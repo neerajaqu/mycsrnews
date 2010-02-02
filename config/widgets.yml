@@ -1,0 +1,29 @@
+widgets:
+  main_content:
+    stories:
+      partial: '/shared/stories'
+      locals: 'contents'
+      load_functions: 'load_contents'
+    featured_content:
+      partial: '/shared/featured_items'
+      locals: 'featured_items'
+      load_functions: 'load_featured_items'
+    ads_banner:
+      partial: '/shared/ads_banner'
+  sidebar_content:
+    top_stories:
+      partial: '/shared/sidebar/top_stories'
+      load_functions: 'load_top_stories'
+      locals: 'top_stories'
+    top_discussed_stories:
+      partial: '/shared/sidebar/top_discussed_stories'
+      load_functions: 'load_top_discussed_stories'
+      locals: 'most_discussed_stories'
+    top_users:
+      partial: '/shared/sidebar/top_users'
+      load_functions: 'load_top_users'
+      locals: 'top_users'
+    newest_users:
+      partial: '/shared/sidebar/newest_users'
+      load_functions: 'load_newest_users'
+      locals: 'newest_users'

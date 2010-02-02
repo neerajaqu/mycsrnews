@@ -1,0 +1,34 @@
+en:
+  shared:
+    sidebar:
+      bio:
+        posted_by: "Posted by {{fb_name}}"
+
+      other_posts:
+        other_posts_by: "Other posts by {{fb_name}}"
+
+      top_discussed_stories:
+        top_discussed_title: "Most Discussed Stories"
+
+      top_stories:
+        top_stories_title: "Top Stories"
+
+      top_users:
+        top_users_karma_title: "Top Users"
+
+      top_ideas:
+        top_ideas_title: "Top Ideas"
+
+      newest_ideas:
+        newest_ideas_title: "Newest Ideas"
+
+      newest_users:
+        newest_users_title: "Newest Users"
+
+      ideas_whatisthis:
+        ideas_whatis_title: "What is this?"
+        ideas_whatis_details: "A crowdsourced community board for posting, discussing and sharing great ideas."
+
+      resources_whatisthis:
+        resources_whatis_title: "What is this?"
+        resources_whatis_details: "A resource directory of useful links for your community."

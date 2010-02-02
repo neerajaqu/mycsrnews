@@ -1,0 +1,32 @@
+- content_for :sub_nav do
+  = render :partial => 'subnav'
+
+#col_left
+  .list_stories.clearfix
+    %ul
+      %li
+        .storyBlockWrap
+          .profilePicLarger
+            = local_linked_profile_pic @resource.user
+          %p.storyHead= @resource.title
+          %p.storyCaption= sanitize @resource.details
+          .storyBlockMeta
+            %h3= t('.posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => time_ago_in_words(@resource.created_at))
+            %p
+              %span.btn_left== #{link_to t('.like'), like_resource_path(@resource, :return_to => resource_path(@resource)), :class => "voteLink"} #{@resource.votes.size}
+              %span.btn_right= fb_share_button(resource_url(@resource))
+            - if @tags.present?
+              %h3== Tags #{tag_list(@tags)}
+
+  %br
+  %br
+  -# TODO::= fb_comments(ar_xid(@resource), true, false, 25, :callbackurl => commented_resource_url(@resource))
+  = fb_comments(ar_xid(@resource), true, false, 25)
+
+  #actionLegend
+  .share_and_hide.clearfix
+    %p.bold
+      = fb_share_button(resource_url(@resource))
+      -#= twitter_share_resource_link @resource
+
+#col_right

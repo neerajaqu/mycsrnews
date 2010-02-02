@@ -1,0 +1,12 @@
+#col_left
+  .panel_1
+    .panelBar.clearfix
+      %h2= t '.title'
+    .panel_block
+      .storyBlockWrap
+        %h3= link_to 'Post a Story', new_story_path
+        %br
+        - semantic_form_for @article do |form|
+          = render :partial => 'article_form', :locals => { :form => form }
+          - form.buttons do
+            = form.commit_button

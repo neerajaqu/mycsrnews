@@ -1,0 +1,44 @@
+#recent-stories
+  .toolbar
+    %h1 Recent Stories
+    %a.back{:href => '#'} Home
+  .info
+    == #{@stories.size} most recent stories
+  %ul.rounded
+    - @stories.each do |story|
+      %li.arrow
+        = link_to story.title, mobile_story_path(story)
+        %small.counter= story.votes.size
+
+#top-stories
+  .toolbar
+    %h1 Top Stories
+    %a.back{:href => '#'} Home
+  .info
+    == #{@top_stories.size} top stories
+  %ul.rounded
+    - @stories.each do |story|
+      %li.arrow
+        = link_to story.title, mobile_story_path(story)
+        %small.counter= story.votes.size
+
+-#comments
+  .toolbar
+    %h1 Comments
+    %a.back{:href => '#'} Home
+  .info
+    10 most recent comments
+  %ul.rounded
+    - @comments.each do |comment|
+      %li.arrow
+        = link_to "#{comment.user.name} said", mobile_comment_path(comment)
+-#likes
+  .toolbar
+    %h1 Likes
+    %a.back{:href => '#'} Home
+  .info
+    10 most recent liked content
+  %ul.rounded
+    - @likes.each do |like|
+      %li.arrow
+        = link_to "#{like.voter.name} liked", mobile_story_path(like.voteable)

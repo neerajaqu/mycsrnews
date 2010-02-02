@@ -1,0 +1,19 @@
+- content_for :sub_nav do
+  = render :partial => 'subnav'
+
+#col_left
+  #newIdea
+    %h1== What's your resource for #{APP_CONFIG['site_title']}?
+
+    - semantic_form_for @resource do |form|
+      - form.inputs do
+        = form.input :title
+        = form.input :url, :label => t('.label_url'), :hint =>t('.hint_url')
+        = form.input :details, :input_html => { :rows => 5 },:required => false
+        = form.input :mapUrl, :label => t('.label_map'), :hint =>t('.hint_map'),:required => false
+        = form.input :twitterName, :label => t('.label_twitter'), :hint=>t('.hint_twitter'), :required => false
+        = form.input :tags_string, :required => false
+      - form.buttons do
+        = form.commit_button :label =>t('.label_create')
+
+#col_right

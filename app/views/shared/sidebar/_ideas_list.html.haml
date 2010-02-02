@@ -1,0 +1,12 @@
+-# @expects: local @ideas, @title
+
+.panel_2
+  .panelBar.clearfix
+    %h2= title
+  %br
+  .list_stories.clearfix
+    %ul
+      - ideas.each do |idea|
+        %li
+          .profilePic= local_linked_profile_pic idea.user
+          = link_to idea.title, idea_path(idea)

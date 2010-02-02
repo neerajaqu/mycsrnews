@@ -1,0 +1,11 @@
+#comment
+  .toolbar
+    %h1 Read Comment
+    %a.back{:href => "#"} Back
+  .info
+    %h2== #{@comment.user.name} commented on:
+    %h2= @comment.content.title
+    -# TODO:: get this link working
+    -#%h2= link_to @comment.content.title, mobile_story_path(@comment.content)
+    %br
+    %p= @comment.comments

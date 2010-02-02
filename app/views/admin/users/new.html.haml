@@ -1,0 +1,6 @@
+.foo
+  %h2 Create a User
+  - semantic_form_for [:admin, @user] do |form|
+    = render :partial => 'user_form', :locals => { :form => form }
+    - form.buttons do
+      = form.commit_button

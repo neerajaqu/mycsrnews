@@ -1,0 +1,28 @@
+- content_for :sub_nav do
+  - if @idea_board.present?
+    = render :partial => 'shared/subnav/idea_boards_subnav'
+  - else
+    = render :partial => 'shared/subnav/ideas_subnav'
+
+#col_left
+  #newIdea
+    %h1== What's your idea for #{APP_CONFIG['site_topic']}?
+
+    - semantic_form_for @idea do |form|
+      - form.inputs do
+        = form.input :title
+        = form.input :details, :input_html => { :rows => 5 }
+        = form.input :tags_string, :required => false
+        = form.input :idea_board, :required => false
+      - form.buttons do
+        = form.commit_button
+
+  #otherIdeas
+    %h1 Browse Other Ideas
+    %p Like an idea to increase its popularity.
+
+    = render :partial => 'shared/ideas', :locals => { :title => t('.browse_other_ideas'), :ideas => @ideas }
+
+#col_right
+  = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('.top_ideas') }
+  = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @newest_ideas, :title => t('.newest_ideas') }

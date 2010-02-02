@@ -1,0 +1,50 @@
+defaults: &defaults
+  # Uncomment this line to enable hoptoad
+  hoptoad_api_key: '1234567890987654321'
+
+  # Uncomment this line to enable google analytics
+  google_analytics_account_id: 'UF-123456890-7'
+
+  # Uncomment these lines to enable google adsense
+  google_adsense_account_id: 'ca-pub-22233344444555555'
+  google_adsense_slot_name: 'my_ad_slot'
+
+  site_topic: 'Default Site Topic'
+  site_title: 'Default Site Name'
+
+  # Uncomment this line to enable twitter
+  #twitter_account: 'mytwitteraccount'
+
+  # Uncomment this line if you wish to enable contact_us email notifications
+  # NOTE:: you must setup smtp.yml for outgoing emails to work
+  contact_us_recipients: 'admin@email.com,me@email.com,support@email.com'
+
+development:
+  <<: *defaults
+  fb_rss_url: "http://my.site.com/stories.atom"
+  fb_ajax_url: "http://my.site.com"
+  base_url: "http://my.site.com"
+
+test:
+  <<: *defaults
+  fb_rss_url: "http://my.site.com/stories.atom"
+  fb_ajax_url: "http://my.site.com"
+  base_url: "http://my.site.com"
+
+cucumber:
+  <<: *defaults
+  fb_rss_url: "http://my.site.com/stories.atom"
+  fb_ajax_url: "http://my.site.com"
+  base_url: "http://my.site.com"
+
+staging:
+  <<: *defaults
+  fb_rss_url: "http://my.site.com/stories.atom"
+  fb_ajax_url: "http://my.site.com"
+  base_url: "http://my.site.com"
+
+production:
+  <<: *defaults
+  fb_rss_url: "http://my.site.com/stories.atom"
+  fb_ajax_url: "http://my.site.com"
+  base_url: "http://my.site.com"

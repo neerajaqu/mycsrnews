@@ -1,0 +1,208 @@
+- content_for :head do
+  %style
+    :sass
+      .clear
+        clear: both
+
+      .template
+        border: 1px solid black
+        padding: 10px
+        width: auto
+        float: left
+        margin-top: 25px
+
+        img
+          width: 250px
+
+      .template-column
+        width: 300px
+        float: left
+
+      .template-builder-column
+        margin-top: 15px
+        width: 500px
+        float: left
+        margin-left: 25px
+
+      .template-item-selector-column
+        width: 400px
+        margin-left: 25px
+        float: left
+
+      .template-builder
+        width: 450px
+        border: 1px solid black
+        padding: 10px
+
+      #template_1
+        height: 150px
+
+      #template_2.template-builder
+        height: 250px
+
+      .primary-drop
+        border: 2px solid #aaaaaa
+        background-color: #dddddd
+        color: #666666
+        text-align: center
+        width: 180px
+        height: 130px
+        float: left
+        margin: 0 10px 0 0
+
+        h1 h2 h3 h4 h5
+          float: left
+        img
+          width: 170px
+          height: 120px
+
+      .secondary-drop
+        border: 2px solid #aaaaaa
+        background-color: #dddddd
+        color: #666666
+        text-align: center
+        width: 80px
+        height: 80px
+        float: left
+        margin: 10px 10px 0 0
+
+        h1 h2 h3 h4 h5
+          float: left
+        img
+          width: 170px
+          height: 120px
+      #items
+        width: 400px
+
+      .items-list
+        li
+          float: left
+          width: 100px
+          height: 175px
+          padding: 2px
+          margin: 5px
+          text-align: center
+          overflow: hidden
+
+          h5
+            cursor: move
+
+          a.ui-icon-zoomin
+            float: left
+
+          img
+            width: 100%
+            max-height: 100px
+            cursor: move
+
+  :javascript
+    $(function() {
+    	var widget_data = {
+    		section1: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        }, section2: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        },
+        template: null
+      };
+
+      $('.template').click(function(event) {
+        if ($(this).attr('id').match(/^template_[345]/)) {
+          alert("At this time only templates 1 and 2 are enabled. Check back soon. (You selected "+$(this).attr('id')+")");
+          return false;
+        }
+      	var url = "/admin/featured_items/"+$(this).attr('id')+"/load_template";
+      	$('#content').load(url, {}, function(responseText, textStatus, XMLHttpRequest) {
+      		$('#section-1-primary, #section-1-secondary1, #section-1-secondary2, #section-2-primary, #section-2-secondary1, #section-2-secondary2').droppable({
+      			accept: 'li.ui-widget-content',
+      			activeClass: 'ui-state-hover',
+      			hoverClass: 'ui-state-active',
+      			drop: function(event, ui) {
+              var section = false;
+              var box = false;
+      				if ((match = $(this).attr('id').match(/^(section-[0-9]+)-(.*)$/)) !== null) {
+      					if (match[1] == 'section-1') {
+      						section = 'section1';
+                } else if (match[1] == 'section-2') {
+                	section = 'section2';
+                } else {
+                	return false;
+                }
+                if (match[2] == 'primary') {
+                	box = match[2];
+                } else if (match[2] == 'secondary1') {
+                	box = match[2];
+                } else if (match[2] == 'secondary2') {
+                	box = match[2];
+                } else {
+                	return false;
+                }
+              } else {
+              	return false;
+              }
+              widget_data[section][box] = ui.draggable.attr('id');
+              widget_data.template = $(this).parent().parent().attr('id');
+      				$('#'+section+'-'+box+'-title').html("<h1>"+$('h5', ui.draggable).text()+"</p>");
+      				if (box == 'primary') {
+      				  $(this).html('<img src="'+$('img', ui.draggable).attr('src')+'" />');
+              }
+      				//$('#section-1-primary').append('<img src="'+$('img', ui.draggable.parent()).attr('src')+'" />');
+            }
+          });
+      		$('#items').html("<p>Loading items...</p>");
+      		$.get('/admin/featured_items/contents/load_items', null, null, 'script');
+      	});
+      });
+
+      $('#featured-items-select').live('change', function() {
+      	var type = $('option:selected', this).val();
+      	$.get('/admin/featured_items/'+type+'/load_items', null, null, 'script');
+      });
+
+      $('#items ul a').live("click", function() { return false; });
+      $('#items .pagination a').live("click", function(event) {
+      	event.preventDefault();
+      	var url = this.href.replace(/^(.+load_items\/)([0-9]+).*$/, "$1page/$2");
+      	$(this).parent().html("Loading items...");
+      	$.get(url, null, null, 'script');
+      });
+
+    	$('#save-button')
+    	  .live('mousedown', function() {
+        	$(this).addClass('ui-state-active');
+        }).live('mouseup', function() {
+    	  	$(this).removeClass('ui-state-active');
+        }).live('click', function() {
+        	$.post("/admin/featured_items/save.json", {featured_items: JSON.stringify(widget_data)}, function(data) {
+          	if (typeof(data.success) !== 'undefined') {
+          		alert(data.success);
+            } else {
+            	alert('There was a problem saving your page');
+            }
+          }, "json");
+        }
+      );
+    });
+
+#content
+  %h2 Select the template you would like to use.
+  .featured-item-templates
+    .template-column
+      .template#template_1
+        = image_tag "featured/template_1.jpg"
+      .template#template_2
+        = image_tag "featured/template_2.jpg"
+      .template#template_3
+        = image_tag "featured/template_3.jpg"
+    .template-column
+      .template#template_4
+        = image_tag "featured/template_4.jpg"
+      .template#template_5
+        = image_tag "featured/template_5.jpg"
+    .template-column
+      #featured-items-selector
+        %p Items Loader

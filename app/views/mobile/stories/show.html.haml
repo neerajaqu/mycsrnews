@@ -1,0 +1,10 @@
+#story
+  .toolbar
+    %h1 Read Story
+    %a.back{:href => "#"} Back
+  .info
+    %h2= @story.title
+    %br
+    %p= @story.caption
+    %br
+    %p= link_to 'Read Story', @story.url

@@ -1,0 +1,18 @@
+= gen_show_page @user, [:name, :fb_user_id, :email, :is_admin, :is_blocked, :cached_slug, :karma_score, :user_info], :associations => { :has_one => { :user_info => :user_info } }
+
+%h2== Contents for this User (#{@user.contents.size})
+= gen_table @user.contents, Content, [:title, :comments_count, :isBlocked, :created_at]
+%hr
+%br
+%h2== Ideas for this User (#{@user.ideas.size})
+= gen_table @user.ideas, Idea, [:title, :likes_count, :comments_count, :created_at, :idea_board_id], :associations => { :belongs_to => {:idea_board => :idea_board_id} }
+%hr
+%br
+%h2== Comments for this User (#{@user.comments.size})
+= gen_table @user.comments, Comment, [:comments, :item, :created_at], :associations => { :belongs_to => {:commentable => :item} }
+%hr
+%br
+%h2== Votes for this User (#{@user.votes.size})
+= gen_table @user.votes, Vote, [:item, :created_at], :associations => { :belongs_to => {:voteable => :item} }
+%hr
+%br

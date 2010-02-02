@@ -1,0 +1,73 @@
+!!!
+
+%html
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'application/xhtml+xml; charset=UTF-8'}/
+    %title== N2 -- #{APP_CONFIG['site_topic']} Admin Interface
+
+    = javascript_include_tag 'all'
+    = stylesheet_link_tag 'all'
+
+    :javascript
+      $(function() {
+        $("##{@current_tab}-tab").addClass('ui-tabs-selected ui-state-active');
+
+      	$('#tabs li').hover(
+      	  function() {
+      	  	$(this).addClass('ui-state-hover');
+          },
+          function() {
+      	  	$(this).removeClass('ui-state-hover');
+          }
+        ).mousedown(function() {
+        	$(this).addClass('ui-state-active');
+        }).mouseup(function() {
+        	$(this).removeClass('ui-state-active');
+        });
+      	return false;
+      	var current_tab = "##{@current_tab}-tab";
+        $("#tabs").tabs({
+          select: function(event, ui) {
+              var url = $.data(ui.tab, 'load.tabs');
+              if( url ) {
+                  location.href = url;
+                  return false;
+              }
+              return true;
+          },
+          selected: $('li').index($(current_tab))
+        });
+        console.log("index of ("+current_tab+"): "+$('li').index($(current_tab)));
+      });
+
+    %style
+      :sass
+        form.formtastic
+          display: block
+          fieldset ol li
+            display: block
+
+    = yield :head
+    = yield :extra_javascript
+
+  %body
+    #tabs.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
+      %ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner.all
+        %li#dashboard-tab.ui-state-default.ui-corner.top= link_to 'Dashboard', admin_path
+        %li#widgets-tab.ui-state-default.ui-corner.top= link_to 'Widgets', admin_widgets_path
+        %li#featured-items-tab.ui-state-default.ui-corner.top= link_to 'Featured Items', admin_featured_items_path
+        %li#idea-boards-tab.ui-state-default.ui-corner.top= link_to 'Idea Boards', admin_idea_boards_path
+        %li#idea-tab.ui-state-default.ui-corner.top= link_to 'Ideas', admin_ideas_path
+        %li#users-tab.ui-state-default.ui-corner.top= link_to 'Users', admin_users_path
+        -#
+          %li= link_to 'Contents', '#contents'
+          %li= link_to 'Content Images', '#content_images'
+          %li= link_to 'Comments', '#comments'
+          %li= link_to 'Users', '#users'
+          %li= link_to 'User Infos', '#user_infos'
+          %li= link_to 'Votes', '#votes'
+          %li= link_to 'Feeds', '#feeds'
+          %li= link_to 'Newswires', '#newswires'
+
+    #admin-content.ui-tabs-panel.ui-widget-content.ui-corner-bottom
+      = yield

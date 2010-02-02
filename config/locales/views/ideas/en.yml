@@ -1,0 +1,25 @@
+en:
+    ideas:
+        subnav:
+          browse_ideas: "Browse Ideas"
+          suggest_idea: "Suggest an Idea"
+          my_ideas: "Your Ideas"
+        index:
+          ideas_title: "Active Ideas"
+          top_ideas: "Popular Ideas"
+          newest_ideas: "Recent Ideas"
+        new:
+          top_ideas: "Popular Ideas"
+          newest_ideas: "Recent Ideas"
+        show:
+          asked_by: "Asked by {{fb_name}} {{date}} ago"
+          share: "Share it"
+          like: "Like"
+          asked_in_board: "Asked in {{board_link}}"
+        my_ideas:
+          my_ideas_title: "Your Ideas"
+          top_ideas: "Popular Ideas"
+          newest_ideas: "Recent Ideas"
+        idea_board_subnav:
+          browse_ideas: "Browse {{name}} Ideas"
+          suggest_idea: "Suggest a {{name}} Idea"

@@ -1,0 +1,10 @@
+--- 
+cwd: /var/www/YOUR_SITE_HERE/current
+log_file: /var/www/YOUR_SITE_HERE/current/log/mongrel.log
+port: "8000"
+environment: staging
+address: 127.0.0.1
+pid_file: /var/www/YOUR_SITE_HERE/current/tmp/pids/mongrel.pid
+servers: 3
+#user: www-data
+#group: www

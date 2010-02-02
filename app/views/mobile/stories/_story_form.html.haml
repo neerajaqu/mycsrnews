@@ -1,0 +1,20 @@
+.errors.clearfix
+  = error_messages_for :content, :object => @story, :header_message => "Please Try Posting Your Story Again!", :message => "We need a bit more information to successfully post your story."
+%br
+%br
+.field
+  = form.label :title, "Title:"
+  %br
+  = form.text_field :title
+.field
+  = form.label :url, "URL:"
+  %br
+  = form.text_field :url
+.field
+  = form.label :image_url, "Image URL:"
+  %br
+  = form.text_field :image_url
+.field
+  = form.label :caption, "Caption:"
+  %br
+  = form.text_area :caption, :rows => 8

@@ -1,0 +1,6 @@
+en:
+  ideas:
+    newest_ideas: "Newest Ideas"
+    top_ideas: "Top Ideas"
+    top_board_ideas: "Top {{name}} Ideas"
+    newest_board_ideas: "Newest {{name}} Ideas"

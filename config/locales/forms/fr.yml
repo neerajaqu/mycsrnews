@@ -1,0 +1,28 @@
+fr:
+  formtastic:
+    titles:
+      post_details: "Post details"
+    labels:
+      title: "Title"  # Default global value
+      article:
+        new:
+          body: "Article content"
+      post:
+        new:
+          title: "Choose a title..."
+          body: "Write something..."
+        edit:
+          title: "Edit title"
+          body: "Edit body"
+      comment:
+        comments: "Commentaires"
+        new: # get this working
+          comments: "lkqjtwqe"
+    hints:
+      post:
+        title: "Choose a good title for you post."
+        body: "Write something inspiring here."
+    actions:
+      create: "Créer Commentaire"
+      update: "Save changes"
+      dummie: "Launch!"

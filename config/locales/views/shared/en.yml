@@ -1,0 +1,70 @@
+en:
+  shared:
+    page_tabs:
+      home: "Home"
+      stories: "Stories"
+      newswire: "Newswire"
+      ideas: "Ideas"
+      resources: "Directory"
+      my_profile: "My Profile"
+      post_story: "Post Story"
+      admin: "Admin"
+
+    comments:
+      comment_title: "Comments"
+      no_comments_msg: "There are currently no comments. Add a new comment!"
+
+    comment:
+      posted_by: "Posted by {{fb_name}} {{date}} ago"
+
+    comment_form:
+      post_comment: "Post a comment"
+      logged_in_error: "You must be logged in to post comments."
+
+    header:
+      sign_out: "Sign Out"
+      sign_in: "Sign In"
+      register: "Register"
+      invite_friends: "Invite Friends"
+      # too long
+      #resources: "{{site_topic}} Resources"
+      resources: "{{site_topic}}"
+      contact_us: "Contact Us"
+
+    footer:
+      rss: "RSS"
+      rss_title: "Follow our story updates via RSS"
+      twitter: "Twitter"
+      twitter_title: "Follow our story updates via Twitter"
+      faq: "FAQ"
+      terms: "Terms of Use"
+      developers: "Developers"
+      about: "About"
+      admin: "Admin"
+      locale: "Locale: "
+
+    stories:
+      stories_title: "Top News"
+      stories_subtitle: "The top stories as chosen by users"
+      stories_like: "Like"
+      stories_comments: "Comment"
+      stories_share: "Share it"
+      stories_posted_by: "Posted by {{fb_name}} {{date}} ago"
+
+    ideas:
+      ideas_title:  "Browse Ideas"
+      ideas_asked_by: "Asked by {{fb_name}} {{date}} ago"
+      ideas_like: "Like"
+      ideas_comments: "Comment"
+      ideas_share: "Share it"
+
+    resources:
+        resources_title:  "Browse Directory"
+        resources_posted_by: "Posted by {{fb_name}} {{date}} ago"
+        resources_like: "Like"
+        resources_comments: "Comment"
+        resources_share: "Share it"
+
+    idea_boards:
+      title: "Idea Boards"
+      subtitle: "Focused discussion of all your greatest ideas"

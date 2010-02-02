@@ -1,0 +1,55 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://www.facebook.com/2008/fbml"}
+%head
+  %title The Needle Mobile &beta;
+  = stylesheet_link_tag 'm/jqtouch.css'
+  = stylesheet_link_tag 'm/jqt/theme.css'
+  = javascript_include_tag 'm/jquery.1.3.2.min', 'm/jqtouch'
+  %style
+    :sass
+      .body-wrapper
+        padding-left: 0px
+  :javascript
+    var jQT = new $.jQTouch({
+        icon: 'jqtouch.png',
+        addGlossToIcon: false,
+        startupScreen: 'jqt_startup.png',
+        statusBar: 'black',
+        preloadImages: [
+            '../../images/m/jqt/back_button.png',
+            '../../images/m/jqt/back_button_clicked.png',
+            '../../images/m/jqt/button_clicked.png',
+            '../../images/m/jqt/grayButton.png',
+            '../../images/m/jqt/whiteButton.png',
+            '../../images/m/jqt/loading.gif'
+            ]
+    });
+
+%body
+  =# fb_connect_javascript_tag
+  =# init_fb_connect "XFBML"
+  =# render :partial => 'shared/header'
+  #about.selectable
+    .toolbar
+      %h1 About The Mobile App
+    %p This is the alpha mobile version of The Needle
+    %br
+    %a.grayButton.goback{:href => '#'} Close
+  #home.current
+    .toolbar
+      %h1 The Needle
+      %a.button.slideup#infoButton{:href => "#about"} About
+    %ul.rounded
+      %li.arrow
+        = link_to "Recent Stories", "#recent-stories"
+        %small.counter= @stories.size
+      %li.arrow
+        = link_to "Top Stories", "#top-stories"
+        %small.counter= @top_stories.size
+      -#%li.arrow
+        = link_to "Comments", "#comments"
+        %small.counter 10
+      -#%li.arrow
+        = link_to "Likes", "#likes"
+        %small.counter 10
+  = yield

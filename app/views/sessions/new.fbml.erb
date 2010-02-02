@@ -1,0 +1,12 @@
+<h1><%= t '.title' %></h1>
+
+<fb:editor action="/sessions/create">
+  <fb:editor-text name="login" id="login" value="" label="<%= t '.login' %>" />
+  <fb:editor-password name="password" id="password" value="" label="<%= t '.password' %>" />
+  <fb:editor-buttonset>
+   <fb:editor-button label="<%= t '.submit' %>" />
+  </fb:editor-buttonset>
+</fb:editor>
+
+<p><%= t '.fb_connect' %></p>
+<%= fb_login_button('window.location = "/users/link_user_accounts";')%>

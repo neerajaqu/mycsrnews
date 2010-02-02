@@ -1,0 +1,8 @@
+en:
+  sessions:
+    new:
+      title: "Sign In"
+      login: "Login"
+      password: "Password"
+      submit: "Sign In"
+      fb_connect: "Or login with Facebook connect"

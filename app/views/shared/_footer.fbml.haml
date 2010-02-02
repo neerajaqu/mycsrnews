@@ -1,0 +1,22 @@
+-# TODO:: fix hardcoded css
+#footer.clearfix{:style => "height: 14px;"}
+  .dh_links
+    %a.rss_link{:target => "_blank", :title => t('.rss_title'), :href => APP_CONFIG['fb_rss_url']}= t('.rss')
+    - if APP_CONFIG['twitter_account'].present?
+      = pipe_spacer
+      %a.twitter_link{:target => "_blank", :title => t('.twitter_title'), :href => twitter_url(APP_CONFIG['twitter_account']) }= t('.twitter')
+    = pipe_spacer
+    = link_to t('.faq'), faq_path
+    = pipe_spacer
+    = link_to t('.terms'), terms_path
+    = pipe_spacer
+    = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
+    = pipe_spacer
+    = link_to t('.about'), about_path
+    - if current_user and current_user.is_admin?
+      = pipe_spacer
+      = link_to t('.admin'), admin_path
+    = pipe_spacer
+    %span= t('.locale')
+    = link_to "EN", root_path(:locale => :en)
+    = link_to "FR", root_path(:locale => :fr)

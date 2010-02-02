@@ -1,0 +1,9 @@
+-# @expects: local 'story'
+
+.panel_1
+  .panelBar.clearfix
+    %h2= t('.other_posts_by', :fb_name => local_linked_profile_name(story.user))
+  .panel_block
+    #otherStoryList
+      - story.user.other_stories(story).each do |other_story|
+        %p= link_to other_story.title, story_path(other_story)

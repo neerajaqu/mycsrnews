@@ -1,0 +1,23 @@
+%fb:fbml
+  = fbjs_library
+  %style
+    = File.read('public/stylesheets/default.css')
+  %style
+    = File.read('public/stylesheets/formtastic.css')
+  -#%script{:type => "text/javascript"}
+  %script
+    == var SITE_URL = "#{APP_CONFIG['fb_ajax_url']}";
+    = File.read('public/javascripts/application.fbjs.js')
+  = fb_connect_javascript_tag
+  = init_fb_connect "XFBML"
+  = render :partial => 'shared/header'
+  #appFrame
+    = facebook_messages
+    = render :partial => 'shared/ads_banner'
+    = yield :sub_nav
+    = yield
+  = render :partial => 'shared/footer'
+  = render :partial => 'shared/fb_strings'
+
+  - if APP_CONFIG['google_analytics_account_id'].present?
+    = fb_google_analytics APP_CONFIG['google_analytics_account_id'], :udn => 'none', :ulink => 1

@@ -1,0 +1,14 @@
+fr:
+  shared:
+    sidebar:
+      bio:
+        posted_by: "Créer par {{fb_name}}"
+
+      other_posts:
+        other_posts_by: "Autres histoires par {{fb_name}}"
+
+      top_discussed_stories:
+        top_discussed_title: "Les plus discutés histoires"
+
+      top_stories:
+        top_stories_title: "Top nouvelles"

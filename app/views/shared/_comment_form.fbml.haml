@@ -1,0 +1,15 @@
+-# expects local :commentable => @commentable
+#postComment.panel_1
+  %a{:id => "postCommentBox", :name => "postCommentBox"}
+  .panelBar.clearfix
+    %h2= t '.post_comment'
+  .panel_block
+    - unless current_user.present?
+      %p== #{t '.logged_in_error'} #{link_to 'Login now', login_path}
+    - else
+      .commentMsgDiv{:style => 'overflow: hidden;'}
+        - semantic_form_for [commentable, Comment.new] do |form|
+          - form.inputs do
+            = form.input :comments
+          - form.buttons do
+            = form.commit_button

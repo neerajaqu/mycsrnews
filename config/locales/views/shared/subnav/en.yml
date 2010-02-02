@@ -1,0 +1,12 @@
+en:
+  shared:
+    subnav:
+      ideas_subnav:
+        browse_ideas: "Browse Ideas"
+        suggest_idea: "Suggest an Idea"
+        my_ideas: "Your Ideas"
+      idea_boards_subnav:
+        browse_board_ideas: "Browse {{name}} Ideas"
+        suggest_board_idea: "Suggest a {{name}} Idea"
+        my_ideas: "My {{name}} Ideas"
+        browse_idea_boards: "Browse Idea Boards"

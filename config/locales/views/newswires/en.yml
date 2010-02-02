@@ -1,0 +1,7 @@
+en:
+  newswires:
+    index:
+      title: "Newswire Feeds"
+      via:  "Via {{title}}, {{date}} ago"
+      publish: "Publish to {{site_title}}"
+      read: "Read Story"

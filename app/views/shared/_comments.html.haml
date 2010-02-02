@@ -1,0 +1,11 @@
+-# @expects: local 'comments'
+
+%a#commentsListTop{:name => "commentsListTop"}
+- if comments.present?
+  #commentThread.panel_1
+    .panelBar.clearfix
+      %h2= t '.comment_title'
+    = render :partial => 'shared/comment', :collection => comments
+- else
+  #commentThreadEmpty.empty_panel_1
+    %p= t '.no_comments_msg'

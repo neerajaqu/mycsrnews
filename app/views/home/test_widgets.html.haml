@@ -1,0 +1,12 @@
+#col_left
+  - @main.each do |widget_page|
+    - widget = widget_page.widget
+    - locals = {}
+    - locals = { widget.locals.to_sym => instance_variable_get("@#{widget.locals}")} if widget.locals.present?
+    = render :partial => widget.partial, :locals => locals
+#col_right
+  - @sidebar.each do |widget_page|
+    - widget = widget_page.widget
+    - locals = {}
+    - locals = { widget.locals.to_sym => instance_variable_get("@#{widget.locals}")} if widget.locals.present?
+    = render :partial => widget.partial, :locals => locals

@@ -1,0 +1,12 @@
+fr:
+  stories:
+    # TODO:: add post story
+    new:
+    show:
+      via:  "Via {{source}} on {{date}}"
+      posted_by: "Publish to {{site_title}}"
+      read_story: "Read the full story"
+      posted_by: "Posted by {{fb_name}} {{date}} ago"
+      post_comment: "Post a comment"
+      share: "Share it"
+      like: "Like"

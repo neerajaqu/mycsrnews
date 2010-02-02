@@ -1,0 +1,35 @@
+en:
+  formtastic:
+    titles:
+      post_details: "Post details"
+    labels:
+      title: "Title"  # Default global value
+      content:
+        new:
+          title: 'Title'
+          url: 'URL'
+          image_url: 'Image URL'
+          tags_string: 'Tags (comma separated)'
+          caption: 'Caption'
+      article:
+        new:
+          body: "Article content"
+      post:
+        new:
+          title: "Choose a title..."
+          body: "Write something..."
+        edit:
+          title: "Edit title"
+          body: "Edit body"
+      comment:
+        comments: "Comments"
+        new: # get this working
+          comments: "lkqjtwqe"
+    hints:
+      post:
+        title: "Choose a good title for you post."
+        body: "Write something inspiring here."
+    actions:
+      create: "Create my {{model}}"
+      update: "Save changes"
+      dummie: "Launch!"

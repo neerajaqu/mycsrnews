@@ -1,0 +1,48 @@
+fr:
+  shared:
+    page_tabs:
+      home: "Accueil"
+      stories: "Histoires"
+      newswire: "Newswire"
+      my_profile: "Mon Profil"
+      post_story: "Créer Histoire"
+      admin: "Admin"
+
+    comments:
+      comment_title: "Commentaires"
+      no_comments_msg: "Il n'y a actuellement aucun commentaire. Ajouter un nouveau commentaire!"
+
+    comment:
+      posted_by: "Créé par {{fb_name}} {{date}} il ya"
+
+    comment_form:
+      post_comment: "Créer un commentaire"
+      logged_in_error: "Vous devez être connecté pour créer des commentaires."
+
+    header:
+      sign_out: "Déconnecter"
+      sign_in: "Identifiez-vous"
+      register: "Inscrivez-vous"
+      invite_friends: "Inviter des amis"
+      resources: "{{site_topic}} Ressources"
+      contact_us: "Contactez-nous"
+
+    footer:
+      rss: "RSS"
+      rss_title: "Follow our story updates via RSS"
+      twitter: "Twitter"
+      twitter_title: "Follow our story updates via Twitter"
+      faq: "FAQ"
+      terms: "Terms of Use"
+      developers: "Developers"
+      about: "About"
+      admin: "Admin"
+      locale: "Locale: "
+
+    stories:
+      stories_title: "Top nouvelles"
+      stories_subtitle: "Les histoires ont été choisies par les lecteurs"
+      stories_like: "Comme"
+      stories_comments: "Commentaire"
+      stories_share: "Partagez cet article"
+      stories_posted_by: "Créé par {{fb_name}} {{date}} il ya"

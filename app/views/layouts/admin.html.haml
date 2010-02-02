@@ -1,0 +1,48 @@
+!!!
+
+%html
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'application/xhtml+xml; charset=UTF-8'}/
+    %title== N2 -- #{APP_CONFIG['site_topic']} Admin Interface
+
+    = javascript_include_tag :defaults
+    = active_scaffold_includes
+
+    = yield :head
+
+  %body
+    %p{:style => "font-size: 90%"}
+      = link_to 'Contents', admin_contents_path
+      = pipe_spacer
+      = link_to 'Content Images', admin_content_images_path
+      = pipe_spacer
+      = link_to 'Comments', admin_comments_path
+      = pipe_spacer
+      = link_to 'Users', admin_users_path
+      = pipe_spacer
+      = link_to 'User Infos', admin_user_infos_path
+      = pipe_spacer
+      = link_to 'Votes', admin_votes_path
+      = pipe_spacer
+      = link_to 'Feeds', admin_feeds_path
+      = pipe_spacer
+      = link_to 'Newswires', admin_newswires_path
+
+    = yield
+
+    %p{:style => "font-size: 90%"}
+      = link_to 'Contents', admin_contents_path
+      = pipe_spacer
+      = link_to 'Content Images', admin_content_images_path
+      = pipe_spacer
+      = link_to 'Comments', admin_comments_path
+      = pipe_spacer
+      = link_to 'Users', admin_users_path
+      = pipe_spacer
+      = link_to 'User Infos', admin_user_infos_path
+      = pipe_spacer
+      = link_to 'Votes', admin_votes_path
+      = pipe_spacer
+      = link_to 'Feeds', admin_feeds_path
+      = pipe_spacer
+      = link_to 'Newswires', admin_newswires_path

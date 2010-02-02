@@ -1,0 +1,98 @@
+#col_left
+  #myProfile.panel_1
+    .panelBar.clearfix
+      %h2= t('.title', :name => profile_fb_name(@user))
+    .panel_block
+      .thumb
+        = fb_profile_pic @user, :size => 'normal', :width => '180'
+      .storyBlockWrap
+        %h1= fb_name @user, :use_you => false
+        .pointsTable_profile
+          %table
+            %tbody
+              %tr
+                %td.bold
+                  %span.pointValue
+                    = @user.cachedPointTotal
+                    %span.pts= t('.points')
+                %td
+              %tr
+                %td.bold
+                  %span.pointValue
+                    = @user.karma_score
+                    %span.pts= t('.karma')
+                %td
+              %tr
+                %td.bold
+                  %span.pointValue
+                    = @user.cachedPointsEarnedThisWeek
+                    %span.pts= t('.this_week')
+                %td
+              %tr
+                %td.bold
+                  %span.pointValue
+                    = @user.cachedPointsEarnedLastWeek
+                    %span.pts= t('.last_week')
+                %td
+              -# TODO:: fix this
+              - if @user.user_info.present?
+                %tr
+                  %td.bold== #{@user.user_info.memberFriends.split(/,/).size} friends
+                  %td
+                    - if @is_owner
+                      = link_to t('.invite_friends'), '#'
+              %tr
+                %td.bold== #{@user.contents.size} stories
+                %td
+                  - if @is_owner
+                    = link_to t('.post_story'), '#'
+              %tr
+                %td.bold== #{@user.comments.size} comments
+                %td
+                  - if @is_owner
+                    = link_to t('.comment_stories'), stories_path
+              %tr
+                %td.bold== #{@user.votes.size} likes
+                %td
+                  - if @is_owner
+                    = link_to t('.find_stories'), stories_path
+              %tr
+                %td.bold= link_to 'RSS', user_path(@user, :format => :atom), :class => 'rss_link', :target => "_blank"
+                %td
+              -# TODO:: add challenges
+  .panel_1
+    .panelBar.clearfix
+      %h2= t('.bio_title', :name => profile_fb_name(@user))
+      - if @is_owner
+        .bar_link= link_to t('.bio_edit'), '#'
+    .panel_block
+      .storyBlockWrap
+        %p= (@user.bio.present?) ? @user.bio : default_bio(@user)
+
+  .panel_1
+    .panelBar.clearfix
+      %h2= t('.action_feeds', :name => profile_fb_name(@user))
+    #actionFeed
+      #navFilter
+        .subFilter
+          = t('.filter_title')
+          %span= link_to t('.filter_all'), user_path(@user, :curr_action => 'all_actions'), :id => 'allFeedFilter', :class => ('feedFilterButton' + (@curr_action == 'all_actions' ? ' selected' : ''))
+          &nbsp;
+          %span= link_to t('.filter_stories'), user_path(@user, :curr_action => 'stories'), :id => 'storiesFilter', :class => ('feedFilterButton' + (@curr_action == 'stories' ? ' selected' : ''))
+          &nbsp;
+          %span= link_to t('.filter_articles'), user_path(@user, :curr_action => 'articles'), :id => 'articlesFilter', :class => ('feedFilterButton' + (@curr_action == 'articles' ? ' selected' : ''))
+          &nbsp;
+          %span= link_to t('.filter_comments'), user_path(@user, :curr_action => 'comments'), :id => 'commentsFilter', :class => ('feedFilterButton' + (@curr_action == 'comments' ? ' selected' : ''))
+          &nbsp;
+          %span= link_to t('.filter_likes'), user_path(@user, :curr_action => 'likes'), :id => 'likesFilter', :class => ('feedFilterButton' + (@curr_action == 'likes' ? ' selected' : ''))
+      #feedList
+        .list_stories
+          - unless @actions.present?
+            %p= t('.action_feed_empty')
+          - else
+            %ul
+              - @actions.each do |action|
+                %li.actionFeedItem
+                  = build_feed_item(action, action.class.name)
+#col_right
+  = render :partial => 'shared/sidebar/top_stories', :locals => { :top_stories => @top_stories }

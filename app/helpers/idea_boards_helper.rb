@@ -1,0 +1,2 @@
+module IdeaBoardsHelper
+end

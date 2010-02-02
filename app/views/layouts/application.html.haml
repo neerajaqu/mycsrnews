@@ -1,0 +1,29 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://www.facebook.com/2008/fbml"}
+  %head
+    = stylesheet_link_tag 'default.css', 'formtastic.css', 'ui-lightness/jquery-ui-1.7.2.custom.css', 'jquery.jcarousel', 'jcarousel.skin', 'application', :cache => true
+    = javascript_include_tag 'jquery.min', 'jquery.ui.min', 'jquery.jcarousel.pack', 'jquery.application', :cache => true
+    = auto_discovery_link_tag(:atom, stories_path(:format => :atom))
+    %style
+      :sass
+        .body-wrapper
+          width: 760px
+          padding-left: 25px
+
+  %body
+    .body-wrapper
+      = fb_connect_javascript_tag
+      = init_fb_connect "XFBML", :js => :jquery
+      = render :partial => 'shared/header'
+      = flash_messages
+      -# if flash[:error].present? || flash[:success].present? || flash[:notice].present?
+        .flash{:style => "border: 1px solid black;"}
+        - if flash[:error]
+          %p= flash[:error]
+        - else
+          %p= (flash[:success] || flash[:notice])
+      = render :partial => 'shared/ads_banner'
+      = yield :sub_nav
+      = yield
+      = render :partial => 'shared/footer'
+    = render :partial => 'shared/google_analytics'

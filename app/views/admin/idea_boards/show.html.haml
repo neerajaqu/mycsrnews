@@ -1,0 +1,4 @@
+= gen_show_page @idea_board, [:name, :description, :section]
+
+%h2 Ideas for this Idea Board
+= gen_table @idea_board.ideas, Idea, [:title, :user_id, :likes_count, :comments_count, :created_at], :associations => { :belongs_to => {:user => :user_id} }

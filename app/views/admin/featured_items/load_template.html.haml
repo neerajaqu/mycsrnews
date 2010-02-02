@@ -1,0 +1,45 @@
+%p= link_to 'Return to template selector', admin_featured_items_path
+
+.actions
+  Actions:
+  %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save
+  %br
+
+- case @template_id
+  - when "template_1"
+    %h1 Template Builder for Template 1
+    .template-builder-column
+      = image_tag 'featured/template_1.jpg'
+      %br
+      %br
+      %br
+      #template_1.template-builder
+        .drop-zone
+          #section-1-primary.primary-drop
+            %p Drop Primary Item 1 Here
+          #section1-primary-title
+  - when "template_2"
+    %h1 Template Builder for Template 1
+    .template-builder-column
+      = image_tag 'featured/template_2.jpg'
+      %br
+      %br
+      %br
+      #template_2.template-builder
+        .drop-zone
+          #section-1-primary.primary-drop
+            %p Drop Primary Item 1 Here
+          #section-1-secondary1.secondary-drop.clear
+            %p Drop Secondary Item 1 Here
+            .clear
+          #section-1-secondary2.secondary-drop
+            %p Drop Secondary Item 2 Here
+            .clear
+        #section1-primary-title
+        #section1-secondary1-title
+        #section1-secondary2-title
+
+.template-item-selector-column
+  %h1 Items
+  = select_tag 'featured-items-select', options_for_select(@featurables)
+  #items

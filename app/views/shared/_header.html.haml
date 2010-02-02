@@ -1,0 +1,24 @@
+%br
+#header
+  = link_to image_tag("default/spacer.gif", :width => 300, :height => 76, :class => "float_left"), home_index_path
+  .dh_links
+    -#TODO:: properly handle logged in users
+    -# unless false && application_is_installed?
+    - if logged_in?
+      = pipe_spacer
+      = link_to t('.sign_out'), logout_path
+      = pipe_spacer
+      = link_to t('.invite_friends'), invite_users_path
+    - else
+      = pipe_spacer
+      = link_to t('.sign_in'), login_path
+      = pipe_spacer
+      = link_to t('.register'), signup_path
+    -#TODO:: add share button from 'templates/header.php'
+    = pipe_spacer
+    -#TODO:: add contact us
+    = link_to t('.contact_us'), contact_us_path
+  = render :partial => 'shared/page_tabs'
+%br
+%br
+%br

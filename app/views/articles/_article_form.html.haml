@@ -1,0 +1,7 @@
+- form.inputs do
+  - form.semantic_fields_for :content do |content_form|
+    - content_form.inputs do
+      = content_form.input :title
+      = content_form.input :url
+      = content_form.input :image_url, :required => false
+  = form.input :body

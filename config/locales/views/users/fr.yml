@@ -1,0 +1,22 @@
+fr:
+  users:
+    show:
+      title: "{{name}} Profile"
+      points: "points"
+      karma: "karma"
+      points_this_week: "this week"
+      points_last_week: "last week"
+      invite_friends: "Invite more friends"
+      post_story: "Post a story"
+      comment_stories: "Comment on stories"
+      find_stories: "Find new stories"
+      bio_title: "{{name}} Bio"
+      bio_edit: "Edit"
+      action_feeds: "{{name}} Action Feeds"
+      action_feed_empty:  "There are no actions to display yet!"
+      filter_title: "Filters: "
+      filter_all: "All Actions"
+      filter_stories: "Stories"
+      filter_articles: "Articles"
+      filter_comments: "Comments"
+      filter_likes: "Likes"

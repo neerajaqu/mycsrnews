@@ -1,0 +1,9 @@
+#stories
+  .toolbar
+    %h1 Stories
+    %a.back{:href => '#'} Home
+  %ul.rounded
+    - @contents.each do |content|
+      %li.arrow
+        = link_to content.title, m_story_path(content)
+        %small.counter= content.votes.count

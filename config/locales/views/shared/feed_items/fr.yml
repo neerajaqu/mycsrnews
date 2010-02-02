@@ -1,0 +1,18 @@
+fr:
+  shared:
+    feed_items:
+      comment:
+        blurb: "{{fb_name}} commented on the story {{story}}"
+        blurb_date: "{{date}} ago"
+
+      story:
+        blurb: "{{fb_name}} posted a story"
+        blurb_date: "{{date}} ago"
+
+      article:
+        blurb: "{{fb_name}} posted an article"
+        blurb_date: "{{date}} ago"
+
+      vote:
+        blurb: "{{fb_name}} liked the {{voteable_type}} {{voteable_link}}"
+        blurb_date: "{{date}} ago"

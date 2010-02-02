@@ -1,0 +1,9 @@
+- unless @success
+  - fb_multi_friend_request("Invite", "Invite friends", invite_users_path) do
+    == #{fb_name current_user} wants you to sign up for #{APP_CONFIG['site_title']}.
+    -#TODO:: get register link working
+    -#= fb_req_choice("Sign up!", link_user_accounts_users_url)
+    = fb_req_choice("Take a peek", home_index_url)
+- else
+  #col_left
+    %h2= "Successfully invited your #{pluralize @fb_user_ids.size, 'friend'} #{fb_list_of_names @fb_user_ids}."

@@ -1,0 +1,9 @@
+#col_left
+  %h1 Contact Us
+
+  - semantic_form_for @message, :url => contact_us_path do |form|
+    - form.inputs do
+      = form.input :subject
+      = form.input :email
+      = form.input :body
+    = form.submit "Contact Us"

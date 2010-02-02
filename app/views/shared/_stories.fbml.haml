@@ -1,0 +1,27 @@
+.panel_1
+  .panelBar.clearfix
+    %h2= t('.stories_title')
+  .subtitle
+    %span= t('.stories_subtitle')
+  .storyList
+    .list_stories.clearfix
+      %ul
+        - @contents.each do |content|
+          %li
+            .thumb
+              - if content.content_image.present?
+                %img{:alt => "story image", :src => content.content_image.url}
+            .storyBlockWrap
+              %p.storyHead= link_to content.title, story_path(content)
+              %p.storyCaption= linked_story_caption content
+              .profilePic= local_linked_profile_pic content.user
+              .storyBlockMeta
+                %p= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
+                %p
+                  %span.btn_left== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteLink"} #{content.votes.size}
+                  %span.btn_mid== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+                  %span.btn_right= t('.stories_share')
+  - unless @no_paginate
+    .clearfix
+      = will_paginate @contents
+      %br

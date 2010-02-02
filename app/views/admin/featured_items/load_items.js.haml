@@ -1,0 +1,2 @@
+== $('#items').html("#{escape_javascript(render :partial => 'load_items', :locals => { :items => @items })}");
+== $('#items li').draggable({revert: 'invalid', helper: 'clone', cursor: 'move'});

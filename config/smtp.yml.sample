@@ -1,0 +1,35 @@
+development:
+  enable_starttls_auto: true #required for using gmail smtp
+  address: smtp.gmail.com
+  port: 587
+  domain: foo.com
+  authentication: :plain
+  user_name: someone@foo.com
+  password: secret
+
+test:
+  enable_starttls_auto: true #required for using gmail smtp
+  address: smtp.gmail.com
+  port: 587
+  domain: foo.com
+  authentication: :plain
+  user_name: someone@foo.com
+  password: secret
+
+staging:
+  enable_starttls_auto: true #required for using gmail smtp
+  address: smtp.gmail.com
+  port: 587
+  domain: foo.com
+  authentication: :plain
+  user_name: someone@foo.com
+  password: secret
+
+production:
+  enable_starttls_auto: true #required for using gmail smtp
+  address: smtp.gmail.com
+  port: 587
+  domain: foo.com
+  authentication: :plain
+  user_name: someone@foo.com
+  password: secret

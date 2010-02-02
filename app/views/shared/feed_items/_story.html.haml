@@ -1,0 +1,13 @@
+-# expects 'story => @story'
+
+.storyBlockWrap
+  .feed_poster
+    .avatar
+      = local_linked_profile_pic story.user, :size => 'square', :width => '30'
+    %h3
+      %span.bold= t('.blurb', :fb_name => local_linked_profile_name(story.user))
+      = t('.blurb_date', :date => time_ago_in_words(story.created_at))
+  %p.storyHead
+    = link_to story.title, story_path(story)
+  %p.storyCaption
+    = linked_story_caption story

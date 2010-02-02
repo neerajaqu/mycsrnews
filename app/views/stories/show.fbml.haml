@@ -1,0 +1,35 @@
+#col_left
+  #readStoryList
+    .thumb
+      - if @story.content_image.present?
+        %img{:alt => "story image", :src => @story.content_image.url}
+    .storyBlockWrap
+      %p.storyHead= @story.title
+      .storyBlockMeta
+        %h3= t('.via', :source => link_to(@story.source, '#'), :date => @story.created_at)
+        %h3= t('.posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
+        - if @tags.present?
+          %h3== Tags #{tag_list(@tags, @story)}
+        %h3
+          %span.btn_left== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteLink"} #{@story.votes.size}
+          %span.btn_mid== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
+          %span.btn_right= t('.share')
+    - if @story.is_article?
+      %p.storyCaption= sanitize nl2br(@story.caption)
+    - else
+      %p.storyCaption= sanitize caption @story.caption
+    - if @story.url.present?
+      %p.float_right= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn_1"
+
+  = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
+  = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
+
+  #actionLegend
+  .share_and_hide.clearfix
+    %p.bold
+      = fb_share_button(story_url(@story))
+      = twitter_share_story_link @story
+
+#col_right
+  = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
+  = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }
