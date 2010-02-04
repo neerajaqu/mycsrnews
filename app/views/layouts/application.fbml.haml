@@ -1,9 +1,7 @@
 %fb:fbml
   = fbjs_library
   %style
-    = File.read('public/stylesheets/default.css')
-  %style
-    = File.read('public/stylesheets/formtastic.css')
+    = File.read('public/stylesheets/compiled/fb_grid.css')
   -#%script{:type => "text/javascript"}
   %script
     == var SITE_URL = "#{APP_CONFIG['fb_ajax_url']}";
