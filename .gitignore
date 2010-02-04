@@ -13,7 +13,6 @@ script/pids
 .*.swo
 config/*.yml
 config/application.god
-!config/newrelic.yml
 !config/widgets.yml
 !config/cucumber.yml
 config/deploy/*.rb
