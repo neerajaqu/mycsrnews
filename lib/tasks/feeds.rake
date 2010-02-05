@@ -1,5 +1,6 @@
-require 'simple-rss'
 require 'open-uri'
+
+# Had to remove rss library
 
 namespace :n2 do
   namespace :feeds do
@@ -25,7 +26,7 @@ end
 
 def update_feed(feed)
   begin
-    rss = SimpleRSS.parse open(feed.rss)
+    # TODO ADDRSSrss = ADDRSS.parse open(feed.rss)
   rescue => e
     puts "Failed to open feed at #{feed.url} -- #{e}" or return false
   end
