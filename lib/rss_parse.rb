@@ -1,5 +1,6 @@
-require 'simple-rss'
 require 'open-uri'
+
+# Had to remove the rss parse library
 
 module RSSParse
 
