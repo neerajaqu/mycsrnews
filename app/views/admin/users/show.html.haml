@@ -1,7 +1,7 @@
 = gen_show_page @user, [:name, :fb_user_id, :email, :is_admin, :is_blocked, :cached_slug, :karma_score, :user_info], :associations => { :has_one => { :user_info => :user_info } }
 
 %h2== Contents for this User (#{@user.contents.size})
-= gen_table @user.contents, Content, [:title, :comments_count, :isBlocked, :created_at]
+= gen_table @user.contents, Content, [:title, :comments_count, :is_blocked, :created_at]
 %hr
 %br
 %h2== Ideas for this User (#{@user.ideas.size})

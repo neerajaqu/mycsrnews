@@ -11,7 +11,7 @@ class Content < ActiveRecord::Base
 
   has_friendly_id :title, :use_slug => true
 
-  named_scope :active, { :conditions => ["isBlocked = 0"] }
+  named_scope :active, { :conditions => ["is_blocked = 0"] }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 5)} }
   named_scope :newest_stories, lambda { |*args| { :conditions => ["article_id IS NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
   named_scope :newest_articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
