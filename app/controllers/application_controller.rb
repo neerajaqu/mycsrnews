@@ -74,6 +74,10 @@ class ApplicationController < ActionController::Base
     @newest_ideas ||= Idea.newest 5
   end
 
+  def load_newest_idea_boards
+    @newest_idea_boards ||= IdeaBoard.newest 5
+  end
+
   def load_top_resources
     @top_resources ||= Resource.tally({
     	:at_least => 1,

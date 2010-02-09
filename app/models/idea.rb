@@ -15,6 +15,7 @@ class Idea < ActiveRecord::Base
   attr_accessor :tags_string
 
   validates_presence_of :title
+  validates_presence_of :idea_board
   validates_format_of :tags_string, :with => /^([-a-zA-Z0-9_ ]+,?)+$/, :allow_blank => true, :message => "Invalid tags. Tags can be alphanumeric characters or -_ or a blank space."  
   
 end

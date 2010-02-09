@@ -4,6 +4,7 @@ class IdeasController < ApplicationController
   before_filter :load_top_ideas
   before_filter :load_newest_ideas
   before_filter :set_idea_board
+  before_filter :load_newest_idea_boards
 
   def index
     @current_sub_tab = 'Browse Ideas'

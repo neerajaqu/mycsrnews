@@ -8,3 +8,4 @@
   = render :partial => 'shared/sidebar/ideas_whatisthis'
   = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('.top_ideas') }
   = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @newest_ideas, :title => t('.newest_ideas') }
+  = render :partial => 'shared/sidebar/idea_boards_list', :locals => { :idea_boards => @newest_idea_boards }
