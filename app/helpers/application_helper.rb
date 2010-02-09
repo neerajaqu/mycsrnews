@@ -195,7 +195,7 @@ module ApplicationHelper
     if item.class.name == 'Content'
     	tagged_stories_path(:tag => tag.name)
     else
-    	[item, tag]
+    	[item.class, tag]
     end
   end
 

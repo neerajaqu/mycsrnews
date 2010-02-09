@@ -21,6 +21,8 @@ ActionController::Routing::Routes.draw do |map|
   map.paged_stories '/stories/page/:page', :controller => 'stories', :action => 'index'
   map.tagged_stories_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
   map.tagged_stories '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
+  map.idea_tag_with_page '/ideas/tag/:tag/page/:page.:format', :controller => 'ideas', :action => 'tags'
+  map.idea_tag '/ideas/tag/:tag.:format', :controller => 'ideas', :action => 'tags'
   map.resources :stories, :member => { :like => [:get, :post] }, :collection => { :parse_page => [:get, :post] }, :has_many => :comments
   map.resources :contents, :controller => 'stories', :has_many => :comments, :as => 'stories'
 

@@ -21,8 +21,8 @@
               %span.btn_left== #{link_to t('.like'), like_idea_path(@idea, :return_to => idea_path(@idea)), :class => "voteLink"} #{@idea.votes.size}
               %span.btn_mid== #{link_to t('.post_comment'), idea_path(@idea, :anchor => "postCommentBox")} #{@idea.comments_count}
               %span.btn_right= fb_share_button(idea_url(@idea))
--#            - if @tags.present?
--#              %h3== Tags #{tag_list(@tags)}
+            - if @tags.present?
+              %h3== Tags #{tag_list(@tags,@idea)}
 
   %br
   %br
