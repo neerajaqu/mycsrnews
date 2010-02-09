@@ -19,14 +19,18 @@
               %h3= t('.asked_in_board', :board_link => link_to(@idea.idea_board.name, @idea.idea_board))
             %p
               %span.btn_left== #{link_to t('.like'), like_idea_path(@idea, :return_to => idea_path(@idea)), :class => "voteLink"} #{@idea.votes.size}
+              %span.btn_mid== #{link_to t('.post_comment'), idea_path(@idea, :anchor => "postCommentBox")} #{@idea.comments_count}
               %span.btn_right= fb_share_button(idea_url(@idea))
-            - if @tags.present?
-              %h3== Tags #{tag_list(@tags)}
+-#            - if @tags.present?
+-#              %h3== Tags #{tag_list(@tags)}
 
   %br
   %br
+  = render :partial => 'shared/comments', :locals => { :comments => @idea.comments }
+  = render :partial => 'shared/comment_form', :locals => { :commentable => @idea }
+
   -# TODO::= fb_comments(ar_xid(@idea), true, false, 25, :callbackurl => commented_idea_url(@idea))
-  = fb_comments(ar_xid(@idea), true, false, 25)
+  -# = fb_comments(ar_xid(@idea), true, false, 25)
 
   #actionLegend
   .share_and_hide.clearfix

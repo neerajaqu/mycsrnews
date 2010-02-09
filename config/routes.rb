@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :articles
   map.resources :newswires, :member => { :publish => [:get, :post] }
-  map.resources :ideas, :member => { :like => [:get, :post], :commented => [:get, :post], :my_ideas => [:get, :post] }
+  map.resources :ideas, :member => { :like => [:get, :post], :commented => [:get, :post], :my_ideas => [:get, :post] }, :has_many => :comments
   map.resources :idea_boards, :has_many => :ideas
   map.resources :resources, :member => { :like => [:get, :post], :commented => [:get, :post], :my_resources => [:get, :post] }
 
