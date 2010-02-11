@@ -4,3 +4,8 @@ en:
     top_ideas: "Top Ideas"
     top_board_ideas: "Top {{name}} Ideas"
     newest_board_ideas: "Newest {{name}} Ideas"
+  resources:
+    newest_resource_sections: "Newest {{name}} Links"
+    top_resource_sections: "Top {{name}} Links"
+    top_resources: "Top Links"
+    newest_resources: "Newest Links"

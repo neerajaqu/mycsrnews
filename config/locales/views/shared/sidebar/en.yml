@@ -32,3 +32,9 @@ en:
       resources_whatisthis:
         resources_whatis_title: "What is this?"
         resources_whatis_details: "A resource directory of useful links for your community."
+        
+      resource_sections_list:
+        title: "Sections"
+
+      idea_boards_list:
+          title: "Idea Boards"

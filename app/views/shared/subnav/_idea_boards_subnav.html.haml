@@ -1,10 +1,10 @@
 #subNav.tabs.clearfix
   .left_tabs
     %ul#toggle_tabs_unused.toggle_tabs.clearfix
-      %li.first= link_to t('.browse_idea_boards'), idea_boards_path, :class => sub_tab_selected?(@current_sub_tab, 'Browse Idea Boards')
       - if @idea_board.present?
         %li.first= link_to t('.browse_board_ideas', :name => @idea_board.name), idea_board_path(@idea_board), :class => sub_tab_selected?(@current_sub_tab, 'Browse Board Ideas')
         %li.first= link_to t('.suggest_board_idea', :name => @idea_board.name), new_idea_board_idea_path(@idea_board), :class => sub_tab_selected?(@current_sub_tab, 'Suggest Idea')
+      %li.first= link_to t('.browse_idea_boards'), idea_boards_path, :class => sub_tab_selected?(@current_sub_tab, 'Browse Idea Boards')
       -# TODO:: add this back in
       - if false and current_user
         %li.first= link_to t('.my_ideas'), my_ideas_idea_path(:id => current_user), :class => sub_tab_selected?(@current_sub_tab, 'My Ideas')

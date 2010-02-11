@@ -14,6 +14,7 @@ class ResourcesController < ApplicationController
   def new
     @current_sub_tab = 'Suggest Resource'
     @resource = Resource.new
+    @resource.resource_section = @resource_section if @resource_section.present?
     @resources = Resource.newest
   end
 

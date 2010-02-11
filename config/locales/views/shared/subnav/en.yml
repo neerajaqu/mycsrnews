@@ -15,9 +15,9 @@ en:
         suggest_resource: "Suggest an Link"
         my_resources: "Your Links"
       resource_sections_subnav:
-        browse_resource_sections: "Browse {{name}} Links"
+        browse_section_resources: "Browse {{name}} Links"
+        browse_resource_sections: "Browse Sections"
         suggest_section_resource: "Suggest a {{name}} Link"
         my_resources: "My {{name}} Links"
-        browse_resource_sections: "Browse Resource Sections"
 
         

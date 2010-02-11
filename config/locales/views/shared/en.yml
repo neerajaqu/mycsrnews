@@ -64,7 +64,11 @@ en:
         resources_like: "Like"
         resources_comments: "Comment"
         resources_share: "Share it"
-
+    
+    resource_sections:
+      title: "Directory Sections"
+      subtitle: "List of resource directory category sections"
+      
     idea_boards:
       title: "Idea Boards"
       subtitle: "Focused discussion of all your greatest ideas"
