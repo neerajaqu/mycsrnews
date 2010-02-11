@@ -39,9 +39,11 @@ ActionController::Routing::Routes.draw do |map|
   map.admin 'admin', :controller => :admin, :action => :index
   map.namespace(:admin) do |admin|
     admin.paged_items '/featured_items/:id/load_items/page/:page', :controller => 'featured_items', :action => 'load_items'
-    admin.resources :ideas
     admin.resources :widgets, :collection => { :save => :post }
+    admin.resources :ideas
     admin.resources :idea_boards
+    admin.resources :resources
+    admin.resources :resource_sections
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }
     admin.resources :contents,        :active_scaffold => true
     admin.resources :content_images,  :active_scaffold => true

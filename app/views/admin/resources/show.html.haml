@@ -1,0 +1,1 @@
+= gen_show_page @resource, [:title, :user_id, :details, :likes_count, :comments_count, :created_at, :resource_section_id], :associations => { :belongs_to => { :resource_section => :resource_section_id, :user => :user_id } }

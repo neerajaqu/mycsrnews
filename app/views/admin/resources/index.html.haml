@@ -1,0 +1,1 @@
+= gen_index_page @resources, Resource, [:title, :user_id, :likes_count, :comments_count, :created_at, :resource_section_id], :associations => { :belongs_to => { :resource_section => :resource_section_id, :user => :user_id } }, :paginate => true

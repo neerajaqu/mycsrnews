@@ -1,0 +1,5 @@
+%h2 Update Resource Board
+- semantic_form_for [:admin, @resource_section] do |form|
+  = render :partial => 'resource_section_form', :locals => { :form => form }
+  - form.buttons do
+    = form.commit_button

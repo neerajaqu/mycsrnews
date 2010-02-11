@@ -1,0 +1,4 @@
+= gen_show_page @resource_section, [:name, :description, :section]
+
+%h2 Links for this Directory Category
+= gen_table @resource_section.resources, Resource, [:title, :user_id, :likes_count, :comments_count, :created_at], :associations => { :belongs_to => {:user => :user_id} }
