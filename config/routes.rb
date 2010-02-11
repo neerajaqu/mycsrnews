@@ -23,14 +23,16 @@ ActionController::Routing::Routes.draw do |map|
   map.tagged_stories '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
   map.idea_tag_with_page '/ideas/tag/:tag/page/:page.:format', :controller => 'ideas', :action => 'tags'
   map.idea_tag '/ideas/tag/:tag.:format', :controller => 'ideas', :action => 'tags'
+  map.resource_tag_with_page '/resources/tag/:tag/page/:page.:format', :controller => 'resources', :action => 'tags'
+  map.resource_tag '/resources/tag/:tag.:format', :controller => 'resources', :action => 'tags'
   map.resources :stories, :member => { :like => [:get, :post] }, :collection => { :parse_page => [:get, :post] }, :has_many => :comments
   map.resources :contents, :controller => 'stories', :has_many => :comments, :as => 'stories'
 
   map.resources :articles
   map.resources :newswires, :member => { :publish => [:get, :post] }
-  map.resources :ideas, :member => { :like => [:get, :post], :commented => [:get, :post], :my_ideas => [:get, :post] }, :has_many => :comments
+  map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] }, :has_many => :comments
   map.resources :idea_boards, :has_many => :ideas
-  map.resources :resources, :member => { :like => [:get, :post], :commented => [:get, :post], :my_resources => [:get, :post] }
+  map.resources :resources, :member => { :like => [:get, :post], :my_resources => [:get, :post] }
 
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index

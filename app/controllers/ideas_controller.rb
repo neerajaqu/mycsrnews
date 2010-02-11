@@ -41,11 +41,6 @@ class IdeasController < ApplicationController
     tag_cloud @idea
   end
 
-  # TODO:: fb comments method
-#  def commented
-#    render :text => "Commented" and return
-#  end
-
   def my_ideas
     @current_sub_tab = 'My Ideas'
     @user = User.find(params[:id])

@@ -21,6 +21,7 @@ class ResourcesController < ApplicationController
     @resource.tag_list = params[:resource][:tags_string]
 
     if @resource.save
+      #JR - can I swap in t('string') here in controller
     	flash[:success] = "Thank you for adding to our directory!"
     	redirect_to resource_path(@resource)
     else
@@ -32,11 +33,6 @@ class ResourcesController < ApplicationController
   def show
     @resource = Resource.find(params[:id])
     tag_cloud @resource
-  end
-
-  def commented
-    #raise params.inspect
-    render :text => "Commented" and return
   end
 
   def my_resources
