@@ -1,5 +1,4 @@
 -# Expects @current_tab to be set, done by default in app_controller
--#        %li= link_to t('.resources'), resources_path, :class => tab_selected?(@current_tab, 'resources')
 #pageTabs.clearfix
   .tabs.clearfix
     .right_tabs
@@ -8,6 +7,7 @@
         %li= link_to t('.stories'), stories_path, :class => tab_selected?(@current_tab, 'stories')
         %li= link_to t('.newswire'), newswires_path, :class => tab_selected?(@current_tab, 'newswire')
         %li= link_to t('.ideas'), ideas_path, :class => tab_selected?(@current_tab, 'ideas')
+        %li= link_to t('.resources'), resources_path, :class => tab_selected?(@current_tab, 'resources')
         - if current_user.present?
           %li= link_to t('.my_profile'), user_path(current_user), :class => tab_selected?(@current_tab, 'my_profile')
           %li= link_to t('.post_story'), new_story_path

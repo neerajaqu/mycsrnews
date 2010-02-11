@@ -3,6 +3,8 @@ class ResourcesController < ApplicationController
   before_filter :login_required, :only => [:new, :create, :update]
   before_filter :load_top_resources
   before_filter :load_newest_resources
+  before_filter :set_resource_section
+  before_filter :load_newest_resource_sections
 
   def index
     @current_sub_tab = 'Browse Resources'
@@ -62,6 +64,10 @@ class ResourcesController < ApplicationController
 
   private
 
+  def set_resource_section
+     @resource_section = params[:resource_section_id].present? ? ResourceSection.find(params[:resource_section_id]) : nil
+  end
+   
   def set_current_tab
     @current_tab = 'resources'
   end

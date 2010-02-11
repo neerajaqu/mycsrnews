@@ -9,10 +9,9 @@ class Idea < ActiveRecord::Base
   belongs_to :user
   belongs_to :idea_board
   has_many :comments, :as => :commentable
+  attr_accessor :tags_string
 
   has_friendly_id :title, :use_slug => true
-
-  attr_accessor :tags_string
 
   validates_presence_of :title
   validates_presence_of :idea_board

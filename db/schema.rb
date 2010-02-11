@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100205015709) do
+ActiveRecord::Schema.define(:version => 20100211072609) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -210,8 +210,16 @@ ActiveRecord::Schema.define(:version => 20100205015709) do
 
   add_index "newswires", ["feed_id"], :name => "feedid"
 
+  create_table "resource_sections", :force => true do |t|
+    t.string   "name"
+    t.string   "section"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "resources", :force => true do |t|
-    t.string   "title",                         :null => false
+    t.string   "title",                                  :null => false
     t.text     "details"
     t.string   "url"
     t.string   "mapUrl"
@@ -221,7 +229,9 @@ ActiveRecord::Schema.define(:version => 20100205015709) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "flags_count",    :default => 0
+    t.integer  "flags_count",         :default => 0
+    t.integer  "resource_section_id"
+    t.boolean  "is_blocked",          :default => false
   end
 
   create_table "sessions", :force => true do |t|

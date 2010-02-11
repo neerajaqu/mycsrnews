@@ -10,3 +10,14 @@ en:
         suggest_board_idea: "Suggest a {{name}} Idea"
         my_ideas: "My {{name}} Ideas"
         browse_idea_boards: "Browse Idea Boards"
+      resources_subnav:
+        browse_resources: "Browse Links"
+        suggest_resource: "Suggest an Link"
+        my_resources: "Your Links"
+      resource_sections_subnav:
+        browse_resource_sections: "Browse {{name}} Links"
+        suggest_section_resource: "Suggest a {{name}} Link"
+        my_resources: "My {{name}} Links"
+        browse_resource_sections: "Browse Resource Sections"
+
+        

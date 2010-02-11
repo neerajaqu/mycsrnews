@@ -1,0 +1,24 @@
+en:
+    resource_sections:
+        subnav:
+            browse_resources: "Browse Links"
+            suggest_resource: "Suggest a Link"
+            my_resources: "Your Links"
+        index:
+            resources_title: "Active Links"
+            top_resources: "Popular Links"
+            newest_resources: "Recent Links"
+        new:
+            top_resources: "Popular Links"
+            newest_resources: "Recent Links"
+        show:
+            asked_by: "Asked by {{fb_name}} {{date}} ago"
+            share: "Share it"
+            like: "Like"
+            comments: "Comment"
+            share: "Share it"
+        my_resources:
+            my_resources_title: "Your Links"
+            top_resources: "Popular Links"
+            newest_resources: "Recent Links"
+

@@ -1,0 +1,11 @@
+-# @expects: local @resource_section, @title
+
+.panel_2
+  .panelBar.clearfix
+    %h2= t('.title')
+  %br
+  .list_stories.clearfix
+    %ul
+      - resource_sections.each do |resource_section|
+        %li
+          = link_to resource_section.name, resource_section
