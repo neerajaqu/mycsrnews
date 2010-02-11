@@ -6,18 +6,20 @@ en:
         suggest_idea: "Suggest an Idea"
         my_ideas: "Your Ideas"
       idea_boards_subnav:
-        browse_board_ideas: "Browse {{name}} Ideas"
-        suggest_board_idea: "Suggest a {{name}} Idea"
+        home_ideas: "Back to Ideas"
+        browse_board_ideas: "{{name}} Ideas"
+        suggest_board_idea: "Suggest an Idea"
         my_ideas: "My {{name}} Ideas"
-        browse_idea_boards: "Browse Idea Boards"
+        browse_idea_boards: "Browse Topics"
       resources_subnav:
         browse_resources: "Browse Links"
         suggest_resource: "Suggest an Link"
         my_resources: "Your Links"
       resource_sections_subnav:
-        browse_section_resources: "Browse {{name}} Links"
-        browse_resource_sections: "Browse Sections"
-        suggest_section_resource: "Suggest a {{name}} Link"
+        home_resource_sections: "Back to Directory"  
+        browse_section_resources: "{{name}} Links"
+        browse_resource_sections: "Browse Categories"
+        suggest_section_resource: "Suggest a Link"
         my_resources: "My {{name}} Links"
 
         

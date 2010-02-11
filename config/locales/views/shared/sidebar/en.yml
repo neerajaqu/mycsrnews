@@ -34,7 +34,7 @@ en:
         resources_whatis_details: "A resource directory of useful links for your community."
         
       resource_sections_list:
-        title: "Sections"
+        title: "Categories"
 
       idea_boards_list:
-          title: "Idea Boards"
+          title: "Idea Topics"
