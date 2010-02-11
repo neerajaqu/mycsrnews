@@ -20,8 +20,8 @@
 
   %br
   %br
-  -# TODO::= fb_comments(ar_xid(@resource), true, false, 25, :callbackurl => commented_resource_url(@resource))
-  = fb_comments(ar_xid(@resource), true, false, 25)
+  = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }
+  = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }
 
   #actionLegend
   .share_and_hide.clearfix
