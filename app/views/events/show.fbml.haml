@@ -1,0 +1,36 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/events_subnav'
+
+#col_left
+  .list_stories.clearfix
+    %ul
+      %li
+        .storyBlockWrap
+          .profilePicLarger
+            = local_linked_profile_pic @event.user
+          %p.storyHead= @event.name
+          %p.storyCaption= sanitize @event.tagline
+          .storyBlockMeta
+            %h3= t('.asked_by', :fb_name => local_linked_profile_name(@event.user), :date => time_ago_in_words(@event.created_at))
+            %p
+              %span.btn_left== #{link_to t('.like'), like_event_path(@event, :return_to => event_path(@event)), :class => "voteLink"} #{@event.votes.size}
+              %span.btn_mid== #{link_to t('.post_comment'), event_path(@event, :anchor => "postCommentBox")} #{@event.comments_count}
+              %span.btn_right= fb_share_button(event_url(@event))
+            - if @tags.present?
+              %h3== Tags #{tag_list(@tags,@event)}
+
+  %br
+  %br
+  = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
+  = render :partial => 'shared/comment_form', :locals => { :commentable => @event }
+
+  -# TODO::= fb_comments(ar_xid(@event), true, false, 25, :callbackurl => commented_event_url(@event))
+  -#= fb_comments(ar_xid(@event), true, false, 25)
+
+  #actionLegend
+  .share_and_hide.clearfix
+    %p.bold
+      = fb_share_button(event_url(@event))
+      -#= twitter_share_event_link @event
+
+#col_right

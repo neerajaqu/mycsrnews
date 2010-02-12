@@ -25,6 +25,8 @@ ActionController::Routing::Routes.draw do |map|
   map.idea_tag '/ideas/tag/:tag.:format', :controller => 'ideas', :action => 'tags'
   map.resource_tag_with_page '/resources/tag/:tag/page/:page.:format', :controller => 'resources', :action => 'tags'
   map.resource_tag '/resources/tag/:tag.:format', :controller => 'resources', :action => 'tags'
+  map.event_tag_with_page '/events/tag/:tag/page/:page.:format', :controller => 'events', :action => 'tags'
+  map.event_tag '/events/tag/:tag.:format', :controller => 'events', :action => 'tags'
   map.resources :stories, :member => { :like => [:get, :post] }, :collection => { :parse_page => [:get, :post] }, :has_many => :comments
   map.resources :contents, :controller => 'stories', :has_many => :comments, :as => 'stories'
 
@@ -34,6 +36,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :idea_boards, :has_many => :ideas
   map.resources :resources, :member => { :like => [:get, :post], :my_resources => [:get, :post] }, :has_many => :comments
   map.resources :resource_sections, :has_many => :resources
+  map.resources :events, :member => { :like => [:get, :post],:my_events => [:get, :post] }, :has_many => :comments
 
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index
@@ -44,6 +47,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :idea_boards
     admin.resources :resources
     admin.resources :resource_sections
+    admin.resources :events
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }
     admin.resources :contents,        :active_scaffold => true
     admin.resources :content_images,  :active_scaffold => true

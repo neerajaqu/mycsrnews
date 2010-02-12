@@ -1,0 +1,10 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/events_subnav'
+
+#col_left
+  = render :partial => 'shared/events', :locals => { :events => @events, :title => t('.events_title') }
+
+#col_right
+  = render :partial => 'shared/sidebar/events_whatisthis'
+  = render :partial => 'shared/sidebar/events_list', :locals => { :events => @top_events, :name => t('.top_events') }
+  = render :partial => 'shared/sidebar/events_list', :locals => { :events => @newest_events, :name => t('.newest_events') }

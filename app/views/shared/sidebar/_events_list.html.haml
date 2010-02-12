@@ -1,0 +1,12 @@
+-# @expects: local @events, @title
+
+.panel_2
+  .panelBar.clearfix
+    %h2=t('.events_title')
+  %br
+  .list_stories.clearfix
+    %ul
+      - events.each do |event|
+        %li
+          .profilePic= local_linked_profile_pic event.user
+          = link_to event.name, event_path(event)

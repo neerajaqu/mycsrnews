@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100211072609) do
+ActiveRecord::Schema.define(:version => 20100212003651) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -105,6 +105,10 @@ ActiveRecord::Schema.define(:version => 20100211072609) do
     t.integer  "comments_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_featured",    :default => false
+    t.datetime "featured_at"
+    t.boolean  "is_blocked",     :default => false
+    t.integer  "flags_count",    :default => 0
   end
 
   create_table "fbSessions", :force => true do |t|

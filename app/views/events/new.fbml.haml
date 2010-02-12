@@ -1,0 +1,24 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/events_subnav'
+
+#col_left
+  #newEvent
+    %h1== What's your event for #{APP_CONFIG['site_topic']}?
+
+  - semantic_form_for @event do |form|
+    - form.inputs do
+      = form.input :name
+      = form.input :tagline, :required => false
+      = form.input :host, :required => false
+      = form.input :location, :required => false
+      = form.input :street, :required => false
+      = form.input :city, :required => false
+      = form.input :state, :required => false
+      = form.input :description, :required => false
+      = form.input :tags_string, :required => false
+    - form.buttons do
+      = form.commit_button
+
+#col_right
+  = render :partial => 'shared/sidebar/events_list', :locals => { :events => @top_events, :title => t('.top_events') }
+  = render :partial => 'shared/sidebar/events_list', :locals => { :events => @newest_events, :title => t('.newest_events') }

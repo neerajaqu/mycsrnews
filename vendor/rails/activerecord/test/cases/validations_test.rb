@@ -532,7 +532,7 @@ class ValidationsTest < ActiveRecord::TestCase
   end
 
   def test_validate_uniqueness_with_limit
-    # Event.title is limited to 5 characters
+    # event.name is limited to 5 characters
     e1 = Event.create(:title => "abcde")
     assert e1.valid?, "Could not create an event with a unique, 5 character title"
     e2 = Event.create(:title => "abcdefgh")
@@ -541,7 +541,7 @@ class ValidationsTest < ActiveRecord::TestCase
 
   def test_validate_uniqueness_with_limit_and_utf8
     with_kcode('UTF8') do
-      # Event.title is limited to 5 characters
+      # event.name is limited to 5 characters
       e1 = Event.create(:title => "一二三四五")
       assert e1.valid?, "Could not create an event with a unique, 5 character title"
       e2 = Event.create(:title => "一二三四五六七八")

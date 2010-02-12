@@ -14,7 +14,6 @@ class Resource < ActiveRecord::Base
   has_friendly_id :title, :use_slug => true
 
   validates_presence_of :title
-  validates_presence_of :url
   validates_presence_of :resource_section
   validates_format_of :tags_string, :with => /^([-a-zA-Z0-9_ ]+,?)+$/, :allow_blank => true, :message => "Invalid tags. Tags can be alphanumeric characters or -_ or a blank space."
 end

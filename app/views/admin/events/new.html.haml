@@ -1,0 +1,6 @@
+.foo
+  %h2 Create an Event
+  - semantic_form_for [:admin, @event] do |form|
+    = render :partial => 'event_form', :locals => { :form => form }
+    - form.buttons do
+      = form.commit_button

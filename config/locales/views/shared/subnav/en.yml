@@ -21,5 +21,8 @@ en:
         browse_resource_sections: "Browse Categories"
         suggest_section_resource: "Suggest a Link"
         my_resources: "My {{name}} Links"
-
+      events_subnav:
+        browse_events: "Browse Calendar"
+        suggest_event: "Add an Event"
+        my_events: "Your Event"
         

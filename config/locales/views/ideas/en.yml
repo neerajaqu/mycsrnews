@@ -16,6 +16,7 @@ en:
           share: "Share it"
           like: "Like"
           asked_in_board: "Asked in {{board_link}}"
+          post_comment: "Post a comment"
         my_ideas:
           my_ideas_title: "Your Ideas"
           top_ideas: "Popular Ideas"

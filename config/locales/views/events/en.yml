@@ -1,0 +1,22 @@
+en:
+    events:
+        subnav:
+          browse_events: "Browse Events"
+          suggest_event: "Suggest an Event"
+          my_events: "Your Events"
+        index:
+          events_title: "Active Events"
+          top_events: "Popular Events"
+          newest_events: "Recent Events"
+        new:
+          top_events: "Popular Events"
+          newest_events: "Recent Events"
+        show:
+          asked_by: "Asked by {{fb_name}} {{date}} ago"
+          share: "Share it"
+          like: "Like"
+          post_comment: "Post a Comment"
+        my_events:
+          my_events_title: "Your Events"
+          top_events: "Popular Events"
+          newest_events: "Recent Events"

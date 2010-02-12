@@ -94,6 +94,18 @@ class ApplicationController < ActionController::Base
     @newest_resources ||= Resource.newest 5
   end
 
+  def load_top_events
+    @top_events ||= Event.tally({
+    	:at_least => 1,
+    	:limit    => 5,
+    	:order    => "votes.count desc"
+    })
+  end
+
+  def load_newest_events
+    @newest_events ||= Event.newest 5
+  end
+
   def set_locale
     locale = params[:locale] || cookies[:locale] || I18n.default_locale
     I18n.locale = locale.to_s

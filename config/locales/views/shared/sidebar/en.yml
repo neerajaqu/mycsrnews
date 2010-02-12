@@ -38,3 +38,13 @@ en:
 
       idea_boards_list:
           title: "Idea Topics"
+
+      events_whatisthis:
+        events_whatis_title: "What is this?"
+        events_whatis_details: "A crowdsourced calendar for posting, discussing and sharing great events."
+      
+      top_events:
+        top_events_title: "Top Events"
+
+      newest_events:
+        newest_events_title: "Newest Events"

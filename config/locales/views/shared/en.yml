@@ -5,6 +5,7 @@ en:
       stories: "Stories"
       newswire: "Newswire"
       ideas: "Ideas"
+      events: "Calendar"
       resources: "Directory"
       my_profile: "My Profile"
       post_story: "Post Story"
@@ -72,3 +73,11 @@ en:
     idea_boards:
       title: "Idea Topics"
       subtitle: "Focused discussion of all your greatest ideas"
+
+    events:
+      events_title:  "Browse Events"
+      events_asked_by: "Asked by {{fb_name}} {{date}} ago"
+      events_like: "Like"
+      events_comments: "Comment"
+      events_share: "Share it"
+

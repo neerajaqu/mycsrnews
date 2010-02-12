@@ -1,0 +1,9 @@
+#subNav.tabs.clearfix
+  .left_tabs
+    %ul#toggle_tabs_unused.toggle_tabs.clearfix
+      %li.first= link_to t('.browse_events'), events_path, :class => sub_tab_selected?(@current_sub_tab, 'Browse Events')
+      %li.first= link_to t('.suggest_event'), new_event_path, :class => sub_tab_selected?(@current_sub_tab, 'Suggest Event')
+      - if current_user
+        %li.first= link_to t('.my_events'), my_events_event_path(:id => current_user), :class => sub_tab_selected?(@current_sub_tab, 'My Events')
+%br
+%br

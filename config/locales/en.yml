@@ -9,3 +9,6 @@ en:
     top_resource_sections: "Top {{name}} Links"
     top_resources: "Top Links"
     newest_resources: "Newest Links"
+  events:
+    newest_events: "Newest Events"
+    top_events: "Top Events"
