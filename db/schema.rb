@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100212014901) do
+ActiveRecord::Schema.define(:version => 20100212220146) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20100212014901) do
     t.string   "commentable_type"
     t.integer  "flags_count",      :default => 0
     t.integer  "likes_count",      :default => 0
+    t.boolean  "is_featured",      :default => false
+    t.datetime "featured_at"
   end
 
   add_index "comments", ["commentable_type", "commentable_id"], :name => "index_comments_on_commentable_type_and_commentable_id"
@@ -237,6 +239,9 @@ ActiveRecord::Schema.define(:version => 20100212014901) do
     t.integer  "flags_count",         :default => 0
     t.integer  "resource_section_id"
     t.boolean  "is_blocked",          :default => false
+    t.boolean  "is_featured",         :default => false
+    t.datetime "featured_at"
+    t.boolean  "is_sponsored",        :default => false
   end
 
   create_table "sessions", :force => true do |t|
