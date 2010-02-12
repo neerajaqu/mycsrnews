@@ -29,4 +29,23 @@ class CommentsController < ApplicationController
     nil
   end
 
+  def like
+    @comment = Comment.find_by_id(params[:id])
+    respond_to do |format|
+      if current_user and @comment.present? and current_user.vote_for(@comment)
+      	success = "Thanks for your vote!"
+      	format.html { flash[:success] = success; redirect_to params[:return_to] || comments_path }
+      	format.fbml { flash[:success] = success; redirect_to params[:return_to] || comments_path }
+      	format.json { render :json => { :msg => "#{@comment.votes.size} likes" }.to_json }
+      	format.fbjs { render :json => { :msg => "#{@comment.votes.size} likes" }.to_json }
+      else
+      	error = "Vote failed"
+      	format.html { flash[:error] = error; redirect_to params[:return_to] || comments_path }
+      	format.fbml { flash[:error] = error; redirect_to params[:return_to] || comments_path }
+      	format.json { render :json => { :msg => error }.to_json }
+      	format.fbjs { render :text => { :msg => error }.to_json }
+      end
+    end
+  end
+
 end
