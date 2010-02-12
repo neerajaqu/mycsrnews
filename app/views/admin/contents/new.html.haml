@@ -1,0 +1,6 @@
+%h2 Create a new Content Item
+- semantic_form_for [:admin, @content] do |form|
+  = render :partial => 'story_form', :locals => { :form => form }
+  - form.buttons do
+    -# TODO:: switch this to locale
+    = form.commit_button

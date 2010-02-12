@@ -44,6 +44,10 @@ class Content < ActiveRecord::Base
     { :controller => '/stories', :action => 'show', :id => self }
   end
 
+  def to_s
+    self.title
+  end
+
   private
   
 end

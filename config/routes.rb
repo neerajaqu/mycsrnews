@@ -50,14 +50,14 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :resource_sections
     admin.resources :events
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }
-    admin.resources :contents,        :active_scaffold => true
-    admin.resources :content_images,  :active_scaffold => true
+    admin.resources :contents
+    admin.resources :content_images
+    admin.resources :newswires
+    admin.resources :feeds
     admin.resources :comments,        :active_scaffold => true
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_infos,      :active_scaffold => true
     admin.resources :votes,           :active_scaffold => true
-    admin.resources :feeds,           :active_scaffold => true
-    admin.resources :newswires,       :active_scaffold => true
   end
 
 	map.mobile_home '/m', :controller => 'mobile/home', :action => :index
