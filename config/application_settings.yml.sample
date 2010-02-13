@@ -19,6 +19,11 @@ defaults: &defaults
   # NOTE:: you must setup smtp.yml for outgoing emails to work
   contact_us_recipients: 'admin@email.com,me@email.com,support@email.com'
 
+  # Default admin login info, this will only be used when you do not have an admin user in the system
+  # Connect to /admin to be prompted for this login info
+  default_admin_user: 'admin'
+  default_admin_password: 'n2adminpassword'
+
 development:
   <<: *defaults
   fb_rss_url: "http://my.site.com/stories.atom"

@@ -55,7 +55,8 @@ module AdminHelper
       html << "</thead>"
       html << "<tbody>"
       collection.each do |item|
-        html << "<tr>"
+        class_name = (item.moderatable? and item.blocked?) ? 'admin-blocked' : ''
+        html << "<tr class='#{class_name}'>"
         fields.each do |field|
           html << "<td>#{field_value item, field, options[:associations]}</td"
         end
@@ -71,10 +72,16 @@ module AdminHelper
   end
 
   def admin_links item
-    [
+    links = [
       link_to_unless_current('View', [:admin, item]) {link_to "Back", :back },
       link_to('Edit', edit_polymorphic_path([:admin, item]))
-    ].join ' | '
+    ]
+
+    if item.moderatable?
+    	links << link_to(item.blocked? ? 'UnBlock' : 'Block', admin_block_path(item.class.name.foreign_key.to_sym => item))
+    	links << link_to('Flag', admin_flag_path(item.class.name.foreign_key.to_sym => item))
+    end
+    links.join ' | '
   end
 
   def set_model_vars model

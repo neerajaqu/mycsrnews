@@ -8,6 +8,22 @@ class AdminController < ApplicationController
     #redirect_to admin_contents_path
   end
 
+  def block
+    @item = find_moderatable_item
+
+    if @item.moderatable? and @item.toggle_blocked
+    	flash[:success] = "Successfully blocked your item."
+    	#redirect_to [:admin, :contents]
+    	redirect_to [:admin, @item]
+    else
+    	flash[:error] = "Could not block this item."
+    	redirect_to [@admin, @item]
+    end
+  end
+
+  def flag
+  end
+
   private
 
   def set_current_tab
@@ -24,6 +40,18 @@ class AdminController < ApplicationController
     else 
       redirect_to home_index_path and return false
     end
+  end
+
+  def find_moderatable_item
+    params.each do |name, value|
+      next if name =~ /^fb/
+      if name =~ /(.+)_id$/
+        # switch story requests to use the content model
+        klass = $1 == 'story' ? 'content' : $1
+        return klass.classify.constantize.find(value)
+      end
+    end
+    nil
   end
 
 end

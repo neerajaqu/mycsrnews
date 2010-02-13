@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   has_many :ideas
   has_many :events
   has_many :resources
+  has_many :flags
   has_one :user_info
 
   has_karma :contents

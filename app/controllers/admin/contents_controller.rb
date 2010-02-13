@@ -5,7 +5,7 @@ class Admin::ContentsController < AdminController
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => Content.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => Content,
-    	:fields => [:title, :user_id, :score, :comments_count, :created_at],
+    	:fields => [:title, :user_id, :score, :comments_count, :is_blocked, :created_at],
     	:associations => { :belongs_to => { :user => :user_id } },
     	:paginate => true
     }
@@ -34,7 +34,7 @@ class Admin::ContentsController < AdminController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
     	:item => Content.find(params[:id]),
     	:model => Content,
-    	:fields => [:title, :user_id, :url, :caption, :content_image, :source, :score, :comments_count, :created_at],
+    	:fields => [:title, :user_id, :url, :caption, :content_image, :source, :score, :comments_count, :is_blocked, :created_at],
     	:associations => { :belongs_to => { :user => :user_id }, :has_one => { :content_image => :content_image } },
     }
   end

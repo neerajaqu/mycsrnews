@@ -9,9 +9,17 @@ require File.join(File.dirname(__FILE__), 'boot')
 # Reserved names for friendly_id slugs
 RESERVED_NAMES = ["admin", "administrator", "update", "delete", "show", "create", "new", "newscloud", "n2", "edit"] unless defined?(RESERVED_NAMES)
 
-# Load acts_as_featured_item plugin
+# Load ActiveRecord Base Model Extensions
+require "#{RAILS_ROOT}/lib/activerecord_model_extensions.rb"
+ActiveRecord::Base.send :include, Newscloud::ActiverecordModelExtensions
+
+# Load acts_as_featured_item mixin
 require "#{RAILS_ROOT}/lib/acts_as_featured_item.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::FeaturedItem
+
+# Load acts_as_moderatable mixin
+require "#{RAILS_ROOT}/lib/acts_as_moderatable.rb"
+ActiveRecord::Base.send :include, Newscloud::Acts::Moderatable
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
