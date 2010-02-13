@@ -1,9 +1,9 @@
 class Flag < ActiveRecord::Base
   belongs_to :user
-  belongs_to :flagable, :polymorphic => true, :counter_cache => true
+  belongs_to :flaggable, :polymorphic => true, :counter_cache => true
 
   def self.flag_types
-    ['spam', 'inappropriate', 'other']
+    ['spam', 'abuse', 'urgent', 'other']
   end
 
   def self.valid_flag_type? flag_type

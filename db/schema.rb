@@ -157,13 +157,13 @@ ActiveRecord::Schema.define(:version => 20100212220146) do
   create_table "flags", :force => true do |t|
     t.string   "flag_type"
     t.integer  "user_id"
-    t.string   "flagable_type"
-    t.integer  "flagable_id"
+    t.string   "flaggable_type"
+    t.integer  "flaggable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "flags", ["flagable_type", "flagable_id"], :name => "index_flags_on_flagable_type_and_flagable_id"
+  add_index "flags", ["flaggable_type", "flaggable_id"], :name => "index_flags_on_flaggable_type_and_flaggable_id"
 
   create_table "idea_boards", :force => true do |t|
     t.string   "name"

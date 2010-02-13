@@ -20,6 +20,8 @@
       %p.storyCaption= sanitize caption @story.caption
     - if @story.url.present?
       %p.float_right= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn_1"
+    - if @story.moderatable?
+      = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
 
   = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }

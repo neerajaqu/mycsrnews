@@ -11,11 +11,19 @@ class Admin::FeedsController < AdminController
   end
 
   def new
-    @feed = Feed.new
+    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
+    	:model => Feed,
+    	:fields => [:title, :url, :rss]
+    }
   end
 
   def edit
     @feed = Feed.find(params[:id])
+    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
+    	:item => @feed,
+    	:model => Feed,
+    	:fields => [:title, :url, :rss]
+    }
   end
 
   def update
