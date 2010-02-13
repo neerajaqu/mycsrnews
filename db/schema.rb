@@ -336,6 +336,7 @@ ActiveRecord::Schema.define(:version => 20100215224032) do
     t.string   "email_hash"
     t.string   "cached_slug"
     t.integer  "karma_score",                              :default => 0
+    t.datetime "last_active"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

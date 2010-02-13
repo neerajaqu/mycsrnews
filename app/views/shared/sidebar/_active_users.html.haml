@@ -1,0 +1,14 @@
+-# @expects: local 'active_users'
+
+- active_users ||= User.last_active
+
+.panel_2
+  .panelBar.clearfix
+    %h2= t('.title')
+  %br
+  .list_stories.clearfix
+    %ul
+      - active_users.each do |user|
+        %li
+          .profilePic= local_linked_profile_pic user
+          == #{link_to user.name, user_path(user)} active #{time_ago_in_words user.last_active} ago

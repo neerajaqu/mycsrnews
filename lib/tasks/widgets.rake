@@ -25,8 +25,8 @@ namespace :n2 do
 
     desc "Deletes and rebuilds all widgets"
     task :rebuild => :environment do
-      Widget.all.each {|w| w.destroy }
-      Rake::Task['widgets:build'].invoke
+      Widget.destroy_all
+      Rake::Task['n2:widgets:build'].invoke
     end
   end
 

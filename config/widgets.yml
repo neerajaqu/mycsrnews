@@ -29,9 +29,7 @@ widgets:
       locals: 'newest_users'
     fan_application:
       partial: '/shared/sidebar/fan_application'
-#      locals: 'user'
-#      load_functions: 'load_user'
     prompt_permissions:
       partial: '/shared/sidebar/prompt_permissions'
-#      locals: 'user'
-#      load_functions: 'load_user'
+    active_users:
+      partial: '/shared/sidebar/active_users'

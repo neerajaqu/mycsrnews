@@ -25,6 +25,9 @@ en:
       newest_users:
         newest_users_title: "Newest Users"
 
+      active_users:
+        title: "Currently Active Users"
+
       ideas_whatisthis:
         ideas_whatis_title: "What is this?"
         ideas_whatis_details: "A crowdsourced community board for posting, discussing and sharing great ideas."

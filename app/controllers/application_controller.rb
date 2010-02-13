@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_tab
   before_filter :set_current_sub_tab
   before_filter :set_locale
+  before_filter :update_last_active
 
   #facebook settings
   # TODO:: get this working
@@ -121,6 +122,13 @@ class ApplicationController < ActionController::Base
 
   def tag_cloud(item)
     @tags = item.tag_counts_on(:tags)
+  end
+
+  def update_last_active
+    return false unless current_user.present?
+
+    current_user.last_active = Time.now
+    current_user.save
   end
 
 end
