@@ -28,8 +28,8 @@ ActionController::Routing::Routes.draw do |map|
   map.event_tag_with_page '/events/tag/:tag/page/:page.:format', :controller => 'events', :action => 'tags'
   map.event_tag '/events/tag/:tag.:format', :controller => 'events', :action => 'tags'
   map.resources :stories, :member => { :like => [:get, :post] }, :collection => { :parse_page => [:get, :post] }, :has_many => :comments
-  map.resources :contents, :controller => 'stories', :has_many => :comments, :as => 'stories'
   map.resources :comments, :member => { :like => [:get, :post] }
+  map.resources :contents, :controller => 'stories', :has_many => :comments, :as => 'stories'
 
   map.resources :articles
   map.resources :newswires, :member => { :publish => [:get, :post] }
