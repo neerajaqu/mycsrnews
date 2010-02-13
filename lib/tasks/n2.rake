@@ -2,7 +2,7 @@ namespace :n2 do
   namespace :data do
 
     desc "Bootstrap and convert existing data"
-    task :bootstrap => [:pre_register_users, :delete_floating_content, :delete_floating_ideas, :generate_model_slugs, :generate_widgets, :load_seed_data] do
+    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_ideas, :generate_model_slugs, :generate_widgets, :load_seed_data] do
       puts "Finished Bootstrapping and converting existing data"
     end
 
@@ -54,6 +54,11 @@ namespace :n2 do
       ['User', 'Content', 'IdeaBoard'].each do |model_name|
         puts "Creating slugs for #{model_name.titleize}"
         Rake::Task['friendly_id:redo_slugs'].invoke ENV['MODEL']=model_name
+
+        # Reenable friendly id tasks so they can be run in the next iteration
+        Rake::Task['friendly_id:redo_slugs'].reenable
+        Rake::Task['friendly_id:make_slugs'].reenable
+        Rake::Task['friendly_id:remove_old_slugs'].reenable
       end
     end
 
