@@ -13,7 +13,7 @@
         = form.input :mapUrl, :label => t('.label_map'), :hint =>t('.hint_map'),:required => false
         = form.input :twitterName, :label => t('.label_twitter'), :hint=>t('.hint_twitter'), :required => false
         = form.input :tags_string, :required => false
-        = form.input :resource_section, :required => true
+        = form.input :resource_section, :required => true, :include_blank => false
       - form.buttons do
         = form.commit_button :label =>t('.label_create')
 
