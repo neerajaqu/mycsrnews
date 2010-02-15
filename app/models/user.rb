@@ -31,8 +31,7 @@ class User < ActiveRecord::Base
   has_many :ideas
   has_many :events
   has_many :resources
-  has_many :flags
-  has_one :user_info
+  has_one :user_profile
 
   has_karma :contents
 
@@ -121,8 +120,8 @@ class User < ActiveRecord::Base
 
   def fb_user_id
     return super unless super.nil?
-    return nil unless self.user_info.present?
-    return self.user_info.facebook_user_id unless self.user_info.facebook_user_id.nil?
+    return nil unless self.user_profile.present?
+    return self.user_profile.facebook_user_id unless self.user_profile.facebook_user_id.nil?
 
     nil
   end
@@ -153,7 +152,7 @@ class User < ActiveRecord::Base
   end
 
   def bio
-    self.user_info.present? ? self.user_info.bio : nil
+    self.user_profile.present? ? self.user_profile.bio : nil
   end
 
   def newest_actions

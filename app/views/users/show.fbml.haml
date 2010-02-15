@@ -35,9 +35,9 @@
                     %span.pts= t('.last_week')
                 %td
               -# TODO:: fix this
-              - if @user.user_info.present?
+              - if @user.user_profile.present?
                 %tr
-                  %td.bold== #{@user.user_info.memberFriends.split(/,/).size} friends
+                  %td.bold== #{@user.user_profile.memberFriends.split(/,/).size} friends
                   %td
                     - if @is_owner
                       = link_to t('.invite_friends'), '#'

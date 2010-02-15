@@ -58,7 +58,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :feeds
     admin.resources :comments,        :active_scaffold => true
     admin.resources :users,           :active_scaffold => true
-    admin.resources :user_infos,      :active_scaffold => true
+    admin.resources :user_profiles,      :active_scaffold => true
     admin.resources :votes,           :active_scaffold => true
   end
 

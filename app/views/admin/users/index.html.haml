@@ -1,1 +1,1 @@
-= gen_index_page @users, User, [:name, :fb_user_id, :email, :is_admin, :is_blocked, :cached_slug, :karma_score, :user_info], :associations => { :asdf => {:user => :user_id, :idea_board => :idea_board_id}, :has_one => {:user_info => :user_info} }, :paginate => true
+= gen_index_page @users, User, [:name, :fb_user_id, :email, :is_admin, :is_blocked, :cached_slug, :karma_score, :user_profile], :associations => { :asdf => {:user => :user_id, :idea_board => :idea_board_id}, :has_one => {:user_profile => :user_profile} }, :paginate => true
