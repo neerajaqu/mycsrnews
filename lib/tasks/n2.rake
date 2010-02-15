@@ -24,7 +24,7 @@ namespace :n2 do
     task :delete_blank_users => :environment do
       puts "Deleting blank users"
       User.find(:all, :conditions => ["name = ''"]).each do |user|
-        user.user_info.destroy if user.user_info.present?
+        user.user_profile.destroy if user.user_profile.present?
         user.destroy
       end
     end
