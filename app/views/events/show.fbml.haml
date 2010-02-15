@@ -18,6 +18,8 @@
               %span.btn_right= fb_share_button(event_url(@event))
             - if @tags.present?
               %h3== Tags #{tag_list(@tags,@event)}
+            - if @event.moderatable?
+              = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
 
   %br
   %br

@@ -8,3 +8,5 @@
     %blockquote
       .quotes= comment.comments
       %span.btn_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{comment.votes.size}
+-#      - if comment.moderatable?
+-#        = render :partial => 'shared/flag_form', :locals => { :flaggable => comment }

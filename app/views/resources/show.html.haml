@@ -17,7 +17,8 @@
               %span.btn_right= fb_share_button(resource_url(@resource))
             - if @tags.present?
               %h3== Tags #{tag_list(@tags)}
-
+            - if @resource.moderatable?
+              = render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
   %br
   %br
   = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }

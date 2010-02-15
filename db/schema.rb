@@ -140,30 +140,30 @@ ActiveRecord::Schema.define(:version => 20100212220146) do
   add_index "featured_items", ["parent_id"], :name => "index_featured_items_on_parent_id"
 
   create_table "feeds", :force => true do |t|
-    t.integer   "wireid",                   :default => 0
-    t.string    "title",                    :default => ""
-    t.string    "url",                      :default => ""
-    t.string    "rss",                      :default => ""
-    t.timestamp "lastFetch",                                       :null => false
-    t.string    "feedType",                 :default => "wire"
-    t.string    "specialType",              :default => "default"
-    t.string    "loadOptions",              :default => "none"
-    t.integer   "user_id",     :limit => 8, :default => 0
-    t.string    "tagList",                  :default => ""
-    t.datetime  "created_at"
-    t.datetime  "updated_at"
+    t.integer  "wireid",                   :default => 0
+    t.string   "title",                    :default => ""
+    t.string   "url",                      :default => ""
+    t.string   "rss",                      :default => ""
+    t.datetime "lastFetch",                                       :null => false
+    t.string   "feedType",                 :default => "wire"
+    t.string   "specialType",              :default => "default"
+    t.string   "loadOptions",              :default => "none"
+    t.integer  "user_id",     :limit => 8, :default => 0
+    t.string   "tagList",                  :default => ""
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "flags", :force => true do |t|
     t.string   "flag_type"
     t.integer  "user_id"
-    t.string   "flaggable_type"
-    t.integer  "flaggable_id"
+    t.string   "flagable_type"
+    t.integer  "flagable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "flags", ["flaggable_type", "flaggable_id"], :name => "index_flags_on_flaggable_type_and_flaggable_id"
+  add_index "flags", ["flagable_type", "flagable_id"], :name => "index_flags_on_flagable_type_and_flagable_id"
 
   create_table "idea_boards", :force => true do |t|
     t.string   "name"
@@ -285,47 +285,47 @@ ActiveRecord::Schema.define(:version => 20100212220146) do
   end
 
   create_table "user_infos", :force => true do |t|
-    t.integer   "user_id",                             :limit => 8,                          :null => false
-    t.integer   "facebook_user_id",                    :limit => 8,   :default => 0
-    t.boolean   "isAppAuthorized",                                    :default => false
-    t.integer   "networkid",                                          :default => 0
-    t.datetime  "birthdate"
-    t.boolean   "age",                                                :default => false
-    t.boolean   "rxConsentForm",                                      :default => false
-    t.string    "gender"
-    t.boolean   "researchImportance",                                 :default => false
-    t.timestamp "dateCreated",                                                               :null => false
-    t.datetime  "lastUpdated"
-    t.text      "friends"
-    t.text      "memberFriends"
-    t.integer   "numFriends",                                         :default => 0
-    t.integer   "numMemberFriends",                                   :default => 0
-    t.datetime  "lastInvite"
-    t.datetime  "lastProfileUpdate"
-    t.datetime  "lastRemoteSyncUpdate"
-    t.text      "interests"
-    t.text      "bio"
-    t.string    "phone",                                              :default => ""
-    t.string    "address1",                                           :default => ""
-    t.string    "address2",                                           :default => ""
-    t.string    "city",                                               :default => "Unknown"
-    t.string    "state",                                              :default => ""
-    t.string    "country",                                            :default => ""
-    t.string    "zip",                                                :default => ""
-    t.integer   "refuid",                              :limit => 8,   :default => 0
-    t.integer   "cachedFriendsInvited",                               :default => 0
-    t.integer   "cachedChallengesCompleted",                          :default => 0
-    t.boolean   "hideTipStories",                                     :default => false
-    t.boolean   "hideTeamIntro",                                      :default => false
-    t.boolean   "noCommentNotify",                                    :default => false
-    t.datetime  "lastUpdateLevels"
-    t.datetime  "lastUpdateSiteChallenges"
-    t.datetime  "lastUpdateCachedPointsAndChallenges"
-    t.datetime  "lastUpdateCachedCommentsAndStories"
-    t.text      "groups"
-    t.text      "networks"
-    t.datetime  "lastNetSync"
-    t.string    "neighborhood",                        :limit => 100, :default => ""
+    t.integer  "user_id",                             :limit => 8,                          :null => false
+    t.integer  "facebook_user_id",                    :limit => 8,   :default => 0
+    t.boolean  "isAppAuthorized",                                    :default => false
+    t.integer  "networkid",                                          :default => 0
+    t.datetime "birthdate"
+    t.boolean  "age",                                                :default => false
+    t.boolean  "rxConsentForm",                                      :default => false
+    t.string   "gender"
+    t.boolean  "researchImportance",                                 :default => false
+    t.datetime "dateCreated",                                                               :null => false
+    t.datetime "lastUpdated"
+    t.text     "friends"
+    t.text     "memberFriends"
+    t.integer  "numFriends",                                         :default => 0
+    t.integer  "numMemberFriends",                                   :default => 0
+    t.datetime "lastInvite"
+    t.datetime "lastProfileUpdate"
+    t.datetime "lastRemoteSyncUpdate"
+    t.text     "interests"
+    t.text     "bio"
+    t.string   "phone",                                              :default => ""
+    t.string   "address1",                                           :default => ""
+    t.string   "address2",                                           :default => ""
+    t.string   "city",                                               :default => "Unknown"
+    t.string   "state",                                              :default => ""
+    t.string   "country",                                            :default => ""
+    t.string   "zip",                                                :default => ""
+    t.integer  "refuid",                              :limit => 8,   :default => 0
+    t.integer  "cachedFriendsInvited",                               :default => 0
+    t.integer  "cachedChallengesCompleted",                          :default => 0
+    t.boolean  "hideTipStories",                                     :default => false
+    t.boolean  "hideTeamIntro",                                      :default => false
+    t.boolean  "noCommentNotify",                                    :default => false
+    t.datetime "lastUpdateLevels"
+    t.datetime "lastUpdateSiteChallenges"
+    t.datetime "lastUpdateCachedPointsAndChallenges"
+    t.datetime "lastUpdateCachedCommentsAndStories"
+    t.text     "groups"
+    t.text     "networks"
+    t.datetime "lastNetSync"
+    t.string   "neighborhood",                        :limit => 100, :default => ""
   end
 
   add_index "user_infos", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true
