@@ -203,4 +203,10 @@ module ApplicationHelper
     APP_CONFIG['default_image']
   end
 
+  def display_facebook_messages
+    flash[:notice] = flash[:success] if flash[:notice].nil? and flash[:success].present?
+
+    facebook_messages
+  end
+
 end

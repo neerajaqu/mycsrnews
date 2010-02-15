@@ -28,8 +28,8 @@ ActionController::Routing::Routes.draw do |map|
   map.event_tag_with_page '/events/tag/:tag/page/:page.:format', :controller => 'events', :action => 'tags'
   map.event_tag '/events/tag/:tag.:format', :controller => 'events', :action => 'tags'
   map.resources :stories, :member => { :like => [:get, :post] }, :collection => { :parse_page => [:get, :post] }, :has_many => :comments
+  map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags], :as => 'stories'
   map.resources :comments, :member => { :like => [:get, :post] }
-  map.resources :contents, :controller => 'stories', :has_many => :comments, :as => 'stories'
 
   map.resources :articles
   map.resources :newswires, :member => { :publish => [:get, :post] }
@@ -42,6 +42,8 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index
   map.namespace(:admin) do |admin|
+    admin.block '/block.:format', :controller => 'admin', :action => 'block'
+    admin.flag '/flag.:format', :controller => 'admin', :action => 'flag'
     admin.paged_items '/featured_items/:id/load_items/page/:page', :controller => 'featured_items', :action => 'load_items'
     admin.resources :widgets, :collection => { :save => :post }
     admin.resources :ideas
@@ -50,14 +52,14 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :resource_sections
     admin.resources :events
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }
-    admin.resources :contents,        :active_scaffold => true
-    admin.resources :content_images,  :active_scaffold => true
+    admin.resources :contents
+    admin.resources :content_images
+    admin.resources :newswires
+    admin.resources :feeds
     admin.resources :comments,        :active_scaffold => true
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_infos,      :active_scaffold => true
     admin.resources :votes,           :active_scaffold => true
-    admin.resources :feeds,           :active_scaffold => true
-    admin.resources :newswires,       :active_scaffold => true
   end
 
 	map.mobile_home '/m', :controller => 'mobile/home', :action => :index

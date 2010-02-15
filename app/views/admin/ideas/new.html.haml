@@ -1,6 +1,5 @@
-.foo
-  %h2 Create an Idea
-  - semantic_form_for [:admin, @idea] do |form|
-    = render :partial => 'idea_form', :locals => { :form => form }
-    - form.buttons do
-      = form.commit_button
+%h2 Create an Idea
+- semantic_form_for [:admin, @idea] do |form|
+  = render :partial => 'idea_form', :locals => { :form => form }
+  - form.buttons do
+    = form.commit_button

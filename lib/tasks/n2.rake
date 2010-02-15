@@ -2,7 +2,7 @@ namespace :n2 do
   namespace :data do
 
     desc "Bootstrap and convert existing data"
-    task :bootstrap => [:pre_register_users, :delete_floating_content, :delete_floating_ideas, :generate_model_slugs, :generate_widgets] do
+    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_ideas, :generate_model_slugs, :generate_widgets, :load_seed_data] do
       puts "Finished Bootstrapping and converting existing data"
     end
 
@@ -12,7 +12,11 @@ namespace :n2 do
       User.all.each do |user|
         next unless user.email.present?
         puts "\tRegistering #{user.name}(#{user.email})"
-        user.register_user_to_fb
+        begin
+          user.register_user_to_fb
+        rescue => e
+          puts "\t***Failed to register user #{user.name}(#{user.email}) -- #{e}"
+        end
       end
     end
 
@@ -50,6 +54,11 @@ namespace :n2 do
       ['User', 'Content', 'IdeaBoard'].each do |model_name|
         puts "Creating slugs for #{model_name.titleize}"
         Rake::Task['friendly_id:redo_slugs'].invoke ENV['MODEL']=model_name
+
+        # Reenable friendly id tasks so they can be run in the next iteration
+        Rake::Task['friendly_id:redo_slugs'].reenable
+        Rake::Task['friendly_id:make_slugs'].reenable
+        Rake::Task['friendly_id:remove_old_slugs'].reenable
       end
     end
 
@@ -60,6 +69,12 @@ namespace :n2 do
       rescue Exception => e
         puts "Error processing widgets: #{e}"
       end
+    end
+
+    desc "Load Seed Data"
+    task :load_seed_data => :environment do
+      puts "Loading Seed Data"
+      Rake::Task['db:seed'].invoke
     end
 
   end

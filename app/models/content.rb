@@ -3,6 +3,7 @@ class Content < ActiveRecord::Base
   acts_as_voteable
   acts_as_taggable_on :tags, :sections
   acts_as_featured_item
+  acts_as_moderatable
 
   belongs_to :user
   belongs_to :article
@@ -11,7 +12,6 @@ class Content < ActiveRecord::Base
 
   has_friendly_id :title, :use_slug => true
 
-  named_scope :active, { :conditions => ["is_blocked = 0"] }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 5)} }
   named_scope :newest_stories, lambda { |*args| { :conditions => ["article_id IS NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
   named_scope :newest_articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
@@ -42,6 +42,10 @@ class Content < ActiveRecord::Base
 
   def featured_url
     { :controller => '/stories', :action => 'show', :id => self }
+  end
+
+  def to_s
+    self.title
   end
 
   private
