@@ -2,20 +2,10 @@ class HomeController < ApplicationController
   caches_page :index, :google_ads
 
   before_filter :set_current_tab
-  before_filter :load_top_stories, :only => [:index, :app_tab]
-  before_filter :load_featured_items, :only => [:index, :app_tab]
-  before_filter :load_top_discussed_stories, :only => [:index, :app_tab]
-  before_filter :load_top_users, :only => [:index, :app_tab]
-  before_filter :load_newest_users, :only => [:index, :app_tab]
 
   def index
-    expires_in 1.minutes, :private => false, :public => true
+    #expires_in 1.minutes, :private => false, :public => true
     @no_paginate = true
-    @contents = Content.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
-    respond_to do |format|
-      format.html
-      format.fbml
-    end
   end
 
   def app_tab

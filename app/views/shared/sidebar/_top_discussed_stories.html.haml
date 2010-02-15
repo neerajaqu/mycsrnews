@@ -1,12 +1,14 @@
 -# @expects: local 'most_discussed_stories'
 
-.panel_2
-  .panelBar.clearfix
-    %h2= t('.top_discussed_title')
-  %br
-  .list_stories.clearfix
-    %ul
-      - most_discussed_stories.each do |story|
-        %li
-          .profilePic= local_linked_profile_pic story.user
-          = link_to story.title, story_path(story)
+- cache :most_discussed_stories do
+  - most_discussed_stories ||= Content.find( :all, :limit => 5, :order => "comments_count desc")
+  .panel_2
+    .panelBar.clearfix
+      %h2= t('.top_discussed_title')
+    %br
+    .list_stories.clearfix
+      %ul
+        - most_discussed_stories.each do |story|
+          %li
+            .profilePic= local_linked_profile_pic story.user
+            = link_to story.title, story_path(story)

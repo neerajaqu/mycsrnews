@@ -1,12 +1,14 @@
 -# @expects: local 'story'
 
-.panel_2
-  .panelBar.clearfix
-    %h2= t('.top_stories_title')
-  %br
-  .list_stories.clearfix
-    %ul
-      - top_stories.each do |story|
-        %li
-          .profilePic= local_linked_profile_pic story.user
-          = link_to story.title, story_path(story)
+- cache :top_stories, :expires_in => 15.seconds do
+  - top_stories ||= Content.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
+  .panel_2
+    .panelBar.clearfix
+      %h2= t('.top_stories_title')
+    %br
+    .list_stories.clearfix
+      %ul
+        - top_stories.each do |story|
+          %li
+            .profilePic= local_linked_profile_pic story.user
+            = link_to story.title, story_path(story)

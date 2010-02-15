@@ -27,6 +27,9 @@ defaults: &defaults
   default_admin_user: 'admin'
   default_admin_password: 'n2adminpassword'
 
+  # Default image
+  default_image: 'images/default/watermark.jpg'
+
 development:
   <<: *defaults
   fb_rss_url: "http://my.site.com/stories.atom"

@@ -1,13 +1,15 @@
 -# @expects: local 'newest_users'
 
-- unless newest_users.empty?
-  .panel_2
-    .panelBar.clearfix
-      %h2= t('.newest_users_title')
-    %br
-    .list_stories.clearfix
-      %ul
-        - newest_users.each do |user|
-          %li
-            .profilePic= local_linked_profile_pic user
-            == #{link_to user.name, user_path(user)} registered #{time_ago_in_words user.created_at} ago
+- cache :newest_users do
+  - newest_users ||= User.newest
+  - unless newest_users.empty?
+    .panel_2
+      .panelBar.clearfix
+        %h2= t('.newest_users_title')
+      %br
+      .list_stories.clearfix
+        %ul
+          - newest_users.each do |user|
+            %li
+              .profilePic= local_linked_profile_pic user
+              == #{link_to user.name, user_path(user)} registered #{time_ago_in_words user.created_at} ago

@@ -1,5 +1,7 @@
+!*.gitignore
 public/uploads
 public/cache/*
+!public/cache/.gitignore
 tmp
 .DS_Store
 public/system
