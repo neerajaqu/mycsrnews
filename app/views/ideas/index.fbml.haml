@@ -5,6 +5,7 @@
   = render :partial => 'shared/ideas', :locals => { :ideas => @ideas, :title => t('.ideas_title') }
 
 #col_right
+  = render :partial => 'shared/sidebar/fan_application'
   = render :partial => 'shared/sidebar/ideas_whatisthis'
   = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('.top_ideas') }
   = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @newest_ideas, :title => t('.newest_ideas') }

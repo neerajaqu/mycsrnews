@@ -1,0 +1,8 @@
+-# to do: needs way to hide if the user is already a fan
+.panel_2
+  .panelBar.clearfix
+    %h2= t('.become_a_fan')
+  .panel_block
+    .storyBlockWrap
+      %p= t('.fan_details')
+      %iframe{:src => "http://www.facebook.com/connect/connect.php?id=#{APP_CONFIG['application_id']}&connections=0&stream=0&locale=your_LOCALE", :frameborder => 0, :scrolling => "no", :style => "border: none; width: 300px; height: 60px;", :allowtransparency => "true"}

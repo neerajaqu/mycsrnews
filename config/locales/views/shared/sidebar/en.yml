@@ -48,3 +48,7 @@ en:
 
       newest_events:
         newest_events_title: "Newest Events"
+        
+      fan_application:
+        become_a_fan: "Become a Fan"
+        fan_details: "Reasons why you should become a fan."

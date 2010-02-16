@@ -27,3 +27,7 @@ widgets:
       partial: '/shared/sidebar/newest_users'
       load_functions: 'load_newest_users'
       locals: 'newest_users'
+    fan_application:
+      partial: '/shared/sidebar/fan_application'
+#      locals: 'user'
+#      load_functions: 'load_user'
