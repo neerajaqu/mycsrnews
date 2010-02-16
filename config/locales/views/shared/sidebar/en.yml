@@ -52,3 +52,8 @@ en:
       fan_application:
         become_a_fan: "Become a Fan"
         fan_details: "Reasons why you should become a fan."
+        
+      prompt_permissions:
+        title: "Stay Connected"
+        details: "Optimize your Facebook permissions for our community"
+        request: "Would you like to receive email from us?"

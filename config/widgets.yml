@@ -31,3 +31,7 @@ widgets:
       partial: '/shared/sidebar/fan_application'
 #      locals: 'user'
 #      load_functions: 'load_user'
+    prompt_permissions:
+      partial: '/shared/sidebar/prompt_permissions'
+#      locals: 'user'
+#      load_functions: 'load_user'
