@@ -209,4 +209,11 @@ module ApplicationHelper
     facebook_messages
   end
 
+  def embed_fb_swf src, options = {}
+    options[:width] ||= '425'
+    options[:height] ||= '344'
+
+    fb_swf src, options
+  end
+
 end

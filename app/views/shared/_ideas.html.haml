@@ -7,6 +7,9 @@
       %ul
         - ideas.each do |idea|
           %li.askQuestionWrap
+            .thumb
+              - if idea.image_item?
+                = image_tag idea.images.last.url(:thumb)
             .storyBlockWrap
               %p.askQuestionHead= link_to idea.title, idea_path(idea)
               .profilePic= local_linked_profile_pic idea.user, :size => :square

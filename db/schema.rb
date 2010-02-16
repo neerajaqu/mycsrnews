@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100215224032) do
+ActiveRecord::Schema.define(:version => 20100216031801) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -192,6 +192,24 @@ ActiveRecord::Schema.define(:version => 20100215224032) do
 
   add_index "ideas", ["title"], :name => "related"
 
+  create_table "images", :force => true do |t|
+    t.string   "imageable_type"
+    t.integer  "imageable_id"
+    t.integer  "user_id"
+    t.text     "description"
+    t.string   "remote_image_url"
+    t.boolean  "is_blocked",         :default => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "images", ["imageable_type", "imageable_id"], :name => "index_images_on_imageable_type_and_imageable_id"
+  add_index "images", ["user_id"], :name => "index_images_on_user_id"
+
   create_table "messages", :force => true do |t|
     t.string   "subject"
     t.string   "email"
@@ -340,6 +358,24 @@ ActiveRecord::Schema.define(:version => 20100215224032) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "videos", :force => true do |t|
+    t.string   "videoable_type"
+    t.integer  "videoable_id"
+    t.integer  "user_id"
+    t.string   "remote_video_url"
+    t.boolean  "is_blocked",        :default => false
+    t.text     "description"
+    t.text     "embed_code"
+    t.string   "embed_src"
+    t.string   "remote_video_type"
+    t.string   "remote_video_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "videos", ["user_id"], :name => "index_videos_on_user_id"
+  add_index "videos", ["videoable_type", "videoable_id"], :name => "index_videos_on_videoable_type_and_videoable_id"
 
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
