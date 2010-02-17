@@ -16,13 +16,18 @@ class Image < ActiveRecord::Base
   }
 
   before_validation :download_image, :if => :remote_image_url?
-  validates_presence_of :remote_image_url, :allow_blank => true, :message => 'invalid image or url.'
+  validates_presence_of :remote_image_url, :allow_blank => true, :message => 'invalid image or url.', :if => :remote_image_url?
+  validates_presence_of :image, :image_file_name, :image_content_type, :image_file_size
 
-  def url options = {}
-    self.image.url options
-  end
+  after_validation :set_user
+
+  delegate :url, :to => :image
 
   private
+
+  def set_user
+    self.user = current_user unless self.user.present?
+  end
 
   def download_image
     self.image = open(URI.parse(remote_image_url))

@@ -23,6 +23,8 @@
     - if @story.moderatable?
       = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
 
+  - if @story.media_item?
+    = render_media_items @story
   = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
 

@@ -5,14 +5,13 @@ class Video < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :videoable, :polymorphic => true
-  validates_presence_of :remote_video_url, :unless => :embed_code?
-  validates_presence_of :embed_code?, :unless => :remote_video_url?
 
   validates_format_of :remote_video_url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :message => "should look like a URL", :allow_blank => true
-  validates_format_of :remote_video_url, :with => /(youtube|vimeo).com/i, :message => "should be a youtube or video url", :allow_blank => true
+  validates_format_of :remote_video_url, :with => /(youtube|vimeo).com/i, :message => "should be a youtube or vimeo url", :allow_blank => true
   validates_format_of :embed_code, :with => /<embed[^>]+src="http(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"/i, :message => "should look like a URL", :allow_blank => true
 
   after_validation :process_video
+  after_validation :set_user
 
   def url_video?
     remote_video_url?
@@ -30,8 +29,6 @@ class Video < ActiveRecord::Base
       	""
     end
   end
-
-  #private
 
   def process_video
     if embed_code?
@@ -69,6 +66,10 @@ class Video < ActiveRecord::Base
   end
 
   def parse_vimeo_url url
+  end
+
+  def set_user
+    self.user = current_user unless self.user.present?
   end
 
 end

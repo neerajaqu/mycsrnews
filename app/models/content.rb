@@ -4,6 +4,7 @@ class Content < ActiveRecord::Base
   acts_as_taggable_on :tags, :sections
   acts_as_featured_item
   acts_as_moderatable
+  acts_as_media_item
 
   belongs_to :user
   belongs_to :article
