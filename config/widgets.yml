@@ -33,3 +33,9 @@ widgets:
       partial: '/shared/sidebar/prompt_permissions'
     active_users:
       partial: '/shared/sidebar/active_users'
+#    top_ideas:
+#      partial: '/shared/sidebar/top_ideas'
+#    newest_ideas:
+#      partial: '/shared/sidebar/newest_ideas'
+#    featured_idea:
+#      partial: '/shared/sidebar/featured_idea'
