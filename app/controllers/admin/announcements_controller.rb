@@ -5,7 +5,7 @@ class Admin::AnnouncementsController < AdminController
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => Announcement.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => Announcement,
-    	:fields => [:title, :url, :rss, :created_at],
+    	:fields => [:prefix, :title, :url, :created_at],
     	:paginate => true
     }
   end
@@ -13,7 +13,7 @@ class Admin::AnnouncementsController < AdminController
   def new
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
     	:model => Announcement,
-    	:fields => [:title, :url, :rss]
+    	:fields => [:prefix, :title, :details, :url, :type]
     }
   end
 
@@ -22,7 +22,7 @@ class Admin::AnnouncementsController < AdminController
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
     	:item => @announcement,
     	:model => Announcement,
-    	:fields => [:title, :url, :rss]
+    	:fields => [:prefix, :title, :details, :url, :type]
     }
   end
 
@@ -41,7 +41,7 @@ class Admin::AnnouncementsController < AdminController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
     	:item => Announcement.find(params[:id]),
     	:model => Announcement,
-    	:fields => [:title, :url, :rss, :created_at],
+    	:fields => [:prefix, :title, :details, :url, :type,:created_at]
     }
   end
 

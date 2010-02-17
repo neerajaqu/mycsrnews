@@ -12,10 +12,11 @@
 ActiveRecord::Schema.define(:version => 20100217011121) do
 
   create_table "announcements", :force => true do |t|
+    t.string   "prefix"
     t.string   "title",                            :null => false
     t.text     "details"
     t.string   "url"
-    t.string   "kind",       :default => "rotate"
+    t.string   "type",       :default => "rotate"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
