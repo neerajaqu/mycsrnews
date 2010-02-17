@@ -249,6 +249,7 @@ EMBED
   end
 
   def render_media_items item
+    return false unless item.media_item?
     output = []
     ['audio', 'video', 'image'].each do |media|
       next unless item.send("#{media}_item?")
