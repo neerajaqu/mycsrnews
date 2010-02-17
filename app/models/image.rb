@@ -9,8 +9,8 @@ class Image < ActiveRecord::Base
   belongs_to :imageable, :polymorphic => true
 
   has_attached_file :image, :styles => {
-  	:mini => "50x50#",
-  	:thumb => "100x100#",
+  	:mini => "50x50",
+  	:thumb => "100x100>",
   	:small => "180x180>",
   	:medium => "200x200"
   }

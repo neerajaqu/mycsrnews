@@ -14,6 +14,23 @@ class Video < ActiveRecord::Base
 
   after_validation :process_video
 
+  def url_video?
+    remote_video_url?
+  end
+
+  def embed_video?
+    embed_src?
+  end
+
+  def video_src
+    case self.remote_video_type
+      when 'youtube'
+        "http://www.youtube.com/v/#{self.remote_video_id}"
+      else
+      	""
+    end
+  end
+
   #private
 
   def process_video
