@@ -6,38 +6,17 @@
     %title== N2 -- #{APP_CONFIG['site_topic']} Admin Interface
 
     = javascript_include_tag 'all'
+    = javascript_include_tag 'hoverIntent'
+    = javascript_include_tag 'superfish'
+
     = stylesheet_link_tag 'all'
+    = stylesheet_link_tag 'superfish'
 
     :javascript
       $(function() {
-        $("##{@current_tab}-tab").addClass('ui-tabs-selected ui-state-active');
 
-      	$('#tabs li').hover(
-      	  function() {
-      	  	$(this).addClass('ui-state-hover');
-          },
-          function() {
-      	  	$(this).removeClass('ui-state-hover');
-          }
-        ).mousedown(function() {
-        	$(this).addClass('ui-state-active');
-        }).mouseup(function() {
-        	$(this).removeClass('ui-state-active');
-        });
-      	return false;
-      	var current_tab = "##{@current_tab}-tab";
-        $("#tabs").tabs({
-          select: function(event, ui) {
-              var url = $.data(ui.tab, 'load.tabs');
-              if( url ) {
-                  location.href = url;
-                  return false;
-              }
-              return true;
-          },
-          selected: $('li').index($(current_tab))
-        });
-        console.log("index of ("+current_tab+"): "+$('li').index($(current_tab)));
+        $('#admin-menu').superfish();
+
       });
 
     %style
@@ -46,31 +25,54 @@
           display: block
           fieldset ol li
             display: block
+        .admin-menu-content
+          padding-left: 30px
+          padding-bottom: 30px
+        .admin-blocked
+          background-color: red
 
     = yield :head
     = yield :extra_javascript
 
   %body
-    #tabs.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
-      %ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner.all
-        %li#dashboard-tab.ui-state-default.ui-corner.top= link_to 'Dashboard', admin_path
-        %li#widgets-tab.ui-state-default.ui-corner.top= link_to 'Widgets', admin_widgets_path
-        %li#featured-items-tab.ui-state-default.ui-corner.top= link_to 'Featured Items', admin_featured_items_path
-        %li#users-tab.ui-state-default.ui-corner.top= link_to 'Users', admin_users_path
-        %li#idea-boards-tab.ui-state-default.ui-corner.top= link_to 'Idea Boards', admin_idea_boards_path
-        %li#idea-tab.ui-state-default.ui-corner.top= link_to 'Ideas', admin_ideas_path
-        %li#resource_sections-tab.ui-state-default.ui-corner.top= link_to 'Resource Sections', admin_resource_sections_path
-        %li#resource-tab.ui-state-default.ui-corner.top= link_to 'Resources', admin_resources_path
-        %li#event-tab.ui-state-default.ui-corner.top= link_to 'Calendar', admin_events_path
-        -#
-          %li= link_to 'Contents', '#contents'
-          %li= link_to 'Content Images', '#content_images'
-          %li= link_to 'Comments', '#comments'
-          %li= link_to 'Users', '#users'
-          %li= link_to 'User Infos', '#user_profiles'
-          %li= link_to 'Votes', '#votes'
-          %li= link_to 'Feeds', '#feeds'
-          %li= link_to 'Newswires', '#newswires'
-
     #admin-content.ui-tabs-panel.ui-widget-content.ui-corner-bottom
-      = yield
+      .admin-menu-content
+        %ul#admin-menu.sf-menu.sf-js-enabled.sf-shadow
+          %li= link_to 'Dashboard', admin_path
+          %li
+            %a{:href => "#home-page"} Home Page
+            %ul
+              %li= link_to 'Widgets', admin_widgets_path
+              %li= link_to 'Featured Items', admin_featured_items_path
+          %li
+            %a{:href => "#modules"} Modules
+            %ul
+              %li
+                %a{:href => "#modules-ideas"} Ideas
+                %ul
+                  %li= link_to 'Ideas', admin_ideas_path
+                  %li= link_to 'Idea Boards', admin_idea_boards_path
+              %li
+                %a{:href => "#modules-resources"} Resources
+                %ul
+                  %li= link_to 'Resources', admin_resources_path
+                  %li= link_to 'Resource Sections', admin_resource_sections_path
+              %li= link_to 'Calendar', admin_events_path
+          %li
+            %a{:href => "#members"} Members
+            %ul
+              %li= link_to 'Users', admin_users_path
+          %li
+            %a{:href => "#contents"} Contents
+            %ul
+              %li= link_to 'Stories', admin_contents_path
+              %li= link_to 'Content Images', admin_content_images_path
+              %li= link_to 'Newswires', admin_newswires_path
+              %li= link_to 'Feeds', admin_feeds_path
+          -#
+            %li= link_to 'Comments', '#comments'
+            %li= link_to 'Users', '#users'
+            %li= link_to 'User Infos', '#user_infos'
+            %li= link_to 'Votes', '#votes'
+      .main-content.clear
+        = yield
