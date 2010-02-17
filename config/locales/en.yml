@@ -12,3 +12,9 @@ en:
   events:
     newest_events: "Newest Events"
     top_events: "Top Events"
+  images:
+    title: "Images"
+  videos:
+    title: "Videos"
+  audios:
+    title: "Audios"

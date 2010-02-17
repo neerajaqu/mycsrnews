@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100217011121) do
+ActiveRecord::Schema.define(:version => 20100217021117) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -28,6 +28,22 @@ ActiveRecord::Schema.define(:version => 20100217011121) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "audios", :force => true do |t|
+    t.string   "audioable_type"
+    t.integer  "audioable_id"
+    t.integer  "user_id"
+    t.string   "url"
+    t.string   "title"
+    t.string   "artist"
+    t.string   "album"
+    t.text     "caption"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "audios", ["audioable_type", "audioable_id"], :name => "index_audios_on_audioable_type_and_audioable_id"
+  add_index "audios", ["user_id"], :name => "index_audios_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "commentid",        :default => 0
@@ -168,13 +184,13 @@ ActiveRecord::Schema.define(:version => 20100217011121) do
   create_table "flags", :force => true do |t|
     t.string   "flag_type"
     t.integer  "user_id"
-    t.string   "flagable_type"
-    t.integer  "flagable_id"
+    t.string   "flaggable_type"
+    t.integer  "flaggable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "flags", ["flagable_type", "flagable_id"], :name => "index_flags_on_flagable_type_and_flagable_id"
+  add_index "flags", ["flaggable_type", "flaggable_id"], :name => "index_flags_on_flaggable_type_and_flaggable_id"
 
   create_table "idea_boards", :force => true do |t|
     t.string   "name"

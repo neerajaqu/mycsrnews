@@ -26,6 +26,8 @@
             - if @idea.moderatable?
               = render :partial => 'shared/flag_form', :locals => { :flaggable => @idea }
 
+  - if @idea.media_item?
+    = render_media_items @idea
   %br
   %br
   = render :partial => 'shared/comments', :locals => { :comments => @idea.comments }

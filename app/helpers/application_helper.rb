@@ -233,4 +233,28 @@ module ApplicationHelper
 EMBED
   end
 
+  def embed_audio audio, options = {}
+    request_comes_from_facebook? ? embed_fb_audio(audio, options) : embed_html_audio(audio, options)
+  end
+
+  def embed_fb_audio audio, options = {}
+    fb_mp3 audio.url, :title => audio.title, :artist => audio.artist, :album => audio.album
+  end
+
+  def embed_html_audio audio, options = {}
+    # TODO::
+    <<EMBED
+<embed src= "http://www.odeo.com/flash/audio_player_standard_gray.swf" quality="high" width="300" height="52" allowScriptAccess="always" wmode="transparent"  type="application/x-shockwave-flash" flashvars= "valid_sample_rate=true&external_url=#{audio.url}" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+EMBED
+  end
+
+  def render_media_items item
+    output = []
+    ['audio', 'video', 'image'].each do |media|
+      next unless item.send("#{media}_item?")
+      output << render(:partial => "shared/media/#{media.pluralize}", :locals => { media.pluralize.to_sym => item.send(media.pluralize.to_sym) })
+    end
+    output.join
+  end
+
 end

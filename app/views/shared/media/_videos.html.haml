@@ -1,0 +1,15 @@
+-# @expects: local 'videos'
+
+.panel_1
+  .panelBar.clearfix
+    %h2= t 'videos.title'
+    %br
+    %br
+  .storyList
+    .list_stories.clearfix
+      %ul
+        - videos.each do |video|
+          .video.clearfix
+            = embed_video video
+            %br
+            %br
