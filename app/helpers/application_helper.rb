@@ -209,11 +209,28 @@ module ApplicationHelper
     facebook_messages
   end
 
-  def embed_fb_swf src, options = {}
+  def embed_video video, options = {}
+    request_comes_from_facebook? ? embed_fb_video(video, options) : embed_html_video(video, options)
+  end
+
+  def embed_fb_video video, options = {}
     options[:width] ||= '425'
     options[:height] ||= '344'
 
-    fb_swf src, options
+    fb_swf video.video_src, options
+  end
+
+  def embed_html_video video, options = {}
+    options[:width] ||= '425'
+    options[:height] ||= '344'
+    <<EMBED
+<object width="#{options[:height]}" height="#{options[:width]}">
+  <param name="movie" value="#{video.video_src}"></param>
+  <param name="allowFullScreen" value="true"></param>
+  <param name="allowscriptaccess" value="always"></param>
+  <embed src="#{video.video_src}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed>
+</object>
+EMBED
   end
 
 end
