@@ -60,3 +60,8 @@ en:
         title: "Stay Connected"
         details: "Optimize your Facebook permissions for our community"
         request: "Would you like to receive email from us?"
+
+      post_story:
+        post_story_title: "Contribute links to our site"
+        post_story: "Post a Story"   
+        

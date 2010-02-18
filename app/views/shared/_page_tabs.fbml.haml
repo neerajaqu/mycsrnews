@@ -11,4 +11,3 @@
         %li= link_to t('.events'), events_path, :class => tab_selected?(@current_tab, 'events')
         - if current_user.present?
           %li= link_to t('.my_profile'), user_path(current_user), :class => tab_selected?(@current_tab, 'my_profile')
-          %li= link_to t('.post_story'), new_story_path
