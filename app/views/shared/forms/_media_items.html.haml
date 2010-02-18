@@ -1,0 +1,23 @@
+%h2 Upload or link to an image:
+- @story.images.build if @story.images.empty?
+- form.semantic_fields_for :images do |image_form|
+  = image_form.file_field :image
+  = image_form.input :remote_image_url, :required => false
+  %br
+  %br
+%h2 Embed or link to a video (youtube only):
+- @story.videos.build if @story.videos.empty?
+- form.semantic_fields_for :videos do |video_form|
+  = video_form.input :embed_code, :required => false
+  = video_form.input :remote_video_url, :required => false
+  %br
+  %br
+%h2 Link to an audio file (.mp3 only):
+- @story.audios.build if @story.audios.empty?
+- form.semantic_fields_for :audios do |audio_form|
+  = audio_form.input :url, :required => false
+  = audio_form.input :title, :required => false
+  = audio_form.input :album, :required => false
+  = audio_form.input :artist, :required => false
+  %br
+  %br

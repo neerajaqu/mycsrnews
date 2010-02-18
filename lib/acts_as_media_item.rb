@@ -10,9 +10,16 @@ module Newscloud
 
       module ClassMethods
         def acts_as_media_item
-          has_many :images, :as => :imageable
-          has_many :videos, :as => :videoable
-          has_many :audios, :as => :audioable
+          has_many :images, :as => :imageable, :dependent => :nullify
+          has_many :videos, :as => :videoable, :dependent => :destroy
+          has_many :audios, :as => :audioable, :dependent => :destroy
+
+          accepts_nested_attributes_for :images,
+            :reject_if => proc { |attrs| attrs.all? { |k,v| v.blank? } }
+          accepts_nested_attributes_for :videos,
+            :reject_if => proc { |attrs| attrs.all? { |k,v| v.blank? } }
+          accepts_nested_attributes_for :audios,
+            :reject_if => proc { |attrs| attrs.all? { |k,v| v.blank? } }
 
           include Newscloud::Acts::MediaItem::InstanceMethods
         end
