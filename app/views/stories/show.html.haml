@@ -13,7 +13,7 @@
         %h3
           %span.btn_left== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteLink"} #{@story.votes.size}
           %span.btn_mid== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
-          %span.btn_right= t('.share')
+          %span.btn_right= fb_share_button(story_url(@story))
     - if @story.is_article?
       %p.storyCaption= sanitize nl2br(@story.caption)
     - else

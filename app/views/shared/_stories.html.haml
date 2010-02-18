@@ -23,7 +23,7 @@
                   %p
                     %span.btn_left== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteLink"} #{content.votes.size}
                     %span.btn_mid== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
-                    %span.btn_right= t('.stories_share')
+                    %span.btn_right= fb_share_button(content_url(content))
     - unless no_paginate
       .clearfix
         = will_paginate contents

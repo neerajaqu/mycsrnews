@@ -19,6 +19,8 @@
               %h3== Tags #{tag_list(@tags)}
             - if @resource.moderatable?
               = render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
+  - if @resource.media_item?
+    = render_media_items @resource
   %br
   %br
   = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }

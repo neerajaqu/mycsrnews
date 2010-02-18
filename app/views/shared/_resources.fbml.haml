@@ -14,4 +14,4 @@
                 %p
                   %span.btn_left== #{link_to t('.resources_like'), like_resource_path(resource.id), :class => "voteLink"} #{resource.votes.size}
                   %span.btn_mid== #{link_to t('.resources_comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}
-                  %span.btn_right= t('.resources_share')
+                  %span.btn_right= fb_share_button(resource_path(resource))
