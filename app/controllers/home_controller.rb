@@ -29,6 +29,10 @@ class HomeController < ApplicationController
     render :partial => 'shared/bookmarklet_panel.html.haml', :layout => false
   end
 
+  def bookmarklet_panel
+    render :partial => 'shared/bookmarklet_panel.html.haml', :layout => false
+  end
+
   def about
   end
 
