@@ -20,7 +20,7 @@
               %h3== Tags #{tag_list(@tags,@event)}
             - if @event.moderatable?
               = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
-   - if @event.media_item?
+  - if @event.media_item?
     = render_media_items @event
 
   %br
