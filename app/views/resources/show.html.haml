@@ -25,11 +25,7 @@
   %br
   = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }
+  = render :partial => 'shared/item_footer', :locals => { :item => @resource, :title => @resource.title }
 
-  #actionLegend
-  .share_and_hide.clearfix
-    %p.bold
-      = fb_share_button(resource_url(@resource))
-      -#= twitter_share_resource_link @resource
 
 #col_right

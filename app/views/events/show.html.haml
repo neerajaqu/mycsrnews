@@ -27,14 +27,6 @@
   %br
   = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @event }
-
-  -# TODO::= fb_comments(ar_xid(@event), true, false, 25, :callbackurl => commented_event_url(@event))
-  -#= fb_comments(ar_xid(@event), true, false, 25)
-
-  #actionLegend
-  .share_and_hide.clearfix
-    %p.bold
-      = fb_share_button(event_url(@event))
-      -#= twitter_share_event_link @event
+  = render :partial => 'shared/item_footer', :locals => { :item => @event, :title =>@event.name }
 
 #col_right

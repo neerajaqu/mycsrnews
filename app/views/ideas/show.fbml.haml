@@ -31,14 +31,6 @@
   %br
   = render :partial => 'shared/comments', :locals => { :comments => @idea.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @idea }
-
-  -# TODO::= fb_comments(ar_xid(@idea), true, false, 25, :callbackurl => commented_idea_url(@idea))
-  -#= fb_comments(ar_xid(@idea), true, false, 25)
-
-  #actionLegend
-  .share_and_hide.clearfix
-    %p.bold
-      = fb_share_button(idea_url(@idea))
-      -#= twitter_share_idea_link @idea
+  = render :partial => 'shared/item_footer', :locals => { :item => @idea, :title => @idea.title }
 
 #col_right

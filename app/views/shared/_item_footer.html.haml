@@ -1,0 +1,7 @@
+#actionLegend
+  .share_and_hide.clearfix
+    %p.bold
+      Link to this page
+      %br
+      %input{:type => "text", :value => "#{path_to_self item}" }
+      = twitter_share_item_link item, title

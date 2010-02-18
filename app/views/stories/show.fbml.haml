@@ -27,12 +27,7 @@
     = render_media_items @story
   = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
-
-  #actionLegend
-  .share_and_hide.clearfix
-    %p.bold
-      = fb_share_button(story_url(@story))
-      = twitter_share_story_link @story
+  = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
 
 #col_right
   = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }

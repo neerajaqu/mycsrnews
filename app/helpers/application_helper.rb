@@ -141,10 +141,18 @@ module ApplicationHelper
   def profile_fb_name(user)
     fb_name(user, :use_you => true, :possessive => true, :capitalize => true)
   end
+  
+  def path_to_self(item)
+    url_for(send("#{item.class.to_s.underscore}_url", item))
+  end
 
-  def twitter_share_story_link(story)
-    caption = caption strip_tags(story.caption)
-    url = story_url(story)
+  def link_to_path_to_self(item)
+    link_to url_for(send("#{item.class.to_s.underscore}_url", item)), url_for(send("#{item.class.to_s.underscore}_url", item))
+  end
+
+  def twitter_share_item_link(item,caption)
+    caption = strip_tags(caption)
+    url = path_to_self(item)
     text = CGI.escape("#{caption} #{url}")
     twitter_url = "http://twitter.com/?status=#{text}"
     link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
