@@ -5,7 +5,7 @@ class Resource < ActiveRecord::Base
   acts_as_moderatable
   acts_as_media_item
   acts_as_refineable
-    
+
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
 #  named_scope :top, lambda { |*args| { :order => ["likes_count desc"], :limit => (args.first || 10)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
