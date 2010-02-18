@@ -2,14 +2,11 @@ en:
   shared:
     page_tabs:
       home: "Home"
-      stories: "Stories"
-      newswire: "Newswire"
+      stories: "News"
+      newswire: "Wires"
       ideas: "Ideas"
       events: "Calendar"
       resources: "Directory"
-      my_profile: "My Profile"
-      post_story: "Post Story"
-      admin: "Admin"
 
     comments:
       comment_title: "Comments"
@@ -32,6 +29,8 @@ en:
       #resources: "{{site_topic}} Resources"
       resources: "{{site_topic}}"
       contact_us: "Contact Us"
+      my_profile: "My Profile"
+      admin: "Admin"
 
     footer:
       rss: "RSS"

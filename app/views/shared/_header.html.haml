@@ -18,6 +18,12 @@
     = pipe_spacer
     -#TODO:: add contact us
     = link_to t('.contact_us'), contact_us_path
+    - if current_user.present?
+      = pipe_spacer
+      = link_to t('.my_profile'), user_path(current_user)
+    - if current_user and current_user.is_admin?
+      = pipe_spacer
+      = link_to t('.admin'), admin_path
   = render :partial => 'shared/page_tabs'
 %br
 %br
