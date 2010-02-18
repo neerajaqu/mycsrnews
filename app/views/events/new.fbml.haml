@@ -16,6 +16,7 @@
       = form.input :state, :required => false
       = form.input :description, :required => false
       = form.input :tags_string, :required => false
+      = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @event }
     - form.buttons do
       = form.commit_button
 

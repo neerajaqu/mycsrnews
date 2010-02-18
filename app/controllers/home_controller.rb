@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  caches_page :index, :google_ads
+  caches_page :index, :google_ads, :bookmarklet_panel
 
   before_filter :set_current_tab
 
@@ -15,6 +15,10 @@ class HomeController < ApplicationController
 
   def google_ads
     render :partial => 'shared/google_ads.html.haml', :layout => false
+  end
+
+  def bookmarklet_panel
+    render :partial => 'shared/bookmarklet_panel.html.haml', :layout => false
   end
 
   def about

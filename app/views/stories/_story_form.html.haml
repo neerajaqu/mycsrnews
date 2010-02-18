@@ -5,4 +5,4 @@
   = form.input :tags_string, :required => false
   %ul#image_selector.jcarousel-skin-tango{:style => "left: 0px;"}
   = form.input :caption
-= render :partial => 'shared/forms/media_items', :locals => { :form => form }
+= render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @story }

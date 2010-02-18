@@ -4,4 +4,4 @@
   = form.input :image_url
   = form.input :tags_string, :required => false
   = form.input :caption
-= render :partial => 'shared/forms/media_items', :locals => { :form => form }
+= render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @story }

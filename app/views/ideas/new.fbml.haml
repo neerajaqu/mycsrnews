@@ -13,6 +13,7 @@
         = form.input :title
         = form.input :details, :input_html => { :rows => 5 }
         = form.input :tags_string, :required => false
+		= render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
         = form.input :idea_board, :required => true, :include_blank => false
       - form.buttons do
         = form.commit_button
