@@ -16,6 +16,7 @@ class Idea < ActiveRecord::Base
   has_friendly_id :title, :use_slug => true
 
   validates_presence_of :title
+  validates_uniqueness_of :title
   validates_presence_of :idea_board
   validates_format_of :tags_string, :with => /^([-a-zA-Z0-9_ ]+,?)+$/, :allow_blank => true, :message => "Invalid tags. Tags can be alphanumeric characters or -_ or a blank space."  
   

@@ -8,8 +8,8 @@
     - semantic_form_for @resource do |form|
       - form.inputs do
         = form.input :title
-        = form.input :details, :input_html => { :rows => 5 },:required => false
         = form.input :url, :label => t('.label_url'), :hint =>t('.hint_url')
+        = form.input :details, :input_html => { :rows => 5 },:required => false
         = form.input :mapUrl, :label => t('.label_map'), :hint =>t('.hint_map'),:required => false
         = form.input :twitterName, :label => t('.label_twitter'), :hint=>t('.hint_twitter'), :required => false
         = form.input :tags_string, :required => false
