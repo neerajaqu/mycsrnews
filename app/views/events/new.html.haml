@@ -16,6 +16,8 @@
       = form.input :state, :required => false
       = form.input :description, :required => false
       = form.input :tags_string, :required => false
+      = form.input :start_time, :required => true
+      = form.input :end_time, :required => false
       = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @event }
 
     - form.buttons do

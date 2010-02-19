@@ -16,7 +16,7 @@
               %span.btn_left== #{link_to t('.like'), like_resource_path(@resource, :return_to => resource_path(@resource)), :class => "voteLink"} #{@resource.votes.size}
               %span.btn_right= fb_share_button(resource_url(@resource))
             - if @tags.present?
-              %h3== Tags #{tag_list(@tags)}
+              %h3== Tags #{tag_list(@tags,@resource)}
             - if @resource.moderatable?
               = render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
   - if @resource.media_item?
