@@ -1,0 +1,15 @@
+-# @expects: local 'newest_ideas'
+
+- cache :newest_ideas do
+  - newest_ideas ||= Idea.newest
+  - unless newest_ideas.empty?
+    .panel_2
+      .panelBar.clearfix
+        %h2= t('.newest_ideas_title')
+      %br
+      .list_stories.clearfix
+        %ul
+          - newest_ideas.each do |idea|
+            %li
+              .profilePic= local_linked_profile_pic idea.user
+              = link_to idea.title, idea_path(idea)

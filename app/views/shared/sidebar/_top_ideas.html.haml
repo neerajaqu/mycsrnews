@@ -1,0 +1,14 @@
+-# @expects: local 'idea'
+
+- cache :top_ideas, :expires_in => 15.seconds do
+  - top_ideas ||= Idea.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
+  .panel_2
+    .panelBar.clearfix
+      %h2= t('.top_ideas_title')
+    %br
+    .list_items.clearfix
+      %ul
+        - top_ideas.each do |idea|
+          %li
+            .profilePic= local_linked_profile_pic idea.user
+            = link_to idea.title, idea_path(idea)

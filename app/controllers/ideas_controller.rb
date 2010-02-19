@@ -3,6 +3,7 @@ class IdeasController < ApplicationController
   before_filter :login_required, :only => [:new, :create, :update]
   before_filter :load_top_ideas
   before_filter :load_newest_ideas
+  before_filter :load_featured_ideas, :only => [:index]
   before_filter :set_idea_board
   before_filter :load_newest_idea_boards
 

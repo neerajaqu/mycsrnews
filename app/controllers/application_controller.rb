@@ -67,14 +67,18 @@ class ApplicationController < ActionController::Base
     })
   end
 
+  def load_newest_ideas
+    @newest_ideas ||= Idea.newest
+  end
+
+  def load_featured_ideas
+    @featured_ideas ||= Idea.featured
+  end
+
   def load_featured_items
     @featured_items ||= FeaturedItem.find_root_by_item_name('featured_template')
   end
   
-  def load_newest_ideas
-    @newest_ideas ||= Idea.newest 5
-  end
-
   def load_newest_idea_boards
     @newest_idea_boards ||= IdeaBoard.newest 5
   end

@@ -33,9 +33,15 @@ widgets:
       partial: '/shared/sidebar/prompt_permissions'
     active_users:
       partial: '/shared/sidebar/active_users'
-#    top_ideas:
-#      partial: '/shared/sidebar/top_ideas'
-#    newest_ideas:
-#      partial: '/shared/sidebar/newest_ideas'
-#    featured_idea:
-#      partial: '/shared/sidebar/featured_idea'
+    top_ideas:
+      partial: '/shared/sidebar/top_ideas'
+      load_functions: 'load_top_ideas'
+      locals: 'top_ideas'
+    newest_ideas:
+      partial: '/shared/sidebar/newest_ideas'
+      load_functions: 'load_newest_ideas'
+      locals: 'newest_ideas'
+    featured_idea:
+      partial: '/shared/sidebar/featured_idea'
+      load_functions: 'load_featured_ideas'
+      locals: 'featured_ideas'
