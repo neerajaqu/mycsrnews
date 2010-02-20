@@ -7,7 +7,14 @@ class EventsController < ApplicationController
 
   def index
     @current_sub_tab = 'Browse Events'
-    @events = Event.newest
+    @events = Event.paginate :page => params[:page], :per_page => Event.per_page, :order => "created_at desc"
+   respond_to do |format|
+      format.html
+      format.fbml
+      format.atom
+      format.json { @events = Event.refine(params) }
+      format.fbjs { @events = Event.refine(params) }
+    end
   end
 
   def new

@@ -33,11 +33,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :articles
   map.resources :newswires, :member => { :publish => [:get, :post] }
-  map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] }, :has_many => [:comments, :flags]
+  map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :idea_boards, :has_many => :ideas
-  map.resources :resources, :member => { :like => [:get, :post], :my_resources => [:get, :post] }, :has_many => [:comments, :flags]
+  map.resources :resources, :member => { :like => [:get, :post], :my_resources => [:get, :post] }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :resource_sections, :has_many => :resources
-  map.resources :events, :member => { :like => [:get, :post],:my_events => [:get, :post] }, :has_many => [:comments, :flags]
+  map.resources :events, :member => { :like => [:get, :post],:my_events => [:get, :post] }, :collection => { :index => [:get, :post] },:has_many => [:comments, :flags]
 
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index

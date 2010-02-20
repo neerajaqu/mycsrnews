@@ -9,7 +9,14 @@ class IdeasController < ApplicationController
 
   def index
     @current_sub_tab = 'Browse Ideas'
-    @ideas = Idea.newest
+    @ideas = Idea.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
+    respond_to do |format|
+      format.html
+      format.fbml
+      format.atom
+      format.json { @ideas = Idea.refine(params) }
+      format.fbjs { @ideas = Idea.refine(params) }
+    end
   end
 
   def new

@@ -9,7 +9,14 @@ class ResourcesController < ApplicationController
 
   def index
     @current_sub_tab = 'Browse Resources'
-    @resources = Resource.top
+    @resources = Resource.paginate :page => params[:page], :per_page => Resource.per_page, :order => "created_at desc"
+    respond_to do |format|
+      format.html
+      format.fbml
+      format.atom
+      format.json { @resources = Resource.refine(params) }
+      format.fbjs { @resources = Resource.refine(params) }
+    end
   end
 
   def new

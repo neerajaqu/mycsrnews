@@ -2,6 +2,9 @@
 .panel_1
   .panelBar.clearfix
     %h2= t('.ideas_title')
+    - if ideas.first.refineable?
+      .bar_link
+        = render :partial => 'shared/forms/refine_dropdown'
   .storyList
     .list_stories.clearfix
       %ul
