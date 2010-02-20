@@ -13,3 +13,7 @@ ActiveRecord::Base.send :include, Newscloud::Acts::MediaItem
 # Load acts_as_moderatable mixin
 require "#{RAILS_ROOT}/lib/acts_as_moderatable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Moderatable
+
+# Load acts_as_refineable mixin
+require "#{RAILS_ROOT}/lib/acts_as_refineable.rb"
+ActiveRecord::Base.send :include, Newscloud::Acts::Refineable

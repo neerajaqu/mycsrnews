@@ -11,11 +11,23 @@ module Newscloud
 
     module ClassMethods
 
+      def refineable?
+        false
+      end
+
     end
 
     module InstanceMethods
 
       def moderatable?
+        false
+      end
+
+      def refineable?
+        false
+      end
+
+      def featured_item?
         false
       end
 

@@ -1,13 +1,31 @@
 %fb:fbml
-  = fbjs_library
+  = stylesheet_link_tag 'default', 'formtastic', 'formtastic_changes'
+
   %style
-    = File.read('public/stylesheets/default.css')
-  %style
-    = File.read('public/stylesheets/formtastic.css')
-  -#%script{:type => "text/javascript"}
+    :sass
+      .bar_link
+        position: relative
+      .refine-box
+        position: absolute
+        width: 150px
+        height: 200px
+        top: 15px
+        left: -65px
+        border: 1px solid black
+        background-color: #B3B3B3
+        z-index: 43
+        display: none
+
+        .refine-content
+          margin-left: 10px
+
+          form
+            margin-left: 10px
   %script
     == var SITE_URL = "#{APP_CONFIG['fb_ajax_url']}";
-    = File.read('public/javascripts/application.fbjs.js')
+  = fb_jqjs_library
+  = javascript_include_tag 'application.fbjs'
+
   = fb_connect_javascript_tag
   = init_fb_connect "XFBML"
   = render :partial => 'shared/header'

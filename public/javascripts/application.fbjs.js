@@ -6,47 +6,52 @@
  * -etc
  * -add base site url to javascript
  */
-function Each(array, block) {
-	for (var i = 0, l = array.length; i < l; i++) {
-		block(array[i]);
-  }
-}
+$(function() {
+  function change_url_format(url, format) {
+    url = getRelURL(url);
+    if (typeof(format) == 'undefined') { format = '.fbjs'; }
 
-function getRelURL(url) {
-	return SITE_URL + url.replace(/^http:\/\/apps.facebook.com\/[^\/]+(.*)/, "$1");
-}
-
-var doc = document.getElementById("appFrame");
-var anchors = doc.getElementsByTagName("a");
-
-Each(anchors, function(anchor) {
-	if (anchor.getClassName() == 'voteLink') {
-    var url = getRelURL(anchor.getHref());
     url = url.replace(/\?return_to=.*$/, '');
     if (url.substring(url.length - 5) == '.fbml') {
-      url = url.substring(0, url.length - 5) + ".fbjs";
+      url = url.substring(0, url.length - 5) + format;
     } else {
-      url = url + ".fbjs";
+      url = url + format;
     }
-    var span = anchor.getParentNode();
-	  anchor.addEventListener('click', function(event) {
-	  	event.preventDefault();
-	  	var ajax = new Ajax();
-	  	ajax.responseType = Ajax.JSON;
-	  	ajax.requireLogin = true;
-	  	ajax.ondone = function(data) {
-	  		if (typeof(data.error) != "undefined") {
-	  			if (data.status == 401) {
-      	    new Dialog().showMessage('Registration Required', dialog_register, 'Cancel');
-          }
-        } else {
-	  		  span.setInnerXHTML("<span>"+data.msg+"</span>");
-        }
-      }
-      ajax.onerror = function(data) {
-      	span.setInnerXHTML(data.msg);
-      }
-	  	ajax.post(url);
-    });
+
+    return url;
   }
+
+  function getRelURL(url) {
+      return SITE_URL + url.replace(/^(?:http:\/\/apps.facebook.com)?\/[^\/]+(.*)/, "$1");
+  }
+
+  $('a.voteLink').click(function(event) {
+    event.preventDefault();
+    var url = change_url_format($(this).href());
+    var span = $(this).parent();
+    $.post(url, {}, { success: function(data) {
+      if (typeof(data.error) != "undefined") {
+        if (data.status == 401) {
+          new Dialog().showMessage('Registration Required', dialog_register, 'Cancel');
+        }
+      } else {
+        span.html("<span>"+data.msg+"</span>");
+      }
+    }}, "JSON");
+  });
+
+  $('.refine-toggle').click(function(event) {
+    event.preventDefault();
+    $(this).next().toggle();
+  });
+
+  $('.refine-form').submit(function(event) {
+    event.preventDefault();
+    $(this).parent().parent().toggle();
+    var url = change_url_format($(this).action());
+    var panel = $(this).parents().filter('.panel_1');
+    panel = $(panel.nodes[0]);
+    var list = panel.children().filter('.list_stories').children().filter('ul');
+    $.update(list, url, $(this).serialize());
+  });
 });

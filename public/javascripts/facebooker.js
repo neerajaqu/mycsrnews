@@ -222,12 +222,15 @@ function extendInstance(instance,hash) {
 
 var Element = {
     visible: function() {
+          console.log(this.getId() + "--"+this.getStyle('display'));
         return (this.getStyle('display') != 'none');
     },
     toggle: function() {
         if (this.visible()) {
+          console.log('visible--'+this.getId());
             this.hide();
         } else {		
+          console.log('not-visible');
             this.show();
         }
     },
@@ -239,13 +242,21 @@ var Element = {
     },
     show: function(element) {
         this.setStyle({
-            display:''
+            display:'block'
         });
         return this;	
     },
     remove: function() {
         this.getParentNode().removeChild(this);
         return null;
+    },
+    click: function(click_func) {
+      this.addEventListener('click', click_func);
+      return this;
+    },
+    submit: function(submit_func) {
+      this.addEventListener('submit', submit_func);
+      return this;
     },
     /*
      * Returns calculated element size

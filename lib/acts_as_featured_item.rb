@@ -17,6 +17,10 @@ module Newscloud
       end
 
       module InstanceMethods
+        def featured_item?
+          true
+        end
+
         def featured_url
           # To use a custom path create a Model.featured_url function
           # and return as hash like so:

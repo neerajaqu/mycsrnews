@@ -5,6 +5,7 @@ class Content < ActiveRecord::Base
   acts_as_featured_item
   acts_as_moderatable
   acts_as_media_item
+  acts_as_refineable
 
   belongs_to :user
   belongs_to :article
@@ -13,7 +14,7 @@ class Content < ActiveRecord::Base
 
   has_friendly_id :title, :use_slug => true
 
-  named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 5)} }
+  named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :newest_stories, lambda { |*args| { :conditions => ["article_id IS NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
   named_scope :newest_articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
 
@@ -24,6 +25,14 @@ class Content < ActiveRecord::Base
   validates_format_of :url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :message => "should look like a URL", :allow_blank => true
   validates_format_of :image_url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :allow_blank => true, :message => "should look like a URL"
   validates_format_of :tags_string, :with => /^([-a-zA-Z0-9_ ]+,?)+$/, :allow_blank => true, :message => "Invalid tags. Tags can be alphanumeric characters or -_ or a blank space."
+
+  def self.top
+    self.tally({
+    	:at_least => 1,
+    	:limit    => 10,
+    	:order    => "votes.count desc"
+    })
+  end
 
   def is_article?
     self.article.present?

@@ -4,6 +4,14 @@ class HomeController < ApplicationController
   before_filter :set_current_tab
 
   def index
+    if request.post?
+    	respond_to do |format|
+    	  format.html
+    	  format.fbml
+    	  format.json { @stories = Content.refine(params) }
+    	  format.fbjs { @stories = Content.refine(params) }
+      end
+    end
     #expires_in 1.minutes, :private => false, :public => true
     @no_paginate = true
   end

@@ -6,6 +6,12 @@ $(function() {
   }, 3500
   );
 
+  function rebuild_facebook_dom() {
+    try {
+      FB.XFBML.Host.parseDomTree();
+    } catch(error) { }
+  }
+
 	function dialog_response(title, message) {
 		$("<p>"+message+"</p>").dialog({
 			title: title,
@@ -13,17 +19,47 @@ $(function() {
 		});
   }
 
+  function change_url_format(url, format) {
+  	if (typeof(format) == 'undefined') { format = '.json'; }
+
+    url = url.replace(/\?return_to=.*$/, '');
+    if (url.substring(url.length - 5) == '.html') {
+      url = url.substring(0, url.length - 5) + format;
+    } else {
+      url = url + format;
+    }
+
+    return url;
+  }
+
+  $('.refine-toggle').click(function(event) {
+  	event.preventDefault();
+  	$(this).next().toggle();
+  });
+
+  $('.refine-form').submit(function(event) {
+  	event.preventDefault();
+  	$(this).parent().parent().toggle();
+
+  	var url = change_url_format($(this).attr('action'));
+  	var list = $('.list_stories ul', $(this).parents().filter('.panel_1'));
+  	$.post(url, $(this).serialize(), function(data) {
+  		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
+  		rebuild_facebook_dom();
+    });
+  });
+
 	$('.voteLink').click(function(event) {
 		event.preventDefault();
 		var span = $(this).parent();
 		$(this).parent().html("<img src=\"/images/spinner.gif\" />");
 		var url = $(this).attr("href");
-                url = url.replace(/\?return_to=.*$/, '');
-        if (url.substring(url.length - 5) == '.html') {
-          url = url.substring(0, url.length - 5) + ".json";
-        } else {
-          url = url + ".json";
-        }
+    url = url.replace(/\?return_to=.*$/, '');
+    if (url.substring(url.length - 5) == '.html') {
+      url = url.substring(0, url.length - 5) + ".json";
+    } else {
+      url = url + ".json";
+    }
 
 		$.ajax({
 			type: "POST",
@@ -50,6 +86,7 @@ $(function() {
       }
     });
   });
+
 });
 
 

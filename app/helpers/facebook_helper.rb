@@ -4,5 +4,11 @@ module FacebookHelper
   def fb_mp3(src, options = {})
     tag "fb:mp3", options.merge(:src => src)
   end
+
+  def fb_jqjs_library
+    "<script>var _token = '#{form_authenticity_token}';var _hostname = '#{ActionController::Base.asset_host}'</script>"+
+    "#{javascript_include_tag 'Utility'}"+
+    "#{javascript_include_tag 'FBjqRY'}"
+  end
       
 end
