@@ -45,3 +45,27 @@ widgets:
       partial: '/shared/sidebar/featured_idea'
       load_functions: 'load_featured_ideas'
       locals: 'featured_ideas'
+    top_resources:
+      partial: '/shared/sidebar/top_resources'
+      load_functions: 'load_top_resources'
+      locals: 'top_resources'
+    newest_resources:
+      partial: '/shared/sidebar/newest_resources'
+      load_functions: 'load_newest_resources'
+      locals: 'newest_resources'
+    featured_resource:
+      partial: '/shared/sidebar/featured_resource'
+      load_functions: 'load_featured_resources'
+      locals: 'featured_resources'
+    top_events:
+      partial: '/shared/sidebar/top_events'
+      load_functions: 'load_top_events'
+      locals: 'top_events'
+    newest_events:
+      partial: '/shared/sidebar/newest_events'
+      load_functions: 'load_newest_events'
+      locals: 'newest_events'
+    featured_event:
+      partial: '/shared/sidebar/featured_event'
+      load_functions: 'load_featured_events'
+      locals: 'featured_events'

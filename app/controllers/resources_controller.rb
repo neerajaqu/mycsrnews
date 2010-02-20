@@ -4,6 +4,7 @@ class ResourcesController < ApplicationController
   before_filter :load_top_resources
   before_filter :load_newest_resources
   before_filter :set_resource_section
+  before_filter :load_featured_resources, :only => [:index]
   before_filter :load_newest_resource_sections
 
   def index

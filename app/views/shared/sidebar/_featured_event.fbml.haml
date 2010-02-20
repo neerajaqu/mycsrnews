@@ -1,0 +1,16 @@
+-# @expects: local 'event'
+
+- cache :featured_events, :expires_in => 15.seconds do
+  - featured_events ||= Event.featured
+  - unless featured_events.empty?
+    .panel_2
+      .panelBar.clearfix
+        %h2= t('.featured_event_title')
+      %br
+      .list_items.clearfix
+        %ul
+          - featured_events.each do |event|
+            %li
+              .profilePic= local_linked_profile_pic event.user
+              = link_to event.name, event_path(event)
+              %p= (event.description.present?) ? event.description : 'no description'

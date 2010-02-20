@@ -22,11 +22,32 @@ en:
       newest_ideas:
         newest_ideas_title: "Newest Ideas"
 
+      featured_idea:
+        featured_idea_title: "Featured Idea"
+
       newest_users:
         newest_users_title: "Newest Users"
 
       active_users:
         title: "Currently Active Users"
+
+      top_resources:
+        top_resources_title: "Top Links"
+
+      newest_resources:
+        newest_resources_title: "Newest Links"
+
+      featured_resource:
+        featured_resource_title: "Featured Link"
+
+      top_events:
+        top_events_title: "Top Events"
+
+      newest_events:
+        newest_events_title: "Newest Events"
+
+      featured_event:
+        featured_event_title: "Featured Event"
 
       ideas_whatisthis:
         ideas_whatis_title: "What is this?"
@@ -64,4 +85,3 @@ en:
       post_story:
         post_story_title: "Contribute links to our site"
         post_story: "Post a Story"   
-        

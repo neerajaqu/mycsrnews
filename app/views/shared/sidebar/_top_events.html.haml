@@ -1,0 +1,14 @@
+-# @expects: local 'event'
+
+- cache :top_events, :expires_in => 15.seconds do
+  - top_events ||= Event.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
+  .panel_2
+    .panelBar.clearfix
+      %h2= t('.top_events_title')
+    %br
+    .list_items.clearfix
+      %ul
+        - top_events.each do |event|
+          %li
+            .profilePic= local_linked_profile_pic event.user
+            = link_to event.name, event_path(event)

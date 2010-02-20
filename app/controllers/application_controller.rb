@@ -75,6 +75,14 @@ class ApplicationController < ActionController::Base
     @featured_ideas ||= Idea.featured
   end
 
+  def load_featured_events
+    @featured_events ||= Event.featured
+  end
+
+  def load_featured_resources
+    @featured_resources ||= Resource.featured
+  end
+
   def load_featured_items
     @featured_items ||= FeaturedItem.find_root_by_item_name('featured_template')
   end

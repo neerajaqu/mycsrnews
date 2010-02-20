@@ -1,0 +1,15 @@
+-# @expects: local 'newest_events'
+
+- cache :newest_events do
+  - newest_events ||= Event.newest
+  - unless newest_events.empty?
+    .panel_2
+      .panelBar.clearfix
+        %h2= t('.newest_events_title')
+      %br
+      .list_stories.clearfix
+        %ul
+          - newest_events.each do |event|
+            %li
+              .profilePic= local_linked_profile_pic event.user
+              = link_to event.name, event_path(event)

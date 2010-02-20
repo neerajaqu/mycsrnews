@@ -1,0 +1,15 @@
+-# @expects: local 'newest_resources'
+
+- cache :newest_resources do
+  - newest_resources ||= Resource.newest
+  - unless newest_resources.empty?
+    .panel_2
+      .panelBar.clearfix
+        %h2= t('.newest_resources_title')
+      %br
+      .list_stories.clearfix
+        %ul
+          - newest_resources.each do |resource|
+            %li
+              .profilePic= local_linked_profile_pic resource.user
+              = link_to resource.title, resource_path(resource)
