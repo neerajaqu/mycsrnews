@@ -15,6 +15,8 @@ class StoriesController < ApplicationController
       format.html
       format.fbml
       format.atom
+      format.json { @stories = Content.refine(params) }
+      format.fbjs { @stories = Content.refine(params) }
     end
   end
 
