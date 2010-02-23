@@ -64,10 +64,6 @@ Rails::Initializer.run do |config|
 
   #config.action_view.sanitized_allowed_tags = 'table', 'tr', 'td'
 
-
-  # HAAAAAAAAAAAAAAAAAAAAAAAAAAAAACK --------- stupid enums :/
-  #config.active_record.schema_format = :sql
-
   # Set rails cache directory to public/cache
   config.action_controller.page_cache_directory = RAILS_ROOT + "/public/cache"
 end

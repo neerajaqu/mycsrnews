@@ -1,8 +1,38 @@
 # http://unicorn.bogomips.org/SIGNALS.html
  
 rails_env = ENV['RAILS_ENV'] || 'production'
-rails_root = ENV['RAILS_ROOT'] || "/data/github/current"
+rails_root = ENV['RAILS_ROOT'] || "/data/sites/my_app/current"
  
+God::Contacts::Email.message_settings = {
+  :from => 'god@example.com'
+}
+
+God::Contacts::Email.server_settings = {
+  :address => "smtp.example.com",
+  :port => 25,
+  :domain => "example.com",
+  :authentication => :plain,
+  :user_name => "john",
+  :password => "s3kr3ts"
+}
+
+God.contact(:email) do |c|
+  c.name = 'tom'
+  c.email = 'tom@example.com'
+end
+
+God.contact(:email) do |c|
+  c.name = 'vanpelt'
+  c.email = 'vanpelt@example.com'
+  c.group = 'admins'
+end
+
+God.contact(:email) do |c|
+  c.name = 'kevin'
+  c.email = 'kevin@example.com'
+  c.group = 'admins'
+end
+
 God.watch do |w|
   w.name = "unicorn"
   w.interval = 30.seconds # default
@@ -20,8 +50,8 @@ God.watch do |w|
   w.restart_grace = 10.seconds
   w.pid_file = "#{rails_root}/tmp/pids/unicorn.pid"
  
-  #w.uid = 'www-data'
-  #w.gid = 'www-data'
+  w.uid = 'deploy'
+  w.gid = 'deploy'
  
   w.behavior(:clean_pid_file)
  
@@ -29,6 +59,7 @@ God.watch do |w|
     start.condition(:process_running) do |c|
       c.interval = 5.seconds
       c.running = false
+	  c.notify = {:contacts => ['admins'], :priority => 1, :category => 'not_running'}
     end
   end
  
@@ -36,11 +67,13 @@ God.watch do |w|
     restart.condition(:memory_usage) do |c|
       c.above = 300.megabytes
       c.times = [3, 5] # 3 out of 5 intervals
+	  c.notify = {:contacts => ['admins'], :priority => 1, :category => 'Memory OOB'}
     end
  
     restart.condition(:cpu_usage) do |c|
       c.above = 50.percent
       c.times = 5
+	  c.notify = {:contacts => ['admins'], :priority => 1, :category => 'CPU OOB'}
     end
   end
  
@@ -55,5 +88,37 @@ God.watch do |w|
       c.retry_times = 5
       c.retry_within = 2.hours
     end
+  end
+end
+
+# This will ride alongside god and kill any rogue memory-greedy
+# processes. Their sacrifice is for the greater good.
+
+unicorn_worker_memory_limit = 200_000
+
+Thread.new do
+  loop do
+    begin
+      # unicorn workers
+      #
+      # ps output line format:
+      # 31580 275444 unicorn_rails worker[15] -c /data/github/current/config/unicorn.rb -E production -D
+      # pid ram command
+      # TODO:: add notifications for work restarts
+
+      lines = `ps -e -www -o pid,rss,command | grep '[u]nicorn_rails worker'`.split("\n")
+      lines.each do |line|
+        parts = line.split(' ')
+        if parts[1].to_i > unicorn_worker_memory_limit
+	  # tell the worker to die after it finishes serving its request
+          ::Process.kill('QUIT', parts[0].to_i)
+        end
+      end
+    rescue Object
+     # don't die ever once we've tested this
+      nil
+    end
+
+    sleep 30
   end
 end

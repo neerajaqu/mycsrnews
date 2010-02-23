@@ -1,23 +1,24 @@
-set :default_stage, "chewbranca_staging"
+set :default_stage, "n2_staging"
 set :stages, %w(n2_production n2_staging chewbranca_staging)
 require 'capistrano/ext/multistage'
 
 default_run_options[:pty] = true
 
-set :repository,  "git@github.com:newscloud/N2.git"
+set :repository,  "git://github.com/newscloud/n2.git"
 set :scm, :git
 set :deploy_via, :remote_cache
 
-set (:deploy_to) { "/data/#{application}" }
+set (:deploy_to) { "/data/sites/#{application}" }
 
-#set :user, 'deploy' # uncomment this or set in your specific multistage file
+set :user, 'deploy'
 set :use_sudo, false
 
 task :after_update_code do
   # setup shared files
   %w{/config/unicorn.conf.rb /tmp/sockets /config/database.yml
     /config/facebooker.yml /config/application_settings.yml
-    /config/application.god}.each do |file|
+    /config/application.god /config/newrelic.yml
+    /config/smtp.yml}.each do |file|
       run "ln -nfs #{shared_path}#{file} #{release_path}#{file}"
   end
 
@@ -32,17 +33,30 @@ task :after_deploy do
   deploy.god.start
 end
 
+task :after_deploy do
+  deploy.notify_hoptoad
+end
+
+task :after_setup do
+  if stage.to_s[0,3] == "n2_"
+  	puts "Setting up default config files"
+    run "mkdir -p #{shared_path}/config"
+    run "mkdir -p #{shared_path}/tmp/sockets"
+    run "cp /data/defaults/config/* #{shared_path}/config/"
+  end
+end
+
 namespace :deploy do
   
   namespace :god do
     desc "Start God monitoring"
     task :stop, :roles => :app, :on_error => :continue do
-      sudo 'god quit'
+      run 'god quit'
     end
 
     desc "Stop God monitoring"
     task :start, :roles => :app do
-      sudo "god -c #{current_path}/config/application.god"
+      run "god -c #{current_path}/config/application.god"
     end
   end
 
