@@ -3,7 +3,6 @@ class AddUsersTableColumns < ActiveRecord::Migration
     add_column :users, :login,                     :string, :limit => 40
     add_column :users, :crypted_password,          :string, :limit => 40
     add_column :users, :salt,                      :string, :limit => 40
-    add_column :users, :created_at,                :datetime
     add_column :users, :updated_at,                :datetime
     add_column :users, :remember_token,            :string, :limit => 40
     add_column :users, :remember_token_expires_at, :datetime
@@ -19,7 +18,6 @@ class AddUsersTableColumns < ActiveRecord::Migration
     remove_column :users, :login
     remove_column :users, :crypted_password
     remove_column :users, :salt
-    remove_column :users, :created_at
     remove_column :users, :updated_at
     remove_column :users, :remember_token
     remove_column :users, :remember_token_expires_at

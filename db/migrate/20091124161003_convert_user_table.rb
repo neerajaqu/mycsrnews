@@ -17,6 +17,7 @@ class ConvertUserTable < ActiveRecord::Migration
     rename_column :users, :optInProfile,    :opt_in_profile
     rename_column :users, :optInFeed,       :opt_in_feed
     rename_column :users, :optInSMS,        :opt_in_sms
+    rename_column :users, :dateRegistered,  :created_at
 
     change_column :users, :remoteStatus, :string
     change_column :users, :eligibility, :string

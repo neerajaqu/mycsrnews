@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :resources
   has_one :profile, :class_name => "UserProfile"
+  has_one :user_profile #TODO:: convert views and remove this
 
   has_karma :contents
 
