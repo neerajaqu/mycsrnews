@@ -55,7 +55,8 @@ after("deploy:setup") do
 end
 
 task :after_deploy do
-  deploy.notify_hoptoad
+  #deploy.notify_hoptoad
+  newrelic.notice_deployment
 end
 
 task :after_setup do
