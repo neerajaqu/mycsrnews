@@ -34,7 +34,8 @@ task :after_deploy do
 end
 
 task :after_deploy do
-  deploy.notify_hoptoad
+  #deploy.notify_hoptoad
+  newrelic.notice_deployment
 end
 
 task :after_setup do
@@ -49,12 +50,12 @@ end
 namespace :deploy do
   
   namespace :god do
-    desc "Start God monitoring"
+    desc "Stop God monitoring"
     task :stop, :roles => :app, :on_error => :continue do
       run 'god quit'
     end
 
-    desc "Stop God monitoring"
+    desc "Start God monitoring"
     task :start, :roles => :app do
       run "god -c #{current_path}/config/application.god"
     end
