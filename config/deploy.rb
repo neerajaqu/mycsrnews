@@ -1,6 +1,7 @@
 set :default_stage, "n2_staging"
 set :stages, %w(n2_production n2_staging chewbranca_staging)
 require 'capistrano/ext/multistage'
+require 'eycap/recipes'
 
 default_run_options[:pty] = true
 
@@ -13,7 +14,7 @@ set (:deploy_to) { "/data/sites/#{application}" }
 set :user, 'deploy'
 set :use_sudo, false
 
-task :after_update_code do
+after("deploy:update_code") do
   # setup shared files
   %w{/config/unicorn.conf.rb /tmp/sockets /config/database.yml
     /config/facebooker.yml /config/application_settings.yml
@@ -25,20 +26,16 @@ task :after_update_code do
   deploy.cleanup
 end
 
-task :before_deploy do
+before("deploy") do
   deploy.god.stop
 end
 
-task :after_deploy do
+after("deploy") do
   deploy.god.start
-end
-
-task :after_deploy do
-  #deploy.notify_hoptoad
   newrelic.notice_deployment
 end
 
-task :after_setup do
+after("deploy:setup") do
   if stage.to_s[0,3] == "n2_"
   	puts "Setting up default config files"
     run "mkdir -p #{shared_path}/config"
