@@ -4,7 +4,7 @@
   .tabs.clearfix
     .left_tabs
       %ul#toggle_tabs_unused.toggle_tabs.clearfix
-        %li.first= link_to t('.home'), home_index_path, :class => tab_selected?(@current_tab, 'home')
+        %li.first= link_to image_tag('default/home-icon.png'), home_index_path, :class => tab_selected?(@current_tab, 'home')
         %li= link_to t('.stories'), stories_path, :class => tab_selected?(@current_tab, 'stories')
         %li= link_to t('.newswire'), newswires_path, :class => tab_selected?(@current_tab, 'newswire')
         %li= link_to t('.ideas'), ideas_path, :class => tab_selected?(@current_tab, 'ideas')

@@ -1,5 +1,5 @@
 #col_left
-  #loginBox.clearfix
+  #contactBox.clearfix
     %h1 Contact Us
 
     - semantic_form_for @message, :url => contact_us_path do |form|
@@ -7,4 +7,4 @@
         = form.input :subject
         = form.input :email
         = form.input :body
-      = form.submit "Contact Us", :class=> "float_right"
+      = form.submit "Contact Us"

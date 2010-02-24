@@ -1,10 +1,9 @@
 #col_left
   .panel_1
-    .panelBar.clearfix
-      %h2 Post a Story
-    .panel_block
+    #contactBox
+      %h1 Post a Story
       .storyBlockWrap
-        %h3= link_to 'Post an Article', new_article_path
+        %h2= link_to 'Post an Article', new_article_path
         - semantic_form_for @story, :url => stories_path do |form|
           = render :partial => 'story_form', :locals => { :form => form }
           - form.buttons do

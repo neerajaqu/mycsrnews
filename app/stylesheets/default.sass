@@ -236,8 +236,7 @@ hr
   a
     text-decoration: none
 
-  img 
-    border: 1px solid #000
+  img.hdrpic 
     position: absolute
     top: 2px
     left: 2px
@@ -291,6 +290,7 @@ hr
   float: left
   margin: 0px
   padding: 5px 10px 7px 10px
+  background: #dce6f4
   color: #333
 
   a
@@ -452,6 +452,35 @@ ul#nav2-tabs
         background: #D8DFEA
 
 
+// Menu Dropdown styles //
+
+.menu_item
+  .dropdown
+    visibility: hidden
+
+
+.menu_item:hover
+  .dropdown
+    visibility: visible
+
+.dropdown
+  ul
+    display: block
+
+  li
+    display: block
+    width: 100%
+    clear: left
+    border: top 1px
+
+  a
+    background: #80a341
+
+  a:hover
+    background: #80a341
+
+
+// top menu page tabs//
 #pageTabs
   width: 100%
   position: absolute
@@ -462,7 +491,7 @@ ul#nav2-tabs
   overflow: visible
   border: none
 
-
+//IE hacks for #pagetabs//
 .ie6 #pageTabs, .ie7 #pageTabs
   top: 0px
 
@@ -477,17 +506,19 @@ ul#nav2-tabs
   padding: 0px 0px 0px 0px
 
 
-
+//IE hacks for .tabs//
 .ie6 .tabs, .ie7 .tabs
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
 
 
+//FF2 hack for .tabs//
 .ff2 .tabs
   margin: 0px 0px 0px 0px
   padding: 8px 0px 0px 0px
 
 
+//top navigation tabs placement//
 .tabs
   &.top
     background: #f7f7f7
@@ -505,6 +536,7 @@ ul#nav2-tabs
     float: right
 
 
+// navigation tabs //
 .toggle_tabs
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
@@ -516,10 +548,11 @@ ul#nav2-tabs
 
 
 .toggle_tabs li
-  display: inline-block
+  display: block
+  float: left
   padding: 0px 0px 0px 0px
-  margin: 0px 0px 0px 0px
-
+  margin: 0px 1px 0px 0px
+  height: 23px
 
 
 .ie6 .toggle_tabs li, .ie7 .toggle_tabs li
@@ -531,7 +564,7 @@ ul#nav2-tabs
 
 
 .toggle_tabs li
-  a, &.first a
+  a
     margin: 0px 0px 0px 0px
     padding: 5px 30px 5px 30px
     height: 13px
@@ -544,8 +577,25 @@ ul#nav2-tabs
     font-size: 11px
     line-height: normal
     background: #660033 url(/images/default/toggletab_bg.gif) left repeat-x
-    display: inline-block
+    display: block
 
+  &.first a
+    margin: 0px 0px 0px 0px
+    padding: 5px 5px 5px 5px
+    height: 13px
+    border-top: none
+    border-right: none
+    border-bottom: none
+    border-left: none
+    color: #fff
+    font-weight: bold
+    font-size: 11px
+    line-height: normal
+    background: #55761b url(/images/default/toggletab_bg.gif) left repeat-x
+    display: block
+ 
+  &.first img
+    display: inline-block    
 
 .ie6 .toggle_tabs li a, .ie7 .toggle_tabs li a
   display: inline-block
@@ -569,7 +619,7 @@ ul#nav2-tabs
 
   &.first a.selected
     margin: -1px 0px 0px 0px
-    padding: 5px 30px 5px 30px
+    padding: 5px 5px 5px 5px
     height: 13px
     border-top: solid 1px #999999
     border-right: solid 1px #999999
@@ -593,10 +643,10 @@ ul#nav2-tabs
 #subNav
   clear: both
   width: 100%
-  height: 1.5em
+  height: 19px
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
-  display: inline-block
+  display: block
   overflow: visible
   border-bottom: none
 
@@ -607,9 +657,9 @@ ul#nav2-tabs
 
 #subNav
   &.tabs
-    border-bottom: 2px solid #3B5998
+    border-bottom: 1px solid #999
     width: 100%
-    margin: 0px 0px 3px 0px
+    margin: 0px 0px 1px 0px
     padding: 0px 0px 0px 0px
 
   .toggle_tabs
@@ -618,30 +668,29 @@ ul#nav2-tabs
     text-align: center
 
     li
-      display: inline
+      display: block
       padding: 0px 0px 0px 0px
-      margin: 0 1px 0 1px
-      overflow: hidden
+      margin: 0 0 0 1px
 
       a
         margin: 0px 0px 0px 0px
         padding: 2px 25px 3px 25px
         height: 14px
         border: none
-        color: #3B5998
+        color: #FFF
         font-weight: bold
         font-size: 11px
-        background: #ECEFF5
-        display: inline
+        background: #55761b
+        display: block
 
         &.selected
-          margin: 0px 0px 0px 0px
-          background: #3B5998
-          border-top: none
-          border-right: none
-          border-bottom: none
-          border-left: none
-          color: #fff
+          margin: -1px 0px 0px 0px
+          background: #fff
+          border-top: solid 1px #999999
+          border-right: solid 1px #999999
+          border-bottom: solid 1px #FFF
+          border-left: solid 1px #999999
+          color: #3B5998
 
           &:hover
             text-decoration: none
@@ -1134,8 +1183,7 @@ ul#nav2-tabs
 .panel_1, .panel_2
   border-bottom: none
   margin-bottom: 15px
-  display: block
-  margin-bottom: 0px
+  display: block 
 
 
 .panel_1 .panelBar, .panel_2 .panelBar
@@ -1154,7 +1202,7 @@ ul#nav2-tabs
 
   a
     color: #3B5998
-    font-weight: bold
+    font-weight: normal
     font-size: 11px
 
 
@@ -1361,15 +1409,20 @@ li
   clear: both
 
 
+.panel_1 ul li
+  padding: 0 0 0 0
+
 .panel_1 ul li, .panel_2 ul li
   clear: both
   float: left
   border-bottom: 1px solid #efefef
+  width: 100%
+
 
 
 .thumb
   float: left
-  margin: 0px 20px 10px 0px
+  margin: 10px 20px 20px 0px
 
 
 .avatar
@@ -1386,15 +1439,15 @@ li
     color: #333333
 
 
-.storyHead
+.storyHead, .askQuestionHead
   font-size: 14px
   font-weight: bold
   font-family: "lucida grande",tahoma,verdana,arial,sans-serif
 
 
 #col_left .storyBlockWrap
-  width: 390px
-  float: right
+  width: 100%
+  padding: 10px 0 0 0
 
 
 #col_right .storyBlockWrap
@@ -1411,6 +1464,8 @@ li
   float: left
   margin: 0px 10px 0px 0px
 
+  a:hover
+    text-decoration: none
 
 .profilePicLarger
   float: left
@@ -1861,14 +1916,7 @@ li
         padding: 1px
 
 
-#loginBox
-  background: #efefef
-  border-top: 1px solid #3B5998
-  border-bottom: 1px solid #cccccc
-  padding: 40px 40px 20px 40px
-  margin: 30px 40px
-  float: left
-
+#loginBox, #contactBox
   h1 
     font-size: 10px
     text-transform: uppercase
@@ -1876,7 +1924,15 @@ li
     color: #666666
     margin-top: -38px
     margin-left: -38px
-  
+
+#loginBox, #contactBox
+  background: #efefef
+  border-top: 1px solid #3B5998
+  border-bottom: 1px solid #cccccc
+  padding: 20px 40px 20px 40px
+  margin: 30px 40px
+  float: left
+
   p
     line-height: 120%
     font-size: 12px
@@ -1886,16 +1942,11 @@ li
     margin-top: 15px
     margin-left: 40px
 
+#contactBox
   form 
+    margin-top: 20px
+  input
+    float: right
 
   label
-    float: left
-    margin: 0
-    padding: 0
-
-  input
-
-
-
-  #message_submit
-    float: right
+    font-size: 12px
