@@ -26,6 +26,8 @@ after("deploy:update_code") do
   deploy.cleanup
 end
 
+after "deploy:symlink", "deploy:update_crontab"
+
 before("deploy") do
   deploy.god.stop
 end
@@ -72,4 +74,10 @@ namespace :deploy do
   task :stop, :roles => :app do
     run "cat #{current_path}/tmp/pids/unicorn.pid | xargs kill -QUIT"
   end
+
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :db do
+    run "cd #{release_path} && whenever --set 'environment=#{rails_env}&cron_log=#{shared_path}/log/cron.log' --update-crontab #{application}"
+  end
+
 end

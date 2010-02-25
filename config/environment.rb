@@ -35,6 +35,8 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "haml"
+  config.gem "eycap"
+  config.gem "whenever"
   config.gem "rack"
   config.gem "formtastic"
   config.gem "hpricot"

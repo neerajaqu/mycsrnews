@@ -167,30 +167,30 @@ ActiveRecord::Schema.define(:version => 20100217021117) do
   add_index "featured_items", ["parent_id"], :name => "index_featured_items_on_parent_id"
 
   create_table "feeds", :force => true do |t|
-    t.integer  "wireid",                   :default => 0
-    t.string   "title",                    :default => ""
-    t.string   "url",                      :default => ""
-    t.string   "rss",                      :default => ""
-    t.datetime "lastFetch",                                       :null => false
-    t.string   "feedType",                 :default => "wire"
-    t.string   "specialType",              :default => "default"
-    t.string   "loadOptions",              :default => "none"
-    t.integer  "user_id",     :limit => 8, :default => 0
-    t.string   "tagList",                  :default => ""
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "wireid",                       :default => 0
+    t.string    "title",                        :default => ""
+    t.string    "url",                          :default => ""
+    t.string    "rss",                          :default => ""
+    t.timestamp "last_fetched_at",                                     :null => false
+    t.string    "feedType",                     :default => "wire"
+    t.string    "specialType",                  :default => "default"
+    t.string    "loadOptions",                  :default => "none"
+    t.integer   "user_id",         :limit => 8, :default => 0
+    t.string    "tagList",                      :default => ""
+    t.datetime  "created_at"
+    t.datetime  "updated_at"
   end
 
   create_table "flags", :force => true do |t|
     t.string   "flag_type"
     t.integer  "user_id"
-    t.string   "flagable_type"
-    t.integer  "flagable_id"
+    t.string   "flaggable_type"
+    t.integer  "flaggable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "flags", ["flagable_type", "flagable_id"], :name => "index_flags_on_flagable_type_and_flagable_id"
+  add_index "flags", ["flaggable_type", "flaggable_id"], :name => "index_flags_on_flaggable_type_and_flaggable_id"
 
   create_table "idea_boards", :force => true do |t|
     t.string   "name"
@@ -330,14 +330,15 @@ ActiveRecord::Schema.define(:version => 20100217021117) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer  "user_id",               :limit => 8,                    :null => false
-    t.integer  "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean  "isAppAuthorized",                    :default => false
-    t.datetime "born_at"
-    t.datetime "created_at",                                            :null => false
-    t.text     "bio"
-    t.integer  "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean  "comment_notifications",              :default => false
+    t.integer   "user_id",               :limit => 8,                    :null => false
+    t.integer   "facebook_user_id",      :limit => 8, :default => 0
+    t.boolean   "isAppAuthorized",                    :default => false
+    t.datetime  "born_at"
+    t.timestamp "created_at",                                            :null => false
+    t.datetime  "updated_at"
+    t.text      "bio"
+    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
+    t.boolean   "comment_notifications",              :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true
@@ -361,7 +362,7 @@ ActiveRecord::Schema.define(:version => 20100217021117) do
     t.boolean  "opt_in_profile",                           :default => true
     t.boolean  "opt_in_feed",                              :default => true
     t.boolean  "opt_in_sms",                               :default => true
-    t.datetime "dateRegistered"
+    t.datetime "created_at"
     t.string   "eligibility",                              :default => "team"
     t.integer  "cachedPointTotal",                         :default => 0
     t.integer  "cachedPointsEarned",                       :default => 0
@@ -373,7 +374,6 @@ ActiveRecord::Schema.define(:version => 20100217021117) do
     t.string   "login",                      :limit => 40
     t.string   "crypted_password",           :limit => 40
     t.string   "salt",                       :limit => 40
-    t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_token",             :limit => 40
     t.datetime "remember_token_expires_at"

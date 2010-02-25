@@ -1,6 +1,4 @@
-require 'open-uri'
-
-# Had to remove rss library
+require 'feed_parser'
 
 namespace :n2 do
   namespace :feeds do
@@ -26,43 +24,36 @@ end
 
 def update_feed(feed)
   begin
-    # TODO ADDRSSrss = ADDRSS.parse open(feed.rss)
+     rss = RSS::Parser.parse(open(feed.rss).read, false)
+     rss = FeedParser.new(feed.rss)
   rescue => e
-    puts "Failed to open feed at #{feed.url} -- #{e}" or return false
+    puts "Failed to open feed at #{feed.url} -- #{e}"
+    return false
   end
 
   puts "The feed #{feed.title}(#{feed.url}) is presently invalid." or return false unless rss.present?
   puts "The feed #{feed.title}(#{feed.url}) is presently empty." or return false unless rss.items.present?
 
-  date = RSSParse.feed_date rss
-  puts "Parsing #{feed.title} with #{rss.items.size} items -- updated on #{date}"
-  # TODO:: fix feed.lastFetch
-  feed_date = feed.updated_at || feed.created_at || feed.lastFetch
-  feed_date = feed.lastFetch if feed.updated_at == feed.created_at
-  if date and feed_date < date
+  puts "Parsing #{feed.title} with #{rss.items.size} items -- updated on #{rss.date}"
+
+  feed_date = feed.last_fetched_at || feed.updated_at || feed.created_at
+  if rss.date and feed_date < rss.date
     rss.items.each do |item|
-      item_date = RSSParse.item_date item
-      break if item_date <= feed_date
+      break if item[:date] <= feed_date
+      next unless item[:body] and item[:link] and item[:title] and item[:date]
 
-      body  = RSSParse.item_body item
-      link  = RSSParse.item_link item
-      title = RSSParse.item_title item
-      image = RSSParse.item_image item
-
-      next unless body and link and title and date
-
-      puts "\tCreating newswire for #{title}"
+      puts "\tCreating newswire for \"#{item[:title].chomp}\""
 
       Newswire.create!({
-        :title      => title,
-        :caption    => body,
-        :created_at => item_date,
-        :url        => link,
-        :imageUrl   => image,
+        :title      => item[:title],
+        :caption    => item[:body],
+        :created_at => item[:date].to_s,
+        :url        => item[:link],
+        :imageUrl   => item[:image],
         :feed       => feed
       })
     end
 
-    feed.update_attributes(:updated_at => Time.now)
+    feed.update_attributes({:updated_at => Time.now, :last_fetched_at => rss.date.to_s})
   end
 end

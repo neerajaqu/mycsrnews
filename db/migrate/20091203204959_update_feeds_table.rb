@@ -6,6 +6,7 @@ class UpdateFeedsTable < ActiveRecord::Migration
     rename_table  :tmp_feeds, :feeds
     add_column :feeds, :created_at, :datetime
     add_column :feeds, :updated_at, :datetime
+    rename_column :feeds, :lastFetch, :last_fetched_at
     rename_column :feeds, :userid, :user_id
     change_column :feeds, :feedType, :string
     change_column :feeds, :specialType, :string
