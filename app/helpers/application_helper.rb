@@ -258,7 +258,7 @@ EMBED
   def render_media_items item
     return false unless item.media_item?
     output = []
-    ['audio', 'video', 'image'].each do |media|
+    ['alwaysudio', 'video', 'image'].each do |media|
       next unless item.send("#{media}_item?")
       output << render(:partial => "shared/media/#{media.pluralize}", :locals => { media.pluralize.to_sym => item.send(media.pluralize.to_sym) })
     end
