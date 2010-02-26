@@ -37,6 +37,14 @@ after("deploy") do
   newrelic.notice_deployment
 end
 
+before("deploy:web:disable") do
+  deploy.god.stop
+end
+
+after("deploy:web:enable") do
+  deploy.god.start
+end
+
 after("deploy:setup") do
   if stage.to_s[0,3] == "n2_"
   	puts "Setting up default config files"

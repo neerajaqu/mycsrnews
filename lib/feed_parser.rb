@@ -4,7 +4,7 @@ require 'rss'
 class FeedParser
   class << self; attr_accessor :title_fields, :date_fields, :body_fields, :link_fields, :image_fields; end
   @title_fields  = ['title', 'subtitle', 'link']
-  @date_fields   = ['updated', 'date', 'updated_at', 'pubDate', 'published', 'lastBuildDate', 'updated_at', 'dc_date']
+  @date_fields   = ['updated', 'date', 'updated_at', 'pubDate', 'published', 'lastBuildDate', 'dc_date']
   @body_fields   = ['description', 'content', 'summary', 'caption']
   @link_fields   = ['link', 'guid']
   @image_fields  = ['image', 'imageUrl', 'image_url', 'logo', 'icon']
