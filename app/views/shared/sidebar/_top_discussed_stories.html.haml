@@ -1,10 +1,10 @@
 -# @expects: local 'most_discussed_stories'
 
 .panel_2
-  .panelBar.clearfix
+  .panelBar
     %h2= t('.top_discussed_title')
 
-  .list_stories.clearfix
+  .list_stories
     %ul
       - most_discussed_stories.each do |story|
         %li

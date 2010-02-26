@@ -3,14 +3,14 @@
   Learn more ~ http://960.gs/
   
   Licensed under GPL and MIT.
-
+*/
 // Reset and grid stylesheets
 @import compass/utilities/general/reset.sass
 @import 960/grid.sass
 
 +global-reset
 
-// App stylesheets
+//App stylesheets
 @import default.sass
 @import formtastic.sass
 @import formtastic_changes.sass
@@ -20,15 +20,40 @@
 
 
 // The following generates the default grids provided by the css version of 960.gs
-.container_12
+!ninesixty_grid_width = 760px
+
+.container
   +grid-system(12)
 
-.container_16
-  +grid-system(16)
+#header, #footer, #pageBody
+  +grid-width(12)
+
+#col_left
+  +grid(8)
+  +grid-children
+  +alpha
+  .left
+    +alpha
+  .right
+    +omega
+
+#col_right
+  +grid(4)
+  +grid-children
+  +omega
+  .panel_2
+    +alpha
+    +omega
+
+.panel_1
+  +grid-width(8)  
+.panel_2 
+  +grid(4)
+
 
 // But most compass users prefer to construct semantic layouts like so (two column layout with header and footer):
 
-!ninesixty_columns = 24
+!ninesixty_grid_width = 760px
 .two-column
   +grid-container
   #header,

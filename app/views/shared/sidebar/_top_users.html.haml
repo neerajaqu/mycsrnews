@@ -2,10 +2,10 @@
 
 - unless top_users.empty?
   .panel_2
-    .panelBar.clearfix
+    .panelBar
       %h2= t('.top_users_karma_title')
 
-    .list_stories.clearfix
+    .list_stories
       %ul
         - top_users.each do |user|
           %li

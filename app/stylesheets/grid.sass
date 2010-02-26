@@ -4,7 +4,6 @@
   
   Licensed under GPL and MIT.
 */
-
 // Reset and grid stylesheets
 @import compass/utilities/general/reset.sass
 @import 960/grid.sass
@@ -21,15 +20,49 @@
 
 
 // The following generates the default grids provided by the css version of 960.gs
-.container_12
-  +grid-system(12)
+!ninesixty_columns = 24
+!ninesixty_gutter_width = 20px
 
-.container_16
-  +grid-system(16)
+=brdr
+  border: 1px dashed red
+
+#bodyWrapper
+  +grid-system(24)
+  +grid-children
+
+#header, #footer, #pageBody
+  +grid-width(24)
+
+#col_left
+  +grid(16)
+  +grid-children
+  +alpha
+  .left
+    +alpha
+  .right
+    +omega
+
+#col_right
+  +grid(8)
+  +grid-children
+  +omega
+  .panel_2
+    +alpha
+    +omega
+
+.panel_1
+  +grid-width(16)  
+.panel_2 
+  +grid(8)
+
+.featured_story_half
+  +grid(8)
+
+
 
 // But most compass users prefer to construct semantic layouts like so (two column layout with header and footer):
 
-!ninesixty_columns = 24
+/*!ninesixty_columns = 12
 .two-column
   +grid-container
   #header,
@@ -43,3 +76,4 @@
     +grid-width(8)
   #main-content
     +grid-width(16)
+*/

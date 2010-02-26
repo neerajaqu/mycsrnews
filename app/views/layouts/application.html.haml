@@ -6,14 +6,9 @@
 
     = javascript_include_tag 'jquery.min', 'jquery.ui.min', 'jquery.jcarousel.pack', 'jquery.application', :cache => true
     = auto_discovery_link_tag(:atom, stories_path(:format => :atom))
-    %style
-      :sass
-        .body-wrapper
-          width: 760px
-          padding-left: 25px
 
   %body
-    .body-wrapper
+    #bodyWrapper
       = fb_connect_javascript_tag
       = init_fb_connect "XFBML", :js => :jquery
       = render :partial => 'shared/header'

@@ -1,3 +1,77 @@
+// Variable callouts //
+!copyFont = lucida grande, tahoma, verdana, arial, "san-serif"
+!headerFont = lucida grande, tahoma, verdana, arial, "san-serif"
+!color_1 = #444555
+!color_2 = #555666
+!color_3 = #666777
+!color_4 = #777888
+
+
+// Variable callouts //
+
+
+.clearfix
+  display: inline-block
+
+
+// floats //
+.float_left
+  float: left
+
+
+
+// floats //
+
+// Header Container //
+#header
+  height: 120px
+  margin-bottom: 15px
+  position: relative
+  border-bottom: 1px solid #999
+  background: #fff url(/images/default/hdr_bg.gif) bottom center no-repeat
+
+  h1
+    display: inline
+    float: left
+    font-size: 32px
+    margin: 5px
+
+  a
+    text-decoration: none
+
+  img.hdrpic 
+    position: absolute
+    top: 2px
+    left: 2px
+
+.dh_links
+  float: right
+  padding: 5px 0px 5px 0px
+// Header Container //
+
+// Body Container //	
+#pageBody
+  
+  display: inline-block
+
+
+
+#col_left
+  float: left
+
+
+
+#col_right
+  float: left
+
+#footer
+  float: left
+  display: block
+  border-top: 1px solid #3B5998
+  width: 740px
+  margin-bottom: 2px
+
+// Page Containers //
 .hidden
   display: none
 
@@ -61,10 +135,10 @@
   color: #777777
   font-size: .8em
 
-
+//Global Styles//
 body
+  :font-family= !copyFont
   direction: ltr
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
   font-size: 11px
   text-align: left
   direction: ltr
@@ -75,6 +149,7 @@ body
 
 
 h1, h2, h3, h4, h5
+  :font-family= !headerFont
   font-size: 14px
   color: #333333
   margin: 0px
@@ -82,7 +157,7 @@ h1, h2, h3, h4, h5
 
 
 h1
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+  :font-family= !headerFont
   font-size: 15px
   font-weight: bold
   line-height: 20px
@@ -99,7 +174,7 @@ h1
 
 
 h2
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+  :font-family= !headerFont
   font-size: 14px
   font-weight: bold
   margin: 0 0 6px 0
@@ -108,7 +183,7 @@ h2
 
 h3
   font-size: 11px
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+  :font-family= !headerFont
   font-weight: normal
   color: #999999
   margin: 0 0 7px 0
@@ -116,7 +191,7 @@ h3
 
 
 h4
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+  :font-family= !headerFont
   font-size: 12px
   font-weight: bold
   margin: 0 0 6px 0
@@ -124,7 +199,7 @@ h4
 
 
 h5
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+  :font-family= !headerFont
   font-size: 12px
   font-weight: bold
   color: #999999
@@ -134,7 +209,7 @@ h5
 
 
 p
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+  :font-family= !copyFont
   font-size: 11px
   line-height: 120%
   text-align: left
@@ -206,72 +281,16 @@ hr
   padding: 4px
 
 
-.clearfix
-  display: inline-block
 
 
-.float_left
-  float: left
 
 
-.float_right
-  float: right
 
 
-#header
-  width: 760px
-  height: 120px
-  display: inline-block
-  margin: 0 0 15px 0
-  position: relative
-  border-bottom: 1px solid #999
-  background: #fff url(/images/default/hdr_bg.gif) bottom center no-repeat
-
-  h1
-    display: inline
-    float: left
-    font-size: 32px
-    margin: 5px
-
-  a
-    text-decoration: none
-
-  img.hdrpic 
-    position: absolute
-    top: 2px
-    left: 2px
-
-#pageBody
-  clear: both
-  width: 760px
-  display: inline-block
-  margin: 0px
 
 
-#col_left
-  clear: both
-  width: 500px
-  float: left
-  margin: 0px 0px 15px 0px
 
 
-#col_right
-  width: 245px
-  float: right
-  margin: 0px 0px 15px 0px
-
-
-#footer
-  clear: both
-  display: block
-  border-top: 1px solid #3B5998
-  width: 740px
-  margin-bottom: 2px
-
-
-.dh_links
-  float: right
-  padding: 5px 0px 5px 0px
 
   a
     color: #3B5998
@@ -298,8 +317,8 @@ hr
 
 
 .powered
-  clear: both
-  float: right
+  
+  
   margin: 2px 0 0 0
   padding: 2px 5px 4px 4px
   color: #999999
@@ -487,7 +506,7 @@ ul#nav2-tabs
   bottom: 0px
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
-  float: right
+  
   overflow: visible
   border: none
 
@@ -528,12 +547,12 @@ ul#nav2-tabs
     padding-left: 1px
 
   .right_tabs
-    float: right
+    
     padding-right: 1px
 
   .back_links
     padding-right: 20px
-    float: right
+    
 
 
 // navigation tabs //
@@ -576,7 +595,7 @@ ul#nav2-tabs
     font-weight: bold
     font-size: 11px
     line-height: normal
-    background: #660033 url(/images/default/toggletab_bg.gif) left repeat-x
+    background: #55761b url(/images/default/toggletab_bg.gif) left repeat-x
     display: block
 
   &.first a
@@ -641,8 +660,7 @@ ul#nav2-tabs
 
 
 #subNav
-  clear: both
-  width: 100%
+  
   height: 19px
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
@@ -658,7 +676,6 @@ ul#nav2-tabs
 #subNav
   &.tabs
     border-bottom: 1px solid #999
-    width: 100%
     margin: 0px 0px 1px 0px
     padding: 0px 0px 0px 0px
 
@@ -759,38 +776,32 @@ ul#nav2-tabs
 .attachBox
   border: 1px solid #CCCCCC
   padding: 10px
-  clear: both
+  
 
 
 #featurePanel
-  padding: 0px 0px 10px 0px
   margin-bottom: 15px
-  display: block
-
   h1
     font-size: 20px
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+    :font-family= !headerFont
     font-weight: bold
-    margin: 10px 0 6px 0
+    margin: 10px
     padding: 0px
+    float: left
 
     a
       color: #3B5998
 
 
 #featuredStories
-  width: 100%
+
 
 .featured_story
-  clear: both
   padding: 10px 10px 0px 10px
   background-color: #dce6f4
 
 
-.featured_story_half
-  width: 230px
-  padding: 5px 5px 0px 5px
-  margin: 10px 0px 0 0px
+.feature_bg
   background-color: #dce6f4
 
 
@@ -802,32 +813,19 @@ ul#nav2-tabs
 
   .thumb
     float: left
-    margin: 0px 0px 10px 0px
+    margin: 10px 10px 10px 10px
 
     img
       max-width: 230px
       max-height: 155px
 
-
-#col_left
-  .featured_story_half .storyBlockWrap
-    clear: both
-    margin: 0px
-    width: 100%
-
-  #featurePanel .storyBlockWrap
-    margin: 0px
-    float: left
-    width: 100%
-
-
 .related_story
-  clear: both
+  
 
 
 #featurePanel .more_link, #introPanel .more_link, #rewardGrid .more_link
   color: #3B5998
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+  :font-family= !headerFont
   font-size: 11px
   font-weight: bold
 
@@ -840,18 +838,18 @@ ul#nav2-tabs
 
 
 #readStoryList
-  clear: both
+  
   display: inline-block
 
 
 #readBlog
-  clear: both
+  
   display: inline-block
   margin: 5px
 
 
 #readVideo
-  clear: both
+  
   margin: 5px
   text-align: center
 
@@ -883,16 +881,16 @@ ul#nav2-tabs
       max-height: 135px
 
   .storyCaption
-    clear: both
+    
     font-size: 12px
 
   .videoIntro
-    clear: both
+    
     text-align: center
     margin: 5px 0px 0px 0px
 
   .btn_1
-    float: right
+    
     margin: 6px 10px 20px 10px
 
   .panel_block
@@ -900,7 +898,7 @@ ul#nav2-tabs
 
 
 #myProfile
-  clear: both
+  
   display: inline-block
 
 
@@ -916,7 +914,7 @@ ul#nav2-tabs
 
 
 .panel_block
-  clear: both
+  
   display: inline-block
   padding: 10px 0px 3px 0px
 
@@ -948,7 +946,7 @@ ul#nav2-tabs
 
 
 #commentThread .btn_1, #postComment .btn_1
-  float: right
+  
   margin: 0 10px 10px 0
   border: none
   display: block
@@ -983,7 +981,7 @@ ul#nav2-tabs
       color: #8fa7cc
 
   h1
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+    :font-family= !headerFont
     font-size: 14px
     font-weight: bold
     color: #fff
@@ -1033,7 +1031,7 @@ ul#nav2-tabs
 
 
 #rewardGrid
-  clear: both
+  
   display: inline-block
   padding: 5px 0px 15px 0px
 
@@ -1066,7 +1064,7 @@ ul#nav2-tabs
     padding: 20px 0 0 0
 
   .storyHead
-    clear: both
+    
 
 
 #teamIcon
@@ -1141,7 +1139,7 @@ ul#nav2-tabs
 
   .btn_1
     margin: 0 0 10px 20px
-    float: right
+    
 
   .pointsTable
     margin: 10px 0 0 0
@@ -1164,7 +1162,7 @@ ul#nav2-tabs
     width: 228px
 
   .wideTipRight
-    float: right
+    
     display: inline
     padding: 10px
     margin: 0
@@ -1172,18 +1170,12 @@ ul#nav2-tabs
 
 
 #leaderWeeklyRewardBlock
-  clear: both
-
-
-.panelBar
-  width: 100%
-  display: block
+  
 
 
 .panel_1, .panel_2
   border-bottom: none
   margin-bottom: 15px
-  display: block 
 
 
 .panel_1 .panelBar, .panel_2 .panelBar
@@ -1191,14 +1183,15 @@ ul#nav2-tabs
   background: #fff
 
 
-.panelBar h2
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
-  padding: 2px 6px 2px 2px
-  margin: 0
-  color: #666666
-  font-weight: normal
-  font-size: 10px
-  text-transform: uppercase
+.panelBar 
+  h2
+    :font-family= !headerFont
+    padding: 2px 6px 2px 2px
+    margin: 0
+    color: #666666
+    font-weight: normal
+    font-size: 10px
+    text-transform: uppercase
 
   a
     color: #3B5998
@@ -1207,7 +1200,7 @@ ul#nav2-tabs
 
 
 .bar_link
-  float: right
+  
   margin: 3px 10px
 
   a
@@ -1220,7 +1213,7 @@ ul#nav2-tabs
 
 
 .subtitle
-  clear: both
+  
   font-size: 10px
   color: #333333
   background-color: #F0F0F0
@@ -1230,7 +1223,7 @@ ul#nav2-tabs
 
 
 .subFilter
-  clear: both
+  
   font-size: 10px
   color: #333333
   background-color: #F0F0F0
@@ -1406,17 +1399,12 @@ li
 
 
 #newswireWrap ul li, .list_rewards ul li, #feedList ul li
-  clear: both
+  
 
 
-.panel_1 ul li
-  padding: 0 0 0 0
-
-.panel_1 ul li, .panel_2 ul li
-  clear: both
+.panel_1 ul li, .panel_2 ul li 
   float: left
-  border-bottom: 1px solid #efefef
-  width: 100%
+
 
 
 
@@ -1442,17 +1430,19 @@ li
 .storyHead, .askQuestionHead
   font-size: 14px
   font-weight: bold
-  font-family: "lucida grande",tahoma,verdana,arial,sans-serif
+  :font-family= !copyFont
 
 
 #col_left .storyBlockWrap
-  width: 100%
-  padding: 10px 0 0 0
+  padding: 5px 10px
 
+  p
+    float: left
+    display: inline
 
 #col_right .storyBlockWrap
   width: 185px
-  float: right
+  
 
 
 .list_stories .thumb img
@@ -1519,12 +1509,12 @@ li
 
 #col_right .top_reward .storyBlockWrap
   width: 125px
-  float: right
+  
 
 
 .pointsTable
   table
-    clear: both
+    
     margin: 0
     background: #fff
     color: #333333
@@ -1539,7 +1529,7 @@ li
 
 .pointsTable_profile
   table
-    clear: both
+    
     margin: 0 0 10px 0
     width: 100%
     border-bottom: 1px solid #D8DFEA
@@ -1552,7 +1542,7 @@ li
 
 .historyTable
   table
-    clear: both
+    
     margin: 0
     width: 100%
     text-align: left
@@ -1589,7 +1579,7 @@ li
 
   .pointsTable_profile
     table
-      clear: both
+      
       margin: 0 0 0 0
       width: 225px
       border-bottom: 1px solid #D8DFEA
@@ -1615,7 +1605,7 @@ li
 
   .pointsTable_profile
     table
-      clear: both
+      
       font-size: 9px
       margin: 0
       width: 100%
@@ -1661,7 +1651,7 @@ li
 
 
 .microTabs
-  clear: both
+  
   font-size: 10px
   color: #333333
   background-color: #ECEFF5
@@ -1705,7 +1695,7 @@ li
 
 
 .resourceList
-  clear: both
+  
   margin-bottom: 10px
   display: inline-block
 
@@ -1713,7 +1703,7 @@ li
     margin: 10px 0 10px 20px
 
   li
-    clear: both
+    
     display: list-item
     margin: 0 0 10px 40px
     padding: 0
@@ -1877,7 +1867,7 @@ li
 
 
 #mediaPro_left
-  clear: both
+  
   width: 225px
   float: left
   margin: 0px 0px 15px 0px
@@ -1888,7 +1878,7 @@ li
 
 #mediaPro_right
   width: 275px
-  float: right
+  
   margin: 0px 0px 15px 0px
 
 
@@ -1946,7 +1936,7 @@ li
   form 
     margin-top: 20px
   input
-    float: right
+    
 
   label
     font-size: 12px

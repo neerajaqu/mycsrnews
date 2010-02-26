@@ -13,7 +13,7 @@
             %h1#story_1_title= link_to primary1.featured_title, primary1.featured_url
             %p#story_1_caption= primary1.featured_blurb
       - when 'template_2'
-        .featured_story_half.clearfix.float_left
+        .panel_2.left.feature_bg
           - primary1 = section1.children.first.featurable
           - secondary1 = section1.children.second.featurable
           - secondary2 = section1.children.third.featurable
@@ -27,7 +27,7 @@
                   %li= link_to secondary1.featured_title, secondary1.featured_url
                   %li= link_to secondary2.featured_title, secondary2.featured_url
 
-        .featured_story_half.clearfix.float_right
+        .panel_2.right.feature_bg
           - primary1 = section1.children.first.featurable
           - secondary1 = section1.children.second.featurable
           - secondary2 = section1.children.third.featurable
