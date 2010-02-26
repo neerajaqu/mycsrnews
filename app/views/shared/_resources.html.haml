@@ -2,7 +2,7 @@
 .panel_1
   .panelBar.clearfix
     %h2= title
-    - if resources.first.refineable?
+    - if resources.present? and resources.first.refineable?
       .bar_link
         = render :partial => 'shared/forms/refine_dropdown'
   .storyList
