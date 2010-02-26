@@ -250,7 +250,6 @@ EMBED
   end
 
   def embed_html_audio audio, options = {}
-    # TODO::
     <<EMBED
 <embed src= "http://www.odeo.com/flash/audio_player_standard_gray.swf" quality="high" width="300" height="52" allowScriptAccess="always" wmode="transparent"  type="application/x-shockwave-flash" flashvars= "valid_sample_rate=true&external_url=#{audio.url}" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
 EMBED
@@ -264,6 +263,10 @@ EMBED
       output << render(:partial => "shared/media/#{media.pluralize}", :locals => { media.pluralize.to_sym => item.send(media.pluralize.to_sym) })
     end
     output.join
+  end
+
+  def sanitize_user_content content
+    sanitize content, :tags => %w(a i b u p)
   end
 
 end

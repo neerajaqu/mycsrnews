@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @commentable = find_commentable
     @comment = @commentable.comments.build(params[:comment])
     @comment.user = current_user
+    @comment.comments = @template.sanitize_user_content @comment.comments
     if @comment.save
     	# TODO:: change this to work with polymorphic associations, switch to using touch
     	#expire_page :controller => 'stories', :action => 'show', :id => @story

@@ -33,6 +33,7 @@ class StoriesController < ApplicationController
     @story = Content.new(params[:content])
     @story.user = current_user
     @story.tag_list = params[:content][:tags_string]
+    @story.caption = @template.sanitize_user_content @story.caption
     if params[:content][:image_url].present?
       @story.build_content_image({:url => params[:content][:image_url]})
     end
