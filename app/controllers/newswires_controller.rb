@@ -34,7 +34,7 @@ class NewswiresController < ApplicationController
   private
 
   def set_current_tab
-    @current_tab = 'newswire'
+    @current_tab = 'stories'
   end
 
 end
