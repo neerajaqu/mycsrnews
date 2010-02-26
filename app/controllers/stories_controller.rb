@@ -10,6 +10,7 @@ class StoriesController < ApplicationController
   before_filter :load_newest_users, :only => [:index, :app_tab, :tags]
 
   def index
+    @current_sub_tab = 'Browse Stories'
     @contents = Content.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     respond_to do |format|
       format.html

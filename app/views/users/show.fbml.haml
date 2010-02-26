@@ -13,26 +13,8 @@
               %tr
                 %td.bold
                   %span.pointValue
-                    = @user.cachedPointTotal
-                    %span.pts= t('.points')
-                %td
-              %tr
-                %td.bold
-                  %span.pointValue
                     = @user.karma_score
                     %span.pts= t('.karma')
-                %td
-              %tr
-                %td.bold
-                  %span.pointValue
-                    = @user.cachedPointsEarnedThisWeek
-                    %span.pts= t('.this_week')
-                %td
-              %tr
-                %td.bold
-                  %span.pointValue
-                    = @user.cachedPointsEarnedLastWeek
-                    %span.pts= t('.last_week')
                 %td
               -# TODO:: fix this
               - if @user.user_profile.present?

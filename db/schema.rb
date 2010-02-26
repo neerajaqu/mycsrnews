@@ -167,18 +167,18 @@ ActiveRecord::Schema.define(:version => 20100217021117) do
   add_index "featured_items", ["parent_id"], :name => "index_featured_items_on_parent_id"
 
   create_table "feeds", :force => true do |t|
-    t.integer   "wireid",                   :default => 0
-    t.string    "title",                    :default => ""
-    t.string    "url",                      :default => ""
-    t.string    "rss",                      :default => ""
-    t.timestamp "lastFetch",                                       :null => false
-    t.string    "feedType",                 :default => "wire"
-    t.string    "specialType",              :default => "default"
-    t.string    "loadOptions",              :default => "none"
-    t.integer   "user_id",     :limit => 8, :default => 0
-    t.string    "tagList",                  :default => ""
-    t.datetime  "created_at"
-    t.datetime  "updated_at"
+    t.integer  "wireid",                   :default => 0
+    t.string   "title",                    :default => ""
+    t.string   "url",                      :default => ""
+    t.string   "rss",                      :default => ""
+    t.datetime "lastFetch",                                       :null => false
+    t.string   "feedType",                 :default => "wire"
+    t.string   "specialType",              :default => "default"
+    t.string   "loadOptions",              :default => "none"
+    t.integer  "user_id",     :limit => 8, :default => 0
+    t.string   "tagList",                  :default => ""
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "flags", :force => true do |t|
@@ -330,15 +330,14 @@ ActiveRecord::Schema.define(:version => 20100217021117) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer   "user_id",               :limit => 8,                    :null => false
-    t.integer   "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean   "isAppAuthorized",                    :default => false
-    t.datetime  "born_at"
-    t.timestamp "created_at",                                            :null => false
-    t.datetime  "updated_at"
-    t.text      "bio"
-    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean   "comment_notifications",              :default => false
+    t.integer  "user_id",               :limit => 8,                    :null => false
+    t.integer  "facebook_user_id",      :limit => 8, :default => 0
+    t.boolean  "isAppAuthorized",                    :default => false
+    t.datetime "born_at"
+    t.datetime "created_at",                                            :null => false
+    t.text     "bio"
+    t.integer  "referred_by_user_id",   :limit => 8, :default => 0
+    t.boolean  "comment_notifications",              :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

@@ -4,6 +4,7 @@ class NewswiresController < ApplicationController
   before_filter :load_top_stories, :only => [:index]
 
   def index
+    @current_sub_tab = 'Browse Wires'
     @newswires = Newswire.find(:all, :order => "updated_at desc", :limit => 20)
   end
 

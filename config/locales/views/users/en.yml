@@ -3,7 +3,7 @@ en:
     show:
       title: "{{name}} Profile"
       points: "points"
-      karma: "karma"
+      karma: "points"
       points_this_week: "this week"
       points_last_week: "last week"
       invite_friends: "Invite more friends"

@@ -1,6 +1,9 @@
 en:
   shared:
     subnav:
+      stories_subnav:
+        browse_stories: "All Stories"
+        browse_wires: "Wires"
       ideas_subnav:
         browse_ideas: "Browse Ideas"
         suggest_idea: "Suggest an Idea"
