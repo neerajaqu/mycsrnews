@@ -54,23 +54,6 @@ after("deploy:setup") do
   end
 end
 
-task :after_deploy do
-  #deploy.notify_hoptoad
-=======
-  deploy.god.start
->>>>>>> Updating deploy and config settings:config/deploy.rb
-  newrelic.notice_deployment
-end
-
-after("deploy:setup") do
-  if stage.to_s[0,3] == "n2_"
-  	puts "Setting up default config files"
-    run "mkdir -p #{shared_path}/config"
-    run "mkdir -p #{shared_path}/tmp/sockets"
-    run "cp /data/defaults/config/* #{shared_path}/config/"
-  end
-end
-
 namespace :deploy do
   
   namespace :god do
