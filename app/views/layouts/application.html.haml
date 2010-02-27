@@ -19,7 +19,7 @@
           %p= flash[:error]
         - else
           %p= (flash[:success] || flash[:notice])
-      = render :partial => 'shared/ads_banner'
+
       = yield :sub_nav
       = yield
       = render :partial => 'shared/footer'

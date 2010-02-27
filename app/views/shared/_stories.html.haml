@@ -1,10 +1,10 @@
 .panel_1
-  .panelBar.clearfix
+  .panelBar
     %h2= t('.stories_title')
   .subtitle
     %span= t('.stories_subtitle')
   .storyList
-    .list_stories.clearfix
+    .list_stories
       %ul
         - @contents.each do |content|
           %li

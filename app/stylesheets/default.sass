@@ -1,15 +1,27 @@
-// Variable callouts //
+// Font Variables //
 !copyFont = lucida grande, tahoma, verdana, arial, "san-serif"
 !headerFont = lucida grande, tahoma, verdana, arial, "san-serif"
-!color_1 = #444555
-!color_2 = #555666
-!color_3 = #666777
-!color_4 = #777888
 
+// Text Color Variables //
+!headerColor = #3B5998
+!subheadColor = #999999
+!linkColor = #3B5998
+!bodyColor = #333333
 
-// Variable callouts //
-
-
+// Background & Border Color Variables //
+!bgColor = #dce6f4
+!bgWhite = #FFFFFF
+!borderColor_1 = 1px solid #3b5998
+!borderColor_2 = 1px solid #333333
+!borderColor_3 = 1px solid #999999
+!borderColor_4 = 1px solid #FFFFFF
+!noBorder = none
+// Menu Tab BG and Text Color Variables //
+!tabOff = #55761b url(/images/default/toggletab_bg.gif) left repeat-x
+!tabOn = #FFFFFF
+!tablinkOff = #FFFFFF
+!tablinkOn = #3b5998
+// Float div hack //
 .clearfix
   display: inline-block
 
@@ -18,17 +30,17 @@
 .float_left
   float: left
 
-
-
-// floats //
+.float_right
+  float: right
 
 // Header Container //
 #header
   height: 120px
   margin-bottom: 15px
   position: relative
-  border-bottom: 1px solid #999
-  background: #fff url(/images/default/hdr_bg.gif) bottom center no-repeat
+  border-bottom: 1px solid
+    :color= !subheadColor
+  background: #fff url(/images/default/hdr_bg.gif) bottom left repeat-x
 
   h1
     display: inline
@@ -44,46 +56,73 @@
     top: 2px
     left: 2px
 
-.dh_links
-  float: right
-  padding: 5px 0px 5px 0px
-// Header Container //
+  .pipe
+    margin: 0 5px
+    :color= !subheadColor
 
-// Body Container //	
-#pageBody
-  
-  display: inline-block
+  .dh_links
+    float: right
+    padding: 5px 10px
 
 
+// Body containers - Most styling for these is in the grid.sass/fb_grid.sass files //
+#bodyWrapper
+  padding-bottom: 20px
 
 #col_left
-  float: left
-
 
 
 #col_right
-  float: left
 
+  .thumb
+    float: left
+    margin: 0px 10px 0px 0px
+
+// Footer Container //
 #footer
   float: left
-  display: block
-  border-top: 1px solid #3B5998
-  width: 740px
-  margin-bottom: 2px
+  clear: left
+  border:
+    :top= !borderColor_1
 
-// Page Containers //
+  .dh_links
+    :color= !bodyColor
+    float: left
+    clear: left
+    margin: 0px
+    padding: 5px 10px 7px 10px
+    background:
+      :color= !bgColor
+
+
+    a
+      color: #3B5998
+
+
+// Footer dhLink Styles //
+.rss_link
+  background: url(/images/default/icon_rss.png) left no-repeat
+  padding: 3px 0 3px 18px
+
+
+.twitter_link
+  background: url(/images/default/icon_twitter.gif) left no-repeat
+  padding: 3px 0 3px 18px
+
+
+.newscloud_link
+  background: url(/images/default/icon_newscloud.gif) left no-repeat
+  padding: 3px 0 3px 20px
+
+
+.grist_link
+  background: url(/images/default/icon_grist.gif) left no-repeat
+  padding: 3px 0 3px 20px
+
+
+// Misc Styles //
 .hidden
   display: none
-
-
-#testBar
-  width: 750px
-  height: 10px
-  background-color: white
-  padding: 5px
-  margin: 0px 0px 10px 0px
-  font-weight: bold
-  text-align: center
 
 
 #loadingStatus
@@ -135,23 +174,19 @@
   color: #777777
   font-size: .8em
 
-//Global Styles//
+// Global styles //
 body
   :font-family= !copyFont
-  direction: ltr
+  :color= !bodyColor
   font-size: 11px
-  text-align: left
-  direction: ltr
-  unicode-bidi: embed
   margin: 0px
   padding: 0px
-  color: #333333
 
 
 h1, h2, h3, h4, h5
   :font-family= !headerFont
+  :color= !bodyColor
   font-size: 14px
-  color: #333333
   margin: 0px
   padding: 0px
 
@@ -165,13 +200,6 @@ h1
   margin: 0 0 6px 0
   padding: 0
 
-  a
-    color: #3B5998
-
-
-.standard_message.has_padding h1
-  padding: inherit
-
 
 h2
   :font-family= !headerFont
@@ -184,8 +212,8 @@ h2
 h3
   font-size: 11px
   :font-family= !headerFont
+  :color= !subheadColor
   font-weight: normal
-  color: #999999
   margin: 0 0 7px 0
   padding: 0
 
@@ -200,9 +228,9 @@ h4
 
 h5
   :font-family= !headerFont
+  :color= !subheadColor
   font-size: 12px
   font-weight: bold
-  color: #999999
   border-top: 1px solid #CCCCCC
   margin: 0px 0px 10px 0
   padding: 5px 0px
@@ -210,15 +238,16 @@ h5
 
 p
   :font-family= !copyFont
+  :color= !bodyColor
   font-size: 11px
   line-height: 120%
   text-align: left
-  margin: 0 0 7px 0
+  margin: 0 0 8px 0
   padding: 0px
 
 
 a
-  color: #3B5998
+  :color= !linkColor
   cursor: pointer
   outline-style: none
   -moz-outline-style: none
@@ -232,18 +261,41 @@ img
   border: 0px
 
 
+hr
+  border: none 0
+  margin: 0
+  border-top: 1px solid #CCCCCC
+  height: 1px
+
+  a
+    :color= !linkColor
+
+
+ul
+  list-style-type: none
+  margin: 0
+  padding: 0
+
+
+li
+  display: inline-block
+  list-style-type: none
+  margin: 0
+  padding: 10px 0 4px 0
+
+
 .meta
-  color: #999999
+  :color= !subheadColor
 
 
 .bold
   font-weight: bold
 
-
+// Something intelligent here //
 blockquote
   background: transparent url(/images/default/start_quote_small.gif) no-repeat scroll -1px 0
-  color: #333333
-  line-height: 14px
+  :color= !subheadColor
+  line-height: 130%
   margin: 0 0 10px 0
   padding: 0 0 0 16px
 
@@ -253,6 +305,7 @@ blockquote
 
 
 .bullet_list
+  margin: 0 10px
   ul
     margin: 10px 0 10px 0
 
@@ -266,59 +319,11 @@ blockquote
     border: none
 
 
-hr
-  border: none 0
-  margin: 0
-  border-top: 1px solid #CCCCCC
-  height: 1px
-
-
-.bump10
-  padding: 10px
-
-
-.bump4
-  padding: 4px
-
-
-
-
-
-
-
-
-
-
-
-
-
-  a
-    color: #3B5998
-
-
 .share_and_hide a
-  color: #3B5998
-
-
-#header .pipe
-  margin: 0 5px
-  color: #333333
-
-
-#footer .dh_links
-  float: left
-  margin: 0px
-  padding: 5px 10px 7px 10px
-  background: #dce6f4
-  color: #333
-
-  a
-    color: #3B5998
+  :color= !linkColor
 
 
 .powered
-  
-  
   margin: 2px 0 0 0
   padding: 2px 5px 4px 4px
   color: #999999
@@ -326,149 +331,22 @@ hr
   font-size: 10px
   line-height: 1.4em
 
+  .label
+    font-family: "arial black",arial,"lucida grande",tahoma,verdana,sans-serif
+    font-size: 14px
+    font-weight: bold
+    padding-bottom: 2px
+    color: #3B5998
+    line-height: 120%
+
   a
     color: #999999
 
 
-a.powered:hover
-  color: #3B5998
-  text-decoration: none
-
-
-.powered .label
-  font-family: "arial black",arial,"lucida grande",tahoma,verdana,sans-serif
-  font-size: 14px
-  font-weight: bold
-  padding-bottom: 2px
-  color: #3B5998
-  line-height: 1.2em
-
-
-.rss_link
-  background: url(/images/default/icon_rss.png) left no-repeat
-  padding: 3px 0 3px 18px
-
-
-.twitter_link
-  background: url(/images/default/icon_twitter.gif) left no-repeat
-  padding: 3px 0 3px 18px
-
-
-.newscloud_link
-  background: url(/images/default/icon_newscloud.gif) left no-repeat
-  padding: 3px 0 3px 20px
-
-
-.grist_link
-  background: url(/images/default/icon_grist.gif) left no-repeat
-  padding: 3px 0 3px 20px
-
-
-#nav
-  margin: 0 4px
-  padding: 0
-  width: auto
-  overflow: visible
-  position: absolute
-  right: 0px
-  bottom: -2px
-
-  .selected
-    background: #fff
-    border-top: solid 1px #999999
-    border-right: solid 1px #999999
-    border-bottom: solid 1px #fff
-    border-left: solid 1px #999999
-    margin-top: -1px
-
-    &:hover
-      cursor: text
-      text-decoration: none
-      background: #fff
-
-
-ul#nav-tabs
-  margin: 0
-  padding: 0
-  list-style: none
-  font-size: 11px
-  font-weight: bold
-  line-height: 1em
-
-  li
-    margin: 0 2px
-    padding: 0
-    display: block
-    width: auto
-    float: left
-    position: relative
-    background-color: #ECEFF5
-
-    a
-      &:link, &:visited
-        padding: 5px 10px 5px 10px
-        display: block
-        width: auto
-        text-align: center
-        text-decoration: none
-        color: #3B5998
-
-      &:hover, &:active
-        text-decoration: none
-        background: #D8DFEA
-
-
-#nav2
-  margin: 0
-  padding: 0
-  width: auto
-  overflow: visible
-  position: relative
-  left: 0px
-  display: inline-block
-  width: 100%
-  border-bottom: solid 2px #3B5998
-
-  a.selected
-    &:link, &:visited
-      color: #fff
-      background: #3B5998
-
-  .selected:hover
-    cursor: text
+a.powered
+  &:hover
+    color: #3B5998
     text-decoration: none
-    background: #3B5998
-
-
-ul#nav2-tabs
-  margin: 4px
-  padding: 0
-  list-style: none
-  font-size: 10px
-  font-weight: bold
-  line-height: 1em
-
-  li
-    margin: 0 2px
-    padding: 0
-    display: block
-    width: auto
-    float: left
-    position: relative
-    background-color: #ECEFF5
-
-    a
-      &:link, &:visited
-        padding: 5px 10px 5px 10px
-        display: block
-        width: auto
-        text-align: center
-        text-decoration: none
-        color: #3B5998
-
-      &:hover, &:active
-        text-decoration: none
-        background: #D8DFEA
 
 
 // Menu Dropdown styles //
@@ -499,7 +377,7 @@ ul#nav2-tabs
     background: #80a341
 
 
-// top menu page tabs//
+// top level menu page tabs //
 #pageTabs
   width: 100%
   position: absolute
@@ -510,10 +388,6 @@ ul#nav2-tabs
   overflow: visible
   border: none
 
-//IE hacks for #pagetabs//
-.ie6 #pageTabs, .ie7 #pageTabs
-  top: 0px
-
 
 #pageTabs .tabs
   position: absolute
@@ -523,18 +397,6 @@ ul#nav2-tabs
   height: 23px
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
-
-
-//IE hacks for .tabs//
-.ie6 .tabs, .ie7 .tabs
-  margin: 0px 0px 0px 0px
-  padding: 0px 0px 0px 0px
-
-
-//FF2 hack for .tabs//
-.ff2 .tabs
-  margin: 0px 0px 0px 0px
-  padding: 8px 0px 0px 0px
 
 
 //top navigation tabs placement//
@@ -552,7 +414,6 @@ ul#nav2-tabs
 
   .back_links
     padding-right: 20px
-    
 
 
 // navigation tabs //
@@ -560,10 +421,6 @@ ul#nav2-tabs
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
   text-align: center
-
-
-.ie6 .toggle_tabs, .ie7 .toggle_tabs
-  margin-bottom: 0px
 
 
 .toggle_tabs li
@@ -574,50 +431,40 @@ ul#nav2-tabs
   height: 23px
 
 
-.ie6 .toggle_tabs li, .ie7 .toggle_tabs li
-  background-position: 0 3px
-
-
-.ff2 .toggle_tabs li
-  line-height: 2em
-
-
 .toggle_tabs li
   a
     margin: 0px 0px 0px 0px
     padding: 5px 30px 5px 30px
     height: 13px
-    border-top: none
-    border-right: none
-    border-bottom: none
-    border-left: none
+    border:
+      :top= !noBorder
+      :bottom= !noBorder
+      :left= !noBorder
+      :right= !noBorder
     color: #fff
     font-weight: bold
     font-size: 11px
     line-height: normal
-    background: #55761b url(/images/default/toggletab_bg.gif) left repeat-x
+    :background= !tabOff
     display: block
 
   &.first a
     margin: 0px 0px 0px 0px
     padding: 5px 5px 5px 5px
-    height: 13px
-    border-top: none
-    border-right: none
-    border-bottom: none
-    border-left: none
+    border:
+      :top= !noBorder
+      :bottom= !noBorder
+      :left= !noBorder
+      :right= !noBorder
     color: #fff
     font-weight: bold
     font-size: 11px
     line-height: normal
-    background: #55761b url(/images/default/toggletab_bg.gif) left repeat-x
+    :background= !tabOff
     display: block
  
   &.first img
     display: inline-block    
-
-.ie6 .toggle_tabs li a, .ie7 .toggle_tabs li a
-  display: inline-block
 
 
 .toggle_tabs li
@@ -629,23 +476,25 @@ ul#nav2-tabs
       margin: -1px 0px 0px 0px
       padding: 5px 30px 5px 30px
       height: 13px
-      border-top: solid 1px #999999
-      border-right: solid 1px #999999
-      border-bottom: solid 1px #fff
-      border-left: solid 1px #999999
-      background: #fff
-      color: #3B5998
+      border:
+        :top= !borderColor_3
+        :bottom= !borderColor_4
+        :right= !borderColor_3
+        :left= !borderColor_3
+      :background= !tabOn
+      :color= !linkColor
 
   &.first a.selected
     margin: -1px 0px 0px 0px
     padding: 5px 5px 5px 5px
     height: 13px
-    border-top: solid 1px #999999
-    border-right: solid 1px #999999
-    border-bottom: solid 1px #fff
-    border-left: solid 1px #999999
-    background: #fff
-    color: #000
+    border:
+      :top= !borderColor_3
+      :bottom= !borderColor_4
+      :right= !borderColor_3
+      :left= !borderColor_3
+    :background= !tabOn
+    :color= !linkColor
 
   a
     &.selected:hover
@@ -658,25 +507,21 @@ ul#nav2-tabs
       &:hover
         text-decoration: none
 
-
+// Sub Navigation Styles //
 #subNav
-  
   height: 19px
-  margin: 0px 0px 0px 0px
+  margin: 0px 0px 15px 0px
   padding: 0px 0px 0px 0px
   display: block
   overflow: visible
   border-bottom: none
 
 
-.ff2 #subNav
-  overflow: visible
-
-
 #subNav
   &.tabs
-    border-bottom: 1px solid #999
-    margin: 0px 0px 1px 0px
+    border:
+      :bottom= !borderColor_3
+    margin: 0px 0px 15px 0px
     padding: 0px 0px 0px 0px
 
   .toggle_tabs
@@ -720,95 +565,34 @@ ul#nav2-tabs
             text-decoration: none
 
 
+// I dont't know what this is for //
+
+/*
 #attachTabs
-  margin-bottom: none
+*/
 
-  .tabs
-    border-bottom: none
-    width: 100%
-    padding: 4px 0 3px 0
-
-  .toggle_tabs li
-    display: inline
-    padding: 3px 0px 3px 0
-    margin: 0 0 0 0
-    background: #CCCCCC
-
-    a
-      border: 1px solid #CCCCCC
-      border-bottom: #CCCCCC
-      background: inherit
-      color: #105576
-      font-weight: normal
-      font-size: 11px
-      padding: 2px 10px 3px 28px
-
-      &.selected
-        background: #fff
-        border: 1px solid #CCCCCC
-        border-bottom: 1px solid #fff
-        color: #105576
-        margin-left: 0
-
-        &.photo_link
-          background: url(/images/default/icon_photo.gif) 4px no-repeat #fff
-
-      &.photo_link
-        background: url(/images/default/icon_photo.gif) 4px no-repeat
-
-      &.selected.video_link
-        background: url(/images/default/icon_video.gif) 4px no-repeat #fff
-
-      &.video_link
-        background: url(/images/default/icon_video.gif) 4px no-repeat
-
-      &.selected:hover
-        text-decoration: none
-
-      &.disabled
-        color: #999999
-        cursor: default
-
-        &:hover
-          text-decoration: none
-
-
-.attachBox
-  border: 1px solid #CCCCCC
-  padding: 10px
-  
-
+// Feature story Styles //
+#featuredStories
 
 #featurePanel
   margin-bottom: 15px
+
   h1
     font-size: 20px
     :font-family= !headerFont
     font-weight: bold
+    line-height: 120%
     margin: 10px
     padding: 0px
-    float: left
 
     a
-      color: #3B5998
+      :color= !linkColor
 
+  p
+    margin: 0 10px
 
-#featuredStories
-
-
-.featured_story
-  padding: 10px 10px 0px 10px
-  background-color: #dce6f4
-
-
-.feature_bg
-  background-color: #dce6f4
-
-
-#featurePanel
   .panelBar
     border-bottom: 1px solid #3b5998
-    background: #fff
     display: block
 
   .thumb
@@ -816,25 +600,12 @@ ul#nav2-tabs
     margin: 10px 10px 10px 10px
 
     img
-      max-width: 230px
-      max-height: 155px
-
-.related_story
-  
+      max-width: 100%
+      max-height: 100%
 
 
-#featurePanel .more_link, #introPanel .more_link, #rewardGrid .more_link
-  color: #3B5998
-  :font-family= !headerFont
-  font-size: 11px
-  font-weight: bold
-
-
-#featurePanel .slot
-  float: left
-  width: 40px
-  height: 30px
-  margin: 0 10px 10px 0
+.feature_bg
+  :background-color= !bgColor
 
 
 #readStoryList
@@ -913,21 +684,6 @@ ul#nav2-tabs
   margin: 0px 20px 20px 0px
 
 
-.panel_block
-  
-  display: inline-block
-  padding: 10px 0px 3px 0px
-
-
-.panel_half
-  display: inline-block
-  margin: 10px
-
-
-.friend
-  float: left
-  margin: 0px 5px
-
 
 #col_left #commentThread .storyBlockWrap
   float: left
@@ -940,239 +696,9 @@ ul#nav2-tabs
   margin: 10px
 
 
-.formfield
-  padding: 5px
-  border: solid 1px #999999
 
 
-#commentThread .btn_1, #postComment .btn_1
-  
-  margin: 0 10px 10px 0
-  border: none
-  display: block
-
-
-#introPanel
-  padding: 12px 18px 6px 18px
-  margin: 0 0 15px 0
-  background-color: #ECEFF5
-  border: solid 1px #D8DFEA
-  -moz-border-radius: 4px
-  -webkit-border-radius: 4px
-  border-radius: 4px
-
-  p
-    color: #333333
-
-
-#teamPanel
-  padding: 0 0 0 0
-  margin: 0 0 15px 0
-  overflow: auto
-  display: inline-block
-  background: url(http://host.newscloud.com/index.php?p=grad&color1=3B5998&color2=23355B&size=200) repeat-x top #23355B
-  color: #fff
-  -moz-border-radius: 4px
-  -webkit-border-radius: 4px
-  border-radius: 4px
-
-  a
-    &:link, &:visited
-      color: #8fa7cc
-
-  h1
-    :font-family= !headerFont
-    font-size: 14px
-    font-weight: bold
-    color: #fff
-    margin: 0 72px 10px 0
-    padding: 0px
-    color: #fff
-
-
-#teamWrap
-  margin: 10px 0 15px 0
-
-
-#teamPanel
-  .thumb
-    width: 320px
-    margin: 0 20px 0 0
-
-    #hideTip
-      margin-top: 15px
-
-  .storyBlockWrap
-    float: left
-    width: 400px
-    margin: 10px 0px 0px 0px
-
-  .btn_1
-    margin: 10px 0 10px 0
-    color: #fff
-
-  a.btn_1
-    &:link, &:visited
-      margin: 10px 0 10px 0
-      color: #fff
-
-
-#rewardsHead
-  padding: 10px
-  margin: 0 0 15px 0
-  display: inline-block
-  background: #ECEFF5
-  border: 1px solid #D8DFEA
-
-  .storyBlockWrap
-    float: left
-    width: 290px
-    margin: 0px
-
-
-#rewardGrid
-  
-  display: inline-block
-  padding: 5px 0px 15px 0px
-
-
-.gridBlock
-  float: left
-  margin: 5px
-  padding: 5px
-  width: 168px
-  height: 168px
-  overflow: hidden
-  border: 1px solid #CCCCCC
-
-  .panel_block
-    margin: 0
-    padding: 0
-
-  .thumb
-    float: left
-    margin: 0px 5px 10px 0px
-
-    img
-      max-width: 90px
-      max-height: 50px
-
-  .storyBlockWrap
-    float: left
-    width: 72px
-    margin: 0px
-    padding: 20px 0 0 0
-
-  .storyHead
-    
-
-
-#teamIcon
-  padding: 10px
-  background: url(/images/default/bg_team.gif) top right no-repeat
-  overflow: auto
-
-
-.pointValue
-  color: #666666
-  font-size: 11px
-  font-weight: bold
-
-
-.pts
-  text-transform: uppercase
-  font-size: 9px
-
-
-.userLevel0
-  font-weight: normal
-  font-size: 9px
-  padding: 1px 2px
-  color: #cc99cc
-  background: url(/images/default/user_reader.gif) center repeat-x
-
-
-.userLevel1
-  font-weight: normal
-  font-size: 9px
-  padding: 1px 2px
-  color: #cb4d01
-  background: url(/images/default/user_contributor.gif) center repeat-x
-
-
-.userLevel2
-  font-weight: normal
-  font-size: 9px
-  padding: 1px 2px
-  color: #996633
-  background: url(/images/default/user_bronze.gif) center repeat-x
-
-
-.userLevel3
-  font-weight: normal
-  font-size: 9px
-  padding: 1px 2px
-  color: #999999
-  background: url(/images/default/user_silver.gif) center repeat-x
-
-
-.userLevel4
-  font-weight: normal
-  font-size: 9px
-  padding: 1px 2px
-  color: #cc9900
-  background: url(/images/default/user_gold.gif) center repeat-x
-
-
-.userLevel5
-  font-weight: normal
-  font-size: 9px
-  padding: 1px 2px
-  color: #80aac0
-  background: url(/images/default/user_platinum.gif) center repeat-x
-
-
-#actionLegend
-  padding: 10px
-  margin: 0 0 15px 0
-  background: url(http://host.newscloud.com/index.php?p=grad&color1=ffffff&color2=D8DFEA&size=100) repeat-x top #D8DFEA
-
-  .btn_1
-    margin: 0 0 10px 20px
-    
-
-  .pointsTable
-    margin: 10px 0 0 0
-
-
-#wideTipPanel, .wideMsgPanel
-  padding: 0px
-  margin: 0 0 15px 0
-  display: inline-block
-  background: #ECEFF5
-  border: 1px solid #D8DFEA
-
-
-#wideTipPanel
-  .wideTipLeft
-    float: left
-    display: inline
-    padding: 10px 10px 0px 10px
-    margin: 0
-    width: 228px
-
-  .wideTipRight
-    
-    display: inline
-    padding: 10px
-    margin: 0
-    width: 230px
-
-
-#leaderWeeklyRewardBlock
-  
-
-
+// Layout panels - should be used for all element containers //
 .panel_1, .panel_2
   border-bottom: none
   margin-bottom: 15px
@@ -1200,7 +726,7 @@ ul#nav2-tabs
 
 
 .bar_link
-  
+  float: right
   margin: 3px 10px
 
   a
@@ -1245,6 +771,8 @@ ul#nav2-tabs
     background-color: #3B5998
 
 
+
+// buttons n stuff //
 .btn_1
   color: #fff
   font-weight: bold
@@ -1309,6 +837,8 @@ ul#nav2-tabs
   background: #F0F0F0
 
 
+
+// rating & modertation styles //
 .rating
   margin: 0 0 10px 15px
   display: block
@@ -1385,18 +915,6 @@ a.flag:hover
   background: url(/images/default/icon_flag.gif) 10px bottom no-repeat
 
 
-ul
-  list-style-type: none
-  margin: 0
-  padding: 0
-
-
-li
-  display: inline-block
-  list-style-type: none
-  margin: 0
-  padding: 10px 0 3px 0
-
 
 #newswireWrap ul li, .list_rewards ul li, #feedList ul li
   
@@ -1410,7 +928,7 @@ li
 
 .thumb
   float: left
-  margin: 10px 20px 20px 0px
+  margin: 0px 20px 20px 0px
 
 
 .avatar
@@ -1434,15 +952,7 @@ li
 
 
 #col_left .storyBlockWrap
-  padding: 5px 10px
-
-  p
-    float: left
-    display: inline
-
-#col_right .storyBlockWrap
-  width: 185px
-  
+  padding: 0px
 
 
 .list_stories .thumb img
@@ -1468,12 +978,6 @@ li
     height: 30px
 
 
-.storyBlockMeta
-  color: #999999
-  padding-bottom: 7px
-  margin: 0
-
-
 .storyCommands
   table
     margin: 0
@@ -1492,24 +996,7 @@ li
 
 
 
-#col_right .thumb
-  float: left
-  margin: 0px 10px 0px 0px
 
-
-.top_reward
-  padding: 10px 10px 3px 10px
-  margin: 0
-  background: url(http://host.newscloud.com/index.php?p=grad&color1=ffffff&color2=D8DFEA&size=100) repeat-x top #D8DFEA
-
-  .thumb
-    float: left
-    margin: 0px 10px 0px 0px
-
-
-#col_right .top_reward .storyBlockWrap
-  width: 125px
-  
 
 
 .pointsTable
@@ -1648,262 +1135,6 @@ li
     font-size: 12px
     font-weight: bold
     margin-right: 54px
-
-
-.microTabs
-  
-  font-size: 10px
-  color: #333333
-  background-color: #ECEFF5
-  border-bottom: 1px solid #94a3c4
-  padding: 2px 0
-
-  a
-    padding: 1px 5px 2px 5px
-
-  .selected
-    color: #fff
-    padding: 1px 5px 2px 5px
-    -moz-border-radius-topright: 4px
-    -moz-border-radius-topleft: 4px
-    -webkit-border-top-right-radius: 4px
-    -webkit-border-top-left-radius: 4px
-    border-top-right-radius: 4px
-    border-top-left-radius: 4px
-    background: #94a3c4
-
-
-.microFeed
-  .thumb
-    margin: 0 8px 8px 0
-
-    img
-      width: 50px
-
-  li
-    padding: 8px 0 0 0
-    border-bottom: 1px solid #D8DFEA
-
-  .storyBlockWrap
-    width: 184px
-
-
-.colFull_half
-  width: 360px
-  float: left
-  margin: 0 10px
-
-
-.resourceList
-  
-  margin-bottom: 10px
-  display: inline-block
-
-  ul
-    margin: 10px 0 10px 20px
-
-  li
-    
-    display: list-item
-    margin: 0 0 10px 40px
-    padding: 0
-    list-style-image: url(/images/default/bullet1.gif)
-    list-style-type: disc
-    list-style-position: outside
-    border: none
-
-    &.thumb
-      list-style: none
-      height: 60px
-      margin: 0 0 10px 20px
-
-  .thumb
-    img
-      height: 50px
-      padding: 0 10px 10px 0
-      vertical-align: middle
-      float: left
-
-    a
-      display: inline
-      position: relative
-      top: 10px
-      margin: 0 0 20px 0
-      font-size: 12px
-      font-weight: bold
-
-    .meta
-      font-size: 11px
-      font-weight: normal
-
-
-.process
-  background: white url(/images/default/vertical_bg_animation.gif') top left repeat
-  opacity: .5
-
-
-.attachment_stage
-  width: 360px
-  border-top: 1px solid #CCCCCC
-  border-bottom: 1px solid #CCCCCC
-  background-color: #F0F0F0
-
-
-.formErrorText
-  font-weight: bold
-  color: #cb4d01
-
-
-.inputText
-  width: 400px
-
-
-.inputTextShort
-  width: 250px
-
-
-.inputTextarea
-  width: 400px
-  height: 160px
-
-
-.inputTextareaShort
-  width: 400px
-  height: 80px
-
-
-.adWideBanner
-  text-align: center
-  margin: 0px 0px 10px 0px
-
-
-#tag_cloud
-  margin: 0
-  clear: left
-  padding: 2px
-  line-height: 2em
-  text-align: center
-
-  li
-    display: inline
-    float: none
-    border-bottom: none
-
-  a
-    padding: 0px
-
-
-#cloud a
-  &.tag1
-    font-size: 0.7em
-    font-weight: 100
-
-  &.tag2
-    font-size: 0.8em
-    font-weight: 200
-
-  &.tag3
-    font-size: 0.9em
-    font-weight: 300
-
-  &.tag4
-    font-size: 1.0em
-    font-weight: 400
-
-  &.tag5
-    font-size: 1.2em
-    font-weight: 500
-
-  &.tag6
-    font-size: 1.4em
-    font-weight: 600
-
-  &.tag7
-    font-size: 1.6em
-    font-weight: 700
-
-  &.tag8
-    font-size: 1.8em
-    font-weight: 800
-
-  &.tag9
-    font-size: 2.2em
-    font-weight: 900
-
-  &.tag10
-    font-size: 2.5em
-    font-weight: 900
-
-
-#accountAgeSpecificOptInText
-  display: none
-
-
-.inputLinkNoBorder
-  border: none
-  width: 100%
-
-
-.imageStrip
-  float: left
-  width: 500px
-  height: 70px
-  overflow: hidden
-  margin-bottom: 10px
-
-
-.imageStripPanel
-  position: relative
-  left: 0px
-  width: 6000px
-  margin-top: 10px
-
-  img
-    width: 65px
-    height: auto
-    max-height: 65px
-    margin-left: 5px
-    border: solid 1px #D2D2D2
-
-
-#mediaPro_left
-  
-  width: 225px
-  float: left
-  margin: 0px 0px 15px 0px
-
-  img
-    max-width: 200px
-
-
-#mediaPro_right
-  width: 275px
-  
-  margin: 0px 0px 15px 0px
-
-
-.mediaGrid
-  float: left
-  margin: 0px
-  padding: 5px
-  width: 250px
-  height: auto
-  overflow: hidden
-  border: 1px solid #CCCCCC
-
-  .thumb
-    float: left
-    margin: 0px 5px 5px 0px
-
-    img
-      max-width: 75px
-      max-height: 75px
-      padding: 0px
-      margin: 0px
-
-      &.selected
-        border: 2px solid red
-        padding: 1px
 
 
 #loginBox, #contactBox
