@@ -1,5 +1,9 @@
 -# expects local :commentable => @commentable
 - if current_user.present?
   - form_tag [flaggable, Flag.new] do
-    = select_tag :flag_type, options_for_select(Flag.flag_types.collect { |f| [f.titleize, f] })
-    = submit_tag "Flag"
+    Flag: 
+    = select_tag :flag_type, options_for_select(Flag.flag_types.collect { |f| [f.titleize, f] }),:onchange=>"submit();"
+  #moderator-link
+    Feature item | Block item
+  #admin-link
+    Ban user
