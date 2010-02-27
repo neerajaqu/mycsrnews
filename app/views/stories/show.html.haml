@@ -25,6 +25,7 @@
 
   - if @story.media_item?
     = render_media_items @story
+  = render :partial => 'shared/ads_banner'
   = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
   = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }

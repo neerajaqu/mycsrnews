@@ -30,6 +30,7 @@
     = render_media_items @idea
   %br
   %br
+  = render :partial => 'shared/ads_banner'
   = render :partial => 'shared/comments', :locals => { :comments => @idea.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @idea }
   = render :partial => 'shared/item_footer', :locals => { :item => @idea, :title => @idea.title }
