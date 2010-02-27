@@ -1,0 +1,7 @@
+#subNav.tabs.clearfix
+  .left_tabs
+    %ul#toggle_tabs_unused.toggle_tabs.clearfix
+      %li.first= link_to t('.browse_stories'), stories_path, :class => sub_tab_selected?(@current_sub_tab, 'Browse Stories')
+      %li.first= link_to t('.browse_wires'), newswires_path, :class => sub_tab_selected?(@current_sub_tab, 'Browse Wires')
+%br
+%br
