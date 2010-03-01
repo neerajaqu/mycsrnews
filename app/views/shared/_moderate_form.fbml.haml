@@ -1,0 +1,23 @@
+-# expects local :flaggable => flaggable
+- if current_user.present? and (current_user.is_moderator? or current_user.is_admin?)
+  .moderator-link
+    - if flaggable.is_blocked?
+      = t('.unblock')
+      -#{link_to = t('.unblock'), block_flaggable_path(flaggable, :return_to => flaggable_path(flaggable))}
+    - else
+      = t('.block')
+      -#{link_to = t('.block'), block_flaggable_path(flaggable, :return_to => flaggable_path(flaggable))}
+    - if flaggable.is_featured?
+      = t('.unfeature')
+      -#{link_to = t('.unfeature'), block_flaggable_path(flaggable, :return_to => flaggable_path(flaggable))}
+    - else
+      = t('.feature')
+      -#{link_to = t('.feature'), feature_flaggable_path(flaggable, :return_to => flaggable_path(flaggable))}
+- if current_user.present? and current_user.is_admin?
+  .admin-link
+  - if flaggable.user.present? and not flaggable.user.is_blocked?
+    = t('.ban')
+    -#{link_to = t('.ban'), ban_flaggable_path(flaggable, :return_to => flaggable_path(flaggable))}
+  - else
+    = t('.unban')
+    -#{link_to = t('.unban'), ban_flaggable_path(flaggable, :return_to => flaggable_path(flaggable))}

@@ -49,6 +49,23 @@ $(function() {
     });
   });
 
+  $('.flag-toggle').click(function(event) {
+  	event.preventDefault();
+  	$(this).next().toggle();
+  });
+
+  $('.flag-form').submit(function(event) {
+  	event.preventDefault();
+  	$(this).parent().parent().toggle();
+
+  	var url = change_url_format($(this).attr('action'));
+  	var list = $('.list_stories ul', $(this).parents().filter('.panel_1'));
+  	$.post(url, $(this).serialize(), function(data) {
+  		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
+  		rebuild_facebook_dom();
+    });
+  });
+
 	$('.voteLink').click(function(event) {
 		event.preventDefault();
 		var span = $(this).parent();

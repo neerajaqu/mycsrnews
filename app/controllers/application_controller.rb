@@ -138,7 +138,13 @@ class ApplicationController < ActionController::Base
 
   def set_slot_data
     # todo look up slot_data for ad based on meta data settings
-    @slot_data = { :name => "default" , :width =>"468px" , :height =>"60px" , :background => "default/ads_468_60.gif"}
+    @slot_data = { :name => "banner" , :width =>"468px" , :height =>"60px" , :background => "default/ads_468_60.gif"}
+    # names https://www.google.com/adsense/static/en_US/AdFormats.html#image
+    #@slot_data = { :name => "leaderboard" , :width =>"728px" , :height =>"90px" , :background => "default/ads_728_90.gif"}
+    #@slot_data = { :name => "wide_skyscraper" , :width =>"160px" , :height =>"600px" , :background => "default/ads_160_600.gif"}
+    #@slot_data = { :name => "sqaure" , :width =>"250px" , :height =>"250px" , :background => "default/ads_250_250.gif"}
+    #@slot_data = { :name => "medium_rectangle" , :width =>"300px" , :height =>"250px" , :background => "default/ads_300_250.gif"}
+    #@slot_data = { :name => "large_rectangle" , :width =>"336px" , :height =>"280px" , :background => "default/ads_336_280.gif"}
   end
   
   def update_last_active

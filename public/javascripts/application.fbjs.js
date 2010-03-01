@@ -54,5 +54,21 @@ $(function() {
     var list = panel.children().filter('.list_stories').children().filter('ul');
     $.update(list, url, $(this).serialize());
   });
+
+  $('.flag-toggle').click(function(event) {
+    event.preventDefault();
+    $(this).next().toggle();
+  });
+
+  $('.flag-form').submit(function(event) {
+    event.preventDefault();
+    $(this).parent().parent().toggle();
+    var url = change_url_format($(this).action());
+    var panel = $(this).parents().filter('.panel_1');
+    panel = $(panel.nodes[0]);
+    var list = panel.children().filter('.list_stories').children().filter('ul');
+    $.update(list, url, $(this).serialize());
+  });
+
 });
 
