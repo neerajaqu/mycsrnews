@@ -5,19 +5,23 @@
   = image_form.input :remote_image_url, :required => false
   %br
   %br
-%h2 Embed or link to a video (youtube only):
-- item.videos.build if item.videos.empty?
-- form.semantic_fields_for :videos do |video_form|
-  = video_form.input :embed_code, :required => false
-  = video_form.input :remote_video_url, :required => false
-  %br
-  %br
-%h2 Link to an audio file (.mp3 only):
-- item.audios.build if item.audios.empty?
-- form.semantic_fields_for :audios do |audio_form|
-  = audio_form.input :url, :required => false
-  = audio_form.input :title, :required => false
-  = audio_form.input :album, :required => false
-  = audio_form.input :artist, :required => false
-  %br
-  %br
+%h2.hidden== Click to #{link_to "Add video link", '#', :class => 'toggle-form'}
+.video-form.hide
+  %h2 Embed or link to a video (youtube only):
+  - item.videos.build if item.videos.empty?
+  - form.semantic_fields_for :videos do |video_form|
+    = video_form.input :embed_code, :required => false
+    = video_form.input :remote_video_url, :required => false
+    %br
+    %br
+%h2.hidden== Click to #{link_to "Add audio link", '#', :class => 'toggle-form'}
+.audio-form.hide
+  %h2 Link to an audio file (.mp3 only):
+  - item.audios.build if item.audios.empty?
+  - form.semantic_fields_for :audios do |audio_form|
+    = audio_form.input :url, :required => false
+    = audio_form.input :title, :required => false
+    = audio_form.input :album, :required => false
+    = audio_form.input :artist, :required => false
+    %br
+    %br

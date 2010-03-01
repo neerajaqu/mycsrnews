@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'timeout'
 
 class Image < ActiveRecord::Base
 
@@ -15,7 +16,9 @@ class Image < ActiveRecord::Base
   	:medium => "200x200"
   }
 
-  before_validation :download_image, :if => :remote_image_url?
+  #before_validation :download_image, :if => :remote_image_url?
+  validate :download_image, :if => :remote_image_url?
+  # TODO:: validate format of remote_image_url
   validates_presence_of :remote_image_url, :allow_blank => true, :message => 'invalid image or url.', :if => :remote_image_url?
   validates_presence_of :image, :image_file_name, :image_content_type, :image_file_size
 
@@ -30,7 +33,13 @@ class Image < ActiveRecord::Base
   end
 
   def download_image
-    self.image = open(URI.parse(remote_image_url))
+    begin
+      Timeout::timeout(10) {
+        self.image = open(URI.parse(remote_image_url))
+      }
+    rescue Timeout::Error, OpenURI::HTTPError, Exception
+      errors.add(:remote_image_url, "Could not download image. Please select another image.")
+    end
   end
 
 end

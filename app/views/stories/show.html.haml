@@ -1,8 +1,8 @@
 #col_left
   #readStoryList
     .thumb
-      - if @story.content_image.present?
-        %img{:alt => "story image", :src => @story.content_image.url}
+      - if @story.images.present?
+        = image_tag @story.images.first.url(:medium)
     .storyBlockWrap
       %p.storyHead= @story.title
       .storyBlockMeta

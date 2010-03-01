@@ -1,15 +1,16 @@
 -# @expects: local 'images'
 
-.panel_1
-  .panelBar.clearfix
-    %h2= t 'images.title'
-    %br
-    %br
-  .storyList.clearfix
-    .list_stories.clearfix
-      %ul
-        - images.each do |image|
-          .image.clearfix
-            = image_tag image.url(:medium)
-            %br
-            %br
+- if images.present? and images.size > 1
+  .panel_1
+    .panelBar.clearfix
+      %h2= t 'images.title'
+      %br
+      %br
+    .storyList.clearfix
+      .list_stories.clearfix
+        %ul
+          - images.each do |image|
+            .image.clearfix
+              = image_tag image.url(:medium)
+              %br
+              %br

@@ -54,5 +54,13 @@ $(function() {
     var list = panel.children().filter('.list_stories').children().filter('ul');
     $.update(list, url, $(this).serialize());
   });
+
+  $('.hide').hide();
+  $('h2.hidden').removeClass('hidden');
+  $('a.toggle-form').click(function(event) {
+  	event.preventDefault();
+  	$(this).parent().next().toggle();
+  });
+
 });
 

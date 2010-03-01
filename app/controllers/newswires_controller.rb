@@ -20,7 +20,7 @@ class NewswiresController < ApplicationController
     	:user     => current_user
     })
     unless @newswire.imageUrl.nil? or @newswire.imageUrl.empty?
-      @content.build_content_image({ :url => @newswire.imageUrl })
+      @content.images.build({ :remote_image_url => @newswire.imageUrl })
     end
     if @content.save
       flash[:success] = "Thanks for posting a story!"

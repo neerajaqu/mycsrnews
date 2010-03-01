@@ -2,7 +2,7 @@ namespace :n2 do
   namespace :data do
 
     desc "Bootstrap and convert existing data"
-    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_ideas, :generate_model_slugs, :generate_widgets, :load_seed_data] do
+    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_ideas, :generate_model_slugs, :generate_widgets, :load_seed_data, :convert_images_to_paperclip] do
       puts "Finished Bootstrapping and converting existing data"
     end
 
@@ -75,6 +75,25 @@ namespace :n2 do
     task :load_seed_data => :environment do
       puts "Loading Seed Data"
       Rake::Task['db:seed'].invoke
+    end
+
+    desc "Convert existing images to paperclip"
+    task :convert_images_to_paperclip => :environment do
+      puts "Converting images to paperclip format (this may take a while)"
+      count = 0
+      ContentImage.all.each do |image|
+        next unless image.content.present? and image.url.present?
+        next if image.content.images.present? and image.content.images.first.remote_image_url == image.url
+        puts "\tConverting: #{image.url}"
+        content = image.content
+        content.images.build({:remote_image_url => image.url})
+        if content.save
+          count += 1
+        else
+        	puts "\t\tFailed to download image."
+        end
+      end
+      puts "Finished converting #{count} images"
     end
 
   end
