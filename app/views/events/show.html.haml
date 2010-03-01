@@ -25,6 +25,7 @@
 
   %br
   %br
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
   = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @event }
   = render :partial => 'shared/item_footer', :locals => { :item => @event, :title =>@event.name }

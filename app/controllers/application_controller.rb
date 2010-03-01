@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
-
+  before_filter :set_slot_data
   before_filter :set_current_tab
   before_filter :set_current_sub_tab
   before_filter :set_locale
@@ -136,6 +136,11 @@ class ApplicationController < ActionController::Base
     @tags = item.tag_counts_on(:tags)
   end
 
+  def set_slot_data
+    # todo look up slot_data for ad based on meta data settings
+    @slot_data = { :name => "default" , :width =>"468px" , :height =>"60px" , :background => "default/ads_468_60.gif"}
+  end
+  
   def update_last_active
     return false unless current_user.present?
 

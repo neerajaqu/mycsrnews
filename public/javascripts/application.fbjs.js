@@ -55,3 +55,4 @@ $(function() {
     $.update(list, url, $(this).serialize());
   });
 });
+

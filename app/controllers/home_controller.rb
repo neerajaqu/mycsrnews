@@ -22,7 +22,7 @@ class HomeController < ApplicationController
   end
 
   def google_ads
-    render :partial => 'shared/google_ads.html.haml', :layout => false
+    render :partial => 'shared/google_ads.html.haml', :locals => { :slot_name => @slot_name },:layout => false
   end
 
   def bookmarklet_panel
