@@ -3,7 +3,7 @@
   - form_tag [flaggable, Flag.new] do
     Flag: 
     = select_tag :flag_type, options_for_select(Flag.flag_types.collect { |f| [f.titleize, f] }),:onchange=>"submit();"
-  #moderator-link
+  #moderator-link.hidden
     Feature item | Block item
-  #admin-link
+  #admin-link.hidden
     Ban user
