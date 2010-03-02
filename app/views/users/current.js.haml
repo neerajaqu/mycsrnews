@@ -1,6 +1,6 @@
 - if current_user
   $(function() {
-  - if current_user.is_moderator?
+  - if (current_user.is_moderator? || current_user.is_admin?)
     $('.moderator-link').show();
   - if current_user.is_admin?
     $('.admin-link').show();
