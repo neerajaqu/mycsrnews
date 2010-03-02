@@ -4,7 +4,7 @@
     - section2 = featured_items.children.second
     - case featured_items.featured_type
       - when 'template_1'
-        .featured_story.clearfix
+        .featured_story
           - primary1 = section1.children.first.featurable
           #story_1_image.thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
           .storyBlockWrap
@@ -12,7 +12,7 @@
             %p#story_1_caption= primary1.featured_blurb
       - when 'template_2'
         .panel_2.left.feature_bg
-          .panelBar.clearfix
+          .panelBar
             %h2 Story 1
           - primary1 = section1.children.first.featurable
           - secondary1 = section1.children.second.featurable
@@ -29,7 +29,7 @@
 
 
         .panel_2.right.feature_bg
-          .panelBar.clearfix
+          .panelBar
             %h2 Story 2
           - primary1 = section1.children.first.featurable
           - secondary1 = section1.children.second.featurable

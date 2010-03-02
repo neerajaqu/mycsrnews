@@ -1,9 +1,12 @@
 -# @expects: local 'comment' %>
 
-.panel_block
+.comment_block
   .thumb= local_linked_profile_pic comment.user
   .storyBlockWrap
     .storyBlockMeta
       %h3= t('.posted_by', :fb_name => (local_linked_profile_name comment.user), :date => time_ago_in_words(comment.created_at))
     %blockquote
       .quotes= comment.comments
+  %div.comment_reply
+    %a{:href => '#'}= "Reply" 
+-# TODO:: ADD TRANSLATION ^^

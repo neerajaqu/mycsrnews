@@ -1,25 +1,23 @@
 #col_left
-  #readStoryList
+  #readArticle.panel_1
     .thumb
       - if @story.content_image.present?
-        %img{:alt => "story image", :src => @story.content_image.url}
+        %img{:alt => "story image", :src => @story.content_image.url, :height => "250px", :width => "325px"}
     .storyBlockWrap
-      %p.storyHead= @story.title
+      %h1.storyHead= @story.title
       .storyBlockMeta
         %h3= t('.via', :source => link_to(@story.source, '#'), :date => @story.created_at)
         %h3= t('.posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
         - if @tags.present?
           %h3== Tags #{tag_list(@tags, @story)}
         %h3
-          %span.btn_left== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteLink"} #{@story.votes.size}
-          %span.btn_mid== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
-          %span.btn_right= t('.share')
     - if @story.is_article?
       %p.storyCaption= sanitize nl2br(@story.caption)
     - else
-      %p.storyCaption= sanitize caption @story.caption
-    - if @story.url.present?
-      %p.float_right= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn_1"
+      %p.bodyArticle
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repella
+      %p.bodyArticle
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repella
 
   = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }

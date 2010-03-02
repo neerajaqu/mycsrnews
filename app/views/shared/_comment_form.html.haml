@@ -1,9 +1,9 @@
 -# expects local :commentable => @commentable
 #postComment.panel_1
   %a{:id => "postCommentBox", :name => "postCommentBox"}
-  .panelBar.clearfix
+  .panelBar
     %h2= t '.post_comment'
-  .panel_block
+  .formBox
     - unless current_user.present?
       %p== #{t '.logged_in_error'} #{link_to 'Login now', login_path}
     - else
