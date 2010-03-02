@@ -1,0 +1,16 @@
+-# TODO set up filter of newest blog articles
+-# @expects: local 'newest_articles'
+
+- cache :newest_articles do
+  - newest_articles ||= Article.newest
+  - unless newest_articles.empty?
+    .panel_2
+      .panelBar.clearfix
+        %h2= t('.newest_articles_title')
+      %br
+      .list_stories.clearfix
+        %ul
+          - newest_articles.each do |article|
+            %li
+              .profilePic= local_linked_profile_pic article.user
+              = link_to article.title, article_path(article)

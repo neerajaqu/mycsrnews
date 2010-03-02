@@ -84,6 +84,26 @@ class ApplicationController < ActionController::Base
     })
   end
 
+  def load_featured_articles
+    @featured_articles ||= Article.featured
+  end
+
+  def load_featured_comments
+    @featured_comments ||= Comment.featured
+  end
+
+  def load_newest_articles
+    @newest_articles ||= Article.newest
+  end
+
+  def load_newest_images
+    @newest_images ||= Image.newest
+  end
+
+  def load_newest_videos
+    @newest_videos ||= Video.newest
+  end
+
   def load_newest_ideas
     @newest_ideas ||= Idea.newest
   end

@@ -4,7 +4,7 @@ class FlagsController < ApplicationController
 
   def create
     @flaggable = find_moderatable_item
-    if @flaggable.flag_item params[:flag_type]
+    if @flaggable.flag_item params[:flag_type],current_user
     	# TODO:: change this to work with polymorphic associations, switch to using touch
     	#expire_page :controller => 'stories', :action => 'show', :id => @story
     	flash[:success] = "Thank you for flagging this item. We will investigate this shortly."

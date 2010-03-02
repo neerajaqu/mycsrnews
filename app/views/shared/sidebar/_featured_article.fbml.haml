@@ -1,0 +1,17 @@
+-# TODO set up scope for featured article blogs
+-# @expects: local 'content'
+
+- cache :featured_contents, :expires_in => 15.seconds do
+  - featured_contents ||= Article.featured
+  - unless featured_contents.empty?
+    .panel_2
+      .panelBar.clearfix
+        %h2= t('.featured_content_title')
+      %br
+      .list_items.clearfix
+        %ul
+          - featured_contents.each do |content|
+            %li
+              .profilePic= local_linked_profile_pic content.user
+              = link_to content.title, content_path(content)
+              %p= (content.details.present?) ? content.details : 'no details'
