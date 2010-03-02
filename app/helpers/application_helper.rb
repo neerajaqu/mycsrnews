@@ -276,7 +276,7 @@ EMBED
 
   def toggle_featured_link item
     return '' unless item.moderatable? and item.featurable?
-    link_to(item.is_featured? ? 'UnFeature' : 'Feature', toggle_featured_path(item.class.name.foreign_key.to_sym => item))
+    link_to(item.featured? ? 'UnFeature' : 'Feature', toggle_featured_path(item.class.name.foreign_key.to_sym => item))
   end
 
 end
