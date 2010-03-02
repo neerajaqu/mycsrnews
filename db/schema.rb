@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100217021117) do
+ActiveRecord::Schema.define(:version => 20100227021124) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -237,6 +237,13 @@ ActiveRecord::Schema.define(:version => 20100217021117) do
   add_index "images", ["imageable_type", "imageable_id"], :name => "index_images_on_imageable_type_and_imageable_id"
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
+  create_table "locales", :force => true do |t|
+    t.string "code"
+    t.string "name"
+  end
+
+  add_index "locales", ["code"], :name => "index_locales_on_code"
+
   create_table "messages", :force => true do |t|
     t.string   "subject"
     t.string   "email"
@@ -328,6 +335,16 @@ ActiveRecord::Schema.define(:version => 20100217021117) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "translations", :force => true do |t|
+    t.string  "key"
+    t.text    "raw_key"
+    t.text    "value"
+    t.integer "pluralization_index", :default => 1
+    t.integer "locale_id"
+  end
+
+  add_index "translations", ["locale_id", "key", "pluralization_index"], :name => "index_translations_on_locale_id_and_key_and_pluralization_index"
 
   create_table "user_profiles", :force => true do |t|
     t.integer  "user_id",               :limit => 8,                    :null => false

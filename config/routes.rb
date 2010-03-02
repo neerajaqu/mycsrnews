@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   # Set locale and make pretty urls
   map.filter 'locale'
+  map.from_plugin 'i18n_backend_database'
 
   map.toggle_blocked '/block.:format', :controller => 'flags', :action => 'block'
   map.toggle_featured '/feature.:format', :controller => 'flags', :action => 'feature'
