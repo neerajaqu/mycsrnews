@@ -69,3 +69,23 @@ widgets:
       partial: '/shared/sidebar/featured_event'
       load_functions: 'load_featured_events'
       locals: 'featured_events'
+    featured_article:
+      partial: '/shared/sidebar/featured_article'
+      load_functions: 'load_featured_articles'
+      locals: 'featured_articles'
+    featured_comment:
+      partial: '/shared/sidebar/featured_comment'
+      load_functions: 'load_featured_comments'
+      locals: 'featured_comments'        
+    newest_articles:
+      partial: '/shared/sidebar/newest_articles'
+      load_functions: 'load_newest_articles'
+      locals: 'newest_articles'
+    newest_images:
+      partial: '/shared/sidebar/newest_images'
+      load_functions: 'load_newest_images'
+      locals: 'newest_images'
+    newest_videos:
+      partial: '/shared/sidebar/newest_videos'
+      load_functions: 'load_newest_videos'
+      locals: 'newest_videos'

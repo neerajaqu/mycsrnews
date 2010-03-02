@@ -49,7 +49,7 @@ module Newscloud
           self.flags.count
         end
 
-        def flag_item flag_type
+        def flag_item flag_type,current_user
           return false unless Flag.valid_flag_type? flag_type
 
           @flag = self.flags.build({ :flag_type => flag_type })

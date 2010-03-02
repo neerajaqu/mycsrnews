@@ -1,0 +1,14 @@
+-# TODO update design for image skybox
+-# @expects: local 'newest_images'
+
+- cache :newest_images do
+  - newest_images ||= Image.newest
+  - unless newest_images.empty?
+    .panel_2
+      .panelBar.clearfix
+        %h2= t('.newest_images_title')
+      %br
+      .list_stories.clearfix
+        %ul
+          - newest_images.each do |image|
+            %li
