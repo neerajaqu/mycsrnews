@@ -22,7 +22,7 @@ class Image < ActiveRecord::Base
   validates_presence_of :remote_image_url, :allow_blank => true, :message => 'invalid image or url.', :if => :remote_image_url?
   validates_presence_of :image, :image_file_name, :image_content_type, :image_file_size
 
-  after_validation :set_user
+  #after_validation :set_user
 
   delegate :url, :to => :image
 

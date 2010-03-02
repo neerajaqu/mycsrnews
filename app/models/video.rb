@@ -11,7 +11,7 @@ class Video < ActiveRecord::Base
   validates_format_of :embed_code, :with => /<embed[^>]+src="http(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"/i, :message => "should look like a URL", :allow_blank => true
 
   after_validation :process_video
-  after_validation :set_user
+  #after_validation :set_user
 
   def url_video?
     remote_video_url?
