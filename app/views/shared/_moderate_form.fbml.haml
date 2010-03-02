@@ -1,7 +1,7 @@
 -# expects local :moderatable => moderatable
 .moderator-links
-  = toggle_blocked_linked moderatable
-  = toggle_featured_linked moderatable
+  = toggle_blocked_link moderatable
+  = toggle_featured_link moderatable
 .admin-links
 -# TODO:: add this in, need cascading block/unblock
   - if moderatable.user.present? and not moderatable.user.is_blocked?

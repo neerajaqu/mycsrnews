@@ -1,5 +1,5 @@
 = link_to t('.flag'), '#', :class => "flag-toggle"
 .flag-box{:style => "display: none"}
   .flag-item
-    - form_tag nil, :class => "flag-form", id => 'flag-form', [flaggable, Flag.new] do 
+    - form_tag [flaggable, Flag.new], :class => "flag-form", id => 'flag-form' do 
       = select_tag :flag_type, options_for_select(Flag.flag_types.collect { |f| [f.titleize, f] }),:onchange=>"submit();"
