@@ -259,6 +259,13 @@ a.flag:hover { color: #cc3333; background: url(/images/default/icon_flag.gif) 10
 #contactBox form { margin-top: 20px; }
 #contactBox label { font-size: 12px; }
 
+.flash { padding: .3em .4em; margin: 0 auto .5em; clear: both; width: auto; }
+.flash p { padding-left: 25px; }
+.flash.flash_error { border: thin solid #8b0000; background: #ffc0cb; }
+.flash.flash_success { border: thin solid green; background: #5FE66C; }
+.flash.flash_notice, .flash.info { border: thin solid #ff0; background: #ffb; }
+.flash.flash_warning { border: thin solid #E18F24; background: #FFAC3D; }
+
 form.formtastic { margin: 0; padding: 0; }
 form.formtastic ul, form.formtastic ol, form.formtastic li, form.formtastic fieldset, form.formtastic legend, form.formtastic input, form.formtastic textarea, form.formtastic select, form.formtastic p { margin: 0; padding: 0; }
 form.formtastic fieldset { border: 0; }
