@@ -1,5 +1,5 @@
 class FlagsController < ApplicationController
-  before_filter :login_required, :only => [:create]
+  before_filter :login_required, :only => [:create,:block,:feature]
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy]
 
   def create
@@ -30,8 +30,7 @@ class FlagsController < ApplicationController
   def feature
     @item = find_moderatable_item
     if @item.moderatable? and @item.featurable? and @item.toggle_featured
-    	flash[:success] = "Successfully featured your item."
-    	#redirect_to [:admin, :contents]
+    	flash[:success] = "Successfully #{@item.featured? ? "Featured" : "UnFeatured"} your item."
     	redirect_to @item
     else
     	flash[:error] = "Could not feature this item."

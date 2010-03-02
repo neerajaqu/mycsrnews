@@ -27,6 +27,7 @@
   = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }
   = render :partial => 'shared/item_footer', :locals => { :item => @resource, :title => @resource.title }
-
+  - if @resource.moderatable?
+    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
 
 #col_right
