@@ -1,9 +1,3 @@
--# expects local :commentable => @commentable
+-# expects local :flaggable => @flaggable
 - if current_user.present?
-  - form_tag [flaggable, Flag.new] do
-    Flag: 
-    = select_tag :flag_type, options_for_select(Flag.flag_types.collect { |f| [f.titleize, f] }),:onchange=>"submit();"
-  #moderator-link.hidden
-    Feature item | Block item
-  #admin-link.hidden
-    Ban user
+  = render :partial => 'shared/forms/flag_dropdown', :locals => {:flaggable => flaggable}

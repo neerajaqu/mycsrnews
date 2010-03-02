@@ -15,6 +15,30 @@ class FlagsController < ApplicationController
     end
   end
 
+  def block
+    @item = find_moderatable_item
+    if @item.moderatable? and @item.toggle_blocked
+      # todo - if block user, then use fb:ban api call too! or unban
+    	flash[:success] = "Successfully blocked your item."
+    	redirect_to @item
+    else
+    	flash[:error] = "Could not block this item."
+    	redirect_to @item
+    end
+  end
+
+  def feature
+    @item = find_moderatable_item
+    if @item.moderatable? and @item.toggle_featured
+    	flash[:success] = "Successfully featured your item."
+    	#redirect_to [:admin, :contents]
+    	redirect_to @item
+    else
+    	flash[:error] = "Could not feature this item."
+    	redirect_to @item
+    end
+  end
+
   private
 
   def find_flaggable

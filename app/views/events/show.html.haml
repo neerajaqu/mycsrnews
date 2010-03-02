@@ -29,5 +29,5 @@
   = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @event }
   = render :partial => 'shared/item_footer', :locals => { :item => @event, :title =>@event.name }
-
+  = render :partial => 'shared/moderate_form', :locals => { :flaggable => @event }
 #col_right

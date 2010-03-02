@@ -81,3 +81,14 @@ en:
       events_comments: "Comment"
       events_share: "Share it"
 
+    moderate_form:
+      ban: "Ban"
+      unban: "Un-ban"
+      block: "Block"
+      unblock: "Un-block"
+      feature: "Feature"
+      unfeature: "Un-feature"
+      
+    forms:
+      flag_dropdown:
+        flag: "Flag this"  
