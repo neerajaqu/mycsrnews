@@ -1,10 +1,10 @@
 #col_left
-  #readStoryList
+  #readArticle.panel_1
     .thumb
       - if @story.images.present?
         = image_tag @story.images.first.url(:medium)
     .storyBlockWrap
-      %p.storyHead= @story.title
+      %h1.storyHead= @story.title
       .storyBlockMeta
         %h3= t('.via', :source => link_to(@story.source, '#'), :date => @story.created_at)
         %h3= t('.posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
@@ -17,7 +17,7 @@
     - if @story.is_article?
       %p.storyCaption= sanitize nl2br(@story.caption)
     - else
-      %p.storyCaption= sanitize caption @story.caption
+      %p.bodyArticle= sanitize caption @story.caption
     - if @story.url.present?
       %p.float_right= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn_1"
     - if @story.moderatable?

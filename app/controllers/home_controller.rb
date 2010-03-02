@@ -60,6 +60,7 @@ class HomeController < ApplicationController
   end
 
   def test_widgets
+    @no_paginate = true
     @featured_items = FeaturedItem.find_root_by_item_name('featured_template')
     controller = self
     @page = WidgetPage.find_root_by_page_name('home')

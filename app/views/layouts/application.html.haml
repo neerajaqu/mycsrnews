@@ -1,11 +1,12 @@
 !!!
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://www.facebook.com/2008/fbml"}
   %head
-    = stylesheet_link_tag 'default.css', 'formtastic.css', 'ui-lightness/jquery-ui-1.7.2.custom.css', 'jquery.jcarousel', 'jcarousel.skin', 'application'
+    = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/text.css', :media => 'print'
+
     = javascript_include_tag 'jquery.min', 'jquery.ui.min', 'jquery.jcarousel.pack', 'jquery.quicksand.min', 'jquery.application'
     = javascript_include_tag '/users/current'
-    = fb_connect_javascript_tag
-    = init_fb_connect "XFBML", :js => :jquery
+
     = auto_discovery_link_tag(:atom, stories_path(:format => :atom))
     %style
       :sass
@@ -36,7 +37,7 @@
               margin-left: 10px
 
   %body
-    .body-wrapper
+    #bodyWrapper
       = fb_connect_javascript_tag
       = init_fb_connect "XFBML", :js => :jquery
       = render :partial => 'shared/header'
@@ -47,6 +48,7 @@
           %p= flash[:error]
         - else
           %p= (flash[:success] || flash[:notice])
+
       = yield :sub_nav
       = yield
       = render :partial => 'shared/footer'

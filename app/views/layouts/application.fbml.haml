@@ -1,5 +1,5 @@
 %fb:fbml
-  = stylesheet_link_tag 'default', 'formtastic', 'formtastic_changes'
+  = stylesheet_link_tag 'compiled/fb_grid'
 
   %style
     :sass
@@ -21,6 +21,7 @@
 
           form
             margin-left: 10px
+
   %script
     == var SITE_URL = "#{APP_CONFIG['fb_ajax_url']}";
   = fb_jqjs_library

@@ -3,7 +3,7 @@
 %a#commentsListTop{:name => "commentsListTop"}
 - if comments.present?
   #commentThread.panel_1
-    .panelBar.clearfix
+    .panelBar
       %h2= t '.comment_title'
     = render :partial => 'shared/comment', :collection => comments
 - else

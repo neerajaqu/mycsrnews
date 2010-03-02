@@ -1,7 +1,7 @@
 -# Expects @current_tab to be set, done by default in app_controller
 #pageTabs.clearfix
   .tabs.clearfix
-    .right_tabs
+    .left_tabs
       %ul#toggle_tabs_unused.toggle_tabs.clearfix
         %li.first= link_to t('.home'), home_index_path, :class => tab_selected?(@current_tab, 'home')
         %li= link_to t('.stories'), stories_path, :class => tab_selected?(@current_tab, 'stories')

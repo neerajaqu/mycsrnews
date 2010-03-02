@@ -1,6 +1,6 @@
 -# @expects: local 'comment' %>
 
-.panel_block
+.comment_block
   .thumb= local_linked_profile_pic comment.user
   .storyBlockWrap
     .storyBlockMeta
@@ -8,5 +8,8 @@
     %blockquote
       .quotes= comment.comments
       %span.btn_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{comment.votes.size}
--#      - if comment.moderatable?
--#        = render :partial => 'shared/flag_form', :locals => { :flaggable => comment }
+      -# if comment.moderatable?
+        = render :partial => 'shared/flag_form', :locals => { :flaggable => comment }
+  .comment_reply
+    %a{:href => '#'}= "Reply" 
+-# TODO:: ADD TRANSLATION ^^
