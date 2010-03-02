@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100227021124) do
+ActiveRecord::Schema.define(:version => 20100302203538) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20100227021124) do
     t.datetime "created_at"
     t.integer  "score",                             :default => 0
     t.integer  "numComments",                       :default => 0
-    t.boolean  "isFeatured",                        :default => false
+    t.boolean  "is_featured",                       :default => false
     t.integer  "user_id",                           :default => 0
     t.integer  "imageid",                           :default => 0
     t.integer  "videoIntroId",                      :default => 0
