@@ -3,6 +3,7 @@
   %head
     = stylesheet_link_tag 'default.css', 'formtastic.css', 'ui-lightness/jquery-ui-1.7.2.custom.css', 'jquery.jcarousel', 'jcarousel.skin', 'application'
     = javascript_include_tag 'jquery.min', 'jquery.ui.min', 'jquery.jcarousel.pack', 'jquery.quicksand.min', 'jquery.application'
+    = javascript_include_tag '/users/current'
     = fb_connect_javascript_tag
     = init_fb_connect "XFBML", :js => :jquery
     = auto_discovery_link_tag(:atom, stories_path(:format => :atom))

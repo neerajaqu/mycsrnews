@@ -25,6 +25,7 @@
     == var SITE_URL = "#{APP_CONFIG['fb_ajax_url']}";
   = fb_jqjs_library
   = javascript_include_tag 'application.fbjs'
+  = javascript_include_tag '/users/current'
 
   = fb_connect_javascript_tag
   = init_fb_connect "XFBML"

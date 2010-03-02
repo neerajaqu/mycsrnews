@@ -1,0 +1,7 @@
+- if current_user
+  $(function() {
+  - if current_user.is_moderator?
+    $('.moderator-link').show();
+  - if current_user.is_admin?
+    $('.admin-link').show();
+  });

@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.test_widgets '/test_widgets', :controller => 'home', :action => 'test_widgets'
   map.contact_us '/contact_us', :controller => 'home', :action => 'contact_us'
   map.app_tab '/app_tab.:format', :controller => 'home', :action => 'app_tab'
-  map.resources :users, :collection => {:link_user_accounts => :get, :invite => [:get, :post]}
+  map.resources :users, :collection => {:link_user_accounts => :get, :invite => [:get, :post], :current => [:get] }
 
   map.resource :session
   map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
