@@ -3,7 +3,7 @@ class FlagsController < ApplicationController
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy]
 
   def create
-    @flaggable = find_flaggable
+    @flaggable = find_moderatable_item
     if @flaggable.flag_item params[:flag_type]
     	# TODO:: change this to work with polymorphic associations, switch to using touch
     	#expire_page :controller => 'stories', :action => 'show', :id => @story
@@ -17,9 +17,9 @@ class FlagsController < ApplicationController
 
   def block
     @item = find_moderatable_item
-    if @item.moderatable? and @item.toggle_blocked
+    if @item.moderatable? and @item.blockable? and @item.toggle_blocked
       # todo - if block user, then use fb:ban api call too! or unban
-    	flash[:success] = "Successfully blocked your item."
+    	flash[:success] = "Successfully #{@item.blocked? ? "Blocked" : "UnBlocked"} your item."
     	redirect_to @item
     else
     	flash[:error] = "Could not block this item."
@@ -29,7 +29,7 @@ class FlagsController < ApplicationController
 
   def feature
     @item = find_moderatable_item
-    if @item.moderatable? and @item.toggle_featured
+    if @item.moderatable? and @item.featurable? and @item.toggle_featured
     	flash[:success] = "Successfully featured your item."
     	#redirect_to [:admin, :contents]
     	redirect_to @item
@@ -41,7 +41,7 @@ class FlagsController < ApplicationController
 
   private
 
-  def find_flaggable
+  def find_moderatable_item
     params.each do |name, value|
       next if name =~ /^fb/
       if name =~ /(.+)_id$/

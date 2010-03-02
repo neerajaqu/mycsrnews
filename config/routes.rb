@@ -2,6 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   # Set locale and make pretty urls
   map.filter 'locale'
 
+  map.toggle_blocked '/block.:format', :controller => 'flags', :action => 'block'
+  map.toggle_featured '/feature.:format', :controller => 'flags', :action => 'feature'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'

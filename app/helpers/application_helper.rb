@@ -269,4 +269,14 @@ EMBED
     sanitize content, :tags => %w(a i b u p)
   end
 
+  def toggle_blocked_link item
+    return '' unless item.moderatable? and item.blockable?
+    link_to(item.blocked? ? 'UnBlock' : 'Block', toggle_blocked_path(item.class.name.foreign_key.to_sym => item))
+  end
+
+  def toggle_featured_link item
+    return '' unless item.moderatable? and item.featurable?
+    link_to(item.isFeatured? ? 'UnFeature' : 'Feature', toggle_featured_path(item.class.name.foreign_key.to_sym => item))
+  end
+
 end

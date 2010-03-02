@@ -1,4 +1,13 @@
 class ApplicationController < ActionController::Base
+  rescue_from Facebooker::Session::SessionExpired, :with => :facebook_session_expired
+
+  def facebook_session_expired
+    clear_fb_cookies!
+    clear_facebook_session_information
+    reset_session # remove your cookies!
+    flash[:error] = "Your facebook session has expired."
+    redirect_to root_url
+  end
   
   include AuthenticatedSystem
 
@@ -21,8 +30,16 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
 
-  before_filter :set_facebook_session
+  before_filter :set_facebook_session_wrapper
   helper_method :facebook_session
+
+  def set_facebook_session_wrapper
+    begin
+      set_facebook_session
+    rescue
+      return facebook_session_expired
+    end
+  end
 
   def set_current_tab
     @current_tab = false

@@ -23,6 +23,14 @@ module Newscloud
           true
         end
 
+        def blockable?
+          self.respond_to?('is_blocked') ? true : false
+        end
+
+        def featurable?
+          self.respond_to?('is_featured') ? true : false
+        end
+
         def blocked?
           return self.is_blocked if self.respond_to?('is_blocked')
 
