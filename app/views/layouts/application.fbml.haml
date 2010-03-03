@@ -3,6 +3,10 @@
 
   %style
     :sass
+      .moderator-links
+        display: none !important
+      .admin-links
+        display: none !important
       .bar_link
         position: relative
       .refine-box
@@ -26,10 +30,14 @@
     == var SITE_URL = "#{APP_CONFIG['fb_ajax_url']}";
   = fb_jqjs_library
   = javascript_include_tag 'application.fbjs'
-  = javascript_include_tag '/users/current'
 
   = fb_connect_javascript_tag
   = init_fb_connect "XFBML"
+
+  =# javascript_include_tag current_users_path(:canvas => false, :only_path => false, :t => Time.now.to_i, :format => 'js')
+  =# javascript_include_tag '/users/current.fbml'
+  = javascript_include_tag "/users/current.fbml?#{Time.now.to_i}"
+
   = render :partial => 'shared/header'
   #appFrame
     = display_facebook_messages
