@@ -27,7 +27,8 @@ class StoriesController < ApplicationController
   end
 
   def new
-    if params[:u].present?
+   @current_sub_tab = 'New Story'
+   if params[:u].present?
       @story = Content.new({
       	:url    => params[:u],
       	:title  => params[:t]

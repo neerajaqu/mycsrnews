@@ -1,10 +1,12 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/news_subnav'
 #col_left
   .panel_1
     .panelBar.clearfix
-      %h2 Post a Story
+      %h2 Story Details
     .panel_block
       .storyBlockWrap
-        %h3= link_to 'Post an Article', new_article_path
+        -# %h3= link_to 'Post an Article', new_article_path
         - semantic_form_for @story, :url => stories_path, :html => { :multipart => true } do |form|
           = render :partial => 'story_form', :locals => { :form => form }
           - form.buttons do
