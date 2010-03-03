@@ -8,7 +8,7 @@
     - @stories.each do |story|
       %li.arrow
         = link_to story.title, mobile_story_path(story)
-        %small.counter= story.votes.size
+        %small.counter= story.votes_tally
 
 #top-stories
   .toolbar
@@ -20,7 +20,7 @@
     - @stories.each do |story|
       %li.arrow
         = link_to story.title, mobile_story_path(story)
-        %small.counter= story.votes.size
+        %small.counter= story.votes_tally
 
 -#comments
   .toolbar

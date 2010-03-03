@@ -3,8 +3,8 @@
   - stories.each do |content|
     %li{'data-id' => content.cache_key}
       .thumb
-        - if content.images.present?
-          = image_tag content.images.first.url(:thumb)
+        - if content.content_image.present?
+          %img{:alt => "story image", :src => content.content_image.url}
       .storyBlockWrap
         %p.storyHead= link_to content.title, story_path(content)
         %p.storyCaption= linked_story_caption content
@@ -12,6 +12,6 @@
         .storyBlockMeta
           %p= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
           %p
-            %span.btn_left== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteLink"} #{content.votes.size}
+            %span.btn_left== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteLink"} #{content.votes_tally}
             %span.btn_mid== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
             %span.btn_right= t('.stories_share')

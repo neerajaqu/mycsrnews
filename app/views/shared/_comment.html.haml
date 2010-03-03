@@ -12,7 +12,8 @@
     %blockquote
       .quotes.clearfix= comment.comments
       
-      -# if comment.moderatable?
+      %span.btn_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{link_to t('.comments_dislike'), dislike_comment_path(comment.id), :class => "voteLink"} #{comment.votes_tally}
+      - if comment.moderatable?
         = render :partial => 'shared/flag_form', :locals => { :flaggable => comment }
   .comment_reply
     %a{:href => '#'}= "Reply" 

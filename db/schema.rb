@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100302203538) do
+ActiveRecord::Schema.define(:version => 20100303014650) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20100302203538) do
     t.datetime "updated_at"
     t.string   "commentable_type"
     t.integer  "flags_count",      :default => 0
-    t.integer  "likes_count",      :default => 0
+    t.integer  "votes_tally",      :default => 0
     t.boolean  "is_featured",      :default => false
     t.datetime "featured_at"
   end
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20100302203538) do
     t.integer  "article_id"
     t.string   "cached_slug"
     t.integer  "flags_count",                       :default => 0
+    t.integer  "votes_tally",                       :default => 0
   end
 
   add_index "contents", ["contentid"], :name => "contentid"
@@ -132,7 +133,7 @@ ActiveRecord::Schema.define(:version => 20100302203538) do
     t.integer  "nid"
     t.integer  "creator"
     t.integer  "user_id"
-    t.integer  "likes_count"
+    t.integer  "votes_tally"
     t.integer  "comments_count"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -206,7 +207,7 @@ ActiveRecord::Schema.define(:version => 20100302203538) do
     t.text     "details"
     t.integer  "old_tag_id",                  :default => 0
     t.integer  "old_video_id",                :default => 0
-    t.integer  "likes_count",                 :default => 0
+    t.integer  "votes_tally",                 :default => 0
     t.integer  "comments_count",              :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -232,6 +233,7 @@ ActiveRecord::Schema.define(:version => 20100302203538) do
     t.datetime "image_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "votes_tally",        :default => 0
   end
 
   add_index "images", ["imageable_type", "imageable_id"], :name => "index_images_on_imageable_type_and_imageable_id"
@@ -284,7 +286,7 @@ ActiveRecord::Schema.define(:version => 20100302203538) do
     t.string   "url"
     t.string   "mapUrl"
     t.string   "twitterName"
-    t.integer  "likes_count"
+    t.integer  "votes_tally"
     t.integer  "comments_count"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -416,6 +418,7 @@ ActiveRecord::Schema.define(:version => 20100302203538) do
     t.string   "remote_video_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "votes_tally",       :default => 0
   end
 
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"

@@ -83,7 +83,7 @@ module Juixe
             id, self.class.name, false
           ])
         end
-        
+
         # Same as voteable.votes.size
         def votes_count
           self.votes.size
@@ -106,7 +106,6 @@ module Juixe
           end
           rtn
         end
-        
         
       end
     end

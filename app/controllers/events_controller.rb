@@ -53,8 +53,8 @@ class EventsController < ApplicationController
       	success = "Thanks for your vote!"
       	format.html { flash[:success] = success; redirect_to params[:return_to] || events_path }
       	format.fbml { flash[:success] = success; redirect_to params[:return_to] || events_path }
-      	format.json { render :json => { :msg => "#{@event.votes.size} likes" }.to_json }
-      	format.fbjs { render :json => { :msg => "#{@event.votes.size} likes" }.to_json }
+      	format.json { render :json => { :msg => "#{@event.votes_tally} likes" }.to_json }
+      	format.fbjs { render :json => { :msg => "#{@event.votes_tally} likes" }.to_json }
       else
       	error = "Vote failed"
       	format.html { flash[:error] = error; redirect_to params[:return_to] || events_path }

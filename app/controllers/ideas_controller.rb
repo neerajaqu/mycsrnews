@@ -62,8 +62,8 @@ class IdeasController < ApplicationController
       	success = "Thanks for your vote!"
       	format.html { flash[:success] = success; redirect_to params[:return_to] || ideas_path }
       	format.fbml { flash[:success] = success; redirect_to params[:return_to] || ideas_path }
-      	format.json { render :json => { :msg => "#{@idea.votes.size} likes" }.to_json }
-      	format.fbjs { render :json => { :msg => "#{@idea.votes.size} likes" }.to_json }
+      	format.json { render :json => { :msg => "#{@idea.votes_tally} likes" }.to_json }
+      	format.fbjs { render :json => { :msg => "#{@idea.votes_tally} likes" }.to_json }
       else
       	error = "Vote failed"
       	format.html { flash[:error] = error; redirect_to params[:return_to] || ideas_path }

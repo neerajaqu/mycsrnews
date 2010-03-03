@@ -15,6 +15,7 @@ en:
     comment:
       posted_by: "Posted by {{fb_name}} {{date}} ago"
       comments_like: "Like"
+      comments_dislike: "Dislike"
 
     comment_form:
       post_comment: "Post a comment"

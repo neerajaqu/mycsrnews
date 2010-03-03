@@ -10,6 +10,6 @@
       %span.btnComment.float_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{comment.votes.size}
     %blockquote
       .quotes= comment.comments
-
--#      - if comment.moderatable?
--#        = render :partial => 'shared/flag_form', :locals => { :flaggable => comment }
+      %span.btn_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{link_to t('.comments_dislike'), dislike_comment_path(comment.id), :class => "voteLink"} #{comment.votes_tally}
+      - if comment.moderatable?
+        = render :partial => 'shared/flag_form', :locals => { :flaggable => comment }

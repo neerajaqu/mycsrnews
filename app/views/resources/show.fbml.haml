@@ -13,7 +13,7 @@
           .storyBlockMeta
             %h3= t('.posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => time_ago_in_words(@resource.created_at))
             %p
-              %span.btn_left== #{link_to t('.like'), like_resource_path(@resource, :return_to => resource_path(@resource)), :class => "voteLink"} #{@resource.votes.size}
+              %span.btn_left== #{link_to t('.like'), like_resource_path(@resource.id, :return_to => resource_path(@resource)), :class => "voteLink"} #{@resource.votes_tally}
               %span.btn_right= fb_share_button(resource_url(@resource))
             - if @tags.present?
               %h3== Tags #{tag_list(@tags,@resource)}

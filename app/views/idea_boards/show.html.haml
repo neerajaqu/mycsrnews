@@ -18,7 +18,7 @@
                 .storyBlockMeta
                   %p= t('.asked_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
                   %p
-                    %span.btn_left== #{link_to t('.like'), like_idea_path(idea.id), :class => "voteLink"} #{idea.votes.size}
+                    %span.btn_left== #{link_to t('.like'), like_idea_path(idea.id), :class => "voteLink"} #{idea.votes_tally}
                     %span.btn_mid== #{link_to t('.comments'), [@idea_board, idea]}
                     %span.btn_right= t('.share')
 
