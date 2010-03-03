@@ -40,6 +40,7 @@ $(function() {
     }}, "JSON");
   });
 
+
   $('.refine-toggle').click(function(event) {
     event.preventDefault();
     $(this).next().toggle();
@@ -66,6 +67,11 @@ $(function() {
     event.preventDefault();
     $(this).next().toggle();
   });
+
+	$('.flag-form').change(function() {
+	  $('.flag-form').submit();
+	});
+
 
   $('.flag-form').submit(function(event) {
     event.preventDefault();
