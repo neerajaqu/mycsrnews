@@ -7,6 +7,7 @@ class AddVoteTallyToModels < ActiveRecord::Migration
     add_column :contents, :votes_tally, :integer, :default => 0
     add_column :images, :votes_tally, :integer, :default => 0
     add_column :videos, :votes_tally, :integer, :default => 0
+    add_column :audios, :votes_tally, :integer, :default => 0
   end
 
   def self.down
