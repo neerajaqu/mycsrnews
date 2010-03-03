@@ -3,10 +3,20 @@ en:
     page_tabs:
       home: "Home"
       stories: "News"
+      stories_list: "Top Stories"
+      new_story: "Post a Story"
       newswire: "Wires"
       ideas: "Ideas"
+      ideas_list: "Browse Ideas"
+      idea_boards_list: "Browse Idea Boards"
+      new_idea: "Suggest an Idea"
       events: "Calendar"
+      events_list: "Browse the Calendar"
+      new_event: "Add an Event"
       resources: "Directory"
+      resources_list: "Browse Directory"
+      new_resource: "Suggest a Link"
+      admin: "Admin"
 
     comments:
       comment_title: "Comments"

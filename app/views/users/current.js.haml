@@ -1,7 +1,10 @@
 - if current_user
   $(function() {
   - if current_user.is_moderator?
-    $('.moderator-links').show();
+    $('.moderator-links').removeClass('moderator-links');
   - if current_user.is_admin?
-    $('.admin-links').show();
+    $('.admin-links').removeClass('admin-links');
   });
+- else
+  // tmp hack to load javascript in facebook, need to get user data submitted on request
+  $('.foo').addClass('bar');

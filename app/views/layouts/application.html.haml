@@ -8,6 +8,13 @@
     = javascript_include_tag '/users/current'
 
     = auto_discovery_link_tag(:atom, stories_path(:format => :atom))
+    %style
+      :sass
+        .moderator-links
+          display: none !important
+        .admin-links
+          display: none !important
+
   %body
     #bodyWrapper
       = fb_connect_javascript_tag
