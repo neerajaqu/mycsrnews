@@ -2,7 +2,11 @@ form.formtastic
   margin: 0
   padding: 0
 
-  ul, ol, li, fieldset, legend, input, textarea, select, p
+  ul, ol, li, fieldset, legend, input, select, p
+    margin: 0px
+    padding: 0px
+
+  textarea
     margin: 0
     padding: 0
 
@@ -36,7 +40,6 @@ form.formtastic
 
     &.inputs
     &.buttons
-      padding-left: 25%
 
     ol
     &.buttons li
@@ -136,8 +139,11 @@ form.formtastic fieldset ol li
       border: none
       display: list-item
 
-  &.string input, &.password input, &.numeric input, &.text textarea
+  &.string input, &.password input, &.numeric input 
     width: 74%
+
+  &.text textarea
+    width: 100%
 
   &.hidden
     display: none

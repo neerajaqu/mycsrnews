@@ -7,9 +7,9 @@
     - unless current_user.present?
       %p== #{t '.logged_in_error'} #{link_to 'Login now', login_path}
     - else
-      .commentMsgDiv{:style => 'overflow: hidden;'}
+      .commentMsgDiv
         - semantic_form_for [commentable, Comment.new] do |form|
           - form.inputs do
-            = form.input :comments
+            = form.input :comments, :input_html => { :rows => '10', :cols => '60' }, :label => false
           - form.buttons do
             = form.commit_button

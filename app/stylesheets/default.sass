@@ -18,6 +18,7 @@
 !borderColor_4 = 1px solid #FFFFFF
 !borderColor_5 = 1px solid #efefef
 !borderColor_6 = 1px solid #CCCCCC
+!borderColor_7 = 1px solid #dce6f4
 !noBorder = none
 // Menu Tab BG and Text Color Variables //
 !tabOff = #55761b url(/images/default/toggletab_bg.gif) left repeat-x
@@ -301,7 +302,7 @@ blockquote
 
   .quotes
     background: transparent url(/images/default/end_quote_small.gif) no-repeat scroll right bottom
-    padding: 0
+    padding: 4px 0
 
 
 // Menu Dropdown styles //
@@ -527,22 +528,36 @@ blockquote
   margin-bottom: 15px
 
   .formBox
-    padding: 8px 20px
+    padding: 10px 0px
+    :background= !subheadBG
 
-    .commit
-      text-align: center
+    .inputs, .buttons
+      width: 96%
+      margin: 0 auto
+
+    textarea
+      :border= !borderColor_6
+      margin-left: -1px
+
+    .buttons li
+      width: 50%
+      margin-left: 50%
+
+      .commit
+        width: 100%
 
   .panelBar
     display: block
+    padding: 6px 0 4px 0px
     border:
       :bottom= !borderColor_1
     :background= !bgWhite
 
     h2
-      padding: 2px 6px 2px 2px
+      padding: 2px 0px 0px 2px
       margin: 0 0 0 0
       font-weight: normal
-      font-size: 10px
+      font-size: 11px
       text-transform: uppercase
       :font-family= !headerFont
       :color= !subheadColor
@@ -607,17 +622,52 @@ blockquote
 
 #readArticle
 
+  .topBar
+    margin-bottom: 15px
+    ul
+      border-bottom: none
+      display: inline-block
+      width: 100%
+      
+      li
+        padding: 3px 0 4px 0
+        text-align: center
+        display: block
+        float: left
+        margin:
+          bottom: 0
+        margin-right: -1px
+        width: 25%
+        border:
+          :left= !borderColor_4
+          :bottom= !noBorder
+        :background= !subheadBG
+
+        a
+          :color= !linkColor
+
   .thumb
     float: right
 
   .bodyArticle
     :color= !bodyColor
-    margin: 8px 4px
+    margin: 8px 10px 14px 10px
+    line-height: 140%
+    font-size: 12px
+
+  .storyCaption
+    p
+      margin: 4px 0
+    br
+      margin: 0
+      line-height: 0px
+      visibility: hidden
+
+
 
 #commentThread
 
   .panelBar
-    padding: 6px 0 4px 2px
     :background= !bgColor
 
     h2
@@ -639,6 +689,7 @@ blockquote
         color: #336600
         font-weight: bold
         font-size: 11px
+
 .feature_bg
   :background-color= !bgColor
 
@@ -679,6 +730,7 @@ blockquote
 
 // buttons n stuff // 
 .btn_1
+  display: inline-block
   color: #fff
   font-weight: bold
   padding: 3px 10px 4px 10px
@@ -707,15 +759,9 @@ blockquote
   background: #F0F0F0
 
 
-.btn_left
+.btnComment
   margin: 0 1px
-  padding: 3px 8px 4px 8px
-  -moz-border-radius-topleft: 4px
-  -moz-border-radius-bottomleft: 4px
-  -webkit-border-top-left-radius: 4px
-  -webkit-border-bottom-left-radius: 4px
-  border-top-left-radius: 4px
-  border-bottom-left-radius: 4px
+  padding: 2px 8px 3px 8px
   background: #F0F0F0
 
 
@@ -723,25 +769,14 @@ blockquote
   background: url(/images/default/icon_vote.gif) left no-repeat
   padding-left: 15px
 
-
-.btn_mid
-  margin: 0 1px
-  padding: 3px 8px 4px 8px
-  background: #F0F0F0
-
-
-.btn_right
-  margin: 0 1px
-  padding: 3px 8px 4px 8px
-  -moz-border-radius-topright: 4px
-  -moz-border-radius-bottomright: 4px
-  -webkit-border-top-right-radius: 4px
-  -webkit-border-bottom-right-radius: 4px
-  border-top-right-radius: 4px
-  border-bottom-right-radius: 4px
-  background: #F0F0F0
-
-
+/*
+   -moz-border-radius-topright: 4px
+   -moz-border-radius-bottomright: 4px
+   webkit-border-top-right-radius: 4px
+   webkit-border-bottom-right-radius: 4px
+   border-top-right-radius: 4px
+   border-bottom-right-radius: 4px
+*/
 
 // rating & modertation styles //
 .rating
@@ -978,3 +1013,70 @@ a.flag:hover
 
   label
     font-size: 12px
+// refine search box styles //
+.panelBar
+  .refine_link
+    float: right
+    position: relative
+    display: block
+    width: 88px
+    margin: -17px 2px 0 0
+    padding: 2px 0px 4px 0px
+    z-index: 46
+    border: 
+      :top= !borderColor_1
+      :bottom= !borderColor_1
+      :left= !borderColor_1
+      :right= !borderColor_1
+    :background-color= !bgWhite
+    text-align: center
+    -moz-border-radius: 4px
+    webkit-border-radius: 4px
+    border-radius: 4px
+    
+    a
+      font-size: 10px
+
+
+    .refine-tab
+      height: 7px
+      width: 88px
+      position: absolute
+      top: -8px
+      right: -1px
+      border: 
+        :top= !noBorder
+        :bottom= !borderColor_4
+        :left= !borderColor_1
+        :right= !borderColor_1
+      :background-color= !bgWhite
+      z-index: 44
+
+    .refine-box
+      z-index: 43
+      display: none
+      position: absolute
+      padding: 8px
+      width: 142px
+      top: 22px
+      left: -71px
+      :border= !borderColor_1
+      :background-color= !bgWhite
+    
+      .refine-content
+        text-align: center
+
+        select
+          width: 100%
+          margin-bottom: 15px
+
+        label
+          display: block
+          font-weight: bold
+          text-align: left
+          padding: 0 0 5px 4px
+
+        input
+          width: 70%
+
+

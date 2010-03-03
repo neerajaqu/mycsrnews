@@ -1,27 +1,6 @@
 %fb:fbml
   = stylesheet_link_tag 'compiled/fb_grid'
 
-  %style
-    :sass
-      .bar_link
-        position: relative
-      .refine-box
-        position: absolute
-        width: 150px
-        height: 200px
-        top: 15px
-        left: -65px
-        border: 1px solid black
-        background-color: #B3B3B3
-        z-index: 43
-        display: none
-
-        .refine-content
-          margin-left: 10px
-
-          form
-            margin-left: 10px
-
   %script
     == var SITE_URL = "#{APP_CONFIG['fb_ajax_url']}";
   = fb_jqjs_library
