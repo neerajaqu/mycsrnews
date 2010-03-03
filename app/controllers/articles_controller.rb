@@ -4,7 +4,9 @@ class ArticlesController < ApplicationController
   before_filter :load_top_stories, :only => [:index]
   before_filter :load_top_discussed_stories, :only => [:index]
 
+  
   def new
+    @current_sub_tab = 'New Article'
     @article = Article.new
     @article.build_content
   end

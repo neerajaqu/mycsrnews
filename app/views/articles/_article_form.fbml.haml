@@ -3,5 +3,7 @@
     - content_form.inputs do
       = content_form.input :title
       = content_form.input :url
-      = content_form.input :image_url, :required => false
+      = content_form.input :tags_string, :required => false
   = form.input :body
+  %ul#image_selector.jcarousel-skin-tango{:style => "left: 0px;"}
+    = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @article.content }
