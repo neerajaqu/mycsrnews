@@ -3,8 +3,8 @@
   - stories.each do |content|
     %li{'data-id' => content.cache_key}
       .thumb
-        - if content.content_image.present?
-          %img{:alt => "story image", :src => content.content_image.url}
+        - if content.images.present?
+            = image_tag content.images.first.url(:thumb)                  
       .storyBlockWrap
         %p.storyHead= link_to content.title, story_path(content)
         %p.storyCaption= linked_story_caption content

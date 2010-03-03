@@ -1,7 +1,7 @@
 #col_left
   #myProfile.panel_1
     .panelBar
-      %h2= t('.title', :name => profile_fb_name(@user))
+      %h2= t('.title', :name => profile_fb_name(@user,false))
     .panel_block
       .thumb
         = fb_profile_pic @user, :size => 'normal', :width => '180'
@@ -16,18 +16,18 @@
                     = @user.karma_score
                     %span.pts= t('.karma')
                 %td
-              -# TODO:: fix this
-              - if @user.user_profile.present?
-                %tr
-                  %td.bold== #{@user.user_profile.memberFriends.split(/,/).size} friends
-                  %td
-                    - if @is_owner
-                      = link_to t('.invite_friends'), '#'
+              -# TODO:: Friends needs to be loaded from Facebooker into user_profile
+              -# - if @user.user_profile.present?
+              -#  %tr
+              -#    %td.bold== #{@user.user_profile.memberFriends.split(/,/).size} friends
+              -#    %td
+              -#      - if @is_owner
+              -#        = link_to t('.invite_friends'), '#'
               %tr
                 %td.bold== #{@user.contents.size} stories
                 %td
                   - if @is_owner
-                    = link_to t('.post_story'), '#'
+                    = link_to t('.post_story'), new_story_path
               %tr
                 %td.bold== #{@user.comments.size} comments
                 %td
@@ -37,14 +37,14 @@
                 %td.bold== #{@user.votes.size} likes
                 %td
                   - if @is_owner
-                    = link_to t('.find_stories'), stories_path
+                    = link_to t('.find_stories'), newswires_path
               %tr
                 %td.bold= link_to 'RSS', user_path(@user, :format => :atom), :class => 'rss_link', :target => "_blank"
                 %td
               -# TODO:: add challenges
   .panel_1
     .panelBar
-      %h2= t('.bio_title', :name => profile_fb_name(@user))
+      %h2= t('.bio_title')
       - if @is_owner
         .bar_link= link_to t('.bio_edit'), '#'
     .panel_block
@@ -53,7 +53,7 @@
 
   .panel_1
     .panelBar
-      %h2= t('.action_feeds', :name => profile_fb_name(@user))
+      %h2= t('.action_feeds')
     #actionFeed
       #navFilter
         .subFilter

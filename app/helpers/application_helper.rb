@@ -138,8 +138,8 @@ module ApplicationHelper
     string.gsub("\n\r","<br>").gsub("\r", "").gsub("\n", "<br />")
   end
 
-  def profile_fb_name(user)
-    fb_name(user, :use_you => true, :possessive => true, :capitalize => true)
+  def profile_fb_name(user,linked = nil)
+    fb_name(user, :use_you => true, :possessive => true, :capitalize => true, :linked => linked)
   end
   
   def path_to_self(item)
