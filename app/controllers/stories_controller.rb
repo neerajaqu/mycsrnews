@@ -27,7 +27,14 @@ class StoriesController < ApplicationController
   end
 
   def new
-    @story = Content.new
+    if params[:u].present?
+      @story = Content.new({
+      	:url    => params[:u],
+      	:title  => params[:t]
+      })
+    else
+      @story = Content.new
+    end
   end
 
   def create

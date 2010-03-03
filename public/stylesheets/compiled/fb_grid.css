@@ -282,6 +282,10 @@ a.flag:hover { color: #cc3333; background: url(/images/default/icon_flag.gif) 10
 .flash.flash_notice, .flash.info { border: thin solid #ff0; background: #ffb; }
 .flash.flash_warning { border: thin solid #E18F24; background: #FFAC3D; }
 
+.process { background: white url(/images/default/vertical_bg_animation.gif) top left repeat; opacity: .5; }
+
+#contactBox .jcarousel-container img { margin-left: 0px; margin-top: 0px; }
+
 form.formtastic { margin: 0; padding: 0; }
 form.formtastic ul, form.formtastic ol, form.formtastic li, form.formtastic fieldset, form.formtastic legend, form.formtastic input, form.formtastic select, form.formtastic p { margin: 0px; padding: 0px; }
 form.formtastic textarea { margin: 0; padding: 0; }
