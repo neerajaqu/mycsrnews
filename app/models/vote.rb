@@ -16,6 +16,7 @@ class Vote < ActiveRecord::Base
   # validates_uniqueness_of :voteable_id, :scope => [:voteable_type, :voter_type, :voter_id]
 
   after_create :update_user_karma
+  after_create :update_voteable_count
 
   private
 
@@ -26,4 +27,12 @@ class Vote < ActiveRecord::Base
     user.save
   end
 
+  def update_voteable_count
+   vote_value = vote ? 1 : -1
+   if voteable.votes_tally == nil
+     voteable.votes_tally = 0
+   end
+   voteable.votes_tally += vote_value
+   voteable.save
+ end
 end

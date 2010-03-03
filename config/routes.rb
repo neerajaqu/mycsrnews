@@ -32,7 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   map.event_tag '/events/tag/:tag.:format', :controller => 'events', :action => 'tags'
   map.resources :stories, :member => { :like => [:get, :post] },:collection => { :parse_page => [:get, :post], :index => [:get, :post] }, :has_many => :comments
   map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags], :as => 'stories'
-  map.resources :comments, :member => { :like => [:get, :post] },:has_many => [ :flags]
+  map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] },:has_many => [ :flags]
 
   map.resources :articles
   map.resources :newswires, :member => { :publish => [:get, :post] }

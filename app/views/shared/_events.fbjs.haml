@@ -8,6 +8,6 @@
         .storyBlockMeta
           %p= t('.events_asked_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))
           %p
-            %span.btn_left== #{link_to t('.events_like'), like_event_path(event.id), :class => "voteLink"} #{event.votes.size}
+            %span.btn_left== #{link_to t('.events_like'), like_event_path(event.id), :class => "voteLink"} #{event.votes_tally}
             %span.btn_mid== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
             %span.btn_right= fb_share_button(events_url(event))
