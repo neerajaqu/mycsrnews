@@ -7,7 +7,7 @@ module Parse
     
     def parse_page(url)
       parsed_url = URI.parse(url)
-      url = "http://#{url}" unless url =~ %r(^http://)
+      url = "http://#{url}" unless url =~ %r(^https?://)
 
       page = open(url) { |f| Hpricot(f) }
       results = {}
@@ -44,14 +44,21 @@ module Parse
       url = URI.parse(image_url)
       response = nil
 
-      Net::HTTP.start(url.host, url.port) { |http| response = http.request_head(url.path) }
+      http = Net::HTTP.new(url.host, url.port)
+      if url.scheme == 'https'
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      end
+
+      response = http.request_head(url.path)
+
       return false unless response and response['content-length'].present?
 
       response['content-length'].to_i >= min_image_size
     end
 
     def self.concat_url(parsed_url, path)
-      return path if path =~ %r(^http://)
+      return path if path =~ %r(^https?://)
       base_url = "#{parsed_url.scheme}://#{parsed_url.host}"
       base_url += parsed_url.path unless path =~ %r(^/)
       base_url += path
