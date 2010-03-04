@@ -40,8 +40,13 @@ $(function() {
     }}, "JSON");
   });
 
+  $('.update-bio').click(function(event) {
+    event.preventDefault();
+  	$('.current-bio').toggle();
+    $(this).parent().next().toggle();
+  });
 
-  $('.refine-toggle').click(function(event) {
+$('.refine-toggle, .flag-toggle').click(function(event) {
     event.preventDefault();
     $(this).next().toggle();
   });
@@ -63,10 +68,6 @@ $(function() {
   	$(this).parent().next().toggle();
   });
 
-  $('.flag-toggle').click(function(event) {
-    event.preventDefault();
-    $(this).next().toggle();
-  });
 
 	$('.flag-form').change(function() {
 	  $('.flag-form').submit();

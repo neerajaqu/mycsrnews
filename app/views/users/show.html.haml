@@ -46,9 +46,10 @@
     .panelBar
       %h2= t('.bio_title')
       - if @is_owner
-        .bar_link= link_to t('.bio_edit'), '#'
+        .bar_link= link_to t('.bio_edit'), '#', :class => "update-bio"
+        = render :partial => 'users/bio_form'
     .panel_block
-      .storyBlockWrap
+      .storyBlockWrap.current-bio
         %p= (@user.bio.present?) ? @user.bio : default_bio(@user)
 
   .panel_1

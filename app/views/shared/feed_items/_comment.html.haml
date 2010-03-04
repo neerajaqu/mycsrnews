@@ -5,7 +5,7 @@
     .avatar
       = local_linked_profile_pic comment.user, :size => 'square', :width => '30'
     %h3
-      %span.bold= t('.blurb', :fb_name => local_linked_profile_name(comment.user), :story => link_to(comment.content.title, story_path(comment.content)))
+      %span.bold= t('.blurb', :fb_name => local_linked_profile_name(comment.user), :story => link_to(comment.commentable.title, comment.commentable))
       = t('.blurb_date', :date => time_ago_in_words((comment.created_at || comment.date)))
   %blockquote
     .quotes
