@@ -21,25 +21,38 @@
 
 
 // The following generates the default grids provided by the css version of 960.gs
+!ninesixty_columns = 24
 !ninesixty_grid_width = 760px
+!ninesixty_gutter_width = 20px
 
-.container
-  +grid-system(12)
+=brdr
+  border: 1px dashed red
+
+body
+  +grid-system(24)
+  +grid-children
+
+#bodyWrapper
+  +grid(24)
+  +grid-children
+  +alpha
+  +omega
 
 #header, #footer, #pageBody
-  +grid-width(12)
+  +grid-width(24)
 
 #col_left
-  +grid(8)
+  +grid(16)
   +grid-children
   +alpha
   .left
     +alpha
   .right
+    float: right
     +omega
 
 #col_right
-  +grid(4)
+  +grid(8)
   +grid-children
   +omega
   .panel_2
@@ -47,24 +60,15 @@
     +omega
 
 .panel_1
-  +grid-width(8)  
+  float: left
+  display: block
+  +grid-width(16)  
 .panel_2 
-  +grid(4)
+  +grid(8)
+
+.featured_story_half
+  +grid(8)
 
 
-// But most compass users prefer to construct semantic layouts like so (two column layout with header and footer):
-
-!ninesixty_grid_width = 760px
-.two-column
-  +grid-container
-  #header,
-  #footer,
-  #sidebar,
-  #main-content
-    +grid-unit-base
-  #header, #footer
-    +grid-width(24)
-  #sidebar
-    +grid-width(8)
-  #main-content
-    +grid-width(16)
+#subNav
+  +grid(16)

@@ -2,10 +2,9 @@
 
 - active_users ||= User.last_active
 
-.panel_2
+.panel_2.left
   .panelBar.clearfix
     %h2= t('.title')
-  %br
   .list_stories.clearfix
     %ul
       - unless active_users.empty?

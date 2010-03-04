@@ -2,13 +2,20 @@
 
 - cache :most_discussed_stories do
   - most_discussed_stories ||= Content.find( :all, :limit => 5, :order => "comments_count desc")
-  .panel_2
+  .panel_2.right
     .panelBar.clearfix
       %h2= t('.top_discussed_title')
-    %br
     .list_stories.clearfix
       %ul
         - most_discussed_stories.each do |story|
           %li
-            .profilePic= local_linked_profile_pic story.user
-            = link_to story.title, story_path(story)
+            .storyBlockWrap
+              %h4= link_to story.title, story_path(story)
+              .profilePic= local_linked_profile_pic story.user
+              .storyBlockMeta
+                %h3 Posted by So And So 1 day ago
+                %span.btnComment
+                  %a.voteUp like
+                %span.btnComment
+                  %a Comment
+
