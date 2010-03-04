@@ -4,7 +4,7 @@
     %li{'data-id' => content.cache_key}
       .thumb
         - if content.images.present?
-            = image_tag content.images.first.url(:thumb)                  
+          = image_tag content.images.first.url(:thumb)                  
       .storyBlockWrap
         %p.storyHead= link_to content.title, story_path(content)
         %p.storyCaption= linked_story_caption content
