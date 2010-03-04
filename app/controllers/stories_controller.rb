@@ -92,4 +92,8 @@ class StoriesController < ApplicationController
     @current_tab = 'stories'
   end
 
+  def set_slot_data
+    @slot_data = Metadata.find_by_key_type_name('ad-slot-name', 'stories')
+  end
+
 end

@@ -49,6 +49,9 @@ ActionController::Routing::Routes.draw do |map|
     admin.flag '/flag.:format', :controller => 'admin', :action => 'flag'
     admin.paged_items '/featured_items/:id/load_items/page/:page', :controller => 'featured_items', :action => 'load_items'
     admin.resources :widgets, :collection => { :save => :post }
+    admin.resources :custom_widgets
+    admin.resources :metadatas, :controller => 'custom_widgets'
+    admin.resources :settings
     admin.resources :ideas
     admin.resources :idea_boards
     admin.resources :resources

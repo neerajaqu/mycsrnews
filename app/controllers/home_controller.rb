@@ -76,6 +76,7 @@ class HomeController < ApplicationController
     @widget = Widget.find_by_id(params[:id])
     controller.send @widget.load_functions if @widget.load_functions.present?
     locals = @widget.locals.present? ? { @widget.locals.to_sym => instance_variable_get("@#{@widget.locals}") } : {}
+    locals[:widget] = @widget
 
     render :partial => @widget.partial, :locals => locals and return
   end
