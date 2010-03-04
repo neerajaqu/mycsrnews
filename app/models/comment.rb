@@ -2,6 +2,7 @@ class Comment < ActiveRecord::Base
 
   acts_as_moderatable
   acts_as_voteable
+  acts_as_refineable
 
   belongs_to :user
   belongs_to :commentable, :polymorphic => true, :counter_cache => true

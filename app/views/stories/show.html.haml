@@ -1,5 +1,15 @@
 #col_left
   #readArticle.panel_1
+    .topBar
+      %ul
+        %li
+          %a== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteLink"} #{@story.votes_tally}
+        %li
+          %a== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
+        %li
+          %a= fb_share_button(story_url(@story))
+        %li
+          %a{:href => '#'}= "Tweet it"
     .thumb
       - if @story.images.present?
         = image_tag @story.images.first.url(:medium)
@@ -10,16 +20,12 @@
         %h3= t('.posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
         - if @tags.present?
           %h3== Tags #{tag_list(@tags, @story)}
-        %h3
-          %span.btn_left== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteLink"} #{@story.votes_tally}
-          %span.btn_mid== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
-          %span.btn_right= fb_share_button(story_url(@story))
     - if @story.is_article?
-      %p.storyCaption= sanitize nl2br(@story.caption)
+      %div.bodyArticle= sanitize nl2br(@story.caption)
     - else
-      %p.bodyArticle= sanitize caption @story.caption
+      %div.bodyArticle= sanitize caption @story.caption
     - if @story.url.present?
-      %p.float_right= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn_1"
+      %div.float_right= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn_1"
     - if @story.moderatable?
       = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
 

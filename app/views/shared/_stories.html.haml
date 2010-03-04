@@ -5,7 +5,7 @@
     .panelBar.clearfix
       %h2= t('.stories_title')
       - if contents.present? and contents.first.refineable?
-        .bar_link
+        .refine_link
           = render :partial => 'shared/forms/refine_dropdown'
     .subtitle
       %span= t('.stories_subtitle')

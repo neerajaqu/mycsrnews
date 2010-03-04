@@ -1,11 +1,8 @@
 = link_to 'Refine Results', '#', :class => "refine-toggle"
 .refine-box{:style => "display: none"}
+  .refine-tab
   .refine-content
-    %p Refine Results
     - form_tag nil, :class => "refine-form", :id => 'refine-form' do
       = label_tag :sort_by, 'Sort By:'
-      %br
       = select_tag :sort_by, options_for_select(['Newest', 'Top'].collect {|k| [k, k]})
-      %br
-      %br
       = submit_tag "Go"
