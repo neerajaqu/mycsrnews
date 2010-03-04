@@ -7,8 +7,10 @@
 !subheadColor = #999999
 !linkColor = #3B5998
 !bodyColor = #333333
+!textWhite = #FFFFFF
 
 // Background & Border Color Variables //
+!bgDark = #3B5998
 !bgColor = #dce6f4
 !subheadBG = #F0F0F0
 !bgWhite = #FFFFFF
@@ -22,16 +24,18 @@
 !noBorder = none
 // Menu Tab BG and Text Color Variables //
 !tabOff = #55761b url(/images/default/toggletab_bg.gif) left repeat-x
+!tabOffHover = #55761b
 !tabOn = #FFFFFF
 !tablinkOff = #FFFFFF
 !tablinkOn = #3b5998
 // Sub Menu Variables
 !subtabOn = #3b5998
 !subtablinkOn = #FFFFFF
+// Header Bg Variable //
+!headerBG = #fff url(/images/default/hdr_bg.gif) bottom left repeat-x
 // Float div hack //
 .clearfix
   display: inline-block
-  width: 100%
 
 
 // floats //
@@ -48,7 +52,7 @@
   position: relative
   border-bottom: 1px solid
     :color= !subheadColor
-  background: #fff url(/images/default/hdr_bg.gif) bottom left repeat-x
+  :background= !headerBG 
 
   h1
     display: inline
@@ -99,7 +103,7 @@
       :color= !bgColor
 
 
-// Footer dhLink Styles //
+// Footer dhLink  ICON Styles //
 .rss_link
   background: url(/images/default/icon_rss.png) left no-repeat
   padding: 3px 0 3px 18px
@@ -123,56 +127,6 @@
 // Misc Styles //
 .hidden
   display: none
-
-
-#loadingStatus
-  margin: 200px 0px 100px 0px
-  min-height: 200px
-  text-align: center
-
-
-#smallLoadingStatus
-  margin: 20px 0px 20px 0px
-  min-height: 50px
-  text-align: center
-
-
-.actionSidePanel, .readSidePanel
-  border: 1px solid #CCCCCC
-  background-color: #CCCCCC
-  padding: 5px
-  margin: 0px 0px 10px 0px
-
-
-.templateEditHover
-  background-color: #fcc
-
-  *
-    background-color: #fcc
-
-
-#videoBox
-  float: left
-  margin: 15px
-
-
-#joinButton
-  text-align: center
-  font-weight: bold
-
-
-.rewardItem
-  width: 100px
-  height: 100px
-
-
-#challengeList, #actionFeedList
-  padding-left: 0px
-
-
-.availabilityText
-  color: #777777
-  font-size: .8em
 
 // Global styles //
 body
@@ -214,13 +168,15 @@ h3
   :font-family= !headerFont
   :color= !subheadColor
   font-weight: normal
-  margin: 0 0 7px 0
+  line-height: 11px
+  margin: 0 5px 5px 0
   padding: 0
 
 
 h4
   :font-family= !headerFont
   font-size: 12px
+  line-height: 120%
   font-weight: bold
   margin: 0 0 6px 0
   padding: 0
@@ -291,7 +247,8 @@ li
 .bold
   font-weight: bold
 
-// Something intelligent here //
+
+// Blockquote styles //
 blockquote
   background: transparent url(/images/default/start_quote_small.gif) no-repeat scroll -1px 0
   :color= !bodyColor
@@ -540,11 +497,11 @@ blockquote
       margin-left: -1px
 
     .buttons li
-      width: 50%
-      margin-left: 50%
+      width: 99%
+      margin: 0
+      float: right
+      text-align: right
 
-      .commit
-        width: 100%
 
   .panelBar
     display: block
@@ -571,6 +528,11 @@ blockquote
       float: right
       margin: -13px 10px 0 0
 
+  .storyBlockSpacer
+    padding-left: 100px
+
+  .storyBlockMeta
+
   .storyBlockWrap
     margin: 0px 10px
 
@@ -591,7 +553,7 @@ blockquote
 
   .thumb
     float: left
-    margin: 0px 10px 20px 10px
+    margin: 0px 10px 10px 10px
 
     img
       max-width: 100%
@@ -620,6 +582,50 @@ blockquote
       list-style-position: outside
       border-bottom: none
 
+  .hotTopicBar
+    float: left
+    width: 100%
+    display: block
+
+    ul
+      display:block
+      width: 100%
+      float: left
+      li
+        float: left
+        padding: 4px 0 4px 0px
+
+
+        &.topic
+          text-align: left
+          :background= !subheadBG
+          width: 22%
+
+          a
+            margin-left: 5px
+            padding-left: 8px
+            background: transparent url(/images/default/topic_arrow.gif) center left no-repeat
+
+        &.topicTitle
+          :background= !bgDark
+          :color= !textWhite
+          width: 22%
+          padding-left: 5px
+          text-transform: uppercase
+          margin-right: 3px
+          
+
+        &.topicMore
+          margin-left: 3px
+          text-align: center
+          width: 10%
+          :background= !subheadBG
+
+  .audio, .video, .image
+    margin: 10px
+
+
+// Article Style modifications //
 #readArticle
 
   .topBar
@@ -664,7 +670,7 @@ blockquote
       visibility: hidden
 
 
-
+// Comment Style Modifications and Additions //
 #commentThread
 
   .panelBar
@@ -681,9 +687,11 @@ blockquote
 
     .comment_reply
       display: block
+      padding: 0 0 4px 20px
       position: absolute
       bottom: 8px 
-      left: 80px
+      left: 70px
+      background: transparent url(/images/default/reply_arrow.png) top left no-repeat
     
       a
         color: #336600
@@ -692,6 +700,10 @@ blockquote
 
 .feature_bg
   :background-color= !bgColor
+  padding-bottom: 10px
+  
+  .thumb
+    margin-top: 10px
 
 
 .subtitle
@@ -761,14 +773,17 @@ blockquote
 
 .btnComment
   margin: 0 1px
-  padding: 2px 8px 3px 8px
+  padding: 1px 8px 2px 8px
   background: #F0F0F0
 
 
-.voteLink
+.voteLink, .voteUp
   background: url(/images/default/icon_vote.gif) left no-repeat
   padding-left: 15px
 
+.voteDown
+  background: url(/images/default/icon_vote_no.gif) left no-repeat
+  padding-left: 15px
 /*
    -moz-border-radius-topright: 4px
    -moz-border-radius-bottomright: 4px
@@ -855,24 +870,6 @@ a.flag:hover
   background: url(/images/default/icon_flag.gif) 10px bottom no-repeat
 
 
-
-#newswireWrap ul li, .list_rewards ul li, #feedList ul li
-
-
-.avatar
-  float: left
-  margin: 0px 10px 0px 0px
-
-
-.feed_poster
-  margin: 0
-  min-height: 36px
-
-  h3
-    padding-top: 7px
-    color: #333333
-
-
 .storyHead, .askQuestionHead
   font-size: 14px
   font-weight: bold
@@ -901,44 +898,6 @@ a.flag:hover
     width: 30px
     height: 30px
 
-
-.storyCommands
-  table
-    margin: 0
-    -moz-border-radius: 4px
-    -webkit-border-radius: 4px
-    border-radius: 4px
-    background-color: #fff
-
-  td
-    margin: 0
-    padding: 3px 8px 4px 8px
-
-  .commentLink
-    border-left: 2px solid #fff
-    border-right: 2px solid #fff
-
-
-
-
-
-
-.pointsTable
-  display: inline-block
-  table
-    float: left
-    margin: 0
-    background: #fff
-    color: #333333
-    width: 50%
-    border-bottom: 1px solid #D8DFEA
-
-  td
-    border-top: 1px solid #D8DFEA
-    margin: 0
-    padding: 3px 5px 4px 10px
-
-
 .pointsTable_profile
   display: inline-block
   table
@@ -951,30 +910,6 @@ a.flag:hover
     border-top: 1px solid #D8DFEA
     margin: 0
     padding: 3px 10px 4px 0px
-
-
-.historyTable
-  width: 100%
-  table    
-    width: 100%
-    margin: 0
-
-    text-align: left
-    border-bottom: none
-
-    th
-      font-size: 10px
-      font-weight: normal
-      color: #333333
-      background-color: #CCCCCC
-      margin: 0
-      padding: 4px 10px 4px 10px
-
-  td
-    border-top: 1px dashed #CCCCCC
-    margin: 0
-    padding: 3px 5px 4px 10px
-
 
 // Form Styles - outside formtastic.sass //
 
@@ -1033,6 +968,7 @@ a.flag:hover
     -moz-border-radius: 4px
     webkit-border-radius: 4px
     border-radius: 4px
+    line-height: 100%
     
     a
       font-size: 10px

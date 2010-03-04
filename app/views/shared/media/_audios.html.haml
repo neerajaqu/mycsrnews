@@ -3,13 +3,9 @@
 .panel_1
   .panelBar.clearfix
     %h2= t 'audios.title'
-    %br
-    %br
   .storyList
     .list_stories.clearfix
       %ul
         - audios.each do |audio|
           .audio.clearfix
             = embed_audio audio
-            %br
-            %br

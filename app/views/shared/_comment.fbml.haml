@@ -5,9 +5,12 @@
   .storyBlockWrap
     .storyBlockMeta
       %h3.float_left= t('.posted_by', :fb_name => (local_linked_profile_name comment.user), :date => time_ago_in_words(comment.created_at))
-      %span.btnComment.float_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{comment.votes.size}
-      %span.btnComment.float_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{comment.votes.size}
-      %span.btnComment.float_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{comment.votes.size}
+      %span.btnComment.float_left
+        %a.voteUp{:href => '#'}= "0"
+      %span.btnComment.float_left
+        %a.voteDown{:href => '#'}= "0"
+      %span.btnComment.float_left
+        %a{:href => '#'}= "Report"
     %blockquote
       .quotes= comment.comments
       %span.btn_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{link_to t('.comments_dislike'), dislike_comment_path(comment.id), :class => "voteLink"} #{comment.votes_tally}
