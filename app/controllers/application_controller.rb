@@ -184,6 +184,11 @@ class ApplicationController < ActionController::Base
     #@slot_data = { :name => "large_rectangle" , :width =>"336px" , :height =>"280px" , :background => "default/ads_336_280.gif"}
   end
   
+  def current_user_profile 
+    return nil unless current_user.present?
+    current_user.profile
+  end 
+  
   def update_last_active
     return false unless current_user.present?
 

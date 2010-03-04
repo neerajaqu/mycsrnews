@@ -83,7 +83,7 @@ module ApplicationHelper
 
   def linked_comment_caption(comment, length = 150)
     caption = caption(comment.comments, length)
-    "#{caption} #{link_to 'More', story_path(comment.content, :anchor => 'commentsListTop')}"
+    "#{caption} #{link_to 'More', comment.commentable, :anchor => 'commentsListTop'}"
   end
 
   def caption(text, length = 150)

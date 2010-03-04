@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message, :unless => :facebook_connect_user?
 
   after_create :register_user_to_fb
-
+  before_save :check_profile
+  
   has_many :contents
   has_many :comments
   has_many :messages
@@ -175,6 +176,10 @@ class User < ActiveRecord::Base
     User.find(:all, :conditions => ['is_admin = true'])
   end
 
+  private
+  def check_profile
+    self.build_profile if self.profile.nil?
+  end
   protected
     
 

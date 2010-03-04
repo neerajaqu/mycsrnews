@@ -74,6 +74,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_bio    
+    if request.post?
+      @profile = current_user_profile
+      @profile.bio = params['bio']
+      if @profile.save
+    		flash[:success] = "Successfully edited your bio."
+    		redirect_to user_path(@profile.user)    	
+      else
+    		flash[:error] = "Could not update your bio."
+    		redirect_to user_path(@profile.user)    	
+    	end
+    end
+  end
+  
   def current
     Rails.logger.debug "**************Hitting CURRENT for #{current_user}"
     respond_to do |format|

@@ -1,7 +1,7 @@
 #col_left
   #myProfile.panel_1
     .panelBar
-      %h2= t('.title', :name => profile_fb_name(@user,))
+      %h2= t('.title', :name => profile_fb_name(@user))
     .panel_block
       .thumb
         = fb_profile_pic @user, :size => 'normal', :width => '180'
@@ -46,9 +46,10 @@
     .panelBar
       %h2= t('.bio_title', :name => profile_fb_name(@user))
       - if @is_owner
-        .bar_link= link_to t('.bio_edit'), '#'
+        .bar_link= link_to t('.bio_edit'), '#', :class => "update-bio"
+        = render :partial => 'users/bio_form'
     .panel_block
-      .storyBlockWrap
+      .storyBlockWrap.current-bio
         %p= (@user.bio.present?) ? @user.bio : default_bio(@user)
 
   .panel_1

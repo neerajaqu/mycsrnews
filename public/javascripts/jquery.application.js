@@ -32,7 +32,13 @@ $(function() {
     return url;
   }
 
-  $('.refine-toggle').click(function(event) {
+  $('.update-bio').click(function(event) {
+  	event.preventDefault();
+  	$('.current-bio').toggle();
+  	$(this).parent().next().toggle();
+  });
+
+  $('.refine-toggle, .flag-toggle').click(function(event) {
   	event.preventDefault();
   	$(this).next().toggle();
   });
@@ -47,11 +53,6 @@ $(function() {
   		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
   		rebuild_facebook_dom();
     });
-  });
-
-  $('.flag-toggle').click(function(event) {
-  	event.preventDefault();
-  	$(this).next().toggle();
   });
 
 	$('.flag-form').change(function() {
