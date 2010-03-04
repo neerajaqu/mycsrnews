@@ -1,6 +1,6 @@
 - cache :stories_list do
   - contents ||= Content.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
-  - no_paginate ||= false
+  - no_paginate ||= true
   .panel_1
     .panelBar.clearfix
       %h2= t('.stories_title')

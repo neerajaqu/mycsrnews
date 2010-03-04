@@ -1,0 +1,19 @@
+%h1 Settings List
+
+- unless @settings.empty?
+  %table
+    %thead
+      %tr
+        %th Key Type
+        %th Key Name
+        %th Created At
+        %th Actions
+    %tbody
+      - @settings.each do |setting|
+        %tr
+          %td= setting.key_type
+          %td= setting.key_name
+          %td= setting.created_at
+          %td== #{link_to 'View', admin_setting_path(setting)} | #{link_to 'Edit', edit_admin_setting_path(setting)}
+- else
+  %h2 No settings available

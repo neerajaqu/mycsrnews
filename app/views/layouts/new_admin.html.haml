@@ -43,7 +43,11 @@
           %li
             %a{:href => "#home-page"} Home Page
             %ul
-              %li= link_to 'Widgets', admin_widgets_path
+              %li
+                %a{:href => "#widgets"} Widgets
+                %ul
+                  %li= link_to 'Widgets Builder', admin_widgets_path
+                  %li= link_to 'Custom Widgets', admin_custom_widgets_path
               %li= link_to 'Featured Items', admin_featured_items_path
               %li= link_to 'Announcements', admin_announcements_path
           %li
@@ -71,6 +75,7 @@
               %li= link_to 'Content Images', admin_content_images_path
               %li= link_to 'Newswires', admin_newswires_path
               %li= link_to 'Feeds', admin_feeds_path
+          %li= link_to 'Settings', admin_settings_path
           -#
             %li= link_to 'Comments', '#comments'
             %li= link_to 'Users', '#users'
