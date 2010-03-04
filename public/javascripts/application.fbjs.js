@@ -76,9 +76,12 @@ $(function() {
   	$(this).parent().next().toggle();
   });
 
+<<<<<<< HEAD:public/javascripts/application.fbjs.js
   $('.flag-form').change(function() {
     $('.flag-form').submit();
   });
+=======
+>>>>>>> update bio added, profile feed fixes for comments:public/javascripts/application.fbjs.js
 
   $('.flag-form').submit(function(event) {
     event.preventDefault();
