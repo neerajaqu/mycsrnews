@@ -12,11 +12,11 @@ $(function() {
     } catch(error) { }
   }
 
-	function dialog_response(title, message) {
-		$("<p>"+message+"</p>").dialog({
-			title: title,
-			modal: true
-		});
+  function dialog_response(title, message) {
+      $("<p>"+message+"</p>").dialog({
+          title: title,
+          modal: true
+      });
   }
 
   function change_url_format(url, format) {
@@ -63,9 +63,9 @@ $(function() {
     });
   });
 
-	$('.flag-form').change(function() {
-	  $('.flag-form').submit();
-	});
+  $('.flag-form').change(function() {
+    $('.flag-form').submit();
+  });
 
   $('.flag-form').submit(function(event) {
   	event.preventDefault();
