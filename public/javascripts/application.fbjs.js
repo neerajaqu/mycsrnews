@@ -46,7 +46,6 @@ $(function() {
 	if ($(this).next().children().length==0) {
 		$.update($(this).next(), SITE_URL+'/account_menu');			
 	}
-	
   });
 
   $('.update-bio').click(function(event) {
@@ -55,7 +54,7 @@ $(function() {
     $(this).parent().next().toggle();
   });
 
-$('.refine-toggle, .flag-toggle').click(function(event) {
+  $('.refine-toggle, .flag-toggle').click(function(event) {
     event.preventDefault();
     $(this).next().toggle();
   });
@@ -77,11 +76,9 @@ $('.refine-toggle, .flag-toggle').click(function(event) {
   	$(this).parent().next().toggle();
   });
 
-
-	$('.flag-form').change(function() {
-	  $('.flag-form').submit();
-	});
-
+  $('.flag-form').change(function() {
+    $('.flag-form').submit();
+  });
 
   $('.flag-form').submit(function(event) {
     event.preventDefault();
@@ -94,4 +91,3 @@ $('.refine-toggle, .flag-toggle').click(function(event) {
   });
 
 });
-
