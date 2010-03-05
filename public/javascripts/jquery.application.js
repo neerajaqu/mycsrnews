@@ -36,7 +36,7 @@ $(function() {
   	event.preventDefault();
   	$(this).next().toggle();
 	if ($(this).next().children().length==0) {
- 		$(this).next().load('/account_menu');
+ 		$(this).next().load('/account_menu.js');
 	}
   });
 
@@ -79,7 +79,7 @@ $(function() {
     });
   });
 
-	$('.voteLink').click(function(event) {
+	$('.voteLink, .voteUp, .voteDown').click(function(event) {
 		event.preventDefault();
 		var span = $(this).parent();
 		$(this).parent().html("<img src=\"/images/spinner.gif\" />");

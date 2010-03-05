@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
-  map.account_menu '/account_menu', :controller => 'users', :action => 'account_menu'
+  map.account_menu '/account_menu.:format', :controller => 'users', :action => 'account_menu'
   map.faq '/faq', :controller => 'home', :action => 'faq'
   map.about '/about', :controller => 'home', :action => 'about'
   map.terms '/terms', :controller => 'home', :action => 'terms'

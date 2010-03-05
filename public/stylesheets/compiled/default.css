@@ -169,7 +169,7 @@ blockquote .quotes { background: transparent url(/images/default/end_quote_small
 
 .voteDown { background: url(/images/default/icon_vote_no.gif) left no-repeat; padding-left: 15px; }
 
-/* -moz-border-radius-topright: 4px -moz-border-radius-bottomright: 4px webkit-border-top-right-radius: 4px webkit-border-bottom-right-radius: 4px border-top-right-radius: 4px border-bottom-right-radius: 4px */
+/* -moz-border-radius-topright: 4px  -moz-border-radius-bottomright: 4px  webkit-border-top-right-radius: 4px  webkit-border-bottom-right-radius: 4px  border-top-right-radius: 4px  border-bottom-right-radius: 4px */
 
 .rating { margin: 0 0 10px 15px; display: block; float: left; height: 16px; }
 
@@ -221,6 +221,7 @@ a.flag:hover { color: #cc3333; background: url(/images/default/icon_flag.gif) 10
 .panelBar .refine_link .refine-box .refine-content select { width: 100%; margin-bottom: 15px; }
 .panelBar .refine_link .refine-box .refine-content label { display: block; font-weight: bold; text-align: left; padding: 0 0 5px 4px; }
 .panelBar .refine_link .refine-box .refine-content input { width: 70%; }
+
 
 .test_height_700 { background: #00cc33; width: 100%; height: 700px; }
 
