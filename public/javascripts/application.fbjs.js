@@ -44,6 +44,7 @@ $(function() {
   	event.preventDefault();  	
   	$(this).next().toggle();
 	if ($(this).next().children().length==0) {
+		$(this).next().html("<img src=\""+SITE_URL+"/images/spinner.gif\" />");
 		$.update($(this).next(), SITE_URL+'/account_menu.fbjs');
 	}
   });
