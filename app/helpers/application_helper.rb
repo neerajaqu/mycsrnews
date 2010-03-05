@@ -117,20 +117,31 @@ module ApplicationHelper
   end
 
   def local_linked_profile_pic(user, options={})
+    link_options = {}
+    if options[:format].present?
+    	link_options[:format] = options[:format]
+    	options.delete(:format)
+    end
+    Rails.logger.debug "LINK OPTIONS:: #{link_options}"
     if user.facebook_user?
       options.merge!(:linked => false)
-      link_to fb_profile_pic(user, options), user_path(user)
+      link_to fb_profile_pic(user, options), user_path(user, link_options)
     else
-      link_to image_tag(default_image), user
+      link_to image_tag(default_image), user, link_options
     end
   end
 
   def local_linked_profile_name(user, options={})
+    link_options = {}
+    if options[:format].present?
+    	link_options[:format] = options[:format]
+    	options.delete(:format)
+    end
     if user.facebook_user?
       options.merge!(:linked => false)
-      link_to fb_name(user, options), user_path(user)
+      link_to fb_name(user, options), user_path(user, link_options)
     else
-      link_to user.name, user
+      link_to user.name, user, link_options
     end
   end
 

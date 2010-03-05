@@ -2,17 +2,17 @@
 %ul
   - if current_user.present? and logged_in?
     %li.account-profile.clearfix
-      .float_left= local_linked_profile_pic(current_user, :size => 'square')
-      %h4.float_left= local_linked_profile_name(current_user, :use_you => false)
+      .float_left= local_linked_profile_pic(current_user, :size => 'square', :format => 'fbml')
+      %h4.float_left= local_linked_profile_name(current_user, :use_you => false, :format => 'fbml')
     %hr
     %li
-      = link_to t('account_menu.sign_out'), logout_path
+      = link_to t('account_menu.sign_out'), logout_path(:format => 'fbml')
     %li
-      = link_to t('account_menu.invite_friends'), invite_users_path
+      = link_to t('account_menu.invite_friends'), invite_users_path(:format => 'fbml')
     %li
-      = link_to t('account_menu.my_profile'), user_path(current_user)
+      = link_to t('account_menu.my_profile'), user_path(current_user, :format => 'fbml')
   - else
     %li
-      = link_to t('account_menu.sign_in'), login_path
+      = link_to t('account_menu.sign_in'), login_path(:format => 'fbml')
     %li
-      = link_to t('account_menu.register'), signup_path
+      = link_to t('account_menu.register'), signup_path(:format => 'fbml')
