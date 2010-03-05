@@ -4,9 +4,9 @@
   - featured_resources ||= Resource.featured
   - unless featured_resources.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.featured_resource_title')
-      .list_items.clearfix
+      .list_items
         %ul
           - featured_resources.each do |resource|
             %li

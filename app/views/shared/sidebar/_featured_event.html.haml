@@ -4,9 +4,9 @@
   - featured_events ||= Event.featured
   - unless featured_events.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.featured_event_title')
-      .list_items.clearfix
+      .list_items
         %ul
           - featured_events.each do |event|
             %li

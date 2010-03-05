@@ -18,7 +18,7 @@
                 - if content.images.present?
                   = image_tag content.images.first.url(:thumb)
               .storyBlockWrap.storyBlockSpacer
-                %p.storyHead= link_to content.title, story_path(content)
+                %h2.storyHead= link_to content.title, story_path(content)
                 %p.storyCaption= linked_story_caption content
                 .profilePic= local_linked_profile_pic content.user
                 .storyBlockMeta.float_left

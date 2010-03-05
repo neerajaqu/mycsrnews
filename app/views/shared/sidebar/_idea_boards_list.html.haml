@@ -1,9 +1,9 @@
 -# @expects: local @idea_board, @title
 
 .panel_2
-  .panelBar.clearfix
+  .panelBar
     %h2= t('.title')
-  .list_stories.clearfix
+  .list_stories
     %ul
       - idea_boards.each do |idea_board|
         %li

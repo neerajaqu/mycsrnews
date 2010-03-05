@@ -5,10 +5,10 @@
   - newest_articles ||= Article.newest
   - unless newest_articles.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.newest_articles_title')
       %br
-      .list_stories.clearfix
+      .list_stories
         %ul
           - newest_articles.each do |article|
             %li

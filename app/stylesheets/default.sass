@@ -28,6 +28,9 @@
 !tabOn = #FFFFFF
 !tablinkOff = #FFFFFF
 !tablinkOn = #3b5998
+// Dropdown Variables //
+!dropdownTabOff = #80a341
+!dropdownTabOn = #80a341
 // Sub Menu Variables
 !subtabOn = #3b5998
 !subtablinkOn = #FFFFFF
@@ -47,18 +50,23 @@
 
 // Header Container //
 #header
-  height: 120px
+  height: 110px
   margin-bottom: 15px
   position: relative
   border-bottom: 1px solid
     :color= !subheadColor
   :background= !headerBG 
 
-  h1
-    display: inline
-    float: left
-    font-size: 32px
-    margin: 5px
+  .headerTitle
+    position: absolute
+    top: 30px
+    left: 10px
+
+    h1
+      display: block
+      float: left
+      font-size: 32px
+      margin: 5px
 
   a
     text-decoration: none
@@ -73,6 +81,9 @@
     :color= !subheadColor
 
   .dh_links
+    position: absolute
+    top: 10px
+    right: 10px
     float: right
     padding: 5px 10px
 
@@ -178,7 +189,7 @@ h4
   font-size: 12px
   line-height: 120%
   font-weight: bold
-  margin: 0 0 6px 0
+  margin: 0 0 4px 0
   padding: 0
 
 
@@ -234,7 +245,6 @@ ul
 
 
 li
-  display: inline-block
   list-style-type: none
   margin: 0
   padding: 10px 0 4px 0
@@ -248,47 +258,6 @@ li
   font-weight: bold
 
 
-// Blockquote styles //
-blockquote
-  background: transparent url(/images/default/start_quote_small.gif) no-repeat scroll -1px 0
-  :color= !bodyColor
-  font-size: 12px
-  line-height: 130%
-  margin: 0 0 10px 0
-  padding: 0 20px 0 60px
-
-  .quotes
-    background: transparent url(/images/default/end_quote_small.gif) no-repeat scroll right bottom
-    padding: 4px 0
-
-
-// Menu Dropdown styles //
-.menu_item
-  .dropdown
-    visibility: hidden
-
-
-.menu_item:hover
-  .dropdown
-    visibility: visible
-
-
-.dropdown
-  ul
-    display: block
-
-  li
-    display: block
-    width: 100%
-    clear: left
-    border: top 1px
-
-  a
-    background: #80a341
-
-  a:hover
-    background: #80a341
-
 
 // top level menu page tabs //
 #pageTabs
@@ -301,141 +270,160 @@ blockquote
   overflow: visible
   border: none
 
-
-#pageTabs .tabs
-  position: absolute
-  bottom: 0
-  left: 0
-  width: 100%
-  height: 23px
-  margin: 0px 0px 0px 0px
-  padding: 0px 0px 0px 0px
-
-
-//top navigation tabs placement//
-.tabs
-  &.top
-    background: #f7f7f7
-
-  .left_tabs
-    float: left
-    padding-left: 1px
-
-  .right_tabs
-    float: right
-    padding-right: 1px
-
-  .back_links
-    padding-right: 20px
-
-
-// navigation tabs //
-.toggle_tabs
-  margin: 0px 0px 0px 0px
-  padding: 0px 0px 0px 0px
-  text-align: center
-
-
-.toggle_tabs li
-  display: block
-  float: left
-  padding: 0px 0px 0px 0px
-  margin: 0px 1px 0px 0px
-  height: 23px
-
-
-.toggle_tabs li
-  a
-    display: block
-    height: 13px
+  .tabs
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    height: 23px
     margin: 0px 0px 0px 0px
-    padding: 5px 30px 5px 30px
-    font-weight: bold
-    font-size: 11px
-    line-height: normal
-    border:
-      :top= !noBorder
-      :bottom= !noBorder
-      :left= !noBorder
-      :right= !noBorder
-    :color= !tablinkOff
-    :background= !tabOff
+    padding: 0px 0px 0px 0px
 
-  &.first a
-    display: block
-    margin: 0px 0px 0px 0px
-    padding: 5px 5px 5px 5px
-    font-weight: bold
-    font-size: 11px
-    line-height: normal
-    border:
-      :top= !noBorder
-      :bottom= !noBorder
-      :left= !noBorder
-      :right= !noBorder
-    :color= !tablinkOff
-    :background= !tabOff
- 
-  &.first img
-    display: inline-block    
+    .left_tabs
+      float: left
+      padding-left: 1px
+
+    .right_tabs
+      float: right
+      padding-right: 1px
+
+    .back_links
+      padding-right: 20px
+
+    .toggle_tabs
+      margin: 0px 0px 0px 0px
+      padding: 0px 0px 0px 0px
+      text-align: center
 
 
-.toggle_tabs li
-  a
-    &:focus
-      outline: 0px
+    .toggle_tabs li
+      display: block
+      float: left
+      padding: 0px 0px 0px 0px
+      margin: 0px 1px 0px 0px
+      height: 23px
 
-    &.selected
-      margin: -1px 0px 0px 0px
-      padding: 5px 30px 5px 30px
-      height: 13px
-      border:
-        :top= !borderColor_3
-        :bottom= !borderColor_4
-        :right= !borderColor_3
-        :left= !borderColor_3
-      :background= !tabOn
-      :color= !linkColor
+    .toggle_tabs li
+      a
+        display: block
+        height: 13px
+        margin: 0px 0px 0px 0px
+        padding: 5px 20px
+        font-weight: bold
+        font-size: 11px
+        line-height: normal
+        border:
+          :top= !noBorder
+          :bottom= !noBorder
+          :left= !noBorder
+          :right= !noBorder
+        :color= !tablinkOff
+        :background= !tabOff
 
-  &.first a.selected
-    margin: -1px 0px 0px 0px
-    padding: 5px 5px 5px 5px
-    height: 13px
-    border:
-      :top= !borderColor_3
-      :bottom= !borderColor_4
-      :right= !borderColor_3
-      :left= !borderColor_3
-    :background= !tabOn
-    :color= !linkColor
+      &.first a
+        display: block
+        margin: 0px 0px 0px 0px
+        padding: 5px 5px 5px 5px
+        font-weight: bold
+        font-size: 11px
+        line-height: normal
+        border:
+          :top= !noBorder
+          :bottom= !noBorder
+          :left= !noBorder
+          :right= !noBorder
+        :color= !tablinkOff
+        :background= !tabOff
 
-  a
-    &.selected:hover
-      text-decoration: none
+      &.first img
+        display: inline-block    
 
-    &.disabled
-      :color= !subheadColor
-      cursor: default
 
-      &:hover
-        text-decoration: none
+    .toggle_tabs li
+      a
+        &:focus
+          outline: 0px
+
+        &.selected
+          margin: -1px 0px 0px 0px
+          padding: 5px 30px 5px 30px
+          height: 13px
+          border:
+            :top= !borderColor_3
+            :bottom= !borderColor_4
+            :right= !borderColor_3
+            :left= !borderColor_3
+          :background= !tabOn
+          :color= !linkColor
+
+      &.first a.selected
+        margin: -1px 0px 0px 0px
+        padding: 5px 5px 5px 5px
+        height: 13px
+        border:
+          :top= !borderColor_3
+          :bottom= !borderColor_4
+          :right= !borderColor_3
+          :left= !borderColor_3
+        :background= !tabOn
+        :color= !linkColor
+
+      a
+        &.selected:hover
+          text-decoration: none
+
+        &.disabled
+          :color= !subheadColor
+          cursor: default
+
+          &:hover
+            text-decoration: none
+
+    .toggle_tabs
+      .menu_item
+        .dropdown
+          visibility: hidden
+          ul
+
+            li
+              display: block
+              width: 100%
+              clear: both
+              padding: 0
+              text-align: left
+
+              a
+                font-size: 10px
+                display: block
+                background: #80a341
+                padding: 5px 10px
+                border-top: 1px solid #FFF
+                color: #FFFFFF
+
+              a:hover
+                background: #80a341
+
+      .menu_item:hover
+        .dropdown
+          visibility: visible
+
+      .menu_item
+        &.selected:hover
+          &.dropdown
+            visibility: hidden
 
 // Sub Navigation Styles //
 #subNav
   height: 19px
   margin: 0px 0px 15px 0px
   padding: 0px 0px 0px 0px
-  display: block
+  display: inline-block
   overflow: visible
-  border-bottom: none
+  border:
+    :bottom= !borderColor_3
 
 
 #subNav
-  &.tabs
-    margin: 0px 0px 15px 0px
-    padding: 0px 0px 0px 0px
-    border:
-      :bottom= !borderColor_3
 
   .toggle_tabs
     margin: 0px 0px 0px 0px
@@ -444,12 +432,13 @@ blockquote
 
     li
       display: block
+      float: left
       padding: 0px 0px 0px 0px
       margin: 0 0 0 1px
 
       a
         margin: 0px 0px 0px 0px
-        padding: 2px 25px 3px 25px
+        padding: 4px 25px 1px 25px
         height: 14px
         border: none
         font-weight: bold
@@ -532,12 +521,18 @@ blockquote
     padding-left: 100px
 
   .storyBlockMeta
+    
+    h4
+      margin-bottom: 3px
+
+    h3
+      margin-bottom: 3px
 
   .storyBlockWrap
     margin: 0px 10px
 
     .storyHead
-      margin: 2px 0 8px 0
+      margin: 0 0 8px 0
       :color= !headerColor
     
     p
@@ -559,10 +554,10 @@ blockquote
       max-width: 100%
       max-height: 100%
 
-  ul li
-    float: left
-    padding: 6px 0 6px 0
-    Width: 100%
+  li
+    display: inline-block
+    width: 100%
+    padding: 5px 0
     border:
       :bottom= !borderColor_5
 
@@ -582,47 +577,56 @@ blockquote
       list-style-position: outside
       border-bottom: none
 
-  .hotTopicBar
-    float: left
-    width: 100%
-    display: block
-
-    ul
-      display:block
-      width: 100%
-      float: left
-      li
-        float: left
-        padding: 4px 0 4px 0px
-
-
-        &.topic
-          text-align: left
-          :background= !subheadBG
-          width: 22%
-
-          a
-            margin-left: 5px
-            padding-left: 8px
-            background: transparent url(/images/default/topic_arrow.gif) center left no-repeat
-
-        &.topicTitle
-          :background= !bgDark
-          :color= !textWhite
-          width: 22%
-          padding-left: 5px
-          text-transform: uppercase
-          margin-right: 3px
-          
-
-        &.topicMore
-          margin-left: 3px
-          text-align: center
-          width: 10%
-          :background= !subheadBG
-
   .audio, .video, .image
     margin: 10px
+
+  .userPoints
+    text-align: right
+    margin-right: 0px
+
+// hot topic bar //
+#hotTopicBar
+  float: left
+  width: 100%
+  display: block
+  margin-bottom: 15px
+
+  ul
+    display:block
+    float: left
+    :background= !subheadBG
+    width: 100%
+    li
+      float: left
+      padding: 4px 0 4px 0px
+
+      &.topic
+        display: inline
+        float: left
+        text-align: left
+        :background= !subheadBG
+        padding: 4px 15px 4px 0
+        min-width: 10%
+
+        a
+          margin-left: 5px
+          padding-left: 8px
+          background: transparent url(/images/default/topic_arrow.gif) center left no-repeat
+
+      &.topicTitle
+        :background= !bgDark
+        :color= !textWhite
+        width: 22%
+        padding-left: 5px
+        text-transform: uppercase
+        margin-right: 10px
+
+      &.topicMore
+        border-left: 2px solid #FFF
+        float: right
+        text-align: center
+        width: 10%
+        :background= !subheadBG
 
 
 // Article Style modifications //
@@ -739,6 +743,18 @@ blockquote
     border-radius: 4px
 
 
+// Blockquote styles //
+blockquote
+  background: transparent url(/images/default/start_quote_small.gif) no-repeat scroll -1px 0
+  :color= !bodyColor
+  font-size: 12px
+  line-height: 130%
+  margin: 0 0 10px 0
+  padding: 0 20px 0 60px
+  .quotes
+    background: transparent url(/images/default/end_quote_small.gif) no-repeat scroll right bottom
+    padding: 4px 0
+
 
 // buttons n stuff // 
 .btn_1
@@ -772,6 +788,7 @@ blockquote
 
 
 .btnComment
+  display: inline-block
   margin: 0 1px
   padding: 1px 8px 2px 8px
   background: #F0F0F0

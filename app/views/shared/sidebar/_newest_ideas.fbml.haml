@@ -4,9 +4,9 @@
   - newest_ideas ||= Idea.newest
   - unless newest_ideas.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.newest_ideas_title')
-      .list_stories.clearfix
+      .list_stories
         %ul
           - newest_ideas.each do |idea|
             %li
