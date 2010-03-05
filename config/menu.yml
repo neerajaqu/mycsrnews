@@ -1,0 +1,24 @@
+# comment out anything you do not wish to appear
+# you must comment out nested elements or this will break
+menu:
+  home: 'enabled'
+  stories:
+    stories_list: 'enabled'
+    newswire: 'enabled'
+    new_story: 'enabled'
+  #blogs:
+    #top_blogs: 'enabled'
+    #new_article: 'enabled'
+  resources:
+    resources_list: 'enabled'
+    new_resource: 'enabled'
+  #qna:
+  ideas:
+    ideas_list: 'enabled'
+    idea_boards_list: 'enabled'
+    new_idea: 'enabled'
+  events:
+    events_list: 'enabled'
+    new_event: 'enabled'
+  #forums:
+  admin:

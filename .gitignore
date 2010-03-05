@@ -17,6 +17,7 @@ config/*.yml
 config/application.god
 !config/widgets.yml
 !config/cucumber.yml
+!config/menu.yml
 config/deploy/*.rb
 !config/deploy/sample.rb
 *.pid
