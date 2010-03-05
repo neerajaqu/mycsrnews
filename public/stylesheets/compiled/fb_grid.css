@@ -242,6 +242,12 @@ a.flag:hover { color: #cc3333; background: url(/images/default/icon_flag.gif) 10
 .panelBar .refine_link .refine-box .refine-content label { display: block; font-weight: bold; text-align: left; padding: 0 0 5px 4px; }
 .panelBar .refine_link .refine-box .refine-content input { width: 70%; }
 
+.test_height_700 { background: #00cc33; width: 100%; height: 700px; }
+
+.test_height_400 { background: #00cc33; width: 100%; height: 400px; }
+
+.test_height_200 { background: #33cc00; width: 100%; height: 200px; }
+
 .flash { padding: .3em .4em; margin: 0 auto .5em; clear: both; width: auto; }
 .flash p { padding-left: 25px; }
 .flash.flash_error { border: thin solid #8b0000; background: #ffc0cb; }
