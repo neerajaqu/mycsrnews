@@ -1,10 +1,10 @@
 -# TODO set up scope for featured article blogs
 -# @expects: local 'content'
 
-- cache :featured_contents, :expires_in => 15.seconds do
+- cache :featured_contents_fbml, :expires_in => 15.seconds do
   - featured_contents ||= Article.featured
   - unless featured_contents.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.featured_content_title')
       %br

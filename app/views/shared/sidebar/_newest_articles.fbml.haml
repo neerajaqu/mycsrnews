@@ -1,10 +1,10 @@
 -# TODO set up filter of newest blog articles
 -# @expects: local 'newest_articles'
 
-- cache :newest_articles do
+- cache :newest_articles_fbml do
   - newest_articles ||= Article.newest
   - unless newest_articles.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.newest_articles_title')
       %br

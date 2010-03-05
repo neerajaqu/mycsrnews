@@ -1,9 +1,9 @@
 -# @expects: local 'idea'
 
-- cache :featured_ideas, :expires_in => 15.seconds do
+- cache :featured_ideas_fbml do
   - featured_ideas ||= Idea.featured
   - unless featured_ideas.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.featured_idea_title')
       .list_items

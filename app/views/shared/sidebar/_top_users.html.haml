@@ -1,9 +1,9 @@
 -# @expects: local 'top_users'
 
-- cache :top_users do
+- cache :top_users_html do
   - top_users ||= User.top
   - unless top_users.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.top_users_karma_title')
       .list_stories

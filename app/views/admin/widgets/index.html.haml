@@ -1,8 +1,30 @@
 - content_for :head do
   %style
     :sass
+      .float-toggle
+        position: absolute
+        top: 2px
+        right: 2px
       #left
         width: 700px
+        display: inline
+        position: relative
+        clear: both
+        float: left
+        .left
+          width: 300px
+          //position: relative
+          //left: 0
+          //margin-left: 0px
+          float: left
+          clear: left
+        .right
+          //position: absolute
+          //right: 0
+          width: 300px
+          float: right
+          clear: right
+          //margin-right: 0px
       #right
         width: 200px
       #main-widgets-list
@@ -19,8 +41,9 @@
       .clear
         clear: both
       .draggable-main, .draggable-sidebar
+        position: relative
         width: 100px
-        height: 100px
+        //height: 100px
         padding: 5px
         margin: 10px 10px 10px 0
         float: left
@@ -37,13 +60,22 @@
     	var foo = null;
 
     	$('.droppable-main').droppable({
-    		accept: '.draggable-main',
+    		//accept: '.draggable-main',
+    		accept: 'li',
     		activeClass: 'ui-state-hover',
     		hoverClass: 'ui-state-active',
     		helper: 'clone',
     		drop: function(event, ui) {
+          console.log(ui.draggable);
+    			if (ui.draggable.parent().parent().attr('id') == 'sidebar-widgets-list') {
+    				ui.draggable.addClass('left');
+          }
     			if (ui.draggable.parent().attr('id') != $main_list.attr('id')) {
-            deleteWidget(ui.draggable, $main_list, '700px', '130px');
+    				var width = "680px";
+    				if (ui.draggable.hasClass('left')) {
+    					width = "300px";
+            }
+            deleteWidget(ui.draggable, $main_list, width, '130px');
           }
           loadWidget(ui.draggable);
         }
@@ -85,6 +117,19 @@
         }
       });
 
+      $('.float-toggle').live('click', function(event) {
+      	console.log("CLICKED!!!!!");
+      	if ($(this).parent().hasClass('left')) {
+      		$(this).parent().removeClass('left');
+      		$(this).parent().addClass('right');
+      		$(this).html('Toggle left');
+      	} else if ($(this).parent().hasClass('right')) {
+      		$(this).parent().removeClass('right');
+      		$(this).parent().addClass('left');
+      		$(this).html('Toggle right');
+        }
+      });
+
       function getWidgetID(widget_str) {
       	if ((match = widget_str.match(/^widget_([0-9]+)$/)) != null) {
       	  return match[1];
@@ -100,6 +145,12 @@
               var url = "/home/" + widget_id + "/render_widget";
               widget.load(url, {}, function(responseText, textStatus, XMLHttpRequest) {
                 $('a', $(this)).click(function() { return false; });
+                if ($(this).hasClass('left')) {
+                  $(this).append('<span class="float-toggle">Toggle right</span>');
+                } else if ($(this).hasClass('right')) {
+                  $(this).append('<span class="float-toggle">Toggle left</span>');
+                } else {
+                }
               });
             }
           }, 1000);
@@ -126,12 +177,20 @@
         		main: [],
         		sidebar: []
           };
-          $('li.draggable-main', $main_list).each(function(i) {
-          	widgets.main.push(getWidgetID(this.id));
+          $('li.draggable-main, li.draggable-sidebar', $main_list).each(function(i) {
+          	if ($(this).hasClass('left')) {
+          		var side = '-left';
+            } else if ($(this).hasClass('right')) {
+          		var side = '-right';
+            } else {
+          	  var side = '';
+            }
+          	widgets.main.push(getWidgetID(this.id)+side);
           });
-          $('li.draggable-sidebar', $sidebar_list).each(function(i) {
+          $('li.draggable-main, li.draggable-sidebar', $sidebar_list).each(function(i) {
           	widgets.sidebar.push(getWidgetID(this.id));
           });
+          console.log(widgets.main);
           $.post("/admin/widgets/save.json", {main: widgets.main.join(','), sidebar: widgets.sidebar.join(',')}, function(data) {
           	if (typeof(data.success) !== 'undefined') {
           		alert(data.success);

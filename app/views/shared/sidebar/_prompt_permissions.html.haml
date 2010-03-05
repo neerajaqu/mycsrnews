@@ -1,8 +1,10 @@
 -# to do: needs way to hide if the user has already approved permissions
-.panel_2
-  .panelBar
-    %h2= t('.title')
-  .panel_block
-    .storyBlockWrap
-      %p= t('.details')
-      %fb:prompt-permission{:perms => "email"}= t('.request')
+
+- cache :prompt_permissions_fbml do
+  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('.title')
+    .panel_block
+      .storyBlockWrap
+        %p= t('.details')
+        %fb:prompt-permission{:perms => "email"}= t('.request')

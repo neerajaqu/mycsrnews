@@ -1,9 +1,9 @@
 -# @expects: local 'resource'
 
-- cache :featured_resources, :expires_in => 15.seconds do
+- cache :featured_resources_fbml do
   - featured_resources ||= Resource.featured
   - unless featured_resources.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.featured_resource_title')
       .list_items

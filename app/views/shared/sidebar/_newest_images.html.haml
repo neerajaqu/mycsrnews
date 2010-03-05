@@ -1,10 +1,10 @@
 -# TODO update design for image skybox
 -# @expects: local 'newest_images'
 
-- cache :newest_images do
+- cache :newest_images_html do
   - newest_images ||= Image.newest
   - unless newest_images.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar.clearfix
         %h2= t('.newest_images_title')
       %br

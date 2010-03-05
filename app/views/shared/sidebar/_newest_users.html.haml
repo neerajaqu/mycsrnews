@@ -1,9 +1,9 @@
 -# @expects: local 'newest_users'
 
-- cache :newest_users do
+- cache :newest_users_html do
   - newest_users ||= User.newest
   - unless newest_users.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.newest_users_title')
       .list_stories

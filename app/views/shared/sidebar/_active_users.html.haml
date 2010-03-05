@@ -1,10 +1,10 @@
 -# @expects: local 'active_users'
 
-- cache :active_users do
+- cache :active_users_html do
   - active_users ||= User.last_active
 
-  .panel_2.left
-    .panelBar
+  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar.clearfix
       %h2= t('.title')
     .list_stories
       - unless active_users.empty?

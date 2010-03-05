@@ -2,18 +2,17 @@
 
 - cache :most_discussed_stories do
   - most_discussed_stories ||= Content.find( :all, :limit => 5, :order => "comments_count desc")
-  .panel_2.right
+  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_discussed_title')
     .list_stories
       %ul
         - most_discussed_stories.each do |story|
           %li
-            %h4= link_to story.title, story_path(story)
-            .profilePic= local_linked_profile_pic story.user
-            .storyBlockMeta
-              %h3 Posted by So And So 1 day ago
-              %span.btnComment
-                %a.voteUp like
-              %span.btnComment
-                %a Comment
+            .storyBlockWrap
+              %h4= link_to story.title, story_path(story)
+              .profilePic= local_linked_profile_pic story.user
+              .storyBlockMeta
+                %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
+                %span.btnComment.float_left== #{link_to t('like'), like_story_path(story.id), :class => "voteLink"} #{story.votes.size}
+                %span.btnComment.float_left== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100303202402) do
+ActiveRecord::Schema.define(:version => 20100305005027) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -461,6 +461,7 @@ ActiveRecord::Schema.define(:version => 20100303202402) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "position"
   end
 
   add_index "widget_pages", ["name"], :name => "index_widget_pages_on_name"

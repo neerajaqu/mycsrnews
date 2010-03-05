@@ -1,9 +1,9 @@
 -# @expects: local 'event'
 
-- cache :featured_events, :expires_in => 15.seconds do
+- cache :featured_events_html, :expires_in => 15.seconds do
   - featured_events ||= Event.featured
   - unless featured_events.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.featured_event_title')
       .list_items

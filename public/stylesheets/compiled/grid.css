@@ -189,7 +189,7 @@ blockquote .quotes { background: transparent url(/images/default/end_quote_small
 
 .voteDown { background: url(/images/default/icon_vote_no.gif) left no-repeat; padding-left: 15px; }
 
-/* -moz-border-radius-topright: 4px -moz-border-radius-bottomright: 4px webkit-border-top-right-radius: 4px webkit-border-bottom-right-radius: 4px border-top-right-radius: 4px border-bottom-right-radius: 4px */
+/* -moz-border-radius-topright: 4px  -moz-border-radius-bottomright: 4px  webkit-border-top-right-radius: 4px  webkit-border-bottom-right-radius: 4px  border-top-right-radius: 4px  border-bottom-right-radius: 4px */
 
 .rating { margin: 0 0 10px 15px; display: block; float: left; height: 16px; }
 
@@ -994,11 +994,11 @@ body .omega { margin-right: 0; }
 
 #subNav { float: left; width: 940px; margin-left: 0; }
 
-#col_left { float: left; display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 620px; margin-left: 0; }
+#col_left { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 620px; margin-left: 0; float: left; clear: both; }
 #col_left .alpha { margin-left: 0; }
 #col_left .omega { margin-right: 0; }
-#col_left .left { float: left; margin-left: 0; }
-#col_left .right { float: right; margin-right: 0; }
+#col_left .left { float: left; clear: left; margin-left: 0; }
+#col_left .right { float: right; clear: right; margin-right: 0; }
 
 #col_right { float: right; display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 300px; margin-right: 0; }
 #col_right .alpha { margin-left: 0; }

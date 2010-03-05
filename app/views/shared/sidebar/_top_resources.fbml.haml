@@ -1,8 +1,8 @@
 -# @expects: local 'resource'
 
-- cache :top_resources, :expires_in => 15.seconds do
+- cache :top_resources_fbml do
   - top_resources ||= Resource.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
-  .panel_2
+  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_resources_title')
     .list_items
