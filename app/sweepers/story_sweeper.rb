@@ -30,9 +30,14 @@ class StorySweeper < ActionController::Caching::Sweeper
   end
 
   def clear_story_cache(story)
+    Rails.logger.debug "*********************clearing cache for #{story.title}"
     expire_page :controller => 'stories', :action => 'index'
     expire_page :controller => 'home', :action => 'index'
     expire_page :controller => 'stories', :action => 'show', :id => story
+    ['top_stories', 'stories_list', 'active_stories', 'most_discussed_stories', 'top_users', 'top_ideas', 'top_events', 'featured_items', 'newest_users', 'newest_ideas'].each do |fragment|
+      expire_fragment "#{fragment}_html"
+      expire_fragment "#{fragment}_fbml"
+    end
     expire_page root_path
   end
 

@@ -1,8 +1,8 @@
-- cache :featured_items do
+- cache :featured_items_html do
   - featured_items ||= FeaturedItem.find_root_by_item_name('featured_template')
   - if featured_items.present?
-    #featurePanel.clearfix
-      #featuredStories.clearfix
+    #featurePanel
+      #featuredStories
         - section1 = featured_items.children.first
         - section2 = featured_items.children.second
         - case featured_items.featured_type

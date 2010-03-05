@@ -1,4 +1,4 @@
-- cache :featured_items do
+- cache :featured_items_fbml do
   - featured_items ||= FeaturedItem.find_root_by_item_name('featured_template')
   - if featured_items.present?
     #featurePanel

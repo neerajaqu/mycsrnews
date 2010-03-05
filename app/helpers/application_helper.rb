@@ -122,7 +122,6 @@ module ApplicationHelper
     	link_options[:format] = options[:format]
     	options.delete(:format)
     end
-    Rails.logger.debug "LINK OPTIONS:: #{link_options}"
     if user.facebook_user?
       options.merge!(:linked => false)
       link_to fb_profile_pic(user, options), user_path(user, link_options)

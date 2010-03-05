@@ -1,4 +1,4 @@
-- cache :stories_list do
+- cache :stories_list_fbml do
   - contents ||= Content.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - no_paginate ||= true
   .panel_1

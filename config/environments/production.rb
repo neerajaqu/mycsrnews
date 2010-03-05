@@ -10,13 +10,14 @@ config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 
 # See everything in the log (default is :info)
-# config.log_level = :debug
+ config.log_level = :debug
 
 # Use a different logger for distributed setups
 # config.logger = SyslogLogger.new
 
 # Use a different cache store in production
-# config.cache_store = :mem_cache_store
+app_name = RAILS_ROOT =~ %r(/([^/]+)/current) ? $1 : 'default'
+config.cache_store = :mem_cache_store, { :namespace => app_name }
 
 # Enable serving of images, stylesheets, and javascripts from an asset server
 # config.action_controller.asset_host = "http://assets.example.com"
