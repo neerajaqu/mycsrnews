@@ -1,6 +1,6 @@
 -# @expects: local 'active_users'
 
-- cache :active_users_fbml
+- cache :active_users_fbml do
   - active_users ||= User.last_active
 
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
