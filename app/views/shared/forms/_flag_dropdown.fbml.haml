@@ -1,4 +1,4 @@
-= link_to t('.flag'), '#', :class => "flag-toggle"
+= link_to t('.flag'), '#', :class => "flag-toggle btnComment float_left"
 .flag-box{:style => "display: none"}
   .flag-item
     - form_tag [flaggable, Flag.new], :class => "flag-form", id => 'flag-form' do 

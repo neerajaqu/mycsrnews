@@ -4,9 +4,9 @@
   - newest_resources ||= Resource.newest
   - unless newest_resources.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.newest_resources_title')
-      .list_stories.clearfix
+      .list_stories
         %ul
           - newest_resources.each do |resource|
             %li

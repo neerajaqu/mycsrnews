@@ -1,16 +1,18 @@
 #header
-  = link_to image_tag("default/spacer.gif"), home_index_path
+  .headerTitle
+    %h1="Generic Title"
   .dh_links
     -#TODO:: properly handle logged in users
     -# unless false && application_is_installed?
     - if logged_in?
-      = pipe_spacer
       = link_to t('.sign_out'), logout_path
       = pipe_spacer
       = link_to t('.invite_friends'), invite_users_path
     - else
       = pipe_spacer
-      = link_to t('.register'), link_user_accounts_users_path
+      = link_to t('.sign_in'), login_path
+      = pipe_spacer
+      = link_to t('.register'), signup_path
     -#TODO:: add share button from 'templates/header.php'
     = pipe_spacer
     -#TODO:: add contact us
@@ -18,4 +20,7 @@
     - if current_user.present?
       = pipe_spacer
       = link_to t('.my_profile'), user_path(current_user)
+    - if current_user and current_user.is_admin?
+      = pipe_spacer
+      = link_to t('.admin'), admin_path
   = render :partial => 'shared/page_tabs'

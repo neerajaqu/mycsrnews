@@ -1,9 +1,9 @@
 -# @expects: local @resource_section, @title
 
 .panel_2
-  .panelBar.clearfix
+  .panelBar
     %h2= t('.title')
-  .list_stories.clearfix
+  .list_stories
     %ul
       - resource_sections.each do |resource_section|
         %li

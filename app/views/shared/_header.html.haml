@@ -1,10 +1,10 @@
 #header
-  = link_to image_tag("default/spacer.gif"), home_index_path
+  .headerTitle
+    %h1="Generic Title"
   .dh_links
     -#TODO:: properly handle logged in users
     -# unless false && application_is_installed?
     - if logged_in?
-      = pipe_spacer
       = link_to t('.sign_out'), logout_path
       = pipe_spacer
       = link_to t('.invite_friends'), invite_users_path

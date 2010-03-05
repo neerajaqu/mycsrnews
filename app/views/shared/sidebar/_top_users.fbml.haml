@@ -4,12 +4,16 @@
   - top_users ||= User.top
   - unless top_users.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.top_users_karma_title')
-      .list_stories.clearfix
+      .list_stories
         %ul
           - top_users.each do |user|
             %li
               .profilePic= local_linked_profile_pic user
-              = link_to user.name, user_path(user)
-              %span.karma-score== (#{user.karma_score})
+              .storyBlockMeta.float_left
+                %h4= link_to user.name, user_path(user)
+                %h3= "City and State"               
+              .storyBlockMeta.float_right
+                %h4.userPoints= "11,230"
+                %h3.userPoints= "Points"

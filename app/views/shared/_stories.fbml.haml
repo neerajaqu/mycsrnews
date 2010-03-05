@@ -18,13 +18,13 @@
                 - if content.images.present?
                   = image_tag content.images.first.url(:thumb)
               .storyBlockWrap.storyBlockSpacer
-                %p.storyHead= link_to content.title, story_path(content)
+                %h2.storyHead= link_to content.title, story_path(content)
                 %p.storyCaption= linked_story_caption content
                 .profilePic= local_linked_profile_pic content.user
-                .storyBlockMeta
+                .storyBlockMeta.float_left
                   %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
-                  %span.btnComment== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteLink"} #{content.votes.size}
-                  %span.btnComment== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+                  %span.btnComment.float_left== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteLink"} #{content.votes.size}
+                  %span.btnComment.float_left== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
     - unless no_paginate
       .clearfix
         = will_paginate contents

@@ -4,10 +4,10 @@
   - newest_videos ||= Video.newest
   - unless newest_videos.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.newest_videos_title')
       %br
-      .list_stories.clearfix
+      .list_stories
         %ul
           - newest_videos.each do |video|
             %li

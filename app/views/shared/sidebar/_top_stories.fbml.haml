@@ -3,18 +3,17 @@
 - cache :top_stories do
   - top_stories ||= Content.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
   .panel_2
-    .panelBar.clearfix
+    .panelBar
       %h2= t('.top_stories_title')
-    .list_stories.clearfix
+    .list_stories
       %ul
         - top_stories.each do |story|
           %li
-            .storyBlockWrap
-              %h4= link_to story.title, story_path(story)
-              .profilePic= local_linked_profile_pic story.user
-              .storyBlockMeta
-                %h3 Posted by So And So 1 day ago
-                %span.btnComment
-                  %a.voteUp like
-                %span.btnComment
-                  %a Comment
+            %h4= link_to story.title, story_path(story)
+            .profilePic= local_linked_profile_pic story.user
+            .storyBlockMeta
+              %h3 Posted by So And So 1 day ago
+              %span.btnComment
+                %a.voteUp like
+              %span.btnComment
+                %a Comment

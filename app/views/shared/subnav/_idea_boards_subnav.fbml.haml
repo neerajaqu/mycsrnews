@@ -1,4 +1,4 @@
-#subNav.tabs.clearfix
+#subNav.tabs
   .left_tabs
     %ul#toggle_tabs_unused.toggle_tabs.clearfix
       - if @idea_board.present?
@@ -10,5 +10,3 @@
       -# TODO:: add this back in
       - if false and current_user
         %li.first= link_to t('.my_ideas'), my_ideas_idea_path(:id => current_user), :class => sub_tab_selected?(@current_sub_tab, 'My Ideas')
-%br
-%br

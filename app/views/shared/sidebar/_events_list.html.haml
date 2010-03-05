@@ -1,9 +1,9 @@
 -# @expects: local @events, @title
 
 .panel_2
-  .panelBar.clearfix
+  .panelBar
     %h2=t('.events_title')
-  .list_stories.clearfix
+  .list_stories
     %ul
       - events.each do |event|
         %li

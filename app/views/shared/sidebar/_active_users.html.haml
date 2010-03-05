@@ -4,9 +4,9 @@
   - active_users ||= User.last_active
 
   .panel_2.left
-    .panelBar.clearfix
+    .panelBar
       %h2= t('.title')
-    .list_stories.clearfix
+    .list_stories
       - unless active_users.empty?
         %ul
           - active_users.each do |user|

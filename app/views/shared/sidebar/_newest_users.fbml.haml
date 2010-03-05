@@ -4,9 +4,9 @@
   - newest_users ||= User.newest
   - unless newest_users.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.newest_users_title')
-      .list_stories.clearfix
+      .list_stories
         %ul
           - newest_users.each do |user|
             %li

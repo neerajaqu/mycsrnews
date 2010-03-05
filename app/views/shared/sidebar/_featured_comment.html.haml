@@ -4,10 +4,10 @@
   - featured_comments ||= Comment.featured
   - unless featured_comments.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.featured_comment_title')
       %br
-      .list_items.clearfix
+      .list_items
         %ul
           - featured_comments.each do |comment|
             %li

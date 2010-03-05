@@ -1,18 +1,18 @@
 -# @expects: local 'comment' %>
 
-.panel_block
+.comment_block
   .thumb= local_linked_profile_pic comment.user
   .storyBlockWrap
-    .storyBlockMeta
-      %h3.float_left= t('.posted_by', :fb_name => (local_linked_profile_name comment.user), :date => time_ago_in_words(comment.created_at))
-      %span.btnComment.float_left
-        %a.voteUp{:href => '#'}= "0"
-      %span.btnComment.float_left
-        %a.voteDown{:href => '#'}= "0"
-      %span.btnComment.float_left
-        %a{:href => '#'}= "Report"
+    .storyBlockMeta.clearfix
+      
+      %h3= t('.posted_by', :fb_name => (local_linked_profile_name comment.user), :date => time_ago_in_words(comment.created_at))
+      %span.btnComment.float_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteUp"} 
+      %span.btnComment.float_left== #{link_to t('.comments_dislike'), dislike_comment_path(comment.id), :class => "voteDown"} #{comment.votes_tally}
+      - if comment.moderatable?
+        = render :partial => 'shared/flag_form', :class => "btnComment, float_left", :locals => { :flaggable => comment }
     %blockquote
       .quotes= comment.comments
-      %span.btn_left== #{link_to t('.comments_like'), like_comment_path(comment.id), :class => "voteLink"} #{link_to t('.comments_dislike'), dislike_comment_path(comment.id), :class => "voteLink"} #{comment.votes_tally}
-      - if comment.moderatable?
-        = render :partial => 'shared/flag_form', :locals => { :flaggable => comment }
+
+  .comment_reply
+    %a.commentReply{:href => '#'}= "Reply" 
+-# TODO:: ADD TRANSLATION ^^

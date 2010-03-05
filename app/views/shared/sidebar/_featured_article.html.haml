@@ -4,10 +4,10 @@
   - featured_contents ||= Article.featured
   - unless featured_contents.empty?
     .panel_2
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.featured_content_title')
       %br
-      .list_items.clearfix
+      .list_items
         %ul
           - featured_contents.each do |content|
             %li
