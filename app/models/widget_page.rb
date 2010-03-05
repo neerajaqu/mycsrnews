@@ -18,4 +18,9 @@ class WidgetPage < ActiveRecord::Base
   def self.find_root_by_page_name(page)
     self.find(:all, :conditions => ["parent_id IS NULL and name = ?", page]).first
   end
+
+  def css_class
+    return '' unless self.position == 'left' || self.position == 'right'
+    self.position
+  end
 end

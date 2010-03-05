@@ -1,9 +1,9 @@
 -# @expects: local 'comment'
 
-- cache :featured_comments, :expires_in => 15.seconds do
+- cache :featured_comments_html, :expires_in => 15.seconds do
   - featured_comments ||= Comment.featured
   - unless featured_comments.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.featured_comment_title')
       %br

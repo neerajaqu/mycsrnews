@@ -1,10 +1,10 @@
 -# TODO update design for videos skybox
 -# @expects: local 'newest_videos'
 
-- cache :newest_videos do
+- cache :newest_videos_html do
   - newest_videos ||= Video.newest
   - unless newest_videos.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar.clearfix
         %h2= t('.newest_videos_title')
       %br

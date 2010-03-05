@@ -1,9 +1,9 @@
 -# @expects: local 'newest_ideas'
 
-- cache :newest_ideas do
+- cache :newest_ideas_fbml do
   - newest_ideas ||= Idea.newest
   - unless newest_ideas.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.newest_ideas_title')
       .list_stories

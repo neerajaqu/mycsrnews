@@ -1,9 +1,9 @@
 -# @expects: local 'newest_resources'
 
-- cache :newest_resources do
+- cache :newest_resources_html do
   - newest_resources ||= Resource.newest
   - unless newest_resources.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar.clearfix
         %h2= t('.newest_resources_title')
       .list_stories.clearfix

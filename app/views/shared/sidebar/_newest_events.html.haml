@@ -1,9 +1,9 @@
 -# @expects: local 'newest_events'
 
-- cache :newest_events do
+- cache :newest_events_html do
   - newest_events ||= Event.newest
   - unless newest_events.empty?
-    .panel_2
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar.clearfix
         %h2= t('.newest_events_title')
       .list_stories.clearfix

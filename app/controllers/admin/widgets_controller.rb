@@ -16,12 +16,22 @@ class Admin::WidgetsController < AdminController
     @main_content = @home_page.children.create({:name => "home_main_content", :widget_type => "main_content"})
     @sidebar_content = @home_page.children.create({:name => "home_sidebar_content", :widget_type => "sidebar_content"})
     @main.each do |widget_id|
+      widget_position = nil
+      if widget_id =~ /^([0-9]+)(?:-(left|right|))?$/
+      	widget_id = $1
+      	widget_position = $2
+      end
       widget = Widget.find_by_id(widget_id)
-      @main_content.children.create({:name => "home_#{widget.name}_widget", :widget => widget, :widget_type => "widget"})
+      @main_content.children.create({:name => "home_#{widget.name}_widget", :widget => widget, :widget_type => "widget", :position => widget_position})
     end
     @sidebar.each do |widget_id|
+      widget_position = nil
+      if widget_id =~ /^([0-9]+)(?:-(left|right|))?$/
+      	widget_id = $1
+      	widget_position = $2
+      end
       widget = Widget.find_by_id(widget_id)
-      @sidebar_content.children.create({:name => "home_#{widget.name}_widget", :widget => widget, :widget_type => "widget"})
+      @sidebar_content.children.create({:name => "home_#{widget.name}_widget", :widget => widget, :widget_type => "widget", :position => widget_position})
     end
 
     render :json => {:success => "Success!"}.to_json and return
