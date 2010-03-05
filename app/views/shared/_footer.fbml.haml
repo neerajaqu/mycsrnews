@@ -13,7 +13,9 @@
     = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
     = pipe_spacer
     = link_to t('.about'), about_path
-    - if current_user and current_user.is_admin?
+    = pipe_spacer
+    = link_to t('footer.contact'), contact_us_path
+    %span.admin-links
       = pipe_spacer
       = link_to t('.admin'), admin_path
     = pipe_spacer

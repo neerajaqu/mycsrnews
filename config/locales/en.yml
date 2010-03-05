@@ -1,4 +1,14 @@
 en:
+  header:
+    account: "Account &darr;"
+  footer:
+    contact: "Contact us"
+  account_menu:
+    sign_in: "Sign in"
+    sign_out: "Sign out"
+    my_profile: "Your profile"
+    register: "Register"
+    invite_friends: "Invite your friends"
   ideas:
     newest_ideas: "Newest Ideas"
     top_ideas: "Top Ideas"

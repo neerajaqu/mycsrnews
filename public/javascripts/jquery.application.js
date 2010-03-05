@@ -32,6 +32,14 @@ $(function() {
     return url;
   }
 
+  $('.account-toggle').click(function(event) {
+  	event.preventDefault();
+  	$(this).next().toggle();
+	if ($(this).next().children().length==0) {
+ 		$(this).next().load('/account_menu');
+	}
+  });
+
   $('.update-bio').click(function(event) {
   	event.preventDefault();
   	$('.current-bio').toggle();
