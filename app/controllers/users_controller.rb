@@ -88,6 +88,13 @@ class UsersController < ApplicationController
     end
   end
   
+  def account_menu
+    respond_to do |format|
+      format.fbjs
+      format.js
+    end     
+  end
+  
   def current
     Rails.logger.debug "**************Hitting CURRENT for #{current_user}"
     respond_to do |format|

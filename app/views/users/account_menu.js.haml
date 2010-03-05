@@ -1,0 +1,13 @@
+%ul
+  - if current_user.present? and logged_in?
+    %li
+      = link_to t('account_menu.sign_out'), logout_path
+    %li
+      = link_to t('account_menu.invite_friends'), invite_users_path
+    %li
+      = link_to t('account_menu.my_profile'), user_path(current_user)
+  - else
+    %li
+      = link_to t('account_menu.sign_in'), login_path
+    %li
+      = link_to t('account_menu.register'), signup_path
