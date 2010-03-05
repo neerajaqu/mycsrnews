@@ -88,18 +88,21 @@
     padding: 5px 10px
 
 // account dropdown styles //
+.account-dropdown
+  float: left
+  position: relative
+  z-index: 98
+
 .account-toggle
   position: relative
   z-index: 99
 
-.account-tab
-
 .account-links
-  width: 200px
+  width: 180px
   position: absolute
-  z-index: 97
-  top: 20px
-  right: 5px
+  z-index: 96
+  top: 18px
+  right: -4px
   display: inline-block
   padding: 4px 10px
   border: 
@@ -124,6 +127,21 @@
         display: inline-block
         &:hover
           background: none
+
+  .account-tab
+    height: 24px
+    width: 65px
+    z-index: 97
+    position: absolute
+    top: -25px
+    right: -1px
+    border: 
+      :top= !borderColor_1
+      :bottom= !noBorder
+      :left= !borderColor_1
+      :right= !borderColor_1
+    :background-color= !bgWhite
+
 // Body containers - Most of the styling for these is in the grid.sass/fb_grid.sass files //
 #bodyWrapper
   padding-bottom: 20px

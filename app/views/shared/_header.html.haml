@@ -4,10 +4,11 @@
   .dh_links
     -#TODO:: properly handle logged in users
     -# unless false && application_is_installed?
-    %a= fb_share_button(home_index_path)
-    = pipe_spacer
-    = link_to t('header.account'), '#', :class => "account-toggle"
-    .account-links{:style => 'display:none'}
+    .account-dropdown
+      %a= fb_share_button(home_index_path)
+      = pipe_spacer
+      = link_to t('header.account'), '#', :class => "account-toggle"
+      .account-links{:style => 'display:none'}
     %span.admin-links
       = pipe_spacer
       = link_to t('.admin'), admin_path
