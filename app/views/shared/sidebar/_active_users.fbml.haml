@@ -6,7 +6,7 @@
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar.clearfix
       %h2= t('.title')
-    .list_stories.clearfix
+    .list_stories
       %ul
         - unless active_users.empty?
           - active_users.each do |user|
