@@ -1,5 +1,9 @@
 %ul
   - if current_user.present? and logged_in?
+    %li.account-profile
+      .float_left= local_linked_profile_pic current_user
+      %h4.float_right= local_linked_profile_name(current_user, :use_you => false)
+    %hr
     %li
       = link_to t('account_menu.sign_out'), logout_path
     %li

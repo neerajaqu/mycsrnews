@@ -12,6 +12,16 @@
 #header .pipe { margin: 0 5px; color: #999999; }
 #header .dh_links { position: absolute; top: 10px; right: 10px; float: right; padding: 5px 10px; }
 
+.account-toggle { position: relative; z-index: 99; }
+
+
+.account-links { width: 200px; position: absolute; z-index: 97; top: 20px; right: 5px; display: inline-block; padding: 4px 10px; border-top: 1px solid #3b5998; border-bottom: 1px solid #3b5998; border-left: 1px solid #3b5998; border-right: 1px solid #3b5998; background-color: white; }
+.account-links li { width: 100%; margin: 6px 0 0px 0; padding: 0; }
+.account-links li a { display: block; padding: 4px 6px; }
+.account-links li a:hover { background: #dce6f4; }
+.account-links li.account-profile a { display: inline-block; }
+.account-links li.account-profile a:hover { background: none; }
+
 #bodyWrapper { padding-bottom: 20px; }
 
 
