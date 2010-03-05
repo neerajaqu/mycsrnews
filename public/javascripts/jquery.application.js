@@ -36,7 +36,9 @@ $(function() {
   	event.preventDefault();
   	$(this).next().toggle();
 	if ($(this).next().children().length==0) {
- 		$(this).next().load('/account_menu.js');
+ 		$(this).next().load('/account_menu.js', function() {
+  			rebuild_facebook_dom();
+		});
 	}
   });
 
