@@ -994,7 +994,7 @@ body .omega { margin-right: 0; }
 
 #subNav { float: left; width: 940px; margin-left: 0; }
 
-#col_left { display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 620px; margin-left: 0; float: left; clear: both; }
+#col_left { float: left; display: inline; float: left; margin-left: 10px; margin-right: 10px; width: 620px; margin-left: 0; clear: both; }
 #col_left .alpha { margin-left: 0; }
 #col_left .omega { margin-right: 0; }
 #col_left .left { float: left; clear: left; margin-left: 0; }

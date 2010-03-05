@@ -25,7 +25,7 @@ $(function() {
       return SITE_URL + url.replace(/^(?:http:\/\/apps.facebook.com)?\/[^\/]+(.*)/, "$1");
   }
 
-  $('a.voteLink').click(function(event) {
+  $('a.voteLink, a.voteUp, a.voteDown').click(function(event) {
     event.preventDefault();
     var url = change_url_format($(this).href());
     var span = $(this).parent();
@@ -44,7 +44,7 @@ $(function() {
   	event.preventDefault();  	
   	$(this).next().toggle();
 	if ($(this).next().children().length==0) {
-		$.update($(this).next(), SITE_URL+'/account_menu');			
+		$.update($(this).next(), SITE_URL+'/account_menu.fbjs');
 	}
   });
 
