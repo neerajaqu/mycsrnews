@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :load_top_stories, :only => [:show]
+  before_filter :ensure_authenticated_to_facebook, :only => :link_user_accounts
 
   # render new.rhtml
   def new

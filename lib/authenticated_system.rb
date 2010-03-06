@@ -82,7 +82,7 @@ module AuthenticatedSystem
         # for a workaround.)
         format.any(:json, :xml) do
           #request_http_basic_authentication 'Web Password'
-          dialog = "Account membership required. Please <a href=\"#{url_for login_path}\"><b>Login</b></a> or <a href=\"#{url_for register_path}\"><b>Register</b></a>."
+          dialog = "Account membership required. Please <a href=\"#{url_for login_path(:format => 'html')}\"><b>Login</b></a> or <a href=\"#{url_for register_path(:format => 'html')}\"><b>Register</b></a>."
           render :json => { :error => "Account Required", :dialog => dialog }.to_json, :status => 401
         end
       end
