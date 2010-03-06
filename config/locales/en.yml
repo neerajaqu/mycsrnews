@@ -33,3 +33,7 @@ en:
   dislike: "Dislike"
   comments: "Comments"
   tweet: "Tweet"
+  asked_by: "Asked by {{fb_name}} {{date}} ago"
+  answer: "{{count}} {{answer_string}}"
+  no_answers_yet: "Answer this question"
+  please_elaborate: "Please elaborate a bit more (optional)"

@@ -1,0 +1,20 @@
+#col_left
+  .list_stories.clearfix
+    %ul
+      %li.askQuestionWrap
+        .storyBlockWrap
+          .profilePicLarger= local_linked_profile_pic @question.user
+          %p.askQuestionHead= link_to @question.question, @question
+          %p.storyCaption= @question.details
+          .storyBlockMeta
+            %p= t('asked_by', :fb_name => local_linked_profile_name(@question.user), :date => time_ago_in_words(@question.created_at))
+            %p
+              %span.btn_left== #{link_to t('like'), like_question_path(@question.id), :class => "voteLink"} #{@question.votes.size}
+              %span.btn_mid== #{link_to answer_translate(@question.answers.count), question_path(@question, :anchor => "commentListTop")}
+              %span.btn_right= fb_share_button(question_url(@question))
+  .answerForm
+    - semantic_form_for @answer, :url => create_answer_question_path(@question) do |form|
+      - form.inputs do
+        = form.input :answer
+      - form.buttons do
+        = form.commit_button

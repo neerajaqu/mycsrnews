@@ -1,0 +1,28 @@
+#col_left
+  %h1 Ask a question
+  - semantic_form_for Question.new do |form|
+    %p= form.input :question, :required => false, :label => false
+    .fullQuestionForm
+      .askRelated
+      %p
+        %b= t('please_elaborate')
+        = form.input :details, :required => false, :label => false
+      - form.buttons do
+        = form.commit_button :button_html => { :class => "btn_1" }
+
+  - unless @questions.empty?
+    .list_stories.clearfix
+      %ul
+        - @questions.each do |question|
+          %li.askQuestionWrap
+            .storyBlockWrap
+              %p.askQuestionHead= link_to question.question, question
+              .profilePic= local_linked_profile_pic question.user
+              .storyBlockMeta
+                %p= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
+                %p
+                  %span.btn_left== #{link_to t('like'), like_question_path(question.id), :class => "voteLink"} #{question.votes.size}
+                  %span.btn_mid== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
+                  %span.btn_right= fb_share_button(question_url(question))
+
+#col_right

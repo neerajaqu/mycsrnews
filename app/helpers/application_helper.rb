@@ -293,4 +293,10 @@ EMBED
     link_to(item.featured? ? 'UnFeature' : 'Feature', toggle_featured_path(item.class.name.foreign_key.to_sym => item))
   end
 
+  def answer_translate count = 0
+    count > 0 ?
+      t('answers', :count => count, :answer_str => pluralize(count, "answer")) :
+      t('no_answers_yet')
+  end
+
 end

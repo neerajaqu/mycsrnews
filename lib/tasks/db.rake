@@ -8,7 +8,7 @@ namespace :n2 do
       db_user = get_input "Database User: "
       db_password = get_input "Database Password (leave blank for no password or use '-p' to prompt for password): "
 
-      ignore_tables = 'AdCode,AdShare,AdTrack,Admin_DataStore,Admin_User,AskAnswers,AskQuestions,Challenges,ChallengesCompleted,ContactEmails,FeaturedTemplate,FeaturedWidgets,FeedMedia,FolderLinks,Folders,ForumTopics,Log,LogDumps,LogExtra,MicroAccounts,MicroPosts,NotificationMessages,Notifications,Orders,OutboundMessages,Photos,Prizes,RawExtLinks,RawSessions,SessionLengths,Sites,Subscriptions,SurveyMonkeys,SystemStatus,TaggedObjects,Templates,UserBlogs,UserCollectives,UserInvites,Videos,WeeklyScores,cronJobs,feedType'
+      ignore_tables = 'AdCode,AdShare,AdTrack,Admin_DataStore,Admin_User,Challenges,ChallengesCompleted,ContactEmails,FeaturedTemplate,FeaturedWidgets,FeedMedia,FolderLinks,Folders,ForumTopics,Log,LogDumps,LogExtra,MicroAccounts,MicroPosts,NotificationMessages,Notifications,Orders,OutboundMessages,Photos,Prizes,RawExtLinks,RawSessions,SessionLengths,Sites,Subscriptions,SurveyMonkeys,SystemStatus,TaggedObjects,Templates,UserBlogs,UserCollectives,UserInvites,Videos,WeeklyScores,cronJobs,feedType'
 
       dump = []
       dump << "mysqldump"

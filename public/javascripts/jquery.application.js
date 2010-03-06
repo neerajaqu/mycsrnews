@@ -49,6 +49,11 @@ $(function() {
   	$(this).parent().next().toggle();
   });
 
+  $('.fullQuestionForm').hide();
+  $('form#new_question #question_question').focus(function(event) {
+  	$('.fullQuestionForm').show();
+  });
+
   $('.refine-toggle, .flag-toggle').click(function(event) {
   	event.preventDefault();
   	$(this).next().toggle();
