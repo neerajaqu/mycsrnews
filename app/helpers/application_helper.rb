@@ -160,14 +160,18 @@ module ApplicationHelper
     link_to url_for(send("#{item.class.to_s.underscore}_url", item)), url_for(send("#{item.class.to_s.underscore}_url", item))
   end
 
-  def twitter_share_item_link(item,caption)
+  def twitter_share_item_link(item,caption,button=false)
     caption = strip_tags(caption)
     url = path_to_self(item)
     text = CGI.escape("#{caption} #{url}")
     twitter_url = "http://twitter.com/?status=#{text}"
-    link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
+    if button == true
+      link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
+    else
+      link_to t('tweet'), twitter_url
+    end
   end
-
+  
   def base_url(path)
     if APP_CONFIG['base_url'].present?
     	"#{APP_CONFIG['base_url']}#{path}"

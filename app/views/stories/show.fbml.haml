@@ -10,7 +10,7 @@
           %li
             %a= fb_share_button(story_url(@story))
           %li
-            %a{:href => '#'}= "Tweet it"
+            %a= twitter_share_item_link @story, @story.title
       .thumb
         - if @story.images.present?
           = image_tag @story.images.first.url(:medium)
