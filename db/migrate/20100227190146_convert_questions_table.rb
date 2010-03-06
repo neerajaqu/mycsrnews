@@ -2,7 +2,7 @@ class ConvertQuestionsTable < ActiveRecord::Migration
   def self.up
     rename_table  :AskQuestions, :questions
 		rename_column :questions, :userid, :user_id
-		rename_column :questions, :numLikes, :likes_count
+		rename_column :questions, :numLikes, :votes_tally
 		rename_column :questions, :numComments, :comments_count
 		rename_column :questions, :numAnswers, :answers_count
 		rename_column :questions, :dt, :created_at

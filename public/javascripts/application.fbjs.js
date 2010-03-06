@@ -7,6 +7,10 @@
  * -add base site url to javascript
  */
 $(function() {
+
+  $('.hide').hide();
+  $('h2.hidden').removeClass('hidden');
+
   function change_url_format(url, format) {
     url = getRelURL(url);
     if (typeof(format) == 'undefined') { format = '.fbjs'; }
@@ -70,8 +74,6 @@ $(function() {
     $.update(list, url, $(this).serialize());
   });
 
-  $('.hide').hide();
-  $('h2.hidden').removeClass('hidden');
   $('a.toggle-form').click(function(event) {
   	event.preventDefault();
   	$(this).parent().next().toggle();
@@ -89,6 +91,22 @@ $(function() {
     panel = $(panel.nodes[0]);
     var list = panel.children().filter('.list_stories').children().filter('ul');
     $.update(list, url, $(this).serialize());
+  });
+
+  $('form#new_question #question_question').focus(function(event) {
+  	$('.fullQuestionForm').show();
+  });
+
+  $('.answer_link').click(function(event) {
+  	event.preventDefault();
+  	$('#answerForm').toggle();
+  });
+  $('#answersList #commentThread, #answersList #postComment').hide();
+  $('.answer_comments_link').click(function(event) {
+  	event.preventDefault();
+  	var answer = $(this).parents().filter('.answer');
+  	answer = $(answer.nodes[0]);
+    answer.children().filter('#commentThread, #postComment').toggle();
   });
 
 });

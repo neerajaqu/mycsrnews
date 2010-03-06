@@ -8,10 +8,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @answer   = @question.answers.build
-    if request.post?
-    	raise params.inspect
-    end
+    @answer   = Answer.new
   end
 
   def new
@@ -24,7 +21,16 @@ class QuestionsController < ApplicationController
   end
 
   def create_answer
-    raise params.inspect
+    @question = Question.find(params[:id])
+    @answer = @question.answers.build(params[:answer])
+    @answer.user = current_user
+    if @question.save
+    	flash[:success] = "Thank you for posting your answer!"
+    	redirect_to @question
+    else
+    	flash[:error] = "Could not create your question, please try again."
+    	redirect_to @question
+    end
   end
 
 end

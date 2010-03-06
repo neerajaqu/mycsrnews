@@ -2,7 +2,7 @@
   %h1 Ask a question
   - semantic_form_for Question.new do |form|
     %p= form.input :question, :required => false, :label => false
-    .fullQuestionForm
+    .fullQuestionForm.hide
       .askRelated
       %p
         %b= t('please_elaborate')

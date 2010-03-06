@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20100305005027) do
     t.integer  "question_id",                 :default => 0
     t.integer  "user_id",        :limit => 8, :default => 0
     t.text     "answer"
-    t.integer  "likes_count",                 :default => 0
+    t.integer  "votes_tally",                 :default => 0
     t.integer  "comments_count",              :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20100305005027) do
     t.text     "caption"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "votes_tally",    :default => 0
   end
 
   add_index "audios", ["audioable_type", "audioable_id"], :name => "index_audios_on_audioable_type_and_audioable_id"
@@ -307,7 +308,7 @@ ActiveRecord::Schema.define(:version => 20100305005027) do
     t.integer  "user_id",        :limit => 8, :default => 0
     t.string   "question",                    :default => ""
     t.text     "details"
-    t.integer  "likes_count",                 :default => 0
+    t.integer  "votes_tally",                 :default => 0
     t.integer  "comments_count",              :default => 0
     t.datetime "created_at"
     t.integer  "answers_count",               :default => 0

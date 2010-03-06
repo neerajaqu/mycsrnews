@@ -295,8 +295,14 @@ EMBED
 
   def answer_translate count = 0
     count > 0 ?
-      t('answers', :count => count, :answer_str => pluralize(count, "answer")) :
-      t('no_answers_yet')
+      t('answers', :answer_string => pluralize(count, "answer")) :
+      t('answer_question')
+  end
+
+  def answer_comments_translate count = 0
+    count > 0 ?
+      t('answer_comments', :answer_comments_string => pluralize(count, "comment")) :
+      t('answer_comment')
   end
 
 end

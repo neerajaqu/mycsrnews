@@ -3,7 +3,7 @@ class ConvertAnswersTable < ActiveRecord::Migration
     rename_table  :AskAnswers, :answers
 		rename_column :answers, :questionid, :question_id
 		rename_column :answers, :userid, :user_id
-		rename_column :answers, :numLikes, :likes_count
+		rename_column :answers, :numLikes, :votes_tally
 		rename_column :answers, :numComments, :comments_count
 		rename_column :answers, :dt, :created_at
 		add_column    :answers, :updated_at, :datetime

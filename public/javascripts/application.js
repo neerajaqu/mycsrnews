@@ -49,7 +49,6 @@ $(function() {
   	$(this).parent().next().toggle();
   });
 
-  $('.fullQuestionForm').hide();
   $('form#new_question #question_question').focus(function(event) {
   	$('.fullQuestionForm').show();
   });
@@ -130,6 +129,16 @@ $(function() {
   $('a.toggle-form').click(function(event) {
   	event.preventDefault();
   	$(this).parent().next().toggle();
+  });
+
+  $('.answer_link').click(function(event) {
+  	event.preventDefault();
+  	$('#answerForm').toggle();
+  });
+  $('#commentThread, #postComment', $('#answersList')).hide();
+  $('.answer_comments_link').click(function(event) {
+  	event.preventDefault();
+    $('#commentThread, #postComment', $(this).parents().filter('.answer')).toggle();
   });
 
 });

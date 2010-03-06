@@ -1,2 +1,37 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.fbml.erb</p>
+#col_left
+  #readArticle.panel_1
+    .topBar
+      %ul
+        %li
+          %a== #{link_to t('like'), like_question_path(@question.id, :return_to => question_path(@question)), :class => "voteLink"} #{@question.votes_tally}
+        %li
+          %a= link_to t('answer_question'), '#', :class => "answer_link"
+        %li
+          %a= fb_share_button(question_url(@question))
+        %li
+          %a= twitter_share_item_link @question, @question.question
+    .list_stories.clearfix
+      %ul
+        %li.askQuestionWrap
+          .storyBlockWrap
+            .profilePicLarger= local_linked_profile_pic @question.user
+            %p.askQuestionHead= link_to @question.question, @question
+            %p.storyCaption= @question.details
+            .storyBlockMeta
+              %p= t('asked_by', :fb_name => local_linked_profile_name(@question.user), :date => time_ago_in_words(@question.created_at))
+    #answerForm.hide
+      - semantic_form_for @answer, :url => create_answer_question_path(@question) do |form|
+        - form.inputs do
+          = form.input :answer
+        - form.buttons do
+          = form.commit_button :button_html => { :class => "btn_1" }
+    #answersList
+      - unless @question.answers.present?
+        %h2 This question has not yet been answered. Be the first!
+      - else
+        %h2== Showing #{pluralize @question.answers.size, 'Answer'}
+        .list_stories
+          %ul
+            - @question.answers.each do |answer|
+              = render :partial => 'shared/answer', :locals => { :answer => answer }
+    = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
