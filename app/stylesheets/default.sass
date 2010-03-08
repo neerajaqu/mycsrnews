@@ -31,6 +31,8 @@
 // Dropdown Variables //
 !dropdownTabOff = #80a341
 !dropdownTabOn = #80a341
+// text dropdown styles //
+!dropDownBg = transparent url( /images/default/dropdown_arrow.gif) center right no-repeat
 // Sub Menu Variables
 !subtabOn = #3b5998
 !subtablinkOn = #FFFFFF
@@ -528,6 +530,34 @@ li
   border-bottom: none
   margin-bottom: 15px
 
+  .videoBlockWrap
+    li
+      display:inline-block
+      float: left
+    .videoThumb
+      margin:
+        top: 3px
+        right: 3px
+      width: 74px
+      height: 36px
+      background: #339900
+      
+  .ad_fullCol
+    width: 480px
+    height: 80px
+    margin:
+      top: 0
+      bottom: 0
+      left: auto
+      right: auto
+    background: #999999
+    
+    span
+      font-size: 9px
+      color: #333333
+      display: block
+      padding: 2px 4px
+      text-transform: uppercase
   .formBox
     padding: 10px 0px
     :background= !subheadBG
@@ -759,11 +789,14 @@ li
 
 .feature_bg
   :background-color= !bgColor
-  padding-bottom: 10px
   
+  .panel_2
+    margin-bottom: 10px
   .thumb
     margin-top: 10px
 
+  .storyBlockWrap
+    margin-top: 10px
 
 .subtitle
   font-size: 10px
@@ -1022,38 +1055,29 @@ a.flag:hover
     font-size: 12px
 // refine search box styles //
 .panelBar
+
+  .refine-toggle
+    position: relative
+    z-index: 48
+    padding-right: 10px
+    :background= !dropDownBg
+
   .refine_link
     float: right
     position: relative
     display: block
-    width: 88px
-    margin: -17px 2px 0 0
-    padding: 2px 0px 4px 0px
-    z-index: 46
-    border: 
-      :top= !borderColor_1
-      :bottom= !borderColor_1
-      :left= !borderColor_1
-      :right= !borderColor_1
-    :background-color= !bgWhite
-    text-align: center
-    -moz-border-radius: 4px
-    webkit-border-radius: 4px
-    border-radius: 4px
-    line-height: 100%
-    
-    a
-      font-size: 10px
+    padding: 4px 10px
+    margin-top: -18px
 
 
     .refine-tab
-      height: 7px
-      width: 88px
+      height: 28px
+      width: 104px
       position: absolute
-      top: -8px
+      top: -30px
       right: -1px
       border: 
-        :top= !noBorder
+        :top= !borderColor_1
         :bottom= !borderColor_4
         :left= !borderColor_1
         :right= !borderColor_1
@@ -1066,8 +1090,8 @@ a.flag:hover
       position: absolute
       padding: 8px
       width: 142px
-      top: 22px
-      left: -71px
+      top: 26px
+      left: -54px
       :border= !borderColor_1
       :background-color= !bgWhite
     
@@ -1086,8 +1110,6 @@ a.flag:hover
 
         input
           width: 70%
-<<<<<<< HEAD:app/stylesheets/default.sass
-
 
 // test heights for test panels
 

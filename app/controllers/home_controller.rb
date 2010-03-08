@@ -4,6 +4,9 @@ class HomeController < ApplicationController
 
   before_filter :set_current_tab
 
+  def test_design
+  end
+
   def index
     if request.post?
     	respond_to do |format|

@@ -107,6 +107,10 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #subNav .toggle_tabs li a.disabled:hover { text-decoration: none; }
 
 .panel_1, .panel_2 { border-bottom: none; margin-bottom: 15px; }
+.panel_1 .videoBlockWrap li, .panel_2 .videoBlockWrap li { float: left; }
+.panel_1 .videoBlockWrap .videoThumb, .panel_2 .videoBlockWrap .videoThumb { margin-top: 3px; margin-right: 3px; width: 74px; height: 36px; background: #339900; }
+.panel_1 .ad_fullCol, .panel_2 .ad_fullCol { width: 480px; height: 80px; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; background: #999999; }
+.panel_1 .ad_fullCol span, .panel_2 .ad_fullCol span { font-size: 9px; color: #333333; display: block; padding: 2px 4px; text-transform: uppercase; }
 .panel_1 .formBox, .panel_2 .formBox { padding: 10px 0px; background: #f0f0f0; }
 .panel_1 .formBox .inputs, .panel_1 .formBox .buttons, .panel_2 .formBox .inputs, .panel_2 .formBox .buttons { width: 96%; margin: 0 auto; }
 .panel_1 .formBox textarea, .panel_2 .formBox textarea { border: 1px solid #cccccc; margin-left: -1px; }
@@ -155,8 +159,10 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #commentThread .comment_block .comment_reply { display: block; padding: 0 0 4px 20px; position: absolute; bottom: 8px; left: 70px; background: transparent url(/images/default/reply_arrow.png) top left no-repeat; }
 #commentThread .comment_block .comment_reply a { color: #336600; font-weight: bold; font-size: 11px; }
 
-.feature_bg { background-color: #dce6f4; padding-bottom: 10px; }
+.feature_bg { background-color: #dce6f4; }
+.feature_bg .panel_2 { margin-bottom: 10px; }
 .feature_bg .thumb { margin-top: 10px; }
+.feature_bg .storyBlockWrap { margin-top: 10px; }
 
 .subtitle { font-size: 10px; color: #999999; background: #f0f0f0; border-top: none; border-bottom: none; padding: 6px 4px 6px 4px; }
 
@@ -225,10 +231,10 @@ a.flag:hover { color: #cc3333; background: url(/images/default/icon_flag.gif) 10
 #contactBox form { margin-top: 20px; }
 #contactBox label { font-size: 12px; }
 
-.panelBar .refine_link { float: right; position: relative; display: block; width: 88px; margin: -17px 2px 0 0; padding: 2px 0px 4px 0px; z-index: 46; border-top: 1px solid #3b5998; border-bottom: 1px solid #3b5998; border-left: 1px solid #3b5998; border-right: 1px solid #3b5998; background-color: white; text-align: center; -moz-border-radius: 4px; webkit-border-radius: 4px; border-radius: 4px; line-height: 100%; }
-.panelBar .refine_link a { font-size: 10px; }
-.panelBar .refine_link .refine-tab { height: 7px; width: 88px; position: absolute; top: -8px; right: -1px; border-top: none; border-bottom: 1px solid white; border-left: 1px solid #3b5998; border-right: 1px solid #3b5998; background-color: white; z-index: 44; }
-.panelBar .refine_link .refine-box { z-index: 43; display: none; position: absolute; padding: 8px; width: 142px; top: 22px; left: -71px; border: 1px solid #3b5998; background-color: white; }
+.panelBar .refine-toggle { position: relative; z-index: 48; padding-right: 10px; background: transparent url('/images/default/dropdown_arrow.gif') center right no-repeat; }
+.panelBar .refine_link { float: right; position: relative; display: block; padding: 4px 10px; margin-top: -18px; }
+.panelBar .refine_link .refine-tab { height: 28px; width: 104px; position: absolute; top: -30px; right: -1px; border-top: 1px solid #3b5998; border-bottom: 1px solid white; border-left: 1px solid #3b5998; border-right: 1px solid #3b5998; background-color: white; z-index: 44; }
+.panelBar .refine_link .refine-box { z-index: 43; display: none; position: absolute; padding: 8px; width: 142px; top: 26px; left: -54px; border: 1px solid #3b5998; background-color: white; }
 .panelBar .refine_link .refine-box .refine-content { text-align: center; }
 .panelBar .refine_link .refine-box .refine-content select { width: 100%; margin-bottom: 15px; }
 .panelBar .refine_link .refine-box .refine-content label { display: block; font-weight: bold; text-align: left; padding: 0 0 5px 4px; }
