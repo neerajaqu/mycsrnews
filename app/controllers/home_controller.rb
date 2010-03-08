@@ -34,12 +34,15 @@ class HomeController < ApplicationController
   end
 
   def about
+    @about_page = Metadata.find_by_key_type_name('page', 'about')    
   end
 
   def faq
+    @faq_page = Metadata.find_by_key_type_name('page', 'faq')    
   end
 
   def terms
+    @terms_page = Metadata.find_by_key_type_name('page', 'terms')    
   end
 
   def contact_us
