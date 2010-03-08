@@ -1,16 +1,15 @@
-- cache :header_html, :expires_in => 1.hour do
-  #header
-    .headerTitle
-      %h1= APP_CONFIG['site_title']
-    .dh_links
-      -#TODO:: properly handle logged in users
-      -# unless false && application_is_installed?
-      .account-dropdown
-        %a= fb_share_button(home_index_path)
-        = pipe_spacer
-        = link_to t('header.account'), '#', :class => "account-toggle"
-        .account-links{:style => 'display:none'}
-      %span.admin-links
-        = pipe_spacer
-        = link_to t('.admin'), admin_path
-    = render :partial => 'shared/page_tabs'
+#header
+  .headerTitle
+    %h1= APP_CONFIG['site_title']
+  .dh_links
+    -#TODO:: properly handle logged in users
+    -# unless false && application_is_installed?
+    .account-dropdown
+      %a= fb_share_button(home_index_path)
+      = pipe_spacer
+      = link_to t('header.account'), '#', :class => "account-toggle"
+      .account-links{:style => 'display:none'}
+    %span.admin-links
+      = pipe_spacer
+      = link_to t('.admin'), admin_path
+  = render :partial => 'shared/page_tabs'

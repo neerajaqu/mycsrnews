@@ -3,6 +3,9 @@ ActionController::Routing::Routes.draw do |map|
   map.filter 'locale'
   map.from_plugin 'i18n_backend_database'
 
+  # TEST DESIGN ROUTE
+  map.toggle_featured '/test_design.:format', :controller => 'home', :action => 'test_design'
+
   map.toggle_blocked '/block.:format', :controller => 'flags', :action => 'block'
   map.toggle_featured '/feature.:format', :controller => 'flags', :action => 'feature'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
