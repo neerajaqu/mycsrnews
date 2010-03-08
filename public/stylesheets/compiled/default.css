@@ -159,7 +159,8 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #commentThread .comment_block .comment_reply { display: block; padding: 0 0 4px 20px; position: absolute; bottom: 8px; left: 70px; background: transparent url(/images/default/reply_arrow.png) top left no-repeat; }
 #commentThread .comment_block .comment_reply a { color: #336600; font-weight: bold; font-size: 11px; }
 
-.feature_bg { background-color: #dce6f4; padding-bottom: 6px; margin-bottom: 4px; }
+.feature_bg { background-color: #dce6f4; }
+.feature_bg .panel_2 { margin-bottom: 10px; }
 .feature_bg .thumb { margin-top: 10px; }
 .feature_bg .storyBlockWrap { margin-top: 10px; }
 
