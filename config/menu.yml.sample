@@ -18,6 +18,9 @@ menu:
     ideas_list: 'enabled'
     idea_boards_list: 'enabled'
     new_idea: 'enabled'
+  questions:
+    questions_list: 'enabled'
+    new_question: 'enabled'
   events:
     events_list: 'enabled'
     new_event: 'enabled'

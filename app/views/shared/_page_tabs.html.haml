@@ -18,8 +18,6 @@
                       %li= link_to t('.newswire'), newswires_path, :class => tab_selected?(@current_tab, 'stories')
                     - unless MENU['stories']['new_story'].nil?
                       %li= link_to t('.new_story'), new_story_path, :class => tab_selected?(@current_tab, 'stories')
-        - if MENU.key? 'questions'
-          %li.first= link_to t('questions'), questions_path, :class => tab_selected?(@current_tab, 'questions')
         -#TODO:: ADD Blogs/Articles
         -# if MENU.key? 'stories'
           -#%li
@@ -63,6 +61,17 @@
                       %li= link_to t('.idea_boards_list'), idea_boards_path, :class => tab_selected?(@current_tab, 'ideas')
                     - unless MENU['ideas']['new_idea'].nil?
                       %li= link_to t('.new_idea'), new_idea_path, :class => tab_selected?(@current_tab, 'ideas')
+        - if MENU.key? 'questions'
+          %li
+            .menu_item
+              = link_to t('questions'), questions_path, :class => tab_selected?(@current_tab, 'questions')
+              - unless MENU['questions'].nil?
+                .dropdown
+                  %ul
+                    - unless MENU['questions']['questions_list'].nil?
+                      %li= link_to t('.questions_list'), questions_path, :class => tab_selected?(@current_tab, 'questions')
+                    - unless MENU['questions']['new_question'].nil?
+                      %li= link_to t('.new_event'), new_question_path, :class => tab_selected?(@current_tab, 'questions')
         - if MENU.key? 'events'
           %li
             .menu_item
