@@ -1,14 +1,30 @@
+// Vote Image Variables  //
+!voteUp = url(/images/default/icon_vote.gif) left no-repeat
+!voteDown = url(/images/default/icon_vote_no.gif) left no-repeat
+// Bullet List Image Variables  //
+!bulletList = url(/images/default/bullet1.gif)
+// Various Icon Image Variables //
+!rss = url(/images/default/icon_rss.png) left no-repeat
+!twitter = url(/images/default/icon_twitter.gif) left no-repeat
+!newsCloud = url(/images/default/icon_newscloud.gif) left no-repeat
+!grist = url(/images/default/icon_grist.gif) left no-repeat
+// Hot Topic Bar Image Variables //
+!hotTopicBar =  url(/images/default/topic_arrow.gif) center left no-repeat
+// Comment Reply Image Variables //
+!commentReply = url(/images/default/reply_arrow.png) top left no-repeat
+// BlockQuote Image Variable //
+!blockQuote = url(/images/default/reply_arrow.png) top left no-repeat
+// Story Thumb Image BG Variable //
+!articleImageBg = url(/images/default/thumb_bg.gif) top left no-repeat
 // Font Variables //
 !copyFont = lucida grande, tahoma, verdana, arial, "san-serif"
 !headerFont = lucida grande, tahoma, verdana, arial, "san-serif"
-
 // Text Color Variables //
 !headerColor = #3B5998
 !subheadColor = #999999
 !linkColor = #3B5998
 !bodyColor = #333333
 !textWhite = #FFFFFF
-
 // Background & Border Color Variables //
 !bgDark = #3B5998
 !bgColor = #dce6f4
@@ -30,7 +46,7 @@
 !tablinkOn = #3b5998
 // Dropdown Variables //
 !dropdownTabOff = #80a341
-!dropdownTabOn = #80a341
+!dropdownTabOn = #5d7e20
 // text dropdown styles //
 !dropDownBg = transparent url( /images/default/dropdown_arrow.gif) center right no-repeat
 // Sub Menu Variables
@@ -171,24 +187,23 @@
       :color= !bgColor
 
 
-// Footer dhLink  ICON Styles //
 .rss_link
-  background: url(/images/default/icon_rss.png) left no-repeat
+  :background= !rss
   padding: 3px 0 3px 18px
 
 
 .twitter_link
-  background: url(/images/default/icon_twitter.gif) left no-repeat
+  :background= !twitter
   padding: 3px 0 3px 18px
 
 
 .newscloud_link
-  background: url(/images/default/icon_newscloud.gif) left no-repeat
+  :background= !newsCloud
   padding: 3px 0 3px 20px
 
 
 .grist_link
-  background: url(/images/default/icon_grist.gif) left no-repeat
+  :background= !grist
   padding: 3px 0 3px 20px
 
 
@@ -452,22 +467,18 @@ li
               a
                 font-size: 10px
                 display: block
-                background: #80a341
+                :background= !dropdownTabOff
                 padding: 5px 10px
-                border-top: 1px solid #FFF
-                color: #FFFFFF
+                border:
+                  :top= !borderColor_4
+                :color= !textWhite
 
               a:hover
-                background: #80a341
+                :background= !dropdownTabOn
 
       .menu_item:hover
         .dropdown
           visibility: visible
-
-      .menu_item
-        &.selected:hover
-          &.dropdown
-            visibility: hidden
 
 // Sub Navigation Styles //
 #subNav
@@ -534,6 +545,7 @@ li
     li
       display:inline-block
       float: left
+
     .videoThumb
       margin:
         top: 3px
@@ -558,6 +570,7 @@ li
       display: block
       padding: 2px 4px
       text-transform: uppercase
+
   .formBox
     padding: 10px 0px
     :background= !subheadBG
@@ -568,7 +581,6 @@ li
 
     textarea
       :border= !borderColor_6
-      margin-left: -1px
 
     .buttons li
       width: 99%
@@ -636,8 +648,8 @@ li
     margin: 0px 10px 10px 10px
 
     img
-      max-width: 100%
-      max-height: 100%
+      max-width: 280px
+      :background= !articleImageBg
 
   li
     display: inline-block
@@ -657,7 +669,7 @@ li
       margin: 0 0 10px 10px
       padding: 0
       line-height: 120%
-      list-style-image: url(/images/default/bullet1.gif)
+      :list-style-image= !bulletList
       list-style-type: disc
       list-style-position: outside
       border-bottom: none
@@ -696,7 +708,7 @@ li
         a
           margin-left: 5px
           padding-left: 8px
-          background: transparent url(/images/default/topic_arrow.gif) center left no-repeat
+          :background= !hotTopicBar
 
       &.topicTitle
         :background= !bgDark
@@ -780,7 +792,7 @@ li
       position: absolute
       bottom: 8px 
       left: 70px
-      background: transparent url(/images/default/reply_arrow.png) top left no-repeat
+      :background= !commentReply 
     
       a
         color: #336600
@@ -833,14 +845,15 @@ li
 
 // Blockquote styles //
 blockquote
-  background: transparent url(/images/default/start_quote_small.gif) no-repeat scroll -1px 0
+  :background= !blockQuote
   :color= !bodyColor
   font-size: 12px
   line-height: 130%
   margin: 0 0 10px 0
   padding: 0 20px 0 60px
+
   .quotes
-    background: transparent url(/images/default/end_quote_small.gif) no-repeat scroll right bottom
+
     padding: 4px 0
 
 
@@ -853,8 +866,7 @@ blockquote
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
   border-radius: 4px
-  background: url(http://host.newscloud.com/index.php?p=grad&color1=9daccc&color2=3B5998&size=12) repeat-x top #3B5998
-
+  :background= !bgDark
 
 .btn_1_lg
   font-size: 14px
@@ -865,16 +877,6 @@ blockquote
   text-align: center
   margin: 10px
 
-
-.btn_2
-  margin: 0 1px
-  padding: 2px 10px 3px 10px
-  -moz-border-radius: 4px
-  -webkit-border-radius: 4px
-  border-radius: 4px
-  background: #F0F0F0
-
-
 .btnComment
   display: inline-block
   margin: 0 1px
@@ -883,23 +885,16 @@ blockquote
 
 
 .voteLink, .voteUp
-  background: url(/images/default/icon_vote.gif) left no-repeat
+  :background= !voteUp
   padding-left: 15px
 
 .voteDown
-  background: url(/images/default/icon_vote_no.gif) left no-repeat
+  :background= !voteDown
   padding-left: 15px
-/*
-   -moz-border-radius-topright: 4px
-   -moz-border-radius-bottomright: 4px
-   webkit-border-top-right-radius: 4px
-   webkit-border-bottom-right-radius: 4px
-   border-top-right-radius: 4px
-   border-bottom-right-radius: 4px
-*/
 
-// rating & modertation styles //
-.rating
+// rating & modertation styles // 
+// Not sure if these styles are being used or will be used //
+/*.rating
   margin: 0 0 10px 15px
   display: block
   float: left
@@ -974,6 +969,7 @@ a.flag:hover
   padding-left: 30px
   background: url(/images/default/icon_flag.gif) 10px bottom no-repeat
 
+*/  // Not sure if these styles are being used or will be used //
 
 .storyHead, .askQuestionHead
   font-size: 14px
@@ -1110,7 +1106,6 @@ a.flag:hover
 
         input
           width: 70%
-<<<<<<< HEAD:app/stylesheets/default.sass
 
 
 // test heights for test panels
