@@ -1,5 +1,6 @@
 class Admin::WidgetsController < AdminController
   skip_before_filter :admin_user_required
+  cache_sweeper :story_sweeper, :only => [:save]
 
   def index
     @main = Widget.main
@@ -34,6 +35,8 @@ class Admin::WidgetsController < AdminController
       @sidebar_content.children.create({:name => "home_#{widget.name}_widget", :widget => widget, :widget_type => "widget", :position => widget_position})
     end
 
+    # HACK:: update a story item to trigger cache sweepers
+    Content.last.touch
     render :json => {:success => "Success!"}.to_json and return
   end
 
