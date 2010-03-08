@@ -6,6 +6,7 @@
       %tr
         %th Key Type
         %th Key Name
+        %th Sub Name
         %th Created At
         %th Actions
     %tbody
@@ -13,6 +14,7 @@
         %tr
           %td= setting.key_type
           %td= setting.key_name
+          %td= setting.data.key?(:name) ? setting.data[:name] : ''
           %td= setting.created_at
           %td== #{link_to 'View', admin_setting_path(setting)} | #{link_to 'Edit', edit_admin_setting_path(setting)}
 - else

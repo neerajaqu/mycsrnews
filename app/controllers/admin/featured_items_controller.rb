@@ -2,6 +2,7 @@ class Admin::FeaturedItemsController < AdminController
   skip_before_filter :admin_user_required
   layout proc {|c| c.request.xhr? ? false : "new_admin" }
   before_filter :set_featured_types, :only => :load_template
+  cache_sweeper :story_sweeper, :only => [:save]
 
   def index
   end
@@ -40,6 +41,8 @@ class Admin::FeaturedItemsController < AdminController
       end
     end
 
+    # HACK:: update a story item to trigger cache sweepers
+    Content.last.touch
     render :json => {:success => "Success!"}.to_json and return
   end
 

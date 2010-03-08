@@ -1,12 +1,12 @@
 -# @expects: local 'active_users'
 
-- cache :active_users_fbml do
+- cache :active_users_html, :expires_in => 1.minute do
   - active_users ||= User.last_active
 
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-    .panelBar.clearfix
+    .panelBar
       %h2= t('.title')
-    .list_stories.clearfix
+    .list_stories
       %ul
         - unless active_users.empty?
           - active_users.each do |user|

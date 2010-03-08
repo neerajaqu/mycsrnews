@@ -1,41 +1,42 @@
-#col_left
-  #readArticle.panel_1
-    .topBar
-      %ul
-        %li
-          %a== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteLink"} #{@story.votes_tally}
-        %li
-          %a== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
-        %li
-          %a= fb_share_button(story_url(@story))
-        %li
-          %a{:href => '#'}= "Tweet it"
-    .thumb
-      - if @story.images.present?
-        = image_tag @story.images.first.url(:medium)
-    .storyBlockWrap
-      %h1.storyHead= @story.title
-      .storyBlockMeta
-        %h3= t('.via', :source => link_to(@story.source, '#'), :date => @story.created_at)
-        %h3= t('.posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
-        - if @tags.present?
-          %h3== Tags #{tag_list(@tags, @story)}
-    - if @story.is_article?
-      %div.bodyArticle= sanitize nl2br(@story.caption)
-    - else
-      %div.bodyArticle= sanitize caption @story.caption
-    - if @story.url.present?
-      %div.float_right= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn_1"
-    - if @story.moderatable?
-      = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
+- cache "#{@story.cache_key}_html" do
+  #col_left
+    #readArticle.panel_1
+      .topBar
+        %ul
+          %li
+            %a== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteLink"} #{@story.votes_tally}
+          %li
+            %a== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
+          %li
+            %a= fb_share_button(story_url(@story))
+          %li
+            %a= twitter_share_item_link @story, @story.title
+      .thumb
+        - if @story.images.present?
+          = image_tag @story.images.first.url(:medium)
+      .storyBlockWrap
+        %h1.storyHead= @story.title
+        .storyBlockMeta
+          %h3= t('.via', :source => link_to(@story.source, '#'), :date => @story.created_at)
+          %h3= t('.posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
+          - if @tags.present?
+            %h3== Tags #{tag_list(@tags, @story)}
+      - if @story.is_article?
+        %div.bodyArticle= sanitize nl2br(@story.caption)
+      - else
+        %div.bodyArticle= sanitize caption @story.caption
+      - if @story.url.present?
+        %div.float_right= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn_1"
+      - if @story.moderatable?
+        = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
 
-  - if @story.media_item?
-    = render_media_items @story
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
-  = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
-  = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
-  = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
+    - if @story.media_item?
+      = render_media_items @story
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
+    = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
+    = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
+    = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
 
-#col_right
-  = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
-  = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }
+  #col_right
+    = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
+    = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }

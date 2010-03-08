@@ -30,6 +30,8 @@ en:
         title: "Choose a good title for you post."
         body: "Write something inspiring here."
     actions:
+      question:
+        create: "Ask my Question"
       create: "Create my {{model}}"
       update: "Save changes"
       dummie: "Launch!"

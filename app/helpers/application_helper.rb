@@ -117,20 +117,30 @@ module ApplicationHelper
   end
 
   def local_linked_profile_pic(user, options={})
+    link_options = {}
+    if options[:format].present?
+    	link_options[:format] = options[:format]
+    	options.delete(:format)
+    end
     if user.facebook_user?
       options.merge!(:linked => false)
-      link_to fb_profile_pic(user, options), user_path(user)
+      link_to fb_profile_pic(user, options), user_path(user, link_options)
     else
-      link_to image_tag(default_image), user
+      link_to image_tag(default_image), user, link_options
     end
   end
 
   def local_linked_profile_name(user, options={})
+    link_options = {}
+    if options[:format].present?
+    	link_options[:format] = options[:format]
+    	options.delete(:format)
+    end
     if user.facebook_user?
       options.merge!(:linked => false)
-      link_to fb_name(user, options), user_path(user)
+      link_to fb_name(user, options), user_path(user, link_options)
     else
-      link_to user.name, user
+      link_to user.name, user, link_options
     end
   end
 
@@ -150,14 +160,18 @@ module ApplicationHelper
     link_to url_for(send("#{item.class.to_s.underscore}_url", item)), url_for(send("#{item.class.to_s.underscore}_url", item))
   end
 
-  def twitter_share_item_link(item,caption)
+  def twitter_share_item_link(item,caption,button=false)
     caption = strip_tags(caption)
     url = path_to_self(item)
     text = CGI.escape("#{caption} #{url}")
     twitter_url = "http://twitter.com/?status=#{text}"
-    link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
+    if button == true
+      link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
+    else
+      link_to t('tweet'), twitter_url
+    end
   end
-
+  
   def base_url(path)
     if APP_CONFIG['base_url'].present?
     	"#{APP_CONFIG['base_url']}#{path}"
@@ -277,6 +291,18 @@ EMBED
   def toggle_featured_link item
     return '' unless item.moderatable? and item.featurable?
     link_to(item.featured? ? 'UnFeature' : 'Feature', toggle_featured_path(item.class.name.foreign_key.to_sym => item))
+  end
+
+  def answer_translate count = 0
+    count > 0 ?
+      t('answers', :answer_string => pluralize(count, "answer")) :
+      t('answer_question')
+  end
+
+  def answer_comments_translate count = 0
+    count > 0 ?
+      t('answer_comments', :answer_comments_string => pluralize(count, "comment")) :
+      t('answer_comment')
   end
 
 end

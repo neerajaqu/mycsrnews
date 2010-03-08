@@ -19,7 +19,7 @@ after("deploy:update_code") do
   %w{/config/unicorn.conf.rb /tmp/sockets /config/database.yml
     /config/facebooker.yml /config/application_settings.yml
     /config/application.god /config/newrelic.yml
-    /config/smtp.yml}.each do |file|
+    /config/smtp.yml /config/menu.yml}.each do |file|
       run "ln -nfs #{shared_path}#{file} #{release_path}#{file}"
   end
 

@@ -1,22 +1,18 @@
 #col_left
-  -#= render :partial => 'shared/featured_items'
-  = render :partial => 'shared/test_layout_a'
-  = render :partial => 'shared/test_layout_b'
-  = render :partial => 'shared/test_layout_c'
-  -#= render :partial => 'shared/hot_topics'
-  -#= render :partial => 'shared/sidebar/active_users'
-  -#= render :partial => 'shared/sidebar/top_discussed_stories'
-  -#= render :partial => 'shared/sidebar/active_users'
-
-  -#= render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
-  -#= render :partial => 'shared/stories'
+  = render :partial => 'shared/featured_items'
+  = render :partial => 'shared/hot_topics'
+  = render :partial => 'shared/sidebar/active_users'
+  = render :partial => 'shared/sidebar/top_discussed_stories'
+  = render :partial => 'shared/sidebar/active_users'
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
+  = render :partial => 'shared/stories'
 
 #col_right
-  -#= render :partial => 'shared/sidebar/top_stories'
-  -#= render :partial => 'shared/sidebar/top_discussed_stories'
-  -#= render :partial => 'shared/sidebar/top_users'
-  -#= render :partial => 'shared/sidebar/newest_users'
-  -#= render :partial => 'shared/sidebar/active_users'
-  -#= render :partial => 'shared/sidebar/fan_application'
-  -#= render :partial => 'shared/sidebar/add_bookmark'
--# TODO  = render :partial => 'shared/sidebar/prompt_permissions'
+  = render :partial => 'shared/sidebar/top_stories'
+  = render :partial => 'shared/sidebar/top_discussed_stories'
+  = render :partial => 'shared/sidebar/top_users'
+  = render :partial => 'shared/sidebar/newest_users'
+  = render :partial => 'shared/sidebar/active_users'
+  = render :partial => 'shared/sidebar/fan_application'
+  = render :partial => 'shared/sidebar/add_bookmark'
+  = render :partial => 'shared/sidebar/prompt_permissions'

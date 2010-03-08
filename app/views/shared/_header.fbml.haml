@@ -1,6 +1,6 @@
 #header
   .headerTitle
-    %h1="Generic Title"
+    %h1= APP_CONFIG['site_title']
   .dh_links
     -#TODO:: properly handle logged in users
     -# unless false && application_is_installed?
@@ -13,4 +13,3 @@
       = pipe_spacer
       = link_to t('.admin'), admin_path
   = render :partial => 'shared/page_tabs'
-

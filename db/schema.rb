@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(:version => 20100305005027) do
     t.datetime "updated_at"
   end
 
+  create_table "answers", :force => true do |t|
+    t.integer  "question_id",                 :default => 0
+    t.integer  "user_id",        :limit => 8, :default => 0
+    t.text     "answer"
+    t.integer  "votes_tally",                 :default => 0
+    t.integer  "comments_count",              :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_blocked",                  :default => false
+    t.boolean  "is_featured",                 :default => false
+    t.datetime "featured_at"
+  end
+
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+  add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
+
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
     t.text     "body"
@@ -287,6 +303,23 @@ ActiveRecord::Schema.define(:version => 20100305005027) do
   end
 
   add_index "newswires", ["feed_id"], :name => "feedid"
+
+  create_table "questions", :force => true do |t|
+    t.integer  "user_id",        :limit => 8, :default => 0
+    t.string   "question",                    :default => ""
+    t.text     "details"
+    t.integer  "votes_tally",                 :default => 0
+    t.integer  "comments_count",              :default => 0
+    t.datetime "created_at"
+    t.integer  "answers_count",               :default => 0
+    t.datetime "updated_at"
+    t.boolean  "is_blocked",                  :default => false
+    t.boolean  "is_featured",                 :default => false
+    t.datetime "featured_at"
+  end
+
+  add_index "questions", ["question"], :name => "related"
+  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
 
   create_table "resource_sections", :force => true do |t|
     t.string   "name"
