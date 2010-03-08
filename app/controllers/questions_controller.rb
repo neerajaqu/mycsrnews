@@ -33,4 +33,15 @@ class QuestionsController < ApplicationController
     end
   end
 
+  private
+
+  def set_current_tab
+    @current_tab = 'questions'
+  end
+
+  def set_slot_data
+    @slot_data = Metadata.find_by_key_type_name('ad-slot-name', 'questions')
+  end
+
+
 end

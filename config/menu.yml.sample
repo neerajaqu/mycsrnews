@@ -6,6 +6,7 @@ menu:
     stories_list: 'enabled'
     newswire: 'enabled'
     new_story: 'enabled'
+  questions:
   #blogs:
     #top_blogs: 'enabled'
     #new_article: 'enabled'
