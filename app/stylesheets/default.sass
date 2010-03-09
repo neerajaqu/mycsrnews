@@ -1,7 +1,7 @@
+@import skin.sass
 // Float div hack //
 .clearfix
   display: inline-block
-
 
 // floats //
 .float_left
@@ -108,10 +108,10 @@
 #bodyWrapper
   padding-bottom: 20px
 
-#col_left
+// #col_left
 
 
-#col_right
+// #col_right
 
 
 // Footer Container //
@@ -485,9 +485,35 @@ li
   border-bottom: none
   margin-bottom: 15px
 
+  .userBlockWrap
+
+    li
+      padding: 0
+      margin: 4px 4px 0 0
+      display: inline-block
+      width: 30px
+      height: 30px
+      float: left
+      border:
+        :bottom= !noBorder
+
+      .profilePic
+        margin: 0
+
+  .featuredNewsList
+    li
+      border-bottom: none
+      font-size: 11px
+      line-height: 16px
+
+      b
+        font-weight: normal
+        text-transform: uppercase
+        
+
   .videoBlockWrap
     li
-      display:inline-block
+      display: inline-block
       float: left
 
     .videoThumb
@@ -496,7 +522,7 @@ li
         right: 3px
       width: 74px
       height: 36px
-      background: #339900
+      background: #cccccc
       
   .ad_fullCol
     width: 480px
@@ -589,11 +615,13 @@ li
 
   .thumb
     float: left
-    margin: 0px 10px 10px 10px
+    margin: 10px
+    max-width: 280px
+    :background= !articleImageBg
 
     img
       max-width: 280px
-      :background= !articleImageBg
+
 
   li
     display: inline-block
@@ -633,7 +661,7 @@ li
   margin-bottom: 15px
 
   ul
-    display:block
+    display: block
     float: left
     :background= !subheadBG
     width: 100%
@@ -766,7 +794,7 @@ li
 
 .subFilter
   font-size: 10px
-  :color= subheadColor
+  :color= !subheadColor
   :background= !subheadBG
   border:
     :top= !noBorder
@@ -987,9 +1015,7 @@ a.flag:hover
 
 #contactBox
   form 
-    margin-top: 20px
-  input
-    
+    margin-top: 20px    
 
   label
     font-size: 12px
@@ -1050,10 +1076,6 @@ a.flag:hover
 
         input
           width: 70%
-<<<<<<< HEAD
-
-=======
->>>>>>> 4c0f2f831be2c6ef9799cb96489d2e9d92edf490
 
 // test heights for test panels
 

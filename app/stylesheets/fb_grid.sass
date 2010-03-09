@@ -43,16 +43,24 @@ body
 #header, #footer, #pageBody
   +grid-width(24)
 
+#subNav
+  float: left
+  +grid-width(24)
+  +alpha
+
 #col_left
   float: left
+  clear: both
   +grid(16)
   +grid-children
   +alpha
   .left
     float: left
+    clear: left
     +alpha
   .right
     float: right
+    clear: right
     +omega
 
 #col_right
@@ -67,13 +75,6 @@ body
 .panel_1, #hotTopicBar
   float: left
   +grid-width(16)  
+
 .panel_2 
   +grid(8)
-
-.featured_story_half
-  +grid(8)
-
-
-#subNav
-  float: left
-  +grid(16)
