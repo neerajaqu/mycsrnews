@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100305005027) do
+ActiveRecord::Schema.define(:version => 20100309162706) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -185,18 +185,18 @@ ActiveRecord::Schema.define(:version => 20100305005027) do
   add_index "featured_items", ["parent_id"], :name => "index_featured_items_on_parent_id"
 
   create_table "feeds", :force => true do |t|
-    t.integer   "wireid",                       :default => 0
-    t.string    "title",                        :default => ""
-    t.string    "url",                          :default => ""
-    t.string    "rss",                          :default => ""
-    t.timestamp "last_fetched_at",                                     :null => false
-    t.string    "feedType",                     :default => "wire"
-    t.string    "specialType",                  :default => "default"
-    t.string    "loadOptions",                  :default => "none"
-    t.integer   "user_id",         :limit => 8, :default => 0
-    t.string    "tagList",                      :default => ""
-    t.datetime  "created_at"
-    t.datetime  "updated_at"
+    t.integer  "wireid",                       :default => 0
+    t.string   "title",                        :default => ""
+    t.string   "url",                          :default => ""
+    t.string   "rss",                          :default => ""
+    t.datetime "last_fetched_at"
+    t.string   "feedType",                     :default => "wire"
+    t.string   "specialType",                  :default => "default"
+    t.string   "loadOptions",                  :default => "none"
+    t.integer  "user_id",         :limit => 8, :default => 0
+    t.string   "tagList",                      :default => ""
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "flags", :force => true do |t|
