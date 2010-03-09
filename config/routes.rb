@@ -8,6 +8,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.toggle_blocked '/block.:format', :controller => 'flags', :action => 'block'
   map.toggle_featured '/feature.:format', :controller => 'flags', :action => 'feature'
+  map.like_item '/like.:format', :controller => 'votes', :action => 'like'
+  map.dislike_item '/dislike.:format', :controller => 'votes', :action => 'dislike'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'

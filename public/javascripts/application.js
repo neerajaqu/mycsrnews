@@ -94,6 +94,8 @@ $(function() {
     url = url.replace(/\?return_to=.*$/, '');
     if (url.substring(url.length - 5) == '.html') {
       url = url.substring(0, url.length - 5) + ".json";
+    } else if (url.match(/like.html/)) {
+      url = url.replace(/like.html/, 'like.json');
     } else {
       url = url + ".json";
     }

@@ -157,9 +157,14 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 8px 0; }
 .panel_1 .storyBlockWrap h1, .panel_2 .storyBlockWrap h1 { font-size: 22px; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 6px 0px; line-height: 120%; }
+<<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
 .panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
 .panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
 .panel_1 .thumb a:hover, .panel_2 .thumb a:hover { text-decoration: none; }
+=======
+.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 10px; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
+.panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
+>>>>>>> Updating featured items views and adding generic like functionality:public/stylesheets/compiled/fb_grid.css
 .panel_1 li, .panel_2 li { display: inline-block; width: 100%; padding: 5px 0; border-bottom: 1px solid #efefef; }
 .panel_1 .bullet_list, .panel_2 .bullet_list { margin: 0 10px; }
 .panel_1 .bullet_list ul, .panel_2 .bullet_list ul { margin: 10px 0 0 0; }
