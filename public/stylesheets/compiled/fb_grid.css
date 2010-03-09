@@ -24,7 +24,7 @@ img a { border: none; }
 
 .float_right { float: right; }
 
-#header { height: 110px; margin-bottom: 15px; position: relative; border-bottom: 1px solid; border-bottom-color: #999999; background: white url('/images/default/hdr_bg.gif') bottom left repeat-x; }
+#header { height: 110px; margin-bottom: 15px; position: relative; border-bottom: 1px solid; border-bottom-color: #999999; background: white url('http://n2dev.chewbranca.com/images/default/hdr_bg.gif?1267551946') bottom left repeat-x; }
 #header .headerTitle { position: absolute; top: 30px; left: 10px; }
 #header .headerTitle h1 { display: block; float: left; font-size: 32px; margin: 5px; }
 #header a { text-decoration: none; }
@@ -49,13 +49,13 @@ img a { border: none; }
 #footer { float: left; clear: left; border-top: 1px solid #3b5998; }
 #footer .dh_links { color: #333333; float: left; clear: left; margin: 0px; padding: 5px 10px 7px 10px; background-color: #dce6f4; }
 
-.rss_link { background: url('/images/default/icon_rss.png') left no-repeat; padding: 3px 0 3px 18px; }
+.rss_link { background: url('http://n2dev.chewbranca.com/images/default/icon_rss.png?1265833188') left no-repeat; padding: 3px 0 3px 18px; }
 
-.twitter_link { background: url('/images/default/icon_twitter.gif') left no-repeat; padding: 3px 0 3px 18px; }
+.twitter_link { background: url('http://n2dev.chewbranca.com/images/default/icon_twitter.gif?1265833188') left no-repeat; padding: 3px 0 3px 18px; }
 
-.newscloud_link { background: url('/images/default/icon_newscloud.gif') left no-repeat; padding: 3px 0 3px 20px; }
+.newscloud_link { background: url('http://n2dev.chewbranca.com/images/default/icon_newscloud.gif?1265833188') left no-repeat; padding: 3px 0 3px 20px; }
 
-.grist_link { background: url('/images/default/icon_grist.gif') left no-repeat; padding: 3px 0 3px 20px; }
+.grist_link { background: url('http://n2dev.chewbranca.com/images/default/icon_grist.gif') left no-repeat; padding: 3px 0 3px 20px; }
 
 .hidden { display: none; }
 
@@ -98,8 +98,8 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #pageTabs .tabs .back_links { padding-right: 20px; }
 #pageTabs .tabs .toggle_tabs { margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; text-align: center; }
 #pageTabs .tabs .toggle_tabs li { display: block; float: left; padding: 0px 0px 0px 0px; margin: 0px 1px 0px 0px; height: 23px; }
-#pageTabs .tabs .toggle_tabs li a { display: block; height: 13px; margin: 0px 0px 0px 0px; padding: 5px 20px; font-weight: bold; font-size: 11px; line-height: normal; border-top: none; border-bottom: none; border-left: none; border-right: none; color: white; background: #55761b url('/images/default/toggletab_bg.gif') left repeat-x; }
-#pageTabs .tabs .toggle_tabs li.first a { display: block; margin: 0px 0px 0px 0px; padding: 5px 5px 5px 5px; font-weight: bold; font-size: 11px; line-height: normal; border-top: none; border-bottom: none; border-left: none; border-right: none; color: white; background: #55761b url('/images/default/toggletab_bg.gif') left repeat-x; }
+#pageTabs .tabs .toggle_tabs li a { display: block; height: 13px; margin: 0px 0px 0px 0px; padding: 5px 20px; font-weight: bold; font-size: 11px; line-height: normal; border-top: none; border-bottom: none; border-left: none; border-right: none; color: white; background: #55761b url('http://n2dev.chewbranca.com/images/default/toggletab_bg.gif?1267551946') left repeat-x; }
+#pageTabs .tabs .toggle_tabs li.first a { display: block; margin: 0px 0px 0px 0px; padding: 5px 5px 5px 5px; font-weight: bold; font-size: 11px; line-height: normal; border-top: none; border-bottom: none; border-left: none; border-right: none; color: white; background: #55761b url('http://n2dev.chewbranca.com/images/default/toggletab_bg.gif?1267551946') left repeat-x; }
 #pageTabs .tabs .toggle_tabs li.first img { display: inline-block; }
 #pageTabs .tabs .toggle_tabs li a:focus { outline: 0px; }
 #pageTabs .tabs .toggle_tabs li a.selected { margin: -1px 0px 0px 0px; padding: 5px 30px 5px 30px; height: 13px; border-top: 1px solid #999999; border-bottom: 1px solid white; border-right: 1px solid #999999; border-left: 1px solid #999999; background: white; color: #3b5998; }
@@ -158,17 +158,21 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 .panel_1 .storyBlockWrap h1, .panel_2 .storyBlockWrap h1 { font-size: 22px; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 6px 0px; line-height: 120%; }
 <<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
+<<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
 .panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
 .panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
 .panel_1 .thumb a:hover, .panel_2 .thumb a:hover { text-decoration: none; }
 =======
 .panel_1 .thumb, .panel_2 .thumb { float: left; margin: 10px; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
+=======
+.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 10px; max-width: 280px; background: url('http://n2dev.chewbranca.com/images/default/default_thumb.gif?1268156684') top left no-repeat; }
+>>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/fb_grid.css
 .panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
 >>>>>>> Updating featured items views and adding generic like functionality:public/stylesheets/compiled/fb_grid.css
 .panel_1 li, .panel_2 li { display: inline-block; width: 100%; padding: 5px 0; border-bottom: 1px solid #efefef; }
 .panel_1 .bullet_list, .panel_2 .bullet_list { margin: 0 10px; }
 .panel_1 .bullet_list ul, .panel_2 .bullet_list ul { margin: 10px 0 0 0; }
-.panel_1 .bullet_list li, .panel_2 .bullet_list li { display: list-item; margin: 0 0 10px 10px; padding: 0; line-height: 120%; list-style-image: url('/images/default/bullet1.gif'); list-style-type: disc; list-style-position: outside; border-bottom: none; }
+.panel_1 .bullet_list li, .panel_2 .bullet_list li { display: list-item; margin: 0 0 10px 10px; padding: 0; line-height: 120%; list-style-image: url('http://n2dev.chewbranca.com/images/default/bullet1.gif?1267730727'); list-style-type: disc; list-style-position: outside; border-bottom: none; }
 .panel_1 .audio, .panel_1 .video, .panel_1 .image, .panel_2 .audio, .panel_2 .video, .panel_2 .image { margin: 10px; }
 .panel_1 .userPoints, .panel_2 .userPoints { text-align: right; margin-right: 0px; }
 
@@ -186,7 +190,7 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #hotTopicBar ul { display: block; float: left; background: #f0f0f0; width: 100%; }
 #hotTopicBar ul li { float: left; padding: 4px 0 4px 0px; }
 #hotTopicBar ul li.topic { display: inline; float: left; text-align: left; background: #f0f0f0; padding: 4px 15px 4px 0; min-width: 10%; }
-#hotTopicBar ul li.topic a { margin-left: 5px; padding-left: 8px; background: url('/images/default/topic_arrow.gif') center left no-repeat; }
+#hotTopicBar ul li.topic a { margin-left: 5px; padding-left: 8px; background: url('http://n2dev.chewbranca.com/images/default/topic_arrow.gif?1267730727') center left no-repeat; }
 #hotTopicBar ul li.topicTitle { background: #31500b; color: white; width: 22%; padding-left: 5px; text-transform: uppercase; margin-right: 10px; }
 #hotTopicBar ul li.topicMore { border-left: 2px solid #FFF; float: right; text-align: center; width: 10%; background: #f0f0f0; }
 
@@ -203,10 +207,25 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #commentThread .panelBar { background: #dce6f4; }
 #commentThread .panelBar h2 { color: #3b5998; }
 #commentThread .comment_block { position: relative; padding: 8px 0 20px 0; border-bottom: 1px solid #efefef; }
-#commentThread .comment_block .comment_reply { display: block; padding: 0 0 4px 20px; position: absolute; bottom: 8px; left: 70px; background: url('/images/default/reply_arrow.png') top left no-repeat; }
+#commentThread .comment_block .comment_reply { display: block; padding: 0 0 4px 20px; position: absolute; bottom: 8px; left: 70px; background: url('http://n2dev.chewbranca.com/images/default/reply_arrow.png?1267730727') top left no-repeat; }
 #commentThread .comment_block .comment_reply a { color: #336600; font-weight: bold; font-size: 11px; }
 
+<<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
 blockquote { background: white; color: #333333; font-size: 12px; line-height: 130%; margin: 10px 0 10px 60px; padding: 0 20px 0 0; }
+=======
+.feature_bg { background-color: #dce6f4; }
+.feature_bg .panel_2 { margin-bottom: 10px; }
+.feature_bg .thumb { margin-top: 10px; }
+.feature_bg .storyBlockWrap { margin-top: 10px; }
+
+.subtitle { font-size: 10px; color: #999999; background: #f0f0f0; border-top: none; border-bottom: none; padding: 6px 4px 6px 4px; }
+
+.subFilter { font-size: 10px; color: #999999; background: #f0f0f0; border-top: none; border-bottom: 1px solid #cccccc; padding: 4px 10px 4px 10px; }
+.subFilter a { padding: 1px 5px 2px 5px; color: #3b5998; margin-left: 4px; }
+.subFilter .selected { color: white; background: #3b5998; padding: 1px 5px 2px 5px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
+
+blockquote { background: url('http://n2dev.chewbranca.com/images/default/reply_arrow.png?1267730727') top left no-repeat; color: #333333; font-size: 12px; line-height: 130%; margin: 0 0 10px 0; padding: 0 20px 0 60px; }
+>>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/fb_grid.css
 blockquote .quotes { padding: 4px 0; }
 
 .btn_1 { display: inline-block; color: #fff; font-weight: bold; padding: 3px 10px 4px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #31500b; }
@@ -215,10 +234,15 @@ blockquote .quotes { padding: 4px 0; }
 
 .btnComment { display: inline-block; margin: 0 1px; padding: 1px 8px 2px 8px; background: #F0F0F0; }
 
+<<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
 .voteUp { background: url('/images/default/icon_vote.gif') left no-repeat; padding-left: 15px; }
+=======
+.voteLink, .voteUp { background: url('http://n2dev.chewbranca.com/images/default/icon_vote.gif?1265833188') left no-repeat; padding-left: 15px; }
+>>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/fb_grid.css
 
-.voteDown { background: url('/images/default/icon_vote_no.gif') left no-repeat; padding-left: 15px; }
+.voteDown { background: url('http://n2dev.chewbranca.com/images/default/icon_vote_no.gif?1267730727') left no-repeat; padding-left: 15px; }
 
+<<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
 .thumb-up { background: url('/images/default/thumb-up.gif') left no-repeat; padding-left: 15px; }
 
 .thumb-down { background: url('/images/default/thumb-down.gif') left no-repeat; padding-left: 15px; }
@@ -227,6 +251,27 @@ blockquote .quotes { padding: 4px 0; }
 .actionLegend .share_and_hide { margin: 5px; }
 .actionLegend .share_and_hide h4 { margin-bottom: 5px; color: #3b5998; }
 .actionLegend .share_and_hide input { border: 1px solid #cccccc; width: 100%; padding: 1px 0; }
+=======
+/* .rating margin: 0 0 10px 15px display: block float: left height: 16px */
+.rate_up { display: block; float: left; width: 16px; height: 16px; margin: 0 0 0 10px; background: image_url("default/icon_thumbs.gif") top left no-repeat; }
+.rate_up:hover { background: image_url("default/icon_thumbs.gif") center left no-repeat; }
+
+.rate_up_on { display: block; float: left; width: 16px; height: 16px; margin: 0 0 0 10px; background: image_url("default/icon_thumbs.gif") bottom left no-repeat; }
+
+.rate_down { display: block; float: left; width: 16px; height: 16px; margin: 0 10px 0 10px; background: image_url("default/icon_thumbs.gif") top right no-repeat; }
+.rate_down:hover { background: image_url("default/icon_thumbs.gif") center right no-repeat; }
+
+.rate_down_on { display: block; float: left; width: 16px; height: 16px; margin: 0 10px 0 10px; background: image_url("default/icon_thumbs.gif") bottom right no-repeat; }
+
+.flag { display: block; float: left; color: #666666; height: 16px; margin: 0 0 0 10px; border-left: 1px solid #CCCCCC; padding-left: 30px; background: image_url("default/icon_flag.gif") 10px top no-repeat; }
+
+a.flag:hover { color: #cc3333; background: image_url("default/icon_flag.gif") 10px center no-repeat; }
+
+.flag_on { display: block; float: left; color: #cc3333; height: 16px; margin: 0 0 0 10px; border-left: 1px solid #CCCCCC; padding-left: 30px; background: image_url("default/icon_flag.gif") 10px bottom no-repeat; }
+
+
+.storyHead, .askQuestionHead { font-size: 14px; font-weight: bold; font-family: lucida grande, tahoma, verdana, arial, san-serif; }
+>>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/fb_grid.css
 
 .list_stories .thumb img { max-width: 90px; max-height: 90px; }
 

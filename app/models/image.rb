@@ -17,7 +17,7 @@ class Image < ActiveRecord::Base
   	:thumb => "100x100>",
   	:small => "180x180>",
   	:medium => "200x200",
-  	:featured => "300x300"
+  	:featured => "300x200"
   }
 
   #before_validation :download_image, :if => :remote_image_url?
