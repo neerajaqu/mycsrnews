@@ -109,5 +109,42 @@ namespace :n2 do
       puts "Finished converting #{count} images"
     end
 
+    desc "Generate fake example data (takes an optional user_id param, otherwise defaults to first user"
+    task :gen_fake_data => :environment do
+      user = ENV['user_id'].present? ? User.find(ENV['user_id']) : User.first
+      raise "Invalid user" unless user.present?
+
+      item_count = ENV['item_count'] || 20
+      model_generators = {
+      	:content => Proc.new { {
+      		:caption  => Faker::Lorem.paragraphs,
+      		:url      => "http://#{Faker::Internet.domain_name}/articles/#{Faker::Company.catch_phrase}",
+      		:title    => "#{Faker::Company.bs}",
+      		:user     => user
+        } },
+      	:question => Proc.new { {
+      		:question => "Do we need to #{Faker::Company.bs}?",
+      		:details  => Faker::Lorem.paragraphs,
+      		:user     => user
+        } },
+      	:answer => Proc.new { {
+      		:answer   => "Perhaps, but what if we #{Faker::Company.bs}",
+      		:question => Question.find(:first, :order => "RAND()"),
+      		:user     => user
+        } },
+      	:comment => Proc.new { {
+      		:comments => "I prefer #{Faker::Company.catch_phrase}.",
+      		:commentable => Answer.find(:first, :order => "RAND()"),
+      		:user     => user
+        } }
+      }
+      model_generators.each do |model_name, model_generator|
+        klass = model_name.to_s.classify.constantize
+        item_count.times do
+          klass.create model_generator.call
+        end
+      end
+    end
+
   end
 end
