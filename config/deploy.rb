@@ -1,5 +1,5 @@
 set :default_stage, "n2_staging"
-set :stages, %w(n2_production n2_staging chewbranca_staging)
+set :stages, %w(n2_production n2_staging chewbranca_staging n2_charlotte)
 require 'capistrano/ext/multistage'
 require 'eycap/recipes'
 
@@ -54,17 +54,27 @@ after("deploy:setup") do
   end
 end
 
+after("deploy:cold_bootstrap") do
+  deploy.god.start
+end
+
 namespace :deploy do
   
   namespace :god do
     desc "Stop God monitoring"
     task :stop, :roles => :app, :on_error => :continue do
-      run 'god quit'
+      run "god unmonitor #{application}"
     end
 
     desc "Start God monitoring"
     task :start, :roles => :app do
-      run "god -c #{current_path}/config/application.god"
+      run "god load #{current_path}/config/application.god"
+      run "god monitor #{application}"
+    end
+
+    desc "Status of God monitoring"
+    task :status, :roles => :app do
+      run "god status"
     end
   end
 
@@ -86,6 +96,18 @@ namespace :deploy do
   desc "Update the crontab file"
   task :update_crontab, :roles => :db do
     run "cd #{release_path} && whenever --set 'environment=#{rails_env}&cron_log=#{shared_path}/log/cron.log' --update-crontab #{application}"
+  end
+
+  desc "Bootstrap initial app and setup database"
+  task :cold_bootstrap do
+    update
+    setup_db
+    start
+  end
+
+  desc "Setup db"
+  task :setup_db do
+    run "cd #{release_path} && rake db:setup"
   end
 
 end
