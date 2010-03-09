@@ -1,7 +1,8 @@
+@import skin.sass
+
 // Float div hack //
 .clearfix
   display: inline-block
-
 
 // floats //
 .float_left
@@ -108,10 +109,10 @@
 #bodyWrapper
   padding-bottom: 20px
 
-#col_left
+// #col_left
 
 
-#col_right
+// #col_right
 
 
 // Footer Container //
@@ -131,24 +132,23 @@
       :color= !bgColor
 
 
-// Footer dhLink  ICON Styles //
 .rss_link
-  background: url(/images/default/icon_rss.png) left no-repeat
+  :background= !rss
   padding: 3px 0 3px 18px
 
 
 .twitter_link
-  background: url(/images/default/icon_twitter.gif) left no-repeat
+  :background= !twitter
   padding: 3px 0 3px 18px
 
 
 .newscloud_link
-  background: url(/images/default/icon_newscloud.gif) left no-repeat
+  :background= !newsCloud
   padding: 3px 0 3px 20px
 
 
 .grist_link
-  background: url(/images/default/icon_grist.gif) left no-repeat
+  :background= !grist
   padding: 3px 0 3px 20px
 
 
@@ -412,22 +412,18 @@ li
               a
                 font-size: 10px
                 display: block
-                background: #80a341
+                :background= !dropdownTabOff
                 padding: 5px 10px
-                border-top: 1px solid #FFF
-                color: #FFFFFF
+                border:
+                  :top= !borderColor_4
+                :color= !textWhite
 
               a:hover
-                background: #80a341
+                :background= !dropdownTabOn
 
       .menu_item:hover
         .dropdown
           visibility: visible
-
-      .menu_item
-        &.selected:hover
-          &.dropdown
-            visibility: hidden
 
 // Sub Navigation Styles //
 #subNav
@@ -490,17 +486,44 @@ li
   border-bottom: none
   margin-bottom: 15px
 
+  .userBlockWrap
+
+    li
+      padding: 0
+      margin: 4px 4px 0 0
+      display: inline-block
+      width: 30px
+      height: 30px
+      float: left
+      border:
+        :bottom= !noBorder
+
+      .profilePic
+        margin: 0
+
+  .featuredNewsList
+    li
+      border-bottom: none
+      font-size: 11px
+      line-height: 16px
+
+      b
+        font-weight: normal
+        text-transform: uppercase
+        
+
   .videoBlockWrap
     li
-      display:inline-block
+      display: inline-block
       float: left
+
     .videoThumb
       margin:
         top: 3px
         right: 3px
       width: 74px
       height: 36px
-      background: #339900
+      background: #cccccc
       
   .ad_fullCol
     width: 480px
@@ -518,6 +541,7 @@ li
       display: block
       padding: 2px 4px
       text-transform: uppercase
+
   .formBox
     padding: 10px 0px
     :background= !subheadBG
@@ -528,7 +552,6 @@ li
 
     textarea
       :border= !borderColor_6
-      margin-left: -1px
 
     .buttons li
       width: 99%
@@ -593,11 +616,12 @@ li
 
   .thumb
     float: left
-    margin: 0px 10px 10px 10px
+    margin: 10px
+    max-width: 280px
+    :background= !articleImageBg
 
     img
-      max-width: 100%
-      max-height: 100%
+      max-width: 280px
 
   li
     display: inline-block
@@ -617,7 +641,7 @@ li
       margin: 0 0 10px 10px
       padding: 0
       line-height: 120%
-      list-style-image: url(/images/default/bullet1.gif)
+      :list-style-image= !bulletList
       list-style-type: disc
       list-style-position: outside
       border-bottom: none
@@ -637,7 +661,7 @@ li
   margin-bottom: 15px
 
   ul
-    display:block
+    display: block
     float: left
     :background= !subheadBG
     width: 100%
@@ -656,7 +680,7 @@ li
         a
           margin-left: 5px
           padding-left: 8px
-          background: transparent url(/images/default/topic_arrow.gif) center left no-repeat
+          :background= !hotTopicBar
 
       &.topicTitle
         :background= !bgDark
@@ -740,7 +764,7 @@ li
       position: absolute
       bottom: 8px 
       left: 70px
-      background: transparent url(/images/default/reply_arrow.png) top left no-repeat
+      :background= !commentReply 
     
       a
         color: #336600
@@ -770,7 +794,7 @@ li
 
 .subFilter
   font-size: 10px
-  :color= subheadColor
+  :color= !subheadColor
   :background= !subheadBG
   border:
     :top= !noBorder
@@ -793,14 +817,15 @@ li
 
 // Blockquote styles //
 blockquote
-  background: transparent url(/images/default/start_quote_small.gif) no-repeat scroll -1px 0
+  :background= !blockQuote
   :color= !bodyColor
   font-size: 12px
   line-height: 130%
   margin: 0 0 10px 0
   padding: 0 20px 0 60px
+
   .quotes
-    background: transparent url(/images/default/end_quote_small.gif) no-repeat scroll right bottom
+
     padding: 4px 0
 
 
@@ -813,8 +838,7 @@ blockquote
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
   border-radius: 4px
-  background: url(http://host.newscloud.com/index.php?p=grad&color1=9daccc&color2=3B5998&size=12) repeat-x top #3B5998
-
+  :background= !bgDark
 
 .btn_1_lg
   font-size: 14px
@@ -825,16 +849,6 @@ blockquote
   text-align: center
   margin: 10px
 
-
-.btn_2
-  margin: 0 1px
-  padding: 2px 10px 3px 10px
-  -moz-border-radius: 4px
-  -webkit-border-radius: 4px
-  border-radius: 4px
-  background: #F0F0F0
-
-
 .btnComment
   display: inline-block
   margin: 0 1px
@@ -843,23 +857,16 @@ blockquote
 
 
 .voteLink, .voteUp
-  background: url(/images/default/icon_vote.gif) left no-repeat
+  :background= !voteUp
   padding-left: 15px
 
 .voteDown
-  background: url(/images/default/icon_vote_no.gif) left no-repeat
+  :background= !voteDown
   padding-left: 15px
-/*
-   -moz-border-radius-topright: 4px
-   -moz-border-radius-bottomright: 4px
-   webkit-border-top-right-radius: 4px
-   webkit-border-bottom-right-radius: 4px
-   border-top-right-radius: 4px
-   border-bottom-right-radius: 4px
-*/
 
-// rating & modertation styles //
-.rating
+// rating & modertation styles // 
+// Not sure if these styles are being used or will be used //
+/*.rating
   margin: 0 0 10px 15px
   display: block
   float: left
@@ -934,6 +941,7 @@ a.flag:hover
   padding-left: 30px
   background: url(/images/default/icon_flag.gif) 10px bottom no-repeat
 
+*/  // Not sure if these styles are being used or will be used //
 
 .storyHead, .askQuestionHead
   font-size: 14px
@@ -1007,9 +1015,7 @@ a.flag:hover
 
 #contactBox
   form 
-    margin-top: 20px
-  input
-    
+    margin-top: 20px    
 
   label
     font-size: 12px
