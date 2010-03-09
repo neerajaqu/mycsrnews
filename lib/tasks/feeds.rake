@@ -36,10 +36,10 @@ def update_feed(feed)
 
   puts "Parsing #{feed.title} with #{rss.items.size} items -- updated on #{rss.date}"
 
-  feed_date = feed.last_fetched_at || feed.updated_at || feed.created_at
-  if rss.date and feed_date < rss.date
+  feed_date = feed.last_fetched_at
+  if !feed_date or (rss.date and feed_date < rss.date)
     rss.items.each do |item|
-      break if item[:date] <= feed_date
+      break if feed_date and item[:date] <= feed_date
       next unless item[:body] and item[:link] and item[:title] and item[:date]
 
       puts "\tCreating newswire for \"#{item[:title].chomp}\""
