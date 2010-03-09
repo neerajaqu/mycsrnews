@@ -18,6 +18,8 @@ $(function() {
     url = url.replace(/\?return_to=.*$/, '');
     if (url.substring(url.length - 5) == '.fbml') {
       url = url.substring(0, url.length - 5) + format;
+    } else if (url.match(/like.fbml/)) {
+      url = url.replace(/like.fbml/, 'like.fbjs');
     } else {
       url = url + format;
     }
