@@ -39,11 +39,8 @@ class HomeController < ApplicationController
   end
 
   def google_ads
-    render :partial => 'shared/google_ads.html.haml', :locals => { :slot_name => @slot_name },:layout => false
-  end
-
-  def bookmarklet_panel
-    render :partial => 'shared/bookmarklet_panel.html.haml', :layout => false
+    slot_name = params[:slot_name] || APP_CONFIG['google_adsense_slot_name']
+    render :partial => 'shared/google_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 
   def bookmarklet_panel

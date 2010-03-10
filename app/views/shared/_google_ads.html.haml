@@ -1,17 +1,17 @@
 -# @expects: local 'slot_name'
 !!!
 %html
-%head
-  = javascript_include_tag "http://partner.googleadservices.com/gampad/google_service.js"
-  %script{:type => "text/javascript"}
-    == GS_googleAddAdSenseService("#{APP_CONFIG['google_adsense_account_id']}");
-    GS_googleEnableAllServices();
-  = javascript_include_tag "http://partner.googleadservices.com/gampad/google_ads.js"
-  %script{:type => "text/javascript"}
-    == GA_googleAddSlot("#{APP_CONFIG['google_adsense_account_id']}", "#{slot_name}");
-  %script{:type => "text/javascript"}
-    GA_googleFetchAds();
+  %head
+    = javascript_include_tag "http://partner.googleadservices.com/gampad/google_service.js"
+    %script{:type => "text/javascript"}
+      == GS_googleAddAdSenseService("#{APP_CONFIG['google_adsense_account_id']}");
+      GS_googleEnableAllServices();
+    = javascript_include_tag "http://partner.googleadservices.com/gampad/google_ads.js"
+    %script{:type => "text/javascript"}
+      == GA_googleAddSlot("#{APP_CONFIG['google_adsense_account_id']}", "#{slot_name}");
+    %script{:type => "text/javascript"}
+      GA_googleFetchAds();
 
-%body
-  %script{:type => "text/javascript"}
-    GA_googleFillSlot(#{slot_name});
+  %body
+    %script{:type => "text/javascript"}
+      GA_googleFillSlot("#{slot_name}");
