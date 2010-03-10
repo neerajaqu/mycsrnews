@@ -102,7 +102,6 @@ class HomeController < ApplicationController
   end
 
   private
-
   def set_current_tab
     @current_tab = 'home'
   end
