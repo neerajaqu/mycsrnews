@@ -5,13 +5,12 @@
 
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
-      %h2= t('.title')
-    .list_stories
-      %ul
-        - unless active_users.empty?
+      %h2= t('active_users', :user_count => active_users.size)
+    .userBlockWrap.clearfix
+      - unless active_users.empty?
+        %ul
           - active_users.each do |user|
             %li
-              .profilePic= local_linked_profile_pic user
-              == #{link_to user.name, user_path(user)} active #{time_ago_in_words user.last_active} ago
-        - else
-          %p No currently active users.
+              .profilePic= local_linked_profile_pic user, :width => '30', :height => '30'
+      - else
+        %p No currently active users.

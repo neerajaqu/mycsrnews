@@ -41,3 +41,4 @@ en:
   answer_question: "Answer this question"
   please_elaborate: "Please elaborate a bit more (optional)"
   questions: "Questions"
+  active_users: "{{user_count}} users online now"
