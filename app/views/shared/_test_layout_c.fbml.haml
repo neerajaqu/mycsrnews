@@ -1,94 +1,91 @@
 %h1.clearfix
   This is the beginning of the Third layout of the left column
-
-.panel_2.left
-  .panelBar
-    %h2
-      Local News
-  .thumb
-    %img{:src => "/images/default/default_thumb.gif"}
-  .storyBlockWrap
-    %h1
-      Local News Title Here
-    %p
-      1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
-      %a
-        More...
-    %span.btnComment
-      %a.voteUp
-        Like
-      106
-    %span.btnComment
-      %a
-        Comment
-      16
-
-.panel_2.right
+.panel_1.feature_bg
   .panelBar
     %h2
       Featured News
-  .featuredNewsList
-    %ul
-      %li
-        %b
-          Nation:
+  .panel_2.left
+    .thumb
+      = image_tag('default/default_thumb_b.gif', :width => "100%")
+    .storyBlockWrap
+      %h1
+        Local News Title Here
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
         %a
-          Time for trapped is running out
-      %li
-        %b
-          Nation:
+          More...
+      %span.btnComment
+        %a.voteUp
+          Like
+        106
+      %span.btnComment
         %a
-          Time for trapped is running out
-      %li
-        %b
-          Opinion:
-        %a
-          I Am So Glad the Olympics Aren’t in Seattle
-      %li
-        %b
-          TECH: 
-        %a
-          The future of UI will be boring
-      %li
-        %b
-          Nation:
-        %a
-          Time for trapped is running out
-      %li
-        %b
-          Nation:
-        %a
-          Time for trapped is running out
-      %li
-        %b
-          Opinion:
-        %a
-          I Am So Glad the Olympics Aren’t in Seattle
-      %li
-        %b
-          TECH: 
-        %a
-          The future of UI will be boring
-      %li
-        %b
-          Nation:
-        %a
-          Time for trapped is running out
-      %li
-        %b
-          Nation:
-        %a
-          Time for trapped is running out
-      %li
-        %b
-          Opinion:
-        %a
-          I Am So Glad the Olympics Aren’t in Seattle
-      %li
-        %b
-          TECH: 
-        %a
-          The future of UI will be boring
+          Comment
+        16
+
+  .panel_2.right
+    .featuredNewsList
+      %ul
+        %li
+          %b
+            Nation:
+          %a
+            Time for trapped is running out
+        %li
+          %b
+            Nation:
+          %a
+            Time for trapped is running out
+        %li
+          %b
+            Opinion:
+          %a
+            I Am So Glad the Olympics Aren’t in Seattle
+        %li
+          %b
+            TECH: 
+          %a
+            The future of UI will be boring
+        %li
+          %b
+            Nation:
+          %a
+            Time for trapped is running out
+        %li
+          %b
+            Nation:
+          %a
+            Time for trapped is running out
+        %li
+          %b
+            Opinion:
+          %a
+            I Am So Glad the Olympics Aren’t in Seattle
+        %li
+          %b
+            TECH: 
+          %a
+            The future of UI will be boring
+        %li
+          %b
+            Nation:
+          %a
+            Time for trapped is running out
+        %li
+          %b
+            Nation:
+          %a
+            Time for trapped is running out
+        %li
+          %b
+            Opinion:
+          %a
+            I Am So Glad the Olympics Aren’t in Seattle
+        %li
+          %b
+            TECH: 
+          %a
+            The future of UI will be boring
 
 .panel_2.left
   .panelBar
@@ -100,7 +97,7 @@
         %a
           Time for the mayor to get going
       .profilePic
-        %img{:src => "/images/default/default_thumb.gif", :height => "30px", :width => "30px"}
+        =link_to image_tag('default/default_thumb.gif', :height => "30px", :width => "30px"), '#'
       %h3
         Posted by 
         %a 
@@ -121,7 +118,7 @@
         %a
           Time for the mayor to get going
       .profilePic
-        %img{:src => "/images/default/default_thumb.gif", :height => "30px", :width => "30px"}
+        =link_to image_tag('default/default_thumb.gif', :height => "30px", :width => "30px"), '#'
       %h3
         Posted by 
         %a 
@@ -148,7 +145,7 @@
       %p
         “At this point, I’m tired of hearing about healthcare reform in the midst of human tradgedy. Seems the President has no ...More
       .profilePic
-        %img{:src => "/images/default/default_thumb.gif", :height => "30px", :width => "30px"}
+        =link_to image_tag('default/default_thumb.gif', :height => "30px", :width => "30px"), '#'
       %h3
         Posted by 
         %a 
@@ -168,7 +165,7 @@
       %p
         “At this point, I’m tired of hearing about healthcare reform in the midst of human tradgedy. Seems the President has no ...More
       .profilePic
-        %img{:src => "/images/default/default_thumb.gif", :height => "30px", :width => "30px"}
+        =link_to image_tag('default/default_thumb.gif', :height => "30px", :width => "30px"), '#'
       %h3
         Posted by 
         %a 
