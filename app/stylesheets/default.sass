@@ -486,6 +486,41 @@ li
   border-bottom: none
   margin-bottom: 15px
 
+  .houseFeatures
+    .featureAd
+      text-align: center
+      :background= !featureBg
+      :border= !featureBorder
+
+      h2
+        text-align: left
+        line-height: 150%
+        padding: 8px 10px
+        :color= !featureH2Text
+
+      p
+        text-align: left
+        padding: 0 10px
+        margin-bottom: 20px
+        
+
+      .featureBtn
+        text-align: center
+        font-size: 14px
+        line-height: 14px
+        font-weight: bold
+        display: inline-block
+        :background= !featureBtnOff
+        :color= !textWhite
+        height: 16px
+        padding: 4px 20px
+        margin: 10px auto
+   
+        &:hover
+          :background= !featureBtnOn
+          text-decoration: none
+
+
   .userBlockWrap
 
     li
@@ -502,10 +537,13 @@ li
         margin: 0
 
   .featuredNewsList
+    ul
+      padding: 0 10px 0 0
     li
       border-bottom: none
       font-size: 11px
-      line-height: 16px
+      line-height: 14px
+      margin: 4px 0 0 0
 
       b
         font-weight: normal
