@@ -159,20 +159,30 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 6px 0px; line-height: 120%; }
 <<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
 <<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
+<<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
 .panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
 .panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
 .panel_1 .thumb a:hover, .panel_2 .thumb a:hover { text-decoration: none; }
 =======
+=======
+>>>>>>> house ad panel updates to layouts b and c featured stories panel and general added variables for house panel to skin.sass:public/stylesheets/compiled/fb_grid.css
 .panel_1 .thumb, .panel_2 .thumb { float: left; margin: 10px; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
 =======
 .panel_1 .thumb, .panel_2 .thumb { float: left; margin: 10px; max-width: 280px; background: url('http://n2dev.chewbranca.com/images/default/default_thumb.gif?1268156684') top left no-repeat; }
 >>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/fb_grid.css
 .panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
+<<<<<<< HEAD:public/stylesheets/compiled/fb_grid.css
 >>>>>>> Updating featured items views and adding generic like functionality:public/stylesheets/compiled/fb_grid.css
 .panel_1 li, .panel_2 li { display: inline-block; width: 100%; padding: 5px 0; border-bottom: 1px solid #efefef; }
 .panel_1 .bullet_list, .panel_2 .bullet_list { margin: 0 10px; }
 .panel_1 .bullet_list ul, .panel_2 .bullet_list ul { margin: 10px 0 0 0; }
 .panel_1 .bullet_list li, .panel_2 .bullet_list li { display: list-item; margin: 0 0 10px 10px; padding: 0; line-height: 120%; list-style-image: url('http://n2dev.chewbranca.com/images/default/bullet1.gif?1267730727'); list-style-type: disc; list-style-position: outside; border-bottom: none; }
+=======
+.panel_1 li, .panel_2 li { display: inline-block; width: 100%; padding: 5px 0; border-bottom: 1px solid #efefef; }
+.panel_1 .bullet_list, .panel_2 .bullet_list { margin: 0 10px; }
+.panel_1 .bullet_list ul, .panel_2 .bullet_list ul { margin: 10px 0 0 0; }
+.panel_1 .bullet_list li, .panel_2 .bullet_list li { display: list-item; margin: 0 0 10px 10px; padding: 0; line-height: 120%; list-style-image: url('/images/default/bullet1.gif'); list-style-type: disc; list-style-position: outside; border-bottom: none; }
+>>>>>>> house ad panel updates to layouts b and c featured stories panel and general added variables for house panel to skin.sass:public/stylesheets/compiled/fb_grid.css
 .panel_1 .audio, .panel_1 .video, .panel_1 .image, .panel_2 .audio, .panel_2 .video, .panel_2 .image { margin: 10px; }
 .panel_1 .userPoints, .panel_2 .userPoints { text-align: right; margin-right: 0px; }
 
