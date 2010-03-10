@@ -202,32 +202,30 @@
     });
 
 #content-box
-  %h1.title Your page content
-  %h2.title Actions:
-  %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save
+  %h1.title Page Layout
   %br
   #left.box.droppable-main.ui-widget-content.ui-state-default
-    %h1 Main Content
+    %h1 Main Column
     %ul#sortable-main
   #right.box.droppable-sidebar.ui-widget-content.ui-state-default
-    %h1 Sidebar Content
+    %h1 Sidebar Column
     %ul#sortable-sidebar
+  %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
 %br
 .clear
 %br
-%br
 #sidebar-widgets
-  %h1.title Widgets Selector
-  %h2.title Drag widgets to their appropriate box and desired position
+  %h1.title Select Widgets for Your Page
+  %p.title Drag widgets to their appropriate box and desired position
   #main-widgets-list.box
-    %h1 Main Content Widgets
+    %h1 Wide Widgets
     %ul
       - @main.each do |widget|
         %li.draggable-main.ui-widget-content{:id => "widget_#{widget.id}"}
-          %p== #{widget.name} Widget
+          %p== #{widget.name}
   #sidebar-widgets-list.box
-    %h1 Sidebar Content Widgets
+    %h1 Narrow Widgets
     %ul
       - @sidebar.each do |widget|
         %li.draggable-sidebar.ui-widget-content{:id => "widget_#{widget.id}"}
-          %p== #{widget.name} Widget
+          %p== #{widget.name}
