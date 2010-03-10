@@ -91,5 +91,3 @@
               %ul
                 %li= link_to t('.top_blogs'), blogs_path, :class => tab_selected?(@current_tab, 'blogs')
                 %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'blogs')
-        - if MENU.key? 'stories'
-          %li.admin-links= link_to t('.admin'), admin_path, :class => tab_selected?(@current_tab, 'admin')
