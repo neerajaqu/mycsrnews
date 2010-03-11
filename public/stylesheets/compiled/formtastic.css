@@ -8,7 +8,8 @@ form.formtastic abbr, form.formtastic acronym { border: 0; font-variant: normal;
 form.formtastic input, form.formtastic textarea, form.formtastic select { font-family: inherit; font-size: inherit; font-weight: inherit; }
 form.formtastic input, form.formtastic textarea, form.formtastic select { font-size: 100%; }
 form.formtastic legend { color: #000; }
-form.formtastic fieldset { display: inline-block; }
+form.formtastic fieldset { width: 90%; margin: 0 auto; }
+form.formtastic fieldset.inputs input { width: 100%; }
 form.formtastic fieldset.buttons li { float: left; padding-right: 0.5em; }
 form.formtastic fieldset:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 
@@ -23,7 +24,7 @@ html[xmlns] form.formtastic fieldset ol li { display: block; }
 
 * html form.formtastic fieldset ol li { height: 1%; }
 
-form.formtastic fieldset ol li label { display: block; width: 25%; float: left; padding-top: .2em; }
+form.formtastic fieldset ol li label { display: block; width: 100%; float: left; padding: 4px 0; }
 form.formtastic fieldset ol li li label { line-height: 100%; padding-top: 0; }
 form.formtastic fieldset ol li li label input { line-height: 100%; vertical-align: middle; margin-top: -0.1em; }
 form.formtastic fieldset ol li fieldset { position: relative; }
@@ -35,7 +36,6 @@ form.formtastic fieldset ol li p.inline-hints { color: #666; margin: 0.5em 0 0 2
 form.formtastic fieldset ol li p.inline-errors { color: #cc0000; margin: 0.5em 0 0 25%; }
 form.formtastic fieldset ol li ul.errors { color: #cc0000; margin: 0.5em 0 0 25%; list-style: square; }
 form.formtastic fieldset ol li ul.errors li { padding: 0; border: none; display: list-item; }
-form.formtastic fieldset ol li.string input, form.formtastic fieldset ol li.password input, form.formtastic fieldset ol li.numeric input { width: 74%; }
 form.formtastic fieldset ol li.text textarea { width: 100%; }
 form.formtastic fieldset ol li.hidden { display: none; }
 form.formtastic fieldset ol li.boolean label { padding-left: 25%; width: auto; }

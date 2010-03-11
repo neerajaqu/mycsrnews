@@ -2,16 +2,21 @@
   = render :partial => 'shared/subnav/news_subnav'
 #col_left
   .panel_1
-    .panelBar.clearfix
-      %h2 Story Details
-    .panel_block
-      .storyBlockWrap
-        -# %h3= link_to 'Post an Article', new_article_path
-        - semantic_form_for @story, :url => stories_path, :html => { :multipart => true } do |form|
-          = render :partial => 'story_form', :locals => { :form => form }
-          - form.buttons do
-            -# TODO:: switch this to locale
-            = form.commit_button "Post Story"
+    .panelBar
+      %h2
+        post a story
+    .formBox  
+      %h2.title= link_to 'Post an Article', new_article_path
+      - semantic_form_for @story, :url => stories_path, :html => { :multipart => true } do |form|
+        = render :partial => 'story_form', :locals => { :form => form }
+        - form.buttons do
+          -# TODO:: switch this to locale
+          = form.commit_button "Post Story"
+
+
 #col_right
-  = fb_iframe base_url(bookmarklet_panel_home_path(:canvas => false)), :frameborder => 0, :scrolling => "no", :style => "margin: 0px 5px 0px 0px; padding: 0px; width: 200px; height: 400px;"
-  %br
+  .panel_2
+    .panelBar
+      %h2
+        An Easier way to Post a story
+    = render :partial => 'shared/bookmarklet_panel'

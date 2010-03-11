@@ -2,16 +2,21 @@
   = render :partial => 'shared/subnav/news_subnav'
 #col_left
   .panel_1
-    #contactBox
-      %h1 Story Details
-      .storyBlockWrap
-        -# %h2= link_to 'Post an Article', new_article_path
-        - semantic_form_for @story, :url => stories_path, :html => { :multipart => true } do |form|
-          = render :partial => 'story_form', :locals => { :form => form }
-          - form.buttons do
-            -# TODO:: switch this to locale
-            = form.commit_button "Post Story"
+    .panelBar
+      %h2
+        post a story
+    .formBox  
+      %h2.title= link_to 'Post an Article', new_article_path
+      - semantic_form_for @story, :url => stories_path, :html => { :multipart => true } do |form|
+        = render :partial => 'story_form', :locals => { :form => form }
+        - form.buttons do
+          -# TODO:: switch this to locale
+          = form.commit_button "Post Story"
+
+
 #col_right
-  #bookmarkletFrame
+  .panel_2
+    .panelBar
+      %h2
+        An Easier way to Post a story
     = render :partial => 'shared/bookmarklet_panel'
-  %br

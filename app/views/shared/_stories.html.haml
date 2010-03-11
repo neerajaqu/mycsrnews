@@ -17,6 +17,8 @@
               .thumb
                 - if content.images.present?
                   = image_tag content.images.first.url(:thumb)
+                - else
+                  = image_tag ('default/default_thumb_b.gif', :width => "100%")
               .storyBlockWrap.storyBlockSpacer
                 %h2.storyHead= link_to content.title, story_path(content)
                 %p.storyCaption= linked_story_caption content

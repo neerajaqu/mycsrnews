@@ -3,7 +3,7 @@
   .panelBar.clearfix
     %h2= t('.ideas_title')
     - if ideas.present? and ideas.first.refineable?
-      .bar_link
+      .refine_link
         = render :partial => 'shared/forms/refine_dropdown'
   .storyList
     .list_stories.clearfix
@@ -11,10 +11,12 @@
         - @ideas.each do |idea|
           %li.askQuestionWrap
             .thumb
-              - if idea.image_item?
-                = image_tag idea.images.last.url(:thumb)
+              - if idea.images.present?
+                = image_tag idea.images.first.url(:thumb)
+              - else
+                = image_tag ('default/default_thumb_b.gif', :width => "100%")
             .storyBlockWrap
-              %p.askQuestionHead= link_to idea.title, idea_path(idea)
+              %h2= link_to idea.title, idea_path(idea)
               .profilePic= local_linked_profile_pic idea.user, :size => :square
               .storyBlockMeta
                 %p= t('.ideas_asked_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))

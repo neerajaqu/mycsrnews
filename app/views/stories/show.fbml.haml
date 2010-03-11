@@ -7,7 +7,7 @@
             %a== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteLink"} #{@story.votes_tally}
           %li
             %a== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
-          %li
+          %li.nopad
             %a= fb_share_button(story_url(@story))
           %li
             %a= twitter_share_item_link @story, @story.title

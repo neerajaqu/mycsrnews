@@ -36,9 +36,13 @@ form.formtastic
     color: #000
 
   fieldset
-    display: inline-block
+    width: 90%
+    margin: 0 auto
 
     &.inputs
+      input
+        width: 100%
+      
     &.buttons
 
     ol
@@ -86,9 +90,9 @@ form.formtastic fieldset ol li
   &.required, &.optional, &.error
   label
     display: block
-    width: 25%
+    width: 100%
     float: left
-    padding-top: .2em
+    padding: 4px 0
 
   li label
     line-height: 100%
@@ -140,7 +144,7 @@ form.formtastic fieldset ol li
       display: list-item
 
   &.string input, &.password input, &.numeric input 
-    width: 74%
+    
 
   &.text textarea
     width: 100%

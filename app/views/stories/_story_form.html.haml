@@ -2,6 +2,6 @@
   = form.input :url
   = form.input :title
   = form.input :tags_string, :required => false
-  = form.input :caption
+  = form.input :caption, :input_html => { :rows => '10', :cols => '20' }
   %ul#image_selector.jcarousel-skin-tango{:style => "left: 0px;"}
-= render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @story }
+  = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @story }
