@@ -124,7 +124,7 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #subNav .toggle_tabs li a.disabled:hover { text-decoration: none; }
 
 .panel_1, .panel_2 { border-bottom: none; margin-bottom: 15px; }
-.panel_1 .houseFeatures .featureAd, .panel_2 .houseFeatures .featureAd { text-align: center; background: #d5cbbb url('http://n2dev.chewbranca.com/images/default/default_thumb_c.gif?1268333775') top left no-repeat; border: 1px solid #7e6947; }
+.panel_1 .houseFeatures .featureAd, .panel_2 .houseFeatures .featureAd { text-align: center; background: #d5cbbb url('/images/default/default_thumb_c.gif') top left no-repeat; border: 1px solid #7e6947; }
 .panel_1 .houseFeatures .featureAd h2, .panel_2 .houseFeatures .featureAd h2 { text-align: left; line-height: 150%; padding: 8px 10px; color: black; }
 .panel_1 .houseFeatures .featureAd p, .panel_2 .houseFeatures .featureAd p { text-align: left; padding: 0 10px; margin-bottom: 20px; }
 .panel_1 .houseFeatures .featureAd .featureBtn, .panel_2 .houseFeatures .featureAd .featureBtn { text-align: center; font-size: 14px; line-height: 14px; font-weight: bold; display: inline-block; background: #55761b url('http://n2dev.chewbranca.com/images/default/toggletab_bg.gif?1267551946') left repeat-x; color: white; height: 16px; padding: 4px 20px; margin: 10px auto; }
@@ -154,15 +154,7 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 8px 0; }
 .panel_1 .storyBlockWrap h1, .panel_2 .storyBlockWrap h1 { font-size: 22px; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 6px 0px; line-height: 120%; }
-<<<<<<< HEAD:public/stylesheets/compiled/grid.css
-<<<<<<< HEAD:public/stylesheets/compiled/grid.css
-.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 10px; max-width: 280px; background: url('http://n2dev.chewbranca.com/images/default/default_thumb.gif?1268156684') top left no-repeat; }
-=======
-.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/grid.css
-=======
 .panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('http://n2dev.chewbranca.com/images/default/default_thumb.gif?1268156684') top left no-repeat; }
->>>>>>> Updating css and javascript unhide:public/stylesheets/compiled/grid.css
 .panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
 .panel_1 .thumb a:hover, .panel_2 .thumb a:hover { text-decoration: none; }
 .panel_1 li, .panel_2 li { display: inline-block; width: 100%; padding: 5px 0; border-bottom: 1px solid #efefef; }
@@ -218,10 +210,6 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 .subFilter .selected { color: white; background: #3b5998; padding: 1px 5px 2px 5px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 
 blockquote { background: white; color: #333333; font-size: 12px; line-height: 130%; margin: 10px 0 10px 60px; padding: 0 20px 0 0; }
-<<<<<<< HEAD:public/stylesheets/compiled/grid.css
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/grid.css
-=======
->>>>>>> Updating css and javascript unhide:public/stylesheets/compiled/grid.css
 blockquote .quotes { padding: 4px 0; }
 
 .btn_1 { display: inline-block; color: #fff; font-weight: bold; padding: 3px 10px 4px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #31500b; }
@@ -232,33 +220,13 @@ blockquote .quotes { padding: 4px 0; }
 
 .btnComment { display: inline-block; margin: 0 1px; padding: 1px 8px 2px 8px; background: #F0F0F0; }
 
-.voteLink, .voteUp { background: url('http://n2dev.chewbranca.com/images/default/icon_vote.gif?1265833188') left no-repeat; padding-left: 15px; }
+.voteLink, .voteUp { background: url('/images/default/icon_vote.gif') left no-repeat; padding-left: 15px; }
 
-.voteDown { background: url('http://n2dev.chewbranca.com/images/default/icon_vote_no.gif?1267730727') left no-repeat; padding-left: 15px; }
+.voteDown { background: url('/images/default/icon_vote_no.gif') left no-repeat; padding-left: 15px; }
 
-.thumb-up { background: url('http://n2dev.chewbranca.com/images/default/thumb-up.gif?1268333775') left no-repeat; padding-left: 15px; }
-
-<<<<<<< HEAD:public/stylesheets/compiled/grid.css
-.rate_up_on { display: block; float: left; width: 16px; height: 16px; margin: 0 0 0 10px; background: image_url("default/icon_thumbs.gif") bottom left no-repeat; }
-
-.rate_down { display: block; float: left; width: 16px; height: 16px; margin: 0 10px 0 10px; background: image_url("default/icon_thumbs.gif") top right no-repeat; }
-.rate_down:hover { background: image_url("default/icon_thumbs.gif") center right no-repeat; }
-
-.rate_down_on { display: block; float: left; width: 16px; height: 16px; margin: 0 10px 0 10px; background: image_url("default/icon_thumbs.gif") bottom right no-repeat; }
-
-.flag { display: block; float: left; color: #666666; height: 16px; margin: 0 0 0 10px; border-left: 1px solid #CCCCCC; padding-left: 30px; background: image_url("default/icon_flag.gif") 10px top no-repeat; }
-
-a.flag:hover { color: #cc3333; background: image_url("default/icon_flag.gif") 10px center no-repeat; }
-
-.flag_on { display: block; float: left; color: #cc3333; height: 16px; margin: 0 0 0 10px; border-left: 1px solid #CCCCCC; padding-left: 30px; background: image_url("default/icon_flag.gif") 10px bottom no-repeat; }
-=======
 .thumb-up { background: url('/images/default/thumb-up.gif') left no-repeat; padding-left: 15px; }
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/grid.css
 
 .thumb-down { background: url('/images/default/thumb-down.gif') left no-repeat; padding-left: 15px; }
-=======
-.thumb-down { background: url('http://n2dev.chewbranca.com/images/default/thumb-down.gif?1268333775') left no-repeat; padding-left: 15px; }
->>>>>>> Updating css and javascript unhide:public/stylesheets/compiled/grid.css
 
 .actionLegend { background: #dce6f4; }
 .actionLegend .share_and_hide { margin: 5px; }
