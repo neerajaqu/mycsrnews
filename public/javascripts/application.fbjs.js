@@ -9,7 +9,7 @@
 $(function() {
 
   $('.hide').hide();
-  $('h2.hidden').removeClass('hidden');
+  $('.unhide').show().removeClass('hidden');
 
   function change_url_format(url, format) {
     url = getRelURL(url);

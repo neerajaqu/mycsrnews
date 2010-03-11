@@ -1,10 +1,12 @@
 // Place your application-specific jQuery JavaScript functions and classes here
 $(function() {
-	setTimeout(function() {
+  $('.hide').hide();
+  $('.unhide').show().removeClass('hidden');
+
+  setTimeout(function() {
 		$('.flash').effect('shake');
 		$('.flash').hide('puff', {}, 'slow');
-  }, 3500
-  );
+  }, 3500);
 
   function rebuild_facebook_dom() {
     try {
@@ -126,8 +128,6 @@ $(function() {
     });
   });
 
-  $('.hide').hide();
-  $('h2.hidden').removeClass('hidden');
   $('a.toggle-form').click(function(event) {
   	event.preventDefault();
   	$(this).parent().next().toggle();
