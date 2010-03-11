@@ -127,7 +127,14 @@ module ApplicationHelper
       link_to fb_profile_pic(user, options), user_path(user, link_options)
     else
       link_to image_tag(default_image), user, link_options
+      #link_to gravatar_image(user), user, link_options
     end
+  end
+
+  def gravatar_image user
+    gid = Digest::MD5.hexdigest(user.email.downcase)
+    gurl = "http://www.gravatar.com/avatar/"
+    image_tag "#{gurl}#{gid}"
   end
 
   def local_linked_profile_name(user, options={})
