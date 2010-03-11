@@ -13,8 +13,9 @@
               .profilePic= local_linked_profile_pic user
               .storyBlockMeta.float_left
                 %h4= link_to user.name, user_path(user)
-                %h3= "City and State"               
+                -#TODO:: add something in here
+                -#%h3= "City and State"
               .storyBlockMeta.float_right
-                %h4.userPoints= "11,230"
+                %h4.userPoints= user.karma_score
                 %h3.userPoints= "Points"
                 
