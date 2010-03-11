@@ -35,8 +35,7 @@ class Admin::WidgetsController < AdminController
       @sidebar_content.children.create({:name => "home_#{widget.name}_widget", :widget => widget, :widget_type => "widget", :position => widget_position})
     end
 
-    # HACK:: update a story item to trigger cache sweepers
-    Content.last.touch
+    WidgetSweeper.expire_all
     render :json => {:success => "Success!"}.to_json and return
   end
 

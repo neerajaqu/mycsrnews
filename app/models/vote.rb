@@ -16,7 +16,7 @@ class Vote < ActiveRecord::Base
   # validates_uniqueness_of :voteable_id, :scope => [:voteable_type, :voter_type, :voter_id]
 
   after_create :update_user_karma
-  after_create :update_voteable_count
+  after_save :update_voteable_count
 
   private
 
@@ -25,14 +25,16 @@ class Vote < ActiveRecord::Base
     vote_value = vote ? 1 : -1
     user.karma_score += vote_value
     user.save
+    return false # return false to prevent additional triggers of this method
   end
 
   def update_voteable_count
-   vote_value = vote ? 1 : -1
-   if voteable.votes_tally == nil
-     voteable.votes_tally = 0
-   end
-   voteable.votes_tally += vote_value
-   voteable.save
+    vote_value = vote ? 1 : -1
+    if voteable.votes_tally == nil
+      voteable.votes_tally = 0
+    end
+    voteable.votes_tally += vote_value
+    voteable.save
+    return false # return false to prevent additional triggers of this method
  end
 end

@@ -177,9 +177,11 @@ class User < ActiveRecord::Base
   end
 
   private
+
   def check_profile
     self.build_profile if self.profile.nil?
   end
+
   protected
     
 

@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  caches_page :index, :google_ads, :bookmarklet_panel
+  #caches_page :index, :google_ads, :bookmarklet_panel
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab

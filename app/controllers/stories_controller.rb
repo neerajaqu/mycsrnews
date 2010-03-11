@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
-  caches_page :show, :index
+  #caches_page :show, :index
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
