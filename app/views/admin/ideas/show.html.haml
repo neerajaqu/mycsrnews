@@ -1,1 +1,1 @@
-= gen_show_page @idea, [:title, :user_id, :details, :likes_count, :comments_count, :created_at, :idea_board_id], :associations => { :belongs_to => { :idea_board => :idea_board_id, :user => :user_id } }
+= gen_show_page @idea, [:title, :user_id, :details, :votes_tally, :comments_count, :created_at, :idea_board_id], :associations => { :belongs_to => { :idea_board => :idea_board_id, :user => :user_id } }

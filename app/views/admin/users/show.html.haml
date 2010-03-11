@@ -5,7 +5,7 @@
 %hr
 %br
 %h2== Ideas for this User (#{@user.ideas.size})
-= gen_table @user.ideas, Idea, [:title, :likes_count, :comments_count, :created_at, :idea_board_id], :associations => { :belongs_to => {:idea_board => :idea_board_id} }
+= gen_table @user.ideas, Idea, [:title, :votes_tally, :comments_count, :created_at, :idea_board_id], :associations => { :belongs_to => {:idea_board => :idea_board_id} }
 %hr
 %br
 %h2== Comments for this User (#{@user.comments.size})

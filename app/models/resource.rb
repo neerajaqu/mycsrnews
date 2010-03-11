@@ -20,6 +20,7 @@ class Resource < ActiveRecord::Base
   validates_uniqueness_of :title
   validates_presence_of :url
   validates_uniqueness_of :url
+  validates_format_of :url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :message => "should look like a URL"
   validates_presence_of :resource_section
   validates_format_of :tags_string, :with => /^([-a-zA-Z0-9_ ]+,?)+$/, :allow_blank => true, :message => "Invalid tags. Tags can be alphanumeric characters or -_ or a blank space."
 

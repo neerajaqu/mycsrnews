@@ -1,2 +1,1 @@
 = gen_index_page @idea_boards, IdeaBoard, [:name, :description, :section], :associations => { :belongs_to => {:user => :user_id, :idea_board => :idea_board_id} }, :paginate => true
-=# gen_index_page @ideas, Idea, [:title, :user_id, :likes_count, :comments_count, :created_at, :idea_board_id], {}, true
