@@ -164,24 +164,21 @@ body
   margin: 0px
   padding: 0px
 
-
 h1, h2, h3, h4, h5
   :font-family= !headerFont
   :color= !bodyColor
   font-size: 14px
+  line-height: 130%
   margin: 0px
   padding: 0px
-
 
 h1
   :font-family= !headerFont
   font-size: 15px
   font-weight: bold
-  line-height: 20px
-  color: #3B5998
+  :color= !headerColor
   margin: 0 0 6px 0
   padding: 0
-
 
 h2
   :font-family= !headerFont
@@ -189,7 +186,6 @@ h2
   font-weight: bold
   margin: 0 0 6px 0
   padding: 0
-
 
 h3
   font-size: 11px
@@ -200,7 +196,6 @@ h3
   margin: 0 5px 5px 0
   padding: 0
 
-
 h4
   :font-family= !headerFont
   font-size: 12px
@@ -208,7 +203,6 @@ h4
   font-weight: bold
   margin: 0 0 4px 0
   padding: 0
-
 
 h5
   :font-family= !headerFont
@@ -219,7 +213,6 @@ h5
   margin: 0px 0px 10px 0
   padding: 5px 0px
 
-
 p
   :font-family= !copyFont
   :color= !bodyColor
@@ -228,7 +221,6 @@ p
   text-align: left
   margin: 0 0 8px 0
   padding: 0px
-
 
 a
   :color= !linkColor
@@ -240,10 +232,8 @@ a
   &:hover
     text-decoration: underline
 
-
 img
   border: 0px
-
 
 hr
   border: none 0
@@ -254,27 +244,21 @@ hr
   a
     :color= !linkColor
 
-
 ul
   list-style-type: none
   margin: 0
   padding: 0
-
 
 li
   list-style-type: none
   margin: 0
   padding: 10px 0 4px 0
 
-
 .meta
   :color= !subheadColor
 
-
 .bold
   font-weight: bold
-
-
 
 // top level menu page tabs //
 #pageTabs
@@ -311,7 +295,6 @@ li
       margin: 0px 0px 0px 0px
       padding: 0px 0px 0px 0px
       text-align: center
-
 
     .toggle_tabs li
       display: block
@@ -354,7 +337,6 @@ li
 
       &.first img
         display: inline-block    
-
 
     .toggle_tabs li
       a
@@ -399,6 +381,7 @@ li
     .toggle_tabs
       .menu_item
         .dropdown
+          z-index: 99
           visibility: hidden
           ul
 
@@ -435,9 +418,7 @@ li
   border:
     :bottom= !borderColor_3
 
-
 #subNav
-
   .toggle_tabs
     margin: 0px 0px 0px 0px
     padding: 0px 0px 0px 0px
@@ -480,7 +461,6 @@ li
           &:hover
             text-decoration: none
 
-
 // Layout panels - should be used for all element containers //
 .panel_1, .panel_2
   border-bottom: none
@@ -520,7 +500,6 @@ li
           :background= !featureBtnOn
           text-decoration: none
 
-
   .userBlockWrap
 
     li
@@ -548,7 +527,6 @@ li
       b
         font-weight: normal
         text-transform: uppercase
-        
 
   .videoBlockWrap
     li
@@ -584,9 +562,14 @@ li
     padding: 10px 0px
     :background= !subheadBG
 
-    .inputs, .buttons
-      width: 96%
-      margin: 0 auto
+    .title
+      width: 90%
+      margin: 15px auto
+      font-weight: normal
+
+    h4
+      font-weight: normal
+      margin-bottom: 10px
 
     textarea
       :border= !borderColor_6
@@ -596,7 +579,6 @@ li
       margin: 0
       float: right
       text-align: right
-
 
   .panelBar
     display: block
@@ -632,21 +614,19 @@ li
       margin-bottom: 3px
 
     h3
-      margin-bottom: 3px
+      margin-bottom: 4px
 
   .storyBlockWrap
-    margin: 0px 10px
 
     .storyHead
       margin: 0 0 8px 0
       :color= !headerColor
-    
+
     p
       margin: 8px 0
 
     h1
       font-size: 22px
-      line-height: 100%
 
     p
       margin: 6px 0px
@@ -654,12 +634,15 @@ li
 
   .thumb
     float: left
-    margin: 10px
+    margin: 0 10px 10px 0
     max-width: 280px
     :background= !articleImageBg
 
     img
       max-width: 280px
+
+    a:hover
+      text-decoration: none
 
   li
     display: inline-block
@@ -690,6 +673,72 @@ li
   .userPoints
     text-align: right
     margin-right: 0px
+
+// refine search box styles //
+.panelBar
+  .refine-toggle
+    position: relative
+    z-index: 48
+    padding-right: 10px
+    :background= !dropDownBg
+
+  .refine_link
+    float: right
+    position: relative
+    display: block
+    padding: 4px 10px
+    margin-top: -18px
+
+    .refine-tab
+      height: 28px
+      width: 104px
+      position: absolute
+      top: -30px
+      right: -1px
+      border: 
+        :top= !borderColor_1
+        :bottom= !borderColor_4
+        :left= !borderColor_1
+        :right= !borderColor_1
+      :background-color= !bgWhite
+      z-index: 44
+
+    .refine-box
+      z-index: 43
+      display: none
+      position: absolute
+      padding: 8px
+      width: 142px
+      top: 26px
+      left: -54px
+      :border= !borderColor_1
+      :background-color= !bgWhite
+
+      .refine-content
+        text-align: center
+
+        select
+          width: 100%
+          margin-bottom: 15px
+          :border= !refineInputBorder
+
+        label
+          display: block
+          font-weight: bold
+          text-align: left
+          padding: 0 0 5px 4px
+
+        input
+          width: 70%
+          cursor: pointer
+          font-weight: bold
+          :color= !refineInputText
+          :border= !refineInputBorder
+          :background= !refineInputBG
+       
+          &:hover
+            :color= !refineInputHoverText
+            :background= !refineInputHoverBG
 
 // hot topic bar //
 #hotTopicBar
@@ -738,7 +787,6 @@ li
 
 // Article Style modifications //
 #readArticle
-
   .topBar
     margin-bottom: 15px
     ul
@@ -760,6 +808,8 @@ li
           :bottom= !noBorder
         :background= !subheadBG
 
+        &.nopad
+          padding-bottom: 2px
         a
           :color= !linkColor
 
@@ -780,10 +830,8 @@ li
       line-height: 0px
       visibility: hidden
 
-
 // Comment Style Modifications and Additions //
 #commentThread
-
   .panelBar
     :background= !bgColor
 
@@ -815,10 +863,10 @@ li
   .panel_2
     margin-bottom: 10px
   .thumb
-    margin-top: 10px
+    margin: 10px
 
   .storyBlockWrap
-    margin-top: 10px
+    margin: 10px 10px 0 10px
 
 .subtitle
   font-size: 10px
@@ -859,8 +907,8 @@ blockquote
   :color= !bodyColor
   font-size: 12px
   line-height: 130%
-  margin: 0 0 10px 0
-  padding: 0 20px 0 60px
+  margin: 10px 0 10px 60px
+  padding: 0 20px 0 0
 
   .quotes
 
@@ -902,95 +950,31 @@ blockquote
   :background= !voteDown
   padding-left: 15px
 
-// rating & modertation styles // 
-// Not sure if these styles are being used or will be used //
-/*.rating
-  margin: 0 0 10px 15px
-  display: block
-  float: left
-  height: 16px
+.thumb-up
+  :background= !thumbUp
+  padding-left: 15px
 
+.thumb-down
+  :background= !thumbDown
+  padding-left: 15px
 
-.rate_up
-  display: block
-  float: left
-  width: 16px
-  height: 16px
-  margin: 0 0 0 10px
-  background: url(/images/default/icon_thumbs.gif) top left no-repeat
+// Action Legend //
 
-  &:hover
-    background: url(/images/default/icon_thumbs.gif) center left no-repeat
-
-
-.rate_up_on
-  display: block
-  float: left
-  width: 16px
-  height: 16px
-  margin: 0 0 0 10px
-  background: url(/images/default/icon_thumbs.gif) bottom left no-repeat
-
-
-.rate_down
-  display: block
-  float: left
-  width: 16px
-  height: 16px
-  margin: 0 10px 0 10px
-  background: url(/images/default/icon_thumbs.gif) top right no-repeat
-
-  &:hover
-    background: url(/images/default/icon_thumbs.gif) center right no-repeat
-
-
-.rate_down_on
-  display: block
-  float: left
-  width: 16px
-  height: 16px
-  margin: 0 10px 0 10px
-  background: url(/images/default/icon_thumbs.gif) bottom right no-repeat
-
-
-.flag
-  display: block
-  float: left
-  color: #666666
-  height: 16px
-  margin: 0 0 0 10px
-  border-left: 1px solid #CCCCCC
-  padding-left: 30px
-  background: url(/images/default/icon_flag.gif) 10px top no-repeat
-
-
-a.flag:hover
-  color: #cc3333
-  background: url(/images/default/icon_flag.gif) 10px center no-repeat
-
-
-.flag_on
-  display: block
-  float: left
-  color: #cc3333
-  height: 16px
-  margin: 0 0 0 10px
-  border-left: 1px solid #CCCCCC
-  padding-left: 30px
-  background: url(/images/default/icon_flag.gif) 10px bottom no-repeat
-
-*/  // Not sure if these styles are being used or will be used //
-
-.storyHead, .askQuestionHead
-  font-size: 14px
-  font-weight: bold
-  :font-family= !copyFont
-
+.actionLegend
+  :background= !bgColor
+  .share_and_hide
+    margin: 5px
+    h4
+      margin-bottom: 5px
+      :color= !headerColor
+    input
+      :border= !borderColor_6
+      width: 100%
+      padding: 1px 0
 
 .list_stories .thumb img
   max-width: 90px
   max-height: 90px
-
 
 .profilePic 
   float: left
@@ -999,16 +983,12 @@ a.flag:hover
   a:hover
     text-decoration: none
 
-.profilePicLarger
-  float: left
-  margin: 0px 10px 0px 0px
-
-
 .list_stories
   .profilePic img
     width: 30px
     height: 30px
 
+// Account Profile stats styles //
 .pointsTable_profile
   display: inline-block
   table
@@ -1022,112 +1002,15 @@ a.flag:hover
     margin: 0
     padding: 3px 10px 4px 0px
 
-// Form Styles - outside formtastic.sass //
-
-
-#loginBox, #contactBox
-  h1 
-    font-size: 10px
-    text-transform: uppercase
-    font-weight: normal
-    color: #666666
-    margin-top: -38px
-    margin-left: -38px
-
-#loginBox, #contactBox
-  background: #efefef
-  border-top: 1px solid #3B5998
-  border-bottom: 1px solid #cccccc
-  padding: 20px 40px 20px 40px
-  margin: 30px 40px
-  float: left
+// Extra styles for Login Page //
+.login
 
   p
     line-height: 120%
     font-size: 12px
-    margin: 10px 0 0 0
-
-  img 
-    margin-top: 15px
-    margin-left: 40px
-
-#contactBox
-  form 
-    margin-top: 20px    
+    margin: 10px auto
+    width: 80%
 
   label
-    font-size: 12px
-// refine search box styles //
-.panelBar
-
-  .refine-toggle
-    position: relative
-    z-index: 48
-    padding-right: 10px
-    :background= !dropDownBg
-
-  .refine_link
-    float: right
-    position: relative
-    display: block
-    padding: 4px 10px
-    margin-top: -18px
-
-
-    .refine-tab
-      height: 28px
-      width: 104px
-      position: absolute
-      top: -30px
-      right: -1px
-      border: 
-        :top= !borderColor_1
-        :bottom= !borderColor_4
-        :left= !borderColor_1
-        :right= !borderColor_1
-      :background-color= !bgWhite
-      z-index: 44
-
-    .refine-box
-      z-index: 43
-      display: none
-      position: absolute
-      padding: 8px
-      width: 142px
-      top: 26px
-      left: -54px
-      :border= !borderColor_1
-      :background-color= !bgWhite
-    
-      .refine-content
-        text-align: center
-
-        select
-          width: 100%
-          margin-bottom: 15px
-
-        label
-          display: block
-          font-weight: bold
-          text-align: left
-          padding: 0 0 5px 4px
-
-        input
-          width: 70%
-
-// test heights for test panels
-
-.test_height_700
-  background: #00cc33
-  width: 100%
-  height: 700px
-
-.test_height_400
-  background: #00cc33
-  width: 100%
-  height: 400px
-
-.test_height_200
-  background: #33cc00
-  width: 100%
-  height: 200px
+    font-size: 11px
+    padding: 4px 2px

@@ -8,5 +8,19 @@
     %ul
       - ideas.each do |idea|
         %li
+          %h4= link_to idea.title, idea_path(idea)
           .profilePic= local_linked_profile_pic idea.user
-          = link_to idea.title, idea_path(idea)
+          .storyBlockMeta
+            %h3 
+              Asked By 
+              %a 
+                SomeOne
+              2 days ago.
+            %span.btnComment.float_left
+              %a.voteUp
+                Like
+              0
+            %span.btnComment.float_left
+              14
+              %a
+                Comments

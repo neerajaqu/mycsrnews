@@ -5,24 +5,32 @@
     = render :partial => 'shared/subnav/ideas_subnav'
 
 #col_left
-  #newIdea
-    %h1== What's your idea for #{APP_CONFIG['site_topic']}?
+  .panel_1
+    .panelBar
+      %h2 
+        Suggest An Idea
+    .formBox
+      %h4.title== What's your idea for a #{APP_CONFIG['site_topic']}?
 
-    - semantic_form_for @idea do |form|
-      - form.inputs do
-        = form.input :title
-        = form.input :details, :input_html => { :rows => 5 }
-        = form.input :tags_string, :required => false
-        = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
-        = form.input :idea_board, :required => true, :include_blank => false
-      - form.buttons do
-        = form.commit_button
+      - semantic_form_for @idea do |form|
+        - form.inputs do
+          = form.input :title
+          = form.input :details, :input_html => { :rows => 5 }
+          = form.input :tags_string, :required => false
+          = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
+          = form.input :idea_board, :required => true, :include_blank => false
+        - form.buttons do
+          = form.commit_button
 
-  #otherIdeas
-    %h1 Browse Other Ideas
-    %p Like an idea to increase its popularity.
+  .panel_1
+    .panelBar
+      %h2
+        Other Ideas
+    .formBox
+      %h4 Browse Other Ideas
+      %p Like an idea to increase its popularity.
 
-    = render :partial => 'shared/ideas', :locals => { :title => t('.browse_other_ideas'), :ideas => @ideas }
+  = render :partial => 'shared/ideas', :locals => { :title => t('.browse_other_ideas'), :ideas => @ideas }
 
 #col_right
   = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('.top_ideas') }
