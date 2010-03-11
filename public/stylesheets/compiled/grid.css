@@ -158,10 +158,14 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 .panel_1 .storyBlockWrap h1, .panel_2 .storyBlockWrap h1 { font-size: 22px; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 6px 0px; line-height: 120%; }
 <<<<<<< HEAD:public/stylesheets/compiled/grid.css
+<<<<<<< HEAD:public/stylesheets/compiled/grid.css
 .panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
 =======
 .panel_1 .thumb, .panel_2 .thumb { float: left; margin: 10px; max-width: 280px; background: url('http://n2dev.chewbranca.com/images/default/default_thumb.gif?1268156684') top left no-repeat; }
 >>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/grid.css
+=======
+.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
+>>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/grid.css
 .panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
 .panel_1 .thumb a:hover, .panel_2 .thumb a:hover { text-decoration: none; }
 .panel_1 li, .panel_2 li { display: inline-block; width: 100%; padding: 5px 0; border-bottom: 1px solid #efefef; }
@@ -210,8 +214,8 @@ blockquote { background: white; color: #333333; font-size: 12px; line-height: 13
 =======
 .feature_bg { background-color: #dce6f4; }
 .feature_bg .panel_2 { margin-bottom: 10px; }
-.feature_bg .thumb { margin-top: 10px; }
-.feature_bg .storyBlockWrap { margin-top: 10px; }
+.feature_bg .thumb { margin: 10px; }
+.feature_bg .storyBlockWrap { margin: 10px 10px 0 10px; }
 
 .subtitle { font-size: 10px; color: #999999; background: #f0f0f0; border-top: none; border-bottom: none; padding: 6px 4px 6px 4px; }
 
@@ -219,8 +223,12 @@ blockquote { background: white; color: #333333; font-size: 12px; line-height: 13
 .subFilter a { padding: 1px 5px 2px 5px; color: #3b5998; margin-left: 4px; }
 .subFilter .selected { color: white; background: #3b5998; padding: 1px 5px 2px 5px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 
+<<<<<<< HEAD:public/stylesheets/compiled/grid.css
 blockquote { background: url('http://n2dev.chewbranca.com/images/default/reply_arrow.png?1267730727') top left no-repeat; color: #333333; font-size: 12px; line-height: 130%; margin: 0 0 10px 0; padding: 0 20px 0 60px; }
 >>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/grid.css
+=======
+blockquote { background: white; color: #333333; font-size: 12px; line-height: 130%; margin: 10px 0 10px 60px; padding: 0 20px 0 0; }
+>>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/grid.css
 blockquote .quotes { padding: 4px 0; }
 
 .btn_1 { display: inline-block; color: #fff; font-weight: bold; padding: 3px 10px 4px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #31500b; }
@@ -240,6 +248,7 @@ blockquote .quotes { padding: 4px 0; }
 <<<<<<< HEAD:public/stylesheets/compiled/grid.css
 .thumb-up { background: url('/images/default/thumb-up.gif') left no-repeat; padding-left: 15px; }
 
+<<<<<<< HEAD:public/stylesheets/compiled/grid.css
 .thumb-down { background: url('/images/default/thumb-down.gif') left no-repeat; padding-left: 15px; }
 
 .actionLegend { background: #dce6f4; }
@@ -263,10 +272,21 @@ blockquote .quotes { padding: 4px 0; }
 a.flag:hover { color: #cc3333; background: image_url("default/icon_flag.gif") 10px center no-repeat; }
 
 .flag_on { display: block; float: left; color: #cc3333; height: 16px; margin: 0 0 0 10px; border-left: 1px solid #CCCCCC; padding-left: 30px; background: image_url("default/icon_flag.gif") 10px bottom no-repeat; }
+=======
+.thumb-up { background: url('/images/default/thumb-up.gif') left no-repeat; padding-left: 15px; }
+>>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/grid.css
 
+.thumb-down { background: url('/images/default/thumb-down.gif') left no-repeat; padding-left: 15px; }
 
+<<<<<<< HEAD:public/stylesheets/compiled/grid.css
 .storyHead, .askQuestionHead { font-size: 14px; font-weight: bold; font-family: lucida grande, tahoma, verdana, arial, san-serif; }
 >>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/grid.css
+=======
+.actionLegend { background: #dce6f4; }
+.actionLegend .share_and_hide { margin: 5px; }
+.actionLegend .share_and_hide h4 { margin-bottom: 5px; color: #3b5998; }
+.actionLegend .share_and_hide input { border: 1px solid #cccccc; width: 100%; padding: 1px 0; }
+>>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/grid.css
 
 .list_stories .thumb img { max-width: 90px; max-height: 90px; }
 
@@ -281,12 +301,15 @@ a.flag:hover { color: #cc3333; background: image_url("default/icon_flag.gif") 10
 
 .login p { line-height: 120%; font-size: 12px; margin: 10px auto; width: 80%; }
 .login label { font-size: 11px; padding: 4px 2px; }
+<<<<<<< HEAD:public/stylesheets/compiled/grid.css
 
 .ad_230 { width: 230px; height: 120px; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; background: #999999; }
 
 .ad_480 { width: 480px; height: 80px; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; background: #999999; }
 
 .ad_480 span, .ad_230 span { font-size: 9px; color: #333333; display: block; padding: 2px 4px; text-transform: uppercase; }
+=======
+>>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/grid.css
 
 .flash { padding: .3em .4em; margin: 0 auto .5em; clear: both; width: auto; }
 .flash p { padding-left: 25px; }

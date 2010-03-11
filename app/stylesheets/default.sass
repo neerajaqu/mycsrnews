@@ -461,18 +461,6 @@ li
           &:hover
             text-decoration: none
 
-// Feature Styles that Coincide with Panel styles //
-.feature_bg
-  :background-color= !bgColor
-  
-  .panel_2
-    margin-bottom: 10px
-  .thumb
-    margin: 10px
-
-  .storyBlockWrap
-    margin: 10px 10px 0 10px
-
 // Layout panels - should be used for all element containers //
 .panel_1, .panel_2
   border-bottom: none
@@ -852,6 +840,50 @@ li
         font-weight: bold
         font-size: 11px
 
+.feature_bg
+  :background-color= !bgColor
+  
+  .panel_2
+    margin-bottom: 10px
+  .thumb
+    margin: 10px
+
+  .storyBlockWrap
+    margin: 10px 10px 0 10px
+
+.subtitle
+  font-size: 10px
+  :color= !subheadColor
+  :background= !subheadBG
+  border:
+    :top= !noBorder
+    :bottom= !noBorder
+  padding: 6px 4px 6px 4px
+
+
+.subFilter
+  font-size: 10px
+  :color= !subheadColor
+  :background= !subheadBG
+  border:
+    :top= !noBorder
+    :bottom= !borderColor_6
+  padding: 4px 10px 4px 10px
+
+  a
+    padding: 1px 5px 2px 5px
+    :color= !linkColor
+    margin-left: 4px
+
+  .selected
+    :color= !subtablinkOn
+    :background= !subtabOn
+    padding: 1px 5px 2px 5px
+    -moz-border-radius: 4px
+    -webkit-border-radius: 4px
+    border-radius: 4px
+
+
 // Blockquote styles //
 blockquote
   :background= !blockQuote
@@ -899,12 +931,22 @@ blockquote
 .thumb-up
   :background= !thumbUp
   padding-left: 15px
+<<<<<<< HEAD:app/stylesheets/default.sass
 
 .thumb-down
   :background= !thumbDown
   padding-left: 15px
 
 // Action Legend Panel//
+=======
+
+.thumb-down
+  :background= !thumbDown
+  padding-left: 15px
+
+// Action Legend //
+
+>>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:app/stylesheets/default.sass
 .actionLegend
   :background= !bgColor
   .share_and_hide
@@ -949,6 +991,10 @@ blockquote
 
 // Extra styles for Login Page //
 .login
+<<<<<<< HEAD:app/stylesheets/default.sass
+=======
+
+>>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:app/stylesheets/default.sass
   p
     line-height: 120%
     font-size: 12px
@@ -958,6 +1004,7 @@ blockquote
   label
     font-size: 11px
     padding: 4px 2px
+<<<<<<< HEAD:app/stylesheets/default.sass
 
 // Ad sizes and Layouts //  
 .ad_230
@@ -987,3 +1034,5 @@ blockquote
     display: block
     padding: 2px 4px
     text-transform: uppercase
+=======
+>>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:app/stylesheets/default.sass
