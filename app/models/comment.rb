@@ -5,7 +5,7 @@ class Comment < ActiveRecord::Base
   acts_as_refineable
 
   belongs_to :user
-  belongs_to :commentable, :polymorphic => true, :counter_cache => true
+  belongs_to :commentable, :polymorphic => true, :counter_cache => true, :touch => true
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 5)} }
   named_scope :top, lambda { |*args| { :order => ["likes_count desc"], :limit => (args.first || 10)} }

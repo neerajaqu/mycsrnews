@@ -41,8 +41,7 @@ class Admin::FeaturedItemsController < AdminController
       end
     end
 
-    # HACK:: update a story item to trigger cache sweepers
-    Content.last.touch
+    WidgetSweeper.expire_all
     render :json => {:success => "Success!"}.to_json and return
   end
 

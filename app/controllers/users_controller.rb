@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
+  cache_sweeper :profile_sweeper, :only => [:update_bio]
+  cache_sweeper :user_sweeper, :only => [:create, :link_user_accounts]
+
+  before_filter :login_required, :only => [:update_bio]
   before_filter :load_top_stories, :only => [:show]
   before_filter :ensure_authenticated_to_facebook, :only => :link_user_accounts
 
-  # render new.rhtml
   def new
     @user = User.new
   end
@@ -97,7 +100,6 @@ class UsersController < ApplicationController
   end
   
   def current
-    Rails.logger.debug "**************Hitting CURRENT for #{current_user}"
     respond_to do |format|
       format.fbjs
       format.js
