@@ -5,7 +5,7 @@
   = image_form.input :remote_image_url, :required => false
   %br
   %br
-%h4.hidden== Click to #{link_to "Add video link", '#', :class => 'toggle-form'}
+%h4.hidden.unhide== Click to #{link_to "Add video link", '#', :class => 'toggle-form'}
 .video-form.hide
   %h4 Embed or link to a video (youtube only):
   - item.videos.build if item.videos.empty?
@@ -14,7 +14,7 @@
     = video_form.input :remote_video_url, :required => false
     %br
     %br
-%h4.hidden== Click to #{link_to "Add audio link", '#', :class => 'toggle-form'}
+%h4.hidden.unhide== Click to #{link_to "Add audio link", '#', :class => 'toggle-form'}
 .audio-form.hide
   %h4 Link to an audio file (.mp3 only):
   - item.audios.build if item.audios.empty?
