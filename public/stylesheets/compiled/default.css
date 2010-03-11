@@ -103,6 +103,11 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #subNav .toggle_tabs li a.disabled { color: #999999; cursor: default; }
 #subNav .toggle_tabs li a.disabled:hover { text-decoration: none; }
 
+.feature_bg { background-color: #dce6f4; }
+.feature_bg .panel_2 { margin-bottom: 10px; }
+.feature_bg .thumb { margin: 10px; }
+.feature_bg .storyBlockWrap { margin: 10px 10px 0 10px; }
+
 .panel_1, .panel_2 { border-bottom: none; margin-bottom: 15px; }
 .panel_1 .houseFeatures .featureAd, .panel_2 .houseFeatures .featureAd { text-align: center; background: #d5cbbb url('/images/default/default_thumb_c.gif') top left no-repeat; border: 1px solid #7e6947; }
 .panel_1 .houseFeatures .featureAd h2, .panel_2 .houseFeatures .featureAd h2 { text-align: left; line-height: 150%; padding: 8px 10px; color: black; }
@@ -116,8 +121,6 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 .panel_1 .featuredNewsList li b, .panel_2 .featuredNewsList li b { font-weight: normal; text-transform: uppercase; }
 .panel_1 .videoBlockWrap li, .panel_2 .videoBlockWrap li { display: inline-block; float: left; }
 .panel_1 .videoBlockWrap .videoThumb, .panel_2 .videoBlockWrap .videoThumb { margin-top: 3px; margin-right: 3px; width: 74px; height: 36px; background: #cccccc; }
-.panel_1 .ad_fullCol, .panel_2 .ad_fullCol { width: 480px; height: 80px; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; background: #999999; }
-.panel_1 .ad_fullCol span, .panel_2 .ad_fullCol span { font-size: 9px; color: #333333; display: block; padding: 2px 4px; text-transform: uppercase; }
 .panel_1 .formBox, .panel_2 .formBox { padding: 10px 0px; background: #f0f0f0; }
 .panel_1 .formBox .title, .panel_2 .formBox .title { width: 90%; margin: 15px auto; font-weight: normal; }
 .panel_1 .formBox h4, .panel_2 .formBox h4 { font-weight: normal; margin-bottom: 10px; }
@@ -178,29 +181,16 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #commentThread .comment_block .comment_reply { display: block; padding: 0 0 4px 20px; position: absolute; bottom: 8px; left: 70px; background: url('/images/default/reply_arrow.png') top left no-repeat; }
 #commentThread .comment_block .comment_reply a { color: #336600; font-weight: bold; font-size: 11px; }
 
-.feature_bg { background-color: #dce6f4; }
-.feature_bg .panel_2 { margin-bottom: 10px; }
-.feature_bg .thumb { margin: 10px; }
-.feature_bg .storyBlockWrap { margin: 10px 10px 0 10px; }
-
-.subtitle { font-size: 10px; color: #999999; background: #f0f0f0; border-top: none; border-bottom: none; padding: 6px 4px 6px 4px; }
-
-.subFilter { font-size: 10px; color: #999999; background: #f0f0f0; border-top: none; border-bottom: 1px solid #cccccc; padding: 4px 10px 4px 10px; }
-.subFilter a { padding: 1px 5px 2px 5px; color: #3b5998; margin-left: 4px; }
-.subFilter .selected { color: white; background: #3b5998; padding: 1px 5px 2px 5px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
-
 blockquote { background: white; color: #333333; font-size: 12px; line-height: 130%; margin: 10px 0 10px 60px; padding: 0 20px 0 0; }
 blockquote .quotes { padding: 4px 0; }
 
 .btn_1 { display: inline-block; color: #fff; font-weight: bold; padding: 3px 10px 4px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #31500b; }
 
-.btn_1_lg { font-size: 14px; }
-
 #col_right .btn_1 { display: block; text-align: center; margin: 10px; }
 
 .btnComment { display: inline-block; margin: 0 1px; padding: 1px 8px 2px 8px; background: #F0F0F0; }
 
-.voteLink, .voteUp { background: url('/images/default/icon_vote.gif') left no-repeat; padding-left: 15px; }
+.voteUp { background: url('/images/default/icon_vote.gif') left no-repeat; padding-left: 15px; }
 
 .voteDown { background: url('/images/default/icon_vote_no.gif') left no-repeat; padding-left: 15px; }
 
@@ -226,3 +216,9 @@ blockquote .quotes { padding: 4px 0; }
 
 .login p { line-height: 120%; font-size: 12px; margin: 10px auto; width: 80%; }
 .login label { font-size: 11px; padding: 4px 2px; }
+
+.ad_230 { width: 230px; height: 120px; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; background: #999999; }
+
+.ad_480 { width: 480px; height: 80px; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; background: #999999; }
+
+.ad_480 span, .ad_230 span { font-size: 9px; color: #333333; display: block; padding: 2px 4px; text-transform: uppercase; }
