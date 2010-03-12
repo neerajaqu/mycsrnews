@@ -4,7 +4,10 @@
     .left_tabs
       %ul#toggle_tabs_unused.toggle_tabs.clearfix
         - if MENU.key? 'home'
-          %li.first= link_to image_tag('default/home-icon.png'), home_index_path, :class => tab_selected?(@current_tab, 'home')
+          - if @current_tab == 'home'
+            %li.first= link_to image_tag('default/home-icon-selected.png'), home_index_path, :class => tab_selected?(@current_tab, 'home')
+          - else
+            %li.first= link_to image_tag('default/home-icon-off.png'), home_index_path, :class => tab_selected?(@current_tab, 'home')
         - if MENU.key? 'stories'
           %li
             .menu_item

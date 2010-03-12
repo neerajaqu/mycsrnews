@@ -1,3 +1,8 @@
+.panel_1
+  .ad_scaleFrame
+    .inside-frame
+      this ad scales to its column
+
 #featuredPanel.panel_1.feature_bg
   .panelBar
     %h2
@@ -39,10 +44,18 @@
           Comment
         16
 .panel_1
-  .ad_fullCol
-    %span            
-      Advertisement
+  .ad_480
+    .inside-frame
+      This is a 460px wide view space
+
 = render :partial => 'shared/hot_topics'
+
+.panel_1
+  .ad_wrapFrame
+    .inside-frame-2
+      This ad simply wraps its 
+      %br
+      defined size view space
 
 .panel_1
   .panelBar
@@ -92,6 +105,16 @@
         %a
           16 Comments      
 
+.panel_2.left
+  .ad_230
+    .inside-frame
+      This is a 210px wide view space 
+
+.panel_2.right
+  .ad_230
+    .inside-frame
+      This is a 210px wide view space 
+
 .panel_1
   .panelBar
     %h2
@@ -114,4 +137,6 @@
       %li.videoThumb 
       %li.videoThumb 
       %li.videoThumb
+
+
       

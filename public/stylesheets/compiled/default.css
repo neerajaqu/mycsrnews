@@ -4,7 +4,7 @@
 
 .float_right { float: right; }
 
-#header { height: 110px; margin-bottom: 15px; position: relative; border-bottom: 1px solid; border-bottom-color: #999999; background: white url('http://n2dev.chewbranca.com/images/default/hdr_bg.gif?1267551946') bottom left repeat-x; }
+#header { height: 110px; margin-bottom: 15px; position: relative; border-bottom: 1px solid; border-bottom-color: #999999; background: white url('/images/default/hdr_bg.gif?1266357217') bottom left repeat-x; }
 #header .headerTitle { position: absolute; top: 30px; left: 10px; }
 #header .headerTitle h1 { display: block; float: left; font-size: 32px; margin: 5px; }
 #header a { text-decoration: none; }
@@ -29,13 +29,13 @@
 #footer { float: left; clear: left; border-top: 1px solid #3b5998; }
 #footer .dh_links { color: #333333; float: left; clear: left; margin: 0px; padding: 5px 10px 7px 10px; background-color: #dce6f4; }
 
-.rss_link { background: url('http://n2dev.chewbranca.com/images/default/icon_rss.png?1265833188') left no-repeat; padding: 3px 0 3px 18px; }
+.rss_link { background: url('/images/default/icon_rss.png?1265674096') left no-repeat; padding: 3px 0 3px 18px; }
 
-.twitter_link { background: url('http://n2dev.chewbranca.com/images/default/icon_twitter.gif?1265833188') left no-repeat; padding: 3px 0 3px 18px; }
+.twitter_link { background: url('/images/default/icon_twitter.gif?1265674096') left no-repeat; padding: 3px 0 3px 18px; }
 
-.newscloud_link { background: url('http://n2dev.chewbranca.com/images/default/icon_newscloud.gif?1265833188') left no-repeat; padding: 3px 0 3px 20px; }
+.newscloud_link { background: url('/images/default/icon_newscloud.gif?1265674096') left no-repeat; padding: 3px 0 3px 20px; }
 
-.grist_link { background: url('http://n2dev.chewbranca.com/images/default/icon_grist.gif') left no-repeat; padding: 3px 0 3px 20px; }
+.grist_link { background: url('/images/default/icon_grist.gif') left no-repeat; padding: 3px 0 3px 20px; }
 
 .hidden { display: none; }
 
@@ -78,20 +78,23 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #pageTabs .tabs .back_links { padding-right: 20px; }
 #pageTabs .tabs .toggle_tabs { margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; text-align: center; }
 #pageTabs .tabs .toggle_tabs li { display: block; float: left; padding: 0px 0px 0px 0px; margin: 0px 1px 0px 0px; height: 23px; }
-#pageTabs .tabs .toggle_tabs li a { display: block; height: 13px; margin: 0px 0px 0px 0px; padding: 5px 20px; font-weight: bold; font-size: 11px; line-height: normal; border-top: none; border-bottom: none; border-left: none; border-right: none; color: white; background: #55761b url('http://n2dev.chewbranca.com/images/default/toggletab_bg.gif?1267551946') left repeat-x; }
-#pageTabs .tabs .toggle_tabs li.first a { display: block; margin: 0px 0px 0px 0px; padding: 5px 5px 5px 5px; font-weight: bold; font-size: 11px; line-height: normal; border-top: none; border-bottom: none; border-left: none; border-right: none; color: white; background: #55761b url('http://n2dev.chewbranca.com/images/default/toggletab_bg.gif?1267551946') left repeat-x; }
-#pageTabs .tabs .toggle_tabs li.first img { display: inline-block; }
+#pageTabs .tabs .toggle_tabs li a { display: block; height: 13px; margin: 0px 0px 0px 0px; padding: 5px 20px; font-weight: bold; font-size: 12px; line-height: normal; border: none; color: white; background: #55761b url('/images/default/pagetab-bg-off.gif?1268348775') left repeat-x; }
+#pageTabs .tabs .toggle_tabs li a:hover { background: #77983a url('/images/default/pagetab-bg-hover.gif?1268348811') left repeat-x; }
+#pageTabs .tabs .toggle_tabs li.first a { margin: 0px 0px 0px 0px; padding: 5px 7px; -moz-border-top-left-radius: 8px; -webkit-border-top-left-radius: 8px; border-top-left-radius: 8px; }
+#pageTabs .tabs .toggle_tabs li.first a img { display: inline-block; }
 #pageTabs .tabs .toggle_tabs li a:focus { outline: 0px; }
-#pageTabs .tabs .toggle_tabs li a.selected { margin: -1px 0px 0px 0px; padding: 5px 30px 5px 30px; height: 13px; border-top: 1px solid #999999; border-bottom: 1px solid white; border-right: 1px solid #999999; border-left: 1px solid #999999; background: white; color: #3b5998; }
-#pageTabs .tabs .toggle_tabs li.first a.selected { margin: -1px 0px 0px 0px; padding: 5px 5px 5px 5px; height: 13px; border-top: 1px solid #999999; border-bottom: 1px solid white; border-right: 1px solid #999999; border-left: 1px solid #999999; background: white; color: #3b5998; }
+#pageTabs .tabs .toggle_tabs li a.selected { margin: -1px 0px 0px 0px; padding: 5px 30px 5px 30px; height: 13px; border-top: 1px solid #999999; border-bottom: 1px solid white; border-right: 1px solid #999999; border-left: 1px solid #999999; background: white url('/images/default/pagetab-bg-selected.gif?1268351246') top left repeat-x; color: #3b5998; }
+#pageTabs .tabs .toggle_tabs li.first a.selected { padding: 5px 7px; -moz-border-top-left-radius: 8px; -webkit-border-top-left-radius: 8px; border-top-left-radius: 8px; }
 #pageTabs .tabs .toggle_tabs li a.selected:hover { text-decoration: none; }
 #pageTabs .tabs .toggle_tabs li a.disabled { color: #999999; cursor: default; }
 #pageTabs .tabs .toggle_tabs li a.disabled:hover { text-decoration: none; }
+#pageTabs .tabs .toggle_tabs .menu_item:hover a { background: #77983a url('/images/default/pagetab-bg-hover.gif?1268348811') left repeat-x; }
+#pageTabs .tabs .toggle_tabs .menu_item:hover a.selected { background: white url('/images/default/pagetab-bg-selected.gif?1268351246') top left repeat-x; }
+#pageTabs .tabs .toggle_tabs .menu_item:hover .dropdown { visibility: visible; }
 #pageTabs .tabs .toggle_tabs .menu_item .dropdown { z-index: 99; visibility: hidden; }
 #pageTabs .tabs .toggle_tabs .menu_item .dropdown ul li { display: block; width: 100%; clear: both; padding: 0; text-align: left; }
 #pageTabs .tabs .toggle_tabs .menu_item .dropdown ul li a { font-size: 10px; display: block; background: #80a341; padding: 5px 10px; border-top: 1px solid white; color: white; }
 #pageTabs .tabs .toggle_tabs .menu_item .dropdown ul li a:hover { background: #5d7e20; }
-#pageTabs .tabs .toggle_tabs .menu_item:hover .dropdown { visibility: visible; }
 
 #subNav { height: 19px; margin: 0px 0px 15px 0px; padding: 0px 0px 0px 0px; display: inline-block; overflow: visible; border-bottom: 1px solid #999999; }
 
@@ -103,16 +106,11 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #subNav .toggle_tabs li a.disabled { color: #999999; cursor: default; }
 #subNav .toggle_tabs li a.disabled:hover { text-decoration: none; }
 
-.feature_bg { background-color: #dce6f4; }
-.feature_bg .panel_2 { margin-bottom: 10px; }
-.feature_bg .thumb { margin: 10px; }
-.feature_bg .storyBlockWrap { margin: 10px 10px 0 10px; }
-
 .panel_1, .panel_2 { border-bottom: none; margin-bottom: 15px; }
-.panel_1 .houseFeatures .featureAd, .panel_2 .houseFeatures .featureAd { text-align: center; background: #d5cbbb url('/images/default/default_thumb_c.gif') top left no-repeat; border: 1px solid #7e6947; }
+.panel_1 .houseFeatures .featureAd, .panel_2 .houseFeatures .featureAd { text-align: center; background: #d5cbbb url('/images/default/default_thumb_c.gif?1268183843') top left no-repeat; border: 1px solid #7e6947; }
 .panel_1 .houseFeatures .featureAd h2, .panel_2 .houseFeatures .featureAd h2 { text-align: left; line-height: 150%; padding: 8px 10px; color: black; }
 .panel_1 .houseFeatures .featureAd p, .panel_2 .houseFeatures .featureAd p { text-align: left; padding: 0 10px; margin-bottom: 20px; }
-.panel_1 .houseFeatures .featureAd .featureBtn, .panel_2 .houseFeatures .featureAd .featureBtn { text-align: center; font-size: 14px; line-height: 14px; font-weight: bold; display: inline-block; background: #55761b url('http://n2dev.chewbranca.com/images/default/toggletab_bg.gif?1267551946') left repeat-x; color: white; height: 16px; padding: 4px 20px; margin: 10px auto; }
+.panel_1 .houseFeatures .featureAd .featureBtn, .panel_2 .houseFeatures .featureAd .featureBtn { text-align: center; font-size: 14px; line-height: 14px; font-weight: bold; display: inline-block; background: #55761b url('/images/default/toggletab_bg.gif') left repeat-x; color: white; height: 16px; padding: 4px 20px; margin: 10px auto; }
 .panel_1 .houseFeatures .featureAd .featureBtn:hover, .panel_2 .houseFeatures .featureAd .featureBtn:hover { background: #80a341; text-decoration: none; }
 .panel_1 .userBlockWrap li, .panel_2 .userBlockWrap li { padding: 0; margin: 4px 4px 0 0; display: inline-block; width: 30px; height: 30px; float: left; border-bottom: none; }
 .panel_1 .userBlockWrap li .profilePic, .panel_2 .userBlockWrap li .profilePic { margin: 0; }
@@ -137,37 +135,17 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 8px 0; }
 .panel_1 .storyBlockWrap h1, .panel_2 .storyBlockWrap h1 { font-size: 22px; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 6px 0px; line-height: 120%; }
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
-=======
-.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 10px; max-width: 280px; background: url('http://n2dev.chewbranca.com/images/default/default_thumb.gif?1268156684') top left no-repeat; }
->>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/default.css
-=======
-=======
->>>>>>> Updating css and javascript unhide:public/stylesheets/compiled/default.css
-.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 10px; max-width: 280px; background: url('http://n2dev.chewbranca.com/images/default/default_thumb.gif?1268156684') top left no-repeat; }
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/default.css
-=======
-.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('/images/default/default_thumb.gif') top left no-repeat; }
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/default.css
-=======
-=======
->>>>>>> New css:public/stylesheets/compiled/default.css
-.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('http://n2dev.chewbranca.com/images/default/default_thumb.gif?1268156684') top left no-repeat; }
+.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('/images/default/default_thumb.gif?1268096572') top left no-repeat; }
 .panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
 .panel_1 .thumb a:hover, .panel_2 .thumb a:hover { text-decoration: none; }
 .panel_1 li, .panel_2 li { display: inline-block; width: 100%; padding: 5px 0; border-bottom: 1px solid #efefef; }
 .panel_1 .bullet_list, .panel_2 .bullet_list { margin: 0 10px; }
 .panel_1 .bullet_list ul, .panel_2 .bullet_list ul { margin: 10px 0 0 0; }
-.panel_1 .bullet_list li, .panel_2 .bullet_list li { display: list-item; margin: 0 0 10px 10px; padding: 0; line-height: 120%; list-style-image: url('http://n2dev.chewbranca.com/images/default/bullet1.gif?1267730727'); list-style-type: disc; list-style-position: outside; border-bottom: none; }
+.panel_1 .bullet_list li, .panel_2 .bullet_list li { display: list-item; margin: 0 0 10px 10px; padding: 0; line-height: 120%; list-style-image: url('/images/default/bullet1.gif?1267730372'); list-style-type: disc; list-style-position: outside; border-bottom: none; }
 .panel_1 .audio, .panel_1 .video, .panel_1 .image, .panel_2 .audio, .panel_2 .video, .panel_2 .image { margin: 10px; }
 .panel_1 .userPoints, .panel_2 .userPoints { text-align: right; margin-right: 0px; }
 
-.panelBar .refine-toggle { position: relative; z-index: 48; padding-right: 10px; background: transparent url('/images/default/dropdown_arrow.gif') center right no-repeat; }
+.panelBar .refine-toggle { position: relative; z-index: 48; padding-right: 10px; background: transparent url('/images/default/dropdown_arrow.gif?1267828152') center right no-repeat; }
 .panelBar .refine_link { float: right; position: relative; display: block; padding: 4px 10px; margin-top: -18px; }
 .panelBar .refine_link .refine-tab { height: 28px; width: 104px; position: absolute; top: -30px; right: -1px; border-top: 1px solid #3b5998; border-bottom: 1px solid white; border-left: 1px solid #3b5998; border-right: 1px solid #3b5998; background-color: white; z-index: 44; }
 .panelBar .refine_link .refine-box { z-index: 43; display: none; position: absolute; padding: 8px; width: 142px; top: 26px; left: -54px; border: 1px solid #3b5998; background-color: white; }
@@ -181,7 +159,7 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #hotTopicBar ul { display: block; float: left; background: #f0f0f0; width: 100%; }
 #hotTopicBar ul li { float: left; padding: 4px 0 4px 0px; }
 #hotTopicBar ul li.topic { display: inline; float: left; text-align: left; background: #f0f0f0; padding: 4px 15px 4px 0; min-width: 10%; }
-#hotTopicBar ul li.topic a { margin-left: 5px; padding-left: 8px; background: url('http://n2dev.chewbranca.com/images/default/topic_arrow.gif?1267730727') center left no-repeat; }
+#hotTopicBar ul li.topic a { margin-left: 5px; padding-left: 8px; background: url('/images/default/topic_arrow.gif?1267730372') center left no-repeat; }
 #hotTopicBar ul li.topicTitle { background: #31500b; color: white; width: 22%; padding-left: 5px; text-transform: uppercase; margin-right: 10px; }
 #hotTopicBar ul li.topicMore { border-left: 2px solid #FFF; float: right; text-align: center; width: 10%; background: #f0f0f0; }
 
@@ -198,12 +176,9 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #commentThread .panelBar { background: #dce6f4; }
 #commentThread .panelBar h2 { color: #3b5998; }
 #commentThread .comment_block { position: relative; padding: 8px 0 20px 0; border-bottom: 1px solid #efefef; }
-#commentThread .comment_block .comment_reply { display: block; padding: 0 0 4px 20px; position: absolute; bottom: 8px; left: 70px; background: url('http://n2dev.chewbranca.com/images/default/reply_arrow.png?1267730727') top left no-repeat; }
+#commentThread .comment_block .comment_reply { display: block; padding: 0 0 4px 20px; position: absolute; bottom: 8px; left: 70px; background: url('/images/default/reply_arrow.png?1267730372') top left no-repeat; }
 #commentThread .comment_block .comment_reply a { color: #336600; font-weight: bold; font-size: 11px; }
 
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-blockquote { background: white; color: #333333; font-size: 12px; line-height: 130%; margin: 10px 0 10px 60px; padding: 0 20px 0 0; }
-=======
 .feature_bg { background-color: #dce6f4; }
 .feature_bg .panel_2 { margin-bottom: 10px; }
 .feature_bg .thumb { margin: 10px; }
@@ -215,95 +190,29 @@ blockquote { background: white; color: #333333; font-size: 12px; line-height: 13
 .subFilter a { padding: 1px 5px 2px 5px; color: #3b5998; margin-left: 4px; }
 .subFilter .selected { color: white; background: #3b5998; padding: 1px 5px 2px 5px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-blockquote { background: url('http://n2dev.chewbranca.com/images/default/reply_arrow.png?1267730727') top left no-repeat; color: #333333; font-size: 12px; line-height: 130%; margin: 0 0 10px 0; padding: 0 20px 0 60px; }
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
->>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/default.css
-=======
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/default.css
-=======
-=======
->>>>>>> Updating css and javascript unhide:public/stylesheets/compiled/default.css
 blockquote { background: white; color: #333333; font-size: 12px; line-height: 130%; margin: 10px 0 10px 60px; padding: 0 20px 0 0; }
 blockquote .quotes { padding: 4px 0; }
 
-.btn_1 { display: inline-block; color: #fff; font-weight: bold; padding: 3px 10px 4px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #31500b; }
+.btn { display: inline-block; color: #fff; font-weight: bold; padding: 3px 10px 4px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #31500b; }
 
 #col_right .btn_1 { display: block; text-align: center; margin: 10px; }
 
 .btnComment { display: inline-block; margin: 0 1px; padding: 1px 8px 2px 8px; background: #F0F0F0; }
 
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-.voteUp { background: url('/images/default/icon_vote.gif') left no-repeat; padding-left: 15px; }
-=======
-.voteLink, .voteUp { background: url('http://n2dev.chewbranca.com/images/default/icon_vote.gif?1265833188') left no-repeat; padding-left: 15px; }
->>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/default.css
-=======
-.voteLink, .voteUp { background: url('/images/default/icon_vote.gif') left no-repeat; padding-left: 15px; }
->>>>>>> New css:public/stylesheets/compiled/default.css
+.voteUp { background: url('/images/default/icon_vote.gif?1265674096') left no-repeat; padding-left: 15px; }
 
-.voteDown { background: url('/images/default/icon_vote_no.gif') left no-repeat; padding-left: 15px; }
+.voteDown { background: url('/images/default/icon_vote_no.gif?1267730372') left no-repeat; padding-left: 15px; }
 
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-.thumb-up { background: url('/images/default/thumb-up.gif') left no-repeat; padding-left: 15px; }
+.thumb-up { background: url('/images/default/thumb-up.gif?1268260321') left no-repeat; padding-left: 15px; }
 
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-.thumb-down { background: url('/images/default/thumb-down.gif') left no-repeat; padding-left: 15px; }
+.thumb-down { background: url('/images/default/thumb-down.gif?1268260260') left no-repeat; padding-left: 15px; }
+
+.thumb-down { background: url('/images/default/thumb-down.gif?1268260260') left no-repeat; padding-left: 15px; }
 
 .actionLegend { background: #dce6f4; }
 .actionLegend .share_and_hide { margin: 5px; }
 .actionLegend .share_and_hide h4 { margin-bottom: 5px; color: #3b5998; }
 .actionLegend .share_and_hide input { border: 1px solid #cccccc; width: 100%; padding: 1px 0; }
-=======
-=======
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/default.css
-/* .rating margin: 0 0 10px 15px display: block float: left height: 16px */
-.rate_up { display: block; float: left; width: 16px; height: 16px; margin: 0 0 0 10px; background: image_url("default/icon_thumbs.gif") top left no-repeat; }
-.rate_up:hover { background: image_url("default/icon_thumbs.gif") center left no-repeat; }
-=======
-.thumb-up { background: url('http://n2dev.chewbranca.com/images/default/thumb-up.gif?1268333775') left no-repeat; padding-left: 15px; }
->>>>>>> Updating css and javascript unhide:public/stylesheets/compiled/default.css
-
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-.rate_up_on { display: block; float: left; width: 16px; height: 16px; margin: 0 0 0 10px; background: image_url("default/icon_thumbs.gif") bottom left no-repeat; }
-
-.rate_down { display: block; float: left; width: 16px; height: 16px; margin: 0 10px 0 10px; background: image_url("default/icon_thumbs.gif") top right no-repeat; }
-.rate_down:hover { background: image_url("default/icon_thumbs.gif") center right no-repeat; }
-
-.rate_down_on { display: block; float: left; width: 16px; height: 16px; margin: 0 10px 0 10px; background: image_url("default/icon_thumbs.gif") bottom right no-repeat; }
-
-.flag { display: block; float: left; color: #666666; height: 16px; margin: 0 0 0 10px; border-left: 1px solid #CCCCCC; padding-left: 30px; background: image_url("default/icon_flag.gif") 10px top no-repeat; }
-
-a.flag:hover { color: #cc3333; background: image_url("default/icon_flag.gif") 10px center no-repeat; }
-
-.flag_on { display: block; float: left; color: #cc3333; height: 16px; margin: 0 0 0 10px; border-left: 1px solid #CCCCCC; padding-left: 30px; background: image_url("default/icon_flag.gif") 10px bottom no-repeat; }
-=======
-=======
->>>>>>> New css:public/stylesheets/compiled/default.css
-.thumb-up { background: url('/images/default/thumb-up.gif') left no-repeat; padding-left: 15px; }
-
-.thumb-down { background: url('/images/default/thumb-down.gif') left no-repeat; padding-left: 15px; }
-
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-.storyHead, .askQuestionHead { font-size: 14px; font-weight: bold; font-family: lucida grande, tahoma, verdana, arial, san-serif; }
->>>>>>> Updating css images to be absolute and modifying image processing:public/stylesheets/compiled/default.css
-=======
-=======
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/default.css
-.actionLegend { background: #dce6f4; }
-.actionLegend .share_and_hide { margin: 5px; }
-.actionLegend .share_and_hide h4 { margin-bottom: 5px; color: #3b5998; }
-.actionLegend .share_and_hide input { border: 1px solid #cccccc; width: 100%; padding: 1px 0; }
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/default.css
-=======
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/default.css
 
 .list_stories .thumb img { max-width: 90px; max-height: 90px; }
 
@@ -318,15 +227,22 @@ a.flag:hover { color: #cc3333; background: image_url("default/icon_flag.gif") 10
 
 .login p { line-height: 120%; font-size: 12px; margin: 10px auto; width: 80%; }
 .login label { font-size: 11px; padding: 4px 2px; }
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
-<<<<<<< HEAD:public/stylesheets/compiled/default.css
 
-.ad_230 { width: 230px; height: 120px; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; background: #999999; }
+.ad_wrapFrame { display: inline-block; margin: 0 10px; }
 
-.ad_480 { width: 480px; height: 80px; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; background: #999999; }
+.ad_scaleFrame { max-width: 100%; }
 
-.ad_480 span, .ad_230 span { font-size: 9px; color: #333333; display: block; padding: 2px 4px; text-transform: uppercase; }
-=======
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/default.css
-=======
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:public/stylesheets/compiled/default.css
+.ad_230 { width: 210px; margin: 0 auto; }
+
+.ad_480 { width: 460px; margin: 0 auto; }
+
+.ad_480, .ad_230, .ad_scaleFrame, .ad_wrapFrame { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; padding: 15px 0 5px; border-left: 10px solid #CCC; border-right: 10px solid #CCC; background: #cccccc url('/images/default/ad-bg-title.gif?1268358007') top center no-repeat; }
+.ad_480 .inside-frame, .ad_230 .inside-frame, .ad_scaleFrame .inside-frame, .ad_wrapFrame .inside-frame { text-align: center; padding: 60px; max-width: 800px; max-height: 300px; background: #fff; }
+.ad_480 .inside-frame-2, .ad_230 .inside-frame-2, .ad_scaleFrame .inside-frame-2, .ad_wrapFrame .inside-frame-2 { text-align: center; padding: 60px; background: #fff; }
+
+.bookmarklet { padding-bottom: 10px; border-bottom: 2px solid #7e6947; background: #d5cbbb url('/images/default/bookmarklet-BG.gif?1268341678') top left repeat-x; }
+.bookmarklet h2 { color: white; background: url('/images/default/bookmarklet-header-BG.png?1268343171') bottom left repeat-x; font-size: 20px; margin: 0; padding: 5px 10px 25px 10px; }
+.bookmarklet p { color: #333333; margin: 5px 10px; }
+.bookmarklet .demo { margin: 10px 15px; padding: 65px 0 10px 0; background: url('/images/default/bookmarklet-demo.png?1268342374') top center no-repeat; }
+.bookmarklet .btn { display: inline-block; color: #fff; font-weight: bold; padding: 5px 10px 6px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #55761b url('/images/default/btn-bg-off.gif?1268347541') left repeat-x; }
+.bookmarklet .btn:hover { text-decoration: none; background: #77983a url('/images/default/btn-bg-on.gif?1268347744') left repeat-x; }
