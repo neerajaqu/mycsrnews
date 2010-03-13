@@ -1,2 +1,13 @@
-<h1>Questions#new</h1>
-<p>Find me in app/views/questions/new.fbml.erb</p>
+#col_left
+  %h1 Ask a question
+  - semantic_form_for Question.new do |form|
+    %p= form.input :question, :required => false, :label => false
+    %p
+      %b= t('please_elaborate')
+      = form.input :details, :required => false, :label => false
+    - form.buttons do
+      = form.commit_button :button_html => { :class => "btn_1" }
+
+#col_right
+  = render :partial => 'shared/sidebar/newest_questions'
+  = render :partial => 'shared/sidebar/top_questions'

@@ -30,13 +30,7 @@ module Newscloud
             next unless refineable_params.index(key)
             if key == 'sort_by'
             	value = value.downcase
-              case value.downcase
-                when 'newest'
-                  chains << value if self.respond_to?(value)
-                when 'top'
-                  chains << value if self.respond_to?(value)
-                else
-              end
+              chains << value if self.respond_to?(value) and self.valid_refine_type?(value)
             elsif key == 'category'
             elsif key == 'section'
             end
@@ -45,6 +39,14 @@ module Newscloud
           result = chains.empty? ?
             self.all(:limit => 10, :order => "created_at desc") :
             chains.inject(self) { |chain, scope| chain.send(scope) }
+        end
+
+        def valid_refine_type? value
+          ['newest', 'top'].include? value
+        end
+
+        def self.refineable_select_options
+          ['Newest', 'Top'].collect { |k| [k, k] }
         end
 
       end

@@ -7,7 +7,7 @@
     .storyBlockMeta
       %p= t('answered_by', :fb_name => local_linked_profile_name(answer.user), :date => time_ago_in_words(answer.created_at))
       %p
-        %span.btn_left== #{link_to t('like'), like_answer_path(answer.id), :class => "voteLink"} #{answer.votes.size}
+        %span.btn_left== #{like_link answer} #{answer.votes.size}
         %span.btn_mid= link_to answer_comments_translate(answer.comments.size), '#', :class => 'answer_comments_link'
   = render :partial => 'shared/comments', :locals => { :comments => answer.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => answer }

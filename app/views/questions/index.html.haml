@@ -1,28 +1,44 @@
 #col_left
-  %h1 Ask a question
-  - semantic_form_for Question.new do |form|
-    %p= form.input :question, :required => false, :label => false
-    .fullQuestionForm.hide
-      .askRelated
-      %p
-        %b= t('please_elaborate')
-        = form.input :details, :required => false, :label => false
-      - form.buttons do
-        = form.commit_button :button_html => { :class => "btn_1" }
+  - cache :questions_list_html do
+    - questions ||= Question.newest
+    %h1 Ask a question
+    - semantic_form_for Question.new do |form|
+      %p= form.input :question, :required => false, :label => false
+      .fullQuestionForm.hide
+        .askRelated
+        %p
+          %b= t('please_elaborate')
+          = form.input :details, :required => false, :label => false
+        - form.buttons do
+          = form.commit_button :button_html => { :class => "btn_1" }
 
-  - unless @questions.empty?
-    .list_stories.clearfix
-      %ul
-        - @questions.each do |question|
-          %li.askQuestionWrap
-            .storyBlockWrap
-              %p.askQuestionHead= link_to question.question, question
-              .profilePic= local_linked_profile_pic question.user
-              .storyBlockMeta
-                %p= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
-                %p
-                  %span.btn_left== #{link_to t('like'), like_question_path(question.id), :class => "voteLink"} #{question.votes.size}
-                  %span.btn_mid== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
-                  %span.btn_right= fb_share_button(question_url(question))
+    - unless questions.empty?
+      .panel_1
+        .panelBar
+          %h2= t('questions.list_title')
+          - if questions.present? and questions.first.refineable?
+            .refine_link
+              = render :partial => 'shared/forms/refine_dropdown', :locals => { :select_options => Question.refineable_select_options }
+        .subtitle
+          %span= t('questions.list_subtitle')
+        .storyList
+          .list_stories.clearfix
+            %ul
+              - questions.each do |question|
+                %li.askQuestionWrap
+                  .storyBlockWrap
+                    %p.askQuestionHead= link_to question.question, question
+                    .profilePic= local_linked_profile_pic question.user
+                    .storyBlockMeta
+                      %p= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
+                      %p
+                        %span.btn_left== #{like_link question, :class => "voteLink"} #{question.votes.size}
+                        %span.btn_mid== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
+                        %span.btnComment= fb_share_item_button question
 
 #col_right
+  = render :partial => 'shared/sidebar/top_questions'
+  = render :partial => 'shared/sidebar/newest_questions'
+  = render :partial => 'shared/sidebar/unanswered_questions'
+  = render :partial => 'shared/sidebar/top_answers'
+  = render :partial => 'shared/sidebar/newest_answers'

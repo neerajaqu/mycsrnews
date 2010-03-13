@@ -64,14 +64,14 @@
         - if MENU.key? 'questions'
           %li
             .menu_item
-              = link_to t('questions'), questions_path, :class => tab_selected?(@current_tab, 'questions')
+              = link_to t('questions.title'), questions_path, :class => tab_selected?(@current_tab, 'questions')
               - unless MENU['questions'].nil?
                 .dropdown
                   %ul
                     - unless MENU['questions']['questions_list'].nil?
-                      %li= link_to t('.questions_list'), questions_path, :class => tab_selected?(@current_tab, 'questions')
+                      %li= link_to t('questions.list'), questions_path, :class => tab_selected?(@current_tab, 'questions')
                     - unless MENU['questions']['new_question'].nil?
-                      %li= link_to t('.new_question'), questions_path, :class => tab_selected?(@current_tab, 'questions')
+                      %li= link_to t('questions.new'), new_question_path, :class => tab_selected?(@current_tab, 'questions')
         - if MENU.key? 'events'
           %li
             .menu_item

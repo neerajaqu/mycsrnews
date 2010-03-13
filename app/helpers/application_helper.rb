@@ -300,19 +300,21 @@ EMBED
     link_to(item.featured? ? 'UnFeature' : 'Feature', toggle_featured_path(item.class.name.foreign_key.to_sym => item))
   end
 
-  def like_link item
+  def like_link item, options = {}
+    options.merge!(:class => 'voteUp')
     return '' unless item.moderatable? and item.featurable?
-    link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), :class => 'voteUp')
+    link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), options)
   end
 
-  def dislike_link item
+  def dislike_link item, options = {}
+    options.merge!(:class => 'voteDown')
     return '' unless item.moderatable? and item.featurable?
-    link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item), :class => 'voteDown')
+    link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item), options)
   end
 
   def answer_translate count = 0
     count > 0 ?
-      t('answers', :answer_string => pluralize(count, "answer")) :
+      t('answers_count', :answer_string => pluralize(count, "answer")) :
       t('answer_question')
   end
 

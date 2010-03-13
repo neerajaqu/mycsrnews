@@ -10,5 +10,9 @@ module FacebookHelper
     "#{javascript_include_tag 'Utility'}"+
     "#{javascript_include_tag 'FBjqRY'}"
   end
+
+  def fb_share_item_button item
+    fb_share_button(polymorphic_url(item, :only_path => false))
+  end
       
 end

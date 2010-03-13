@@ -47,7 +47,13 @@ namespace :n2 do
         question.destroy and count += 1 if question.user.nil?
       end
       Answer.all.each do |answer|
-        answer.destroy and count += 1 if answer.user.nil?
+        if answer.user.nil?
+          answer.destroy and count += 1
+        elsif answer.question.nil?
+          answer.destroy and count += 1
+        else
+        	next
+        end
       end
       puts "Deleted #{count} floating questions_and_answers"
     end

@@ -12,6 +12,24 @@ class Question < ActiveRecord::Base
 
   validates_presence_of :question
 
+  named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 10)} }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
+  named_scope :unanswered, lambda { |*args| { :conditions => ["answers_count = 0"], :order => ["created_at asc"], :limit => (args.first || 10) } }
+
+  def self.get_top
+    self.tally({
+    	:at_least => 1,
+    	:limit    => 10,
+    	:order    => "votes.count desc"
+    })
+  end
+
+  def self.valid_refine_type? value
+    ['newest', 'top', 'unanswered'].include? value.downcase
+  end
+
+  def self.refineable_select_options
+    ['Newest', 'Top', 'Unanswered'].collect { |k| [k, k] }
+  end
 
 end
