@@ -1,4 +1,6 @@
 -# @expects: local '@slot_data'
-.clearfix{:style => "padding:5px 0px 0px 0px; margin:0px 0px 10px 0px; background: url(\"#{APP_CONFIG['base_url']}/images/#{@slot_data[:background]}\") top left no-repeat;"}
-  = fb_iframe base_url(google_ads_home_path(:slot_name => @slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => "margin: 0px 5px 0px 0px; padding: 0px; width: #{@slot_data['data'][:width]}; height: #{@slot_data['data'][:height]};"
-  %br
+.panel_1
+  .ad_scaleFrame
+    .inside-frame
+      -#    .clearfix{:style => "padding:5px 0px 0px 0px; margin:0px 0px 10px 0px; background: url(\"#{APP_CONFIG['base_url']}/images/#{@slot_data[:background]}\") top left no-repeat;"}
+      = fb_iframe base_url(google_ads_home_path(:slot_name => @slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => "margin: 0px 5px 0px 0px; padding: 0px; width: #{@slot_data['data'][:width]}; height: #{@slot_data['data'][:height]};"
