@@ -1,26 +1,86 @@
-/* 960 Grid System ~ Text CSS. Learn more ~ http://960.gs/ Licensed under GPL and MIT. */
-body { font: 13px/1.5 Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif; }
+/* 960 Grid System ~ Text CSS.
+ * Learn more ~ http://960.gs/
+ *
+ * Licensed under GPL and MIT. */
+/* line 4, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+body {
+  font: 13px/1.5 Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+}
 
-a:focus { outline: 1px dotted invert; }
+/* line 7, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+a:focus {
+  outline: 1px dotted invert;
+}
 
-hr { border-color: #ccc; border-style: solid; border-width: 1px 0 0; clear: both; height: 0; }
+/* line 10, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+hr {
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 1px 0 0;
+  clear: both;
+  height: 0;
+}
 
-h1 { font-size: 25px; }
+/* line 17, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+h1 {
+  font-size: 25px;
+}
 
-h2 { font-size: 23px; }
+/* line 20, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+h2 {
+  font-size: 23px;
+}
 
-h3 { font-size: 21px; }
+/* line 23, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+h3 {
+  font-size: 21px;
+}
 
-h4 { font-size: 19px; }
+/* line 26, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+h4 {
+  font-size: 19px;
+}
 
-h5 { font-size: 17px; }
+/* line 29, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+h5 {
+  font-size: 17px;
+}
 
-h6 { font-size: 15px; }
+/* line 32, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+h6 {
+  font-size: 15px;
+}
 
-ol { list-style: decimal; }
+/* line 35, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+ol {
+  list-style: decimal;
+}
 
-ul { list-style: square; }
+/* line 38, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+ul {
+  list-style: square;
+}
 
-li { margin-left: 30px; }
+/* line 41, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+li {
+  margin-left: 30px;
+}
 
-p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset { margin-bottom: 20px; }
+/* line 44, ../../../../../../Jeff/.gem/ruby/1.8/gems/compass-960-plugin-0.9.11/sass/960/_text.sass */
+p,
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset {
+  margin-bottom: 20px;
+}
