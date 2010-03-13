@@ -310,33 +310,23 @@ li
         margin: 0px 0px 0px 0px
         padding: 5px 20px
         font-weight: bold
-        font-size: 11px
+        font-size: 12px
         line-height: normal
-        border:
-          :top= !noBorder
-          :bottom= !noBorder
-          :left= !noBorder
-          :right= !noBorder
-        :color= !tablinkOff
-        :background= !tabOff
+        border: none
+        :color= !pageTablinkOff
+        :background= !pageTabOff
+        &:hover
+          :background= !pageTabOffHover
 
       &.first a
-        display: block
         margin: 0px 0px 0px 0px
-        padding: 5px 5px 5px 5px
-        font-weight: bold
-        font-size: 11px
-        line-height: normal
-        border:
-          :top= !noBorder
-          :bottom= !noBorder
-          :left= !noBorder
-          :right= !noBorder
-        :color= !tablinkOff
-        :background= !tabOff
+        padding: 5px 7px
+        -moz-border-top-left-radius: 8px
+        -webkit-border-top-left-radius: 8px
+        border-top-left-radius: 8px
 
-      &.first img
-        display: inline-block    
+        img
+          display: inline-block    
 
     .toggle_tabs li
       a
@@ -348,24 +338,18 @@ li
           padding: 5px 30px 5px 30px
           height: 13px
           border:
-            :top= !borderColor_3
-            :bottom= !borderColor_4
-            :right= !borderColor_3
-            :left= !borderColor_3
-          :background= !tabOn
-          :color= !linkColor
+            :top= !pageTabBorder
+            :bottom= !TabBotBorder
+            :right= !pageTabBorder
+            :left= !pageTabBorder
+          :background= !pageTabOn
+          :color= !pageTablinkOn
 
       &.first a.selected
-        margin: -1px 0px 0px 0px
-        padding: 5px 5px 5px 5px
-        height: 13px
-        border:
-          :top= !borderColor_3
-          :bottom= !borderColor_4
-          :right= !borderColor_3
-          :left= !borderColor_3
-        :background= !tabOn
-        :color= !linkColor
+        padding: 5px 7px
+        -moz-border-top-left-radius: 8px
+        -webkit-border-top-left-radius: 8px
+        border-top-left-radius: 8px
 
       a
         &.selected:hover
@@ -380,6 +364,15 @@ li
 
     .toggle_tabs
       .menu_item
+        &:hover
+          a
+            :background= !pageTabOffHover
+            &.selected
+              :background= !pageTabOn
+
+          .dropdown
+            visibility: visible
+
         .dropdown
           z-index: 99
           visibility: hidden
@@ -404,10 +397,6 @@ li
               a:hover
                 :background= !dropdownTabOn
 
-      .menu_item:hover
-        .dropdown
-          visibility: visible
-
 // Sub Navigation Styles //
 #subNav
   height: 19px
@@ -416,7 +405,7 @@ li
   display: inline-block
   overflow: visible
   border:
-    :bottom= !borderColor_3
+    :bottom= !subnavBorder
 
 #subNav
   .toggle_tabs
@@ -439,17 +428,17 @@ li
         font-size: 11px
         background: #55761b
         display: block
-        :color= !tablinkOff
+        :color= !subnavTabLinkOff
 
         &.selected
           margin: -1px 0px 0px 0px
-          :background= !tablinkOff
+          :background= !subnavTabLinkOff
           border:
-            :top= !borderColor_3
-            :bottom= !borderColor_4
-            :right= !borderColor_3
-            :left= !borderColor_3
-          :color= !tablinkOn
+            :top= !subnavBorder
+            :bottom= !TabBotBorder
+            :right= !subnavBorder
+            :left= !subnavBorder
+          :color= !subnavTabLinkOn
 
         &:hover
           text-decoration: none
@@ -540,23 +529,6 @@ li
       width: 74px
       height: 36px
       background: #cccccc
-      
-  .ad_fullCol
-    width: 480px
-    height: 80px
-    margin:
-      top: 0
-      bottom: 0
-      left: auto
-      right: auto
-    background: #999999
-    
-    span
-      font-size: 9px
-      color: #333333
-      display: block
-      padding: 2px 4px
-      text-transform: uppercase
 
   .formBox
     padding: 10px 0px
@@ -911,12 +883,11 @@ blockquote
   padding: 0 20px 0 0
 
   .quotes
-
     padding: 4px 0
 
 
-// buttons n stuff // 
-.btn_1
+// Universal Button Styles // 
+.btn
   display: inline-block
   color: #fff
   font-weight: bold
@@ -926,23 +897,19 @@ blockquote
   border-radius: 4px
   :background= !bgDark
 
-.btn_1_lg
-  font-size: 14px
-
-
 #col_right .btn_1
   display: block
   text-align: center
   margin: 10px
 
+// Like, Share, Vote, Comment, and Rate Styles //
 .btnComment
   display: inline-block
   margin: 0 1px
   padding: 1px 8px 2px 8px
   background: #F0F0F0
 
-
-.voteLink, .voteUp
+.voteUp
   :background= !voteUp
   padding-left: 15px
 
@@ -953,6 +920,15 @@ blockquote
 .thumb-up
   :background= !thumbUp
   padding-left: 15px
+<<<<<<< HEAD:app/stylesheets/default.sass
+=======
+
+.thumb-down
+  :background= !thumbDown
+  padding-left: 15px
+
+// Action Legend Panel//
+>>>>>>> 36ba79d4929d288540aa8787387daad6d04cc885:app/stylesheets/default.sass
 
 .thumb-down
   :background= !thumbDown
@@ -1004,7 +980,10 @@ blockquote
 
 // Extra styles for Login Page //
 .login
+<<<<<<< HEAD:app/stylesheets/default.sass
 
+=======
+>>>>>>> 36ba79d4929d288540aa8787387daad6d04cc885:app/stylesheets/default.sass
   p
     line-height: 120%
     font-size: 12px
@@ -1014,3 +993,79 @@ blockquote
   label
     font-size: 11px
     padding: 4px 2px
+<<<<<<< HEAD:app/stylesheets/default.sass
+=======
+
+// Ad sizes and Layouts //
+.ad_wrapFrame
+  display: inline-block
+  margin: 0 10px
+
+.ad_scaleFrame
+  max-width: 100%
+
+.ad_230
+  width: 210px
+  margin: 0 auto
+  
+.ad_480
+  width: 460px
+  margin: 0 auto
+    
+.ad_480, .ad_230, .ad_scaleFrame, .ad_wrapFrame
+  -moz-border-radius: 4px
+  -webkit-border-radius: 4px
+  border-radius: 4px
+  padding: 15px 0 5px
+  border-left: 10px solid #CCC
+  border-right: 10px solid #CCC
+  :background= !AdBG 
+
+  .inside-frame
+    text-align: center
+    padding: 60px
+    max-width: 800px
+    max-height: 300px
+    background: #fff
+
+  .inside-frame-2
+    text-align: center
+    padding: 60px
+    background: #fff
+
+
+
+// Bookmarklet Styles //
+.bookmarklet
+  padding-bottom: 10px
+  border:
+    :bottom= !bookmarkletBorder
+  :background= !bookmarkletBG
+  h2
+    :color= !bookmarkletHeader
+    :background= !bookmarkletHeaderBG
+    font-size: 20px
+    margin: 0
+    padding: 5px 10px 25px 10px 
+  p
+    :color= !bookmarkletText
+    margin: 5px 10px
+
+  .demo
+    margin: 10px 15px
+    padding: 65px 0 10px 0
+    :background= !demoBG
+
+  .btn
+    display: inline-block
+    color: #fff
+    font-weight: bold
+    padding: 5px 10px 6px 10px
+    -moz-border-radius: 4px
+    -webkit-border-radius: 4px
+    border-radius: 4px
+    :background= !bookmarkletBtn
+    &:hover
+      text-decoration: none
+      :background= !bookmarkletBtnHover
+>>>>>>> 36ba79d4929d288540aa8787387daad6d04cc885:app/stylesheets/default.sass

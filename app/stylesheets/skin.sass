@@ -1,14 +1,9 @@
 // Vote Image Variables  //
-<<<<<<< HEAD:app/stylesheets/skin.sass
 !voteUp = image_url("default/icon_vote.gif") left no-repeat
 !voteDown = image_url("default/icon_vote_no.gif") left no-repeat
-=======
-!voteUp = url(/images/default/icon_vote.gif) left no-repeat
-!voteDown = url(/images/default/icon_vote_no.gif) left no-repeat
 // Thumb Image Variables  //
-!thumbUp = url(/images/default/thumb-up.gif) left no-repeat
-!thumbDown = url(/images/default/thumb-down.gif) left no-repeat
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:app/stylesheets/skin.sass
+!thumbUp = image_url("default/thumb-up.gif") left no-repeat
+!thumbDown = image_url("default/thumb-down.gif") left no-repeat
 // Bullet List Image Variables  //
 !bulletList = image_url("default/bullet1.gif")
 // Various Icon Image Variables //
@@ -21,11 +16,7 @@
 // Comment Reply Image Variables //
 !commentReply = image_url("default/reply_arrow.png") top left no-repeat
 // BlockQuote Image Variable //
-<<<<<<< HEAD:app/stylesheets/skin.sass
-!blockQuote = image_url("default/reply_arrow.png") top left no-repeat
-=======
 !blockQuote = #fff
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:app/stylesheets/skin.sass
 // Story Thumb Image BG Variable //
 !articleImageBg = image_url("default/default_thumb.gif") top left no-repeat
 // Font Variables //
@@ -50,17 +41,28 @@
 !borderColor_6 = 1px solid #CCCCCC
 !borderColor_7 = 1px solid #dce6f4
 !noBorder = none
-// Menu Tab BG and Text Color Variables //
-!tabOff = #55761b image_url("default/toggletab_bg.gif") left repeat-x
-!tabOffHover = #55761b
-!tabOn = #FFFFFF
-!tablinkOff = #FFFFFF
-!tablinkOn = #3b5998
-// Dropdown Variables //
+// Bottom Border style for all tab links --DO NOT change unless you're planning on changing the entire pages background color-- //
+!TabBotBorder = 1px solid #FFFFFF
+// Menu Page Tab BG and Text Color Variables //
+!pageTabOff = #55761b image_url("default/pagetab-bg-off.gif") left repeat-x
+!pageTabOffHover = #77983a image_url("default/pagetab-bg-hover.gif") left repeat-x
+!pageTabOn = #FFFFFF image_url("default/pagetab-bg-selected.gif") top left repeat-x
+!pageTabBorder = 1px solid #999999
+!pageTablinkOff = #FFFFFF
+!pageTablinkOn = #3b5998
+// Page Tab Dropdown Variables //
 !dropdownTabOff = #80a341
 !dropdownTabOn = #5d7e20
+// SubNav Variables //
+!subnavTabOn = #FFFFFF image_url("default/pagetab-bg-selected.gif") top left repeat-x
+!subnavTabOffHover = #77983a image_url("default/pagetab-bg-hover.gif") left repeat-x
+!subnavTabOff = #55761b image_url("default/pagetab-bg-off.gif") left repeat-x
+!subnavTabLinkOn = #3b5998
+!subnavTabLinkOff = #FFFFFF
+!subnavBorder = 1px solid #999999
+
 // text dropdown styles //
-!dropDownBg = transparent url( /images/default/dropdown_arrow.gif) center right no-repeat
+!dropDownBg = transparent image_url("default/dropdown_arrow.gif") center right no-repeat
 // Sub Menu Variables
 !subtabOn = #3b5998
 !subtablinkOn = #FFFFFF
@@ -71,11 +73,7 @@
 !featureBtnOn = #80a341
 !featureH2Text = #000
 !featureBodyText = #000
-<<<<<<< HEAD:app/stylesheets/skin.sass
 !featureBg = #d5cbbb image_url("default/default_thumb_c.gif") top left no-repeat
-!featureBorder = 1px solid #7e6947
-=======
-!featureBg = #d5cbbb url(/images/default/default_thumb_c.gif) top left no-repeat
 !featureBorder = 1px solid #7e6947
 // refine drop down form button variables //
 !refineInputBorder = 1px solid #3b5998
@@ -83,4 +81,14 @@
 !refineInputText = #3b5998
 !refineInputHoverText = #fff
 !refineInputHoverBG = #3b5998
->>>>>>> Fixed minor display issues, Updated default.sass, updated story page, post a story, post an idea, login pages, Refine results input styles, comment thread thumbs up and down, added default image link to stories and ideas page. All while dancing a jig upside down.:app/stylesheets/skin.sass
+// Bookmarklet Variables //
+!demoBG = image_url("default/bookmarklet-demo.png") top center no-repeat
+!bookmarkletBG = #d5cbbb image_url("default/bookmarklet-BG.gif") top left repeat-x
+!bookmarkletBtn = #55761b image_url("default/btn-bg-off.gif") left repeat-x
+!bookmarkletBtnHover = #77983a image_url("default/btn-bg-on.gif") left repeat-x
+!bookmarkletHeader = #FFF
+!bookmarkletHeaderBG = image_url("default/bookmarklet-header-BG.png") bottom left repeat-x
+!bookmarkletText = #333333
+!bookmarkletBorder = 2px solid #7e6947
+// Ad BG Variable //
+!AdBG = #ccc image_url("default/ad-bg-title.gif") top center no-repeat
