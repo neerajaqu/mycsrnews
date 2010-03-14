@@ -12,7 +12,7 @@
               %li
                 %p
                   = (comment.comments.present?) ? comment.comments : 'no comment'
-                .profilePic
+                .profilePic= local_linked_profile_pic comment.user
                 %h3
                   Posted by
                   = local_linked_profile_name comment.user
