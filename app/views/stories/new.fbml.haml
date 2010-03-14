@@ -17,6 +17,5 @@
 #col_right
   .panel_2
     .panelBar
-      %h2
-        An Easier way to Post a story
-    = render :partial => 'shared/bookmarklet_panel'
+      = fb_iframe base_url(bookmarklet_panel_home_path(:canvas => false)), :frameborder => 0, :scrolling => "no", :style => "margin: 0px 5px 0px 0px; padding: 0px; width: 200px; height: 400px;"
+      %br
