@@ -29,8 +29,6 @@ widgets:
       locals: 'newest_users'
     fan_application:
       partial: '/shared/sidebar/fan_application'
-    prompt_permissions:
-      partial: '/shared/sidebar/prompt_permissions'
     active_users:
       partial: '/shared/sidebar/active_users'
     top_ideas:
