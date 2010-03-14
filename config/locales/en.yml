@@ -29,6 +29,7 @@ en:
   audios:
     title: "Audios"
   featured_stories: "Featured Stories"
+  featured_comment_title: "Featured Comment"
   posted_by: "Posted by {{fb_name}} {{date}} ago"
   like: "Like"
   dislike: "Dislike"
