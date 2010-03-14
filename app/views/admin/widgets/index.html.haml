@@ -122,11 +122,11 @@
       	if ($(this).parent().hasClass('left')) {
       		$(this).parent().removeClass('left');
       		$(this).parent().addClass('right');
-      		$(this).html('Toggle left');
+      		$(this).html('Move left');
       	} else if ($(this).parent().hasClass('right')) {
       		$(this).parent().removeClass('right');
       		$(this).parent().addClass('left');
-      		$(this).html('Toggle right');
+      		$(this).html('Move right');
         }
       });
 
@@ -146,9 +146,9 @@
               widget.load(url, {}, function(responseText, textStatus, XMLHttpRequest) {
                 $('a', $(this)).click(function() { return false; });
                 if ($(this).hasClass('left')) {
-                  $(this).append('<span class="float-toggle">Toggle right</span>');
+                  $(this).append('<span class="float-toggle">Move right</span>');
                 } else if ($(this).hasClass('right')) {
-                  $(this).append('<span class="float-toggle">Toggle left</span>');
+                  $(this).append('<span class="float-toggle">Move left</span>');
                 } else {
                 }
               });
