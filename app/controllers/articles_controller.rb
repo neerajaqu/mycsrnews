@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_filter :login_required, :only => [:new, :create]
   before_filter :load_top_stories, :only => [:index]
   before_filter :load_top_discussed_stories, :only => [:index]
-
+  before_filter :load_newest_articles, :only => [:index]
   
   def new
     @current_sub_tab = 'New Article'

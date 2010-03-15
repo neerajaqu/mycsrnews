@@ -85,5 +85,5 @@ widgets:
       locals: 'featured_comments'        
     newest_articles:
       partial: '/shared/sidebar/newest_articles'
-      #load_functions: 'load_newest_articles'
+      load_functions: 'load_newest_articles'
       locals: 'newest_articles'
