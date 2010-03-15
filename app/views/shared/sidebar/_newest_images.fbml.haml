@@ -5,7 +5,7 @@
   - unless newest_images.empty?
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
-        %h2= t('.newest_images_title')
+        %h2= t('newest_images_title')
       .videoBlockWrap
         %ul          
           - newest_images.each do |image|
