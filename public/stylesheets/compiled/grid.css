@@ -91,7 +91,7 @@ a img {
   position: relative;
   border-bottom: 1px solid;
   border-bottom-color: #999999;
-  background: white url('http://my.site.com/images/default/hdr_bg.gif?1267561705') bottom left repeat-x;
+  background: white url('http://jeff-laptop.chewbranca.com/images/default/hdr_bg.gif?1267561705') bottom left repeat-x;
 }
 /* line 23, ../../../app/stylesheets/default.sass */
 #header .headerTitle {
@@ -219,25 +219,25 @@ a img {
 
 /* line 135, ../../../app/stylesheets/default.sass */
 .rss_link {
-  background: url('http://my.site.com/images/default/icon_rss.png?1265750670') left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/icon_rss.png?1265750670') left no-repeat;
   padding: 3px 0 3px 18px;
 }
 
 /* line 140, ../../../app/stylesheets/default.sass */
 .twitter_link {
-  background: url('http://my.site.com/images/default/icon_twitter.gif?1265750670') left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/icon_twitter.gif?1265750670') left no-repeat;
   padding: 3px 0 3px 18px;
 }
 
 /* line 145, ../../../app/stylesheets/default.sass */
 .newscloud_link {
-  background: url('http://my.site.com/images/default/icon_newscloud.gif?1265750670') left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/icon_newscloud.gif?1265750670') left no-repeat;
   padding: 3px 0 3px 20px;
 }
 
 /* line 150, ../../../app/stylesheets/default.sass */
 .grist_link {
-  background: url('http://my.site.com/images/default/icon_grist.gif') left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/icon_grist.gif') left no-repeat;
   padding: 3px 0 3px 20px;
 }
 
@@ -440,11 +440,11 @@ li {
   line-height: normal;
   border: none;
   color: white;
-  background: #55761b url('http://my.site.com/images/default/pagetab-bg-off.gif?1268444346') left repeat-x;
+  background: #55761b url('http://jeff-laptop.chewbranca.com/images/default/pagetab-bg-off.gif?1268444346') left repeat-x;
 }
 /* line 318, ../../../app/stylesheets/default.sass */
 #pageTabs .tabs .toggle_tabs li a:hover {
-  background: #77983a url('http://my.site.com/images/default/pagetab-bg-hover.gif?1268444346') left repeat-x;
+  background: #77983a url('http://jeff-laptop.chewbranca.com/images/default/pagetab-bg-hover.gif?1268444346') left repeat-x;
 }
 /* line 321, ../../../app/stylesheets/default.sass */
 #pageTabs .tabs .toggle_tabs li.first a {
@@ -471,7 +471,7 @@ li {
   border-bottom: 1px solid white;
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
-  background: white url('http://my.site.com/images/default/pagetab-bg-selected.gif?1268444346') top left repeat-x;
+  background: white url('http://jeff-laptop.chewbranca.com/images/default/pagetab-bg-selected.gif?1268444346') top left repeat-x;
   color: #3b5998;
 }
 /* line 348, ../../../app/stylesheets/default.sass */
@@ -496,11 +496,11 @@ li {
 }
 /* line 368, ../../../app/stylesheets/default.sass */
 #pageTabs .tabs .toggle_tabs .menu_item:hover a {
-  background: #77983a url('http://my.site.com/images/default/pagetab-bg-hover.gif?1268444346') left repeat-x;
+  background: #77983a url('http://jeff-laptop.chewbranca.com/images/default/pagetab-bg-hover.gif?1268444346') left repeat-x;
 }
 /* line 370, ../../../app/stylesheets/default.sass */
 #pageTabs .tabs .toggle_tabs .menu_item:hover a.selected {
-  background: white url('http://my.site.com/images/default/pagetab-bg-selected.gif?1268444346') top left repeat-x;
+  background: white url('http://jeff-laptop.chewbranca.com/images/default/pagetab-bg-selected.gif?1268444346') top left repeat-x;
 }
 /* line 373, ../../../app/stylesheets/default.sass */
 #pageTabs .tabs .toggle_tabs .menu_item:hover .dropdown {
@@ -600,7 +600,7 @@ li {
 /* line 459, ../../../app/stylesheets/default.sass */
 .panel_1 .houseFeatures .featureAd, .panel_2 .houseFeatures .featureAd {
   text-align: center;
-  background: #d5cbbb url('http://my.site.com/images/default/default_thumb_c.gif?1268373865') top left no-repeat;
+  background: #d5cbbb url('http://jeff-laptop.chewbranca.com/images/default/default_thumb_c.gif?1268373865') top left no-repeat;
   border: 1px solid #7e6947;
 }
 /* line 464, ../../../app/stylesheets/default.sass */
@@ -623,7 +623,7 @@ li {
   line-height: 14px;
   font-weight: bold;
   display: inline-block;
-  background: #55761b url('http://my.site.com/images/default/toggletab_bg.gif') left repeat-x;
+  background: #55761b url('http://jeff-laptop.chewbranca.com/images/default/toggletab_bg.gif') left repeat-x;
   color: white;
   height: 16px;
   padding: 4px 20px;
@@ -767,7 +767,7 @@ li {
   float: left;
   margin: 0 10px 10px 0;
   max-width: 280px;
-  background: url('http://my.site.com/images/default/default_thumb.gif?1268289528') top left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/default_thumb.gif?1268289528') top left no-repeat;
 }
 /* line 613, ../../../app/stylesheets/default.sass */
 .panel_1 .thumb img, .panel_2 .thumb img {
@@ -798,7 +798,7 @@ li {
   margin: 0 0 10px 10px;
   padding: 0;
   line-height: 120%;
-  list-style-image: url('http://my.site.com/images/default/bullet1.gif?1267736380');
+  list-style-image: url('http://jeff-laptop.chewbranca.com/images/default/bullet1.gif?1267736380');
   list-style-type: disc;
   list-style-position: outside;
   border-bottom: none;
@@ -818,7 +818,7 @@ li {
   position: relative;
   z-index: 48;
   padding-right: 10px;
-  background: transparent url('http://my.site.com/images/default/dropdown_arrow.gif?1268096909') center right no-repeat;
+  background: transparent url('http://jeff-laptop.chewbranca.com/images/default/dropdown_arrow.gif?1268096909') center right no-repeat;
 }
 /* line 657, ../../../app/stylesheets/default.sass */
 .panelBar .refine_link {
@@ -918,7 +918,7 @@ li {
 #hotTopicBar ul li.topic a {
   margin-left: 5px;
   padding-left: 8px;
-  background: url('http://my.site.com/images/default/topic_arrow.gif?1267736380') center left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/topic_arrow.gif?1267736380') center left no-repeat;
 }
 /* line 744, ../../../app/stylesheets/default.sass */
 #hotTopicBar ul li.topicTitle {
@@ -1012,7 +1012,7 @@ li {
   position: absolute;
   bottom: 8px;
   left: 70px;
-  background: url('http://my.site.com/images/default/reply_arrow.png?1267736380') top left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/reply_arrow.png?1267736380') top left no-repeat;
 }
 /* line 827, ../../../app/stylesheets/default.sass */
 #commentThread .comment_block .comment_reply a {
@@ -1116,33 +1116,33 @@ blockquote .quotes {
 
 /* line 912, ../../../app/stylesheets/default.sass */
 .voteUp {
-  background: url('http://my.site.com/images/default/icon_vote.gif?1265750670') left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/icon_vote.gif?1265750670') left no-repeat;
   padding-left: 15px;
 }
 
 /* line 916, ../../../app/stylesheets/default.sass */
 .voteDown {
-  background: url('http://my.site.com/images/default/icon_vote_no.gif?1267736380') left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/icon_vote_no.gif?1267736380') left no-repeat;
   padding-left: 15px;
 }
 
 /* line 920, ../../../app/stylesheets/default.sass */
 .thumb-up {
-  background: url('http://my.site.com/images/default/thumb-up.gif?1268373865') left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/thumb-up.gif?1268373865') left no-repeat;
   padding-left: 15px;
 }
 
 
 /* line 926, ../../../app/stylesheets/default.sass */
 .thumb-down {
-  background: url('http://my.site.com/images/default/thumb-down.gif?1268373865') left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/thumb-down.gif?1268373865') left no-repeat;
   padding-left: 15px;
 }
 
 
 /* line 933, ../../../app/stylesheets/default.sass */
 .thumb-down {
-  background: url('http://my.site.com/images/default/thumb-down.gif?1268373865') left no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/thumb-down.gif?1268373865') left no-repeat;
   padding-left: 15px;
 }
 
@@ -1253,9 +1253,10 @@ blockquote .quotes {
   padding: 15px 0 5px;
   border-left: 10px solid #CCC;
   border-right: 10px solid #CCC;
-  background: #cccccc url('http://my.site.com/images/default/ad-bg-title.gif?1268444345') top center no-repeat;
+  background: #cccccc url('http://jeff-laptop.chewbranca.com/images/default/ad-bg-title.gif?1268444345') top center no-repeat;
+  padding: 0;
 }
-/* line 1024, ../../../app/stylesheets/default.sass */
+/* line 1025, ../../../app/stylesheets/default.sass */
 .ad_480 .inside-frame, .ad_230 .inside-frame, .ad_scaleFrame .inside-frame, .ad_wrapFrame .inside-frame {
   text-align: center;
   padding: 60px;
@@ -1263,39 +1264,39 @@ blockquote .quotes {
   max-height: 300px;
   background: #fff;
 }
-/* line 1031, ../../../app/stylesheets/default.sass */
+/* line 1032, ../../../app/stylesheets/default.sass */
 .ad_480 .inside-frame-2, .ad_230 .inside-frame-2, .ad_scaleFrame .inside-frame-2, .ad_wrapFrame .inside-frame-2 {
   text-align: center;
   padding: 60px;
   background: #fff;
 }
 
-/* line 1039, ../../../app/stylesheets/default.sass */
+/* line 1040, ../../../app/stylesheets/default.sass */
 .bookmarklet {
   padding-bottom: 10px;
   border-bottom: 2px solid #7e6947;
-  background: #d5cbbb url('http://my.site.com/images/default/bookmarklet-BG.gif?1268444345') top left repeat-x;
+  background: #d5cbbb url('http://jeff-laptop.chewbranca.com/images/default/bookmarklet-BG.gif?1268444345') top left repeat-x;
 }
-/* line 1044, ../../../app/stylesheets/default.sass */
+/* line 1045, ../../../app/stylesheets/default.sass */
 .bookmarklet h2 {
   color: white;
-  background: url('http://my.site.com/images/default/bookmarklet-header-BG.png?1268444345') bottom left repeat-x;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/bookmarklet-header-BG.png?1268444345') bottom left repeat-x;
   font-size: 20px;
   margin: 0;
   padding: 5px 10px 25px 10px;
 }
-/* line 1050, ../../../app/stylesheets/default.sass */
+/* line 1051, ../../../app/stylesheets/default.sass */
 .bookmarklet p {
   color: #333333;
   margin: 5px 10px;
 }
-/* line 1054, ../../../app/stylesheets/default.sass */
+/* line 1055, ../../../app/stylesheets/default.sass */
 .bookmarklet .demo {
   margin: 10px 15px;
   padding: 65px 0 10px 0;
-  background: url('http://my.site.com/images/default/bookmarklet-demo.png?1268444345') top center no-repeat;
+  background: url('http://jeff-laptop.chewbranca.com/images/default/bookmarklet-demo.png?1268444345') top center no-repeat;
 }
-/* line 1059, ../../../app/stylesheets/default.sass */
+/* line 1060, ../../../app/stylesheets/default.sass */
 .bookmarklet .btn {
   display: inline-block;
   color: #fff;
@@ -1304,12 +1305,12 @@ blockquote .quotes {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  background: #55761b url('http://my.site.com/images/default/btn-bg-off.gif?1268444346') left repeat-x;
+  background: #55761b url('http://jeff-laptop.chewbranca.com/images/default/btn-bg-off.gif?1268444346') left repeat-x;
 }
-/* line 1068, ../../../app/stylesheets/default.sass */
+/* line 1069, ../../../app/stylesheets/default.sass */
 .bookmarklet .btn:hover {
   text-decoration: none;
-  background: #77983a url('http://my.site.com/images/default/btn-bg-on.gif?1268444346') left repeat-x;
+  background: #77983a url('http://jeff-laptop.chewbranca.com/images/default/btn-bg-on.gif?1268444346') left repeat-x;
 }
 
 /* line 1, ../../../app/stylesheets/application.sass */

@@ -98,6 +98,7 @@ class ApplicationController < ActionController::Base
 
   def load_newest_images
     @newest_images ||= Image.newest
+    #@newest_images ||= Image.find(:all, :limit => 10, :order => "created_at desc")
   end
 
   def load_newest_videos

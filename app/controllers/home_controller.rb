@@ -3,6 +3,8 @@ class HomeController < ApplicationController
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
+  before_filter :load_newest_images, :only => [:index, :app_tab]
+  before_filter :load_newest_videos, :only => [:index, :app_tab]
 
   def test_design
   end

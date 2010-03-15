@@ -1,7 +1,8 @@
 -# nothing expected
 
 .panel_2
-  .panelBar
-    %h2= t('.post_story_title')
-  .panel_block
-    %p= link_to t('.post_story'),new_story_path
+  .houseFeatures
+    .featureAd
+      %h2= t('post_story_title')
+      %p= t('post_story_detail')
+      = link_to t('post_story_button'), new_story_path, :class => "featureBtn"
