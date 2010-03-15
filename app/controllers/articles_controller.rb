@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  cache_sweeper :story_sweeper, :only => [:create]
+
   before_filter :set_current_tab
   before_filter :login_required, :only => [:new, :create]
   before_filter :load_top_stories, :only => [:index]

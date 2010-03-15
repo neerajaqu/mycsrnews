@@ -6,11 +6,11 @@
   - unless newest_articles.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
-        %h2= t('.newest_articles_title')
+        %h2= t('articles.newest_title')
       %br
       .list_stories
         %ul
           - newest_articles.each do |article|
             %li
-              .profilePic= local_linked_profile_pic article.user
-              = link_to article.title, article_path(article)
+              .profilePic= local_linked_profile_pic article.author
+              = link_to article.content.title, content_path(article.content)

@@ -59,3 +59,5 @@ en:
   answers:
     top_title: "Top Answers"
     newest_title: "Newest Answers"
+  articles:
+    newest_title: "Newest Articles"
