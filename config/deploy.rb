@@ -1,5 +1,5 @@
 set :default_stage, "n2_staging"
-set :stages, %w(n2_production n2_staging chewbranca_staging n2_charlotte n2_freep n2_kpcc)
+set :stages, %w(n2_production n2_staging chewbranca_staging n2_charlotte n2_freep n2_kpcc n2_genomics)
 require 'capistrano/ext/multistage'
 require 'eycap/recipes'
 
