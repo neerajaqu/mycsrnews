@@ -6,7 +6,6 @@
       %h2
         post a story
     .formBox  
-      %h2.title= link_to 'Post an Article', new_article_path
       - semantic_form_for @story, :url => stories_path, :html => { :multipart => true } do |form|
         = render :partial => 'story_form', :locals => { :form => form }
         - form.buttons do
