@@ -72,12 +72,13 @@ namespace :n2 do
     task :generate_model_slugs => :environment do
       ['User', 'Content', 'IdeaBoard'].each do |model_name|
         puts "Creating slugs for #{model_name.titleize}"
-        Rake::Task['friendly_id:redo_slugs'].invoke ENV['MODEL']=model_name
+        #Rake::Task['friendly_id:redo_slugs'].invoke ENV['MODEL']=model_name
+        system("rake friendly_id:redo_slugs MODEL=#{model_name}")
 
         # Reenable friendly id tasks so they can be run in the next iteration
-        Rake::Task['friendly_id:redo_slugs'].reenable
-        Rake::Task['friendly_id:make_slugs'].reenable
-        Rake::Task['friendly_id:remove_old_slugs'].reenable
+        #Rake::Task['friendly_id:redo_slugs'].reenable
+        #Rake::Task['friendly_id:make_slugs'].reenable
+        #Rake::Task['friendly_id:remove_old_slugs'].reenable
       end
     end
 
