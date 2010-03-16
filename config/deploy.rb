@@ -23,6 +23,8 @@ after("deploy:update_code") do
       run "ln -nfs #{shared_path}#{file} #{release_path}#{file}"
   end
 
+  deploy.rake_post_deploy
+
   deploy.cleanup
 end
 
@@ -108,6 +110,11 @@ namespace :deploy do
   desc "Setup db"
   task :setup_db do
     run "cd #{release_path} && rake db:setup"
+  end
+
+  desc "Run rake after deploy tasks"
+  task :rake_post_deploy do
+    run "cd #{release_path} && /usr/bin/rake n2:deploy:after RAILS_ENV=#{rails_env}"
   end
 
 end
