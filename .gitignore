@@ -8,6 +8,7 @@ public/system
 public/javascripts/cache
 public/stylesheets/cache
 public/stylesheets/compiled/*.css
+public/stylesheets/compiled/*/*
 coverage
 *.log
 *.bak
