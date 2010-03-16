@@ -12,12 +12,8 @@ widgets:
       partial: '/shared/ads_banner'
     newest_videos:
       partial: '/shared/sidebar/newest_videos'
-      load_functions: 'load_newest_videos'
-      locals: 'newest_videos'
     newest_images:
       partial: '/shared/sidebar/newest_images'
-      load_functions: 'load_newest_images'
-      locals: 'newest_images'
   sidebar_content:
     top_stories:
       partial: '/shared/sidebar/top_stories'

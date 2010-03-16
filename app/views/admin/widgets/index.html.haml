@@ -204,12 +204,17 @@
 #content-box
   %h1.title Select Widgets for Your Page Layout
   %br
+  %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
+  .clear
+  %br
   #left.box.droppable-main.ui-widget-content.ui-state-default
     %h1 Main Column
     %ul#sortable-main
   #right.box.droppable-sidebar.ui-widget-content.ui-state-default
     %h1 Sidebar Column
     %ul#sortable-sidebar
+  .clear
+  %br
   %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
 %br
 .clear

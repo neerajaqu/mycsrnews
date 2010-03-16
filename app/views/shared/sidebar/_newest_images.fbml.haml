@@ -1,6 +1,6 @@
 -# @expects: local 'newest_images'
 
-- cache :newest_images_html do
+- cache :newest_images_fbml do
   - newest_images ||= Image.newest
   - unless newest_images.empty?
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
@@ -9,4 +9,4 @@
       .videoBlockWrap
         %ul          
           - newest_images.each do |image|
-            %li.videoThumb= image_tag image.url(:thumb)
+            %li.videoThumb= link_to image_tag(image.url(:media_item)), image.imageable

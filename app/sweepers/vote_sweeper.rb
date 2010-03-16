@@ -4,6 +4,8 @@ class VoteSweeper < ActionController::Caching::Sweeper
   def after_save(vote)
     if vote.voteable.is_a?(Content)
       StorySweeper.expire_story_all vote.voteable
+    elsif vote.voteable.is_a?(Article)
+      StorySweeper.expire_article_all vote.voteable
     elsif vote.voteable.is_a?(Comment) and vote.voteable.commentable.is_a?(Content)
       StorySweeper.expire_story_all vote.voteable.commentable
     elsif vote.voteable.is_a?(Question)

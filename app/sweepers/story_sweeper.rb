@@ -46,7 +46,7 @@ class StorySweeper < ActionController::Caching::Sweeper
     #expire_page root_path
   end
 
-  def clear_article_cache(article)
+  def clear_article_cache article
     ['newest_articles', 'top_articles'].each do |fragment|
       expire_fragment "#{fragment}_html"
       expire_fragment "#{fragment}_fbml"
@@ -56,6 +56,16 @@ class StorySweeper < ActionController::Caching::Sweeper
   def self.expire_story_all story
     controller = ActionController::Base.new
     ['top_stories', 'stories_list', 'featured_items', story.cache_key, 'most_discussed_stories'].each do |fragment|
+      controller.expire_fragment "#{fragment}_html"
+      controller.expire_fragment "#{fragment}_fbml"
+    end
+
+    StorySweeper.expire_article_all story.article if story.is_article?
+  end
+
+  def self.expire_article_all article
+    controller = ActionController::Base.new
+    ['newest_articles', 'top_articles'].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
       controller.expire_fragment "#{fragment}_fbml"
     end

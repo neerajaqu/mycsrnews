@@ -1,6 +1,7 @@
 class FlagsController < ApplicationController
   before_filter :login_required, :only => [:create,:block,:feature]
-  cache_sweeper :story_sweeper, :only => [:create, :update, :destroy]
+  cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :feature]
+  #TODO:: updated feature cache sweeper
 
   def create
     @flaggable = find_moderatable_item

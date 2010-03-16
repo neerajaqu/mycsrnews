@@ -1,16 +1,17 @@
 -# TODO set up scope for featured article blogs
 -# @expects: local 'content'
-- cache :featured_contents_html, :expires_in => 15.seconds do
+- cache :featured_articles_html do
   - featured_contents ||= Article.featured
   - unless featured_contents.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
-        %h2= t('.featured_content_title')
-      %br
-      .list_items
-        %ul
-          - featured_contents.each do |content|
-            %li
-              .profilePic= local_linked_profile_pic content.user
-              = link_to content.title, content_path(content)
-              %p= (content.details.present?) ? content.details : 'no details'
+        %h2= t('articles.featured_title')
+      %ul
+        - featured_contents.each do |article|
+          %li
+            %h4= link_to article.content.title, content_path(article.content)
+            %p= caption((article.content.caption.present?) ? article.content.caption : 'no caption')
+            .profilePic= local_linked_profile_pic article.author, :width => '30px', :height => '30px'
+            %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
+            %span.btnComment== #{like_link article.content} #{article.content.votes_tally}
+            %span.btnComment== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}
