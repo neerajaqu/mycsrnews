@@ -30,8 +30,9 @@ class StoriesController < ApplicationController
    @current_sub_tab = 'New Story'
    if params[:u].present?
       @story = Content.new({
-      	:url    => params[:u],
-      	:title  => params[:t]
+      	:url      => params[:u],
+      	:title    => params[:t],
+      	:caption  => params[:c]
       })
     else
       @story = Content.new
