@@ -11,14 +11,10 @@
 !twitter = image_url("default/icon_twitter.gif") left no-repeat
 !newsCloud = image_url("default/icon_newscloud.gif") left no-repeat
 !grist = image_url("default/icon_grist.gif") left no-repeat
-// Hot Topic Bar Image Variables //
-!hotTopicBar =  image_url("default/topic_arrow.gif") center left no-repeat
-// Comment Reply Image Variables //
-!commentReply = image_url("default/reply_arrow.png") top left no-repeat
 // BlockQuote Image Variable //
 !blockQuote = #fff
 // Story Thumb Image BG Variable //
-!articleImageBg = image_url("default/default_thumb.gif") top left no-repeat
+!WaterMark = image_url("default/default_thumb.gif") top left no-repeat
 // Font Variables //
 !copyFont = lucida grande, tahoma, verdana, arial, "san-serif"
 !headerFont = lucida grande, tahoma, verdana, arial, "san-serif"
@@ -27,25 +23,16 @@
 !subheadColor = #999999
 !linkColor = #3B5998
 !bodyColor = #333333
-!textWhite = #FFFFFF
 // Background & Border Color Variables //
 !bgDark = #31500b
 !bgColor = #dce6f4
 !subheadBG = #F0F0F0
-!bgWhite = #FFFFFF
-!borderColor_1 = 1px solid #3b5998
-!borderColor_2 = 1px solid #333333
-!borderColor_3 = 1px solid #999999
-!borderColor_4 = 1px solid #FFFFFF
-!borderColor_5 = 1px solid #efefef
-!borderColor_6 = 1px solid #CCCCCC
-!borderColor_7 = 1px solid #dce6f4
 !noBorder = none
 // Bottom Border style for all tab links --DO NOT change unless you're planning on changing the entire pages background color-- //
 !TabBotBorder = 1px solid #FFFFFF
 // Menu Page Tab BG and Text Color Variables //
-!pageTabOff = #55761b image_url("default/pagetab-bg-off.gif") left repeat-x
-!pageTabOffHover = #77983a image_url("default/pagetab-bg-hover.gif") left repeat-x
+!pageTabOff = #55761b image_url("default/pagetab-bg-off.gif") top left repeat-x
+!pageTabOffHover = #77983a image_url("default/pagetab-bg-hover.gif") top left repeat-x
 !pageTabOn = #FFFFFF image_url("default/pagetab-bg-selected.gif") top left repeat-x
 !pageTabBorder = 1px solid #999999
 !pageTablinkOff = #FFFFFF
@@ -53,6 +40,12 @@
 // Page Tab Dropdown Variables //
 !dropdownTabOff = #80a341
 !dropdownTabOn = #5d7e20
+!dropdownTabText = #FFF
+!dropdownTabBorder = 1px solid #FFF
+!dropdownTabSelectOff = #fff
+!dropdownTabSelectOn = #dce6f4
+!dropdownTabTextSelect = #3B5998
+!dropdownTabBorderSelect = 1px solid #F0F0F0
 // SubNav Variables //
 !subnavTabOn = #FFFFFF image_url("default/pagetab-bg-selected.gif") top left repeat-x
 !subnavTabOffHover = #77983a image_url("default/pagetab-bg-hover.gif") left repeat-x
@@ -60,9 +53,19 @@
 !subnavTabLinkOn = #3b5998
 !subnavTabLinkOff = #FFFFFF
 !subnavBorder = 1px solid #999999
-
 // text dropdown styles //
-!dropDownBg = transparent image_url("default/dropdown_arrow.gif") center right no-repeat
+!TextDropDownArrow = transparent image_url("default/dropdown_arrow.gif") center right no-repeat
+// Text Dropdown Panel //
+!DropDownBorder = 1px solid #3b5998
+!DropDownBorderBot = 1px solid #FFF
+!DropDownBG = #FFFFFF
+!DropDownLinkHover = #dce6f4
+// refine drop down form button variables //
+!refineInputBorder = 1px solid #3b5998
+!refineInputBG = #dce6f4
+!refineInputText = #3b5998
+!refineInputHoverText = #fff
+!refineInputHoverBG = #3b5998
 // Sub Menu Variables
 !subtabOn = #3b5998
 !subtablinkOn = #FFFFFF
@@ -71,16 +74,11 @@
 // House Ad Variables //
 !featureBtnOff = #55761b image_url("default/toggletab_bg.gif") left repeat-x
 !featureBtnOn = #80a341
+!featureBtnText = #fff
 !featureH2Text = #000
 !featureBodyText = #000
 !featureBg = #d5cbbb image_url("default/default_thumb_c.gif") top left no-repeat
 !featureBorder = 1px solid #7e6947
-// refine drop down form button variables //
-!refineInputBorder = 1px solid #3b5998
-!refineInputBG = #dce6f4
-!refineInputText = #3b5998
-!refineInputHoverText = #fff
-!refineInputHoverBG = #3b5998
 // Bookmarklet Variables //
 !demoBG = image_url("default/bookmarklet-demo.png") top center no-repeat
 !bookmarkletBG = #d5cbbb image_url("default/bookmarklet-BG.gif") top left repeat-x
@@ -92,3 +90,34 @@
 !bookmarkletBorder = 2px solid #7e6947
 // Ad BG Variable //
 !AdBG = #ccc image_url("default/ad-bg-title.gif") top center no-repeat
+// Hot Topic Bar Variables //
+!HTBaseBG = #F0F0F0
+!HTTitleBG = #31500b
+!HTTitleText = #FFF
+// Hot Topic Bar List Image Variable //
+!hotTopicBar =  image_url("default/topic_arrow.gif") center left no-repeat
+//Top Bar Variables (bar at the top of article detail pages)//
+!TopBarBorder = 1px solid #FFFFFF
+!TopBarBG = #F0F0F0
+// Panel Variables //
+!panelListBorder = 1px solid #efefef
+// panel Bar //
+!panelBarBG = #FFF
+!panelBarBorder = 1px solid #3b5998
+!panelBarHeader = #999999
+//Panel Featured Story //
+!featureStoryBG = #dce6f4
+// PanelBar Comments Thread BG //
+!panelBarCommentBG = #dce6f4
+!commentBlockBorder = 1px solid #efefef
+// Comment Reply Variables //
+!commentReplyText = #336600
+!commentReply = image_url("default/reply_arrow.png") top left no-repeat
+// Form Box //
+!formBoxBG = #EFEFEF
+!formBoxTextArea = 1px solid #ccc
+// Action Legend Variables //
+!actionLegendinputBorder = 1px solid #CCCCCC
+// Footer //
+!FooterBorder = 1px solid #3b5998
+!FooterBG = #dce6f4

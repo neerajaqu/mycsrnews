@@ -3,14 +3,11 @@
 // Float div hack //
 .clearfix
   display: inline-block
-
 // floats //
 .float_left
   float: left
-
 .float_right
   float: right
-
 // Header Container //
 #header
   height: 110px
@@ -69,11 +66,11 @@
   display: inline-block
   padding: 4px 10px
   border: 
-    :top= !borderColor_1
-    :bottom= !borderColor_1
-    :left= !borderColor_1
-    :right= !borderColor_1
-  :background-color= !bgWhite 
+    :top= !DropDownBorder
+    :bottom= !DropDownBorder
+    :left= !DropDownBorder
+    :right= !DropDownBorder
+  :background-color= !DropDownBG
   li
     width: 100%
     margin: 6px 0 0px 0
@@ -83,7 +80,7 @@
       display: block
       padding: 4px 6px
       &:hover
-        :background= !bgColor
+        :background= !DropDownLinkHover
 
     &.account-profile
       a
@@ -99,28 +96,22 @@
     top: -25px
     right: -1px
     border: 
-      :top= !borderColor_1
-      :bottom= !noBorder
-      :left= !borderColor_1
-      :right= !borderColor_1
-    :background-color= !bgWhite
+      :top= !DropDownBorder
+      :bottom= !DropDownBorder
+      :left= !DropDownBorder
+      :right= !DropDownBorder
+    :background-color= !DropDownBG
 
-// Body containers - Most of the styling for these is in the grid.sass/fb_grid.sass files //
+// Body containers //
 #bodyWrapper
   padding-bottom: 20px
-
-// #col_left
-
-
-// #col_right
-
 
 // Footer Container //
 #footer
   float: left
   clear: left
   border:
-    :top= !borderColor_1
+    :top= !FooterBorder
 
   .dh_links
     :color= !bodyColor
@@ -129,9 +120,9 @@
     margin: 0px
     padding: 5px 10px 7px 10px
     background:
-      :color= !bgColor
+      :color= !FooterBG
 
-
+// Various Icon Links //
 .rss_link
   :background= !rss
   padding: 3px 0 3px 18px
@@ -152,7 +143,7 @@
   padding: 3px 0 3px 20px
 
 
-// Misc Styles //
+// Russell's Section Stuff //
 .hidden
   display: none
 
@@ -209,7 +200,6 @@ h5
   :color= !subheadColor
   font-size: 12px
   font-weight: bold
-  border-top: 1px solid #CCCCCC
   margin: 0px 0px 10px 0
   padding: 5px 0px
 
@@ -390,12 +380,23 @@ li
                 display: block
                 :background= !dropdownTabOff
                 padding: 5px 10px
+                :color= !dropdownTabText
                 border:
-                  :top= !borderColor_4
-                :color= !textWhite
+                  :top= !dropdownTabBorder
+                &:hover
+                  :background= !dropdownTabOn
 
-              a:hover
-                :background= !dropdownTabOn
+              a.selected
+                :background= !dropdownTabSelectOff
+                border:
+                  :top= !dropdownTabBorderSelect
+                  :bottom= !pageTabBorder
+                  :left= !pageTabBorder
+                  :right= !pageTabBorder
+                :color= !dropdownTabTextSelect
+                
+                &.selected:hover
+                  :background= !dropdownTabSelectOn
 
 // Sub Navigation Styles //
 #subNav
@@ -480,7 +481,7 @@ li
         font-weight: bold
         display: inline-block
         :background= !featureBtnOff
-        :color= !textWhite
+        :color= !featureBtnText
         height: 16px
         padding: 4px 20px
         margin: 10px auto
@@ -523,6 +524,7 @@ li
       float: left
 
     .videoThumb
+      padding: 0
       margin:
         top: 3px
         right: 3px
@@ -533,7 +535,7 @@ li
 
   .formBox
     padding: 10px 0px
-    :background= !subheadBG
+    :background= !formBoxBG
 
     .title
       width: 90%
@@ -545,7 +547,7 @@ li
       margin-bottom: 10px
 
     textarea
-      :border= !borderColor_6
+      :border= !formBoxTextArea
 
     .buttons li
       width: 99%
@@ -557,8 +559,8 @@ li
     display: block
     padding: 6px 0 4px 0px
     border:
-      :bottom= !borderColor_1
-    :background= !bgWhite
+      :bottom= !panelBarBorder
+    :background= !panelBarBG
 
     h2
       padding: 2px 0px 0px 2px
@@ -567,7 +569,7 @@ li
       font-size: 11px
       text-transform: uppercase
       :font-family= !headerFont
-      :color= !subheadColor
+      :color= !panelBarHeader
 
     a
       font-weight: normal
@@ -609,7 +611,7 @@ li
     float: left
     margin: 0 10px 10px 0
     max-width: 280px
-    :background= !articleImageBg
+    :background= !WaterMark
 
     img
       max-width: 280px
@@ -622,7 +624,7 @@ li
     width: 100%
     padding: 5px 0
     border:
-      :bottom= !borderColor_5
+      :bottom= !panelListBorder
 
   .bullet_list 
     margin: 0 10px
@@ -653,7 +655,7 @@ li
     position: relative
     z-index: 48
     padding-right: 10px
-    :background= !dropDownBg
+    :background= !TextDropDownArrow
 
   .refine_link
     float: right
@@ -669,11 +671,11 @@ li
       top: -30px
       right: -1px
       border: 
-        :top= !borderColor_1
-        :bottom= !borderColor_4
-        :left= !borderColor_1
-        :right= !borderColor_1
-      :background-color= !bgWhite
+        :top= !DropDownBorder
+        :bottom= !DropDownBorderBot
+        :left= !DropDownBorder
+        :right= !DropDownBorder
+      :background-color= !DropDownBG
       z-index: 44
 
     .refine-box
@@ -684,8 +686,8 @@ li
       width: 142px
       top: 26px
       left: -54px
-      :border= !borderColor_1
-      :background-color= !bgWhite
+      :border= !DropDownBorder
+      :background-color= !DropDownBG
 
       .refine-content
         text-align: center
@@ -723,7 +725,7 @@ li
   ul
     display: block
     float: left
-    :background= !subheadBG
+    :background= !HTBaseBG
     width: 100%
     li
       float: left
@@ -733,7 +735,7 @@ li
         display: inline
         float: left
         text-align: left
-        :background= !subheadBG
+        :background= !HTBaseBG
         padding: 4px 15px 4px 0
         min-width: 10%
 
@@ -743,8 +745,8 @@ li
           :background= !hotTopicBar
 
       &.topicTitle
-        :background= !bgDark
-        :color= !textWhite
+        :background= !HTTitleBG
+        :color= !HTTitleText
         width: 22%
         padding-left: 5px
         text-transform: uppercase
@@ -755,7 +757,7 @@ li
         float: right
         text-align: center
         width: 10%
-        :background= !subheadBG
+        :background= !HTBaseBG
 
 
 // Article Style modifications //
@@ -777,9 +779,9 @@ li
         margin-right: -1px
         width: 25%
         border:
-          :left= !borderColor_4
+          :left= !TopBarBorder
           :bottom= !noBorder
-        :background= !subheadBG
+        :background= !TopBarBG
 
         &.nopad
           padding-bottom: 2px
@@ -806,7 +808,7 @@ li
 // Comment Style Modifications and Additions //
 #commentThread
   .panelBar
-    :background= !bgColor
+    :background= !panelBarCommentBG
 
     h2
       :color= !linkColor
@@ -815,7 +817,7 @@ li
     position: relative
     padding: 8px 0 20px 0
     border:
-      :bottom= !borderColor_5
+      :bottom= !commentBlockBorder
 
     .comment_reply
       display: block
@@ -826,18 +828,16 @@ li
       :background= !commentReply 
     
       a
-        color: #336600
+        :color= !commentReplyText
         font-weight: bold
         font-size: 11px
 
 .feature_bg
-  :background-color= !bgColor
-  
+  :background-color= !featureStoryBG 
   .panel_2
     margin-bottom: 10px
   .thumb
     margin: 10px
-
   .storyBlockWrap
     margin: 10px 10px 0 10px
 
@@ -845,34 +845,8 @@ li
   font-size: 10px
   :color= !subheadColor
   :background= !subheadBG
-  border:
-    :top= !noBorder
-    :bottom= !noBorder
+  border: none
   padding: 6px 4px 6px 4px
-
-
-.subFilter
-  font-size: 10px
-  :color= !subheadColor
-  :background= !subheadBG
-  border:
-    :top= !noBorder
-    :bottom= !borderColor_6
-  padding: 4px 10px 4px 10px
-
-  a
-    padding: 1px 5px 2px 5px
-    :color= !linkColor
-    margin-left: 4px
-
-  .selected
-    :color= !subtablinkOn
-    :background= !subtabOn
-    padding: 1px 5px 2px 5px
-    -moz-border-radius: 4px
-    -webkit-border-radius: 4px
-    border-radius: 4px
-
 
 // Blockquote styles //
 blockquote
@@ -885,7 +859,7 @@ blockquote
 
   .quotes
     padding: 4px 0
-
+// TODO add styles for reply quotes when its functional //
 
 // Universal Button Styles // 
 .btn
@@ -921,21 +895,16 @@ blockquote
 .thumb-up
   :background= !thumbUp
   padding-left: 15px
-<<<<<<< HEAD:app/stylesheets/default.sass
-=======
 
 .thumb-down
   :background= !thumbDown
   padding-left: 15px
 
-// Action Legend Panel//
->>>>>>> 36ba79d4929d288540aa8787387daad6d04cc885:app/stylesheets/default.sass
-
 .thumb-down
   :background= !thumbDown
   padding-left: 15px
 
-// Action Legend //
+// Action Legend Panell//
 
 .actionLegend
   :background= !bgColor
@@ -945,14 +914,16 @@ blockquote
       margin-bottom: 5px
       :color= !headerColor
     input
-      :border= !borderColor_6
+      :border= !actionLegendinputBorder
       width: 100%
       padding: 1px 0
 
+// Thumb Pic Size //
 .list_stories .thumb img
   max-width: 90px
   max-height: 90px
 
+// Profile Pic //
 .profilePic 
   float: left
   margin: 0px 10px 0px 0px
@@ -960,6 +931,7 @@ blockquote
   a:hover
     text-decoration: none
 
+// Profile Pic Size //
 .list_stories
   .profilePic img
     width: 30px
@@ -981,10 +953,6 @@ blockquote
 
 // Extra styles for Login Page //
 .login
-<<<<<<< HEAD:app/stylesheets/default.sass
-
-=======
->>>>>>> 36ba79d4929d288540aa8787387daad6d04cc885:app/stylesheets/default.sass
   p
     line-height: 120%
     font-size: 12px
@@ -994,8 +962,7 @@ blockquote
   label
     font-size: 11px
     padding: 4px 2px
-<<<<<<< HEAD:app/stylesheets/default.sass
-=======
+
 
 // Ad sizes and Layouts //
 .ad_wrapFrame
@@ -1010,7 +977,7 @@ blockquote
   margin: 0 auto
   
 .ad_480
-  width: 460px
+  width: 470px
   margin: 0 auto
     
 .ad_480, .ad_230, .ad_scaleFrame, .ad_wrapFrame
@@ -1018,24 +985,16 @@ blockquote
   -webkit-border-radius: 4px
   border-radius: 4px
   padding: 15px 0 5px
-  border-left: 10px solid #CCC
-  border-right: 10px solid #CCC
-  :background= !AdBG
-  padding: 0
+  border-left: 5px solid #CCC
+  border-right: 5px solid #CCC
+  :background= !AdBG 
 
-  .inside-frame
-    text-align: center
-    padding: 60px
-    max-width: 800px
-    max-height: 300px
-    background: #fff
-
-  .inside-frame-2
-    text-align: center
-    padding: 60px
-    background: #fff
-
-
+  iframe
+    padding: 0
+    html
+      padding: 0
+      body
+        padding: 0
 
 // Bookmarklet Styles //
 .bookmarklet
@@ -1043,6 +1002,7 @@ blockquote
   border:
     :bottom= !bookmarkletBorder
   :background= !bookmarkletBG
+
   h2
     :color= !bookmarkletHeader
     :background= !bookmarkletHeaderBG
@@ -1070,4 +1030,3 @@ blockquote
     &:hover
       text-decoration: none
       :background= !bookmarkletBtnHover
->>>>>>> 36ba79d4929d288540aa8787387daad6d04cc885:app/stylesheets/default.sass
