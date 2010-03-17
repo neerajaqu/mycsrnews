@@ -9,14 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100315230605) do
+ActiveRecord::Schema.define(:version => 20100317083752) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
     t.string   "title",                            :null => false
     t.text     "details"
     t.string   "url"
-    t.string   "type",       :default => "rotate"
+    t.string   "mode",       :default => "rotate"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

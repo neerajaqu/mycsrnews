@@ -10,10 +10,10 @@ widgets:
       load_functions: 'load_featured_items'
     ads_banner:
       partial: '/shared/ads_banner'
-    newest_videos:
-      partial: '/shared/sidebar/newest_videos'
     newest_images:
       partial: '/shared/sidebar/newest_images'
+    announcements:
+      partial: 'shared/announcements'    
   sidebar_content:
     welcome_panel:
       partial: '/shared/sidebar/welcome_panel'

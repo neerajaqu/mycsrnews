@@ -1,0 +1,16 @@
+-# @expects: local 'newest_announcements'
+- cache :newest_announcements_html do
+  - newest_announcements ||= Announcement.newest
+  #hotTopicBar    
+    %ul
+      - unless newest_announcements.empty?
+        - newest_announcements.each do |announcement|
+          %li.topicTitle
+            #{announcement.prefix}
+          %li.topic
+            = link_to announcement.title, announcement.url
+      - else
+        %li.topicTitle
+          Breaking News
+        %li.topic
+          You don't have any announcements yet. Enter them in the Admin

@@ -157,6 +157,10 @@ class ApplicationController < ActionController::Base
     @newest_events ||= Event.newest 5
   end
 
+  def load_newest_announcements
+    @newest_announcements ||= Announcement.newest 1
+  end
+
   def set_locale
     locale = params[:locale] || cookies[:locale] || I18n.default_locale
     I18n.locale = locale.to_s
