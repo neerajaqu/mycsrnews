@@ -15,6 +15,10 @@ widgets:
     newest_images:
       partial: '/shared/sidebar/newest_images'
   sidebar_content:
+    welcome_panel:
+      partial: '/shared/sidebar/welcome_panel'
+      #load_functions: 'load_top_stories'
+      locals: 'welcome_message'
     top_stories:
       partial: '/shared/sidebar/top_stories'
       #load_functions: 'load_top_stories'

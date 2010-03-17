@@ -111,8 +111,8 @@
       };
 
       $('.template').click(function(event) {
-        if ($(this).attr('id').match(/^template_[345]/)) {
-          alert("At this time only templates 1 and 2 are enabled. Check back soon. (You selected "+$(this).attr('id')+")");
+        if ($(this).attr('id').match(/^template_[35]/)) {
+          alert("At this time only templates 1, 2 and 4 are enabled. Check back soon. (You selected "+$(this).attr('id')+")");
           return false;
         }
       	var url = "/admin/featured_items/"+$(this).attr('id')+"/load_template";

@@ -38,3 +38,27 @@
                 %ul
                   %li= link_to secondary1.featured_title, secondary1.featured_url
                   %li= link_to secondary2.featured_title, secondary2.featured_url
+      - when 'template_4'
+        - primary1 = section1.children.first.featurable
+        - primary2 = section2.children.first.featurable
+        #featuredPanel.panel_1.feature_bg
+          .panelBar
+            %h2= t('featured_stories')
+          .panel_2.left
+            .thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+            .storyBlockWrap
+              %h1= link_to primary1.featured_title, primary1.featured_url
+              %p
+                = primary1.featured_blurb
+                = link_to 'More...', primary1
+              %span.btnComment.float_left== #{like_link primary1} #{primary1.num_votes}
+              %span.btnComment.float_left== #{link_to t('comments'), primary1} #{primary1.num_comments}
+          .panel_2.right
+            .thumb= link_to image_tag(primary2.featured_image_url), primary2.featured_url
+            .storyBlockWrap
+              %h1= link_to primary2.featured_title, primary2.featured_url
+              %p
+                = primary2.featured_blurb
+                = link_to 'More...', primary2
+              %span.btnComment.float_left== #{like_link primary2} #{primary2.num_votes}
+              %span.btnComment.float_left== #{link_to t('comments'), primary2} #{primary2.num_comments}
