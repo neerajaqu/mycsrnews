@@ -1,5 +1,5 @@
 -# @expects: local 'newest_announcements'
-- cache :newest_announcements_html do
+- cache :newest_announcements_fbml do
   - newest_announcements ||= Announcement.newest
   #hotTopicBar    
     %ul
