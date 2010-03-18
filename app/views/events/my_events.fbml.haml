@@ -5,5 +5,5 @@
   = render :partial => 'shared/events', :locals => { :events => @events, :title => t('.my_events_title') }
 
 #col_right
-  = render :partial => 'shared/sidebar/events_list', :locals => { :events => @top_events, :name => t('.top_events') }
-  = render :partial => 'shared/sidebar/events_list', :locals => { :events => @newest_events, :name => t('.newest_events') }
+  = render :partial => 'shared/sidebar/top_events', :locals => { :top_events => @top_events }
+  = render :partial => 'shared/sidebar/newest_events', :locals => { :newest_events => @newest_events }
