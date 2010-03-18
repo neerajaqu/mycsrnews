@@ -47,14 +47,16 @@ en:
   answer_question: "Answer this"
   please_elaborate: "Please elaborate a bit more (optional)"
   active_users: "{{user_count}} users online now"
+  tags_hint: "Separate each tag with a comma e.g. dining options, raw food, seattle"
   questions:
+    tab_title: "Answers"
     title: "Questions"
     list_title: "Questions and Answers"
     list_subtitle: "Help your community by answering questions"
     top_title: "top questions"
     newest_title: "Newest Questions"
     unanswered_title: "Unanswered Questions"
-    list: "Browse Questions"
+    list: "Answer Questions"
     new: "Ask a Question"
   answers:
     top_title: "Top Answers"

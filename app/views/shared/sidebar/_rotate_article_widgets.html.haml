@@ -1,0 +1,7 @@
+- case rand(2)
+  - when 0
+    = render :partial => 'shared/sidebar/newest_articles'
+  - when 1
+    = render :partial => 'shared/sidebar/featured_article'
+  - when 2
+    -# = render :partial => 'shared/sidebar/top_articles'

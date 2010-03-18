@@ -69,7 +69,7 @@
         - if MENU.key? 'questions'
           %li
             .menu_item
-              = link_to t('questions.title'), questions_path, :class => tab_selected?(@current_tab, 'questions')
+              = link_to t('questions.tab_title'), questions_path, :class => tab_selected?(@current_tab, 'questions')
               - unless MENU['questions'].nil?
                 .dropdown
                   %ul

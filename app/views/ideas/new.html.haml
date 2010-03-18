@@ -16,21 +16,11 @@
         - form.inputs do
           = form.input :title
           = form.input :details, :input_html => { :rows => 5 }
-          = form.input :tags_string, :required => false
+          = form.input :tags_string, :required => false, :hint => t('tags_hint')
           = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
           = form.input :idea_board, :required => true, :include_blank => false
         - form.buttons do
           = form.commit_button
-
-  .panel_1
-    .panelBar
-      %h2
-        Other Ideas
-    .formBox
-      %h4 Browse Other Ideas
-      %p Like an idea to increase its popularity.
-
-  = render :partial => 'shared/ideas', :locals => { :title => t('.browse_other_ideas'), :ideas => @ideas }
 
 #col_right
   = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('.top_ideas') }
