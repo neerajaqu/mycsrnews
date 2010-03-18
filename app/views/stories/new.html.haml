@@ -3,8 +3,7 @@
 #col_left
   .panel_1
     .panelBar
-      %h2
-        post a story
+      %h2= t('.new_story_header')
     .formBox  
       - semantic_form_for @story, :url => stories_path, :html => { :multipart => true } do |form|
         = render :partial => 'story_form', :locals => { :form => form }

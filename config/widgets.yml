@@ -39,6 +39,14 @@ widgets:
       partial: '/shared/sidebar/fan_application'
     active_users:
       partial: '/shared/sidebar/active_users'
+    rotate_question_widgets:
+      partial: '/shared/sidebar/rotate_question_widgets'
+    rotate_idea_widgets:
+      partial: '/shared/sidebar/rotate_idea_widgets'
+    rotate_user_widgets:
+      partial: '/shared/sidebar/rotate_user_widgets'
+    rotate_article_widgets:
+      partial: '/shared/sidebar/rotate_article_widgets'
     top_ideas:
       partial: '/shared/sidebar/top_ideas'
       #load_functions: 'load_top_ideas'
@@ -87,3 +95,8 @@ widgets:
       partial: '/shared/sidebar/newest_articles'
       load_functions: 'load_newest_articles'
       locals: 'newest_articles'
+# TODO Implement named scope for top articles
+#    top_articles:
+#      partial: '/shared/sidebar/top_articles'
+#      load_functions: 'load_top_articles'
+#      locals: 'top_articles'

@@ -3,7 +3,7 @@
 #col_left
   .panel_1
     .panelBar
-      %h2= t '.title'
+      %h2= t '.header'
     .formBox
       - semantic_form_for @article do |form|
         = render :partial => 'article_form', :locals => { :form => form }

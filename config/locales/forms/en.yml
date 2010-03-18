@@ -9,7 +9,7 @@ en:
           title: 'Title'
           url: 'URL'
           image_url: 'Image URL'
-          tags_string: 'Tags (comma separated)'
+          tags_string: 'Tags'
           caption: 'Caption'
       article:
         new:

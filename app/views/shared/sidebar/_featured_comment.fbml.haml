@@ -11,7 +11,7 @@
           %li
             -# TODO: provide title method for all models          
             -#             %h4= link_to comment.commentable.title, comment.commentable
-            %p= caption((comment.comments.present?) ? comment.comments : 'no comment')
+            %p= caption((comment.comments.present?) ? "\"#{comment.comments}\"" : 'no comment')
             .profilePic= local_linked_profile_pic comment.user, :width => '30px', :height => '30px'
             %h3
               = t('posted_by', :fb_name => local_linked_profile_name(comment.user), :date => time_ago_in_words(comment.created_at))

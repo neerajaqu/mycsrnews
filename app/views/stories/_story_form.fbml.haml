@@ -1,6 +1,6 @@
 - form.inputs do
   = form.input :url
   = form.input :title
-  = form.input :tags_string, :required => false
+  = form.input :tags_string, :required => false, :hint => t('tags_hint')
   = form.input :caption
   = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @story }

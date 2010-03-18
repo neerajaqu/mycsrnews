@@ -1,0 +1,9 @@
+- case rand(4)
+  - when 0
+    = render :partial => 'shared/sidebar/top_answers'
+  - when 1
+    = render :partial => 'shared/sidebar/newest_answers'
+  - when 2
+    = render :partial => 'shared/sidebar/top_questions'
+  - when 3
+    = render :partial => 'shared/sidebar/newest_questions'
