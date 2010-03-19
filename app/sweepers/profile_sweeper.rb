@@ -2,7 +2,6 @@ class ProfileSweeper < ActionController::Caching::Sweeper
   observe UserProfile
 
   def after_save(profile)
-    self.test
     return false unless profile.changed?
 
     if profile.bio_changed?
