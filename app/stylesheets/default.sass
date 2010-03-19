@@ -13,20 +13,24 @@
   height: 110px
   margin-bottom: 15px
   position: relative
-  border-bottom: 1px solid
-    :color= !subheadColor
+  border:
+    :bottom= !pageTabBorder 
   :background= !headerBG 
 
   .headerTitle
+    :background= !headerTitleLogoImage
+    :height= !headerTitleLogoHeight
+    :width= !headerTitleLogoWidth
     position: absolute
-    top: 30px
-    left: 10px
+    :top= !headerTitleLogoPosTop
+    :left= !headerTitleLogoPosLeft
 
     h1
+      :visibility= !headerTitleDisplay
       display: block
       float: left
       font-size: 32px
-      margin: 5px
+      :color= !headerTitleColor
 
   a
     text-decoration: none
@@ -97,7 +101,7 @@
     right: -1px
     border: 
       :top= !DropDownBorder
-      :bottom= !DropDownBorder
+      :bottom= none
       :left= !DropDownBorder
       :right= !DropDownBorder
     :background-color= !DropDownBG
@@ -127,21 +131,13 @@
   :background= !rss
   padding: 3px 0 3px 18px
 
-
 .twitter_link
   :background= !twitter
   padding: 3px 0 3px 18px
 
-
 .newscloud_link
   :background= !newsCloud
   padding: 3px 0 3px 20px
-
-
-.grist_link
-  :background= !grist
-  padding: 3px 0 3px 20px
-
 
 // Russell's Section Stuff //
 .hidden
@@ -151,6 +147,7 @@
 body
   :font-family= !copyFont
   :color= !bodyColor
+  :background= !bodyBG
   font-size: 11px
   margin: 0px
   padding: 0px
@@ -163,6 +160,8 @@ h1, h2, h3, h4, h5
   margin: 0px
   padding: 0px
 
+  a
+    :color= !headerColor   
 h1
   :font-family= !headerFont
   font-size: 15px
@@ -180,13 +179,15 @@ h2
 
 h3
   font-size: 11px
-  :font-family= !headerFont
+  :font-family= !copyFont
   :color= !subheadColor
   font-weight: normal
   line-height: 11px
   margin: 0 5px 5px 0
   padding: 0
 
+  a
+    :color= !linkColor
 h4
   :font-family= !headerFont
   font-size: 12px
@@ -270,13 +271,9 @@ li
     margin: 0px 0px 0px 0px
     padding: 0px 0px 0px 0px
 
-    .left_tabs
-      float: left
-      padding-left: 1px
-
-    .right_tabs
-      float: right
-      padding-right: 1px
+    .tab-float
+      :float= !pagetabFloat
+      padding: 0 1px
 
     .back_links
       padding-right: 20px
@@ -388,11 +385,14 @@ li
 
               a.selected
                 :background= !dropdownTabSelectOff
+                margin:
+                  :right= !dropdownTabSelectMarginRight
+                  :left= !dropdownTabSelectMarginLeft
                 border:
-                  :top= !dropdownTabBorderSelect
-                  :bottom= !pageTabBorder
-                  :left= !pageTabBorder
-                  :right= !pageTabBorder
+                  :top= none
+                  :bottom= !dropdownTabBorderSelect
+                  :left= !dropdownTabBorderSelect
+                  :right= !dropdownTabBorderSelect
                 :color= !dropdownTabTextSelect
                 
                 &.selected:hover
@@ -427,22 +427,27 @@ li
         border: none
         font-weight: bold
         font-size: 11px
-        background: #55761b
+        :background= !subnavTabOff
         display: block
         :color= !subnavTabLinkOff
 
+        &:hover
+          :background= !subnavTabOffHover
+          text-decoration: none
+
         &.selected
           margin: -1px 0px 0px 0px
-          :background= !subnavTabLinkOff
+          :background= !subnavTabOn
           border:
             :top= !subnavBorder
             :bottom= !TabBotBorder
             :right= !subnavBorder
             :left= !subnavBorder
           :color= !subnavTabLinkOn
-
-        &:hover
-          text-decoration: none
+          &:hover
+            :background= !subnavTabOn
+            text-decoration: none
+            cursor: default
 
         &.disabled
           :color= !subheadColor
@@ -457,10 +462,30 @@ li
   margin-bottom: 15px
 
   .houseFeatures
+    :background= !featureBg
+    :border= !featureBorder
+
+    .thumbBanner
+      padding: 0
+      display: inline-block
+      width: 100%
+
+      img
+        max-width: 100% 
+        max-height: 100%
+
+    .thumb
+      background: none
+      padding: 0
+      float: left
+      margin: 10px
+      
+      img
+        max-width: 75px
+        max-height: 75px
+
     .featureAd
       text-align: center
-      :background= !featureBg
-      :border= !featureBorder
 
       h2
         text-align: left
@@ -472,6 +497,7 @@ li
         text-align: left
         padding: 0 10px
         margin-bottom: 20px
+        :color= !featureBodyText
         
 
       .featureBtn
@@ -485,6 +511,10 @@ li
         height: 16px
         padding: 4px 20px
         margin: 10px auto
+        :border= !featureBtnBorder
+        -moz-border-radius: 4px
+        -webkit-border-radius: 4px
+        border-radius: 4px
    
         &:hover
           :background= !featureBtnOn
@@ -526,10 +556,10 @@ li
     .videoThumb
       padding: 0
       margin:
-        top: 3px
-        right: 3px
-      width: 74px
-      height: 36px
+        top: 2px
+        right: 2px
+      width: 72px
+      height: 48px
       background: #cccccc
       padding: 0px
 
@@ -568,7 +598,7 @@ li
       font-weight: normal
       font-size: 11px
       text-transform: uppercase
-      :font-family= !headerFont
+      :font-family= !copyFont
       :color= !panelBarHeader
 
     a
@@ -614,7 +644,7 @@ li
     :background= !WaterMark
 
     img
-      max-width: 280px
+      max-width: 100%
 
     a:hover
       text-decoration: none
@@ -666,13 +696,13 @@ li
 
     .refine-tab
       height: 28px
-      width: 104px
+      width: 99px
       position: absolute
-      top: -30px
+      top: -29px
       right: -1px
       border: 
         :top= !DropDownBorder
-        :bottom= !DropDownBorderBot
+        bottom: none
         :left= !DropDownBorder
         :right= !DropDownBorder
       :background-color= !DropDownBG
@@ -684,8 +714,8 @@ li
       position: absolute
       padding: 8px
       width: 142px
-      top: 26px
-      left: -54px
+      top: 25px
+      left: -59px
       :border= !DropDownBorder
       :background-color= !DropDownBG
 
@@ -790,16 +820,22 @@ li
 
   .thumb
     float: right
+    margin: 10px
+    
+    img
+      width: 300px
+      height: 250px
 
   .bodyArticle
     :color= !bodyColor
-    margin: 8px 10px 14px 10px
+    margin: 8px 5px 14px 5px
     line-height: 140%
     font-size: 12px
 
   .storyCaption
     p
-      margin: 4px 0
+      padding: 0
+      margin: 4px 0px
     br
       margin: 0
       line-height: 0px
@@ -833,18 +869,20 @@ li
         font-size: 11px
 
 .feature_bg
-  :background-color= !featureStoryBG 
+  :background= !featureStoryBG 
   .panel_2
     margin-bottom: 10px
   .thumb
     margin: 10px
   .storyBlockWrap
     margin: 10px 10px 0 10px
+  .btnComment
+    :background= !btnCommentFeatureBG
 
 .subtitle
   font-size: 10px
   :color= !subheadColor
-  :background= !subheadBG
+  :background= !subTitleBG
   border: none
   padding: 6px 4px 6px 4px
 
@@ -870,19 +908,17 @@ blockquote
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
   border-radius: 4px
-  :background= !bgDark
-
-#col_right .btn_1
-  display: block
-  text-align: center
-  margin: 10px
+  :background= !btnBG
+  :border= !btnBorder
+  &hover
+    :background= !btnBGHover
 
 // Like, Share, Vote, Comment, and Rate Styles //
 .btnComment
   display: inline-block
   margin: 0 1px
   padding: 1px 8px 2px 8px
-  background: #F0F0F0
+  :background= !btnCommentBG
 
 .voteUp
   :background= !voteUp
@@ -900,14 +936,10 @@ blockquote
   :background= !thumbDown
   padding-left: 15px
 
-.thumb-down
-  :background= !thumbDown
-  padding-left: 15px
-
 // Action Legend Panell//
 
 .actionLegend
-  :background= !bgColor
+  :background= !actionLegendBG
   .share_and_hide
     margin: 5px
     h4
@@ -919,9 +951,11 @@ blockquote
       padding: 1px 0
 
 // Thumb Pic Size //
-.list_stories .thumb img
-  max-width: 90px
-  max-height: 90px
+.list_stories 
+  .thumb 
+    img
+      max-width: 90px
+      max-height: 90px
 
 // Profile Pic //
 .profilePic 
@@ -965,22 +999,22 @@ blockquote
 
 
 // Ad sizes and Layouts //
-.ad_wrapFrame
-  display: inline-block
-  margin: 0 10px
-
-.ad_scaleFrame
-  max-width: 100%
+#adspace
+  margin-bottom: 15px
 
 .ad_230
-  width: 210px
+  width: 222px
   margin: 0 auto
   
 .ad_480
-  width: 470px
+  width: 474px
   margin: 0 auto
-    
-.ad_480, .ad_230, .ad_scaleFrame, .ad_wrapFrame
+
+.ad_720
+  width: 718px
+  margin: 0 auto
+
+.ad_480, .ad_230, .ad_720
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
   border-radius: 4px
@@ -991,9 +1025,12 @@ blockquote
 
   iframe
     padding: 0
+    margin: 0
     html
+      margin: 0
       padding: 0
       body
+        margin: 0
         padding: 0
 
 // Bookmarklet Styles //
@@ -1012,6 +1049,7 @@ blockquote
   p
     :color= !bookmarkletText
     margin: 5px 10px
+    font-size: 12px
 
   .demo
     margin: 10px 15px
@@ -1023,6 +1061,7 @@ blockquote
     color: #fff
     font-weight: bold
     padding: 5px 10px 6px 10px
+    :border= !bookmarkletBtnBorder
     -moz-border-radius: 4px
     -webkit-border-radius: 4px
     border-radius: 4px
