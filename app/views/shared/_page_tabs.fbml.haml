@@ -1,7 +1,7 @@
 -# Expects @current_tab to be set, done by default in app_controller
 #pageTabs.clearfix
   .tabs.clearfix
-    .left_tabs
+    .tab-float
       %ul#toggle_tabs_unused.toggle_tabs.clearfix
         - if MENU.key? 'home'
           - if @current_tab == 'home'

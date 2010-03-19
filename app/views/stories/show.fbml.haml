@@ -26,7 +26,7 @@
       - else
         %div.bodyArticle= sanitize caption @story.caption
       - if @story.url.present?
-        %div.float_right= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn_1"
+        %div.float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
       - if @story.moderatable?
         = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
 

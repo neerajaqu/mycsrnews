@@ -1,20 +1,9 @@
-// Vote Image Variables  //
-!voteUp = image_url("default/icon_vote.gif") left no-repeat
-!voteDown = image_url("default/icon_vote_no.gif") left no-repeat
-// Thumb Image Variables  //
-!thumbUp = image_url("default/thumb-up.gif") left no-repeat
-!thumbDown = image_url("default/thumb-down.gif") left no-repeat
-// Bullet List Image Variables  //
-!bulletList = image_url("default/bullet1.gif")
-// Various Icon Image Variables //
-!rss = image_url("default/icon_rss.png") left no-repeat
-!twitter = image_url("default/icon_twitter.gif") left no-repeat
-!newsCloud = image_url("default/icon_newscloud.gif") left no-repeat
-!grist = image_url("default/icon_grist.gif") left no-repeat
-// BlockQuote Image Variable //
-!blockQuote = #fff
-// Story Thumb Image BG Variable //
-!WaterMark = image_url("default/default_thumb.gif") top left no-repeat
+// NEWSCLOUD SITE SKIN //
+
+// noborder style - do not edit //
+!noBorder = none
+// body Variables //
+!bodyBG= #FFFFFF
 // Font Variables //
 !copyFont = lucida grande, tahoma, verdana, arial, "san-serif"
 !headerFont = lucida grande, tahoma, verdana, arial, "san-serif"
@@ -23,17 +12,23 @@
 !subheadColor = #999999
 !linkColor = #3B5998
 !bodyColor = #333333
-// Background & Border Color Variables //
-!bgDark = #31500b
-!bgColor = #dce6f4
-!subheadBG = #F0F0F0
-!noBorder = none
+// Header Variables //
+!headerTitleColor = #3B5998
+!headerTitleDisplay = visible
+!headerTitleLogoImage = none
+!headerTitleLogoHeight = 50px
+!headerTitleLogoWidth = 400px
+!headerTitleLogoPosTop = 30px
+!headerTitleLogoPosLeft = 20px
+!headerBG = #fff image_url("default/hdr_bg.gif") bottom left repeat-x
 // Bottom Border style for all tab links --DO NOT change unless you're planning on changing the entire pages background color-- //
 !TabBotBorder = 1px solid #FFFFFF
+// menu page tab float variable //
+!pagetabFloat = left
 // Menu Page Tab BG and Text Color Variables //
 !pageTabOff = #55761b image_url("default/pagetab-bg-off.gif") top left repeat-x
 !pageTabOffHover = #77983a image_url("default/pagetab-bg-hover.gif") top left repeat-x
-!pageTabOn = #FFFFFF image_url("default/pagetab-bg-selected.gif") top left repeat-x
+!pageTabOn = #FFFFFF image_url("default/pagetab-bg-on.gif") top left repeat-x
 !pageTabBorder = 1px solid #999999
 !pageTablinkOff = #FFFFFF
 !pageTablinkOn = #3b5998
@@ -46,8 +41,10 @@
 !dropdownTabSelectOn = #dce6f4
 !dropdownTabTextSelect = #3B5998
 !dropdownTabBorderSelect = 1px solid #F0F0F0
+!dropdownTabSelectMarginRight = 0px
+!dropdownTabSelectMarginLeft = 0px
 // SubNav Variables //
-!subnavTabOn = #FFFFFF image_url("default/pagetab-bg-selected.gif") top left repeat-x
+!subnavTabOn = #FFFFFF image_url("default/pagetab-bg-on.gif") top left repeat-x
 !subnavTabOffHover = #77983a image_url("default/pagetab-bg-hover.gif") left repeat-x
 !subnavTabOff = #55761b image_url("default/pagetab-bg-off.gif") left repeat-x
 !subnavTabLinkOn = #3b5998
@@ -66,24 +63,21 @@
 !refineInputText = #3b5998
 !refineInputHoverText = #fff
 !refineInputHoverBG = #3b5998
-// Sub Menu Variables
-!subtabOn = #3b5998
-!subtablinkOn = #FFFFFF
-// Header Bg Variable //
-!headerBG = #fff image_url("default/hdr_bg.gif") bottom left repeat-x
 // House Ad Variables //
-!featureBtnOff = #55761b image_url("default/toggletab_bg.gif") left repeat-x
-!featureBtnOn = #80a341
 !featureBtnText = #fff
-!featureH2Text = #000
-!featureBodyText = #000
-!featureBg = #d5cbbb image_url("default/default_thumb_c.gif") top left no-repeat
-!featureBorder = 1px solid #7e6947
+!featureBtnOff = #55761b image_url("default/btn-off.gif") left repeat-x
+!featureBtnOn = #80a341 image_url("default/btn-on.gif") left repeat-x
+!featureBtnBorder = 1px solid #213603
+!featureH2Text = #3b5998
+!featureBodyText = #3b5998
+!featureBg = #fff image_url("default/house-ad-bg.gif") top center repeat-x
+!featureBorder = 2px solid #3B5998
 // Bookmarklet Variables //
 !demoBG = image_url("default/bookmarklet-demo.png") top center no-repeat
 !bookmarkletBG = #d5cbbb image_url("default/bookmarklet-BG.gif") top left repeat-x
-!bookmarkletBtn = #55761b image_url("default/btn-bg-off.gif") left repeat-x
-!bookmarkletBtnHover = #77983a image_url("default/btn-bg-on.gif") left repeat-x
+!bookmarkletBtn = #55761b image_url("default/btn-off.gif") left repeat-x
+!bookmarkletBtnHover = #77983a image_url("default/btn-on.gif") left repeat-x
+!bookmarkletBtnBorder = 1px solid #77983a
 !bookmarkletHeader = #FFF
 !bookmarkletHeaderBG = image_url("default/bookmarklet-header-BG.png") bottom left repeat-x
 !bookmarkletText = #333333
@@ -105,8 +99,20 @@
 !panelBarBG = #FFF
 !panelBarBorder = 1px solid #3b5998
 !panelBarHeader = #999999
+// subtitle background color //
+!subTitleBG = #F0F0F0
 //Panel Featured Story //
 !featureStoryBG = #dce6f4
+// Vote Button Variable //
+!btnCommentBG = #F0F0F0
+// feature vote button variable //
+!btnCommentFeatureBG = #FFFFFF
+// Vote Image Variables  //
+!voteUp = image_url("default/icon_vote_up.gif") left no-repeat
+!voteDown = image_url("default/icon_vote_down.gif") left no-repeat
+// Thumb Image Variables  //
+!thumbUp = image_url("default/thumb-up.gif") left no-repeat
+!thumbDown = image_url("default/thumb-down.gif") left no-repeat
 // PanelBar Comments Thread BG //
 !panelBarCommentBG = #dce6f4
 !commentBlockBorder = 1px solid #efefef
@@ -118,6 +124,21 @@
 !formBoxTextArea = 1px solid #ccc
 // Action Legend Variables //
 !actionLegendinputBorder = 1px solid #CCCCCC
+!actionLegendBG = #dce6f4
 // Footer //
 !FooterBorder = 1px solid #3b5998
 !FooterBG = #dce6f4
+// Button Background //
+!btnBG = #55761b image_url("default/btn-off.gif") left repeat-x
+!btnBGHover = #77983a image_url("default/btn-on.gif") left repeat-x
+!btnBorder =  1px solid #77983a
+// Bullet List Image Variables  //
+!bulletList = image_url("default/bullet1.gif")
+// Various Icon Image Variables //
+!rss = image_url("default/icon_rss.png") left no-repeat
+!twitter = image_url("default/icon_twitter.gif") left no-repeat
+!newsCloud = image_url("default/icon_newscloud.gif") left no-repeat
+// BlockQuote Image Variable //
+!blockQuote = #fff
+// Story Thumb Image BG Variable //
+!WaterMark = image_url("default/default_thumb.gif") top left no-repeat

@@ -24,9 +24,9 @@ img a { border: none; }
 
 .float_right { float: right; }
 
-#header { height: 110px; margin-bottom: 15px; position: relative; border-bottom: 1px solid; border-bottom-color: #999999; background: white url('http://eyeleveloffice.mine.nu:8857/images/default/hdr_bg.gif?1266357217') bottom left repeat-x; }
-#header .headerTitle { position: absolute; top: 30px; left: 10px; }
-#header .headerTitle h1 { display: block; float: left; font-size: 32px; margin: 5px; }
+#header { height: 110px; margin-bottom: 15px; position: relative; border-bottom: 1px solid #999999; background: white url('http://ileveloffice.homeip.net:8857/images/default/hdr_bg.gif?1266357217') bottom left repeat-x; }
+#header .headerTitle { background: none; height: 50px; width: 400px; position: absolute; top: 30px; left: 20px; }
+#header .headerTitle h1 { visibility: visible; display: block; float: left; font-size: 32px; color: #3b5998; }
 #header a { text-decoration: none; }
 #header img.hdrpic { position: absolute; top: 2px; left: 2px; }
 #header .pipe { margin: 0 5px; color: #999999; }
@@ -42,32 +42,32 @@ img a { border: none; }
 .account-links li a:hover { background: #dce6f4; }
 .account-links li.account-profile a { display: inline-block; }
 .account-links li.account-profile a:hover { background: none; }
-.account-links .account-tab { height: 24px; width: 65px; z-index: 97; position: absolute; top: -25px; right: -1px; border-top: 1px solid #3b5998; border-bottom: 1px solid #3b5998; border-left: 1px solid #3b5998; border-right: 1px solid #3b5998; background-color: white; }
+.account-links .account-tab { height: 24px; width: 65px; z-index: 97; position: absolute; top: -25px; right: -1px; border-top: 1px solid #3b5998; border-bottom: none; border-left: 1px solid #3b5998; border-right: 1px solid #3b5998; background-color: white; }
 
 #bodyWrapper { padding-bottom: 20px; }
 
 #footer { float: left; clear: left; border-top: 1px solid #3b5998; }
 #footer .dh_links { color: #333333; float: left; clear: left; margin: 0px; padding: 5px 10px 7px 10px; background-color: #dce6f4; }
 
-.rss_link { background: url('http://eyeleveloffice.mine.nu:8857/images/default/icon_rss.png?1265674096') left no-repeat; padding: 3px 0 3px 18px; }
+.rss_link { background: url('http://ileveloffice.homeip.net:8857/images/default/icon_rss.png?1265674096') left no-repeat; padding: 3px 0 3px 18px; }
 
-.twitter_link { background: url('http://eyeleveloffice.mine.nu:8857/images/default/icon_twitter.gif?1265674096') left no-repeat; padding: 3px 0 3px 18px; }
+.twitter_link { background: url('http://ileveloffice.homeip.net:8857/images/default/icon_twitter.gif?1265674096') left no-repeat; padding: 3px 0 3px 18px; }
 
-.newscloud_link { background: url('http://eyeleveloffice.mine.nu:8857/images/default/icon_newscloud.gif?1265674096') left no-repeat; padding: 3px 0 3px 20px; }
-
-.grist_link { background: url('http://eyeleveloffice.mine.nu:8857/images/default/icon_grist.gif') left no-repeat; padding: 3px 0 3px 20px; }
+.newscloud_link { background: url('http://ileveloffice.homeip.net:8857/images/default/icon_newscloud.gif?1265674096') left no-repeat; padding: 3px 0 3px 20px; }
 
 .hidden { display: none; }
 
-body { font-family: lucida grande, tahoma, verdana, arial, san-serif; color: #333333; font-size: 11px; margin: 0px; padding: 0px; }
+body { font-family: lucida grande, tahoma, verdana, arial, san-serif; color: #333333; background: white; font-size: 11px; margin: 0px; padding: 0px; }
 
 h1, h2, h3, h4, h5 { font-family: lucida grande, tahoma, verdana, arial, san-serif; color: #333333; font-size: 14px; line-height: 130%; margin: 0px; padding: 0px; }
+h1 a, h2 a, h3 a, h4 a, h5 a { color: #3b5998; }
 
 h1 { font-family: lucida grande, tahoma, verdana, arial, san-serif; font-size: 15px; font-weight: bold; color: #3b5998; margin: 0 0 6px 0; padding: 0; }
 
 h2 { font-family: lucida grande, tahoma, verdana, arial, san-serif; font-size: 14px; font-weight: bold; margin: 0 0 6px 0; padding: 0; }
 
 h3 { font-size: 11px; font-family: lucida grande, tahoma, verdana, arial, san-serif; color: #999999; font-weight: normal; line-height: 11px; margin: 0 5px 5px 0; padding: 0; }
+h3 a { color: #3b5998; }
 
 h4 { font-family: lucida grande, tahoma, verdana, arial, san-serif; font-size: 12px; line-height: 120%; font-weight: bold; margin: 0 0 4px 0; padding: 0; }
 
@@ -93,54 +93,59 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 
 #pageTabs { width: 100%; position: absolute; bottom: 0px; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; overflow: visible; border: none; }
 #pageTabs .tabs { position: absolute; bottom: 0; left: 0; width: 100%; height: 23px; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; }
-#pageTabs .tabs .left_tabs { float: left; padding-left: 1px; }
-#pageTabs .tabs .right_tabs { float: right; padding-right: 1px; }
+#pageTabs .tabs .tab-float { float: left; padding: 0 1px; }
 #pageTabs .tabs .back_links { padding-right: 20px; }
 #pageTabs .tabs .toggle_tabs { margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; text-align: center; }
 #pageTabs .tabs .toggle_tabs li { display: block; float: left; padding: 0px 0px 0px 0px; margin: 0px 1px 0px 0px; height: 23px; }
-#pageTabs .tabs .toggle_tabs li a { display: block; height: 13px; margin: 0px 0px 0px 0px; padding: 5px 20px; font-weight: bold; font-size: 12px; line-height: normal; border: none; color: white; background: #55761b url('http://eyeleveloffice.mine.nu:8857/images/default/pagetab-bg-off.gif?1268348775') top left repeat-x; }
-#pageTabs .tabs .toggle_tabs li a:hover { background: #77983a url('http://eyeleveloffice.mine.nu:8857/images/default/pagetab-bg-hover.gif?1268348811') top left repeat-x; }
+#pageTabs .tabs .toggle_tabs li a { display: block; height: 13px; margin: 0px 0px 0px 0px; padding: 5px 20px; font-weight: bold; font-size: 12px; line-height: normal; border: none; color: white; background: #55761b url('http://ileveloffice.homeip.net:8857/images/default/pagetab-bg-off.gif?1268761250') top left repeat-x; }
+#pageTabs .tabs .toggle_tabs li a:hover { background: #77983a url('http://ileveloffice.homeip.net:8857/images/default/pagetab-bg-hover.gif?1268348811') top left repeat-x; }
 #pageTabs .tabs .toggle_tabs li.first a { margin: 0px 0px 0px 0px; padding: 5px 7px; -moz-border-top-left-radius: 8px; -webkit-border-top-left-radius: 8px; border-top-left-radius: 8px; }
 #pageTabs .tabs .toggle_tabs li.first a img { display: inline-block; }
 #pageTabs .tabs .toggle_tabs li a:focus { outline: 0px; }
-#pageTabs .tabs .toggle_tabs li a.selected { margin: -1px 0px 0px 0px; padding: 5px 30px 5px 30px; height: 13px; border-top: 1px solid #999999; border-bottom: 1px solid white; border-right: 1px solid #999999; border-left: 1px solid #999999; background: white url('http://eyeleveloffice.mine.nu:8857/images/default/pagetab-bg-selected.gif?1268351246') top left repeat-x; color: #3b5998; }
+#pageTabs .tabs .toggle_tabs li a.selected { margin: -1px 0px 0px 0px; padding: 5px 30px 5px 30px; height: 13px; border-top: 1px solid #999999; border-bottom: 1px solid white; border-right: 1px solid #999999; border-left: 1px solid #999999; background: white url('http://ileveloffice.homeip.net:8857/images/default/pagetab-bg-on.gif?1268761394') top left repeat-x; color: #3b5998; }
 #pageTabs .tabs .toggle_tabs li.first a.selected { padding: 5px 7px; -moz-border-top-left-radius: 8px; -webkit-border-top-left-radius: 8px; border-top-left-radius: 8px; }
 #pageTabs .tabs .toggle_tabs li a.selected:hover { text-decoration: none; }
 #pageTabs .tabs .toggle_tabs li a.disabled { color: #999999; cursor: default; }
 #pageTabs .tabs .toggle_tabs li a.disabled:hover { text-decoration: none; }
-#pageTabs .tabs .toggle_tabs .menu_item:hover a { background: #77983a url('http://eyeleveloffice.mine.nu:8857/images/default/pagetab-bg-hover.gif?1268348811') top left repeat-x; }
-#pageTabs .tabs .toggle_tabs .menu_item:hover a.selected { background: white url('http://eyeleveloffice.mine.nu:8857/images/default/pagetab-bg-selected.gif?1268351246') top left repeat-x; }
+#pageTabs .tabs .toggle_tabs .menu_item:hover a { background: #77983a url('http://ileveloffice.homeip.net:8857/images/default/pagetab-bg-hover.gif?1268348811') top left repeat-x; }
+#pageTabs .tabs .toggle_tabs .menu_item:hover a.selected { background: white url('http://ileveloffice.homeip.net:8857/images/default/pagetab-bg-on.gif?1268761394') top left repeat-x; }
 #pageTabs .tabs .toggle_tabs .menu_item:hover .dropdown { visibility: visible; }
 #pageTabs .tabs .toggle_tabs .menu_item .dropdown { z-index: 99; visibility: hidden; }
 #pageTabs .tabs .toggle_tabs .menu_item .dropdown ul li { display: block; width: 100%; clear: both; padding: 0; text-align: left; }
 #pageTabs .tabs .toggle_tabs .menu_item .dropdown ul li a { font-size: 10px; display: block; background: #80a341; padding: 5px 10px; color: white; border-top: 1px solid white; }
 #pageTabs .tabs .toggle_tabs .menu_item .dropdown ul li a:hover { background: #5d7e20; }
-#pageTabs .tabs .toggle_tabs .menu_item .dropdown ul li a.selected { background: white; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #999999; border-left: 1px solid #999999; border-right: 1px solid #999999; color: #3b5998; }
+#pageTabs .tabs .toggle_tabs .menu_item .dropdown ul li a.selected { background: white; margin-right: 0px; margin-left: 0px; border-top: none; border-bottom: 1px solid #f0f0f0; border-left: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; color: #3b5998; }
 #pageTabs .tabs .toggle_tabs .menu_item .dropdown ul li a.selected.selected:hover { background: #dce6f4; }
 
 #subNav { height: 19px; margin: 0px 0px 15px 0px; padding: 0px 0px 0px 0px; display: inline-block; overflow: visible; border-bottom: 1px solid #999999; }
 
 #subNav .toggle_tabs { margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; text-align: center; }
 #subNav .toggle_tabs li { display: block; float: left; padding: 0px 0px 0px 0px; margin: 0 0 0 1px; }
-#subNav .toggle_tabs li a { margin: 0px 0px 0px 0px; padding: 4px 25px 1px 25px; height: 14px; border: none; font-weight: bold; font-size: 11px; background: #55761b; display: block; color: white; }
-#subNav .toggle_tabs li a.selected { margin: -1px 0px 0px 0px; background: white; border-top: 1px solid #999999; border-bottom: 1px solid white; border-right: 1px solid #999999; border-left: 1px solid #999999; color: #3b5998; }
-#subNav .toggle_tabs li a:hover { text-decoration: none; }
+#subNav .toggle_tabs li a { margin: 0px 0px 0px 0px; padding: 4px 25px 1px 25px; height: 14px; border: none; font-weight: bold; font-size: 11px; background: #55761b url('http://ileveloffice.homeip.net:8857/images/default/pagetab-bg-off.gif?1268761250') left repeat-x; display: block; color: white; }
+#subNav .toggle_tabs li a:hover { background: #77983a url('http://ileveloffice.homeip.net:8857/images/default/pagetab-bg-hover.gif?1268348811') left repeat-x; text-decoration: none; }
+#subNav .toggle_tabs li a.selected { margin: -1px 0px 0px 0px; background: white url('http://ileveloffice.homeip.net:8857/images/default/pagetab-bg-on.gif?1268761394') top left repeat-x; border-top: 1px solid #999999; border-bottom: 1px solid white; border-right: 1px solid #999999; border-left: 1px solid #999999; color: #3b5998; }
+#subNav .toggle_tabs li a.selected:hover { background: white url('http://ileveloffice.homeip.net:8857/images/default/pagetab-bg-on.gif?1268761394') top left repeat-x; text-decoration: none; cursor: default; }
 #subNav .toggle_tabs li a.disabled { color: #999999; cursor: default; }
 #subNav .toggle_tabs li a.disabled:hover { text-decoration: none; }
 
 .panel_1, .panel_2 { border-bottom: none; margin-bottom: 15px; }
-.panel_1 .houseFeatures .featureAd, .panel_2 .houseFeatures .featureAd { text-align: center; background: #d5cbbb url('http://eyeleveloffice.mine.nu:8857/images/default/default_thumb_c.gif?1268183843') top left no-repeat; border: 1px solid #7e6947; }
-.panel_1 .houseFeatures .featureAd h2, .panel_2 .houseFeatures .featureAd h2 { text-align: left; line-height: 150%; padding: 8px 10px; color: black; }
-.panel_1 .houseFeatures .featureAd p, .panel_2 .houseFeatures .featureAd p { text-align: left; padding: 0 10px; margin-bottom: 20px; }
-.panel_1 .houseFeatures .featureAd .featureBtn, .panel_2 .houseFeatures .featureAd .featureBtn { text-align: center; font-size: 14px; line-height: 14px; font-weight: bold; display: inline-block; background: #55761b url('http://eyeleveloffice.mine.nu:8857/images/default/toggletab_bg.gif') left repeat-x; color: white; height: 16px; padding: 4px 20px; margin: 10px auto; }
-.panel_1 .houseFeatures .featureAd .featureBtn:hover, .panel_2 .houseFeatures .featureAd .featureBtn:hover { background: #80a341; text-decoration: none; }
+.panel_1 .houseFeatures, .panel_2 .houseFeatures { background: white url('http://ileveloffice.homeip.net:8857/images/default/house-ad-bg.gif?1268958044') top center repeat-x; border: 2px solid #3b5998; }
+.panel_1 .houseFeatures .thumbBanner, .panel_2 .houseFeatures .thumbBanner { padding: 0; display: inline-block; width: 100%; }
+.panel_1 .houseFeatures .thumbBanner img, .panel_2 .houseFeatures .thumbBanner img { max-width: 100%; max-height: 100%; }
+.panel_1 .houseFeatures .thumb, .panel_2 .houseFeatures .thumb { background: none; padding: 0; float: left; margin: 10px; }
+.panel_1 .houseFeatures .thumb img, .panel_2 .houseFeatures .thumb img { max-width: 75px; max-height: 75px; }
+.panel_1 .houseFeatures .featureAd, .panel_2 .houseFeatures .featureAd { text-align: center; }
+.panel_1 .houseFeatures .featureAd h2, .panel_2 .houseFeatures .featureAd h2 { text-align: left; line-height: 150%; padding: 8px 10px; color: #3b5998; }
+.panel_1 .houseFeatures .featureAd p, .panel_2 .houseFeatures .featureAd p { text-align: left; padding: 0 10px; margin-bottom: 20px; color: #3b5998; }
+.panel_1 .houseFeatures .featureAd .featureBtn, .panel_2 .houseFeatures .featureAd .featureBtn { text-align: center; font-size: 14px; line-height: 14px; font-weight: bold; display: inline-block; background: #55761b url('http://ileveloffice.homeip.net:8857/images/default/btn-off.gif?1268347541') left repeat-x; color: white; height: 16px; padding: 4px 20px; margin: 10px auto; border: 1px solid #213603; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
+.panel_1 .houseFeatures .featureAd .featureBtn:hover, .panel_2 .houseFeatures .featureAd .featureBtn:hover { background: #80a341 url('http://ileveloffice.homeip.net:8857/images/default/btn-on.gif?1268347744') left repeat-x; text-decoration: none; }
 .panel_1 .userBlockWrap li, .panel_2 .userBlockWrap li { padding: 0; margin: 4px 4px 0 0; display: inline-block; width: 30px; height: 30px; float: left; border-bottom: none; }
 .panel_1 .userBlockWrap li .profilePic, .panel_2 .userBlockWrap li .profilePic { margin: 0; }
 .panel_1 .featuredNewsList ul, .panel_2 .featuredNewsList ul { padding: 0 10px 0 0; }
 .panel_1 .featuredNewsList li, .panel_2 .featuredNewsList li { border-bottom: none; font-size: 11px; line-height: 14px; margin: 4px 0 0 0; }
 .panel_1 .featuredNewsList li b, .panel_2 .featuredNewsList li b { font-weight: normal; text-transform: uppercase; }
 .panel_1 .videoBlockWrap li, .panel_2 .videoBlockWrap li { display: inline-block; float: left; }
-.panel_1 .videoBlockWrap .videoThumb, .panel_2 .videoBlockWrap .videoThumb { padding: 0; margin-top: 3px; margin-right: 3px; width: 74px; height: 36px; background: #cccccc; }
+.panel_1 .videoBlockWrap .videoThumb, .panel_2 .videoBlockWrap .videoThumb { padding: 0; margin-top: 2px; margin-right: 2px; width: 72px; height: 48px; background: #cccccc; }
 .panel_1 .formBox, .panel_2 .formBox { padding: 10px 0px; background: #efefef; }
 .panel_1 .formBox .title, .panel_2 .formBox .title { width: 90%; margin: 15px auto; font-weight: normal; }
 .panel_1 .formBox h4, .panel_2 .formBox h4 { font-weight: normal; margin-bottom: 10px; }
@@ -157,20 +162,20 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 8px 0; }
 .panel_1 .storyBlockWrap h1, .panel_2 .storyBlockWrap h1 { font-size: 22px; }
 .panel_1 .storyBlockWrap p, .panel_2 .storyBlockWrap p { margin: 6px 0px; line-height: 120%; }
-.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('http://eyeleveloffice.mine.nu:8857/images/default/default_thumb.gif?1268096572') top left no-repeat; }
-.panel_1 .thumb img, .panel_2 .thumb img { max-width: 280px; }
+.panel_1 .thumb, .panel_2 .thumb { float: left; margin: 0 10px 10px 0; max-width: 280px; background: url('http://ileveloffice.homeip.net:8857/images/default/default_thumb.gif?1268096572') top left no-repeat; }
+.panel_1 .thumb img, .panel_2 .thumb img { max-width: 100%; }
 .panel_1 .thumb a:hover, .panel_2 .thumb a:hover { text-decoration: none; }
 .panel_1 li, .panel_2 li { display: inline-block; width: 100%; padding: 5px 0; border-bottom: 1px solid #efefef; }
 .panel_1 .bullet_list, .panel_2 .bullet_list { margin: 0 10px; }
 .panel_1 .bullet_list ul, .panel_2 .bullet_list ul { margin: 10px 0 0 0; }
-.panel_1 .bullet_list li, .panel_2 .bullet_list li { display: list-item; margin: 0 0 10px 10px; padding: 0; line-height: 120%; list-style-image: url('http://eyeleveloffice.mine.nu:8857/images/default/bullet1.gif?1267730372'); list-style-type: disc; list-style-position: outside; border-bottom: none; }
+.panel_1 .bullet_list li, .panel_2 .bullet_list li { display: list-item; margin: 0 0 10px 10px; padding: 0; line-height: 120%; list-style-image: url('http://ileveloffice.homeip.net:8857/images/default/bullet1.gif?1267730372'); list-style-type: disc; list-style-position: outside; border-bottom: none; }
 .panel_1 .audio, .panel_1 .video, .panel_1 .image, .panel_2 .audio, .panel_2 .video, .panel_2 .image { margin: 10px; }
 .panel_1 .userPoints, .panel_2 .userPoints { text-align: right; margin-right: 0px; }
 
-.panelBar .refine-toggle { position: relative; z-index: 48; padding-right: 10px; background: transparent url('http://eyeleveloffice.mine.nu:8857/images/default/dropdown_arrow.gif?1267828152') center right no-repeat; }
+.panelBar .refine-toggle { position: relative; z-index: 48; padding-right: 10px; background: transparent url('http://ileveloffice.homeip.net:8857/images/default/dropdown_arrow.gif?1267828152') center right no-repeat; }
 .panelBar .refine_link { float: right; position: relative; display: block; padding: 4px 10px; margin-top: -18px; }
-.panelBar .refine_link .refine-tab { height: 28px; width: 104px; position: absolute; top: -30px; right: -1px; border-top: 1px solid #3b5998; border-bottom: 1px solid white; border-left: 1px solid #3b5998; border-right: 1px solid #3b5998; background-color: white; z-index: 44; }
-.panelBar .refine_link .refine-box { z-index: 43; display: none; position: absolute; padding: 8px; width: 142px; top: 26px; left: -54px; border: 1px solid #3b5998; background-color: white; }
+.panelBar .refine_link .refine-tab { height: 28px; width: 99px; position: absolute; top: -29px; right: -1px; border-top: 1px solid #3b5998; border-bottom: none; border-left: 1px solid #3b5998; border-right: 1px solid #3b5998; background-color: white; z-index: 44; }
+.panelBar .refine_link .refine-box { z-index: 43; display: none; position: absolute; padding: 8px; width: 142px; top: 25px; left: -59px; border: 1px solid #3b5998; background-color: white; }
 .panelBar .refine_link .refine-box .refine-content { text-align: center; }
 .panelBar .refine_link .refine-box .refine-content select { width: 100%; margin-bottom: 15px; border: 1px solid #3b5998; }
 .panelBar .refine_link .refine-box .refine-content label { display: block; font-weight: bold; text-align: left; padding: 0 0 5px 4px; }
@@ -181,7 +186,7 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #hotTopicBar ul { display: block; float: left; background: #f0f0f0; width: 100%; }
 #hotTopicBar ul li { float: left; padding: 4px 0 4px 0px; }
 #hotTopicBar ul li.topic { display: inline; float: left; text-align: left; background: #f0f0f0; padding: 4px 15px 4px 0; min-width: 10%; }
-#hotTopicBar ul li.topic a { margin-left: 5px; padding-left: 8px; background: url('http://eyeleveloffice.mine.nu:8857/images/default/topic_arrow.gif?1267730372') center left no-repeat; }
+#hotTopicBar ul li.topic a { margin-left: 5px; padding-left: 8px; background: url('http://ileveloffice.homeip.net:8857/images/default/topic_arrow.gif?1267730372') center left no-repeat; }
 #hotTopicBar ul li.topicTitle { background: #31500b; color: white; width: 22%; padding-left: 5px; text-transform: uppercase; margin-right: 10px; }
 #hotTopicBar ul li.topicMore { border-left: 2px solid #FFF; float: right; text-align: center; width: 10%; background: #f0f0f0; }
 
@@ -190,42 +195,41 @@ li { list-style-type: none; margin: 0; padding: 10px 0 4px 0; }
 #readArticle .topBar ul li { padding: 3px 0 4px 0; text-align: center; display: block; float: left; margin-bottom: 0; margin-right: -1px; width: 25%; border-left: 1px solid white; border-bottom: none; background: #f0f0f0; }
 #readArticle .topBar ul li.nopad { padding-bottom: 2px; }
 #readArticle .topBar ul li a { color: #3b5998; }
-#readArticle .thumb { float: right; }
-#readArticle .bodyArticle { color: #333333; margin: 8px 10px 14px 10px; line-height: 140%; font-size: 12px; }
-#readArticle .storyCaption p { margin: 4px 0; }
+#readArticle .thumb { float: right; margin: 10px; }
+#readArticle .thumb img { width: 300px; height: 250px; }
+#readArticle .bodyArticle { color: #333333; margin: 8px 5px 14px 5px; line-height: 140%; font-size: 12px; }
+#readArticle .storyCaption p { padding: 0; margin: 4px 0px; }
 #readArticle .storyCaption br { margin: 0; line-height: 0px; visibility: hidden; }
 
 #commentThread .panelBar { background: #dce6f4; }
 #commentThread .panelBar h2 { color: #3b5998; }
 #commentThread .comment_block { position: relative; padding: 8px 0 20px 0; border-bottom: 1px solid #efefef; }
-#commentThread .comment_block .comment_reply { display: block; padding: 0 0 4px 20px; position: absolute; bottom: 8px; left: 70px; background: url('http://eyeleveloffice.mine.nu:8857/images/default/reply_arrow.png?1267730372') top left no-repeat; }
+#commentThread .comment_block .comment_reply { display: block; padding: 0 0 4px 20px; position: absolute; bottom: 8px; left: 70px; background: url('http://ileveloffice.homeip.net:8857/images/default/reply_arrow.png?1267730372') top left no-repeat; }
 #commentThread .comment_block .comment_reply a { color: #336600; font-weight: bold; font-size: 11px; }
 
-.feature_bg { background-color: #dce6f4; }
+.feature_bg { background: #dce6f4; }
 .feature_bg .panel_2 { margin-bottom: 10px; }
 .feature_bg .thumb { margin: 10px; }
 .feature_bg .storyBlockWrap { margin: 10px 10px 0 10px; }
+.feature_bg .btnComment { background: white; }
 
 .subtitle { font-size: 10px; color: #999999; background: #f0f0f0; border: none; padding: 6px 4px 6px 4px; }
 
 blockquote { background: white; color: #333333; font-size: 12px; line-height: 130%; margin: 10px 0 10px 60px; padding: 0 20px 0 0; }
 blockquote .quotes { padding: 4px 0; }
 
-.btn { display: inline-block; color: #fff; font-weight: bold; padding: 3px 10px 4px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #31500b; }
+.btn { display: inline-block; color: #fff; font-weight: bold; padding: 3px 10px 4px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #55761b url('http://ileveloffice.homeip.net:8857/images/default/btn-off.gif?1268347541') left repeat-x; border: 1px solid #77983a; }
+.btnhover { background: #77983a url('http://ileveloffice.homeip.net:8857/images/default/btn-on.gif?1268347744') left repeat-x; }
 
-#col_right .btn_1 { display: block; text-align: center; margin: 10px; }
+.btnComment { display: inline-block; margin: 0 1px; padding: 1px 8px 2px 8px; background: #f0f0f0; }
 
-.btnComment { display: inline-block; margin: 0 1px; padding: 1px 8px 2px 8px; background: #F0F0F0; }
+.voteUp { background: url('http://ileveloffice.homeip.net:8857/images/default/icon_vote_up.gif?1265674096') left no-repeat; padding-left: 15px; }
 
-.voteUp { background: url('http://eyeleveloffice.mine.nu:8857/images/default/icon_vote.gif?1265674096') left no-repeat; padding-left: 15px; }
+.voteDown { background: url('http://ileveloffice.homeip.net:8857/images/default/icon_vote_down.gif?1267730372') left no-repeat; padding-left: 15px; }
 
-.voteDown { background: url('http://eyeleveloffice.mine.nu:8857/images/default/icon_vote_no.gif?1267730372') left no-repeat; padding-left: 15px; }
+.thumb-up { background: url('http://ileveloffice.homeip.net:8857/images/default/thumb-up.gif?1268260321') left no-repeat; padding-left: 15px; }
 
-.thumb-up { background: url('http://eyeleveloffice.mine.nu:8857/images/default/thumb-up.gif?1268260321') left no-repeat; padding-left: 15px; }
-
-.thumb-down { background: url('http://eyeleveloffice.mine.nu:8857/images/default/thumb-down.gif?1268260260') left no-repeat; padding-left: 15px; }
-
-.thumb-down { background: url('http://eyeleveloffice.mine.nu:8857/images/default/thumb-down.gif?1268260260') left no-repeat; padding-left: 15px; }
+.thumb-down { background: url('http://ileveloffice.homeip.net:8857/images/default/thumb-down.gif?1268260260') left no-repeat; padding-left: 15px; }
 
 .actionLegend { background: #dce6f4; }
 .actionLegend .share_and_hide { margin: 5px; }
@@ -246,25 +250,25 @@ blockquote .quotes { padding: 4px 0; }
 .login p { line-height: 120%; font-size: 12px; margin: 10px auto; width: 80%; }
 .login label { font-size: 11px; padding: 4px 2px; }
 
-.ad_wrapFrame { display: inline-block; margin: 0 10px; }
+#adspace { margin-bottom: 15px; }
 
-.ad_scaleFrame { max-width: 100%; }
+.ad_230 { width: 222px; margin: 0 auto; }
 
-.ad_230 { width: 210px; margin: 0 auto; }
+.ad_480 { width: 474px; margin: 0 auto; }
 
-.ad_480 { width: 470px; margin: 0 auto; }
+.ad_720 { width: 718px; margin: 0 auto; }
 
-.ad_480, .ad_230, .ad_scaleFrame, .ad_wrapFrame { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; padding: 15px 0 5px; border-left: 5px solid #CCC; border-right: 5px solid #CCC; background: #cccccc url('http://eyeleveloffice.mine.nu:8857/images/default/ad-bg-title.gif?1268358007') top center no-repeat; }
-.ad_480 iframe, .ad_230 iframe, .ad_scaleFrame iframe, .ad_wrapFrame iframe { padding: 0; }
-.ad_480 iframe html, .ad_230 iframe html, .ad_scaleFrame iframe html, .ad_wrapFrame iframe html { padding: 0; }
-.ad_480 iframe html body, .ad_230 iframe html body, .ad_scaleFrame iframe html body, .ad_wrapFrame iframe html body { padding: 0; }
+.ad_480, .ad_230, .ad_720 { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; padding: 15px 0 5px; border-left: 5px solid #CCC; border-right: 5px solid #CCC; background: #cccccc url('http://ileveloffice.homeip.net:8857/images/default/ad-bg-title.gif?1268358007') top center no-repeat; }
+.ad_480 iframe, .ad_230 iframe, .ad_720 iframe { padding: 0; margin: 0; }
+.ad_480 iframe html, .ad_230 iframe html, .ad_720 iframe html { margin: 0; padding: 0; }
+.ad_480 iframe html body, .ad_230 iframe html body, .ad_720 iframe html body { margin: 0; padding: 0; }
 
-.bookmarklet { padding-bottom: 10px; border-bottom: 2px solid #7e6947; background: #d5cbbb url('http://eyeleveloffice.mine.nu:8857/images/default/bookmarklet-BG.gif?1268341678') top left repeat-x; }
-.bookmarklet h2 { color: white; background: url('http://eyeleveloffice.mine.nu:8857/images/default/bookmarklet-header-BG.png?1268343171') bottom left repeat-x; font-size: 20px; margin: 0; padding: 5px 10px 25px 10px; }
-.bookmarklet p { color: #333333; margin: 5px 10px; }
-.bookmarklet .demo { margin: 10px 15px; padding: 65px 0 10px 0; background: url('http://eyeleveloffice.mine.nu:8857/images/default/bookmarklet-demo.png?1268342374') top center no-repeat; }
-.bookmarklet .btn { display: inline-block; color: #fff; font-weight: bold; padding: 5px 10px 6px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #55761b url('http://eyeleveloffice.mine.nu:8857/images/default/btn-bg-off.gif?1268347541') left repeat-x; }
-.bookmarklet .btn:hover { text-decoration: none; background: #77983a url('http://eyeleveloffice.mine.nu:8857/images/default/btn-bg-on.gif?1268347744') left repeat-x; }
+.bookmarklet { padding-bottom: 10px; border-bottom: 2px solid #7e6947; background: #d5cbbb url('http://ileveloffice.homeip.net:8857/images/default/bookmarklet-BG.gif?1268341678') top left repeat-x; }
+.bookmarklet h2 { color: white; background: url('http://ileveloffice.homeip.net:8857/images/default/bookmarklet-header-BG.png?1268343171') bottom left repeat-x; font-size: 20px; margin: 0; padding: 5px 10px 25px 10px; }
+.bookmarklet p { color: #333333; margin: 5px 10px; font-size: 12px; }
+.bookmarklet .demo { margin: 10px 15px; padding: 65px 0 10px 0; background: url('http://ileveloffice.homeip.net:8857/images/default/bookmarklet-demo.png?1268778280') top center no-repeat; }
+.bookmarklet .btn { display: inline-block; color: #fff; font-weight: bold; padding: 5px 10px 6px 10px; border: 1px solid #77983a; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; background: #55761b url('http://ileveloffice.homeip.net:8857/images/default/btn-off.gif?1268347541') left repeat-x; }
+.bookmarklet .btn:hover { text-decoration: none; background: #77983a url('http://ileveloffice.homeip.net:8857/images/default/btn-on.gif?1268347744') left repeat-x; }
 
 .flash { padding: .3em .4em; margin: 0 auto .5em; clear: both; width: auto; }
 .flash p { padding-left: 25px; }
@@ -1014,7 +1018,7 @@ body .omega { margin-right: 0; }
 #bodyWrapper .alpha { margin-left: 0; }
 #bodyWrapper .omega { margin-right: 0; }
 
-#header, #footer, #pageBody { width: 740px; }
+#header, #footer, #pageBody, #adspace { width: 740px; }
 
 #subNav { float: left; width: 740px; margin-left: 0; }
 

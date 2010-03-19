@@ -1,9 +1,5 @@
 %h1.clearfix
   This is the beginning of Layout A
-.panel_1
-  .ad_scaleFrame
-    .inside-frame
-      this ad scales to its column
 
 #featuredPanel.panel_1.feature_bg
   .panelBar
@@ -11,7 +7,7 @@
       Featured Stories
   .panel_2.left
     .thumb
-      = image_tag('default/default_thumb_b.gif', :width => "100%")
+      = image_tag('default/default_thumb_b.gif')
     .storyBlockWrap
       %h1
         Local News Title Here
@@ -30,7 +26,7 @@
 
   .panel_2.right
     .thumb
-      = image_tag('default/default_thumb_b.gif', :width => "100%")
+      = image_tag('default/default_thumb_b.gif')
 
     .storyBlockWrap
       %h1
@@ -52,12 +48,14 @@
 
 = render :partial => 'shared/hot_topics'
 
-.panel_1
-  .ad_wrapFrame
-    .inside-frame-2
-      This ad simply wraps its 
-      %br
-      defined size view space
+#hotTopicBar
+  %ul
+    %li.topicTitle
+      Breaking News
+    %li.topic
+      %a Earthquake reaches magnitude 9.6 off the coast of Chile
+    %li.topicMore
+      %a More
 
 .panel_1
   .panelBar
