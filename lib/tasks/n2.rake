@@ -2,7 +2,7 @@ namespace :n2 do
   namespace :data do
 
     desc "Bootstrap and convert existing data"
-    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_ideas, :delete_floating_questions_and_answers, :generate_model_slugs, :generate_widgets, :load_seed_data, :convert_images_to_paperclip] do
+    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_comments, :delete_floating_ideas, :delete_floating_questions_and_answers, :generate_model_slugs, :generate_widgets, :load_seed_data, :convert_images_to_paperclip] do
       puts "Finished Bootstrapping and converting existing data"
     end
 
@@ -66,6 +66,16 @@ namespace :n2 do
         content.destroy and count += 1 unless content.user.present?
       end
       puts "Deleted #{count} floating contents"
+    end
+
+    desc "Delete Floating Comments"
+    task :delete_floating_comments => :environment do
+      puts "Deleting floating comments"
+      count = 0
+      Comment.all.each do |comment|
+        comment.destroy and count += 1 unless comment.user.present?
+      end
+      puts "Deleted #{count} floating comments"
     end
 
     desc "Generate model slugs"
