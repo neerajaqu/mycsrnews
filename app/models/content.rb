@@ -58,6 +58,16 @@ class Content < ActiveRecord::Base
     self.title
   end
 
+  def toggle_featured
+    if is_article?
+    	self.article.toggle_featured
+    else
+      self.is_featured = ! self.is_featured
+      self.featured_at = Time.now
+      self.save
+    end
+  end
+
   private
   
 end

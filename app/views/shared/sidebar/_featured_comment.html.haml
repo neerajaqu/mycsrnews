@@ -1,17 +1,17 @@
 -# @expects: local 'comment'
 
-- cache :featured_comments_html, :expires_in => 15.seconds do
+- cache :featured_comments_html do
   - featured_comments ||= Comment.featured
   - unless featured_comments.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
-        %h2= t('.featured_comment_title')
-      %br
-      .list_items
-        %ul
-          - featured_comments.each do |comment|
-            %li
-              .profilePic= local_linked_profile_pic comment.user
-              -# TODO link to item page comment belongs to with bookmark to comment id
-              = link_to comment.title, comment_path(comment)
-              %p= (comment.comments.present?) ? comment.comments : 'no comment'
+        %h2= t('featured_comment_title')
+      %ul
+        - featured_comments.each do |comment|
+          %li
+            %h4= link_to "Comment Item", comment.commentable
+            %p= caption((comment.comments.present?) ? comment.comments : 'no comment')
+            .profilePic= local_linked_profile_pic comment.user, :width => '30px', :height => '30px'
+            %h3= t('posted_by', :fb_name => local_linked_profile_name(comment.user), :date => time_ago_in_words(comment.created_at))
+            %span.btnComment== #{like_link comment} #{comment.votes_tally}
+            %span.btnComment== #{link_to t('comments'), content_path(comment.commentable, :anchor => "commentListTop")} #{comment.commentable.comments_count}

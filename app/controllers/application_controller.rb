@@ -98,6 +98,7 @@ class ApplicationController < ActionController::Base
 
   def load_newest_images
     @newest_images ||= Image.newest
+    #@newest_images ||= Image.find(:all, :limit => 10, :order => "created_at desc")
   end
 
   def load_newest_videos
@@ -164,6 +165,21 @@ class ApplicationController < ActionController::Base
 
   def default_url_options(options={})
     format = options[:format] || request.format.to_sym
+    unless ['html', 'fbml', 'json', 'js', 'fbjs', 'xml', 'atom', 'rss'].include? format.to_s
+      if request.xhr? or request_is_facebook_ajax?
+        if request_comes_from_facebook?
+        	format = 'fbjs'
+        else
+        	format = 'json'
+        end
+      else
+        if request_comes_from_facebook?
+        	format = 'fbml'
+        else
+        	format = 'html'
+        end
+      end
+    end
     { :locale => I18n.locale,
       :format => format
     } 

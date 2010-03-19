@@ -1,5 +1,5 @@
 set :default_stage, "n2_staging"
-set :stages, %w(n2_production n2_staging chewbranca_staging n2_charlotte n2_freep n2_kpcc)
+set :stages, %w(n2_production n2_staging chewbranca_staging n2_charlotte n2_freep n2_kpcc n2_genomics)
 require 'capistrano/ext/multistage'
 require 'eycap/recipes'
 
@@ -22,6 +22,8 @@ after("deploy:update_code") do
     /config/smtp.yml /config/menu.yml /config/compass.config}.each do |file|
       run "ln -nfs #{shared_path}#{file} #{release_path}#{file}"
   end
+
+  deploy.rake_post_deploy
 
   deploy.cleanup
 end
@@ -108,6 +110,11 @@ namespace :deploy do
   desc "Setup db"
   task :setup_db do
     run "cd #{release_path} && rake db:setup"
+  end
+
+  desc "Run rake after deploy tasks"
+  task :rake_post_deploy do
+    run "cd #{release_path} && /usr/bin/rake n2:deploy:after RAILS_ENV=#{rails_env}"
   end
 
 end

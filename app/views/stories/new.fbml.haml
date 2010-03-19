@@ -6,7 +6,6 @@
       %h2
         post a story
     .formBox  
-      %h2.title= link_to 'Post an Article', new_article_path
       - semantic_form_for @story, :url => stories_path, :html => { :multipart => true } do |form|
         = render :partial => 'story_form', :locals => { :form => form }
         - form.buttons do
@@ -20,4 +19,3 @@
       %h2
         An Easier way to Post a story
     = fb_iframe base_url(bookmarklet_panel_home_path(:canvas =>false)), :frameborder => 0, :scrolling => "no", :style => "margin: 0px; padding: 0px; width: 233px; height: 320px;"
-    

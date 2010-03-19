@@ -1,4 +1,3 @@
--# TODO set up filter of newest blog articles
 -# @expects: local 'newest_articles'
 
 - cache :newest_articles_html do
@@ -6,11 +5,15 @@
   - unless newest_articles.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar.clearfix
-        %h2= t('.newest_articles_title')
+        %h2= t('articles.newest_title')
       %br
       .list_stories.clearfix
         %ul
           - newest_articles.each do |article|
             %li
-              .profilePic= local_linked_profile_pic article.user
-              = link_to article.title, article_path(article)
+              %h4= link_to article.content.title, content_path(article.content)
+              .profilePic= local_linked_profile_pic article.author
+              .storyBlockMeta
+                %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
+                %span.btnComment== #{like_link article.content} #{article.content.votes_tally}
+                %span.btnComment== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}

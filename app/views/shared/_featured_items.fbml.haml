@@ -1,4 +1,4 @@
-- cache :featured_items_html do
+- cache :featured_items_fbml do
   - featured_items ||= FeaturedItem.find_root_by_item_name('featured_template')
   - if featured_items.present?
     - section1 = featured_items.children.first
@@ -8,8 +8,7 @@
         - primary1 = section1.children.first.featurable
         #featuredPanel.panel_1.feature_bg
           .panelBar
-            %h2
-              Featured News
+            %h2= t('featured_stories')
           .feature_bg.clearfix
             .thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
             .storyBlockWrap
@@ -25,8 +24,7 @@
         - secondary2 = section1.children.third.featurable
         #featuredPanel.panel_1.feature_bg
           .panelBar
-            %h2
-              Featured News
+            %h2= t('featured_stories')
           .feature_bg.clearfix
             .thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
             .storyBlockWrap

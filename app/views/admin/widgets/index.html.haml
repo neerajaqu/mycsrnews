@@ -122,11 +122,11 @@
       	if ($(this).parent().hasClass('left')) {
       		$(this).parent().removeClass('left');
       		$(this).parent().addClass('right');
-      		$(this).html('Toggle left');
+      		$(this).html('Move left');
       	} else if ($(this).parent().hasClass('right')) {
       		$(this).parent().removeClass('right');
       		$(this).parent().addClass('left');
-      		$(this).html('Toggle right');
+      		$(this).html('Move right');
         }
       });
 
@@ -146,9 +146,9 @@
               widget.load(url, {}, function(responseText, textStatus, XMLHttpRequest) {
                 $('a', $(this)).click(function() { return false; });
                 if ($(this).hasClass('left')) {
-                  $(this).append('<span class="float-toggle">Toggle right</span>');
+                  $(this).append('<span class="float-toggle">Move right</span>');
                 } else if ($(this).hasClass('right')) {
-                  $(this).append('<span class="float-toggle">Toggle left</span>');
+                  $(this).append('<span class="float-toggle">Move left</span>');
                 } else {
                 }
               });
@@ -204,13 +204,19 @@
 #content-box
   %h1.title Select Widgets for Your Page Layout
   %br
+  %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
+  .clear
+  %br
   #left.box.droppable-main.ui-widget-content.ui-state-default
     %h1 Main Column
     %ul#sortable-main
   #right.box.droppable-sidebar.ui-widget-content.ui-state-default
     %h1 Sidebar Column
     %ul#sortable-sidebar
-  %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
+  .clear
+  %br
+  -# TODO this second button is not working
+  -# %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
 %br
 .clear
 %br

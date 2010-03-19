@@ -1,13 +1,12 @@
--# TODO update design for image skybox
 -# @expects: local 'newest_images'
+
 - cache :newest_images_fbml do
   - newest_images ||= Image.newest
   - unless newest_images.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar.clearfix
-        %h2= t('.newest_images_title')
-      %br
-      .list_stories.clearfix
-        %ul
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('newest_images_title')
+      .videoBlockWrap
+        %ul          
           - newest_images.each do |image|
-            %li
+            %li.videoThumb= link_to image_tag(image.url(:media_item)), image.imageable

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100309162706) do
+ActiveRecord::Schema.define(:version => 20100315230605) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(:version => 20100309162706) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "author_id"
+    t.boolean  "is_featured", :default => false
+    t.datetime "featured_at"
   end
 
   create_table "audios", :force => true do |t|

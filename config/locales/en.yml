@@ -28,6 +28,12 @@ en:
     title: "Videos"
   audios:
     title: "Audios"
+  newest_images_title: "Recent Images"
+  featured_stories: "Featured Stories"
+  featured_comment_title: "Featured Comment"
+  post_story_title: "Help us keep the community informed!"
+  post_story_detail: "Post Stories on our site to help you and your community become better informed of the world around you."
+  post_story_button: "Post a Story"
   posted_by: "Posted by {{fb_name}} {{date}} ago"
   like: "Like"
   dislike: "Dislike"
@@ -53,3 +59,6 @@ en:
   answers:
     top_title: "Top Answers"
     newest_title: "Newest Answers"
+  articles:
+    newest_title: "Newest Articles"
+    featured_title: "Featured Article"
