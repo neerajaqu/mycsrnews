@@ -24,7 +24,7 @@ after("deploy:update_code") do
       run "ln -nfs #{shared_path}#{file} #{release_path}#{file}"
   end
 
-  deploy.rake_post_deploy
+  deploy.load_skin
 
   deploy.cleanup
 end
@@ -38,6 +38,14 @@ end
 after("deploy") do
   deploy.god.start
   newrelic.notice_deployment
+end
+
+before "deploy:start" do
+  deploy.rake_post_deploy
+end
+
+before "deploy:restart" do
+  deploy.rake_post_deploy
 end
 
 before("deploy:web:disable") do
@@ -118,4 +126,34 @@ namespace :deploy do
     run "cd #{release_path} && /usr/bin/rake n2:deploy:after RAILS_ENV=#{rails_env}"
   end
 
+  desc "Load the app skin if it exists"
+  task :load_skin do
+    if skin_dir_exists? and skin_file_exists?
+    	run "ln -nfs /data/config/n2_sites/#{application}/app/stylesheets/skin.sass #{release_path}/app/stylesheets/skin.sass"
+    	run "rm -r #{release_path}/public/images"
+    	run "ln -nfs /data/config/n2_sites/#{application}/public/images #{release_path}/public/images"
+    end
+  end
+
+end
+
+
+#########################################################################
+# Helper Methods
+#########################################################################
+
+def skin_dir_exists?
+  dir_exists? "/data/config/n2_sites/#{application}"
+end
+
+def skin_file_exists?
+  file_exists? "/data/config/n2_sites/#{application}/app/stylesheets/skin.sass"
+end
+
+def dir_exists? path
+  'yes' == capture("if [ -d #{path} ]; then echo 'yes'; fi").strip
+end
+
+def file_exists? path
+  'yes' == capture("if [ -e #{path} ]; then echo 'yes'; fi").strip
 end
