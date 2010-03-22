@@ -2,7 +2,8 @@
 - item.images.build if item.images.empty?
 - form.semantic_fields_for :images do |image_form|
   = image_form.input :remote_image_url, :required => false, :hint => "Provide the URL to an image hosted on the Web"
-  = image_form.file_field :image, :required => false, :hint => "Upload an image from your computer"
+  -# TODO Implement pop up for facebook support, FB doesn't allow file uploads
+  -# = image_form.file_field :image, :required => false, :hint => "Upload an image from your computer"
   %br
   %br
 %h4.hidden.unhide== #{link_to "Add video link", '#', :class => 'toggle-form'}
