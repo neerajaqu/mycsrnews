@@ -76,6 +76,7 @@ en:
 
     ideas:
       ideas_title:  "Browse Ideas"
+      ideas_subtitle:  "The latest and greatest community ideas"
       ideas_asked_by: "Asked by {{fb_name}} {{date}} ago"
       ideas_like: "Like"
       ideas_comments: "Comment"

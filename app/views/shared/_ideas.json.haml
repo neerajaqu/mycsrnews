@@ -1,16 +1,18 @@
 - ideas ||= Idea.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
 %ul
   - ideas.each do |idea|
-    %li.askQuestionWrap
+    %li{'data-id' => idea.cache_key}
       .thumb
-        - if idea.image_item?
-          = image_tag idea.images.last.url(:thumb)
-      .storyBlockWrap
-        %p.askQuestionHead= link_to idea.title, idea_path(idea)
-        .profilePic= local_linked_profile_pic idea.user, :size => :square
-        .storyBlockMeta
-          %p= t('.ideas_asked_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
-          %p
-            %span.btn_left== #{link_to t('.ideas_like'), like_idea_path(idea.id), :class => "voteUp"} #{idea.votes_tally}
-            %span.btn_mid== #{link_to t('.ideas_comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
-            %span.btn_right= fb_share_button(ideas_url(idea))
+        - if idea.images.present?
+          = image_tag idea.images.first.url(:thumb)
+        - else
+          = image_tag ('default/default_thumb_b.gif')
+      .storyBlockWrap.storyBlockSpacer
+        %h2.storyHead= link_to idea.title, idea_path(idea)
+        %p.storyCaption= linked_item_details idea
+        .profilePic= local_linked_profile_pic idea.user
+        .storyBlockMeta.float_left
+          %h3= t('posted_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
+          %span.btnComment.float_left== #{like_link idea} #{idea.votes_tally}
+          %span.btnComment.float_left== #{link_to t('.ideas_comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
+          %span.btnComment.float_left= fb_share_button(ideas_url(idea))
