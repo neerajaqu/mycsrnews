@@ -1,14 +1,17 @@
 -# @expects: local 'most_discussed_stories'
+
 - cache :most_discussed_stories_html do
   - most_discussed_stories ||= Content.find( :all, :limit => 5, :order => "comments_count desc")
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_discussed_title')
-    %ul
-      - most_discussed_stories.each do |story|
-        %li
-          %h4= link_to story.title, story_path(story)
-          .profilePic= local_linked_profile_pic story.user
-          %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
-          %span.btnComment== #{link_to t('like'), like_story_path(story.id), :class => "voteUp"} #{story.votes_tally}
-          %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
+    .list_stories
+      %ul
+        - most_discussed_stories.each do |story|
+          %li
+            %h4= link_to story.title, story_path(story)
+            .profilePic= local_linked_profile_pic story.user
+            .storyBlockMeta
+              %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
+              %span.btnComment== #{link_to t('like'), like_story_path(story.id), :class => "voteUp"} #{story.votes_tally}
+              %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
