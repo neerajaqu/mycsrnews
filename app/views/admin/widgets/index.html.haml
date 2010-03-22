@@ -66,7 +66,6 @@
     		hoverClass: 'ui-state-active',
     		helper: 'clone',
     		drop: function(event, ui) {
-          console.log(ui.draggable);
     			if (ui.draggable.parent().parent().attr('id') == 'sidebar-widgets-list') {
     				ui.draggable.addClass('left');
           }
@@ -118,7 +117,6 @@
       });
 
       $('.float-toggle').live('click', function(event) {
-      	console.log("CLICKED!!!!!");
       	if ($(this).parent().hasClass('left')) {
       		$(this).parent().removeClass('left');
       		$(this).parent().addClass('right');
@@ -190,7 +188,6 @@
           $('li.draggable-main, li.draggable-sidebar', $sidebar_list).each(function(i) {
           	widgets.sidebar.push(getWidgetID(this.id));
           });
-          console.log(widgets.main);
           $.post("/admin/widgets/save.json", {main: widgets.main.join(','), sidebar: widgets.sidebar.join(',')}, function(data) {
           	if (typeof(data.success) !== 'undefined') {
           		alert(data.success);
