@@ -15,4 +15,3 @@
               %h3= t('asked_by', :fb_name => local_linked_profile_name(answer.user), :date => time_ago_in_words(answer.created_at))
               %span.btnComment.float_left== #{like_link answer} #{answer.votes_tally}
               %span.btnComment.float_left== #{link_to answer_comments_translate(answer.comments_count), question_path(answer.question, :anchor => "commentListTop")}
-              -# %span.btnComment= fb_share_item_button answer.question
