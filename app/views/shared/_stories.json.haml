@@ -5,13 +5,13 @@
       .thumb
         - if content.images.present?
           = image_tag content.images.first.url(:thumb)                  
-      .storyBlockWrap
+        - else
+          = image_tag ('default/default_thumb_b.gif', :width => "100%")
+      .storyBlockWrap.storyBlockSpacer
         %p.storyHead= link_to content.title, story_path(content)
         %p.storyCaption= linked_story_caption content
         .profilePic= local_linked_profile_pic content.user
-        .storyBlockMeta
-          %p= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
-          %p
-            %span.btn_left== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteUp"} #{content.votes_tally}
-            %span.btn_mid== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
-            %span.btn_right= t('.stories_share')
+        .storyBlockMeta.float_left
+          %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
+          %span.btnComment.float_left== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteUp"} #{content.votes_tally}
+          %span.btnComment.float_left== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
