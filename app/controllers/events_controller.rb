@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_filter :set_current_tab
-  before_filter :login_required, :only => [:new, :create, :update]
+  before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_events
   before_filter :load_newest_events
   before_filter :load_featured_events, :only => [:index]

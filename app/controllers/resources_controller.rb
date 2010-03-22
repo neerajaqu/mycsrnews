@@ -1,6 +1,6 @@
 class ResourcesController < ApplicationController
   before_filter :set_current_tab
-  before_filter :login_required, :only => [:new, :create, :update]
+  before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_resources
   before_filter :load_newest_resources
   before_filter :set_resource_section

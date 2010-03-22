@@ -13,6 +13,6 @@
             .profilePic= local_linked_profile_pic question.user
             .storyBlockMeta
               %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
-              %span.btnComment== #{like_link question} #{question.votes_tally}
-              %span.btn_mid== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
+              %span.btnComment.float_left== #{like_link question} #{question.votes_tally}
+              %span.btnComment.float_left== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
               -# %span.btnComment= fb_share_item_button question

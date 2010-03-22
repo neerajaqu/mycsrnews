@@ -302,13 +302,13 @@ EMBED
 
   def like_link item, options = {}
     options.merge!(:class => 'voteUp')
-    return '' unless item.moderatable? and item.featurable?
+    return '' unless item.respond_to? "votes_for"    
     link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), options)
   end
 
   def dislike_link item, options = {}
     options.merge!(:class => 'voteDown')
-    return '' unless item.moderatable? and item.featurable?
+    return '' unless item.respond_to? "votes_for"
     link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item), options)
   end
 

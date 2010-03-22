@@ -13,5 +13,5 @@
             .profilePic= local_linked_profile_pic story.user
             .storyBlockMeta
               %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
-              %span.btnComment== #{link_to t('like'), like_story_path(story.id), :class => "voteUp"} #{story.votes_tally}
+              %span.btnComment.float_left== #{like_link story} #{story.votes_tally}
               %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

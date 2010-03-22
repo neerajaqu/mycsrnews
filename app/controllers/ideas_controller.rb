@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   before_filter :set_current_tab
-  before_filter :login_required, :only => [:new, :create, :update]
+  before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_ideas
   before_filter :load_newest_ideas
   before_filter :load_featured_ideas, :only => [:index]
@@ -53,25 +53,6 @@ class IdeasController < ApplicationController
     @current_sub_tab = 'My Ideas'
     @user = User.find(params[:id])
     @ideas = @user.ideas
-  end
-
-  def like
-    @idea = Idea.find_by_id(params[:id])
-    respond_to do |format|
-      if current_user and @idea.present? and current_user.vote_for(@idea)
-      	success = "Thanks for your vote!"
-      	format.html { flash[:success] = success; redirect_to params[:return_to] || ideas_path }
-      	format.fbml { flash[:success] = success; redirect_to params[:return_to] || ideas_path }
-      	format.json { render :json => { :msg => "#{@idea.votes_tally} likes" }.to_json }
-      	format.fbjs { render :json => { :msg => "#{@idea.votes_tally} likes" }.to_json }
-      else
-      	error = "Vote failed"
-      	format.html { flash[:error] = error; redirect_to params[:return_to] || ideas_path }
-      	format.fbml { flash[:error] = error; redirect_to params[:return_to] || ideas_path }
-      	format.json { render :json => { :msg => error }.to_json }
-      	format.fbjs { render :text => { :msg => error }.to_json }
-      end
-    end
   end
 
   private
