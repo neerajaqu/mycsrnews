@@ -5,12 +5,13 @@
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_discussed_title')
-    %ul
-      - most_discussed_stories.each do |story|
-        %li
-          %h4= link_to story.title, story_path(story)
-          .profilePic= local_linked_profile_pic story.user
-          .storyBlockMeta
-            %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
-            %span.btnComment.float_left== #{like_link story} #{story.votes_tally}
-            %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
+    .list_stories
+      %ul
+        - most_discussed_stories.each do |story|
+          %li
+            %h4= link_to story.title, story_path(story)
+            .profilePic= local_linked_profile_pic story.user
+            .storyBlockMeta
+              %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
+              %span.btnComment.float_left== #{like_link story} #{story.votes_tally}
+              %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
