@@ -32,7 +32,7 @@
                     .storyBlockMeta
                       %p= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
                       %p
-                        %span.btn_left== #{like_link question, :class => "voteLink"} #{question.votes.size}
+                        %span.btn_left== #{like_link question, :class => "voteUp"} #{question.votes.size}
                         %span.btn_mid== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
                         %span.btnComment= fb_share_item_button question
 

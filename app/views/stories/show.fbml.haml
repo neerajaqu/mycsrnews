@@ -4,7 +4,7 @@
       .topBar
         %ul
           %li
-            %a== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteLink"} #{@story.votes_tally}
+            %a== #{link_to t('.like'), like_story_path(@story.id, :return_to => story_path(@story)), :class => "voteUp"} #{@story.votes_tally}
           %li
             %a== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
           %li.nopad

@@ -25,7 +25,7 @@
                 .profilePic= local_linked_profile_pic content.user
                 .storyBlockMeta.float_left
                   %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
-                  %span.btnComment.float_left== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteLink"} #{content.votes_tally}
+                  %span.btnComment.float_left== #{link_to t('.stories_like'), like_story_path(content.id), :class => "voteUp"} #{content.votes_tally}
                   %span.btnComment.float_left== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
     - unless no_paginate
       .clearfix
