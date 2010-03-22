@@ -67,6 +67,13 @@ en:
       stories_share: "Share it"
       stories_posted_by: "Posted by {{fb_name}} {{date}} ago"
 
+    newswires:
+      title: "Newswire Feeds"
+      subtitle: "The latest from our favorite feeds"
+      via:  "Via {{title}}, {{date}} ago"
+      publish: "Publish to {{site_title}}"
+      read: "Read Story"
+
     ideas:
       ideas_title:  "Browse Ideas"
       ideas_asked_by: "Asked by {{fb_name}} {{date}} ago"
