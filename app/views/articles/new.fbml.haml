@@ -8,4 +8,4 @@
       - semantic_form_for @article do |form|
         = render :partial => 'article_form', :locals => { :form => form }
         - form.buttons do
-          = form.commit_button
+          = form.commit_button :button_html => { :class => 'btn' }
