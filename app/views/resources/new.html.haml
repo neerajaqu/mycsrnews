@@ -21,6 +21,6 @@
             = form.input :resource_section, :required => true, :include_blank => false
             = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @resource }
           - form.buttons do
-            = form.commit_button :label =>t('.label_create')
+            = form.commit_button :label =>t('.label_create'), :button_html => { :class => 'btn' } 
 
 #col_right

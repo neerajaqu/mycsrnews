@@ -11,6 +11,11 @@ en:
         new:
           top_ideas: "Popular Ideas"
           newest_ideas: "Recent Ideas"
+          title: "Your Idea"
+          idea_board: "Idea Board"
+          hint_idea_boards: "Select an idea board to add your idea to"
+          hint_idea_title: "Describe your idea in a single headline"
+          hint_idea_details: "Tell us more about your idea"
         show:
           asked_by: "Asked by {{fb_name}} {{date}} ago"
           share: "Share it"

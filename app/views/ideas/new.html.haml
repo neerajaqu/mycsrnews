@@ -14,13 +14,13 @@
 
       - semantic_form_for @idea do |form|
         - form.inputs do
-          = form.input :title
-          = form.input :details, :input_html => { :rows => 5 }
-          = form.input :tags_string, :required => false, :hint => t('tags_hint')
+          = form.input :title, :label => t('.title'), :hint => t('.hint_idea_title')
+          = form.input :details, :input_html => { :rows => 5 }, :hint => t('.hint_idea_details') 
+          = form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
           = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
-          = form.input :idea_board, :required => true, :include_blank => false
+          = form.input :idea_board, :label => t('.idea_board'), :required => true, :include_blank => false, :hint => t('.hint_idea_boards')
         - form.buttons do
-          = form.commit_button
+          = form.commit_button  :button_html => { :class => 'btn_1' } 
 
 #col_right
   = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('.top_ideas') }

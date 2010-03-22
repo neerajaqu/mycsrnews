@@ -1,0 +1,32 @@
+- cache :my_ideas_list_fbml do
+  - ideas ||= Ideas.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - no_paginate ||= true
+  .panel_1
+    .panelBar
+      %h2= t('.my_ideas_title')
+    .subtitle
+      %span= t('.my_ideas_subtitle')
+    .storyList
+      #front-stories.list_stories
+        %ul
+          - ideas.each do |idea|
+            %li{'data-id' => idea.cache_key}
+              .thumb
+                - if idea.images.present?
+                  = image_tag idea.images.first.url(:thumb)
+                - else
+                  = image_tag ('default/default_thumb_b.gif')
+              .storyBlockWrap.storyBlockSpacer
+                %h2.storyHead= link_to idea.title, idea_path(idea)
+                %p.storyCaption= linked_item_details idea
+                .profilePic= local_linked_profile_pic idea.user
+                .storyBlockMeta.float_left
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
+                  %span.btnComment.float_left== #{like_link idea} #{idea.votes_tally}
+                  %span.btnComment.float_left== #{link_to t('.ideas_comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
+                  %span.btnComment.float_left= fb_share_button(ideas_url(idea))
+ 
+    - unless no_paginate
+      .clearfix
+        = will_paginate ideas
+        %br

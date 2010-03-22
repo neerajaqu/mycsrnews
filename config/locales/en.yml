@@ -47,6 +47,7 @@ en:
   answer_question: "Answer this"
   please_elaborate: "Please elaborate a bit more (optional)"
   active_users: "{{user_count}} users online now"
+  tags: "Tags"
   tags_hint: "Separate each tag with a comma e.g. dining options, raw food, seattle"
   questions:
     tab_title: "Answers"
