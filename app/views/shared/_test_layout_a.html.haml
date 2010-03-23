@@ -7,7 +7,7 @@
       Featured Stories
   .panel_2.left
     .thumb
-      = image_tag('default/default_thumb_b.gif', :width => "100%")
+      = image_tag('default/default_thumb_b.gif')
     .storyBlockWrap
       %h1
         Local News Title Here
@@ -42,9 +42,8 @@
           Comment
         16
 .panel_1
-  .ad_480
-    .inside-frame
-      This is a 460px wide view space
+  .ad_468
+    .test-frame
 
 = render :partial => 'shared/hot_topics'
 
@@ -53,7 +52,7 @@
     %li.topicTitle
       Breaking News
     %li.topic
-      %a Earthquake reaches magnitude 9.6 off the coast of Chile
+      %a 9.6 Earthquake off the coast of Chile
     %li.topicMore
       %a More
 
@@ -106,14 +105,12 @@
           16 Comments      
 
 .panel_2.left
-  .ad_230
-    .inside-frame
-      This is a 210px wide view space 
+  .ad_200
+    .test-frame
 
 .panel_2.right
-  .ad_230
-    .inside-frame
-      This is a 210px wide view space 
+  .ad_200
+    .test-frame
 
 .panel_1
   .panelBar
@@ -138,5 +135,12 @@
       %li.videoThumb 
       %li.videoThumb
 
-
+  .pagination
+    .pagination-float
+      %span.disabled.previous Previous 
+      %span.current 1
+      %a 2
+      %a 3
+      %a 4
+      %a.next Next
       
