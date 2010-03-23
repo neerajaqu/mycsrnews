@@ -60,13 +60,15 @@
 .account-toggle
   position: relative
   z-index: 99
+  padding-right: 10px
+  :background= !TextDropDownArrow
 
 .account-links
   width: 180px
   position: absolute
   z-index: 96
   top: 18px
-  right: -4px
+  right: -6px
   display: inline-block
   padding: 4px 10px
   border: 
@@ -460,6 +462,40 @@ li
 .panel_1, .panel_2
   border-bottom: none
   margin-bottom: 15px
+
+  .eventBlock
+    margin: 0 0 4px 0
+    padding: 0
+    border:
+      top: 1px solid #f0f0f0
+      bottom: 1px solid #f0f0f0
+
+    .tag
+      font-weight: normal
+      text-transform: uppercase
+      font-size: 11px
+
+    .eventDetailsBlock
+      float: left
+      width: 75%
+      margin: 4px 0
+
+    .eventLocationBlock
+      float: left
+      width: 25%
+      :background= !subTitleBG
+
+      ul
+        margin: 4px 0 8px 0
+
+        li
+          border: none
+          padding: 4px 0 0 8px
+          font-size: 10px
+          :color= !subheadColor
+
+          b
+            :color= !headerColor
 
   .houseFeatures
     :background= !featureBg
@@ -1002,26 +1038,37 @@ blockquote
 #adspace
   margin-bottom: 15px
 
-.ad_230
-  width: 222px
+.ad_160
+  width: 160px
+  margin: 0 auto
+
+.ad_200
+  width: 200px
   margin: 0 auto
   
-.ad_480
-  width: 474px
+.ad_468
+  width: 468px
   margin: 0 auto
 
-.ad_720
-  width: 718px
+.ad_728
+  width: 728px
   margin: 0 auto
 
-.ad_480, .ad_230, .ad_720
+.ad_468, .ad_200, .ad_728, .ad_160
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
   border-radius: 4px
   padding: 15px 0 5px
-  border-left: 5px solid #CCC
-  border-right: 5px solid #CCC
+  border-left: 5px solid #ccc
+  border-right: 5px solid #ccc
   :background= !AdBG 
+
+  .test-frame
+    background-color: #fff
+    height: 80px
+    width: 100%
+    &.sky-scraper
+      height: 600px
 
   iframe
     padding: 0
@@ -1069,3 +1116,53 @@ blockquote
     &:hover
       text-decoration: none
       :background= !bookmarkletBtnHover
+
+// pagination styles TO BE ALTERED
+
+.pagination
+  display: inline-block
+  background: #fff
+  width: 100%
+  margin: 0 auto
+
+  .pagination-float
+    float: right
+    margin: 10px 15px 0px 15px
+
+
+    .previous, .next
+      border: none
+      &.disabled
+        border: none
+    a, span
+      padding: 2px 5px
+      display: block
+      float: left
+      margin-right: 1px
+    span.disabled
+      color: #999
+      border: 1px solid #DDD
+    span.current
+      :font-weight bold
+      :background #2E6AB1
+      :color white
+      :border 1px solid #2E6AB1
+    a
+      :text-decoration none
+      :color #105CB6
+      :border 1px solid #9AAFE5
+      &:hover, &:focus
+        :color #003
+        :border-color #003
+    .page_info
+      :background #2E6AB1
+      :color white
+      :padding .4em .6em
+      :width 22em
+      :margin-bottom .3em
+      :text-align center
+      b
+        :color #003
+        :background = #2E6AB1
+        :padding .1em .25em
+    

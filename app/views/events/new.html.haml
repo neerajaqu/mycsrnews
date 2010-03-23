@@ -2,26 +2,28 @@
   = render :partial => 'shared/subnav/events_subnav'
 
 #col_left
-  #newEvent
-    %h1== What's your event for #{APP_CONFIG['site_topic']}?
+  .panel_1
+    .panelBar
+      %h2== What's your event for #{APP_CONFIG['site_topic']}?
+    .formBox
 
-  - semantic_form_for @event do |form|
-    - form.inputs do
-      = form.input :name
-      = form.input :tagline, :required => false
-      = form.input :host, :required => false
-      = form.input :location, :required => false
-      = form.input :street, :required => false
-      = form.input :city, :required => false
-      = form.input :state, :required => false
-      = form.input :description, :required => false
-      = form.input :tags_string, :required => false
-      = form.input :start_time, :required => true
-      = form.input :end_time, :required => false
-      = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @event }
+      - semantic_form_for @event do |form|
+        - form.inputs do
+          = form.input :name
+          = form.input :tagline, :required => false
+          = form.input :host, :required => false
+          = form.input :location, :required => false
+          = form.input :street, :required => false
+          = form.input :city, :required => false
+          = form.input :state, :required => false
+          = form.input :description, :required => false
+          = form.input :tags_string, :required => false
+          = form.input :start_time, :required => true
+          = form.input :end_time, :required => false
+          = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @event }
 
-    - form.buttons do
-      = form.commit_button
+        - form.buttons do
+          = form.commit_button
 
 #col_right
   = render :partial => 'shared/sidebar/events_list', :locals => { :events => @top_events, :title => t('.top_events') }
