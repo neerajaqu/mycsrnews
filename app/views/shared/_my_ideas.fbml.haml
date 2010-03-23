@@ -1,14 +1,11 @@
-- cache :ideas_list_fbml do
+- cache :my_ideas_list_fbml do
   - ideas ||= Ideas.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - no_paginate ||= true
   .panel_1
     .panelBar
-      %h2= t('.ideas_title')
-      - if ideas.present? and ideas.first.refineable?
-        .refine_link
-          = render :partial => 'shared/forms/refine_dropdown'
+      %h2= t('.my_ideas_title')
     .subtitle
-      %span= t('.ideas_subtitle')
+      %span= t('.my_ideas_subtitle')
     .storyList
       #front-stories.list_stories
         %ul

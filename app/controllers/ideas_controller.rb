@@ -65,4 +65,8 @@ class IdeasController < ApplicationController
     @current_tab = 'ideas'
   end
 
+  def set_slot_data
+    @slot_data = Metadata.find_by_key_type_name('ad-slot-name', 'ideas')
+  end
+
 end
