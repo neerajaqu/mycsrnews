@@ -35,6 +35,7 @@ $(function() {
     event.preventDefault();
     var url = change_url_format($(this).href());
     var span = $(this).parent();
+    span.html("<img src=\""+SITE_URL+"/images/spinner.gif\" />");
     $.post(url, {}, { success: function(data) {
       if (typeof(data.error) != "undefined") {
         if (data.status == 401) {
