@@ -12,13 +12,13 @@
 
         - semantic_form_for @resource do |form|
           - form.inputs do
-            = form.input :title
+            = form.input :title, :label => t('.label_title'),:hint =>t('.hint_title')
             = form.input :url, :label => t('.label_url'), :hint =>t('.hint_url')
-            = form.input :details, :input_html => { :rows => 5 },:required => false
+            = form.input :details, :input_html => { :rows => 5 },:required => false, :label => t('.label_details'),:hint =>t('.hint_details')
             = form.input :mapUrl, :label => t('.label_map'), :hint =>t('.hint_map'),:required => false
             = form.input :twitterName, :label => t('.label_twitter'), :hint=>t('.hint_twitter'), :required => false
-            = form.input :tags_string, :required => false, :hint => t('tags_hint')
-            = form.input :resource_section, :required => true, :include_blank => false
+            = form.input :tags_string, :required => false, :label => t('tags'),:hint => t('tags_hint')
+            = form.input :resource_section, :required => true, :include_blank => false,:label => t('.label_details'),:hint => t('.hint_section')
             = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @resource }
           - form.buttons do
             = form.commit_button :label =>t('.label_create'), :button_html => { :class => 'btn' } 
