@@ -88,6 +88,7 @@ en:
       
     resources:
         resources_title:  "Browse Directory"
+        resources_subtitle:  "Find whatever you're looking for in our community directory"
         resources_posted_by: "Posted by {{fb_name}} {{date}} ago"
         resources_like: "Like"
         resources_comments: "Comment"
@@ -96,7 +97,11 @@ en:
     resource_sections:
       title: "Directory Sections"
       subtitle: "List of resource directory category sections"
-      
+
+    my_resources:
+      my_resources_title:  "Your Links"
+      my_resources_subtitle:  "Here are all the links you have posted"
+
     idea_boards:
       title: "Idea Topics"
       subtitle: "Focused discussion of all your greatest ideas"
