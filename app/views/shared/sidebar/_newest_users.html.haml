@@ -11,4 +11,5 @@
           - newest_users.each do |user|
             %li
               .profilePic= local_linked_profile_pic user
-              == #{link_to user.name, user_path(user)} registered #{time_ago_in_words user.created_at} ago
+              %h4== #{link_to user.name, user_path(user)} 
+              == registered #{time_ago_in_words user.created_at} ago
