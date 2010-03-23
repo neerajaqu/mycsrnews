@@ -8,6 +8,8 @@ class QandaSweeper < ActionController::Caching::Sweeper
     	clear_answer_cache(record)
     elsif record.is_a?(Idea)
     	clear_idea_cache(record)
+    elsif record.is_a?(Resource)
+    	clear_resource_cache(record)
     else
     	return false
     end
@@ -20,8 +22,17 @@ class QandaSweeper < ActionController::Caching::Sweeper
     	clear_answer_cache(record)
     elsif record.is_a?(Idea)
     	clear_idea_cache(record)
+    elsif record.is_a?(Resource)
+    	clear_resource_cache(record)
     else
     	return false
+    end
+  end
+
+  def clear_resource_cache(resource)
+    ['top_resources', 'newest_resources'].each do |fragment|
+      expire_fragment "#{fragment}_html"
+      expire_fragment "#{fragment}_fbml"
     end
   end
 
@@ -46,6 +57,15 @@ class QandaSweeper < ActionController::Caching::Sweeper
     end
     clear_question_cache answer.question
   end
+
+  def self.expire_resource_all resource
+    controller = ActionController::Base.new
+    ['top_resources', 'newest_resources'].each do |fragment|
+      controller.expire_fragment "#{fragment}_html"
+      controller.expire_fragment "#{fragment}_fbml"
+    end
+  end
+
 
   def self.expire_idea_all idea
     controller = ActionController::Base.new

@@ -3,12 +3,9 @@
   - no_paginate ||= true
   .panel_1
     .panelBar
-      %h2= t('.resources_title')
-      - if resources.present? and resources.first.refineable?
-        .refine_link
-          = render :partial => 'shared/forms/refine_dropdown'
+      %h2= t('.my_resources_title')
     .subtitle
-      %span= t('.resources_subtitle')
+      %span= t('.my_resources_subtitle')
     .storyList
       #front-stories.list_stories
         %ul
@@ -26,7 +23,7 @@
                 .storyBlockMeta.float_left
                   %h3= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => time_ago_in_words(resource.created_at))
                   %span.btnComment.float_left== #{like_link resource} #{resource.votes_tally}
-                  %span.btnComment.float_left== #{link_to t('.resources_comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}
+                  %span.btnComment.float_left== #{link_to t('comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}
                   %span.btnComment.float_left= fb_share_button(resources_url(resource))
  
     - unless no_paginate
