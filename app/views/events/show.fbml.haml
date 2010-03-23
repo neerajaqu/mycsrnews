@@ -13,7 +13,7 @@
           .storyBlockMeta
             %h3= t('.asked_by', :fb_name => local_linked_profile_name(@event.user), :date => time_ago_in_words(@event.created_at))
             %p
-              %span.btn_left== #{link_to t('.like'), like_event_path(@event.id, :return_to => event_path(@event)), :class => "voteLink"} #{@event.votes_tally}
+              %span.btn_left== #{link_to t('.like'), like_event_path(@event.id, :return_to => event_path(@event)), :class => "voteUp"} #{@event.votes_tally}
               %span.btn_mid== #{link_to t('.post_comment'), event_path(@event, :anchor => "postCommentBox")} #{@event.comments_count}
               %span.btn_right= fb_share_button(event_url(@event))
             - if @tags.present?

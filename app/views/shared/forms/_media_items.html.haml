@@ -1,10 +1,10 @@
-%h4 Add an image:
 - item.images.build if item.images.empty?
 - form.semantic_fields_for :images do |image_form|
-  = image_form.input :image, :required => false, :hint => "Upload an image from your computer"
-  = image_form.input :remote_image_url, :required => false, :hint => "Provide the URL to an image hosted on the Web"
-
-.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form btn'}
+  = image_form.input :remote_image_url, :label => "Add an image from the Web", :required => false, :hint => "Provide the URL to an image hosted on the Web"
+  = image_form.file_field :image, :label => "Add an image from your computer",:required => false, :hint => "Upload an image from your computer"
+  %br
+  %br
+%h4.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}
 .video-form.hide
   %h3 Embed or link to a video (youtube only):
   - item.videos.build if item.videos.empty?

@@ -21,9 +21,8 @@
           = form.input :start_time, :required => true
           = form.input :end_time, :required => false
           = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @event }
-
         - form.buttons do
-          = form.commit_button
+          = form.commit_button  :button_html => { :class => 'btn' } 
 
 #col_right
   = render :partial => 'shared/sidebar/events_list', :locals => { :events => @top_events, :title => t('.top_events') }

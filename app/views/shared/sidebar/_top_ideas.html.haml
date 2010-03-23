@@ -9,5 +9,10 @@
       %ul
         - top_ideas.each do |idea|
           %li
-            .profilePic= local_linked_profile_pic idea.user
-            = link_to idea.title, idea_path(idea)
+            .storyBlockWrap
+              %h4= link_to idea.title, idea_path(idea)
+              .profilePic= local_linked_profile_pic idea.user
+              .storyBlockMeta
+                %h3= t('posted_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
+                %span.btnComment.float_left== #{like_link idea} #{idea.votes_tally}
+                %span.btnComment.float_left== #{link_to t('comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}

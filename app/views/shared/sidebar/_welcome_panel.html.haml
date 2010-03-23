@@ -1,10 +1,12 @@
+-# TODO Don't show the welcome message to users once they've added the application
 -# TODO tie welcome_message into locale DB
 -# expects local :welcome_message => welcome_message
 .panel_2
   .houseFeatures
+    .thumbBanner
+      = image_tag('default/house-ad-banner.jpg')
     .featureAd
       %h2
         Welcome to #{APP_CONFIG['site_title']}!
       %p
         This site is dedicated to what people are talking about around #{APP_CONFIG['site_topic']}. See what people are talking about and join the conversation.
--# TODO Don't show the welcome message to users once they've added the application

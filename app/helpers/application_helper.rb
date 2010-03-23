@@ -76,6 +76,12 @@ module ApplicationHelper
     "#{caption} #{link_to 'More', (url ? url : story_path(story))}"
   end
 
+  #remove this method when self.title methods created
+  def linked_item_details(item, length = 150, url = false)
+    caption = caption(item.details, length)
+    "#{caption} #{link_to 'More', (url ? url : item)}"
+  end
+
   def linked_newswire_caption(newswire, length = 150)
     caption = caption(newswire.caption, length)
     "#{caption} #{link_to 'More', newswire.url, :target => "_cts"}"
@@ -302,13 +308,13 @@ EMBED
 
   def like_link item, options = {}
     options.merge!(:class => 'voteUp')
-    return '' unless item.moderatable? and item.featurable?
+    return '' unless item.respond_to? "votes_for"    
     link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), options)
   end
 
   def dislike_link item, options = {}
     options.merge!(:class => 'voteDown')
-    return '' unless item.moderatable? and item.featurable?
+    return '' unless item.respond_to? "votes_for"
     link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item), options)
   end
 

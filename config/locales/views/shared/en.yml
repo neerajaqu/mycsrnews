@@ -67,13 +67,25 @@ en:
       stories_share: "Share it"
       stories_posted_by: "Posted by {{fb_name}} {{date}} ago"
 
+    newswires:
+      title: "Newswire Feeds"
+      subtitle: "The latest from our favorite feeds"
+      via:  "Via {{title}}, {{date}} ago"
+      publish: "Publish to {{site_title}}"
+      read: "Read Story"
+
     ideas:
       ideas_title:  "Browse Ideas"
+      ideas_subtitle:  "The latest and greatest community ideas"
       ideas_asked_by: "Asked by {{fb_name}} {{date}} ago"
       ideas_like: "Like"
       ideas_comments: "Comment"
       ideas_share: "Share it"
 
+    my_ideas:
+      my_ideas_title: "My Ideas"
+      my_ideas_subtitle: "Here are all the ideas you have posted"
+      
     resources:
         resources_title:  "Browse Directory"
         resources_posted_by: "Posted by {{fb_name}} {{date}} ago"

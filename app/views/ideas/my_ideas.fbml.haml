@@ -1,9 +1,10 @@
+
 - content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }  
   = render :partial => 'shared/subnav/ideas_subnav'
 
 #col_left
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
-  = render :partial => 'shared/ideas', :locals => { :ideas => @ideas, :title => t('.my_ideas_title') }
+  = render :partial => 'shared/my_ideas', :locals => { :ideas => @ideas, :title => t('.my_ideas_title') }
 
 #col_right
   = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('.top_ideas') }

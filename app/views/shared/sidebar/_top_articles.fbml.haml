@@ -1,4 +1,3 @@
--# TODO set up filter of top blog articles
 -# @expects: local 'top_articles'
 
 - cache :top_articles_fbml do
@@ -7,14 +6,11 @@
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('articles.top_title')
-      %br
-      .list_stories
-        %ul
-          - top_articles.each do |article|
-            %li
-              %h4= link_to article.content.title, content_path(article.content)
-              .profilePic= local_linked_profile_pic article.author
-              .storyBlockMeta
-                %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
-                %span.btnComment== #{like_link article.content} #{article.content.votes_tally}
-                %span.btnComment== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}
+      %ul
+        - top_articles.each do |article|
+          %li
+            %h4= link_to article.content.title, content_path(article.content)
+            .profilePic= local_linked_profile_pic article.author
+            %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
+            %span.btnComment.float_left== #{like_link article.content} #{article.content.votes_tally}
+            %span.btnComment.float_left== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}
