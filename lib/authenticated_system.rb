@@ -71,7 +71,12 @@ module AuthenticatedSystem
           store_location
           redirect_to new_session_path
         end
-
+        format.fbml do
+          flash[:error] = "You must be logged in to view that page!"
+          store_location
+          #redirect_to new_session_path
+          redirect_to home_index_path(:unauthorized => true)
+        end
         # facebook ignores out status and spits a generic error message so we can't use this
         #format.fbjs { render :json => { :error => "Login Required"}.to_json, :status => 401 }
         format.fbjs { render :json => { :error => "Registration Required", :status => "401" }.to_json }

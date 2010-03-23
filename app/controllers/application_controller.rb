@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_sub_tab
   before_filter :set_locale
   before_filter :update_last_active
+  before_filter :check_authorized_param
 
   #facebook settings
   # TODO:: get this working
@@ -211,6 +212,10 @@ class ApplicationController < ActionController::Base
 
     current_user.last_active = Time.now
     current_user.save
+  end
+
+  def check_authorized_param
+    flash[:error] = "You must be logged in to do that!" if params[:unauthorized]
   end
 
 end
