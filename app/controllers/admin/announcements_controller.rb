@@ -1,5 +1,7 @@
 class Admin::AnnouncementsController < AdminController
   skip_before_filter :admin_user_required
+#  cache_sweeper :widget_sweeper, :only => [:create,:update,:destroy]
+# TODO - ask RB    WidgetSweeper.expire_all
 
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
