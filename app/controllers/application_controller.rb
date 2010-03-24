@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   def logged_in_to_facebook_and_app_authorized
     if ensure_application_is_installed_by_facebook_user  
-      filter_parameter_logging :fb_sig_friends
+      # filter_parameter_logging :fb_sig_friends # commenting out for now because it fails sometimes
     end
   end
   
