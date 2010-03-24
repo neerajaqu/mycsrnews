@@ -63,7 +63,7 @@ namespace :n2 do
       puts "Deleting floating contents"
       count = 0
       Content.all.each do |content|
-        content.destroy and count += 1 unless content.user.present?
+        content.destroy and count += 1 unless content.user.present? and content.url.present? and valid_url?(content.url)
       end
       puts "Deleted #{count} floating contents"
     end
@@ -164,4 +164,8 @@ namespace :n2 do
     end
 
   end
+end
+
+def valid_url? url
+  url =~ /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i
 end

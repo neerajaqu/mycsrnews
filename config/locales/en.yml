@@ -65,3 +65,11 @@ en:
   articles:
     newest_title: "Newest Articles"
     featured_title: "Featured Article"
+  cards:
+    send: "Send a Card"
+    more_info: "Click to see more info"
+    select_stage_text: "Click a card above to see details/send."
+    send_message_text: "Type a message for your friend."
+    received: "Received"
+    sent: "Sent"
+    menu_title: "Cards"
