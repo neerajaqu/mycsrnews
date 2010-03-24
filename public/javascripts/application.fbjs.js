@@ -50,13 +50,18 @@ $(function() {
   $('.account-toggle').click(function(event) {
   	event.preventDefault();  	
 	if ($(this).next().children().length==0) {
-		$(this).next().html("<img style=\"float:right;\" src=\""+SITE_URL+"/images/spinner.gif\" />");
+		$(this).next().html("loading... <img style=\"float:right;\" src=\""+SITE_URL+"/images/spinner.gif\" />");
 		$(this).next().show(); 
 		$.update($(this).next(), SITE_URL+'/account_menu.fbjs');
 		$(this).next().show(); // force show on load
-	} else {
-		  	$(this).next().toggle(); // if already loaded, show immediately
+		$(this).next().css('display','block');
 	}
+  if ($(this).next().css('display') == 'none') {
+	 			$(this).next().show();
+				$(this).next().css('display','block');
+  } else {
+	 			$(this).next().hide();	
+  }
   });
 
   $('.update-bio').click(function(event) {
