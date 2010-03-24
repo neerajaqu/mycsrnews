@@ -1,4 +1,5 @@
 class ResourcesController < ApplicationController
+  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :like], :if => :request_comes_from_facebook?
   before_filter :set_current_tab
   before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_resources
