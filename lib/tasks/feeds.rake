@@ -8,6 +8,8 @@ namespace :n2 do
         feeds = Feed.find(:all, :conditions => ["specialType = ?", "default"])
 
         feeds.each { |f| update_feed f }
+
+        NewswireSweeper.expire_newswires
       end
 
       desc "Parse One Feed from 'feed_id'"
@@ -17,6 +19,8 @@ namespace :n2 do
         raise "Invalid feed id." unless feed.present?
 
         update_feed feed
+
+        NewswireSweeper.expire_newswires
       end
     end
   end
