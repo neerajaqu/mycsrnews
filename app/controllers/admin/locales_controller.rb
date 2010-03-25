@@ -82,4 +82,18 @@ class Admin::LocalesController < AdminController
       format.xml  { head :ok }
     end
   end
+
+  def refresh
+    # TODO:: HACK:: OMFG:: GET RID OF THIS!!!!!!! but how?
+    # There isn't a way to clear a namespace in memcached
+    # There isn't a default expiry option for rails memcached
+    # There is not a pleasant way to clear all cached items,
+    # including stories/ideas/whatever, have to manually iterate over them
+    # This is a serious issue that needs to be addressed
+    # Cached fragments depend on locales and need to be invalidated with the locales
+    # but how? doing a flush_all is a terrible solution.
+    Rails.cache.clear
+    flash[:success] = "Refreshed locales"
+    redirect_to admin_locales_path
+  end
 end
