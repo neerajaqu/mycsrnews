@@ -5,7 +5,7 @@ class IdeaBoardsController < ApplicationController
   before_filter :load_newest_ideas, :only => :index
 
   def index
-    @current_sub_tab = 'Browse Idea Boards'
+    @current_sub_tab = 'Browse Idea Topics'
     @idea_boards = IdeaBoard.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   end
 

@@ -9,7 +9,7 @@ class IdeaBoard < ActiveRecord::Base
   validates_presence_of :name, :section, :description
 
   def to_s
-    "Idea Board: #{name}"
+    "Idea Topic: #{name}"
   end
 
 end

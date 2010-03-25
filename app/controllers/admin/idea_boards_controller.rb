@@ -16,10 +16,10 @@ class Admin::IdeaBoardsController < AdminController
   def update
     @idea_board = IdeaBoard.find(params[:id])
     if @idea_board.update_attributes(params[:idea_board])
-      flash[:success] = "Successfully updated your Idea Board."
+      flash[:success] = "Successfully updated your Idea Topic."
       redirect_to [:admin, @idea_board]
     else
-      flash[:error] = "Could not update your Idea Board as requested. Please try again."
+      flash[:error] = "Could not update your Idea Topic as requested. Please try again."
       render :edit
     end
   end
@@ -31,10 +31,10 @@ class Admin::IdeaBoardsController < AdminController
   def create
     @idea_board = IdeaBoard.new(params[:idea_board])
     if @idea_board.save
-      flash[:success] = "Successfully created your new Idea Board!"
+      flash[:success] = "Successfully created your new Idea Topic!"
       redirect_to [:admin, @idea_board]
     else
-      flash[:error] = "Could not create your Idea Board, please try again"
+      flash[:error] = "Could not create your Idea Topic, please try again"
       render :new
     end
   end
