@@ -1,3 +1,4 @@
+%h4 Add an image:
 - item.images.build if item.images.empty?
 - form.semantic_fields_for :images do |image_form|
   = image_form.input :remote_image_url, :label => "Add an image from the Web", :required => false, :hint => "Provide the URL to an image hosted on the Web"
@@ -7,21 +8,19 @@
   %br
 %h4.hidden.unhide== #{link_to "Add video link", '#', :class => 'toggle-form'}
 .video-form.hide
-  %h4 Embed or link to a video (youtube only):
+  %h3 Embed or link to a video (youtube only):
   - item.videos.build if item.videos.empty?
   - form.semantic_fields_for :videos do |video_form|
     = video_form.input :remote_video_url, :required => false
     = video_form.input :embed_code, :required => false
-    %br
-    %br
-%h4.hidden.unhide== #{link_to "Add audio link", '#', :class => 'toggle-form'}
+%br
+.hidden.unhide== #{link_to "Add audio clip", '#', :class => 'toggle-form btn'}
 .audio-form.hide
-  %h4 Link to an audio file (.mp3 only):
+  %h3 Link to an audio file (.mp3 only):
   - item.audios.build if item.audios.empty?
   - form.semantic_fields_for :audios do |audio_form|
     = audio_form.input :url, :required => false
     = audio_form.input :title, :required => false
     = audio_form.input :album, :required => false
     = audio_form.input :artist, :required => false
-    %br
-    %br
+

@@ -2,7 +2,7 @@ form.formtastic
   margin: 0
   padding: 0
 
-  ul, ol, li, fieldset, legend, input, select, p
+  ul, ol, li, fieldset, legend, select, p
     margin: 0px
     padding: 0px
 
@@ -127,7 +127,7 @@ form.formtastic fieldset ol li
   p
     &.inline-hints
       color: #666
-      margin: 0.5em 0 0 25%
+      margin: 4px 0 0 0
 
     &.inline-errors
       color: #cc0000
@@ -143,8 +143,10 @@ form.formtastic fieldset ol li
       border: none
       display: list-item
 
-  &.string input, &.password input, &.numeric input 
+  &.password input, &.numeric input 
     
+  &.string input
+    width: 75%
 
   &.text textarea
     width: 100%

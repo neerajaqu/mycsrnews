@@ -8,4 +8,4 @@
     - else
       - ad_class = "ad_468"
   %div{:class => ad_class}
-    %iframe{:src => base_url(google_ads_home_path(:slot_name => @slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => "width: #{@slot_data['data'][:width]}; height: #{@slot_data['data'][:height]};"}
+    %iframe{:src => base_url(google_ads_home_path(:slot_name => @slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #fff; width: #{@slot_data['data'][:width]}; height: #{@slot_data['data'][:height]};"}

@@ -1,5 +1,7 @@
 @import skin.sass
-
+* 
+  margin: 0
+  padding: 0
 // Float div hack //
 .clearfix
   display: inline-block
@@ -184,7 +186,7 @@ h3
   :font-family= !copyFont
   :color= !subheadColor
   font-weight: normal
-  line-height: 11px
+  line-height: 12px
   margin: 0 5px 5px 0
   padding: 0
 
@@ -566,7 +568,7 @@ li
       height: 30px
       float: left
       border:
-        :bottom= !noBorder
+        bottom: none
 
       .profilePic
         margin: 0
@@ -715,6 +717,22 @@ li
     text-align: right
     margin-right: 0px
 
+// Flag box styles //
+.flag-wrap
+  display: inline-block
+  position: relative
+  z-index: 49
+  .flag-toggle
+    position: relative
+    z-index: 51
+  .flag-box
+    padding: 10px
+    position: absolute
+    top: 13px
+    left: 1px
+    :background= !btnCommentBG
+    z-index: 50
+
 // refine search box styles //
 .panelBar
   .refine-toggle
@@ -846,7 +864,7 @@ li
         width: 25%
         border:
           :left= !TopBarBorder
-          :bottom= !noBorder
+          bottom: none
         :background= !TopBarBG
 
         &.nopad
@@ -1117,7 +1135,7 @@ blockquote
       text-decoration: none
       :background= !bookmarkletBtnHover
 
-// pagination styles TO BE ALTERED
+// pagination styles //
 
 .pagination
   display: inline-block
@@ -1126,43 +1144,46 @@ blockquote
   margin: 0 auto
 
   .pagination-float
-    float: right
+    :float= !paginationFloat
     margin: 10px 15px 0px 15px
 
-
     .previous, .next
+      :color= !paginationLinkOn
+      background: none
       border: none
       &.disabled
         border: none
+        cursor: default
+
+    a.previous, a.next
+      text-decoration: underline
+      &:hover
+        text-decoration: none
+    
     a, span
       padding: 2px 5px
       display: block
       float: left
       margin-right: 1px
+      font-size: 10px
+
     span.disabled
-      color: #999
-      border: 1px solid #DDD
+      :color= !paginationLinkDisabled
+      :border= !paginationBdrDisabled
+      :background= !paginationBgDisabled
+
     span.current
-      :font-weight bold
-      :background #2E6AB1
-      :color white
-      :border 1px solid #2E6AB1
+      font-weight: bold
+      :background= !paginationBgOn
+      :color= !paginationLinkOn
+      :border= !paginationBdrOn
+
     a
-      :text-decoration none
-      :color #105CB6
-      :border 1px solid #9AAFE5
+      text-decoration: none
+      :color= !paginationLinkOff
+      :border= !paginationBdrOff
+      :background= !paginationBgOff
       &:hover, &:focus
-        :color #003
-        :border-color #003
-    .page_info
-      :background #2E6AB1
-      :color white
-      :padding .4em .6em
-      :width 22em
-      :margin-bottom .3em
-      :text-align center
-      b
-        :color #003
-        :background = #2E6AB1
-        :padding .1em .25em
-    
+        :background= !paginationBgOn
+        :color= !paginationLinkOn
+        :border-color= !paginationBdrOn

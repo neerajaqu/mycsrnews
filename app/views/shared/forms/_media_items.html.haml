@@ -11,9 +11,8 @@
   - form.semantic_fields_for :videos do |video_form|
     = video_form.input :remote_video_url, :required => false
     = video_form.input :embed_code, :required => false
-    %br
-    %br
-%h4.hidden.unhide== #{link_to "Add audio clip", '#', :class => 'toggle-form'}
+%br
+.hidden.unhide== #{link_to "Add audio clip", '#', :class => 'toggle-form btn'}
 .audio-form.hide
   %h3 Link to an audio file (.mp3 only):
   - item.audios.build if item.audios.empty?
@@ -22,5 +21,4 @@
     = audio_form.input :title, :required => false
     = audio_form.input :album, :required => false
     = audio_form.input :artist, :required => false
-    %br
-    %br
+
