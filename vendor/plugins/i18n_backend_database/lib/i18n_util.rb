@@ -116,7 +116,12 @@ class I18nUtil
           interpolation_arguments= default_locale_value.scan(/\{\{(.*?)\}\}/).flatten
 
           if interpolation_arguments.empty?
-            translation.value = GoogleLanguage.translate(default_locale_value, locale.code, Locale.default_locale.code)
+            begin
+              translation.value = GoogleLanguage.translate(default_locale_value, locale.code, Locale.default_locale.code)
+            rescue StandardError => e
+              puts "Failed to translate locale (#{default_locale_value}), error: #{e}"
+              next
+            end
             translation.save!
           else
             placeholder_value = 990 # at least in :es it seems to leave a 3 digit number in the postion on the string
@@ -130,7 +135,12 @@ class I18nUtil
             end
 
             # translate string
-            translated_value = GoogleLanguage.translate(default_locale_value, locale.code, Locale.default_locale.code)
+            begin
+              translated_value = GoogleLanguage.translate(default_locale_value, locale.code, Locale.default_locale.code)
+            rescue StandardError => e
+              puts "Failed to translate locale (#{default_locale_value}), error: #{e}"
+              next
+            end
 
             # replace numeric place holders with {{interpolation_arguments}} 
             placeholders.each {|placeholder_value,interpolation_argument| translated_value.gsub!("#{placeholder_value}", "{{#{interpolation_argument}}}") }
