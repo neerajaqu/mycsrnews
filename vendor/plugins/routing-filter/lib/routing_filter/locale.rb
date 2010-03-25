@@ -32,9 +32,10 @@ module RoutingFilter
     end
 
     def around_generate(*args, &block)
-      locale = args.extract_options!.delete(:locale) # extract the passed :locale option
-      locale = I18n.locale if locale.nil?            # default to I18n.locale when locale is nil (could also be false)
-      locale = nil unless valid_locale?(locale)      # reset to no locale when locale is not valid
+      locale = args.extract_options!.delete(:locale)      # extract the passed :locale option
+      locale = I18n.default_locale unless locale.present? # default to I18n.default_locale when locale is nil (could also be false)
+      locale = nil unless valid_locale?(locale)           # reset to no locale when locale is not valid
+      I18n.locale = locale                                # set I18n.locale, somewhere along the way this is getting unset
 
       returning yield do |result|
         if locale && prepend_locale?(locale)
