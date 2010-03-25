@@ -14,6 +14,7 @@
     <td><%= link_to 'Edit', edit_admin_locale_path(locale) %></td>
     <td><%= link_to 'Destroy', [:admin, locale], :confirm => 'Are you sure?', :method => :delete %></td>
     <td><%= link_to 'Translations', admin_locale_translations_path(locale) %></td>
+    <td><%= link_to 'Pages', admin_locale_translations_path(locale, :type => 'static_pages') %></td>
   </tr>
 <% end %>
 </table>
