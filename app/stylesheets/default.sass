@@ -676,8 +676,6 @@ li
       line-height: 120%
 
   .thumb
-    float: left
-    margin: 0 10px 10px 0
     max-width: 280px
     :background= !WaterMark
 
@@ -928,10 +926,17 @@ li
     margin-bottom: 10px
   .thumb
     margin: 10px
+    float: none
+    display: inline-block
   .storyBlockWrap
     margin: 10px 10px 0 10px
   .btnComment
     :background= !btnCommentFeatureBG
+
+.storyList
+  .thumb
+    float: left
+    
 
 .subtitle
   font-size: 10px
