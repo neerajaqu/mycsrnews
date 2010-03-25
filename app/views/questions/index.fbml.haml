@@ -9,8 +9,9 @@
         %p
           %b= t('please_elaborate')
           = form.input :details, :required => false, :label => false
+        %p= form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
         - form.buttons do
-          = form.commit_button :button_html => { :class => "btn_1" }
+          = form.commit_button :button_html => { :class => "btn" }
 
     - unless questions.empty?
       .panel_1

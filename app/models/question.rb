@@ -12,6 +12,8 @@ class Question < ActiveRecord::Base
 
   validates_presence_of :question
 
+  attr_accessor :tags_string
+
   named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 10)} }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :unanswered, lambda { |*args| { :conditions => ["answers_count = 0"], :order => ["created_at asc"], :limit => (args.first || 10) } }

@@ -1,40 +1,46 @@
 - content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
   - if @idea_board.present?
     = render :partial => 'shared/subnav/idea_boards_subnav'
   - else
     = render :partial => 'shared/subnav/ideas_subnav'
 
-#col_left
-  .list_stories.clearfix
-    %ul
-      %li
-        .storyBlockWrap
-          .profilePicLarger
-            = local_linked_profile_pic @idea.user
-          %p.storyHead= @idea.title
-          %p.storyCaption= sanitize @idea.details
-          .storyBlockMeta
-            %h3= t('.asked_by', :fb_name => local_linked_profile_name(@idea.user), :date => time_ago_in_words(@idea.created_at))
+- cache "#{@idea.cache_key}_html" do
+  #col_left
+    #readArticle.panel_1
+      .topBar
+        %ul
+          %li
+            %a== #{link_to t('.like'), like_idea_path(@idea.id, :return_to => idea_path(@idea)), :class => "voteUp"} #{@idea.votes_tally}
+          %li
+            %a== #{link_to t('.post_comment'), idea_path(@idea, :anchor => "postCommentBox")} #{@idea.comments_count}
+          %li
+            %a= fb_share_button(idea_path(@idea))
+          %li
+            %a= twitter_share_item_link @idea, @idea.title
+      .thumb
+        - if @idea.images.present?
+          = image_tag @idea.images.first.url(:medium)
+      .storyBlockWrap
+        %h1.storyHead= @idea.title
+        .storyBlockMeta
+          %h3
+            = t('posted_by', :fb_name => local_linked_profile_name(@idea.user), :date => time_ago_in_words(@idea.created_at))
             - if @idea.idea_board.present?
-              %h3= t('.asked_in_board', :board_link => link_to(@idea.idea_board.name, @idea.idea_board))
-            %p
-              %span.btn_left== #{link_to t('.like'), like_idea_path(@idea.id, :return_to => idea_path(@idea)), :class => "voteUp"} #{@idea.votes_tally}
-              %span.btn_mid== #{link_to t('.post_comment'), idea_path(@idea, :anchor => "postCommentBox")} #{@idea.comments_count}
-              %span.btn_right= fb_share_button(idea_path(@idea))
-            - if @tags.present?
-              %h3== Tags #{tag_list(@tags,@idea)}
-            - if @idea.moderatable?
-              = render :partial => 'shared/flag_form', :locals => { :flaggable => @idea }
+              in
+              = link_to(@idea.idea_board.name, @idea.idea_board)
+          - if @tags.present?
+            %h3== #{tag_list(@tags,@idea)}
+          - if @idea.moderatable?
+            = render :partial => 'shared/flag_form', :locals => { :flaggable => @idea }
+      %div.bodyArticle= sanitize @idea.details
+    - if @idea.media_item?
+      = render_media_items @idea
+    = render :partial => 'shared/comments', :locals => { :comments => @idea.comments }
+    = render :partial => 'shared/comment_form', :locals => { :commentable => @idea }
+    = render :partial => 'shared/item_footer', :locals => { :item => @idea, :title => @idea.title }
+    - if @idea.moderatable?
+      = render :partial => 'shared/moderate_form', :locals => { :moderatable => @idea }
 
-  - if @idea.media_item?
-    = render_media_items @idea
-  %br
-  %br
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
-  = render :partial => 'shared/comments', :locals => { :comments => @idea.comments }
-  = render :partial => 'shared/comment_form', :locals => { :commentable => @idea }
-  = render :partial => 'shared/item_footer', :locals => { :item => @idea, :title => @idea.title }
-  - if @idea.moderatable?
-    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @idea }
-
-#col_right
+  #col_right
+    = render :partial => 'shared/sidebar/bio', :locals => { :user => @idea.user }
