@@ -1,33 +1,45 @@
 - content_for :sub_nav do
   = render :partial => 'subnav'
 
-#col_left
-  .list_stories.clearfix
-    %ul
-      %li
-        .storyBlockWrap
-          .profilePicLarger
-            = local_linked_profile_pic @resource.user
-          %p.storyHead= @resource.title
-          %p.storyCaption= sanitize @resource.details
-          .storyBlockMeta
-            %h3= t('.posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => time_ago_in_words(@resource.created_at))
-            %p
-              %span.btn_left== #{link_to t('.like'), like_resource_path(@resource.id, :return_to => resource_path(@resource)), :class => "voteUp"} #{@resource.votes_tally}
-              %span.btn_right= fb_share_button(resource_url(@resource))
-            - if @tags.present?
-              %h3== Tags #{tag_list(@tags,@resource)}
-            - if @resource.moderatable?
-              = render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
-  - if @resource.media_item?
-    = render_media_items @resource
-  %br
-  %br
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
-  = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }
-  = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }
-  = render :partial => 'shared/item_footer', :locals => { :item => @resource, :title => @resource.title }
-  - if @resource.moderatable?
-    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
+- cache "#{@resource.cache_key}_html" do
+  #col_left
+    #readArticle.panel_1
+      .topBar
+        %ul
+          %li
+            %a== #{link_to t('.like'), like_resource_path(@resource.id, :return_to => resource_path(@resource)), :class => "voteUp"} #{@resource.votes_tally}
+          %li
+            %a== #{link_to t('.post_comment'), resource_path(@resource, :anchor => "postCommentBox")} #{@resource.comments_count}
+          %li
+            %a= fb_share_button(resource_path(@resource))
+          %li
+            %a= twitter_share_item_link @resource, @resource.title
+      .thumb
+        - if @resource.images.present?
+          = image_tag @resource.images.first.url(:medium)
+      .storyBlockWrap
+        %h1.storyHead= @resource.title
+        .storyBlockMeta
+          %h3
+            = t('posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => time_ago_in_words(@resource.created_at))
+            - if @resource.resource_section.present?
+              = t('in')
+              = link_to(@resource.resource_section.name, @resource.resource_section)
+          - if @tags.present?
+            %h3== #{tag_list(@tags,@resource)}
+          - if @resource.moderatable?
+            = render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
+      %div.bodyArticle= sanitize @resource.details
+      - if @resource.url.present?
+        %div.float_left= link_to t('.visit_url'), @resource.url, :target => "_resource", :class => "btn"
+    - if @resource.media_item?
+      = render_media_items @resource
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
+    = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }
+    = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }
+    = render :partial => 'shared/item_footer', :locals => { :item => @resource, :title => @resource.title }
+    - if @resource.moderatable?
+      = render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
 
-#col_right
+  #col_right
+    = render :partial => 'shared/sidebar/bio', :locals => { :user => @resource.user }

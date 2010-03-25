@@ -8,7 +8,8 @@ en:
             posted_by: "Posted by {{fb_name}} {{date}} ago"
             share: "Share it"
             like: "Like"
-            post_comment: "Post a comment"            
+            post_comment: "Post a comment" 
+            visit_url: "Visit the Website"           
         subnav:
             browse_resources: "Browse Links"
             suggest_resource: "Suggest a Link"
