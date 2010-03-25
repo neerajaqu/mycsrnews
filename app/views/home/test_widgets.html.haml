@@ -1,6 +1,6 @@
 #col_left
   - unless @page.present?
-    %h1 No contest setup yet. Admins please configure your home page.
+    %h1 No content setup yet. Admins please configure your home page.
   - else
     - @main.each do |widget_page|
       - widget = widget_page.widget
@@ -11,7 +11,7 @@
       = render :partial => widget.partial, :locals => locals
 #col_right
   - unless @page.present?
-    %h1 No contest setup yet. Admins please configure your home page.
+    %h1 No content setup yet. Admins please configure your home page.
   - else
     - @sidebar.each do |widget_page|
       - widget = widget_page.widget

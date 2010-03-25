@@ -18,14 +18,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_sub_tab
   before_filter :set_locale
   before_filter :update_last_active
-
-  #facebook settings
-  # TODO:: get this working
-  #ensure_application_is_installed_by_facebook_user  
-  #ensure_authenticated_to_facebook
-  #To prevent a violation of Facebook Terms of Service while reducing log bloat, you should also add 
-  filter_parameter_logging :fb_sig_friends
-
+#  before_filter :check_authorized_param
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
@@ -33,6 +26,12 @@ class ApplicationController < ActionController::Base
   before_filter :set_facebook_session_wrapper
   helper_method :facebook_session
 
+  def logged_in_to_facebook_and_app_authorized
+    if ensure_application_is_installed_by_facebook_user  
+      # filter_parameter_logging :fb_sig_friends # commenting out for now because it fails sometimes
+    end
+  end
+  
   def set_facebook_session_wrapper
     begin
       set_facebook_session
@@ -211,6 +210,10 @@ class ApplicationController < ActionController::Base
 
     current_user.last_active = Time.now
     current_user.save
+  end
+
+  def check_authorized_param
+    flash[:error] = "You must be logged in to do that!" if params[:unauthorized]
   end
 
 end

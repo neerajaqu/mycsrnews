@@ -49,6 +49,10 @@ en:
       featured_event:
         featured_event_title: "Featured Event"
 
+      questions_whatisthis:
+        questions_whatis_title: "What is this?"
+        questions_whatis_details: "A way to have your questions answered in our online community by other readers."
+
       ideas_whatisthis:
         ideas_whatis_title: "What is this?"
         ideas_whatis_details: "A crowdsourced community board for posting, discussing and sharing great ideas."

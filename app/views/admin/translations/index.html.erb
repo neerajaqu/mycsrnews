@@ -1,0 +1,40 @@
+<h1>Listing translations for <%= @locale.code %></h1>
+<br />
+
+<%= link_to 'New translation', new_admin_locale_translation_path %> |
+<%= link_to 'Back', admin_locales_path %>
+<br />
+<br />
+
+<table class="sort-table">
+  <thead>
+    <tr>
+      <!--<th>Key</th>-->
+      <th>Raw Key</th>
+      <th>Value</th>
+      <th>Default Locale Value</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% for translation in @translations %>
+      <tr class="<%= cycle("odd", "even") %>">
+        <!--<td><%#=h translation.key %></td>-->
+        <td><%=h translation.raw_key %></td>
+        <td><%=h translation.value %></td>
+        <td><%=h translation.default_locale_value %></td>
+        <td>
+          <%= link_to 'Show', admin_locale_translation_path(@locale, translation) %> |
+          <%= link_to 'Edit', edit_admin_locale_translation_path(@locale, translation) %> |
+          <%= link_to 'Destroy', admin_locale_translation_path(@locale, translation), :confirm => 'Are you sure?', :method => :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New translation', new_admin_locale_translation_path %> |
+<%= link_to 'Back', admin_locales_path %>

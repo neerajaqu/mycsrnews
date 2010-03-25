@@ -10,7 +10,7 @@ en:
           url: 'URL'
           image_url: 'Image URL'
           tags_string: 'Tags'
-          caption: 'Caption'
+          caption: 'Summary'
       article:
         new:
           body: "Article content"

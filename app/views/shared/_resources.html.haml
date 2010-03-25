@@ -1,21 +1,35 @@
--# expects @title, @resources
-.panel_1
-  .panelBar.clearfix
-    %h2= title
-    - if resources.present? and resources.first.refineable?
-      .bar_link
-        = render :partial => 'shared/forms/refine_dropdown'
-  .storyList
-    .list_stories.clearfix
-      %ul
-        - resources.each do |resource|
-          %li.askQuestionWrap
-            .storyBlockWrap
-              %p.askQuestionHead= link_to resource.title, resource_path(resource)
-              .profilePic= local_linked_profile_pic resource.user, :size => :square
-              .storyBlockMeta
-                %p= t('.resources_posted_by', :fb_name => local_linked_profile_name(resource.user), :date => time_ago_in_words(resource.created_at))
-                %p
-                  %span.btn_left== #{link_to t('.resources_like'), like_resource_path(resource.id), :class => "voteUp"} #{resource.votes_tally}
-                  %span.btn_mid== #{link_to t('.resources_comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}
-                  %span.btn_right= fb_share_button(resource_path(resource))
+- cache :resources_list_html do
+  - resources ||= Resources.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - no_paginate ||= true
+  .panel_1
+    .panelBar
+      %h2= t('.resources_title')
+      - if resources.present? and resources.first.refineable?
+        .refine_link
+          = render :partial => 'shared/forms/refine_dropdown'
+    .subtitle
+      %span= t('.resources_subtitle')
+    .storyList
+      #front-stories.list_stories
+        %ul
+          - resources.each do |resource|
+            %li{'data-id' => resource.cache_key}
+              .thumb
+                - if resource.images.present?
+                  = image_tag resource.images.first.url(:thumb)
+                - else
+                  = image_tag ('default/default_thumb_b.gif')
+              .storyBlockWrap.storyBlockSpacer
+                %h2.storyHead= link_to resource.title, resource_path(resource)
+                %p.storyCaption= linked_item_details resource
+                .profilePic= local_linked_profile_pic resource.user
+                .storyBlockMeta.float_left
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => time_ago_in_words(resource.created_at))
+                  %span.btnComment.float_left== #{like_link resource} #{resource.votes_tally}
+                  %span.btnComment.float_left== #{link_to t('.resources_comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}
+                  %span.btnComment.float_left= fb_share_button(resources_url(resource))
+ 
+    - unless no_paginate
+      .clearfix
+        = will_paginate resources
+        %br

@@ -1,4 +1,5 @@
 class ResourcesController < ApplicationController
+  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :like], :if => :request_comes_from_facebook?
   before_filter :set_current_tab
   before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_resources
@@ -50,25 +51,6 @@ class ResourcesController < ApplicationController
     @current_sub_tab = 'My Resources'
     @user = User.find(params[:id])
     @resources = @user.resources
-  end
-
-  def like
-    @resource = Resource.find_by_id(params[:id])
-    respond_to do |format|
-      if current_user and @resource.present? and current_user.vote_for(@resource)
-      	success = "Thanks for your vote!"
-      	format.html { flash[:success] = success; redirect_to params[:return_to] || resources_path }
-      	format.fbml { flash[:success] = success; redirect_to params[:return_to] || resources_path }
-      	format.json { render :json => { :msg => "#{@resource.votes_tally} likes" }.to_json }
-      	format.fbjs { render :json => { :msg => "#{@resource.votes_tally} likes" }.to_json }
-      else
-      	error = "Vote failed"
-      	format.html { flash[:error] = error; redirect_to params[:return_to] || resources_path }
-      	format.fbml { flash[:error] = error; redirect_to params[:return_to] || resources_path }
-      	format.json { render :json => { :msg => error }.to_json }
-      	format.fbjs { render :text => { :msg => error }.to_json }
-      end
-    end
   end
 
   private
