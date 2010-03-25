@@ -55,7 +55,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.block '/block.:format', :controller => 'admin', :action => 'block'
     admin.flag '/flag.:format', :controller => 'admin', :action => 'flag'
     admin.paged_items '/featured_items/:id/load_items/page/:page', :controller => 'featured_items', :action => 'load_items'
-    admin.resources :locales, :has_many => :translations
+    admin.resources :locales, :collection => { :refresh => [:get] }, :has_many => :translations
     admin.translations '/translations.:format', :controller => 'translations', :action => 'translations'
     admin.asset_translations '/asset_translations.:format', :controller => 'translations', :action => 'asset_translations'
     admin.resources :widgets, :collection => { :save => :post }
