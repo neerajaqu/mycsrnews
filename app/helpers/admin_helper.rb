@@ -56,7 +56,7 @@ module AdminHelper
       html << "<tbody>"
       collection.each do |item|
         class_name = (item.moderatable? and item.blocked?) ? 'admin-blocked' : ''
-        html << "<tr class='#{class_name}'>"
+        html << "<tr class='#{class_name} #{cycle('odd', 'even')}'>"
         fields.each do |field|
           html << "<td>#{field_value item, field, options[:associations]}</td"
         end
