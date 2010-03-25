@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   named_scope :top, lambda { |*args| { :order => ["karma_score desc"], :limit => (args.first || 5), :conditions => ["karma_score > 0"]} }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 5), :conditions => ["created_at > ?", 2.months.ago]} }
   named_scope :last_active, lambda { { :conditions => ["last_active > ?", 5.minutes.ago], :order => ["last_active desc"] } }
+  named_scope :admins, { :conditions => ["is_admin is true"] }
+  named_scope :moderators, { :conditions => ["is_moderator is true"] }
 
   validates_presence_of     :login, :unless => :facebook_connect_user?
   validates_length_of       :login,    :within => 3..40, :unless => :facebook_connect_user?

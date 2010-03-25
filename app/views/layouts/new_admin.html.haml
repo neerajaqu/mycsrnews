@@ -8,15 +8,28 @@
     = javascript_include_tag 'jquery.min', 'jquery.ui.min', 'jquery.jcarousel.pack', 'jquery.quicksand.min', 'application'
     = javascript_include_tag 'hoverIntent'
     = javascript_include_tag 'superfish'
+    = javascript_include_tag 'jquery.tablesorter.min'
 
     = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
     = stylesheet_link_tag 'superfish'
+    = stylesheet_link_tag 'tablesorter'
 
     :javascript
       $(function() {
 
         $('#admin-menu').superfish();
+
+        // TODO:: get this working with pagination to work across the board
+        //$('table').addClass('tablesorter').tablesorter();
+        $('table').addClass('tablesorter');
+        $('table.sort-table').tablesorter();
+
+        $('table tbody tr').mouseover(function() {
+          $(this).addClass('current-row');
+        }).mouseout(function() {
+          $(this).removeClass('current-row');
+        });
 
       });
 
@@ -79,9 +92,14 @@
             %ul
               %li= link_to 'Users', admin_users_path
           %li
-            %a{:href => "#home-page"} Settings
+            %a{:href => "#module-settings"} Settings
             %ul
               %li= link_to 'Metadata', admin_settings_path
+              %li
+                %a{:href => "#modules-settings-locales"} Locales
+                %ul
+                  %li= link_to 'Locales', admin_locales_path
+                  %li= link_to 'Translations', admin_translations_path
           %li
             %a{:href => "#home-page"} Links
             %ul
