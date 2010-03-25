@@ -8,7 +8,10 @@
           %li.topicTitle
             #{announcement.prefix}
           %li.topic
-            = link_to announcement.title, announcement.url
+            - if announcement.url.present?          
+              = link_to announcement.title, announcement.url
+            - else 
+              = announcement.title
       - else
         %li.topicTitle
           Breaking News

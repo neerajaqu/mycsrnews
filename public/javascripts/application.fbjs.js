@@ -49,10 +49,13 @@ $(function() {
 
   $('.account-toggle').click(function(event) {
   	event.preventDefault();  	
-  	$(this).next().toggle();
 	if ($(this).next().children().length==0) {
-		$(this).next().html("<img src=\""+SITE_URL+"/images/spinner.gif\" />");
+		$(this).next().html("loading... <img style=\"float:right;\" src=\""+SITE_URL+"/images/spinner.gif\" />");
+		$(this).next().show(); // force show 
 		$.update($(this).next(), SITE_URL+'/account_menu.fbjs');
+		$(this).next().show(); // force show 
+	} else {
+		$(this).next().toggle();
 	}
   });
 

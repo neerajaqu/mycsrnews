@@ -14,8 +14,6 @@
       = link_to t('account_menu.my_profile'), user_path(current_user, :format => 'fbml')
   - else
     %li
-      =# link_to t('account_menu.sign_in'), login_path(:format => 'fbml')
       = link_to t('account_menu.sign_in'), link_user_accounts_users_path(:format => 'fbml')
     %li
-      =# link_to t('account_menu.register'), signup_path(:format => 'fbml')
       = link_to t('account_menu.register'), link_user_accounts_users_path(:format => 'fbml')

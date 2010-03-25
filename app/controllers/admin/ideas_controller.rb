@@ -1,6 +1,6 @@
 class Admin::IdeasController < AdminController
   skip_before_filter :admin_user_required
-
+  
   def index
     @ideas = Idea.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
