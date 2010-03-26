@@ -5,7 +5,9 @@ class NewswiresController < ApplicationController
 
   def index
     @current_sub_tab = 'Browse Wires'
-    @newswires = Newswire.find(:all, :order => "updated_at desc", :limit => 20)
+    #@newswires = Newswire.find(:all, :order => "updated_at desc", :limit => 200)
+    @newswires = Newswire.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @paginate = true
   end
 
   def publish
@@ -14,7 +16,7 @@ class NewswiresController < ApplicationController
 
     @content = Content.new({
     	:title    => @newswire.title,
-    	:caption  => @newswire.caption,
+    	:caption  => @template.strip_tags(@newswire.caption),
     	:url      => @newswire.url,
     	:source   => @newswire.feed.title,
     	:user     => current_user
