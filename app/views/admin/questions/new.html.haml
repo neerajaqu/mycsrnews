@@ -1,0 +1,5 @@
+%h2 Create a Question
+- semantic_form_for [:admin, @question] do |form|
+  = render :partial => 'question_form', :locals => { :form => form }
+  - form.buttons do
+    = form.commit_button
