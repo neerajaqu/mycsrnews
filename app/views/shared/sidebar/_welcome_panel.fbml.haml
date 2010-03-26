@@ -2,9 +2,9 @@
 -# expects local :welcome_message => welcome_message
 .panel_2
   .houseFeatures
-    .thumbBanner
-      = image_tag('default/house-ad-banner.jpg')
+    .thumb
+      = image_tag('default/house-ad-profile.jpg')
     .featureAd
-      %h2= t(.'welcome_panel_headline')
-      -# .featureAd.clearfix
-      %p= t(.'welcome_panel_message_fbml')
+      %h2= t('.welcome_panel_headline')
+    .featureAd.clearfix
+      %p= t('.welcome_panel_message_fbml')
