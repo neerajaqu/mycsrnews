@@ -54,25 +54,6 @@ class StoriesController < ApplicationController
     end
   end
 
-  def like
-    @story = Content.find_by_id(params[:id])
-    respond_to do |format|
-      if current_user and @story.present? and current_user.vote_for(@story)
-      	success = "Thanks for your vote!"
-      	format.html { flash[:success] = success; redirect_to params[:return_to] || stories_path }
-      	format.fbml { flash[:success] = success; redirect_to params[:return_to] || stories_path }
-      	format.json { render :json => { :msg => "#{@story.votes_tally} likes" }.to_json }
-      	format.fbjs { render :json => { :msg => "#{@story.votes_tally} likes" }.to_json }
-      else
-      	error = "Vote failed"
-      	format.html { flash[:error] = error; redirect_to params[:return_to] || stories_path }
-      	format.fbml { flash[:error] = error; redirect_to params[:return_to] || stories_path }
-      	format.json { render :json => { :msg => error }.to_json }
-      	format.fbjs { render :text => { :msg => error }.to_json }
-      end
-    end
-  end
-
   def parse_page
     @url = params[:url]
     @page_data = Parse::Page.parse_page(@url) unless @url.empty?

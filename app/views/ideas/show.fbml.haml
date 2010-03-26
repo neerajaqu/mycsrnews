@@ -11,7 +11,7 @@
       .topBar
         %ul
           %li
-            %a== #{link_to t('.like'), like_idea_path(@idea.id, :return_to => idea_path(@idea)), :class => "voteUp"} #{@idea.votes_tally}
+            #{like_link @idea} #{@idea.votes_tally}
           %li
             %a== #{link_to t('.post_comment'), idea_path(@idea, :anchor => "postCommentBox")} #{@idea.comments_count}
           %li
