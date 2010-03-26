@@ -67,3 +67,7 @@ en:
   articles:
     newest_title: "Newest Articles"
     featured_title: "Featured Article"
+  static_pages:
+    faq: "FAQ found here"
+    about_us: "About Us found here"
+    terms_of_service: "Terms of Service found here"

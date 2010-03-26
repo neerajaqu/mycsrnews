@@ -17,3 +17,5 @@ ActiveRecord::Base.send :include, Newscloud::Acts::Moderatable
 # Load acts_as_refineable mixin
 require "#{RAILS_ROOT}/lib/acts_as_refineable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Refineable
+
+require "#{RAILS_ROOT}/lib/locale_extensions.rb"

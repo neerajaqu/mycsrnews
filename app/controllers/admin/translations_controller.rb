@@ -7,7 +7,11 @@ class Admin::TranslationsController < AdminController
   # GET /translations
   # GET /translations.xml
   def index
-    @translations = @locale.translations.find(:all, :order => "raw_key, pluralization_index")
+    if params[:type].nil?
+      @translations = @locale.translations.find(:all, :order => "raw_key, pluralization_index")
+    else
+      @translations = @locale.translations.with_type params[:type]
+    end
 
     respond_to do |format|
       format.html # index.html.erb
