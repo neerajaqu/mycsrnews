@@ -13,4 +13,8 @@ class Comment < ActiveRecord::Base
 #  named_scope :controversial, lambda { |*args| { :order => ["??? desc"], :limit => (args.first || 10)} }
 
   validates_presence_of :comments
+
+  def item_title
+    "Comment on #{self.commentable.item_title}"
+  end
 end

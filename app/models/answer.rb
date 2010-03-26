@@ -24,4 +24,8 @@ class Answer < ActiveRecord::Base
     })
   end
 
+  def item_title
+    "Answer to #{self.question.item_title}"
+  end
+
 end
