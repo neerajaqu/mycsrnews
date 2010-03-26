@@ -1,7 +1,8 @@
 #col_left
-  - cache :questions_list_fbml do
-    - questions ||= Question.newest
-    %h1 Ask a question
+  %h1 Ask a question
+  - unless current_user.present?
+    %p== #{t 'questions.logged_in_error'} #{link_to 'Login now', link_user_accounts_users_path}
+  - else
     - semantic_form_for Question.new do |form|
       %p= form.input :question, :required => false, :label => false
       .fullQuestionForm.hide
@@ -13,6 +14,8 @@
         - form.buttons do
           = form.commit_button :button_html => { :class => "btn" }
 
+  - cache :questions_list_fbml do
+    - questions ||= Question.newest
     - unless questions.empty?
       .panel_1
         .panelBar

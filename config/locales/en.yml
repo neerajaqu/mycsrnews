@@ -51,6 +51,7 @@ en:
   active_users: "{{user_count}} users online now"
   tags: "Tags"
   tags_hint: "Separate each tag with a comma e.g. dining options, raw food, seattle"
+  logged_in_error: "You must be logged in to perform this action."
   questions:
     tab_title: "Answers"
     title: "Questions"
@@ -61,9 +62,11 @@ en:
     unanswered_title: "Unanswered Questions"
     list: "Answer Questions"
     new: "Ask a Question"
+    logged_in_error: "You must be logged in to ask questions."
   answers:
     top_title: "Top Answers"
     newest_title: "Newest Answers"
+    logged_in_error: "You must be logged in to answer questions."
   articles:
     newest_title: "Newest Articles"
     featured_title: "Featured Article"

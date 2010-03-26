@@ -5,7 +5,7 @@
     %h2= t '.post_comment'
   .formBox
     - unless current_user.present?
-      %p== #{t '.logged_in_error'} #{link_to 'Login now', login_path}
+      %p== #{t '.logged_in_error'} #{link_to 'Login now', link_user_accounts_users_path}
     - else
       .commentMsgDiv
         - semantic_form_for [commentable, Comment.new] do |form|
