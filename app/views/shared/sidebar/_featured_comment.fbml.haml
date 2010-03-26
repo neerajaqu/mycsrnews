@@ -9,12 +9,12 @@
       %ul
         - featured_comments.each do |comment|
           %li
-            -# TODO: provide title method for all models          
-            -#             %h4= link_to comment.commentable.title, comment.commentable
             %p= caption((comment.comments.present?) ? "\"#{comment.comments}\"" : 'no comment',200)
             .profilePic= local_linked_profile_pic comment.user, :width => '30px', :height => '30px'
             %h3
               = t('posted_by', :fb_name => local_linked_profile_name(comment.user), :date => time_ago_in_words(comment.created_at))
-              = link_to "here", comment.commentable
+            %h3
+              Re: 
+              = link_to caption(comment.commentable.title,120), comment.commentable
             %span.btnComment.float_left== #{like_link comment} #{comment.votes_tally}
             %span.btnComment== #{link_to t('comments'), content_path(comment.commentable, :anchor => "commentListTop")} #{comment.commentable.comments_count}
