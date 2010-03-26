@@ -1,7 +1,7 @@
 class VotesController < ApplicationController
   cache_sweeper :vote_sweeper, :only => [:like, :dislike]
 
-  before_filter :login_required
+  before_filter :login_required, :only => [:like, :dislike]
 
   def like
     @voteable = find_voteable

@@ -45,7 +45,7 @@ module Newscloud
           [:title, :name].each do |method|
             return self.send(method) if self.respond_to?(method) and self.send(method).present?
           end
-          nil
+          self.item_title
         end
 
         def featured_blurb

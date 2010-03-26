@@ -47,6 +47,13 @@ module Newscloud
         false
       end
 
+      def item_title
+        [:title, :name, :question].each do |method|
+          return self.send(method) if self.respond_to?(method) and self.send(method).present?
+        end
+        "#{self.class.name.titleize} ##{self.id}"
+      end
+
     end
 
   end

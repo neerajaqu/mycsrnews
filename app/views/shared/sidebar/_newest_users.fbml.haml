@@ -1,6 +1,6 @@
 -# @expects: local 'newest_users'
 
-- cache :newest_users_fbml do
+- cache :newest_users_html do
   - newest_users ||= User.newest
   - unless newest_users.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
@@ -12,4 +12,4 @@
             %li
               .profilePic= local_linked_profile_pic user
               %h4== #{link_to user.name, user_path(user)} 
-              == registered #{time_ago_in_words user.created_at} ago
+              %h3== registered #{time_ago_in_words user.created_at} ago
