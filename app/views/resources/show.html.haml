@@ -7,7 +7,7 @@
       .topBar
         %ul
           %li
-            %a== #{link_to t('.like'), like_resource_path(@resource.id, :return_to => resource_path(@resource)), :class => "voteUp"} #{@resource.votes_tally}
+            %a==  #{like_link @resource} #{@resource.votes_tally}
           %li
             %a== #{link_to t('.post_comment'), resource_path(@resource, :anchor => "postCommentBox")} #{@resource.comments_count}
           %li

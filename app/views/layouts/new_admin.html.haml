@@ -85,7 +85,10 @@
                   %li= link_to 'Resource Sections', admin_resource_sections_path
               %li= link_to 'Calendar', admin_events_path
               %li
-                %a{:href => "#"} Questions
+                %a{:href => "#modules-questions"} Q & A
+                %ul
+                  %li= link_to 'Questions', admin_questions_path
+                  %li= link_to 'Answers', admin_answers_path
           %li
             %a{:href => "#members"} Members
             %ul

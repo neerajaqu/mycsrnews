@@ -68,6 +68,8 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :resources
     admin.resources :resource_sections
     admin.resources :events
+    admin.resources :questions
+    admin.resources :answers    
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }
     admin.resources :contents
     admin.resources :content_images

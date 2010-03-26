@@ -1,11 +1,5 @@
-#col_left
-  .panel_1
-    .panelBar.clearfix
-      %h2 Post a Story
-    .panel_block
-      .storyBlockWrap
-        - semantic_form_for @story, :url => stories_path do |form|
-          = render :partial => 'story_form', :locals => { :form => form }
-          - form.buttons do
-            -# TODO:: switch this to locale
-            = form.commit_button "Post Story"
+%h2 Update Answer
+- semantic_form_for [:admin, @content] do |form|
+  = render :partial => 'content_form', :locals => { :form => form }
+  - form.buttons do
+    = form.commit_button

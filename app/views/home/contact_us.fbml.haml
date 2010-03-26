@@ -6,4 +6,8 @@
       = form.input :subject
       = form.input :email
       = form.input :body
-    = form.submit "Contact Us"
+    - form.buttons do
+      = form.commit_button :button_html => { :class => "btn", :value => "Send Message" }
+  %br
+
+#col_right

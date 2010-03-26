@@ -47,25 +47,6 @@ class EventsController < ApplicationController
     @events = @user.events
   end
 
-  def like
-    @event = Event.find_by_id(params[:id])
-    respond_to do |format|
-      if current_user and @event.present? and current_user.vote_for(@event)
-      	success = "Thanks for your vote!"
-      	format.html { flash[:success] = success; redirect_to params[:return_to] || events_path }
-      	format.fbml { flash[:success] = success; redirect_to params[:return_to] || events_path }
-      	format.json { render :json => { :msg => "#{@event.votes_tally} likes" }.to_json }
-      	format.fbjs { render :json => { :msg => "#{@event.votes_tally} likes" }.to_json }
-      else
-      	error = "Vote failed"
-      	format.html { flash[:error] = error; redirect_to params[:return_to] || events_path }
-      	format.fbml { flash[:error] = error; redirect_to params[:return_to] || events_path }
-      	format.json { render :json => { :msg => error }.to_json }
-      	format.fbjs { render :text => { :msg => error }.to_json }
-      end
-    end
-  end
-
   private
 
   def set_current_tab

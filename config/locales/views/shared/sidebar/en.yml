@@ -89,3 +89,7 @@ en:
       post_story:
         post_story_title: "Contribute links to our site"
         post_story: "Post a Story"   
+
+      welcome_panel:
+        welcome_panel_headline: "Welcome to our site"
+        welcome_panel_message_fbml: "This is such a wonderful community to keep up on local events. We hope you enjoy yourself here."
