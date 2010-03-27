@@ -40,10 +40,12 @@ after("deploy") do
 end
 
 before "deploy:start" do
+  set :rake_post_path, release_path
   deploy.rake_post_deploy
 end
 
 before "deploy:restart" do
+  set :rake_post_path, current_path
   deploy.rake_post_deploy
 end
 
@@ -122,7 +124,8 @@ namespace :deploy do
 
   desc "Run rake after deploy tasks"
   task :rake_post_deploy do
-    run "cd #{release_path} && /usr/bin/rake n2:deploy:after RAILS_ENV=#{rails_env}"
+    path = rake_post_path || release_path
+    run "cd #{path} && /usr/bin/rake n2:deploy:after RAILS_ENV=#{rails_env}"
   end
 
   desc "Load the app skin if it exists"
