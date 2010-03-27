@@ -3,7 +3,8 @@
     - content_form.inputs do
       = content_form.input :title
       = content_form.input :tags_string, :required => false
-      = content_form.input :url, :required => false, :hint => "If you're writing about a story on the Web, provide the link to the web page (URL) here", :label => "Link to Web Page (optional)"
+      = content_form.input :url, :required => false
       = render :partial => 'shared/forms/media_items', :locals => { :form => content_form, :item => @article.content }
-  = form.input :body
   %ul#image_selector.jcarousel-skin-tango{:style => "left: 0px;"}
+  %br
+  %p= form.input :body

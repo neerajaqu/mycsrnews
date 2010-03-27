@@ -4,7 +4,7 @@
   = image_form.file_field :image, :label => "Add an image from your computer",:required => false, :hint => "Upload an image from your computer"
   %br
   %br
-%h4.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}
+%h3.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}
 .video-form.hide
   %h3 Embed or link to a video (youtube only):
   - item.videos.build if item.videos.empty?
