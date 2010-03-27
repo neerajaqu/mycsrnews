@@ -54,7 +54,7 @@ class QuestionsController < ApplicationController
   end
 
   def set_slot_data
-    @slot_data = Metadata.find_by_key_type_name('ad-slot-name', 'questions')
+    @slot_data = Metadata.find_by_key_type_sub_name('ads', 'primary', 'questions')
   end
 
 

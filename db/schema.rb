@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100317083752) do
+ActiveRecord::Schema.define(:version => 20100326220707) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -284,10 +284,12 @@ ActiveRecord::Schema.define(:version => 20100317083752) do
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key_sub_type"
   end
 
   add_index "metadatas", ["key_name"], :name => "index_metadatas_on_key_name"
   add_index "metadatas", ["key_type", "key_name"], :name => "index_metadatas_on_key_type_and_key_name"
+  add_index "metadatas", ["key_type", "key_sub_type", "key_name"], :name => "index_metadatas_on_key_type_and_key_sub_type_and_key_name"
   add_index "metadatas", ["metadatable_type", "metadatable_id"], :name => "index_metadatas_on_metadatable_type_and_metadatable_id"
 
   create_table "newswires", :force => true do |t|

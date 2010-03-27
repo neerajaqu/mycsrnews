@@ -197,7 +197,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_slot_data
-    @slot_data = Metadata.find_by_key_type_name('ad-slot-name', 'default')
+    @slot_data = Metadata.find_by_key_type_sub_name('ads', 'primary', 'default')
   end
   
   def current_user_profile 
