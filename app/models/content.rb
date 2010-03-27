@@ -63,7 +63,7 @@ class Content < ActiveRecord::Base
     	self.article.toggle_featured
     else
       self.is_featured = ! self.is_featured
-      self.featured_at = Time.now
+      self.featured_at = Time.now if self.respond_to? 'featured_at'
       self.save
     end
   end

@@ -76,7 +76,7 @@ class StoriesController < ApplicationController
   end
 
   def set_slot_data
-    @slot_data = Metadata.find_by_key_type_name('ad-slot-name', 'stories')
+    @slot_data = Metadata.find_by_key_type_sub_name('ads', 'primary', 'stories')
   end
 
 end
