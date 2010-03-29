@@ -1,8 +1,8 @@
 - content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
   = render :partial => 'shared/subnav/events_subnav'
 
 #col_left
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
   = render :partial => 'shared/events', :locals => { :events => @events, :title => t('.events_title') }
 
 #col_right
