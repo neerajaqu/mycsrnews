@@ -7,13 +7,14 @@ en:
       content:
         new:
           title: 'Title'
-          url: 'URL'
+          url: 'Story URL'
           image_url: 'Image URL'
           tags_string: 'Tags'
           caption: 'Summary'
       article:
         new:
-          body: "Article content"
+          body: "Your article content"
+          url: "If you're writing about a story on the Web, provide the link to the web page (URL) here"
       post:
         new:
           title: "Choose a title..."
@@ -26,6 +27,14 @@ en:
         new: # get this working
           comments: "lkqjtwqe"
     hints:
+      content:
+        new:
+          title: "Enter a headline for this story."
+          url: "Enter the web address for this story."
+          caption: "Please provide an abstract that concisely describes this story"
+      article:
+        body: "Enter your article text and html here. Only basic HTML tags allowed for now."
+        url: "Link to Web Page (optional)"
       post:
         title: "Choose a good title for you post."
         body: "Write something inspiring here."
@@ -35,4 +44,3 @@ en:
       create: "Create my {{model}}"
       update: "Save changes"
       dummie: "Launch!"
-       
