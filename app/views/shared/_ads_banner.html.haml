@@ -1,4 +1,5 @@
 -# expects: local 'slot_data'
+- slot_data ||= Metadata.get_default_ad_slot
 - if slot_data.present?
   - case slot_data['data'][:width]
     - when "728px"

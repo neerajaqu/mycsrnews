@@ -20,8 +20,12 @@ class Metadata < ActiveRecord::Base
 
   def self.get_ad_slot key_sub_type, key_name
     @ad_slot = self.key_type_sub_name('ads', key_sub_type, key_name).first
-    @ad_slot = self.key_type_sub_name('ads', key_sub_type, 'default').first if @ad_slot.nil?
+    @ad_slot = self.get_default_ad_slot if @ad_slot.nil?
     @ad_slot
+  end
+
+  def self.get_default_ad_slot
+    self.key_type_sub_name('ads', 'primary', 'default').first
   end
   
 end
