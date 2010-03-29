@@ -39,6 +39,12 @@ class Admin::ResourceSectionsController < AdminController
     end
   end
 
+  def destroy
+    @resource_section = ResourceSection.find(params[:id])
+    @resource_section.destroy
+    redirect_to admin_resource_sections_path
+  end
+
   private
 
   def set_current_tab

@@ -39,6 +39,12 @@ class Admin::IdeaBoardsController < AdminController
     end
   end
 
+  def destroy
+    @idea_board = IdeaBoard.find(params[:id])
+    @idea_board.destroy
+    redirect_to admin_idea_boards_path
+  end
+
   private
 
   def set_current_tab

@@ -1,14 +1,22 @@
 -# expects: local 'slot_data'
 - if slot_data.present?
-  .panel_1
-    - case slot_data['data'][:width]
-      - when "728px"
-        - ad_class = "ad_728"
-      - when "468px"
-        - ad_class = "ad_468"
-      - when "160px"
-        - ad_class = "ad_160"
-      - else
-        - ad_class = "ad_468"
+  - case slot_data['data'][:width]
+    - when "728px"
+      - ad_class = "ad_728"
+      - panel_id = "adspace"
+      - panel_class = ""
+    - when "468px"
+      - panel_id = ""
+      - panel_class = "panel_1"
+      - ad_class = "ad_468"
+    - when "160px"
+      - panel_id = ""
+      - panel_class = "panel_2"
+      - ad_class = "ad_160"
+    - else
+      - panel_id = ""
+      - panel_class = "panel_1"
+      - ad_class = "ad_468"
+  %div{:class => panel_class, :id => panel_id}
     %div{:class => ad_class}
       = fb_iframe base_url(google_ads_home_path(:slot_name => slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #FFF; width: #{slot_data['data'][:width]}; height: #{slot_data['data'][:height]};"
