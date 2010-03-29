@@ -21,11 +21,11 @@ module ApplicationHelper
   def build_feed_link(action)
     action_type = action.class.name
     if action_type == 'Content'
-    	base_url(story_path(action, :canvas => false))
+    	base_url(story_path(action, :canvas => false, :format => 'html'))
     elsif action_type == 'Comment'
-    	base_url(polymorphic_path(action.commentable, :canvas => false))
+    	base_url(polymorphic_path(action.commentable, :canvas => false, :format => 'html'))
     elsif action_type == 'Vote'
-    	base_url(story_path(action.voteable, :canvas => false))
+    	base_url(story_path(action.voteable, :canvas => false, :format => 'html'))
     else
     	''
     end
