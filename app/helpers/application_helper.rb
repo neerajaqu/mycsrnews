@@ -23,7 +23,7 @@ module ApplicationHelper
     if action_type == 'Content'
     	base_url(story_path(action, :canvas => false))
     elsif action_type == 'Comment'
-    	base_url(story_path(action.content, :canvas => false))
+    	base_url(polymorphic_path(action.commentable, :canvas => false))
     elsif action_type == 'Vote'
     	base_url(story_path(action.voteable, :canvas => false))
     else
@@ -36,9 +36,9 @@ module ApplicationHelper
     if action_type == 'Content'
     	"#{user.name} posted #{action.title}"
     elsif action_type == 'Comment'
-    	"#{user.name} just commented on #{action.content.title}"
+    	"#{user.name} just commented on #{action.commentable.item_title}"
     elsif action_type == 'Vote'
-    	"#{user.name} liked #{action.voteable.title}"
+    	"#{user.name} liked #{action.voteable.item_title}"
     else
     	''
     end
@@ -49,9 +49,9 @@ module ApplicationHelper
     if action_type == 'Content'
     	"#{user.name} posted #{linked_story_caption(action, 150, build_feed_link(action))}"
     elsif action_type == 'Comment'
-    	"#{user.name} just commented on #{action.content.title}: #{action.comments}"
+    	"#{user.name} just commented on #{action.commentable.item_title}: #{action.comments}"
     elsif action_type == 'Vote'
-    	"#{user.name} liked #{action.voteable.title}"
+    	"#{user.name} liked #{action.voteable.item_title}"
     else
     	''
     end
