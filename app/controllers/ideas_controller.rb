@@ -57,9 +57,9 @@ class IdeasController < ApplicationController
   end
 
   def set_slot_data
-    @ad_banner = Metadata.find_by_key_type_sub_name('ads', 'primary', 'ideas')
-    @ad_leaderboard = Metadata.find_by_key_type_sub_name('ads', 'leaderboard', 'ideas')
-    @ad_skyscraper = Metadata.find_by_key_type_sub_name('ads', 'skyscraper', 'ideas')
+    @ad_banner = Metadata.get_ad_slot('primary', 'ideas')
+    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'ideas')
+    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'ideas')
   end
 
   private
