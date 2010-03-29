@@ -11,6 +11,14 @@ en:
         new:
           top_events: "Popular Events"
           newest_events: "Recent Events"
+          label_event_name: "Name"
+          label_event_tagline: "Tagline"
+          label_event_description: "Description"
+          label_event_location: "Location"
+          hint_event_name: "Please provide a brief descriptive name for your event"
+          hint_event_tagline: "Please provide a one line teaser for your event"
+          hint_event_description: "Please provide any additional details here"
+          hint_event_location: "Where is the venue for your event?"
         show:
           asked_by: "Asked by {{fb_name}} {{date}} ago"
           share: "Share it"

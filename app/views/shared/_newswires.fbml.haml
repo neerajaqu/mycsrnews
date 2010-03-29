@@ -1,6 +1,6 @@
 - cache :newswires_list_fbml do
   - newswires ||= Newswire.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
-  - no_paginate ||= true
+  - paginate ||= false
   .panel_1
     .panelBar
       %h2= t '.title'
@@ -11,15 +11,15 @@
         %ul
           - @newswires.each do |newswire|
             %li{'data-id' => newswire.cache_key}
-            -# TODO:: remove inline css
-            .storyBlockWrap{:style => "width: 490px; clear: left; word-wrap: break-word;"}
-              %h2.storyHead= link_to newswire.title, newswire.url, :target => "_cts"
-              %p.storyCaption= linked_newswire_caption newswire
-              .storyBlockMeta.float_left
-                %h3= t('.via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))
-                %span.btnComment.float_left= link_to t('.publish', :site_title => APP_CONFIG['site_title']), publish_newswire_path(newswire)
-                %span.btnComment.float_left= link_to t('.read'), newswire.url, :target => "_cts" 
-    - unless no_paginate
+              -# TODO:: remove inline css
+              .storyBlockWrap{:style => "width: 490px; clear: left; word-wrap: break-word;"}
+                %h2.storyHead= link_to newswire.title, newswire.url, :target => "_cts"
+                %p.storyCaption= linked_newswire_caption newswire
+                .storyBlockMeta.float_left
+                  %h3= t('.via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))
+                  %span.btnComment.float_left= link_to t('.publish', :site_title => APP_CONFIG['site_title']), publish_newswire_path(newswire)
+                  %span.btnComment.float_left= link_to t('.read'), newswire.url, :target => "_cts" 
+    - if paginate
       .clearfix
-        = will_paginate contents
+        = will_paginate newswires
         %br

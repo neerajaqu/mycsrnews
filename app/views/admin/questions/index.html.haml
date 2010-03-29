@@ -1,0 +1,1 @@
+= gen_index_page @questions, Question, [:question, :details, :user_id, :votes_tally, :comments_count, :created_at], :associations => { :belongs_to => { :user => :user_id } }, :paginate => true

@@ -1,0 +1,1 @@
+= gen_show_page @answer, [:answer, :question_id, :user_id, :votes_tally, :comments_count, :created_at], :associations => { :belongs_to => {  :question => :question_id, :user => :user_id } }

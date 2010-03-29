@@ -1,0 +1,5 @@
+%h2 Update Answer
+- semantic_form_for [:admin, @answer] do |form|
+  = render :partial => 'answer_form', :locals => { :form => form }
+  - form.buttons do
+    = form.commit_button

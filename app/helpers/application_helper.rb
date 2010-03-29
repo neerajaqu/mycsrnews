@@ -83,7 +83,7 @@ module ApplicationHelper
   end
 
   def linked_newswire_caption(newswire, length = 150)
-    caption = caption(newswire.caption, length)
+    caption = strip_tags(caption(newswire.caption, length))
     "#{caption} #{link_to 'More', newswire.url, :target => "_cts"}"
   end
 
