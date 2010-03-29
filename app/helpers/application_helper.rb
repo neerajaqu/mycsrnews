@@ -71,9 +71,9 @@ module ApplicationHelper
     end
   end
 
-  def linked_story_caption(story, length = 150, url = false)
+  def linked_story_caption(story, length = 150, url = false, options = {})
     caption = caption(story.caption, length)
-    "#{caption} #{link_to 'More', (url ? url : story_path(story))}"
+    "#{caption} #{link_to 'More', (url ? url : story_path(story, options))}"
   end
 
   #remove this method when self.title methods created
@@ -308,14 +308,24 @@ EMBED
 
   def like_link item, options = {}
     options.merge!(:class => 'voteUp')
+    format = options.delete(:format)
     return '' unless item.respond_to? "votes_for"    
-    link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), options)
+    if format
+      link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
+    else
+      link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), options)
+    end
   end
 
   def dislike_link item, options = {}
     options.merge!(:class => 'voteDown')
+    format = options.delete(:format)
     return '' unless item.respond_to? "votes_for"
-    link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item), options)
+    if format
+      link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
+    else
+      link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item), options)
+    end
   end
 
   def answer_translate count = 0
