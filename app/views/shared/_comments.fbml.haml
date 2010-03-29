@@ -5,7 +5,8 @@
   #commentThread.panel_1
     .panelBar
       %h2= t '.comment_title'
-      - if comments.present? and comments.first.refineable?
+      -# TODO:: current refine logic only works on lists
+      -# if comments.present? and comments.first.refineable?
         .refine_link
           = render :partial => 'shared/forms/refine_dropdown'
     = render :partial => 'shared/comment', :collection => comments
