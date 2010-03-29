@@ -25,5 +25,4 @@
           = form.commit_button  :button_html => { :class => 'btn' } 
 
 #col_right
-  = render :partial => 'shared/sidebar/top_events', :locals => { :top_events => @top_events }
-  = render :partial => 'shared/sidebar/newest_events', :locals => { :newest_events => @newest_events }
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

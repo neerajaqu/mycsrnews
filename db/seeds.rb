@@ -18,6 +18,3 @@ Metadata.create({:meta_type => 'config', :key_type => 'ads', :key_sub_type => 'p
 Metadata.create({:meta_type => 'config', :key_type => 'ads', :key_sub_type => 'primary', :key_name => 'resources', :data => { :name => 'resources_banner', :width => "468px", :height => "60px", :background => "default/ads_468_60.gif" } })
 Metadata.create({:meta_type => 'config', :key_type => 'ads', :key_sub_type => 'primary', :key_name => 'events', :data => { :name => 'events_banner', :width => "468px", :height => "60px", :background => "default/ads_468_60.gif" } })
 Metadata.create({:meta_type => 'config', :key_type => 'ads', :key_sub_type => 'primary', :key_name => 'questions', :data => { :name => 'questions_banner', :width => "468px", :height => "60px", :background => "default/ads_468_60.gif" } })
-Metadata.create({:meta_type => 'content', :key_type => 'page', :key_name => 'about', :data => { :content => "<h1>About Us</h1><p>This is your about content.</p>"} })
-Metadata.create({:meta_type => 'content', :key_type => 'page', :key_name => 'faq', :data => { :content => "<h1>Frequently Asked Questions</h1><p>Beginning of questions goes here.</p>"} })
-Metadata.create({:meta_type => 'content', :key_type => 'page', :key_name => 'terms', :data => { :content => "<h1>Terms of Use</h1><p>Terms of service for this application go here.</p>"} })

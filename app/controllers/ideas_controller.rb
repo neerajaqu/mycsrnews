@@ -56,6 +56,12 @@ class IdeasController < ApplicationController
     @ideas = @user.ideas
   end
 
+  def set_slot_data
+    @ad_banner = Metadata.get_ad_slot('primary', 'ideas')
+    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'ideas')
+    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'ideas')
+  end
+
   private
 
   def set_idea_board
@@ -64,10 +70,6 @@ class IdeasController < ApplicationController
 
   def set_current_tab
     @current_tab = 'ideas'
-  end
-
-  def set_slot_data
-    @slot_data = Metadata.find_by_key_type_sub_name('ads', 'primary', 'ideas')
   end
 
 end

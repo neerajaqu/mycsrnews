@@ -47,6 +47,12 @@ class EventsController < ApplicationController
     @events = @user.events
   end
 
+  def set_slot_data
+    @ad_banner = Metadata.get_ad_slot('primary', 'events')
+    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'events')
+    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'events')
+  end
+
   private
 
   def set_current_tab

@@ -53,6 +53,12 @@ class ResourcesController < ApplicationController
     @resources = @user.resources
   end
 
+  def set_slot_data
+    @ad_banner = Metadata.get_ad_slot('primary', 'resources')
+    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'resources')
+    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'resources')
+  end
+
   private
 
   def set_resource_section
@@ -62,5 +68,6 @@ class ResourcesController < ApplicationController
   def set_current_tab
     @current_tab = 'resources'
   end
+
 
 end

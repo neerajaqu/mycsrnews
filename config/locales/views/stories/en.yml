@@ -1,6 +1,5 @@
 en:
   stories:
-    # TODO:: add post story
     new:
       new_story_header: "Post a story from the Web"
     show:
