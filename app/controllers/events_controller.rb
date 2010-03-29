@@ -47,6 +47,12 @@ class EventsController < ApplicationController
     @events = @user.events
   end
 
+  def set_slot_data
+    @ad_banner = Metadata.find_by_key_type_sub_name('ads', 'primary', 'events')
+    @ad_leaderboard = Metadata.find_by_key_type_sub_name('ads', 'leaderboard', 'events')
+    @ad_skyscraper = Metadata.find_by_key_type_sub_name('ads', 'skyscraper', 'events')
+  end
+
   private
 
   def set_current_tab

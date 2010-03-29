@@ -1,6 +1,5 @@
 fr:
   stories:
-    # TODO:: add post story
     new:
     show:
       via:  "Via {{source}} on {{date}}"

@@ -1,11 +1,14 @@
--# @expects: local '@slot_data'
-.panel_1
-  - case @slot_data['data'][:width]
-    - when "728px"
-      - ad_class = "ad_728"
-    - when "468px"
-      - ad_class = "ad_468"
-    - else
-      - ad_class = "ad_468"
-  %div{:class => ad_class}
-    = fb_iframe base_url(google_ads_home_path(:slot_name => @slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #FFF; width: #{@slot_data['data'][:width]}; height: #{@slot_data['data'][:height]};"
+-# expects: local 'slot_data'
+- if slot_data.present?
+  .panel_1
+    - case slot_data['data'][:width]
+      - when "728px"
+        - ad_class = "ad_728"
+      - when "468px"
+        - ad_class = "ad_468"
+      - when "160px"
+        - ad_class = "ad_160"
+      - else
+        - ad_class = "ad_468"
+    %div{:class => ad_class}
+      = fb_iframe base_url(google_ads_home_path(:slot_name => slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #FFF; width: #{slot_data['data'][:width]}; height: #{slot_data['data'][:height]};"

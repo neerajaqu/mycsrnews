@@ -23,5 +23,4 @@
           = form.commit_button  :button_html => { :class => 'btn_1' } 
 
 #col_right
-  = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('.top_ideas') }
-  = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @newest_ideas, :title => t('.newest_ideas') }
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

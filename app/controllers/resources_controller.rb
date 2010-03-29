@@ -53,6 +53,12 @@ class ResourcesController < ApplicationController
     @resources = @user.resources
   end
 
+  def set_slot_data
+    @ad_banner = Metadata.find_by_key_type_sub_name('ads', 'primary', 'resources')
+    @ad_leaderboard = Metadata.find_by_key_type_sub_name('ads', 'leaderboard', 'resources')
+    @ad_skyscraper = Metadata.find_by_key_type_sub_name('ads', 'skyscraper', 'resources')
+  end
+
   private
 
   def set_resource_section
@@ -62,5 +68,6 @@ class ResourcesController < ApplicationController
   def set_current_tab
     @current_tab = 'resources'
   end
+
 
 end
