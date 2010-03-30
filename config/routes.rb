@@ -53,8 +53,8 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index
   map.namespace(:admin) do |admin|
-    admin.block '/block.:format', :controller => 'admin', :action => 'block'
-    admin.flag '/flag.:format', :controller => 'admin', :action => 'flag'
+    admin.block '/block.:format', :controller => 'misc', :action => 'block'
+    admin.flag '/flag.:format', :controller => 'misc', :action => 'flag'
     admin.paged_items '/featured_items/:id/load_items/page/:page', :controller => 'featured_items', :action => 'load_items'
     admin.resources :locales, :collection => { :refresh => [:get] }, :has_many => :translations
     admin.translations '/translations.:format', :controller => 'translations', :action => 'translations'

@@ -5,34 +5,9 @@ class AdminController < ApplicationController
   before_filter :set_current_tab
 
   def index
+    # Loads dashboard
+    # TODO:: make the dashboard actually a dashboard
     #redirect_to admin_contents_path
-  end
-
-  def block
-    @item = find_moderatable_item
-
-    if @item.moderatable? and @item.toggle_blocked
-    	flash[:success] = "Successfully blocked your item."
-    	#redirect_to [:admin, :contents]
-    	redirect_to [:admin, @item]
-    else
-    	flash[:error] = "Could not block this item."
-    	redirect_to [@admin, @item]
-    end
-  end
-
-  def flag
-    @item = find_moderatable_item
-
-    # TODO:: change the flag type here to user selected
-    if @item.moderatable? and @item.flag_item('other', current_user)
-    	flash[:success] = "Successfully flagged your item."
-    	#redirect_to [:admin, :contents]
-    	redirect_to [:admin, @item]
-    else
-    	flash[:error] = "Could not flag this item."
-    	redirect_to [@admin, @item]
-    end
   end
 
   private
