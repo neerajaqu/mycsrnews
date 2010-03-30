@@ -47,17 +47,16 @@ class QuestionsController < ApplicationController
     end
   end
 
-  private
-
-  def set_current_tab
-    @current_tab = 'questions'
-  end
-
   def set_slot_data
     @ad_banner = Metadata.get_ad_slot('primary', 'questions')
     @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'questions')
     @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'questions')
   end
 
+  private
+
+  def set_current_tab
+    @current_tab = 'questions'
+  end
 
 end
