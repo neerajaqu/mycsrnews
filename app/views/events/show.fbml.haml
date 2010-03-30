@@ -19,7 +19,7 @@
         - if @event.images.present?
           = image_tag @event.images.first.url(:medium)
       .storyBlockWrap
-        %h1.storyHead= @event.title
+        %h1.storyHead= @event.name
         .storyBlockMeta
           %h3
             = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => time_ago_in_words(@event.created_at))
@@ -27,10 +27,9 @@
             %h3== #{tag_list(@tags,@event)}
           - if @event.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
-      %div.bodyArticle= sanitize @event.tagline
+      %div.bodyArticle= sanitize @event.description
     - if @event.media_item?
       = render_media_items @event
-    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
     = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
     = render :partial => 'shared/comment_form', :locals => { :commentable => @event }
     = render :partial => 'shared/item_footer', :locals => { :item => @event, :title =>@event.name }
