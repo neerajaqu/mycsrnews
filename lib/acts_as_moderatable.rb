@@ -13,6 +13,7 @@ module Newscloud
           has_many :flags, :as => :flaggable
 
           named_scope :active, { :conditions => ["is_blocked = 0"] }
+          named_scope :inactive, { :conditions => ["is_blocked = 1"] }
 
           include Newscloud::Acts::Moderatable::InstanceMethods
         end
