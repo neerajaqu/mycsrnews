@@ -1,32 +1,40 @@
 - content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
   = render :partial => 'shared/subnav/events_subnav'
 
-#col_left
-  .list_stories.clearfix
-    %ul
-      %li
-        .storyBlockWrap
-          .profilePicLarger
-            = local_linked_profile_pic @event.user
-          %p.storyHead= @event.name
-          %p.storyCaption= sanitize @event.tagline
-          .storyBlockMeta
-            %h3= t('.asked_by', :fb_name => local_linked_profile_name(@event.user), :date => time_ago_in_words(@event.created_at))
-            %p
-              %span.btn_left== #{like_link @event} #{@event.votes_tally}
-              %span.btn_mid== #{link_to t('.post_comment'), event_path(@event, :anchor => "postCommentBox")} #{@event.comments_count}
-              %span.btn_right= fb_share_button(event_url(@event))
-            - if @tags.present?
-              %h3== Tags #{tag_list(@tags,@event)}
-            - if @event.moderatable?
-              = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
-  - if @event.media_item?
-    = render_media_items @event
-
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
-  = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
-  = render :partial => 'shared/comment_form', :locals => { :commentable => @event }
-  = render :partial => 'shared/item_footer', :locals => { :item => @event, :title =>@event.name }
-  - if @event.moderatable?
-    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @event }
-#col_right
+- cache "#{@event.cache_key}_fbml" do
+  #col_left
+    #readArticle.panel_1
+      .topBar
+        %ul
+          %li
+            #{like_link @event} #{@event.votes_tally}
+          %li
+            %a== #{link_to t('.post_comment'), event_path(@event, :anchor => "postCommentBox")} #{@event.comments_count}
+          %li
+            %a= fb_share_button(event_path(@event))
+          %li
+            %a= twitter_share_item_link @event, @event.title
+      .thumb
+        - if @event.images.present?
+          = image_tag @event.images.first.url(:medium)
+      .storyBlockWrap
+        %h1.storyHead= @event.title
+        .storyBlockMeta
+          %h3
+            = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => time_ago_in_words(@event.created_at))
+          - if @tags.present?
+            %h3== #{tag_list(@tags,@event)}
+          - if @event.moderatable?
+            = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
+      %div.bodyArticle= sanitize @event.tagline
+    - if @event.media_item?
+      = render_media_items @event
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
+    = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
+    = render :partial => 'shared/comment_form', :locals => { :commentable => @event }
+    = render :partial => 'shared/item_footer', :locals => { :item => @event, :title =>@event.name }
+    - if @event.moderatable?
+      = render :partial => 'shared/moderate_form', :locals => { :moderatable => @event }
+  #col_right
+    = render :partial => 'shared/sidebar/bio', :locals => { :user => @event.user }
