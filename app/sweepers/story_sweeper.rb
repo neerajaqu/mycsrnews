@@ -39,9 +39,13 @@ class StorySweeper < ActionController::Caching::Sweeper
     #expire_page :controller => '/home', :action => 'index', :format => 'fbml'
     #expire_page :controller => '/stories', :action => 'show', :id => story, :format => 'html'
     #expire_page :controller => '/stories', :action => 'show', :id => story, :format => 'fbml'
-    ['top_stories', 'stories_list', 'active_users', 'most_discussed_stories', 'top_users', 'top_ideas', 'top_events', 'featured_items', 'newest_users', 'newest_ideas', 'header', 'fan_application', 'prompt_permissions', "#{story.cache_key}_top", "#{story.cache_key}_bottom", "#{story.cache_key}_sidebar"].each do |fragment|
+    ['top_stories', 'active_users', 'most_discussed_stories', 'top_users', 'top_ideas', 'top_events', 'featured_items', 'newest_users', 'newest_ideas', 'header', 'fan_application', 'prompt_permissions', "#{story.cache_key}_top", "#{story.cache_key}_bottom", "#{story.cache_key}_sidebar"].each do |fragment|
       expire_fragment "#{fragment}_html"
       expire_fragment "#{fragment}_fbml"
+    end
+    ['', 'page_1_', 'page_2_'].each do |page|
+      expire_fragment "stories_list_#{page}html"
+      expire_fragment "stories_list_#{page}fbml"
     end
     #expire_page root_path
   end
@@ -58,6 +62,10 @@ class StorySweeper < ActionController::Caching::Sweeper
     ['top_stories', 'stories_list', 'featured_items', 'most_discussed_stories', "#{story.cache_key}_top", "#{story.cache_key}_bottom", "#{story.cache_key}_sidebar"].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
       controller.expire_fragment "#{fragment}_fbml"
+    end
+    ['', 'page_1_', 'page_2_'].each do |page|
+      controller.expire_fragment "stories_list_#{page}html"
+      controller.expire_fragment "stories_list_#{page}fbml"
     end
 
     StorySweeper.expire_article_all story.article if story.is_article?
