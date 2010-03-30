@@ -27,7 +27,7 @@
                   %h3= t('posted_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
                   %span.btnComment.float_left== #{like_link idea} #{idea.votes_tally}
                   %span.btnComment.float_left== #{link_to t('.ideas_comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
-                  %span.btnComment.float_left= fb_share_button(ideas_url(idea))
+                  %span.btnFBshare.float_left= fb_share_button(ideas_url(idea))
  
     - unless no_paginate
       .clearfix
