@@ -19,7 +19,7 @@ en:
       new_question: "Ask a Question"
       resources: "Directory"
       resources_list: "Browse Directory"
-      new_resource: "Suggest a Link"
+      new_resource: "Add a new link"
       admin: "Admin"
 
     comments:

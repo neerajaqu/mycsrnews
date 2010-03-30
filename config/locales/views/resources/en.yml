@@ -12,7 +12,7 @@ en:
             visit_url: "Visit the Website"           
         subnav:
             browse_resources: "Browse Links"
-            suggest_resource: "Suggest a Link"
+            suggest_resource: "Add a new link"
             my_resources: "Your Links"
         my_resources:
             my_resources_title: "Your Links"
