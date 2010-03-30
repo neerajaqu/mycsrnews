@@ -1,5 +1,4 @@
 class Admin::ContentsController < AdminController
-  skip_before_filter :admin_user_required
 
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {

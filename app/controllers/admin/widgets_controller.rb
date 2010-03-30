@@ -1,5 +1,4 @@
 class Admin::WidgetsController < AdminController
-  skip_before_filter :admin_user_required
   cache_sweeper :story_sweeper, :only => [:save]
 
   def index

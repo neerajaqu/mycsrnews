@@ -1,5 +1,4 @@
 class Admin::SettingsController < AdminController
-  skip_before_filter :admin_user_required
 
   def index
     @settings = Metadata.meta_type('config')

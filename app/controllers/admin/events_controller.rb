@@ -1,5 +1,4 @@
 class Admin::EventsController < AdminController
-  skip_before_filter :admin_user_required
 
   def index
     @events = Event.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
