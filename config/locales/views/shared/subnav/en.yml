@@ -22,7 +22,7 @@ en:
         home_resource_sections: "Back to Directory"  
         browse_section_resources: "{{name}} Links"
         browse_resource_sections: "Browse Categories"
-        suggest_section_resource: "Suggest a Link"
+        suggest_section_resource: "Add a new link"
         my_resources: "My {{name}} Links"
       events_subnav:
         browse_events: "Browse Calendar"

@@ -69,16 +69,17 @@ class StoriesController < ApplicationController
 
   end
 
-  private
-
-  def set_current_tab
-    @current_tab = 'stories'
-  end
-
   def set_slot_data
     @ad_banner = Metadata.get_ad_slot('primary', 'stories')
     @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'stories')
     @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'stories')
+    @ad_small_square = Metadata.get_ad_slot('small_square', 'stories')
+  end
+
+  private
+
+  def set_current_tab
+    @current_tab = 'stories'
   end
 
 end

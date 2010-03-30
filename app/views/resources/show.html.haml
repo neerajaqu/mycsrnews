@@ -1,4 +1,5 @@
 - content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
   = render :partial => 'subnav'
 
 - cache "#{@resource.cache_key}_html" do
@@ -34,7 +35,6 @@
         %div.float_left= link_to t('.visit_url'), @resource.url, :target => "_resource", :class => "btn"
     - if @resource.media_item?
       = render_media_items @resource
-    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
     = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }
     = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }
     = render :partial => 'shared/item_footer', :locals => { :item => @resource, :title => @resource.title }
@@ -43,3 +43,4 @@
 
   #col_right
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @resource.user }
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
