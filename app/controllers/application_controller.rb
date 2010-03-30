@@ -96,7 +96,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_newest_articles
-    @newest_articles ||= Article.newest
+    @newest_articles ||= Article.active.newest
   end
 
   def load_newest_images
@@ -109,7 +109,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_newest_ideas
-    @newest_ideas ||= Idea.newest
+    @newest_ideas ||= Idea.active.newest
   end
 
   def load_featured_ideas
@@ -145,7 +145,7 @@ class ApplicationController < ActionController::Base
   end
   
   def load_newest_resources
-    @newest_resources ||= Resource.newest 5
+    @newest_resources ||= Resource.active.newest 5
   end
 
   def load_top_events
@@ -157,7 +157,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_newest_events
-    @newest_events ||= Event.newest 5
+    @newest_events ||= Event.active.newest 5
   end
 
   def load_newest_announcements

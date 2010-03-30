@@ -1,7 +1,7 @@
 -# @expects: local 'newest_resources'
 
 - cache :newest_resources_html do
-  - newest_resources ||= Resource.newest
+  - newest_resources ||= Resource.active.newest
   - unless newest_resources.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar.clearfix

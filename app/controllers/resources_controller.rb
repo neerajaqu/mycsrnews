@@ -24,7 +24,7 @@ class ResourcesController < ApplicationController
     @current_sub_tab = 'Suggest Resource'
     @resource = Resource.new
     @resource.resource_section = @resource_section if @resource_section.present?
-    @resources = Resource.newest
+    @resources = Resource.active.newest
   end
 
   def create
@@ -37,7 +37,7 @@ class ResourcesController < ApplicationController
     	flash[:success] = "Thank you for adding to our directory!"
     	redirect_to resource_path(@resource)
     else
-      @resources = Resource.newest
+      @resources = Resource.active.newest
     	render :new
     end
   end

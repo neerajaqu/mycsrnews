@@ -24,7 +24,7 @@ class IdeasController < ApplicationController
     @current_sub_tab = 'Suggest Idea'
     @idea = Idea.new
     @idea.idea_board = @idea_board if @idea_board.present?
-    @ideas = Idea.newest
+    @ideas = Idea.active.newest
   end
 
   def create
@@ -40,7 +40,7 @@ class IdeasController < ApplicationController
     	flash[:success] = "Thank you for your idea!"
     	redirect_to @idea_board.present? ? [@idea_board, @idea] : @idea
     else
-      @ideas = Idea.newest
+      @ideas = Idea.active.newest
     	render :new
     end
   end

@@ -1,5 +1,5 @@
 - cache :my_ideas_list_html do
-  - ideas ||= Ideas.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - ideas ||= Ideas.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - no_paginate ||= true
   .panel_1
     .panelBar

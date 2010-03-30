@@ -1,7 +1,7 @@
 -# @expects: local 'newest_events'
 
 - cache :newest_events_fbml do
-  - newest_events ||= Event.newest
+  - newest_events ||= Event.active.newest
   - unless newest_events.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar

@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   def new
     @current_sub_tab = 'Suggest Event'
     @event = Event.new
-    @events = Event.newest
+    @events = Event.active.newest
   end
 
   def create
@@ -31,7 +31,7 @@ class EventsController < ApplicationController
 
     if @event.save
     	flash[:success] = "Thank you for your event!"
-      @events = Event.newest
+      @events = Event.active.newest
     	render :new
     end
   end

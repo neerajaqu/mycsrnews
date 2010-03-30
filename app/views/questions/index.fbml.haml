@@ -17,7 +17,7 @@
           = form.commit_button :button_html => { :class => "btn" }
 
   - cache :questions_list_fbml do
-    - questions ||= Question.newest
+    - questions ||= Question.active.newest
     - unless questions.empty?
       .panel_1
         .panelBar

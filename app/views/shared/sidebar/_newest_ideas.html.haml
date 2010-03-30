@@ -1,7 +1,7 @@
 -# @expects: local 'newest_ideas'
 
 - cache :newest_ideas_html do
-  - newest_ideas ||= Idea.newest 5
+  - newest_ideas ||= Idea.active.newest 5
   - unless newest_ideas.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
