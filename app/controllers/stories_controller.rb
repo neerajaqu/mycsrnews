@@ -12,10 +12,10 @@ class StoriesController < ApplicationController
 
   def index
     @current_sub_tab = 'Browse Stories'
-    @contents = Content.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    @contents = Content.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     respond_to do |format|
-      format.html
-      format.fbml
+      format.html { @paginate = true }
+      format.fbml { @paginate = true }
       format.atom
       format.json { @stories = Content.refine(params) }
       format.fbjs { @stories = Content.refine(params) }

@@ -4,6 +4,7 @@ class Admin::MiscController < AdminController
     @item = find_moderatable_item
 
     if @item.moderatable? and @item.toggle_blocked
+    	expire_cache @item
     	flash[:success] = "Successfully blocked your item."
     	#redirect_to [:admin, :contents]
     	redirect_to [:admin, @item]

@@ -1,4 +1,4 @@
-- stories ||= Content.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+- stories ||= Content.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
 %ul
   - stories.each do |content|
     %li{'data-id' => content.cache_key}

@@ -40,4 +40,13 @@ class AdminController < ApplicationController
     nil
   end
 
+  def expire_cache item
+    case item.class.name
+      when "Content"
+        StorySweeper.expire_story_all item
+      else
+      	nil
+    end
+  end
+
 end

@@ -1,6 +1,6 @@
 - cache :stories_list_html do
-  - contents ||= Content.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
-  - no_paginate ||= true
+  - contents ||= Content.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - paginate ||= false
   .panel_1
     .panelBar
       %h2= t('.stories_title')
@@ -28,7 +28,7 @@
                   %span.btnComment.float_left== #{like_link content} #{content.votes_tally}
                   %span.btnComment.float_left== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
  
-    - unless no_paginate
+    - if paginate
       .clearfix
         = will_paginate contents
         %br
