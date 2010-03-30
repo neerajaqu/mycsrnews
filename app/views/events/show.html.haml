@@ -14,7 +14,7 @@
           %li
             %a= fb_share_button(event_path(@event))
           %li
-            %a= twitter_share_item_link @event, @event.title
+            %a= twitter_share_item_link @event, @event.name
       .thumb
         - if @event.images.present?
           = image_tag @event.images.first.url(:medium)
