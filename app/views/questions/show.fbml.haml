@@ -27,7 +27,12 @@
           - if @question.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @question }
       %div.bodyArticle= sanitize caption @question.details
-    #answerForm.hide
+      - if @question.media_item?
+        = render_media_items @question
+      -# TODO:: this breaks with .clearfix on fb side
+      -#= render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
+    %br
+    #answerForm.clearfix.hide
       - unless current_user.present?
         %p== #{t 'answers.logged_in_error'} #{link_to 'Login now', link_user_accounts_users_path}
       - else
