@@ -50,9 +50,10 @@ I18nUtil.class_eval do
       translation = locale.translations.build(:key =>key, :pluralization_index => pluralization_index)
       puts "from yaml create translation for #{locale.code} : #{key} : #{pluralization_index}" unless RAILS_ENV['test']
     end
-    unless translation.value.present?
+    unless (translation.value.present? and translation.value != translation.raw_key)
       translation.value = value
       translation.save!
+      translation.send(:update_cache)
     end
   end
 
