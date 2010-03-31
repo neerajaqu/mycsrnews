@@ -1,3 +1,6 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/questions_subnav'
+
 #col_left
   %h1 Ask a question
   - semantic_form_for Question.new do |form|

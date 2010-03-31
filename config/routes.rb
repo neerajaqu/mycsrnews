@@ -47,7 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :resources, :member => { :like => [:get, :post], :my_resources => [:get, :post] }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :resource_sections, :has_many => :resources
   map.resources :events, :member => { :like => [:get, :post],:my_events => [:get, :post] }, :collection => { :index => [:get, :post] },:has_many => [:comments, :flags]
-  map.resources :questions, :member => { :like => [:get, :post], :create_answer => :post }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :answers, :flags]
+  map.resources :questions, :member => { :like => [:get, :post], :create_answer => :post, :my_questions => [:get, :post] }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :answers, :flags]
   map.resources :answers, :member => { :like => [:get, :post] }, :has_many => [:comments, :answers, :flags]
 
   map.root :controller => "home", :action => "index"

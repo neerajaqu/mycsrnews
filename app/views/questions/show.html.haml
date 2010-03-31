@@ -1,3 +1,7 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render :partial => 'shared/subnav/questions_subnav'
+
 #col_left
   - cache "#{@question.cache_key}_html" do
     #readArticle.panel_1

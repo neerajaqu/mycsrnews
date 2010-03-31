@@ -1,4 +1,6 @@
-= render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+- content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render :partial => 'shared/subnav/questions_subnav'
 
 #col_left
   %h1 Ask a question

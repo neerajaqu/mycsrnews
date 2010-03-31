@@ -25,7 +25,7 @@ class Metadata < ActiveRecord::Base
   end
 
   def self.get_default_ad_slot
-    self.key_type_sub_name('ads', 'primary', 'default').first
+    self.key_type_sub_name('ads', 'banner', 'default').first
   end
   
 end

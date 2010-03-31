@@ -4,6 +4,10 @@ en:
       stories_subnav:
         browse_stories: "All Stories"
         browse_wires: "Wires"
+      questions_subnav:
+        browse_questions: "Browse Questions"
+        ask_question: "Ask a Question"
+        my_questions: "Your Questions"
       ideas_subnav:
         browse_ideas: "Browse Ideas"
         suggest_idea: "Suggest an Idea"
@@ -31,3 +35,4 @@ en:
       news_subnav:
         new_article: "Compose an article"
         new_story: "Post a story"
+        

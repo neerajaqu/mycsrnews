@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   before_filter :login_required, :only => [:like, :new, :create, :create_answer]
 
   def index
+    @current_sub_tab = 'Browse Questions'
     respond_to do |format|
       format.html
       format.fbml
@@ -17,6 +18,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    @current_sub_tab = 'Ask Question'
   end
 
   def create
@@ -34,6 +36,12 @@ class QuestionsController < ApplicationController
   def new_answer
   end
 
+  def my_questions
+    @current_sub_tab = 'My Questions'
+    @user = User.find(params[:id])
+    @questions = @user.questions
+  end
+
   def create_answer
     @question = Question.find(params[:id])
     @answer = @question.answers.build(params[:answer])
@@ -48,7 +56,7 @@ class QuestionsController < ApplicationController
   end
 
   def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('primary', 'questions')
+    @ad_banner = Metadata.get_ad_slot('banner', 'questions')
     @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'questions')
     @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'questions')
   end
