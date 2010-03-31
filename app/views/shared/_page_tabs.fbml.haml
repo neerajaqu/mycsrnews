@@ -77,8 +77,8 @@
                       %li= link_to t('questions.list'), questions_path, :class => tab_selected?(@current_tab, 'questions')
                     - unless MENU['questions']['new_question'].nil?
                       %li= link_to t('questions.new'), new_question_path, :class => tab_selected?(@current_tab, 'ask question')
-                    - unless MENU['questions']['my_questions'].nil?
-                      %li= link_to t('questions.my_questions'), my_questions_question_path, :class => tab_selected?(@current_tab, 'my questions')
+                    -# - unless MENU['questions']['my_questions'].nil?
+                    -#   %li= link_to t('questions.my_questions'), my_questions_question_path, :class => tab_selected?(@current_tab, 'my questions')
         - if MENU.key? 'events'
           %li
             .menu_item
