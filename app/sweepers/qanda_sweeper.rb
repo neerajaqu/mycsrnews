@@ -44,7 +44,7 @@ class QandaSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_question_cache(question)
-    ['top_questions', 'questions_list', 'newest_questions', 'unanswered_questions', question.cache_key].each do |fragment|
+    ['top_questions', 'questions_list', 'newest_questions', 'unanswered_questions', "#{question.cache_key}_top", "#{question.cache_key}_bottom"].each do |fragment|
       expire_fragment "#{fragment}_html"
       expire_fragment "#{fragment}_fbml"
     end
@@ -77,7 +77,7 @@ class QandaSweeper < ActionController::Caching::Sweeper
 
   def self.expire_question_all question
     controller = ActionController::Base.new
-    ['top_questions', 'questions_list', 'newest_questions', 'unanswered_questions', question.cache_key].each do |fragment|
+    ['top_questions', 'questions_list', 'newest_questions', 'unanswered_questions', "#{question.cache_key}_top", "#{question.cache_key}_bottom"].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
       controller.expire_fragment "#{fragment}_fbml"
     end
