@@ -44,6 +44,8 @@ class AdminController < ApplicationController
     case item.class.name
       when "Content"
         StorySweeper.expire_story_all item
+      when "Idea"
+        IdeaSweeper.expire_idea_all item
       else
       	nil
     end
