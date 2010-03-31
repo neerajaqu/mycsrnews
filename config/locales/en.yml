@@ -66,6 +66,7 @@ en:
     unanswered_title: "Unanswered Questions"
     list: "Answer Questions"
     new: "Ask a Question"
+    my_questions: "Your Questions"
     logged_in_error: "You must be logged in to ask questions."
   answers:
     top_title: "Top Answers"
