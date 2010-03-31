@@ -20,6 +20,8 @@ class Idea < ActiveRecord::Base
   validates_uniqueness_of :title
   validates_presence_of :idea_board
   validates_format_of :tags_string, :with => /^([-a-zA-Z0-9_ ]+,?)+$/, :allow_blank => true, :message => "Invalid tags. Tags can be alphanumeric characters or -_ or a blank space."  
+
+  def self.per_page; 10; end
   
   def self.top
     self.tally({
@@ -28,5 +30,6 @@ class Idea < ActiveRecord::Base
     	:order    => "votes.count desc"
     })
   end
+
 
 end
