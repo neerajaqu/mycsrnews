@@ -19,6 +19,21 @@
     :bottom= !pageTabBorder 
   :background= !headerBG 
 
+  .sponsor
+    :background= !sponsorBG
+    :display= !sponsordisplay
+    position: absolute
+    :top= !sponsortop
+    :left= !sponsorleft
+    :height= !sponsorheight
+    :width= !sponsorwidth
+    z-index: 72
+    a
+      display: block
+      :height= !sponsorheight
+      :width= !sponsorwidth
+
+
   .headerTitle
     :background= !headerTitleLogoImage
     :height= !headerTitleLogoHeight
@@ -26,6 +41,7 @@
     position: absolute
     :top= !headerTitleLogoPosTop
     :left= !headerTitleLogoPosLeft
+    z-index: 70
 
     h1
       :visibility= !headerTitleDisplay
@@ -609,11 +625,9 @@ li
     padding: 10px 0px
     :background= !formBoxBG
 
-    .title
-      width: 90%
-      margin: 15px auto
-      font-weight: normal
-
+    p
+      margin: 0 10px
+    
     h4
       font-weight: normal
       margin-bottom: 10px
@@ -621,27 +635,31 @@ li
     textarea
       :border= !formBoxTextArea
 
-    .buttons li
-      width: 99%
-      margin: 0
-      float: right
-      text-align: right
-
   .panelBar
+    position: relative
     display: block
-    padding: 6px 0 4px 0px
+    padding: 6px 0 2px 0px
     border:
       :bottom= !panelBarBorder
     :background= !panelBarBG
 
-    h2
-      padding: 2px 0px 0px 2px
-      margin: 0 0 0 0
+    h1
+      margin: 0
       font-weight: normal
-      font-size: 11px
+      font-size: 18px
+      text-transform: Capitalize
+      :font-family= !copyFont
+      :color= !panelBarHeader
+      display: inline
+      
+    h2
+      margin: 0
+      font-weight: normal
+      font-size: 10px
       text-transform: uppercase
       :font-family= !copyFont
       :color= !panelBarHeader
+      display: inline
 
     a
       font-weight: normal
@@ -650,7 +668,7 @@ li
 
     .bar_link
       float: right
-      margin: -13px 10px 0 0
+      margin: 2px 0 0 0
 
   .storyBlockSpacer
     padding-left: 100px
@@ -680,11 +698,9 @@ li
       line-height: 120%
 
   .thumb
-    max-width: 280px
-    :background= !WaterMark
 
     img
-      max-width: 100%
+      :background= !WaterMark
 
     a:hover
       text-decoration: none
@@ -747,14 +763,13 @@ li
     float: right
     position: relative
     display: block
-    padding: 4px 10px
-    margin-top: -18px
+    padding: 0px 8px
 
     .refine-tab
-      height: 28px
+      height: 32px
       width: 99px
       position: absolute
-      top: -29px
+      top: -33px
       right: -1px
       border: 
         :top= !DropDownBorder
@@ -771,7 +786,7 @@ li
       padding: 8px
       width: 142px
       top: 25px
-      left: -59px
+      left: -58px
       :border= !DropDownBorder
       :background-color= !DropDownBG
 
@@ -793,6 +808,7 @@ li
           width: 70%
           cursor: pointer
           font-weight: bold
+          padding: 4px 0
           :color= !refineInputText
           :border= !refineInputBorder
           :background= !refineInputBG
@@ -877,10 +893,6 @@ li
   .thumb
     float: right
     margin: 10px
-    
-    img
-      width: 300px
-      height: 250px
 
   .bodyArticle
     :color= !bodyColor
@@ -938,7 +950,7 @@ li
     float: none
     display: inline-block
   .storyBlockWrap
-    margin: 10px 10px 0 10px
+    margin: 0px 10px 0 10px
   .btnComment
     :background= !btnCommentFeatureBG
 
@@ -987,6 +999,9 @@ blockquote
   margin: 0 1px
   padding: 1px 8px 2px 8px
   :background= !btnCommentBG
+
+.btnFBshare
+  margin: 1px 1px 0 1px
 
 .voteUp
   :background= !voteUp
@@ -1134,6 +1149,9 @@ blockquote
     margin: 10px 15px
     padding: 65px 0 10px 0
     :background= !demoBG
+
+  .fb-btn
+    margin-top: 15px
 
   .btn
     display: inline-block
