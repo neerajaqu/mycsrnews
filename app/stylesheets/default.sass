@@ -1170,52 +1170,29 @@ blockquote
 // pagination styles //
 
 .pagination
-  display: inline-block
-  background: #fff
-  width: 100%
-  margin: 0 auto
-
-  .pagination-float
-    :float= !paginationFloat
-    margin: 10px 15px 0px 15px
-
-    .previous, .next
-      :color= !paginationLinkOn
-      background: none
-      border: none
-      &.disabled
-        border: none
-        cursor: default
-
-    a.previous, a.next
-      text-decoration: underline
-      &:hover
-        text-decoration: none
-    
-    a, span
-      padding: 2px 5px
-      display: block
-      float: left
-      margin-right: 1px
-      font-size: 10px
-
-    span.disabled
-      :color= !paginationLinkDisabled
-      :border= !paginationBdrDisabled
-      :background= !paginationBgDisabled
-
-    span.current
-      font-weight: bold
-      :background= !paginationBgOn
-      :color= !paginationLinkOn
-      :border= !paginationBdrOn
-
-    a
-      text-decoration: none
-      :color= !paginationLinkOff
-      :border= !paginationBdrOff
-      :background= !paginationBgOff
-      &:hover, &:focus
-        :background= !paginationBgOn
-        :color= !paginationLinkOn
-        :border-color= !paginationBdrOn
+  :text-align center
+  :padding .3em
+  a, span
+    :padding .2em .5em
+  span.disabled
+    :color #AAA
+  span.current
+    :font-weight bold
+    :color #FF0084
+  a
+    :border 1px solid #DDDDDD
+    :color #0063DC
+    :text-decoration none
+    &:hover, &:focus
+      :border-color #003366
+      :background #0063DC
+      :color white
+  .page_info
+    :color #aaa
+    :padding-top .8em
+  .prev_page, .next_page
+    :border-width 2px
+  .prev_page
+    :margin-right 1em
+  .next_page
+    :margin-left 1em
