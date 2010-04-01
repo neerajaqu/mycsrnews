@@ -16,7 +16,7 @@
             .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p
-                = caption(sanitize(strip_tags(primary1.featured_blurb)),200)
+                = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
                 = link_to 'More...', primary1
               %span.btnComment== #{like_link primary1} #{primary1.num_votes}
               %span.btnComment== #{link_to t('comments'), primary1} #{primary1.num_comments}
@@ -32,7 +32,7 @@
             .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p
-                = primary1.featured_blurb
+                = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
                 = link_to 'More...', primary1
               %span.btnComment.float_left== #{like_link primary1} #{primary1.num_votes}
               %span.btnComment.float_left== #{link_to t('comments'), primary1} #{primary1.num_comments}
@@ -51,7 +51,7 @@
             .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p
-                = primary1.featured_blurb
+                = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
                 = link_to 'More...', primary1
               %span.btnComment.float_left== #{like_link primary1} #{primary1.num_votes}
               %span.btnComment.float_left== #{link_to t('comments'), primary1} #{primary1.num_comments}
@@ -60,7 +60,7 @@
             .storyBlockWrap
               %h1= link_to primary2.featured_title, primary2.featured_url
               %p
-                = primary2.featured_blurb
+                = caption(sanitize(strip_tags(primary2.featured_blurb)),300)
                 = link_to 'More...', primary2
               %span.btnComment.float_left== #{like_link primary2} #{primary2.num_votes}
               %span.btnComment.float_left== #{link_to t('comments'), primary2} #{primary2.num_comments}
