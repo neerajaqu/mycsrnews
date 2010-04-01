@@ -1,7 +1,7 @@
 -# @expects: local 'questions'
 
 - cache :top_questions_fbml do
-  - top_questions ||= Question.top 5
+  - top_questions ||= Question.active.top 5
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('questions.top_title')

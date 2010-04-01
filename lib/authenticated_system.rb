@@ -57,6 +57,10 @@ module AuthenticatedSystem
       (current_user and current_user.is_admin?) || access_denied
     end
 
+    def moderator_user_required
+      (current_user and (current_user.is_moderator? or current_user.is_admin?)) || access_denied
+    end
+
     # Redirect as appropriate when an access request fails.
     #
     # The default action is to redirect to the login screen.

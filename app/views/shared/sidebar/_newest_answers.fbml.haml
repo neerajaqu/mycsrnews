@@ -1,7 +1,7 @@
 -# @expects: local 'newest_answers'
 
 - cache :newest_answers_fbml do
-  - newest_answers ||= Answer.newest 5
+  - newest_answers ||= Answer.active.newest 5
   - unless newest_answers.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar

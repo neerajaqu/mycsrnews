@@ -18,8 +18,9 @@
         - form.buttons do
           = form.commit_button :button_html => { :class => "btn_1" }
 
-  - cache :questions_list_html do
-    - questions ||= Question.active.newest
+  - cache "questions_list_#{@page}html" do
+    - questions ||= Question.active.paginate :page => params[:page], :per_page => Question.per_page, :order => "created_at desc"
+    - @paginate ||= false
     - unless questions.empty?
       .panel_1
         .panelBar
@@ -48,6 +49,11 @@
                       %span.btnComment.float_left== #{like_link question} #{question.votes.size}
                       %span.btnComment.float_left== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
                       %span.btnComment.float_left= fb_share_item_button question
+
+      - if @paginate
+        .clearfix
+          = will_paginate questions
+          %br
 
 #col_right
   = render :partial => 'shared/sidebar/questions_whatisthis'

@@ -30,7 +30,7 @@ class QandaSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_resource_cache(resource)
-    ['top_resources', 'newest_resources'].each do |fragment|
+    ['top_resources', 'newest_resources', 'resources_list'].each do |fragment|
       expire_fragment "#{fragment}_html"
       expire_fragment "#{fragment}_fbml"
     end
@@ -44,9 +44,13 @@ class QandaSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_question_cache(question)
-    ['top_questions', 'questions_list', 'newest_questions', 'unanswered_questions', "#{question.cache_key}_top", "#{question.cache_key}_bottom"].each do |fragment|
+    ['top_questions', 'newest_questions', 'unanswered_questions', "#{question.cache_key}_top", "#{question.cache_key}_bottom"].each do |fragment|
       expire_fragment "#{fragment}_html"
       expire_fragment "#{fragment}_fbml"
+    end
+    ['', 'page_1_', 'page_2_'].each do |page|
+      expire_fragment "questions_list_#{page}html"
+      expire_fragment "questions_list_#{page}fbml"
     end
   end
 
@@ -60,7 +64,7 @@ class QandaSweeper < ActionController::Caching::Sweeper
 
   def self.expire_resource_all resource
     controller = ActionController::Base.new
-    ['top_resources', 'newest_resources'].each do |fragment|
+    ['top_resources', 'newest_resources', 'resources_list'].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
       controller.expire_fragment "#{fragment}_fbml"
     end
@@ -77,9 +81,13 @@ class QandaSweeper < ActionController::Caching::Sweeper
 
   def self.expire_question_all question
     controller = ActionController::Base.new
-    ['top_questions', 'questions_list', 'newest_questions', 'unanswered_questions', "#{question.cache_key}_top", "#{question.cache_key}_bottom"].each do |fragment|
+    ['top_questions', 'newest_questions', 'unanswered_questions', "#{question.cache_key}_top", "#{question.cache_key}_bottom"].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
       controller.expire_fragment "#{fragment}_fbml"
+    end
+    ['', 'page_1_', 'page_2_'].each do |page|
+      controller.expire_fragment "questions_list_#{page}html"
+      controller.expire_fragment "questions_list_#{page}fbml"
     end
   end
 

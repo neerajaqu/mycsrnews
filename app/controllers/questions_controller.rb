@@ -2,11 +2,14 @@ class QuestionsController < ApplicationController
 
   before_filter :login_required, :only => [:like, :new, :create, :create_answer]
 
+  cache_sweeper :qanda_sweeper, :only => [:create, :update, :destroy, :create_answer]
+
   def index
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Questions'
     respond_to do |format|
-      format.html
-      format.fbml
+      format.html { @paginate = true }
+      format.fbml { @paginate = true }
       format.json { @questions = Question.refine(params) }
       format.fbjs { @questions = Question.refine(params) }
     end
@@ -37,9 +40,10 @@ class QuestionsController < ApplicationController
   end
 
   def my_questions
+    @paginate = true
     @current_sub_tab = 'My Questions'
     @user = User.find(params[:id])
-    @questions = @user.questions
+    @questions = @user.questions.active.paginate :page => params[:page], :per_page => Question.per_page, :order => "created_at desc"
   end
 
   def create_answer

@@ -61,14 +61,14 @@ module Newscloud
 
         def toggle_blocked
           self.is_blocked = ! self.is_blocked
-          self.save
+          return self.save ? true : false
         end
 
         def toggle_featured
           #TODO - set featured_at timestamp
           self.is_featured = ! self.is_featured
           self.featured_at = Time.now if self.respond_to?('featured_at')
-          self.save
+          return self.save ? true : false
         end
 
       end

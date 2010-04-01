@@ -14,6 +14,10 @@ class VoteSweeper < ActionController::Caching::Sweeper
       QandaSweeper.expire_answer_all vote.voteable
     elsif vote.voteable.is_a?(Idea)
       IdeaSweeper.expire_idea_all vote.voteable
+    elsif vote.voteable.is_a?(Event)
+      EventSweeper.expire_event_all vote.voteable
+    elsif vote.voteable.is_a?(Resource)
+      ResourceSweeper.expire_resource_all vote.voteable
     end
   end
 

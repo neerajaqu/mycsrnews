@@ -78,6 +78,7 @@ module ApplicationHelper
 
   #remove this method when self.title methods created
   def linked_item_details(item, length = 150, url = false)
+    return "" if item.details.nil?
     caption = caption(item.details, length)
     "#{caption} #{link_to 'More', (url ? url : item)}"
   end
@@ -93,6 +94,7 @@ module ApplicationHelper
   end
 
   def caption(text, length = 150)
+    return "" if text.nil?
     text.length <= length ? text : text[0, length] + '...'
   end
 

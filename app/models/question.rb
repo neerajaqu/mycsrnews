@@ -18,6 +18,8 @@ class Question < ActiveRecord::Base
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :unanswered, lambda { |*args| { :conditions => ["answers_count = 0"], :order => ["created_at asc"], :limit => (args.first || 10) } }
 
+  def self.per_page; 20; end
+
   def self.get_top
     self.tally({
     	:at_least => 1,

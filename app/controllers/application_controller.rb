@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_stories
-    @top_stories ||= Content.tally({
+    @top_stories ||= Content.active.tally({
     	:at_least => 1,
     	:limit    => 5,
     	:order    => "votes.count desc"
@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_ideas
-    @top_ideas ||= Idea.tally({
+    @top_ideas ||= Idea.active.tally({
     	:at_least => 1,
     	:limit    => 5,
     	:order    => "votes.count desc"
@@ -109,7 +109,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_newest_ideas
-    @newest_ideas ||= Idea.active.newest
+    @newest_ideas ||= Idea.active.newest 5
   end
 
   def load_featured_ideas
@@ -137,7 +137,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_resources
-    @top_resources ||= Resource.tally({
+    @top_resources ||= Resource.active.tally({
     	:at_least => 1,
     	:limit    => 5,
     	:order    => "votes.count desc"
@@ -149,7 +149,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_events
-    @top_events ||= Event.tally({
+    @top_events ||= Event.active.tally({
     	:at_least => 1,
     	:limit    => 5,
     	:order    => "votes.count desc"
@@ -216,6 +216,39 @@ class ApplicationController < ActionController::Base
 
   def check_authorized_param
     flash[:error] = "You must be logged in to do that!" if params[:unauthorized]
+  end
+
+  def find_polymorphic_item
+    params.each do |name, value|
+      next if name =~ /^fb/
+      if name =~ /(.+)_id$/
+        # switch story requests to use the content model
+        klass = $1 == 'story' ? 'content' : $1
+        return klass.classify.constantize.find(value)
+      end
+    end
+    nil
+  end
+
+  def expire_cache item
+    case item.class.name
+      when "Content"
+        StorySweeper.expire_story_all item
+      when "Article"
+        StorySweeper.expire_article_all item
+      when "Idea"
+        IdeaSweeper.expire_idea_all item
+      when "Question"
+        QandaSweeper.expire_question_all item
+      when "Answer"
+        QandaSweeper.expire_answer_all item
+      when "Resource"
+        ResourceSweeper.expire_resource_all item
+      when "Event"
+        EventSweeper.expire_event_all item
+      else
+      	nil
+    end
   end
 
 end

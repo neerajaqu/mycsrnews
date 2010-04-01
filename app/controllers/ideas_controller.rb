@@ -1,7 +1,7 @@
 class IdeasController < ApplicationController
   before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :my_ideas], :if => :request_comes_from_facebook?
 
-  cache_sweeper :story_sweeper, :only => [:create, :update, :destroy]
+  cache_sweeper :idea_sweeper, :only => [:create, :update, :destroy]
 
   before_filter :set_current_tab
   before_filter :login_required, :only => [:new, :create, :update, :my_ideas]
@@ -12,9 +12,9 @@ class IdeasController < ApplicationController
   before_filter :load_newest_idea_boards
 
   def index
-    @page = (params[:page].present? and params[:page].to_i < 3) ? "page_#{params[:page]}_" : ""
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Ideas'
-    @ideas = Idea.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
+    @ideas = Idea.active.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
     respond_to do |format|
       format.html { @paginate = true }
       format.fbml { @paginate = true }
@@ -55,9 +55,10 @@ class IdeasController < ApplicationController
   end
 
   def my_ideas
+    @paginate = true
     @current_sub_tab = 'My Ideas'
     @user = User.find(params[:id])
-    @ideas = @user.ideas
+    @ideas = @user.ideas.active.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
   end
 
   def set_slot_data

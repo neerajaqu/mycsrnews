@@ -1,6 +1,7 @@
 class StoriesController < ApplicationController
   #caches_page :show, :index
   before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :like], :if => :request_comes_from_facebook?
+
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
@@ -11,7 +12,7 @@ class StoriesController < ApplicationController
   before_filter :load_newest_users, :only => [:index, :app_tab, :tags]
 
   def index
-    @page = (params[:page].present? and params[:page].to_i < 3) ? "page_#{params[:page]}_" : ""
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Stories'
     @contents = Content.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     respond_to do |format|
@@ -66,7 +67,7 @@ class StoriesController < ApplicationController
 
   def tags
     @paginate = true
-    @contents = Content.tagged_with(params[:tag], :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @contents = Content.tagged_with(params[:tag], :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
 
   end
 

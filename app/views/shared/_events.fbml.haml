@@ -1,6 +1,7 @@
 -# expects @title, @events
+- cache_if page.present?, "events_list_#{page}fbml" do
   - events ||= Events.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
-  - no_paginate ||= true
+  - paginate ||= false
   .panel_1
     .panelBar
       %h2= t('.events_title')
@@ -30,9 +31,8 @@
                     %b Specific Location
                   %li== #{event.location}
                   %li== #{event.start_time}
-                  -#                %li 
-                  -#                  %b Cost
-    - unless no_paginate
+
+    - if paginate
       .clearfix
-        = will_paginate resources
+        = will_paginate events
         %br

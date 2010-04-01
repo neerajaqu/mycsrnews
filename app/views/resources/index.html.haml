@@ -3,7 +3,7 @@
   = render :partial => 'subnav'
 
 #col_left
-  = render :partial => 'shared/resources', :locals => { :resources => @resources, :title => t('.resources_title') }
+  = render :partial => 'shared/resources', :locals => { :resources => @resources, :paginate => @paginate, :page => @page }
 
 #col_right
   = render :partial => 'shared/sidebar/resources_whatisthis'
