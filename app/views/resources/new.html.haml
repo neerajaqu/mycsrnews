@@ -6,7 +6,7 @@
     .panel_1
       .panelBar
         %h2 
-          Suggest A Link
+          Add a new link
       .formBox
         %h4.title== What's your suggested link for #{APP_CONFIG['site_title']}?
         
@@ -24,3 +24,4 @@
             = form.commit_button :label =>t('.label_create'), :button_html => { :class => 'btn' } 
 
 #col_right
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

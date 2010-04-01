@@ -1,6 +1,7 @@
 class StoriesController < ApplicationController
   #caches_page :show, :index
   before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :like], :if => :request_comes_from_facebook?
+
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
@@ -11,11 +12,12 @@ class StoriesController < ApplicationController
   before_filter :load_newest_users, :only => [:index, :app_tab, :tags]
 
   def index
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Stories'
-    @contents = Content.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    @contents = Content.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     respond_to do |format|
-      format.html
-      format.fbml
+      format.html { @paginate = true }
+      format.fbml { @paginate = true }
       format.atom
       format.json { @stories = Content.refine(params) }
       format.fbjs { @stories = Content.refine(params) }
@@ -65,18 +67,21 @@ class StoriesController < ApplicationController
 
   def tags
     @paginate = true
-    @contents = Content.tagged_with(params[:tag], :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @contents = Content.tagged_with(params[:tag], :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
 
+  end
+
+  def set_slot_data
+    @ad_banner = Metadata.get_ad_slot('primary', 'stories')
+    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'stories')
+    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'stories')
+    @ad_small_square = Metadata.get_ad_slot('small_square', 'stories')
   end
 
   private
 
   def set_current_tab
     @current_tab = 'stories'
-  end
-
-  def set_slot_data
-    @slot_data = Metadata.find_by_key_type_name('ad-slot-name', 'stories')
   end
 
 end

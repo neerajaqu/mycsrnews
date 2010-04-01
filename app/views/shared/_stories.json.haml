@@ -1,4 +1,4 @@
-- stories ||= Content.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+- stories ||= Content.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
 %ul
   - stories.each do |content|
     %li{'data-id' => content.cache_key}
@@ -8,10 +8,10 @@
         - else
           = image_tag ('default/default_thumb_b.gif', :width => "100%")
       .storyBlockWrap.storyBlockSpacer
-        %h2.storyHead= link_to content.title, story_path(content)
-        %p.storyCaption= linked_story_caption content
-        .profilePic= local_linked_profile_pic content.user
+        %h2.storyHead= link_to content.title, story_path(content, :format => 'html')
+        %p.storyCaption= linked_story_caption content, 150, false, :format => 'html'
+        .profilePic= local_linked_profile_pic content.user, :format => 'html'
         .storyBlockMeta.float_left
-          %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
-          %span.btnComment.float_left== #{like_link content} #{content.votes_tally}
-          %span.btnComment.float_left== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+          %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user, :format => 'html'), :date => time_ago_in_words(content.created_at))
+          %span.btnComment.float_left== #{like_link content, :format => 'html'} #{content.votes_tally}
+          %span.btnComment.float_left== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop", :format => 'html')} #{content.comments_count}

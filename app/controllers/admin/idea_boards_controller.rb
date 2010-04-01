@@ -1,5 +1,4 @@
 class Admin::IdeaBoardsController < AdminController
-  skip_before_filter :admin_user_required
 
   def index
     @idea_boards = IdeaBoard.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
@@ -37,6 +36,12 @@ class Admin::IdeaBoardsController < AdminController
       flash[:error] = "Could not create your Idea Topic, please try again"
       render :new
     end
+  end
+
+  def destroy
+    @idea_board = IdeaBoard.find(params[:id])
+    @idea_board.destroy
+    redirect_to admin_idea_boards_path
   end
 
   private

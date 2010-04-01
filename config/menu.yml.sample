@@ -13,7 +13,6 @@ menu:
   resources:
     resources_list: 'enabled'
     new_resource: 'enabled'
-  #qna:
   ideas:
     ideas_list: 'enabled'
     idea_boards_list: 'enabled'
@@ -21,6 +20,7 @@ menu:
   questions:
     questions_list: 'enabled'
     new_question: 'enabled'
+    my_questions: 'enabled'
   events:
     events_list: 'enabled'
     new_event: 'enabled'

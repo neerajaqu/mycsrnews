@@ -1,6 +1,10 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render :partial => 'shared/subnav/questions_subnav'
+
 #col_left
-  - cache "#{@question.cache_key}_fbml" do
-    #readArticle.panel_1
+  #readArticle.panel_1
+    - cache "#{@question.cache_key}_top_fbml" do
       .topBar
         %ul
           %li
@@ -23,27 +27,33 @@
           - if @question.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @question }
       %div.bodyArticle= sanitize caption @question.details
-  #answerForm.hide
-    - unless current_user.present?
-      %p== #{t 'answers.logged_in_error'} #{link_to 'Login now', link_user_accounts_users_path}
-    - else
-      - semantic_form_for @answer, :url => create_answer_question_path(@question) do |form|
-        - form.inputs do
-          = form.input :answer
-        - form.buttons do
-          = form.commit_button :button_html => { :class => "btn" }
-  #answersList
-    - unless @question.answers.present?
-      %p
-        This question has not yet been answered, 
-        %a= link_to t('answer_it'), '#', :class => "answer_link"
-    - else
-      %h2== Showing #{pluralize @question.answers.size, 'Answer'}
-      .list_stories
-        %ul
-          - @question.answers.each do |answer|
-            = render :partial => 'shared/answer', :locals => { :answer => answer }
-  = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
+      - if @question.media_item?
+        = render_media_items @question
+      -# TODO:: this breaks with .clearfix on fb side
+      -#= render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
+    %br
+    #answerForm.clearfix.hide
+      - unless current_user.present?
+        %p== #{t 'answers.logged_in_error'} #{link_to 'Login now', link_user_accounts_users_path}
+      - else
+        - semantic_form_for @answer, :url => create_answer_question_path(@question) do |form|
+          - form.inputs do
+            = form.input :answer
+          - form.buttons do
+            = form.commit_button :button_html => { :class => "btn" }
+    - cache "#{@question.cache_key}_bottom_fbml" do
+      #answersList
+        - unless @question.answers.present?
+          %p
+            This question has not yet been answered, 
+            %a= link_to t('answer_it'), '#', :class => "answer_link"
+        - else
+          %h2== Showing #{pluralize @question.answers.size, 'Answer'}
+          .list_stories
+            %ul
+              - @question.answers.each do |answer|
+                = render :partial => 'shared/answer', :locals => { :answer => answer }
+      = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
 #col_right
   = render :partial => 'shared/sidebar/top_questions'
   = render :partial => 'shared/sidebar/newest_questions'

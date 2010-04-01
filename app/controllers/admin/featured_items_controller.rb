@@ -1,5 +1,4 @@
 class Admin::FeaturedItemsController < AdminController
-  skip_before_filter :admin_user_required
   layout proc {|c| c.request.xhr? ? false : "new_admin" }
   before_filter :set_featured_types, :only => :load_template
   cache_sweeper :story_sweeper, :only => [:save]

@@ -1,13 +1,18 @@
 -# @expects: local 'event'
 
-- cache :top_events_html, :expires_in => 15.seconds do
+- cache :top_events_html do
   - top_events ||= Event.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_events_title')
-    .list_items
+    .list_stories
       %ul
         - top_events.each do |event|
           %li
-            .profilePic= local_linked_profile_pic event.user
-            = link_to event.name, event_path(event)
+            .storyBlockWrap
+              %h4= link_to event.name, event_path(event)
+              .profilePic= local_linked_profile_pic event.user
+              .eventBlockMeta
+                %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))
+                %span.btnComment.float_left== #{like_link event} #{event.votes_tally}
+                %span.btnComment.float_left== #{link_to t('comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}

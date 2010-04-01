@@ -1,0 +1,48 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }  
+  = render :partial => 'shared/subnav/questions_subnav'
+
+#col_left
+  - @questions ||= Question.active.newest
+  - @paginate ||= false
+  - unless @questions.empty?
+    .panel_1
+      .panelBar
+        %h2= t('questions.my_list_title')
+        - if @questions.present? and @questions.first.refineable?
+          .refine_link
+            = render :partial => 'shared/forms/refine_dropdown', :locals => { :select_options => Question.refineable_select_options }
+      .subtitle
+        %span= t('questions.my_list_subtitle')
+      .storyList
+        #front-stories.list_stories
+          %ul
+            - @questions.each do |question|
+              %li.askQuestionWrap{'data-id' => question.cache_key}
+                .thumb
+                  - if question.images.present?
+                    = image_tag question.images.first.url(:thumb)
+                  - else
+                    = image_tag ('default/default_thumb_b.gif')
+                .storyBlockWrap.storyBlockSpacer
+                  %h2.storyHead= link_to question.question, question
+                  %p.storyCaption= linked_item_details question
+                  .profilePic= local_linked_profile_pic question.user
+                  .storyBlockMeta.float_left
+                    %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
+                    %span.btnComment.float_left== #{like_link question} #{question.votes_tally}
+                    %span.btnComment.float_left== #{link_to t('comments'), question_path(question, :anchor => "commentListTop")} #{question.comments_count}
+                    %span.btnComment.float_left= fb_share_button(questions_url(question))
+ 
+      - if @paginate
+        .clearfix
+          = will_paginate @questions
+          %br
+
+#col_right
+  = render :partial => 'shared/sidebar/questions_whatisthis'
+  = render :partial => 'shared/sidebar/top_questions'
+  = render :partial => 'shared/sidebar/newest_questions'
+  = render :partial => 'shared/sidebar/unanswered_questions'
+  = render :partial => 'shared/sidebar/top_answers'
+  = render :partial => 'shared/sidebar/newest_answers'

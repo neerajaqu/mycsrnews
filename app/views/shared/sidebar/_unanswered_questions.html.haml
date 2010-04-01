@@ -1,7 +1,7 @@
 -# @expects: local 'questions'
 
 - cache :unanswered_questions_html do
-  - top_questions ||= Question.unanswered 5
+  - top_questions ||= Question.active.unanswered 5
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('questions.unanswered_title')

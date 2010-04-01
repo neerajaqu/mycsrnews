@@ -19,6 +19,9 @@ config.action_view.cache_template_loading            = true
 app_name = RAILS_ROOT =~ %r(/([^/]+)/(current|release)) ? $1 : 'default'
 config.cache_store = :mem_cache_store, { :namespace => app_name }
 
+# Set the i18n cache store
+#I18n.backend.cache_store = :mem_cache_store
+
 # Enable serving of images, stylesheets, and javascripts from an asset server
 # config.action_controller.asset_host = "http://assets.example.com"
 

@@ -2,7 +2,7 @@ en:
     resource_sections:
         subnav:
             browse_resources: "Browse Links"
-            suggest_resource: "Suggest a Link"
+            suggest_resource: "Add a new link"
             my_resources: "Your Links"
         index:
             resources_title: "Active Links"

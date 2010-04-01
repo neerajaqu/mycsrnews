@@ -1,9 +1,9 @@
 - content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
   = render :partial => 'shared/subnav/stories_subnav'
 
 #col_left
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
-  = render :partial => 'shared/stories'
+  = render :partial => 'shared/stories', :locals => { :contents => @contents, :paginate => @paginate, :page => @page }
 
 #col_right
   = render :partial => 'shared/sidebar/post_story'

@@ -1,5 +1,5 @@
-- cache "#{@story.cache_key}_html" do
-  #col_left
+#col_left
+  - cache "#{@story.cache_key}_html" do
     #readArticle.panel_1
       .topBar
         %ul
@@ -33,13 +33,16 @@
 
     - if @story.media_item?
       = render_media_items @story
-    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
-    = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
+  = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
+  - cache "#{@story.cache_key}_bottom_html" do
     = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
     - if @story.moderatable?
       = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
 
-  #col_right
+#col_right
+  - cache "#{@story.cache_key}_sidebar_html" do
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
     = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

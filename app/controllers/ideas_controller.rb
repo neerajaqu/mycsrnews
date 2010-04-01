@@ -1,7 +1,10 @@
 class IdeasController < ApplicationController
-  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :like], :if => :request_comes_from_facebook?
+  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :my_ideas], :if => :request_comes_from_facebook?
+
+  cache_sweeper :idea_sweeper, :only => [:create, :update, :destroy]
+
   before_filter :set_current_tab
-  before_filter :login_required, :only => [:like, :new, :create, :update]
+  before_filter :login_required, :only => [:new, :create, :update, :my_ideas]
   before_filter :load_top_ideas
   before_filter :load_newest_ideas
   before_filter :load_featured_ideas, :only => [:index]
@@ -9,11 +12,12 @@ class IdeasController < ApplicationController
   before_filter :load_newest_idea_boards
 
   def index
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Ideas'
-    @ideas = Idea.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
+    @ideas = Idea.active.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
     respond_to do |format|
-      format.html
-      format.fbml
+      format.html { @paginate = true }
+      format.fbml { @paginate = true }
       format.atom
       format.json { @ideas = Idea.refine(params) }
       format.fbjs { @ideas = Idea.refine(params) }
@@ -24,7 +28,7 @@ class IdeasController < ApplicationController
     @current_sub_tab = 'Suggest Idea'
     @idea = Idea.new
     @idea.idea_board = @idea_board if @idea_board.present?
-    @ideas = Idea.newest
+    @ideas = Idea.active.newest
   end
 
   def create
@@ -40,7 +44,7 @@ class IdeasController < ApplicationController
     	flash[:success] = "Thank you for your idea!"
     	redirect_to @idea_board.present? ? [@idea_board, @idea] : @idea
     else
-      @ideas = Idea.newest
+      @ideas = Idea.active.newest
     	render :new
     end
   end
@@ -51,9 +55,16 @@ class IdeasController < ApplicationController
   end
 
   def my_ideas
+    @paginate = true
     @current_sub_tab = 'My Ideas'
     @user = User.find(params[:id])
-    @ideas = @user.ideas
+    @ideas = @user.ideas.active.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
+  end
+
+  def set_slot_data
+    @ad_banner = Metadata.get_ad_slot('banner', 'ideas')
+    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'ideas')
+    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'ideas')
   end
 
   private
@@ -64,10 +75,6 @@ class IdeasController < ApplicationController
 
   def set_current_tab
     @current_tab = 'ideas'
-  end
-
-  def set_slot_data
-    @slot_data = Metadata.find_by_key_type_name('ad-slot-name', 'ideas')
   end
 
 end

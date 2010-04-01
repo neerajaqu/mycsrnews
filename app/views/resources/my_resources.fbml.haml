@@ -2,7 +2,8 @@
   = render :partial => 'subnav'
 
 #col_left
-  = render :partial => 'shared/my_resources', :locals => { :resources => @resources, :title => t('.my_resources_title') }
+  -# HACK:: :page set to false to disable caching since this is the standard events list
+  = render :partial => 'shared/resources', :locals => { :resources => @resources, :page => false, :paginate => @paginate }
 
 #col_right
   = render :partial => 'shared/sidebar/resource_sections_list', :locals => { :resource_sections => @newest_resource_sections }

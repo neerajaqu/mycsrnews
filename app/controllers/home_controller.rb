@@ -11,6 +11,7 @@ class HomeController < ApplicationController
   end
 
   def index
+    @page = "page_1_"
     if request.post?
     	respond_to do |format|
     	  format.html

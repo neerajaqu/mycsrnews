@@ -13,6 +13,7 @@ module Newscloud
           has_many :flags, :as => :flaggable
 
           named_scope :active, { :conditions => ["is_blocked = 0"] }
+          named_scope :inactive, { :conditions => ["is_blocked = 1"] }
 
           include Newscloud::Acts::Moderatable::InstanceMethods
         end
@@ -60,14 +61,14 @@ module Newscloud
 
         def toggle_blocked
           self.is_blocked = ! self.is_blocked
-          self.save
+          return self.save ? true : false
         end
 
         def toggle_featured
           #TODO - set featured_at timestamp
           self.is_featured = ! self.is_featured
-          self.featured_at = Time.now
-          self.save
+          self.featured_at = Time.now if self.respond_to?('featured_at')
+          return self.save ? true : false
         end
 
       end

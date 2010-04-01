@@ -21,11 +21,11 @@ module ApplicationHelper
   def build_feed_link(action)
     action_type = action.class.name
     if action_type == 'Content'
-    	base_url(story_path(action, :canvas => false))
+    	base_url(story_path(action, :canvas => false, :format => 'html'))
     elsif action_type == 'Comment'
-    	base_url(story_path(action.content, :canvas => false))
+    	base_url(polymorphic_path(action.commentable, :canvas => false, :format => 'html'))
     elsif action_type == 'Vote'
-    	base_url(story_path(action.voteable, :canvas => false))
+    	base_url(story_path(action.voteable, :canvas => false, :format => 'html'))
     else
     	''
     end
@@ -36,9 +36,9 @@ module ApplicationHelper
     if action_type == 'Content'
     	"#{user.name} posted #{action.title}"
     elsif action_type == 'Comment'
-    	"#{user.name} just commented on #{action.content.title}"
+    	"#{user.name} just commented on #{action.commentable.item_title}"
     elsif action_type == 'Vote'
-    	"#{user.name} liked #{action.voteable.title}"
+    	"#{user.name} liked #{action.voteable.item_title}"
     else
     	''
     end
@@ -49,9 +49,9 @@ module ApplicationHelper
     if action_type == 'Content'
     	"#{user.name} posted #{linked_story_caption(action, 150, build_feed_link(action))}"
     elsif action_type == 'Comment'
-    	"#{user.name} just commented on #{action.content.title}: #{action.comments}"
+    	"#{user.name} just commented on #{action.commentable.item_title}: #{action.comments}"
     elsif action_type == 'Vote'
-    	"#{user.name} liked #{action.voteable.title}"
+    	"#{user.name} liked #{action.voteable.item_title}"
     else
     	''
     end
@@ -71,13 +71,14 @@ module ApplicationHelper
     end
   end
 
-  def linked_story_caption(story, length = 150, url = false)
+  def linked_story_caption(story, length = 150, url = false, options = {})
     caption = caption(story.caption, length)
-    "#{caption} #{link_to 'More', (url ? url : story_path(story))}"
+    "#{caption} #{link_to 'More', (url ? url : story_path(story, options))}"
   end
 
   #remove this method when self.title methods created
   def linked_item_details(item, length = 150, url = false)
+    return "" if item.details.nil?
     caption = caption(item.details, length)
     "#{caption} #{link_to 'More', (url ? url : item)}"
   end
@@ -93,6 +94,7 @@ module ApplicationHelper
   end
 
   def caption(text, length = 150)
+    return "" if text.nil?
     text.length <= length ? text : text[0, length] + '...'
   end
 
@@ -308,14 +310,24 @@ EMBED
 
   def like_link item, options = {}
     options.merge!(:class => 'voteUp')
+    format = options.delete(:format)
     return '' unless item.respond_to? "votes_for"    
-    link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), options)
+    if format
+      link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
+    else
+      link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), options)
+    end
   end
 
   def dislike_link item, options = {}
     options.merge!(:class => 'voteDown')
+    format = options.delete(:format)
     return '' unless item.respond_to? "votes_for"
-    link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item), options)
+    if format
+      link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
+    else
+      link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item), options)
+    end
   end
 
   def answer_translate count = 0

@@ -1,4 +1,6 @@
 en:
+  date: 
+    order: [:month, :day, :year] 
   header:
     account: "Account"
   footer:
@@ -57,11 +59,14 @@ en:
     title: "Questions"
     list_title: "Questions and Answers"
     list_subtitle: "Help your community by answering questions"
+    my_list_title: "Your Questions"
+    my_list_subtitle: "Here are the questions you've asked so far"
     top_title: "top questions"
     newest_title: "Newest Questions"
     unanswered_title: "Unanswered Questions"
     list: "Answer Questions"
     new: "Ask a Question"
+    my_questions: "Your Questions"
     logged_in_error: "You must be logged in to ask questions."
   answers:
     top_title: "Top Answers"

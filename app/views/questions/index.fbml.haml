@@ -1,3 +1,7 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render :partial => 'shared/subnav/questions_subnav'
+
 #col_left
   %h1 Ask a question
   - unless current_user.present?
@@ -14,8 +18,9 @@
         - form.buttons do
           = form.commit_button :button_html => { :class => "btn" }
 
-  - cache :questions_list_fbml do
-    - questions ||= Question.newest
+  - cache "questions_list_#{@page}fbml" do
+    - questions ||= Question.active.paginate :page => params[:page], :per_page => Question.per_page, :order => "created_at desc"
+    - @paginate ||= false
     - unless questions.empty?
       .panel_1
         .panelBar
@@ -44,6 +49,11 @@
                       %span.btnComment.float_left== #{like_link question} #{question.votes_tally}
                       %span.btnComment.float_left== #{link_to t('comments'), question_path(question, :anchor => "commentListTop")} #{question.comments_count}
                       %span.btnComment.float_left= fb_share_button(questions_url(question))
+
+      - if @paginate
+        .clearfix
+          = will_paginate questions
+          %br
 
 #col_right
   = render :partial => 'shared/sidebar/questions_whatisthis'

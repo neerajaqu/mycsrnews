@@ -29,6 +29,12 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def set_slot_data
+    @ad_banner = Metadata.get_ad_slot('banner', 'articles')
+    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'articles')
+    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'articles')
+  end
+
   private
 
   def set_current_tab

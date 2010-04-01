@@ -1,33 +1,38 @@
 -# expects @title, @events
-.panel_1
-  .panelBar
-    %h2= t('.events_title')
-    - if events.present? and events.first.refineable?
-      .bar_link
-        = render :partial => 'shared/forms/refine_dropdown'
-  .storyList
-    .list_stories
-      %ul
-        - events.each do |event|
-          %li.eventBlock
-            .eventDetailsBlock
-              .storyBlockWrap
-                %h4
-                  %span.tag
-                    Event:
-                  = link_to event.name, event_path(event)
-                .profilePic= local_linked_profile_pic event.user, :size => :square
-                .storyBlockMeta
-                  %h3= t('.events_asked_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))
-                  
-                  %span.btnComment== #{like_link event} #{event.votes_tally}
-                  %span.btnComment== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
-                  %span.btnComment= fb_share_button(events_url(event))
-            .eventLocationBlock
-              %ul
-                %li 
-                  %b Specific Location
-                %li General Location
-                %li TIME
-                %li 
-                  %b Cost
+- cache_if page.present?, "events_list_#{page}fbml" do
+  - events ||= Events.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - paginate ||= false
+  .panel_1
+    .panelBar
+      %h2= t('.events_title')
+      - if events.present? and events.first.refineable?
+        .bar_link
+          = render :partial => 'shared/forms/refine_dropdown'
+    .storyList
+      .list_stories
+        %ul
+          - events.each do |event|
+            %li.eventBlock
+              .eventDetailsBlock
+                .storyBlockWrap
+                  %h4
+                    %span.tag
+                      Event:
+                    = link_to event.name, event_path(event)
+                  .profilePic= local_linked_profile_pic event.user, :size => :square
+                  .storyBlockMeta
+                    %h3= t('.events_asked_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))                  
+                    %span.btnComment.float_left== #{like_link event} #{event.votes_tally}
+                    %span.btnComment.float_left== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
+                    %span.btnComment.float_left= fb_share_button(events_url(event))
+              .eventLocationBlock
+                %ul
+                  %li 
+                    %b Specific Location
+                  %li== #{event.location}
+                  %li== #{event.start_time}
+
+    - if paginate
+      .clearfix
+        = will_paginate events
+        %br

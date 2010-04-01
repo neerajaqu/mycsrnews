@@ -27,7 +27,14 @@ ActionController::Routing::Routes.draw do |map|
 
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
+  map.paged_ideas '/ideas/page/:page.:format', :controller => 'ideas', :action => 'index'
   map.paged_newswires '/newswires/page/:page.:format', :controller => 'newswires', :action => 'index'
+  map.paged_my_events '/events/:id/my_events/page/:page.:format', :controller => 'events', :action => 'my_events'
+  map.paged_events '/events/page/:page.:format', :controller => 'events', :action => 'index'
+  map.paged_my_resources '/resources/:id/my_resources/page/:page.:format', :controller => 'resources', :action => 'my_resources'
+  map.paged_resources '/resources/page/:page.:format', :controller => 'resources', :action => 'index'
+  map.paged_questions '/questions/page/:page.:format', :controller => 'questions', :action => 'index'
+  map.paged_my_questions '/questions/:id/my_questions/page/:page.:format', :controller => 'questions', :action => 'my_questions'
   map.tagged_stories_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
   map.tagged_stories '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
   map.idea_tag_with_page '/ideas/tag/:tag/page/:page.:format', :controller => 'ideas', :action => 'tags'
@@ -47,14 +54,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :resources, :member => { :like => [:get, :post], :my_resources => [:get, :post] }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :resource_sections, :has_many => :resources
   map.resources :events, :member => { :like => [:get, :post],:my_events => [:get, :post] }, :collection => { :index => [:get, :post] },:has_many => [:comments, :flags]
-  map.resources :questions, :member => { :like => [:get, :post], :create_answer => :post }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :answers, :flags]
+  map.resources :questions, :member => { :like => [:get, :post], :create_answer => :post, :my_questions => [:get, :post] }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :answers, :flags]
   map.resources :answers, :member => { :like => [:get, :post] }, :has_many => [:comments, :answers, :flags]
 
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index
   map.namespace(:admin) do |admin|
-    admin.block '/block.:format', :controller => 'admin', :action => 'block'
-    admin.flag '/flag.:format', :controller => 'admin', :action => 'flag'
+    admin.block '/block.:format', :controller => 'misc', :action => 'block'
+    admin.flag '/flag.:format', :controller => 'misc', :action => 'flag'
     admin.paged_items '/featured_items/:id/load_items/page/:page', :controller => 'featured_items', :action => 'load_items'
     admin.resources :locales, :collection => { :refresh => [:get] }, :has_many => :translations
     admin.translations '/translations.:format', :controller => 'translations', :action => 'translations'

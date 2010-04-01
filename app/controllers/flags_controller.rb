@@ -1,5 +1,7 @@
 class FlagsController < ApplicationController
   before_filter :login_required, :only => [:create,:block,:feature]
+  before_filter :admin_user_required, :only => [:block]
+  before_filter :moderator_user_required, :only => [:feature]
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :feature]
   #TODO:: updated feature cache sweeper
 
@@ -19,6 +21,7 @@ class FlagsController < ApplicationController
   def block
     @item = find_moderatable_item
     if @item.moderatable? and @item.blockable? and @item.toggle_blocked
+    	expire_cache @item
       # todo - if block user, then use fb:ban api call too! or unban
     	flash[:success] = "Successfully #{@item.blocked? ? "Blocked" : "UnBlocked"} your item."
     	redirect_to @item

@@ -1,5 +1,5 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @slot_data }
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
   - if @idea_board.present?
     = render :partial => 'shared/subnav/idea_boards_subnav'
   - else
@@ -44,3 +44,4 @@
 
   #col_right
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @idea.user }
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

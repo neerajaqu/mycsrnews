@@ -1,5 +1,8 @@
 class ResourcesController < ApplicationController
   before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :like], :if => :request_comes_from_facebook?
+
+  cache_sweeper :resource_sweeper, :only => [:create, :update, :destroy]
+
   before_filter :set_current_tab
   before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_resources
@@ -9,11 +12,12 @@ class ResourcesController < ApplicationController
   before_filter :load_newest_resource_sections
 
   def index
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Resources'
-    @resources = Resource.paginate :page => params[:page], :per_page => Resource.per_page, :order => "created_at desc"
+    @resources = Resource.active.paginate :page => params[:page], :per_page => Resource.per_page, :order => "created_at desc"
     respond_to do |format|
-      format.html
-      format.fbml
+      format.html { @paginate = true }
+      format.fbml { @paginate = true }
       format.atom
       format.json { @resources = Resource.refine(params) }
       format.fbjs { @resources = Resource.refine(params) }
@@ -24,7 +28,7 @@ class ResourcesController < ApplicationController
     @current_sub_tab = 'Suggest Resource'
     @resource = Resource.new
     @resource.resource_section = @resource_section if @resource_section.present?
-    @resources = Resource.newest
+    @resources = Resource.active.newest
   end
 
   def create
@@ -37,7 +41,7 @@ class ResourcesController < ApplicationController
     	flash[:success] = "Thank you for adding to our directory!"
     	redirect_to resource_path(@resource)
     else
-      @resources = Resource.newest
+      @resources = Resource.active.newest
     	render :new
     end
   end
@@ -48,9 +52,16 @@ class ResourcesController < ApplicationController
   end
 
   def my_resources
+    @paginate = true
     @current_sub_tab = 'My Resources'
     @user = User.find(params[:id])
-    @resources = @user.resources
+    @resources = @user.resources.active.paginate :page => params[:page], :per_page => Resource.per_page, :order => "created_at desc"
+  end
+
+  def set_slot_data
+    @ad_banner = Metadata.get_ad_slot('banner', 'resources')
+    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'resources')
+    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'resources')
   end
 
   private
@@ -62,5 +73,6 @@ class ResourcesController < ApplicationController
   def set_current_tab
     @current_tab = 'resources'
   end
+
 
 end

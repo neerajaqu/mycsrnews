@@ -36,13 +36,22 @@ module Newscloud
             end
           end
 
-          result = chains.empty? ?
-            self.all(:limit => 10, :order => "created_at desc") :
-            chains.inject(self) { |chain, scope| chain.send(scope) }
+          # TODO:: clean this up
+          if chains.empty?
+          	if self.respond_to? :active
+              result = self.active.all(:limit => 10, :order => "created_at desc")
+            else
+              result = self.all(:limit => 10, :order => "created_at desc")
+            end
+          else
+            chains.unshift 'active' if self.respond_to? :active
+            result = chains.inject(self) { |chain, scope| chain.send(scope) }
+          end
+          result
         end
 
         def valid_refine_type? value
-          ['newest', 'top'].include? value
+          ['newest', 'top'].include? value.downcase
         end
 
         def self.refineable_select_options

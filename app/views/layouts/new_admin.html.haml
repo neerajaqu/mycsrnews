@@ -77,12 +77,12 @@
                 %a{:href => "#modules-ideas"} Ideas
                 %ul
                   %li= link_to 'Ideas', admin_ideas_path
-                  %li= link_to 'Idea Topics', admin_idea_boards_path
+                  %li= link_to 'Topics', admin_idea_boards_path
               %li
-                %a{:href => "#modules-resources"} Resources
+                %a{:href => "#modules-resources"} Directory
                 %ul
-                  %li= link_to 'Resources', admin_resources_path
-                  %li= link_to 'Resource Sections', admin_resource_sections_path
+                  %li= link_to 'Links', admin_resources_path
+                  %li= link_to 'Categories', admin_resource_sections_path
               %li= link_to 'Calendar', admin_events_path
               %li
                 %a{:href => "#modules-questions"} Q & A
@@ -101,6 +101,7 @@
                 %a{:href => "#modules-settings-locales"} Languages
                 %ul
                   %li= link_to 'Default text', admin_locale_translations_path(:locale_id => 'en')
+                  %li= link_to 'Default pages', admin_locale_translations_path(:locale_id => 'en',:type => 'static_pages')
                   %li= link_to 'Locales', admin_locales_path
                   %li= link_to 'Translations', admin_translations_path
                   %li= link_to 'Reflect changes (use rarely)', refresh_admin_locales_path

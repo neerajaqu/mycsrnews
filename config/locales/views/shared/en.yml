@@ -17,9 +17,10 @@ en:
       questions: "Questions"
       questions_list: "Browse Questions"
       new_question: "Ask a Question"
+      my_questions: "My Questions"
       resources: "Directory"
       resources_list: "Browse Directory"
-      new_resource: "Suggest a Link"
+      new_resource: "Add a new link"
       admin: "Admin"
 
     comments:

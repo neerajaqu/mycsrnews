@@ -13,8 +13,8 @@
           = form.input :tagline, :required => false, :label => t('.label_event_tagline'), :hint => t('.hint_event_tagline')
           = form.input :description, :input_html => { :rows => 5 }, :label => t('.label_event_description'), :hint => t('.hint_event_description'), :required => false
           = form.input :tags_string,:label => t('tags'),  :required => false, :hint => t('tags_hint')
-          = form.input :start_time, :required => true
-          = form.input :end_time, :required => false
+          = form.input(:start_time, :as => :datetime, :order => [:month,:day,  :year], :required =>true) 
+          = form.input(:end_time, :as => :datetime, :order => [:month,:day,  :year], :required =>false) 
           = form.input :location, :required => true,:label => t('.label_event_location'), :hint => t('.hint_event_location')
           = form.input :street, :required => false
           = form.input :city, :required => false
@@ -26,5 +26,4 @@
           = form.commit_button  :button_html => { :class => 'btn' } 
 
 #col_right
-  = render :partial => 'shared/sidebar/top_events', :locals => { :top_events => @top_events }
-  = render :partial => 'shared/sidebar/newest_events', :locals => { :newest_events => @newest_events }
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

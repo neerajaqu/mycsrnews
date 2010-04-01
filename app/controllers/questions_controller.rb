@@ -2,10 +2,14 @@ class QuestionsController < ApplicationController
 
   before_filter :login_required, :only => [:like, :new, :create, :create_answer]
 
+  cache_sweeper :qanda_sweeper, :only => [:create, :update, :destroy, :create_answer]
+
   def index
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
+    @current_sub_tab = 'Browse Questions'
     respond_to do |format|
-      format.html
-      format.fbml
+      format.html { @paginate = true }
+      format.fbml { @paginate = true }
       format.json { @questions = Question.refine(params) }
       format.fbjs { @questions = Question.refine(params) }
     end
@@ -17,6 +21,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    @current_sub_tab = 'Ask Question'
   end
 
   def create
@@ -34,6 +39,13 @@ class QuestionsController < ApplicationController
   def new_answer
   end
 
+  def my_questions
+    @paginate = true
+    @current_sub_tab = 'My Questions'
+    @user = User.find(params[:id])
+    @questions = @user.questions.active.paginate :page => params[:page], :per_page => Question.per_page, :order => "created_at desc"
+  end
+
   def create_answer
     @question = Question.find(params[:id])
     @answer = @question.answers.build(params[:answer])
@@ -47,15 +59,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def set_slot_data
+    @ad_banner = Metadata.get_ad_slot('banner', 'questions')
+    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'questions')
+    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'questions')
+  end
+
   private
 
   def set_current_tab
     @current_tab = 'questions'
   end
-
-  def set_slot_data
-    @slot_data = Metadata.find_by_key_type_name('ad-slot-name', 'questions')
-  end
-
 
 end

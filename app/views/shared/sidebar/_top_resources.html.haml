@@ -1,7 +1,7 @@
 -# @expects: local 'resource'
 
-- cache :top_resources_html, :expires_in => 15.seconds do
-  - top_resources ||= Resource.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
+- cache :top_resources_html do
+  - top_resources ||= Resource.active.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_resources_title')
