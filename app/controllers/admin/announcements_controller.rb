@@ -1,6 +1,5 @@
 class Admin::AnnouncementsController < AdminController
-# TODO - ask RB
-#  cache_sweeper :announcement_sweeper, :only => [:create, :update, :destroy]
+  cache_sweeper :announcement_sweeper, :only => [:create, :update, :destroy]
 
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
