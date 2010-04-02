@@ -15,11 +15,6 @@ class Admin::CustomWidgetsController < AdminController
 
   def edit
     @metadata = Metadata.find(params[:id])
-    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => @metadata,
-    	:model => Metadata,
-    	:fields => [:title, :url, :rss]
-    }
   end
 
   def update
@@ -44,9 +39,9 @@ class Admin::CustomWidgetsController < AdminController
   def create
     @metadata = Metadata.new(params[:metadata])
     unless @metadata.title.present? and @metadata.custom_data.present? and @metadata.content_type.present?
-      @metadata.errors.add(:title, "Title must be present") if @metadata.title.empty?
-      @metadata.errors.add(:custom_data, "Custom Data must be present") if @metadata.custom_data.empty?
-      @metadata.errors.add(:content_type, "Content Type must be present and valid") if (@metadata.content_type.empty? || (@metadata.content_type != 'main_content' and @metadata.content_type != 'sidebar_content'))
+      @metadata.errors.add(:title, "Title must be present") unless @metadata.title.present?
+      @metadata.errors.add(:custom_data, "Custom Data must be present") unless @metadata.custom_data.present?
+      @metadata.errors.add(:content_type, "Content Type must be present and valid") unless (@metadata.content_type.present? and (@metadata.content_type == 'main_content' or @metadata.content_type == 'sidebar_content'))
 
       render :new
       return false
