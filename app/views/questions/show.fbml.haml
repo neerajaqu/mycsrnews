@@ -32,15 +32,18 @@
       -# TODO:: this breaks with .clearfix on fb side
       -#= render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
     %br
-    #answerForm.clearfix.hide
-      - unless current_user.present?
-        %p== #{t 'answers.logged_in_error'} #{link_to 'Login now', link_user_accounts_users_path}
-      - else
-        - semantic_form_for @answer, :url => create_answer_question_path(@question) do |form|
-          - form.inputs do
-            = form.input :answer
-          - form.buttons do
-            = form.commit_button :button_html => { :class => "btn" }
+    #answerForm.panel_1.hide.clearfix
+      .panelBar
+        %h2 Answer this question
+      .formBox
+        - unless current_user.present?
+          %p== #{t 'answers.logged_in_error'} #{link_to 'Login now', link_user_accounts_users_path}
+        - else
+          - semantic_form_for @answer, :url => create_answer_question_path(@question) do |form|
+            - form.inputs do
+              = form.input :answer, :label => false
+            - form.buttons do
+              = form.commit_button :button_html => { :class => "btn_1" }
     - cache "#{@question.cache_key}_bottom_fbml" do
       #answersList
         - unless @question.answers.present?
