@@ -41,7 +41,11 @@ module Parse
 
     def self.is_valid_image?(image_url)
       min_image_size = 3500
-      url = URI.parse(image_url)
+      begin
+        url = URI.parse(image_url)
+      rescue URI::InvalidURIError
+        return false
+      end
       response = nil
 
       http = Net::HTTP.new(url.host, url.port)
