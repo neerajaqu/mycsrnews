@@ -37,6 +37,7 @@ en:
   post_story_detail: "Post Stories on our site to help you and your community become better informed of the world around you."
   post_story_button: "Post a Story"
   posted_by: "Posted by {{fb_name}} {{date}} ago"
+  read_more: "read more"
   like: "Like"
   dislike: "Dislike"
   comments: "Comments"

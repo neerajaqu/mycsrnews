@@ -33,3 +33,7 @@
       .clearfix
         = will_paginate contents
         %br
+    - else
+      .clearfix
+      %p= link_to t('read_more'), stories_path, :class => "float_right"
+      %br
