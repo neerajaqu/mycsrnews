@@ -3,20 +3,22 @@
   = render :partial => 'shared/subnav/questions_subnav'
 
 #col_left
-  %h1 Ask a question
-  - unless current_user.present?
-    %p== #{t 'questions.logged_in_error'} #{link_to 'Login now', login_path}
-  - else
-    - semantic_form_for Question.new do |form|
-      %p= form.input :question, :required => false, :label => false
-      .fullQuestionForm.hide
-        .askRelated
-        %p
-          %b= t('please_elaborate')
-          = form.input :details, :required => false, :label => false
-        %p= form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
-        - form.buttons do
-          = form.commit_button :button_html => { :class => "btn_1" }
+  .panel_1
+    .panelBar
+      %h2 Ask a question
+    .formBox
+      - unless current_user.present?
+        %p== #{t 'questions.logged_in_error'} #{link_to 'Login now', login_path}
+      - else
+        - semantic_form_for Question.new do |form|
+          - form.inputs do
+            = form.input :question, :required => false, :label => false
+          .fullQuestionForm.hide
+            - form.inputs do
+              = form.input :details, :required => false, :label => t('please_elaborate'), :input_html => { :class => 'asdf' }
+              = form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
+            - form.buttons do
+              = form.commit_button :button_html => { :class => "btn_1" }
 
   - cache "questions_list_#{@page}html" do
     - questions ||= Question.active.paginate :page => params[:page], :per_page => Question.per_page, :order => "created_at desc"
