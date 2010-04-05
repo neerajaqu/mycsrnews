@@ -1,5 +1,5 @@
 %fb:fbml
-  = fb_title ((title = yield(:title)) ? title : APP_CONFIG['site_title'])
+  = fb_title ((title = yield(:title)) ? "#{title} -- #{APP_CONFIG['site_title']}" : APP_CONFIG['site_title'])
 
   = stylesheet_link_tag 'compiled/fb_grid'
 

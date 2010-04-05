@@ -1,3 +1,6 @@
+- content_for :title do
+  = @story.title
+
 #col_left
   - cache "#{@story.cache_key}_top_fbml" do
     #readArticle.panel_1
