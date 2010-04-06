@@ -1,4 +1,5 @@
 !*.gitignore
+public/maintenance.*
 public/uploads
 public/cache/*
 !public/cache/.gitignore
