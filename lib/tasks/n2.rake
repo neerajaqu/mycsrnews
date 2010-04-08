@@ -2,7 +2,7 @@ namespace :n2 do
   namespace :data do
 
     desc "Bootstrap and convert existing data"
-    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_comments, :delete_floating_ideas, :delete_floating_questions_and_answers, :generate_model_slugs, :generate_widgets, :load_seed_data, :convert_images_to_paperclip] do
+    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_comments, :delete_floating_ideas, :delete_floating_questions_and_answers, :generate_model_slugs, :generate_widgets, :load_seed_data, :convert_images_to_paperclip, :load_locale_data] do
       puts "Finished Bootstrapping and converting existing data"
     end
 
@@ -105,6 +105,14 @@ namespace :n2 do
     task :load_seed_data => :environment do
       puts "Loading Seed Data"
       Rake::Task['db:seed'].invoke
+    end
+
+    desc "Load Locale Data"
+    task :load_locale_data => :environment do
+      puts "Loading Locale Data"
+      Rake::Task['i18n:populate:load_default_locales'].invoke
+      Rake::Task['i18n:populate:from_rails'].invoke
+      Rake::Task['i18n:populate:synchronize_translations'].invoke
     end
 
     desc "Convert existing images to paperclip"
