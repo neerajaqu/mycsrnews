@@ -18,7 +18,7 @@
   border:
     :bottom= !pageTabBorder 
   :background= !headerBG 
-  z-index: 100
+  z-index: 1
 
   .sponsor
     :background= !sponsorBG
@@ -28,7 +28,7 @@
     :left= !sponsorleft
     :height= !sponsorheight
     :width= !sponsorwidth
-    z-index: 72
+    z-index: 1
     a
       display: block
       :height= !sponsorheight
@@ -42,7 +42,7 @@
     position: absolute
     :top= !headerTitleLogoPosTop
     :left= !headerTitleLogoPosLeft
-    z-index: 70
+    z-index: 2
 
     h1
       :visibility= !headerTitleDisplay
@@ -69,23 +69,24 @@
     right: 10px
     float: right
     padding: 5px 10px
+    :background= !dhlinkscolor
 
 // account dropdown styles //
 .account-dropdown
   float: left
   position: relative
-  z-index: 98
+  z-index: 2
 
 .account-toggle
   position: relative
-  z-index: 99
+  z-index: 3
   padding-right: 10px
   :background= !TextDropDownArrow
 
 .account-links
   width: 180px
   position: absolute
-  z-index: 96
+  z-index: 2
   top: 18px
   right: -6px
   display: inline-block
@@ -116,7 +117,7 @@
   .account-tab
     height: 24px
     width: 65px
-    z-index: 97
+    z-index: 2
     position: absolute
     top: -25px
     right: -1px
@@ -382,7 +383,7 @@ li
             visibility: visible
 
         .dropdown
-          z-index: 999
+          z-index: 4
           visibility: hidden
           ul
 
@@ -551,6 +552,8 @@ li
         line-height: 150%
         padding: 8px 10px
         :color= !featureH2Text
+        &.push-left
+          margin-right: 40%
 
       p
         text-align: left
@@ -739,23 +742,23 @@ li
 .flag-wrap
   display: inline-block
   position: relative
-  z-index: 49
+  z-index: 6
   .flag-toggle
     position: relative
-    z-index: 51
+    z-index: 8
   .flag-box
     padding: 10px
     position: absolute
     top: 13px
     left: 1px
     :background= !btnCommentBG
-    z-index: 50
+    z-index: 7
 
 // refine search box styles //
 .panelBar
   .refine-toggle
     position: relative
-    z-index: 48
+    z-index: 10
     padding-right: 10px
     :background= !TextDropDownArrow
 
@@ -777,10 +780,10 @@ li
         :left= !DropDownBorder
         :right= !DropDownBorder
       :background-color= !DropDownBG
-      z-index: 44
+      z-index: 9
 
     .refine-box
-      z-index: 43
+      z-index: 8
       display: none
       position: absolute
       padding: 8px
@@ -944,15 +947,17 @@ li
 .feature_bg
   :background= !featureStoryBG 
   .panel_2
-    margin-bottom: 10px
+    margin: 10px 0
   .thumb
-    margin: 10px
+    margin: 0 10px 10px
     float: none
     display: inline-block
   .storyBlockWrap
     margin: 0px 10px 0 10px
   .btnComment
     :background= !btnCommentFeatureBG
+li.feature_bg
+  border-bottom: 1px solid #fff
 
 .storyList
   .thumb
@@ -973,7 +978,7 @@ blockquote
   font-size: 12px
   line-height: 130%
   margin: 10px 0 10px 60px
-  padding: 0 20px 0 0
+  padding: 5px 10px
 
   .quotes
     padding: 4px 0
@@ -1170,28 +1175,42 @@ blockquote
 // pagination styles //
 
 .pagination
-  :text-align center
-  :padding .3em
+  :text-align= !paginationAlign
+  display: inline-block
+  width: 100%
+  margin: 10px
+  .gap
+    :color= !paginationLinkOn
+    :background= !paginationBgOn
+    :border none
   a, span
-    :padding .2em .5em
+    :padding 2px 4px
+    :background= !paginationBgOff
+    :color= !paginationLinkOff
   span.disabled
-    :color #AAA
+    :color= !paginationLinkDisabled
+    :background= !paginationBgDisabled
+    :border= !paginationBdrDisabled 
   span.current
     :font-weight bold
-    :color #FF0084
+    :color= !paginationLinkOn
+    :background= !paginationBgOn
+    :border= !paginationBdrOn
   a
-    :border 1px solid #DDDDDD
-    :color #0063DC
+    :border= !paginationBdrOff
+    :color= !paginationLinkOff
     :text-decoration none
     &:hover, &:focus
-      :border-color #003366
-      :background #0063DC
-      :color white
+      :border= !paginationBdrOn
+      :background= !paginationBgOff
+      :color= !paginationLinkOn
   .page_info
     :color #aaa
     :padding-top .8em
   .prev_page, .next_page
-    :border-width 2px
+    :color= !paginationLinkOn
+    :border none
+    :background none
   .prev_page
     :margin-right 1em
   .next_page
