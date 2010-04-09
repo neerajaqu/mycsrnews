@@ -5,7 +5,12 @@ N2 is the latest and greatest iteration of the Newscloud framework.
 
 == Getting Started
 
-1. Clone this application to your machine
+1.a Clone this application to your machine
+git clone git://github.com/newscloud/n2.git
+1.b Switch to the stable release
+git checkout --track -b release_1_stable origin/release_1_stable
+Alternatively, download the release 1 stable bundle:
+http://github.com/newscloud/n2/archives/v1.0_stable
 2. Setup config files
 2.a copy config/database.yml.sample to config/database.yml and configure your db.
 2.b copy config/facebooker.yml.sample to config/facebook.yml and configure your facebook app.
