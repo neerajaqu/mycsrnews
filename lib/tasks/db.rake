@@ -44,6 +44,7 @@ namespace :n2 do
       puts "Finished converting your old database into the new rails format!"
       puts "Processing existing records and removing floating data"
       Rake::Task['n2:data:bootstrap'].invoke
+      Rake::Task['n2:util:compass:compile_css'].invoke
       puts "All tasks finished, your new database is setup and good to go!"
     end
 

@@ -172,4 +172,29 @@ namespace :n2 do
     end
 
   end
+
+  namespace :setup do
+
+    desc "Default N2 setup task"
+    task :default do
+      puts "Setting up your N2 framework"
+      Rake::Task['db:setup'].invoke
+      Rake::Task['n2:data:load_locale_data'].invoke
+      Rake::Task['n2:data:generate_widgets'].invoke
+      Rake::Task['n2:util:compass:compile_css'].invoke
+      puts "Finished setting up your application"
+    end
+
+    desc "Convert an existing php based newscloud framework to N2"
+    task :convert_existing => :environment do
+      puts "Setting up your N2 framework from an existing newscloud installation"
+      # Using system here because for some reason invoking it manually won't
+      # directly print get the input request
+      system('rake n2:db:convert_and_create_database')
+      #Rake::Task['n2:db:convert_and_create_database'].invoke
+    end
+
+  end
+  desc "Alias for n2:setup:default"
+  task :setup => 'setup:default'
 end
