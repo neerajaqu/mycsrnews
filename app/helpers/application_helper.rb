@@ -132,6 +132,7 @@ module ApplicationHelper
     end
     if user.facebook_user?
       options.merge!(:linked => false)
+      options[:size] = 'square' unless options[:size].present?
       link_to fb_profile_pic(user, options), user_path(user, link_options)
     else
       link_to image_tag(default_image), user, link_options
