@@ -2,19 +2,20 @@
   .sponsor
     %a
   .headerTitle
-    %h1= APP_CONFIG['site_title']
+    %a
+      %h1= APP_CONFIG['site_title']
   .dh_links
     - if logged_in?
       .account-dropdown
-        %a= fb_share_button(home_index_path(:only_path => false))
-        = pipe_spacer
         = link_to t('header.account'), '#', :class => "account-toggle"
         .account-links{:style => 'display:none'}
       %span.admin-links
         = pipe_spacer
         = link_to t('.admin'), admin_path
     - else
-      = link_to t('.sign_in'), link_user_accounts_users_path
+      = link_to t('.sign_in'), login_path
       = pipe_spacer
-      = link_to t('.register'), link_user_accounts_users_path
+      = link_to t('.register'), signup_path
+    = pipe_spacer
+    %a= fb_share_button(home_index_path(:only_path => false))
   = render :partial => 'shared/page_tabs'

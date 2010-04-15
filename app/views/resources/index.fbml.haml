@@ -3,11 +3,11 @@
   = render :partial => 'subnav'
 
 #col_left
-  = render :partial => 'shared/resources', :locals => { :resources => @resources, :paginate => @paginate, :page => @page }
+  = render :partial => 'shared/resource_test', :locals => { :resources => @resources, :paginate => @paginate, :page => @page }
 
 #col_right
   = render :partial => 'shared/sidebar/resources_whatisthis'
+  = render :partial => 'shared/sidebar/hot_categories'
   = render :partial => 'shared/sidebar/resource_sections_list', :locals => { :resource_sections => @newest_resource_sections }
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @top_resources, :title => t('.top_resources') }
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @newest_resources, :title => t('.newest_resources') }
-  = render :partial => 'shared/sidebar/resource_sections_list', :locals => { :resource_sections => @newest_resource_sections }
