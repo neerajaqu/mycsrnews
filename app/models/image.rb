@@ -13,12 +13,10 @@ class Image < ActiveRecord::Base
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
 
   has_attached_file :image, :styles => {
-  	:mini => "50x50",
-  	:media_item => "72x48\!",
-  	:thumb => "100x100>",
-  	:small => "180x180>",
-  	:medium => "200x200",
-  	:featured => "300x200"
+  	:media_item => "72x48\!^",
+  	:thumb => "90x90<",
+  	:medium => "280x280>",
+  	:featured => "280x280#<"
   }
 
   #before_validation :download_image, :if => :remote_image_url?

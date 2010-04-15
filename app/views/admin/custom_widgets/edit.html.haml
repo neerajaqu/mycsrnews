@@ -1,0 +1,5 @@
+%h2== Edit Custom Widget
+- semantic_form_for [:admin, @metadata] do |form|
+  = render :partial => 'custom_widget_form', :locals => { :form => form, :metadata => @metadata }
+  - form.buttons do
+    = form.commit_button

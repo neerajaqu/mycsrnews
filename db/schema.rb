@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100326220707) do
+ActiveRecord::Schema.define(:version => 20100405201921) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -308,6 +308,7 @@ ActiveRecord::Schema.define(:version => 20100326220707) do
   end
 
   add_index "newswires", ["feed_id"], :name => "feedid"
+  add_index "newswires", ["title"], :name => "index_newswires_on_title"
 
   create_table "questions", :force => true do |t|
     t.integer  "user_id",        :limit => 8, :default => 0

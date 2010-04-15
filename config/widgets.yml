@@ -37,6 +37,8 @@ widgets:
       locals: 'newest_users'
     fan_application:
       partial: '/shared/sidebar/fan_application'
+    add_bookmark:
+      partial: '/shared/sidebar/add_bookmark'
     active_users:
       partial: '/shared/sidebar/active_users'
     rotate_question_widgets:

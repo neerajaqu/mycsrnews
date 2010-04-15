@@ -38,12 +38,13 @@ def update_feed(feed)
   puts "The feed #{feed.title}(#{feed.url}) is presently invalid." or return false unless rss.present?
   puts "The feed #{feed.title}(#{feed.url}) is presently empty." or return false unless rss.items.present?
 
-  puts "Parsing #{feed.title} with #{rss.items.size} items -- updated on #{rss.date}"
+  puts "Parsing #{feed.title} with #{rss.items.size} items -- updated on #{rss.date} -- last fetched #{feed.last_fetched_at}"
 
   feed_date = feed.last_fetched_at
   if !feed_date or (rss.date and feed_date < rss.date)
     rss.items.each do |item|
       break if feed_date and item[:date] <= feed_date
+      next if Newswire.find_by_title item[:title]
       next unless item[:body] and item[:link] and item[:title] and item[:date]
 
       puts "\tCreating newswire for \"#{item[:title].chomp}\""

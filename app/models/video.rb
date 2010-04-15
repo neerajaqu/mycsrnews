@@ -28,6 +28,8 @@ class Video < ActiveRecord::Base
     case self.remote_video_type
       when 'youtube'
         "http://www.youtube.com/v/#{self.remote_video_id}"
+      when 'vmixcore'
+        self.remote_video_id
       else
       	""
     end
@@ -42,6 +44,9 @@ class Video < ActiveRecord::Base
     			self.remote_video_id = self.parse_youtube_url self.embed_src
     		elsif self.embed_src =~ /vimeo.com/i
     		  self.remote_video_type = 'vimeo'
+    		elsif self.embed_src =~ /vmixcore.com/i
+    		  self.remote_video_type = 'vmixcore'
+    			self.remote_video_id = self.parse_vmixcore_src self.embed_code
     		else
     			return false
     		end
@@ -63,6 +68,17 @@ class Video < ActiveRecord::Base
   def parse_youtube_url url
     if url =~ /youtube.com\/(watch\?v=|v\/)([^"&]+)/
     	self.remote_video_id = $2
+    else
+    	return false
+    end
+  end
+
+  def parse_vmixcore_src src
+    if src =~ /<embed[^>]+?src="([^"]+?)player_id=.*?"[^>]+?flashvars="([^"]+)"/i
+    	movie = $1
+    	flash_vars = $2
+    	return false unless movie and flash_vars and movie =~ /vmixcore.com/i
+    	return movie + flash_vars
     else
     	return false
     end
