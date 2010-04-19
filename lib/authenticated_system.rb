@@ -12,6 +12,12 @@ module AuthenticatedSystem
       @current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie || login_from_fb) unless @current_user == false
     end
 
+    # Accesses the current facebooker user from the facebook session.
+    def current_facebook_user
+      return nil unless facebook_session
+      @current_facebook_user ||= facebook_session.user
+    end
+
     # Store the given user id in the session.
     def current_user=(new_user)
       session[:user_id] = new_user ? new_user.id : nil

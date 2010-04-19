@@ -1,0 +1,12 @@
+.cards_displayOuter
+  .cards_displayImage= image_tag card.image_path, :class => 'cards_thumb'
+  .cards_displayCaption
+    %span.cards_displayCaptionSpan= card.name
+    %br
+    - if card.long_caption.present?
+      .cards_shortCaption= card.short_caption
+      %div{:id => "fbd_#{card.id}", :class => "cards_displayLongCaption"}= card.long_caption
+      .cards_float90.showLink
+        %b== + #{link_to 'read more', '#'}
+      .cards_float90.hidden.hideLink
+        %b== - #{link_to 'hide full description', '#'}

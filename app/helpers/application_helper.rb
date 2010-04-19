@@ -126,9 +126,14 @@ module ApplicationHelper
 
   def local_linked_profile_pic(user, options={})
     link_options = {}
+    # TODO:: separate this into a method
     if options[:format].present?
     	link_options[:format] = options[:format]
     	options.delete(:format)
+    end
+    unless options[:only_path].nil?
+    	link_options[:only_path] = options[:only_path]
+    	options.delete(:only_path)
     end
     if user.facebook_user?
       options.merge!(:linked => false)
@@ -151,6 +156,10 @@ module ApplicationHelper
     if options[:format].present?
     	link_options[:format] = options[:format]
     	options.delete(:format)
+    end
+    unless options[:only_path].nil?
+    	link_options[:only_path] = options[:only_path]
+    	options.delete(:only_path)
     end
     if user.facebook_user?
       options.merge!(:linked => false)

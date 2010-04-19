@@ -15,6 +15,16 @@ module Newscloud
         false
       end
 
+      def top_items limit = 10
+        # TODO:: this needs work
+        return self.all(:order => "created_at desc", :limit => limit) unless self.columns.select {|col| col.name == 'votes_tally'}
+
+        table = self.name.tableize
+        # HACK ALERT
+        # This will return an ordered set of results based on number of votes and time since posting
+        self.find_by_sql %{SELECT ((1 + (votes_tally * 2)) / (((UNIX_TIMESTAMP("2010-03-23 14:20:24") - UNIX_TIMESTAMP(created_at)) / 3600) + 5)) AS item_score, #{table}.* FROM #{table} JOIN (SELECT ID FROM #{table} ORDER BY created_at DESC LIMIT 100) AS sub_#{table} ON #{table}.id = sub_#{table}.id ORDER BY item_score DESC LIMIT #{limit};}
+      end
+
     end
 
     module InstanceMethods

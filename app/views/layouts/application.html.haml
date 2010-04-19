@@ -5,6 +5,7 @@
 
     = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
+    = stylesheet_link_tag 'cards'
 
     = javascript_include_tag 'jquery.min', 'jquery.ui.min', 'jquery.jcarousel.pack', 'jquery.quicksand.min', 'application'
     = javascript_include_tag '/users/current'
@@ -16,6 +17,8 @@
           display: none !important
         .admin-links
           display: none !important
+
+    = yield :head_content
 
   %body
     #bodyWrapper

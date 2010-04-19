@@ -18,6 +18,8 @@
   = fb_connect_javascript_tag
   = init_fb_connect "XFBML"
 
+  = yield :head_content
+
   =# javascript_include_tag current_users_path(:canvas => false, :only_path => false, :t => Time.now.to_i, :format => 'js')
   =# javascript_include_tag '/users/current.fbml'
   = javascript_include_tag "/users/current.fbml?#{Time.now.to_i}"
