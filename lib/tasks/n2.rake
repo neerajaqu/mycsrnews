@@ -200,16 +200,22 @@ namespace :n2 do
       full_dump_file = "#{RAILS_ROOT}/db/full_backup_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}.sql"
       config = ActiveRecord::Base.configurations[RAILS_ENV]
       raise "Invalid adapter, this only works with mysql." unless config["adapter"] == 'mysql'
+
+      ignore_tables = 'schema_migrations'
+
       dump = []
       dump << "mysqldump"
       dump << "--no-create-info"
       dump << "--complete-insert"
       dump << "-u #{config["username"]}"
       dump << "-p#{config["password"]}" if config["password"].present?
+      ignore_tables.split(',').each do |table|
+        dump << "--ignore-table=#{config["database"]}.#{table}"
+      end
       dump << "#{config["database"]}"
 
       puts "Creating a full backup"
-      Rake::Task["db:database_dump"] ENV['file']=full_dump_file
+      Rake::Task["db:database_dump"].invoke ENV['file']=full_dump_file
 
       #puts "SQL::  #{dump.join ' '}"
       puts "Dumping data from #{config["database"]} database... this may take a minute"
@@ -228,8 +234,7 @@ namespace :n2 do
       insert << "-p#{config["password"]}" if config["password"].present?
       insert << "#{config["database"]}"
       insert << "< #{dump_file}"
-      ouput = `#{dump.join ' '}`
-      puts "OUTPUT: #{output}"
+      output = `#{insert.join ' '}`
       puts "Finishing rebuilding your application"
 
     end
