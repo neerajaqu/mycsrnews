@@ -194,6 +194,46 @@ namespace :n2 do
       #Rake::Task['n2:db:convert_and_create_database'].invoke
     end
 
+    desc "Backup an existing N2 application, rebuild the app settings and merge back in the data"
+    task :backup_and_rebuild => :environment do
+      dump_file = "#{RAILS_ROOT}/db/backup_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}.sql"
+      full_dump_file = "#{RAILS_ROOT}/db/full_backup_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}.sql"
+      config = ActiveRecord::Base.configurations[RAILS_ENV]
+      raise "Invalid adapter, this only works with mysql." unless config["adapter"] == 'mysql'
+      dump = []
+      dump << "mysqldump"
+      dump << "--no-create-info"
+      dump << "--complete-insert"
+      dump << "-u #{config["username"]}"
+      dump << "-p#{config["password"]}" if config["password"].present?
+      dump << "#{config["database"]}"
+
+      puts "Creating a full backup"
+      Rake::Task["db:database_dump"] ENV['file']=full_dump_file
+
+      #puts "SQL::  #{dump.join ' '}"
+      puts "Dumping data from #{config["database"]} database... this may take a minute"
+      File.open(dump_file, "w+") do |file|
+        output = `#{dump.join ' '}`
+        raise "Failed on mysql error, please check the error and try again." if output.empty?
+        file << output
+      end
+      Rake::Task['db:drop'].invoke
+      Rake::Task['db:create'].invoke
+      Rake::Task['db:schema:load'].invoke
+      puts "Reloading data"
+      insert = []
+      insert << "mysql"
+      insert << "-u #{config["username"]}"
+      insert << "-p#{config["password"]}" if config["password"].present?
+      insert << "#{config["database"]}"
+      insert << "< #{dump_file}"
+      ouput = `#{dump.join ' '}`
+      puts "OUTPUT: #{output}"
+      puts "Finishing rebuilding your application"
+
+    end
+
   end
   desc "Alias for n2:setup:default"
   task :setup => 'setup:default'
