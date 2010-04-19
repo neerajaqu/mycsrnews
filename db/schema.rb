@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100414191921) do
+ActiveRecord::Schema.define(:version => 20100419192519) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -483,6 +483,8 @@ ActiveRecord::Schema.define(:version => 20100414191921) do
     t.string   "cached_slug"
     t.integer  "karma_score",                              :default => 0
     t.datetime "last_active"
+    t.boolean  "is_editor",                                :default => false
+    t.boolean  "is_robot",                                 :default => false
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

@@ -160,9 +160,13 @@ class User < ActiveRecord::Base
     self.is_admin == true
   end
 
+  def is_editor?
+    self.is_editor == true
+  end
+
   def is_moderator?
     # admins have all powers of moderators
-    (self.is_moderator || self.is_admin) == true
+    (self.is_moderator || self.is_editor || self.is_admin) == true
   end
 
   def bio
