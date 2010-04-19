@@ -870,8 +870,6 @@ FBjqRY.fn = FBjqRY.prototype = {
     },
 
     animate: function(params, dur, easing, cb, neitherShowHide) {
-    	  console.log("Animating..");
-    	  console.log(this);
         dur = parseSpeed(dur);
         var hide = (neitherShowHide == 2);
         var show = (neitherShowHide == 1);
@@ -888,7 +886,7 @@ FBjqRY.fn = FBjqRY.prototype = {
         };
 
         this.stop();
-        each(this.nodes, function() { console.log("...as..df..."); animObj(this).go(); });
+        each(this.nodes, function() { animObj(this).go(); });
         if(cb) { setTimeout(cb, dur); }
         return this;
     },

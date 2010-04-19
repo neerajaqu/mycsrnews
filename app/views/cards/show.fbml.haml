@@ -1,0 +1,38 @@
+- content_for :head_content do
+  = stylesheet_link_tag 'cards'
+
+  :javascript
+    $(function() {
+
+      $('.card_link').click(function(event) {
+      	event.preventDefault();
+      	var url = $(this).href().replace(/^(.*?cards\/[0-9]+)(\.[a-z]+)/, "$1/get_card_form.fbjs");
+      	url = SITE_URL + url.replace(/^(?:http:\/\/apps.facebook.com)?\/[^\/]+(.*)/, "$1");
+      	$.update($('#card-request-box'), url);
+      });
+
+    });
+
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/cards_subnav'
+
+#col_left
+  #selCardStage
+    .cards_insideSelStage
+      &nbsp;
+      %b= @card.name
+      .cards_displayOuter
+        .cards_displayImage= image_tag @card.image_path, :class => 'cards_thumb'
+        .cards_displayCaption
+          %span.cards_displayCaptionSpan= @card.short_caption
+          %br
+          - if @card.long_caption.present?
+            .long_text= @card.long_caption
+          %br
+          %br
+          = link_to 'Send this card to a friend', @card, :class => "card_link"
+  #card-request-box
+
+#col_right
+  = render :partial => 'shared/sidebar/top_sent_cards'
+  = render :partial => 'shared/sidebar/newest_sent_cards'

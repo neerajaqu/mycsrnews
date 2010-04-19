@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100323193005) do
+ActiveRecord::Schema.define(:version => 20100414191921) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -361,6 +361,20 @@ ActiveRecord::Schema.define(:version => 20100323193005) do
     t.datetime "featured_at"
     t.boolean  "is_sponsored",        :default => false
   end
+
+  create_table "sent_cards", :force => true do |t|
+    t.integer  "from_user_id"
+    t.integer  "to_fb_user_id"
+    t.integer  "card_id"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sent_cards", ["card_id"], :name => "index_sent_cards_on_card_id"
+  add_index "sent_cards", ["from_user_id", "card_id"], :name => "index_sent_cards_on_from_user_id_and_card_id"
+  add_index "sent_cards", ["from_user_id"], :name => "index_sent_cards_on_from_user_id"
+  add_index "sent_cards", ["to_fb_user_id"], :name => "index_sent_cards_on_to_fb_user_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

@@ -15,27 +15,25 @@
 
       $('.card_link').click(function(event) {
       	event.preventDefault();
-      	$('.selCardStage').fbml(details[$(this).attr('id')]);
+      	$('#selCardStage').fbml(details[$(this).attr('id')]);
       	setShowLink();
       	setHideLink();
+      	$('#card-request-box').fbml(card_loading_msg);
+      	var url = $(this).href().replace(/^(.*?cards\/[0-9]+)(\.[a-z]+)/, "$1/get_card_form.fbjs");
+      	url = SITE_URL + url.replace(/^(?:http:\/\/apps.facebook.com)?\/[^\/]+(.*)/, "$1");
+      	$.update($('#card-request-box'), url);
       });
 
       function setShowLink() {
         $('.showLink a').click(function(event) {
           event.preventDefault();
           var wrapper = $(this).parents().filter('.cards_displayCaption');
-          //$(wrapper.children().filter('.cards_displayLongCaption')).animate({height: 'auto', width: 'auto', opacity: 1}, 'slow', 'blind', false).show();
-          //$(wrapper.children().filter('.cards_displayLongCaption')).animate({opacity: 1}, 'slow', 'blind', false).show();
           var long_caption = wrapper.children().filter('.cards_displayLongCaption').nodes[0];
           var show_link = wrapper.children().filter('.showLink').nodes[0];
           var hide_link = wrapper.children().filter('.hideLink').nodes[0];
           Animation(long_caption).to('height', 'auto').from('0px').to('width', 'auto').from('auto').to('opacity', 1).from(0).show().blind().go();
           $(show_link).hide();
           $(hide_link).show();
-          //$(foo).animate({height: 'auto', width: 'auto', opacity: 1}, 'slow', 'blind', false).show();
-          //$(wrapper.children().filter('.cards_displayLongCaption')).animate({opacity: 1}, 2000).show();
-          //$(wrapper.children().filter('.cards_displayLongCaption')).fadeIn();
-          //Animation(wrapper.children().filter('.cards_displayLongCaption')).to('height', 'auto').from('0px').to('width', 'auto').from('0px').to('opacity', 1).from(0).blind().show().go();
         });
       }
 
@@ -49,10 +47,6 @@
           Animation(long_caption).to('height', '0px').to('width', '0px').to('opacity', 0).hide().go();
           $(show_link).show();
           $(hide_link).hide();
-          //$(foo).animate({height: 'auto', width: 'auto', opacity: 1}, 'slow', 'blind', false).show();
-          //$(wrapper.children().filter('.cards_displayLongCaption')).animate({opacity: 1}, 2000).show();
-          //$(wrapper.children().filter('.cards_displayLongCaption')).fadeIn();
-          //Animation(wrapper.children().filter('.cards_displayLongCaption')).to('height', 'auto').from('0px').to('width', 'auto').from('0px').to('opacity', 1).from(0).blind().show().go();
         });
       }
 
@@ -64,6 +58,8 @@
 - @cards.each do |card|
   %fb:js-string{:var => "details.card_#{card.id}"}
     = render :partial => 'card_dialog', :locals => { :card => card }
+%fb:js-string{:var => "card_loading_msg"}
+  = t('cards.loading_message')
 
 #col_left
   .cards_fancyTitle.cards_floatwide
@@ -78,21 +74,12 @@
       %b PAGE:
       %span.card_pagination_links
         = (@cards.size / 6.0).ceil.times.entries.map {|k| link_to k+1, '#'}.join ' | '
-  .selCardStage
+  #selCardStage
     .cards_insideSelStage
       &nbsp;
       %b= t('cards.select_stage_text')
-  .card_form
-    %form
-      %p
-        %b To:
-        = fb_multi_friend_input :width => "100%", :border_color => "#64B74D"
-      %p
-        %b Message:
-        %br
-        = t('cards.send_message_text')
-        %br
-        = text_area :card, :msg, :class => 'cards_textarea'
+  #card-request-box
 
 #col_right
-  = render :partial => 'shared/sidebar/top_stories'
+  = render :partial => 'shared/sidebar/top_sent_cards'
+  = render :partial => 'shared/sidebar/newest_sent_cards'

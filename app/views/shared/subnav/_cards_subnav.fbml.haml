@@ -2,5 +2,6 @@
   .left_tabs
     %ul#toggle_tabs_unused.toggle_tabs.clearfix
       %li.first= link_to t('cards.send'), cards_path, :class => sub_tab_selected?(@current_sub_tab, 'Send a Card')
-      %li.first= link_to t('cards.received'), '#', :class => sub_tab_selected?(@current_sub_tab, 'Cards Received')
-      %li.first= link_to t('cards.sent'), '#', :class => sub_tab_selected?(@current_sub_tab, 'Cards Sent')
+      - if current_user
+        %li.first= link_to t('cards.received'), my_received_cards_path, :class => sub_tab_selected?(@current_sub_tab, 'Cards Received')
+        %li.first= link_to t('cards.sent'), my_sent_cards_path, :class => sub_tab_selected?(@current_sub_tab, 'Cards Sent')
