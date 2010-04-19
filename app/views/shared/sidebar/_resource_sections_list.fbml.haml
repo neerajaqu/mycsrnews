@@ -4,7 +4,7 @@
   .panelBar
     %h2= t('.title')
   .list_stories
-    %ul
+    %ul.listTags
       - resource_sections.each do |resource_section|
         %li
           = link_to resource_section.name, resource_section

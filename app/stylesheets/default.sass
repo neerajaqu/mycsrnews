@@ -44,6 +44,11 @@
     :left= !headerTitleLogoPosLeft
     z-index: 2
 
+    a
+      display: block
+      width: 100%
+      height: 100%
+
     h1
       :visibility= !headerTitleDisplay
       display: block
@@ -66,9 +71,9 @@
   .dh_links
     position: absolute
     top: 10px
-    right: 10px
+    right: 0px
     float: right
-    padding: 5px 10px
+    padding: 5px 20px 5px 10px
     :background= !dhlinkscolor
 
 // account dropdown styles //
@@ -229,8 +234,8 @@ h5
 p
   :font-family= !copyFont
   :color= !bodyColor
-  font-size: 11px
-  line-height: 120%
+  font-size: 12px
+  line-height: 130%
   text-align: left
   margin: 0 0 8px 0
   padding: 0px
@@ -411,7 +416,7 @@ li
                   :right= !dropdownTabSelectMarginRight
                   :left= !dropdownTabSelectMarginLeft
                 border:
-                  :top= none
+                  :top= !dropdownTabTopBorderSelect
                   :bottom= !dropdownTabBorderSelect
                   :left= !dropdownTabBorderSelect
                   :right= !dropdownTabBorderSelect
@@ -483,9 +488,35 @@ li
   border-bottom: none
   margin-bottom: 15px
 
+  &.textpage
+    h2
+      font-size: 13px
+
+  &.sponsorbox
+    :background= !sponsorBoxBG
+    ul
+      :border= !sponsorBoxBorder
+    .panelBar
+      :background= !sponsorBoxPanelBarBG
+      border: none
+      h2
+        :color= !sponsorBoxPanelBarTextColor
+        font-weight: bold
+    .storyBlockWrap
+      margin: 0 8px
+
+  .listTags
+    li
+      border: none
+      padding: 2px 0
+    h4
+      font-weight: normal
+      font-size: 11px
+      :color= !subheadColor
+
   .thumb
     float: left
-    margin: 0 10px 10px 0
+    margin: 0 10px
 
   .eventBlock
     margin: 0 0 4px 0
@@ -646,15 +677,6 @@ li
       :bottom= !panelBarBorder
     :background= !panelBarBG
 
-    h1
-      margin: 0
-      font-weight: normal
-      font-size: 18px
-      text-transform: Capitalize
-      :font-family= !copyFont
-      :color= !panelBarHeader
-      display: inline
-      
     h2
       margin: 0
       font-weight: normal
@@ -663,6 +685,7 @@ li
       :font-family= !copyFont
       :color= !panelBarHeader
       display: inline
+      margin-left: 4px
 
     a
       font-weight: normal
@@ -692,6 +715,7 @@ li
 
     p
       margin: 8px 0
+      font-size: 11px
 
     h1
       font-size: 22px
@@ -755,7 +779,7 @@ li
     z-index: 7
 
 // refine search box styles //
-.panelBar
+.panelBar, .subtitle
   .refine-toggle
     position: relative
     z-index: 10
@@ -789,7 +813,7 @@ li
       padding: 8px
       width: 142px
       top: 25px
-      left: -58px
+      right: 0px
       :border= !DropDownBorder
       :background-color= !DropDownBG
 
@@ -907,6 +931,7 @@ li
     p
       padding: 0
       margin: 4px 0px
+
     br
       margin: 0
       line-height: 0px
@@ -965,11 +990,12 @@ li.feature_bg
     
 
 .subtitle
+  position: relative
   font-size: 10px
   :color= !subheadColor
   :background= !subTitleBG
   border: none
-  padding: 6px 4px 6px 4px
+  padding: 6px 0px 6px 4px
 
 // Blockquote styles //
 blockquote
@@ -1045,6 +1071,20 @@ blockquote
       max-width: 90px
       max-height: 90px
 
+  .feature_bg
+    .thumb
+      display: block
+      float: left
+      margin: 0 10px
+      img
+        max-width: 90px
+        max-height: 90px
+
+  .profilePic 
+    img
+      max-width: 30px
+      max-height: 30px
+
 // Profile Pic //
 .profilePic 
   float: left
@@ -1052,12 +1092,6 @@ blockquote
 
   a:hover
     text-decoration: none
-
-// Profile Pic Size //
-.list_stories
-  .profilePic img
-    width: 30px
-    height: 30px
 
 // Account Profile stats styles //
 .pointsTable_profile
@@ -1152,7 +1186,7 @@ blockquote
 
   .demo
     margin: 10px 15px
-    padding: 65px 0 10px 0
+    padding: 70px 0 10px 0
     :background= !demoBG
 
   .fb-btn

@@ -5,32 +5,76 @@
       %a Post Resource
       = pipe_spacer
       %a My Resources
+  .subtitle
+    Showing 1-4 of 4 Results
+    .refine_link
+      = render :partial => 'shared/forms/refine_dropdown'
 
-  .panel_2.left
-    .panelBar
-      %h2 Hot Categories
+.panel_1.sponsorbox
+  .panelBar
+    %h2 Sponsored
 
-  .panel_2.right
-    .panelBar
-      %h2 Featured Resources
+  %ul
+    %li
+      .storyBlockWrap
+        %h4 
+          %a 
+            Sponsored Resource 1
+        %p Description of Resource 1 Lorem Ipsum dolor setvis managafhf ask jest et habs asl kf yuuoler
+    %li
+      .storyBlockWrap
+        %h4 
+          %a 
+            Sponsored Resource 2
+        %p Description of Resource 2 Lorem Ipsum dolor setvis managafhf ask jest et habs asl kf yuuoler
 
+.panel_1
+  .list_stories
     %ul
       %li.feature_bg
-        .storyBlockWrap
+        .thumb
+          = image_tag('default/default_thumb_b.gif')
+        .storyBlockWrap.storyBlockSpacer
           %h4 
             %a 
-              Featured Resource 1
-          %p Description of Resource 1 Lorem Ipsum dolor setvis managafhf ask jest et habs asl kf yuuoler
+              Featured Resource
+          %p Description of Resource Lorem Ipsum dolor setvis managafhf ask jest et habs asl kf yuuoler
           %span.btnComment
             %a.voteUp Like
           %span.btnComment
             %a Comment
       %li.feature_bg
-        .storyBlockWrap
+        .thumb
+          = image_tag('default/default_thumb_b.gif')
+        .storyBlockWrap.storyBlockSpacer
           %h4 
             %a 
-              Featured Resource 1
-          %p Description of Resource 1 Lorem Ipsum dolor setvis managafhf ask jest et habs asl kf yuuoler
+              Featured Resource
+          %p Description of Resource Lorem Ipsum dolor setvis managafhf ask jest et habs asl kf yuuoler
+          %span.btnComment
+            %a.voteUp Like
+          %span.btnComment
+            %a Comment
+      %li
+        .thumb
+          = image_tag('default/default_thumb_b.gif')
+        .storyBlockWrap.storyBlockSpacer
+          %h4 
+            %a 
+              Resource 1
+          %p Description of Resource Lorem Ipsum dolor setvis managafhf ask jest et habs asl kf yuuoler
+          %span.btnComment
+            %a.voteUp Like
+          %span.btnComment
+            %a Comment
+      %li
+        .thumb
+          = image_tag('default/default_thumb_b.gif')
+        .storyBlockWrap.storyBlockSpacer
+          %h4 
+            %a 
+              Resource
+          %p Description of Resource Lorem Ipsum dolor setvis managafhf ask jest et habs asl kf yuuoler
           %span.btnComment
             %a.voteUp Like
           %span.btnComment
