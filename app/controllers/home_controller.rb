@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  #caches_page :index, :google_ads, :bookmarklet_panel
+  #caches_page :index, :google_ads, :helios_ads, :bookmarklet_panel
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
@@ -45,6 +45,11 @@ class HomeController < ApplicationController
   def google_ads
     slot_name = params[:slot_name] || APP_CONFIG['google_adsense_slot_name']
     render :partial => 'shared/google_ads', :locals => { :slot_name => slot_name },:layout => false
+  end
+
+  def helios_ads
+    slot_name = params[:slot_name] || APP_CONFIG['helios_slot_name']
+    render :partial => 'shared/ads/helios_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 
   def bookmarklet_panel

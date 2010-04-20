@@ -24,4 +24,11 @@
       - ad_class = "ad_468"
   %div{:class => panel_class, :id => panel_id}
     %div{:class => ad_class}
-      %iframe{:src => base_url(google_ads_home_path(:slot_name => slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #fff; width: #{slot_data['data'][:width]}; height: #{slot_data['data'][:height]};"}
+      - if APP_CONFIG['ad_platform'].present?
+        - case APP_CONFIG['ad_platform']
+          - when "helios"
+            %iframe{:src => base_url(helios_ads_home_path(:slot_name => slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #fff; width: #{slot_data['data'][:width]}; height: #{slot_data['data'][:height]};"}
+          - when "google"
+            %iframe{:src => base_url(google_ads_home_path(:slot_name => slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #fff; width: #{slot_data['data'][:width]}; height: #{slot_data['data'][:height]};"}
+      - else                  
+        %iframe{:src => base_url(google_ads_home_path(:slot_name => slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #fff; width: #{slot_data['data'][:width]}; height: #{slot_data['data'][:height]};"}
