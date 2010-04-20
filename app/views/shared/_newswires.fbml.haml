@@ -17,7 +17,7 @@
                 %p.storyCaption= linked_newswire_caption newswire
                 .storyBlockMeta.float_left
                   %h3= t('.via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))
-                  %span.btnComment.float_left= link_to t('.publish', :site_title => APP_CONFIG['site_title']), publish_newswire_path(newswire)
+                  %span.btnComment.float_left= link_to t('.publish', :site_title => APP_CONFIG['site_title']), new_story_path(:newswire_id => newswire)
                   %span.btnComment.float_left= link_to t('.read'), newswire.url, :target => "_cts" 
     - if paginate
       .clearfix
