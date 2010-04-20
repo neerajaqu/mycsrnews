@@ -19,6 +19,7 @@ script/pids
 config/*.yml
 config/application.god
 config/compass.config
+config/compass.rb
 !config/widgets.yml
 !config/cucumber.yml
 config/deploy/*.rb
