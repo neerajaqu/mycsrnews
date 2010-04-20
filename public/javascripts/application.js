@@ -197,4 +197,9 @@ $(function() {
         "json");
     }
   });
+
+	if ($('#content_url').val() != '') {
+		$('#content_url').trigger('blur');
+  }
+
 });

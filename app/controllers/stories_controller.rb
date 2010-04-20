@@ -37,6 +37,13 @@ class StoriesController < ApplicationController
       	:title    => params[:t],
       	:caption  => params[:c]
       })
+    elsif params[:newswire_id].present?
+      @newswire = Newswire.find(params[:newswire_id])
+      @story = Content.new({
+      	:url      => @newswire.url,
+      	:title    => @newswire.title,
+      	:caption  => @template.strip_tags(@newswire.caption)
+      })
     else
       @story = Content.new
     end

@@ -1,6 +1,6 @@
 class NewswiresController < ApplicationController
   before_filter :set_current_tab
-  before_filter :login_required, :only => [:publish]
+  before_filter :login_required, :only => [:quick_post]
   before_filter :load_top_stories, :only => [:index]
 
   def index
@@ -10,7 +10,7 @@ class NewswiresController < ApplicationController
     @paginate = true
   end
 
-  def publish
+  def quick_post
     @newswire = Newswire.find_by_id(params[:id])
     redirect_to newswire_path and return if @newswire.nil?
 
