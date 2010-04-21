@@ -3,7 +3,7 @@
 .comment_block
   .thumb= local_linked_profile_pic comment.user
   .storyBlockWrap
-    .storyBlockMeta.clearfix
+    .storyBlockMeta
       
       %h3= t('.posted_by', :fb_name => (local_linked_profile_name comment.user), :date => time_ago_in_words(comment.created_at))
       %span.btnComment.float_left= votes_link(comment, comment.votes_tally)

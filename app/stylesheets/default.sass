@@ -5,6 +5,7 @@
 // Float div hack //
 .clearfix
   display: inline-block
+  width: 100%
 // floats //
 .float_left
   float: left
@@ -189,6 +190,8 @@ h1, h2, h3, h4, h5
 
   a
     :color= !headerColor   
+    &:hover
+      :color= !headerLinkHover
 h1
   :font-family= !headerFont
   font-size: 15px
@@ -215,6 +218,8 @@ h3
 
   a
     :color= !linkColor
+    &:hover
+      :color= !linkColor
 h4
   :font-family= !headerFont
   font-size: 12px
@@ -386,11 +391,15 @@ li
 
           .dropdown
             visibility: visible
+            height: 100%
 
         .dropdown
           z-index: 4
           visibility: hidden
+          height: 0px
           ul
+            display: inline-block
+            width: 100%
 
             li
               display: block
@@ -401,12 +410,16 @@ li
 
               a
                 font-size: 10px
+                font-weight: normal
                 display: block
                 :background= !dropdownTabOff
-                padding: 5px 10px
+                padding: 5px 5px
                 :color= !dropdownTabText
                 border:
-                  :top= !dropdownTabBorder
+                  :top= !dropdownTabTopBorder
+                  :bottom= !dropdownListBorder
+                  :left= !dropdownListBorder
+                  :right= !dropdownListBorder
                 &:hover
                   :background= !dropdownTabOn
 
@@ -417,9 +430,9 @@ li
                   :left= !dropdownTabSelectMarginLeft
                 border:
                   :top= !dropdownTabTopBorderSelect
-                  :bottom= !dropdownTabBorderSelect
-                  :left= !dropdownTabBorderSelect
-                  :right= !dropdownTabBorderSelect
+                  :bottom= !dropdownTabListBorderSelect
+                  :left= !dropdownTabListBorderSelect
+                  :right= !dropdownTabListBorderSelect
                 :color= !dropdownTabTextSelect
                 
                 &.selected:hover
@@ -554,8 +567,11 @@ li
 
   .houseFeatures
     :background= !featureBg
-    :border= !featureBorder
-
+    border: 
+      :top= !featureBorderTop
+      :bottom= !featureBorderBot
+      :left= !featureBorderLeft
+      :right= !featureBorderRight
     .thumbBanner
       padding: 0
       display: inline-block
@@ -577,6 +593,7 @@ li
 
     .featureAd
       text-align: center
+      display: inline-block
 
       h2
         text-align: left
@@ -694,7 +711,7 @@ li
 
     .bar_link
       float: right
-      margin: 2px 0 0 0
+      margin: 0 8px 
 
   .storyBlockSpacer
     padding-left: 100px
@@ -1021,7 +1038,9 @@ blockquote
   border-radius: 4px
   :background= !btnBG
   :border= !btnBorder
-  &hover
+  &:hover
+    cursor: pointer
+    text-decoration: none
     :background= !btnBGHover
 
 // Like, Share, Vote, Comment, and Rate Styles //
@@ -1213,7 +1232,7 @@ blockquote
   display: inline-block
   width: 100%
   padding-top: 10px
-  margin: 10px
+  margin: 10px 0
   .gap
     :color= !paginationLinkOn
     :background= !paginationBgOn
@@ -1226,6 +1245,9 @@ blockquote
     :color= !paginationLinkDisabled
     :background= !paginationBgDisabled
     :border= !paginationBdrDisabled 
+    &:hover
+      text-decoration: none
+      cursor: default
   span.current
     :font-weight bold
     :color= !paginationLinkOn
@@ -1237,7 +1259,7 @@ blockquote
     :text-decoration none
     &:hover, &:focus
       :border= !paginationBdrOn
-      :background= !paginationBgOff
+      :background= !paginationBgOn
       :color= !paginationLinkOn
   .page_info
     :color #aaa
@@ -1246,6 +1268,12 @@ blockquote
     :color= !paginationLinkOn
     :border none
     :background none
+    &:hover
+      :border none
+      :background none
+      text-decoration: underline
+    &.disabled
+      :border none
   .prev_page
     :margin-right 1em
   .next_page
