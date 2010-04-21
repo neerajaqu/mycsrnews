@@ -5,35 +5,46 @@ N2 is the latest and greatest iteration of the Newscloud framework.
 
 == Getting Started
 
-1. Clone this application to your machine
-2. copy config/database.yml.sample to config/database.yml and configure your db.
-3. copy config/facebooker.yml.sample to config/facebook.yml and configure your facebook app.
-4. copy config/application_settings.yml.sample to config/application_settings.yml.
+1.a Clone this application to your machine
+git clone git://github.com/newscloud/n2.git
+1.b Switch to the stable release
+git checkout --track -b release_1_stable origin/release_1_stable
+Alternatively, download the release 1 stable bundle:
+http://github.com/newscloud/n2/archives/v1.0_stable
+2. Setup config files
+2.a copy config/database.yml.sample to config/database.yml and configure your db.
+2.b copy config/facebooker.yml.sample to config/facebook.yml and configure your facebook app.
+2.c copy config/application_settings.yml.sample to config/application_settings.yml.
 This is your base config file where you set your site specific options related to the framework.
-4.b (optional)
+***This needs to be setup properly to work
+2.d copy config/menu.yml.sample to config/menu.yml and disable and items you do not want showing up.
+2.e copy config/compass.yml.sample to config/compass.yml and disable and items you do not want showing up.
+***You need to edit your image path to be an absolute url for css images in facebook to work
+2.f If you are not using memcached in production edit config/environments/production.rb and set it accordingly
+2.g (optional)
 If you wish to configure outgoing email, copy config/smtp.yml.sample to config/smtp.yml
 and configure your outgoing mail settings. Google hosted email is supported!
-4.c (optional) There are also a number of *.yml.sample files in the config directory for advanced use.
-5. Next check that the gems are setup properly by running
+2.h (optional) There are also a number of *.yml.sample files in the config directory for advanced use.
+3. Next check that the gems are setup properly by running
 	rake gems
 If you don't see any error messages then you are good to go. You might have to run:
-	sudo rake gems:build
-	or
 	sudo rake gems:install
+	or
+	sudo rake gems:build
 to build the native extensions for some of the gems.
-6. Build the database
+4. Setup the framework
 If you have an existing newscloud application you would like to port over, run:
-rake n2:db:convert_and_create_database
+rake n2:setup:convert_existing
 This will prompt you for the old database info and will migrate to the new database.
 This will _not_ harm your existing database, it will create a new database for rails
 and perform the conversions there, leaving your existing application intact.
-If you do not have an existing application you want to convert, simply run:
-rake db:setup
-and this will build the database for you.
-7. Now start the server with:
+If you would like to create a fresh install, just run:
+rake n2:setup
+and this will setup the n2 framework for you.
+5. Now start the server with:
 	ruby script/server
 and you should be up and running
-8. Next you need to configure the admin interface.
+6. Next you need to configure the admin interface.
 If you are converting an existing newscloud framework, and you already have
 an admin user account, you can login and access the admin interface just fine.
 As long as there are no existing admin users, there will be a default login account for you to use, which is configurable in your application_settings.yml file.

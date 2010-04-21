@@ -1,0 +1,19 @@
+-# @expects: local 'newest_sent_cards'
+
+- cache :newest_sent_cards_fbml do
+  - newest_sent_cards ||= SentCard.newest 5
+  - unless newest_sent_cards.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('cards.newest_sent_cards_title')
+      .list_stories
+        %ul
+          - newest_sent_cards.each do |sent_card|
+            %li
+              %h4= link_to sent_card.card.name, card_path(sent_card.card)
+              .profilePic= image_tag sent_card.card.image_path
+              .storyBlockMeta
+                %h3= t('cards.sent_at', :date => time_ago_in_words(sent_card.created_at))
+                -#%span.btnComment.float_left== #{like_link sent_card} #{sent_card.votes_tally}
+                -#%span.btnComment== #{link_to t('comments'), sent_card_path(sent_card, :anchor => "commentListTop")} #{sent_card.comments_count}
+                -# %span.btnComment= fb_share_button(sent_cards_url(sent_card))

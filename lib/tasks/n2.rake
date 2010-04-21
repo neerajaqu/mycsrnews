@@ -63,7 +63,7 @@ namespace :n2 do
       puts "Deleting floating contents"
       count = 0
       Content.all.each do |content|
-        content.destroy and count += 1 unless content.user.present?
+        content.destroy and count += 1 unless content.user.present? and content.url.present? and valid_url?(content.url)
       end
       puts "Deleted #{count} floating contents"
     end
@@ -172,4 +172,78 @@ namespace :n2 do
     end
 
   end
+
+  namespace :setup do
+
+    desc "Default N2 setup task"
+    task :default do
+      puts "Setting up your N2 framework"
+      Rake::Task['db:setup'].invoke
+      Rake::Task['n2:data:load_locale_data'].invoke
+      Rake::Task['n2:data:generate_widgets'].invoke
+      Rake::Task['n2:util:compass:compile_css'].invoke
+      puts "Finished setting up your application"
+    end
+
+    desc "Convert an existing php based newscloud framework to N2"
+    task :convert_existing => :environment do
+      puts "Setting up your N2 framework from an existing newscloud installation"
+      # Using system here because for some reason invoking it manually won't
+      # directly print get the input request
+      system('rake n2:db:convert_and_create_database')
+      #Rake::Task['n2:db:convert_and_create_database'].invoke
+    end
+
+    desc "Backup an existing N2 application, rebuild the app settings and merge back in the data"
+    task :backup_and_rebuild => :environment do
+      dump_file = "#{RAILS_ROOT}/db/backup_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}.sql"
+      full_dump_file = "#{RAILS_ROOT}/db/full_backup_#{Time.now.utc.strftime("%Y%m%d%H%M%S")}.sql"
+      config = ActiveRecord::Base.configurations[RAILS_ENV]
+      raise "Invalid adapter, this only works with mysql." unless config["adapter"] == 'mysql'
+
+      ignore_tables = 'schema_migrations'
+
+      dump = []
+      dump << "mysqldump"
+      dump << "--no-create-info"
+      dump << "--complete-insert"
+      dump << "-u #{config["username"]}"
+      dump << "-p#{config["password"]}" if config["password"].present?
+      ignore_tables.split(',').each do |table|
+        dump << "--ignore-table=#{config["database"]}.#{table}"
+      end
+      dump << "#{config["database"]}"
+
+      puts "Creating a full backup"
+      Rake::Task["db:database_dump"].invoke ENV['file']=full_dump_file
+
+      #puts "SQL::  #{dump.join ' '}"
+      puts "Dumping data from #{config["database"]} database... this may take a minute"
+      File.open(dump_file, "w+") do |file|
+        output = `#{dump.join ' '}`
+        raise "Failed on mysql error, please check the error and try again." if output.empty?
+        file << output
+      end
+      Rake::Task['db:drop'].invoke
+      Rake::Task['db:create'].invoke
+      Rake::Task['db:schema:load'].invoke
+      puts "Reloading data"
+      insert = []
+      insert << "mysql"
+      insert << "-u #{config["username"]}"
+      insert << "-p#{config["password"]}" if config["password"].present?
+      insert << "#{config["database"]}"
+      insert << "< #{dump_file}"
+      output = `#{insert.join ' '}`
+      puts "Finishing rebuilding your application"
+
+    end
+
+  end
+  desc "Alias for n2:setup:default"
+  task :setup => 'setup:default'
+end
+
+def valid_url? url
+  url =~ /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i
 end

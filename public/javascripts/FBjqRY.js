@@ -875,7 +875,7 @@ FBjqRY.fn = FBjqRY.prototype = {
         var show = (neitherShowHide == 1);
         
         var animObj = function(n) {
-            var obj = Animation(n).duration(dur);
+            var obj = Animation(n).duration(dur).checkpoint();
             for(var p in params) {
                 if(params.hasOwnProperty(p)) { obj = obj.to(p, params[p]); }
             }
