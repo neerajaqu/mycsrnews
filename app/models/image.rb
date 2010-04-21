@@ -22,7 +22,8 @@ class Image < ActiveRecord::Base
   #before_validation :download_image, :if => :remote_image_url?
   validate :download_image, :if => :remote_image_url?
   # TODO:: validate format of remote_image_url
-  validates_presence_of :remote_image_url, :allow_blank => true, :message => 'invalid image or url.', :if => :remote_image_url?
+  #validates_format_of :remote_image_url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*(jpg,jpeg,gif,png))?$/ix, :allow_blank => true, :message => "image url must point to a jpeg, gif or png image", :if => :remote_image_url?
+  #validates_presence_of :remote_image_url, :allow_blank => true, :message => 'invalid image or url.', :if => :remote_image_url?
   validates_presence_of :image, :image_file_name, :image_content_type, :image_file_size
 
   #after_validation :set_user
@@ -36,6 +37,7 @@ class Image < ActiveRecord::Base
   end
 
   def download_image
+    errors.add(:remote_image_url, "image url must point to a jpeg, gif or png image url") and return unless remote_image_url =~ /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*(jpg,jpeg,gif,png))?$/ix
     begin
       Timeout::timeout(10) {
         self.image = open(URI.parse(remote_image_url))
