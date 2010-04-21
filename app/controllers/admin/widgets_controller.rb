@@ -4,6 +4,14 @@ class Admin::WidgetsController < AdminController
   def index
     @main = Widget.main
     @sidebar = Widget.sidebar
+    @page = WidgetPage.find_root_by_page_name('home')
+    if @page.present? and @page.children.present?
+      @main_widgets = @page.children.first.children
+      @sidebar_widgets = @page.children.second.children
+    else
+    	@main_widgets = nil
+    	@sidebar_widgets = nil
+    end
   end
 
   def save

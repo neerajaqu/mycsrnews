@@ -51,88 +51,90 @@
         overflow: hidden
 
 - content_for :extra_javascript do
-  :javascript
+  :erb
+    <script type="text/javascript">
     $(function() {
-    	$main = $('#left'), $sidebar = $('#right');
-    	$main_list = $('ul', $main), $sidebar_list = $('ul', $sidebar);
-    	$main_widgets = $('#main-widgets-list'), $sidebar_widgets = $('#sidebar-widgets-list');
-    	$('#main-widgets-list ul, #sortable-main, #sidebar-widgets-list ul, #sortable-sidebar').sortable().disableSelection();
-    	var foo = null;
+      var main = $('#left'), sidebar = $('#right');
+      var main_list = $('ul', main), sidebar_list = $('ul', sidebar);
+      var main_widgets = $('#main-widgets-list'), sidebar_widgets = $('#sidebar-widgets-list');
+      $('#main-widgets-list ul, #sortable-main, #sidebar-widgets-list ul, #sortable-sidebar').sortable().disableSelection();
 
-    	$('.droppable-main').droppable({
-    		//accept: '.draggable-main',
-    		accept: 'li',
-    		activeClass: 'ui-state-hover',
-    		hoverClass: 'ui-state-active',
-    		helper: 'clone',
-    		drop: function(event, ui) {
-    			if (ui.draggable.parent().parent().attr('id') == 'sidebar-widgets-list') {
-    				ui.draggable.addClass('left');
+      $('.droppable-main').droppable({
+        //accept: '.draggable-main',
+        accept: 'li',
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        helper: 'clone',
+        drop: function(event, ui) {
+          if (ui.draggable.parent().parent().attr('id') == 'sidebar-widgets-list') {
+            ui.draggable.addClass('left');
           }
-    			if (ui.draggable.parent().attr('id') != $main_list.attr('id')) {
-    				var width = "680px";
-    				if (ui.draggable.hasClass('left')) {
-    					width = "300px";
+          if (ui.draggable.parent().attr('id') != main_list.attr('id')) {
+            var width = "680px";
+            if (ui.draggable.hasClass('left')) {
+              width = "300px";
             }
-            deleteWidget(ui.draggable, $main_list, width, '130px');
+            deleteWidget(ui.draggable, main_list, width, '130px');
+            loadWidget(ui.draggable);
           }
-          loadWidget(ui.draggable);
         }
       });
-    	$('.droppable-sidebar').droppable({
-    		accept: '.draggable-sidebar',
-    		activeClass: 'ui-state-hover',
-    		hoverClass: 'ui-state-active',
-    		helper: 'clone',
-    		drop: function(event, ui) {
-    			if (ui.draggable.parent().attr('id') != $sidebar_list.attr('id')) {
-    			  deleteWidget(ui.draggable, $sidebar_list, '180px', '140px');
-          }
-          loadWidget(ui.draggable);
-        }
-      });
-
-    	$('#main-widgets-list').droppable({
-    		accept: '#left li',
-    		activeClass: 'ui-state-hover',
-    		hoverClass: 'ui-state-active',
-    		helper: 'clone',
-    		drop: function(event, ui) {
-    			if (ui.draggable.parent().attr('id') != $main_widgets.attr('id')) {
-    			  deleteWidget(ui.draggable, $('ul', $main_widgets), '100px', '100px');
+      $('.droppable-sidebar').droppable({
+        accept: '.draggable-sidebar',
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        helper: 'clone',
+        drop: function(event, ui) {
+          if (ui.draggable.parent().attr('id') != sidebar_list.attr('id')) {
+            deleteWidget(ui.draggable, sidebar_list, '180px', '140px');
+            loadWidget(ui.draggable);
           }
         }
       });
 
-    	$('#sidebar-widgets-list').droppable({
-    		accept: '#right li',
-    		activeClass: 'ui-state-hover',
-    		hoverClass: 'ui-state-active',
-    		helper: 'clone',
-    		drop: function(event, ui) {
-    			if (ui.draggable.parent().attr('id') != $sidebar_widgets.attr('id')) {
-    			  deleteWidget(ui.draggable, $('ul', $sidebar_widgets), '100px', '100px');
+      $('#main-widgets-list').droppable({
+        accept: '#left li',
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        helper: 'clone',
+        drop: function(event, ui) {
+          if (ui.draggable.parent().attr('id') != main_widgets.attr('id')) {
+          	$(ui.draggable).html($(ui.draggable).attr('name'));
+            deleteWidget(ui.draggable, $('ul', main_widgets), '100px', '100px');
+          }
+        }
+      });
+
+      $('#sidebar-widgets-list').droppable({
+        accept: '#right li',
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        helper: 'clone',
+        drop: function(event, ui) {
+          if (ui.draggable.parent().attr('id') != sidebar_widgets.attr('id')) {
+          	$(ui.draggable).html($(ui.draggable).attr('name'));
+            deleteWidget(ui.draggable, $('ul', sidebar_widgets), '100px', '100px');
           }
         }
       });
 
       $('.float-toggle').live('click', function(event) {
-      	if ($(this).parent().hasClass('left')) {
-      		$(this).parent().removeClass('left');
-      		$(this).parent().addClass('right');
-      		$(this).html('Move left');
-      	} else if ($(this).parent().hasClass('right')) {
-      		$(this).parent().removeClass('right');
-      		$(this).parent().addClass('left');
-      		$(this).html('Move right');
+        if ($(this).parent().hasClass('left')) {
+          $(this).parent().removeClass('left');
+          $(this).parent().addClass('right');
+          $(this).html('Move left');
+        } else if ($(this).parent().hasClass('right')) {
+          $(this).parent().removeClass('right');
+          $(this).parent().addClass('left');
+          $(this).html('Move right');
         }
       });
 
       function getWidgetID(widget_str) {
-      	if ((match = widget_str.match(/^widget_([0-9]+)$/)) != null) {
-      	  return match[1];
+        if ((match = widget_str.match(/^widget_([0-9]+)$/)) != null) {
+          return match[1];
         } else {
-        	return false;
+          return false;
         }
       }
 
@@ -155,53 +157,90 @@
       }
 
       function deleteWidget($widget, $list, $width, $height) {
-      	$widget.fadeOut(function() {
-      		$widget.appendTo($list).fadeIn(function() {
-      			$widget.animate({ width: $width, 'min-height': $height, 'max-height': '500px', height: 'auto' }).css('height', 'auto');
+        $widget.fadeOut(function() {
+          $widget.appendTo($list).fadeIn(function() {
+            $widget.animate({ width: $width, 'min-height': $height, 'max-height': '500px', height: 'auto' }).css('height', 'auto');
           });
         });
       }
 
-    	$('#save-button')
-    	  .hover(
-    	    function() { $(this).addClass('ui-state-hover'); },
-    	    function() { $(this).removeClass('ui-state-hover'); }
-    	  ).mousedown(function() {
-        	$(this).addClass('ui-state-active');
+      $('#save-button')
+        .hover(
+          function() { $(this).addClass('ui-state-hover'); },
+          function() { $(this).removeClass('ui-state-hover'); }
+        ).mousedown(function() {
+          $(this).addClass('ui-state-active');
         }).mouseup(function() {
-    	  	$(this).removeClass('ui-state-active');
+          $(this).removeClass('ui-state-active');
         }).click(function() {
-        	var widgets = {
-        		main: [],
-        		sidebar: []
+          var widgets = {
+            main: [],
+            sidebar: []
           };
-          $('li.draggable-main, li.draggable-sidebar', $main_list).each(function(i) {
-          	if ($(this).hasClass('left')) {
-          		var side = '-left';
+          $('li.draggable-main, li.draggable-sidebar', main_list).each(function(i) {
+            if ($(this).hasClass('left')) {
+              var side = '-left';
             } else if ($(this).hasClass('right')) {
-          		var side = '-right';
+              var side = '-right';
             } else {
-          	  var side = '';
+              var side = '';
             }
-          	widgets.main.push(getWidgetID(this.id)+side);
+            widgets.main.push(getWidgetID(this.id)+side);
           });
-          $('li.draggable-main, li.draggable-sidebar', $sidebar_list).each(function(i) {
-          	widgets.sidebar.push(getWidgetID(this.id));
+          $('li.draggable-main, li.draggable-sidebar', sidebar_list).each(function(i) {
+            widgets.sidebar.push(getWidgetID(this.id));
           });
           $.post("/admin/widgets/save.json", {main: widgets.main.join(','), sidebar: widgets.sidebar.join(',')}, function(data) {
-          	if (typeof(data.success) !== 'undefined') {
-          		alert(data.success);
+            if (typeof(data.success) !== 'undefined') {
+              alert(data.success);
             } else {
-            	alert('There was a problem saving your page');
+              alert('There was a problem saving your page');
             }
           }, "json");
         });
+
+      $('#clear-button').click(function(event) {
+      	  event.preventDefault();
+          $('#sortable-main li.ui-widget-content').each(function(i, item) {
+          	$(item).html($(item).attr('name'));
+          	if ($(item).hasClass('left') || $(item).hasClass('right')) {
+              $(item).removeClass('left').removeClass('right');
+              deleteWidget($(item), $('ul', sidebar_widgets), '100px', '100px');
+            } else {
+              deleteWidget($(item), $('ul', main_widgets), '100px', '100px');
+            }
+          });
+          $('#sortable-sidebar li.ui-widget-content').each(function(i, item) {
+          	$(item).html($(item).attr('name'));
+          	$(item).removeClass('left').removeClass('right');
+            deleteWidget($(item), $('ul', sidebar_widgets), '100px', '100px');
+          });
+      });
+
+      <% @main_widgets.each do |mwidget| %>
+        var curr_widget = $('#widget_<%= mwidget.widget.id %>');
+        var width = "680px";
+        <% if mwidget.position %>
+          curr_widget.addClass('<%= mwidget.position %>');
+          width = '300px';
+        <% end %>
+        deleteWidget(curr_widget, main_list, width, '130px');
+        loadWidget(curr_widget);
+      <% end %>
+
+      <% @sidebar_widgets.each do |swidget| %>
+        var curr_widget = $('#widget_<%= swidget.widget.id %>');
+        deleteWidget(curr_widget, sidebar_list, '180px', '140px');
+        loadWidget(curr_widget);
+      <% end %>
     });
+    </script>
 
 #content-box
   %h1.title Select Widgets for Your Page Layout
   %br
   %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
+  %button#clear-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Clear Widgets
   .clear
   %br
   #left.box.droppable-main.ui-widget-content.ui-state-default
@@ -223,11 +262,11 @@
     %h1 Wide Widgets
     %ul
       - @main.each do |widget|
-        %li.draggable-main.ui-widget-content{:id => "widget_#{widget.id}"}
+        %li.draggable-main.ui-widget-content{:id => "widget_#{widget.id}", :name => widget.name}
           %p== #{widget.name}
   #sidebar-widgets-list.box
     %h1 Narrow Widgets
     %ul
       - @sidebar.each do |widget|
-        %li.draggable-sidebar.ui-widget-content{:id => "widget_#{widget.id}"}
+        %li.draggable-sidebar.ui-widget-content{:id => "widget_#{widget.id}", :name => widget.name}
           %p== #{widget.name}
