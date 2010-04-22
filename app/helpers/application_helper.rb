@@ -170,7 +170,7 @@ module ApplicationHelper
       options.merge!(:firstnameonly => firstnameonly) if firstnameonly
       link_to fb_name(user, options), user_path(user, link_options)
     else
-      link_to user.public_name, user, link_options
+      link_to user.public_name, user_path(user, link_options)
     end
   end
 
