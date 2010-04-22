@@ -6,7 +6,7 @@ atom_feed do |feed|
     feed.entry(action, :url => build_feed_link(action)) do |entry|
       entry.title(build_feed_title(action, @user))
       entry.action(build_feed_blurb(action, @user), :type => 'html', :url => build_feed_link(action))
-      entry.author { |author| author.name(@user.name) }
+      entry.author { |author| author.name(@user.public_name) }
     end
   end
 end

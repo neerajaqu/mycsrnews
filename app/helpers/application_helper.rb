@@ -34,11 +34,11 @@ module ApplicationHelper
   def build_feed_title(action, user)
     action_type = action.class.name
     if action_type == 'Content'
-    	"#{user.name} posted #{action.title}"
+    	"#{user.public_name} posted #{action.title}"
     elsif action_type == 'Comment'
-    	"#{user.name} just commented on #{action.commentable.item_title}"
+    	"#{user.public_name} just commented on #{action.commentable.item_title}"
     elsif action_type == 'Vote'
-    	"#{user.name} liked #{action.voteable.item_title}"
+    	"#{user.public_name} liked #{action.voteable.item_title}"
     else
     	''
     end
@@ -47,11 +47,11 @@ module ApplicationHelper
   def build_feed_blurb(action, user)
     action_type = action.class.name
     if action_type == 'Content'
-    	"#{user.name} posted #{linked_story_caption(action, 150, build_feed_link(action))}"
+    	"#{user.public_name} posted #{linked_story_caption(action, 150, build_feed_link(action))}"
     elsif action_type == 'Comment'
-    	"#{user.name} just commented on #{action.commentable.item_title}: #{action.comments}"
+    	"#{user.public_name} just commented on #{action.commentable.item_title}: #{action.comments}"
     elsif action_type == 'Vote'
-    	"#{user.name} liked #{action.voteable.item_title}"
+    	"#{user.public_name} liked #{action.voteable.item_title}"
     else
     	''
     end
@@ -163,9 +163,11 @@ module ApplicationHelper
     end
     if user.facebook_user?
       options.merge!(:linked => false)
+      firstnameonly = APP_CONFIG['firstnameonly'] || false
+      options.merge!(:firstnameonly => firstnameonly) if firstnameonly
       link_to fb_name(user, options), user_path(user, link_options)
     else
-      link_to user.name, user, link_options
+      link_to user.public_name, user, link_options
     end
   end
 
@@ -173,8 +175,9 @@ module ApplicationHelper
     string.gsub("\n\r","<br>").gsub("\r", "").gsub("\n", "<br />")
   end
 
-  def profile_fb_name(user,linked = nil)
-    fb_name(user, :use_you => true, :possessive => true, :capitalize => true, :linked => linked)
+  def profile_fb_name(user,linked = nil,use_you = true, possessive = false)
+    firstnameonly = APP_CONFIG['firstnameonly'] || false
+    fb_name(user, :use_you => use_you, :possessive => possessive, :capitalize => true, :linked => linked, :firstnameonly => firstnameonly )
   end
   
   def path_to_self(item)
@@ -205,8 +208,8 @@ module ApplicationHelper
 
   def fb_list_of_names(fb_user_ids)
     return false if fb_user_ids.empty?
-    return fb_name(fb_user_ids.first) if fb_user_ids.size == 1
-
+    firstnameonly = APP_CONFIG['firstnameonly'] || false
+    return fb_name(fb_user_ids.first,:firstnameonly => firstnameonly) if fb_user_ids.size == 1
     last = fb_user_ids.pop
     "#{fb_user_ids.collect { |c| fb_name c }.join ', '} and #{fb_name last}"
   end

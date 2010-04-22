@@ -6,7 +6,7 @@
       .thumb
         = fb_profile_pic @user, :size => 'normal', :width => '180'
       .storyBlockWrap
-        %h1= fb_name @user, :use_you => false
+        %h1= profile_fb_name (@user,nil, false, false)
         .pointsTable_profile
           %table
             %tbody
