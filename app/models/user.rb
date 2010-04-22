@@ -178,6 +178,12 @@ class User < ActiveRecord::Base
     actions.sort_by {|a| a.created_at}.reverse[0,10]
   end
 
+  def public_name
+    firstnameonly = APP_CONFIG['firstnameonly'] || false
+    return self.name.split(' ').first if firstnameonly
+    self.name
+  end
+
   def to_s
     "User: #{self.name}"
   end

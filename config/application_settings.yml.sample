@@ -36,6 +36,9 @@ defaults: &defaults
 
   # Default image
   default_image: 'default/watermark.jpg'
+  
+  #Privacy settings
+  firstnameonly: false
 
 development:
   <<: *defaults

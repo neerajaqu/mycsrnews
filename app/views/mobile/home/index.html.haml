@@ -31,7 +31,7 @@
   %ul.rounded
     - @comments.each do |comment|
       %li.arrow
-        = link_to "#{comment.user.name} said", mobile_comment_path(comment)
+        = link_to "#{comment.user.public_name} said", mobile_comment_path(comment)
 -#likes
   .toolbar
     %h1 Likes

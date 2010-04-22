@@ -2,7 +2,7 @@
   .sponsor
     %a
   .headerTitle
-    %a
+    %a{:title => "Front Page - #{APP_CONFIG['site_title']}", :href => "#{home_index_path(:only_path => false)}"}
       %h1= APP_CONFIG['site_title']
   .dh_links
     - if logged_in?
