@@ -157,7 +157,7 @@ $(function() {
 		my_carousel = carousel;
   }
 
-	$('#content_url').blur(function() {
+	$('form.post_story #content_url').blur(function() {
 		if ($(this).val() != '') {
       $(this).addClass('process');
       $('#content_title').addClass('process');
@@ -202,8 +202,8 @@ $(function() {
     }
   });
 
-	if ($('#content_url').val() != '') {
-		$('#content_url').trigger('blur');
+  if ($('form.post_story #content_url').val() != '') {
+    $('#content_url').trigger('blur');
   }
 
 });

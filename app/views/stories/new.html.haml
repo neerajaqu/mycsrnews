@@ -4,8 +4,8 @@
   .panel_1
     .panelBar
       %h2= t('.new_story_header')
-    .formBox  
-      - semantic_form_for @story, :url => stories_path, :html => { :multipart => true } do |form|
+    .formBox
+      - semantic_form_for @story, :url => stories_path, :html => { :multipart => true, :class => "post_story" } do |form|
         = render :partial => 'story_form', :locals => { :form => form }
         - form.buttons do
           -# TODO:: switch this to locale
