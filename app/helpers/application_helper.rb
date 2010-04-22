@@ -161,8 +161,11 @@ module ApplicationHelper
     	link_options[:only_path] = options[:only_path]
     	options.delete(:only_path)
     end
-    if user.facebook_user?
+    if user.facebook_user?      
       options.merge!(:linked => false)
+      unless options[:useyou] == true
+        options.merge!(:capitalize => true)        
+      end
       firstnameonly = APP_CONFIG['firstnameonly'] || false
       options.merge!(:firstnameonly => firstnameonly) if firstnameonly
       link_to fb_name(user, options), user_path(user, link_options)
