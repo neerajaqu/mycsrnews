@@ -17,4 +17,8 @@ class Comment < ActiveRecord::Base
   def item_title
     "Comment on #{self.commentable.item_title}"
   end
+
+  def downvoteable?
+    true
+  end
 end

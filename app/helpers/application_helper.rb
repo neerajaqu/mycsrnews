@@ -319,25 +319,35 @@ EMBED
   end
 
   def like_link item, options = {}
-    options.merge!(:class => 'voteUp')
+    css_class = item.is_a?(Comment) ? 'thumb-up' : 'voteUp'
+    link_text = item.is_a?(Comment) ? ' ' : 'Like'
+    options.merge!(:class => css_class)
     format = options.delete(:format)
     return '' unless item.respond_to? "votes_for"    
     if format
-      link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
+      link_to(link_text, like_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
     else
-      link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), options)
+      link_to(link_text, like_item_path(item.class.name.foreign_key.to_sym => item), options)
     end
   end
 
   def dislike_link item, options = {}
-    options.merge!(:class => 'voteDown')
+    css_class = item.is_a?(Comment) ? 'thumb-down' : 'voteUp'
+    link_text = item.is_a?(Comment) ? '' : 'Dislike'
+    options.merge!(:class => css_class)
     format = options.delete(:format)
     return '' unless item.respond_to? "votes_for"
     if format
-      link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
+      link_to(link_text, dislike_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
     else
-      link_to('Dislike', dislike_item_path(item.class.name.foreign_key.to_sym => item), options)
+      link_to(link_text, dislike_item_path(item.class.name.foreign_key.to_sym => item), options)
     end
+  end
+
+  def votes_link item, count = 0
+    count_str = "#{count > 0 ? '+' : ''}#{count}"
+    output = "<span class='likes-tally'>#{count_str}</span>&nbsp;#{like_link item}"
+    output += "&nbsp;#{dislike_link item}" if item.downvoteable?
   end
 
   def answer_translate count = 0

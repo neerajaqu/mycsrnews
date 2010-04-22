@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection => {:link_user_accounts => :get, :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
 
   map.resource :session
-  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
+  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
 
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
@@ -48,7 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] },:has_many => [ :flags]
 
   map.resources :articles
-  map.resources :newswires, :member => { :publish => [:get, :post] }
+  map.resources :newswires, :member => { :quick_post => [:get, :post] }
   map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :idea_boards, :has_many => :ideas
   map.resources :resources, :member => { :like => [:get, :post], :my_resources => [:get, :post] }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]

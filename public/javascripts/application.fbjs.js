@@ -31,7 +31,7 @@ $(function() {
       return SITE_URL + url.replace(/^(?:http:\/\/apps.facebook.com)?\/[^\/]+(.*)/, "$1");
   }
 
-  $('a.voteLink, a.voteUp, a.voteDown').click(function(event) {
+  $('a.voteLink, a.voteUp, a.voteDown, a.thumb-up, a.thumb-down').click(function(event) {
     event.preventDefault();
     var url = change_url_format($(this).href());
     var span = $(this).parent();

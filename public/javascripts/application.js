@@ -90,7 +90,7 @@ $(function() {
     });
   });
 
-	$('.voteLink, .voteUp, .voteDown').click(function(event) {
+	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').click(function(event) {
 		event.preventDefault();
 		var span = $(this).parent();
 		$(this).parent().html("<img src=\"/images/spinner.gif\" />");
@@ -197,4 +197,9 @@ $(function() {
         "json");
     }
   });
+
+	if ($('#content_url').val() != '') {
+		$('#content_url').trigger('blur');
+  }
+
 });

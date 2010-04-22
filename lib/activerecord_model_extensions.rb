@@ -64,6 +64,10 @@ module Newscloud
         "#{self.class.name.titleize} ##{self.id}"
       end
 
+      def downvoteable?
+        false
+      end
+
     end
 
   end

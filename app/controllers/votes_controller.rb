@@ -6,14 +6,15 @@ class VotesController < ApplicationController
   def like
     @voteable = find_voteable
     respond_to do |format|
-      if current_user and @voteable.present? and current_user.vote_for(@voteable)
+      error = (current_user and current_user.voted_for?(@voteable)) ? "You already voted" : false
+      if !error and current_user and @voteable.present? and current_user.vote_for(@voteable)
       	success = "Thanks for your vote!"
       	format.html { flash[:success] = success; redirect_to params[:return_to] || @voteable }
       	format.fbml { flash[:success] = success; redirect_to params[:return_to] || @voteable }
       	format.json { render :json => { :msg => "#{@voteable.votes_tally} likes" }.to_json }
       	format.fbjs { render :json => { :msg => "#{@voteable.votes_tally} likes" }.to_json }
       else
-      	error = "Vote failed"
+      	error ||= "Vote failed"
       	format.html { flash[:error] = error; redirect_to params[:return_to] || @voteable }
       	format.fbml { flash[:error] = error; redirect_to params[:return_to] || @voteable }
       	format.json { render :json => { :msg => error }.to_json }

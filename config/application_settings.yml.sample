@@ -5,9 +5,16 @@ defaults: &defaults
   # Uncomment this line to enable google analytics
   google_analytics_account_id: 'UF-123456890-7'
 
+  # ad platforms supported: google, helios
+  ad_platform: 'google' 
+  
   # Uncomment these lines to enable google adsense
   google_adsense_account_id: 'ca-pub-22233344444555555'
   google_adsense_slot_name: 'my_ad_slot'
+
+  # Uncomment these lines to enable helios
+  helios_sitepage: 'youraddomain.com/yourfacebookproject.htm'
+  helios_url: 'http://subdomain.ur.gcion.com'
 
   site_topic: 'Default Site Topic'
   site_title: 'Default Site Name'
