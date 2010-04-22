@@ -164,9 +164,13 @@ $(function() {
       $.post("/stories/parse_page", 
         {url: $(this).val()},
         function(data, status) {
-          $('#content_title').val(data.title);
+          if ($('#content_title').val() == '') {
+            $('#content_title').val(data.title);
+          }
           if (data.description) {
-            $('#content_caption').val(data.description);
+            if ($('#content_caption').val() == '') {
+              $('#content_caption').val(data.description);
+            }
           }
           if (data.images.length > 0) {
             // Hack to make this work in chrome..
