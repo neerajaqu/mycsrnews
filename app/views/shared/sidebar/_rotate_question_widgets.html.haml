@@ -1,9 +1,12 @@
+- locals = {}
+- locals[:widget] = widget if defined?(widget)
+- locals[:widget_page] = widget_page if defined?(widget_page)
 - case rand(4)
   - when 0
-    = render :partial => 'shared/sidebar/top_answers'
+    = render :partial => 'shared/sidebar/top_answers', :locals => locals
   - when 1
-    = render :partial => 'shared/sidebar/newest_answers'
+    = render :partial => 'shared/sidebar/newest_answers', :locals => locals
   - when 2
-    = render :partial => 'shared/sidebar/top_questions'
+    = render :partial => 'shared/sidebar/top_questions', :locals => locals
   - when 3
-    = render :partial => 'shared/sidebar/newest_questions'
+    = render :partial => 'shared/sidebar/newest_questions', :locals => locals
