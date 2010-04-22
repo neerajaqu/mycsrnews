@@ -217,21 +217,25 @@
           });
       });
 
-      <% @main_widgets.each do |mwidget| %>
-        var curr_widget = $('#widget_<%= mwidget.widget.id %>');
-        var width = "680px";
-        <% if mwidget.position %>
-          curr_widget.addClass('<%= mwidget.position %>');
-          width = '300px';
+      <% if @main_widgets %>
+        <% @main_widgets.each do |mwidget| %>
+          var curr_widget = $('#widget_<%= mwidget.widget.id %>');
+          var width = "680px";
+          <% if mwidget.position %>
+            curr_widget.addClass('<%= mwidget.position %>');
+            width = '300px';
+          <% end %>
+          deleteWidget(curr_widget, main_list, width, '130px');
+          loadWidget(curr_widget);
         <% end %>
-        deleteWidget(curr_widget, main_list, width, '130px');
-        loadWidget(curr_widget);
       <% end %>
 
-      <% @sidebar_widgets.each do |swidget| %>
-        var curr_widget = $('#widget_<%= swidget.widget.id %>');
-        deleteWidget(curr_widget, sidebar_list, '180px', '140px');
-        loadWidget(curr_widget);
+      <% if @sidebar_widgets %>
+        <% @sidebar_widgets.each do |swidget| %>
+          var curr_widget = $('#widget_<%= swidget.widget.id %>');
+          deleteWidget(curr_widget, sidebar_list, '180px', '140px');
+          loadWidget(curr_widget);
+        <% end %>
       <% end %>
     });
     </script>
