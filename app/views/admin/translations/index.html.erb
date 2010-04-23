@@ -1,3 +1,29 @@
+<% content_for :extra_javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('form.edit_translation').submit(function(event) {
+        event.preventDefault();
+        var url = $(this).attr('action').replace(/html/, 'js');
+        var td_ele = $(this).parent().parent();
+        $.post(url, $(this).serialize(), function(data) {
+        	if (typeof(data.success) != 'undefined') {
+          	$(td_ele).html(data.success);
+            $(td_ele).parent().effect('pulsate', {times: 3});
+          } else {
+          	if (typeof(data.error) != 'undefined') {
+              $(td_ele).parent().effect('pulsate', {times: 3});
+              $(td_ele).html(data.error);
+            } else {
+              $(td_ele).parent().effect('pulsate', {times: 3});
+              $(td_ele).html("Could not complete this action.");
+            }
+          }
+        }, 'json');
+      });
+    });
+  </script>
+<% end %>
+
 <h1>Listing translations for <%= @locale.code %></h1>
 <br />
 
@@ -22,7 +48,14 @@
       <tr class="<%= cycle("odd", "even") %>">
         <!--<td><%#=h translation.key %></td>-->
         <td><%=h translation.raw_key %></td>
-        <td><%=h translation.value %></td>
+        <td>
+          <div style="display: inline">
+          <% form_for([:admin, @locale, translation]) do |f|%>
+            <%= f.text_field :value %>
+            <%= f.submit "Update" %>
+          <% end %>
+          </div>
+        </td>
         <td><%=h translation.default_locale_value %></td>
         <td>
           <%= link_to 'Show', admin_locale_translation_path(@locale, translation) %> |

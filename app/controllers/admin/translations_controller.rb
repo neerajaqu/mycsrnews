@@ -116,9 +116,10 @@ class Admin::TranslationsController < AdminController
           redirect_to admin_locale_translation_path(@locale, @translation)
         end
         format.xml  { head :ok }
-        format.js   {}
+        format.js   { render :json => { :success => "Successfully updated translation!" }, :status => 200 }
       else
         format.html { render :action => "edit" }
+        format.js   { render :json => { :error => "Could not update your translation!" }, :status => 200 }
         format.xml  { render :xml => @translation.errors, :status => :unprocessable_entity }
       end
     end
