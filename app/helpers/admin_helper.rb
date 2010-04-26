@@ -79,6 +79,7 @@ module AdminHelper
 
     if item.moderatable?
     	links << link_to(item.blocked? ? 'UnBlock' : 'Block', admin_block_path(item.class.name.foreign_key.to_sym => item))
+    	links << link_to(item.featured? ? 'UnFeature' : 'Feature', admin_feature_path(item.class.name.foreign_key.to_sym => item))
     	links << link_to('Flag', admin_flag_path(item.class.name.foreign_key.to_sym => item))
     end
     links.join ' | '

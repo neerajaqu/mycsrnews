@@ -1,11 +1,25 @@
 class Admin::MiscController < AdminController
 
+  def feature
+    @item = find_moderatable_item
+
+    if @item.moderatable? and @item.toggle_featured
+    	expire_cache @item
+    	flash[:success] = "Successfully featured (or unfeatured) your item."
+    	#redirect_to [:admin, :contents]
+    	redirect_to [:admin, @item]
+    else
+    	flash[:error] = "Could not feature this item."
+    	redirect_to [@admin, @item]
+    end
+  end
+
   def block
     @item = find_moderatable_item
 
     if @item.moderatable? and @item.toggle_blocked
     	expire_cache @item
-    	flash[:success] = "Successfully blocked your item."
+    	flash[:success] = "Successfully blocked (or unblocked) your item."
     	#redirect_to [:admin, :contents]
     	redirect_to [:admin, @item]
     else

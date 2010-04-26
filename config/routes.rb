@@ -64,6 +64,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace(:admin) do |admin|
     admin.block '/block.:format', :controller => 'misc', :action => 'block'
     admin.flag '/flag.:format', :controller => 'misc', :action => 'flag'
+    admin.feature '/feature.:format', :controller => 'misc', :action => 'feature'
     admin.paged_items '/featured_items/:id/load_items/page/:page', :controller => 'featured_items', :action => 'load_items'
     admin.resources :locales, :collection => { :refresh => [:get] }, :has_many => :translations
     admin.translations '/translations.:format', :controller => 'translations', :action => 'translations'
