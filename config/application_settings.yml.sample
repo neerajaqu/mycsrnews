@@ -15,6 +15,7 @@ defaults: &defaults
   # Uncomment these lines to enable helios
   helios_sitepage: 'youraddomain.com/yourfacebookproject.htm'
   helios_url: 'http://subdomain.ur.gcion.com'
+  helios_script_url: 'http://scriptsubdomain.ur.gcion.com'
 
   site_topic: 'Default Site Topic'
   site_title: 'Default Site Name'
