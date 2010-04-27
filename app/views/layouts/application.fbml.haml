@@ -1,5 +1,9 @@
 %fb:fbml
-  = fb_title ((title = yield(:title)) ? "#{title} -- #{APP_CONFIG['site_title']}" : APP_CONFIG['site_title'])
+  = fb_title ((title = yield(:title)) ? "#{title} - #{APP_CONFIG['site_title']}" : APP_CONFIG['site_title'])
+  -# = tag "meta",{:name=>"title",:content=>"#{title} - #{APP_CONFIG['site_title']}"}
+  -#  = tag "meta",{:name=>"description",:content=> description = yield(:description) ? "#{description}" : ""}
+  -#  = tag "link",{:rel=>"image_src",:href=> image_src = yield(:image_src) ? "#{image_src}" : "#{APP_CONFIG['base_url']}/images/default/icon-fan-app.gif"}
+  -#  = tag "meta",{:name=>"medium",:content=>"news"}
 
   = stylesheet_link_tag 'compiled/fb_grid'
 

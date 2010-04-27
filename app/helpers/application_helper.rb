@@ -202,7 +202,7 @@ module ApplicationHelper
       link_to t('tweet'), twitter_url
     end
   end
-  
+      
   def base_url(path)
     if APP_CONFIG['base_url'].present?
     	"#{APP_CONFIG['base_url']}#{path}"
