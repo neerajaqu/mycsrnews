@@ -7,7 +7,7 @@
       OAS_listpos='728x90_1,468x60_1,300x250_1,160x600_1,250x250_1,200x200_1,336x280_1';
       OAS_query=''+'&'+location.search.substring(1);
       OAS_target='_top';
-      OAS_url='http://gcirm.dmp.gcion.com/RealMedia/ads/';
+      == OAS_url='#{APP_CONFIG['helios_url']}/RealMedia/ads/';
       == OAS_sitepage='#{APP_CONFIG['helios_sitepage']}';
       OAS_version=10;
       OAS_rn='001234567890'; OAS_rns = '1234567890';
@@ -18,9 +18,9 @@
       }
       // -->
 
-    = javascript_include_tag "#{APP_CONFIG['helios_url']}/global/AD/AdtechGlobalSettings.js"
-    = javascript_include_tag "#{APP_CONFIG['helios_url']}/AD/AdtechSiteSettings.js"
-    = javascript_include_tag "#{APP_CONFIG['helios_url']}/Scripts/AD/Adtechscript.js"
+    = javascript_include_tag "#{APP_CONFIG['helios_script_url']}/global/AD/AdtechGlobalSettings.js"
+    = javascript_include_tag "#{APP_CONFIG['helios_script_url']}/AD/AdtechSiteSettings.js"
+    = javascript_include_tag "#{APP_CONFIG['helios_script_url']}/Scripts/AD/Adtechscript.js"
 
   %body{:style => "margin: 0px; padding: 0px;"}
     %script{:type => "text/javascript"}
