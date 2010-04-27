@@ -1,5 +1,10 @@
 - content_for :title do
   = @story.item_title
+- content_for :meta_description do
+  = meta_description @story
+- if @story.images.present?
+  - content_for :meta_image do
+    = meta_image @story.images.first
 
 #col_left
   - cache "#{@story.cache_key}_top_html" do

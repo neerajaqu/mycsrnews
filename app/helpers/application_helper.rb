@@ -368,4 +368,12 @@ EMBED
       t('answer_comment')
   end
 
+  def meta_description item
+    caption h(item.item_description)
+  end
+
+  def meta_image image
+    base_url image.url(:thumb)
+  end
+
 end

@@ -1,5 +1,10 @@
 - content_for :title do
   = @story.item_title
+- content_for :meta_description do
+  = meta_description @story
+- if @story.images.present?
+  - content_for :meta_image do
+    = meta_image @story.images.first
 
 #col_left
   - cache "#{@story.cache_key}_top_fbml" do
@@ -12,7 +17,7 @@
             %a== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
           - if logged_in?
             %li.nopad
-              %a= fb_share_button(story_url(@story))
+              = fb_meta_share_button @story
           %li
             %a= twitter_share_item_link @story, @story.title
       .thumb

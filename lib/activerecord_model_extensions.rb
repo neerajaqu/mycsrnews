@@ -64,6 +64,13 @@ module Newscloud
         "#{self.class.name.titleize} ##{self.id}"
       end
 
+      def item_description
+        [:description, :caption, :blurb, :details, :details].each do |method|
+          return self.send(method) if self.respond_to?(method) and self.send(method).present?
+        end
+        "#{self.class.name.titleize} ##{self.id}"
+      end
+
       def downvoteable?
         false
       end
