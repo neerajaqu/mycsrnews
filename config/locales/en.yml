@@ -3,6 +3,7 @@ en:
     order: [:month, :day, :year] 
   header:
     account: "Account"
+    share_description: "Join the growing community at our new Facebook application!"
   footer:
     contact: "Contact us"
   account_menu:
