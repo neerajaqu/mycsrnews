@@ -5,12 +5,12 @@ class Admin::MiscController < AdminController
 
     if @item.moderatable? and @item.toggle_featured
     	expire_cache @item
-    	flash[:success] = "Successfully featured (or unfeatured) your item."
+    	flash[:success] = "Successfully #{@item.is_featured? ? 'featured' : 'unfeatured'} your item."
     	#redirect_to [:admin, :contents]
     	redirect_to [:admin, @item]
     else
-    	flash[:error] = "Could not feature this item."
-    	redirect_to [@admin, @item]
+    	flash[:error] = "Could not feature this item. #{@item.errors.full_messages.join '. '}"
+    	redirect_to [:admin, @item]
     end
   end
 
@@ -19,12 +19,12 @@ class Admin::MiscController < AdminController
 
     if @item.moderatable? and @item.toggle_blocked
     	expire_cache @item
-    	flash[:success] = "Successfully blocked (or unblocked) your item."
+    	flash[:success] = "Successfully #{@item.is_blocked? ? 'blocked' : 'unblocked'} your item."
     	#redirect_to [:admin, :contents]
     	redirect_to [:admin, @item]
     else
-    	flash[:error] = "Could not block this item."
-    	redirect_to [@admin, @item]
+    	flash[:error] = "Could not block this item. #{@item.errors.full_messages.join '. '}"
+    	redirect_to [:admin, @item]
     end
   end
 
@@ -38,7 +38,7 @@ class Admin::MiscController < AdminController
     	redirect_to [:admin, @item]
     else
     	flash[:error] = "Could not flag this item."
-    	redirect_to [@admin, @item]
+    	redirect_to [:admin, @item]
     end
   end
 
