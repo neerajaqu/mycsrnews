@@ -57,6 +57,8 @@ class UsersController < ApplicationController
     	@actions = @user.comments.newest
     elsif @curr_action == 'likes'
     	@actions = @user.votes.newest
+    elsif @curr_action == 'all_actions'
+    	@actions = @user.newest_actions
     else
       @actions = false
     end

@@ -79,3 +79,5 @@
                   = build_feed_item(action, action.class.name)
 #col_right
   = render :partial => 'shared/sidebar/top_stories', :locals => { :top_stories => @top_stories }
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
+  
