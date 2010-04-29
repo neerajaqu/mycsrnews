@@ -18,6 +18,11 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer   = Answer.new
+
+    if @question.is_blocked?
+    	flash[:error] = "This question has been blocked."
+    	redirect_to questions_path
+    end
   end
 
   def new
