@@ -10,11 +10,27 @@ widgets:
       load_functions: 'load_featured_items'
     ads_banner:
       partial: '/shared/ads_banner'
+    #ad_leaderboard:
+      #locals: 'slot_data'
+      #load_functions: 'load_ad_leaderboard'
+      #partial: '/shared/ads_banner'
     newest_images:
       partial: '/shared/sidebar/newest_images'
     announcements:
       partial: 'shared/announcements'    
   sidebar_content:
+    ad_skyscraper:
+      locals: 'slot_data'
+      load_functions: 'load_ad_skyscraper'
+      partial: '/shared/ads_banner'
+    ad_small_square:
+      locals: 'slot_data'
+      load_functions: 'load_ad_small_square'
+      partial: '/shared/ads_banner'
+    ad_square:
+      locals: 'slot_data'
+      load_functions: 'load_ad_square'
+      partial: '/shared/ads_banner'        
     welcome_panel:
       partial: '/shared/sidebar/welcome_panel'
       #load_functions: 'load_top_stories'
