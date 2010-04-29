@@ -4,8 +4,9 @@
   - else
     - @main.each do |widget_page|
       - widget = widget_page.widget
+      - next if widget.name =~ /^ads?_/
       - locals = {}
-      - locals = { widget.locals.to_sym => instance_variable_get("@#{widget.locals}")} if widget.locals.present?
+      - locals = { widget.locals.to_sym => instance_variable_get("@#{widget.locals}")} if widget.locals.present? 
       - locals[:widget] = widget
       - locals[:widget_page] = widget_page
       = render :partial => widget.partial, :locals => locals
