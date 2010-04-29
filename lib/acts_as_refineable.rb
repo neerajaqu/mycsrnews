@@ -27,6 +27,7 @@ module Newscloud
           
           chains = []
           params.each do |key, value|
+            value = self.filtered_value value
             next unless refineable_params.index(key)
             if key == 'sort_by'
             	value = value.downcase
@@ -48,6 +49,15 @@ module Newscloud
             result = chains.inject(self) { |chain, scope| chain.send(scope) }
           end
           result
+        end
+
+        def filtered_value value
+          case value.downcase
+            when 'top_rated'
+              'top'
+            else
+            	value
+          end
         end
 
         def valid_refine_type? value

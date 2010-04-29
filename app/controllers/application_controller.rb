@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_contents
-    @contents ||= Content.find(:all, :limit => 10, :order => "created_at desc")
+    @contents ||= Content.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
   end
 
   def load_newest_users
