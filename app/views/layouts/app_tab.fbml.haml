@@ -1,0 +1,20 @@
+%fb:fbml
+  - title = (out = yield(:title)) ? "#{out} - #{APP_CONFIG['site_title']}" : APP_CONFIG['site_title']
+  = fb_title title
+  %meta{:name => 'title', :content => title}
+  %meta{:name => 'description', :content => (out = yield(:meta_description)) ? out : ""}
+  %meta{:name => 'medium', :content => 'news'}
+  %link{:rel  => "image_src", :href => (out = yield(:meta_image)) ? out : base_url('/images/default/icon-fan-app.gif')}
+
+  = stylesheet_link_tag 'compiled/fb_grid'
+
+  %style
+    :sass
+      .moderator-links
+        display: none !important
+      .admin-links
+        display: none !important
+
+  #appFrame
+    = display_facebook_messages
+    = yield

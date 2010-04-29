@@ -17,5 +17,9 @@
       = pipe_spacer
       = link_to t('.register'), link_user_accounts_users_path
     = pipe_spacer
-    %a= fb_share_button(home_index_path(:only_path => false))
+    %fb:share-button{:class => 'meta'}
+      %meta{:name => 'title', :content => APP_CONFIG['site_title']}
+      %meta{:name => 'description', :content => t('header.share_description')}
+      %link{:rel => "image_src", :href => base_url('/images/default/icon-fan-app.gif')}
+      %link{:rel => "target_url", :href => home_index_path(:only_path => false)}
   = render :partial => 'shared/page_tabs'

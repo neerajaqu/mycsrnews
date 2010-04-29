@@ -164,6 +164,30 @@ class ApplicationController < ActionController::Base
     @newest_announcements ||= Announcement.newest 1
   end
 
+  def load_ad_leaderboard
+    @slot_widget_leaderboard = Metadata.get_ad_slot('leaderboard', 'default')
+  end
+
+  def load_ad_square
+    @slot_widget_square = Metadata.get_ad_slot('square', 'default')
+  end
+
+  def load_ad_small_square
+    @slot_widget_small_square = Metadata.get_ad_slot('small_square', 'default')
+  end
+  
+  def load_ad_skyscraper
+    @slot_widget_skyscraper = Metadata.get_ad_slot('skyscraper', 'default')
+  end
+
+  def load_ad_medium_rectangle
+    @slot_widget_medium_rectangle = Metadata.get_ad_slot('medium_rectangle', 'default')
+  end
+
+  def load_ad_large_rectangle
+    @slot_widget_large_rectangle = Metadata.get_ad_slot('large_rectangle', 'default')
+  end
+
   def set_locale
     locale = params[:locale] || cookies[:locale] || I18n.default_locale
     I18n.locale = locale.to_s

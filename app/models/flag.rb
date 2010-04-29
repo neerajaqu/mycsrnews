@@ -10,4 +10,13 @@ class Flag < ActiveRecord::Base
     self.flag_types.index(flag_type.downcase).nil? ? false : true
   end
 
+  def item_title; flaggable.item_title; end
+  def item_description; flaggable.item_description; end
+  def is_blocked; flaggable.is_blocked; end
+  def is_blocked?; flaggable.is_blocked?; end
+
+  def num_flags
+    flaggable.respond_to?(:flags_count) ? flaggable.flags_count : flaggable.flags.count
+  end
+
 end
