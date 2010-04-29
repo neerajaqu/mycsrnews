@@ -1,81 +1,76 @@
 @import skin.sass
-* 
+
+*
   margin: 0
   padding: 0
+
 // Float div hack //
 .clearfix
   display: inline-block
+
 // floats //
 .float_left
   float: left
+
 .float_right
   float: right
+
 // Header Container //
 #header
   height: 110px
   margin-bottom: 15px
   position: relative
   border:
-    :bottom= !pageTabBorder 
-  :background= !headerBG 
+    bottom: $pageTabBorder
+  background: $headerBG
   z-index: 1
-
   .sponsor
-    :background= !sponsorBG
-    :display= !sponsordisplay
+    background: $sponsorBG
+    display: $sponsordisplay
     position: absolute
-    :top= !sponsortop
-    :left= !sponsorleft
-    :height= !sponsorheight
-    :width= !sponsorwidth
+    top: $sponsortop
+    left: $sponsorleft
+    height: $sponsorheight
+    width: $sponsorwidth
     z-index: 1
     a
       display: block
-      :height= !sponsorheight
-      :width= !sponsorwidth
-
-
+      height: $sponsorheight
+      width: $sponsorwidth
   .headerTitle
-    :background= !headerTitleLogoImage
-    :height= !headerTitleLogoHeight
-    :width= !headerTitleLogoWidth
+    background: $headerTitleLogoImage
+    height: $headerTitleLogoHeight
+    width: $headerTitleLogoWidth
     position: absolute
-    :top= !headerTitleLogoPosTop
-    :left= !headerTitleLogoPosLeft
+    top: $headerTitleLogoPosTop
+    left: $headerTitleLogoPosLeft
     z-index: 2
-
     a
       display: block
       width: 100%
       height: 100%
-
     h1
-      :visibility= !headerTitleDisplay
+      visibility: $headerTitleDisplay
       display: block
       float: left
       font-size: 32px
-      :color= !headerTitleColor
-
+      color: $headerTitleColor
   a
     text-decoration: none
-
-  img.hdrpic 
+  img.hdrpic
     position: absolute
     top: 2px
     left: 2px
-
   .pipe
     margin: 0 5px
-    :color= !subheadColor
-
+    color: $subheadColor
   .dh_links
     position: absolute
     top: 10px
     right: 0px
     float: right
     padding: 5px 20px 5px 10px
-    :background= !dhlinkscolor
-      
+    background: $dhlinkscolor
 
 // account dropdown styles //
 .account-dropdown
@@ -87,7 +82,7 @@
   position: relative
   z-index: 3
   padding-right: 10px
-  :background= !TextDropDownArrow
+  background: $TextDropDownArrow
 
 .account-links
   width: 180px
@@ -97,29 +92,26 @@
   right: -6px
   display: inline-block
   padding: 4px 10px
-  border: 
-    :top= !DropDownBorder
-    :bottom= !DropDownBorder
-    :left= !DropDownBorder
-    :right= !DropDownBorder
-  :background-color= !DropDownBG
+  border:
+    top: $DropDownBorder
+    bottom: $DropDownBorder
+    left: $DropDownBorder
+    right: $DropDownBorder
+  background-color: $DropDownBG
   li
     width: 100%
     margin: 6px 0 0px 0
     padding: 0
-
     a
       display: block
       padding: 4px 6px
       &:hover
-        :background= !DropDownLinkHover
-
+        background: $DropDownLinkHover
     &.account-profile
       a
         display: inline-block
         &:hover
           background: none
-
   .account-tab
     height: 24px
     width: 65px
@@ -127,12 +119,12 @@
     position: absolute
     top: -25px
     right: -1px
-    border: 
-      :top= !DropDownBorder
-      :bottom= none
-      :left= !DropDownBorder
-      :right= !DropDownBorder
-    :background-color= !DropDownBG
+    border:
+      top: $DropDownBorder
+      bottom: none
+      left: $DropDownBorder
+      right: $DropDownBorder
+    background-color: $DropDownBG
 
 // Body containers //
 #bodyWrapper
@@ -143,28 +135,27 @@
   float: left
   clear: left
   border:
-    :top= !FooterBorder
-
+    top: $FooterBorder
   .dh_links
-    :color= !bodyColor
+    color: $bodyColor
     float: left
     clear: left
     margin: 0px
     padding: 5px 10px 7px 10px
     background:
-      :color= !FooterBG
+      color: $FooterBG
 
 // Various Icon Links //
 .rss_link
-  :background= !rss
+  background: $rss
   padding: 3px 0 3px 18px
 
 .twitter_link
-  :background= !twitter
+  background: $twitter
   padding: 3px 0 3px 18px
 
 .newscloud_link
-  :background= !newsCloud
+  background: $newsCloud
   padding: 3px 0 3px 20px
 
 // Russell's Section Stuff //
@@ -173,35 +164,35 @@
 
 // Global styles //
 body
-  :font-family= !copyFont
-  :color= !bodyColor
-  :background= !bodyBG
+  font-family: $copyFont
+  color: $bodyColor
+  background: $bodyBG
   font-size: 11px
   margin: 0px
   padding: 0px
 
 h1, h2, h3, h4, h5
-  :font-family= !headerFont
-  :color= !bodyColor
+  font-family: $headerFont
+  color: $bodyColor
   font-size: 14px
   line-height: 130%
   margin: 0px
   padding: 0px
-
   a
-    :color= !headerColor   
+    color: $headerColor
     &:hover
-      :color= !headerLinkHover
+      color: $headerLinkHover
+
 h1
-  :font-family= !headerFont
+  font-family: $headerFont
   font-size: 15px
   font-weight: bold
-  :color= !headerColor
+  color: $headerColor
   margin: 0 0 6px 0
   padding: 0
 
 h2
-  :font-family= !headerFont
+  font-family: $headerFont
   font-size: 14px
   font-weight: bold
   margin: 0 0 6px 0
@@ -209,19 +200,19 @@ h2
 
 h3
   font-size: 11px
-  :font-family= !copyFont
-  :color= !subheadColor
+  font-family: $copyFont
+  color: $subheadColor
   font-weight: normal
   line-height: 12px
   margin: 0 5px 5px 0
   padding: 0
-
   a
-    :color= !linkColor
+    color: $linkColor
     &:hover
-      :color= !linkColor
+      color: $linkColor
+
 h4
-  :font-family= !headerFont
+  font-family: $headerFont
   font-size: 12px
   line-height: 120%
   font-weight: bold
@@ -229,16 +220,16 @@ h4
   padding: 0
 
 h5
-  :font-family= !headerFont
-  :color= !subheadColor
+  font-family: $headerFont
+  color: $subheadColor
   font-size: 12px
   font-weight: bold
   margin: 0px 0px 10px 0
   padding: 5px 0px
 
 p
-  :font-family= !copyFont
-  :color= !bodyColor
+  font-family: $copyFont
+  color: $bodyColor
   font-size: 12px
   line-height: 130%
   text-align: left
@@ -246,12 +237,11 @@ p
   padding: 0px
 
 a
-  :color= !linkColor
+  color: $linkColor
   cursor: pointer
   outline-style: none
   -moz-outline-style: none
   text-decoration: none
-
   &:hover
     text-decoration: underline
 
@@ -261,11 +251,10 @@ img
 hr
   border: none 0
   margin: 0
-  border-top: 1px solid #CCCCCC
+  border-top: 1px solid #cccccc
   height: 1px
-
   a
-    :color= !linkColor
+    color: $linkColor
 
 ul
   list-style-type: none
@@ -278,7 +267,7 @@ li
   padding: 10px 0 4px 0
 
 .meta
-  :color= !subheadColor
+  color: $subheadColor
 
 .bold
   font-weight: bold
@@ -290,10 +279,8 @@ li
   bottom: 0px
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
-  
   overflow: visible
   border: none
-
   .tabs
     position: absolute
     bottom: 0
@@ -302,26 +289,21 @@ li
     height: 23px
     margin: 0px 0px 0px 0px
     padding: 0px 0px 0px 0px
-
     .tab-float
-      :float= !pagetabFloat
+      float: $pagetabFloat
       padding: 0 1px
-
     .back_links
       padding-right: 20px
-
     .toggle_tabs
       margin: 0px 0px 0px 0px
       padding: 0px 0px 0px 0px
       text-align: center
-
     .toggle_tabs li
       display: block
       float: left
       padding: 0px 0px 0px 0px
       margin: 0px 1px 0px 0px
       height: 23px
-
     .toggle_tabs li
       a
         display: block
@@ -332,67 +314,56 @@ li
         font-size: 12px
         line-height: normal
         border: none
-        :color= !pageTablinkOff
-        :background= !pageTabOff
+        color: $pageTablinkOff
+        background: $pageTabOff
         &:hover
-          :background= !pageTabOffHover
-
+          background: $pageTabOffHover
       &.first a
         margin: 0px 0px 0px 0px
         padding: 5px 7px
         -moz-border-top-left-radius: 8px
         -webkit-border-top-left-radius: 8px
         border-top-left-radius: 8px
-
         img
-          display: inline-block    
-
+          display: inline-block
     .toggle_tabs li
       a
         &:focus
           outline: 0px
-
         &.selected
           margin: -1px 0px 0px 0px
           padding: 5px 30px 5px 30px
           height: 13px
           border:
-            :top= !pageTabBorder
-            :bottom= !TabBotBorder
-            :right= !pageTabBorder
-            :left= !pageTabBorder
-          :background= !pageTabOn
-          :color= !pageTablinkOn
-
+            top: $pageTabBorder
+            bottom: $TabBotBorder
+            right: $pageTabBorder
+            left: $pageTabBorder
+          background: $pageTabOn
+          color: $pageTablinkOn
       &.first a.selected
         padding: 5px 7px
         -moz-border-top-left-radius: 8px
         -webkit-border-top-left-radius: 8px
         border-top-left-radius: 8px
-
       a
         &.selected:hover
           text-decoration: none
-
         &.disabled
-          :color= !subheadColor
+          color: $subheadColor
           cursor: default
-
           &:hover
             text-decoration: none
-
     .toggle_tabs
       .menu_item
         &:hover
           a
-            :background= !pageTabOffHover
+            background: $pageTabOffHover
             &.selected
-              :background= !pageTabOn
-
+              background: $pageTabOn
           .dropdown
             visibility: visible
             height: 100%
-
         .dropdown
           z-index: 4
           visibility: hidden
@@ -400,43 +371,39 @@ li
           ul
             display: inline-block
             width: 100%
-
             li
               display: block
               width: 100%
               clear: both
               padding: 0
               text-align: left
-
               a
                 font-size: 10px
                 font-weight: normal
                 display: block
-                :background= !dropdownTabOff
+                background: $dropdownTabOff
                 padding: 5px 5px
-                :color= !dropdownTabText
+                color: $dropdownTabText
                 border:
-                  :top= !dropdownTabTopBorder
-                  :bottom= !dropdownListBorder
-                  :left= !dropdownListBorder
-                  :right= !dropdownListBorder
+                  top: $dropdownTabTopBorder
+                  bottom: $dropdownListBorder
+                  left: $dropdownListBorder
+                  right: $dropdownListBorder
                 &:hover
-                  :background= !dropdownTabOn
-
+                  background: $dropdownTabOn
               a.selected
-                :background= !dropdownTabSelectOff
+                background: $dropdownTabSelectOff
                 margin:
-                  :right= !dropdownTabSelectMarginRight
-                  :left= !dropdownTabSelectMarginLeft
+                  right: $dropdownTabSelectMarginRight
+                  left: $dropdownTabSelectMarginLeft
                 border:
-                  :top= !dropdownTabTopBorderSelect
-                  :bottom= !dropdownTabListBorderSelect
-                  :left= !dropdownTabListBorderSelect
-                  :right= !dropdownTabListBorderSelect
-                :color= !dropdownTabTextSelect
-                
+                  top: $dropdownTabTopBorderSelect
+                  bottom: $dropdownTabListBorderSelect
+                  left: $dropdownTabListBorderSelect
+                  right: $dropdownTabListBorderSelect
+                color: $dropdownTabTextSelect
                 &.selected:hover
-                  :background= !dropdownTabSelectOn
+                  background: $dropdownTabSelectOn
 
 // Sub Navigation Styles //
 #subNav
@@ -446,20 +413,18 @@ li
   display: inline-block
   overflow: visible
   border:
-    :bottom= !subnavBorder
+    bottom: $subnavBorder
 
 #subNav
   .toggle_tabs
     margin: 0px 0px 0px 0px
     padding: 0px 0px 0px 0px
     text-align: center
-
     li
       display: block
       float: left
       padding: 0px 0px 0px 0px
       margin: 0 0 0 1px
-
       a
         margin: 0px 0px 0px 0px
         padding: 4px 25px 1px 25px
@@ -467,32 +432,28 @@ li
         border: none
         font-weight: bold
         font-size: 11px
-        :background= !subnavTabOff
+        background: $subnavTabOff
         display: block
-        :color= !subnavTabLinkOff
-
+        color: $subnavTabLinkOff
         &:hover
-          :background= !subnavTabOffHover
+          background: $subnavTabOffHover
           text-decoration: none
-
         &.selected
           margin: -1px 0px 0px 0px
-          :background= !subnavTabOn
+          background: $subnavTabOn
           border:
-            :top= !subnavBorder
-            :bottom= !TabBotBorder
-            :right= !subnavBorder
-            :left= !subnavBorder
-          :color= !subnavTabLinkOn
+            top: $subnavBorder
+            bottom: $TabBotBorder
+            right: $subnavBorder
+            left: $subnavBorder
+          color: $subnavTabLinkOn
           &:hover
-            :background= !subnavTabOn
+            background: $subnavTabOn
             text-decoration: none
             cursor: default
-
         &.disabled
-          :color= !subheadColor
+          color: $subheadColor
           cursor: default
-
           &:hover
             text-decoration: none
 
@@ -500,24 +461,21 @@ li
 .panel_1, .panel_2
   border-bottom: none
   margin-bottom: 15px
-
   &.textpage
     h2
       font-size: 13px
-
   &.sponsorbox
-    :background= !sponsorBoxBG
+    background: $sponsorBoxBG
     ul
-      :border= !sponsorBoxBorder
+      border: $sponsorBoxBorder
     .panelBar
-      :background= !sponsorBoxPanelBarBG
+      background: $sponsorBoxPanelBarBG
       border: none
       h2
-        :color= !sponsorBoxPanelBarTextColor
+        color: $sponsorBoxPanelBarTextColor
         font-weight: bold
     .storyBlockWrap
       margin: 0 8px
-
   .listTags
     li
       border: none
@@ -525,112 +483,93 @@ li
     h4
       font-weight: normal
       font-size: 11px
-      :color= !subheadColor
-
+      color: $subheadColor
   .thumb
     float: left
     margin: 0 10px
-
   .eventBlock
     margin: 0 0 4px 0
     padding: 0
     border:
       top: 1px solid #f0f0f0
       bottom: 1px solid #f0f0f0
-
     .tag
       font-weight: normal
       text-transform: uppercase
       font-size: 11px
-
     .eventDetailsBlock
       float: left
       width: 75%
       margin: 4px 0
-
     .eventLocationBlock
       float: left
       width: 25%
-      :background= !subTitleBG
-
+      background: $subTitleBG
       ul
         margin: 4px 0 8px 0
-
         li
           border: none
           padding: 4px 0 0 8px
           font-size: 10px
-          :color= !subheadColor
-
+          color: $subheadColor
           b
-            :color= !headerColor
-
+            color: $headerColor
   .houseFeatures
-    :background= !featureBg
-    border: 
-      :top= !featureBorderTop
-      :bottom= !featureBorderBot
-      :left= !featureBorderLeft
-      :right= !featureBorderRight
+    background: $featureBg
+    border:
+      top: $featureBorderTop
+      bottom: $featureBorderBot
+      left: $featureBorderLeft
+      right: $featureBorderRight
     .thumbBanner
       padding: 0
       display: inline-block
       width: 100%
-
       img
-        max-width: 100% 
+        max-width: 100%
         max-height: 100%
-
     .thumb
       background: none
       padding: 0
       float: left
       margin: 10px
-      
       img
         max-width: 75px
         max-height: 75px
-
     .featureAd
       text-align: center
       display: inline-block
-
       h2
         text-align: left
         line-height: 150%
         padding: 8px 10px
-        :color= !featureH2Text
+        color: $featureH2Text
         &.push-left
           margin-right: 40%
-
       p
         text-align: left
         padding: 0 10px
         margin-bottom: 20px
-        :color= !featureBodyText
-        
+        color: $featureBodyText
       .featureBtn
         text-align: center
         font-size: 14px
         line-height: 14px
         font-weight: bold
         display: inline-block
-        :background= !featureBtnOff
-        :color= !featureBtnText
+        background: $featureBtnOff
+        color: $featureBtnText
         height: 16px
         padding: 4px 20px
         margin: 10px auto
-        :border= !featureBtnBorder
+        border: $featureBtnBorder
         -moz-border-radius: 4px
         -webkit-border-radius: 4px
         border-radius: 4px
-   
         &:hover
-          :background= !featureBtnOn
+          background: $featureBtnOn
           text-decoration: none
-
   .userBlockWrap
-
     li
       padding: 0
       margin: 4px 4px 0 0
@@ -640,10 +579,8 @@ li
       float: left
       border:
         bottom: none
-
       .profilePic
         margin: 0
-
   .featuredNewsList
     ul
       padding: 0 10px 0 0
@@ -652,16 +589,13 @@ li
       font-size: 11px
       line-height: 14px
       margin: 4px 0 0 0
-
       b
         font-weight: normal
         text-transform: uppercase
-
   .videoBlockWrap
     li
       display: inline-block
       float: left
-
     .videoThumb
       padding: 0
       margin:
@@ -671,110 +605,84 @@ li
       height: 48px
       background: #cccccc
       padding: 0px
-
   .formBox
     padding: 10px 0px
-    :background= !formBoxBG
-
+    background: $formBoxBG
     p
       margin: 0 10px
-    
     h4
       font-weight: normal
       margin-bottom: 10px
-
     textarea
-      :border= !formBoxTextArea
-
+      border: $formBoxTextArea
   .panelBar
     position: relative
     display: block
     padding: 6px 0 2px 0px
     border:
-      :bottom= !panelBarBorder
-    :background= !panelBarBG
-
+      bottom: $panelBarBorder
+    background: $panelBarBG
     h2
       margin: 0
       font-weight: normal
       font-size: 10px
       text-transform: uppercase
-      :font-family= !copyFont
-      :color= !panelBarHeader
+      font-family: $copyFont
+      color: $panelBarHeader
       display: inline
       margin-left: 4px
-
     a
       font-weight: normal
       font-size: 11px
-      :color= !linkColor
-
+      color: $linkColor
     .bar_link
       float: right
-      margin: 0 8px 
-
+      margin: 0 8px
   .storyBlockSpacer
     padding-left: 100px
-
   .storyBlockMeta
-    
     h4
       margin-bottom: 3px
-
     h3
       margin-bottom: 4px
-
   .storyBlockWrap
-
     .storyHead
       margin: 0 0 8px 0
-      :color= !headerColor
-
+      color: $headerColor
     p
       margin: 8px 0
       font-size: 11px
-
     h1
       font-size: 22px
-
     p
       margin: 6px 0px
       line-height: 120%
-
   .thumb
-
     img
-      :background= !WaterMark
-
+      background: $WaterMark
     a:hover
       text-decoration: none
-
   li
     display: inline-block
     width: 100%
     padding: 5px 0
     border:
-      :bottom= !panelListBorder
-
-  .bullet_list 
+      bottom: $panelListBorder
+  .bullet_list
     margin: 0 10px
-
     ul
       margin: 10px 0 0 0
-
     li
       display: list-item
       margin: 0 0 10px 10px
       padding: 0
       line-height: 120%
-      :list-style-image= !bulletList
+      list-style-image: $bulletList
       list-style-type: disc
       list-style-position: outside
       border-bottom: none
-
   .audio, .video, .image
     margin: 10px
-
   .userPoints
     text-align: right
     margin-right: 0px
@@ -792,7 +700,7 @@ li
     position: absolute
     top: 13px
     left: 1px
-    :background= !btnCommentBG
+    background: $btnCommentBG
     z-index: 7
 
 // refine search box styles //
@@ -801,28 +709,25 @@ li
     position: relative
     z-index: 10
     padding-right: 10px
-    :background= !TextDropDownArrow
-
+    background: $TextDropDownArrow
   .refine_link
     float: right
     position: relative
     display: block
     padding: 0px 8px
-
     .refine-tab
       height: 32px
       width: 99px
       position: absolute
       top: -33px
       right: -1px
-      border: 
-        :top= !DropDownBorder
+      border:
+        top: $DropDownBorder
         bottom: none
-        :left= !DropDownBorder
-        :right= !DropDownBorder
-      :background-color= !DropDownBG
+        left: $DropDownBorder
+        right: $DropDownBorder
+      background-color: $DropDownBG
       z-index: 9
-
     .refine-box
       z-index: 8
       display: none
@@ -831,35 +736,30 @@ li
       width: 142px
       top: 25px
       right: 0px
-      :border= !DropDownBorder
-      :background-color= !DropDownBG
-
+      border: $DropDownBorder
+      background-color: $DropDownBG
       .refine-content
         text-align: center
-
         select
           width: 100%
           margin-bottom: 15px
-          :border= !refineInputBorder
-
+          border: $refineInputBorder
         label
           display: block
           font-weight: bold
           text-align: left
           padding: 0 0 5px 4px
-
         input
           width: 70%
           cursor: pointer
           font-weight: bold
           padding: 4px 0
-          :color= !refineInputText
-          :border= !refineInputBorder
-          :background= !refineInputBG
-       
+          color: $refineInputText
+          border: $refineInputBorder
+          background: $refineInputBG
           &:hover
-            :color= !refineInputHoverText
-            :background= !refineInputHoverBG
+            color: $refineInputHoverText
+            background: $refineInputHoverBG
 
 // hot topic bar //
 #hotTopicBar
@@ -867,44 +767,38 @@ li
   width: 100%
   display: block
   margin-bottom: 15px
-
   ul
     display: block
     float: left
-    :background= !HTBaseBG
+    background: $HTBaseBG
     width: 100%
     li
       float: left
       padding: 4px 0 4px 0px
-
       &.topic
         display: inline
         float: left
         text-align: left
-        :background= !HTBaseBG
+        background: $HTBaseBG
         padding: 4px 15px 4px 0
         min-width: 10%
-
         a
           margin-left: 5px
           padding-left: 8px
-          :background= !hotTopicBar
-
+          background: $hotTopicBar
       &.topicTitle
-        :background= !HTTitleBG
-        :color= !HTTitleText
+        background: $HTTitleBG
+        color: $HTTitleText
         width: 22%
         padding-left: 5px
         text-transform: uppercase
         margin-right: 10px
-
       &.topicMore
-        border-left: 2px solid #FFF
+        border-left: 2px solid white
         float: right
         text-align: center
         width: 10%
-        :background= !HTBaseBG
-
+        background: $HTBaseBG
 
 // Article Style modifications //
 #readArticle
@@ -914,7 +808,6 @@ li
       border-bottom: none
       display: inline-block
       width: 100%
-      
       li
         padding: 3px 0 4px 0
         text-align: center
@@ -925,69 +818,58 @@ li
         margin-right: -1px
         width: 25%
         border:
-          :left= !TopBarBorder
+          left: $TopBarBorder
           bottom: none
-        :background= !TopBarBG
-
+        background: $TopBarBG
         &.nopad
           padding-bottom: 2px
         a
-          :color= !linkColor
-
+          color: $linkColor
   .thumb
     float: right
     margin: 10px
-
   .bodyArticle
-    :color= !bodyColor
+    color: $bodyColor
     margin: 8px 5px 14px 5px
     line-height: 140%
     font-size: 12px
-
   .storyCaption
     p
       padding: 0
       margin: 4px 0px
-
     br
       margin: 0
       line-height: 0px
       visibility: hidden
 
 // Comment Style Modifications and Additions //
-#commentThread
+.commentThread, #commentThread
   .panelBar
-    :background= !panelBarCommentBG
-
+    background: $panelBarCommentBG
     h2
-      :color= !linkColor
-
+      color: $linkColor
   .thumb
     float: left
     margin: 0 10px 10px 0
-
   .comment_block
     position: relative
     padding: 8px 0 20px 0
     border:
-      :bottom= !commentBlockBorder
-
-
+      bottom: $commentBlockBorder
     .comment_reply
       display: block
       padding: 0 0 4px 20px
       position: absolute
-      bottom: 8px 
+      bottom: 8px
       left: 70px
-      :background= !commentReply 
-    
+      background: $commentReply
       a
-        :color= !commentReplyText
+        color: $commentReplyText
         font-weight: bold
         font-size: 11px
 
 .feature_bg
-  :background= !featureStoryBG 
+  background: $featureStoryBG
   .panel_2
     margin: 10px 0
   .thumb
@@ -997,99 +879,98 @@ li
   .storyBlockWrap
     margin: 0px 10px 0 10px
   .btnComment
-    :background= !btnCommentFeatureBG
+    background: $btnCommentFeatureBG
+
 li.feature_bg
-  border-bottom: 1px solid #fff
+  border-bottom: 1px solid white
 
 .storyList
   .thumb
     float: left
-    
 
 .subtitle
   position: relative
   font-size: 10px
-  :color= !subheadColor
-  :background= !subTitleBG
+  color: $subheadColor
+  background: $subTitleBG
   border: none
   padding: 6px 0px 6px 4px
 
 // Blockquote styles //
 blockquote
-  :background= !blockQuote
-  :color= !bodyColor
+  background: $blockQuote
+  color: $bodyColor
   font-size: 12px
   line-height: 130%
   margin: 10px 0 10px 60px
   padding: 5px 10px
-
   .quotes
     padding: 4px 0
+
 // TODO add styles for reply quotes when its functional //
 
-// Universal Button Styles // 
+// Universal Button Styles //
 .btn
   display: inline-block
-  color: #fff
+  color: white
   font-weight: bold
   padding: 3px 10px 4px 10px
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
   border-radius: 4px
-  :background= !btnBG
-  :border= !btnBorder
+  background: $btnBG
+  border: $btnBorder
   &:hover
     cursor: pointer
     text-decoration: none
-    :background= !btnBGHover
+    background: $btnBGHover
 
 // Like, Share, Vote, Comment, and Rate Styles //
 .btnComment
   display: inline-block
   margin: 0 1px
   padding: 1px 8px 2px 8px
-  :background= !btnCommentBG
+  background: $btnCommentBG
 
 .btnFBshare
   margin: 1px 1px 0 1px
 
 .voteUp
-  :background= !voteUp
+  background: $voteUp
   padding-left: 15px
 
 .voteDown
-  :background= !voteDown
+  background: $voteDown
   padding-left: 15px
 
 .thumb-up
-  :background= !thumbUp
+  background: $thumbUp
   padding-left: 15px
 
 .thumb-down
-  :background= !thumbDown
+  background: $thumbDown
   padding-left: 15px
 
 // Action Legend Panell//
 
 .actionLegend
-  :background= !actionLegendBG
+  background: $actionLegendBG
   .share_and_hide
     margin: 5px
     h4
       margin-bottom: 5px
-      :color= !headerColor
+      color: $headerColor
     input
-      :border= !actionLegendinputBorder
+      border: $actionLegendinputBorder
       width: 100%
       padding: 1px 0
 
 // Thumb Pic Size //
-.list_stories 
-  .thumb 
+.list_stories
+  .thumb
     img
       max-width: 90px
       max-height: 90px
-
   .feature_bg
     .thumb
       display: block
@@ -1098,17 +979,15 @@ blockquote
       img
         max-width: 90px
         max-height: 90px
-
-  .profilePic 
+  .profilePic
     img
       max-width: 30px
       max-height: 30px
 
 // Profile Pic //
-.profilePic 
+.profilePic
   float: left
   margin: 0px 10px 0px 0px
-
   a:hover
     text-decoration: none
 
@@ -1119,10 +998,9 @@ blockquote
     float: left
     width: 100%
     margin: 0 0 10px 0
-    border-bottom: 1px solid #D8DFEA
-
+    border-bottom: 1px solid #d8dfea
   td
-    border-top: 1px solid #D8DFEA
+    border-top: 1px solid #d8dfea
     margin: 0
     padding: 3px 10px 4px 0px
 
@@ -1133,11 +1011,9 @@ blockquote
     font-size: 12px
     margin: 10px auto
     width: 80%
-
   label
     font-size: 11px
     padding: 4px 2px
-
 
 // Ad sizes and Layouts //
 #adspace
@@ -1176,17 +1052,15 @@ blockquote
   -webkit-border-radius: 4px
   border-radius: 4px
   padding: 15px 0 5px
-  border-left: 5px solid #ccc
-  border-right: 5px solid #ccc
-  :background= !AdBG 
-
+  border-left: 5px solid #cccccc
+  border-right: 5px solid #cccccc
+  background: $AdBG
   .test-frame
-    background-color: #fff
+    background-color: white
     height: 80px
     width: 100%
     &.sky-scraper
       height: 600px
-
   iframe
     padding: 0
     margin: 0
@@ -1201,92 +1075,88 @@ blockquote
 .bookmarklet
   padding-bottom: 10px
   border:
-    :bottom= !bookmarkletBorder
-  :background= !bookmarkletBG
-
+    bottom: $bookmarkletBorder
+  background: $bookmarkletBG
   h2
-    :color= !bookmarkletHeader
-    :background= !bookmarkletHeaderBG
+    color: $bookmarkletHeader
+    background: $bookmarkletHeaderBG
     font-size: 20px
     margin: 0
-    padding: 5px 10px 25px 10px 
+    padding: 5px 10px 25px 10px
   p
-    :color= !bookmarkletText
+    color: $bookmarkletText
     margin: 5px 10px
     font-size: 12px
-
   .demo
     margin: 10px 15px
     padding: 70px 0 10px 0
-    :background= !demoBG
-
+    background: $demoBG
   .fb-btn
     margin-top: 15px
-
   .btn
     display: inline-block
-    color: #fff
+    color: white
     font-weight: bold
     padding: 5px 10px 6px 10px
-    :border= !bookmarkletBtnBorder
+    border: $bookmarkletBtnBorder
     -moz-border-radius: 4px
     -webkit-border-radius: 4px
     border-radius: 4px
-    :background= !bookmarkletBtn
+    background: $bookmarkletBtn
     &:hover
       text-decoration: none
-      :background= !bookmarkletBtnHover
+      background: $bookmarkletBtnHover
 
 // pagination styles //
 
 .pagination
-  :text-align= !paginationAlign
+  text-align: $paginationAlign
   display: inline-block
   width: 100%
   padding-top: 10px
   margin: 10px 0
   .gap
-    :color= !paginationLinkOn
-    :background= !paginationBgOn
-    :border none
+    color: $paginationLinkOn
+    background: $paginationBgOn
+    border: none
   a, span
-    :padding 2px 4px
-    :background= !paginationBgOff
-    :color= !paginationLinkOff
+    padding: 2px 4px
+    background: $paginationBgOff
+    color: $paginationLinkOff
   span.disabled
-    :color= !paginationLinkDisabled
-    :background= !paginationBgDisabled
-    :border= !paginationBdrDisabled 
+    color: $paginationLinkDisabled
+    background: $paginationBgDisabled
+    border: $paginationBdrDisabled
     &:hover
       text-decoration: none
       cursor: default
   span.current
-    :font-weight bold
-    :color= !paginationLinkOn
-    :background= !paginationBgOn
-    :border= !paginationBdrOn
+    font-weight: bold
+    color: $paginationLinkOn
+    background: $paginationBgOn
+    border: $paginationBdrOn
   a
-    :border= !paginationBdrOff
-    :color= !paginationLinkOff
-    :text-decoration none
+    border: $paginationBdrOff
+    color: $paginationLinkOff
+    text-decoration: none
     &:hover, &:focus
-      :border= !paginationBdrOn
-      :background= !paginationBgOn
-      :color= !paginationLinkOn
+      border: $paginationBdrOn
+      background: $paginationBgOn
+      color: $paginationLinkOn
   .page_info
-    :color #aaa
-    :padding-top .8em
+    color: #aaaaaa
+    padding-top: 0.8em
   .prev_page, .next_page
-    :color= !paginationLinkOn
-    :border none
-    :background none
+    color: $paginationLinkOn
+    border: none
+    background: none
     &:hover
-      :border none
-      :background none
+      border: none
+      background: none
       text-decoration: underline
     &.disabled
-      :border none
+      border: none
   .prev_page
-    :margin-right 1em
+    margin-right: 1em
   .next_page
-    :margin-left 1em
+    margin-left: 1em
