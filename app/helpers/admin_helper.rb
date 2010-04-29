@@ -5,7 +5,7 @@ module AdminHelper
     set_model_vars model
 
     html = []
-    html << "<h1>#{@model_list_name} List</h1"
+    html << "<br /><h1>#{@model_list_name} List</h1"
     html << "<br />"
 
     html << "<h2>#{gen_new_link model}</h2>"
@@ -80,7 +80,7 @@ module AdminHelper
     if item.moderatable?
     	links << link_to(item.blocked? ? 'UnBlock' : 'Block', admin_block_path(item.class.name.foreign_key.to_sym => item))
     	links << link_to(item.featured? ? 'UnFeature' : 'Feature', admin_feature_path(item.class.name.foreign_key.to_sym => item))
-    	links << link_to('Flag', admin_flag_path(item.class.name.foreign_key.to_sym => item))
+    	links << link_to('Flag', admin_flag_item_path(item.class.name.foreign_key.to_sym => item))
     end
     links.join ' | '
   end

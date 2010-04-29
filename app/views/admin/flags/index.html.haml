@@ -1,0 +1,30 @@
+%br
+%h1 Flagged Items
+
+- if @flags.empty?
+  %p No flagged items
+- else
+  %table.admin-table
+    %thead
+      %tr
+        %th Item Title
+        %th Item Description
+        %th Item Type
+        %th Flag Type
+        %th Flagged By
+        %th Flagged At
+        %th Flags Count
+        %th Blocked?
+        %th Actions
+    %tbody
+      - @flags.each do |flag|
+        %tr{:class => cycle('odd', 'even')}
+          %td= link_to flag.item_title, [:admin, flag.flaggable]
+          %td= flag.item_description
+          %td= flag.flaggable.class.name.humanize
+          %td= flag.flag_type
+          %td= link_to flag.user.name, [:admin, flag.user]
+          %td= flag.created_at
+          %td= flag.flaggable.respond_to?(:flags_count) ? flag.flaggable.flags_count : flag.flaggable.flags.count
+          %td= flag.is_blocked
+          %td= link_to 'View Flags', [:admin, flag]
