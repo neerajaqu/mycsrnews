@@ -2,8 +2,8 @@
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
   = render :partial => 'subnav'
 
-- cache "#{@resource.cache_key}_fbml" do
-  #col_left
+#col_left
+  - cache "#{@resource.cache_key}_fbml" do
     #readArticle.panel_1
       .topBar
         %ul
@@ -36,11 +36,11 @@
     - if @resource.media_item?
       = render_media_items @resource
     = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }
-    = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }
-    = render :partial => 'shared/item_footer', :locals => { :item => @resource, :title => @resource.title }
-    - if @resource.moderatable?
-      = render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
+  = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }
+  = render :partial => 'shared/item_footer', :locals => { :item => @resource, :title => @resource.title }
+  - if @resource.moderatable?
+    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
 
-  #col_right
-    = render :partial => 'shared/sidebar/bio', :locals => { :user => @resource.user }
-    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
+#col_right
+  = render :partial => 'shared/sidebar/bio', :locals => { :user => @resource.user }
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

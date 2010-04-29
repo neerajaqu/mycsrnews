@@ -1,5 +1,5 @@
-  %h2 Create a Link
-  - semantic_form_for [:admin, @resource] do |form|
-    = render :partial => 'resource_form', :locals => { :form => form }
-    - form.buttons do
-      = form.commit_button
+%h2 Create a Link
+- semantic_form_for [:admin, @resource] do |form|
+  = render :partial => 'resource_form', :locals => { :form => form }
+  - form.buttons do
+    = form.commit_button
