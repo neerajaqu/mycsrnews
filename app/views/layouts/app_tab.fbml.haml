@@ -15,13 +15,6 @@
       .admin-links
         display: none !important
 
-  = fb_connect_javascript_tag
-  = init_fb_connect "XFBML"
-
-  = yield :head_content
-
   #appFrame
     = display_facebook_messages
-    = yield :sub_nav
     = yield
-  = render :partial => 'shared/fb_strings'
