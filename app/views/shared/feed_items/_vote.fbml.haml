@@ -1,9 +1,7 @@
 -# expects 'vote => @vote'
 
-.storyBlockWrap
-  .feed_poster
-    .avatar
-      = local_linked_profile_pic vote.voter, :size => 'square', :width => '30'
+%li
+  .storyBlockWrap.storyBlockSpacer
     %h3
-      %span.bold= t('.blurb', :fb_name => local_linked_profile_name(vote.voter), :voteable_type => voteable_type_name(vote), :voteable_link => voteable_type_link(vote))
-      = t('.blurb_date', :date => time_ago_in_words(vote.created_at))
+      =t('.blurb', :fb_name => local_linked_profile_name(vote.voter), :voteable_type => voteable_type_name(vote), :voteable_link => voteable_type_link(vote)) 
+      =t('.blurb_date', :date => time_ago_in_words(vote.created_at))
