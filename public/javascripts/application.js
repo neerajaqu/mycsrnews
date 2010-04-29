@@ -139,10 +139,10 @@ $(function() {
   	event.preventDefault();
   	$('#answerForm').toggle();
   });
-  $('#commentThread, #postComment', $('#answersList')).hide();
+  $('.commentThread, .postComment', $('#answersList')).hide();
   $('.answer_comments_link').click(function(event) {
   	event.preventDefault();
-    $('#commentThread, #postComment', $(this).parents().filter('.answer')).toggle();
+    $('.commentThread, .postComment', $(this).parents().filter('.answer')).toggle();
   });
 
 });
