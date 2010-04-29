@@ -2,7 +2,7 @@ namespace :n2 do
   namespace :data do
 
     desc "Bootstrap and convert existing data"
-    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_comments, :delete_floating_ideas, :delete_floating_questions_and_answers, :generate_model_slugs, :generate_widgets, :load_seed_data, :convert_images_to_paperclip, :load_locale_data] do
+    task :bootstrap => [:environment, :pre_register_users, :delete_floating_content, :delete_floating_comments, :delete_floating_ideas, :delete_floating_questions_and_answers, :update_floating_comments, :generate_model_slugs, :generate_widgets, :load_seed_data, :convert_images_to_paperclip, :load_locale_data] do
       puts "Finished Bootstrapping and converting existing data"
     end
 
@@ -26,6 +26,15 @@ namespace :n2 do
       User.find(:all, :conditions => ["name = ''"]).each do |user|
         user.user_profile.destroy if user.user_profile.present?
         user.destroy
+      end
+    end
+
+    desc "Updating floating comments"
+    task :update_floating_comments => :environment do
+      puts "Updating floating comments"
+      Comment.all.each do |comment|
+        comment.commentable_type = 'Content'
+        comment.save
       end
     end
 
