@@ -1,17 +1,19 @@
-/*
-  960 Grid System ~ Core CSS.
-  Learn more ~ http://960.gs/
-  
-  Licensed under GPL and MIT.
-*/
+/* 960 Grid System ~ Core CSS.
+ * Learn more ~ http://960.gs/
+ *
+ * Licensed under GPL and MIT.
+ */
+
+
 // Reset and grid stylesheets
-@import compass/utilities/general/reset.sass
+@import "compass/utilities/general/reset"
 @import 960/grid.sass
 
 +global-reset
 
 //App Skin
 @import skin.sass
+
 // App stylesheets
 @import default.sass
 @import application.sass
@@ -27,17 +29,17 @@
     img
       max-height: 280px
       max-width: 280px
-    
 
 #readArticle
   .thumb
     img
       max-height: 280px
-      max-width: 280px 
+      max-width: 280px
 
 // The following are the current grid layout boxes for the site.
-!ninesixty_columns = 24
-!ninesixty_gutter_width = 20px
+$ninesixty_columns: 24
+
+$ninesixty_gutter_width: 20px
 
 =brdr
   border: 1px dashed red
@@ -81,8 +83,7 @@ body
 
 .panel_1, #hotTopicBar
   float: left
-  +grid-width(16)  
+  +grid-width(16)
 
-.panel_2 
+.panel_2
   +grid(8)
-
