@@ -27,5 +27,9 @@ module FacebookHelper
 
     text
   end
+
+  def iframe_facebook_request?
+    (session and session[:facebook_request]) or request_comes_from_facebook?
+  end
       
 end

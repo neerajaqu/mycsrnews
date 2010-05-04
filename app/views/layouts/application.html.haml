@@ -1,5 +1,5 @@
 !!!
-%html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://www.facebook.com/2008/fbml"}
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://www.facebook.com/2008/fbml", :style => "overflow-x: hidden; overflow-y: hidden;"}
   %head
     - title = (out = yield(:title)) ? "#{out} - #{APP_CONFIG['site_title']}" : APP_CONFIG['site_title']
     %title= title
@@ -8,7 +8,10 @@
     %meta{:name => 'medium', :content => 'news'}
     %link{:rel  => "image_src", :content => (out = yield(:meta_image)) ? out : base_url('/images/default/icon-fan-app.gif')}
     
-    = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
+    - if iframe_facebook_request?
+      = stylesheet_link_tag 'compiled/fb_grid.css', :media => 'screen, projection'
+    - else
+      = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
     = stylesheet_link_tag 'cards'
 
@@ -31,14 +34,20 @@
       = init_fb_connect "XFBML", :js => :jquery
       = render :partial => 'shared/header'
       = flash_messages
-      -# if flash[:error].present? || flash[:success].present? || flash[:notice].present?
-        .flash{:style => "border: 1px solid black;"}
-        - if flash[:error]
-          %p= flash[:error]
-        - else
-          %p= (flash[:success] || flash[:notice])
 
       = yield :sub_nav
+
       = yield
+
       = render :partial => 'shared/footer'
+
     = render :partial => 'shared/google_analytics'
+
+    <!-- Note: Include this div markup as a workaround for a known bug in this release on IE where you may get a "operation aborted" error -->
+    <div id="FB_HiddenIFrameContainer" style="display:none; position:absolute; left:-100px; top:-100px; width:0px; height: 0px;"></div>
+
+    <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+    <script type="text/javascript"> FB_RequireFeatures(["CanvasUtil"], function(){ FB.XdComm.Server.init('/xd_receiver.html'); FB.CanvasClient.startTimerToSizeToContent(); }); </script>
+
+    -# HACK:: non floating div eliminates webkit resizing issues with facebook javascript
+    %div{:style => "clear: both;"}
