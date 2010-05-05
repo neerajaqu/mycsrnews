@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
   def set_facebook_session_wrapper
     begin
       set_facebook_session
+      session[:facebook_request] = true if request_comes_from_facebook?
     rescue
       return facebook_session_expired
     end

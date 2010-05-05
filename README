@@ -8,7 +8,7 @@ N2 is the latest and greatest iteration of the Newscloud framework.
 1.a Clone this application to your machine
 git clone git://github.com/newscloud/n2.git
 1.b Switch to the stable release
-git checkout --track -b release_1_stable origin/release_1_stable
+git checkout --track -b release_1_final origin/release_1_final
 Alternatively, download the release 1 stable bundle:
 http://github.com/newscloud/n2/archives/v1.0_stable
 2. Setup config files
@@ -18,7 +18,7 @@ http://github.com/newscloud/n2/archives/v1.0_stable
 This is your base config file where you set your site specific options related to the framework.
 ***This needs to be setup properly to work
 2.d copy config/menu.yml.sample to config/menu.yml and disable and items you do not want showing up.
-2.e copy config/compass.yml.sample to config/compass.yml and disable and items you do not want showing up.
+2.e copy config/compass.rb.sample to config/compass.rb and disable and items you do not want showing up.
 ***You need to edit your image path to be an absolute url for css images in facebook to work
 2.f If you are not using memcached in production edit config/environments/production.rb and set it accordingly
 2.g (optional)

@@ -2,16 +2,17 @@
 
 - cache :top_answers_fbml do
   - top_answers ||= Answer.active.top 5
-  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-    .panelBar
-      %h2= t('answers.top_title')
-    .list_stories
-      %ul
-        - top_answers.each do |answer|
-          %li
-            %h4= link_to answer.answer, question_path(answer.question)
-            .profilePic= local_linked_profile_pic answer.user
-            .storyBlockMeta
-              %h3= t('asked_by', :fb_name => local_linked_profile_name(answer.user), :date => time_ago_in_words(answer.created_at))
-              %span.btnComment.float_left== #{like_link answer} #{answer.votes_tally}
-              %span.btnComment.float_left== #{link_to answer_comments_translate(answer.comments_count), question_path(answer.question, :anchor => "commentListTop")}
+  - unless top_answers.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('answers.top_title')
+      .list_stories
+        %ul
+          - top_answers.each do |answer|
+            %li
+              %h4= link_to caption(answer.answer,120), question_path(answer.question)
+              .profilePic= local_linked_profile_pic answer.user
+              .storyBlockMeta
+                %h3= t('asked_by', :fb_name => local_linked_profile_name(answer.user), :date => time_ago_in_words(answer.created_at))
+                %span.btnComment.float_left== #{like_link answer} #{answer.votes_tally}
+                %span.btnComment.float_left== #{link_to answer_comments_translate(answer.comments_count), question_path(answer.question, :anchor => "commentListTop")}
