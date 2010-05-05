@@ -49,6 +49,12 @@ en:
       featured_event:
         featured_event_title: "Featured Event"
 
+      featured_question:
+        featured_question_title: "Featured Questions"
+
+      featured_answer:
+        featured_answer_title: "Featured Answers"
+
       questions_whatisthis:
         questions_whatis_title: "What is this?"
         questions_whatis_details: "A way to have your questions answered in our online community by other readers."

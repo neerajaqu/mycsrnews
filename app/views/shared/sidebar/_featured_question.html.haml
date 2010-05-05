@@ -1,19 +1,18 @@
--# @expects: local 'newest_questions'
+-# @expects: local 'question'
 
-- cache :newest_questions_fbml do
-  - newest_questions ||= Question.active.newest 5
-  - unless newest_questions.empty?
+- cache :featured_questions_html, :expires_in => 15.seconds do
+  - featured_questions ||= Question.featured
+  - unless featured_questions.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('questions.newest_title')
-      .list_stories
+      .panelBar.clearfix
+        %h2= t('.featured_question_title')
+      .list_items.clearfix
         %ul
-          - newest_questions.each do |question|
+          - featured_questions.each do |question|
             %li
               %h4= link_to caption(question.question,120), question_path(question)
               .profilePic= local_linked_profile_pic question.user
               .storyBlockMeta
                 %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
                 %span.btnComment.float_left== #{like_link question} #{question.votes_tally}
-                %span.btn_mid== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
-                -# %span.btnComment= fb_share_item_button question
+                %span.btnComment.float_left== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}

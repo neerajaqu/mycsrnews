@@ -1,14 +1,14 @@
--# @expects: local 'answers'
+-# @expects: local 'answer'
 
-- cache :top_answers_html do
-  - top_answers ||= Answer.active.top 5
-  - unless top_answers.empty?
+- cache :featured_answers_html, :expires_in => 15.seconds do
+  - featured_answers ||= Answer.featured
+  - unless featured_answers.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('answers.top_title')
-      .list_stories
+      .panelBar.clearfix
+        %h2= t('.featured_answer_title')
+      .list_items.clearfix
         %ul
-          - top_answers.each do |answer|
+          - featured_answers.each do |answer|
             %li
               %h4= link_to caption(answer.answer,120), question_path(answer.question)
               .profilePic= local_linked_profile_pic answer.user
