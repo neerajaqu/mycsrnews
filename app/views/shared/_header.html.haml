@@ -21,5 +21,5 @@
       %meta{:name => 'title', :content => APP_CONFIG['site_title']}
       %meta{:name => 'description', :content => t('header.share_description')}
       %link{:rel => "image_src", :href => base_url('/images/default/icon-fan-app.gif')}
-      %link{:rel => "target_url", :href => home_index_path(:only_path => false)}
+      %link{:rel => "target_url", :href => home_index_path(:only_path => false,:canvas => true)}
   = render :partial => 'shared/page_tabs'
