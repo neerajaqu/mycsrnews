@@ -206,7 +206,9 @@ class ApplicationController < ActionController::Base
         end
       else
         if request_comes_from_facebook?
-        	format = 'fbml'
+        	#format = 'fbml'
+          # TODO:: needed to change this for iframes as all should be html now
+        	format = 'html'
         else
         	format = 'html'
         end
