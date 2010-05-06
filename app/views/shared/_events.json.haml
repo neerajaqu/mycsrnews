@@ -10,4 +10,4 @@
           %p
             %span.btn_left== #{like_link event} #{event.votes_tally}
             %span.btn_mid== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
-            %span.btn_right= fb_share_button(events_url(event))
+            %span.btn_right= fb_share_item_button(event)

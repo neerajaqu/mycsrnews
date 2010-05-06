@@ -11,8 +11,7 @@
             %a==  #{like_link @resource} #{@resource.votes_tally}
           %li
             %a== #{link_to t('.post_comment'), resource_path(@resource, :anchor => "postCommentBox")} #{@resource.comments_count}
-          %li
-            %a= fb_share_button(resource_path(@resource))
+          %li= fb_share_item_button(@resource)
           %li
             %a= twitter_share_item_link @resource, @resource.title
       .thumb
