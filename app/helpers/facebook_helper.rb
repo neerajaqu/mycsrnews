@@ -12,7 +12,8 @@ module FacebookHelper
   end
 
   def fb_share_item_button item
-    fb_share_button(polymorphic_url(item, :only_path => false))
+    canvas = iframe_facebook_request? ? true : false
+    fb_share_button(polymorphic_url(item, :only_path => false, :canvas => canvas))
   end
 
   def fb_meta_share_button item

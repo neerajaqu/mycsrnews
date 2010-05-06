@@ -184,7 +184,8 @@ module ApplicationHelper
   end
   
   def path_to_self(item)
-    url_for(send("#{item.class.to_s.underscore}_url", item))
+    canvas = iframe_facebook_request? ? true : false
+    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas))
   end
 
   def link_to_path_to_self(item)
