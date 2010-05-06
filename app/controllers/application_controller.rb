@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  before_filter :set_p3p_header
   before_filter :set_slot_data
   before_filter :set_current_tab
   before_filter :set_current_sub_tab
@@ -30,6 +31,11 @@ class ApplicationController < ActionController::Base
     if ensure_application_is_installed_by_facebook_user  
       # filter_parameter_logging :fb_sig_friends # commenting out for now because it fails sometimes
     end
+  end
+
+  def set_p3p_header
+    #required for IE in iframe FB environments if sessions are to work.
+    headers['P3P:CP'] = "IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
   end
   
   def set_facebook_session_wrapper
@@ -214,7 +220,8 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    { :locale => I18n.locale,
+    {
+    	:locale => I18n.locale,
       :format => format
     } 
   end
