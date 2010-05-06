@@ -1,0 +1,35 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/cards_subnav'
+
+- @paginate ||= false
+
+#col_left
+  .panel_1
+    .panelBar
+      %h2= t('cards.my_received_title')
+    .subtitle
+      %span= t('cards.my_received_subtitle')
+    .storyList
+      .list_stories
+        %ul
+          - @my_cards.each do |my_card|
+            %li
+              .thumb
+                = image_tag my_card.card.image_path
+              .storyBlockWrap.storyBlockSpacer
+                %h2.storyHead= link_to my_card.card.name, card_path(my_card.card)
+                %p.storyCaption= my_card.card.short_caption
+                .profilePic= local_linked_profile_pic my_card.from_user
+                .storyBlockMeta.float_left
+                  %h3= t('cards.sent_by', :fb_name => local_linked_profile_name(my_card.from_user), :date => time_ago_in_words(my_card.created_at))
+                  -#%span.btnComment.float_left== #{link_to t('.stories_like'), like_story_path(card.id), :class => "voteUp"} #{card.votes_tally}
+                  -#%span.btnComment.float_left== #{link_to t('.stories_comments'), story_path(card, :anchor => "commentListTop")} #{card.comments_count}
+    - if @paginate
+      .clearfix
+        = will_paginate @my_cards
+        %br
+
+#col_right
+  = render :partial => 'shared/sidebar/top_sent_cards'
+  = render :partial => 'shared/sidebar/newest_sent_cards'
+

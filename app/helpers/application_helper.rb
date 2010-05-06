@@ -135,6 +135,10 @@ module ApplicationHelper
     	link_options[:only_path] = options[:only_path]
     	options.delete(:only_path)
     end
+    unless options[:canvas].nil?
+    	link_options[:canvas] = options[:canvas]
+    	options.delete(:canvas)
+    end
     if user.facebook_user?
       options.merge!(:linked => false)
       options[:size] = 'square' unless options[:size].present?
@@ -160,6 +164,10 @@ module ApplicationHelper
     unless options[:only_path].nil?
     	link_options[:only_path] = options[:only_path]
     	options.delete(:only_path)
+    end
+    unless options[:canvas].nil?
+    	link_options[:canvas] = options[:canvas]
+    	options.delete(:canvas)
     end
     if user.facebook_user?      
       options.merge!(:linked => false)

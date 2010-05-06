@@ -4,11 +4,12 @@ class CardsController < ApplicationController
   before_filter :login_required, :except => :received
 
   def index
-    @current_sub_tab = 'Send a card'
+    @current_sub_tab = 'Send a Card'
     @cards = Card.all.reverse
   end
 
   def show
+    @current_sub_tab = 'Send a Card'
     @card = Card.find(params[:id])
   end
 
