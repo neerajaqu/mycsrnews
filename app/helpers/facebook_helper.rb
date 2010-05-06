@@ -13,7 +13,11 @@ module FacebookHelper
 
   def fb_share_item_button item
     canvas = iframe_facebook_request? ? true : false
-    fb_share_button(polymorphic_url(item, :only_path => false, :canvas => canvas))
+    if canvas
+      fb_meta_share_button item
+    else
+      fb_share_button(polymorphic_url(item, :only_path => false, :canvas => canvas))
+    end
   end
 
   def fb_meta_share_button item
@@ -23,9 +27,8 @@ module FacebookHelper
     if item.respond_to?(:images) and item.images.present?
     	text += %{<link rel="image_src" href="#{meta_image item.images.first}"}
     end
-    text += %{<link rel="target_url" href="#{polymorphic_path(item, :only_path => false)}"}
+    text += %{<link rel="target_url" href="#{polymorphic_path(item, :only_path => false, :canvas => true)}"}
     text += %{</fb:share-button>}
-
     text
   end
 
