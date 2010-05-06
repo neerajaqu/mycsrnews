@@ -11,8 +11,7 @@
             %a== #{like_link @question} #{@question.votes_tally}
           %li
             %a= link_to t('answer_question'), '#', :class => "answer_link"
-          %li
-            %a= fb_share_item_button(@question)
+          %li= fb_share_item_button(@question)
           %li
             %a= twitter_share_item_link @question, @question.question
 

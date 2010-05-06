@@ -11,8 +11,7 @@
             #{like_link @event} #{@event.votes_tally}
           %li
             %a== #{link_to t('.post_comment'), event_path(@event, :anchor => "postCommentBox")} #{@event.comments_count}
-          %li
-            %a= fb_share_item_button(@event)
+          %li= fb_share_item_button(@event)
           %li
             %a= twitter_share_item_link @event, @event.name
       .thumb
