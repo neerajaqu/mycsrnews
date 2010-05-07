@@ -1,10 +1,10 @@
-class Admin::EventsController < AdminController
+class Admin::DashboardMessagesController < AdminController
 
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => DashboardMessage.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => DashboardMessage,
-    	:fields => [:prefix, :title, :url, :created_at],
+    	:fields => [:message, :status, :created_at],
     	:paginate => true
     }
   end
@@ -12,24 +12,24 @@ class Admin::EventsController < AdminController
   def new
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
     	:model => DashboardMessage,
-    	:fields => [:prefix, :title, :details, :url, :type]
+    	:fields => [:message, :action_text, :action_url, :image_url, :status, :created_at],
     }
   end
 
   def edit
-    @DashboardMessage = DashboardMessage.find(params[:id])
+    @dashboardMessage = DashboardMessage.find(params[:id])
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => @DashboardMessage,
+    	:item => @dashboardMessage,
     	:model => DashboardMessage,
-    	:fields => [:prefix, :title, :details, :url, :type]
+    	:fields => [:message, :action_text, :action_url, :image_url, :status, :created_at],
     }
   end
 
   def update
-    @DashboardMessage = DashboardMessage.find(params[:id])
-    if @DashboardMessage.update_attributes(params[:DashboardMessage])
+    @dashboardMessage = DashboardMessage.find(params[:id])
+    if @dashboardMessage.update_attributes(params[:DashboardMessage])
       flash[:success] = "Successfully updated your DashboardMessage."
-      redirect_to [:admin, @DashboardMessage]
+      redirect_to [:admin, @dashboardMessage]
     else
       flash[:error] = "Could not update your DashboardMessage as requested. Please try again."
       render :edit
@@ -40,32 +40,31 @@ class Admin::EventsController < AdminController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
     	:item => DashboardMessage.find(params[:id]),
     	:model => DashboardMessage,
-    	:fields => [:prefix, :title, :details, :url, :type,:created_at]
+    	:fields => [:message, :action_text, :action_url, :image_url, :status, :created_at],
     }
   end
 
   def create
-    @DashboardMessage = DashboardMessage.new(params[:DashboardMessage])
-    if @DashboardMessage.save
+    @dashboardMessage = DashboardMessage.new(params[:DashboardMessage])
+    if @dashboardMessage.save
       flash[:success] = "Successfully created your new DashboardMessage!"
-      redirect_to [:admin, @DashboardMessage]
+      redirect_to [:admin, @dashboardMessage]
     else
       flash[:error] = "Could not create your DashboardMessage, please try again"
-      render :new
+      redirect_to new_admin_dashboard_message_path
     end
   end
 
   def destroy
-    @DashboardMessage = DashboardMessage.find(params[:id])
-    @DashboardMessage.destroy
-
-    redirect_to admin_DashboardMessages_path
+    @dashboardMessage = DashboardMessage.find(params[:id])
+    @dashboardMessage.destroy
+    redirect_to admin_dashboard_messages_path
   end
 
   private
 
   def set_current_tab
-    @current_tab = 'events';
+    @current_tab = 'dashboard-messages';
   end
 
 end

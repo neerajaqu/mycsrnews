@@ -87,6 +87,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :newswires
     admin.resources :feeds
     admin.resources :announcements
+    admin.resources :dashboard_messages
     admin.resources :comments
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true

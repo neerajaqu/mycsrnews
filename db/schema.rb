@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100420011145) do
+ActiveRecord::Schema.define(:version => 20100507001639) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -142,6 +142,17 @@ ActiveRecord::Schema.define(:version => 20100420011145) do
   add_index "contents", ["contentid"], :name => "contentid"
   add_index "contents", ["title"], :name => "relatedItems"
   add_index "contents", ["title"], :name => "relatedText"
+
+  create_table "dashboard_messages", :force => true do |t|
+    t.string   "message"
+    t.string   "action_text"
+    t.string   "action_url"
+    t.string   "image_url"
+    t.string   "status",      :default => "draft"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", :force => true do |t|
     t.integer  "eid"
