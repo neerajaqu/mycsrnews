@@ -174,6 +174,8 @@ module AuthenticatedSystem
     # when you cross quarantine (logged-out to logged-in).
     def logout_killing_session!
       logout_keeping_session!
+      clear_fb_cookies!
+      clear_facebook_session_information
       reset_session
     end
 
