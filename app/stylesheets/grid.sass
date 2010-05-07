@@ -1,8 +1,7 @@
-/* 960 Grid System ~ Core CSS.
- * Learn more ~ http://960.gs/
- *
- * Licensed under GPL and MIT.
- */
+// 960 Grid System ~ Core CSS.
+// Learn more ~ http://960.gs/
+//Licensed under GPL and MIT.
+
 
 
 // Reset and grid stylesheets
@@ -10,10 +9,8 @@
 @import 960/grid.sass
 
 +global-reset
-
 //App Skin
 @import skin.sass
-
 // App stylesheets
 @import default.sass
 @import application.sass
@@ -37,53 +34,39 @@
       max-width: 280px
 
 // The following are the current grid layout boxes for the site.
-$ninesixty_columns: 24
+$ninesixty_columns: 12
 
 $ninesixty_gutter_width: 20px
 
-=brdr
-  border: 1px dashed red
-
+//#bodyWrapper, .panel_1, .panel_2
+ // border: 1px dashed red
 body
-  +grid-system(24)
-  +grid-children
-
-#bodyWrapper
-  +grid(24)
-  +grid-children
-  +alpha
-  +omega
+  +grid-system(12)
 
 #header, #footer, #pageBody, #adspace, #subNav
-  +grid-width(24)
+  +grid(12)
+
+.left, .right
+  display: inline-block
 
 #col_left
-  float: left
-  clear: both
-  +grid(16)
-  +grid-children
-  +alpha
-  .left
-    float: left
-    clear: left
-    +alpha
-  .right
-    float: right
-    clear: right
-    +omega
-
-#col_right
-  float: right
   +grid(8)
   +grid-children
-  +omega
+  .left
+    +alpha
+  .right
+    +omega
+#col_right
+  +grid(4)
+  +grid-children
   .panel_2
     +alpha
     +omega
 
 .panel_1, #hotTopicBar
-  float: left
-  +grid-width(16)
+  +grid(8)
+  +alpha
+  +omega
 
 .panel_2
-  +grid(8)
+  +grid(4)

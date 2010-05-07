@@ -17,7 +17,7 @@
 
 // Header Container //
 #header
-  height: 110px
+  height: $headerHeight
   margin-bottom: 15px
   position: relative
   border:
@@ -128,12 +128,13 @@
 
 // Body containers //
 #bodyWrapper
-  padding-bottom: 20px
+  background: $bodyWrapperBG
+  display: inline-block
+  width: 960px
 
 // Footer Container //
 #footer
-  float: left
-  clear: left
+  margin-bottom: 15px
   border:
     top: $FooterBorder
   .dh_links
@@ -287,123 +288,122 @@ li
     left: 0
     width: 100%
     height: 23px
-    margin: 0px 0px 0px 0px
-    padding: 0px 0px 0px 0px
+    margin: 0
+    padding: 0
     .tab-float
       float: $pagetabFloat
       padding: 0 1px
     .back_links
       padding-right: 20px
     .toggle_tabs
-      margin: 0px 0px 0px 0px
-      padding: 0px 0px 0px 0px
-      text-align: center
+      margin: 0
+      padding: 0
     .toggle_tabs li
-      display: block
-      float: left
-      padding: 0px 0px 0px 0px
-      margin: 0px 1px 0px 0px
       height: 23px
+      width: 100px
+      float: left
+      padding: 0
+      margin: 0 1px 0 0
+      text-align: center
+
     .toggle_tabs li
       a
         display: block
         height: 13px
         margin: 0px 0px 0px 0px
-        padding: 5px 20px
+        padding: 5px 0
         font-weight: bold
         font-size: 12px
-        line-height: normal
         border: none
         color: $pageTablinkOff
         background: $pageTabOff
         &:hover
           background: $pageTabOffHover
-      &.first a
-        margin: 0px 0px 0px 0px
-        padding: 5px 7px
-        -moz-border-top-left-radius: 8px
-        -webkit-border-top-left-radius: 8px
-        border-top-left-radius: 8px
-        img
-          display: inline-block
+      &.first 
+        width: 30px
+        a
+          margin: 0
+          padding: 5px 0
+          img
+            display: inline-block
+
     .toggle_tabs li
-      a
-        &:focus
-          outline: 0px
-        &.selected
-          margin: -1px 0px 0px 0px
-          padding: 5px 30px 5px 30px
-          height: 13px
-          border:
-            top: $pageTabBorder
-            bottom: $TabBotBorder
-            right: $pageTabBorder
-            left: $pageTabBorder
-          background: $pageTabOn
-          color: $pageTablinkOn
+      a.selected
+        margin: -1px 0px 0px 0px
+        padding: 5px 0
+        border:
+          top: $pageTabBorder
+          bottom: $TabBotBorder
+          right: $pageTabBorder
+          left: $pageTabBorder
+        background: $pageTabOn
+        color: $pageTablinkOn
       &.first a.selected
         padding: 5px 7px
-        -moz-border-top-left-radius: 8px
-        -webkit-border-top-left-radius: 8px
-        border-top-left-radius: 8px
-      a
-        &.selected:hover
-          text-decoration: none
+      a.selected:hover
+        text-decoration: none
         &.disabled
           color: $subheadColor
           cursor: default
           &:hover
             text-decoration: none
-    .toggle_tabs
-      .menu_item
-        &:hover
-          a
-            background: $pageTabOffHover
-            &.selected
-              background: $pageTabOn
-          .dropdown
-            visibility: visible
-            height: 100%
+#pageTabs
+  .toggle_tabs
+    .menu_item
+      &:hover
+        a
+          background: $pageTabOffHover
+          &.selected
+            background: $pageTabOn
+
+#pageTabs
+  .toggle_tabs
+    .menu_item
+      &:hover
         .dropdown
-          z-index: 4
-          visibility: hidden
-          height: 0px
-          ul
-            display: inline-block
+          visibility: visible
+          display: inline
+      .dropdown
+        z-index: 20
+        visibility: hidden
+        display: none
+        ul
+          li
             width: 100%
-            li
+            height: 100%
+            float: left
+            clear: left
+            padding: 0
+            text-align: left
+            a
+              height: 100%
+              font-size: 10px
+              font-weight: normal
               display: block
-              width: 100%
-              clear: both
-              padding: 0
-              text-align: left
-              a
-                font-size: 10px
-                font-weight: normal
-                display: block
-                background: $dropdownTabOff
-                padding: 5px 5px
-                color: $dropdownTabText
-                border:
-                  top: $dropdownTabTopBorder
-                  bottom: $dropdownListBorder
-                  left: $dropdownListBorder
-                  right: $dropdownListBorder
-                &:hover
-                  background: $dropdownTabOn
-              a.selected
-                background: $dropdownTabSelectOff
-                margin:
-                  right: $dropdownTabSelectMarginRight
-                  left: $dropdownTabSelectMarginLeft
-                border:
-                  top: $dropdownTabTopBorderSelect
-                  bottom: $dropdownTabListBorderSelect
-                  left: $dropdownTabListBorderSelect
-                  right: $dropdownTabListBorderSelect
-                color: $dropdownTabTextSelect
-                &.selected:hover
-                  background: $dropdownTabSelectOn
+              background: $dropdownTabOff
+              padding: 5px
+              color: $dropdownTabText
+              border:
+                top: $dropdownTabTopBorder
+                bottom: $dropdownListBorder
+                left: $dropdownListBorder
+                right: $dropdownListBorder
+              &:hover
+                background: $dropdownTabOn
+            a.selected
+              padding: 5px
+              background: $dropdownTabSelectOff
+              margin:
+                right: $dropdownTabSelectMarginRight
+                left: $dropdownTabSelectMarginLeft
+              border:
+                top: $dropdownTabTopBorderSelect
+                bottom: $dropdownTabListBorderSelect
+                left: $dropdownTabListBorderSelect
+                right: $dropdownTabListBorderSelect
+              color: $dropdownTabTextSelect
+              &.selected:hover
+                background: $dropdownTabSelectOn
 
 // Sub Navigation Styles //
 #subNav
@@ -456,6 +456,13 @@ li
           cursor: default
           &:hover
             text-decoration: none
+// Left and right column styling //
+//#col_left
+//  -webkit-box-shadow: 10px 10px 5px #888
+//  background: $leftColumnBG
+//  -moz-border-radius: 4px
+//  -webkit-border-radius: 4px
+//  border-radius: 4px
 
 // Layout panels - should be used for all element containers //
 .panel_1, .panel_2
@@ -516,6 +523,9 @@ li
             color: $headerColor
   .houseFeatures
     background: $featureBg
+    -moz-border-radius: $featureBorderRadius
+    -webkit-border-radius: $featureBorderRadius
+    border-radius: $featureBorderRadius
     border:
       top: $featureBorderTop
       bottom: $featureBorderBot
@@ -525,6 +535,7 @@ li
       padding: 0
       display: inline-block
       width: 100%
+
       img
         max-width: 100%
         max-height: 100%
@@ -624,17 +635,19 @@ li
     background: $panelBarBG
     h2
       margin: 0
-      font-weight: normal
+      font-weight: $panelBarHeaderWeight
       font-size: 10px
       text-transform: uppercase
       font-family: $copyFont
       color: $panelBarHeader
       display: inline
-      margin-left: 4px
-    a
-      font-weight: normal
-      font-size: 11px
-      color: $linkColor
+      margin-left: 6px
+      a
+        color: $panelBarHeader
+        font-weight: normal
+        text-transform: none
+        font-size: 11px
+
     .bar_link
       float: right
       margin: 0 8px
@@ -715,6 +728,8 @@ li
     position: relative
     display: block
     padding: 0px 8px
+    a
+      color: $linkColor
     .refine-tab
       height: 32px
       width: 99px
@@ -871,7 +886,7 @@ li
 .feature_bg
   background: $featureStoryBG
   .panel_2
-    margin: 10px 0
+    margin-top: 10px
   .thumb
     margin: 0 10px 10px
     float: none
