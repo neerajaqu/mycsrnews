@@ -25,9 +25,14 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    canvas = canvas?
     logout_killing_session!
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default(root_path)
+    if canvas
+      redirect_back_or_default(root_path(:iframe_req => true))
+    else
+      redirect_back_or_default(root_path)
+    end
   end
 
 protected

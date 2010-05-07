@@ -1,12 +1,24 @@
 class ApplicationController < ActionController::Base
   rescue_from Facebooker::Session::SessionExpired, :with => :facebook_session_expired
+  rescue_from Facebooker::Session::MissingOrInvalidParameter, :with => :facebook_session_expired
+
+  def rescue_action(exception)
+    if exception.message == 'Invalid parameter' and
+    	 exception.file_name =~ /_header/ and
+    	 exception.source_extract =~ /if logged_in/
+    	facebook_session_expired
+    else
+      super
+    end
+  end
 
   def facebook_session_expired
+    canvas = iframe_facebook_request? ? true : false
     clear_fb_cookies!
     clear_facebook_session_information
     reset_session # remove your cookies!
     flash[:error] = "Your facebook session has expired."
-    redirect_to root_url
+    redirect_to root_url(:canvas => false)
   end
   
   include AuthenticatedSystem
@@ -41,7 +53,7 @@ class ApplicationController < ActionController::Base
   def set_facebook_session_wrapper
     begin
       set_facebook_session
-      session[:facebook_request] = true if request_comes_from_facebook?
+      session[:facebook_request] = true if request_comes_from_facebook? or params[:iframe_req].present?
     rescue
       return facebook_session_expired
     end
@@ -283,6 +295,23 @@ class ApplicationController < ActionController::Base
       else
       	nil
     end
+  end
+
+  def canvas?
+    iframe_facebook_request? ? true : false
+  end
+
+  def iframe_facebook_request?
+    (session and session[:facebook_request]) or request_comes_from_facebook?
+  end
+
+  def after_facebook_login_url
+    if canvas?
+      link_user_accounts_users_path(:only_path => false, :canvas => true)
+    else
+    	root_url
+    end
+    #root_url(:only_path => false, :canvas => true)
   end
 
 end

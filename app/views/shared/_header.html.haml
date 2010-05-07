@@ -13,9 +13,14 @@
         = pipe_spacer
         = link_to t('.admin'), admin_path
     - else
-      = link_to t('.sign_in'), link_user_accounts_users_path
-      = pipe_spacer
-      = link_to t('.register'), link_user_accounts_users_path
+      - if iframe_facebook_request?
+        = link_to t('.sign_in'), link_user_accounts_users_path(:only_path => false, :canvas => true), :target => '_parent'
+        = pipe_spacer
+        = link_to t('.register'), link_user_accounts_users_path(:only_path => false, :canvas => true), :target => '_parent'
+      - else
+        = link_to t('.sign_in'), login_path
+        = pipe_spacer
+        = link_to t('.register'), signup_path
     = pipe_spacer
     %fb:share-button{:class => 'meta'}
       %meta{:name => 'title', :content => APP_CONFIG['site_title']}

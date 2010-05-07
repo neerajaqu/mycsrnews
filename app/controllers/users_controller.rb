@@ -42,7 +42,11 @@ class UsersController < ApplicationController
       #connect accounts
       self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
     end
-    redirect_back_or_default(home_index_path)
+    if canvas?
+      redirect_back_or_default(home_index_path(:only_path => false, :canvas => canvas?))
+    else
+      redirect_back_or_default(home_index_path)
+    end
   end
 
   def show
