@@ -37,7 +37,7 @@
       max-width: 210px
 
 // The following generates the default grids provided by the css version of 960.gs
-$ninesixty_columns: 24
+$ninesixty_columns: 12
 
 $ninesixty_grid_width: 760px
 
@@ -47,45 +47,36 @@ $ninesixty_gutter_width: 20px
   border: 1px dashed red
 
 body
-  +grid-system(24)
+  +grid-system(12)
   +grid-children
 
-#bodyWrapper
-  +grid(24)
-  +grid-children
-  +alpha
-  +omega
+body
+  +grid-system(12)
 
 #header, #footer, #pageBody, #adspace, #subNav
-  +grid-width(24)
+  +grid(12)
+
+.left, .right
+  display: inline-block
 
 #col_left
-  float: left
-  clear: both
-  +grid(16)
-  +grid-children
-  +alpha
-  .left
-    float: left
-    clear: left
-    +alpha
-  .right
-    float: right
-    clear: right
-    +omega
-
-#col_right
-  float: right
   +grid(8)
   +grid-children
-  +omega
+  .left
+    +alpha
+  .right
+    +omega
+#col_right
+  +grid(4)
+  +grid-children
   .panel_2
     +alpha
     +omega
 
 .panel_1, #hotTopicBar
-  float: left
-  +grid-width(16)
+  +grid(8)
+  +alpha
+  +omega
 
 .panel_2
-  +grid(8)
+  +grid(4)
