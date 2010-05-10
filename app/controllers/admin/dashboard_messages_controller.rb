@@ -12,24 +12,24 @@ class Admin::DashboardMessagesController < AdminController
   def new
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
     	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status, :created_at],
+    	:fields => [:message, :action_text, :action_url, :image_url, :status],
     }
   end
 
   def edit
-    @event = DashboardMessage.find(params[:id])
+    @dashboardMessage = DashboardMessage.find(params[:id])
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => @event,
+    	:item => @dashboardMessage,
     	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status, :created_at],
+    	:fields => [:message, :action_text, :action_url, :image_url, :status],
     }
   end
 
   def update
-    @event = DashboardMessage.find(params[:id])
-    if @event.update_attributes(params[:DashboardMessage])
+    @dashboardMessage = DashboardMessage.find(params[:id])
+    if @dashboardMessage.update_attributes(params[:DashboardMessage])
       flash[:success] = "Successfully updated your DashboardMessage."
-      redirect_to [:admin, @event]
+      redirect_to [:admin, @dashboardMessage]
     else
       flash[:error] = "Could not update your DashboardMessage as requested. Please try again."
       render :edit
@@ -45,10 +45,10 @@ class Admin::DashboardMessagesController < AdminController
   end
 
   def create
-    @event = DashboardMessage.new(params[:DashboardMessage])
-    if @event.save
+    @dashboardMessage = DashboardMessage.new(params[:DashboardMessage])
+    if @dashboardMessage.save
       flash[:success] = "Successfully created your new DashboardMessage!"
-      redirect_to [:admin, @event]
+      redirect_to [:admin, @dashboardMessage]
     else
       flash[:error] = "Could not create your DashboardMessage, please try again"
       redirect_to new_admin_dashboard_message_path
@@ -56,8 +56,8 @@ class Admin::DashboardMessagesController < AdminController
   end
 
   def destroy
-    @event = DashboardMessage.find(params[:id])
-    @event.destroy
+    @dashboardMessage = DashboardMessage.find(params[:id])
+    @dashboardMessage.destroy
     redirect_to admin_dashboard_messages_path
   end
 
