@@ -9,7 +9,7 @@
             #{announcement.prefix}
           %li.topic
             - if announcement.url.present?          
-              = link_to announcement.title, announcement.url
+              = link_to announcement.title, announcement.url, :target=> "_parent"
             - else 
               = announcement.title
       - else
