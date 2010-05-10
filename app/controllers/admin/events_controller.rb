@@ -1,65 +1,42 @@
 class Admin::EventsController < AdminController
 
   def index
-    render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
-    	:items => DashboardMessage.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
-    	:model => DashboardMessage,
-    	:fields => [:prefix, :title, :url, :created_at],
-    	:paginate => true
-    }
+    @events = Event.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
 
   def new
-    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
-    	:model => DashboardMessage,
-    	:fields => [:prefix, :title, :details, :url, :type]
-    }
+    @event = Event.new
   end
 
   def edit
-    @DashboardMessage = DashboardMessage.find(params[:id])
-    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => @DashboardMessage,
-    	:model => DashboardMessage,
-    	:fields => [:prefix, :title, :details, :url, :type]
-    }
+    @event = Event.find(params[:id])
   end
 
   def update
-    @DashboardMessage = DashboardMessage.find(params[:id])
-    if @DashboardMessage.update_attributes(params[:DashboardMessage])
-      flash[:success] = "Successfully updated your DashboardMessage."
-      redirect_to [:admin, @DashboardMessage]
+    @event = Event.find(params[:id])
+    if @event.update_attributes(params[:event])
+      flash[:success] = "Successfully updated your Event ."
+      redirect_to [:admin, @event]
     else
-      flash[:error] = "Could not update your DashboardMessage as requested. Please try again."
+      flash[:error] = "Could not update your Event  as requested. Please try again."
       render :edit
     end
   end
 
   def show
-    render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
-    	:item => DashboardMessage.find(params[:id]),
-    	:model => DashboardMessage,
-    	:fields => [:prefix, :title, :details, :url, :type,:created_at]
-    }
+    @event = Event.find(params[:id])
   end
 
   def create
-    @DashboardMessage = DashboardMessage.new(params[:DashboardMessage])
-    if @DashboardMessage.save
-      flash[:success] = "Successfully created your new DashboardMessage!"
-      redirect_to [:admin, @DashboardMessage]
+    @event = Event.new(params[:event])
+    @event.user = current_user
+    if @event.save
+      flash[:success] = "Successfully created your new Event !"
+      redirect_to [:admin, @event]
     else
-      flash[:error] = "Could not create your DashboardMessage, please try again"
+      flash[:error] = "Could not create your Event , please try again"
       render :new
     end
-  end
-
-  def destroy
-    @DashboardMessage = DashboardMessage.find(params[:id])
-    @DashboardMessage.destroy
-
-    redirect_to admin_DashboardMessages_path
   end
 
   private

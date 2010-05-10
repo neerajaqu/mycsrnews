@@ -17,19 +17,19 @@ class Admin::DashboardMessagesController < AdminController
   end
 
   def edit
-    @dashboardMessage = DashboardMessage.find(params[:id])
+    @event = DashboardMessage.find(params[:id])
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => @dashboardMessage,
+    	:item => @event,
     	:model => DashboardMessage,
     	:fields => [:message, :action_text, :action_url, :image_url, :status, :created_at],
     }
   end
 
   def update
-    @dashboardMessage = DashboardMessage.find(params[:id])
-    if @dashboardMessage.update_attributes(params[:DashboardMessage])
+    @event = DashboardMessage.find(params[:id])
+    if @event.update_attributes(params[:DashboardMessage])
       flash[:success] = "Successfully updated your DashboardMessage."
-      redirect_to [:admin, @dashboardMessage]
+      redirect_to [:admin, @event]
     else
       flash[:error] = "Could not update your DashboardMessage as requested. Please try again."
       render :edit
@@ -45,10 +45,10 @@ class Admin::DashboardMessagesController < AdminController
   end
 
   def create
-    @dashboardMessage = DashboardMessage.new(params[:DashboardMessage])
-    if @dashboardMessage.save
+    @event = DashboardMessage.new(params[:DashboardMessage])
+    if @event.save
       flash[:success] = "Successfully created your new DashboardMessage!"
-      redirect_to [:admin, @dashboardMessage]
+      redirect_to [:admin, @event]
     else
       flash[:error] = "Could not create your DashboardMessage, please try again"
       redirect_to new_admin_dashboard_message_path
@@ -56,8 +56,8 @@ class Admin::DashboardMessagesController < AdminController
   end
 
   def destroy
-    @dashboardMessage = DashboardMessage.find(params[:id])
-    @dashboardMessage.destroy
+    @event = DashboardMessage.find(params[:id])
+    @event.destroy
     redirect_to admin_dashboard_messages_path
   end
 
