@@ -21,6 +21,8 @@
                     %span.btn_left== #{like_link resource} #{resource.votes_tally}
                     %span.btn_mid== #{link_to t('.comments'), [@resource_section, resource]}
                     %span.btn_right= t('.share')
+  - cache "#{@resource_section.cache_key}_bottom_html" do
+    = render :partial => 'shared/item_footer', :locals => { :item => @resource_section,:title => @resource_section.name }
 
 #col_right
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @top_resources, :title => t('resources.top_resource_sections', :name => @resource_section.name) }
