@@ -52,7 +52,7 @@ class Admin::AnnouncementsController < AdminController
       redirect_to [:admin, @announcement]
     else
       flash[:error] = "Could not create your Announcement, please try again"
-      render :new
+      redirect_to new_admin_announcements_path
     end
   end
 

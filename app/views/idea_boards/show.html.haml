@@ -21,6 +21,8 @@
                     %span.btn_left== #{like_link idea} #{idea.votes_tally}
                     %span.btn_mid== #{link_to t('.comments'), [@idea_board, idea]}
                     %span.btn_right= t('.share')
+  - cache "#{@idea_board.cache_key}_bottom_html" do
+    = render :partial => 'shared/item_footer', :locals => { :item => @idea_board,:title => @idea_board.name }
 
 #col_right
   = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('ideas.top_board_ideas', :name => @idea_board.name) }
