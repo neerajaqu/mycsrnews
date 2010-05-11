@@ -4,9 +4,9 @@
   - featured_questions ||= [Question.featured.first]
   - unless featured_questions.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar.clearfix
+      .panelBar
         %h2= t('.featured_question_title')
-      .list_items.clearfix
+      .list_items
         %ul
           - featured_questions.each do |question|
             %li
