@@ -256,8 +256,7 @@ class ApplicationController < ActionController::Base
   def update_last_active
     return false unless current_user.present?
 
-    current_user.last_active = Time.now
-    current_user.save
+    current_user.touch(:last_active)
   end
 
   def check_authorized_param
