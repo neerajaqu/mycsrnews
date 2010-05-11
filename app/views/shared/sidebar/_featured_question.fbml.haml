@@ -1,7 +1,7 @@
 -# @expects: local 'question'
 
 - cache :featured_questions_fbml do
-  - featured_questions ||= Question.featured.1
+  - featured_questions ||= Question.featured.first
   - unless featured_questions.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
