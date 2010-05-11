@@ -1,10 +1,11 @@
-- content_for :head_content do
-  :javascript
-    $(function() {
-    	$('.item-share-button').click(function(event) {
-    		event.preventDefault();
-        #{fb_connect_stream_publish(stream_post, "Share #{item.item_title}")}
-      });
+-# content_for :head_content do
+-# TODO:: switch this to an ajax request
+:javascript
+  $(function() {
+    $('##{item.muid}').click(function(event) {
+      event.preventDefault();
+      #{fb_connect_stream_publish(stream_post, "Share #{item.item_title}")}
     });
+  });
 
-%a.item-share-button{:href => '#'} Share
+%a.item-share-button{:href => '#', :id => item.muid} Share

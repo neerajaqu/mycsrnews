@@ -17,6 +17,19 @@ module FacebookHelper
     render :partial => 'shared/misc/share_button', :locals => {:item => item, :stream_post => stream_post}
   end
 
+  def fb_share_app_button
+begin
+    stream_post = Facebooker::StreamPost.new
+    attachment = Facebooker::Attachment.new
+    attachment.name = "Media"
+    stream_post.message = t('shared.sidebar.welcome_panel.welcome_panel_message_fbml')
+    stream_post.action_links = [{:text => t('shared.sidebar.welcome_panel.welcome_panel_headline'), :href => home_index_path(:only_path => false, :canvas => true)}]
+    stream_post.attachment = attachment
+end
+
+    render :partial => 'shared/misc/share_app_button', :locals => {:stream_post => stream_post}
+  end
+
   def fb_meta_share_button item
     text = %{<fb:share-button class="meta"><meta name="medium" content="news" />}
     text += %{<meta name="title" content="#{item.item_title}" />}
@@ -46,6 +59,17 @@ module FacebookHelper
     end
     stream_post.message = item.item_description
     stream_post.action_links = [{:text => item.item_title, :href => polymorphic_url(item, :only_path => false, :canvas => true)}]
+    stream_post.attachment = attachment
+
+    stream_post
+  end
+
+  def build_app_stream_post
+    stream_post = Facebooker::StreamPost.new
+    attachment = Facebooker::Attachment.new
+    attachment.name = "Media"
+    stream_post.message = t('shared.sidebar.welcome_panel.welcome_panel_message_fbml')
+    stream_post.action_links = [{:text => t('shared.sidebar.welcome_panel.welcome_panel_headline'), :href => home_index_path(:only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
 
     stream_post

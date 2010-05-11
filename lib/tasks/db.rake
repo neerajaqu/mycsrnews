@@ -12,6 +12,7 @@ namespace :n2 do
 
       dump = []
       dump << "mysqldump"
+      dump << "--default-character-set=utf8"
       dump << "--opt"
       dump << "-u #{db_user}"
       dump << "-p#{db_password}" unless db_password.empty? or db_password == '-p'
@@ -26,7 +27,8 @@ namespace :n2 do
       File.open(dump_file, "w+") do |file|
         output = `#{dump.join ' '}`
         raise "Failed on mysql error, please check the error and try again." if output.empty?
-        file << output
+        # gsub hack because mysqldump isn't outputting with utf8 properly
+        file << output.gsub(/latin1/, 'utf8')
       end
       puts "Finished dumping data"
       puts "Converting to new database format"

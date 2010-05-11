@@ -27,6 +27,15 @@
           display: none !important
 
     = yield :head_content
+    = yield :head_content_bar
+    - stream_post = build_app_stream_post
+    :javascript
+      $(function() {
+        $('.app-share-button').click(function(event) {
+          event.preventDefault();
+          #{fb_connect_stream_publish(stream_post, "Share #{APP_CONFIG['site_title']}")}
+        });
+      });
 
   %body
     #bodyWrapper
