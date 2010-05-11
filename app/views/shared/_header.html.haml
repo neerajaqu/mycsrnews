@@ -22,9 +22,5 @@
         = pipe_spacer
         = link_to t('.register'), signup_path
     = pipe_spacer
-    %fb:share-button{:class => 'meta'}
-      %meta{:name => 'title', :content => APP_CONFIG['site_title']}
-      %meta{:name => 'description', :content => t('header.share_description')}
-      %link{:rel => "image_src", :href => base_url('/images/default/icon-fan-app.gif')}
-      %link{:rel => "target_url", :href => home_index_path(:only_path => false,:canvas => true)}
+    = fb_share_app_button
   = render :partial => 'shared/page_tabs'
