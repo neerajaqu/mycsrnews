@@ -12,12 +12,9 @@ module FacebookHelper
   end
 
   def fb_share_item_button item
-    canvas = iframe_facebook_request? ? true : false
-    if canvas
-      fb_meta_share_button item
-    else
-      fb_share_button(polymorphic_url(item, :only_path => false, :canvas => canvas))
-    end
+    stream_post = build_stream_post item
+
+    render :partial => 'shared/misc/share_button', :locals => {:item => item, :stream_post => stream_post}
   end
 
   def fb_meta_share_button item
@@ -34,6 +31,24 @@ module FacebookHelper
 
   def iframe_facebook_request?
     (session and session[:facebook_request]) or request_comes_from_facebook?
+  end
+
+  private
+
+  def build_stream_post item
+    stream_post = Facebooker::StreamPost.new
+    attachment = Facebooker::Attachment.new
+    attachment.name = "Media"
+    if item.respond_to?(:images) and item.images.present?
+    	item.images.each do |image|
+    	  attachment.add_image(image_path(image.url(:thumb)), polymorphic_url(item, :only_path => false, :canvas => true))
+    	end
+    end
+    stream_post.message = item.item_description
+    stream_post.action_links = [{:text => item.item_title, :href => polymorphic_url(item, :only_path => false, :canvas => true)}]
+    stream_post.attachment = attachment
+
+    stream_post
   end
       
 end

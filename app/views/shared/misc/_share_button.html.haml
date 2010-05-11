@@ -1,0 +1,10 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+    	$('.item-share-button').click(function(event) {
+    		event.preventDefault();
+        #{fb_connect_stream_publish(stream_post, "Share #{item.item_title}")}
+      });
+    });
+
+%a.item-share-button{:href => '#'} Share
