@@ -23,7 +23,7 @@
   border:
     bottom: $pageTabBorder
   background: $headerBG
-  z-index: 1
+  z-index: 22
   .sponsor
     background: $sponsorBG
     display: $sponsordisplay
@@ -130,6 +130,11 @@
 #bodyWrapper
   background: $bodyWrapperBG
   display: inline-block
+  border: 
+    top: $bodyWrapperBorderTop
+    bottom: $bodyWrapperBorderBot
+    left: $bodyWrapperBorderleft
+    right: $bodyWrapperBorderRight
   width: 960px
 
 // Footer Container //
@@ -300,7 +305,7 @@ li
       padding: 0
     .toggle_tabs li
       height: 23px
-      width: 100px
+      width: $pageTabWidth
       float: left
       padding: 0
       margin: 0 1px 0 0
@@ -378,6 +383,7 @@ li
             a
               height: 100%
               font-size: 10px
+              line-height: 13px
               font-weight: normal
               display: block
               background: $dropdownTabOff
@@ -549,7 +555,7 @@ li
         max-height: 75px
     .featureAd
       text-align: center
-      display: inline-block
+      display: block
       h2
         text-align: left
         line-height: 150%
@@ -559,11 +565,11 @@ li
           margin-right: 40%
       p
         text-align: left
+        display: inline-block
         padding: 0 10px
         margin-bottom: 20px
         color: $featureBodyText
       .featureBtn
-        text-align: center
         font-size: 14px
         line-height: 14px
         font-weight: bold
