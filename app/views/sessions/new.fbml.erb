@@ -1,17 +1,17 @@
 <div class="panel_2 left">
   <div class="panelBar"><h2>Sign In</h2></div>
-	<div class="formBox login">
-		
-<fb:editor action="/sessions/create">
-  <fb:editor-text name="login" id="login" value="" label="<%= t '.login' %>" />
-  <fb:editor-password name="password" id="password" value="" label="<%= t '.password' %>" />
-  <fb:editor-buttonset>
-   <fb:editor-button label="<%= t '.submit' %>" />
-  </fb:editor-buttonset>
-</fb:editor>
-
-<p><%= t '.fb_connect' %></p>
-<%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+	<div class="formBox login">		
+    <p><%= t '.use_fb_connect' %></p>
+    <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+    <br />
+    <br />
+    <fb:editor action="/sessions/create">
+      <fb:editor-text name="login" id="login" value="" label="<%= t '.login' %>" />
+      <fb:editor-password name="password" id="password" value="" label="<%= t '.password' %>" />
+      <fb:editor-buttonset>
+       <fb:editor-button label="<%= t '.submit' %>" />
+      </fb:editor-buttonset>
+    </fb:editor>
 	</div>
 </div>
 <br />

@@ -1,23 +1,23 @@
 <div class="panel_2 left">
 	<div class="panelBar"><h2>Sign In</h2></div>
 	<div class="formBox login">
-  <% form_tag session_path do -%>
-  <p><%= label_tag 'login', t('.login') %><br />
-  <%= text_field_tag 'login', @login %></p>
+    <p><%= t '.fb_connect' %></p>
+    <p><%= fb_login_button('window.location = "/users/link_user_accounts";')%></p>
+    <br />
+    <br />
+    <% form_tag session_path do -%>
+    <p><%= label_tag 'login', t('.login') %><br />
+    <%= text_field_tag 'login', @login %></p>
 
-  <p><%= label_tag 'password', t('.password') %><br/>
-  <%= password_field_tag 'password', nil %></p>
+    <p><%= label_tag 'password', t('.password') %><br/>
+    <%= password_field_tag 'password', nil %></p>
 
-  <!-- Uncomment this if you want this functionality
-  <p><%= label_tag 'remember_me', 'Remember me' %>
-  <%= check_box_tag 'remember_me', '1', @remember_me %></p>
+    <!-- Uncomment this if you want this functionality
+    <p><%= label_tag 'remember_me', 'Remember me' %>
+    <%= check_box_tag 'remember_me', '1', @remember_me %></p>
 -->
-
-  <p><%= submit_tag t('.submit') %></p>
-  <% end -%>
-
-  <p><%= t '.fb_connect' %></p>
-  <p><%= fb_login_button('window.location = "/users/link_user_accounts";')%></p>
+    <p><%= submit_tag t('.submit') %></p>
+    <% end -%>
 	</div>
 </div>
 <br />

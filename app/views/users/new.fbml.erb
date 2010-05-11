@@ -1,6 +1,11 @@
 <div class="panel_2 left">
 	<div class="panelBar"><h2>Sign up as a new user</h2></div>
 	<div class="formBox login">
+    <p>Use Facebook Connect</p>
+    <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+
+    <p>Or, register as a new user below:</p>
+	  
     <% @user.password = @user.password_confirmation = nil %>
 
     <%= error_messages_for :user %>
@@ -22,9 +27,6 @@
 
     <p><%= submit_tag 'Sign up' %></p>
     <% end -%>
-
-    <p>or register with Facebook connect</p>
-    <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
 
   </div>
 </div>
