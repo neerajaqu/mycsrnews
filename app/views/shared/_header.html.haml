@@ -11,7 +11,10 @@
         .account-links{:style => 'display:none'}
       %span.admin-links
         = pipe_spacer
-        = link_to t('.admin'), admin_path
+        - if iframe_facebook_request?
+          = link_to t('.admin'), admin_path, :target => '_parent'
+        - else
+          = link_to t('.admin'), admin_path
     - else
       - if iframe_facebook_request?
         = link_to t('.sign_in'), link_user_accounts_users_path(:only_path => false, :canvas => true), :target => '_parent'
