@@ -1,18 +1,31 @@
 class ApplicationController < ActionController::Base
   rescue_from Facebooker::Session::SessionExpired, :with => :facebook_session_expired
+  rescue_from Facebooker::Session::MissingOrInvalidParameter, :with => :facebook_session_expired
+
+  def rescue_action(exception)
+    if exception.message == 'Invalid parameter' and
+    	 exception.file_name =~ /_header/ and
+    	 exception.source_extract =~ /if logged_in/
+    	facebook_session_expired
+    else
+      super
+    end
+  end
 
   def facebook_session_expired
+    canvas = iframe_facebook_request? ? true : false
     clear_fb_cookies!
     clear_facebook_session_information
     reset_session # remove your cookies!
     flash[:error] = "Your facebook session has expired."
-    redirect_to root_url
+    redirect_to root_url(:canvas => false)
   end
   
   include AuthenticatedSystem
 
   helper :all # include all helpers, all the time
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  before_filter :set_p3p_header
   before_filter :set_slot_data
   before_filter :set_current_tab
   before_filter :set_current_sub_tab
@@ -31,10 +44,16 @@ class ApplicationController < ActionController::Base
       # filter_parameter_logging :fb_sig_friends # commenting out for now because it fails sometimes
     end
   end
+
+  def set_p3p_header
+    #required for IE in iframe FB environments if sessions are to work.
+    headers['P3P:CP'] = "IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+  end
   
   def set_facebook_session_wrapper
     begin
       set_facebook_session
+      session[:facebook_request] = true if request_comes_from_facebook? or params[:iframe_req].present?
     rescue
       return facebook_session_expired
     end
@@ -61,7 +80,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_contents
-    @contents ||= Content.find(:all, :limit => 10, :order => "created_at desc")
+    @contents ||= Content.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
   end
 
   def load_newest_users
@@ -205,13 +224,16 @@ class ApplicationController < ActionController::Base
         end
       else
         if request_comes_from_facebook?
-        	format = 'fbml'
+        	#format = 'fbml'
+          # TODO:: needed to change this for iframes as all should be html now
+        	format = 'html'
         else
         	format = 'html'
         end
       end
     end
-    { :locale => I18n.locale,
+    {
+    	:locale => I18n.locale,
       :format => format
     } 
   end
@@ -273,6 +295,23 @@ class ApplicationController < ActionController::Base
       else
       	nil
     end
+  end
+
+  def canvas?
+    iframe_facebook_request? ? true : false
+  end
+
+  def iframe_facebook_request?
+    (session and session[:facebook_request]) or request_comes_from_facebook?
+  end
+
+  def after_facebook_login_url
+    if canvas?
+      link_user_accounts_users_path(:only_path => false, :canvas => true)
+    else
+    	root_url
+    end
+    #root_url(:only_path => false, :canvas => true)
   end
 
 end

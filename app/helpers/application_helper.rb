@@ -135,6 +135,10 @@ module ApplicationHelper
     	link_options[:only_path] = options[:only_path]
     	options.delete(:only_path)
     end
+    unless options[:canvas].nil?
+    	link_options[:canvas] = options[:canvas]
+    	options.delete(:canvas)
+    end
     if user.facebook_user?
       options.merge!(:linked => false)
       options[:size] = 'square' unless options[:size].present?
@@ -161,6 +165,10 @@ module ApplicationHelper
     	link_options[:only_path] = options[:only_path]
     	options.delete(:only_path)
     end
+    unless options[:canvas].nil?
+    	link_options[:canvas] = options[:canvas]
+    	options.delete(:canvas)
+    end
     if user.facebook_user?      
       options.merge!(:linked => false)
       unless options[:useyou] == true
@@ -184,7 +192,8 @@ module ApplicationHelper
   end
   
   def path_to_self(item)
-    url_for(send("#{item.class.to_s.underscore}_url", item))
+    canvas = iframe_facebook_request? ? true : false
+    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas))
   end
 
   def link_to_path_to_self(item)

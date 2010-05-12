@@ -1,4 +1,11 @@
 // Place your application-specific jQuery JavaScript functions and classes here
+
+function rebuild_facebook_dom() {
+  try {
+    FB.XFBML.Host.parseDomTree();
+  } catch(error) { }
+}
+
 $(function() {
   $('.hide').hide();
   $('.unhide').show().removeClass('hidden');
@@ -7,12 +14,6 @@ $(function() {
 		$('.flash').effect('shake');
 		$('.flash').hide('puff', {}, 'slow');
   }, 3500);
-
-  function rebuild_facebook_dom() {
-    try {
-      FB.XFBML.Host.parseDomTree();
-    } catch(error) { }
-  }
 
   function dialog_response(title, message) {
       $("<p>"+message+"</p>").dialog({

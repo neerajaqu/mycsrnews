@@ -1,7 +1,7 @@
 -# @expects: local 'top_articles'
 
 - cache :top_articles_html do
-  - top_articles ||= Article.top
+  - top_articles ||= Article.top.7
   - unless top_articles.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar

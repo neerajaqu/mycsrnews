@@ -4,10 +4,6 @@ class SwitchCommentsToPolymorphic < ActiveRecord::Migration
     add_column    :comments, :commentable_type, :string
 
     add_index :comments, [:commentable_type, :commentable_id]
-    Comment.all.each do |comment|
-      comment.commentable_type = 'Content'
-      comment.save
-    end
   end
 
   def self.down

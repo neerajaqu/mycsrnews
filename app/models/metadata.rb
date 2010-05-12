@@ -35,6 +35,16 @@ class Metadata < ActiveRecord::Base
     end
   end
 
+# TODO:: port this method in
+# from rails initializer.rb, cleaner
+#  def method_missing(name, *args)
+#    if name.to_s =~ /(.*)=$/
+#      self[$1.to_sym] = args.first
+#    else
+#      self[name]
+#    end
+#  end
+
   def method_missing(name, *args)
     return self.send(name, *args) if self.respond_to? name
     init_data

@@ -12,20 +12,43 @@ module FacebookHelper
   end
 
   def fb_share_item_button item
-    fb_share_button(polymorphic_url(item, :only_path => false))
+    stream_post = build_stream_post item
+
+    render :partial => 'shared/misc/share_button', :locals => {:item => item, :stream_post => stream_post}
   end
 
   def fb_meta_share_button item
     text = %{<fb:share-button class="meta"><meta name="medium" content="news" />}
     text += %{<meta name="title" content="#{item.item_title}" />}
-    text += %{<meta name="description" content="#{item.item_description}" />}
+    text += %{<meta name="description" content="#{caption(strip_tags(item.item_description),200)}" />}
     if item.respond_to?(:images) and item.images.present?
     	text += %{<link rel="image_src" href="#{meta_image item.images.first}"}
     end
-    text += %{<link rel="target_url" href="#{polymorphic_path(item, :only_path => false)}"}
+    text += %{<link rel="target_url" href="#{polymorphic_path(item, :only_path => false, :canvas => true)}"}
     text += %{</fb:share-button>}
-
     text
+  end
+
+  def iframe_facebook_request?
+    (session and session[:facebook_request]) or request_comes_from_facebook?
+  end
+
+  private
+
+  def build_stream_post item
+    stream_post = Facebooker::StreamPost.new
+    attachment = Facebooker::Attachment.new
+    attachment.name = "Media"
+    if item.respond_to?(:images) and item.images.present?
+    	item.images.each do |image|
+    	  attachment.add_image(image_path(image.url(:thumb)), polymorphic_url(item, :only_path => false, :canvas => true))
+    	end
+    end
+    stream_post.message = item.item_description
+    stream_post.action_links = [{:text => item.item_title, :href => polymorphic_url(item, :only_path => false, :canvas => true)}]
+    stream_post.attachment = attachment
+
+    stream_post
   end
       
 end

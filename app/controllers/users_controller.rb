@@ -42,7 +42,11 @@ class UsersController < ApplicationController
       #connect accounts
       self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
     end
-    redirect_back_or_default(home_index_path)
+    if canvas?
+      redirect_back_or_default(home_index_path(:only_path => false, :canvas => false))
+    else
+      redirect_back_or_default(home_index_path)
+    end
   end
 
   def show
@@ -57,6 +61,8 @@ class UsersController < ApplicationController
     	@actions = @user.comments.newest
     elsif @curr_action == 'likes'
     	@actions = @user.votes.newest
+    elsif @curr_action == 'all_actions'
+    	@actions = @user.newest_actions
     else
       @actions = false
     end

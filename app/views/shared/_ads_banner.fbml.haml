@@ -45,7 +45,7 @@
       - panel_id = ""
       - panel_class = "panel_1"
       - ad_class = "ad_468"
-  %div{:class => "#{panel_class} #{defined?(widget_page) ? widget_page.css_class : ''}"}
+  %div{:class => "#{panel_class} #{defined?(widget_page) ? widget_page.css_class : ''}", :id => panel_id}
     %div{:class => ad_class}
       - if APP_CONFIG['ad_platform'].present? 
         - case APP_CONFIG['ad_platform']
