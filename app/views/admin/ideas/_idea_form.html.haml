@@ -1,6 +1,7 @@
 - form.inputs do
   = form.input :title
   = form.input :details, :input_html => { :rows => 5 }
+  = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
   = form.input :tags_string, :required => false
   = form.input :idea_board, :required => false
 %br
