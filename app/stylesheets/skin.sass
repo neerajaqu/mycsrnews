@@ -1,8 +1,8 @@
-// NEWSCLOUD SITE SKIN //
+// BOSTON SITE SKIN //
 
 
 // body Variables //
-$bodyBG: #FFFFFF
+$bodyBG: #fbfbfb
 $bodyWrapperBG: #fff
 $bodyWrapperBorder: none
 $bodyWrapperBorderTop: $bodyWrapperBorder
@@ -11,34 +11,36 @@ $bodyWrapperBorderleft: $bodyWrapperBorder
 $bodyWrapperBorderRight: $bodyWrapperBorder
 
 // Font Variables //
-$copyFont: lucida grande, tahoma, verdana, arial, "san-serif"
-$headerFont: lucida grande, tahoma, verdana, arial, "san-serif"
+$copyFont: Georgia, 'Times New Roman', Times, serif
+$headerFont: Arial, Helvetica, sans-serif
 
 // Text Color Variables //
-$headerColor: #3b5998
-$headerLinkHover: #3b5998
-$subheadColor: #888888
-$linkColor: #3b5998
-$bodyColor: #333333
+$headerColor: #002878
+$headerLinkHover: #2851A2
+$subheadColor: #666
+$linkColor: #002878
+$bodyColor: #222
 
 // Button Background //
-$btnBG: #55761b image_url("default/btn-off.gif") left repeat-x
-$btnBGHover: #77983a image_url("default/btn-on.gif") left repeat-x
-$btnBorder:  1px solid #213603
+$btnBG: #002878 image_url("default/btn-off.gif") left repeat-x
+$btnBGHover: #142d5d image_url("default/btn-on.gif") left repeat-x
+$btnBorder:  1px solid #142d5d
 
 // Header Variables //
-$headerHeight: 110px
-$headerTitleColor: #3B5998
-$headerTitleDisplay: visible
-$headerTitleLogoImage: none
-$headerTitleLogoHeight: 50px
-$headerTitleLogoWidth: 400px
-$headerTitleLogoPosTop: 30px
-$headerTitleLogoPosLeft: 20px
+$headerHeight: 90px
+$headerTitleColor: black
+$headerTitleDisplay: hidden
+$headerTitleLogoImage: image_url("default/hdr-logo.png") top left no-repeat
+$headerTitleLogoHeight: 42px
+$headerTitleLogoWidth: 306px
+$headerTitleLogoPosTop: 10px
+$headerTitleLogoPosLeft: 30px
 $headerBG: #fff image_url("default/hdr_bg.gif") bottom left repeat-x
 $dhlinkscolor: none
+
 // Bottom Border style for all tab links --DO NOT change unless you're planning on changing the entire pages background color-- //
 $TabBotBorder: 1px solid #FFFFFF
+
 // sponsor variables //
 $sponsordisplay: none
 $sponsorheight: 30px
@@ -46,153 +48,176 @@ $sponsorwidth: 140px
 $sponsortop: 20px
 $sponsorleft: 300px
 $sponsorBG: #fff image_url("default/sponsor-logo.png") center left no-repeat
+
 // menu page tab float variable //
-$pagetabFloat: left
+$pagetabFloat: right
+
 // Menu Page Tab BG and Text Color Variables //
-$pageTabOff: #55761b image_url("default/pagetab-bg-off.gif") top left repeat-x
-$pageTabOffHover: #77983a image_url("default/pagetab-bg-hover.gif") top left repeat-x
-$pageTabOn: #FFFFFF image_url("default/pagetab-bg-on.gif") top left repeat-x
+$pageTabOff: #fff image_url("default/pagetab-off.gif") top left repeat-x
+$pageTabOffHover: #000 image_url("default/pagetab-hover.gif") top left repeat-x
+$pageTabOn: #FFFFFF 
 $pageTabBorder: 1px solid #999999
 $pageTablinkOff: #FFFFFF
-$pageTablinkOn: #3b5998
-$pageTabWidth: 110px
+$pageTablinkOn: #222
+$pageTabWidth: 110px  // keep between 100 and 130px or it will wrap and break the header //
 // Page Tab Dropdown Variables //
-$dropdownTabOff: #80a341
-$dropdownTabOn: #5d7e20
-$dropdownTabText: #FFF
-$dropdownTabTopBorder: 1px solid #FFF
-$dropdownListBorder: none
+$dropdownTabOff: #fff
+$dropdownTabOn: #f0f0f0
+$dropdownTabText: #002878
+$dropdownTabTopBorder: 1px dotted #f0f0f0
+$dropdownListBorder: 1px solid #142d5d
+
 // Page Tab Selected Dropdown Variables //
 $dropdownTabSelectOff: #fff
-$dropdownTabSelectOn: #dce6f4
-$dropdownTabTextSelect: #3B5998
-$dropdownTabTopBorderSelect: 1px solid #f0f0f0
-$dropdownTabListBorderSelect: 1px solid #999999
+$dropdownTabSelectOn: #f0f0f0
+$dropdownTabTextSelect: #222
+$dropdownTabTopBorderSelect: 1px dotted #f0f0f0
+$dropdownTabListBorderSelect: 1px solid #999
 $dropdownTabSelectMarginRight: 0px
 $dropdownTabSelectMarginLeft: 0px
+
 // SubNav Variables //
-$subnavTabOn: #FFFFFF image_url("default/pagetab-bg-on.gif") top left repeat-x
-$subnavTabOffHover: #77983a image_url("default/pagetab-bg-hover.gif") left repeat-x
-$subnavTabOff: #55761b image_url("default/pagetab-bg-off.gif") left repeat-x
-$subnavTabLinkOn: #3b5998
-$subnavTabLinkOff: #FFFFFF
-$subnavBorder: 1px solid #999999
+$subnavTabOn: $pageTabOn
+$subnavTabOffHover: $pageTabOffHover
+$subnavTabOff: $pageTabOff
+$subnavTabLinkOn: $pageTablinkOn
+$subnavTabLinkOff: $pageTablinkOff
+$subnavBorder: $pageTabBorder
+
 // text dropdown styles //
 $TextDropDownArrow: transparent image_url("default/dropdown_arrow.gif") center right no-repeat
+
 // Text Dropdown Panel //
-$DropDownBorder: 1px solid #3b5998
+$DropDownBorder: 1px solid #3F5F9C
 $DropDownBorderBot: 1px solid #FFF
 $DropDownBG: #FFFFFF
-$DropDownLinkHover: #dce6f4
-// refine drop down form button variables //
-$refineInputBorder: 1px solid #3b5998
-$refineInputBG: #dce6f4
-$refineInputText: #3b5998
-$refineInputHoverText: #fff
-$refineInputHoverBG: #3b5998
+$DropDownLinkHover: #efefef
 
+// refine drop down form button variables //
+$refineInputBorder: 1px solid #3F5F9C
+$refineInputBG: $btnBG
+$refineInputText: #fff
+$refineInputHoverText: #fff
+$refineInputHoverBG: $btnBGHover
 
 // House Ad Variables //
 $featureBtnText: #fff
-$featureBtnOff: #55761b image_url("default/btn-off.gif") left repeat-x
-$featureBtnOn: #80a341 image_url("default/btn-on.gif") left repeat-x
-$featureBtnBorder: 1px solid #213603
-$featureH2Text: #3b5998
-$featureBodyText: #3b5998
-$featureBg: #fff image_url("default/house-ad-bg.gif") top center repeat-x
-$featureBorder: 2px solid #c0cce0
-$featureBorderTop: $featureBorder
+$featureBtnOff: $btnBG
+$featureBtnOn: $btnBGHover
+$featureBtnBorder: $btnBorder
+$featureH2Text: black
+$featureBodyText: #333
+$featureBg: #EBF4FB
+$featureBorder: 1px solid #B7CDFF
+$featureBorderTop: 3px solid #3F5F9C
 $featureBorderBot: $featureBorder
 $featureBorderLeft: $featureBorder
 $featureBorderRight: $featureBorder
 $featureBorderRadius: none
+
 // Bookmarklet Variables //
 $demoBG: image_url("default/bookmarklet-demo.png") top center no-repeat
-$bookmarkletBG: #dbe5ee image_url("default/bookmarklet-BG.gif") top left repeat-x
-$bookmarkletBtn: #55761b image_url("default/btn-off.gif") left repeat-x
-$bookmarkletBtnHover: #77983a image_url("default/btn-on.gif") left repeat-x
-$bookmarkletBtnBorder: 1px solid #213603
-$bookmarkletHeader: #3b5998
-$bookmarkletHeaderBG: image_url("default/bookmarklet-header-BG.png") top center no-repeat
-$bookmarkletText: #333333
-$bookmarkletBorder: 2px solid #c0cce0
+$bookmarkletBG: black image_url("default/bookmarklet-BG.gif") top left repeat-x
+$bookmarkletBtn: $btnBG
+$bookmarkletBtnHover: $btnBGHover
+$bookmarkletBtnBorder: 1px solid #EBF4FB
+$bookmarkletHeader: white
+$bookmarkletHeaderBG: none
+$bookmarkletText: #fbfbfb
+$bookmarkletBorder: none
+
 // Ad BG Variable //
 $AdBG: #ccc image_url("default/ad-bg-title.gif") top center no-repeat
+
 // Hot Topic Bar Variables //
 $HTBaseBG: #F0F0F0
-$HTTitleBG: #31500b
+$HTTitleBG: #3F5F9C
 $HTTitleText: #FFF
+
 // Hot Topic Bar List Image Variable //
 $hotTopicBar:  image_url("default/topic_arrow.gif") center left no-repeat
+
 //Top Bar Variables (bar at the top of article detail pages)//
 $TopBarBorder: 1px solid #FFFFFF
 $TopBarBG: #F0F0F0
 
-
 // Panel Variables //
-$panelListBorder: 1px solid #efefef
+$panelListBorder: 1px dotted #f0f0f0
+
 // panel Bar //
-$panelBarBG: #FFF
-$panelBarBorder: 1px solid #3b5998
-$panelBarHeader: #999999
-$panelBarHeaderWeight: normal
+$panelBarBG: #FFF //image_url("default/panelBar-BG.gif") top left repeat-x
+$panelBarBorder: 2px solid #3F5F9C
+$panelBarHeader: #666
+$panelBarHeaderWeight: bold
+
 // subtitle background color //
-$subTitleBG: #F0F0F0
+$subTitleBG: #efefef
+
 //Panel Featured Story //
-$featureStoryBG: #e6ecf3
+$featureStoryBG: #e9f0f5
+
 // Panel Resources sponsor box //
-$sponsorBoxBorder: 2px solid #77983a
-$sponsorBoxPanelBarBG: #77983a
+$sponsorBoxBorder: 3px solid #333
+$sponsorBoxPanelBarBG: #333
 $sponsorBoxPanelBarTextColor: #fff
 $sponsorBoxBG: #fff
+
 // Bullet List Image Variables  //
 $bulletList: image_url("default/bullet1.gif")
+
 // Vote Button Variable //
-$btnCommentBG: #F0F0F0
+$btnCommentBG: #f0f0f0
+
 // feature vote button variable //
 $btnCommentFeatureBG: #FFFFFF
+
 // Vote Image Variables  //
 $voteUp: image_url("default/icon_vote_up.gif") left no-repeat
 $voteDown: image_url("default/icon_vote_down.gif") left no-repeat
+
 // Thumb Image Variables  //
 $thumbUp: image_url("default/thumb-up.gif") left no-repeat
 $thumbDown: image_url("default/thumb-down.gif") left no-repeat
+
 // PanelBar Comments Thread BG //
-$panelBarCommentBG: #dce6f4
-$commentBlockBorder: 1px solid #efefef
+$panelBarCommentBG: white
+$commentBlockBorder: 1px dotted #f0f0f0
+
 // Comment Reply Variables //
 $commentReplyText: #336600
 $commentReply: image_url("default/reply_arrow.png") top left no-repeat
+
 // Form Box //
-$formBoxBG: #EFEFEF
-$formBoxTextArea: 1px solid #ccc
+$formBoxBG: #f0f0f0
+$formBoxTextArea: 1px solid #3F5F9C
+
 // Action Legend Variables //
-$actionLegendinputBorder: 1px solid #CCCCCC
-$actionLegendBG: #dce6f4
+$actionLegendinputBorder: 1px solid #3F5F9C
+$actionLegendBG: #f0f0f0
+
 // Pagination Variables //
 $paginationAlign: center
-$paginationLinkOn: #3b5998
+$paginationLinkOn: #3F5F9C
 $paginationLinkOff: #fff
 $paginationLinkDisabled: #999
 $paginationBgOn: #fff
-$paginationBgOff: #3b5998
+$paginationBgOff: #3F5F9C
 $paginationBgDisabled: #fff
-$paginationBdrOn: 1px solid #3b5998
-$paginationBdrOff: 1px solid #3b5998
+$paginationBdrOn: 1px solid #3F5F9C
+$paginationBdrOff: 1px solid #3F5F9C
 $paginationBdrDisabled: 1px solid #999
 
-
 // Footer //
-$FooterBorder: 1px solid #3b5998
-$FooterBG: #dce6f4
-
+$FooterBorder: 1px solid #888
+$FooterBG: #fff
 
 // Various Icon Image Variables //
 $rss: image_url("default/icon_rss.png") left no-repeat
 $twitter: image_url("default/icon_twitter.gif") left no-repeat
 $newsCloud: image_url("default/icon_newscloud.gif") left no-repeat
+
 // BlockQuote Image Variable //
 $blockQuote: #fff
+
 // Story Thumb Image BG Variable //
 $WaterMark: #fff image_url("default/watermark.jpg") center no-repeat
-
