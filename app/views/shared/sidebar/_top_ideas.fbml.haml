@@ -2,7 +2,8 @@
 
 - cache :top_ideas_fbml do
   - top_ideas ||= Idea.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
-  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+  - unless top_ideas.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_ideas_title')
     .list_stories
