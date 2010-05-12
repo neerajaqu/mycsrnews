@@ -18,6 +18,8 @@ class Admin::FeaturedItemsController < AdminController
         @items = Content.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Idea.name.tableize
         @items = Idea.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when Question.name.tableize
+        @items = Question.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       else
       	return false
     end
@@ -53,13 +55,15 @@ class Admin::FeaturedItemsController < AdminController
         return Content.find_by_id($2)
       when 'idea'
         return Idea.find_by_id($2)
+      when 'question'
+        return Question.find_by_id($2)
       else
       	return false
     end
   end
 
   def set_featured_types
-    @featurables ||= [['Stories', 'contents'], ['Ideas', 'ideas']]
+    @featurables ||= [['Stories', 'contents'], ['Ideas', 'ideas'], ['Questions', 'questions']]
   end
 
   def set_current_tab
