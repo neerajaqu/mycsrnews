@@ -286,11 +286,11 @@ module ApplicationHelper
     options[:width] ||= '425'
     options[:height] ||= '344'
     <<EMBED
-<object width="#{options[:height]}" height="#{options[:width]}">
+<object width="#{options[:width]}" height="#{options[:height]}">
   <param name="movie" value="#{video.video_src}"></param>
   <param name="allowFullScreen" value="true"></param>
   <param name="allowscriptaccess" value="always"></param>
-  <embed src="#{video.video_src}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed>
+  <embed src="#{video.video_src}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="#{options[:width]}" height="#{options[:height]}"></embed>
 </object>
 EMBED
   end

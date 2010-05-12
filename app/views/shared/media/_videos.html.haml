@@ -8,4 +8,8 @@
       %ul
         - videos.each do |video|
           .video.clearfix
-            = embed_video video
+            - case video.remote_video_type
+              - when "vimeo"
+                = embed_video video, {:width => 400, :height => 302}
+              - else
+                = embed_video video

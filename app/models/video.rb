@@ -29,7 +29,7 @@ class Video < ActiveRecord::Base
       when 'youtube'
         "http://www.youtube.com/v/#{self.remote_video_id}"
       when 'vimeo'
-        "http://vimeo.com/v/#{self.remote_video_id}"
+        "http://vimeo.com/moogaloop.swf?clip_id=#{self.remote_video_id}&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=ff0179&amp;fullscreen=1"
       when 'vmixcore'
         self.remote_video_id
       else
