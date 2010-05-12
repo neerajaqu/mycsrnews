@@ -6,11 +6,11 @@
   %br
 %h3.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}
 .video-form.hide
-  %h3 Embed or link to a video (youtube, vimeo and vmixcore only):
+  %h3 Embed or link to a video (YouTube, Vimeo and Vmixcore only):
   - item.videos.build if item.videos.empty?
   - form.semantic_fields_for :videos do |video_form|
-    = video_form.input :remote_video_url, :required => false
-    = video_form.input :embed_code, :required => false
+    = video_form.input :remote_video_url, :label => "Remote video URL", :required => false, :hint => "e.g. http://youtube.com/watch?v=xpAg2gBkQ5c"
+    = video_form.input :embed_code, :label => "Or, video embedding code", :required => false
 %br
 .hidden.unhide== #{link_to "Add audio clip", '#', :class => 'toggle-form'}
 .audio-form.hide
