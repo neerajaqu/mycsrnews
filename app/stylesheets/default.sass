@@ -130,6 +130,11 @@
 #bodyWrapper
   background: $bodyWrapperBG
   display: inline-block
+  border: 
+    top: $bodyWrapperBorderTop
+    bottom: $bodyWrapperBorderBot
+    left: $bodyWrapperBorderleft
+    right: $bodyWrapperBorderRight
   width: 960px
 
 // Footer Container //
@@ -300,7 +305,7 @@ li
       padding: 0
     .toggle_tabs li
       height: 23px
-      width: 100px
+      width: $pageTabWidth
       float: left
       padding: 0
       margin: 0 1px 0 0
@@ -362,11 +367,12 @@ li
       &:hover
         .dropdown
           visibility: visible
-          display: inline
+          display: block
       .dropdown
         z-index: 20
         visibility: hidden
         display: none
+        margin-top: 1px
         ul
           li
             width: 100%
@@ -375,6 +381,7 @@ li
             clear: left
             padding: 0
             text-align: left
+            margin-top: -1px
             a
               height: 100%
               font-size: 10px
@@ -552,6 +559,7 @@ li
       text-align: center
       display: block
       h2
+        font-size: 18px
         text-align: left
         line-height: 150%
         padding: 8px 10px
@@ -639,7 +647,7 @@ li
       font-weight: $panelBarHeaderWeight
       font-size: 10px
       text-transform: uppercase
-      font-family: $copyFont
+      font-family: $headerFont
       color: $panelBarHeader
       display: inline
       margin-left: 6px
@@ -1102,7 +1110,7 @@ blockquote
   p
     color: $bookmarkletText
     margin: 5px 10px
-    font-size: 12px
+    font-size: 13px
   .demo
     margin: 10px 15px
     padding: 70px 0 10px 0
