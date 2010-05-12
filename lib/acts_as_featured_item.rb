@@ -55,6 +55,14 @@ module Newscloud
           nil
         end
 
+        def featured_related_count
+          self.comments_count
+        end
+
+        def featured_related_locale
+          'comments'
+        end
+
         def num_votes
           self.votes_tally
         end
