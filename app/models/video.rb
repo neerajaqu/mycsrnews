@@ -46,7 +46,7 @@ class Video < ActiveRecord::Base
     			self.remote_video_id = self.parse_youtube_url self.embed_src
     		elsif self.embed_src =~ /vimeo.com/i
     		  self.remote_video_type = 'vimeo'
-    			self.remote_video_id = self.parse_vimeo_url self.embed_src
+    			self.remote_video_id = self.parse_vimeo_embed self.embed_src
     		elsif self.embed_src =~ /vmixcore.com/i
     		  self.remote_video_type = 'vmixcore'
     			self.remote_video_id = self.parse_vmixcore_src self.embed_code
@@ -66,6 +66,14 @@ class Video < ActiveRecord::Base
       else
       	return false
       end
+    else
+    	return false
+    end
+  end
+
+  def parse_vimeo_embed url
+    if url =~ /vimeo.com\/moogaloop.swf\?clip_id\=([^"&]+)/
+    	self.remote_video_id = $1
     else
     	return false
     end
