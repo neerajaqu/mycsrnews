@@ -51,6 +51,7 @@ en:
   answer_comment: "Comment on this"
   answer_question: "Answer this"
   answer_it: "Answer it"
+  answers_label: "Answers"
   please_elaborate: "Please elaborate a bit more (optional)"
   active_users: "{{user_count}} users online now"
   tags: "Tags"
