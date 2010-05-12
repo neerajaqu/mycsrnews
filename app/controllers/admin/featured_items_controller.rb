@@ -18,6 +18,12 @@ class Admin::FeaturedItemsController < AdminController
         @items = Content.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Idea.name.tableize
         @items = Idea.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when Event.name.tableize
+        @items = Event.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when Resource.name.tableize
+        @items = Resource.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when Question.name.tableize
+        @items = Question.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       else
       	return false
     end
@@ -53,13 +59,19 @@ class Admin::FeaturedItemsController < AdminController
         return Content.find_by_id($2)
       when 'idea'
         return Idea.find_by_id($2)
+      when 'event'
+        return Event.find_by_id($2)
+      when 'resource'
+        return Resource.find_by_id($2)
+      when 'question'
+        return Question.find_by_id($2)
       else
       	return false
     end
   end
 
   def set_featured_types
-    @featurables ||= [['Stories', 'contents'], ['Ideas', 'ideas']]
+    @featurables ||= [['Stories', 'contents'], ['Ideas', 'ideas'], ['Questions', 'questions'], ['Resources', 'resources'], ['Events', 'events']]
   end
 
   def set_current_tab

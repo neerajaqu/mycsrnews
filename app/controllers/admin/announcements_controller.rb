@@ -51,7 +51,7 @@ class Admin::AnnouncementsController < AdminController
       flash[:success] = "Successfully created your new Announcement!"
       redirect_to [:admin, @announcement]
     else
-      flash[:error] = "Could not create your Announcement, please try again"
+      flash[:error] = "Could not create your Announcement, please try again. The prefix must be less than 15 characters and the message must be less than 80 characters."
       redirect_to new_admin_announcements_path
     end
   end

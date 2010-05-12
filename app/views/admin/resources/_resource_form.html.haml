@@ -2,6 +2,7 @@
   = form.input :title
   = form.input :url
   = form.input :details, :input_html => { :rows => 5 }
+  = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @resource }
   = form.input :tags_string, :required => false
   = form.input :resource_section, :required => false
 %br

@@ -28,6 +28,8 @@ class Video < ActiveRecord::Base
     case self.remote_video_type
       when 'youtube'
         "http://www.youtube.com/v/#{self.remote_video_id}"
+      when 'vimeo'
+        "http://vimeo.com/moogaloop.swf?clip_id=#{self.remote_video_id}&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=ff0179&amp;fullscreen=1"
       when 'vmixcore'
         self.remote_video_id
       else
@@ -44,6 +46,7 @@ class Video < ActiveRecord::Base
     			self.remote_video_id = self.parse_youtube_url self.embed_src
     		elsif self.embed_src =~ /vimeo.com/i
     		  self.remote_video_type = 'vimeo'
+    			self.remote_video_id = self.parse_vimeo_embed self.embed_src
     		elsif self.embed_src =~ /vmixcore.com/i
     		  self.remote_video_type = 'vmixcore'
     			self.remote_video_id = self.parse_vmixcore_src self.embed_code
@@ -57,9 +60,28 @@ class Video < ActiveRecord::Base
       if remote_video_url =~ /youtube.com/i
         self.remote_video_type = 'youtube'
         self.remote_video_id = self.parse_youtube_url remote_video_url
+      elsif
+        self.remote_video_type = 'vimeo'
+        self.remote_video_id = self.parse_vimeo_url remote_video_url       
       else
       	return false
       end
+    else
+    	return false
+    end
+  end
+
+  def parse_vimeo_embed url
+    if url =~ /vimeo.com\/moogaloop.swf\?clip_id\=([^"&]+)/
+    	self.remote_video_id = $1
+    else
+    	return false
+    end
+  end
+
+  def parse_vimeo_url url
+    if url =~ /vimeo.com\/([^"&]+)/
+    	self.remote_video_id = $1
     else
     	return false
     end
@@ -82,9 +104,6 @@ class Video < ActiveRecord::Base
     else
     	return false
     end
-  end
-
-  def parse_vimeo_url url
   end
 
   def set_user
