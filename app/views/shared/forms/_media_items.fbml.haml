@@ -8,7 +8,7 @@
   %br
 %h3.hidden.unhide== #{link_to "Add video link", '#', :class => 'toggle-form'}
 .video-form.hide
-  %h3 Embed or link to a video (youtube and vmixcore only):
+  %h3 Embed or link to a video (youtube, vimeo and vmixcore only):
   - item.videos.build if item.videos.empty?
   - form.semantic_fields_for :videos do |video_form|
     = video_form.input :remote_video_url, :required => false
