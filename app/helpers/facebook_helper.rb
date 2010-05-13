@@ -56,7 +56,7 @@ end
     	end
     end
     #stream_post.name = item.item_title
-    stream_post.message = item.item_description
+    stream_post.message = caption(strip_tags(item.item_description),200)
     stream_post.action_links = [{:text => "Read more", :href => polymorphic_url(item, :only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
 
