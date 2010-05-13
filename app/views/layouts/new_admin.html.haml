@@ -116,8 +116,8 @@
             %ul
               %li= link_to 'Web site', home_index_path
               %li= link_to 'Facebook Application', "http://apps.facebook.com/#{ENV['FACEBOOKER_RELATIVE_URL_ROOT']}"
-              %li= link_to 'Facebook App Page', "http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['application_id']}"
-              %li= link_to 'Facebook App Statistics', "http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['application_id']}"
+              %li= link_to 'Facebook App Page', "http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['facebook_application_id']}"
+              %li= link_to 'Facebook App Statistics', "http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['facebook_application_id']}"
 
           -#
             %li= link_to 'Comments', '#comments'
