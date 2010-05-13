@@ -50,6 +50,8 @@ body
   display: inline-block
 
 #col_left
+  position: relative
+  z-index: 1
   +grid(8)
   +grid-children
   .left
@@ -57,6 +59,8 @@ body
   .right
     +omega
 #col_right
+  position: relative
+  z-index: 1
   +grid(4)
   +grid-children
   .panel_2
