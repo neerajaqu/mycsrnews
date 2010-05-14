@@ -271,20 +271,21 @@ module ApplicationHelper
     facebook_messages
   end
 
-  def embed_video video, options = {}
-    request_comes_from_facebook? ? embed_fb_video(video, options) : embed_html_video(video, options)
+  def embed_video video, options = { }
+    options.merge!(:size => 'normal') unless options[:size].present?
+    embed_html_video(video, options)
   end
 
   def embed_fb_video video, options = {}
-    options[:width] ||= '425'
-    options[:height] ||= '344'
+    options[:width] ||= video.get_width options[:size]
+    options[:height] ||= video.get_height options[:size]
 
     fb_swf video.video_src, options
   end
 
   def embed_html_video video, options = {}
-    options[:width] ||= '425'
-    options[:height] ||= '344'
+    options[:width] ||= video.get_width options[:size]
+    options[:height] ||= video.get_height options[:size]
     <<EMBED
 <object width="#{options[:width]}" height="#{options[:height]}">
   <param name="movie" value="#{video.video_src}"></param>
@@ -309,12 +310,12 @@ EMBED
 EMBED
   end
 
-  def render_media_items item
+  def render_media_items item, size = 'default'
     return false unless item.media_item?
     output = []
     ['audio', 'video', 'image'].each do |media|
       next unless item.send("#{media}_item?")
-      output << render(:partial => "shared/media/#{media.pluralize}", :locals => { media.pluralize.to_sym => item.send(media.pluralize.to_sym) })
+      output << render(:partial => "shared/media/#{media.pluralize}", :locals => { media.pluralize.to_sym => item.send(media.pluralize.to_sym), :size => size })
     end
     output.join
   end
