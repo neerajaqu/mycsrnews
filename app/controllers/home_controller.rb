@@ -61,6 +61,17 @@ class HomeController < ApplicationController
     render :partial => 'shared/ads/helios_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 
+  def helios_alt2_ads
+    slot_name = params[:slot_name] || APP_CONFIG['helios_slot_name']
+    render :partial => 'shared/ads/helios_alt2_ads', :locals => { :slot_name => slot_name },:layout => false
+  end
+
+  def helios_alt3_ads
+    slot_name = params[:slot_name] || APP_CONFIG['helios_slot_name']
+    render :partial => 'shared/ads/helios_alt3_ads', :locals => { :slot_name => slot_name },:layout => false
+  end
+
+
   def bookmarklet_panel
     render :partial => 'shared/bookmarklet_panel.fbml.haml', :layout => false
   end
