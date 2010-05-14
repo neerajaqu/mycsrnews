@@ -1,7 +1,11 @@
 %h2 Update Feed
+- associations ||= {}
 - semantic_form_for [:admin, item] do |form|
   - form.inputs do
     - fields.each do |field|
-      = form.input field
+      - if association = association_exists?(field, associations)
+        = form.input association
+      - else
+        = form.input field
   - form.buttons do
     = form.commit_button

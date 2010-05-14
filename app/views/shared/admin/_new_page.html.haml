@@ -1,7 +1,12 @@
 %h2== Create a new #{model.name.titleize}
-- semantic_form_for [:admin, model.new] do |form|
+- item ||= model.new
+- associations ||= {}
+- semantic_form_for [:admin, item] do |form|
   - form.inputs do
     - fields.each do |field|
-      = form.input field
+      - if association = association_exists?(field, associations)
+        = form.input association
+      - else
+        = form.input field
   - form.buttons do
     = form.commit_button

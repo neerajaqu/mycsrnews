@@ -128,5 +128,7 @@
             %li= link_to 'User Infos', '#user_infos'
             %li= link_to 'Votes', '#votes'
       .main-content.clear
+        .div{:style => 'clear:both'}
+        %br
         = flash_messages
         = yield
