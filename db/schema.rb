@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100507001639) do
+ActiveRecord::Schema.define(:version => 20100513220901) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -23,15 +23,15 @@ ActiveRecord::Schema.define(:version => 20100507001639) do
   end
 
   create_table "answers", :force => true do |t|
-    t.integer  "question_id",                 :default => 0
-    t.integer  "user_id",        :limit => 8, :default => 0
-    t.text     "answer"
-    t.integer  "votes_tally",                 :default => 0
-    t.integer  "comments_count",              :default => 0
+    t.integer  "question_id",                        :default => 0
+    t.integer  "user_id",        :limit => 8,        :default => 0
+    t.text     "answer",         :limit => 16777215
+    t.integer  "votes_tally",                        :default => 0
+    t.integer  "comments_count",                     :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_blocked",                  :default => false
-    t.boolean  "is_featured",                 :default => false
+    t.boolean  "is_blocked",                         :default => false
+    t.boolean  "is_featured",                        :default => false
     t.datetime "featured_at"
   end
 
@@ -67,34 +67,35 @@ ActiveRecord::Schema.define(:version => 20100507001639) do
   add_index "audios", ["user_id"], :name => "index_audios_on_user_id"
 
   create_table "cards", :force => true do |t|
-    t.string   "name"
-    t.string   "short_caption"
-    t.text     "long_caption"
-    t.integer  "points",        :default => 0
-    t.string   "slug_name"
-    t.boolean  "not_sendable",  :default => false
-    t.boolean  "is_featured",   :default => false
-    t.datetime "updated_at"
-    t.integer  "sent_count",    :default => 0
-    t.datetime "created_at"
+    t.string    "name",                              :default => ""
+    t.string    "short_caption",                     :default => ""
+    t.text      "long_caption",  :limit => 16777215
+    t.integer   "points",                            :default => 0
+    t.string    "slug_name",     :limit => 25,       :default => ""
+    t.boolean   "not_sendable",                      :default => false
+    t.timestamp "created_at",                                           :null => false
+    t.timestamp "available_at",                                         :null => false
+    t.boolean   "is_featured",                       :default => false
+    t.datetime  "updated_at"
+    t.integer   "sent_count",                        :default => 0
   end
 
   create_table "comments", :force => true do |t|
-    t.integer  "commentid",        :default => 0
-    t.integer  "commentable_id",   :default => 0
-    t.integer  "contentid",        :default => 0
-    t.text     "comments"
-    t.string   "postedByName",     :default => ""
-    t.integer  "postedById",       :default => 0
-    t.integer  "user_id",          :default => 0
+    t.integer  "commentid",                            :default => 0
+    t.integer  "commentable_id",                       :default => 0
+    t.integer  "contentid",                            :default => 0
+    t.text     "comments",         :limit => 16777215
+    t.string   "postedByName",                         :default => ""
+    t.integer  "postedById",                           :default => 0
+    t.integer  "user_id",                              :default => 0
     t.datetime "created_at"
-    t.boolean  "is_blocked",       :default => false
-    t.integer  "videoid",          :default => 0
+    t.boolean  "is_blocked",                           :default => false
+    t.integer  "videoid",                              :default => 0
     t.datetime "updated_at"
     t.string   "commentable_type"
-    t.integer  "flags_count",      :default => 0
-    t.integer  "votes_tally",      :default => 0
-    t.boolean  "is_featured",      :default => false
+    t.integer  "flags_count",                          :default => 0
+    t.integer  "votes_tally",                          :default => 0
+    t.boolean  "is_featured",                          :default => false
     t.datetime "featured_at"
   end
 
@@ -137,11 +138,11 @@ ActiveRecord::Schema.define(:version => 20100507001639) do
     t.string   "cached_slug"
     t.integer  "flags_count",                       :default => 0
     t.integer  "votes_tally",                       :default => 0
+    t.integer  "newswire_id"
   end
 
   add_index "contents", ["contentid"], :name => "contentid"
   add_index "contents", ["title"], :name => "relatedItems"
-  add_index "contents", ["title"], :name => "relatedText"
 
   create_table "dashboard_messages", :force => true do |t|
     t.string   "message"
@@ -225,6 +226,7 @@ ActiveRecord::Schema.define(:version => 20100507001639) do
     t.string   "tagList",                      :default => ""
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "load_all",                     :default => false
   end
 
   create_table "flags", :force => true do |t|
@@ -318,21 +320,21 @@ ActiveRecord::Schema.define(:version => 20100507001639) do
   add_index "metadatas", ["metadatable_type", "metadatable_id"], :name => "index_metadatas_on_metadatable_type_and_metadatable_id"
 
   create_table "newswires", :force => true do |t|
-    t.string   "title",                     :default => ""
-    t.text     "caption"
-    t.string   "source",     :limit => 150, :default => ""
-    t.string   "url",                       :default => ""
+    t.string   "title",                          :default => ""
+    t.text     "caption",    :limit => 16777215
+    t.string   "source",     :limit => 150,      :default => ""
+    t.string   "url",                            :default => ""
     t.datetime "created_at"
-    t.integer  "wireid",                    :default => 0
-    t.string   "feedType",                  :default => "wire"
-    t.string   "mediaUrl",                  :default => ""
-    t.string   "imageUrl",                  :default => ""
-    t.text     "embed"
-    t.integer  "feed_id",                   :default => 0
+    t.integer  "wireid",                         :default => 0
+    t.string   "feedType",                       :default => "wire"
+    t.string   "mediaUrl",                       :default => ""
+    t.string   "imageUrl",                       :default => ""
+    t.text     "embed",      :limit => 16777215
+    t.integer  "feed_id",                        :default => 0
     t.datetime "updated_at"
+    t.boolean  "published",                      :default => false
   end
 
-  add_index "newswires", ["feed_id"], :name => "feedid"
   add_index "newswires", ["title"], :name => "index_newswires_on_title"
 
   create_table "questions", :force => true do |t|
@@ -341,8 +343,8 @@ ActiveRecord::Schema.define(:version => 20100507001639) do
     t.text     "details"
     t.integer  "votes_tally",                 :default => 0
     t.integer  "comments_count",              :default => 0
-    t.datetime "created_at"
     t.integer  "answers_count",               :default => 0
+    t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_blocked",                  :default => false
     t.boolean  "is_featured",                 :default => false
@@ -443,15 +445,15 @@ ActiveRecord::Schema.define(:version => 20100507001639) do
   add_index "translations", ["locale_id", "key", "pluralization_index"], :name => "index_translations_on_locale_id_and_key_and_pluralization_index"
 
   create_table "user_profiles", :force => true do |t|
-    t.integer   "user_id",               :limit => 8,                    :null => false
-    t.integer   "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean   "isAppAuthorized",                    :default => false
+    t.integer   "user_id",               :limit => 8,                           :null => false
+    t.integer   "facebook_user_id",      :limit => 8,        :default => 0
+    t.boolean   "isAppAuthorized",                           :default => false
     t.datetime  "born_at"
-    t.timestamp "created_at",                                            :null => false
+    t.timestamp "created_at",                                                   :null => false
     t.datetime  "updated_at"
-    t.text      "bio"
-    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean   "comment_notifications",              :default => false
+    t.text      "bio",                   :limit => 16777215
+    t.integer   "referred_by_user_id",   :limit => 8,        :default => 0
+    t.boolean   "comment_notifications",                     :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

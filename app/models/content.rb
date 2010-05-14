@@ -9,6 +9,7 @@ class Content < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :article
+  belongs_to :newswire
   has_one :content_image
   has_many :comments, :as => :commentable
 
@@ -39,8 +40,12 @@ class Content < ActiveRecord::Base
     self.article.present?
   end
 
+  def is_newswire?
+    self.newswire.present?
+  end
+
   def is_content?
-    ! is_article?
+    not is_article? and not is_newswire?
   end
 
   def self.per_page
