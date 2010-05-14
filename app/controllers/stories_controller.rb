@@ -43,7 +43,8 @@ class StoriesController < ApplicationController
       @story = Content.new({
       	:url      => @newswire.url,
       	:title    => @newswire.title,
-      	:caption  => @template.strip_tags(@newswire.caption)
+      	:caption  => @template.strip_tags(@newswire.caption),
+      	:newswire => @newswire
       })
     else
       @story = Content.new

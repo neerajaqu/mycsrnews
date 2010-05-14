@@ -20,9 +20,9 @@ module FacebookHelper
   def fb_share_app_button
     stream_post = Facebooker::StreamPost.new
     attachment = Facebooker::Attachment.new
-    attachment.name = "Media"
-    stream_post.message = t('shared.sidebar.welcome_panel.welcome_panel_message_fbml')
-    stream_post.action_links = [{:text => t('shared.sidebar.welcome_panel.welcome_panel_headline'), :href => home_index_path(:only_path => false, :canvas => true)}]
+	  attachment.add_image(image_path('default/icon-fan-app.gif'), home_index_path(:only_path => false, :canvas => true))
+    stream_post.message = t('header.share_description')
+    stream_post.action_links = [{:text => "Learn more", :href => home_index_path(:only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
 
     render :partial => 'shared/misc/share_app_button', :locals => {:stream_post => stream_post}
@@ -49,25 +49,27 @@ module FacebookHelper
   def build_stream_post item
     stream_post = Facebooker::StreamPost.new
     attachment = Facebooker::Attachment.new
-    attachment.name = "Media"
     if item.respond_to?(:images) and item.images.present?
     	item.images.each do |image|
     	  attachment.add_image(image_path(image.url(:thumb)), polymorphic_url(item, :only_path => false, :canvas => true))
     	end
     end
-    stream_post.message = item.item_description
-    stream_post.action_links = [{:text => item.item_title, :href => polymorphic_url(item, :only_path => false, :canvas => true)}]
+    #stream_post.name = item.item_title
+    stream_post.message = caption(strip_tags(item.item_description),200)
+    stream_post.action_links = [{:text => "Read more", :href => polymorphic_url(item, :only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
 
     stream_post
   end
 
   def build_app_stream_post
+    # todo - is this not being used
     stream_post = Facebooker::StreamPost.new
     attachment = Facebooker::Attachment.new
-    attachment.name = "Media"
-    stream_post.message = t('shared.sidebar.welcome_panel.welcome_panel_message_fbml')
-    stream_post.action_links = [{:text => t('shared.sidebar.welcome_panel.welcome_panel_headline'), :href => home_index_path(:only_path => false, :canvas => true)}]
+    #stream_post.name = APP_CONFIG['site_title']
+	  attachment.add_image(image_path('default/icon-fan-app.gif'), home_index_path(:only_path => false, :canvas => true))
+    stream_post.message = t('header.share_description')
+    stream_post.action_links = [{:text => "Learn more", :href => home_index_path(:only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
 
     stream_post

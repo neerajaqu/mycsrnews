@@ -8,7 +8,8 @@
       - locals = { widget.locals.to_sym => instance_variable_get("@#{widget.locals}")} if widget.locals.present?
       - locals[:widget] = widget
       - locals[:widget_page] = widget_page
-      = render :partial => widget.partial, :locals => locals
+      %div{:class => widget_page.css_class}
+        = render :partial => widget.partial, :locals => locals
 #col_right
   - unless @page.present?
     %h1 No content setup yet. Admins please configure your home page.

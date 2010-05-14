@@ -37,4 +37,12 @@ class Question < ActiveRecord::Base
     ['Newest', 'Top', 'Unanswered'].collect { |k| [k, k] }
   end
 
+  def featured_related_count
+    self.answers_count
+  end
+
+  def featured_related_locale
+    'answers_label'
+  end
+
 end

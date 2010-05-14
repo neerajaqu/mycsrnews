@@ -2,7 +2,9 @@
   -# TODO: move these strings to locales
   = form.input :url
   = form.input :title
+  - if story.newswire.present?
+    = form.input :newswire_id, :as => :hidden
   = form.input :tags_string, :required => false, :hint => t('tags_hint')
   = form.input :caption, :input_html => { :rows => '10', :cols => '20' }
   %ul#image_selector.jcarousel-skin-tango{:style => "left: 0px;"}
-  = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @story }
+  = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => story }

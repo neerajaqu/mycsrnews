@@ -1,0 +1,58 @@
+-# helios OAS usage for KPCC
+-# @expects: local 'slot_name'
+!!!
+
+%html
+  %head
+    %script{:type => "text/javascript"}
+      <!--
+      == OAS_url='#{APP_CONFIG['helios_url']}/RealMedia/ads/';
+      == OAS_sitepage='#{APP_CONFIG['helios_sitepage']}';
+      == OAS_listpos='#{APP_CONFIG['helios_list_pos']}';
+      OAS_query = '';
+      OAS_target = '_top';
+      OAS_version = 10;
+      OAS_rn = '001234567890'; OAS_rns = '1234567890';
+      OAS_rn = new String (Math.random()); OAS_rns = OAS_rn.substring (2, 11);
+      function OAS_NORMAL(pos) {
+      document.write('<a href="' + OAS_url + 'click_nx.ads/' + OAS_sitepage + '/1' + OAS_rns + '@' + OAS_listpos + '!' + pos + '?' + OAS_query + '" target=' + OAS_target + '>');
+      document.write('<img src="' + OAS_url + 'adstream_nx.ads/' + OAS_sitepage + '/1' + OAS_rns + '@' + OAS_listpos + '!' + pos + '?' + OAS_query + '" border="0" /></a>');
+      }
+      // -->
+
+    %script{:type => "text/javascript"}
+      <!--
+      OAS_version = 11;
+      if ((navigator.userAgent.indexOf('Mozilla/3') != -1) || (navigator.userAgent.indexOf('Mozilla/4.0 WebTV') != -1))
+      OAS_version = 10;
+      if (OAS_version >= 11)
+      document.write('<SCR' + 'IPT LANGUAGE=JavaScript1.1 SRC="' + OAS_url + 'adstream_mjx.ads/' + OAS_sitepage + '/1' + OAS_rns + '@' + OAS_listpos + '?' + OAS_query + '"><\/SCRIPT>');
+      // -->
+      
+    %script{:type => "text/javascript"}
+      <!--
+      document.write('');
+      function OAS_AD(pos) {
+      if (OAS_version >= 11)
+      OAS_RICH(pos);
+      else
+      OAS_NORMAL(pos);
+      // -->
+
+  %body{:style => "margin: 0px; padding: 0px;"}
+    %script{:type => "text/javascript"}
+      - case slot_name
+        - when "slot_leaderboard"
+          OAS_AD('x01');
+        - when "slot_small_square"
+          OAS_AD('x02');
+        - when "slot_skyscraper"
+          OAS_AD('x03');
+        - when "slot_square"
+          OAS_AD('x13');
+        - when "slot_medium_rectangle"
+          OAS_AD('300x250_1');
+        - when "slot_large_rectangle"
+          OAS_AD('336x280_1');
+        - else
+          OAS_AD('x01');

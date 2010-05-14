@@ -41,6 +41,11 @@ module Newscloud
           @default_image_url
         end
 
+        def featured_video
+          return self.videos.first if self.respond_to?('videos') and self.videos.present?
+          nil
+        end
+
         def featured_title
           [:title, :name].each do |method|
             return self.send(method) if self.respond_to?(method) and self.send(method).present?
