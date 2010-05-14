@@ -59,25 +59,22 @@ body
 #col_left
   position: relative
   z-index: 1
+  width: 506.667px
+  float: left
+
+#col_right
+  position: relative
+  z-index: 1
+  width: 253.333px
+  float: left
+
+.panel_1, #hotTopicBar
   +grid(8)
-  +grid-children
+.feature_bg
   .left
     +alpha
   .right
     +omega
-#col_right
-  position: relative
-  z-index: 1
-  +grid(4)
-  +grid-children
-  .panel_2
-    +alpha
-    +omega
-
-.panel_1, #hotTopicBar
-  +grid(8)
-  +alpha
-  +omega
 
 .panel_2
   +grid(4)
