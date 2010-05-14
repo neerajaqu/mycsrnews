@@ -106,3 +106,5 @@ en:
     request_type: "Card"
     request_send_message: "{{fb_name}} sent you the card \"{{card_name}}\""
     loading_message: "Loading send a card form..."
+  sessions:
+    use_fb_connect: "Use Facebook Connect"
