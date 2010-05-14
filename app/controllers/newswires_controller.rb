@@ -13,12 +13,15 @@ class NewswiresController < ApplicationController
     @newswire = Newswire.find_by_id(params[:id])
     redirect_to newswire_path and return if @newswire.nil?
 
-    if @newswire.quick_post(current_user.id)
-      flash[:success] = "Thanks for posting a story!"
-      redirect_to story_path(@newswire.content)
-    else
-      flash[:error] = "Could not publish your story. Please try again. #{@newswire.errors.full_messages.join '. '}"
-      redirect_to newswires_path
+    respond_to do |format|
+      if @newswire.quick_post(current_user.id)
+        success = "Thanks for posting!"
+        format.html { flash[:success] = success; redirect_to story_path(@newswire.content) }
+        format.json { render :json => { :msg => success }.to_json }
+      else
+        format.html { flash[:error] = "Could not publish your story. Please try publishing this post."; redirect_to newswires_path }
+        format.json { render :json => { :error => "Quick post failed" }.to_json, :status => 409 }
+      end
     end
   end
 
