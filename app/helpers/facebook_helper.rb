@@ -18,14 +18,12 @@ module FacebookHelper
   end
 
   def fb_share_app_button
-begin
     stream_post = Facebooker::StreamPost.new
     attachment = Facebooker::Attachment.new
     attachment.name = "Media"
     stream_post.message = t('shared.sidebar.welcome_panel.welcome_panel_message_fbml')
     stream_post.action_links = [{:text => t('shared.sidebar.welcome_panel.welcome_panel_headline'), :href => home_index_path(:only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
-end
 
     render :partial => 'shared/misc/share_app_button', :locals => {:stream_post => stream_post}
   end

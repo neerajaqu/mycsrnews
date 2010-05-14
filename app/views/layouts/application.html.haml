@@ -15,8 +15,11 @@
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
     = stylesheet_link_tag 'cards'
 
-    = javascript_include_tag 'jquery.min', 'jquery.ui.min', 'jquery.jcarousel.pack', 'jquery.quicksand.min', 'application'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', 'application'
     = javascript_include_tag '/users/current'
+
+    -# IE Debugging 
+    =# javascript_include_tag 'http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'
 
     = auto_discovery_link_tag(:atom, stories_path(:format => :atom))
     %style

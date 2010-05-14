@@ -308,7 +308,7 @@ class ApplicationController < ActionController::Base
     if canvas?
       link_user_accounts_users_path(:only_path => false, :canvas => true)
     else
-    	root_url
+    	home_index_path(:only_path => false)
     end
     #root_url(:only_path => false, :canvas => true)
   end

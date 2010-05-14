@@ -120,7 +120,7 @@ $(function() {
         });
       },
       error: function(xhr, status, errorThrown) {
-      	var result = JSON.parse(xhr.responseText);
+      	var result = $.parseJSON(xhr.responseText);
       	if (xhr.status == 401) {
       	  dialog_response(result.error, result.dialog);
           span.fadeOut("normal", function() {
