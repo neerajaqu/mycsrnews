@@ -1,10 +1,11 @@
 - item.images.build if item.images.empty?
+%h2 Add an image to your story
 - form.semantic_fields_for :images do |image_form|
-  = image_form.input :remote_image_url, :label => "Add an image from the Web", :required => false, :hint => "Provide the URL to an image hosted on the Web"
-  = image_form.file_field :image, :label => "Add an image from your computer",:required => false, :hint => "Upload an image from your computer"
+  = image_form.input :remote_image_url, :label => "Image web address (optional)", :required => false, :hint => "Either provide the web address (URL) of the image above or click the button below to upload the image from your computer"  
+  = image_form.file_field :image, :required => false
   %br
   %br
-%h3.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}
+%h2.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}
 .video-form.hide
   %h3 Embed or link to a video (YouTube, Vimeo and Vmixcore only):
   - item.videos.build if item.videos.empty?
@@ -12,7 +13,7 @@
     = video_form.input :remote_video_url, :label => "Remote video URL", :required => false, :hint => "e.g. http://youtube.com/watch?v=xpAg2gBkQ5c"
     = video_form.input :embed_code, :label => "Or, video embedding code", :required => false
 %br
-.hidden.unhide== #{link_to "Add audio clip", '#', :class => 'toggle-form'}
+%h2.hidden.unhide== #{link_to "Add audio clip", '#', :class => 'toggle-form'}
 .audio-form.hide
   %h3 Link to an audio file (.mp3 only):
   - item.audios.build if item.audios.empty?

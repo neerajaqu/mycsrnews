@@ -50,6 +50,7 @@ en:
   answer_comments: "{{answer_comments_string}}"
   answer_comment: "Comment on this"
   answer_question: "Answer this"
+  answer_this_question: "Answer this question"
   answer_it: "Answer it"
   answers_label: "Answers"
   please_elaborate: "Please elaborate a bit more (optional)"
