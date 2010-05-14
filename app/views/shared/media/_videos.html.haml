@@ -1,4 +1,4 @@
--# @expects: local 'videos'
+-# @expects: local 'videos', 'size'
 
 .panel_1
   .panelBar.clearfix
@@ -8,8 +8,4 @@
       %ul
         - videos.each do |video|
           .video.clearfix
-            - case video.remote_video_type
-              - when "vimeo"
-                = embed_video video, {:width => 400, :height => 302}
-              - else
-                = embed_video video
+            = embed_video video, size
