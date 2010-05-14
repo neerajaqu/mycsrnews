@@ -3,19 +3,17 @@
 - cache :top_users_html do
   - top_users ||= User.top
   - unless top_users.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('.top_users_karma_title')
-      .list_stories
-        %ul
-          - top_users.each do |user|
-            %li
-              .profilePic= local_linked_profile_pic user
-              .storyBlockMeta.float_left
-                %h4== #{local_linked_profile_name(user)}
-                -#TODO:: add something in here
-                -#%h3= "City and State"
-              .storyBlockMeta.float_right
-                %h4.userPoints= user.karma_score
-                %h3.userPoints= "Points"
-                
+    .panelBar
+      %h2= t('.top_users_karma_title')
+    .list_stories
+      %ul
+        - top_users.each do |user|
+          %li
+            .profilePic= local_linked_profile_pic user
+            .storyBlockMeta.float_left
+              %h4== #{local_linked_profile_name(user)}
+              -#TODO:: add something in here
+              -#%h3= "City and State"
+            .storyBlockMeta.float_right
+              %h4.userPoints= user.karma_score
+              %h3.userPoints= "Points"
