@@ -16,6 +16,7 @@ defaults: &defaults
   helios_sitepage: 'youraddomain.com/yourfacebookproject.htm'
   helios_url: 'http://subdomain.ur.gcion.com'
   helios_script_url: 'http://scriptsubdomain.ur.gcion.com'
+  helios_list_pos: '728x90_1,468x60_1,300x250_1,160x600_1,250x250_1,200x200_1,336x280_1'
 
   site_topic: 'Default Site Topic'
   site_title: 'Default Site Name'
