@@ -57,7 +57,7 @@ def update_feed(feed)
         :imageUrl   => item[:image],
         :feed       => feed
       })
-      if feed.auto_load?
+      if feed.load_all?
       	newswire.quick_post
       end
     end
