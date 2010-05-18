@@ -27,8 +27,9 @@
         #featuredPanel.panel_1.feature_bg
           .panelBar
             %h2= t('featured_stories')
-          .feature_bg.clearfix
+          .panel_2.left
             .thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+          .panel_2.right  
             .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p

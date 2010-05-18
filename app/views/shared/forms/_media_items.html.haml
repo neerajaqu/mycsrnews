@@ -4,7 +4,7 @@
   = image_form.file_field :image, :label => "Add an image from your computer",:required => false, :hint => "Upload an image from your computer"
   %br
   %br
-%h3.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}
+%h3.btn.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}
 .video-form.hide
   %h3 Embed or link to a video (YouTube, Vimeo and Vmixcore only):
   - item.videos.build if item.videos.empty?
@@ -12,7 +12,7 @@
     = video_form.input :remote_video_url, :label => "Remote video URL", :required => false, :hint => "e.g. http://youtube.com/watch?v=xpAg2gBkQ5c"
     = video_form.input :embed_code, :label => "Or, video embedding code", :required => false
 %br
-.hidden.unhide== #{link_to "Add audio clip", '#', :class => 'toggle-form'}
+%h3.btn.hidden.unhide== #{link_to "Add audio clip", '#', :class => 'toggle-form'}
 .audio-form.hide
   %h3 Link to an audio file (.mp3 only):
   - item.audios.build if item.audios.empty?
