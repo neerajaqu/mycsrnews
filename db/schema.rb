@@ -9,11 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100513220901) do
+
+ActiveRecord::Schema.define(:version => 20100516002048) do
+
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
-    t.string   "title",                            :null => false
+    t.string   "title",      :default => "",       :null => false
     t.text     "details"
     t.string   "url"
     t.string   "mode",       :default => "rotate"
@@ -156,7 +158,7 @@ ActiveRecord::Schema.define(:version => 20100513220901) do
   end
 
   create_table "events", :force => true do |t|
-    t.integer  "eid"
+    t.string   "eid"
     t.string   "name"
     t.string   "tagline"
     t.string   "pic"
@@ -188,6 +190,8 @@ ActiveRecord::Schema.define(:version => 20100513220901) do
     t.boolean  "is_blocked",     :default => false
     t.integer  "flags_count",    :default => 0
   end
+
+  add_index "events", ["eid"], :name => "index_events_on_eid"
 
   create_table "fbSessions", :force => true do |t|
     t.integer  "userid",                     :limit => 8, :default => 0
@@ -364,7 +368,7 @@ ActiveRecord::Schema.define(:version => 20100513220901) do
   end
 
   create_table "resources", :force => true do |t|
-    t.string   "title",                                  :null => false
+    t.string   "title",               :default => "",    :null => false
     t.text     "details"
     t.string   "url"
     t.string   "mapUrl"
@@ -397,7 +401,7 @@ ActiveRecord::Schema.define(:version => 20100513220901) do
   add_index "sent_cards", ["to_fb_user_id"], :name => "index_sent_cards_on_to_fb_user_id"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
+    t.string   "session_id", :default => "", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -526,7 +530,7 @@ ActiveRecord::Schema.define(:version => 20100513220901) do
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
     t.integer  "voteable_id",                      :null => false
-    t.string   "voteable_type",                    :null => false
+    t.string   "voteable_type", :default => "",    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
     t.datetime "created_at"

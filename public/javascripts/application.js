@@ -48,6 +48,13 @@ $(function() {
 	}
   });
 
+	$('.import-events-toggle').click(function(event) {
+		event.preventDefault();
+		$('#new_event').toggle();
+		$('#import-events').toggle();
+	}	
+	);
+	
   $('.update-bio').click(function(event) {
   	event.preventDefault();
   	$('.current-bio').toggle();
