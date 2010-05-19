@@ -29,43 +29,37 @@
       %div.bodyArticle= sanitize @question.details
       - if @question.media_item?
         = render_media_items @question
-      - if current_user.present?
-        %div.float_right= link_to t('answer_this_question'), '#', :class => "btn answer_link"
-        %p.clearfix
-          %br
-          %br
-        
-      -# = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
-    #answerForm.panel_1.hide.clearfix
-      .panelBar
-        %h2 Answer this question
-      .formBox
-        - unless current_user.present?
-          %p== #{t 'questions.logged_in_error'} #{link_to 'Login now', login_path}
-        - else
-          - semantic_form_for @answer, :url => create_answer_question_path(@question) do |form|
-            - form.inputs do
-              = form.input :answer, :label => false
-            - form.buttons do
-              = form.commit_button :button_html => { :class => "btn_1" }
-    - cache "#{@question.cache_key}_bottom_html" do
-      #answersList.panel_1
-        - unless @question.answers.present?
-          .panelBar
-            %h2
-              This question has not yet been answered, 
-              %a= link_to t('answer_it'), '#', :class => "answer_link"
-        - else
-          .panelBar
-            %h2== Showing #{pluralize @question.answers.size, 'Answer'}
-          .storyList
-            .list_stories
-              %ul
-                - @question.answers.each do |answer|
-                  = render :partial => 'shared/answer', :locals => { :answer => answer }
-      = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
-      - if @question.moderatable?
-        = render :partial => 'shared/moderate_form', :locals => { :moderatable => @question }
+      = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
+  #answerForm.panel_1.hide.clearfix
+    .panelBar
+      %h2 Answer this question
+    .formBox
+      - unless current_user.present?
+        %p== #{t 'questions.logged_in_error'} #{link_to 'Login now', login_path}
+      - else
+        - semantic_form_for @answer, :url => create_answer_question_path(@question) do |form|
+          - form.inputs do
+            = form.input :answer, :label => false
+          - form.buttons do
+            = form.commit_button :button_html => { :class => "btn_1" }
+  - cache "#{@question.cache_key}_bottom_html" do
+    #answersList.panel_1
+      - unless @question.answers.present?
+        .panelBar
+          %h2
+            This question has not yet been answered, 
+            %a= link_to t('answer_it'), '#', :class => "answer_link"
+      - else
+        .panelBar
+          %h2== Showing #{pluralize @question.answers.size, 'Answer'}
+        .storyList
+          .list_stories
+            %ul
+              - @question.answers.each do |answer|
+                = render :partial => 'shared/answer', :locals => { :answer => answer }
+    = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
+    - if @question.moderatable?
+      = render :partial => 'shared/moderate_form', :locals => { :moderatable => @question }
 
 #col_right
   = render :partial => 'shared/sidebar/top_questions'

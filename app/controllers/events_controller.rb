@@ -60,6 +60,27 @@ class EventsController < ApplicationController
     @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'events')
   end
 
+  def import_facebook
+    if request.post?
+      @events = current_facebook_user.events(:eids=>params[:fb_events].join(','))
+      @events.each do |event|
+        Event.create_from_facebook_event(event,current_user)
+      end
+      flash[:succes] = "Your events have successfully been imported."
+      redirect_to events_path
+    else
+      if current_facebook_user
+        @event = Event.new
+        @fb_events = current_facebook_user.events(:start_time => Time.now, :end_time => 1.month.from_now)
+        current_events = Event.find(:all, :conditions=>["eid IN (?)", @fb_events.collect { |e| e.eid }]).collect { |e| e.eid }
+        @fb_events.delete_if {|x| current_events.include? x.eid.to_s }
+      else
+        flash[:info] = "You need to connect via Facebook."
+        redirect_to events_path
+      end
+    end
+  end
+  
   private
 
   def set_current_tab

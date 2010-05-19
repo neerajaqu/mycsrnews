@@ -28,6 +28,34 @@ class Event < ActiveRecord::Base
     	:order    => "votes.count desc"
     })
   end
+  
+  def self.create_from_facebook_event(facebook_event, user)
+    return nil if not facebook_event.is_a? Facebooker::Event
+    check = Event.find_by_eid(facebook_event.eid)
+    if check
+      return check
+    else
+      e = Event.create!(
+          :user => user,
+          :name => facebook_event.name,
+          :eid => facebook_event.eid,
+          :start_time => Time.at(facebook_event.start_time.to_i),
+          :end_time => Time.at(facebook_event.end_time.to_i),
+          :description => facebook_event.description,
+          :location => facebook_event.location,
+          :street => facebook_event.venue[:street],
+          :city => facebook_event.venue[:city],
+          :state => facebook_event.venue[:state],
+          :country => facebook_event.venue[:country],
+          #:privacy_type => facebook_event.privacy,
+          :creator => facebook_event.creator,
+          :pic => facebook_event.pic,
+          :pic_big => facebook_event.pic_big,
+          :pic_small => facebook_event.pic_small,
+          :update_time => facebook_event.update_time,
+          :tagline => facebook_event.tagline)
+    end
+  end
 
 end
 

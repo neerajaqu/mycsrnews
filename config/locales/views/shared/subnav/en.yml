@@ -32,6 +32,7 @@ en:
         browse_events: "Browse Calendar"
         suggest_event: "Add an Event"
         my_events: "Your Events"
+        import_facebook: "Add from Facebook"
       news_subnav:
         new_article: "Compose an article"
         new_story: "Post a story"

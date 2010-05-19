@@ -6,7 +6,6 @@
     .panelBar
       %h2== What's your event for #{APP_CONFIG['site_topic']}?
     .formBox
-
       - semantic_form_for @event do |form|
         - form.inputs do
           = form.input :name, :label => t('.label_event_name'), :hint => t('.hint_event_name')

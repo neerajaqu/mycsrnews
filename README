@@ -19,19 +19,20 @@ This is your base config file where you set your site specific options related t
 ***This needs to be setup properly to work
 2.d copy config/menu.yml.sample to config/menu.yml and disable and items you do not want showing up.
 2.e copy config/compass.rb.sample to config/compass.rb and disable and items you do not want showing up.
+2.f copy config/newrelic.yml.sample to config/newrelic.yml and setup the appropriate keys
 ***You need to edit your image path to be an absolute url for css images in facebook to work
-2.f If you are not using memcached in production edit config/environments/production.rb and set it accordingly
-2.g (optional)
+2.g If you are not using memcached in production edit config/environments/production.rb and set it accordingly
+2.h (optional)
 If you wish to configure outgoing email, copy config/smtp.yml.sample to config/smtp.yml
 and configure your outgoing mail settings. Google hosted email is supported!
-2.h (optional) There are also a number of *.yml.sample files in the config directory for advanced use.
+2.i (optional) There are also a number of *.yml.sample files in the config directory for advanced use.
 3. Next check that the gems are setup properly by running
 	rake gems
 If you don't see any error messages then you are good to go. You might have to run:
 	sudo rake gems:install
 	or
 	sudo rake gems:build
-to build the native extensions for some of the gems.
+to build the native extensions for some of the gems. ### REQUIRES HPRICOT to be installed first!! WHENEVER does not install by default
 4. Setup the framework
 If you have an existing newscloud application you would like to port over, run:
 rake n2:setup:convert_existing
