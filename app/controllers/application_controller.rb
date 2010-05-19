@@ -103,10 +103,6 @@ class ApplicationController < ActionController::Base
     })
   end
 
-  def load_top_articles
-    @top_articles ||= Article.top
-  end
-
   def load_featured_articles
     @featured_articles ||= Article.featured
   end

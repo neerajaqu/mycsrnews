@@ -27,6 +27,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
+  map.paged_articles_with_format '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
+  map.paged_articles '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
   map.paged_ideas '/ideas/page/:page.:format', :controller => 'ideas', :action => 'index'
   map.paged_newswires '/newswires/page/:page.:format', :controller => 'newswires', :action => 'index'
   map.paged_my_events '/events/:id/my_events/page/:page.:format', :controller => 'events', :action => 'my_events'
@@ -47,7 +49,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags], :as => 'stories'
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] },:has_many => [ :flags]
 
-  map.resources :articles
+  map.resources :articles, :collection => { :index => [:get, :post] }
   map.resources :newswires, :member => { :quick_post => [:get, :post] }
   map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :idea_boards, :has_many => :ideas

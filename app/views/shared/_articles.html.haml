@@ -1,0 +1,39 @@
+- page ||= ""
+- cache_if page.present?, "articles_list_#{page}html" do
+  - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - paginate ||= false
+  .panel_1
+    .panelBar
+      %h2= t('.articles_title')
+      - if contents.present? and contents.first.refineable?
+        .refine_link
+          = render :partial => 'shared/forms/refine_dropdown'
+    .subtitle
+      %span= t('.articles_subtitle')
+    .storyList
+      .list_stories
+        %ul
+          - contents.each do |content|
+            %li{'data-id' => content.cache_key}
+              .thumb
+                - if content.images.present?
+                  = image_tag content.images.first.url(:thumb)
+                - else
+                  = image_tag ('default/default_thumb_b.gif', :width => "100%")
+              .storyBlockWrap.storyBlockSpacer
+                %h2.storyHead= link_to content.title, story_path(content)
+                %p.storyCaption= linked_story_caption content
+                .profilePic= local_linked_profile_pic content.user
+                .storyBlockMeta.float_left
+                  %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
+                  %span.btnComment.float_left== #{like_link content} #{content.votes_tally}
+                  %span.btnComment.float_left== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+ 
+    - if paginate
+      .clearfix
+        = will_paginate contents
+        %br
+    - else
+      .clearfix
+      %p= link_to t('read_more'), articles_path, :class => "float_right"
+      %br

@@ -7,8 +7,8 @@ menu:
     newswire: 'enabled'
     new_story: 'enabled'
     new_article: 'enabled'
-  #blogs:
-    #top_blogs: 'enabled'
+  #articles:
+    #articles_list: 'enabled'
     #new_article: 'enabled'
   resources:
     resources_list: 'enabled'
