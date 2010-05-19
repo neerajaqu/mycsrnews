@@ -68,7 +68,7 @@ en:
     list_subtitle: "Help your community by answering questions"
     my_list_title: "Your Questions"
     my_list_subtitle: "Here are the questions you've asked so far"
-    top_title: "top questions"
+    top_title: "Top questions"
     newest_title: "Newest Questions"
     unanswered_title: "Unanswered Questions"
     list: "Answer Questions"
@@ -82,6 +82,7 @@ en:
   articles:
     newest_title: "Newest Articles"
     featured_title: "Featured Article"
+    top_title: "Top Articles"
   static_pages:
     faq: "FAQ found here"
     about_us: "About Us found here"
