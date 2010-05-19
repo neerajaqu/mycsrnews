@@ -26,33 +26,19 @@ class EventsController < ApplicationController
     @current_sub_tab = 'Suggest Event'
     @event = Event.new
     @events = Event.active.newest
-    if current_facebook_user
-      @fb_events = current_facebook_user.events(:start_time => Time.now, :end_time => 1.month.from_now)
-      current_events = current_user.events.collect { |e| e.eid }
-      @fb_events.delete_if {|x| current_events.include? x.eid.to_s }
-    end
   end
 
   def create
-    if params[:fb_events]
-      @events = current_facebook_user.events(:eids=>params[:fb_events].join(','))
-      @events.each do |event|
-        Event.create_from_facebook_event(event,current_user)
-      end
-      flash[:succes] = "Your events have successfully been imported."
-      redirect_to events_path
-    else
-      @event = Event.new(params[:event])
-      @event.user = current_user
-      @event.tag_list = params[:event][:tags_string]
+    @event = Event.new(params[:event])
+    @event.user = current_user
+    @event.tag_list = params[:event][:tags_string]
 
-      if @event.save
-      	flash[:success] = "Thank you for your event!"
-      	redirect_to @event
-      else
-      	flash[:error] = "Could not create your event. Please clear the errors and try again."
-      	render :new
-      end
+    if @event.save
+    	flash[:success] = "Thank you for your event!"
+    	redirect_to @event
+    else
+    	flash[:error] = "Could not create your event. Please clear the errors and try again."
+    	render :new
     end
   end
 
@@ -74,6 +60,27 @@ class EventsController < ApplicationController
     @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'events')
   end
 
+  def import_facebook
+    if request.post?
+      @events = current_facebook_user.events(:eids=>params[:fb_events].join(','))
+      @events.each do |event|
+        Event.create_from_facebook_event(event,current_user)
+      end
+      flash[:succes] = "Your events have successfully been imported."
+      redirect_to events_path
+    else
+      if current_facebook_user
+        @event = Event.new
+        @fb_events = current_facebook_user.events(:start_time => Time.now, :end_time => 1.month.from_now)
+        current_events = Event.find(:all, :conditions=>["eid IN (?)", @fb_events.collect { |e| e.eid }]).collect { |e| e.eid }
+        @fb_events.delete_if {|x| current_events.include? x.eid.to_s }
+      else
+        flash[:info] = "You need to connect via Facebook."
+        redirect_to events_path
+      end
+    end
+  end
+  
   private
 
   def set_current_tab

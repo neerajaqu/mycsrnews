@@ -16,6 +16,7 @@ en:
       events: "Calendar"
       events_list: "Browse the Calendar"
       new_event: "Add an Event"
+      import_facebook: "Add from Facebook"
       questions: "Questions"
       questions_list: "Browse Questions"
       new_question: "Ask a Question"

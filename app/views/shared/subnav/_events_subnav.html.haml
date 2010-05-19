@@ -5,3 +5,5 @@
       %li.first= link_to t('.suggest_event'), new_event_path, :class => sub_tab_selected?(@current_sub_tab, 'Suggest Event')
       - if current_user
         %li.first= link_to t('.my_events'), my_events_event_path(:id => current_user), :class => sub_tab_selected?(@current_sub_tab, 'My Events')
+        - if current_facebook_user
+          %li.first= link_to t('.import_facebook'), import_facebook_events_path, :class => sub_tab_selected?(@current_sub_tab, 'Add from Facebook')

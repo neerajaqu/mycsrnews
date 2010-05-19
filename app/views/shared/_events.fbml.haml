@@ -30,7 +30,7 @@
                   %li 
                     %b Specific Location
                   %li== #{event.location}
-                  %li== #{event.start_time}
+                  %li== #{event.start_time.to_s :short_with_time}
 
     - if paginate
       .clearfix

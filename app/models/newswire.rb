@@ -6,21 +6,25 @@ class Newswire < ActiveRecord::Base
 
   named_scope :unpublished, { :conditions => ["published = ?", false] }
 
-  def quick_post user_id = nil
+  def quick_post user_id = nil, override_image = false
     user_id ||= self.feed.user_id
     return false unless user_id and user_id > 0
 
+    caption = self.feed.full_html? ? self.caption : ActionController::Base.helpers.strip_tags(self.caption)
+    story_type = self.feed.full_html? ? 'full_html' : 'story'
     @content = Content.new({
-    	:title    => self.title,
-    	:caption  => ActionController::Base.helpers.strip_tags(self.caption),
-    	:url      => self.url,
-    	:source   => self.feed.title,
-    	:user_id  => user_id,
-    	:newswire => self
+    	:title      => self.title,
+    	:caption    => caption,
+    	:url        => self.url,
+    	:source     => self.feed.title,
+    	:user_id    => user_id,
+    	:newswire   => self,
+    	:story_type => story_type
     })
 
     if self.imageUrl.present?
     	@content.images.build({ :remote_image_url => self.imageUrl})
+    	@content.images.first.override_image = true if override_image
     else
     	page = Parse::Page.parse_page self.url
     	unless page[:images_sized].empty?
