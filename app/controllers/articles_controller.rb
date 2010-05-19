@@ -7,7 +7,18 @@ class ArticlesController < ApplicationController
   before_filter :load_top_stories, :only => [:index]
   before_filter :load_top_discussed_stories, :only => [:index]
   before_filter :load_newest_articles, :only => [:index]
-  
+
+  def index
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
+    @current_sub_tab = 'Browse Articles'
+    @articles = Content.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    @article_images = Image.find(:all, :conditions => ["imageable_type = ?", "Article"], :order => "created_at desc")  
+    respond_to do |format|
+      format.html { @paginate = true }
+      format.json { @articles = Content.refine(params) }
+    end
+  end
+    
   def new
     @current_sub_tab = 'New Article'
     @article = Article.new
@@ -38,7 +49,11 @@ class ArticlesController < ApplicationController
   private
 
   def set_current_tab
-    @current_tab = 'stories'
+    if MENU.key? 'articles'
+      @current_tab = 'articles'
+    elsif
+      @current_tab = 'stories'
+    end
   end
 
 end

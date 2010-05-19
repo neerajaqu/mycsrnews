@@ -1,14 +1,13 @@
 - content_for :sub_nav do
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
-  = render :partial => 'shared/subnav/stories_subnav'
-
+  
 #col_left
-  = render :partial => 'shared/stories', :locals => { :contents => @articles, :paginate => @paginate, :page => @page }
+  - if @article_images.present?
+    = render_media_items @article_images
+  = render :partial => 'shared/articles', :locals => { :contents => @articles, :paginate => @paginate, :page => @page }
 
 #col_right
-  = render :partial => 'shared/sidebar/post_story'
-  = render :partial => 'shared/sidebar/top_articles', :locals => { :top_articles => @top_articles }
-  -# = render :partial => 'shared/sidebar/top_discussed_stories', :locals => { :most_discussed_stories => @most_discussed_stories }
-  -# moderators go here
-  = render :partial => 'shared/sidebar/top_users', :locals => { :top_users => @top_users }
-  = render :partial => 'shared/sidebar/newest_users', :locals => { :newest_users => @newest_users }
+  = render :partial => 'shared/sidebar/post_article'
+  = render :partial => 'shared/sidebar/top_articles'
+  = render :partial => 'shared/sidebar/moderator_users'
+  -# = render :partial => 'shared/sidebar/top_tags' 

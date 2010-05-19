@@ -23,15 +23,17 @@
                       %li= link_to t('.new_story'), new_story_path, :class => tab_selected?(@current_tab, 'stories')
                     - unless MENU['stories']['new_article'].nil?
                       %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'stories')
-        -#TODO:: ADD Blogs/Articles
-        -# if MENU.key? 'stories'
-          -#%li
+        - if MENU.key? 'articles'
+          %li
             .menu_item
-              = link_to t('.blogs'), blogs_path, :class => tab_selected?(@current_tab, 'blogs')
-              .dropdown
-                %ul
-                  %li= link_to t('.top_blogs'), blogs_path, :class => tab_selected?(@current_tab, 'blogs')
-                  %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'blogs')
+              = link_to t('.articles'), articles_path, :class => tab_selected?(@current_tab, 'articles')
+              - unless MENU['articles'].nil?
+                .dropdown
+                  %ul
+                    - unless MENU['articles']['articles_list'].nil?
+                      %li= link_to t('.articles_list'), articles_path, :class => tab_selected?(@current_tab, 'articles')
+                    - unless MENU['articles']['new_article'].nil?
+                      %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'articles')
 
         - if MENU.key? 'resources'
           %li

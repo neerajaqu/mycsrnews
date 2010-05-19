@@ -28,6 +28,9 @@ class StoriesController < ApplicationController
   def show
     @story = Content.find(params[:id])
     tag_cloud @story
+    if MENU.key? 'articles'
+      @current_tab = 'articles' if @story.is_article?
+    end
   end
 
   def new
