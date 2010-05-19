@@ -5,9 +5,9 @@
   - if @article_images.present?
     = render_media_items @article_images
   = render :partial => 'shared/articles', :locals => { :contents => @articles, :paginate => @paginate, :page => @page }
-
+  
 #col_right
   = render :partial => 'shared/sidebar/post_article'
   = render :partial => 'shared/sidebar/top_articles'
   = render :partial => 'shared/sidebar/moderator_users'
-  -# = render :partial => 'shared/sidebar/top_tags' 
+  -# = render :partial => 'shared/sidebar/top_tags'

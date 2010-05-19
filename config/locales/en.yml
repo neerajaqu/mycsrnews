@@ -58,6 +58,7 @@ en:
   answers_label: "Answers"
   please_elaborate: "Please elaborate a bit more (optional)"
   active_users: "{{user_count}} users online now"
+  moderator_users: "Our Moderators"
   tags: "Tags"
   tags_hint: "Separate each tag with a comma e.g. dining options, raw food, seattle"
   logged_in_error: "You must be logged in to perform this action."
