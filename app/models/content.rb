@@ -74,6 +74,10 @@ class Content < ActiveRecord::Base
     end
   end
 
+  def full_html?
+    self.story_type == 'full_html'
+  end
+
   private
   
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100513220901) do
+ActiveRecord::Schema.define(:version => 20100519173310) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -138,9 +138,13 @@ ActiveRecord::Schema.define(:version => 20100513220901) do
     t.integer  "flags_count",                       :default => 0
     t.integer  "votes_tally",                       :default => 0
     t.integer  "newswire_id"
+    t.string   "story_type",                        :default => "story"
+    t.string   "summary"
+    t.text     "full_html"
   end
 
   add_index "contents", ["contentid"], :name => "contentid"
+  add_index "contents", ["story_type"], :name => "index_contents_on_story_type"
   add_index "contents", ["title"], :name => "relatedItems"
   add_index "contents", ["title"], :name => "relatedText"
 
