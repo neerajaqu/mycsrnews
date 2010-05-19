@@ -110,4 +110,49 @@ class Video < ActiveRecord::Base
     self.user = current_user unless self.user.present?
   end
 
+  def get_width size = "normal"
+    video_type = Video.sizes[self.remote_video_type].present? ? self.remote_video_type : "default"
+    return Video.sizes[video_type][size]["width"]
+  end
+
+  def get_height size = "normal"
+    video_type = Video.sizes[self.remote_video_type].present? ? self.remote_video_type : "default"
+    return Video.sizes[video_type][size]["height"]
+  end
+
+  def self.sizes
+    {
+      "vimeo" => {
+        "normal" => {
+          "width" => 400,
+          "height" => 225
+        },
+        "large" => {
+          "width" => 480,
+          "height" => 270          
+        }
+      },
+      "youtube"=> {
+        "normal" => {
+          "width" => 425,
+          "height" => 344
+        },
+        "large" => {
+          "width" => 480,
+          "height" => 385          
+        }
+      },
+      "default"=> {
+        "normal" => {
+          "width" => 425,
+          "height" => 344
+        },
+        "large" => {
+          "width" => 480,
+          "height" => 385          
+        }
+      }  
+    }
+  end
+  
 end

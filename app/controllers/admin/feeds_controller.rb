@@ -4,25 +4,20 @@ class Admin::FeedsController < AdminController
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => Feed.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => Feed,
-    	:fields => [:title, :url, :rss, :created_at],
+    	:fields => [:title, :url, :rss, :created_at, :user_id],
+    	:associations => { :belongs_to => { :user => :user_id } },
     	:paginate => true
     }
   end
 
   def new
-    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
-    	:model => Feed,
-    	:fields => [:title, :url, :rss]
-    }
+    render_new
   end
 
   def edit
     @feed = Feed.find(params[:id])
-    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => @feed,
-    	:model => Feed,
-    	:fields => [:title, :url, :rss]
-    }
+
+    render_edit @feed
   end
 
   def update
@@ -32,7 +27,7 @@ class Admin::FeedsController < AdminController
       redirect_to [:admin, @feed]
     else
       flash[:error] = "Could not update your Feed as requested. Please try again."
-      render :edit
+      render_edit @feed
     end
   end
 
@@ -51,7 +46,7 @@ class Admin::FeedsController < AdminController
       redirect_to [:admin, @feed]
     else
       flash[:error] = "Could not create your Feed, please try again"
-      render :new
+      render_new @feed
     end
   end
 
@@ -63,6 +58,27 @@ class Admin::FeedsController < AdminController
   end
 
   private
+
+  def render_new feed = nil
+    feed ||= Feed.new
+
+    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
+    	:item => @feed,
+    	:model => Feed,
+    	:fields => [:title, :url, :rss, :user_id],
+    	:associations => { :belongs_to => { :user => :user_id } }
+    }
+  end
+
+  def render_edit feed
+    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
+    	:item => feed,
+    	:model => Feed,
+    	:fields => [:title, :url, :rss, :user_id],
+    	:associations => { :belongs_to => { :user => :user_id } }
+    }
+  end
+
 
   def set_current_tab
     @current_tab = 'feeds';

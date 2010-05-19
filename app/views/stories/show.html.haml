@@ -37,9 +37,8 @@
         %div.bodyArticle= sanitize caption @story.caption
       - if @story.url.present?
         %div.float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
-
     - if @story.media_item?
-      = render_media_items @story
+      = render_media_items @story, :size => 'large'
     = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }

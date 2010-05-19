@@ -5,8 +5,7 @@ class NewswiresController < ApplicationController
 
   def index
     @current_sub_tab = 'Browse Wires'
-    #@newswires = Newswire.find(:all, :order => "updated_at desc", :limit => 200)
-    @newswires = Newswire.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @newswires = Newswire.unpublished.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
     @paginate = true
   end
 
@@ -14,22 +13,15 @@ class NewswiresController < ApplicationController
     @newswire = Newswire.find_by_id(params[:id])
     redirect_to newswire_path and return if @newswire.nil?
 
-    @content = Content.new({
-    	:title    => @newswire.title,
-    	:caption  => @template.strip_tags(@newswire.caption),
-    	:url      => @newswire.url,
-    	:source   => @newswire.feed.title,
-    	:user     => current_user
-    })
-    unless @newswire.imageUrl.nil? or @newswire.imageUrl.empty?
-      @content.images.build({ :remote_image_url => @newswire.imageUrl })
-    end
-    if @content.save
-      flash[:success] = "Thanks for posting a story!"
-      redirect_to story_path(@content)
-    else
-      flash[:error] = "Could not publish your story. Please try again."
-      redirect_to newswire_path
+    respond_to do |format|
+      if @newswire.quick_post(current_user.id)
+        success = "Thanks for posting!"
+        format.html { flash[:success] = success; redirect_to story_path(@newswire.content) }
+        format.json { render :json => { :msg => success }.to_json }
+      else
+        format.html { flash[:error] = "Could not publish your story. Please try publishing this post."; redirect_to newswires_path }
+        format.json { render :json => { :error => "Quick post failed" }.to_json, :status => 409 }
+      end
     end
   end
 

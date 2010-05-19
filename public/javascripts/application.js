@@ -48,6 +48,13 @@ $(function() {
 	}
   });
 
+	$('.import-events-toggle').click(function(event) {
+		event.preventDefault();
+		$('#new_event').toggle();
+		$('#import-events').toggle();
+	}	
+	);
+	
   $('.update-bio').click(function(event) {
   	event.preventDefault();
   	$('.current-bio').toggle();
@@ -120,12 +127,64 @@ $(function() {
         });
       },
       error: function(xhr, status, errorThrown) {
-      	var result = JSON.parse(xhr.responseText);
+      	var result = $.parseJSON(xhr.responseText);
       	if (xhr.status == 401) {
       	  dialog_response(result.error, result.dialog);
           span.fadeOut("normal", function() {
             span.html(data.msg).fadeIn("normal");
           });
+        }
+      }
+    });
+  });
+
+	$('.quick_post').click(function(event) {
+		event.preventDefault();
+		var span = $(this).parent();
+    var $li_parent = $(this).parents().filter('li').first();
+		$(this).parent().html("<img src=\"/images/spinner.gif\" />");
+		var url = $(this).attr("href");
+    url = url.replace(/\?return_to=.*$/, '');
+    if (url.substring(url.length - 5) == '.html') {
+      url = url.substring(0, url.length - 5) + ".json";
+    } else if (url.match(/quick_post.html/)) {
+      url = url.replace(/quick_post.html/, 'quick_post.json');
+    } else {
+      url = url + ".json";
+    }
+
+		$.ajax({
+			type: "POST",
+			url: url,
+			// Yet another chrome hack
+			// chrome sends this xml if both contentType and data are not set
+			// and as a result rails flips out
+			contentType: 'application/json',
+			data: "foo", // data has to be set to explicitly set the content type
+			dataType: "json",
+			success: function(data, status) {
+				span.fadeOut("normal", function() {
+				  span.html(data.msg).fadeIn("normal");
+        });
+        setTimeout(function() {
+          $li_parent.effect('highlight', {color: 'green'}, 2000);
+          $li_parent.hide('fold', {}, 'slow');
+        }, 1500);
+      },
+      error: function(xhr, status, errorThrown) {
+      	var result = $.parseJSON(xhr.responseText);
+      	if (xhr.status == 401) {
+      	  dialog_response(result.error, result.dialog);
+          span.fadeOut("normal", function() {
+            span.html(data.msg).fadeIn("normal");
+          });
+        } else if (xhr.status == 409) {
+          span.fadeOut("normal", function() {
+            span.html(result.error).fadeIn("normal");
+          });
+          setTimeout(function() {
+            $li_parent.effect('highlight', {color: 'red'}, 3000);
+          }, 1500);
         }
       }
     });

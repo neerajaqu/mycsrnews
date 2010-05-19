@@ -1,2 +1,6 @@
 .panel_2
-  %fb:bookmark{:type => "off-facebook"}
+  -# closing tag required
+  :erb
+    <fb:bookmark type="off-facebook"></fb:bookmark>
+  -# helper didn't add closing tag
+  -# %fb:bookmark{:type => "off-facebook"}

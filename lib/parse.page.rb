@@ -9,11 +9,13 @@ module Parse
       parsed_url = URI.parse(url)
       url = "http://#{url}" unless url =~ %r(^https?://)
 
+      @images_sized = []
       page = open(url) { |f| Hpricot(f) }
       results = {}
       results[:title] = self.parse_title(page)
       results[:description] = self.parse_description(page)
       results[:images] = self.parse_images(page, parsed_url)
+      results[:images_sized] = @images_sized.sort {|a,b| a[:size] <=> b[:size]}.reverse
 
       results
     end
@@ -58,7 +60,13 @@ module Parse
 
       return false unless response and response['content-length'].present?
 
-      response['content-length'].to_i >= min_image_size
+      size = response['content-length'].to_i
+      if size >= min_image_size and not image_url =~ /\.gif(\??.*)?$/
+      	@images_sized << {:size => size, :url => image_url}
+      	return true
+      else
+      	return false
+      end
     end
 
     def self.concat_url(parsed_url, path)

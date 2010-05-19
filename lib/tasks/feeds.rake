@@ -49,7 +49,7 @@ def update_feed(feed)
 
       puts "\tCreating newswire for \"#{item[:title].chomp}\""
 
-      Newswire.create!({
+      newswire = Newswire.create!({
         :title      => item[:title],
         :caption    => item[:body],
         :created_at => item[:date].to_s,
@@ -57,6 +57,9 @@ def update_feed(feed)
         :imageUrl   => item[:image],
         :feed       => feed
       })
+      if feed.load_all?
+      	newswire.quick_post
+      end
     end
 
     feed.update_attributes({:updated_at => Time.now, :last_fetched_at => rss.date.to_s})

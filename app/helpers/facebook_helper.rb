@@ -18,14 +18,13 @@ module FacebookHelper
   end
 
   def fb_share_app_button
-begin
     stream_post = Facebooker::StreamPost.new
     attachment = Facebooker::Attachment.new
 	  attachment.add_image(image_path('default/icon-fan-app.gif'), home_index_path(:only_path => false, :canvas => true))
     stream_post.message = t('header.share_description')
     stream_post.action_links = [{:text => "Learn more", :href => home_index_path(:only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
-end
+
     render :partial => 'shared/misc/share_app_button', :locals => {:stream_post => stream_post}
   end
 
@@ -56,7 +55,7 @@ end
     	end
     end
     #stream_post.name = item.item_title
-    stream_post.message = item.item_description
+    stream_post.message = caption(strip_tags(item.item_description),200)
     stream_post.action_links = [{:text => "Read more", :href => polymorphic_url(item, :only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
 

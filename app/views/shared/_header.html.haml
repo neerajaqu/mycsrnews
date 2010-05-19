@@ -12,7 +12,7 @@
       %span.admin-links
         = pipe_spacer
         - if iframe_facebook_request?
-          = link_to t('.admin'), admin_path, :target => '_parent'
+          = link_to t('.admin'), admin_path, :target => '_admin'
         - else
           = link_to t('.admin'), admin_path
     - else

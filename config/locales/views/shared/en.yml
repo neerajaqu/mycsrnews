@@ -74,6 +74,7 @@ en:
       via:  "Via {{title}}, {{date}} ago"
       publish: "Publish to {{site_title}}"
       read: "Read Story"
+      quick_post: "Quick post"
 
     ideas:
       ideas_title:  "Browse Ideas"

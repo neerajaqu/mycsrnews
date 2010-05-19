@@ -1,7 +1,8 @@
 - item.images.build if item.images.empty?
+%h2 Add an image to your story
 - form.semantic_fields_for :images do |image_form|
-  = image_form.input :remote_image_url, :label => "Add an image from the Web", :required => false, :hint => "Provide the URL to an image hosted on the Web"
-  = image_form.file_field :image, :label => "Add an image from your computer",:required => false, :hint => "Upload an image from your computer"
+  = image_form.input :remote_image_url, :label => "Image web address (optional)", :required => false, :hint => "Either provide the web address (URL) of the image above or click the button below to upload the image from your computer"  
+  = image_form.file_field :image, :required => false
   %br
   %br
 %h3.btn.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}

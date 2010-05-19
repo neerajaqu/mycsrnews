@@ -28,3 +28,7 @@ en:
           my_events_title: "Your Events"
           top_events: "Popular Events"
           newest_events: "Recent Events"
+        import_from_facebook:
+          import_events_title: "Click to Import Events from Facebook"
+          or_fill_out_form: "Or, fill out the form below."
+          import_events: "Import Events"

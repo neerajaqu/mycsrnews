@@ -5,4 +5,4 @@ fr:
       login: "Login"
       password: "Password"
       submit: "Sign In"
-      fb_connect: "Use Facebook Connect"
+      use_fb_connect: "Use Facebook Connect"

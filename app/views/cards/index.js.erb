@@ -1,0 +1,39 @@
+$(function() {
+  var card_loading_msg = "<%= t('cards.loading_message') %>";
+  $('.cards_pagerBar a').click(function(event) {
+    event.preventDefault();
+    var pager_width = 486;
+    var page_links = $('.cards_pagerBar a');
+    var curr_page = page_links.index($(this)) + 1;
+    var new_x = pager_width - (curr_page * pager_width);
+    $('#thumbPanel').animate({left: new_x});
+  });
+
+  $('.card_link').click(function(event) {
+    event.preventDefault();
+    $('#selCardStage').html($("#block-"+$(this).attr('id')).clone());
+    $('#card-request-box').html("<br />" + card_loading_msg);
+    var url = $(this).attr('href').replace(/^(.*?cards\/[0-9]+)(\.[a-z]+)/, "$1/get_card_form.json");
+    $.get(url, {}, function(data) {
+      document.getElementById('card-request-box').innerHTML = data;
+      rebuild_facebook_dom();
+    }, 'html');
+  });
+
+  $('.showLink a').live('click', function(event) {
+      event.preventDefault();
+      var wrap = $(this).parent().parent().parent();
+      $('.showLink', wrap).hide();
+      $('.hideLink', wrap).show();
+      $('.cards_displayLongCaption', wrap).animate({opacity: 'show'});
+  });
+
+  $('.hideLink a').live('click', function(event) {
+      event.preventDefault();
+      var wrap = $(this).parent().parent().parent();
+      $('.cards_displayLongCaption', wrap).hide();
+      $('.hideLink', wrap).hide();
+      $('.showLink', wrap).show();
+  });
+
+});

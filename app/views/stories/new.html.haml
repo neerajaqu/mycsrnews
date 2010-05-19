@@ -6,7 +6,7 @@
       %h2= t('.new_story_header')
     .formBox
       - semantic_form_for @story, :url => stories_path, :html => { :multipart => true, :class => "post_story" } do |form|
-        = render :partial => 'story_form', :locals => { :form => form }
+        = render :partial => 'story_form', :locals => { :form => form, :story => @story }
         - form.buttons do
           -# TODO:: switch this to locale
           = form.commit_button "Post Story", :button_html => { :class => 'btn' }
