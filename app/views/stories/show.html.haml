@@ -44,10 +44,9 @@
     = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
-  - cache "#{@story.cache_key}_bottom_html" do
-    = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
-    - if @story.moderatable?
-      = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
+  = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
+  - if @story.moderatable?
+    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
 
 #col_right
   - cache "#{@story.cache_key}_sidebar_html" do
