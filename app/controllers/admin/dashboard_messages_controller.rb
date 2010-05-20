@@ -60,7 +60,7 @@ class Admin::DashboardMessagesController < AdminController
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
     	:item => dashboardMessage,
     	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status]
+    	:fields => [:message, :action_text, :action_url, :image_url]
       }
   end
   
@@ -68,7 +68,7 @@ class Admin::DashboardMessagesController < AdminController
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
     	:item => dashboardMessage,
     	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status]
+    	:fields => [:message, :action_text, :action_url, :image_url]
     }
   end  
   private
