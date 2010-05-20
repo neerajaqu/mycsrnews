@@ -41,6 +41,9 @@ defaults: &defaults
   
   #Privacy settings
   firstnameonly: false
+  
+  #Zvent settings
+  zvent_api_key: 'FRXBFQTGJOMXVKIQSFGSBDFWYMLXSJPBQGJDGPXJICGBSGPWGULKGTJGOXXKLUOG'
 
 development:
   <<: *defaults
