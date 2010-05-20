@@ -1,0 +1,9 @@
+.foo
+  %h2 Import Events from Zvents
+
+  %p Did you want to import these events?
+  - form_tag import_zvents_admin_events_path do
+    =submit_tag "Import All Events"
+  %ol
+  - @events.each do |event|
+    %li== #{event.name} on #{event.startTime.to_s :us}
