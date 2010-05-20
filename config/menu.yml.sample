@@ -24,5 +24,6 @@ menu:
   events:
     events_list: 'enabled'
     new_event: 'enabled'
+	import_facebook: 'enabled'
   #forums:
   admin:

@@ -17,7 +17,8 @@
             %li{'data-id' => user.cache_key}
               .feature_bg
                 .thumb
-                  .profilePic= local_linked_profile_pic user, :size => "normal"
+                  -# can change size to normal, but need fixed spacer for thumb
+                  .profilePic= local_linked_profile_pic user, :size => "small"
               .storyBlockWrap.float_left
                 %h2.storyHead== #{local_linked_profile_name(user)}
                 -#%p= "City and State"
