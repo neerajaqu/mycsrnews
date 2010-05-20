@@ -35,6 +35,7 @@ class Newswire < ActiveRecord::Base
     begin
       if @content.save
       	set_published
+      	NewswireSweeper.expire_newswires
       	return true
       else
       	return false
