@@ -9,7 +9,6 @@ class Admin::DashboardMessagesController < AdminController
     }
   end
 
-
   def new
     render_new
   end

@@ -134,3 +134,7 @@ en:
     forms:
       flag_dropdown:
         flag: "Flag this"  
+    
+    users:
+      users_title: "Top Members"
+      users_subtitle: "Members with the highest scores"
