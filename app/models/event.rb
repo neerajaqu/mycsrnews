@@ -57,5 +57,28 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def self.create_from_zvent_event(zvent, user)
+    return nil if not zvent.is_a? Zvent::Event
+    check  = Event.find_by_eid(zvent.id)
+    if check
+      return check
+    else
+      image = zvent.images.empty? ? nil : zvent.images.first["url"] 
+      Event.create!(
+      :user => user,
+      :name => zvent.name,
+      :eid => zvent.id,
+      :start_time => zvent.startTime,
+      :end_time => zvent.endTime,
+      :description => zvent.description,
+      :location => zvent.venue.name,
+      :street => zvent.venue.address,
+      :city => zvent.venue.city,
+      :state => zvent.venue.state,
+      :country => zvent.venue.country,
+      :creator => nil, #not yet support in gem
+      :pic => image)
+    end
+  end
 end
 

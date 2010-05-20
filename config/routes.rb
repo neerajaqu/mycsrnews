@@ -80,7 +80,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :idea_boards
     admin.resources :resources
     admin.resources :resource_sections
-    admin.resources :events
+    admin.resources :events, :collection => { :import_zvents => [:get, :post]}
     admin.resources :flags
     admin.resources :questions
     admin.resources :answers    

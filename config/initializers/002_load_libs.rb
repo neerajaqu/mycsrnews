@@ -19,3 +19,5 @@ require "#{RAILS_ROOT}/lib/acts_as_refineable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Refineable
 
 require "#{RAILS_ROOT}/lib/locale_extensions.rb"
+
+require "#{RAILS_ROOT}/lib/zvent_gem_addon.rb"
