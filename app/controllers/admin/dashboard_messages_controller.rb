@@ -9,30 +9,24 @@ class Admin::DashboardMessagesController < AdminController
     }
   end
 
+
   def new
-    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
-    	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status],
-    }
+    render_new
   end
 
   def edit
     @dashboardMessage = DashboardMessage.find(params[:id])
-    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => @dashboardMessage,
-    	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status],
-    }
+    render_edit @dashboardMessage
   end
 
   def update
     @dashboardMessage = DashboardMessage.find(params[:id])
-    if @dashboardMessage.update_attributes(params[:DashboardMessage])
+    if @dashboardMessage.update_attributes(params[:dashboardMessage])
       flash[:success] = "Successfully updated your DashboardMessage."
       redirect_to [:admin, @dashboardMessage]
     else
       flash[:error] = "Could not update your DashboardMessage as requested. Please try again."
-      render :edit
+      render_edit
     end
   end
 
@@ -40,18 +34,18 @@ class Admin::DashboardMessagesController < AdminController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
     	:item => DashboardMessage.find(params[:id]),
     	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status, :created_at],
+    	:fields => [:message, :action_text, :action_url, :image_url, :status],
     }
   end
 
   def create
-    @dashboardMessage = DashboardMessage.new(params[:DashboardMessage])
+    @dashboardMessage = DashboardMessage.new(params[:dashboardMessage])
     if @dashboardMessage.save
-      flash[:success] = "Successfully created your new DashboardMessage!"
+      flash[:success] = "Successfully created your new Dashboard Message!"
       redirect_to [:admin, @dashboardMessage]
     else
-      flash[:error] = "Could not create your DashboardMessage, please try again"
-      redirect_to new_admin_dashboard_message_path
+      flash[:error] = "Could not create your Dashboard Message, please try again"
+      render_new @dashboardMessage
     end
   end
 
@@ -61,6 +55,23 @@ class Admin::DashboardMessagesController < AdminController
     redirect_to admin_dashboard_messages_path
   end
 
+  def render_new dashboardMessage = nil
+    dashboardMessage ||= DashboardMessage.new
+
+    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
+    	:item => @dashboardMessage,
+    	:model => DashboardMessage,
+    	:fields => [:message, :action_text, :action_url, :image_url, :status]
+      }
+  end
+  
+  def render_edit dashboardMessage
+    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
+    	:item => dashboardMessage,
+    	:model => DashboardMessage,
+    	:fields => [:message, :action_text, :action_url, :image_url, :status]
+    }
+  end  
   private
 
   def set_current_tab
