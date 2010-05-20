@@ -42,11 +42,15 @@ class FeedParser
     command = fields.select { |field| feed_object.respond_to? field }.first
     return nil unless command.present?
 
+    # If atom feed, we need to call content on the field to get the data
+    original_command = command
     command = is_atom == true ? (command == 'link' ? [command, 'href'] : [command, 'content']) : command
 
     begin
       command.inject(feed_object) { |item, cmd| item.send(cmd) }
     rescue NoMethodError
+      subfields = fields.delete(original_command)
+      return get_value(feed_object, subfields, is_atom) if subfields and subfields.present?
       nil
     end
   end
