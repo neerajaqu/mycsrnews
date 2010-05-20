@@ -1,6 +1,7 @@
 class Admin::DashboardMessagesController < AdminController
 
   def index
+    current_facebook_user.dashboard_increment_count
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => DashboardMessage.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => DashboardMessage,
@@ -71,6 +72,18 @@ class Admin::DashboardMessagesController < AdminController
     	:fields => [:message, :action_text, :action_url, :image_url, :status]
     }
   end  
+
+  def send_global
+    @dashboardMessage = DashboardMessage.find(params[:id])
+    unless @dashboardMessage
+      flash[:error] = "Invalid dashboard message"
+      redirect_to admin_dashboard_messages_path
+    end
+
+    result = facebook_session.application.add_global_news(@dashboardMessage.build_news, @dashboardMessage.image_url)
+    raise result.inspect
+  end
+
   private
 
   def set_current_tab
