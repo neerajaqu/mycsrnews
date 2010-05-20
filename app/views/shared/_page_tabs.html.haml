@@ -32,6 +32,8 @@
                   %ul
                     - unless MENU['articles']['articles_list'].nil?
                       %li= link_to t('.articles_list'), articles_path, :class => tab_selected?(@current_tab, 'articles')
+                    - unless MENU['articles']['users_list'].nil?
+                      %li= link_to t('.users_list'), users_path, :class => tab_selected?(@current_tab, 'articles')
                     - unless MENU['articles']['new_article'].nil?
                       %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'articles')
 
