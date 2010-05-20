@@ -1,6 +1,8 @@
 - content_for :sub_nav do
   = render :partial => 'shared/subnav/events_subnav'
 
+=stylesheet_link_tag "anytimec"
+=javascript_include_tag "anytimec"
 #col_left
   .panel_1
     .panelBar
@@ -12,8 +14,8 @@
           = form.input :tagline, :required => false, :label => t('.label_event_tagline'), :hint => t('.hint_event_tagline')
           = form.input :description, :input_html => { :rows => 5 }, :label => t('.label_event_description'), :hint => t('.hint_event_description'), :required => false
           = form.input :tags_string,:label => t('tags'),  :required => false, :hint => t('tags_hint')
-          = form.input :start_time, :required => true
-          = form.input :end_time, :required => false
+          = form.input(:start_time, :as => :string, :required =>true) 
+          = form.input(:end_time, :as => :string, :required =>false)
           = form.input :location, :required => true,:label => t('.label_event_location'), :hint => t('.hint_event_location')
           = form.input :street, :required => false
           = form.input :city, :required => false
@@ -25,3 +27,25 @@
 
 #col_right
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
+
+:javascript
+  var oneDay = 24*60*60*1000;
+  var rangeFormat = "%Y-%m-%d %H:%i";
+  var rangeConv = new AnyTime.Converter({format:rangeFormat});
+  $("#event_start_time").AnyTime_picker({ format: rangeFormat,formatUtcOffset: "%: (%@)",hideInput: true,placement: "inline", earliest: new Date() } );
+  $('#event_end_time').AnyTime_picker({ format: rangeFormat,formatUtcOffset: "%: (%@)",hideInput: true,placement: "inline" } );
+
+  $("#event_start_time").change( function(e) { try {
+        var fromDay = rangeConv.parse($("#event_start_time").val()).getTime();
+        var dayLater = new Date(fromDay); 
+        var now = new Date()
+        if (dayLater != now) { dayLater.setHours(0,0,0,0); }
+        else { dayLater.setHours(now.getHours(), now.getMinutes(),0,0); }
+        var ninetyDaysLater = new Date(fromDay+(90*oneDay));
+        ninetyDaysLater.setHours(23,59,59,999); 
+        $("#event_end_time").AnyTime_noPicker().removeAttr("disabled").val(rangeConv.format(dayLater)).AnyTime_picker(
+                { earliest: dayLater,
+                  format: rangeFormat,
+                  latest: ninetyDaysLater, formatUtcOffset: "%: (%@)",hideInput: true,placement: "inline" 
+                } );
+        } catch(e){ $("#event_end_time").val("").attr("disabled","disabled"); } } );
