@@ -20,7 +20,7 @@ class Admin::DashboardMessagesController < AdminController
 
   def update
     @dashboardMessage = DashboardMessage.find(params[:id])
-    if @dashboardMessage.update_attributes(params[:dashboardMessage])
+    if @dashboardMessage.update_attributes(params[:dashboard_message])
       flash[:success] = "Successfully updated your DashboardMessage."
       redirect_to [:admin, @dashboardMessage]
     else
@@ -38,7 +38,7 @@ class Admin::DashboardMessagesController < AdminController
   end
 
   def create
-    @dashboardMessage = DashboardMessage.new(params[:dashboardMessage])
+    @dashboardMessage = DashboardMessage.new(params[:dashboard_message])
     if @dashboardMessage.save
       flash[:success] = "Successfully created your new Dashboard Message!"
       redirect_to [:admin, @dashboardMessage]
@@ -58,7 +58,7 @@ class Admin::DashboardMessagesController < AdminController
     dashboardMessage ||= DashboardMessage.new
 
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
-    	:item => @dashboardMessage,
+    	:item => dashboardMessage,
     	:model => DashboardMessage,
     	:fields => [:message, :action_text, :action_url, :image_url, :status]
       }

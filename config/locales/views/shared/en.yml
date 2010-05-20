@@ -65,7 +65,7 @@ en:
       locale: "Locale: "
 
     articles:
-      articles_title: "Top News"
+      articles_title: "Newest Articles"
       articles_subtitle: "The top articles as chosen by users"
       stories_posted_by: "Posted by {{fb_name}} {{date}} ago"
 
