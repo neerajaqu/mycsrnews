@@ -7,7 +7,7 @@
   = render :partial => 'shared/articles', :locals => { :contents => @articles, :paginate => @paginate, :page => @page }
   
 #col_right
+  = render :partial => 'shared/sidebar/post_article'
   = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Article, :locale_var => 'top_article_tags' }
   = render :partial => 'shared/sidebar/moderator_users'
-  = render :partial => 'shared/sidebar/post_article'
   = render :partial => 'shared/sidebar/top_articles'
