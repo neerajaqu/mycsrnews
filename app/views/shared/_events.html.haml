@@ -16,8 +16,6 @@
               .eventDetailsBlock
                 .storyBlockWrap
                   %h4
-                    %span.tag
-                      Event:
                     = link_to event.name, event_path(event)
                   .profilePic= local_linked_profile_pic event.user, :size => :square
                   .storyBlockMeta
