@@ -21,7 +21,7 @@
                   .profilePic= local_linked_profile_pic user, :size => "small"
               .storyBlockWrap.float_left
                 %h2.storyHead== #{local_linked_profile_name(user)}
-                -#%p= "City and State"
+                %p= caption(user.bio,350)
               .storyBlockMeta.float_right
                 %h4.userPoints= user.karma_score
                 %h3.userPoints= "Points"
