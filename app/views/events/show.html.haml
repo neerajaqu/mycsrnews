@@ -13,7 +13,7 @@
             %a== #{link_to t('.post_comment'), event_path(@event, :anchor => "postCommentBox")} #{@event.comments_count}
           %li= fb_share_item_button(@event)
           %li
-            %a= twitter_share_item_link @event, @event.name
+            %a= twitter_share_item_link @event, @event.name           
       .thumb
         - if @event.images.present?
           = image_tag @event.images.first.url(:medium)
@@ -24,6 +24,7 @@
             = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => time_ago_in_words(@event.created_at))
           - if @tags.present?
             %h3== #{tag_list(@tags,@event)}
+          = link_to("Original Event Link", @event.url) if @event.url 
           - if @event.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
       %div.bodyArticle= sanitize @event.description

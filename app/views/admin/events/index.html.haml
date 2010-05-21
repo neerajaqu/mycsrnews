@@ -1,3 +1,1 @@
-%h2= link_to "Click to Import from Zvents", import_zvents_admin_events_path
-
 = gen_index_page @events, Event, [:name, :user_id, :votes_tally, :comments_count, :created_at], :associations => { :belongs_to => { :user => :user_id } }, :paginate => true
