@@ -1,0 +1,20 @@
+-# Expects klass, tag_type, locale_var
+- tag_type ||= 'tags'
+- locale_var ||= 'tags.top_title'
+- klass_name = klass.name
+
+- cache "top_#{klass_name}_#{tag_type}_html" do
+  .panelBar
+    %h2= t(locale_var)
+  .list_stories
+    %ul
+      - klass.send("top_#{tag_type}").each do |tag|
+        %li
+          .storyBlockWrap
+            %h4== [#{tag.count}] #{link_to tag.name, url_for(send("tagged_#{klass_name.underscore.pluralize}_path", tag))}
+            -#
+              .profilePic= local_linked_profile_pic story.user
+              .storyBlockMeta
+                %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
+                %span.btnComment.float_left== #{like_link story} #{story.votes_tally}
+                %span.btnComment.float_left== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

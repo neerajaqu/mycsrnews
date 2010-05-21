@@ -34,7 +34,7 @@ class Admin::DashboardMessagesController < AdminController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
     	:item => DashboardMessage.find(params[:id]),
     	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status],
+    	:fields => [:message, :action_text, :action_url, :image_url, :status, :news_id],
     }
   end
 
@@ -81,7 +81,14 @@ class Admin::DashboardMessagesController < AdminController
     end
 
     result = facebook_session.application.add_global_news(@dashboardMessage.build_news, @dashboardMessage.image_url)
-    raise result.inspect
+    if result =~ /^[0-9]+$/
+      @dashboardMessage.set_success! result
+      flash[:success] = "Successfully sent your message"
+      redirect_to admin_dashboard_messages_path
+    else
+    	flash[:error] = "Could not send your message"
+      redirect_to admin_dashboard_messages_path
+    end
   end
 
   private
