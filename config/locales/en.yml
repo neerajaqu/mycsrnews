@@ -64,6 +64,8 @@ en:
   invite_users_button: "Send Invitations"
   tags: "Tags"
   tags_hint: "Separate each tag with a comma e.g. dining options, raw food, seattle"
+  top_article_tags: "Popular Tags"
+  top_content_tags: "Popular Tags"
   logged_in_error: "You must be logged in to perform this action."
   questions:
     tab_title: "Answers"

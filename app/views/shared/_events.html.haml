@@ -16,6 +16,8 @@
               .eventDetailsBlock
                 .storyBlockWrap
                   %h4
+                    -# %span.tag
+                    -# could be used to show type of event e.g. Lecture, Party, etc.                    
                     = link_to event.name, event_path(event)
                   .profilePic= local_linked_profile_pic event.user, :size => :square
                   .storyBlockMeta
