@@ -24,6 +24,9 @@ defaults: &defaults
   # facebook application id 
   facebook_application_id: '111111111111'
 
+  # allow web log in system
+  allow_web_auth: false
+
   # Uncomment this line to enable twitter
   #twitter_account: 'mytwitteraccount'
 

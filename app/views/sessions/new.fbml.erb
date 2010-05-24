@@ -6,13 +6,15 @@
     <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
     <br />
     <br />
-    <fb:editor action="/sessions/create">
-      <fb:editor-text name="login" id="login" value="" label="<%= t '.login' %>" />
-      <fb:editor-password name="password" id="password" value="" label="<%= t '.password' %>" />
-      <fb:editor-buttonset>
-       <fb:editor-button label="<%= t '.submit' %>" />
-      </fb:editor-buttonset>
-    </fb:editor>
+    <% if APP_CONFIG['allow_web_auth'].present? and APP_CONFIG['allow_web_auth'] %>
+      <fb:editor action="/sessions/create">
+        <fb:editor-text name="login" id="login" value="" label="<%= t '.login' %>" />
+        <fb:editor-password name="password" id="password" value="" label="<%= t '.password' %>" />
+        <fb:editor-buttonset>
+         <fb:editor-button label="<%= t '.submit' %>" />
+        </fb:editor-buttonset>
+      </fb:editor>
+    <% end -%>
 	</div>
 </div>
 <br />
