@@ -19,7 +19,7 @@
                 .thumb
                   -# can change size to normal, but need fixed spacer for thumb
                   .profilePic= local_linked_profile_pic user, :size => "small"
-              .storyBlockWrap.float_left
+              .float_left
                 %h2.storyHead== #{local_linked_profile_name(user)}
                 %p= caption(user.bio,350)
               .storyBlockMeta.float_right

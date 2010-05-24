@@ -2,16 +2,13 @@
 %ul
   - users.each do |user|
     %li{'data-id' => user.cache_key}
-      .thumb
-        - if user.images.present?
-          = image_tag user.images.first.url(:thumb)                  
-        - else
-          = image_tag ('default/default_thumb_b.gif', :width => "100%")
-      .storyBlockWrap.storyBlockSpacer
-        %h2.storyHead= link_to user.title, story_path(user, :format => 'html')
-        %p.storyCaption= linked_story_caption user, 150, false, :format => 'html'
-        .profilePic= local_linked_profile_pic user.user, :format => 'html'
-        .storyBlockMeta.float_left
-          %h3= t('.users_posted_by', :fb_name => local_linked_profile_name(user.user, :format => 'html'), :date => time_ago_in_words(user.created_at))
-          %span.btnComment.float_left== #{like_link user, :format => 'html'} #{user.votes_tally}
-          %span.btnComment.float_left== #{link_to t('.users_comments'), story_path(user, :anchor => "commentListTop", :format => 'html')} #{user.comments_count}
+      .feature_bg
+        .thumb
+          -# can change size to normal, but need fixed spacer for thumb
+          .profilePic= local_linked_profile_pic user, :size => "small"
+      .float_left
+        %h2.storyHead== #{local_linked_profile_name(user)}
+        %p= caption(user.bio,350)
+      .storyBlockMeta.float_right
+        %h4.userPoints= user.karma_score
+        %h3.userPoints= "Points"
