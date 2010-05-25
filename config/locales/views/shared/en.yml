@@ -25,6 +25,7 @@ en:
       resources_list: "Browse Directory"
       new_resource: "Add a new link"
       admin: "Admin"
+      forums: "Forums"
 
     comments:
       comment_title: "Comments"

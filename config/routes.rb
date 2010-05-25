@@ -22,6 +22,8 @@ ActionController::Routing::Routes.draw do |map|
   map.app_tab '/app_tab.:format', :controller => 'home', :action => 'app_tab'
   map.resources :users, :collection => {:link_user_accounts => :get, :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
 
+  map.resources :forums, :has_many => [:topics]
+  map.resources :topics, :has_many => [:comments]
   map.resource :session
   map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
 
@@ -82,6 +84,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :events
     admin.resources :flags
     admin.resources :questions
+    admin.resources :forums
     admin.resources :answers    
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }
     admin.resources :contents

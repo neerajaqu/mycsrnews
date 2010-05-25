@@ -14,6 +14,8 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :comments
 
+  after_create :custom_callback
+
   def item_title
     "Comment on #{self.commentable.item_title}"
   end
@@ -21,4 +23,19 @@ class Comment < ActiveRecord::Base
   def downvoteable?
     true
   end
+
+  def forum_post?
+    self.commentable_type == 'Topic'
+  end
+
+  def crumb_parents
+    [self.commentable.crumb_items].flatten
+  end
+
+  private
+
+  def custom_callback
+    self.commentable.comments_callback if self.commentable.respond_to?(:comments_callback)
+  end
+
 end

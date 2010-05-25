@@ -1,8 +1,13 @@
 -# expects local :commentable => @commentable
+-# optional locals post_locale and commit_text
+- post_locale ||= '.post_comment'
+- commit_text ||= nil
+- commit_text = t(commit_text) unless commit_text.nil?
+
 .postComment.panel_1
   %a{:id => "postCommentBox", :name => "postCommentBox"}
   .panelBar
-    %h2= t '.post_comment'
+    %h2= t post_locale
   .formBox
     - unless current_user.present?
       %p== #{t '.logged_in_error'} #{link_to 'Login now', login_path}
@@ -12,4 +17,4 @@
           - form.inputs do
             = form.input :comments, :input_html => { :rows => '10', :cols => '60' }, :label => false
           - form.buttons do
-            = form.commit_button :button_html => { :class => 'btn' }
+            = form.commit_button commit_text, :button_html => { :class => 'btn' }

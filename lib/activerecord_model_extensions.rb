@@ -87,6 +87,24 @@ module Newscloud
         "#{self.class.name.titleize} ##{self.id}"
       end
 
+      # Breadcrumb parents method
+      # Overwrite as [self.story.crumb_items]
+      def crumb_parents
+        []
+      end
+
+      def crumb_items
+        [self, self.crumb_parents].flatten
+      end
+
+      def crumb_text
+        self.item_title
+      end
+
+      def crumb_link
+        self
+      end
+
     end
 
   end

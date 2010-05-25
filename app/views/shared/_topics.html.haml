@@ -1,0 +1,48 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/breadcrumbs', :locals => { :breadcrumbs => forum_breadcrumbs(@forum) }
+
+- cache "#{@forum.cache_key}_topics_list" do
+  - paginate ||= false
+  .panel_1
+    .panelBar
+      %h2= t('forums.topics.list_title', :forum_name => forum.name)
+    .subtitle
+      %span= t('forums.topics.list_subtitle', :forum_description => forum.description)
+    .storyList
+      %h2= link_to "New Topic", new_forum_topic_path(forum)
+      - if forum.topics.any?
+        %table.tablesorter
+          %thead
+            %tr
+              %th Title
+              %th Replies
+              %th Views
+              %th Last Post
+          %tbody
+            - forum.topics.each do |topic|
+              %tr
+                %td= link_to topic.title, [forum, topic]
+                %td= topic.comments_count
+                %td= topic.views_count
+                %td= t('posted_by', :fb_name => local_linked_profile_name(topic.replied_user), :date => time_ago_in_words(topic.replied_at))
+      - else
+        %p No topics yet.
+      -#.list_stories
+        %ul
+          - forum.topics.each do |topic|
+            %li{'data-id' => topic.cache_key}
+              .thumb
+                - if topic.images.present?
+                  = image_tag topic.images.first.url(:thumb)
+                - else
+                  = image_tag ('default/default_thumb_b.gif', :width => "100%")
+              .storyBlockWrap.storyBlockSpacer
+                %h2.storyHead= link_to topic.title, topic
+                -#%p.storyCaption= topic.description
+                %p.storyCaption Last post blurb
+                -#.profilePic= local_linked_profile_pic forum.user
+                .storyBlockMeta.float_left
+                  -#%h3= t('forums.topics.last_active', :fb_name => local_linked_profile_name(forum.user), :date => time_ago_in_words(forum.created_at))
+                  %h3== Last Active #{link_to forum.name, forum}
+                  -#%span.btnComment.float_left= t('forums.topics.topics_count', :topics_count => forum.topics_count)
+                  -#%span.btnComment.float_left= t('forums.topics.posts_count', :posts_count => forum.posts_count)

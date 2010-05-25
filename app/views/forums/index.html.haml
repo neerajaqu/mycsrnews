@@ -1,0 +1,5 @@
+-# content_for :sub_nav do
+  = render :partial => 'shared/breadcrumbs', :locals => { :breadcrumbs => get_forum_breadcrumbs(@forums) }
+
+#col_left
+  = render :partial => 'shared/forums', :locals => { :forums => @forums }

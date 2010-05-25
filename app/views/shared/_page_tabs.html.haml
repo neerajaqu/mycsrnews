@@ -96,6 +96,15 @@
                       %li= link_to t('.import_facebook'), import_facebook_events_path, :class => tab_selected?(@current_tab, 'events')
         - if MENU.key? 'cards'
           %li= link_to t('cards.menu_title'), cards_path, :class => tab_selected?(@current_tab, 'cards')
+        - if MENU.key? 'forums'
+          %li
+            .menu_item
+              = link_to t('.forums'), forums_path, :class => tab_selected?(@current_tab, 'forums')
+              - unless MENU['forums'].nil? or MENU['forums']['sub_forums'].nil?
+                .dropdown
+                  %ul
+                    - Forum.all.each do |forum|
+                      %li= link_to forum.name, forum_path(forum), :class => tab_selected?(@current_tab, 'forums')
         -#TODO:: SWITCH THIS TO FORUM
         -#%li
           .menu_item

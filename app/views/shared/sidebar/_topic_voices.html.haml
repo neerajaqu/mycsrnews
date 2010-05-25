@@ -1,0 +1,15 @@
+-# @expects: local 'topic'
+
+- cache "#{topic.cache_key}_voices" do
+  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('forums.topics.voices_title')
+    .subtitle
+      %span= t('forums.topics.voices_subtitle')
+    .list_stories
+      %ul
+        - topic.voices.uniq.each do |user|
+          %li
+            .profilePic= local_linked_profile_pic user
+            .storyBlockMeta.float_left
+              %h4== #{local_linked_profile_name(user)}

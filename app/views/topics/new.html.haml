@@ -1,0 +1,12 @@
+-# content_for :sub_nav do
+  = render :partial => 'shared/subnav/news_subnav'
+#col_left
+  .panel_1
+    .panelBar
+      %h2= t('forums.topics.new_header')
+    .formBox
+      - semantic_form_for [@forum, @topic], :html => { :multipart => true } do |form|
+        = render :partial => 'topic_form', :locals => { :form => form, :topic => @topic }
+        - form.buttons do
+          -# TODO:: switch this to locale
+          = form.commit_button :button_html => { :class => 'btn' }

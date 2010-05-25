@@ -386,4 +386,8 @@ EMBED
     base_url image.url(:thumb)
   end
 
+  def breadcrumbs item, initial_set = []
+    [initial_set].push(item.crumb_items.flatten.inject([]) {|set,crumb| set << (set.empty? ? crumb.crumb_text : link_to(crumb.crumb_text, crumb.crumb_link)) }.reverse).flatten
+  end
+
 end

@@ -112,3 +112,19 @@ en:
     loading_message: "Loading send a card form..."
   sessions:
     use_fb_connect: "Use Facebook Connect"
+  forums:
+    title: "Forums"
+    subtitle: "Community Discussion"
+    topics_count: "{{topics_count}} Topics"
+    posts_count: "{{posts_count}} Posts"
+    topics:
+      list_title: "{{forum_name}} Topics"
+      list_subtitle: "{{forum_description}}"
+      item_title: "{{title}}"
+      item_subtitle: "{{posts_count}} Posts, {{voices_count}} Voices"
+      topics_count: "{{topics_count}} Topics"
+      posts_count: "{{posts_count}} Posts"
+      voices_title: "Voices"
+      voices_subtitle: "Users involved in this discussion"
+      post_comment: "Reply to this topic"
+      commit_reply: "Post your reply"
