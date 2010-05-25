@@ -32,6 +32,8 @@
                   %ul
                     - unless MENU['articles']['articles_list'].nil?
                       %li= link_to t('.articles_list'), articles_path, :class => tab_selected?(@current_tab, 'articles')
+                    - unless MENU['articles']['users_list'].nil?
+                      %li= link_to t('.users_list'), users_path, :class => tab_selected?(@current_tab, 'articles')
                     - unless MENU['articles']['new_article'].nil?
                       %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'articles')
 
@@ -93,7 +95,8 @@
                     - unless MENU['events']['new_event'].nil?
                       %li= link_to t('.new_event'), new_event_path, :class => tab_selected?(@current_tab, 'events')
                     - unless MENU['events']['import_facebook'].nil?
-                      %li= link_to t('.import_facebook'), import_facebook_events_path, :class => tab_selected?(@current_tab, 'events')
+                      - if current_facebook_user
+                        %li= link_to t('.import_facebook'), import_facebook_events_path, :class => tab_selected?(@current_tab, 'events')
         - if MENU.key? 'cards'
           %li= link_to t('cards.menu_title'), cards_path, :class => tab_selected?(@current_tab, 'cards')
         - if MENU.key? 'forums'

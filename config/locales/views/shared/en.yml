@@ -6,6 +6,7 @@ en:
       stories_list: "Top Stories"
       new_story: "Post a Story"
       articles: "Community"
+      users_list: "Top Members"
       articles_list: "Top Articles"
       new_article: "Compose an Article"
       newswire: "Wires"
@@ -65,8 +66,9 @@ en:
       locale: "Locale: "
 
     articles:
-      articles_title: "Top News"
+      articles_title: "Newest Articles"
       articles_subtitle: "The top articles as chosen by users"
+      stories_posted_by: "Posted by {{fb_name}} {{date}} ago"
 
     stories:
       stories_title: "Top News"
@@ -134,3 +136,7 @@ en:
     forms:
       flag_dropdown:
         flag: "Flag this"  
+    
+    users:
+      users_title: "Top Members"
+      users_subtitle: "Members with the highest scores"

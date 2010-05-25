@@ -30,9 +30,10 @@
       - if @question.media_item?
         = render_media_items @question
       = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
-  #answerForm.panel_1.hide.clearfix
+  #answerForm.panel_1.hide
     .panelBar
-      %h2 Answer this question
+      %h2 
+        Answer this question
     .formBox
       - unless current_user.present?
         %p== #{t 'questions.logged_in_error'} #{link_to 'Login now', login_path}

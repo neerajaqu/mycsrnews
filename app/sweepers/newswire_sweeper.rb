@@ -7,6 +7,10 @@ class NewswireSweeper < ActionController::Caching::Sweeper
       controller.expire_fragment "#{fragment}_html"
       controller.expire_fragment "#{fragment}_fbml"
     end
+    ['', 'page_1_', 'page_2_'].each do |page|
+      controller.expire_fragment "newswires_list_#{page}html"
+      controller.expire_fragment "newswires_list_#{page}fbml"
+    end
   end
 
 end

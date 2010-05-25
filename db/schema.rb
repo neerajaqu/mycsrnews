@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100519223249) do
+ActiveRecord::Schema.define(:version => 20100521205635) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20100519223249) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "news_id"
   end
 
   create_table "events", :force => true do |t|
@@ -192,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20100519223249) do
     t.datetime "featured_at"
     t.boolean  "is_blocked",     :default => false
     t.integer  "flags_count",    :default => 0
+    t.string   "url"
   end
 
   add_index "events", ["eid"], :name => "index_events_on_eid"
@@ -482,15 +484,15 @@ ActiveRecord::Schema.define(:version => 20100519223249) do
   add_index "translations", ["locale_id", "key", "pluralization_index"], :name => "index_translations_on_locale_id_and_key_and_pluralization_index"
 
   create_table "user_profiles", :force => true do |t|
-    t.integer   "user_id",               :limit => 8,                    :null => false
-    t.integer   "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean   "isAppAuthorized",                    :default => false
-    t.datetime  "born_at"
-    t.timestamp "created_at",                                            :null => false
-    t.datetime  "updated_at"
-    t.text      "bio"
-    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean   "comment_notifications",              :default => false
+    t.integer  "user_id",               :limit => 8,                    :null => false
+    t.integer  "facebook_user_id",      :limit => 8, :default => 0
+    t.boolean  "isAppAuthorized",                    :default => false
+    t.datetime "born_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at"
+    t.text     "bio"
+    t.integer  "referred_by_user_id",   :limit => 8, :default => 0
+    t.boolean  "comment_notifications",              :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

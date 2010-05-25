@@ -360,6 +360,7 @@ li
           background: $pageTabOffHover
           &.selected
             background: $pageTabOn
+            
 
 #pageTabs
   .toggle_tabs
@@ -396,14 +397,14 @@ li
                 bottom: $dropdownListBorder
                 left: $dropdownListBorder
                 right: $dropdownListBorder
+              margin:
+                left: $dropdownListMargin
+                right: $dropdownListMargin
               &:hover
                 background: $dropdownTabOn
             a.selected
               padding: 5px
               background: $dropdownTabSelectOff
-              margin:
-                right: $dropdownTabSelectMarginRight
-                left: $dropdownTabSelectMarginLeft
               border:
                 top: $dropdownTabTopBorderSelect
                 bottom: $dropdownTabListBorderSelect
@@ -539,6 +540,7 @@ li
       bottom: $featureBorderBot
       left: $featureBorderLeft
       right: $featureBorderRight
+    display: inline-block
     .thumbBanner
       padding: 0
       display: inline-block
@@ -557,7 +559,6 @@ li
         max-height: 75px
     .featureAd
       text-align: center
-      display: block
       h2
         font-size: 18px
         text-align: left
@@ -568,7 +569,6 @@ li
           margin-right: 40%
       p
         text-align: left
-        display: block
         padding: 0 10px
         margin-bottom: 20px
         color: $featureBodyText
@@ -941,7 +941,7 @@ h3.btn
       text-decoration: none
 .btn
   display: inline-block
-  color: white
+  color: $btnTextColor
   font-weight: bold
   padding: 3px 10px 4px 10px
   -moz-border-radius: 4px

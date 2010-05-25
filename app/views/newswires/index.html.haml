@@ -3,7 +3,7 @@
   = render :partial => 'shared/subnav/stories_subnav'
 
 #col_left
-  = render :partial => 'shared/newswires', :locals => { :newswires => @newswires, :paginate => @paginate }
+  = render :partial => 'shared/newswires', :locals => { :newswires => @newswires, :paginate => @paginate, :page => @page }
 
 #col_right.clearfix
   = render :partial => 'shared/sidebar/post_story'

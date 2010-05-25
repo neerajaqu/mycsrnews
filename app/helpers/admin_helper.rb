@@ -82,6 +82,9 @@ module AdminHelper
     	links << link_to(item.featured? ? 'UnFeature' : 'Feature', admin_feature_path(item.class.name.foreign_key.to_sym => item))
     	links << link_to('Flag', admin_flag_item_path(item.class.name.foreign_key.to_sym => item))
     end
+    if item.class.name == 'DashboardMessage'
+      links << link_to('Send', send_global_admin_dashboard_message_path(item)) unless item.sent?
+    end
     links.join ' | '
   end
 

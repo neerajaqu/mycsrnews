@@ -30,12 +30,20 @@ class Content < ActiveRecord::Base
   validates_format_of :image_url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :allow_blank => true, :message => "should look like a URL"
   validates_format_of :tags_string, :with => /^([-a-zA-Z0-9_ ]+,?)+$/, :allow_blank => true, :message => "Invalid tags. Tags can be alphanumeric characters or -_ or a blank space."
 
+  after_save :set_published, :if => :is_newswire?
+
   def self.top_tally
     self.tally({
     	:at_least => 1,
     	:limit    => 10,
     	:order    => "votes.count desc"
     })
+  end
+
+  def set_published
+    return false unless self.is_newswire?
+
+    self.newswire.set_published
   end
 
   def is_article?

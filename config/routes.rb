@@ -41,6 +41,10 @@ ActionController::Routing::Routes.draw do |map|
   map.paged_my_questions '/questions/:id/my_questions/page/:page.:format', :controller => 'questions', :action => 'my_questions'
   map.tagged_stories_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
   map.tagged_stories '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
+  map.tagged_contents_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
+  map.tagged_contents '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
+  map.tagged_articles_with_page '/articles/tag/:tag/page/:page.:format', :controller => 'articles', :action => 'tags'
+  map.tagged_articles '/articles/tag/:tag.:format', :controller => 'articles', :action => 'tags'
   map.idea_tag_with_page '/ideas/tag/:tag/page/:page.:format', :controller => 'ideas', :action => 'tags'
   map.idea_tag '/ideas/tag/:tag.:format', :controller => 'ideas', :action => 'tags'
   map.resource_tag_with_page '/resources/tag/:tag/page/:page.:format', :controller => 'resources', :action => 'tags'
@@ -52,6 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] },:has_many => [ :flags]
 
   map.resources :articles, :collection => { :index => [:get, :post] }
+  map.resources :users, :collection => { :index => [:get, :post] }
   map.resources :newswires, :member => { :quick_post => [:get, :post] }
   map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :idea_boards, :has_many => :ideas
@@ -81,7 +86,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :idea_boards
     admin.resources :resources
     admin.resources :resource_sections
-    admin.resources :events
+    admin.resources :events, :collection => { :import_zvents => [:get, :post]}
     admin.resources :flags
     admin.resources :questions
     admin.resources :forums
@@ -92,7 +97,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :newswires
     admin.resources :feeds
     admin.resources :announcements
-    admin.resources :dashboard_messages
+    admin.resources :dashboard_messages, :member => { :send_global => [:get, :post] }
     admin.resources :comments
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true

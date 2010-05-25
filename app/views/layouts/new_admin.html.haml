@@ -87,7 +87,11 @@
                 %ul
                   %li= link_to 'Links', admin_resources_path
                   %li= link_to 'Categories', admin_resource_sections_path
-              %li= link_to 'Calendar', admin_events_path
+              %li
+                = link_to 'Calendar', admin_events_path
+                %ul
+                  %li= link_to "Manage Events", admin_events_path
+                  %li= link_to "Import from Zvents", import_zvents_admin_events_path
               %li
                 %a{:href => "#modules-questions"} Q & A
                 %ul
@@ -100,8 +104,7 @@
           %li
             %a{:href => "#module-settings"} Communicate
             %ul
-              %li Dashboard (tbd)
-              -# %li= link_to 'Dashboard', admin_dashboard_messages_path
+              %li= link_to 'Dashboard', admin_dashboard_messages_path
           %li
             %a{:href => "#module-settings"} Settings
             %ul

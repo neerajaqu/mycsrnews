@@ -60,6 +60,7 @@ def update_feed(feed)
         :feed       => feed
       })
       if feed.load_all?
+      	puts "\t\tRunning quick post"
       	newswire.quick_post
       end
     end

@@ -24,6 +24,7 @@ menu:
   events:
     events_list: 'enabled'
     new_event: 'enabled'
+	import_facebook: 'enabled'
   forums:
   	#sub_forums: 'enabled' # uncomment to enable a drop down of all forums
   admin:

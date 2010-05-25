@@ -1,6 +1,7 @@
 class Admin::DashboardMessagesController < AdminController
 
   def index
+    current_facebook_user.dashboard_increment_count
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => DashboardMessage.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => DashboardMessage,
@@ -10,29 +11,22 @@ class Admin::DashboardMessagesController < AdminController
   end
 
   def new
-    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
-    	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status],
-    }
+    render_new
   end
 
   def edit
     @dashboardMessage = DashboardMessage.find(params[:id])
-    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => @dashboardMessage,
-    	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status],
-    }
+    render_edit @dashboardMessage
   end
 
   def update
     @dashboardMessage = DashboardMessage.find(params[:id])
-    if @dashboardMessage.update_attributes(params[:DashboardMessage])
+    if @dashboardMessage.update_attributes(params[:dashboard_message])
       flash[:success] = "Successfully updated your DashboardMessage."
       redirect_to [:admin, @dashboardMessage]
     else
       flash[:error] = "Could not update your DashboardMessage as requested. Please try again."
-      render :edit
+      render_edit
     end
   end
 
@@ -40,18 +34,18 @@ class Admin::DashboardMessagesController < AdminController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
     	:item => DashboardMessage.find(params[:id]),
     	:model => DashboardMessage,
-    	:fields => [:message, :action_text, :action_url, :image_url, :status, :created_at],
+    	:fields => [:message, :action_text, :action_url, :image_url, :status, :news_id],
     }
   end
 
   def create
-    @dashboardMessage = DashboardMessage.new(params[:DashboardMessage])
+    @dashboardMessage = DashboardMessage.new(params[:dashboard_message])
     if @dashboardMessage.save
-      flash[:success] = "Successfully created your new DashboardMessage!"
+      flash[:success] = "Successfully created your new Dashboard Message!"
       redirect_to [:admin, @dashboardMessage]
     else
-      flash[:error] = "Could not create your DashboardMessage, please try again"
-      redirect_to new_admin_dashboard_message_path
+      flash[:error] = "Could not create your Dashboard Message, please try again"
+      render_new @dashboardMessage
     end
   end
 
@@ -59,6 +53,42 @@ class Admin::DashboardMessagesController < AdminController
     @dashboardMessage = DashboardMessage.find(params[:id])
     @dashboardMessage.destroy
     redirect_to admin_dashboard_messages_path
+  end
+
+  def render_new dashboardMessage = nil
+    dashboardMessage ||= DashboardMessage.new
+
+    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
+    	:item => dashboardMessage,
+    	:model => DashboardMessage,
+    	:fields => [:message, :action_text, :action_url, :image_url]
+      }
+  end
+  
+  def render_edit dashboardMessage
+    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
+    	:item => dashboardMessage,
+    	:model => DashboardMessage,
+    	:fields => [:message, :action_text, :action_url, :image_url]
+    }
+  end  
+
+  def send_global
+    @dashboardMessage = DashboardMessage.find(params[:id])
+    unless @dashboardMessage
+      flash[:error] = "Invalid dashboard message"
+      redirect_to admin_dashboard_messages_path
+    end
+
+    result = facebook_session.application.add_global_news(@dashboardMessage.build_news, @dashboardMessage.image_url)
+    if result =~ /^[0-9]+$/
+      @dashboardMessage.set_success! result
+      flash[:success] = "Successfully sent your message"
+      redirect_to admin_dashboard_messages_path
+    else
+    	flash[:error] = "Could not send your message"
+      redirect_to admin_dashboard_messages_path
+    end
   end
 
   private

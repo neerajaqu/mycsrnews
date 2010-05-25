@@ -58,8 +58,14 @@ en:
   answers_label: "Answers"
   please_elaborate: "Please elaborate a bit more (optional)"
   active_users: "{{user_count}} users online now"
+  moderator_users: "Our Moderators"
+  invite_users_title: "Invite Your Friends"
+  invite_users_detail: "Choose Facebook friends to invite to our application"
+  invite_users_button: "Send Invitations"
   tags: "Tags"
   tags_hint: "Separate each tag with a comma e.g. dining options, raw food, seattle"
+  top_article_tags: "Popular Tags"
+  top_content_tags: "Popular Tags"
   logged_in_error: "You must be logged in to perform this action."
   questions:
     tab_title: "Answers"
@@ -68,7 +74,7 @@ en:
     list_subtitle: "Help your community by answering questions"
     my_list_title: "Your Questions"
     my_list_subtitle: "Here are the questions you've asked so far"
-    top_title: "top questions"
+    top_title: "Top questions"
     newest_title: "Newest Questions"
     unanswered_title: "Unanswered Questions"
     list: "Answer Questions"
@@ -82,6 +88,7 @@ en:
   articles:
     newest_title: "Newest Articles"
     featured_title: "Featured Article"
+    top_title: "Top Articles"
   static_pages:
     faq: "FAQ found here"
     about_us: "About Us found here"
