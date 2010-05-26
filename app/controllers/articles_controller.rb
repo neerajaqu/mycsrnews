@@ -30,6 +30,7 @@ class ArticlesController < ApplicationController
     @article.content = Content.new(params[:article][:content_attributes].merge(:article => @article))
     @article.content.caption = @article.body
     @article.author = current_user
+    @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.content.user = current_user
     if @article.save
       flash[:success] = "Successfully posted your story!"
