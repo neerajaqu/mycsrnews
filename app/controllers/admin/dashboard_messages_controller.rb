@@ -73,6 +73,34 @@ class Admin::DashboardMessagesController < AdminController
     }
   end  
 
+  def clear_global 
+    if params[:id]
+      @dashboardMessage = DashboardMessage.find(params[:id])
+      unless @dashboardMessage
+        flash[:error] = "Invalid dashboard message"
+        redirect_to admin_dashboard_messages_path
+      end
+      result = facebook_session.application.clear_global_news @dashboardMessage.news_id
+      @dashboardMessage.set_draft! result
+    else
+      result = facebook_session.application.clear_global_news
+      # clear status of all dashboard messages
+      @dashboardMessage = DashboardMessage.find(:all)
+      @dashboardMessage.each do |dashboardMessage|
+        dashboardMessage.set_draft! dashboardMessage.news_id
+      end
+    
+    end
+      
+#    if result =~ /^[0-9]+$/
+      flash[:success] = "Successfully cleared the message(s)"
+      redirect_to admin_dashboard_messages_path
+#    else
+#    	flash[:error] = "Could not clear the message(s)"
+#      redirect_to admin_dashboard_messages_path
+#    end
+  end
+  
   def send_global
     @dashboardMessage = DashboardMessage.find(params[:id])
     unless @dashboardMessage

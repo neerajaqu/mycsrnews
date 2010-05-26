@@ -97,6 +97,11 @@
                 %ul
                   %li= link_to 'Questions', admin_questions_path
                   %li= link_to 'Answers', admin_answers_path
+              %li
+                %a{:href => "#forums-questions"} Forums
+                %ul
+                  %li= link_to 'Forums', admin_forums_path
+                  %li= link_to 'Topics', admin_topics_path
           %li
             %a{:href => "#members"} Members
             %ul
@@ -105,6 +110,7 @@
             %a{:href => "#module-settings"} Communicate
             %ul
               %li= link_to 'Dashboard', admin_dashboard_messages_path
+              %li= link_to 'Clear Dashboard', clear_global_admin_dashboard_messages_path
           %li
             %a{:href => "#module-settings"} Settings
             %ul

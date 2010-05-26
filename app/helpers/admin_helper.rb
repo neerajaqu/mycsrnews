@@ -84,6 +84,7 @@ module AdminHelper
     end
     if item.class.name == 'DashboardMessage'
       links << link_to('Send', send_global_admin_dashboard_message_path(item)) unless item.sent?
+      links << link_to('Clear', clear_global_admin_dashboard_message_path(item)) if item.sent?
     end
     links.join ' | '
   end
