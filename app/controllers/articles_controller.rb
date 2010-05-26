@@ -30,6 +30,7 @@ class ArticlesController < ApplicationController
     @article.content = Content.new(params[:article][:content_attributes].merge(:article => @article))
     @article.content.caption = @article.body
     @article.author = current_user
+    @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.content.user = current_user
     if @article.save
       flash[:success] = "Successfully posted your story!"
@@ -38,6 +39,12 @@ class ArticlesController < ApplicationController
     	flash[:error] = "Could not create your article. Please fix the errors and try again."
     	render :new
     end
+  end
+
+  def tags
+    @paginate = true
+    @articles = Article.tagged_with(params[:tag], :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+
   end
 
   def set_slot_data

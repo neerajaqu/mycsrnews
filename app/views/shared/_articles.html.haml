@@ -1,6 +1,6 @@
 - page ||= ""
 - cache_if page.present?, "articles_list_#{page}html" do
-  - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - contents ||= Article.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - paginate ||= false
   .panel_1
     .panelBar
@@ -13,7 +13,8 @@
     .storyList
       .list_stories
         %ul
-          - contents.each do |content|
+          - contents.each do |article|
+            - content = article.is_a?(Article) ? article.content : article
             %li{'data-id' => content.cache_key}
               .thumb
                 - if content.images.present?

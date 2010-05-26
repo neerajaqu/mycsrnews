@@ -258,6 +258,8 @@ module ApplicationHelper
   def tag_link(tag, item)
     if item.class.name == 'Content'
     	tagged_stories_path(:tag => tag.name)
+    elsif item.class.name == 'Article'
+    	tagged_articles_path(:tag => tag.name)
     else
     	[item.class, tag]
     end

@@ -27,7 +27,7 @@ class StoriesController < ApplicationController
 
   def show
     @story = Content.find(params[:id])
-    tag_cloud @story
+    tag_cloud (@story.is_article? ? @story.article : @story)
     if MENU.key? 'articles'
       @current_tab = 'articles' if @story.is_article?
     end
