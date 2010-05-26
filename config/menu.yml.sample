@@ -10,6 +10,8 @@ menu:
   #articles:
     #articles_list: 'enabled'
     #new_article: 'enabled'
+  forums:
+  	#sub_forums: 'enabled' # uncomment to enable a drop down of all forums
   resources:
     resources_list: 'enabled'
     new_resource: 'enabled'
@@ -25,6 +27,4 @@ menu:
     events_list: 'enabled'
     new_event: 'enabled'
 	import_facebook: 'enabled'
-  forums:
-  	#sub_forums: 'enabled' # uncomment to enable a drop down of all forums
   admin:

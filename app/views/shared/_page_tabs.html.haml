@@ -36,7 +36,15 @@
                       %li= link_to t('.users_list'), users_path, :class => tab_selected?(@current_tab, 'articles')
                     - unless MENU['articles']['new_article'].nil?
                       %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'articles')
-
+        - if MENU.key? 'forums'
+          %li
+            .menu_item
+              = link_to t('.forums'), forums_path, :class => tab_selected?(@current_tab, 'forums')
+              - unless MENU['forums'].nil? or MENU['forums']['sub_forums'].nil?
+                .dropdown
+                  %ul
+                    - Forum.all.each do |forum|
+                      %li= link_to forum.name, forum_path(forum), :class => tab_selected?(@current_tab, 'forums')
         - if MENU.key? 'resources'
           %li
             .menu_item
@@ -48,15 +56,6 @@
                       %li= link_to t('.resources_list'), resources_path, :class => tab_selected?(@current_tab, 'resources')
                     - unless MENU['resources']['new_resource'].nil?
                       %li= link_to t('.new_resource'), new_resource_path, :class => tab_selected?(@current_tab, 'resources')
-        -#TODO:: SWITCH THIS TO Q&A
-        -# if MENU.key? 'stories'
-        -#%li
-          .menu_item
-            = link_to t('.blogs'), blogs_path, :class => tab_selected?(@current_tab, 'blogs')
-            .dropdown
-              %ul
-                %li= link_to t('.top_blogs'), blogs_path, :class => tab_selected?(@current_tab, 'blogs')
-                %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'blogs')
         - if MENU.key? 'ideas'
           %li
             .menu_item
@@ -99,20 +98,3 @@
                         %li= link_to t('.import_facebook'), import_facebook_events_path, :class => tab_selected?(@current_tab, 'events')
         - if MENU.key? 'cards'
           %li= link_to t('cards.menu_title'), cards_path, :class => tab_selected?(@current_tab, 'cards')
-        - if MENU.key? 'forums'
-          %li
-            .menu_item
-              = link_to t('.forums'), forums_path, :class => tab_selected?(@current_tab, 'forums')
-              - unless MENU['forums'].nil? or MENU['forums']['sub_forums'].nil?
-                .dropdown
-                  %ul
-                    - Forum.all.each do |forum|
-                      %li= link_to forum.name, forum_path(forum), :class => tab_selected?(@current_tab, 'forums')
-        -#TODO:: SWITCH THIS TO FORUM
-        -#%li
-          .menu_item
-            = link_to t('.blogs'), blogs_path, :class => tab_selected?(@current_tab, 'blogs')
-            .dropdown
-              %ul
-                %li= link_to t('.top_blogs'), blogs_path, :class => tab_selected?(@current_tab, 'blogs')
-                %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'blogs')
