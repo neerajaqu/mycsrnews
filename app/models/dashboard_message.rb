@@ -25,6 +25,12 @@ class DashboardMessage < ActiveRecord::Base
     ]
   end
 
+  def set_clear_success! news_id
+    self.news_id = news_id
+    self.status = 'draft'
+    save
+  end
+
   def set_success! news_id
     self.news_id = news_id
     self.status = 'sent'

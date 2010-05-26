@@ -90,6 +90,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :flags
     admin.resources :questions
     admin.resources :forums
+    admin.resources :topics
     admin.resources :answers    
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }
     admin.resources :contents
@@ -97,7 +98,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :newswires
     admin.resources :feeds
     admin.resources :announcements
-    admin.resources :dashboard_messages, :member => { :send_global => [:get, :post] }
+    admin.resources :dashboard_messages, :member => { :send_global => [:get, :post], :clear_global => [:get, :post] }, :collection => { :clear_global => [:get, :post] }
     admin.resources :comments
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true
