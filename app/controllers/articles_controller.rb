@@ -41,6 +41,12 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def tags
+    @paginate = true
+    @articles = Article.tagged_with(params[:tag], :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+
+  end
+
   def set_slot_data
     @ad_banner = Metadata.get_ad_slot('banner', 'articles')
     @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'articles')
