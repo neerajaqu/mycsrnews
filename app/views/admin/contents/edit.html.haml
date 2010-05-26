@@ -1,5 +1,5 @@
 %h2 Update Answer
-- semantic_form_for [:admin, @content] do |form|
+- semantic_form_for [:admin, @content], :html => { :multipart => true } do |form|
   = render :partial => 'content_form', :locals => { :form => form }
   - form.buttons do
     = form.commit_button
