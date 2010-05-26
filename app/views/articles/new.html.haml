@@ -9,7 +9,7 @@
     .panelBar
       %h2= t '.header'
     .formBox
-      - semantic_form_for @article do |form|
+      - semantic_form_for @article, :html => { :multipart => true } do |form|
         = render :partial => 'article_form', :locals => { :form => form }
         - form.buttons do
           = form.commit_button :button_html => { :class => 'btn' }
