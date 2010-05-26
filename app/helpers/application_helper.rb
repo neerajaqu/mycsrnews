@@ -256,10 +256,11 @@ module ApplicationHelper
   end
 
   def tag_link(tag, item)
+    tag_name = CGI.escape(tag.name)
     if item.class.name == 'Content'
-    	tagged_stories_path(:tag => tag.name)
+    	tagged_stories_path(:tag => tag_name)
     elsif item.class.name == 'Article'
-    	tagged_articles_path(:tag => tag.name)
+    	tagged_articles_path(:tag => tag_name)
     else
     	[item.class, tag]
     end
