@@ -80,7 +80,6 @@ class StoriesController < ApplicationController
   def tags
     @paginate = true
     @contents = Content.tagged_with(params[:tag], :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
-
   end
 
   def set_slot_data
