@@ -32,7 +32,9 @@ module AdminHelper
 
   def gen_new_link model
     set_model_vars model
-    link_to "New #{@model_name}", new_polymorphic_path([:admin, model])
+    unless model.name == 'Topic'
+      link_to "New #{@model_name}", new_polymorphic_path([:admin, model])
+    end
   end
 
   def gen_table(collection, model, fields, options = {})

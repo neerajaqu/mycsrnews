@@ -47,6 +47,7 @@ en:
   comments: "Comments"
   tweet: "Tweet"
   in: "in"
+  link_here: "Link to this page"
   asked_by: "Asked by {{fb_name}} {{date}} ago"
   answered_by: "Answered by {{fb_name}} {{date}} ago"
   answers_count: "{{answer_string}}"
@@ -135,3 +136,4 @@ en:
       voices_subtitle: "Users involved in this discussion"
       post_comment: "Reply to this topic"
       commit_reply: "Post your reply"
+      new: "Create a new topic"

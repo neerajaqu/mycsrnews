@@ -6,10 +6,10 @@
   .panel_1
     .panelBar
       %h2= t('forums.topics.list_title', :forum_name => forum.name)
+      %span.bar_link= fb_share_item_button(forum)
     .subtitle
       %span= t('forums.topics.list_subtitle', :forum_description => forum.description)
     .storyList
-      %h2= link_to "New Topic", new_forum_topic_path(forum)
       - if forum.topics.any?
         %table.tablesorter
           %thead
@@ -26,7 +26,7 @@
                 %td= topic.views_count
                 %td= t('posted_by', :fb_name => local_linked_profile_name(topic.replied_user), :date => time_ago_in_words(topic.replied_at))
       - else
-        %p No topics yet.
+        %p There are no topics yet, create one
       -#.list_stories
         %ul
           - forum.topics.each do |topic|
@@ -46,3 +46,6 @@
                   %h3== Last Active #{link_to forum.name, forum}
                   -#%span.btnComment.float_left= t('forums.topics.topics_count', :topics_count => forum.topics_count)
                   -#%span.btnComment.float_left= t('forums.topics.posts_count', :posts_count => forum.posts_count)
+  .panel_1
+    %div.float_left= link_to t('forums.topics.new'), new_forum_topic_path(forum), :class => "btn"
+  = render :partial => 'shared/item_footer', :locals => { :item => forum, :title => forum.name }
