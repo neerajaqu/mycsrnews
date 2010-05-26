@@ -28,7 +28,7 @@ namespace :n2 do
 end
 
 def update_feed(feed)
-  return new_update_feed(feed) if feed.load_all? and feed.loadOptions == 'full_html'
+  return new_update_feed(feed) if (feed.load_all? and feed.loadOptions == 'full_html') or feed.loadOptions == 'magic_parse'
   begin
      #rss = RSS::Parser.parse(open(feed.rss).read, false)
      rss = FeedParser.new(feed.rss)
