@@ -11,7 +11,7 @@ class MagicParse
     def title_fields; ['title', 'subtitle', 'link']; end
     def date_fields; ['updated', 'date', 'updated_at', 'pubDate', 'published', 'lastBuildDate', 'dc:date']; end
     def body_fields; ['description', 'content', 'summary', 'caption']; end
-    def link_fields; ['link', 'guid']; end
+    def link_fields; ['feedburner:origLink', 'link', 'guid']; end
     def image_fields; ['image', 'imageUrl', 'image_url', 'photo' 'logo', 'icon']; end
   end
 
