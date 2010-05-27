@@ -16,6 +16,8 @@ class MagicParse
   end
 
   def initialize url
+    @data = {}
+
     begin
       @doc = open(url) { |f| Hpricot.XML(f) }
     rescue => e
@@ -23,8 +25,6 @@ class MagicParse
       Rails.logger "ERROR::MagicParse(#{Time.now}) -- failed to open feed at #{feed.url} with error: #{e}"
       return false
     end
-      
-    @data = {}
   end
 
   def method_missing(name, *args)
