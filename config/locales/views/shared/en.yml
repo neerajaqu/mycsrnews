@@ -135,7 +135,7 @@ en:
       
     forms:
       flag_dropdown:
-        flag: "Flag this"  
+        flag: "flag"  
     
     users:
       users_title: "Top Members"
