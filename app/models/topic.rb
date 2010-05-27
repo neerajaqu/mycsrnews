@@ -24,6 +24,11 @@ class Topic < ActiveRecord::Base
 
   attr_accessor :body
 
+  def item_description
+    return self.posts.first.comments if self.posts.any?
+    "No topic description yet"
+  end
+
   def last_post
     self.posts.last
   end

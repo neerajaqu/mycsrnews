@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100521205635) do
+ActiveRecord::Schema.define(:version => 20100526231658) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -467,6 +467,7 @@ ActiveRecord::Schema.define(:version => 20100521205635) do
     t.boolean  "locked",          :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",      :default => false
   end
 
   add_index "topics", ["forum_id", "replied_at"], :name => "index_topics_on_forum_id_and_replied_at"

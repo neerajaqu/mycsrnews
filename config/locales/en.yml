@@ -125,6 +125,11 @@ en:
     subtitle: "Community Discussion"
     topics_count: "{{topics_count}} Topics"
     posts_count: "{{posts_count}} Posts"
+    top_forums_title: "Popular Forums"
+    top_topics_title: "Popular Topics"
+    newest_topics_title: "Newest Topics"
+    new: "Create a new Forum"
+    last_active: "Last active"
     topics:
       list_title: "{{forum_name}} Topics"
       list_subtitle: "{{forum_description}}"
@@ -137,3 +142,4 @@ en:
       post_comment: "Reply to this topic"
       commit_reply: "Post your reply"
       new: "Create a new topic"
+      new_header: "Create a New Topic"

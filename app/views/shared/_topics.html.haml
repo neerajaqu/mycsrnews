@@ -43,7 +43,7 @@
                 -#.profilePic= local_linked_profile_pic forum.user
                 .storyBlockMeta.float_left
                   -#%h3= t('forums.topics.last_active', :fb_name => local_linked_profile_name(forum.user), :date => time_ago_in_words(forum.created_at))
-                  %h3== Last Active #{link_to forum.name, forum}
+                  %h3== #{t('forums.last_active')} #{link_to forum.name, forum}
                   -#%span.btnComment.float_left= t('forums.topics.topics_count', :topics_count => forum.topics_count)
                   -#%span.btnComment.float_left= t('forums.topics.posts_count', :posts_count => forum.posts_count)
   .panel_1

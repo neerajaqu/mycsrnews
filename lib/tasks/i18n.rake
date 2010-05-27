@@ -10,4 +10,10 @@ namespace :i18n do
     end
   end
 
+  namespace :populate do
+    desc 'Updates and synchronizes'
+    task :update_and_sync => [:update_from_rails,:synchronize_translations] do
+    end
+  end
+
 end

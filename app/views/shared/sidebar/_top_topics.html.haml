@@ -1,0 +1,14 @@
+-# @expects: local 'topic'
+
+- cache :top_topics_html do
+  - top_topics ||= Topic.active({ :at_least => 1, :limit => 7, :order => "comments_count desc" })
+  - unless top_topics.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('forums.top_topics_title')
+      .list_stories.clearfix
+        %ul
+          - top_topics.each do |topic|
+            %li
+              .profilePic= local_linked_profile_pic topic.user
+              = link_to topic.title, topic_path(topic)
