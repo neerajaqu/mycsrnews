@@ -10,7 +10,8 @@ class Newswire < ActiveRecord::Base
     user_id ||= self.feed.user_id
     return false unless user_id and user_id > 0
 
-    caption = self.feed.full_html? ? self.caption : ActionController::Base.helpers.strip_tags(self.caption)
+    caption = CGI.unescapeHTML self.caption
+    caption = self.feed.full_html? ? caption : ActionController::Base.helpers.strip_tags(caption)
     story_type = self.feed.full_html? ? 'full_html' : 'story'
     @content = Content.new({
     	:title      => self.title,
