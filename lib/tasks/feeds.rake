@@ -28,7 +28,7 @@ namespace :n2 do
 end
 
 def update_feed(feed)
-  return new_update_feed(feed) if feed.load_all? and feed.loadOptions == 'full_html'
+  return new_update_feed(feed) if (feed.load_all? and feed.loadOptions == 'full_html') or feed.loadOptions == 'magic_parse'
   begin
      #rss = RSS::Parser.parse(open(feed.rss).read, false)
      rss = FeedParser.new(feed.rss)
@@ -72,6 +72,7 @@ end
 def new_update_feed(feed)
   puts "Running full parse on #{feed.title}"
   rss = MagicParse.new(feed.rss)
+  puts "The feed #{feed.title}(#{feed.url}) is presently invalid." or return false unless rss.present?
   items = rss.get_items
   puts "The feed #{feed.title}(#{feed.url}) is presently empty." or return false unless items.present?
   puts "Parsing #{feed.title} with #{items.size} items -- updated on #{rss.get_pub_date} -- last fetched #{feed.last_fetched_at}"

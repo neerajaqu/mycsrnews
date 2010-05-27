@@ -16,7 +16,14 @@ class MagicParse
   end
 
   def initialize url
-    @doc = open(url) { |f| Hpricot.XML(f) }
+    begin
+      @doc = open(url) { |f| Hpricot.XML(f) }
+    rescue => e
+      puts "Failed to open feed at #{feed.url} -- #{e}"
+      Rails.logger "ERROR::MagicParse(#{Time.now}) -- failed to open feed at #{feed.url} with error: #{e}"
+      return false
+    end
+      
     @data = {}
   end
 
@@ -43,10 +50,18 @@ class MagicParse
 
     result = (doc/singularize(element)) unless result.present? or singular?(element)
 
-    return (result.present? and html ? (plural?(element) ? result.map { |e| e.html } : result.html) : result)
+    return (result.present? and html ? (plural?(element) ? result.map { |e| inner_text(e) } : inner_text(result)) : result)
   end
 
   def get_pub_date; get_date || parse_value('date', items, true); end
+
+  def inner_text item
+    if item.children.any? and item.children.first.is_a?(Hpricot::CData)
+    	item.children.first.inner_text
+    else
+    	item.html
+    end
+  end
 
   def get_items
     results = []

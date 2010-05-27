@@ -38,9 +38,11 @@ class Newswire < ActiveRecord::Base
       	NewswireSweeper.expire_newswires
       	return true
       else
+      	errors.add(:content, @content.errors.full_messages.join('. '))
       	return false
       end
     rescue
+      	errors.add(:content, "Blew up")
       return false
     end
   end
