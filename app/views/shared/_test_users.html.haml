@@ -1,0 +1,29 @@
+.panel_1
+  .panelBar
+    %h2
+      Top Users
+  .storyList
+    .list_stories
+      %ul
+        %li.feature_bg
+          .thumb
+            = image_tag ('default/icon-fan-app.gif'), :class => "moderator"
+            %a= image_tag('default/default_thumb.gif')
+          .float_left
+            %h2.storyHead 
+              %a Johnny McJohn-john
+              
+            %p Seattle Wa
+          .storyBlockMeta.float_right
+            %h4.userPoints 11,340
+            %h3.userPoints points
+        %li
+          .thumb
+            =link_to image_tag('default/default_thumb.gif'), '#'
+          .float_left
+            %h2.storyHead 
+              %a name goes here
+            %p city and state
+          .storyBlockMeta.float_right
+            %h4.userPoints 11,340
+            %h3.userPoints points
