@@ -71,8 +71,12 @@ end
 
 def new_update_feed(feed)
   puts "Running full parse on #{feed.title}"
-  rss = MagicParse.new(feed.rss)
-  puts "The feed #{feed.title}(#{feed.url}) is presently invalid." or return false unless rss.present?
+  begin
+    rss = MagicParse.new(feed.rss)
+  rescue => e
+    puts "Failed to open feed at #{feed.url} -- #{e}"
+    return false
+  end
   items = rss.get_items
   puts "The feed #{feed.title}(#{feed.url}) is presently empty." or return false unless items.present?
   puts "Parsing #{feed.title} with #{items.size} items -- updated on #{rss.get_pub_date} -- last fetched #{feed.last_fetched_at}"
@@ -83,7 +87,7 @@ def new_update_feed(feed)
     items.each do |item|
       break if feed_date and Time.parse(item[:date]) <= feed_date
       next if Newswire.find_by_title item[:title]
-      next unless item[:body] and item[:link] and Time.parse(item[:title]) and item[:date]
+      next unless item[:body] and item[:link] and item[:title] and item[:date]
 
       puts "\tCreating newswire for \"#{item[:title].chomp}\""
 

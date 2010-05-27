@@ -16,14 +16,7 @@ class MagicParse
   end
 
   def initialize url
-    begin
-      @doc = open(url) { |f| Hpricot.XML(f) }
-    rescue => e
-      puts "Failed to open feed at #{feed.url} -- #{e}"
-      Rails.logger "ERROR::MagicParse(#{Time.now}) -- failed to open feed at #{feed.url} with error: #{e}"
-      return false
-    end
-      
+    @doc = open(url) { |f| Hpricot.XML(f) }
     @data = {}
   end
 
