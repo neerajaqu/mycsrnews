@@ -8,6 +8,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @comment.comments = @template.sanitize_user_content @comment.comments
     if @comment.save
+      if @comment.post_wall?
+        session[:post_wall] = @comment
+      end
     	# TODO:: change this to work with polymorphic associations, switch to using touch
     	#expire_page :controller => 'stories', :action => 'show', :id => @story
     	redirect_to @commentable
