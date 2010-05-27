@@ -22,7 +22,7 @@ class Content < ActiveRecord::Base
   named_scope :articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["created_at desc"]} }
   named_scope :top_articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["votes_tally desc"], :limit => (args.first || 5)} }
 
-  attr_accessor :image_url, :tags_string
+  attr_accessor :image_url, :tags_string, :post_wall
 
   validates_presence_of :title, :caption
   validates_presence_of :url, :if =>  :is_content?
@@ -39,6 +39,10 @@ class Content < ActiveRecord::Base
     	:order    => "votes.count desc"
     })
   end
+
+  def post_wall?
+    post_wall and post_wall.to_i != 0
+  end  
 
   def set_published
     return false unless self.is_newswire?
