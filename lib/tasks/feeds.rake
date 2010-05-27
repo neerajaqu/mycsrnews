@@ -87,7 +87,7 @@ def new_update_feed(feed)
     items.each do |item|
       break if feed_date and Time.parse(item[:date]) <= feed_date
       next if Newswire.find_by_title item[:title]
-      next unless item[:body] and item[:link] and Time.parse(item[:title]) and item[:date]
+      next unless item[:body] and item[:link] and item[:title] and item[:date]
 
       puts "\tCreating newswire for \"#{item[:title].chomp}\""
 
