@@ -59,7 +59,7 @@ class ArticlesController < ApplicationController
   def set_current_tab
     if MENU.key? 'articles'
       @current_tab = 'articles'
-    elsif
+    else
       @current_tab = 'stories'
     end
   end
