@@ -51,12 +51,12 @@ module FacebookHelper
     attachment = Facebooker::Attachment.new
     if item.respond_to?(:images) and item.images.present?
     	item.images.each do |image|
-    	  attachment.add_image(image_path(image.url(:thumb)), polymorphic_url(item, :only_path => false, :canvas => true))
+    	  attachment.add_image(image_path(image.url(:thumb)), polymorphic_url(item.item_link, :only_path => false, :canvas => true))
     	end
     end
     #stream_post.name = item.item_title
     stream_post.message = caption(strip_tags(item.item_description),200)
-    stream_post.action_links = [{:text => "Read more", :href => polymorphic_url(item, :only_path => false, :canvas => true)}]
+    stream_post.action_links = [{:text => "Read more", :href => polymorphic_url(item.item_link, :only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
 
     stream_post

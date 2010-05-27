@@ -24,8 +24,9 @@ en:
           body: "Edit body"
       comment:
         comments: "Comments"
-        new: # get this working
-          comments: "lkqjtwqe"
+        new: 
+          comments: "Share your thoughts below"
+          post_wall: "Post to your wall"
     hints:
       content:
         new:

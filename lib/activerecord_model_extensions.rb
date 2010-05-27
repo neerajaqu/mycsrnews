@@ -73,6 +73,10 @@ module Newscloud
         "#{self.class.name.underscore}_#{self.id}"
       end
 
+      def item_link
+        self
+      end
+      
       def item_title
         [:title, :name, :question].each do |method|
           return self.send(method) if self.respond_to?(method) and self.send(method).present?

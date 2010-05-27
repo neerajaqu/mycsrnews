@@ -31,7 +31,7 @@
           display: none !important
 
     = yield :head_content
-    = yield :head_content_bar
+              
     - stream_post = build_app_stream_post
     :javascript
       $(function() {
@@ -44,7 +44,12 @@
   %body
     #bodyWrapper
       = fb_connect_javascript_tag
-      = init_fb_connect "XFBML", :js => :jquery
+      - if @share_item
+        = init_fb_connect "XFBML", :js => :jquery do
+          = fb_connect_stream_publish(build_stream_post(@share_item), "Share #{@share_item.item_title}")
+      - else
+        = init_fb_connect "XFBML", :js => :jquery
+
       = render :partial => 'shared/header'
       = flash_messages
 
