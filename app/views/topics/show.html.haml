@@ -7,6 +7,7 @@
     .panel_1
       .panelBar
         %h2= t('forums.topics.item_title', :title => @topic.title)
+        %span.bar_link= fb_share_item_button(@topic)
       .subtitle
         %span= t('forums.topics.item_subtitle', :posts_count => @topic.comments_count, :voices_count => @topic.voices_count)
       .storyList
@@ -20,4 +21,6 @@
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @topic }
 
 #col_right
+  = render :partial => 'shared/sidebar/newest_topics'
+  = render :partial => 'shared/sidebar/top_topics'
   = render :partial => 'shared/sidebar/topic_voices', :locals => { :topic => @topic }
