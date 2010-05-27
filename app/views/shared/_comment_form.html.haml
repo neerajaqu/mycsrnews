@@ -17,6 +17,6 @@
           - form.inputs do
             = form.input :comments, :input_html => { :rows => '10', :cols => '60' }, :label => false
             - if current_user.facebook_user?
-              = form.input :post_wall, :as => :boolean, :label => t('post_wall')
+              = form.input :post_wall, :as => :boolean, :label => t('post_wall'), :required => false
           - form.buttons do
             = form.commit_button commit_text, :button_html => { :class => 'btn' }
