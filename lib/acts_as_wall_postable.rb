@@ -20,7 +20,7 @@ module Newscloud
           true
         end
         
-        def item_comments
+        def wall_caption
           return ''
         end
 
