@@ -48,7 +48,7 @@ module FacebookHelper
 
   def build_stream_post item
     stream_post = Facebooker::StreamPost.new
-    stream_post.message = caption(strip_tags(item.item_comments),400) # 420 is fb limit
+    stream_post.message = caption(strip_tags(item.wall_caption),400) # 420 is fb limit
     stream_post.action_links = [{:text => "Learn more", :href => polymorphic_url(item.item_link, :only_path => false, :canvas => true)}]
     attachment = Facebooker::Attachment.new
     if item.respond_to?(:images) and item.images.present?
