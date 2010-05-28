@@ -205,7 +205,7 @@ module ApplicationHelper
     url =  Rack::Utils.escape(path_to_self(item))
     text = "#{caption}+#{url}"
     twitter_url = "http://twitter.com/?status=#{text}"
-    is_configured = !APP_CONFIG['twitter_connect_key'].nil? || !APP_CONFIG['twitter_connect_key'].empty?
+    is_configured = APP_CONFIG['twitter_connect_key'].present?
     if button == true
       if is_configured
         link_to image_tag('/images/default/tweet_button.gif'), "#", :class => "tweetButton", :link => overlay_tweet_url(:text=>caption, :link=>url), :rel=>"#overlay"

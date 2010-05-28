@@ -50,7 +50,7 @@ defaults: &defaults
   zvent_location: 'Seattle, WA'
     
   #Twitter Settings
-  twitter_user: 'username'
+  #twitter_account: 'username'
   twitter_connect_key: 'key'
   twitter_oauth_key: 'key'
   twitter_oauth_secret: 'secret'
