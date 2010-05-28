@@ -19,10 +19,11 @@
     = pipe_spacer
     = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
     %span#follow-twitterapi
-    :javascript
-      twttr.anywhere(function (T) {
-        T('#follow-twitterapi').followButton("#{APP_CONFIG['twitter_user']}");
-      });
+    -if APP_CONFIG['twitter_user']
+      :javascript
+        twttr.anywhere(function (T) {
+          T('#follow-twitterapi').followButton("#{APP_CONFIG['twitter_user']}");
+        });
 
 #overlay.standard_overlay
   .contentWrap
