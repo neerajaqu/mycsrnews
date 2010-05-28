@@ -47,6 +47,11 @@ defaults: &defaults
   
   #Zvent settings
   zvent_api_key: 'FRXBFQTGJOMXVKIQSFGSBDFWYMLXSJPBQGJDGPXJICGBSGPWGULKGTJGOXXKLUOG'
+  
+  #Twitter Settings
+  twitter_connect_key: 'key'
+  twitter_oauth_key: 'key'
+  twitter_oauth_secret: 'secret'
 
 development:
   <<: *defaults

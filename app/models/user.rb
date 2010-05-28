@@ -41,7 +41,8 @@ class User < ActiveRecord::Base
   has_one :user_profile #TODO:: convert views and remove this
   has_many :received_cards, :class_name => "SentCard", :foreign_key => 'to_fb_user_id', :primary_key => 'fb_user_id', :conditions => 'sent_cards.to_fb_user_id IS NOT NULL'
   has_many :sent_cards, :class_name => "SentCard", :foreign_key => 'from_user_id'
-
+  has_one  :twitter,:class_name=>"TwitterToken", :dependent=>:destroy
+  
   has_karma :contents
 
   # HACK HACK HACK -- how to do attr_accessible from here?

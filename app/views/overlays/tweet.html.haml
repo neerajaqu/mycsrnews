@@ -1,0 +1,14 @@
+
+#tbox
+
+:javascript
+  twttr.anywhere(function (T) {
+
+  T('#tbox').tweetBox({
+     height: 100,
+     width: 400,
+     defaultContent: '#{@text} #{@link}',
+     label: 'Share this on Twitter'
+     });
+
+   });
