@@ -18,7 +18,7 @@
           - if logged_in?
             %li= fb_share_item_button(@story)
           %li
-            %a= twitter_share_item_link @story, @story.title
+            = twitter_share_item_link @story, @story.title
       .thumb
         - if @story.images.present?
           = image_tag @story.images.first.url(:medium)
@@ -47,9 +47,9 @@
   = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
   - if @story.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
-
 #col_right
   - cache "#{@story.cache_key}_sidebar_html" do
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
     = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }
     = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
+    

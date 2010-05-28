@@ -24,7 +24,7 @@
             = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => time_ago_in_words(@event.created_at))
           - if @tags.present?
             %h3== #{tag_list(@tags,@event)}
-          = link_to("Original Event Link", @event.url) if @event.url 
+          = link_to(t('.view'), @event.url, :class=>"btn", :target=>"_new") if @event.url 
           - if @event.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
       %div.bodyArticle= sanitize @event.description

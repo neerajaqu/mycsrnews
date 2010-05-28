@@ -47,6 +47,13 @@ defaults: &defaults
   
   #Zvent settings
   zvent_api_key: 'FRXBFQTGJOMXVKIQSFGSBDFWYMLXSJPBQGJDGPXJICGBSGPWGULKGTJGOXXKLUOG'
+  zvent_location: 'Seattle, WA'
+    
+  #Twitter Settings
+  twitter_user: 'username'
+  twitter_connect_key: 'key'
+  twitter_oauth_key: 'key'
+  twitter_oauth_secret: 'secret'
 
 development:
   <<: *defaults

@@ -54,7 +54,7 @@ class Event < ActiveRecord::Base
           :pic_small => facebook_event.pic_small,
           :update_time => facebook_event.update_time,
           :tagline => facebook_event.tagline,
-          :url => "http://www.facebook.com/event.php?eid="+facebook_event.eid)
+          :url => "http://www.facebook.com/event.php?eid="+facebook_event.eid.to_s)
     end
   end
 
@@ -79,7 +79,7 @@ class Event < ActiveRecord::Base
       :country => zvent.venue.country,
       :creator => nil, #not yet support in gem
       :pic => image,
-      :url => "http://www.zvents.com/"+zvent.zurl)
+      :url => "http://www.zvents.com"+zvent.zurl)
     end
   end
 end

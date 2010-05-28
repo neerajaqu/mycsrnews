@@ -18,6 +18,39 @@
       = link_to t('.admin'), admin_path
     = pipe_spacer
     = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
+    %span#follow-twitterapi
+    -if APP_CONFIG['twitter_user']
+      :javascript
+        twttr.anywhere(function (T) {
+          T('#follow-twitterapi').followButton("#{APP_CONFIG['twitter_user']}");
+        });
+
+#overlay.standard_overlay
+  .contentWrap
+  
+:javascript
+  $(function() {
+
+  	// if the function argument is given to overlay,
+  	// it is assumed to be the onBeforeLoad event listener
+  	$("a[rel]").overlay({
+
+  		mask: 'white',
+  		effect: 'apple',
+
+  		onBeforeLoad: function() {
+
+  			// grab wrapper element inside content
+  			var wrap = this.getOverlay().find(".contentWrap");
+
+  			// load the page specified in the trigger
+  			wrap.load(this.getTrigger().attr("link"));
+  			
+  			
+  		}
+
+  	});
+  });
 -#    = pipe_spacer
 -#    %span= t('.locale')
 -#    = link_to "EN", root_path(:locale => :en)

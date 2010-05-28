@@ -72,9 +72,7 @@ module ApplicationHelper
   end
 
   def linked_story_caption(story, length = 150, url = false, options = {})
-    caption = caption(story.caption, length).sanitize(:tags => %w(del, dd, h3, address, big, sub, tt, a, ul, h4, cite, dfn, h5, small, kbd, code,
-       b, ins, h6, sup, pre, strong, blockquote, acronym, dt, br, p, div, samp,
-       li, ol, var, em, h1, i, abbr, h2, span, hr), :attributes => %w(name, href, cite, class, title, src, height, datetime, alt, abbr, width))
+    caption = caption(story.caption, length).sanatize_standard
     "#{caption} #{link_to 'More', (url ? url : story_path(story, options))}"
   end
 
@@ -203,15 +201,25 @@ module ApplicationHelper
   end
 
   def twitter_share_item_link(item,caption,button=false)
-    caption = strip_tags(caption)
-    url = path_to_self(item)
-    text = CGI.escape("#{caption} #{url}")
+    caption =  Rack::Utils.escape(strip_tags(caption))
+    url =  Rack::Utils.escape(path_to_self(item))
+    text = "#{caption}+#{url}"
     twitter_url = "http://twitter.com/?status=#{text}"
+    is_configured = !APP_CONFIG['twitter_connect_key'].nil? || !APP_CONFIG['twitter_connect_key'].empty?
     if button == true
-      link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
+      if is_configured
+        link_to image_tag('/images/default/tweet_button.gif'), "#", :class => "tweetButton", :link => overlay_tweet_url(:text=>caption, :link=>url), :rel=>"#overlay"
+      else
+        link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
+      end
     else
-      link_to t('tweet'), twitter_url
+      if is_configured
+        link_to t('tweet'), "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url)
+      else
+        link_to t('tweet'), twitter_url
+      end
     end
+
   end
       
   def base_url(path)

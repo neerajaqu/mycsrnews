@@ -122,4 +122,7 @@ class UsersController < ApplicationController
     end
   end
 
+  def link_twitter_account
+    
+  end
 end
