@@ -6,7 +6,7 @@
     = form.input :newswire_id, :as => :hidden
   = form.input :caption, :input_html => { :rows => '10', :cols => '20' }
   = form.input :tags_string, :required => false, :hint => t('tags_hint')
-  - if current_user.facebook_user?
-    = form.input :post_wall, :as => :boolean, :label => t('post_wall'), :required => false
   %ul#image_selector.jcarousel-skin-tango{:style => "left: 0px;"}
   = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => story }
+  - if current_user.facebook_user?
+    = form.input :post_wall, :as => :boolean, :label => t('post_wall'), :required => false
