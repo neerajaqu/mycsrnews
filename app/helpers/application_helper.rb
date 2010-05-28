@@ -203,12 +203,21 @@ module ApplicationHelper
   def twitter_share_item_link(item,caption,button=false)
     caption =  Rack::Utils.escape(strip_tags(caption))
     url =  Rack::Utils.escape(path_to_self(item))
-    #text = CGI.escape("#{caption} #{url}")
-    #twitter_url = "http://twitter.com/?status=#{text}"
+    text = "#{caption}+#{url}"
+    twitter_url = "http://twitter.com/?status=#{text}"
+    is_configured = !APP_CONFIG['twitter_connect_key'].empty?
     if button == true
-      link_to image_tag('/images/default/tweet_button.gif'), "#", :class => "tweetButton", :link => overlay_tweet_url(:text=>caption, :link=>url)
+      if is_configured
+        link_to image_tag('/images/default/tweet_button.gif'), "#", :class => "tweetButton", :link => overlay_tweet_url(:text=>caption, :link=>url), :rel=>"#overlay"
+      else
+        link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
+      end
     else
-      link_to t('tweet'), "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url)
+      if is_configured
+        link_to t('tweet'), "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url)
+      else
+        link_to t('tweet'), twitter_url
+      end
     end
 
   end
