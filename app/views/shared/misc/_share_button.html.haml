@@ -4,7 +4,7 @@
   $(function() {
     $('##{item.muid}').click(function(event) {
       event.preventDefault();
-      #{fb_connect_stream_publish(stream_post, "Share #{item.item_title}")}
+      #{fb_connect_stream_publish(stream_post, t('facebook_share'))}
     });
   });
 

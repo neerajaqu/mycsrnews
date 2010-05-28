@@ -80,7 +80,7 @@ module Newscloud
       def item_link
         self
       end
-      
+            
       def item_title
         [:title, :name, :question].each do |method|
           return self.send(method) if self.respond_to?(method) and self.send(method).present?
@@ -93,6 +93,11 @@ module Newscloud
           return self.send(method) if self.respond_to?(method) and self.send(method).present?
         end
         "#{self.class.name.titleize} ##{self.id}"
+      end
+
+      def item_comments
+        return '' unless self.comments.present?
+        self.comments
       end
 
       # Breadcrumb parents method

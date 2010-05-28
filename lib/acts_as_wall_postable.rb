@@ -12,12 +12,16 @@ module Newscloud
         def acts_as_wall_postable
           include Newscloud::Acts::WallPostable::InstanceMethods
         end
-                
+                        
       end
 
       module InstanceMethods
         def wall_postable?
           true
+        end
+        
+        def item_comments
+          return ''
         end
 
         attr_accessor :post_wall

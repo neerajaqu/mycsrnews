@@ -43,6 +43,7 @@ en:
   post_wall: "Post on my Facebook wall"
   posted_by: "Posted by {{fb_name}} {{date}} ago"
   read_more: "read more"
+  facebook_share: "What do you want to write on your wall?"
   like: "Like"
   dislike: "Dislike"
   comments: "Comments"

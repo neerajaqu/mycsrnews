@@ -26,7 +26,7 @@ class Comment < ActiveRecord::Base
   end
 
   def item_description
-    self.comments
+    self.commentable.item_description
   end
 
   def item_link
