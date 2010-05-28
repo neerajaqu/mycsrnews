@@ -36,6 +36,10 @@ module Newscloud
     module InstanceMethods
 
       # Misc continuity methods for working with mixins
+      def wall_postable?
+        false
+      end
+
       def moderatable?
         false
       end

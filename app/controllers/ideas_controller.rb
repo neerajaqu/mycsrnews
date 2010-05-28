@@ -41,6 +41,9 @@ class IdeasController < ApplicationController
     end
 
     if @idea.save
+      if @idea.post_wall?
+        session[:post_wall] = @idea
+      end      
     	flash[:success] = "Thank you for your idea!"
     	redirect_to @idea_board.present? ? [@idea_board, @idea] : @idea
     else

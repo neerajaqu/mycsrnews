@@ -18,6 +18,10 @@ ActiveRecord::Base.send :include, Newscloud::Acts::Moderatable
 require "#{RAILS_ROOT}/lib/acts_as_refineable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Refineable
 
+# Load acts_as_wall_postable mixin
+require "#{RAILS_ROOT}/lib/acts_as_wall_postable.rb"
+ActiveRecord::Base.send :include, Newscloud::Acts::WallPostable
+
 require "#{RAILS_ROOT}/lib/locale_extensions.rb"
 
 require "#{RAILS_ROOT}/lib/zvent_gem_addon.rb"
