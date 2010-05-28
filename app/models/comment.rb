@@ -28,6 +28,10 @@ class Comment < ActiveRecord::Base
   def item_description
     self.commentable.item_description
   end
+  
+  def wall_caption
+    self.comments
+  end
 
   def item_link
     self.commentable
