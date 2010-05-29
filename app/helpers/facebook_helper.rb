@@ -22,7 +22,7 @@ module FacebookHelper
     attachment = Facebooker::Attachment.new
 	  attachment.add_image(image_path('default/icon-fan-app.gif'), home_index_path(:only_path => false, :canvas => true))
     stream_post.message = t('header.share_description')
-    stream_post.action_links = [{:text => "Learn more", :href => home_index_path(:only_path => false, :canvas => true)}]
+    stream_post.action_links = [{:text => t('facebook_learn_more'), :href => home_index_path(:only_path => false, :canvas => true)}]
     stream_post.attachment = attachment
 
     render :partial => 'shared/misc/share_app_button', :locals => {:stream_post => stream_post}
@@ -49,7 +49,7 @@ module FacebookHelper
   def build_stream_post item
     stream_post = Facebooker::StreamPost.new
     stream_post.message = caption(strip_tags(item.wall_caption),400) # 420 is fb limit
-    stream_post.action_links = [{:text => "Learn more", :href => polymorphic_url(item.item_link, :only_path => false, :canvas => true)}]
+    stream_post.action_links = [{:text => t('facebook_learn_more'), :href => polymorphic_url(item.item_link, :only_path => false, :canvas => true)}]
     attachment = Facebooker::Attachment.new
     if item.respond_to?(:images) and item.images.present?
     	item.images.each do |image|
@@ -67,7 +67,7 @@ module FacebookHelper
     # todo - is this not being used
     stream_post = Facebooker::StreamPost.new
     stream_post.message = ''
-    stream_post.action_links = [{:text => "Learn more", :href => home_index_path(:only_path => false, :canvas => true)}]
+    stream_post.action_links = [{:text => t('facebook_learn_more'), :href => home_index_path(:only_path => false, :canvas => true)}]
     attachment = Facebooker::Attachment.new
     attachment.name = APP_CONFIG['site_title']
     attachment.description = t('header.share_description')

@@ -45,6 +45,7 @@ en:
   posted_by: "Posted by {{fb_name}} {{date}} ago"
   read_more: "read more"
   facebook_share: "What do you want to write on your wall?"
+  facebook_learn_more: "Learn more"
   like: "Like"
   dislike: "Dislike"
   comments: "Comments"
