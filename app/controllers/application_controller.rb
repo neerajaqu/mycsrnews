@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   
   def set_p3p_header
     #required for IE in iframe FB environments if sessions are to work.
-    headers['P3P:CP'] = "IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+    headers['P3P'] = 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"'
   end
   
   def set_facebook_session_wrapper
