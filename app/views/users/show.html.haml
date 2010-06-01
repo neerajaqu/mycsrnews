@@ -5,7 +5,7 @@
     .panel_block
       .thumb
         = fb_profile_pic @user, :size => 'normal', :width => '180'
-        - if current_user.is_moderator?
+        - if @user.is_moderator?
           = image_tag 'default/icon-fan-app.gif', :class => "moderator"
       .storyBlockWrap
         %h1= profile_fb_name (@user,nil, false, false)
