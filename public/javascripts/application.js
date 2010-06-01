@@ -38,7 +38,7 @@ $(function() {
   $('.account-toggle').click(function(event) {
   	event.preventDefault();
 	if ($(this).next().children().length==0) {
-		$(this).next().html("<img src=\"/images/spinner-tiny.gif\" />");
+		$(this).next().html("<img src=\"/images/default/spinner-tiny.gif\" />");
   	$(this).next().toggle(); // after spinner appears, toggle it
  		$(this).next().load('/account_menu.js', function() {
   			rebuild_facebook_dom();
@@ -101,7 +101,7 @@ $(function() {
 	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').click(function(event) {
 		event.preventDefault();
 		var span = $(this).parent();
-		$(this).parent().html("<img src=\"/images/spinner-tiny.gif\" />");
+		$(this).parent().html("<img src=\"/images/default/spinner-tiny.gif\" />");
 		var url = $(this).attr("href");
     url = url.replace(/\?return_to=.*$/, '');
     if (url.substring(url.length - 5) == '.html') {
@@ -142,7 +142,7 @@ $(function() {
 		event.preventDefault();
 		var span = $(this).parent();
     var $li_parent = $(this).parents().filter('li').first();
-		$(this).parent().html("<img src=\"/images/spinner.gif\" />");
+		$(this).parent().html("<img src=\"/images/default/spinner.gif\" />");
 		var url = $(this).attr("href");
     url = url.replace(/\?return_to=.*$/, '');
     if (url.substring(url.length - 5) == '.html') {
