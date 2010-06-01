@@ -1,0 +1,13 @@
+-# @expects: local 'moderator_users'
+
+- cache :moderator_users_html, :expires_in => 60.minute do
+  - moderator_users ||= User.find( :all, :conditions => ["is_moderator =1 OR is_editor=1"], :limit => 40, :order => "created_at desc" )
+  - unless moderator_users.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('moderator_users', :user_count => moderator_users.size)
+      .userBlockWrap.clearfix
+        %ul
+          - moderator_users.each do |user|
+            %li
+              .profilePic= local_linked_profile_pic user, :width => '30', :height => '30'

@@ -1,0 +1,10 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  
+#col_left
+  = render :partial => 'shared/users', :locals => { :users => @users, :paginate => @paginate, :page => @page }
+  
+#col_right
+  = render :partial => 'shared/sidebar/invite_users'
+  = render :partial => 'shared/sidebar/active_users'
+  = render :partial => 'shared/sidebar/newest_users'

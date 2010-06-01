@@ -1,3 +1,4 @@
+require 'zvent'
 class Admin::EventsController < AdminController
 
   def index
@@ -31,11 +32,26 @@ class Admin::EventsController < AdminController
     @event = Event.new(params[:event])
     @event.user = current_user
     if @event.save
-      flash[:success] = "Successfully created your new Event !"
+      flash[:success] = "Successfully created your new Event!"
       redirect_to [:admin, @event]
     else
       flash[:error] = "Could not create your Event , please try again"
       render :new
+    end
+  end
+  
+  def import_zvents
+    if request.post?
+      zvent =Zvent::Session.new(APP_CONFIG['zvent_api_key'])
+      zevents = zvent.find_events_by_date('next month')
+      zevents[:events].each do |event|
+        Event.create_from_zvent_event(event,current_user)
+      end
+      redirect_to [:admin]
+    else
+      zvent =Zvent::Session.new(APP_CONFIG['zvent_api_key'])
+      zevents = zvent.find_events_by_date('next month')
+      @events = zevents[:events]
     end
   end
 

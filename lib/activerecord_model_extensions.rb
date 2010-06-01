@@ -73,6 +73,10 @@ module Newscloud
         "#{self.class.name.underscore}_#{self.id}"
       end
 
+      def item_link
+        self
+      end
+      
       def item_title
         [:title, :name, :question].each do |method|
           return self.send(method) if self.respond_to?(method) and self.send(method).present?
@@ -85,6 +89,24 @@ module Newscloud
           return self.send(method) if self.respond_to?(method) and self.send(method).present?
         end
         "#{self.class.name.titleize} ##{self.id}"
+      end
+
+      # Breadcrumb parents method
+      # Overwrite as [self.story.crumb_items]
+      def crumb_parents
+        []
+      end
+
+      def crumb_items
+        [self, self.crumb_parents].flatten
+      end
+
+      def crumb_text
+        self.item_title
+      end
+
+      def crumb_link
+        self
       end
 
     end

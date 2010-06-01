@@ -16,21 +16,17 @@
               .eventDetailsBlock
                 .storyBlockWrap
                   %h4
-                    %span.tag
-                      Event:
                     = link_to event.name, event_path(event)
                   .profilePic= local_linked_profile_pic event.user, :size => :square
                   .storyBlockMeta
                     %h3= t('.events_asked_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))                  
                     %span.btnComment.float_left== #{like_link event} #{event.votes_tally}
                     %span.btnComment.float_left== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
-                    %span.btnComment.float_left= fb_share_button(events_url(event))
               .eventLocationBlock
-                %ul
-                  %li 
-                    %b Specific Location
-                  %li== #{event.location}
-                  %li== #{event.start_time}
+              %ul
+                %li 
+                  %b== #{event.location}
+                %li== #{event.start_time.to_s :short_with_time}
 
     - if paginate
       .clearfix

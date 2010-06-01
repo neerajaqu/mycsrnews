@@ -14,11 +14,41 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :comments
 
+  after_create :custom_callback
+  attr_accessor :post_wall
+
+  def post_wall?
+    post_wall and post_wall.to_i != 0
+  end
+  
   def item_title
     "Comment on #{self.commentable.item_title}"
   end
 
+  def item_description
+    self.comments
+  end
+
+  def item_link
+    self.commentable
+  end
+  
   def downvoteable?
     true
   end
+
+  def forum_post?
+    self.commentable_type == 'Topic'
+  end
+
+  def crumb_parents
+    [self.commentable.crumb_items].flatten
+  end
+
+  private
+
+  def custom_callback
+    self.commentable.comments_callback if self.commentable.respond_to?(:comments_callback)
+  end
+
 end

@@ -1,4 +1,4 @@
-- select_options ||= ['Newest', 'Top Rated'].collect {|k| [k, k.gsub(/\s+/, '_')]}
+- select_options ||= ['Newest', 'Top rated'].collect {|k| [k, k.gsub(/\s+/, '_')]}
 = link_to 'Refine Results', '#', :class => "refine-toggle"
 .refine-box{:style => "display: none"}
   .refine-tab

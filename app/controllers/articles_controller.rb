@@ -7,7 +7,18 @@ class ArticlesController < ApplicationController
   before_filter :load_top_stories, :only => [:index]
   before_filter :load_top_discussed_stories, :only => [:index]
   before_filter :load_newest_articles, :only => [:index]
-  
+
+  def index
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
+    @current_sub_tab = 'Browse Articles'
+    @articles = Content.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    #@article_images = Image.find(:all, :conditions => ["imageable_type = ?", "Article"], :order => "created_at desc")  
+    respond_to do |format|
+      format.html { @paginate = true }
+      format.json { @articles = Content.refine(params) }
+    end
+  end
+    
   def new
     @current_sub_tab = 'New Article'
     @article = Article.new
@@ -19,6 +30,7 @@ class ArticlesController < ApplicationController
     @article.content = Content.new(params[:article][:content_attributes].merge(:article => @article))
     @article.content.caption = @article.body
     @article.author = current_user
+    @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.content.user = current_user
     if @article.save
       flash[:success] = "Successfully posted your story!"
@@ -27,6 +39,13 @@ class ArticlesController < ApplicationController
     	flash[:error] = "Could not create your article. Please fix the errors and try again."
     	render :new
     end
+  end
+
+  def tags
+    tag_name = CGI.unescape(params[:tag])
+    @paginate = true
+    @articles = Article.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+
   end
 
   def set_slot_data
@@ -38,7 +57,11 @@ class ArticlesController < ApplicationController
   private
 
   def set_current_tab
-    @current_tab = 'stories'
+    if MENU.key? 'articles'
+      @current_tab = 'articles'
+    else
+      @current_tab = 'stories'
+    end
   end
 
 end

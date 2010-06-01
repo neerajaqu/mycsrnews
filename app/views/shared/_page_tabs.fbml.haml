@@ -90,6 +90,8 @@
                       %li= link_to t('.events_list'), events_path, :class => tab_selected?(@current_tab, 'events')
                     - unless MENU['events']['new_event'].nil?
                       %li= link_to t('.new_event'), new_event_path, :class => tab_selected?(@current_tab, 'events')
+                    - unless MENU['events']['import_facebook'].nil?
+                      %li= link_to t('.import_facebook'), import_facebook_events_path, :class => tab_selected?(@current_tab, 'events')
         - if MENU.key? 'cards'
           %li= link_to t('cards.menu_title'), cards_path, :class => tab_selected?(@current_tab, 'cards')
         -#TODO:: SWITCH THIS TO FORUM

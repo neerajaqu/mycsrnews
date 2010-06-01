@@ -27,7 +27,10 @@ class StoriesController < ApplicationController
 
   def show
     @story = Content.find(params[:id])
-    tag_cloud @story
+    tag_cloud (@story.is_article? ? @story.article : @story)
+    if MENU.key? 'articles'
+      @current_tab = 'articles' if @story.is_article?
+    end
   end
 
   def new
@@ -75,9 +78,9 @@ class StoriesController < ApplicationController
   end
 
   def tags
+    tag_name = CGI.unescape(params[:tag])
     @paginate = true
-    @contents = Content.tagged_with(params[:tag], :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
-
+    @contents = Content.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
 
   def set_slot_data

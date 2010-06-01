@@ -22,11 +22,15 @@ ActionController::Routing::Routes.draw do |map|
   map.app_tab '/app_tab.:format', :controller => 'home', :action => 'app_tab'
   map.resources :users, :collection => {:link_user_accounts => :get, :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
 
+  map.resources :forums, :has_many => [:topics]
+  map.resources :topics, :has_many => [:comments]
   map.resource :session
   map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
 
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
+  map.paged_articles_with_format '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
+  map.paged_articles '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
   map.paged_ideas '/ideas/page/:page.:format', :controller => 'ideas', :action => 'index'
   map.paged_newswires '/newswires/page/:page.:format', :controller => 'newswires', :action => 'index'
   map.paged_my_events '/events/:id/my_events/page/:page.:format', :controller => 'events', :action => 'my_events'
@@ -37,6 +41,10 @@ ActionController::Routing::Routes.draw do |map|
   map.paged_my_questions '/questions/:id/my_questions/page/:page.:format', :controller => 'questions', :action => 'my_questions'
   map.tagged_stories_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
   map.tagged_stories '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
+  map.tagged_contents_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
+  map.tagged_contents '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
+  map.tagged_articles_with_page '/articles/tag/:tag/page/:page.:format', :controller => 'articles', :action => 'tags'
+  map.tagged_articles '/articles/tag/:tag.:format', :controller => 'articles', :action => 'tags'
   map.idea_tag_with_page '/ideas/tag/:tag/page/:page.:format', :controller => 'ideas', :action => 'tags'
   map.idea_tag '/ideas/tag/:tag.:format', :controller => 'ideas', :action => 'tags'
   map.resource_tag_with_page '/resources/tag/:tag/page/:page.:format', :controller => 'resources', :action => 'tags'
@@ -47,13 +55,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags], :as => 'stories'
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] },:has_many => [ :flags]
 
-  map.resources :articles
+  map.resources :articles, :collection => { :index => [:get, :post] }
+  map.resources :users, :collection => { :index => [:get, :post] }
   map.resources :newswires, :member => { :quick_post => [:get, :post] }
   map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :idea_boards, :has_many => :ideas
   map.resources :resources, :member => { :like => [:get, :post], :my_resources => [:get, :post] }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :resource_sections, :has_many => :resources
-  map.resources :events, :member => { :like => [:get, :post],:my_events => [:get, :post] }, :collection => { :index => [:get, :post] },:has_many => [:comments, :flags]
+  map.resources :events, :member => { :like => [:get, :post],:my_events => [:get, :post] }, :collection => { :index => [:get, :post], :import_facebook => [:get, :post] },:has_many => [:comments, :flags]
   map.resources :questions, :member => { :like => [:get, :post], :create_answer => :post, :my_questions => [:get, :post] }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :answers, :flags]
   map.resources :answers, :member => { :like => [:get, :post] }, :has_many => [:comments, :answers, :flags]
   map.received_card '/cards/received/:card_id/from/:user_id.:format', :controller => 'cards', :action => 'received'
@@ -77,9 +86,11 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :idea_boards
     admin.resources :resources
     admin.resources :resource_sections
-    admin.resources :events
+    admin.resources :events, :collection => { :import_zvents => [:get, :post]}
     admin.resources :flags
     admin.resources :questions
+    admin.resources :forums
+    admin.resources :topics
     admin.resources :answers    
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }
     admin.resources :contents
@@ -87,7 +98,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :newswires
     admin.resources :feeds
     admin.resources :announcements
-    admin.resources :dashboard_messages
+    admin.resources :dashboard_messages, :member => { :send_global => [:get, :post], :clear_global => [:get, :post] }, :collection => { :clear_global => [:get, :post] }
     admin.resources :comments
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true

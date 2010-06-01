@@ -14,6 +14,7 @@
       = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
     = stylesheet_link_tag 'cards'
+    = stylesheet_link_tag 'tablesorter'
 
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', 'application'
     = javascript_include_tag '/users/current'
@@ -30,7 +31,7 @@
           display: none !important
 
     = yield :head_content
-    = yield :head_content_bar
+              
     - stream_post = build_app_stream_post
     :javascript
       $(function() {
@@ -43,7 +44,12 @@
   %body
     #bodyWrapper
       = fb_connect_javascript_tag
-      = init_fb_connect "XFBML", :js => :jquery
+      - if @share_item
+        = init_fb_connect "XFBML", :js => :jquery do
+          = fb_connect_stream_publish(build_stream_post(@share_item), "Share #{@share_item.item_title}")
+      - else
+        = init_fb_connect "XFBML", :js => :jquery
+
       = render :partial => 'shared/header'
       = flash_messages
 

@@ -9,13 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20100516002048) do
-
+ActiveRecord::Schema.define(:version => 20100526231658) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
-    t.string   "title",      :default => "",       :null => false
+    t.string   "title",                            :null => false
     t.text     "details"
     t.string   "url"
     t.string   "mode",       :default => "rotate"
@@ -101,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
   end
 
   add_index "comments", ["commentable_type", "commentable_id"], :name => "index_comments_on_commentable_type_and_commentable_id"
+  add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
 
   create_table "content_images", :force => true do |t|
     t.string   "url",        :default => ""
@@ -140,9 +139,13 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
     t.integer  "flags_count",                       :default => 0
     t.integer  "votes_tally",                       :default => 0
     t.integer  "newswire_id"
+    t.string   "story_type",                        :default => "story"
+    t.string   "summary"
+    t.text     "full_html"
   end
 
   add_index "contents", ["contentid"], :name => "contentid"
+  add_index "contents", ["story_type"], :name => "index_contents_on_story_type"
   add_index "contents", ["title"], :name => "relatedItems"
   add_index "contents", ["title"], :name => "relatedText"
 
@@ -155,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "news_id"
   end
 
   create_table "events", :force => true do |t|
@@ -189,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
     t.datetime "featured_at"
     t.boolean  "is_blocked",     :default => false
     t.integer  "flags_count",    :default => 0
+    t.string   "url"
   end
 
   add_index "events", ["eid"], :name => "index_events_on_eid"
@@ -243,6 +248,16 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
   end
 
   add_index "flags", ["flaggable_type", "flaggable_id"], :name => "index_flags_on_flaggable_type_and_flaggable_id"
+
+  create_table "forums", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "topics_count",   :default => 0
+    t.integer  "comments_count", :default => 0
+    t.integer  "position",       :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "idea_boards", :force => true do |t|
     t.string   "name"
@@ -368,7 +383,7 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
   end
 
   create_table "resources", :force => true do |t|
-    t.string   "title",               :default => "",    :null => false
+    t.string   "title",                                  :null => false
     t.text     "details"
     t.string   "url"
     t.string   "mapUrl"
@@ -401,7 +416,7 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
   add_index "sent_cards", ["to_fb_user_id"], :name => "index_sent_cards_on_to_fb_user_id"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :default => "", :null => false
+    t.string   "session_id", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -439,6 +454,26 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
     t.string "name"
   end
 
+  create_table "topics", :force => true do |t|
+    t.integer  "forum_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.integer  "views_count",     :default => 0
+    t.integer  "comments_count",  :default => 0
+    t.datetime "replied_at"
+    t.integer  "replied_user_id"
+    t.integer  "sticky",          :default => 0
+    t.integer  "last_comment_id"
+    t.boolean  "locked",          :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_blocked",      :default => false
+  end
+
+  add_index "topics", ["forum_id", "replied_at"], :name => "index_topics_on_forum_id_and_replied_at"
+  add_index "topics", ["forum_id"], :name => "index_topics_on_forum_id"
+  add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
+
   create_table "translations", :force => true do |t|
     t.string  "key"
     t.text    "raw_key"
@@ -450,15 +485,15 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
   add_index "translations", ["locale_id", "key", "pluralization_index"], :name => "index_translations_on_locale_id_and_key_and_pluralization_index"
 
   create_table "user_profiles", :force => true do |t|
-    t.integer   "user_id",               :limit => 8,                    :null => false
-    t.integer   "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean   "isAppAuthorized",                    :default => false
-    t.datetime  "born_at"
-    t.timestamp "created_at",                                            :null => false
-    t.datetime  "updated_at"
-    t.text      "bio"
-    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean   "comment_notifications",              :default => false
+    t.integer  "user_id",               :limit => 8,                    :null => false
+    t.integer  "facebook_user_id",      :limit => 8, :default => 0
+    t.boolean  "isAppAuthorized",                    :default => false
+    t.datetime "born_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at"
+    t.text     "bio"
+    t.integer  "referred_by_user_id",   :limit => 8, :default => 0
+    t.boolean  "comment_notifications",              :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true
@@ -504,9 +539,11 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
     t.datetime "last_active"
     t.boolean  "is_editor",                                :default => false
     t.boolean  "is_robot",                                 :default => false
+    t.integer  "posts_count",                              :default => 0
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+  add_index "users", ["posts_count"], :name => "index_users_on_posts_count"
 
   create_table "videos", :force => true do |t|
     t.string   "videoable_type"
@@ -530,7 +567,7 @@ ActiveRecord::Schema.define(:version => 20100516002048) do
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
     t.integer  "voteable_id",                      :null => false
-    t.string   "voteable_type", :default => "",    :null => false
+    t.string   "voteable_type",                    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
     t.datetime "created_at"

@@ -30,11 +30,13 @@
           - if @story.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
           - if @tags.present?
-            %h3== Tags #{tag_list(@tags, @story)}
+            %h3== Tags #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
       - if @story.is_article?
         %div.bodyArticle= sanitize nl2br(@story.caption)
+      - elsif @story.full_html?
+        %div.bodyArticle= nl2br(@story.caption)
       - else
-        %div.bodyArticle= sanitize caption @story.caption
+        %div.bodyArticle= sanitize caption(@story.caption, 500)
       - if @story.url.present?
         %div.float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
     - if @story.media_item?
@@ -42,10 +44,9 @@
     = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
-  - cache "#{@story.cache_key}_bottom_html" do
-    = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
-    - if @story.moderatable?
-      = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
+  = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
+  - if @story.moderatable?
+    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
 
 #col_right
   - cache "#{@story.cache_key}_sidebar_html" do

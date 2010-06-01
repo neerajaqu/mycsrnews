@@ -1,7 +1,7 @@
 -# @expects: local 'top_articles'
 
 - cache :top_articles_html do
-  - top_articles ||= Article.top.7
+  - top_articles ||= Article.find( :all, :limit => 7, :order => "created_at desc" )  
   - unless top_articles.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
@@ -11,6 +11,7 @@
           %li
             %h4= link_to article.content.title, content_path(article.content)
             .profilePic= local_linked_profile_pic article.author
-            %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
-            %span.btnComment.float_left== #{like_link article.content} #{article.content.votes_tally}
-            %span.btnComment.float_left== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}
+            .storyBlockMeta
+              %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
+              %span.btnComment.float_left== #{like_link article.content} #{article.content.votes_tally}
+              %span.btnComment.float_left== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}

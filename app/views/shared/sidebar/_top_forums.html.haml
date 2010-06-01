@@ -1,0 +1,13 @@
+-# @expects: local 'forum'
+
+- cache :top_forums_html do
+  - top_forums ||= Forum.all({  :limit => 7, :order => "comments_count desc" })
+  - unless top_forums.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('forums.top_forums_title')
+      .list_items
+        %ul
+          - top_forums.each do |forum|
+            %li
+              = link_to forum.name, forum_path(forum)

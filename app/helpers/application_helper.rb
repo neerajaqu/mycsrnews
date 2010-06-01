@@ -72,7 +72,9 @@ module ApplicationHelper
   end
 
   def linked_story_caption(story, length = 150, url = false, options = {})
-    caption = caption(story.caption, length)
+    caption = caption(story.caption, length).sanitize(:tags => %w(del, dd, h3, address, big, sub, tt, a, ul, h4, cite, dfn, h5, small, kbd, code,
+       b, ins, h6, sup, pre, strong, blockquote, acronym, dt, br, p, div, samp,
+       li, ol, var, em, h1, i, abbr, h2, span, hr), :attributes => %w(name, href, cite, class, title, src, height, datetime, alt, abbr, width))
     "#{caption} #{link_to 'More', (url ? url : story_path(story, options))}"
   end
 
@@ -193,7 +195,7 @@ module ApplicationHelper
   
   def path_to_self(item)
     canvas = iframe_facebook_request? ? true : false
-    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas))
+    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas, :only_path => false))
   end
 
   def link_to_path_to_self(item)
@@ -254,8 +256,11 @@ module ApplicationHelper
   end
 
   def tag_link(tag, item)
+    tag_name = CGI.escape(tag.name)
     if item.class.name == 'Content'
-    	tagged_stories_path(:tag => tag.name)
+    	tagged_stories_path(:tag => tag_name)
+    elsif item.class.name == 'Article'
+    	tagged_articles_path(:tag => tag_name)
     else
     	[item.class, tag]
     end
@@ -384,6 +389,10 @@ EMBED
 
   def meta_image image
     base_url image.url(:thumb)
+  end
+
+  def breadcrumbs item, initial_set = []
+    [initial_set].push(item.crumb_items.flatten.inject([]) {|set,crumb| set << (set.empty? ? crumb.crumb_text : link_to(crumb.crumb_text, crumb.crumb_link)) }.reverse).flatten
   end
 
 end

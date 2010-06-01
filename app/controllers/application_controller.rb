@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_sub_tab
   before_filter :set_locale
   before_filter :update_last_active
+  before_filter :check_post_wall
 #  before_filter :check_authorized_param
 
   # Scrub sensitive parameters from your log
@@ -46,6 +47,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_post_wall
+    @share_item = session.delete(:post_wall)
+  end
+  
   def set_p3p_header
     #required for IE in iframe FB environments if sessions are to work.
     headers['P3P:CP'] = "IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
@@ -101,10 +106,6 @@ class ApplicationController < ActionController::Base
     	:limit    => 5,
     	:order    => "votes.count desc"
     })
-  end
-
-  def load_top_articles
-    @top_articles ||= Article.top
   end
 
   def load_featured_articles

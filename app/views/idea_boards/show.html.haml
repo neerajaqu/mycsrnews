@@ -2,28 +2,33 @@
   = render :partial => 'shared/subnav/idea_boards_subnav'
 
 #col_left
+  -# cache_if page.present?, "idea_boards_#{idea_board.id}_#{page}html" do
+    -# ideas ||= @idea_board.ideas.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - paginate ||= false
   .panel_1
     .panelBar.clearfix
       %h2= @idea_board.name
     .subtitle
       %span= @idea_board.description
     .storyList
-      .list_stories.clearfix
+      #front-stories.list_stories
         %ul
           - @idea_board.ideas.each do |idea|
-            %li.askQuestionWrap
-              .storyBlockWrap
-                %p.askQuestionHead= link_to idea.title, [@idea_board, idea]
-                .profilePic= local_linked_profile_pic idea.user, :size => :square
-                .storyBlockMeta
-                  %p= t('.asked_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
-                  %p
-                    %span.btn_left== #{like_link idea} #{idea.votes_tally}
-                    %span.btn_mid== #{link_to t('.comments'), [@idea_board, idea]}
-                    %span.btn_right= t('.share')
-  - cache "#{@idea_board.cache_key}_bottom_html" do
-    = render :partial => 'shared/item_footer', :locals => { :item => @idea_board,:title => @idea_board.name }
-
-#col_right
-  = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('ideas.top_board_ideas', :name => @idea_board.name) }
-  = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @newest_ideas, :title => t('ideas.newest_board_ideas', :name => @idea_board.name) }
+            %li{'data-id' => idea.cache_key}
+              .thumb
+                - if idea.images.present?
+                  = image_tag idea.images.first.url(:thumb)
+                - else
+                  = image_tag ('default/default_thumb_b.gif')
+              .storyBlockWrap.storyBlockSpacer
+                %h2.storyHead= link_to idea.title, idea_path(idea)
+                %p.storyCaption= linked_item_details idea
+                .profilePic= local_linked_profile_pic idea.user
+                .storyBlockMeta.float_left
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
+                  %span.btnComment.float_left== #{like_link idea} #{idea.votes_tally}
+                  %span.btnComment.float_left== #{link_to t('comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
+    - if paginate
+      .clearfix
+        = will_paginate ideas
+        %br

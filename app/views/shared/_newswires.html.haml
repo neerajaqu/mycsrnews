@@ -1,4 +1,5 @@
-- cache :newswires_list_html do
+- page ||= ""
+- cache_if page.present?, "newswires_list_#{page}html" do
   - newswires ||= Newswire.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - paginate ||= false
   .panel_1

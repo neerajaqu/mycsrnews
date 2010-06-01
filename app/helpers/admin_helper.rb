@@ -32,7 +32,9 @@ module AdminHelper
 
   def gen_new_link model
     set_model_vars model
-    link_to "New #{@model_name}", new_polymorphic_path([:admin, model])
+    unless model.name == 'Topic'
+      link_to "New #{@model_name}", new_polymorphic_path([:admin, model])
+    end
   end
 
   def gen_table(collection, model, fields, options = {})
@@ -81,6 +83,10 @@ module AdminHelper
     	links << link_to(item.blocked? ? 'UnBlock' : 'Block', admin_block_path(item.class.name.foreign_key.to_sym => item))
     	links << link_to(item.featured? ? 'UnFeature' : 'Feature', admin_feature_path(item.class.name.foreign_key.to_sym => item))
     	links << link_to('Flag', admin_flag_item_path(item.class.name.foreign_key.to_sym => item))
+    end
+    if item.class.name == 'DashboardMessage'
+      links << link_to('Send', send_global_admin_dashboard_message_path(item)) unless item.sent?
+      links << link_to('Clear', clear_global_admin_dashboard_message_path(item)) if item.sent?
     end
     links.join ' | '
   end

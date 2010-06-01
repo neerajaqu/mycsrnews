@@ -7,9 +7,11 @@ menu:
     newswire: 'enabled'
     new_story: 'enabled'
     new_article: 'enabled'
-  #blogs:
-    #top_blogs: 'enabled'
+  #articles:
+    #articles_list: 'enabled'
     #new_article: 'enabled'
+  forums:
+  	#sub_forums: 'enabled' # uncomment to enable a drop down of all forums
   resources:
     resources_list: 'enabled'
     new_resource: 'enabled'
@@ -24,5 +26,5 @@ menu:
   events:
     events_list: 'enabled'
     new_event: 'enabled'
-  #forums:
+	import_facebook: 'enabled'
   admin:

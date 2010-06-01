@@ -6,6 +6,15 @@ class UsersController < ApplicationController
   before_filter :load_top_stories, :only => [:show]
   before_filter :ensure_authenticated_to_facebook, :only => :link_user_accounts
 
+  def index
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
+    @users = User.top.paginate :page => params[:page], :per_page => Content.per_page, :order => "karma_score desc"
+    respond_to do |format|
+      format.html { @paginate = true }
+      format.json { @users = User.refine(params) }
+    end
+  end
+
   def new
     @user = User.new
   end

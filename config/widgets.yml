@@ -129,9 +129,5 @@ widgets:
       partial: '/shared/sidebar/featured_question'
     featured_answer:
       partial: '/shared/sidebar/featured_answer'
-
-# TODO Implement named scope for top articles
-#    top_articles:
-#      partial: '/shared/sidebar/top_articles'
-#      load_functions: 'load_top_articles'
-#      locals: 'top_articles'
+    top_articles:
+      partial: '/shared/sidebar/top_articles'

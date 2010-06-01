@@ -10,4 +10,8 @@ class Feed < ActiveRecord::Base
     self.title
   end
 
+  def full_html?
+    self.loadOptions == 'full_html'
+  end
+
 end

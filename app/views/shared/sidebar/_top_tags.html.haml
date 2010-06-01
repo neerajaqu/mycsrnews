@@ -1,0 +1,14 @@
+-# Expects klass, tag_type, locale_var
+- tag_type ||= 'tags'
+- locale_var ||= 'tags.top_title'
+- klass_name = klass.name
+
+- cache "top_#{klass_name}_#{tag_type}_html" do
+  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t(locale_var)
+    .storyBlockWrap.clearfix
+      %ul
+        - klass.send("top_#{tag_type}").each do |tag|
+          %li
+            %h4== [#{tag.count}] #{link_to tag.name, url_for(send("tagged_#{klass_name.underscore.pluralize}_path", CGI.escape(tag.name)))}
