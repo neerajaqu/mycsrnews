@@ -55,6 +55,18 @@ defaults: &defaults
   twitter_oauth_key: 'key'
   twitter_oauth_secret: 'secret'
 
+  tweet_events_min_votes: 5
+  tweet_events_limit: 3
+  tweet_articles_min_votes: 5   
+  tweet_articles_limit: 3
+  tweet_questions_min_votes: 5
+  tweet_questions_limit: 3
+  tweet_ideas_min_votes: 5
+  tweet_ideas_limit: 3
+
+  #Uncomment to allow bit.ly
+  #bitly_username: 'username'
+  #bitly_api_key: 'key'
 development:
   <<: *defaults
   fb_rss_url: "http://my.site.com/stories.atom"

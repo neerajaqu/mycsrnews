@@ -1,6 +1,7 @@
 
 #tbox
 
+%p You must click the text to be able to Tweet. Feel free to edit the text.
 :javascript
   twttr.anywhere(function (T) {
 
@@ -8,7 +9,11 @@
      height: 100,
      width: 400,
      defaultContent: '#{@text} #{@link}',
-     label: 'Share this on Twitter'
+     label: 'Share this on Twitter',
+     onTweet: function(text,html) { $("a[rel]").data("overlay").close(); }
      });
 
    });
+
+   
+   

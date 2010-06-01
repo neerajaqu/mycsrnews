@@ -2,6 +2,9 @@
 #footer
   .dh_links
     %a.rss_link{:target => "_blank", :title => t('.rss_title'), :href => stories_path(:format => :atom)}= t('.rss')
+    - if APP_CONFIG['twitter_account'].present? && !APP_CONFIG['twitter_connect_key'].present?
+      = pipe_spacer
+      %a.twitter_link{:target => "_blank", :title => t('.twitter_title'), :href => twitter_url(APP_CONFIG['twitter_account']) }= t('.twitter')
     = pipe_spacer
     = link_to t('.faq'), faq_path
     = pipe_spacer
@@ -16,7 +19,7 @@
     = pipe_spacer
     = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
     %span#follow-twitterapi
-    -if APP_CONFIG['twitter_account']
+    -if APP_CONFIG['twitter_account'] && APP_CONFIG['twitter_connect_key'].present?
       :javascript
         twttr.anywhere(function (T) {
           T('#follow-twitterapi').followButton("#{APP_CONFIG['twitter_account']}");
