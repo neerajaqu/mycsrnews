@@ -117,7 +117,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_newest_articles
-    @newest_articles ||= Article.active.newest
+    @newest_articles ||= Article.active.newest 5
   end
 
   def load_newest_images
