@@ -8,22 +8,25 @@
     .subtitle
       %span= @resource_section.description
     .storyList
-      .list_stories.clearfix
+      .list_stories
         %ul
           - @resource_section.resources.each do |resource|
-            %li.askQuestionWrap
-              .storyBlockWrap
-                %p.askQuestionHead= link_to resource.title, [@resource_section, resource]
-                .profilePic= local_linked_profile_pic resource.user, :size => :square
-                .storyBlockMeta
-                  %p= t('.asked_by', :fb_name => local_linked_profile_name(resource.user), :date => time_ago_in_words(resource.created_at))
-                  %p
-                    %span.btn_left== #{like_link resource} #{resource.votes_tally}
-                    %span.btn_mid== #{link_to t('.comments'), [@resource_section, resource]}
-                    %span.btn_right= t('.share')
-  - cache "#{@resource_section.cache_key}_bottom_html" do
-    = render :partial => 'shared/item_footer', :locals => { :item => @resource_section,:title => @resource_section.name }
-
+            %li{'data-id' => resource.cache_key}
+              .thumb
+                - if resource.images.present?
+                  = image_tag resource.images.first.url(:thumb)
+                - else
+                  = image_tag ('default/default_thumb_b.gif')
+              .storyBlockWrap.storyBlockSpacer
+                %h2.storyHead= link_to resource.title, [@resource_section, resource]
+                %p.storyCaption= linked_item_details resource
+                .profilePic= local_linked_profile_pic resource.user
+                .storyBlockMeta.float_left
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => time_ago_in_words(resource.created_at))
+                  %span.btnComment.float_left== #{like_link resource} #{resource.votes_tally}
+                  %span.btnComment.float_left== #{link_to t('comments'), [@resource_section, resource]} #{resource.comments_count}
+                  %span.btnComment.float_left= fb_share_item_button(resource)
+                  
 #col_right
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @top_resources, :title => t('resources.top_resource_sections', :name => @resource_section.name) }
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @newest_resources, :title => t('resources.newest_resource_sections', :name => @resource_section.name) }
