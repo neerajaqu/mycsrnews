@@ -5,6 +5,8 @@
     .panel_1
       .panelBar
         %h2= t('forums.title')
+        -# if forums.present? and forums
+          %span.bar_link= fb_share_item_button(forums)
       .subtitle
         %span= t('forums.subtitle')
         
