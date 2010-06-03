@@ -106,6 +106,14 @@
     			primary: null,
     			secondary1: null,
     			secondary2: null
+        }, section3: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        }, section4: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
         },
         template: null
       };
@@ -117,7 +125,7 @@
         }
       	var url = "/admin/featured_items/"+$(this).attr('id')+"/load_template";
       	$('#content').load(url, {}, function(responseText, textStatus, XMLHttpRequest) {
-      		$('#section-1-primary, #section-1-secondary1, #section-1-secondary2, #section-2-primary, #section-2-secondary1, #section-2-secondary2').droppable({
+      		$('#section-1-primary, #section-1-secondary1, #section-1-secondary2, #section-2-primary, #section-2-secondary1, #section-2-secondary2,#section-3-primary, #section-3-secondary1, #section-3-secondary2,#section-4-primary, #section-4-secondary1, #section-4-secondary2,').droppable({
       			accept: 'li.ui-widget-content',
       			activeClass: 'ui-state-hover',
       			hoverClass: 'ui-state-active',
@@ -129,6 +137,10 @@
       						section = 'section1';
                 } else if (match[1] == 'section-2') {
                 	section = 'section2';
+                } else if (match[1] == 'section-3') {
+                	section = 'section3';
+                } else if (match[1] == 'section-4') {
+                	section = 'section4';
                 } else {
                 	return false;
                 }
@@ -196,13 +208,15 @@
         = image_tag "featured/template_1.jpg"
       .template#template_2
         = image_tag "featured/template_2.jpg"
-      .template#template_3
+      -#.template#template_3
         = image_tag "featured/template_3.jpg"
     .template-column
       .template#template_4
         = image_tag "featured/template_4.jpg"
-      .template#template_5
+      -#.template#template_5
         = image_tag "featured/template_5.jpg"
+      .template#template_7
+        = image_tag "featured/template_7.jpg"
       .template#template_6
         = image_tag "featured/template_6.jpg"
     .template-column

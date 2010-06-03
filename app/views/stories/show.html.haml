@@ -15,8 +15,7 @@
             %a== #{like_link @story} #{@story.votes_tally}
           %li
             %a== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
-          - if logged_in?
-            %li= fb_share_item_button(@story)
+          %li= fb_share_item_button(@story)
           %li
             = twitter_share_item_link @story, @story.title
       .thumb

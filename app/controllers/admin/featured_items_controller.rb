@@ -36,7 +36,9 @@ class Admin::FeaturedItemsController < AdminController
     @template_name = FeaturedItem.create({:name => 'featured_template', :featured_type => data['template']})
     @section1 = @template_name.children.create({:name => "section1", :featured_type => "section1"})
     @section2 = @template_name.children.create({:name => "section2", :featured_type => "section2"})
-    ['section1', 'section2'].each do |section|
+    @section3 = @template_name.children.create({:name => "section3", :featured_type => "section3"})
+    @section4 = @template_name.children.create({:name => "section4", :featured_type => "section4"})
+    ['section1', 'section2','section3','section4'].each do |section|
       section_data = instance_variable_get("@#{section}")
       ['primary', 'secondary1', 'secondary2'].each do |box|
         item_id = data[section][box]
