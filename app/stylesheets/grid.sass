@@ -21,17 +21,7 @@
 @import jcarousel.skin.sass
 
 //Image sizing for Non-facebook
-.feature_bg
-  .thumb
-    img
-      max-height: 280px
-      max-width: 280px
 
-#readArticle
-  .thumb
-    img
-      max-height: 280px
-      max-width: 280px
 
 // The following are the current grid layout boxes for the site.
 $ninesixty_columns: 12
@@ -84,6 +74,15 @@ body
         margin-left: 5px
       &.last
         margin-right: 5px
+      .thumb
+        height: 80px
+        overflow: hidden
+          
+.panel_3
+  width: 50%
+  margin-bottom: 15px
+  display: inline-block
+  float: left
 
 .panel_4
   +grid(2)
@@ -96,6 +95,7 @@ body
     +alpha
   .right
     +omega
+
 
 .panel_2
   +grid(4)
