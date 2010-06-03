@@ -4,6 +4,13 @@
 %p=t('.help')
 
 :javascript
+
+  if($("a[rel]").length) {
+    returnf = function(text,html) { $("a[rel]").data("overlay").close(); }
+    }
+  else {
+    returnf = function(text,html) { top.window.close(); }
+  }
   twttr.anywhere(function (T) {
 
   T('#tbox').tweetBox({
@@ -11,10 +18,11 @@
      width: 400,
      defaultContent: '#{@text} #{@link}',
      label: 'Share this on Twitter',
-     onTweet: function(text,html) { $("a[rel]").data("overlay").close(); }
+     onTweet: returnf,
+     complete: function (tb) {
+      $('#tbox iframe')[0].contentWindow.jQuery("#tweet-box").focus();
+     }
      });
 
    });
-
-   
    

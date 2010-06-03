@@ -208,13 +208,13 @@ module ApplicationHelper
     is_configured = APP_CONFIG['twitter_connect_key'].present?
     if button == true
       if is_configured
-        link_to image_tag('/images/default/tweet_button.gif'), "#", :class => "tweetButton", :link => overlay_tweet_url(:text=>caption, :link=>url), :rel=>"#overlay"
+        link_to image_tag('/images/default/tweet_button.gif'), "#", :class => "tweetButton", :link => overlay_tweet_url(:text=>caption, :link=>url), :rel=>"#overlay", :class=>"new-window"
       else
         link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
       end
     else
       if is_configured
-        link_to t('tweet'), "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url)
+        link_to t('tweet'), "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :class=>"new-window"
       else
         link_to t('tweet'), twitter_url
       end
@@ -402,5 +402,6 @@ EMBED
   def breadcrumbs item, initial_set = []
     [initial_set].push(item.crumb_items.flatten.inject([]) {|set,crumb| set << (set.empty? ? crumb.crumb_text : link_to(crumb.crumb_text, crumb.crumb_link)) }.reverse).flatten
   end
+  
 
 end
