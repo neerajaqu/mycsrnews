@@ -46,6 +46,8 @@ Rails::Initializer.run do |config|
   config.gem 'json', :version => '1.2.4'
   config.gem "compass-960-plugin", :lib => 'ninesixty'
   config.gem "eostrom-zvent", :lib => 'zvent'
+  config.gem "oauth"
+  config.gem "twitter"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

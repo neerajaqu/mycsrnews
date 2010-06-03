@@ -23,6 +23,7 @@ en:
           asked_by: "Asked by {{fb_name}} {{date}} ago"
           share: "Share it"
           like: "Like"
+          view: "View Event"
           post_comment: "Post a Comment"
         my_events:
           my_events_title: "Your Events"

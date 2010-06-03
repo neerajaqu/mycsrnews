@@ -6,6 +6,7 @@ class Question < ActiveRecord::Base
   acts_as_moderatable
   acts_as_media_item
   acts_as_refineable
+  acts_as_wall_postable
 
   belongs_to  :user
   has_many    :answers

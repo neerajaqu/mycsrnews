@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
   acts_as_moderatable
   acts_as_media_item
   acts_as_refineable
+  acts_as_wall_postable
   
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
@@ -54,7 +55,7 @@ class Event < ActiveRecord::Base
           :pic_small => facebook_event.pic_small,
           :update_time => facebook_event.update_time,
           :tagline => facebook_event.tagline,
-          :url => "http://www.facebook.com/event.php?eid="+facebook_event.eid)
+          :url => "http://www.facebook.com/event.php?eid="+facebook_event.eid.to_s)
     end
   end
 
@@ -79,7 +80,7 @@ class Event < ActiveRecord::Base
       :country => zvent.venue.country,
       :creator => nil, #not yet support in gem
       :pic => image,
-      :url => "http://www.zvents.com/"+zvent.zurl)
+      :url => "http://www.zvents.com"+zvent.zurl)
     end
   end
 end

@@ -101,6 +101,17 @@ ActiveRecord::Schema.define(:version => 20100526231658) do
   add_index "comments", ["commentable_type", "commentable_id"], :name => "index_comments_on_commentable_type_and_commentable_id"
   add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
 
+  create_table "consumer_tokens", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "type",       :limit => 30
+    t.string   "token",      :limit => 1024
+    t.string   "secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "consumer_tokens", ["user_id"], :name => "index_consumer_tokens_on_user_id", :unique => true
+
   create_table "content_images", :force => true do |t|
     t.string   "url",        :default => ""
     t.integer  "content_id", :default => 0

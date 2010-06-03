@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @comment.comments = @template.sanitize_user_content @comment.comments
     if @comment.save
+      # to do doesn't work for topic replies
       if @comment.post_wall?
         session[:post_wall] = @comment
       end

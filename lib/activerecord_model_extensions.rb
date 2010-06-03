@@ -36,6 +36,10 @@ module Newscloud
     module InstanceMethods
 
       # Misc continuity methods for working with mixins
+      def wall_postable?
+        false
+      end
+
       def moderatable?
         false
       end
@@ -77,6 +81,10 @@ module Newscloud
         self
       end
       
+      def wall_caption
+        return ''
+      end
+            
       def item_title
         [:title, :name, :question].each do |method|
           return self.send(method) if self.respond_to?(method) and self.send(method).present?

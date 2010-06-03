@@ -3,6 +3,7 @@ class Comment < ActiveRecord::Base
   acts_as_moderatable
   acts_as_voteable
   acts_as_refineable
+  acts_as_wall_postable
 
   belongs_to :user
   belongs_to :commentable, :polymorphic => true, :counter_cache => true, :touch => true
@@ -15,17 +16,16 @@ class Comment < ActiveRecord::Base
   validates_presence_of :comments
 
   after_create :custom_callback
-  attr_accessor :post_wall
 
-  def post_wall?
-    post_wall and post_wall.to_i != 0
-  end
-  
   def item_title
     "Comment on #{self.commentable.item_title}"
   end
 
   def item_description
+    self.commentable.item_description
+  end
+  
+  def wall_caption
     self.comments
   end
 

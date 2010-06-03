@@ -34,6 +34,9 @@ class EventsController < ApplicationController
     @event.tag_list = params[:event][:tags_string]
 
     if @event.save
+      if @event.post_wall?
+        session[:post_wall] = @event
+      end            
     	flash[:success] = "Thank you for your event!"
     	redirect_to @event
     else

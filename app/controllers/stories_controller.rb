@@ -60,6 +60,9 @@ class StoriesController < ApplicationController
     @story.tag_list = params[:content][:tags_string]
     @story.caption = @template.sanitize_user_content @story.caption
     if @story.save
+      if @story.post_wall?
+        session[:post_wall] = @story
+      end
       flash[:success] = "Successfully posted your story!"
       redirect_to story_path(@story)
     else

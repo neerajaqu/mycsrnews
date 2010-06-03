@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :oauth_consumers,:member=>{:callback=>:get}
+
   # Set locale and make pretty urls
   map.filter 'locale'
 
@@ -112,6 +114,7 @@ ActionController::Routing::Routes.draw do |map|
 	  mobile.resources :comments
 	end
 
+  map.overlay_tweet '/overlays/tweet', :controller => 'overlays', :action => 'tweet'
   # Admin interface
 
   # The priority is based upon order of creation: first created -> highest priority.
