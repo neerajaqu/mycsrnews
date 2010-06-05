@@ -28,7 +28,7 @@
                   %span.btnComment.float_left== #{link_to t('comments'), [@resource_section, resource]} #{resource.comments_count}
                   %span.btnComment.float_left= fb_share_item_button(resource)
 
-  = render :partial => 'shared/index_footer', :locals => { :index_path => resource_section_path(:only_path => false,:canvas => iframe_facebook_request?), :title => @resource_section.name }
+  = render :partial => 'shared/index_footer', :locals => { :index_path => resource_section_path(:only_path => false, :canvas => iframe_facebook_request?), :title => @resource_section.name }
                   
 #col_right
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @top_resources, :title => t('resources.top_resource_sections', :name => @resource_section.name) }
