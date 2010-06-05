@@ -207,17 +207,15 @@ module ApplicationHelper
     twitter_url = "http://twitter.com/?status=#{text}"
     is_configured = APP_CONFIG['twitter_connect_key'].present?
     if button == true
-      if is_configured
-        link_to image_tag('/images/default/tweet_button.gif'), "#", :class => "tweetButton", :link => overlay_tweet_url(:text=>caption, :link=>url), :rel=>"#overlay", :class=>"new-window"
-      else
-        link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
-      end
+      link_text = image_tag('/images/default/tweet_button.gif')
     else
-      if is_configured
-        link_to t('tweet'), "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :class=>"new-window"
-      else
-        link_to t('tweet'), twitter_url
-      end
+      link_text = t('tweet')
+    end
+
+    if is_configured
+      link_to link_text, "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :burl=>twitter_url, :id=>"twitter-link"
+    else
+      link_to link_text, twitter_url
     end
 
   end

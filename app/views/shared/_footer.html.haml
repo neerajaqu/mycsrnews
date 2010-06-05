@@ -28,13 +28,10 @@
       %a.twitter_link{:style=>"display:none;",:target => "_blank", :title => t('.twitter_title'), :href => twitter_url(APP_CONFIG['twitter_account']) }= t('.twitter')
 #overlay.standard_overlay
   .contentWrap
-  
+ 
 :javascript
   if(top !== self) {
-    $('a.new-window').click(function(){
-      tw_window = window.open($('a.new-window').attr("link"), 'Twitter Connect','width=480,height=300,location=0,status=0,scrollbars=1');
-      return false;
-    });
+    $("#twitter-link").attr("href", $("#twitter-link").attr("burl"));
     $("#follow-twitterapi").hide();
     $(".twitter_link").show();
   }
@@ -62,6 +59,8 @@
     	});
     });
   }
+  
+   
 -#    = pipe_spacer
 -#    %span= t('.locale')
 -#    = link_to "EN", root_path(:locale => :en)

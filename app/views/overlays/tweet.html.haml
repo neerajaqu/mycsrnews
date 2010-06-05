@@ -1,8 +1,8 @@
 
 #tbox
 
-%p=t('.help')
-
+%p.help=t('.help')
+%span#login
 :javascript
 
   if($("a[rel]").length) {
@@ -11,18 +11,18 @@
   else {
     returnf = function(text,html) { top.window.close(); }
   }
+  
   twttr.anywhere(function (T) {
+  
+      T('#tbox').tweetBox({
+         height: 100,
+         width: 400,
+         defaultContent: '#{@text} #{@link}',
+         label: 'Share this on Twitter',
+         onTweet: returnf,
+         complete: function (tb) {
+          $('#tbox iframe')[0].contentWindow.jQuery("#tweet-box").focus();
+         }
+         });
 
-  T('#tbox').tweetBox({
-     height: 100,
-     width: 400,
-     defaultContent: '#{@text} #{@link}',
-     label: 'Share this on Twitter',
-     onTweet: returnf,
-     complete: function (tb) {
-      $('#tbox iframe')[0].contentWindow.jQuery("#tweet-box").focus();
-     }
-     });
-
-   });
-   
+  });
