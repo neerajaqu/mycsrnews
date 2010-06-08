@@ -5,7 +5,7 @@
     %h2= title
 
   .list_stories
-    %ul.listTags.bullet_list
+    %ul.listTags
       - resources.each do |resource|
         %li
           .profilePic= local_linked_profile_pic resource.user
