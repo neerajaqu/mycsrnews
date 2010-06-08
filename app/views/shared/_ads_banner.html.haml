@@ -9,7 +9,11 @@
   - slot_data = slot_widget_medium_rectangle
 - elsif defined? slot_widget_large_rectangle
   - slot_data = slot_widget_large_rectangle
-- else
+- elsif defined? slot_widget_leaderboard
+  - slot_data = slot_widget_leaderboard
+- elsif defined? slot_widget_banner
+  - slot_data = slot_widget_banner
+-# else
   - slot_data ||= Metadata.get_default_ad_slot
 - if slot_data.present?
   - case slot_data['data'][:width]
@@ -41,10 +45,6 @@
       - panel_id = ""
       - panel_class = "panel_2"
       - ad_class = "ad_336"
-    - else
-      - panel_id = ""
-      - panel_class = "panel_1"
-      - ad_class = "ad_468"
   %div{:class => "#{panel_class} #{defined?(widget_page) ? widget_page.css_class : ''}",:id => panel_id}
     %div{:class => ad_class}
       - if APP_CONFIG['ad_platform'].present?
