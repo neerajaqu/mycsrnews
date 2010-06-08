@@ -58,6 +58,9 @@
           - when "helios_alt3" 
             -# wkyc
             %iframe{:src => base_url(helios_alt3_ads_home_path(:slot_name => slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #fff; width: #{slot_data['data'][:width]}; height: #{slot_data['data'][:height]};"}          
+          - when "helios_alt4" 
+            -# boston
+            %iframe{:src => base_url(helios_alt4_ads_home_path(:slot_name => slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #fff; width: #{slot_data['data'][:width]}; height: #{slot_data['data'][:height]};"}          
           - when "google"
             %iframe{:src => base_url(google_ads_home_path(:slot_name => slot_data['data'][:name],:canvas => false)), :frameborder => 0, :scrolling => "no", :style => " background-color: #fff; width: #{slot_data['data'][:width]}; height: #{slot_data['data'][:height]};"}
       - else                  
