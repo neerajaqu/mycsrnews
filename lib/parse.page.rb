@@ -11,6 +11,7 @@ module Parse
 
       @images_sized = []
       @skip_images = Metadata::SkipImage.all.map(&:image_url)
+      @title_filters = Metadata::TitleFilter.all.map(&:keyword)
       page = open(url) { |f| Hpricot(f) }
       results = {}
       results[:title] = self.parse_title(page)
@@ -22,7 +23,9 @@ module Parse
     end
 
     def self.parse_title(doc)
-      (doc/"head/title").inner_html
+      title = (doc/"head/title").inner_html
+      title = @title_filters.inject(title) {|str,key| str.gsub(%r{#{key}}, '') }
+      title.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'')
     end
 
     def self.parse_description(doc)
