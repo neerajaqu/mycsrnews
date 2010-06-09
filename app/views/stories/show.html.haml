@@ -30,6 +30,9 @@
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
           - if @tags.present?
             %h3== Tags #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
+      - if @story.media_item?
+        =render_media_items @story, :size => 'large'
+        
       - if @story.is_article?
         %div.bodyArticle= sanitize nl2br(@story.caption)
       - elsif @story.full_html?
@@ -38,8 +41,8 @@
         %div.bodyArticle= sanitize caption(@story.caption, 500)
       - if @story.url.present?
         %div.float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
-    - if @story.media_item?
-      = render_media_items @story, :size => 'large'
+
+
     = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
@@ -51,4 +54,10 @@
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
     = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }
     = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
-    
+/ #image_box.standard_overlay
+/   #images.scrollable_popup
+/     .items
+/       - @story.images.each do |image|
+/         = image_tag image.url(:medium)
+/   / .navi.prev
+/   / .navi.next
