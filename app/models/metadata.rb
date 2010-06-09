@@ -8,12 +8,14 @@ class Metadata < ActiveRecord::Base
   named_scope :key_type_sub_name, lambda { |*args| { :conditions => ["key_type = ? AND key_sub_type = ? AND key_name = ?", args.first, args.second, args.third] } }
   named_scope :meta_type, lambda { |*args| { :conditions => ["meta_type = ?", args.first] } }
 
+  before_save :set_meta_keys
+
   def self.find_by_key_type_name key_type, key_name
     self.key_type_name(key_type, key_name).first
   end
 
   def self.find_by_key_type_sub_name key_type, key_sub_type, key_name
-    self.key_type_sub_name(key_type, key_sub_type, key_name).first
+    self.find(:first, :conditions => ["key_type = ? and key_sub_type = ? and key_name = ?", key_type, key_sub_type, key_name])
   end
 
   def self.get_ad_slot key_sub_type, key_name
@@ -57,6 +59,8 @@ class Metadata < ActiveRecord::Base
     end
   end
 
+  private
+
   def key_from_assign key
     key = $1 if key.to_s =~ /^(.*)=$/
     key.to_sym
@@ -64,6 +68,10 @@ class Metadata < ActiveRecord::Base
 
   def init_data
     self.data = {} if self.data.nil?
+  end
+
+  # overwrite in sub metadata models as needed
+  def set_meta_keys
   end
   
 end

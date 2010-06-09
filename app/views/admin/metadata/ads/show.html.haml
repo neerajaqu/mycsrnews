@@ -1,0 +1,10 @@
+%h1 Ad Detail
+%hr
+
+%p== Key Type: #{@ad.key_type}
+%p== Key Name: #{@ad.key_name}
+- @ad.data.each do |key, value|
+  %p== #{key}: #{value}
+%p== Created At: #{@ad.created_at}
+
+%p== Actions: #{link_to 'Back to Ads', admin_metadata_ads_path} | #{link_to 'Edit', edit_admin_metadata_ad_path(@ad)}

@@ -6,6 +6,8 @@
   = render :partial => 'shared/events', :locals => { :events => @events, :paginate => @paginate, :page => @page }
 
 #col_right
+  - if @custom_sidebar_widget
+    = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
   = render :partial => 'shared/sidebar/events_whatisthis'
   = render :partial => 'shared/sidebar/top_events', :locals => { :top_events => @top_events }
   = render :partial => 'shared/sidebar/newest_events', :locals => { :newest_events => @newest_events }

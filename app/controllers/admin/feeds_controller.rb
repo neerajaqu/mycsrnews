@@ -63,7 +63,7 @@ class Admin::FeedsController < AdminController
     feed ||= Feed.new
 
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
-    	:item => @feed,
+    	:item => feed,
     	:model => Feed,
     	:fields => [:title, :url, :rss, :user_id],
     	:associations => { :belongs_to => { :user => :user_id } }

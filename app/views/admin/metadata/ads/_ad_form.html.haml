@@ -1,0 +1,8 @@
+= form.input :name
+= form.input :background
+= form.input :height
+= form.input :width
+-# ad.data.each do |key, value|
+  %p
+    = label_tag "custom_data_#{key}", key.to_s.titleize
+    = text_field_tag "custom_data[#{key}]", value

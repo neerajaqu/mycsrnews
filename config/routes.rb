@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :forums, :has_many => [:topics]
   map.resources :topics, :has_many => [:comments]
   map.resource :session
-  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
+  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
 
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
@@ -81,9 +81,10 @@ ActionController::Routing::Routes.draw do |map|
     admin.translations '/translations.:format', :controller => 'translations', :action => 'translations'
     admin.asset_translations '/asset_translations.:format', :controller => 'translations', :action => 'asset_translations'
     admin.resources :widgets, :collection => { :save => :post }
-    admin.resources :custom_widgets
-    admin.resources :metadatas, :controller => 'custom_widgets'
+    #admin.resources :custom_widgets
+    #admin.resources :metadatas, :controller => 'custom_widgets'
     admin.resources :settings
+    admin.resources :skip_images
     admin.resources :ideas
     admin.resources :idea_boards
     admin.resources :resources
@@ -105,6 +106,13 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true
     admin.resources :votes,           :active_scaffold => true
+
+    admin.namespace(:metadata) do |metadata|
+      metadata.resources :ads
+      metadata.resources :settings
+      metadata.resources :skip_images
+      metadata.resources :custom_widgets
+    end
   end
 
 	map.mobile_home '/m', :controller => 'mobile/home', :action => :index

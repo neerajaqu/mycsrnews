@@ -26,20 +26,22 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :set_p3p_header
+  before_filter :set_facebook_session_wrapper
   before_filter :set_slot_data
   before_filter :set_current_tab
   before_filter :set_current_sub_tab
   before_filter :set_locale
   before_filter :update_last_active
   before_filter :check_post_wall
+
 #  before_filter :check_authorized_param
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
 
-  before_filter :set_facebook_session_wrapper
   helper_method :facebook_session
   helper_method :current_facebook_user
+  helper_method :get_setting
 
   def logged_in_to_facebook_and_app_authorized
     if ensure_application_is_installed_by_facebook_user  
@@ -53,7 +55,7 @@ class ApplicationController < ActionController::Base
   
   def set_p3p_header
     #required for IE in iframe FB environments if sessions are to work.
-    headers['P3P:CP'] = "IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+    headers['P3P'] = 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"'
   end
   
   def set_facebook_session_wrapper
@@ -313,6 +315,15 @@ class ApplicationController < ActionController::Base
     	home_index_path(:only_path => false)
     end
     #root_url(:only_path => false, :canvas => true)
+  end
+
+  def get_setting name, sub_type = nil
+    Metadata::Setting.get name, sub_type
+  end
+
+  def set_custom_sidebar_widget
+    cswidget = Metadata::CustomWidget.find_slot('sidebar', "#{self.controller_name}-custom-sidebar-widget")
+    @custom_sidebar_widget = (cswidget and cswidget.has_widget? ? cswidget.metadatable : nil)
   end
 
 end

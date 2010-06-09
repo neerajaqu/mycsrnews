@@ -344,6 +344,7 @@ ActiveRecord::Schema.define(:version => 20100609180615) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "key_sub_type"
+    t.string   "type"
   end
 
   add_index "metadatas", ["key_name"], :name => "index_metadatas_on_key_name"
