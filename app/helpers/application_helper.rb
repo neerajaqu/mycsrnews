@@ -282,12 +282,14 @@ module ApplicationHelper
     facebook_messages
   end
 
-  def embed_video video, options = { }
+  def embed_video video, *args
+    options = args.extract_options!
     options.merge!(:size => 'normal') unless options[:size].present?
     embed_html_video(video, options)
   end
 
-  def embed_fb_video video, options = {}
+  def embed_fb_video video, *args
+    options = args.extract_options!
     options[:width] ||= video.get_width options[:size]
     options[:height] ||= video.get_height options[:size]
 
