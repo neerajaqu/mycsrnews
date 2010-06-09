@@ -6,6 +6,7 @@ class Forum < ActiveRecord::Base
   acts_as_moderatable
   acts_as_media_item
   acts_as_refineable
+  acts_as_wall_postable
 
   has_many :topics, :order => 'sticky desc, replied_at desc', :dependent => :destroy
   has_many :recent_topics, :class_name => "Topic", :order => 'replied_at desc'

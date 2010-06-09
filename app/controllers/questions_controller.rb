@@ -33,6 +33,9 @@ class QuestionsController < ApplicationController
     @question = Question.new(params[:question])
     @question.user = current_user
     if @question.save
+      if @question.post_wall?
+        session[:post_wall] = @question
+      end      
       flash[:success] = "Successfully posted your question!"
       redirect_to question_path(@question)
     else

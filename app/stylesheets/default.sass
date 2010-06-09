@@ -135,7 +135,6 @@
     bottom: $bodyWrapperBorderBot
     left: $bodyWrapperBorderleft
     right: $bodyWrapperBorderRight
-  width: 960px
 
 // Footer Container //
 #footer
@@ -178,10 +177,6 @@ body
   padding: 0px
 
 h1, h2, h3, h4, h5
-  font-family: $headerFont
-  color: $bodyColor
-  font-size: 14px
-  line-height: 130%
   margin: 0px
   padding: 0px
   a
@@ -189,46 +184,45 @@ h1, h2, h3, h4, h5
     &:hover
       color: $headerLinkHover
 
-h1
+h1, h2, h4
   font-family: $headerFont
-  font-size: $fontsize + 8px
-  font-weight: bold
   color: $headerColor
-  margin: 0 0 6px 0
-  padding: 0
+  line-height: 130%
 
-h2
-  font-family: $headerFont
-  font-size: 14px
-  font-weight: bold
-  margin: 0 0 6px 0
-  padding: 0
-
-h3
-  font-size: 11px
+h3, h5 
   font-family: $copyFont
   color: $subheadColor
-  font-weight: normal
-  line-height: 12px
-  margin: 0 5px 5px 0
-  padding: 0
+  line-height: 120%
   a
     color: $linkColor
     &:hover
       color: $linkColor
 
+h1
+  font-size: $fontsize * 1.5
+  font-weight: bold
+  margin: 0 0 6px 0
+
+h2
+  font-size: $fontsize * 1.2
+  font-weight: bold
+  margin: 0 0 6px 0
+
 h4
-  font-family: $headerFont
-  font-size: 12px
-  line-height: 120%
+  font-size: $fontsize * 1.1
   font-weight: bold
   margin: 0 0 4px 0
   padding: 0
 
+h3
+  font-size: $fontsize * 0.9
+  font-weight: normal
+  margin: 0 5px 5px 0
+
 h5
   font-family: $headerFont
   color: $subheadColor
-  font-size: 12px
+  font-size: $fontsize * 0.9
   font-weight: bold
   margin: 0px 0px 10px 0
   padding: 5px 0px
@@ -245,22 +239,12 @@ p
 a
   color: $linkColor
   cursor: pointer
-  outline-style: none
-  -moz-outline-style: none
   text-decoration: none
   &:hover
     text-decoration: underline
 
 img
-  border: 0px
-
-hr
-  border: none 0
-  margin: 0
-  border-top: 1px solid #cccccc
-  height: 1px
-  a
-    color: $linkColor
+  border: none
 
 ul
   list-style-type: none
@@ -465,21 +449,105 @@ li
           cursor: default
           &:hover
             text-decoration: none
-// Left and right column styling //
-//#col_left
-//  -webkit-box-shadow: 10px 10px 5px #888
-//  background: $leftColumnBG
-//  -moz-border-radius: 4px
-//  -webkit-border-radius: 4px
-//  border-radius: 4px
 
+// Thumb class stylings
+.panel_2
+  .thumb
+    float: left
+    margin: 0 5px 5px 5px
+    img
+
+.thumb
+  margin: 10px
+  position: relative
+  background: $WaterMark
+  overflow: hidden
+  img
+    position: relative
+  a:hover
+    text-decoration: none
+  &.threeFour
+    height: 210px
+    img
+      top: -10px
+  &.nineSixteen
+    height: 150px
+    img
+      top: -40px
+  .moderator 
+    display: inline-block
+    position: absolute
+    left: -4px
+    bottom: -4px
+    height: 20px
+    width: 20px
+    background: none
+
+.houseFeatures
+  .thumb
+    margin: 10px
+
+.feature_bg
+  .thumb
+    margin: 10px 15px 0
+    display: inline-block
+    overflow: hidden
+    img
+      max-width: 280px
+    &.wide
+      height: 160px
+      img
+        width: 590px
+        max-width: 590px
+
+#readArticle
+  .thumb
+    float: right
+    img
+      max-width: 280px
+
+.storyList
+  .thumb
+    height: 68px
+    float: left
+    img
+      max-width: 90px
+
+.featuredNewsList
+  .thumb
+    background: black
+    margin: 0 8px 0 0
+    height: 34px
+    float: left
+    img
+      max-width: 48px
 // Layout panels - should be used for all element containers //
 .panel_1, .panel_2
-  border-bottom: none
+  .storyBlockWrap
+    .featuredNewsList
+      ul
+        padding: 0
+      li
+        width: auto
+        display: block
+        border-bottom: none
+        margin: 0 0 4px 0
+        padding: 4px
+        &.selected, &:hover
+          background-color: white
+          .btnComment
+            background: $btnCommentBG
+      p
+        margin: 3px 0 4px 0
+
+.panel_1, .panel_2, .panel_3
   margin-bottom: 15px
+
+.panel_1, .panel_2
+
   &.textpage
     h2
-      font-size: 13px
+      font-size: $fontsize * 1.1
   &.sponsorbox
     background: $sponsorBoxBG
     ul
@@ -500,18 +568,6 @@ li
       font-weight: normal
       font-size: 11px
       color: $subheadColor
-  .thumb
-    float: left
-    margin: 0 10px
-    position: relative
-    .moderator 
-      display: inline-block
-      position: absolute
-      right: -4px
-      bottom: -4px
-      height: 16px
-      width: 16px
-      background: none
   .eventBlock
     margin: 0 0 4px 0
     padding: 0
@@ -555,17 +611,6 @@ li
       display: inline-block
       width: 100%
 
-      img
-        max-width: 100%
-        max-height: 100%
-    .thumb
-      background: none
-      padding: 0
-      float: left
-      margin: 10px
-      img
-        max-width: 75px
-        max-height: 75px
     .featureAd
       text-align: center
       h2
@@ -610,22 +655,6 @@ li
         bottom: none
       .profilePic
         margin: 0
-        position: relative
-        .moderator
-          position: absolute
-          top: 1px
-          left: 1px
-  .featuredNewsList
-    ul
-      padding: 0 10px 0 0
-    li
-      border-bottom: none
-      font-size: 11px
-      line-height: 14px
-      margin: 4px 0 0 0
-      b
-        font-weight: normal
-        text-transform: uppercase
   .videoBlockWrap
     li
       display: inline-block
@@ -670,7 +699,6 @@ li
         font-weight: normal
         text-transform: none
         font-size: 11px
-
     .bar_link
       float: right
       margin: 0 8px
@@ -696,11 +724,6 @@ li
     p
       margin: 6px 0px
       line-height: 120%
-  .thumb
-    img
-      background: $WaterMark
-    a:hover
-      text-decoration: none
   li
     display: inline-block
     width: 100%
@@ -866,9 +889,6 @@ li
           padding-bottom: 2px
         a
           color: $linkColor
-  .thumb
-    float: right
-    margin: 10px
   .bodyArticle
     color: $bodyColor
     margin: 8px 5px 14px 5px
@@ -889,9 +909,6 @@ li
     background: $panelBarCommentBG
     h2
       color: $linkColor
-  .thumb
-    float: left
-    margin: 0 10px 10px 0
   .comment_block
     position: relative
     padding: 8px 0 20px 0
@@ -913,21 +930,14 @@ li
   background: $featureStoryBG
   .panel_2
     margin-top: 10px
-  .thumb
-    margin: 10px
-    float: none
-    display: inline-block
   .storyBlockWrap
-    margin: 0px 10px 0 10px
+    margin: 10px 15px
   .btnComment
     background: $btnCommentFeatureBG
 
 li.feature_bg
   border-bottom: 1px solid white
 
-.storyList
-  .thumb
-    float: left
 
 .subtitle
   position: relative
@@ -1011,32 +1021,23 @@ h3.btn
       width: 100%
       padding: 1px 0
 
-// Thumb Pic Size //
-.list_stories
-  .thumb
-    img
-      max-width: 90px
-      max-height: 90px
-  .feature_bg
-    .thumb
-      display: block
-      float: left
-      margin: 0 10px
-      img
-        max-width: 90px
-        max-height: 90px
-  .profilePic
-    position: relative
-    img
-      max-width: 30px
-      max-height: 30px
-
 // Profile Pic //
 .profilePic
+  position: relative
   float: left
   margin: 0px 10px 0px 0px
+  img
+    max-width: 30px
+    max-height: 30px
   a:hover
     text-decoration: none
+  .moderator
+    position: absolute
+    bottom: -4px
+    left: -4px
+    height: 16px
+    width: 16px
+    background: none
 
 // Account Profile stats styles //
 .pointsTable_profile
@@ -1223,7 +1224,7 @@ h3.btn
   display: none
   z-index: 10000
   padding: 35px
-  width: 640px
+  width: 440px
   background-image: url(/images/overlay/white.png)
 
 .standard_overlay .close 
@@ -1243,3 +1244,122 @@ h3.btn
 .contentWrap 
   height: 441px
   overflow-y: auto
+
+/*
+/*	root element for the scrollable.
+/*	when scrolling occurs this element stays still.
+
+.scrollable 
+
+  /* required settings */
+  position: relative
+  overflow: hidden
+  width: 350px
+  height: 120px
+
+  /* custom decorations */
+  border: 1px solid #ccc
+  background: url(/images/h300.png) repeat-x
+
+
+#scrollbox
+  display: none
+/*	root element for scrollable items. Must be absolutely positioned
+/*	and it should have a extremely large width to accomodate scrollable items.
+/*	it's enough that you set the width and height for the root element and
+/*	not for this element.
+
+.scrollable .items 
+  /* this cannot be too large */
+  width: 20000em
+  position: absolute
+  clear: both
+
+.items div 
+  float: left
+  width: 350px
+
+
+/* single scrollable item */
+.scrollable img 
+  float: left
+  margin: 20px 5px 20px 21px
+  background-color: #fff
+  padding: 2px
+  width: 100px
+  height: 75px
+
+  -moz-border-radius: 4px
+  -webkit-border-radius: 4px
+
+/* active item */
+.scrollable .active 
+  border: 2px solid #000
+  position: relative
+  cursor: default
+
+/* this makes it possible to add next button beside scrollable */
+.scrollable 
+  float: left
+
+
+/* prev, next, prevPage and nextPage buttons */
+a.browse 
+  display: block
+  width: 30px
+  height: 20px
+  float: left
+  margin: 60px 10px 60px 10px
+  cursor: pointer
+  font-size: 1px
+
+
+/* right */
+a.right_scroll
+  background: url(/images/arrow/right.png) no-repeat
+  clear: right
+  margin-right: 0px
+  
+  &:hover
+    background-position: 0px -20px
+  
+  &:active
+    background-position: 0px -30px
+
+/* left */
+a.left_scroll
+  background: url(/images/arrow/left.png) no-repeat
+  margin-left: 0px
+  &:hover
+    background-position: 0px -20px
+  &:active
+    background-position: 0px -20px
+
+/* up and down */
+a.up_scroll		
+  background: url(/images/arrow/up.png) no-repeat
+  float: none
+  margin: 10px 50px
+	
+  &:hover
+    background-position: -30px 0
+  &:active
+    background-position: -60px 0
+    
+a.down_scroll
+  background: url(/images/arrow/down.png) no-repeat
+  float: none
+  margin: 10px 50px
+  background-position: 0 -30px
+  
+  &:hover
+    background-position: -30px -30px
+  &:active
+    background-position: -60px -30px
+
+/* disabled navigational button */
+a.disabled 
+  visibility: hidden !important
+
+.selected-image
+  border: 1px solid red

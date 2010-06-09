@@ -20,6 +20,7 @@
             = form.input :twitterName, :label => t('.label_twitter'), :hint=>t('.hint_twitter'), :required => false
             = form.input :tags_string, :required => false, :label => t('tags'),:hint => t('tags_hint')
             = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @resource }
+            = render :partial => 'shared/forms/wall_postable', :locals => { :form => form }            
           - form.buttons do
             = form.commit_button :label =>t('.label_create'), :button_html => { :class => 'btn' } 
 

@@ -37,6 +37,9 @@ class ResourcesController < ApplicationController
     @resource.tag_list = params[:resource][:tags_string]
 
     if @resource.save
+      if @resource.post_wall?
+        session[:post_wall] = @resource
+      end      
       #JR - can I swap in t('string') here in controller
     	flash[:success] = "Thank you for adding to our directory!"
     	redirect_to resource_path(@resource)

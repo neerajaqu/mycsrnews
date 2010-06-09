@@ -6,6 +6,7 @@ class Topic < ActiveRecord::Base
   acts_as_moderatable
   acts_as_media_item
   acts_as_refineable
+  acts_as_wall_postable
 
   has_many :posts, :class_name => "Comment", :as => :commentable
   has_many :comments, :as => :commentable

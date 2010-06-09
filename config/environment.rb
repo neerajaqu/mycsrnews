@@ -48,6 +48,7 @@ Rails::Initializer.run do |config|
   config.gem "eostrom-zvent", :lib => 'zvent'
   config.gem "oauth"
   config.gem "twitter"
+  config.gem "bitly"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

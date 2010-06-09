@@ -87,7 +87,7 @@ class StoriesController < ApplicationController
   end
 
   def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('primary', 'stories')
+    @ad_banner = Metadata.get_ad_slot('banner', 'stories')
     @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'stories')
     @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'stories')
     @ad_small_square = Metadata.get_ad_slot('small_square', 'stories')

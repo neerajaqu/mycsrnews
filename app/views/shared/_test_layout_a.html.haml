@@ -1,13 +1,65 @@
-%h1.clearfix
-  This is the beginning of Layout A
+.panel_1.feature_bg
+  .panel_4.first
+    .thumb
+      %a= image_tag('default/seth-test-img/test_pic-1.jpg')
+    .storyBlock
+      %h4 
+        %a Title text for skybox goes here
+      %h3
+        thingies
+      %h3
+        more thingies
+      %h3
+        even more thingies
+  .panel_4
+    .thumb
+      %a= image_tag('default/seth-test-img/test_pic-2.jpg')
+    .storyBlock
+      %h4 
+        %a Title text for skybox goes here
+      %h3
+        thingies
+      %h3
+        more thingies
+      %h3
+        even more thingies
+  .panel_4
+    .thumb
+      %a= image_tag('default/seth-test-img/test_pic-3.jpg')
+    .storyBlock
+      %h4 
+        %a Title text for skybox goes here
+      %h3
+        thingies
+      %h3
+        more thingies
+      %h3
+        even more thingies
+  .panel_4.last
+    .thumb
+      %a= image_tag('default/seth-test-img/test_pic-4.jpg')
+    .storyBlock
+      %h4 
+        %a Title text for skybox goes here
+      %h3
+        thingies
+      %h3
+        more thingies
+      %h3
+        even more thingies
+
+
+.panel_1
+  %h1
+    This is the beginning of Layout A
 
 #featuredPanel.panel_1.feature_bg
   .panelBar
     %h2
       Featured Stories
-  .panel_2.left
-    .thumb
-      = image_tag('default/default_thumb_b.gif')
+  .panel_3
+    .thumb.nineSixteen
+      = image_tag('default/seth-test-img/test_pic-5.jpg')
     .storyBlockWrap
       %h1
         Local News Title Here
@@ -24,9 +76,9 @@
           Comment
         16
 
-  .panel_2.right
-    .thumb
-      = image_tag('default/default_thumb_b.gif')
+  .panel_3
+    .thumb.nineSixteen
+      = image_tag('default/seth-test-img/test_pic-2.jpg')
 
     .storyBlockWrap
       %h1
@@ -41,106 +93,205 @@
         %a
           Comment
         16
-.panel_1
-  .ad_468
-    .test-frame
-
-= render :partial => 'shared/hot_topics'
-
-#hotTopicBar
-  %ul
-    %li.topicTitle
-      Breaking News
-    %li.topic
-      %a 9.6 Earthquake off the coast of Chile
-    %li.topicMore
-      %a More
 
 .panel_1
+  %h1
+    This is the beginning of Layout A
+
+#featuredPanel.panel_1.feature_bg
   .panelBar
     %h2
-      Forum Topics
-  %ul
-    %li
-      %h4
+      Featured Stories
+  .panel_3
+    .thumb.threeFour
+      = image_tag('default/seth-test-img/test_pic-3.jpg')
+    .storyBlockWrap
+      %h1
+        Local News Title Here
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
         %a
-          Hawks needed to do more researching on the coaching change
-      .profilePic
-        =link_to image_tag('default/default_thumb.gif', :height => "30px", :width => "30px"), '#'
-      %h3
-        Posted by 
-        %a 
-          Frank Parsons 
-        in
-        %a
-          Sports 
-        1 day ago
+          More...
       %span.btnComment
         %a.voteUp
           Like
-        4
+        106
       %span.btnComment
         %a
-          16 Comments
-    %li
-      %h4
-        %a
-          Hawks needed to do more researching on the coaching change
-      .profilePic
-        =link_to image_tag('default/default_thumb.gif', :height => "30px", :width => "30px"), '#'
-      %h3
-        Posted by 
-        %a 
-          Frank Parsons 
-        in
-        %a
-          Sports 
-        1 day ago
+          Comment
+        16
+
+  .panel_3
+    .thumb.threeFour
+      = image_tag('default/seth-test-img/test_pic-5.jpg')
+
+    .storyBlockWrap
+      %h1
+        Video News Title here
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured.
       %span.btnComment
         %a.voteUp
           Like
-        4
+        106
       %span.btnComment
         %a
-          16 Comments      
+          Comment
+        16
 
-.panel_2.left
-  .ad_200
-    .test-frame
-
-.panel_2.right
-  .ad_200
-    .test-frame
-
-.panel_1
+.panel_1.feature_bg
   .panelBar
     %h2
-      Recent Media     
-  .videoBlockWrap
-    %ul
-      %li.videoThumb
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb 
-      %li.videoThumb
+      Featured News
+  .panel_3
+    .thumb.threeFour
+      = image_tag('default/seth-test-img/test_pic-4.jpg')
+  .panel_3
+    .storyBlockWrap
+      %h1
+        Featured News Title Here: Two line spread
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured.
+        %a
+          More...
+      %span.btnComment
+        %a.voteUp
+          Like
+        106
+      %span.btnComment
+        %a
+          Comment
+        16
+      .bullet_list.float_left
+        %ul
+          %li
+            %h4
+              %a
+                This is a bullet list point
+          %li
+            %h4
+              %a
+                This is a bullet list point
 
-  .pagination
-    .pagination-float
-      %span.disabled.previous Previous 
-      %span.current 1
-      %a 2
-      %a 3
-      %a 4
-      %a.next Next
-      
+.panel_1.feature_bg
+  .panelBar
+    %h2
+      Featured News
+  .panel_3
+    .storyBlockWrap
+      %h1
+        Featured News Title Here: Two line spread
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured.
+        %a
+          More...
+      %span.btnComment
+        %a.voteUp
+          Like
+        106
+      %span.btnComment
+        %a
+          Comment
+        16
+      .bullet_list.float_left
+        %ul
+          %li
+            %h4
+              %a
+                This is a bullet list point
+          %li
+            %h4
+              %a
+                This is a bullet list point
+  .panel_3
+    .thumb.threeFour
+      = image_tag('default/seth-test-img/test_pic-1.jpg')
+
+.panel_1.feature_bg
+  .panelBar
+    %h2
+      Featured News
+  .panel_3
+    .thumb.nineSixteen
+      = image_tag('default/seth-test-img/test_pic-2.jpg')
+    .storyBlockWrap
+      %h1
+        Local News Title Here
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
+        %a
+          More...
+      %span.btnComment
+        %a.voteUp
+          Like
+        106
+      %span.btnComment
+        %a
+          Comment
+        16
+
+  .panel_3
+    .storyBlockWrap
+      .featuredNewsList
+        %ul
+          %li
+            .thumb
+              = image_tag('default/seth-test-img/test_pic-1.jpg')
+            %h4
+              %a
+                Gores split after 40 years o...
+            %p
+              1:45PM Officials shut down an ...
+          %li.selected
+            .thumb
+              = image_tag('default/seth-test-img/test_pic-2.jpg')
+            %h4
+              %a
+                Gores split after 40 years o...
+            %p
+              1:45PM Officials shut down an ...
+          %li
+            .thumb
+              = image_tag('default/seth-test-img/test_pic-3.jpg')
+            %h4
+              %a
+                Gores split after 40 years o...
+            %p
+              1:45PM Officials shut down an ...
+          %li
+            .thumb
+              = image_tag('default/seth-test-img/test_pic-4.jpg')
+            %h4
+              %a
+                Gores split after 40 years o...
+            %p
+              1:45PM Officials shut down an ...
+          %li
+            .thumb
+              = image_tag('default/seth-test-img/test_pic-5.jpg')
+            %h4
+              %a
+                Gores split after 40 years o...
+            %p
+              1:45PM Officials shut down an ...
+
+.panel_1.feature_bg
+  .panelBar
+    %h2
+      Featured News
+  .thumb.wide
+    = image_tag('default/seth-test-img/test_pic-5.jpg')
+  .storyBlockWrap
+    %h1
+      Local News Title thats extra long goes here.
+    %p
+      1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured. 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured. 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
+    %span.btnComment
+      %a.voteUp
+        Like
+      106
+    %span.btnComment
+      %a
+        Comment
+      16
+  

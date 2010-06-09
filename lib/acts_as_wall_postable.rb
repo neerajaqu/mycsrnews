@@ -16,15 +16,15 @@ module Newscloud
       end
 
       module InstanceMethods
+        attr_accessor :post_wall
+
         def wall_postable?
           true
         end
         
-        def item_comments
+        def wall_caption
           return ''
         end
-
-        attr_accessor :post_wall
 
         def post_wall?
           post_wall and post_wall.to_i != 0

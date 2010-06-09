@@ -31,9 +31,13 @@ class ArticlesController < ApplicationController
     @article.content.caption = @article.body
     @article.author = current_user
     @article.tag_list = params[:article][:content_attributes][:tags_string]
+    @article.post_wall = params[:article][:content_attributes][:post_wall]
     @article.content.user = current_user
     if @article.save
-      flash[:success] = "Successfully posted your story!"
+      if @article.post_wall?
+        session[:post_wall] = @article.content
+      end            
+      flash[:success] = "Successfully posted your article!"
       redirect_to story_path(@article.content)
     else
     	flash[:error] = "Could not create your article. Please fix the errors and try again."

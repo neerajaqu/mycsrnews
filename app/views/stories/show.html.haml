@@ -15,8 +15,7 @@
             %a== #{like_link @story} #{@story.votes_tally}
           %li
             %a== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
-          - if logged_in?
-            %li= fb_share_item_button(@story)
+          %li= fb_share_item_button(@story)
           %li
             = twitter_share_item_link @story, @story.title
       .thumb
@@ -25,7 +24,7 @@
       .storyBlockWrap
         %h1.storyHead= @story.title
         .storyBlockMeta
-          %h3= t('.via', :source => link_to(@story.source, '#'), :date => @story.created_at)
+          %h3= t('.via', :source => link_to(@story.source, @story.url), :date => @story.created_at) unless @story.source.empty?
           %h3= t('.posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
           - if @story.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }

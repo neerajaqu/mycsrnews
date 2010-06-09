@@ -6,5 +6,7 @@
   .panel_block
     .thumb
       = local_linked_profile_pic user
+      - if user.is_moderator?
+        = image_tag 'default/icon-fan-app.gif', :class => "moderator"
     .storyBlockWrap
       %p= (user.bio.present?) ? user.bio : default_bio(user)

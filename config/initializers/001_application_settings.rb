@@ -1,4 +1,5 @@
 # Load in the application settings
 # Note:: this file is named 001_... to be explicitly loaded prior to all other initializers
 
-APP_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/application_settings.yml")[RAILS_ENV]
+APPLICATION_CONFIGURATION_FILE_LOCATION = "#{RAILS_ROOT}/config/application_settings.yml"
+APP_CONFIG = YAML.load_file(APPLICATION_CONFIGURATION_FILE_LOCATION)[RAILS_ENV]

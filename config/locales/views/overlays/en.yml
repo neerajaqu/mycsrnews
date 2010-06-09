@@ -1,0 +1,4 @@
+en:
+  overlays:
+    tweet:
+      help: "You must click inside the text box above prior to clicking the Tweet button."

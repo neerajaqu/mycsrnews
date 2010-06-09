@@ -72,6 +72,32 @@ body
   width: 253.333px
   float: left
 
+.panel_1
+  .panel_4
+    &.first
+      +alpha
+    &.last
+      +omega
+    .thumb
+      +grid(2)
+      margin: 0 0 10px 0
+      img
+        +grid(2)
+        margin: 0
+  &.feature_bg
+    .panel_4
+      margin-top: 5px
+      margin-right: 8px
+      margin-left: 8px
+      margin-bottom: 10px
+      &.first
+        margin-left: 5px
+      &.last
+        margin-right: 5px
+
+.panel_4
+  +grid(2)
+
 .panel_1, #hotTopicBar
   +grid(8)
 .feature_bg
