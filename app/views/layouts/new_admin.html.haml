@@ -64,7 +64,7 @@
                 %a{:href => "#widgets"} Build Layout
                 %ul
                   %li= link_to 'Choose Widgets', admin_widgets_path
-                  %li= link_to 'Custom Widgets', admin_custom_widgets_path
+                  %li= link_to 'Custom Widgets', admin_metadata_custom_widgets_path
               %li= link_to 'Announcements', admin_announcements_path
           %li
             %a{:href => "#contents"} Content
@@ -114,7 +114,13 @@
           %li
             %a{:href => "#module-settings"} Settings
             %ul
-              %li= link_to 'Metadata', admin_settings_path
+              %li
+                -#%a{:href => "#modules-metadata"}= link_to 'Metadata', admin_settings_path
+                %a{:href => "#modules-metadata"} Metadata
+                %ul
+                  %li= link_to 'Ads', admin_metadata_ads_path
+                  %li= link_to 'App Settings', admin_metadata_settings_path
+                  %li= link_to 'Custom Widgets', admin_metadata_custom_widgets_path
               %li
                 %a{:href => "#modules-settings-locales"} Languages
                 %ul

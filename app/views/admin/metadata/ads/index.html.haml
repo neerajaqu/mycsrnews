@@ -1,0 +1,19 @@
+%h1 Ads List
+
+- unless @ads.empty?
+  %table
+    %thead
+      %tr
+        %th Key Name
+        %th Sub Name
+        %th Created At
+        %th Actions
+    %tbody
+      - @ads.each do |ad|
+        %tr
+          %td= ad.key_name
+          %td= ad.data.key?(:name) ? ad.data[:name] : ''
+          %td= ad.created_at
+          %td== #{link_to 'View', [:admin, ad]} | #{link_to 'Edit', [:edit, :admin, ad]}
+- else
+  %h2 No ads available

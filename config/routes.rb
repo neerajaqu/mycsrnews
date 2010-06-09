@@ -81,8 +81,8 @@ ActionController::Routing::Routes.draw do |map|
     admin.translations '/translations.:format', :controller => 'translations', :action => 'translations'
     admin.asset_translations '/asset_translations.:format', :controller => 'translations', :action => 'asset_translations'
     admin.resources :widgets, :collection => { :save => :post }
-    admin.resources :custom_widgets
-    admin.resources :metadatas, :controller => 'custom_widgets'
+    #admin.resources :custom_widgets
+    #admin.resources :metadatas, :controller => 'custom_widgets'
     admin.resources :settings
     admin.resources :ideas
     admin.resources :idea_boards
@@ -105,6 +105,12 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true
     admin.resources :votes,           :active_scaffold => true
+
+    admin.namespace(:metadata) do |metadata|
+      metadata.resources :ads
+      metadata.resources :settings
+      metadata.resources :custom_widgets
+    end
   end
 
 	map.mobile_home '/m', :controller => 'mobile/home', :action => :index
