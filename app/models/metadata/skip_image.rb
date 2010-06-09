@@ -14,8 +14,8 @@ class Metadata::SkipImage < Metadata
   private
 
   def set_meta_keys
-    self.meta_type    = 'skip_image'
-    self.key_type     = 'media'
+    self.meta_type    = 'setting'
+    self.key_type     = 'skip_image'
     self.key_sub_type ||= self.setting_sub_type_name
     self.key_name     ||= self.setting_name
   end

@@ -122,6 +122,7 @@
                   %li= link_to 'App Settings', admin_metadata_settings_path
                   %li= link_to 'Custom Widgets', admin_metadata_custom_widgets_path
                   %li= link_to 'Skip Images', admin_metadata_skip_images_path
+                  %li= link_to 'Headline filters', admin_metadata_title_filters_path
               %li
                 %a{:href => "#modules-settings-locales"} Languages
                 %ul
@@ -137,7 +138,7 @@
               %li= link_to 'Facebook Application', "http://apps.facebook.com/#{ENV['FACEBOOKER_RELATIVE_URL_ROOT']}"
               %li= link_to 'Facebook App Page', "http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['facebook_application_id']}"
               %li= link_to 'Facebook App Statistics', "http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['facebook_application_id']}"
-
+              %li= link_to 'NewsCloud Support', 'http://support.newscloud.com/discussions/problems'
           -#
             %li= link_to 'Comments', '#comments'
             %li= link_to 'Users', '#users'
