@@ -9,11 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100608230348) do
+ActiveRecord::Schema.define(:version => 20100609180615) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
-    t.string   "title",                            :null => false
+    t.string   "title",      :default => "",       :null => false
     t.text     "details"
     t.string   "url"
     t.string   "mode",       :default => "rotate"
@@ -205,6 +205,8 @@ ActiveRecord::Schema.define(:version => 20100608230348) do
     t.boolean  "is_blocked",     :default => false
     t.integer  "flags_count",    :default => 0
     t.string   "url"
+    t.string   "alt_url"
+    t.string   "source"
   end
 
   add_index "events", ["eid"], :name => "index_events_on_eid"
@@ -395,7 +397,7 @@ ActiveRecord::Schema.define(:version => 20100608230348) do
   end
 
   create_table "resources", :force => true do |t|
-    t.string   "title",                                  :null => false
+    t.string   "title",               :default => "",    :null => false
     t.text     "details"
     t.string   "url"
     t.string   "mapUrl"
@@ -428,7 +430,7 @@ ActiveRecord::Schema.define(:version => 20100608230348) do
   add_index "sent_cards", ["to_fb_user_id"], :name => "index_sent_cards_on_to_fb_user_id"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
+    t.string   "session_id", :default => "", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -579,7 +581,7 @@ ActiveRecord::Schema.define(:version => 20100608230348) do
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
     t.integer  "voteable_id",                      :null => false
-    t.string   "voteable_type",                    :null => false
+    t.string   "voteable_type", :default => "",    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
     t.datetime "created_at"

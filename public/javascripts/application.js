@@ -235,25 +235,20 @@ $(function() {
           if (data.images.length > 0) {
             // Hack to make this work in chrome..
             // can't use your typical itemLoadCallback
-            $("#image_selector").jcarousel({
-              initCallback: set_carousel
-            });
+						$("#scrollbox").show();
 
-            my_carousel.size(data.images.length);
+						$(".scrollable").scrollable();
+						
+						var api = $(".scrollable").data("scrollable");
             jQuery.each(data.images, function(i, url) {
-              my_carousel.add(i+1, '<img src="'+url+'" width="75" height="75" />');
+              api.addItem('<img src="'+url+'" width="75" height="75" />');
             });
-            my_carousel.reload();
-
-            $('.jcarousel-item:first').addClass('jcarousel-selected');
-            $('#content_images_attributes_0_remote_image_url').val(data.images[0]);
-            $('.jcarousel-item').click(function() {
-            	$('.jcarousel-item.jcarousel-selected').removeClass('jcarousel-selected');
-            	$(this).addClass('jcarousel-selected');
-            	//$('#content_image_url').val($(this).find('img:first').attr('src'));
-            	$('#content_images_attributes_0_remote_image_url').val($(this).find('img:first').attr('src'));
-            });
-            $('#images').show();
+						$(".items img").click(function() {
+							$('.selected-image').removeClass('selected-image');
+            	$(this).addClass('selected-image');
+							$('#add_image').click();
+            	$('.image-url-input').last().val($(this).attr('src'));
+						})
           }
           $('#content_url').removeClass('process');
           $('#content_title').removeClass('process');
@@ -266,4 +261,33 @@ $(function() {
     $('#content_url').trigger('blur');
   }
 
+});
+
+/** IMAGE VIEWER **/
+$(function() {
+	$("#thumbnails").scrollable({size: 3, clickable: false}).find("img").each(function(index) {
+
+			// thumbnail images trigger the overlay
+			$(this).overlay({
+
+				effect: 'apple',
+				target: '#overlay',
+				mask: { maskId: 'mask' },
+    		onBeforeLoad: function() {
+
+    			// grab wrapper element inside content
+    			var wrap = this.getOverlay().find(".contentWrap");
+
+    			// load the page specified in the trigger
+    			wrap.html("<img src=\""+this.getTrigger().attr("src")+"\"\/>");
+  			
+  			
+    		}
+				// when box is opened, scroll to correct position (in 0 seconds)
+				// onLoad: function() {
+				// 	$("#images").data("scrollable").seekTo(index, 0);
+				// }
+			});
+		});
+	$("#images").scrollable();
 });
