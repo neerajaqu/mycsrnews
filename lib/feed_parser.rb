@@ -23,6 +23,7 @@ class FeedParser
   def initialize(url)
     @url = url
     @feed_type = false
+    @title_filters = Metadata::TitleFilter.all.map(&:keyword)  
     parse
   end
   
@@ -65,10 +66,12 @@ class FeedParser
 
   def items
     items = []
-
     @raw_feed.items.each do |item|
+      tempTitle = title(item)
+      tempTitle = @title_filters.inject(tempTitle) {|str,key| str.gsub(%r{#{key}}, '') }
+      tempTitle.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'')
       items << {
-      	:title => title(item),
+      	:title => tempTitle,
       	:body => body(item),
       	:date => date(item),
       	:link => link(item),
