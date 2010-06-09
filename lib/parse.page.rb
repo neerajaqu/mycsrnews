@@ -10,6 +10,7 @@ module Parse
       url = "http://#{url}" unless url =~ %r(^https?://)
 
       @images_sized = []
+      @skip_images = Metadata::SkipImage.all.map(&:image_url)
       page = open(url) { |f| Hpricot(f) }
       results = {}
       results[:title] = self.parse_title(page)
@@ -43,6 +44,7 @@ module Parse
 
     def self.is_valid_image?(image_url)
       min_image_size = 3500
+      return false if @skip_images.include? image_url
       begin
         url = URI.parse(image_url)
       rescue URI::InvalidURIError
