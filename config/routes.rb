@@ -84,6 +84,7 @@ ActionController::Routing::Routes.draw do |map|
     #admin.resources :custom_widgets
     #admin.resources :metadatas, :controller => 'custom_widgets'
     admin.resources :settings
+    admin.resources :skip_images
     admin.resources :ideas
     admin.resources :idea_boards
     admin.resources :resources
@@ -109,6 +110,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.namespace(:metadata) do |metadata|
       metadata.resources :ads
       metadata.resources :settings
+      metadata.resources :skip_images
       metadata.resources :custom_widgets
     end
   end
