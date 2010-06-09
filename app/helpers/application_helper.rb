@@ -403,7 +403,7 @@ EMBED
   
   
   def add_image(form_builder)
-    link_to_function "Add Image", :id => "add_image", :class=>"btn" do |page|
+    link_to_function "Add Another Image", :id => "add_image" do |page|
         form_builder.fields_for :images, Image.new, :child_index => 'NEW_RECORD' do |image_form|
           html = render(:partial => 'shared/forms/image', :locals => {:f => image_form })
           page << "$('#{escape_javascript(html)}'.replace(/NEW_RECORD/g, new Date().getTime())).insertBefore('#add_image');" 
@@ -413,10 +413,10 @@ EMBED
   
   def delete_image(form_builder)
     if form_builder.object.new_record?
-      link_to_function("Remove this Photo", "$(this).parent('fieldset').remove()")
+      link_to_function("Remove this Photo", "$(this).parent('fieldset').remove()", :class=>"delete_image")
     else 
       form_builder.hidden_field(:_delete) +
-      link_to_function("Remove this Photo", "$(this).parent('fieldset').hide(); $(this).prev().value = '1'")
+      link_to_function("Remove this Photo", "$(this).parent('fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
     end
   end
 end
