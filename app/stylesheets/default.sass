@@ -351,22 +351,21 @@ li
     .menu_item
       &:hover
         .dropdown
-          visibility: visible
           display: block
       .dropdown
         z-index: 20
-        visibility: hidden
         display: none
         margin-top: 1px
         ul
           li
-            width: 100%
+            width: $dropdownWidth
             height: 100%
-            float: left
-            clear: left
+            float: $pagetabFloat
+            clear: both
             padding: 0
             text-align: left
             margin-top: -1px
+            margin-right: 0
             a
               height: 100%
               font-size: 10px
@@ -455,7 +454,8 @@ li
   .thumb
     float: left
     margin: 0 5px 5px 5px
-    img
+    &.bio
+      overflow: visible
 
 .thumb
   margin: 10px
