@@ -17,6 +17,10 @@ class Comment < ActiveRecord::Base
 
   after_create :custom_callback
 
+  def voices
+    Comment.find(:all, :include => :user, :group => :user_id, :conditions => {:commentable_type => self.commentable_type, :commentable_id => self.commentable_id}).map(&:user)
+  end
+
   def item_title
     "Comment on #{self.commentable.item_title}"
   end
