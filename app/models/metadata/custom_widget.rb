@@ -61,7 +61,6 @@ class Metadata::CustomWidget < Metadata
     	:partial => 'shared/custom_widget'
     })
     self.metadatable = @widget
-    debugger
 
     @widget
   end
