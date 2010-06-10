@@ -20,6 +20,6 @@
           = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
           = form.input :idea_board, :label => t('.idea_board'), :required => true, :include_blank => false, :hint => t('.hint_idea_boards')
         - form.buttons do
-          = form.commit_button  :button_html => { :class => 'btn' } 
+          = form.commit_button  :button_html => { :class => 'btn'  , :onclick => 'this.form.submit();return true;' } 
 #col_right
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
