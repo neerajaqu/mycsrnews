@@ -34,7 +34,7 @@ class Admin::Metadata::TitleFiltersController < Admin::MetadataController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
       :item => Metadata::TitleFilter.find(params[:id]),
       :model => Metadata::TitleFilter,
-    	:fields => [:title_filter_name, :title_filter_sub_type_name, :title_filter_value, :created_at],
+    	:fields => [:keyword, :created_at],
     }
   end
 
