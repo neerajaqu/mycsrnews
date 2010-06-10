@@ -18,6 +18,7 @@ class MagicParse
   def initialize url
     @doc = open(url) { |f| Hpricot.XML(f) }
     @data = {}
+    @title_filters = Metadata::TitleFilter.all.map(&:keyword)
   end
 
   def method_missing(name, *args)
@@ -59,8 +60,11 @@ class MagicParse
   def get_items
     results = []
     items.each do |item|
+      title = parse_value('title', item, true)
+      title = @title_filters.inject(title) {|str,key| str.gsub(%r{#{key}}, '') }
+      title.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'')      
       results << {
-      	:title    => parse_value('title', item, true),
+      	:title    => title,
       	:link     => parse_value('link', item, true),
       	:body     => parse_value('body', item, true),
       	:caption  => parse_value('caption', item, true),

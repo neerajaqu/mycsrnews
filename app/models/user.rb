@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   # NOTE:: this must be above has_friendly_id, see below
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :karma_score, :is_admin, :is_blocked, :cached_slug, :is_moderator?
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :karma_score, :is_admin, :is_blocked, :cached_slug, :is_moderator, :is_editor
 
 
   # NOTE NOTE NOTE NOTE NOTE

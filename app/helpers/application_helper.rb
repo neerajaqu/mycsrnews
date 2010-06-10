@@ -207,17 +207,15 @@ module ApplicationHelper
     twitter_url = "http://twitter.com/?status=#{text}"
     is_configured = APP_CONFIG['twitter_connect_key'].present?
     if button == true
-      if is_configured
-        link_to image_tag('/images/default/tweet_button.gif'), "#", :class => "tweetButton", :link => overlay_tweet_url(:text=>caption, :link=>url), :rel=>"#overlay"
-      else
-        link_to image_tag('/images/default/tweet_button.gif'), twitter_url, :class => "tweetButton"
-      end
+      link_text = image_tag('/images/default/tweet_button.gif')
     else
-      if is_configured
-        link_to t('tweet'), "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url)
-      else
-        link_to t('tweet'), twitter_url
-      end
+      link_text = t('tweet')
+    end
+
+    if is_configured
+      link_to link_text, "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :burl=>twitter_url, :id=>"twitter-link"
+    else
+      link_to link_text, twitter_url
     end
 
   end
@@ -284,12 +282,14 @@ module ApplicationHelper
     facebook_messages
   end
 
-  def embed_video video, options = { }
+  def embed_video video, *args
+    options = args.extract_options!
     options.merge!(:size => 'normal') unless options[:size].present?
     embed_html_video(video, options)
   end
 
-  def embed_fb_video video, options = {}
+  def embed_fb_video video, *args
+    options = args.extract_options!
     options[:width] ||= video.get_width options[:size]
     options[:height] ||= video.get_height options[:size]
 
@@ -402,5 +402,23 @@ EMBED
   def breadcrumbs item, initial_set = []
     [initial_set].push(item.crumb_items.flatten.inject([]) {|set,crumb| set << (set.empty? ? crumb.crumb_text : link_to(crumb.crumb_text, crumb.crumb_link)) }.reverse).flatten
   end
-
+  
+  
+  def add_image(form_builder)
+    link_to_function "Add Another Image", :id => "add_image" do |page|
+        form_builder.fields_for :images, Image.new, :child_index => 'NEW_RECORD' do |image_form|
+          html = render(:partial => 'shared/forms/image', :locals => {:f => image_form })
+          page << "$('#{escape_javascript(html)}'.replace(/NEW_RECORD/g, new Date().getTime())).insertBefore('#add_image');" 
+        end
+      end
+  end
+  
+  def delete_image(form_builder)
+    if form_builder.object.new_record?
+      link_to_function("Remove this Photo", "$(this).parent('fieldset').remove()", :class=>"delete_image")
+    else 
+      form_builder.hidden_field(:_delete) +
+      link_to_function("Remove this Photo", "$(this).parent('fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
+    end
+  end
 end

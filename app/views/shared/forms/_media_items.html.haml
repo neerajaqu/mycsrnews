@@ -5,6 +5,9 @@
   = image_form.file_field :image, :required => false
   %br
   %br
+  =add_image(form)
+%br
+%br
 %h3.btn.hidden.unhide== #{link_to "Add video clip", '#', :class => 'toggle-form'}
 .video-form.hide
   %h3 Embed or link to a video (YouTube, Vimeo and Vmixcore only):

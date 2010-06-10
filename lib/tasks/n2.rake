@@ -180,6 +180,21 @@ namespace :n2 do
       end
     end
 
+    desc "Convert existing metadatas to have a type"
+    task :update_metadata_types => :environment do
+      Metadata.find(:all, :conditions => "type IS NULL").each do |metadata|
+        if metadata.meta_type == 'config' and metadata.key_type == 'ads'
+        	puts "Converting #{metadata.inspect} to Metadata::Ad type"
+        	metadata.update_attribute(:type, 'Metadata::Ad')
+        elsif metadata.meta_type == 'custom' and metadata.key_type == 'widget'
+        	puts "Converting #{metadata.inspect} to Metadata::CustomWidget type"
+        	metadata.update_attribute(:type, 'Metadata::CustomWidget')
+        else
+        	next
+        end
+      end
+    end
+
   end
 
   namespace :setup do

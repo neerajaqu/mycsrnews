@@ -1,0 +1,4 @@
+%h2== New Ad
+- semantic_form_for [:admin, @ad] do |form|
+  = render :partial => 'ad_form', :locals => { :form => form, :ad => @ad }
+  %p= submit_tag "Create Ad"

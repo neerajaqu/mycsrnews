@@ -35,17 +35,24 @@ class StoriesController < ApplicationController
 
   def new
    @current_sub_tab = 'New Story'
+   @title_filters = Metadata::TitleFilter.all.map(&:keyword)
    if params[:u].present?
+      title = params[:t]
+      title = @title_filters.inject(title) {|str,key| str.gsub(%r{#{key}}, '') }
+      title.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'')
       @story = Content.new({
       	:url      => params[:u],
-      	:title    => params[:t],
+      	:title    => title,
       	:caption  => params[:c]
       })
     elsif params[:newswire_id].present?
       @newswire = Newswire.find(params[:newswire_id])
+      title = @newswire.title
+      title = @title_filters.inject(title) {|str,key| str.gsub(%r{#{key}}, '') }
+      title.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'')
       @story = Content.new({
       	:url      => @newswire.url,
-      	:title    => @newswire.title,
+      	:title    => title,
       	:caption  => @template.strip_tags(@newswire.caption),
       	:newswire => @newswire
       })
@@ -87,7 +94,7 @@ class StoriesController < ApplicationController
   end
 
   def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('primary', 'stories')
+    @ad_banner = Metadata.get_ad_slot('banner', 'stories')
     @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'stories')
     @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'stories')
     @ad_small_square = Metadata.get_ad_slot('small_square', 'stories')

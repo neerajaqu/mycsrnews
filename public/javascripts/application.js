@@ -38,7 +38,7 @@ $(function() {
   $('.account-toggle').click(function(event) {
   	event.preventDefault();
 	if ($(this).next().children().length==0) {
-		$(this).next().html("<img src=\"/images/btn-comment-spinner.gif\" />");
+		$(this).next().html("<img src=\"/images/default/spinner-tiny.gif\" />");
   	$(this).next().toggle(); // after spinner appears, toggle it
  		$(this).next().load('/account_menu.js', function() {
   			rebuild_facebook_dom();
@@ -101,7 +101,7 @@ $(function() {
 	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').click(function(event) {
 		event.preventDefault();
 		var span = $(this).parent();
-		$(this).parent().html("<img src=\"/images/btn-comment-spinner.gif\" />");
+		$(this).parent().html("<img src=\"/images/default/spinner-tiny.gif\" />");
 		var url = $(this).attr("href");
     url = url.replace(/\?return_to=.*$/, '');
     if (url.substring(url.length - 5) == '.html') {
@@ -142,7 +142,7 @@ $(function() {
 		event.preventDefault();
 		var span = $(this).parent();
     var $li_parent = $(this).parents().filter('li').first();
-		$(this).parent().html("<img src=\"/images/spinner.gif\" />");
+		$(this).parent().html("<img src=\"/images/default/spinner.gif\" />");
 		var url = $(this).attr("href");
     url = url.replace(/\?return_to=.*$/, '');
     if (url.substring(url.length - 5) == '.html') {
@@ -235,25 +235,36 @@ $(function() {
           if (data.images.length > 0) {
             // Hack to make this work in chrome..
             // can't use your typical itemLoadCallback
-            $("#image_selector").jcarousel({
-              initCallback: set_carousel
-            });
+						$("#scrollbox").show();
 
-            my_carousel.size(data.images.length);
+						$(".scrollable").scrollable();
+						
+						var api = $(".scrollable").data("scrollable");
             jQuery.each(data.images, function(i, url) {
-              my_carousel.add(i+1, '<img src="'+url+'" width="75" height="75" />');
+              api.addItem('<img src="'+url+'" width="75" height="75" />');
             });
-            my_carousel.reload();
-
-            $('.jcarousel-item:first').addClass('jcarousel-selected');
-            $('#content_images_attributes_0_remote_image_url').val(data.images[0]);
-            $('.jcarousel-item').click(function() {
-            	$('.jcarousel-item.jcarousel-selected').removeClass('jcarousel-selected');
-            	$(this).addClass('jcarousel-selected');
-            	//$('#content_image_url').val($(this).find('img:first').attr('src'));
-            	$('#content_images_attributes_0_remote_image_url').val($(this).find('img:first').attr('src'));
-            });
-            $('#images').show();
+						$(".items img").click(function() {
+							if ($(this).hasClass("selected-image"))
+							{
+								$(this).removeClass('selected-image');
+							}
+							else {
+        	    	$(this).addClass('selected-image');
+								var in_use = false;
+								var current_src = $(this).attr('src');
+								$('.image-url-input').each( function(i, input){
+									if ($(input).val() == current_src)
+									{
+										in_use = true;
+									}
+								});
+								if (!in_use){
+									$('#add_image').click();
+	            		$('.image-url-input').last().val($(this).attr('src'));
+									$('.image-url-input').last().parent().next().hide();
+								}
+							}
+						});
           }
           $('#content_url').removeClass('process');
           $('#content_title').removeClass('process');
@@ -266,4 +277,33 @@ $(function() {
     $('#content_url').trigger('blur');
   }
 
+});
+
+/** IMAGE VIEWER **/
+$(function() {
+	$("#thumbnails").scrollable({size: 3, clickable: false}).find("img").each(function(index) {
+
+			// thumbnail images trigger the overlay
+			$(this).overlay({
+
+				effect: 'apple',
+				target: '#overlay',
+				mask: { maskId: 'mask' },
+    		onBeforeLoad: function() {
+
+    			// grab wrapper element inside content
+    			var wrap = this.getOverlay().find(".contentWrap");
+
+    			// load the page specified in the trigger
+    			wrap.html("<img src=\""+this.getTrigger().attr("src")+"\"\/>");
+  			
+  			
+    		}
+				// when box is opened, scroll to correct position (in 0 seconds)
+				// onLoad: function() {
+				// 	$("#images").data("scrollable").seekTo(index, 0);
+				// }
+			});
+		});
+	$("#images").scrollable();
 });

@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   before_filter :load_top_events
   before_filter :load_newest_events
   before_filter :load_featured_events, :only => [:index]
+  before_filter :set_custom_sidebar_widget, :only => [:index, :new, :show, :my_events, :import_facebook]
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"

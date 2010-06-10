@@ -18,7 +18,7 @@
             %p Drop Primary Item 1 Here
           #section1-primary-title
   - when "template_2"
-    %h1 Template Builder for Template 1
+    %h1 Template Builder for Template 2
     .template-builder-column
       = image_tag 'featured/template_2.jpg'
       %br
@@ -65,7 +65,44 @@
           #section-1-primary.primary-drop
             %p Drop Primary Item 1 Here
           #section1-primary-title
-
+  - when "template_7"
+    %h1 Template Builder for Skyboxes
+    .template-builder-column
+      = image_tag 'featured/template_7.jpg'
+      %br
+      %br
+      %br
+      #template_7.template-builder
+        .drop-zone
+          #section-1-primary.primary-drop
+            %p Drop First Item
+            .clear
+          #section-2-primary.primary-drop
+            %p Drop Second Item
+            .clear
+          #section-3-primary.primary-drop
+            %p Drop Third Item
+            .clear
+          #section-4-primary.primary-drop
+            %p Drop Fourth Item
+            .clear
+        #section1-primary-title
+        #section2-primary-title
+        #section3-primary-title
+        #section4-primary-title
+  - when "template_8"
+    %h1 Large one pic headline
+    .template-builder-column
+      = image_tag 'featured/template_8.jpg'
+      %br
+      %br
+      %br
+      #template_8.template-builder
+        .drop-zone
+          #section-1-primary.primary-drop
+            %p Drop Primary Item 1 Here
+          #section1-primary-title
+  
 .template-item-selector-column
   %h1 Items
   = select_tag 'featured-items-select', options_for_select(@featurables)

@@ -1,5 +1,5 @@
 -# content_for :sub_nav do
-  = render :partial => 'shared/subnav/news_subnav'
+  
 #col_left
   .panel_1
     .panelBar
@@ -9,4 +9,4 @@
         = render :partial => 'topic_form', :locals => { :form => form, :topic => @topic }
         - form.buttons do
           -# TODO:: switch this to locale
-          = form.commit_button :button_html => { :class => 'btn' }
+          = form.commit_button :button_html => { :class => 'btn'  , :onclick => 'this.form.submit();return true;' }
