@@ -20,6 +20,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :name
   validates_format_of :tags_string, :with => /^([-a-zA-Z0-9_ ]+,?)+$/, :allow_blank => true, :message => "Invalid tags. Tags can be alphanumeric characters or -_ or a blank space."
   
+  
   def self.per_page; 10; end
 
   def self.top
@@ -37,6 +38,7 @@ class Event < ActiveRecord::Base
       return check
     else
       e = Event.create!(
+          :source => "Facebook",
           :user => user,
           :name => facebook_event.name,
           :eid => facebook_event.eid,
@@ -67,6 +69,7 @@ class Event < ActiveRecord::Base
     else
       image = zvent.images.empty? ? nil : zvent.images.first["url"] 
       Event.create!(
+      :source => "Zvent",
       :user => user,
       :name => zvent.name,
       :eid => zvent.id,
@@ -80,7 +83,8 @@ class Event < ActiveRecord::Base
       :country => zvent.venue.country,
       :creator => nil, #not yet support in gem
       :pic => image,
-      :url => "http://www.zvents.com"+zvent.zurl)
+      :url => zvent.url || "http://www.zvents.com"+zvent.zurl,
+      :alt_url => "http://www.zvents.com"+zvent.zurl)
     end
   end
 end

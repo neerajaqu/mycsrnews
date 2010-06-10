@@ -282,12 +282,14 @@ module ApplicationHelper
     facebook_messages
   end
 
-  def embed_video video, options = { }
+  def embed_video video, *args
+    options = args.extract_options!
     options.merge!(:size => 'normal') unless options[:size].present?
     embed_html_video(video, options)
   end
 
-  def embed_fb_video video, options = {}
+  def embed_fb_video video, *args
+    options = args.extract_options!
     options[:width] ||= video.get_width options[:size]
     options[:height] ||= video.get_height options[:size]
 
@@ -401,5 +403,22 @@ EMBED
     [initial_set].push(item.crumb_items.flatten.inject([]) {|set,crumb| set << (set.empty? ? crumb.crumb_text : link_to(crumb.crumb_text, crumb.crumb_link)) }.reverse).flatten
   end
   
-
+  
+  def add_image(form_builder)
+    link_to_function "Add Another Image", :id => "add_image" do |page|
+        form_builder.fields_for :images, Image.new, :child_index => 'NEW_RECORD' do |image_form|
+          html = render(:partial => 'shared/forms/image', :locals => {:f => image_form })
+          page << "$('#{escape_javascript(html)}'.replace(/NEW_RECORD/g, new Date().getTime())).insertBefore('#add_image');" 
+        end
+      end
+  end
+  
+  def delete_image(form_builder)
+    if form_builder.object.new_record?
+      link_to_function("Remove this Photo", "$(this).parent('fieldset').remove()", :class=>"delete_image")
+    else 
+      form_builder.hidden_field(:_delete) +
+      link_to_function("Remove this Photo", "$(this).parent('fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
+    end
+  end
 end

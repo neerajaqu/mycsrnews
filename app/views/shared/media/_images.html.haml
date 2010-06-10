@@ -1,13 +1,18 @@
 -# @expects: local 'images'
 
 - if images.present? and images.size > 1
-  .panel_1
-    .panelBar.clearfix
-      %h2= t 'images.title'
-    .storyList.clearfix
-      .list_stories.clearfix
-        %ul
-          - images.each do |image|
-            .image.clearfix
-              = image_tag image.url(:medium)
+  %a.prev.browse.left_scroll.prev
+  #thumbnails.scrollable
+    .items
+      - images.each do |image|
+        = image_tag image.url(:medium), :size=>"100x100"
+  %a.prev.browse.right_scroll.next
 
+  %hr{:style=>"clear: both"}
+  / #image_box.standard_overlay
+  /   #images.scrollable_popup
+  /     .items
+  /       - images.each do |image|
+  /         = image_tag image.url(:medium)
+  /   / .navi.prev
+  /   / .navi.next

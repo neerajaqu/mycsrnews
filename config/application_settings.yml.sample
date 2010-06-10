@@ -4,6 +4,7 @@ defaults: &defaults
 
   # Uncomment this line to enable google analytics
   google_analytics_account_id: 'UF-123456890-7'
+  google_analytics_site_id: '5407321'
 
   # ad platforms supported: google, helios
   ad_platform: 'google' 

@@ -10,6 +10,8 @@ module Parse
       url = "http://#{url}" unless url =~ %r(^https?://)
 
       @images_sized = []
+      @skip_images = Metadata::SkipImage.all.map(&:image_url)
+      @title_filters = Metadata::TitleFilter.all.map(&:keyword)
       page = open(url) { |f| Hpricot(f) }
       results = {}
       results[:title] = self.parse_title(page)
@@ -21,7 +23,9 @@ module Parse
     end
 
     def self.parse_title(doc)
-      (doc/"head/title").inner_html
+      title = (doc/"head/title").inner_html
+      title = @title_filters.inject(title) {|str,key| str.gsub(%r{#{key}}, '') }
+      title.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'')
     end
 
     def self.parse_description(doc)
@@ -43,6 +47,7 @@ module Parse
 
     def self.is_valid_image?(image_url)
       min_image_size = 3500
+      return false if @skip_images.include? image_url
       begin
         url = URI.parse(image_url)
       rescue URI::InvalidURIError

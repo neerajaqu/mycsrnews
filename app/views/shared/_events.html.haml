@@ -29,6 +29,7 @@
                   %li 
                     %b== #{event.location}
                   %li== #{event.start_time.to_s :short_with_time}
+                  %li= "#{event.end_time.to_s :short_with_time}" unless event.end_time.nil?
 
     - if paginate
       .clearfix
