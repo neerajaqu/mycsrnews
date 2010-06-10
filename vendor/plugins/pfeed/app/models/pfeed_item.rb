@@ -55,7 +55,12 @@ class PfeedItem < ActiveRecord::Base
 
   def deliver(ar_obj,method_name_arr)
     method_name_arr.map { |method_name|
-      ar_obj.send(method_name)
+      if method_name.to_s =~ /^participant_(.*)$/
+      	return nil unless self.participant
+      	self.participant.send($1)
+      else
+        ar_obj.send(method_name)
+      end
     }.flatten.uniq.map {|o| deliver_to(o) }.compact
   end
 
