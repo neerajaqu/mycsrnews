@@ -8,6 +8,8 @@ class NewswiresController < ApplicationController
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @newswires = Newswire.unpublished.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
     @paginate = true
+    Rails.logger.debug session
+  
   end
 
   def quick_post
