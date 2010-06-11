@@ -7,7 +7,7 @@ ActiveRecord::Base.send(:include, ParolkarInnovationLab::SocialNet)
 ActionController::Base.helper do
   def pfeed_content(pfeed)
     controller.send('render_to_string',
-      :partial => "pfeeds/#{pfeed.view_template_name}.html.erb", :locals => {:object => pfeed})
+      :partial => "pfeeds/#{pfeed.view_template_name}", :locals => {:object => pfeed})
   end
 
   def pfeed_item_url(pfeed_item)
