@@ -31,9 +31,6 @@ defaults: &defaults
   # allow web log in system
   allow_web_auth: false
 
-  # Uncomment this line to enable twitter
-  #twitter_account: 'mytwitteraccount'
-
   # Uncomment this line if you wish to enable contact_us email notifications
   # NOTE:: you must setup smtp.yml for outgoing emails to work
   contact_us_recipients: 'admin@email.com,me@email.com,support@email.com'
@@ -53,6 +50,7 @@ defaults: &defaults
   zvent_api_key: 'FRXBFQTGJOMXVKIQSFGSBDFWYMLXSJPBQGJDGPXJICGBSGPWGULKGTJGOXXKLUOG'
   zvent_location: 'Seattle, WA'
     
+  # Uncomment this line to enable twitter
   #Twitter Settings
   #twitter_account: 'username'
   twitter_connect_key: 'key'
