@@ -7,6 +7,9 @@ class PfeedItem < ActiveRecord::Base
   belongs_to :participant, :polymorphic => true
 
   has_many :pfeed_deliveries, :dependent => :destroy   
+
+  # Only show pfeed items newer than provided pfeed_item
+  named_scope :newer_than, lambda { |*args| { :conditions => ["pfeed_items.id > ?", args.first] } }
   
   attr_accessor :temp_references # this is an temporary Hash to hold references to temporary Objects 
   
