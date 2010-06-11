@@ -5,7 +5,7 @@
     <br /><br />
     <p><%= fb_login_button('window.location = "/users/link_user_accounts";')%></p>
     <br />
-    <%= fb_prompt_permission('offline_access', t('request_offline_access')) %>
+    <%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %>
     <br /><br />
 
     <% if APP_CONFIG['allow_web_auth'].present? and APP_CONFIG['allow_web_auth'] %>
