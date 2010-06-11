@@ -124,6 +124,7 @@ en:
     loading_message: "Loading send a card form..."
   sessions:
     use_fb_connect: "Use Facebook Connect"
+    request_offline_access: "Tell Facebook to keep me signed in"
   forums:
     title: "Forums"
     subtitle: "Community Discussion"
