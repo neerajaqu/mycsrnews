@@ -66,3 +66,36 @@ custom_widgets.each do |custom_widget|
     }
   })
 end
+
+settings = [
+ { :key_sub_type => 'options', :key_name => 'site_title',  :value => APP_CONFIG['site_title'] || "Default Site Title" },
+ { :key_sub_type => 'options', :key_name => 'site_topic', :value => APP_CONFIG['site_topic'] || "Default Topic" },
+ { :key_sub_type => 'options', :key_name => 'contact_us',  :value => APP_CONFIG['contact_us_recipient'] || "admin@email.com,me@email.com,support@email.com" },
+ { :key_sub_type => 'options', :key_name => 'firstnameonly', :value => APP_CONFIG[''] || "false" },
+ { :key_sub_type => 'design', :key_name => 'typekit', :value => APP_CONFIG[''] || "000000" },
+ { :key_sub_type => 'twitter', :key_name => 'account', :value =>APP_CONFIG[''] || "userkey_name" },
+ { :key_sub_type => 'twitter', :key_name => 'connect_key', :value => APP_CONFIG[''] || "U6qjcn193333331AuA" },
+ { :key_sub_type => 'twitter', :key_name => 'oauth_key', :value => APP_CONFIG[''] ||"U6qjcn193333331AuA" },
+ { :key_sub_type => 'twitter', :key_name => 'oauth_secret', :value => APP_CONFIG[''] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" },
+ { :key_sub_type => 'facebook', :key_name => 'app_id', :value => APP_CONFIG[''] || "111111111111" },
+ { :key_sub_type => 'stats', :key_name => 'google_analytics_account_id', :value => APP_CONFIG[''] || "UF-123456890-7" },
+ { :key_sub_type => 'stats', :key_name => 'google_analytics_site_id', :value => APP_CONFIG[''] || "1231232" },
+ { :key_sub_type => 'ads', :key_name => 'platform', :value => "google" },
+ { :key_sub_type => 'ads', :key_name => 'helios_sitepage', :value => APP_CONFIG[''] || "youraddomain.com/yourfacebookproject.htm" },
+ { :key_sub_type => 'ads', :key_name => 'helios_url', :value => APP_CONFIG[''] || "http://subdomain.xxx.com" },
+ { :key_sub_type => 'ads', :key_name => 'helios_script_url', :value => APP_CONFIG[''] || "http://scriptsubdomain.xxx.com" },
+ { :key_sub_type => 'ads', :key_name => 'google_adsense_account_id', :value => APP_CONFIG[''] || "ca-pub-9975156792632579" },
+ { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => APP_CONFIG[''] || "Needle_Small" }
+]
+
+settings.each do |setting|
+  next if Metadata::Setting.find_setting(setting[:key_sub_type], setting[:key_name])
+  puts "Creating setting #{setting[:key_name]} -- #{setting[:key_sub_type]}" if debug
+
+  Metadata::Setting.create!({
+		:data => {
+		  :setting_value => setting[:key_sub_type],
+		  :setting_name => setting[:key_name], 
+		  :setting_value => setting[:value]    }
+  })
+end
