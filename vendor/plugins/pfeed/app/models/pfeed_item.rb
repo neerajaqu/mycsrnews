@@ -162,7 +162,7 @@ class PfeedItem < ActiveRecord::Base
           constructor_options.merge(:temp_references => temp_references))
       rescue NameError
         unless retried
-          CUSTOM_CLASSES[pfeed_class_name] = false
+          CUSTOM_CLASSES[pfeed_class_name] = nil
           retried = true
           pfeed_class_name = "Pfeeds::"+pfeed_class_name
           retry
