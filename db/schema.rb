@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100609180615) do
+ActiveRecord::Schema.define(:version => 20100611200848) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -371,6 +371,26 @@ ActiveRecord::Schema.define(:version => 20100609180615) do
   add_index "newswires", ["feed_id"], :name => "feedid"
   add_index "newswires", ["title"], :name => "index_newswires_on_title"
 
+  create_table "pfeed_deliveries", :force => true do |t|
+    t.integer  "pfeed_receiver_id"
+    t.string   "pfeed_receiver_type"
+    t.integer  "pfeed_item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pfeed_items", :force => true do |t|
+    t.string   "type"
+    t.integer  "originator_id"
+    t.string   "originator_type"
+    t.integer  "participant_id"
+    t.string   "participant_type"
+    t.text     "data"
+    t.datetime "expiry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "questions", :force => true do |t|
     t.integer  "user_id",        :limit => 8, :default => 0
     t.string   "question",                    :default => ""
@@ -513,47 +533,49 @@ ActiveRecord::Schema.define(:version => 20100609180615) do
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true
 
   create_table "users", :force => true do |t|
-    t.integer  "ncu_id",                     :limit => 8,  :default => 0
-    t.string   "name",                                     :default => ""
-    t.string   "email",                                    :default => ""
-    t.boolean  "is_admin",                                 :default => false
-    t.boolean  "is_blocked",                               :default => false
-    t.integer  "vote_power",                               :default => 1
-    t.string   "remoteStatus",                             :default => "noverify"
-    t.boolean  "is_member",                                :default => false
-    t.boolean  "is_moderator",                             :default => false
-    t.boolean  "is_sponsor",                               :default => false
-    t.boolean  "is_email_verified",                        :default => false
-    t.boolean  "is_researcher",                            :default => false
-    t.boolean  "accept_rules",                             :default => false
-    t.boolean  "opt_in_study",                             :default => true
-    t.boolean  "opt_in_email",                             :default => true
-    t.boolean  "opt_in_profile",                           :default => true
-    t.boolean  "opt_in_feed",                              :default => true
-    t.boolean  "opt_in_sms",                               :default => true
+    t.integer  "ncu_id",                      :limit => 8,  :default => 0
+    t.string   "name",                                      :default => ""
+    t.string   "email",                                     :default => ""
+    t.boolean  "is_admin",                                  :default => false
+    t.boolean  "is_blocked",                                :default => false
+    t.integer  "vote_power",                                :default => 1
+    t.string   "remoteStatus",                              :default => "noverify"
+    t.boolean  "is_member",                                 :default => false
+    t.boolean  "is_moderator",                              :default => false
+    t.boolean  "is_sponsor",                                :default => false
+    t.boolean  "is_email_verified",                         :default => false
+    t.boolean  "is_researcher",                             :default => false
+    t.boolean  "accept_rules",                              :default => false
+    t.boolean  "opt_in_study",                              :default => true
+    t.boolean  "opt_in_email",                              :default => true
+    t.boolean  "opt_in_profile",                            :default => true
+    t.boolean  "opt_in_feed",                               :default => true
+    t.boolean  "opt_in_sms",                                :default => true
     t.datetime "created_at"
-    t.string   "eligibility",                              :default => "team"
-    t.integer  "cachedPointTotal",                         :default => 0
-    t.integer  "cachedPointsEarned",                       :default => 0
-    t.integer  "cachedPointsEarnedThisWeek",               :default => 0
-    t.integer  "cachedPointsEarnedLastWeek",               :default => 0
-    t.integer  "cachedStoriesPosted",                      :default => 0
-    t.integer  "cachedCommentsPosted",                     :default => 0
-    t.string   "userLevel",                  :limit => 25, :default => "reader"
-    t.string   "login",                      :limit => 40
-    t.string   "crypted_password",           :limit => 40
-    t.string   "salt",                       :limit => 40
+    t.string   "eligibility",                               :default => "team"
+    t.integer  "cachedPointTotal",                          :default => 0
+    t.integer  "cachedPointsEarned",                        :default => 0
+    t.integer  "cachedPointsEarnedThisWeek",                :default => 0
+    t.integer  "cachedPointsEarnedLastWeek",                :default => 0
+    t.integer  "cachedStoriesPosted",                       :default => 0
+    t.integer  "cachedCommentsPosted",                      :default => 0
+    t.string   "userLevel",                   :limit => 25, :default => "reader"
+    t.string   "login",                       :limit => 40
+    t.string   "crypted_password",            :limit => 40
+    t.string   "salt",                        :limit => 40
     t.datetime "updated_at"
-    t.string   "remember_token",             :limit => 40
+    t.string   "remember_token",              :limit => 40
     t.datetime "remember_token_expires_at"
-    t.integer  "fb_user_id",                 :limit => 8
+    t.integer  "fb_user_id",                  :limit => 8
     t.string   "email_hash"
     t.string   "cached_slug"
-    t.integer  "karma_score",                              :default => 0
+    t.integer  "karma_score",                               :default => 0
     t.datetime "last_active"
-    t.boolean  "is_editor",                                :default => false
-    t.boolean  "is_robot",                                 :default => false
-    t.integer  "posts_count",                              :default => 0
+    t.boolean  "is_editor",                                 :default => false
+    t.boolean  "is_robot",                                  :default => false
+    t.integer  "posts_count",                               :default => 0
+    t.integer  "last_viewed_feed_item_id"
+    t.integer  "last_delivered_feed_item_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

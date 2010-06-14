@@ -16,6 +16,19 @@ class Comment < ActiveRecord::Base
   validates_presence_of :comments
 
   after_create :custom_callback
+  after_create :trigger_user_comment
+
+
+  def voices
+    Comment.find(:all, :include => :user, :group => :user_id, :conditions => {:commentable_type => self.commentable_type, :commentable_id => self.commentable_id}).map(&:user)
+  end
+
+  def recipient_voices
+    users = self.voices
+    users << self.commentable.user
+    users.delete self.user
+    users.uniq
+  end
 
   def item_title
     "Comment on #{self.commentable.item_title}"
@@ -49,6 +62,10 @@ class Comment < ActiveRecord::Base
 
   def custom_callback
     self.commentable.comments_callback if self.commentable.respond_to?(:comments_callback)
+  end
+
+  def trigger_user_comment
+    self.user.trigger_comment(self)
   end
 
 end
