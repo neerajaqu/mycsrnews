@@ -10,7 +10,7 @@
       %h2 
         Suggest An Idea
     .formBox
-      %h4.title== What's your idea for a #{APP_CONFIG['site_topic']}?
+      %h4.title== What's your idea?
 
       - semantic_form_for @idea do |form|
         - form.inputs do
@@ -21,7 +21,7 @@
           = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
           = render :partial => 'shared/forms/wall_postable', :locals => { :form => form, :item => @idea }
         - form.buttons do
-          = form.commit_button  :button_html => { :class => 'btn_1' } 
+          = form.commit_button  :button_html => { :class => 'btn_1', :onclick => 'this.form.submit();return true;' } 
 
 #col_right
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

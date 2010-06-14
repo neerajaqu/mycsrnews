@@ -32,6 +32,6 @@
                     %li== #{event.location}
                     %li== #{Time.at(event.start_time.to_i).to_date}
           %fieldset{:class=>"buttons"}
-            = form.submit t('.import_events'), :class => 'btn'
+            = form.submit t('.import_events'), :class => 'btn',  :onclick => 'this.form.submit();return true;'
 #col_right
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

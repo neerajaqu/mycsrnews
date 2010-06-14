@@ -9,7 +9,7 @@
         = render :partial => 'story_form', :locals => { :form => form, :story => @story }
         - form.buttons do
           -# TODO:: switch this to locale
-          = form.commit_button "Post Story", :button_html => { :class => 'btn'  , :onclick => 'this.form.submit();return true;' , :onclick => 'this.form.submit();return true;'}
+          = form.commit_button "Post Story", :button_html => { :class => 'btn' , :onclick => 'this.form.submit();return true;' }
 
 #col_right
   .panel_2
