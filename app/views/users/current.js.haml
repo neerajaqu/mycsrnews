@@ -1,9 +1,11 @@
 - if current_user
   $(function() {
-  - current_user.pfeed_inbox_get_new!.each do |pfeed_item|
-    - next unless pfeed_item.participant
-    $.jGrowl("#{escape_javascript(pfeed_content(pfeed_item))}", {sticky: true, afterOpen: function() {
-    rebuild_facebook_dom(); }});
+  - jgrowl_setting = get_setting 'enable_activity_popups'
+  - if jgrowl_setting and jgrowl_setting.enabled?
+    - current_user.pfeed_inbox_get_new!.each do |pfeed_item|
+      - next unless pfeed_item.participant
+      $.jGrowl("#{escape_javascript(pfeed_content(pfeed_item))}", {sticky: true, afterOpen: function() {
+      rebuild_facebook_dom(); }});
 
   - if current_user.is_moderator?
     $('.moderator-links').removeClass('moderator-links');
