@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   map.test_widgets '/test_widgets.:format', :controller => 'home', :action => 'test_widgets'
   map.contact_us '/contact_us.:format', :controller => 'home', :action => 'contact_us'
   map.app_tab '/app_tab.:format', :controller => 'home', :action => 'app_tab'
-  map.resources :users, :collection => {:link_user_accounts => :get, :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
+  map.resources :users, :collection => {:link_user_accounts => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
 
   map.resources :forums, :has_many => [:topics]
   map.resources :topics, :has_many => [:comments]

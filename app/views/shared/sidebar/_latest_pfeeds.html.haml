@@ -1,0 +1,10 @@
+-# @expects: local 'story'
+
+- cache :latest_pfeeds_html, :expires_in => 5.minutes do
+  - latest_pfeeds ||= PfeedItem.find(:all, :order => "created_at desc", :limit => 5)
+  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('pfeeds.latest.title')
+    .list_stories
+      %ul
+        = render :partial => "pfeeds/pfeed", :collection => latest_pfeeds

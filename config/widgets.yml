@@ -131,3 +131,5 @@ widgets:
       partial: '/shared/sidebar/featured_answer'
     top_articles:
       partial: '/shared/sidebar/top_articles'
+    latest_activity:
+      partial: '/shared/sidebar/latest_pfeeds'
