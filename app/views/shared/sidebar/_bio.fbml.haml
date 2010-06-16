@@ -3,8 +3,7 @@
 .panel_2
   .panelBar
     %h2= t('.posted_by', :fb_name => local_linked_profile_name(user))
-  .panel_block
-    .thumb
-      = local_linked_profile_pic user
-    .storyBlockWrap
-      %p= (user.bio.present?) ? user.bio : default_bio(user)
+  .thumb.bio
+    = local_linked_profile_pic user
+  .storyBlockWrap
+    %p= (user.bio.present?) ? user.bio : default_bio(user)
