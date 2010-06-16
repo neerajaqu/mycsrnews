@@ -11,7 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 20100615220810) do
 
-
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
     t.string   "title",      :default => "",       :null => false
