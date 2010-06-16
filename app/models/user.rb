@@ -42,6 +42,9 @@ class User < ActiveRecord::Base
   has_many :received_cards, :class_name => "SentCard", :foreign_key => 'to_fb_user_id', :primary_key => 'fb_user_id', :conditions => 'sent_cards.to_fb_user_id IS NOT NULL'
   has_many :sent_cards, :class_name => "SentCard", :foreign_key => 'from_user_id'
   has_one  :twitter,:class_name=>"TwitterToken", :dependent=>:destroy
+
+  belongs_to :last_viewed_feed_item, :class_name => "PfeedItem", :foreign_key => "last_viewed_feed_item_id"
+  belongs_to :last_delivered_feed_item, :class_name => "PfeedItem", :foreign_key => "last_delivered_feed_item_id"
   
   has_karma :contents
 
@@ -59,7 +62,37 @@ class User < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true, :reserved => RESERVED_NAMES
 
 
+  # NOTE:: must be above emits_pfeeds call
+  def trigger_comment(comment)
+    # trigger comment pfeed delivery
+  end
   
+  def pfeed_trigger_delivery_callback(pfeed_item)
+    self.update_attribute(:last_delivered_feed_item, pfeed_item)
+  end
+
+  def pfeed_inbox_unread
+    return pfeed_inbox unless last_viewed_feed_item
+    pfeed_inbox.newer_than(last_viewed_feed_item)
+  end
+
+  def pfeed_inbox_get_new!
+    items = pfeed_inbox_unread
+    pfeed_set_last_viewed_as_delivered!
+    items
+  end
+
+  def pfeed_set_last_viewed! pfeed_item
+    self.update_attribute(:last_viewed_feed_item, pfeed_item)
+  end
+
+  def pfeed_set_last_viewed_as_delivered!
+    return true if last_viewed_feed_item == last_delivered_feed_item
+    self.update_attribute(:last_viewed_feed_item, last_delivered_feed_item)
+  end
+
+  emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices], :identified_by => :name
+  receives_pfeed
 
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.

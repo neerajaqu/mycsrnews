@@ -1,0 +1,37 @@
+Inflectionist
+=============
+
+The old school ActiveSupport's inflections allowed you to pluralize, singularize , humanize etc. And when you wanted little more complex linguistic processing , you found nothing. Here comes Inflectionist for your rescue. It is an extension to ActiveSupport inflections available in form of a rails plugin. For now, this will allow you to find simple past tense of any given word.     
+
+
+
+Example
+=======
+ With this plugin installed in your rails app, you will be able to perform operations on strings this way... 
+
+ "create".to_past_tense  => "created"
+ "buy".to_past_tense => "bought"
+ "fight".to_past_tense => "fought"
+ "market".to_past_tense => "marketed"
+ "animate".to_past_tense => "animated"
+ "fluctuate".to_past_tense => "fluctuated"
+ "tag".to_past_tense => "tagged"
+ "feel".to_past_tense => "felt"
+
+
+Installation
+============
+
+  script/plugin install git://github.com/parolkar/inflectionist.git
+
+
+
+Goals & TODO
+============
+1.) Implement past to present tense conversion
+2.) Implement more complex linguistic processing
+3.) Add more inflections
+
+
+
+Copyright (c) 2009 Er Abhishek Parolkar, released under the MIT license

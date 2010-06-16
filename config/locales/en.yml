@@ -148,3 +148,6 @@ en:
       commit_reply: "Post your reply"
       new: "Create a new topic"
       new_header: "Create a New Topic"
+  pfeeds:
+    latest:
+      title: "Latest user activity"
