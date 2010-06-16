@@ -4,6 +4,10 @@
     <p>Join our community using your Facebook account</p>
     <br /><br />
     <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+    <br /><p>&nbsp;&nbsp;
+    <%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %>
+    </p>
+    <br /><br />
     <% if APP_CONFIG['allow_web_auth'].present? and APP_CONFIG['allow_web_auth'] %>
       <p>Or, register as a new user below:</p>
 
