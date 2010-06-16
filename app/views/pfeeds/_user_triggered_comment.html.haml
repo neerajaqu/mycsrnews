@@ -12,9 +12,11 @@
     -#%span.btnComment.float_left== #{like_link story} #{story.votes_tally}
     -#%span.btnComment.float_left== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
 %p= caption((comment.comments.present?) ? "\"#{comment.comments}\"" : 'no comment',200)
-.profilePic= local_linked_profile_pic user, :width => '30px', :height => '30px', :format => 'html'
-%h3
-  = t('posted_by', :fb_name => local_linked_profile_name(user, :format => 'html'), :date => time_ago_in_words(comment.created_at))
-%h3
-  Re: 
-  = link_to caption(comment.commentable.item_title,120), polymorphic_path(comment.commentable, :format => 'html')
+
+.user-wrapper
+  .profilePic= local_linked_profile_pic user, :width => '30px', :height => '30px', :format => 'html'
+  %h3
+    = t('posted_by', :fb_name => local_linked_profile_name(user, :format => 'html'), :date => time_ago_in_words(comment.created_at))
+  %h3
+    Re: 
+    = link_to caption(comment.commentable.item_title,120), polymorphic_path(comment.commentable, :format => 'html')

@@ -1413,3 +1413,55 @@ a.disabled
   
 .prev
   background: url(/images/arrow/left.png) no-repeat
+
+
+// jgrowl styling //
+body div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer
+  background: $featureBg
+  border: $featureBorder
+  opacity: 1
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)"
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85)
+  zoom: 1
+  width: 275px
+  padding: 10px
+  margin-top: 5px
+  margin-bottom: 5px
+  text-align: left
+  display: none
+  -moz-border-radius: 5px
+  -webkit-border-radius: 5px
+
+body div.jGrowl div.jGrowl-notification
+  min-height: 40px
+
+body div.jGrowl div.jGrowl-notification div.jGrowl-header
+  margin: 0 0 10px 0
+  color: $featureBodyText
+body div.jGrowl div.jGrowl-notification div.jGrowl-message
+  h3
+    font-size: $fontsize * 0.8
+    margin: 1px 0 3px 0
+  p
+    font-size: $fontsize * 0.95
+    color: $featureBodyText
+
+body div.jGrowl div.jGrowl-notification div.user-wrapper
+  background: #fff
+  padding: 2px
+  .profilePic
+    border: #ccc 1px solid
+    margin: 0 5px 5px 0
+  
+body div.jGrowl div.jGrowl-notification div.jGrowl-close
+  z-index: 99
+  float: right
+  font-weight: bold
+  font-size: 1em
+  cursor: pointer
+  display: inline-block
+  float: right
+  color: #000
+  position: relative
+  top: -3px
+body div.jGrowl div.jGrowl-closer
