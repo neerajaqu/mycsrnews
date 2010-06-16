@@ -4,12 +4,11 @@
       = content_form.input :title
       %p= form.input :body
       = content_form.input :url, :required => false, :hint => t('article_url_hint')
-      %ul#image_selector.jcarousel-skin-tango{:style => "left: 0px;"}
       #scrollbox
-        %a.prev.browse.left
+        %a.prev.browse.left_scroll
         .scrollable
           .items
-        %a.next.browse.right
+        %a.next.browse.right_scroll
       = render :partial => 'shared/forms/media_items', :locals => { :form => content_form, :item => @article.content }
       = content_form.input :tags_string, :required => false, :hint => t('tags_hint')
       = render :partial => 'shared/forms/wall_postable', :locals => { :form => content_form }

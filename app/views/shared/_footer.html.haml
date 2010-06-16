@@ -25,7 +25,7 @@
         twttr.anywhere(function (T) {
           T('#follow-twitterapi').followButton("#{APP_CONFIG['twitter_account']}");
         });
-      %a.twitter_link{:style=>"display:none;",:target => "_blank", :title => t('.twitter_title'), :href => twitter_url(APP_CONFIG['twitter_account']) }= t('.twitter')
+      %a.twitter_link{:style=>"display:none;",:target => "_tweet", :title => t('.twitter_title'), :href => twitter_url(APP_CONFIG['twitter_account']) }= t('.twitter')
 #overlay.standard_overlay
   .contentWrap
  

@@ -53,37 +53,44 @@ namespace :n2 do
       if !APP_CONFIG['twitter_oauth_consumer_key'].present? && !APP_CONFIG['twitter_oauth_consumer_secret'].present?
         puts "Your Twitter account is not configured run 'rake n2:twitter:connect'."
       else
-        @events = Event.tally(
+        options =Event.options_for_tally().merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
+        
+        event_options = Event.options_for_tally(
           {   :at_least => APP_CONFIG['tweet_events_min_votes'], 
               :at_most => 1000,  
               :start_at => 1.day.ago,
               :limit => APP_CONFIG['tweet_events_limit'],
               :order => "events.created_at desc"
-          })
-
-        @articles = Article.tally(
+          }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
+        
+        @events = Event.find(:all, event_options)
+        
+        article_options = Article.options_for_tally(
           {   :at_least => APP_CONFIG['tweet_articles_min_votes'], 
               :at_most => 1000,  
               :start_at => 1.day.ago,
               :limit => APP_CONFIG['tweet_articles_limit'],
               :order => "articles.created_at desc"
-          })
+          }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
+        @articles = Article.find(:all, article_options)
         
-        @questions = Question.tally(
+        question_options = Question.options_for_tally(
           {   :at_least => APP_CONFIG['tweet_questions_min_votes'], 
               :at_most => 1000,  
               :start_at => 1.day.ago,
               :limit => APP_CONFIG['tweet_questions_limit'],
               :order => "questions.created_at desc"
-          })  
+          }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})  
+        @questions = Question.find(:all, question_options)
         
-        @ideas = Idea.tally(
+        idea_options = Idea.options_for_tally(
           {   :at_least => APP_CONFIG['tweet_ideas_min_votes'], 
               :at_most => 1000,  
               :start_at => 1.day.ago,
               :limit => APP_CONFIG['tweet_ideas_limit'],
               :order => "ideas.created_at desc"
-          })
+          }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
+        @ideas = Idea.find(:all, idea_options)
           
         oauth = Twitter::OAuth.new(APP_CONFIG['twitter_oauth_key'], APP_CONFIG['twitter_oauth_secret'])
         oauth.authorize_from_access(APP_CONFIG['twitter_oauth_consumer_key'], APP_CONFIG['twitter_oauth_consumer_secret'])
@@ -105,6 +112,7 @@ def tweet_events(twitter, events)
   events.each do |event|
     msg = "#{event.name} #{shorten_url(event_url(event))}"
     tweet(twitter, msg)
+    event.create_tweeted_item
   end
 
 end
@@ -113,6 +121,7 @@ def tweet_articles(twitter, articles)
   articles.each do |article|
     msg = "#{article.content.title} #{shorten_url(story_url(article.content))}"
     tweet(twitter, msg)
+    article.create_tweeted_item
   end
 end
 
@@ -120,6 +129,7 @@ def tweet_questions(twitter, questions)
   questions.each do |question|
     msg = "#{question.question} #{shorten_url(question_url(question))}"
     tweet(twitter, msg)
+    question.create_tweeted_item
   end
 end
 
@@ -127,6 +137,7 @@ def tweet_ideas(twitter, ideas)
   ideas.each do |idea|
     msg = "#{idea.title} #{shorten_url(idea_url(idea))}"
     tweet(twitter, msg)
+    idea.create_tweeted_item
   end
 end
 

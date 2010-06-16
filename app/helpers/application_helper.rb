@@ -201,21 +201,28 @@ module ApplicationHelper
   end
 
   def twitter_share_item_link(item,caption,button=false)
+    is_bitly_configured = APP_CONFIG['twitter_connect_key'].present?
     caption =  Rack::Utils.escape(strip_tags(caption))
-    url =  Rack::Utils.escape(path_to_self(item))
+    
+    if is_bitly_configured
+      bitly = Bitly.new(APP_CONFIG['bitly_username'], APP_CONFIG['bitly_api_key'])
+      url = bitly.shorten(path_to_self(item)).short_url
+    else
+      url =  Rack::Utils.escape(path_to_self(item))
+    end
     text = "#{caption}+#{url}"
     twitter_url = "http://twitter.com/?status=#{text}"
-    is_configured = APP_CONFIG['twitter_connect_key'].present?
+
     if button == true
       link_text = image_tag('/images/default/tweet_button.gif')
     else
       link_text = t('tweet')
     end
 
-    if is_configured
-      link_to link_text, "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :burl=>twitter_url, :id=>"twitter-link"
+    if is_bitly_configured
+      link_to link_text, "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :burl=>twitter_url, :id=>"twitter-link", :target => "_tweet"
     else
-      link_to link_text, twitter_url
+      link_to link_text, twitter_url, :target => "_tweet"
     end
 
   end
@@ -415,10 +422,10 @@ EMBED
   
   def delete_image(form_builder)
     if form_builder.object.new_record?
-      link_to_function("Remove this Photo", "$(this).parent('fieldset').remove()", :class=>"delete_image")
+      link_to_function("Remove this Photo", "$(this).parents('.image-fieldset').remove()", :class=>"delete_image")
     else 
       form_builder.hidden_field(:_delete) +
-      link_to_function("Remove this Photo", "$(this).parent('fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
+      link_to_function("Remove this Photo", "$(this).parents('.image-fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
     end
   end
 end
