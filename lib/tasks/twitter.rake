@@ -1,5 +1,3 @@
-require 'feed_parser'
-require 'magic_parse'
 require 'action_controller'
 include ActionController::UrlWriter
 
