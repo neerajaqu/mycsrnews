@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
 
   has_many :comments, :as => :commentable
+  has_one :tweeted_item, :as => :item
   attr_accessor :tags_string
 
   has_friendly_id :name, :use_slug => true

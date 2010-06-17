@@ -9,6 +9,7 @@ class Article < ActiveRecord::Base
   acts_as_wall_postable
 
   has_one :content
+  has_one :tweeted_item, :as => :item
   belongs_to :author, :class_name => "User"
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
