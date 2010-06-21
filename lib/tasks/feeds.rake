@@ -128,6 +128,7 @@ def feedzirra_update_feed(feed)
     puts "Failed to open feed at #{feed.url} -- #{e}"
     return false
   end
+  puts "The feed #{feed.title}(#{feed.url}) could not be reached -- status: #{rss.inspect}" or return false unless rss and rss.respond_to?(:entries)
   items = rss.entries
   puts "The feed #{feed.title}(#{feed.url}) is presently empty." or return false unless items.present?
   puts "Parsing #{feed.title} with #{items.size} items -- updated on #{rss.last_modified} -- last fetched #{feed.last_fetched_at}"
