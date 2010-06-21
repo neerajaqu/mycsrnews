@@ -137,7 +137,7 @@ def feedzirra_update_feed(feed)
   pub_date = rss.last_modified
   if !feed_date or (pub_date and feed_date < pub_date)
     items.each do |item|
-      break if feed_date and item.published <= feed_date
+      break if feed_date and item.published and (item.published <= feed_date)
       next if Newswire.find_by_title item.title
       next unless item.summary and item.url and item.title
 
