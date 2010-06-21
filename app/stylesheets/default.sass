@@ -53,7 +53,7 @@
       visibility: $headerTitleDisplay
       display: block
       float: left
-      font-size: 32px
+      font-size: $fontsize * 2.2
       color: $headerTitleColor
   a
     text-decoration: none
@@ -302,7 +302,7 @@ li
         margin: 0px 0px 0px 0px
         padding: 5px 0
         font-weight: bold
-        font-size: 12px
+        font-size: $fontsize
         border: none
         color: $pageTablinkOff
         background: $pageTabOff
@@ -351,25 +351,24 @@ li
     .menu_item
       &:hover
         .dropdown
-          visibility: visible
           display: block
       .dropdown
         z-index: 20
-        visibility: hidden
         display: none
         margin-top: 1px
         ul
           li
-            width: 100%
+            width: $dropdownWidth
             height: 100%
-            float: left
-            clear: left
+            float: $pagetabFloat
+            clear: both
             padding: 0
             text-align: left
             margin-top: -1px
+            margin-right: 0
             a
               height: 100%
-              font-size: 10px
+              font-size: $fontsize * 0.95
               line-height: 13px
               font-weight: normal
               display: block
@@ -424,7 +423,7 @@ li
         height: 14px
         border: none
         font-weight: bold
-        font-size: 11px
+        font-size: $fontsize
         background: $subnavTabOff
         display: block
         color: $subnavTabLinkOff
@@ -455,7 +454,8 @@ li
   .thumb
     float: left
     margin: 0 5px 5px 5px
-    img
+    &.bio
+      overflow: visible
 
 .thumb
   margin: 10px
@@ -467,7 +467,7 @@ li
   a:hover
     text-decoration: none
   &.threeFour
-    height: 210px
+    height: 190px
     img
       top: -10px
   &.nineSixteen
@@ -566,7 +566,7 @@ li
       padding: 2px 0
     h4
       font-weight: normal
-      font-size: 11px
+      font-size: $fontsize
       color: $subheadColor
   .eventBlock
     margin: 0 0 4px 0
@@ -577,7 +577,7 @@ li
     .tag
       font-weight: normal
       text-transform: uppercase
-      font-size: 11px
+      font-size: $fontsize
     .eventDetailsBlock
       float: left
       width: 75%
@@ -591,7 +591,7 @@ li
         li
           border: none
           padding: 4px 0 0 8px
-          font-size: 10px
+          font-size: $fontsize * 0.9
           color: $subheadColor
           b
             color: $headerColor
@@ -614,7 +614,7 @@ li
     .featureAd
       text-align: center
       h2
-        font-size: 18px
+        font-size: $fontsize * 1.35
         text-align: left
         line-height: 150%
         padding: 8px 10px
@@ -627,7 +627,7 @@ li
         margin-bottom: 20px
         color: $featureBodyText
       .featureBtn
-        font-size: 14px
+        font-size: $fontsize * 1.25
         line-height: 14px
         font-weight: bold
         display: inline-block
@@ -688,7 +688,7 @@ li
     h2
       margin: 0
       font-weight: $panelBarHeaderWeight
-      font-size: 10px
+      font-size: $fontsize * 0.9
       text-transform: uppercase
       font-family: $headerFont
       color: $panelBarHeader
@@ -698,7 +698,7 @@ li
         color: $panelBarHeader
         font-weight: normal
         text-transform: none
-        font-size: 11px
+        font-size: $fontsize
     .bar_link
       float: right
       margin: 0 8px
@@ -716,11 +716,6 @@ li
       margin: 0 0 8px 0
       color: $headerColor
         
-    p
-      margin: 8px 0
-      font-size: 11px
-    h1
-      font-size: 22px
     p
       margin: 6px 0px
       line-height: 120%
@@ -893,7 +888,7 @@ li
     color: $bodyColor
     margin: 8px 5px 14px 5px
     line-height: 140%
-    font-size: 12px
+    font-size: $fontsize
   .storyCaption
     p
       padding: 0
@@ -924,14 +919,17 @@ li
       a
         color: $commentReplyText
         font-weight: bold
-        font-size: 11px
+        font-size: $fontsize * 0.9
 
 .feature_bg
   background: $featureStoryBG
   .panel_2
     margin-top: 10px
   .storyBlockWrap
-    margin: 10px 15px
+    margin: 0 15px 10px
+    &.header-top
+      margin-top: 10px
+      margin-bottom: -10px
   .btnComment
     background: $btnCommentFeatureBG
 
@@ -941,7 +939,7 @@ li.feature_bg
 
 .subtitle
   position: relative
-  font-size: 10px
+  font-size: $fontsize * 0.9
   color: $subheadColor
   background: $subTitleBG
   border: none
@@ -951,7 +949,7 @@ li.feature_bg
 blockquote
   background: $blockQuote
   color: $bodyColor
-  font-size: 12px
+  font-size: $fontsize
   line-height: 130%
   margin: 10px 0 10px 60px
   padding: 5px 10px
@@ -1066,7 +1064,7 @@ h3.btn
     display: block
     margin: 0 10px 5px 10px
   label
-    font-size: 11px
+    font-size: $fontsize * 0.9
     padding: 4px 2px
     width: 27%
     display: inline-block
@@ -1139,13 +1137,13 @@ h3.btn
   h2
     color: $bookmarkletHeader
     background: $bookmarkletHeaderBG
-    font-size: 20px
+    font-size: $fontsize * 1.4
     margin: 0
     padding: 5px 10px 25px 10px
   p
     color: $bookmarkletText
     margin: 5px 10px
-    font-size: 13px
+    font-size: $fontsize * 1.35
   .demo
     margin: 10px 15px
     padding: 70px 0 10px 0
@@ -1264,6 +1262,7 @@ h3.btn
 
 #scrollbox
   display: none
+  height: 150px
 /*	root element for scrollable items. Must be absolutely positioned
 /*	and it should have a extremely large width to accomodate scrollable items.
 /*	it's enough that you set the width and height for the root element and
@@ -1415,3 +1414,55 @@ a.disabled
   
 .prev
   background: url(/images/arrow/left.png) no-repeat
+
+
+// jgrowl styling //
+body div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer
+  background: $featureBg
+  border: $featureBorder
+  opacity: 1
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)"
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85)
+  zoom: 1
+  width: 275px
+  padding: 10px
+  margin-top: 5px
+  margin-bottom: 5px
+  text-align: left
+  display: none
+  -moz-border-radius: 5px
+  -webkit-border-radius: 5px
+
+body div.jGrowl div.jGrowl-notification
+  min-height: 40px
+
+body div.jGrowl div.jGrowl-notification div.jGrowl-header
+  margin: 0 0 10px 0
+  color: $featureBodyText
+body div.jGrowl div.jGrowl-notification div.jGrowl-message
+  h3
+    font-size: $fontsize * 0.8
+    margin: 1px 0 3px 0
+  p
+    font-size: $fontsize * 0.95
+    color: $featureBodyText
+
+body div.jGrowl div.jGrowl-notification div.user-wrapper
+  background: #fff
+  padding: 2px
+  .profilePic
+    border: #ccc 1px solid
+    margin: 0 5px 5px 0
+  
+body div.jGrowl div.jGrowl-notification div.jGrowl-close
+  z-index: 99
+  float: right
+  font-weight: bold
+  font-size: 1em
+  cursor: pointer
+  display: inline-block
+  float: right
+  color: #000
+  position: relative
+  top: -3px
+body div.jGrowl div.jGrowl-closer

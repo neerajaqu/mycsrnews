@@ -13,6 +13,7 @@ class Idea < ActiveRecord::Base
   belongs_to :user
   belongs_to :idea_board
   has_many :comments, :as => :commentable
+  has_one :tweeted_item, :as => :item
   attr_accessor :tags_string
 
   has_friendly_id :title, :use_slug => true

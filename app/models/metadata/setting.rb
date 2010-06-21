@@ -22,7 +22,24 @@ class Metadata::Setting < Metadata
   end
 
   def key() self.setting_name end
-  def value() self.setting_value end
+
+  def value
+    if self.setting_value == "true"
+      return true
+    elsif self.setting_value == "false"
+      return false
+    else
+      return self.setting_value
+    end
+  end
+
+  def enabled?
+    !! self.value
+  end
+
+  def disabled?
+    ! self.value
+  end
 
   private
 

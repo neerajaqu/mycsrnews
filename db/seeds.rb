@@ -66,3 +66,39 @@ custom_widgets.each do |custom_widget|
     }
   })
 end
+
+settings = [
+ { :key_sub_type => 'options', :key_name => 'enable_activity_popups',  :value => "true" },
+ { :key_sub_type => 'options', :key_name => 'allow_web_auth',  :value => (APP_CONFIG['allow_web_auth'] || "false" ) },
+ { :key_sub_type => 'options', :key_name => 'site_title',  :value => (APP_CONFIG['site_title'] || "Default Site Title" ) },
+ { :key_sub_type => 'options', :key_name => 'site_topic', :value => (APP_CONFIG['site_topic'] || "Default Topic" ) },
+ { :key_sub_type => 'options', :key_name => 'contact_us',  :value => (APP_CONFIG['contact_us_recipient'] || "admin@email.com,me@email.com,support@email.com" ) },
+ { :key_sub_type => 'options', :key_name => 'firstnameonly', :value => (APP_CONFIG['firstnameonly'] || "false" ) },
+ { :key_sub_type => 'design', :key_name => 'typekit', :value => (APP_CONFIG['typekit'] || "000000" ) },
+ { :key_sub_type => 'twitter', :key_name => 'account', :value =>(APP_CONFIG['twitter_account'] || "userkey_name" ) },
+ { :key_sub_type => 'twitter', :key_name => 'connect_key', :value => (APP_CONFIG['twitter_connect_key'] || "U6qjcn193333331AuA" ) },
+ { :key_sub_type => 'twitter', :key_name => 'oauth_key', :value => (APP_CONFIG['twitter_oauth_key'] || "U6qjcn193333331AuA" ) },
+ { :key_sub_type => 'twitter', :key_name => 'oauth_secret', :value => (APP_CONFIG['twitter_oauth_secret'] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" ) },
+ { :key_sub_type => 'facebook', :key_name => 'app_id', :value => (APP_CONFIG['facebook_application_id'] || "111111111111" ) },
+ { :key_sub_type => 'stats', :key_name => 'google_analytics_account_id', :value => (APP_CONFIG['google_analytics_account_id'] || "UF-123456890-7" ) },
+ { :key_sub_type => 'stats', :key_name => 'google_analytics_site_id', :value => (APP_CONFIG['google_analytics_site_id'] || "1231232" ) },
+ { :key_sub_type => 'ads', :key_name => 'platform', :value => (APP_CONFIG['ad_platform'] || "google" ) },
+ { :key_sub_type => 'ads', :key_name => 'helios_sitepage', :value => (APP_CONFIG['helios_sitepage'] || "youraddomain.com/yourfacebookproject.htm" ) },
+ { :key_sub_type => 'ads', :key_name => 'helios_url', :value => (APP_CONFIG['helios_url'] || "http://subdomain.xxx.com" ) },
+ { :key_sub_type => 'ads', :key_name => 'helios_script_url', :value => (APP_CONFIG['helios_script_url'] || "http://scriptsubdomain.xxx.com" ) },
+ { :key_sub_type => 'ads', :key_name => 'helios_list_pos', :value => (APP_CONFIG['helios_list_pos'] || "728x90_1,468x60_1,300x250_1,160x600_1,250x250_1,200x200_1,336x280_1" ) },
+ { :key_sub_type => 'ads', :key_name => 'google_adsense_account_id', :value => (APP_CONFIG['google_adsense_account_id'] || "ca-pub-9975156792632579" ) },
+ { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => (APP_CONFIG['google_adsense_slot_name'] || "Needle_Small") }
+]
+
+settings.each do |setting|
+  next if Metadata::Setting.find_setting(setting[:key_sub_type], setting[:key_name])
+  puts "Creating setting #{setting[:key_name]} -- #{setting[:key_sub_type]}" if debug
+
+  Metadata::Setting.create!({
+		:data => {
+		  :setting_value => setting[:key_sub_type],
+		  :setting_name => setting[:key_name], 
+		  :setting_value => setting[:value]    }
+  })
+end

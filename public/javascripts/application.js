@@ -261,7 +261,10 @@ $(function() {
 								if (!in_use){
 									$('#add_image').click();
 	            		$('.image-url-input').last().val($(this).attr('src'));
-									$('.image-url-input').last().parent().next().hide();
+									$('.image-url-input').last().attr('disabled','disabled');
+									$('.image-url-input').last().parent().next().remove();
+									$('.image-url-input').last().next().remove();
+									$('.image-url-input').last().after($('.delete_image').last());
 								}
 							}
 						});
