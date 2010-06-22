@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(:version => 20100615220810) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
-    t.string   "title",      :default => "",       :null => false
+    t.string   "title",                            :null => false
     t.text     "details"
     t.string   "url"
     t.string   "mode",       :default => "rotate"
@@ -417,7 +417,7 @@ ActiveRecord::Schema.define(:version => 20100615220810) do
   end
 
   create_table "resources", :force => true do |t|
-    t.string   "title",               :default => "",    :null => false
+    t.string   "title",                                  :null => false
     t.text     "details"
     t.string   "url"
     t.string   "mapUrl"
@@ -450,7 +450,7 @@ ActiveRecord::Schema.define(:version => 20100615220810) do
   add_index "sent_cards", ["to_fb_user_id"], :name => "index_sent_cards_on_to_fb_user_id"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :default => "", :null => false
+    t.string   "session_id", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -526,15 +526,15 @@ ActiveRecord::Schema.define(:version => 20100615220810) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer  "user_id",               :limit => 8,                    :null => false
-    t.integer  "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean  "isAppAuthorized",                    :default => false
-    t.datetime "born_at"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at"
-    t.text     "bio"
-    t.integer  "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean  "comment_notifications",              :default => false
+    t.integer   "user_id",               :limit => 8,                    :null => false
+    t.integer   "facebook_user_id",      :limit => 8, :default => 0
+    t.boolean   "isAppAuthorized",                    :default => false
+    t.datetime  "born_at"
+    t.timestamp "created_at",                                            :null => false
+    t.datetime  "updated_at"
+    t.text      "bio"
+    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
+    t.boolean   "comment_notifications",              :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true
@@ -610,7 +610,7 @@ ActiveRecord::Schema.define(:version => 20100615220810) do
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
     t.integer  "voteable_id",                      :null => false
-    t.string   "voteable_type", :default => "",    :null => false
+    t.string   "voteable_type",                    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
     t.datetime "created_at"

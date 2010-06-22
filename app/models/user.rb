@@ -202,6 +202,11 @@ class User < ActiveRecord::Base
     # admins have all powers of moderators
     (self.is_moderator || self.is_editor || self.is_admin) == true
   end
+  
+  def is_established?
+    # returning user after two weeks
+    (self.created_at < 2.week.ago) == true
+  end
 
   def bio
     self.user_profile.present? ? self.user_profile.bio : nil
