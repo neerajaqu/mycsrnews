@@ -357,6 +357,8 @@ li
         display: none
         margin-top: 1px
         ul
+          padding: 1px 0 0 0
+          display: inline-block
           li
             width: $dropdownWidth
             height: 100%
@@ -380,9 +382,6 @@ li
                 bottom: $dropdownListBorder
                 left: $dropdownListBorder
                 right: $dropdownListBorder
-              margin:
-                left: $dropdownListMargin
-                right: $dropdownListMargin
               &:hover
                 background: $dropdownTabOn
             a.selected
@@ -454,22 +453,22 @@ li
   .thumb
     float: left
     margin: 0 5px 5px 5px
-    &.bio
-      overflow: visible
 
 .thumb
   margin: 10px
   position: relative
-  background: $WaterMark
   overflow: hidden
   img
     position: relative
+    background: $WaterMark
   a:hover
     text-decoration: none
   &.threeFour
     height: 190px
     img
       top: -10px
+  &.bio
+    overflow: visible
   &.nineSixteen
     height: 150px
     img
@@ -492,6 +491,11 @@ li
     margin: 10px 15px 0
     display: inline-block
     overflow: hidden
+    &.bio
+      overflow: visible
+    .moderator
+      height: 40px
+      width: 40px
     img
       max-width: 280px
     &.wide
@@ -1040,16 +1044,12 @@ h3.btn
 
 // Account Profile stats styles //
 .pointsTable_profile
-  display: inline-block
   table
-    float: left
     width: 100%
-    margin: 0 0 10px 0
-    border-bottom: 1px solid #d8dfea
+    border-bottom: 1px solid #fff
   td
-    border-top: 1px solid #d8dfea
-    margin: 0
-    padding: 3px 10px 4px 0px
+    border-top: 1px solid #fff
+    padding: 6px 10px
 
 // Extra styles for Login Page //
 .login
