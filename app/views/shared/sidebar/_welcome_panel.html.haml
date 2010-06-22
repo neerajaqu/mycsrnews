@@ -1,8 +1,8 @@
--# unless current_user.is_established?
-.panel_2
-  .houseFeatures
-    .thumb
-      = image_tag('default/house-ad-profile.jpg')
-    .featureAd
-      %h2= t('.welcome_panel_headline')
-      %p= t('.welcome_panel_message_fbml')
+- unless current_user.is_established?
+  .panel_2
+    .houseFeatures
+      .thumb
+        = image_tag('default/house-ad-profile.jpg')
+      .featureAd
+        %h2= t('.welcome_panel_headline')
+        %p= t('.welcome_panel_message_fbml')
