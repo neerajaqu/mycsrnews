@@ -6,7 +6,7 @@
       .thumb.bio
         = fb_profile_pic @user, :size => 'normal', :width => '180'
         - if @user.is_moderator?
-          = image_tag 'default/icon-fan-app.gif', :class => "moderator"
+          = image_tag 'default/icon-mod-badge.png', :class => "moderator"
     .panel_3
       .storyBlockWrap
         %h1= profile_fb_name (@user,nil, false, false)
