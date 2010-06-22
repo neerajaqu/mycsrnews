@@ -21,7 +21,7 @@
           = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
           = render :partial => 'shared/forms/wall_postable', :locals => { :form => form, :item => @idea }
         - form.buttons do
-          = form.commit_button  :button_html => { :class => 'btn_1', :onclick => 'this.form.submit();return true;' } 
+          = form.commit_button  :button_html => { :class => 'btn_1' } 
 
 #col_right
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
