@@ -1,7 +1,0 @@
--# expects 'vote => @vote'
-
-%li
-  .storyBlockWrap.storyBlockSpacer
-    %h3
-      =t('.blurb', :fb_name => local_linked_profile_name(vote.voter), :voteable_type => voteable_type_name(vote), :voteable_link => voteable_type_link(vote)) 
-      =t('.blurb_date', :date => time_ago_in_words(vote.created_at))

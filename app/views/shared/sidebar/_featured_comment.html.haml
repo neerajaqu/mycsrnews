@@ -15,6 +15,6 @@
               = t('posted_by', :fb_name => local_linked_profile_name(comment.user), :date => time_ago_in_words(comment.created_at))
             %h3
               Re: 
-              = link_to caption(comment.commentable.title,120), comment.commentable
+              = link_to caption(comment.commentable.title,25), comment.commentable
             %span.btnComment.float_left== #{like_link comment} #{comment.votes_tally}
             %span.btnComment== #{link_to t('comments'), content_path(comment.commentable, :anchor => "commentListTop")} #{comment.commentable.comments_count}

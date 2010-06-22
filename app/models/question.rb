@@ -10,6 +10,7 @@ class Question < ActiveRecord::Base
 
   belongs_to  :user
   has_many    :answers
+  has_one :tweeted_item, :as => :item
 
   validates_presence_of :question
 
