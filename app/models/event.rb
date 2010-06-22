@@ -59,6 +59,7 @@ class Event < ActiveRecord::Base
           :update_time => facebook_event.update_time,
           :tagline => facebook_event.tagline,
           :url => "http://www.facebook.com/event.php?eid="+facebook_event.eid.to_s)
+      e.images.create(:remote_image_url=>facebook_event.pic) if facebook_event.pic
     end
   end
 
@@ -68,8 +69,8 @@ class Event < ActiveRecord::Base
     if check
       return check
     else
-      image = zvent.images.empty? ? nil : zvent.images.first["url"] 
-      Event.create!(
+      image = (zvent.images.empty? ? nil : zvent.images.first["url"]) || (zvent.venue.images.empty? ? nil : zvent.venue.images.first["url"])
+      e = Event.create!(
       :source => "Zvent",
       :user => user,
       :name => zvent.name,
@@ -86,6 +87,8 @@ class Event < ActiveRecord::Base
       :pic => image,
       :url => zvent.url || "http://www.zvents.com"+zvent.zurl,
       :alt_url => "http://www.zvents.com"+zvent.zurl)
+      
+      e.images.create(:remote_image_url=>image) if image
     end
   end
 end

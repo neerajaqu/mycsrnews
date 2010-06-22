@@ -1,3 +1,4 @@
+%br
 %fieldset.image-fieldset
   - if !f.object.new_record?
     = image_tag f.object.image.url
@@ -6,5 +7,3 @@
   = f.file_field :image
   %br
   = delete_image(f)
-  %br
-  %br
