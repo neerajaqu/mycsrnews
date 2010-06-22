@@ -45,12 +45,15 @@ class PfeedItem < ActiveRecord::Base
   end  
   
   @@dj = (defined? Delayed) == "constant" && (instance_methods.include? 'send_later') #this means Delayed_job exists , so make use of asynchronous delivery of pfeed
+  @@resque = (defined? Resque) == "constant" && (defined? PFEED_RESQUE_KLASS == "constant" and PFEED_RESQUE_KLASS.respond_to?(:perform)) #this means Resque exists, so make use of asynchronous delivery of pfeed. NOTE: Set PFEED_RESQUE_KLASS in your resque initializer to be the worker class you want to use
 
   def attempt_delivery (ar_obj,method_name_arr)
     return if method_name_arr.empty?
 
     if @@dj
       send_later(:deliver,ar_obj,method_name_arr)  
+    elsif @@resque
+      Resque.enqueue(PFEED_RESQUE_KLASS, self.id, ar_obj.class.name, ar_obj.id, method_name_arr)
     else  # regular instant delivery
       send(:deliver,ar_obj,method_name_arr)    
     end
