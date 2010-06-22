@@ -12,7 +12,7 @@
           .panelBar
             %h2= t('featured_stories')
           .panel_3
-            .thumb.threefour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
             .storyBlockWrap
           .panel_3
             .storyBlockWrap
@@ -30,7 +30,7 @@
           .panelBar
             %h2= t('featured_stories')
           .panel_3
-            .thumb.threefour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
           .panel_3
             .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
@@ -52,7 +52,7 @@
           .panelBar
             %h2= t('featured_stories')
           .panel_3
-            .thumb.threefour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
             .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p
@@ -61,7 +61,7 @@
               %span.btnComment.float_left== #{like_link primary1} #{primary1.num_votes}
               %span.btnComment.float_left== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
           .panel_3
-            .thumb.threefour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
+            .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
             .storyBlockWrap
               %h1= link_to primary2.featured_title, primary2.featured_url
               %p
