@@ -13,7 +13,7 @@
   - slot_data = slot_widget_leaderboard
 - elsif defined? slot_widget_banner
   - slot_data = slot_widget_banner
--# else
+- else
   - slot_data ||= Metadata.get_default_ad_slot
 - if slot_data.present?
   - case slot_data['data'][:width]
