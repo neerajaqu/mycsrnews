@@ -9,4 +9,8 @@ Resque.redis = resque_config[rails_env]
 app_name = rails_root =~ %r(/([^/]+)/(current|release)) ? $1 : nil
 Resque.redis.namespace = "resque:#{app_name}" if app_name
 
-PFEED_RESQUE_KLASS = NotificationWorker if defined? NotificationWorker
+begin
+  NotificationWorker.class
+  PFEED_RESQUE_KLASS = NotificationWorker
+rescue NameError
+end
