@@ -1,9 +1,7 @@
 .bio-box{:style => "display: none"}
-  .refine-tab
-  .refine-content
+  .bio-content
     - form_tag update_bio_users_path, :class => "update-bio-form", :id => 'update-bio-form' do
       = label_tag :bio_tag, 'Tell us about yourself:'
-      %br
       = text_area_tag :bio, current_user.bio, :rows => 10, :cols => 60
-      %br
-      = submit_tag "Update"
+    .submit-box
+      = submit_tag "Update", :class => "btn"
