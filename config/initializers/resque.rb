@@ -1,3 +1,5 @@
+require 'yaml'
+
 rails_root = ENV['RAILS_ROOT'] || File.expand_path(File.dirname(__FILE__) + '/../..')
 rails_env = ENV['RAILS_ENV'] || 'development'
 
