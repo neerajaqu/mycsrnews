@@ -35,6 +35,7 @@ before("deploy") do
 end
 
 after("deploy") do
+  run "cd #{current_path} && rake n2:queue:restart_workers"
   deploy.god.start
   newrelic.notice_deployment
 end
