@@ -34,7 +34,17 @@ before("deploy") do
   deploy.god.stop
 end
 
+before("deploy:migrations") do
+  deploy.god.stop
+end
+
 after("deploy") do
+  run "cd #{current_path} && rake n2:queue:restart_workers"
+  deploy.god.start
+  newrelic.notice_deployment
+end
+
+after("deploy:migrations") do
   run "cd #{current_path} && rake n2:queue:restart_workers"
   deploy.god.start
   newrelic.notice_deployment
