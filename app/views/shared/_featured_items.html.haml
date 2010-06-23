@@ -11,10 +11,10 @@
         #featuredPanel.panel_1.feature_bg
           .panelBar
             %h2= t('featured_stories')
-          .panel_2.left
-            .thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+          .panel_3
+            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
             .storyBlockWrap
-          .panel_2.right
+          .panel_3
             .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p
@@ -29,9 +29,9 @@
         #featuredPanel.panel_1.feature_bg
           .panelBar
             %h2= t('featured_stories')
-          .pane_l_2.left
-            .thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
-          .panel_2.right
+          .panel_3
+            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+          .panel_3
             .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p
@@ -41,16 +41,18 @@
               %span.btnComment.float_left== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
               .bullet_list.float_left
                 %ul
-                  %li= link_to secondary1.featured_title, secondary1.featured_url
-                  %li= link_to secondary2.featured_title, secondary2.featured_url
+                  %li
+                    %h4= link_to secondary1.featured_title, secondary1.featured_url
+                  %li 
+                    %h4= link_to secondary2.featured_title, secondary2.featured_url
       - when 'template_4'
         - primary1 = section1.children.first.featurable
         - primary2 = section2.children.first.featurable
         #featuredPanel.panel_1.feature_bg
           .panelBar
             %h2= t('featured_stories')
-          .panel_2.left
-            .thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+          .panel_3
+            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
             .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p
@@ -58,8 +60,8 @@
                 = link_to 'More...', primary1
               %span.btnComment.float_left== #{like_link primary1} #{primary1.num_votes}
               %span.btnComment.float_left== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
-          .panel_2.right
-            .thumb= link_to image_tag(primary2.featured_image_url), primary2.featured_url
+          .panel_3
+            .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
             .storyBlockWrap
               %h1= link_to primary2.featured_title, primary2.featured_url
               %p
@@ -72,21 +74,21 @@
         #featuredPanel.panel_1.feature_bg
           .panelBar
             %h2= t('featured_stories')
-          .feature_bg.clearfix
+          .feature_bg
             %br
             .thumb
               - if primary1.video_item?
                 = embed_video primary1.featured_video, :size => 'large'
               - else
                 = link_to image_tag(primary1.featured_image_url), primary1.featured_url
-            .storyBlockWrap.clearfix
+            .storyBlockWrap
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p
                 = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
                 = link_to 'More...', primary1
               %span.btnComment== #{like_link primary1} #{primary1.num_votes}
               %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
-            %p.clearfix
+            %p
       - when 'template_7'
         - box1 = section1.children.first.featurable
         - box2 = section2.children.first.featurable
