@@ -7,7 +7,7 @@
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t(locale_var)
-    .storyBlockWrap.clearfix
+    .top-tags
       %ul
         - klass.send("top_#{tag_type}").each do |tag|
           %li
