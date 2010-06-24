@@ -3,6 +3,7 @@ class ResourceSectionsController < ApplicationController
   before_filter :login_required, :only => [:new, :create, :update]
   before_filter :load_top_resources, :only => :index
   before_filter :load_newest_resources, :only => :index
+  before_filter :load_newest_resource_sections
 
   def index
     @current_sub_tab = 'Browse Resource Sections'
