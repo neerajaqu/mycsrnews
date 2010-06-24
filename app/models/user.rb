@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   # NOTE:: this must be above has_friendly_id, see below
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :karma_score, :is_admin, :is_blocked, :cached_slug, :is_moderator, :is_editor
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :karma_score, :is_admin, :is_blocked, :cached_slug, :is_moderator, :is_editor, :is_host
 
 
   # NOTE NOTE NOTE NOTE NOTE
@@ -201,6 +201,10 @@ class User < ActiveRecord::Base
   def is_moderator?
     # admins have all powers of moderators
     (self.is_moderator || self.is_editor || self.is_admin) == true
+  end
+
+  def is_host?
+    self.is_host == true
   end
   
   def is_established?

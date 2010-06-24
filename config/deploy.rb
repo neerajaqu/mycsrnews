@@ -19,7 +19,7 @@ after("deploy:update_code") do
   %w{/config/unicorn.conf.rb /tmp/sockets /config/database.yml
     /config/facebooker.yml /config/application_settings.yml
     /config/application.god /config/newrelic.yml
-    /config/smtp.yml /config/menu.yml /config/compass.rb}.each do |file|
+    /config/smtp.yml /config/menu.yml /config/compass.rb /config/resque.yml}.each do |file|
       run "ln -nfs #{shared_path}#{file} #{release_path}#{file}"
   end
 
@@ -34,7 +34,18 @@ before("deploy") do
   deploy.god.stop
 end
 
+before("deploy:migrations") do
+  deploy.god.stop
+end
+
 after("deploy") do
+  run "cd #{current_path} && rake n2:queue:restart_workers"
+  deploy.god.start
+  newrelic.notice_deployment
+end
+
+after("deploy:migrations") do
+  run "cd #{current_path} && rake n2:queue:restart_workers"
   deploy.god.start
   newrelic.notice_deployment
 end
