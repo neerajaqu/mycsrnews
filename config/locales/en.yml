@@ -12,6 +12,7 @@ en:
     my_profile: "Your profile"
     register: "Register"
     invite_friends: "Invite your friends"
+    fix_scrollbars: "Restore scrollbars"
   ideas:
     newest_ideas: "Newest Ideas"
     top_ideas: "Top Ideas"
