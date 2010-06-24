@@ -142,11 +142,16 @@ module ApplicationHelper
     if user.facebook_user?
       options.merge!(:linked => false)
       options[:size] = 'square' unless options[:size].present?
-      link_to fb_profile_pic(user, options), user_path(user, link_options)
+      temp = link_to fb_profile_pic(user, options), user_path(user, link_options)
     else
-      link_to image_tag(default_image), user, link_options
+      temp = link_to image_tag(default_image), user, link_options
       #link_to gravatar_image(user), user, link_options
     end
+    badge = profile_pic_badge user
+    unless badge.nil?
+      temp += badge
+    end
+    return temp
   end
 
   def gravatar_image user
@@ -155,6 +160,14 @@ module ApplicationHelper
     image_tag "#{gurl}#{gid}"
   end
 
+  def profile_pic_badge user
+    if user.is_moderator?
+      image_tag 'default/icon-fan-app.gif', :class => "moderator"
+    elsif user.is_host?
+      image_tag 'default/icon-host-badge.png', :class => "moderator"    
+    end
+  end
+  
   def local_linked_profile_name(user, options={})
     link_options = {}
     if options[:format].present?
