@@ -7,3 +7,4 @@
 #col_right
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @top_resources, :title => t('resources.top_resources') }
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @newest_resources, :title => t('resources.newest_resources') }
+  = render :partial => 'shared/sidebar/resource_sections_list', :locals => { :resource_sections => @newest_resource_sections }
