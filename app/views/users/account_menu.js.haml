@@ -2,7 +2,7 @@
 %ul
   - if current_user.present? and logged_in?
     %li.account-profile.clearfix
-      .float_left= local_linked_profile_pic(current_user, :size => 'square', :format => 'html')
+      .float_left.thumb.bio= local_linked_profile_pic(current_user, :size => 'square', :format => 'html')
       %h4.float_left= local_linked_profile_name(current_user, :use_you => false, :format => 'html')
     %hr
     %li
