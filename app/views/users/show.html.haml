@@ -69,7 +69,7 @@
           %span= link_to t('.filter_comments'), user_path(@user, :curr_action => 'comments'), :id => 'commentsFilter', :class => ('feedFilterButton' + (@curr_action == 'comments' ? ' selected' : ''))
           &nbsp;
           %span= link_to t('.filter_likes'), user_path(@user, :curr_action => 'likes'), :id => 'likesFilter', :class => ('feedFilterButton' + (@curr_action == 'likes' ? ' selected' : ''))
-      #feedList
+      #feedList.storyList
         .list_stories
           - unless @actions.present?
             %p= t('.action_feed_empty')
