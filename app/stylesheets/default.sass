@@ -757,15 +757,33 @@ li
       margin: 0 0 8px 0
       color: $headerColor
     .eventMetaBlock
+      background: $subTitleBG
       width: 60%
       display: inline-block
+      padding: 4px
+      h3
+        display: inline-block
       .eventMeta
         float: left
         display: inline-block
+        h4
+          margin: 0 6px 4px 
+        h3
+          color: $bodyColor
+          margin: 0 6px 4px
+          line-height: 150%
         &.time
-          padding-right: 10px
+          border-right: #fff 1px solid
+          margin-left: -1px
+          width: 50%
         &.location
-          padding-left: 10px
+          margin-left: -1px
+          border-left: #fff 1px solid
+          width: 50%
+        &.tags
+          border-top: #fff 1px solid
+          width: 100%
+          margin: 0
     p
       margin: 6px 0px
       line-height: 120%
@@ -931,6 +949,8 @@ li
 
 // Article Style modifications //
 #readArticle
+  .thumb
+    margin-top: 0
   .topBar
     margin-bottom: 15px
     ul
