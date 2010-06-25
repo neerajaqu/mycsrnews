@@ -62,16 +62,25 @@ namespace :n2 do
           }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
         
         @events = Event.find(:all, event_options)
-        
-        article_options = Article.options_for_tally(
-          {   :at_least => APP_CONFIG['tweet_articles_min_votes'], 
+        # 
+        # article_options = Article.options_for_tally(
+        #   {   :at_least => APP_CONFIG['tweet_articles_min_votes'], 
+        #       :at_most => 1000,  
+        #       :start_at => 1.day.ago,
+        #       :limit => APP_CONFIG['tweet_articles_limit'],
+        #       :order => "articles.created_at desc"
+        #   }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
+        # @articles = Article.find(:all, article_options)
+
+        story_options = Content.options_for_tally(
+          {   :at_least => APP_CONFIG['tweet_stories_min_votes'], 
               :at_most => 1000,  
               :start_at => 1.day.ago,
-              :limit => APP_CONFIG['tweet_articles_limit'],
-              :order => "articles.created_at desc"
+              :limit => APP_CONFIG['tweet_stories_limit'],
+              :order => "contents.created_at desc"
           }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
-        @articles = Article.find(:all, article_options)
-        
+        @stories = Content.find(:all, content_options)
+                
         question_options = Question.options_for_tally(
           {   :at_least => APP_CONFIG['tweet_questions_min_votes'], 
               :at_most => 1000,  
@@ -97,7 +106,8 @@ namespace :n2 do
         tweet_events(twitter, @events)
         tweet_questions(twitter, @questions)
         tweet_ideas(twitter, @ideas)
-        tweet_articles(twitter, @articles)
+        # tweet_articles(twitter, @articles)
+        tweet_stories(twitter, @stories)
       end
     end
 
@@ -115,12 +125,19 @@ def tweet_events(twitter, events)
 
 end
 
-def tweet_articles(twitter, articles)
-  articles.each do |article|
-    msg = "#{article.content.title} #{shorten_url(story_url(article.content))}"
-    tweet(twitter, msg)
-    article.create_tweeted_item
-  end
+# def tweet_articles(twitter, articles)
+#   articles.each do |article|
+#     msg = "#{article.content.title} #{shorten_url(story_url(article.content))}"
+#     tweet(twitter, msg)
+#     article.create_tweeted_item
+#   end
+# end
+
+def tweet_stories(twitter,stories)
+  stories.each do |story|
+    msg = "#{story.title} #{shorten_url(story_url(story))}"
+    tweet(twitter,msg)
+    story.create_tweeted_item
 end
 
 def tweet_questions(twitter, questions)
