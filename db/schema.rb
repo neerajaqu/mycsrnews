@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100615220810) do
+ActiveRecord::Schema.define(:version => 20100624005830) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -471,6 +471,14 @@ ActiveRecord::Schema.define(:version => 20100615220810) do
   add_index "slugs", ["name", "sluggable_type", "scope", "sequence"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
+  create_table "sources", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.boolean  "all_subdomains_valid", :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -583,6 +591,7 @@ ActiveRecord::Schema.define(:version => 20100615220810) do
     t.integer  "posts_count",                               :default => 0
     t.integer  "last_viewed_feed_item_id"
     t.integer  "last_delivered_feed_item_id"
+    t.boolean  "is_host",                                   :default => false
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

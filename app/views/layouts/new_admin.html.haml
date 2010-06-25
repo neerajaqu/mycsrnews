@@ -69,11 +69,12 @@
           %li
             %a{:href => "#contents"} Content
             %ul
+              %li= link_to 'Flagged Items', admin_flags_path
               %li= link_to 'Stories', admin_contents_path
               %li= link_to 'Newswires', admin_newswires_path
               %li= link_to 'Comments', admin_comments_path
               %li= link_to 'RSS Feeds', admin_feeds_path
-              %li= link_to 'Flagged Items', admin_flags_path
+              %li= link_to 'News Sources', admin_sources_path
           %li
             %a{:href => "#modules"} Modules
             %ul

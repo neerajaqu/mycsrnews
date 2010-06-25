@@ -454,6 +454,15 @@ li
     float: left
     margin: 0 5px 5px 5px
 
+.list_stories
+  .thumb
+    margin-top: 0px
+    margin-bottom: 5px
+  .feature_bg
+    .thumb
+      margin: 0 10px 5px
+    
+
 .thumb
   margin: 10px
   position: relative
@@ -528,6 +537,24 @@ li
       max-width: 48px
 // Layout panels - should be used for all element containers //
 .panel_1, .panel_2
+
+  .top-tags
+    display: inline-block
+    li
+      display: block
+      width: auto
+      border-bottom: none
+      float: left
+      padding: 2px 0
+      h4
+        margin: 0
+        padding: 0
+      a
+        padding: 4px 6px
+        &:hover
+          text-decoration: none
+          background: $featureStoryBG
+
   .storyBlockWrap
     .featuredNewsList
       ul
@@ -767,6 +794,26 @@ li
 
 // refine search box styles //
 .panelBar, .subtitle
+  .bio-box
+    width: 100%
+    padding: 0px
+    z-index: 9
+    position: absolute
+    top: 22px
+    right: 0px
+    border: $DropDownBorder
+    background-color: $DropDownBG 
+    .bio-content
+      display: block
+      margin: 10px
+      label
+        display: block
+        margin-bottom: 10px
+      textarea
+        width: 100%
+        margin-bottom: 5px
+      .submit-box
+        text-align: right
   .refine-toggle
     position: relative
     z-index: 10
