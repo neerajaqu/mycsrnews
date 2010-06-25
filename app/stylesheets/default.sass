@@ -606,7 +606,8 @@ li
       font-size: $fontsize
       color: $subheadColor
   .eventBlock
-    margin: 0 0 4px 0
+    background: $subTitleBG
+    margin: 4px 0 0 0
     padding: 0
     border:
       top: 1px solid #f0f0f0
@@ -616,9 +617,12 @@ li
       text-transform: uppercase
       font-size: $fontsize
     .eventDetailsBlock
+      background: #fff
       float: left
       width: 75%
-      margin: 4px 0
+      padding: 4px 0 6px 0
+      .storyBlockWrap
+        padding-left: 6px
     .eventLocationBlock
       float: left
       width: 25%
@@ -752,7 +756,16 @@ li
     .storyHead
       margin: 0 0 8px 0
       color: $headerColor
-        
+    .eventMetaBlock
+      width: 60%
+      display: inline-block
+      .eventMeta
+        float: left
+        display: inline-block
+        &.time
+          padding-right: 10px
+        &.location
+          padding-left: 10px
     p
       margin: 6px 0px
       line-height: 120%
