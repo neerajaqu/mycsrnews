@@ -92,12 +92,12 @@ settings = [
 ]
 
 settings.each do |setting|
-  next if Metadata::Setting.find_setting(setting[:key_sub_type], setting[:key_name])
+  next if Metadata::Setting.find_setting(setting[:key_name], setting[:key_sub_type])
   puts "Creating setting #{setting[:key_name]} -- #{setting[:key_sub_type]}" if debug
 
   Metadata::Setting.create!({
 		:data => {
-		  :setting_value => setting[:key_sub_type],
+		  :setting_sub_type_name => setting[:key_sub_type],
 		  :setting_name => setting[:key_name], 
 		  :setting_value => setting[:value]    }
   })
