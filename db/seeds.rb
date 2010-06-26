@@ -88,7 +88,7 @@ settings = [
  { :key_sub_type => 'facebook', :key_name => 'app_id', :value => (APP_CONFIG['facebook_application_id'] || "111111111111" ) },
  { :key_sub_type => 'welcome_panel', :key_name => 'welcome_layout', :value => "default" },
  { :key_sub_type => 'welcome_panel', :key_name => 'welcome_image_url', :value => APP_CONFIG['base_url']+"/images/default/icon-fan-app.gif" },
- { :key_sub_type => 'welcome_panel', :key_name => 'welcome_host', :value => nil },
+ { :key_sub_type => 'welcome_panel', :key_name => 'welcome_host', :value => "0" },
  { :key_sub_type => 'stats', :key_name => 'google_analytics_account_id', :value => (APP_CONFIG['google_analytics_account_id'] || "UF-123456890-7" ) },
  { :key_sub_type => 'stats', :key_name => 'google_analytics_site_id', :value => (APP_CONFIG['google_analytics_site_id'] || "1231232" ) },
  { :key_sub_type => 'ads', :key_name => 'platform', :value => (APP_CONFIG['ad_platform'] || "google" ) },

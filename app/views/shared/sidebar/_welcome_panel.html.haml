@@ -1,54 +1,47 @@
+-# later could add FB connect button if not signed in or registered in web connect
 - unless current_user.present? and current_user.is_established?
-  .panel_2
-    .houseFeatures
-      .thumb
-        = image_tag('default/house-ad-profile.jpg')
-      .featureAd
-        %h2= t('.welcome_panel_headline')
-        %p= t('.welcome_panel_message_fbml')
--#        
-  .panel_2
-    .houseFeatures
-      .featureAd
-        %h2
-          Help us keep the community informed!
-        %p
-          Post Stories on our site to help you and your community become better informed of the world around you.
-        %a.featureBtn
-          Post A Story
-
-  .panel_2
-    .houseFeatures
-      .featureAd
-        %h2.push-left
-          Help us keep the community informed!
-      .featureAd.clearfix
-        %p
-          Post Stories on our site to help you and your community become better informed of the world around you.
-        %a.featureBtn
-          Post A Story
-
-  .panel_2
-    .houseFeatures
-      .thumb
-        = image_tag('default/house-ad-profile.jpg')
-      .featureAd
-        %h2
-          Help us keep the community informed!
-      .featureAd.clearfix
-        %p
-          Post Stories on our site to help you and your community become better informed of the world around you.
-        %a.featureBtn
-          Post A Story
-
-  .panel_2
-    .houseFeatures
-      .thumbBanner
-        = image_tag('default/house-ad-banner.jpg')
-      .featureAd
-        %h2
-          Help us keep the community informed!
-        %p
-          Post Stories on our site to help you and your community become better informed of the world around you.
-        %a.featureBtn
-          Post A Story        
+  - case Metadata::Setting.get_setting('welcome_layout')
+    - when 'host'
+      .panel_2
+        .houseFeatures
+          .thumb
+            - unless Metadata::Setting.get_setting('welcome_host').present? and Metadata::Setting.get_setting('welcome_host').empty?
+              = image_tag('default/house-ad-profile.jpg')
+            - else
+              = local_linked_profile_pic(User.find(Metadata::Setting.get_setting('welcome_host')))
+          .featureAd
+            %h2= t('.welcome_panel_headline')
+            %p= t('.welcome_panel_message_fbml')
+    - when 'thumb'
+      .panel_2
+        .houseFeatures
+          .thumb
+            - unless Metadata::Setting.get_setting('welcome_image_url').present? and Metadata::Setting.get_setting('welcome_image_url').empty?
+              = image_tag('default/house-ad-profile.jpg')
+            - else
+              = image_tag(Metadata::Setting.get_setting('welcome_image_url'))
+          .featureAd
+            %h2= t('.welcome_panel_headline')
+            %p= t('.welcome_panel_message_fbml')
+    - when 'banner'
+      .panel_2
+        .houseFeatures
+          .thumbBanner
+            - unless Metadata::Setting.get_setting('welcome_image_url').present? and Metadata::Setting.get_setting('welcome_image_url').empty?
+              = image_tag('default/house-ad-banner.jpg')
+            - else
+              = image_tag(Metadata::Setting.get_setting('welcome_image_url'))
+          .featureAd
+            %h2= t('.welcome_panel_headline')
+            %p= t('.welcome_panel_message_fbml')
+    - else
+      .panel_2
+        .houseFeatures
+          .thumb
+            - unless Metadata::Setting.get_setting('welcome_image_url').present? and Metadata::Setting.get_setting('welcome_image_url').empty?
+              = image_tag('default/house-ad-profile.jpg')
+            - else
+              = image_tag(Metadata::Setting.get_setting('welcome_image_url'))
+          .featureAd
+            %h2= t('.welcome_panel_headline')
+            %p= t('.welcome_panel_message_fbml')
