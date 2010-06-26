@@ -125,7 +125,12 @@
       left: $DropDownBorder
       right: $DropDownBorder
     background-color: $DropDownBG
-
+.account-links
+  .account-profile
+    .thumb
+      margin: 5px
+      a
+        padding: 0
 // Body containers //
 #bodyWrapper
   background: $bodyWrapperBG
@@ -601,7 +606,8 @@ li
       font-size: $fontsize
       color: $subheadColor
   .eventBlock
-    margin: 0 0 4px 0
+    background: $subTitleBG
+    margin: 4px 0 0 0
     padding: 0
     border:
       top: 1px solid #f0f0f0
@@ -611,9 +617,12 @@ li
       text-transform: uppercase
       font-size: $fontsize
     .eventDetailsBlock
+      background: #fff
       float: left
       width: 75%
-      margin: 4px 0
+      padding: 4px 0 6px 0
+      .storyBlockWrap
+        padding-left: 6px
     .eventLocationBlock
       float: left
       width: 25%
@@ -747,7 +756,34 @@ li
     .storyHead
       margin: 0 0 8px 0
       color: $headerColor
-        
+    .eventMetaBlock
+      background: $subTitleBG
+      width: 60%
+      display: inline-block
+      padding: 4px
+      h3
+        display: inline-block
+      .eventMeta
+        float: left
+        display: inline-block
+        h4
+          margin: 0 6px 4px 
+        h3
+          color: $bodyColor
+          margin: 0 6px 4px
+          line-height: 150%
+        &.time
+          border-right: #fff 1px solid
+          margin-left: -1px
+          width: 50%
+        &.location
+          margin-left: -1px
+          border-left: #fff 1px solid
+          width: 50%
+        &.tags
+          border-top: #fff 1px solid
+          width: 100%
+          margin: 0
     p
       margin: 6px 0px
       line-height: 120%
@@ -913,6 +949,8 @@ li
 
 // Article Style modifications //
 #readArticle
+  .thumb
+    margin-top: 0
   .topBar
     margin-bottom: 15px
     ul
