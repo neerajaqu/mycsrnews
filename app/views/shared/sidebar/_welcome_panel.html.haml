@@ -1,14 +1,14 @@
 -# later could add FB connect button if not signed in or registered in web connect
 - unless current_user.present? and current_user.is_established?
-  - case Metadata::Setting.get_setting('welcome_layout')
+  - case get_setting('welcome_layout')
     - when 'host'
       .panel_2
         .houseFeatures
           .thumb
-            - unless Metadata::Setting.get_setting('welcome_host').present? and Metadata::Setting.get_setting('welcome_host').empty?
+            - unless get_setting('welcome_host').present? and get_setting('welcome_host').empty?
               = image_tag('default/house-ad-profile.jpg')
             - else
-              = local_linked_profile_pic(User.find(Metadata::Setting.get_setting('welcome_host')))
+              = local_linked_profile_pic(User.find(get_setting('welcome_host')))
           .featureAd
             %h2= t('.welcome_panel_headline')
             %p= t('.welcome_panel_message_fbml')
@@ -16,10 +16,10 @@
       .panel_2
         .houseFeatures
           .thumb
-            - unless Metadata::Setting.get_setting('welcome_image_url').present? and Metadata::Setting.get_setting('welcome_image_url').empty?
+            - unless get_setting('welcome_image_url').present? and get_setting('welcome_image_url').empty?
               = image_tag('default/house-ad-profile.jpg')
             - else
-              = image_tag(Metadata::Setting.get_setting('welcome_image_url'))
+              = image_tag(get_setting('welcome_image_url'))
           .featureAd
             %h2= t('.welcome_panel_headline')
             %p= t('.welcome_panel_message_fbml')
@@ -27,10 +27,10 @@
       .panel_2
         .houseFeatures
           .thumbBanner
-            - unless Metadata::Setting.get_setting('welcome_image_url').present? and Metadata::Setting.get_setting('welcome_image_url').empty?
+            - unless get_setting('welcome_image_url').present? and get_setting('welcome_image_url').empty?
               = image_tag('default/house-ad-banner.jpg')
             - else
-              = image_tag(Metadata::Setting.get_setting('welcome_image_url'))
+              = image_tag(get_setting('welcome_image_url'))
           .featureAd
             %h2= t('.welcome_panel_headline')
             %p= t('.welcome_panel_message_fbml')
@@ -38,10 +38,10 @@
       .panel_2
         .houseFeatures
           .thumb
-            - unless Metadata::Setting.get_setting('welcome_image_url').present? and Metadata::Setting.get_setting('welcome_image_url').empty?
+            - unless get_setting('welcome_image_url').present? and get_setting('welcome_image_url').empty?
               = image_tag('default/house-ad-profile.jpg')
             - else
-              = image_tag(Metadata::Setting.get_setting('welcome_image_url'))
+              = image_tag(get_setting('welcome_image_url'))
           .featureAd
             %h2= t('.welcome_panel_headline')
             %p= t('.welcome_panel_message_fbml')
