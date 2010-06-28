@@ -86,9 +86,9 @@ settings = [
  { :key_sub_type => 'twitter', :key_name => 'oauth_key', :value => (APP_CONFIG['twitter_oauth_key'] || "U6qjcn193333331AuA" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_secret', :value => (APP_CONFIG['twitter_oauth_secret'] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" ) },
  { :key_sub_type => 'facebook', :key_name => 'app_id', :value => (APP_CONFIG['facebook_application_id'] || "111111111111" ) },
- { :key_sub_type => 'welcome_panel', :key_name => 'welcome_layout', :value => "default" },
- { :key_sub_type => 'welcome_panel', :key_name => 'welcome_image_url', :value => APP_CONFIG['base_url']+"/images/default/icon-fan-app.gif" },
- { :key_sub_type => 'welcome_panel', :key_name => 'welcome_host', :value => "0" },
+ { :key_sub_type => 'welcome_panel', :key_name => 'welcome_layout', :value => "default", :hint => 'e.g. default, thumb, host, banner' },
+ { :key_sub_type => 'welcome_panel', :key_name => 'welcome_image_url', :value => APP_CONFIG['base_url']+"/images/default/icon-fan-app.gif", :hint => "Full (absolute) URL to image, e.g. #{APP_CONFIG['base_url']}/images/default/icon-fan-app.gif, recommended sizes: thumb 50 x 50 or banner = 300 x 90"},
+ { :key_sub_type => 'welcome_panel', :key_name => 'welcome_host', :value => "0", :hint => 'userid of host profile image to use'},
  { :key_sub_type => 'stats', :key_name => 'google_analytics_account_id', :value => (APP_CONFIG['google_analytics_account_id'] || "UF-123456890-7" ) },
  { :key_sub_type => 'stats', :key_name => 'google_analytics_site_id', :value => (APP_CONFIG['google_analytics_site_id'] || "1231232" ) },
  { :key_sub_type => 'ads', :key_name => 'platform', :value => (APP_CONFIG['ad_platform'] || "google" ) },
@@ -108,6 +108,8 @@ settings.each do |setting|
 		:data => {
 		  :setting_sub_type_name => setting[:key_sub_type],
 		  :setting_name => setting[:key_name], 
-		  :setting_value => setting[:value]    }
+		  :setting_value => setting[:value],
+		  :setting_hint => (setting[:hint] || "")
+		  }
   })
 end

@@ -35,7 +35,7 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
       :item => Metadata::Setting.find(params[:id]),
       :model => Metadata::Setting,
-    	:fields => [:setting_name, :setting_sub_type_name, :setting_value, :created_at],
+    	:fields => [:setting_name, :setting_sub_type_name, :setting_value, :setting_hint, :created_at],
     }
   end
 
@@ -65,7 +65,7 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
     	:item => setting,
     	:model => Metadata::Setting,
-    	:fields => [:setting_name, lambda {|f| f.input :setting_sub_type_name, :required => false }, :setting_value]
+    	:fields => [:setting_name, :setting_hint, lambda {|f| f.input :setting_sub_type_name, :required => false }, :setting_value]
     }
   end
 
@@ -75,7 +75,7 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
     	:item => setting,
     	:model => Metadata::Setting,
-    	:fields => [:setting_name, lambda {|f| f.input :setting_sub_type_name, :required => false }, :setting_value]
+    	:fields => [:setting_name, :setting_hint, lambda {|f| f.input :setting_sub_type_name, :required => false }, lambda {|f| f.input :setting_value, :hint => :setting_hint } ]
     }
   end
 
