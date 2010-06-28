@@ -23,6 +23,10 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
     @setting = Metadata::Setting.find(params[:id])
     #@setting.data = params[:custom_data].symbolize_keys
     if @setting.update_attributes(params[:metadata_setting])
+      # sweep cache elements when specific settings change
+      if @setting.key_name.include? "welcome_"
+        WidgetSweeper.expire_item "welcome_panel"
+      end
       flash[:success] = "Successfully updated your setting."
       redirect_to admin_metadata_setting_path(@setting)
     else
