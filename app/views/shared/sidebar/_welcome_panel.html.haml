@@ -1,48 +1,49 @@
 -# later could add FB connect button if not signed in or registered in web connect
 - unless current_user.present? and current_user.is_established?
   - cache :welcome_panel_html do
-    - case get_setting('welcome_layout').value
-      - when 'host'
-        .panel_2
-          .houseFeatures
-            .thumb
-              - if get_setting('welcome_host').present? and get_setting('welcome_host').value.empty?
-                = image_tag('default/house-ad-profile.jpg')
-              - else
-                = local_linked_profile_pic(User.find(get_setting('welcome_host').value))
-            .featureAd
-              %h2= t('.welcome_panel_headline')
-              %p= t('.welcome_panel_message_fbml')
-      - when 'thumb'
-        .panel_2
-          .houseFeatures
-            .thumb
-              - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
-                = image_tag('default/house-ad-profile.jpg')
-              - else
-                = image_tag(get_setting('welcome_image_url'))
-            .featureAd
-              %h2= t('.welcome_panel_headline')
-              %p= t('.welcome_panel_message_fbml')
-      - when 'banner'
-        .panel_2
-          .houseFeatures
-            .thumbBanner
-              - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
-                = image_tag('default/house-ad-banner.jpg')
-              - else
-                = image_tag(get_setting('welcome_image_url'))
-            .featureAd
-              %h2= t('.welcome_panel_headline')
-              %p= t('.welcome_panel_message_fbml')
-      - else
-        .panel_2
-          .houseFeatures
-            .thumb
-              - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
-                = image_tag('default/house-ad-profile.jpg')
-              - else
-                = image_tag(get_setting('welcome_image_url'))
-            .featureAd
-              %h2= t('.welcome_panel_headline')
-              %p= t('.welcome_panel_message_fbml')
+    - if get_setting('welcome_layout').present?
+      - case get_setting('welcome_layout').value
+        - when 'host'
+          .panel_2
+            .houseFeatures
+              .thumb
+                - if get_setting('welcome_host').present? and get_setting('welcome_host').value.empty?
+                  = image_tag('default/house-ad-profile.jpg')
+                - else
+                  = local_linked_profile_pic(User.find(get_setting('welcome_host').value))
+              .featureAd
+                %h2= t('.welcome_panel_headline')
+                %p= t('.welcome_panel_message_fbml')
+        - when 'thumb'
+          .panel_2
+            .houseFeatures
+              .thumb
+                - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
+                  = image_tag('default/house-ad-profile.jpg')
+                - else
+                  = image_tag(get_setting('welcome_image_url'))
+              .featureAd
+                %h2= t('.welcome_panel_headline')
+                %p= t('.welcome_panel_message_fbml')
+        - when 'banner'
+          .panel_2
+            .houseFeatures
+              .thumbBanner
+                - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
+                  = image_tag('default/house-ad-banner.jpg')
+                - else
+                  = image_tag(get_setting('welcome_image_url'))
+              .featureAd
+                %h2= t('.welcome_panel_headline')
+                %p= t('.welcome_panel_message_fbml')
+        - else
+          .panel_2
+            .houseFeatures
+              .thumb
+                - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
+                  = image_tag('default/house-ad-profile.jpg')
+                - else
+                  = image_tag(get_setting('welcome_image_url'))
+              .featureAd
+                %h2= t('.welcome_panel_headline')
+                %p= t('.welcome_panel_message_fbml')
