@@ -59,8 +59,8 @@ defaults: &defaults
 
   tweet_events_min_votes: 5
   tweet_events_limit: 3
-  tweet_articles_min_votes: 5   
-  tweet_articles_limit: 3
+  tweet_stories_min_votes: 5   
+  tweet_stories_limit: 3
   tweet_questions_min_votes: 5
   tweet_questions_limit: 3
   tweet_ideas_min_votes: 5
