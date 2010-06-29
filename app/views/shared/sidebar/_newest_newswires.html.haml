@@ -1,0 +1,19 @@
+-# @expects: local 'newest_newswires'
+
+- cache :newest_newswires_html do
+  - newest_newswires ||= Newswire.unpublished.newest 5
+  - unless newest_newswires.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar.clearfix
+        %h2= t('newest_newswires_title')
+      .list_stories.clearfix
+        %ul
+          - newest_newswires.each do |newswire|
+            %li
+              %h4= link_to caption(newswire.title,120), newswire.url, :target => "_newswire"
+              -#.profilePic= local_linked_profile_pic answer.user
+              .storyBlockMeta
+                %h3= t('via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))
+                %span.btnComment.float_left= link_to t('post_newswire', :site_title => APP_CONFIG['site_title']), new_story_path(:newswire_id => newswire)
+                -# %span.btnComment.float_left= link_to t('.quick_post', :site_title => APP_CONFIG['site_title']), quick_post_newswire_path(newswire), :class => 'quick_post'
+                %span.btnComment.float_left= link_to t('read_newswire'), newswire.url, :target => "_cts" 
