@@ -44,6 +44,7 @@ class Admin::ForumsController < AdminController
       flash[:success] = "Successfully created your new Forum!"
       redirect_to [:admin, @forum]
     else
+    	raise @forum.errors.full_messages.inspect
       flash[:error] = "Could not create your Forum, please try again"
       render_new @forum
     end
@@ -65,6 +66,7 @@ class Admin::ForumsController < AdminController
     	:item => @forum,
     	:model => Forum,
     	:fields => [:name, :description],
+    	:include_media_form => true
     }
   end
 
@@ -73,6 +75,7 @@ class Admin::ForumsController < AdminController
     	:item => forum,
     	:model => Forum,
     	:fields => [:name, :description],
+    	:include_media_form => true,
     	:associations => { :belongs_to => { :user => :user_id } }
     }
   end

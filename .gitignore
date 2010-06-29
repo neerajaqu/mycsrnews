@@ -41,3 +41,4 @@ config/s3.yml
 !db/development_structure.sql
 spec/fixtures
 *.tmproj
+dump.rdb
