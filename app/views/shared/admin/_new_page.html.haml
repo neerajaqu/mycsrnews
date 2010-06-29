@@ -1,6 +1,7 @@
 %h2== Create a new #{model.name.titleize}
 - item ||= model.new
 - associations ||= {}
+- include_media_form ||= false
 - semantic_form_for [:admin, item], :html => { :multipart => (!! include_media_form) } do |form|
   - form.inputs do
     - fields.each do |field|
