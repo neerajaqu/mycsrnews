@@ -171,6 +171,10 @@ class ApplicationController < ActionController::Base
     @newest_resources ||= Resource.active.newest 5
   end
 
+  def load_newest_newswires
+    @newest_newswires ||= Newswire.newest 5
+  end
+
   def load_top_events
     @top_events ||= Event.active.tally({
     	:at_least => 1,
