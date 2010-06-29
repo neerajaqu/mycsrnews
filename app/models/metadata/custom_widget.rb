@@ -48,8 +48,8 @@ class Metadata::CustomWidget < Metadata
   def set_meta_keys
     self.meta_type    = 'custom'
     self.key_type     = 'widget'
-    self.key_sub_type = self.content_type.downcase.sub(/_content$/, '')
-    self.key_name     = self.title.parameterize
+    self.key_sub_type ||= self.content_type.downcase.sub(/_content$/, '')
+    self.key_name     ||= self.title.parameterize
   end
 
   def build_widget

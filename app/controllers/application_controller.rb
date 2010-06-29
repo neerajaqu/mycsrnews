@@ -322,7 +322,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_custom_sidebar_widget
-    cswidget = Metadata::CustomWidget.find_slot('sidebar', "#{self.controller_name}-custom-sidebar-widget")
+    cswidget = Metadata::CustomWidget.find_slot('sidebar', "#{self.controller_name}")
     @custom_sidebar_widget = (cswidget and cswidget.has_widget? ? cswidget.metadatable : nil)
   end
 

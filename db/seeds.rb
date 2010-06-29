@@ -13,6 +13,12 @@ debug = Rails.env.development?
 IdeaBoard.create!({:name => 'General', :section =>'general',:description=>'General ideas.'}) unless IdeaBoard.find_by_name_and_section('General', 'general')
 ResourceSection.create!({:name => 'General', :section =>'general',:description=>'General links.'}) unless ResourceSection.find_by_name_and_section('General', 'general')
 
+# Populate Sources table with some commonly used sites
+Source.create!({:name => 'New York Times', :url =>'nytimes.com'}) unless Source.find_by_url('nytimes.com')
+Source.create!({:name => 'Los Angeles Times', :url =>'latimes.com'}) unless Source.find_by_url('latimes.com')
+Source.create!({:name => 'Chicago Tribune', :url =>'chicagotribune.com'}) unless Source.find_by_url('chicagotribune.com')
+Source.create!({:name => 'National Public Radio', :url =>'npr.org'}) unless Source.find_by_url('npr.org')
+
 # Create Metadata Settings
 ads = [
   { :key_name => 'default', :key_sub_type => 'banner', :width => "468px", :height => "60px", :background => "default/ads_468_60.gif" },
@@ -80,6 +86,9 @@ settings = [
  { :key_sub_type => 'twitter', :key_name => 'oauth_key', :value => (APP_CONFIG['twitter_oauth_key'] || "U6qjcn193333331AuA" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_secret', :value => (APP_CONFIG['twitter_oauth_secret'] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" ) },
  { :key_sub_type => 'facebook', :key_name => 'app_id', :value => (APP_CONFIG['facebook_application_id'] || "111111111111" ) },
+ { :key_sub_type => 'welcome_panel', :key_name => 'welcome_layout', :value => "default" },
+ { :key_sub_type => 'welcome_panel', :key_name => 'welcome_image_url', :value => APP_CONFIG['base_url']+"/images/default/icon-fan-app.gif" },
+ { :key_sub_type => 'welcome_panel', :key_name => 'welcome_host', :value => "0" },
  { :key_sub_type => 'stats', :key_name => 'google_analytics_account_id', :value => (APP_CONFIG['google_analytics_account_id'] || "UF-123456890-7" ) },
  { :key_sub_type => 'stats', :key_name => 'google_analytics_site_id', :value => (APP_CONFIG['google_analytics_site_id'] || "1231232" ) },
  { :key_sub_type => 'ads', :key_name => 'platform', :value => (APP_CONFIG['ad_platform'] || "google" ) },
@@ -92,12 +101,12 @@ settings = [
 ]
 
 settings.each do |setting|
-  next if Metadata::Setting.find_setting(setting[:key_sub_type], setting[:key_name])
+  next if Metadata::Setting.find_setting(setting[:key_name], setting[:key_sub_type])
   puts "Creating setting #{setting[:key_name]} -- #{setting[:key_sub_type]}" if debug
 
   Metadata::Setting.create!({
 		:data => {
-		  :setting_value => setting[:key_sub_type],
+		  :setting_sub_type_name => setting[:key_sub_type],
 		  :setting_name => setting[:key_name], 
 		  :setting_value => setting[:value]    }
   })
