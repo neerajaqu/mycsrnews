@@ -23,7 +23,7 @@ class TopicsController < ApplicationController
     end
 
     if success
-        if @topic.post_wall?
+      if @topic.post_wall?
         session[:post_wall] = @topic
       end                
     	flash[:success] = "Successfully posted your new topic!"

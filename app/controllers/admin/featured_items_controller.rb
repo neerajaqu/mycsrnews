@@ -45,6 +45,8 @@ class Admin::FeaturedItemsController < AdminController
         next unless item = get_item(item_id)
         item = get_item item_id
         section_data.children.create({:name => "item_#{item_id}", :featured_type => "featured_item", :featurable => item})
+        #tweet item
+        tweet(item) if Metadata::Setting.find_setting('tweet_featured_items') == 'true'
       end
     end
 
@@ -80,4 +82,33 @@ class Admin::FeaturedItemsController < AdminController
     @current_tab = 'featured-items';
   end
 
+  def tweet
+    return if item.tweeted_item.present?
+    
+    if Metadata::Setting.find_setting('bitly_username')
+      bitly = Bitly.new(Metadata::Setting.find_setting('bitly_username'), Metadata::Setting.find_setting('bitly_api_key'))
+      shrt = bitly.shorten(url)
+      return shrt.short_url
+    else
+      return url
+    end
+    
+    oauth = Twitter::OAuth.new(Metadata::Setting.find_setting('oauth_key'), Metadata::Setting.find_setting('oauth_secret'))
+    oauth.authorize_from_access(Metadata::Setting.find_setting('twitter_oauth_consumer_key'), Metadata::Setting.find_setting('twitter_oauth_consumer_secret'))
+    twitter = Twitter::Base.new(oauth)
+    
+    case item.class.name
+    when "Content"
+      msg = "#{item.title} #{shorten_url(story_url(item))}"
+    when "Question"
+      msg = "#{item.question} #{shorten_url(question_url(item))}"
+    when "Idea"
+      msg = "#{item.title} #{shorten_url(idea_url(item))}"
+    when "Event"
+      msg = "#{item.name} #{shorten_url(event_url(item))}"
+    end
+
+    twitter.update(msg)
+    item.create_tweeted_item
+  end
 end

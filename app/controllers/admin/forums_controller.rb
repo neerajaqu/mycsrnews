@@ -44,7 +44,6 @@ class Admin::ForumsController < AdminController
       flash[:success] = "Successfully created your new Forum!"
       redirect_to [:admin, @forum]
     else
-    	raise @forum.errors.full_messages.inspect
       flash[:error] = "Could not create your Forum, please try again"
       render_new @forum
     end
