@@ -167,6 +167,6 @@ def shorten_url(url)
     shrt = bitly.shorten(url)
     return shrt.short_url
   else
-    return ulr
+    return url
   end  
 end

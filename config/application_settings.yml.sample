@@ -65,7 +65,8 @@ defaults: &defaults
   tweet_questions_limit: 3
   tweet_ideas_min_votes: 5
   tweet_ideas_limit: 3
-
+  tweet_featured_items: true
+  
   #Uncomment to allow bit.ly
   #bitly_username: 'username'
   #bitly_api_key: 'key'
