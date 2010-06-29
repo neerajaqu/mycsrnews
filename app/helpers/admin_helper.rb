@@ -75,7 +75,7 @@ module AdminHelper
 
   def admin_links item
     links = [
-      link_to_unless_current('View', [:admin, item]) {link_to "Back", :back },
+      link_to_unless_current('View', [:admin, item]) {link_to "Back", url_for(send("admin_#{item.class.name.tableize.gsub(/\//, '_')}_url"))},
       link_to('Edit', edit_polymorphic_path([:admin, item]))
     ]
 

@@ -32,6 +32,10 @@ en:
     title: "Videos"
   audios:
     title: "Audios"
+  newest_newswires_title: "Latest Wire News"
+  post_newswire: "Post"
+  read_newswire: "Read"
+  via:  "Via {{title}}, {{date}} ago"
   newest_images_title: "Recent Images"
   featured_stories: "Featured Stories"
   featured_comment_title: "Featured Comment"

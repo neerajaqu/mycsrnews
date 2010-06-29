@@ -115,6 +115,9 @@ widgets:
       partial: '/shared/sidebar/newest_articles'
       load_functions: 'load_newest_articles'
       locals: 'newest_articles'
+    newest_newswires:
+      partial: '/shared/sidebar/newest_newswires'
+      locals: 'newest_newswires'
     rotate_question_widgets:
       partial: '/shared/sidebar/rotate_question_widgets'
     top_answers:

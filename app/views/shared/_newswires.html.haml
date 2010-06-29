@@ -14,7 +14,7 @@
             %li{'data-id' => newswire.cache_key}
               -# TODO:: remove inline css
               .storyBlockWrap{:style => "width: 490px; clear: left; word-wrap: break-word;"}
-                %h2.storyHead= link_to newswire.title, newswire.url, :target => "_cts"
+                %h2.storyHead= link_to newswire.title, newswire.url, :target => "_newswire"
                 %p.storyCaption= linked_newswire_caption newswire
                 .storyBlockMeta.float_left
                   %h3= t('.via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))

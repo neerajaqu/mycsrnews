@@ -14,7 +14,7 @@
           %li= fb_share_item_button(@event)
           %li
             %a= twitter_share_item_link @event, @event.name           
-      .thumb
+      .thumb.threeFour
         - if @event.images.present?
           = image_tag @event.images.first.url(:medium)
         - if !@event.images.present? && @event.pic.present?
@@ -22,21 +22,38 @@
       .storyBlockWrap
         %h1.storyHead= @event.name
         .storyBlockMeta
-          %h2 
-            == Starts: #{@event.start_time.to_s :short_with_time} 
-            - if @event.end_time.present?
-              %br== Ends:&nbsp; #{@event.end_time.to_s :short_with_time}
-          %h4
-            %br=h @event.location
-            %br=h @event.street
-            %br== #{h @event.city}, #{h @event.state} #{h @event.country}
+          .eventMetaBlock
+            .eventMeta.time
+              %h4
+                Date and Time:
+              %h3 
+                Starts:
+                %br
+                == #{@event.start_time.to_s :short_with_time}
+                %br
+                - if @event.end_time.present?
+                  Ends:
+                  %br
+                  == #{@event.end_time.to_s :short_with_time} 
+            .eventMeta.location
+              %h4
+                Location:
+              %h3
+                =h @event.location
+                %br
+                =h @event.street
+                %br
+                == #{h @event.city}, #{h @event.state} #{h @event.country}
+            - if @tags.present?
+              .eventMeta.tags  
+                %h4 Tags:
+                %h3==#{tag_list(@tags,@event)}
           %h3
             = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => time_ago_in_words(@event.created_at))
-          - if @tags.present?
-            %h3== #{tag_list(@tags,@event)}
           = link_to(t('.view'), @event.url, :class=>"btn", :target=>"_new") if @event.url 
           - if @event.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
+
 
       %div.bodyArticle= sanitize @event.description
     - if @event.media_item?
