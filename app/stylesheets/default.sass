@@ -65,6 +65,7 @@
     margin: 0 5px
     color: $subheadColor
   .dh_links
+    font-size: 12px
     position: absolute
     top: 10px
     right: 0px
@@ -152,6 +153,7 @@
     clear: left
     margin: 0px
     padding: 5px 10px 7px 10px
+    font-size: 12px
     background:
       color: $FooterBG
 
@@ -184,6 +186,7 @@ body
 h1, h2, h3, h4, h5
   margin: 0px
   padding: 0px
+  font-weight: normal
   a
     color: $headerColor
     &:hover
@@ -205,30 +208,25 @@ h3, h5
 
 h1
   font-size: $fontsize * 1.5
-  font-weight: bold
   margin: 0 0 6px 0
 
 h2
   font-size: $fontsize * 1.2
-  font-weight: bold
   margin: 0 0 6px 0
 
 h4
   font-size: $fontsize * 1.1
-  font-weight: bold
   margin: 0 0 4px 0
   padding: 0
 
 h3
-  font-size: $fontsize * 0.9
-  font-weight: normal
+  font-size: 11px
   margin: 0 5px 5px 0
 
 h5
   font-family: $headerFont
   color: $subheadColor
   font-size: $fontsize * 0.9
-  font-weight: bold
   margin: 0px 0px 10px 0
   padding: 5px 0px
 
@@ -459,15 +457,6 @@ li
     float: left
     margin: 0 5px 5px 5px
 
-.list_stories
-  .thumb
-    margin-top: 0px
-    margin-bottom: 5px
-  .feature_bg
-    .thumb
-      margin: 0 10px 5px
-    
-
 .thumb
   margin: 10px
   position: relative
@@ -526,10 +515,13 @@ li
 
 .storyList
   .thumb
+    margin: 0 6px
     height: 68px
     float: left
     img
       max-width: 90px
+  .storyBlockWrap
+    padding-left: 110px
 
 .featuredNewsList
   margin: 10px 0 0 0
@@ -545,6 +537,7 @@ li
 
   .top-tags
     display: inline-block
+    padding-top: 4px
     li
       display: block
       width: auto
@@ -730,7 +723,7 @@ li
       margin: 0
       font-weight: $panelBarHeaderWeight
       font-size: $fontsize * 0.9
-      text-transform: uppercase
+      text-transform: $panelBarTextTransform
       font-family: $headerFont
       color: $panelBarHeader
       display: inline
@@ -743,8 +736,6 @@ li
     .bar_link
       float: right
       margin: 0 8px
-  .storyBlockSpacer
-    padding-left: 100px
   .storyBlockMeta
     &.float_right
       margin-right: 10px
@@ -789,6 +780,7 @@ li
       line-height: 120%
   li
     display: inline-block
+    position: relative
     width: 100%
     padding: 8px 0
     border:
@@ -861,6 +853,7 @@ li
     display: block
     padding: 0px 8px
     a
+      font-size: 12px
       color: $linkColor
     .refine-tab
       height: 32px
@@ -1075,6 +1068,7 @@ h3.btn
   margin: 0 1px
   padding: 1px 8px 2px 8px
   background: $btnCommentBG
+  font-size: 11px
 
 .btnFBshare
   margin: 1px 1px 0 1px
@@ -1229,7 +1223,7 @@ h3.btn
   p
     color: $bookmarkletText
     margin: 5px 10px
-    font-size: $fontsize * 1.35
+    font-size: $fontsize * 1.1
   .demo
     margin: 10px 15px
     padding: 70px 0 10px 0
@@ -1240,6 +1234,7 @@ h3.btn
     display: inline-block
     color: white
     font-weight: bold
+    font-size: 11px
     padding: 5px 10px 6px 10px
     border: $bookmarkletBtnBorder
     -moz-border-radius: 4px
