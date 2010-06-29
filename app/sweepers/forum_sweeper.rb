@@ -3,17 +3,17 @@ class ForumSweeper < ActionController::Caching::Sweeper
 
   def after_save(record)
     if record.is_a?(Forum)
-      self.class.clear_forum_cache(record)
+      self.expire_forum_all(record)
     elsif record.is_a?(Topic)
-      self.class.clear_topic_cache(record)
+      self.expire_topic_all(record)
     end
   end
 
   def after_destroy(record)
     if record.is_a?(Forum)
-      self.class.clear_forum_cache(record)
+      self.expire_forum_all(record)
     elsif record.is_a?(Topic)
-      self.class.clear_topic_cache(record)
+      self.expire_topic_all(record)
     end
   end
 
@@ -30,7 +30,7 @@ class ForumSweeper < ActionController::Caching::Sweeper
       controller.expire_fragment fragment
     end
 
-    self.class.expire_forum_all topic.forum
+    self.expire_forum_all topic.forum
   end
 
 end
