@@ -1,6 +1,6 @@
 -# expects @title, @events
 - cache_if page.present?, "events_list_#{page}html" do
-  - events ||= Event.active.paginate :page => params[:page], :per_page => Event.per_page, :order => "created_at desc"
+  - events ||= Event.active.paginate :page => params[:page], :per_page => Event.per_page, :order => "start_time asc"
   - paginate ||= false
   .panel_1
     .panelBar
