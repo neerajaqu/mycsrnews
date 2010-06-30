@@ -4,6 +4,7 @@ class Content < ActiveRecord::Base
   acts_as_taggable_on :tags, :sections
   acts_as_featured_item
   acts_as_moderatable
+  acts_as_relatable
   acts_as_media_item
   acts_as_refineable
   acts_as_wall_postable
@@ -12,7 +13,7 @@ class Content < ActiveRecord::Base
   belongs_to :article
   belongs_to :newswire
   has_one :content_image
-  has_many :comments, :as => :commentable
+  has_many :comments, :as => :commentable  
 
   has_friendly_id :title, :use_slug => true
 
