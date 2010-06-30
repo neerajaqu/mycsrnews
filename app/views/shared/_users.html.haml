@@ -18,7 +18,7 @@
               .feature_bg
                 .thumb.bio
                   = local_linked_profile_pic user, :size => "small"
-              .float_left { :style => 'width: 60%' }
+              .float_left{ :style => 'width: 60%' }
                 %h2.storyHead== #{local_linked_profile_name(user)}
                 %p= caption(user.bio,350)
               .storyBlockMeta.float_right
