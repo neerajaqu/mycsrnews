@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :contents
   has_many :comments
   has_many :messages
-  has_many :ideas
+  has_many :ideas, :after_add => :trigger_idea
   has_many :questions
   has_many :answers
   has_many :events
@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
   def trigger_comment(comment)
     # trigger comment pfeed delivery
   end
+
+  def trigger_idea(idea)
+    # trigger idea pfeed delivery
+  end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -90,8 +94,9 @@ class User < ActiveRecord::Base
     return true if last_viewed_feed_item == last_delivered_feed_item
     self.update_attribute(:last_viewed_feed_item, last_delivered_feed_item)
   end
-
-  emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices], :identified_by => :name
+  
+  emits_pfeeds :on => [:trigger_idea], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   receives_pfeed
 
 
@@ -161,6 +166,10 @@ class User < ActiveRecord::Base
     return !fb_user_id.nil? && fb_user_id > 0
   end
 
+  def friends
+    []
+  end
+  
   def fb_user_id
     return super unless super.nil?
     return nil unless self.user_profile.present?
