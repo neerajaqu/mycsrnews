@@ -29,7 +29,6 @@ class ArticlesController < ApplicationController
     @article = Article.new(params[:article])
     @article.content = Content.new(params[:article][:content_attributes].merge(:article => @article))
     @article.content.caption = @article.body
-    @article.author = current_user
     @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.post_wall = params[:article][:content_attributes][:post_wall]
     @article.content.user = current_user

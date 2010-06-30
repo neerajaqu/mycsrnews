@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   before_save :check_profile
   
   has_many :contents, :after_add => :trigger_story
+  has_many :articles, :foreign_key => :author_id, :after_add => :trigger_article
   has_many :comments
   has_many :messages
   has_many :questions, :after_add => :trigger_question
@@ -66,6 +67,7 @@ class User < ActiveRecord::Base
 
   # NOTE:: must be above emits_pfeeds call
   def trigger_comment(comment) end
+  def trigger_article(article) end
   def trigger_story(story) end
   def trigger_topic(topic) end
   def trigger_question(question) end
@@ -100,6 +102,7 @@ class User < ActiveRecord::Base
   end
 
   emits_pfeeds :on => [:trigger_story], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_article], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_topic], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_question], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_answer], :for => [:participant_recipient_voices, :friends], :identified_by => :name
