@@ -92,6 +92,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :settings
     admin.resources :skip_images
     admin.resources :title_filters
+    admin.resources :activity_scores
     admin.resources :ideas
     admin.resources :idea_boards
     admin.resources :resources
@@ -119,6 +120,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.namespace(:metadata) do |metadata|
       metadata.resources :ads
       metadata.resources :settings
+      metadata.resources :activity_scores
       metadata.resources :skip_images
       metadata.resources :title_filters
       metadata.resources :custom_widgets

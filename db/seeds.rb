@@ -126,3 +126,35 @@ settings.each do |setting|
 		  }
   })
 end
+
+activity_scores = [
+ { :key_sub_type => 'importance', :key_name => 'karma',  :value => 1, :hint => "Multiple used when calculating karma actions. High setting maximizes impact of quality of posts as judged by other readers" },
+ { :key_sub_type => 'importance', :key_name => 'participation',  :value => 0, :hint => "Multiple used when calculating participation actions. Low setting minimizes impact of posting on user scores." },
+ { :key_sub_type => 'participation', :key_name => 'story',  :value => 1, :hint => "Points awarded when user creates a story" },
+ { :key_sub_type => 'participation', :key_name => 'article',  :value => 1, :hint => "Points awarded when user creates a article" },
+ { :key_sub_type => 'participation', :key_name => 'idea',  :value => 1, :hint => "Points awarded when user creates a idea" },
+ { :key_sub_type => 'participation', :key_name => 'event',  :value => 1, :hint => "Points awarded when user creates a event" },
+ { :key_sub_type => 'participation', :key_name => 'topic',  :value => 1, :hint => "Points awarded when user creates a topic" },
+ { :key_sub_type => 'participation', :key_name => 'resource',  :value => 1, :hint => "Points awarded when user creates a resource" },
+ { :key_sub_type => 'participation', :key_name => 'question',  :value => 1, :hint => "Points awarded when user creates a question" },
+ { :key_sub_type => 'participation', :key_name => 'answer',  :value => 1, :hint => "Points awarded when user creates a answer" },
+ { :key_sub_type => 'participation', :key_name => 'comment',  :value => 1, :hint => "Points awarded when user creates a comment" },
+ { :key_sub_type => 'participation', :key_name => 'share',  :value => 1, :hint => "Points awarded when user shares another reader\'s item" },
+ { :key_sub_type => 'karma', :key_name => 'item_vote',  :value => 1, :hint => "Points awarded when item created by user is liked" },
+ { :key_sub_type => 'karma', :key_name => 'item_comment',  :value => 1, :hint => "Points awarded when item created by user is commented on" },
+ { :key_sub_type => 'karma', :key_name => 'item_shared',  :value => 1, :hint => "Points awarded when item created by user is shared or tweeted" }
+]
+
+activity_scores.each do |activity_score|
+  next if Metadata::ActivityScore.find_activity_score(activity_score[:key_name], activity_score[:key_sub_type])
+  puts "Creating activity_score #{activity_score[:key_name]} -- #{activity_score[:key_sub_type]}" if debug
+
+  Metadata::ActivityScore.create!({
+		:data => {
+		  :activity_score_sub_type_name => activity_score[:key_sub_type],
+		  :activity_score_name => activity_score[:key_name], 
+		  :activity_score_value => activity_score[:value],
+		  :activity_score_hint => (activity_score[:hint] || "")
+		  }
+  })
+end
