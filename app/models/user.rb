@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :events, :after_add => :trigger_event
   has_many :resources, :after_add => :trigger_resource
   has_many :topics, :after_add => :trigger_topic
+  has_many :dashboard_messages, :after_add => :trigger_dashboard_message
   has_one :profile, :class_name => "UserProfile"
   has_one :user_profile #TODO:: convert views and remove this
   has_many :received_cards, :class_name => "SentCard", :foreign_key => 'to_fb_user_id', :primary_key => 'fb_user_id', :conditions => 'sent_cards.to_fb_user_id IS NOT NULL'
@@ -71,7 +72,8 @@ class User < ActiveRecord::Base
   def trigger_answer(answer) end
   def trigger_idea(idea) end
   def trigger_event(event) end
-  def trigger_resource(event) end
+  def trigger_resource(resource) end
+  def trigger_dashboard_message(dashboard_message) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -104,6 +106,7 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_idea], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_event], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_resource], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_dashboard_message], :for => [:participant_recipient_voices], :identified_by => :name
   emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   receives_pfeed
 

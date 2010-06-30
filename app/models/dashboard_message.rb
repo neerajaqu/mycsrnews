@@ -37,4 +37,8 @@ class DashboardMessage < ActiveRecord::Base
     save
   end
 
+  def recipient_voices
+    User.all
+  end  
+
 end
