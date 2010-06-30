@@ -98,6 +98,10 @@ module ApplicationHelper
     text.length <= length ? text : text[0, length] + '...'
   end
 
+  def pfeed_caption(text, length = nil)
+    caption(text, length = nil)
+  end
+
   def voteable_type_name(vote)
     type = vote.voteable.class.name
     if type == 'Content'

@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   before_filter :find_forum
-  before_filter :login_required, :only => [:new]
+  before_filter :login_required, :only => [:new, :create]
 
   def new
     @topic = @forum.topics.new
@@ -18,10 +18,9 @@ class TopicsController < ApplicationController
     @topic.tag_list = params[:topic][:tags_string]
 
     @topic.transaction do
-      @topic.user = current_user
       @post = @topic.posts.build({:comments => @topic.body, :user => current_user})
       @post.commentable = @topic
-      success = @topic.save
+      success = current_user.topics.push @topic
     end
 
     if success

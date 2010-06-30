@@ -17,6 +17,17 @@ class Answer < ActiveRecord::Base
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
 
+  def voices
+    Answer.find(:all, :include => :user, :group => :user_id, :conditions => {:question_id => self.question_id}).map(&:user)
+  end
+
+  def recipient_voices
+    users = self.voices
+    users << self.question.user
+    users.delete self.user
+    users.uniq
+  end
+
   def self.get_top
     self.tally({
     	:at_least => 1,
@@ -26,7 +37,11 @@ class Answer < ActiveRecord::Base
   end
 
   def item_title
-    "Answer to #{self.question.item_title}"
+    "Answer to: #{self.question.item_title}"
+  end
+
+  def item_description
+    answer
   end
 
 end

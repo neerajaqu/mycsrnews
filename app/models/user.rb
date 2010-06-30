@@ -29,14 +29,15 @@ class User < ActiveRecord::Base
   after_create :register_user_to_fb
   before_save :check_profile
   
-  has_many :contents
+  has_many :contents, :after_add => :trigger_story
   has_many :comments
   has_many :messages
   has_many :ideas
-  has_many :questions
-  has_many :answers
+  has_many :questions, :after_add => :trigger_question
+  has_many :answers, :after_add => :trigger_answer
   has_many :events
   has_many :resources
+  has_many :topics, :after_add => :trigger_topic
   has_one :profile, :class_name => "UserProfile"
   has_one :user_profile #TODO:: convert views and remove this
   has_many :received_cards, :class_name => "SentCard", :foreign_key => 'to_fb_user_id', :primary_key => 'fb_user_id', :conditions => 'sent_cards.to_fb_user_id IS NOT NULL'
@@ -63,9 +64,11 @@ class User < ActiveRecord::Base
 
 
   # NOTE:: must be above emits_pfeeds call
-  def trigger_comment(comment)
-    # trigger comment pfeed delivery
-  end
+  def trigger_comment(comment) end
+  def trigger_story(story) end
+  def trigger_topic(topic) end
+  def trigger_question(question) end
+  def trigger_answer(answer) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -91,7 +94,11 @@ class User < ActiveRecord::Base
     self.update_attribute(:last_viewed_feed_item, last_delivered_feed_item)
   end
 
-  emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices], :identified_by => :name
+  emits_pfeeds :on => [:trigger_story], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_topic], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_question], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_answer], :for => [:participant_recipient_voices, :friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   receives_pfeed
 
 
