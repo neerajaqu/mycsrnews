@@ -36,7 +36,7 @@ class ResourcesController < ApplicationController
     @resource.tag_list = params[:resource][:tags_string]
     @resource.twitterName = params[:resource][:twitterName].sub(/^http:\/\/(www.)*twitter.com\/+/,'').sub('@','')
 
-    if current_user.resources.push @resource
+    if @resource.valid? and current_user.resources.push @resource
       if @resource.post_wall?
         session[:post_wall] = @resource
       end      

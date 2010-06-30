@@ -33,7 +33,7 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
     @event.tag_list = params[:event][:tags_string]
 
-    if current_user.events.push @event
+    if @event.valid? and current_user.events.push @event
       if @event.post_wall?
         session[:post_wall] = @event
       end            

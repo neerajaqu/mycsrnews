@@ -39,7 +39,7 @@ class IdeasController < ApplicationController
     	@idea.section_list = @idea_board.section unless @idea_board.nil?
     end
 
-    if current_user.ideas.push @idea
+    if @idea.valid? and current_user.ideas.push @idea
       if @idea.post_wall?
         session[:post_wall] = @idea
       end      
