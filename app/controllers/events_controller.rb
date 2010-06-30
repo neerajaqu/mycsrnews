@@ -31,10 +31,9 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(params[:event])
-    @event.user = current_user
     @event.tag_list = params[:event][:tags_string]
 
-    if @event.save
+    if current_user.events.push @event
       if @event.post_wall?
         session[:post_wall] = @event
       end            

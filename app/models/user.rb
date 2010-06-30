@@ -35,8 +35,8 @@ class User < ActiveRecord::Base
   has_many :questions, :after_add => :trigger_question
   has_many :answers, :after_add => :trigger_answer
   has_many :ideas, :after_add => :trigger_idea
-  has_many :events
-  has_many :resources
+  has_many :events, :after_add => :trigger_event
+  has_many :resources, :after_add => :trigger_resource
   has_many :topics, :after_add => :trigger_topic
   has_one :profile, :class_name => "UserProfile"
   has_one :user_profile #TODO:: convert views and remove this
@@ -70,6 +70,8 @@ class User < ActiveRecord::Base
   def trigger_question(question) end
   def trigger_answer(answer) end
   def trigger_idea(idea) end
+  def trigger_event(event) end
+  def trigger_resource(event) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -100,6 +102,8 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_question], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_answer], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_idea], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_event], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_resource], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   receives_pfeed
 
