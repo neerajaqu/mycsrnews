@@ -4,4 +4,4 @@
 .user-wrapper
   .profilePic= local_linked_profile_pic user, :width => '30px', :height => '30px', :format => 'html'
   %h3
-    = t('posted_by', :fb_name => local_linked_profile_name(user, :format => 'html'), :title => link_to(item.item_title, item), :date => time_ago_in_words(item.created_at))
+    = t('posted_by', :fb_name => local_linked_profile_name(user, :format => 'html'), :date => time_ago_in_words(item.created_at))
