@@ -1,5 +1,7 @@
 class DashboardMessage < ActiveRecord::Base
 
+  belongs_to :user
+
   named_scope :sent, {:conditions => ["status = ?", 'sent'] }
   named_scope :unsent, {:conditions => ["status = ?", 'unsent'] }
 
