@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
     @topic.transaction do
       @post = @topic.posts.build({:comments => @topic.body, :user => current_user})
       @post.commentable = @topic
-      success = current_user.topics.push @topic
+      success = (@topic.valid? and current_user.topics.push @topic)
     end
 
     if success
