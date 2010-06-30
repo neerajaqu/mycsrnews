@@ -4,6 +4,5 @@
     = image_tag f.object.image.url
   
   = f.input :remote_image_url, :label => "Image web address (optional)", :required => false, :hint => "Either provide the web address (URL) of the image above or click the button below to upload the image from your computer", :input_html => {:class=>"image-url-input"}
-  = f.file_field :image
-  %br
+  = f.file_field :image, :label=>nil
   = delete_image(f)

@@ -2,7 +2,7 @@
 %h2 Add an image to your story
 - form.semantic_fields_for :images do |image_form|
   = image_form.input :remote_image_url, :label => "Image web address (optional)", :required => false, :hint => "Either provide the web address (URL) of the image above or click the button below to upload the image from your computer"  
-  = image_form.input :image, :required => false, :as => :file
+  = image_form.input :image, :required => false, :as => :file, :label=>"Image from file"
   %br
   %br
   = add_image(form)
