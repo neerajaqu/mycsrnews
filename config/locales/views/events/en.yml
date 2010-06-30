@@ -7,10 +7,10 @@ en:
         index:
           events_title: "Active Events"
           top_events: "Popular Events"
-          newest_events: "Recent Events"
+          newest_events: "Upcoming Events"
         new:
           top_events: "Popular Events"
-          newest_events: "Recent Events"
+          newest_events: "Upcoming Events"
           label_event_name: "Name"
           label_event_tagline: "Tagline"
           label_event_description: "Description"
@@ -28,7 +28,7 @@ en:
         my_events:
           my_events_title: "Your Events"
           top_events: "Popular Events"
-          newest_events: "Recent Events"
+          newest_events: "Upcoming Events"
         import_facebook:
           import_events: "Import Events"
         import_from_facebook:

@@ -11,6 +11,11 @@ class WidgetSweeper < ActionController::Caching::Sweeper
   def self.expire_newest
     self.expire_some :newest
   end
+  
+  def self.expire_item widget, controller = nil
+    controller ||= ActionController::Base.new
+    controller.expire_fragment "#{widget}_html"
+  end  
 
   def self.expire_some filter = nil, controller = nil
     widgets = self.widgets
@@ -22,12 +27,12 @@ class WidgetSweeper < ActionController::Caching::Sweeper
 
       puts "Expiring fragment: #{widget}"
       controller.expire_fragment "#{widget}_html"
-      controller.expire_fragment "#{widget}_fbml"
+      #controller.expire_fragment "#{widget}_fbml"
     end
   end
 
   def self.widgets
-    ['top_stories', 'stories_list', 'active_stories', 'most_discussed_stories', 'top_users', 'top_ideas', 'top_events', 'featured_items', 'newest_users', 'newest_ideas', 'header', 'fan_application', 'prompt_permissions', 'newest_images', 'newest_videos','announcements']
+    ['top_stories', 'stories_list', 'active_stories', 'most_discussed_stories', 'top_users', 'top_ideas', 'top_events', 'featured_items', 'newest_users', 'newest_ideas', 'header', 'fan_application', 'prompt_permissions', 'newest_images', 'newest_videos','announcements','welcome_panel']
   end
 
 end

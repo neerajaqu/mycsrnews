@@ -44,7 +44,7 @@ en:
         top_events_title: "Top Events"
 
       newest_events:
-        newest_events_title: "Newest Events"
+        newest_events_title: "Upcoming Events"
 
       featured_event:
         featured_event_title: "Featured Event"
@@ -81,7 +81,7 @@ en:
         top_events_title: "Top Events"
 
       newest_events:
-        newest_events_title: "Newest Events"
+        newest_events_title: "Upcoming Events"
         
       fan_application:
         become_a_fan: "Become a Fan"

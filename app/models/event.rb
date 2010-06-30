@@ -9,6 +9,7 @@ class Event < ActiveRecord::Base
   
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
+  named_scope :upcoming, lambda { |*args| { :order => ["start_time asc"], :limit => (args.first || 10)} }
 
   belongs_to :user
 

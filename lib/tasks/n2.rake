@@ -186,7 +186,7 @@ namespace :n2 do
         if metadata.meta_type == 'config' and metadata.key_type == 'ads'
         	puts "Converting #{metadata.inspect} to Metadata::Ad type"
         	metadata.update_attribute(:type, 'Metadata::Ad')
-        elsif metadata.meta_type == 'custom' and metadata.key_type == 'widget'
+        elsif (metadata.meta_type == 'custom' and metadata.key_type == 'widget') or metadata.meta_type == 'custom_widget'
         	puts "Converting #{metadata.inspect} to Metadata::CustomWidget type"
         	metadata.update_attribute(:type, 'Metadata::CustomWidget')
         else

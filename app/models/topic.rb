@@ -60,6 +60,8 @@ class Topic < ActiveRecord::Base
     self.last_comment_id = last_post.id
 
     save!
+
+    ForumSweeper.expire_topic_all self
   end
 
 end

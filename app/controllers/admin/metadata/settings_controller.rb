@@ -23,6 +23,10 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
     @setting = Metadata::Setting.find(params[:id])
     #@setting.data = params[:custom_data].symbolize_keys
     if @setting.update_attributes(params[:metadata_setting])
+      # sweep cache elements when specific settings change
+      if @setting.key_name.include? "welcome_"
+        WidgetSweeper.expire_item "welcome_panel"
+      end
       flash[:success] = "Successfully updated your setting."
       redirect_to admin_metadata_setting_path(@setting)
     else
@@ -35,7 +39,7 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
       :item => Metadata::Setting.find(params[:id]),
       :model => Metadata::Setting,
-    	:fields => [:setting_name, :setting_sub_type_name, :setting_value, :created_at],
+    	:fields => [:setting_name, :setting_sub_type_name, :setting_value, :setting_hint, :created_at],
     }
   end
 
@@ -65,7 +69,7 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
     	:item => setting,
     	:model => Metadata::Setting,
-    	:fields => [:setting_name, lambda {|f| f.input :setting_sub_type_name, :required => false }, :setting_value]
+    	:fields => [:setting_name, :setting_hint, lambda {|f| f.input :setting_sub_type_name, :required => false }, :setting_value]
     }
   end
 
@@ -75,7 +79,7 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
     	:item => setting,
     	:model => Metadata::Setting,
-    	:fields => [:setting_name, lambda {|f| f.input :setting_sub_type_name, :required => false }, :setting_value]
+    	:fields => [:setting_name, :setting_hint, lambda {|f| f.input :setting_sub_type_name, :required => false }, lambda {|f| f.input :setting_value, :hint => :setting_hint } ]
     }
   end
 

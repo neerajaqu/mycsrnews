@@ -1,0 +1,2 @@
+class RelatedItemsController < ApplicationController
+end

@@ -2,7 +2,7 @@
 
 %li.comment_block
   %blockquote
-    .quotes= nl2br comment.comments
+    .quotes= nl2br linkify(comment.comments)
   .profilePic= local_linked_profile_pic comment.user
   .storyBlockWrap
     .storyBlockMeta

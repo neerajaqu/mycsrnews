@@ -45,6 +45,7 @@ def update_feed(feed)
   puts "Parsing #{feed.title} with #{rss.items.size} items -- updated on #{rss.date} -- last fetched #{feed.last_fetched_at}"
 
   feed_date = feed.last_fetched_at
+  added_item = false
   if !feed_date or (rss.date and feed_date < rss.date)
     rss.items.each do |item|
       break if feed_date and item[:date] <= feed_date
@@ -61,12 +62,18 @@ def update_feed(feed)
         :imageUrl   => item[:image],
         :feed       => feed
       })
+      
+      added_item = true
+      
       if feed.load_all?
       	puts "\t\tRunning quick post"
       	newswire.quick_post
       end
+      
     end
-
+    if added_item
+      WidgetSweeper.expire_item "newest_newswires"
+    end
     feed.update_attributes({:updated_at => Time.now, :last_fetched_at => rss.date.to_s})
   end
 end

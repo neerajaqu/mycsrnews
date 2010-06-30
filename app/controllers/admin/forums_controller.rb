@@ -65,6 +65,7 @@ class Admin::ForumsController < AdminController
     	:item => @forum,
     	:model => Forum,
     	:fields => [:name, :description],
+    	:include_media_form => true
     }
   end
 
@@ -73,6 +74,7 @@ class Admin::ForumsController < AdminController
     	:item => forum,
     	:model => Forum,
     	:fields => [:name, :description],
+    	:include_media_form => true,
     	:associations => { :belongs_to => { :user => :user_id } }
     }
   end
