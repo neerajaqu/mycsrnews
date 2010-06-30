@@ -31,6 +31,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(params[:question])
+    @question.user = current_user
     if @question.valid? and current_user.questions.push @question
       if @question.post_wall?
         session[:post_wall] = @question
@@ -56,6 +57,7 @@ class QuestionsController < ApplicationController
   def create_answer
     @question = Question.find(params[:id])
     @answer = @question.answers.build(params[:answer])
+    @answer.user = current_user
     if @answer.valid? and current_user.answers.push @answer
     	flash[:success] = "Thank you for posting your answer!"
     	redirect_to @question

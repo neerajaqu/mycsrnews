@@ -22,6 +22,7 @@ class Admin::ForumsController < AdminController
   def update
     @forum = Forum.find(params[:id])
     if @forum.update_attributes(params[:forum])
+    	ForumSweeper.expire_forum_all @forum
       flash[:success] = "Successfully updated your Forum."
       redirect_to [:admin, @forum]
     else
@@ -41,6 +42,7 @@ class Admin::ForumsController < AdminController
   def create
     @forum = Forum.new(params[:forum])
     if @forum.save
+    	ForumSweeper.expire_forum_all @forum
       flash[:success] = "Successfully created your new Forum!"
       redirect_to [:admin, @forum]
     else

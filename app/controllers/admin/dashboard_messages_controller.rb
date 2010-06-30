@@ -40,6 +40,7 @@ class Admin::DashboardMessagesController < AdminController
 
   def create
     @dashboardMessage = DashboardMessage.new(params[:dashboard_message])
+    @dashboardMessage.user = current_user
     if @dashboardMessage.valid? and current_user.dashboard_messages.push @dashboardMessage
       flash[:success] = "Successfully created your new Dashboard Message!"
       redirect_to [:admin, @dashboardMessage]
