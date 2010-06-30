@@ -21,6 +21,14 @@ class Article < ActiveRecord::Base
   validates_presence_of :body
   
   before_save :sanitize_body
+
+  def item_title
+    content.item_title
+  end
+
+  def item_description
+    content.item_description
+  end
   
   private
   
