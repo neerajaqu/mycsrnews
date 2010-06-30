@@ -98,7 +98,7 @@ module ApplicationHelper
     text.length <= length ? text : text[0, length] + '...'
   end
 
-  def pfeed_caption(text, length = nil)
+  def pfeed_caption(text, length = 150)
     caption(text, length = nil)
   end
 
