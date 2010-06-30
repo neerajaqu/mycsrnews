@@ -264,7 +264,7 @@ $(function() {
 
 									$('.image-url-input').last().parent().next().remove();
 									$('.image-url-input').last().next().remove();
-
+									$('.image-url-input').last().after($('.delete_image').last());
 								}
 							}
 						});

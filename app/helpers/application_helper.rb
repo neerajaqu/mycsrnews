@@ -437,10 +437,10 @@ EMBED
   
   def delete_image(form_builder)
     if form_builder.object.new_record?
-      link_to_function("Remove this Photo", "$(this).parents('.image-fieldset').remove()", :class=>"delete_image")
+      link_to_function("Remove", "$(this).parents('.image-fieldset').remove()", :class=>"delete_image")
     else 
       form_builder.hidden_field(:_delete) +
-      link_to_function("Remove this Photo", "$(this).parents('.image-fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
+      link_to_function("Remove", "$(this).parents('.image-fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
     end
   end
 end
