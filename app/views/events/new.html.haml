@@ -14,6 +14,7 @@
           = form.input :name, :label => t('.label_event_name'), :hint => t('.hint_event_name')
           = form.input :tagline, :required => false, :label => t('.label_event_tagline'), :hint => t('.hint_event_tagline')
           = form.input :description, :input_html => { :rows => 5 }, :label => t('.label_event_description'), :hint => t('.hint_event_description'), :required => false
+          = form.input :url, :required => false, :label => t('.label_event_url'), :hint => t('.hint_event_url')
           = form.input :tags_string,:label => t('tags'),  :required => false, :hint => t('tags_hint')
           = form.input(:start_time, :as => :string, :required =>true) 
           = form.input(:end_time, :as => :string, :required =>false) 
