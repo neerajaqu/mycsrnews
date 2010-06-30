@@ -32,6 +32,7 @@ class ArticlesController < ApplicationController
     @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.post_wall = params[:article][:content_attributes][:post_wall]
     @article.content.user = current_user
+    @article.author = current_user
     if @article.valid? and current_user.articles.push @article
       if @article.post_wall?
         session[:post_wall] = @article.content

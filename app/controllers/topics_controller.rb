@@ -18,6 +18,7 @@ class TopicsController < ApplicationController
     @topic.tag_list = params[:topic][:tags_string]
 
     @topic.transaction do
+      @topic.user = current_user
       @post = @topic.posts.build({:comments => @topic.body, :user => current_user})
       @post.commentable = @topic
       success = (@topic.valid? and current_user.topics.push @topic)

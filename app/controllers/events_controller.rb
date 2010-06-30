@@ -32,6 +32,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @event.tag_list = params[:event][:tags_string]
+    @event.user = current_user
 
     if @event.valid? and current_user.events.push @event
       if @event.post_wall?

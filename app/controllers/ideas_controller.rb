@@ -34,6 +34,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params[:idea])
     @idea.tag_list = params[:idea][:tags_string]
+    @idea.user = current_user
     if params[:idea][:idea_board_id].present?
     	@idea_board = IdeaBoard.find_by_id(params[:idea][:idea_board_id])
     	@idea.section_list = @idea_board.section unless @idea_board.nil?
