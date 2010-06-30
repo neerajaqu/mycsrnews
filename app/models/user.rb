@@ -32,9 +32,9 @@ class User < ActiveRecord::Base
   has_many :contents, :after_add => :trigger_story
   has_many :comments
   has_many :messages
-  has_many :ideas
   has_many :questions, :after_add => :trigger_question
   has_many :answers, :after_add => :trigger_answer
+  has_many :ideas, :after_add => :trigger_idea
   has_many :events
   has_many :resources
   has_many :topics, :after_add => :trigger_topic
@@ -69,6 +69,7 @@ class User < ActiveRecord::Base
   def trigger_topic(topic) end
   def trigger_question(question) end
   def trigger_answer(answer) end
+  def trigger_idea(idea) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -98,6 +99,7 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_topic], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_question], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_answer], :for => [:participant_recipient_voices, :friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_idea], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   receives_pfeed
 
@@ -168,6 +170,10 @@ class User < ActiveRecord::Base
     return !fb_user_id.nil? && fb_user_id > 0
   end
 
+  def friends
+    []
+  end
+  
   def fb_user_id
     return super unless super.nil?
     return nil unless self.user_profile.present?

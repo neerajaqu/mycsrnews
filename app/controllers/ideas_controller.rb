@@ -33,14 +33,13 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(params[:idea])
-    @idea.user = current_user
     @idea.tag_list = params[:idea][:tags_string]
     if params[:idea][:idea_board_id].present?
     	@idea_board = IdeaBoard.find_by_id(params[:idea][:idea_board_id])
     	@idea.section_list = @idea_board.section unless @idea_board.nil?
     end
 
-    if @idea.save
+    if current_user.ideas.push @idea
       if @idea.post_wall?
         session[:post_wall] = @idea
       end      
