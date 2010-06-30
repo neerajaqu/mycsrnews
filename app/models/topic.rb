@@ -22,8 +22,9 @@ class Topic < ActiveRecord::Base
   validates_presence_of :body, :if => :new_record?
 
   named_scope :newest, lambda { |*args| { :order => ["replied_at desc"], :limit => (args.first || 5)} }
+  named_scope :top, lambda { |*args| { :order => ["comments_count desc, created_at desc"], :limit => (args.first || 5)} }
 
-  attr_accessor :body
+  attr_accessor :body, :tags_string
 
   def item_description
     return self.posts.first.comments if self.posts.any?

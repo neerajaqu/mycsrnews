@@ -1,8 +1,10 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/breadcrumbs', :locals => { :breadcrumbs => forum_breadcrumbs(@forum) }
+  = render :partial => 'shared/breadcrumbs', :locals => { :breadcrumbs => forum_breadcrumbs(forum) }
 
-- cache "#{@forum.cache_key}_topics_list" do
+- cache_if page.present?, "#{@forum.cache_key}_topics_list#{page}" do
+  - topics ||= forum.topics.active
   - paginate ||= false
+  - page ||= ""
   .panel_1
     .panelBar
       %h2= t('forums.topics.list_title', :forum_name => forum.name)
@@ -10,7 +12,7 @@
     .subtitle
       %span= t('forums.topics.list_subtitle', :forum_description => forum.description)
     .storyList
-      - if forum.topics.any?
+      - if topics.any?
         %table.tablesorter
           %thead
             %tr
@@ -19,7 +21,7 @@
               %th Views
               %th Last Post
           %tbody
-            - forum.topics.each do |topic|
+            - topics.each do |topic|
               %tr
                 %td= link_to topic.title, [forum, topic]
                 %td= topic.comments_count
@@ -27,25 +29,11 @@
                 %td= t('posted_by', :fb_name => local_linked_profile_name(topic.replied_user), :date => time_ago_in_words(topic.replied_at))
       - else
         %p There are no topics yet, create one
-      -#.list_stories
-        %ul
-          - forum.topics.each do |topic|
-            %li{'data-id' => topic.cache_key}
-              .thumb
-                - if topic.images.present?
-                  = image_tag topic.images.first.url(:thumb)
-                - else
-                  = image_tag ('default/default_thumb_b.gif', :width => "100%")
-              .storyBlockWrap.storyBlockSpacer
-                %h2.storyHead= link_to topic.title, topic
-                -#%p.storyCaption= topic.description
-                %p.storyCaption Last post blurb
-                -#.profilePic= local_linked_profile_pic forum.user
-                .storyBlockMeta.float_left
-                  -#%h3= t('forums.topics.last_active', :fb_name => local_linked_profile_name(forum.user), :date => time_ago_in_words(forum.created_at))
-                  %h3== #{t('forums.last_active')} #{link_to forum.name, forum}
-                  -#%span.btnComment.float_left= t('forums.topics.topics_count', :topics_count => forum.topics_count)
-                  -#%span.btnComment.float_left= t('forums.topics.posts_count', :posts_count => forum.posts_count)
+    - if paginate
+      .clearfix
+        = will_paginate topics
+        %br
+
   .panel_1
     %div.float_left= link_to t('forums.topics.new'), new_forum_topic_path(forum), :class => "btn"
   = render :partial => 'shared/item_footer', :locals => { :item => forum, :title => forum.name }

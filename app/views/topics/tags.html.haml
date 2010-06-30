@@ -1,0 +1,37 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/breadcrumbs', :locals => { :breadcrumbs => forum_breadcrumbs(@forum) }
+
+#col_left
+  - page ||= ""
+  - cache_if page.present?, "#{@forum.cache_key}_topics_tags_list#{page}" do
+    - @paginate ||= false
+    .panel_1
+      .panelBar
+        %h2= t('forums.topics.list_title', :forum_name => @forum.name)
+        -#%span.bar_link= fb_share_item_button(forum)
+      .subtitle
+        %span= t('forums.topics.list_subtitle', :forum_description => @forum.description)
+      .subtitle
+        %span== Tagged with #{@tag_name}
+      .storyList
+        - if @topics.any?
+          %table.tablesorter
+            %thead
+              %tr
+                %th Title
+                %th Replies
+                %th Views
+                %th Last Post
+            %tbody
+              - @topics.each do |topic|
+                %tr
+                  %td= link_to topic.title, [@forum, topic]
+                  %td= topic.comments_count
+                  %td= topic.views_count
+                  %td= t('posted_by', :fb_name => local_linked_profile_name(topic.replied_user), :date => time_ago_in_words(topic.replied_at))
+        - else
+          %p There are no topics yet, create one
+    - if @paginate
+      .clearfix
+        = will_paginate @topics
+        %br

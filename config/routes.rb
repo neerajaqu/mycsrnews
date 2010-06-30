@@ -24,15 +24,12 @@ ActionController::Routing::Routes.draw do |map|
   map.app_tab '/app_tab.:format', :controller => 'home', :action => 'app_tab'
   map.resources :users, :collection => {:link_user_accounts => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
 
-  map.resources :forums, :has_many => [:topics]
-  map.resources :topics, :has_many => [:comments]
-  map.resource :session
-  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
-
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_articles_with_format '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
   map.paged_articles '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
+  map.paged_forums_with_format '/forums/:id/page/:page.:format', :controller => 'forums', :action => 'show'
+  map.paged_forums '/forums/:id/page/:page.:format', :controller => 'forums', :action => 'show'
   map.paged_ideas '/ideas/page/:page.:format', :controller => 'ideas', :action => 'index'
   map.paged_newswires '/newswires/page/:page.:format', :controller => 'newswires', :action => 'index'
   map.paged_my_events '/events/:id/my_events/page/:page.:format', :controller => 'events', :action => 'my_events'
@@ -47,6 +44,8 @@ ActionController::Routing::Routes.draw do |map|
   map.tagged_contents '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
   map.tagged_articles_with_page '/articles/tag/:tag/page/:page.:format', :controller => 'articles', :action => 'tags'
   map.tagged_articles '/articles/tag/:tag.:format', :controller => 'articles', :action => 'tags'
+  map.tagged_forum_with_page '/forums/:forum_id/tag/:tag/page/:page.:format', :controller => 'topics', :action => 'tags'
+  map.tagged_forum '/forums/:forum_id/tag/:tag.:format', :controller => 'topics', :action => 'tags'
   map.idea_tag_with_page '/ideas/tag/:tag/page/:page.:format', :controller => 'ideas', :action => 'tags'
   map.idea_tag '/ideas/tag/:tag.:format', :controller => 'ideas', :action => 'tags'
   map.resource_tag_with_page '/resources/tag/:tag/page/:page.:format', :controller => 'resources', :action => 'tags'
@@ -69,6 +68,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :answers, :member => { :like => [:get, :post] }, :has_many => [:comments, :answers, :flags]
   map.received_card '/cards/received/:card_id/from/:user_id.:format', :controller => 'cards', :action => 'received'
   map.resources :cards, :member => { :get_card_form => [:get, :post], :post_sent => [:get, :post] }, :collection => { :my_received => :get, :my_sent => :get }
+  map.resources :forums, :has_many => [:topics]
+  map.resources :topics, :has_many => [:comments]
+  map.resource :session
+  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
+
 
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index

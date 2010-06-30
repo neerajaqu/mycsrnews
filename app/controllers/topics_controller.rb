@@ -9,11 +9,13 @@ class TopicsController < ApplicationController
   def show
     @topic = @forum.topics.find(params[:id])
     @topic.viewed!
+    tag_cloud @topic
   end
 
   def create
     success = false
     @topic = @forum.topics.build(params[:topic])
+    @topic.tag_list = params[:topic][:tags_string]
 
     @topic.transaction do
       @topic.user = current_user
@@ -31,6 +33,12 @@ class TopicsController < ApplicationController
     else
     	render :new
     end
+  end
+
+  def tags
+    @tag_name = CGI.unescape(params[:tag])
+    @paginate = true
+    @topics = @forum.topics.tagged_with(@tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
 
   private

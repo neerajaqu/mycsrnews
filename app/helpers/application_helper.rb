@@ -287,6 +287,8 @@ module ApplicationHelper
     	tagged_stories_path(:tag => tag_name)
     elsif item.class.name == 'Article'
     	tagged_articles_path(:tag => tag_name)
+    elsif item.class.name == 'Topic'
+    	tagged_forum_path(item.forum, :tag => tag_name)
     else
     	[item.class, tag]
     end

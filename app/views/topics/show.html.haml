@@ -10,6 +10,9 @@
         %span.bar_link= fb_share_item_button(@topic)
       .subtitle
         %span= t('forums.topics.item_subtitle', :posts_count => @topic.comments_count, :voices_count => @topic.voices_count)
+      - if @tags.present?
+        .subtitle
+          %h3== Tags #{tag_list(@tags, @topic)}
       .storyList
         .list_stories
           %ul

@@ -1,7 +1,7 @@
 -# @expects: local 'topic'
 
 - cache :top_topics_html do
-  - top_topics ||= Topic.active({ :at_least => 1, :limit => 7, :order => "comments_count desc" })
+  - top_topics ||= Topic.active.top
   - unless top_topics.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar

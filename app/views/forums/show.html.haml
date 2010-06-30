@@ -1,5 +1,5 @@
 #col_left
-  = render :partial => 'shared/topics', :locals => { :forum => @forum }
+  = render :partial => 'shared/topics', :locals => { :forum => @forum, :topics => @topics, :page => @page, :paginate => @paginate }
 #col_right
   = render :partial => 'shared/sidebar/top_topics'
   = render :partial => 'shared/sidebar/newest_topics'
