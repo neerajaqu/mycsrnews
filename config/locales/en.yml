@@ -58,6 +58,8 @@ en:
   tweet: "Tweet"
   in: "in"
   link_here: "Link to this page"
+  karma_score: "Appreciation: {{score}}"
+  activity_score: "Participation: {{score}}"
   asked_by: "Asked by {{fb_name}} {{date}} ago"
   answered_by: "Answered by {{fb_name}} {{date}} ago"
   answers_count: "{{answer_string}}"
@@ -154,6 +156,7 @@ en:
       commit_reply: "Post your reply"
       new: "Create a new topic"
       new_header: "Create a New Topic"
+  score_for: "Score for {{activity}}"
   pfeeds:
     latest:
       title: "Latest user activity"

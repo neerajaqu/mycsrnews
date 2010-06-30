@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100630164852) do
+ActiveRecord::Schema.define(:version => 20100630222126) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -607,6 +607,7 @@ ActiveRecord::Schema.define(:version => 20100630164852) do
     t.integer  "last_viewed_feed_item_id"
     t.integer  "last_delivered_feed_item_id"
     t.boolean  "is_host",                                   :default => false
+    t.integer  "activity_score",                            :default => 0
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
