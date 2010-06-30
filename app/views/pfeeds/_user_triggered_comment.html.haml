@@ -1,16 +1,5 @@
 - user = user_triggered_comment.originator
 - comment = user_triggered_comment.participant
-=# user_triggered_comment.guess_identification(user_triggered_comment.originator)%>
-=# user_triggered_comment.data[:action_string] %>
-
--#== #{local_linked_profile_pic user} commented on "#{link_to comment.commentable.item_title, comment.commentable.item_link}" about #{time_ago_in_words(user_triggered_comment.created_at)} ago  
--#.storyBlockWrap
-  %h4= link_to comment.commentable.item_title, comment.commentable.item_link
-  .profilePic= local_linked_profile_pic user
-  .storyBlockMeta
-    %h3= t('posted_by', :fb_name => local_linked_profile_name(user), :date => time_ago_in_words(comment.created_at))
-    -#%span.btnComment.float_left== #{like_link story} #{story.votes_tally}
-    -#%span.btnComment.float_left== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
 %p= caption((comment.comments.present?) ? "\"#{comment.comments}\"" : 'no comment',200)
 
 .user-wrapper
