@@ -140,9 +140,11 @@ activity_scores = [
  { :key_sub_type => 'participation', :key_name => 'answer',  :value => 1, :hint => "Points awarded when user creates a answer" },
  { :key_sub_type => 'participation', :key_name => 'comment',  :value => 1, :hint => "Points awarded when user creates a comment" },
  { :key_sub_type => 'participation', :key_name => 'share',  :value => 1, :hint => "Points awarded when user shares another reader\'s item" },
+ { :key_sub_type => 'participation', :key_name => 'invite',  :value => 1, :hint => "Points awarded when user invites a friend" },
  { :key_sub_type => 'karma', :key_name => 'item_vote',  :value => 1, :hint => "Points awarded when item created by user is liked" },
  { :key_sub_type => 'karma', :key_name => 'item_comment',  :value => 1, :hint => "Points awarded when item created by user is commented on" },
- { :key_sub_type => 'karma', :key_name => 'item_shared',  :value => 1, :hint => "Points awarded when item created by user is shared or tweeted" }
+ { :key_sub_type => 'karma', :key_name => 'item_shared',  :value => 1, :hint => "Points awarded when item created by user is shared or tweeted" },
+ { :key_sub_type => 'karma', :key_name => 'invite_accepted',  :value => 1, :hint => "Points awarded when invite from user is accepted" }
 ]
 
 activity_scores.each do |activity_score|

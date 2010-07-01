@@ -12,13 +12,19 @@ class Metadata::ActivityScore < Metadata
   def self.get name, sub_type = nil
     self.find_activity_score(name, sub_type)
   end
-
-  def self.get_activity_score name, sub_type = nil
-    self.find_activity_score(name, sub_type)
+  
+  def get_multiplier
+    foo = self.find_activity_score(self.key_sub_type, 'importance')
+    raise foo.inspect
+    return (foo ? foo.value.to_i : 0)
+  end
+  
+  def self.get_activity_score name, sub_type_name = nil
+    self.find_activity_score(name, sub_type_name)
   end
 
-  def self.find_activity_score name, sub_type = nil
-    return self.find(:first, :conditions => ["key_sub_type = ? and key_name = ?", sub_type, name]) if sub_type
+  def self.find_activity_score name, key_sub_type = nil
+    return self.find(:first, :conditions => ["key_sub_type = ? and key_name = ?", key_sub_type, name]) if key_sub_type
     return self.find(:first, :conditions => ["key_name = ?", name])
   end
 
@@ -27,6 +33,10 @@ class Metadata::ActivityScore < Metadata
   def value
     self.activity_score_value
   end
+
+  def score_value
+    get_multiplier * value.to_i
+  end  
 
   def enabled?
     !! self.value
