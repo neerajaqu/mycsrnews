@@ -14,9 +14,8 @@ class Metadata::ActivityScore < Metadata
   end
   
   def get_multiplier
-    foo = self.find_activity_score(self.key_sub_type, 'importance')
-    raise foo.inspect
-    return (foo ? foo.value.to_i : 0)
+    multiplier = Metadata::ActivityScore.find_activity_score(self.key_sub_type, 'importance')
+    return (multiplier ? multiplier.value.to_i : 0)
   end
   
   def self.get_activity_score name, sub_type_name = nil
