@@ -14,7 +14,6 @@
 #col_right
   .panel_2
     .panelBar
-      %h2
-        An Easier way to Post a story
+      %h2= t('.new_story_bookmarklet_intro')
     = render :partial => 'shared/bookmarklet_panel'
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_small_square }
