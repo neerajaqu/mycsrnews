@@ -12,6 +12,7 @@ class Content < ActiveRecord::Base
   belongs_to :user
   belongs_to :article
   belongs_to :newswire
+  belongs_to :source
   has_one :content_image
   has_many :comments, :as => :commentable  
 
