@@ -29,7 +29,13 @@ class Article < ActiveRecord::Base
   def item_description
     content.item_description
   end
-  
+
+  def toggle_blocked
+    self.is_blocked = !self.is_blocked
+    self.content.toggle_blocked
+    return self.save ? true : false
+  end  
+        
   private
   
   def sanitize_body
