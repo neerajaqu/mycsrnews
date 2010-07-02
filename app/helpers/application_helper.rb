@@ -72,7 +72,7 @@ module ApplicationHelper
   end
 
   def linked_story_caption(story, length = 150, url = false, options = {})
-    caption = caption(story.caption, length).sanatize_standard
+    caption = caption(story.caption.sanatize_standard, length)
     "#{caption} #{link_to 'More', (url ? url : story_path(story, options))}"
   end
 
