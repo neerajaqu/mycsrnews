@@ -29,15 +29,14 @@ namespace :n2 do
             puts "> FAIL!"
           end
           
-          APP_CONFIG["twitter_oauth_consumer_key"] = oauth.access_token.token
-          APP_CONFIG["twitter_oauth_consumer_secret"] = oauth.access_token.secret
+          atk = Metadata::Setting.find_setting('oauth_consumer_key')
+          ats = Metadata::Setting.find_setting('oauth_consumer_secret')
           
-          puts "Please copy and paste these into your application_settings.yml file: \n
-                twitter_oauth_consumer_key: '#{APP_CONFIG["twitter_oauth_consumer_key"]}' \n
-                twitter_oauth_consumer_secret: '#{APP_CONFIG["twitter_oauth_consumer_secret"]}'\n"
-          # File.open(APPLICATION_CONFIGURATION_FILE_LOCATION, 'w') do |out|
-          #   YAML.dump(APP_CONFIG, out)
-          # end
+          atk.update_attribute(:value, oauth.access_token.token)
+          ats.update_attribute(:value, oauth.access_token.secret)
+          
+          puts "Your settings have been updated"
+
         else
           puts "You need to configure your Twitter OAuth settings in application_settings.yml"
         end
@@ -46,9 +45,9 @@ namespace :n2 do
     
     desc "Post hot items to Twitter"
     task :post_hot_items => :environment do
-      default_url_options[:host] = APP_CONFIG['default_host']
+      default_url_options[:host] = Metadata::Setting.find_setting('default_host')
       
-      if !APP_CONFIG['twitter_oauth_consumer_key'].present? && !APP_CONFIG['twitter_oauth_consumer_secret'].present?
+      if !Metadata::Setting.find_setting('oauth_consumer_key').present? && !Metadata::Setting.find_setting('oauth_consumer_secret'].present?
         puts "Your Twitter account is not configured run 'rake n2:twitter:connect'."
       else
         options =Event.options_for_tally().merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
@@ -162,8 +161,8 @@ def tweet(twitter, msg)
 end
 
 def shorten_url(url)
-  if APP_CONFIG['bitly_username'].present?
-    bitly = Bitly.new(APP_CONFIG['bitly_username'], APP_CONFIG['bitly_api_key'])
+  if Metadata::Setting.find_setting('bitly_username').present?
+    bitly = Bitly.new(Metadata::Setting.find_setting('bitly_username'), Metadata::Setting.find_setting('bitly_api_key'))
     shrt = bitly.shorten(url)
     return shrt.short_url
   else
