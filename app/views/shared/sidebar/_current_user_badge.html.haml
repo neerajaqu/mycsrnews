@@ -1,0 +1,5 @@
+- unless current_user.present? and current_user.is_established?
+  -# - cache :current_user_badge_html do
+  .panel_2
+    .thumb
+      = local_linked_profile_pic current_user

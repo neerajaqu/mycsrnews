@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100630164852) do
+ActiveRecord::Schema.define(:version => 20100630222126) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -549,15 +549,15 @@ ActiveRecord::Schema.define(:version => 20100630164852) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer  "user_id",               :limit => 8,                    :null => false
-    t.integer  "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean  "isAppAuthorized",                    :default => false
-    t.datetime "born_at"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at"
-    t.text     "bio"
-    t.integer  "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean  "comment_notifications",              :default => false
+    t.integer   "user_id",               :limit => 8,                    :null => false
+    t.integer   "facebook_user_id",      :limit => 8, :default => 0
+    t.boolean   "isAppAuthorized",                    :default => false
+    t.datetime  "born_at"
+    t.timestamp "created_at",                                            :null => false
+    t.datetime  "updated_at"
+    t.text      "bio"
+    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
+    t.boolean   "comment_notifications",              :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true
@@ -607,6 +607,7 @@ ActiveRecord::Schema.define(:version => 20100630164852) do
     t.integer  "last_viewed_feed_item_id"
     t.integer  "last_delivered_feed_item_id"
     t.boolean  "is_host",                                   :default => false
+    t.integer  "activity_score",                            :default => 0
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

@@ -33,15 +33,14 @@ class ResourcesController < ApplicationController
 
   def create
     @resource = Resource.new(params[:resource])
-    @resource.user = current_user
     @resource.tag_list = params[:resource][:tags_string]
     @resource.twitterName = params[:resource][:twitterName].sub(/^http:\/\/(www.)*twitter.com\/+/,'').sub('@','')
+    @resource.user = current_user
 
-    if @resource.save
+    if @resource.valid? and current_user.resources.push @resource
       if @resource.post_wall?
         session[:post_wall] = @resource
       end      
-      #JR - can I swap in t('string') here in controller
     	flash[:success] = "Thank you for adding to our directory!"
     	redirect_to resource_path(@resource)
     else

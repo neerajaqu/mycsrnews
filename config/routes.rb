@@ -22,7 +22,6 @@ ActionController::Routing::Routes.draw do |map|
   map.test_widgets '/test_widgets.:format', :controller => 'home', :action => 'test_widgets'
   map.contact_us '/contact_us.:format', :controller => 'home', :action => 'contact_us'
   map.app_tab '/app_tab.:format', :controller => 'home', :action => 'app_tab'
-  map.resources :users, :collection => {:link_user_accounts => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
 
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
@@ -30,6 +29,8 @@ ActionController::Routing::Routes.draw do |map|
   map.paged_articles '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
   map.paged_forums_with_format '/forums/:id/page/:page.:format', :controller => 'forums', :action => 'show'
   map.paged_forums '/forums/:id/page/:page.:format', :controller => 'forums', :action => 'show'
+  map.paged_users_with_format '/users/:id/page/:page.:format', :controller => 'users', :action => 'show'
+  map.paged_users '/users/:id/page/:page.:format', :controller => 'users', :action => 'show'
   map.paged_ideas '/ideas/page/:page.:format', :controller => 'ideas', :action => 'index'
   map.paged_newswires '/newswires/page/:page.:format', :controller => 'newswires', :action => 'index'
   map.paged_my_events '/events/:id/my_events/page/:page.:format', :controller => 'events', :action => 'my_events'
@@ -56,6 +57,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags], :as => 'stories'
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] },:has_many => [ :flags]
 
+  map.resources :users, :collection => {:link_user_accounts => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
   map.resources :articles, :collection => { :index => [:get, :post] }
   map.resources :users, :collection => { :index => [:get, :post] }
   map.resources :newswires, :member => { :quick_post => [:get, :post] }
@@ -90,6 +92,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :settings
     admin.resources :skip_images
     admin.resources :title_filters
+    admin.resources :activity_scores
     admin.resources :ideas
     admin.resources :idea_boards
     admin.resources :resources
@@ -117,6 +120,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.namespace(:metadata) do |metadata|
       metadata.resources :ads
       metadata.resources :settings
+      metadata.resources :activity_scores
       metadata.resources :skip_images
       metadata.resources :title_filters
       metadata.resources :custom_widgets

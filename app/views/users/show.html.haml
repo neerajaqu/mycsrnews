@@ -57,27 +57,20 @@
     .panelBar
       %h2= t('.action_feeds')
     #actionFeed
-      #navFilter
-        .subFilter
-          = t('.filter_title')
-          %span= link_to t('.filter_all'), user_path(@user, :curr_action => 'all_actions'), :id => 'allFeedFilter', :class => ('feedFilterButton' + (@curr_action == 'all_actions' ? ' selected' : ''))
-          &nbsp;
-          %span= link_to t('.filter_stories'), user_path(@user, :curr_action => 'stories'), :id => 'storiesFilter', :class => ('feedFilterButton' + (@curr_action == 'stories' ? ' selected' : ''))
-          &nbsp;
-          %span= link_to t('.filter_articles'), user_path(@user, :curr_action => 'articles'), :id => 'articlesFilter', :class => ('feedFilterButton' + (@curr_action == 'articles' ? ' selected' : ''))
-          &nbsp;
-          %span= link_to t('.filter_comments'), user_path(@user, :curr_action => 'comments'), :id => 'commentsFilter', :class => ('feedFilterButton' + (@curr_action == 'comments' ? ' selected' : ''))
-          &nbsp;
-          %span= link_to t('.filter_likes'), user_path(@user, :curr_action => 'likes'), :id => 'likesFilter', :class => ('feedFilterButton' + (@curr_action == 'likes' ? ' selected' : ''))
       #feedList.storyList
         .list_stories
-          - unless @actions.present?
+          - unless @activities.any?
             %p= t('.action_feed_empty')
           - else
             %ul
-              - @actions.each do |action|
-                %li.actionFeedItem
-                  = build_feed_item(action, action.class.name)
+              - @activities.each do |activity|
+                -#%li.actionFeedItem
+                %li.pfeed_container= pfeed_content(activity)
+    - if @paginate
+      .clearfix
+        = will_paginate @activities
+        %br
+
 #col_right
   = render :partial => 'shared/sidebar/top_stories', :locals => { :top_stories => @top_stories }
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

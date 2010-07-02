@@ -2,7 +2,7 @@ class Admin::Metadata::TitleFiltersController < Admin::MetadataController
 
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
-    	:items => Metadata::TitleFilter.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
+    	:items => Metadata::TitleFilter.paginate(:page => params[:page], :per_page => 25, :order => "created_at desc"),
     	:model => Metadata::TitleFilter,
     	:fields => [:keyword],
     	:paginate => true

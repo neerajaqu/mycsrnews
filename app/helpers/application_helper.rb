@@ -72,7 +72,7 @@ module ApplicationHelper
   end
 
   def linked_story_caption(story, length = 150, url = false, options = {})
-    caption = caption(story.caption, length).sanatize_standard
+    caption = caption(story.caption.sanatize_standard, length)
     "#{caption} #{link_to 'More', (url ? url : story_path(story, options))}"
   end
 
@@ -96,6 +96,10 @@ module ApplicationHelper
   def caption(text, length = 150)
     return "" if text.nil?
     text.length <= length ? text : text[0, length] + '...'
+  end
+
+  def pfeed_caption(text, length = 150)
+    caption(text, length)
   end
 
   def voteable_type_name(vote)

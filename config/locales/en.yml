@@ -47,7 +47,9 @@ en:
   post_article_button: "Compose an article"
   article_url_hint: "If you are writing about a story on another web page, please provide a link or URL to that page."
   post_wall: "Post on my Facebook wall"
+  user_posted_item: "{{fb_name}} posted {{title}} {{date}} ago"
   posted_by: "Posted by {{fb_name}} {{date}} ago"
+  posted_by_via: "Posted by {{fb_name}} via {{source}}, {{date}} ago"
   read_more: "read more"
   facebook_share: "What do you want to write on your wall?"
   facebook_learn_more: "Learn more"
@@ -57,6 +59,8 @@ en:
   tweet: "Tweet"
   in: "in"
   link_here: "Link to this page"
+  karma_score: "Appreciation: {{score}}"
+  activity_score: "Participation: {{score}}"
   asked_by: "Asked by {{fb_name}} {{date}} ago"
   answered_by: "Answered by {{fb_name}} {{date}} ago"
   answers_count: "{{answer_string}}"
@@ -153,6 +157,7 @@ en:
       commit_reply: "Post your reply"
       new: "Create a new topic"
       new_header: "Create a New Topic"
+  score_for: "Score for {{activity}}"
   pfeeds:
     latest:
       title: "Latest user activity"

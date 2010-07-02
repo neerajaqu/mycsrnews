@@ -1,5 +1,7 @@
 class DashboardMessage < ActiveRecord::Base
 
+  belongs_to :user
+
   named_scope :sent, {:conditions => ["status = ?", 'sent'] }
   named_scope :unsent, {:conditions => ["status = ?", 'unsent'] }
 
@@ -36,5 +38,9 @@ class DashboardMessage < ActiveRecord::Base
     self.status = 'sent'
     save
   end
+
+  def recipient_voices
+    User.all
+  end  
 
 end

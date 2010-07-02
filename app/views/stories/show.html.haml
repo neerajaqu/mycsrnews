@@ -24,8 +24,10 @@
       .storyBlockWrap
         %h1.storyHead= @story.title
         .storyBlockMeta
-          %h3= t('.via', :source => story_source_link(@story), :date => time_ago_in_words(@story.created_at)) unless @story.is_article?
-          %h3= t('.posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
+          - unless @story.is_article?
+            %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => story_source_link(@story), :date => time_ago_in_words(@story.created_at))
+          - else
+            %h3= t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
           - if @story.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
           - if @tags.present?
@@ -54,6 +56,7 @@
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
     = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }
     = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
+-#    = render :partial => 'shared/sidebar/related_items', :locals => { :item => @story }
 / #image_box.standard_overlay
 /   #images.scrollable_popup
 /     .items

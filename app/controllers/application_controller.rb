@@ -3,9 +3,12 @@ class ApplicationController < ActionController::Base
   rescue_from Facebooker::Session::MissingOrInvalidParameter, :with => :facebook_session_expired
 
   def rescue_action(exception)
-    if exception.message == 'Invalid parameter' and
+    if (defined?(exception.message) and defined?(exception.file_name) and defined?(exception.source_extract)) and
+    	 exception.message == 'Invalid parameter' and
     	 exception.file_name =~ /_header/ and
     	 exception.source_extract =~ /if logged_in/
+    	facebook_session_expired
+    elsif exception.class.name == "Facebooker::Session::MissingOrInvalidParameter"
     	facebook_session_expired
     else
       super

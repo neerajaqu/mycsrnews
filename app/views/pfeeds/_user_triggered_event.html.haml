@@ -1,0 +1,7 @@
+- user = user_triggered_event.originator
+- item = user_triggered_event.participant
+.user-wrapper
+  .profilePic= local_linked_profile_pic user, :width => '30px', :height => '30px', :format => 'html'
+  %h3
+    = t('user_posted_item', :fb_name => local_linked_profile_name(user, :format => 'html'), :title => link_to(item.item_title, item), :date => time_ago_in_words(item.created_at))
+-# %p= pfeed_caption item.item_description

@@ -1,8 +1,8 @@
 class TwitterWorker
   @queue = :twitter
 
-  # Takes a PfeedItem and stringified PfeedItem.attemp_delivery method params
   def self.perform()
+    return unless Metadata::Setting.find_setting( 'tweet_popular_items')
     default_url_options[:host] = Metadata::Setting.find_setting('default_host')
     
     if !Metadata::Setting.find_setting('oauth_consumer_key').present? && !Metadata::Setting.find_setting('oauth_consumer_secret'].present?

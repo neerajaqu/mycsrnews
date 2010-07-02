@@ -64,24 +64,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @activities = @user.activities.paginate :page => params[:page], :per_page => 10
+    @paginate = true
     @is_owner = current_user && (@user.id == current_user.id)
-    @curr_action = params[:curr_action] || 'stories'
-    if @curr_action == 'stories'
-    	@actions = @user.contents.newest_stories
-    elsif @curr_action == 'articles'
-    	@actions = @user.contents.newest_articles
-    elsif @curr_action == 'comments'
-    	@actions = @user.comments.newest
-    elsif @curr_action == 'likes'
-    	@actions = @user.votes.newest
-    elsif @curr_action == 'all_actions'
-    	@actions = @user.newest_actions
-    else
-      @actions = false
-    end
     respond_to do |format|
       format.html
-      format.fbml
       format.atom { @actions = @user.newest_actions }
     end
   end

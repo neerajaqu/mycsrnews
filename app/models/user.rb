@@ -29,14 +29,18 @@ class User < ActiveRecord::Base
   after_create :register_user_to_fb
   before_save :check_profile
   
-  has_many :contents
+  has_many :contents, :after_add => :trigger_story
+  has_many :articles, :foreign_key => :author_id, :after_add => :trigger_article
   has_many :comments
   has_many :messages
-  has_many :ideas
-  has_many :questions
-  has_many :answers
-  has_many :events
-  has_many :resources
+  has_many :activities, :class_name => "PfeedItem", :as => :originator, :order => "created_at desc"
+  has_many :questions, :after_add => :trigger_question
+  has_many :answers, :after_add => :trigger_answer
+  has_many :ideas, :after_add => :trigger_idea
+  has_many :events, :after_add => :trigger_event
+  has_many :resources, :after_add => :trigger_resource
+  has_many :topics, :after_add => :trigger_topic
+  has_many :dashboard_messages, :after_add => :trigger_dashboard_message
   has_one :profile, :class_name => "UserProfile"
   has_one :user_profile #TODO:: convert views and remove this
   has_many :received_cards, :class_name => "SentCard", :foreign_key => 'to_fb_user_id', :primary_key => 'fb_user_id', :conditions => 'sent_cards.to_fb_user_id IS NOT NULL'
@@ -63,9 +67,16 @@ class User < ActiveRecord::Base
 
 
   # NOTE:: must be above emits_pfeeds call
-  def trigger_comment(comment)
-    # trigger comment pfeed delivery
-  end
+  def trigger_comment(comment) end
+  def trigger_article(article) end
+  def trigger_story(story) end
+  def trigger_topic(topic) end
+  def trigger_question(question) end
+  def trigger_answer(answer) end
+  def trigger_idea(idea) end
+  def trigger_event(event) end
+  def trigger_resource(resource) end
+  def trigger_dashboard_message(dashboard_message) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -91,7 +102,16 @@ class User < ActiveRecord::Base
     self.update_attribute(:last_viewed_feed_item, last_delivered_feed_item)
   end
 
-  emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices], :identified_by => :name
+  emits_pfeeds :on => [:trigger_story], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_article], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_topic], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_question], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_answer], :for => [:participant_recipient_voices, :friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_idea], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_event], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_resource], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_dashboard_message], :for => [:participant_recipient_voices], :identified_by => :name
+  emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   receives_pfeed
 
 
@@ -161,6 +181,10 @@ class User < ActiveRecord::Base
     return !fb_user_id.nil? && fb_user_id > 0
   end
 
+  def friends
+    []
+  end
+  
   def fb_user_id
     return super unless super.nil?
     return nil unless self.user_profile.present?
