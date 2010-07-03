@@ -1,0 +1,15 @@
+- content = article.is_a?(Article) ? article.content : article
+.article.large
+  .thumb
+    - if content.images.present?
+      = image_tag content.images.first.url(:thumb)
+    - else
+      = image_tag ('default/default_thumb_b.gif', :width => "100%")
+  .storyBlockWrap.storyBlockSpacer
+    %h2.storyHead= link_to content.title, story_path(content)
+    %p.storyCaption= linked_story_caption content
+    .profilePic= local_linked_profile_pic content.user
+    .storyBlockMeta.float_left
+      %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
+      %span.btnComment.float_left== #{like_link content} #{content.votes_tally}
+      %span.btnComment.float_left== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}

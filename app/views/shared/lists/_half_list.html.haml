@@ -1,0 +1,18 @@
+-# @expects: local 'story'
+
+- page ||= ""
+- paginate ||= false
+- title ||= "Small list of items"
+- subtitle ||= "Subtitle of small list of items"
+-# TODO:: make caching work
+- cache_if false, :top_stories_html do
+  -#%div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+  .panel_2
+    .panelBar
+      %h2= title
+    .subtitle
+      %span= subtitle
+    .list_stories
+      %ul
+        - collection.each do |item|
+          %li= render_generic_small_item item
