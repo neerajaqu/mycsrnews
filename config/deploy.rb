@@ -24,7 +24,7 @@ after("deploy:update_code") do
   end
 
   deploy.load_skin
-  deploy.restore_previous_sitemap
+#  deploy.restore_previous_sitemap
   deploy.cleanup
 end
 
@@ -148,10 +148,10 @@ namespace :deploy do
     end
   end
 
-  desc "restore sitemap files in public after deploy"
-  task :restore_previous_sitemap do
-      #run "if [ -e #{current_path}/public/sitemap_index.xml.gz ]; then cp #{current_path}/public/sitemap* #{release_path}/public/; fi"
-  end
+#  desc "restore sitemap files in public after deploy"
+#  task :restore_previous_sitemap do
+#      run "if [ -e #{current_path}/public/sitemap_index.xml.gz ]; then cp #{current_path}/public/sitemap* #{release_path}/public/; fi"
+#  end
 
 
 end
