@@ -3,7 +3,7 @@
     .panelBar
       %h2
         Add a Related Item
-    = render :partial => 'shared/related_item_form' , :locals => { :relatable => @relatable }
+    = render :partial => 'shared/forms/related_item_form' , :locals => { :relatable => @relatable }
 
 #col_right
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

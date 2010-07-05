@@ -1,17 +1,15 @@
 class RelatedItemsController < ApplicationController
+  before_filter :login_required, :only => [:create]
 
-  def index
-    @relatable = find_relatable
-  end
-  
   def new
-    @relatable = find_relatable
     @related_item = RelatedItem.new
   end
     
   def create
     @relatable = find_relatable
-    if @relatable.related_item params[:relatable_type],current_user
+    @related_item = @relatable.related_items.build(params[:related_item])
+    @related_item.user = current_user
+    if @related_item.save
     	flash[:success] = "Thank you for creating this related item."
     	redirect_to @relatable
     else

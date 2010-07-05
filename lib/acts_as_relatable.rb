@@ -22,15 +22,6 @@ module Newscloud
           true
         end
 
-        def related_item relatable_type,current_user
-          #return false unless RelatedItem.valid_relatable_type? relatable_type
-
-          @related_item = self.related_items.build({ :relatable_type => relatable_type })
-          @related_item.user = current_user
-
-          return @related_item.save
-        end
-
       end
     end
   end

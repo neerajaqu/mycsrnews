@@ -10,6 +10,6 @@
         - semantic_form_for [relatable, RelatedItem.new] do |form|
           - form.inputs do
             = form.input :title
-            = form.input :url
+            = form.input :url            
           - form.buttons do
             = form.commit_button t('submit_related_item'), :button_html => { :class => 'btn'   }

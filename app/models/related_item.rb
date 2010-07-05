@@ -1,5 +1,5 @@
 class RelatedItem < ActiveRecord::Base
-  acts_as_moderatable
+  #acts_as_moderatable
   
   belongs_to :user
   belongs_to :relatable, :polymorphic => true

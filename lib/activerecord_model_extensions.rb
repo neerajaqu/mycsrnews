@@ -48,6 +48,10 @@ module Newscloud
         false
       end
 
+      def relatable?
+        false
+      end
+
       def featured_item?
         false
       end
