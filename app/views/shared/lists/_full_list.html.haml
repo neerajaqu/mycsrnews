@@ -1,0 +1,27 @@
+- page ||= ""
+- paginate ||= false
+-# TODO:: Make good defaults for these
+- title ||= "List of Items"
+- subtitle ||= "Subtitle of List of Items"
+-# cache_if page.present?, "stories_list_#{page}html" do
+-# TODO:: setup proper caching block, for list type, date range, locale, etc etc
+- cache_if false, "stories_list_#{page}html" do
+  -# contents ||= Content.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  .panel_1
+    .panelBar
+      %h2= title
+      - if false and collection.present? and collection.first.refineable?
+        .refine_link
+          = render :partial => 'shared/forms/refine_dropdown'
+    .subtitle
+      %span= subtitle
+    .storyList
+      .list_stories
+        %ul
+          - collection.each do |item|
+            %li{'data-id' => item.cache_key}= render_generic_item item
+ 
+    - if paginate
+      .clearfix
+        = will_paginate collection
+        %br

@@ -1,6 +1,6 @@
 -# @expects: local 'newest_sent_cards'
 
-- cache :newest_sent_cards_fbml do
+- cache :newest_sent_cards_html do
   - newest_sent_cards ||= SentCard.newest 5
   - unless newest_sent_cards.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
