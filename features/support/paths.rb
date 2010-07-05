@@ -34,6 +34,9 @@ module NavigationHelpers
     when /the new comment page/
       new_comment_path
 
+    when /the new related_item page/
+      new_related_item_path
+
     when /the new article page/
       new_article_path
 

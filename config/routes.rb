@@ -56,12 +56,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :stories, :member => { :like => [:get, :post] },:collection => { :parse_page => [:get, :post], :index => [:get, :post] }, :has_many => :comments
   map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags], :as => 'stories'
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] },:has_many => [ :flags]
+  map.resources :related_items, :member => {  }, :has_many => [ :flags]
 
   map.resources :users, :collection => {:link_user_accounts => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
   map.resources :articles, :collection => { :index => [:get, :post] }
   map.resources :users, :collection => { :index => [:get, :post] }
   map.resources :newswires, :member => { :quick_post => [:get, :post] }
-  map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
+  map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags, :related_items]
   map.resources :idea_boards, :has_many => :ideas
   map.resources :resources, :member => { :like => [:get, :post], :my_resources => [:get, :post] }, :collection => { :index => [:get, :post] }, :has_many => [:comments, :flags]
   map.resources :resource_sections, :has_many => :resources
