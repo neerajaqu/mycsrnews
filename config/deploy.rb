@@ -24,7 +24,7 @@ after("deploy:update_code") do
   end
 
   deploy.load_skin
-
+  deploy.restore_previous_sitemap
   deploy.cleanup
 end
 
@@ -147,6 +147,12 @@ namespace :deploy do
     	run "ln -nfs /data/config/n2_sites/#{application}/public/images #{release_path}/public/images"
     end
   end
+
+  desc "restore sitemap files in public after deploy"
+  task :restore_previous_sitemap do
+      run "if [ -e #{current_path}/public/sitemap_index.xml.gz ]; then cp #{current_path}/public/sitemap* #{release_path}/public/; fi"
+  end
+
 
 end
 

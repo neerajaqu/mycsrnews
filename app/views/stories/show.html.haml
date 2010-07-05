@@ -25,7 +25,10 @@
         %h1.storyHead= @story.title
         .storyBlockMeta
           - unless @story.is_article?
-            %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => story_source_link(@story), :date => time_ago_in_words(@story.created_at))
+            - unless @story.source.present?
+              %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => story_source_link(@story), :date => time_ago_in_words(@story.created_at))
+            - else
+              %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => source_link(@story), :date => time_ago_in_words(@story.created_at))
           - else
             %h3= t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
           - if @story.moderatable?

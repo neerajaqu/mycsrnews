@@ -48,7 +48,7 @@ namespace :n2 do
       default_url_options[:host] = Metadata::Setting.find_setting('default_host')
 
       if Metadata::Setting.find_setting( 'tweet_popular_items')
-        if !Metadata::Setting.find_setting('oauth_consumer_key').present? && !Metadata::Setting.find_setting('oauth_consumer_secret'].present?
+        if !Metadata::Setting.find_setting('oauth_consumer_key').present? && !Metadata::Setting.find_setting('oauth_consumer_secret').present?
           puts "Your Twitter account is not configured run 'rake n2:twitter:connect'."
         else
           options =Event.options_for_tally().merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})

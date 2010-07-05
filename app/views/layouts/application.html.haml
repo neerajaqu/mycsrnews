@@ -4,6 +4,8 @@
     - title = (out = yield(:title)) ? "#{out} - #{APP_CONFIG['site_title']}" : APP_CONFIG['site_title']
     %title= title
     %meta{:name => 'title', :content => title}
+    - if Metadata::Setting.find_setting('google-site-verification').present?
+      %meta{:name => 'google-site-verification', :content => "#{Metadata::Setting.find_setting('google-site-verification').value}"}
     %meta{:name => 'description', :content => (out = yield(:meta_description)) ? out : ""}
     %meta{:name => 'medium', :content => 'news'}
     %link{:rel  => "image_src", :content => (out = yield(:meta_image)) ? out : base_url('/images/default/icon-fan-app.gif')}
