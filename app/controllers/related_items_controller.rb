@@ -2,11 +2,13 @@ class RelatedItemsController < ApplicationController
   before_filter :login_required, :only => [:create]
 
   def new
+    @relatable = find_relatable_item
     @related_item = RelatedItem.new
   end
     
   def create
-    @relatable = find_relatable
+    return false unless (@current_user.is_moderator or @current_user.is_host)
+    @relatable = find_relatable_item
     @related_item = @relatable.related_items.build(params[:related_item])
     @related_item.user = current_user
     if @related_item.save
@@ -20,7 +22,7 @@ class RelatedItemsController < ApplicationController
 
   private
   
-  def find_relatable
+  def find_relatable_item
     params.each do |name, value|
       next if name =~ /^fb/
       if name =~ /(.+)_id$/

@@ -8,6 +8,7 @@ class Content < ActiveRecord::Base
   acts_as_media_item
   acts_as_refineable
   acts_as_wall_postable
+  acts_as_relatable
 
   belongs_to :user
   belongs_to :article

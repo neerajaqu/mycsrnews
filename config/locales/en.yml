@@ -157,6 +157,15 @@ en:
       commit_reply: "Post your reply"
       new: "Create a new topic"
       new_header: "Create a New Topic"
+  related_items_title: "Related Links"
+  add_related_item: "Add a related link"
+  submit_related_item: "Submit Link"
+  label_related_item_title: "Title"
+  hint_related_item_title: "Provide a title for this link" 
+  label_related_item_url: "Website URL"
+  hint_related_item_url: "Enter the URL or web address for the link here."
+  label_related_item_notes: "Notes"
+  hint_related_item_notes: "Provide any additional notes on the link here"
   score_for: "Score for {{activity}}"
   pfeeds:
     latest:

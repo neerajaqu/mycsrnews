@@ -7,6 +7,7 @@ class Article < ActiveRecord::Base
   acts_as_media_item
   acts_as_refineable
   acts_as_wall_postable
+  acts_as_relatable
 
   has_one :content
   has_one :tweeted_item, :as => :item

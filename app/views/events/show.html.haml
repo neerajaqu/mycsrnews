@@ -65,3 +65,4 @@
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @event }
 #col_right
   = render :partial => 'shared/sidebar/bio', :locals => { :user => @event.user }
+  = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @event, :related_items => @event.related_items }

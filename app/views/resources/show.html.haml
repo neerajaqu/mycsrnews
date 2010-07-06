@@ -42,5 +42,6 @@
 
 #col_right
   = render :partial => 'shared/sidebar/bio', :locals => { :user => @resource.user }
+  = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @resource, :related_items => @resource.related_items }
   = render :partial => 'shared/sidebar/resource_sections_list', :locals => { :resource_sections => @newest_resource_sections }
   = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
