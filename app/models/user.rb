@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   has_many :contents, :after_add => :trigger_story
   has_many :articles, :foreign_key => :author_id, :after_add => :trigger_article
   has_many :comments
+  has_many :related_items
   has_many :messages
   has_many :activities, :class_name => "PfeedItem", :as => :originator, :order => "created_at desc"
   has_many :questions, :after_add => :trigger_question
