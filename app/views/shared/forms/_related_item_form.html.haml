@@ -9,8 +9,8 @@
       .relatedItemFormDiv
         - semantic_form_for [relatable, RelatedItem.new] do |form|
           - form.inputs do
-            = form.input :title, :required => true, :label => t('label_related_item_title'), :hint => t('hint_related_item_title')
             = form.input :url, :required => true, :label => t('label_related_item_url'), :hint => t('hint_related_item_url')            
+            = form.input :title, :required => true, :label => t('label_related_item_title'), :hint => t('hint_related_item_title')
             = form.input :notes, :required => false, :input_html => { :rows => 5 } , :label => t('label_related_item_notes'), :hint => t('hint_related_item_notes')
           - form.buttons do
             = form.commit_button t('submit_related_item'), :button_html => { :class => 'btn'   }
