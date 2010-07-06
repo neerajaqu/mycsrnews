@@ -1,6 +1,7 @@
 class RelatedItemsController < ApplicationController
   before_filter :login_required, :only => [:create]
   before_filter :moderator_required, :only => [:create]
+  cache_sweeper :story_sweeper, :only => [:create, :update, :destroy]
 
   def new
     @relatable = find_relatable_item
@@ -19,6 +20,7 @@ class RelatedItemsController < ApplicationController
     @related_item = @relatable.related_items.build(params[:related_item])
     @related_item.user = current_user
     if @related_item.save
+    	expire_cache @relatable
     	flash[:success] = "Thank you for creating this related item."
     	redirect_to @relatable
     else
