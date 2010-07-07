@@ -1,6 +1,6 @@
 - page ||= ""
 - cache_if page.present?, "users_list_#{page}html" do
-  - users ||= User.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - users ||= User.top.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - paginate ||= false
   .panel_1
     .panelBar
