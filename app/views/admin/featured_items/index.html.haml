@@ -120,7 +120,7 @@
 
       $('.template').click(function(event) {
         if ($(this).attr('id').match(/^template_[5]/)) {
-          alert("At this time only templates 1, 2 and 4 are enabled. Check back soon. (You selected "+$(this).attr('id')+")");
+          alert("At this time template 5 is disabled. Check back soon. (You selected "+$(this).attr('id')+")");
           return false;
         }
       	var url = "/admin/featured_items/"+$(this).attr('id')+"/load_template";
