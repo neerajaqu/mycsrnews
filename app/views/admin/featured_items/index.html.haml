@@ -119,7 +119,7 @@
       };
 
       $('.template').click(function(event) {
-        if ($(this).attr('id').match(/^template_[35]/)) {
+        if ($(this).attr('id').match(/^template_[5]/)) {
           alert("At this time only templates 1, 2 and 4 are enabled. Check back soon. (You selected "+$(this).attr('id')+")");
           return false;
         }
@@ -210,7 +210,7 @@
         = image_tag "featured/template_2.jpg"
       .template#template_8
         = image_tag "featured/template_8.jpg"
-      -#.template#template_3
+      .template#template_3
         = image_tag "featured/template_3.jpg"
     .template-column
       .template#template_4

@@ -45,6 +45,36 @@
                     %h4= link_to secondary1.featured_title, secondary1.featured_url
                   %li 
                     %h4= link_to secondary2.featured_title, secondary2.featured_url
+      - when 'template_3'
+        - primary1 = section1.children.first.featurable
+        - primary2 = section2.children.first.featurable
+        #featuredPanel.panel_1.feature_bg
+          .panelBar
+            %h2= t('featured_stories')
+          .panel_4.first
+            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+          .panel_4
+            .storyBlock
+              %h2= link_to caption(primary1.featured_title,34), primary1.featured_url
+              %p
+                = caption(sanitize(strip_tags(primary1.featured_blurb)),60)
+                = link_to 'More...', primary1
+              - unless primary1.featured_related_count == 0
+                %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
+              -else
+                %span.btnComment== #{like_link primary1} #{primary1.num_votes}
+          .panel_4
+            .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
+          .panel_4.last
+            .storyBlock
+              %h2= link_to caption(primary2.featured_title,34), primary2.featured_url
+              %p
+                = caption(sanitize(strip_tags(primary2.featured_blurb)),60)
+                = link_to 'More...', primary2
+              - unless primary2.featured_related_count == 0
+                %span.btnComment== #{link_to t("#{primary2.featured_related_locale}"), primary2} #{primary2.featured_related_count}
+              -else
+                %span.btnComment== #{like_link primary2} #{primary2.num_votes}
       - when 'template_4'
         - primary1 = section1.children.first.featurable
         - primary2 = section2.children.first.featurable
