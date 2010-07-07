@@ -35,7 +35,8 @@ class Admin::RelatedItemsController < AdminController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
     	:item => RelatedItem.find(params[:id]),
     	:model => RelatedItem,
-    	:fields => [:title, :url, :notes, :is_blocked, :user_id, :created_at],
+    	:fields => [:title, :url, :notes, :is_blocked, :user_id,:relatable_id, :created_at],
+    	:associations => { :belongs_to => { :user => :user_id, :relatable => :relatable_id } }
     }
   end
 
@@ -74,8 +75,8 @@ class Admin::RelatedItemsController < AdminController
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
     	:item => related_item,
     	:model => RelatedItem,
-    	:fields => [:title, :url, :notes, :user_id, :relatable_type, :relatable_id, :is_blocked ],
-    	:associations => { :belongs_to => { :user => :user_id } },
+    	:fields => [:title, :url, :notes, :user_id, :is_blocked ],
+    	:associations => { :belongs_to => { :user => :user_id, :relatable => :relatable_id } }
     }
   end
 

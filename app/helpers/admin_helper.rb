@@ -81,8 +81,10 @@ module AdminHelper
 
     if item.moderatable?
     	links << link_to(item.blocked? ? 'UnBlock' : 'Block', admin_block_path(item.class.name.foreign_key.to_sym => item))
-    	links << link_to(item.featured? ? 'UnFeature' : 'Feature', admin_feature_path(item.class.name.foreign_key.to_sym => item))
-    	links << link_to('Flag', admin_flag_item_path(item.class.name.foreign_key.to_sym => item))
+      if item.class.name != 'RelatedItem'
+    	  links << link_to(item.featured? ? 'UnFeature' : 'Feature', admin_feature_path(item.class.name.foreign_key.to_sym => item))
+    	  links << link_to('Flag', admin_flag_item_path(item.class.name.foreign_key.to_sym => item))
+    	end
     end
     if item.class.name == 'DashboardMessage'
       links << link_to('Send', send_global_admin_dashboard_message_path(item)) unless item.sent?

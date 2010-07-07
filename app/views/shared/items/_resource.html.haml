@@ -1,0 +1,15 @@
+.resource.large
+  .thumb
+    - if resource.images.present?
+      = image_tag resource.images.first.url(:thumb)
+    - else
+      = image_tag ('default/default_thumb_b.gif')
+  .storyBlockWrap.storyBlockSpacer
+    %h2.storyHead= link_to resource.title, resource_path(resource)
+    %p.storyCaption= linked_item_details resource
+    .profilePic= local_linked_profile_pic resource.user
+    .storyBlockMeta.float_left
+      %h3= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => time_ago_in_words(resource.created_at))
+      %span.btnComment.float_left== #{like_link resource} #{resource.votes_tally}
+      %span.btnComment.float_left== #{link_to t('.resources_comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}
+      %span.btnComment.float_left= fb_share_item_button(resource)

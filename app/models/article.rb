@@ -7,6 +7,7 @@ class Article < ActiveRecord::Base
   acts_as_media_item
   acts_as_refineable
   acts_as_wall_postable
+  acts_as_relatable
 
   has_one :content
   has_one :tweeted_item, :as => :item
@@ -29,7 +30,13 @@ class Article < ActiveRecord::Base
   def item_description
     content.item_description
   end
-  
+
+  def toggle_blocked
+    self.is_blocked = !self.is_blocked
+    self.content.toggle_blocked
+    return self.save ? true : false
+  end  
+        
   private
   
   def sanitize_body

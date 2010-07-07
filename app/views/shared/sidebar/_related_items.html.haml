@@ -1,12 +1,13 @@
--# @expects: local 'item'
-
-- related_items = item.related_items
-- unless related_items.empty?
-  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+-# @expects: local 'related_items','relatable'
+%div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+  - unless related_items.empty?
     .panelBar
       %h2= t('related_items_title')
-    %ul
+    %ul.bullet_list
       - related_items.each do |related_item|
         %li
-          %h4= link_to related_item.title, related_item.url
--# %h3= link_to t('add_related_item'),related_item_new_path
+          %h4= link_to related_item.title, related_item.url, :title => related_item.notes
+  - if current_user.present?
+    - if (current_user.is_moderator? or current_user.is_host?)
+      %h3.btn= link_to t('add_related_item'), new_polymorphic_path([relatable, :related_item])
+

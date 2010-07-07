@@ -229,7 +229,8 @@ class ApplicationController < ActionController::Base
     unless ['html', 'fbml', 'json', 'js', 'fbjs', 'xml', 'atom', 'rss'].include? format.to_s
       if request.xhr? or request_is_facebook_ajax?
         if request_comes_from_facebook?
-        	format = 'fbjs'
+        	#format = 'fbjs'
+        	format = 'json'
         else
         	format = 'json'
         end

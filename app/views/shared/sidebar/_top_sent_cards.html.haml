@@ -1,4 +1,4 @@
-- cache :top_sent_cards_fbml do
+- cache :top_sent_cards_html do
   - top_sent_cards ||= SentCard.top
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar

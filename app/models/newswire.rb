@@ -18,7 +18,7 @@ class Newswire < ActiveRecord::Base
     	:title      => self.title,
     	:caption    => caption,
     	:url        => self.url,
-    	:source     => self.feed.title,
+    	#:source     => self.feed.title,
     	:user_id    => user_id,
     	:newswire   => self,
     	:story_type => story_type

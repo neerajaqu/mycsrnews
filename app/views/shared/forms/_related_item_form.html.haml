@@ -1,0 +1,16 @@
+-# expects local :relatable => @relatable
+
+.panel_2
+  %a{:id => "postRelatedItemBox", :name => "postRelatedItemBox"}
+  .formBox
+    - unless current_user.present?
+      %p== #{t '.logged_in_error'} #{link_to 'Login now', login_path}
+    - else
+      .relatedItemFormDiv
+        - semantic_form_for [relatable, RelatedItem.new] do |form|
+          - form.inputs do
+            = form.input :url, :required => true, :label => t('label_related_item_url'), :hint => t('hint_related_item_url')            
+            = form.input :title, :required => true, :label => t('label_related_item_title'), :hint => t('hint_related_item_title')
+            = form.input :notes, :required => false, :input_html => { :rows => 5 } , :label => t('label_related_item_notes'), :hint => t('hint_related_item_notes')
+          - form.buttons do
+            = form.commit_button t('submit_related_item'), :button_html => { :class => 'btn'   }

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100630222126) do
+ActiveRecord::Schema.define(:version => 20100707181429) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -463,8 +463,8 @@ ActiveRecord::Schema.define(:version => 20100630222126) do
   add_index "sent_cards", ["to_fb_user_id"], :name => "index_sent_cards_on_to_fb_user_id"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
+    t.string   "session_id",                       :null => false
+    t.text     "data",       :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -549,15 +549,15 @@ ActiveRecord::Schema.define(:version => 20100630222126) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer  "user_id",               :limit => 8,                    :null => false
-    t.integer  "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean  "isAppAuthorized",                    :default => false
-    t.datetime "born_at"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at"
-    t.text     "bio"
-    t.integer  "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean  "comment_notifications",              :default => false
+    t.integer   "user_id",               :limit => 8,                    :null => false
+    t.integer   "facebook_user_id",      :limit => 8, :default => 0
+    t.boolean   "isAppAuthorized",                    :default => false
+    t.datetime  "born_at"
+    t.timestamp "created_at",                                            :null => false
+    t.datetime  "updated_at"
+    t.text      "bio"
+    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
+    t.boolean   "comment_notifications",              :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

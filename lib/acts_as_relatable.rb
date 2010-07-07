@@ -10,8 +10,9 @@ module Newscloud
 
       module ClassMethods
         def acts_as_relatable    
-          named_scope :related_items, lambda { |*args| { :order => ["title asc"], :limit => (args.first || 12)} }
-                
+          has_many :related_items, :as => :relatable
+          named_scope :list_items, lambda { |*args| { :order => ["title asc"], :limit => (args.first || 12)} }
+          accepts_nested_attributes_for :related_items
           include Newscloud::Acts::Relatable::InstanceMethods
         end
       end
@@ -19,10 +20,6 @@ module Newscloud
       module InstanceMethods
         def relatable?
           true
-        end
-
-        def related_items
-          []
         end
 
       end
