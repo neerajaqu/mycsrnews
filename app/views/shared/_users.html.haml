@@ -23,13 +23,9 @@
                 %p= caption(user.bio,350)
               .storyBlockMeta.float_right
                 %h4.userPoints
-                  = t('karma_score', :score => user.karma_score) 'Karma'
-                  %span.pointsnote
-                    Karma
+                  = t('karma_score', :score => user.karma_score)
                 %h3.userPoints
                   = t('activity_score', :score => user.activity_score)
-                  %span.pointsnote
-                    Activity
     .clearfix
       = will_paginate users
       %br
