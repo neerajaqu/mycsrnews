@@ -15,9 +15,8 @@
         %ul
           - users.each do |user|
             %li{'data-id' => user.cache_key}
-              .feature_bg
-                .thumb.bio
-                  = local_linked_profile_pic user, :size => "small"
+              .thumb.user
+                = local_linked_profile_pic user, :size => "small"
               .storyBlockMeta.float_left{ :style => 'width: 60%' }
                 %h2.storyHead== #{local_linked_profile_name(user)}
                 %p= caption(user.bio,350)

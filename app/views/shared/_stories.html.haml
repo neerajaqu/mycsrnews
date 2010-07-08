@@ -16,14 +16,18 @@
         %ul
           - contents.each do |content|
             %li{'data-id' => content.cache_key}
-              .thumb
+              .thumb.story
                 - if content.images.present?
                   = image_tag content.images.first.url(:thumb)
-              .storyBlockWrap.storyBlockSpacer
-                %h2.storyHead= link_to content.title, story_path(content)
-                %p.storyCaption= linked_story_caption content
-                .profilePic= local_linked_profile_pic content.user
-                .storyBlockMeta.float_left
+                -else
+                  = image_tag ('default/watermark.jpg')
+              .storyBlockWrap
+                .storyBlockMeta
+                  %h2.storyHead= link_to content.title, story_path(content)
+                  %p.storyCaption= linked_story_caption content
+                
+                  .profilePic= local_linked_profile_pic content.user
+                  .storyBlockMeta.float_left
                   %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
                   %span.btnComment.float_left== #{like_link content} #{content.votes_tally}
                   %span.btnComment.float_left== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}

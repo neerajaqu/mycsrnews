@@ -19,7 +19,7 @@
                   - if forum.images.present?
                     = image_tag forum.images.first.url(:thumb)
                   - else
-                    = image_tag ('default/default_thumb_b.gif', :width => "100%")
+                    = image_tag ('default/watermark.jpg', :width => "100%")
                 .storyBlockWrap.storyBlockSpacer
                   %h2.storyHead= link_to forum.name, forum
                   %p.storyCaption= forum.description
