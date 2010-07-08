@@ -5,7 +5,7 @@
     - if article.images.present?
       = image_tag article.images.first.url(:thumb)
     - else
-      = image_tag ('default/default_thumb_b.gif', :width => "100%")
+      = image_tag ('default/watermark.jpg', :width => "100%")
   .storyBlockWrap.storyBlockSpacer
     %h2.storyHead= link_to article.title, article_path(article)
     %p.storyCaption= linked_story_caption article

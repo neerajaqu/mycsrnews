@@ -19,11 +19,10 @@
           %ul
             - @questions.each do |question|
               %li.askQuestionWrap{'data-id' => question.cache_key}
-                .thumb
+                .thumb.story
                   - if question.images.present?
                     = image_tag question.images.first.url(:thumb)
-                  - else
-                    = image_tag ('default/default_thumb_b.gif')
+                  
                 .storyBlockWrap.storyBlockSpacer
                   %h2.storyHead= link_to question.question, question
                   %p.storyCaption= linked_item_details question

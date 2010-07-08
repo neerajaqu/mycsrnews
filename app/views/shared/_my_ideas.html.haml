@@ -14,7 +14,7 @@
               - if idea.images.present?
                 = image_tag idea.images.first.url(:thumb)
               - else
-                = image_tag ('default/default_thumb_b.gif')
+                = image_tag ('default/watermark.jpg')
             .storyBlockWrap.storyBlockSpacer
               %h2.storyHead= link_to idea.title, idea_path(idea)
               %p.storyCaption= linked_item_details idea
