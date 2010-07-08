@@ -9,7 +9,7 @@
               .thumb
                 - if get_setting('welcome_host').present? and get_setting('welcome_host').value.empty?
                   = image_tag('default/house-ad-profile.jpg')
-                - else
+                - elsif get_setting('welcome_host').present?
                   - host = get_setting('welcome_host').value
                   - user = User.find_by_id(host) || User.find(UserProfile.find_by_facebook_user_id(host).id)
                   - unless user.nil?

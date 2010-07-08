@@ -6,6 +6,9 @@ defaults: &defaults
   google_analytics_account_id: 'UF-123456890-7'
   google_analytics_site_id: '5407321'
 
+  # Yahoo AppId used for sitemap ping
+  yahoo_app_id: 'ELIZq2LV44444.rGdRR5abc888HCGL1zDOegJakZyHIrugVqPip3YK333P8-'
+  
   # ad platforms supported: google, helios
   ad_platform: 'google' 
   
@@ -70,6 +73,10 @@ defaults: &defaults
   #Uncomment to allow bit.ly
   #bitly_username: 'username'
   #bitly_api_key: 'key'
+
+  # Yahoo AppId used for sitemap ping
+  yahoo_app_id: 'ELIZq2LV44444.rGdRR5abc888HCGL1zDOegJakZyHIrugVqPip3YK333P8-'
+
 development:
   <<: *defaults
   fb_rss_url: "http://my.site.com/stories.atom"

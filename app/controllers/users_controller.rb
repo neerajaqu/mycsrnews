@@ -100,7 +100,6 @@ class UsersController < ApplicationController
   
   def account_menu
     respond_to do |format|
-      format.fbjs
       format.js
     end     
   end
@@ -111,6 +110,9 @@ class UsersController < ApplicationController
       format.js
       format.fbml { render :template => 'users/current.js', :content_type => 'text/javascript', :layout => false }
     end
+  end
+
+  def settings
   end
 
   def link_twitter_account
