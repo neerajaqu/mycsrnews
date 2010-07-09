@@ -55,7 +55,7 @@
             .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
           .panel_4
             .storyBlock
-              %h2= link_to caption(primary1.featured_title,34), primary1.featured_url
+              %h2= link_to caption(primary1.featured_title,24), primary1.featured_url
               %p
                 = caption(sanitize(strip_tags(primary1.featured_blurb)),60)
                 = link_to 'More...', primary1
@@ -67,7 +67,7 @@
             .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
           .panel_4.last
             .storyBlock
-              %h2= link_to caption(primary2.featured_title,34), primary2.featured_url
+              %h2= link_to caption(primary2.featured_title,24), primary2.featured_url
               %p
                 = caption(sanitize(strip_tags(primary2.featured_blurb)),60)
                 = link_to 'More...', primary2

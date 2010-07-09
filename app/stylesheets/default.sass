@@ -15,13 +15,14 @@
 .float_right
   float: right
 
-// Header Container //
+// Header Container // /* -webkit-box-shadow: #999 0px 2px 12px */
 #header
+
   height: $headerHeight
   margin-bottom: 15px
   position: relative
   border:
-    bottom: $pageTabBorder
+    bottom: $pageTabOnBdr
   background: $headerBG
   z-index: 10
   .sponsor
@@ -270,43 +271,39 @@ li
   width: 100%
   position: absolute
   bottom: 0px
-  margin: 0px 0px 0px 0px
-  padding: 0px 0px 0px 0px
   overflow: visible
   border: none
   .tabs
+    border-top: $tabTopBdr
     position: absolute
     bottom: 0
     left: 0
+    background: $tabsBG
     width: 100%
-    height: 23px
-    margin: 0
-    padding: 0
+    height: 24px
     .tab-float
       float: $pagetabFloat
-      padding: 0 1px
+      padding: 0 0 0 1px
     .back_links
       padding-right: 20px
-    .toggle_tabs
-      margin: 0
-      padding: 0
     .toggle_tabs li
+      margin-right: 1px
       height: 23px
       width: $pageTabWidth
       float: left
       padding: 0
-      margin: 0 1px 0 0
       text-align: center
 
     .toggle_tabs li
       a
+        position: relative
+        bottom: $pageTabOffPOS
         display: block
         height: 13px
         margin: 0px 0px 0px 0px
         padding: 5px 0
         font-weight: bold
         font-size: $fontsize
-        border: none
         color: $pageTablinkOff
         background: $pageTabOff
         &:hover
@@ -321,13 +318,14 @@ li
 
     .toggle_tabs li
       a.selected
-        margin: -1px 0px 0px 0px
+        bottom: $pageTabOnPOS
+        margin: 0px 0px 0px 0px
         padding: 5px 0
         border:
-          top: $pageTabBorder
-          bottom: $TabBotBorder
-          right: $pageTabBorder
-          left: $pageTabBorder
+          top: $pageTabOnBdr
+          bottom: $pageTabOnBotBdr
+          right: $pageTabOnBdr
+          left: $pageTabOnBdr
         background: $pageTabOn
         color: $pageTablinkOn
       &.first a.selected
@@ -604,7 +602,7 @@ li
   margin-bottom: 5px
 
 .panel_1, .panel_2
-
+  background: #fff
   &.textpage
     h2
       font-size: $fontsize * 1.1
@@ -886,7 +884,7 @@ li
     display: block
     padding: 0px 8px
     a
-      font-size: 12px
+      font-size: 11px
       color: $linkColor
     .refine-tab
       height: 32px
