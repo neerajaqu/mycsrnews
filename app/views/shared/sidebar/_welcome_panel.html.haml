@@ -6,7 +6,7 @@
         - when 'host'
           .panel_2
             .houseFeatures
-              .thumb
+              .thumb.welcome
                 - if get_setting('welcome_host').present? and get_setting('welcome_host').value.empty?
                   = image_tag('default/house-ad-profile.jpg')
                 - elsif get_setting('welcome_host').present?
@@ -22,7 +22,7 @@
         - when 'thumb'
           .panel_2
             .houseFeatures
-              .thumb
+              .thumb.welcome
                 - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
                   = image_tag('default/house-ad-profile.jpg')
                 - else
@@ -33,7 +33,7 @@
         - when 'banner'
           .panel_2
             .houseFeatures
-              .thumbBanner
+              .thumb.banner
                 - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
                   = image_tag('default/house-ad-banner.jpg')
                 - else
@@ -44,7 +44,7 @@
         - else
           .panel_2
             .houseFeatures
-              .thumb
+              .thumb.welcome
                 - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
                   = image_tag('default/house-ad-profile.jpg')
                 - else
