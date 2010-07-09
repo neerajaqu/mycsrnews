@@ -1,0 +1,15 @@
+-# @expects: local 'newest_ideas'
+
+- cache :feed_roll_html do
+  - feed_roll ||= Feed.roll 7
+  - unless feed_roll.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('feed_roll_title')
+      .list_stories
+        %ul.bullet_list
+          - feed_roll.each do |feed|
+            %li
+              %h4= link_to feed.title, feed.url
+              -#.profilePic= local_linked_profile_pic idea.user
+        %p= link_to t('read_latest_newswires'), newswires_path
