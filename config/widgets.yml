@@ -115,6 +115,12 @@ widgets:
       partial: '/shared/sidebar/newest_articles'
       load_functions: 'load_newest_articles'
       locals: 'newest_articles'
+    blog_roll:
+      partial: '/shared/sidebar/blog_roll'
+      locals: 'blog_roll'              
+    feed_roll:
+      partial: '/shared/sidebar/feed_roll'
+      locals: 'feed_roll'      
     newest_newswires:
       partial: '/shared/sidebar/newest_newswires'
       locals: 'newest_newswires'

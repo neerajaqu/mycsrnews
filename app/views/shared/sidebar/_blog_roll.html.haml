@@ -1,0 +1,14 @@
+-# @expects: local 'blog_roll'
+
+- cache :blog_roll_html do
+  - blog_roll ||= Article.blog_roll 30
+  - unless blog_roll.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('blog_roll_title')
+      .userBlockWrap.clearfix
+        %ul
+          - blog_roll.each do |user|
+            %li
+              - fb_user = User.find_by_id(user.author_id)
+              .profilePic= local_linked_profile_pic fb_user, :width => '30', :height => '30'
