@@ -5,15 +5,15 @@
 #col_left
   - @questions ||= Question.active.newest
   - @paginate ||= false
-  - unless @questions.empty?
-    .panel_1
-      .panelBar
-        %h2= t('questions.my_list_title')
-        - if @questions.present? and @questions.first.refineable?
-          .refine_link
-            = render :partial => 'shared/forms/refine_dropdown', :locals => { :select_options => Question.refineable_select_options }
-      .subtitle
-        %span= t('questions.my_list_subtitle')
+  .panel_1
+    .panelBar
+      %h2= t('questions.my_list_title')
+      - if @questions.present? and @questions.first.refineable?
+        .refine_link
+          = render :partial => 'shared/forms/refine_dropdown', :locals => { :select_options => Question.refineable_select_options }
+    .subtitle
+      %span= t('questions.my_list_subtitle')
+    - unless @questions.empty?
       .storyList
         #front-stories.list_stories
           %ul
@@ -33,7 +33,7 @@
                     %span.btnComment.float_left== #{like_link question} #{question.votes.size}
                     %span.btnComment.float_left== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
                     %span.btnComment.float_left= fb_share_item_button question
- 
+
       - if @paginate
         .clearfix
           = will_paginate @questions

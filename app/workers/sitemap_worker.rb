@@ -2,7 +2,9 @@ class SitemapWorker
   @queue = :sitemaps
 
   def self.perform()
-    rake "-s sitemap:refresh"
+    SitemapGenerator::Sitemap.verbose = verbose
+    SitemapGenerator::Sitemap.create
+    SitemapGenerator::Sitemap.ping_search_engines  
   end
 
 end

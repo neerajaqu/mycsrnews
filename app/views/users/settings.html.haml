@@ -1,0 +1,18 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  
+#col_left
+  .panel_1
+    .formBox
+      - unless current_user.present?
+        %p== #{t '.logged_in_error'} #{link_to 'Login now', login_path}
+      - else
+        .userSettingsFormDiv
+          - form_tag update_bio_users_path, :class => "update-bio-form", :id => 'update-bio-form' do
+            = label_tag :bio_tag, 'Tell us about yourself:'
+            = text_area_tag :bio, current_user.bio, :rows => 10, :cols => 60
+            .submit-box
+              = submit_tag "Update", :class => "btn"
+  
+#col_right
+  = render :partial => 'shared/sidebar/invite_users'

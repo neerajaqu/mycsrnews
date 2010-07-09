@@ -25,6 +25,7 @@ class Content < ActiveRecord::Base
   named_scope :newest_articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
   named_scope :articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["created_at desc"]} }
   named_scope :top_articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["votes_tally desc"], :limit => (args.first || 5)} }
+  named_scope :stories, lambda { |*args| { :conditions => ["article_id IS NULL"], :order => ["created_at desc"]} }
 
   attr_accessor :image_url, :tags_string
 

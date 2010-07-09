@@ -179,7 +179,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_events
-    @top_events ||= Event.active.tally({
+    @top_events ||= Event.upcoming.active.tally({
     	:at_least => 1,
     	:limit    => 5,
     	:order    => "votes.count desc"
@@ -187,7 +187,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_newest_events
-    @newest_events ||= Event.active.upcoming 5
+    @newest_events ||= Event.upcoming.active 5
   end
 
   def load_newest_announcements

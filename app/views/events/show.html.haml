@@ -27,14 +27,9 @@
               %h4
                 Date and Time:
               %h3 
-                Starts:
-                %br
                 == #{@event.start_time.to_s :short_with_time}
-                %br
                 - if @event.end_time.present?
-                  Ends:
-                  %br
-                  == #{@event.end_time.to_s :short_with_time} 
+                  == - #{@event.end_time.to_s :short_time} 
             .eventMeta.location
               %h4
                 Location:

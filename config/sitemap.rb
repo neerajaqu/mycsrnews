@@ -1,6 +1,10 @@
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = APP_CONFIG['base_url']
 
+if APP_CONFIG['yahoo_app_id'].present?
+  SitemapGenerator::Sitemap.yahoo_app_id = APP_CONFIG['yahoo_app_id']
+end
+
 SitemapGenerator::Sitemap.add_links do |sitemap|
   # Put links creation logic here.
   #
@@ -16,12 +20,36 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
 
   # Examples:
 
-  # add '/stories'
+  sitemap.add home_index_path, :priority => 0.8, :changefreq => 'daily'
   sitemap.add stories_path, :priority => 0.7, :changefreq => 'daily'
+  sitemap.add ideas_path, :priority => 0.6, :changefreq => 'daily'
+  sitemap.add events_path, :priority => 0.6, :changefreq => 'daily'
+  sitemap.add forums_path, :priority => 0.6, :changefreq => 'daily'
+  sitemap.add questions_path, :priority => 0.6, :changefreq => 'daily'
+  sitemap.add resource_sections_path, :priority => 0.6, :changefreq => 'daily'
 
-  # add all individual stories
-  Content.find(:all).each do |a|
+  Content.active.find(:all).each do |a|
     sitemap.add story_path(a), :lastmod => a.updated_at
+  end
+
+  Idea.active.find(:all).each do |a|
+    sitemap.add idea_path(a), :lastmod => a.updated_at
+  end
+
+  Event.active.find(:all).each do |a|
+    sitemap.add event_path(a), :lastmod => a.updated_at
+  end
+
+  ResourceSection.find(:all).each do |a|
+    sitemap.add resource_section_path(a), :lastmod => a.updated_at
+  end
+
+  Question.find(:all).each do |a|
+    sitemap.add question_path(a), :lastmod => a.updated_at
+  end
+
+  Forum.find(:all).each do |a|
+    sitemap.add forum_path(a), :lastmod => a.updated_at
   end
 
 end
