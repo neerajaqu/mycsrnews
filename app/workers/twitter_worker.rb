@@ -3,7 +3,7 @@ class TwitterWorker
 
   def self.perform()
     return unless Metadata::Setting.find_setting( 'tweet_popular_items')
-    default_url_options[:host] = Metadata::Setting.find_setting('default_host')
+    default_url_options[:host] = Metadata::Setting.find_setting('default_host').value
     
     if !Metadata::Setting.find_setting('oauth_consumer_key').present? && !Metadata::Setting.find_setting('oauth_consumer_secret'].present?
       puts "Your Twitter account is not configured run 'rake n2:twitter:connect'."
@@ -11,10 +11,10 @@ class TwitterWorker
       options =Event.options_for_tally().merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
       
       event_options = Event.options_for_tally(
-        {   :at_least => Metadata::Setting.find_setting( 'tweet_events_min_votes'), 
+        {   :at_least => Metadata::Setting.find_setting( 'tweet_events_min_votes').value, 
             :at_most => 1000,  
             :start_at => 1.day.ago,
-            :limit => Metadata::Setting.find_setting('tweet_events_limit'),
+            :limit => Metadata::Setting.find_setting('tweet_events_limit').value,
             :order => "events.created_at desc"
         }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
       
@@ -30,34 +30,34 @@ class TwitterWorker
       # @articles = Article.find(:all, article_options)
 
       story_options = Content.options_for_tally(
-        {   :at_least =>Metadata::Setting.find_setting('tweet_stories_min_votes'), 
+        {   :at_least =>Metadata::Setting.find_setting('tweet_stories_min_votes').value, 
             :at_most => 1000,  
             :start_at => 1.day.ago,
-            :limit => Metadata::Setting.find_setting('tweet_stories_limit'),
+            :limit => Metadata::Setting.find_setting('tweet_stories_limit').value,
             :order => "contents.created_at desc"
         }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
       @stories = Content.find(:all, content_options)
               
       question_options = Question.options_for_tally(
-        {   :at_least => Metadata::Setting.find_setting('tweet_questions_min_votes'), 
+        {   :at_least => Metadata::Setting.find_setting('tweet_questions_min_votes').value, 
             :at_most => 1000,  
             :start_at => 1.day.ago,
-            :limit => Metadata::Setting.find_setting('tweet_questions_limit'),
+            :limit => Metadata::Setting.find_setting('tweet_questions_limit').value,
             :order => "questions.created_at desc"
         }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})  
       @questions = Question.find(:all, question_options)
       
       idea_options = Idea.options_for_tally(
-        {   :at_least => Metadata::Setting.find_setting('tweet_ideas_min_votes'), 
+        {   :at_least => Metadata::Setting.find_setting('tweet_ideas_min_votes').value, 
             :at_most => 1000,  
             :start_at => 1.day.ago,
-            :limit => Metadata::Setting.find_setting('tweet_ideas_limit'),
+            :limit => Metadata::Setting.find_setting('tweet_ideas_limit').value,
             :order => "ideas.created_at desc"
         }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
       @ideas = Idea.find(:all, idea_options)
         
-      oauth = Twitter::OAuth.new(Metadata::Setting.find_setting('oauth_key'), Metadata::Setting.find_setting('oauth_secret'))
-      oauth.authorize_from_access(Metadata::Setting.find_setting('twitter_oauth_consumer_key'), Metadata::Setting.find_setting('twitter_oauth_consumer_secret'))
+      oauth = Twitter::OAuth.new(Metadata::Setting.find_setting('oauth_key').value, Metadata::Setting.find_setting('oauth_secret').value)
+      oauth.authorize_from_access(Metadata::Setting.find_setting('twitter_oauth_consumer_key').value, Metadata::Setting.find_setting('twitter_oauth_consumer_secret').value)
       twitter = Twitter::Base.new(oauth)  
       
       tweet_events(twitter, @events)
@@ -117,7 +117,7 @@ class TwitterWorker
 
   def shorten_url(url)
     if Metadata::Setting.find_setting('bitly_username').present?
-      bitly = Bitly.new(Metadata::Setting.find_setting('bitly_username'), Metadata::Setting.find_setting('bitly_api_key'))
+      bitly = Bitly.new(Metadata::Setting.find_setting('bitly_username').value, Metadata::Setting.find_setting('bitly_api_key').value)
       shrt = bitly.shorten(url)
       return shrt.short_url
     else
