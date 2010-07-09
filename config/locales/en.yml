@@ -157,6 +157,7 @@ en:
       commit_reply: "Post your reply"
       new: "Create a new topic"
       new_header: "Create a New Topic"
+  blog_roll_title: "Blogroll"
   feed_roll_title: "Blogroll"
   read_latest_newswires: "Read the latest newswires"    
   related_items_title: "Related Links"
