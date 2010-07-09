@@ -6,7 +6,7 @@
         - if resource.images.present?
           = image_tag resource.images.first.url(:thumb)
         - else
-          = image_tag ('default/default_thumb_b.gif')
+          = image_tag ('default/watermark.jpg')
       .storyBlockWrap.storyBlockSpacer
         %h2.storyHead= link_to resource.title, resource_path(resource)
         %p.storyCaption= linked_item_details resource

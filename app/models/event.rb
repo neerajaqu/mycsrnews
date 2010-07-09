@@ -8,9 +8,9 @@ class Event < ActiveRecord::Base
   acts_as_wall_postable
   acts_as_relatable
  
-  named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
-  named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
-  named_scope :upcoming, lambda { |*args| { :order => ["start_time asc"], :limit => (args.first || 10)} }
+  named_scope :newest, lambda { |*args| { :conditions => ["start_time > now()"], :order => ["created_at desc"], :limit => (args.first || 10)} }
+  named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1 AND start_time > now()"],:order => ["created_at desc"], :limit => (args.first || 3)} }
+  named_scope :upcoming, lambda { |*args| { :conditions => ["start_time > now()"], :order => ["start_time asc"], :limit => (args.first || 10)} }
 
   belongs_to :user
 

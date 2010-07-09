@@ -9,15 +9,20 @@
           .thumb
             = image_tag 'default/icon-mod-badge.png', :class => "moderator"
             %a= image_tag('default/default_thumb.gif')
-          .float_left
+          .storyBlockMeta.float_left{ :style => 'width: 60%' }
             %h2.storyHead 
               %a Johnny McJohn-john
-              
-            %p Seattle Wa
+            %p 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
           .storyBlockMeta.float_right
-            %h4.userPoints 11,340
-            %h3.userPoints points
-        %li
+            %h4.userPoints
+              = t('11,340') 
+              %span.pointsnote
+                Karma
+            %h3.userPoints
+              = t('11,340')
+              %span.pointsnote
+                Activity
+        %li.feature_bg
           .thumb
             =link_to image_tag('default/default_thumb.gif'), '#'
           .float_left

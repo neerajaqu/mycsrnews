@@ -1,6 +1,6 @@
 - page ||= ""
 - cache_if page.present?, "users_list_#{page}html" do
-  - users ||= User.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - users ||= User.top.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - paginate ||= false
   .panel_1
     .panelBar
@@ -15,15 +15,14 @@
         %ul
           - users.each do |user|
             %li{'data-id' => user.cache_key}
-              .feature_bg
-                .thumb.bio
-                  = local_linked_profile_pic user, :size => "small"
-              .float_left{ :style => 'width: 60%' }
+              .thumb.user
+                = local_linked_profile_pic user, :size => "small"
+              .storyBlockMeta.float_left{ :style => 'width: 60%' }
                 %h2.storyHead== #{local_linked_profile_name(user)}
                 %p= caption(user.bio,350)
               .storyBlockMeta.float_right
                 %h4.userPoints= t('karma_score', :score => user.karma_score)
-                %h4.userPoints= t('activity_score', :score => user.activity_score)
+                %h3.userPoints= t('activity_score', :score => user.activity_score)
     .clearfix
       = will_paginate users
       %br

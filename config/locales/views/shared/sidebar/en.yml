@@ -55,17 +55,25 @@ en:
       featured_answer:
         featured_answer_title: "Featured Answers"
 
+      forums_whatisthis:
+        forums_whatis_title: "Welcome to our discussion forums!"
+        forums_whatis_details: "What's on your mind? This is the place to talk about your interests with other readers."
+
+      events_whatisthis:
+        events_whatis_title: "Welcome to our event calendar!"
+        events_whatis_details: "What's happening in your area? Find upcoming events or post or share your own. You can also import events from Facebook."
+      
       questions_whatisthis:
-        questions_whatis_title: "What is this?"
-        questions_whatis_details: "A way to have your questions answered in our online community by other readers."
+        questions_whatis_title: "Have a question?"
+        questions_whatis_details: "Post your question here for other readers to answer. Help other readers by answering their questions."
 
       ideas_whatisthis:
-        ideas_whatis_title: "What is this?"
-        ideas_whatis_details: "A crowdsourced community board for posting, discussing and sharing great ideas."
+        ideas_whatis_title: "Have a great idea?"
+        ideas_whatis_details: "Share your ideas with our community and like and comment ideas posted by other readers."
 
       resources_whatisthis:
-        resources_whatis_title: "What is this?"
-        resources_whatis_details: "A resource directory of useful links for your community."
+        resources_whatis_title: "Welcome to the Directory"
+        resources_whatis_details: "Find useful links related to your community. Add your favorites as well."
         
       resource_sections_list:
         title: "Categories"
@@ -73,10 +81,6 @@ en:
       idea_boards_list:
           title: "Idea Topics"
 
-      events_whatisthis:
-        events_whatis_title: "What is this?"
-        events_whatis_details: "A crowdsourced calendar for posting, discussing and sharing great events."
-      
       top_events:
         top_events_title: "Top Events"
 

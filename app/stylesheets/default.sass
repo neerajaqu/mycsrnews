@@ -452,10 +452,6 @@ li
             text-decoration: none
 
 // Thumb class stylings
-.panel_2
-  .thumb
-    float: left
-    margin: 0 5px 5px 5px
 
 .thumb
   margin: 10px
@@ -467,23 +463,46 @@ li
   a:hover
     text-decoration: none
   &.threeFour
-    height: 190px
+    max-height: 190px
     img
       top: -10px
   &.bio
     overflow: visible
   &.nineSixteen
-    height: 150px
+    max-height: 150px
     img
       top: -40px
+  &.story
+    width: 90px
+    max-height: 75px
+  &.user
+    max-height: 90px
+    .moderator
+      height: 18px
+      width: 18px
+  &.user-details
+    max-height: 210px
+    .moderator
+      height: 32px
+      width: 32px
+  &.user-bio
+    float: left
+    margin: 5px
+    .moderator
+      height: 16px
+      width: 16px
   .moderator 
-    display: inline-block
     position: absolute
-    left: -4px
-    bottom: -4px
-    height: 20px
-    width: 20px
+    left: 4px
+    bottom: 4px
     background: none
+
+// Moderator badge general styles
+.moderator 
+  position: absolute
+  left: 2px
+  bottom: 2px
+  background: none
 
 .houseFeatures
   .thumb
@@ -494,18 +513,13 @@ li
     margin: 10px 15px 0
     display: inline-block
     overflow: hidden
-    &.bio
-      overflow: visible
-    .moderator
-      height: 40px
-      width: 40px
+  img
+    width: 280px
+  &.wide
+    height: 160px
     img
-      max-width: 280px
-    &.wide
-      height: 160px
-      img
-        width: 590px
-        max-width: 590px
+      width: 590px
+      max-width: 590px
 
 #readArticle
   .thumb
@@ -516,12 +530,11 @@ li
 .storyList
   .thumb
     margin: 0 6px
-    height: 68px
     float: left
     img
       max-width: 90px
   .storyBlockWrap
-    padding-left: 110px
+    margin-left: 110px
 
 .featuredNewsList
   margin: 10px 0 0 0
@@ -532,6 +545,21 @@ li
     float: left
     img
       max-width: 48px
+
+// Profile Pic //
+.profilePic
+  position: relative
+  float: left
+  margin: 0px 10px 0px 0px
+  img
+    max-width: 30px
+    max-height: 30px
+  a:hover
+    text-decoration: none
+  .moderator
+    height: 12px
+    width: 12px
+
 // Layout panels - should be used for all element containers //
 .panel_1, .panel_2
 
@@ -805,6 +833,9 @@ li
   .userPoints
     text-align: right
     margin-right: 0px
+    .pointsnote
+      font-size: 90%
+      font-weight: normal
 
 // Flag box styles //
 .flag-wrap
@@ -1105,23 +1136,6 @@ h3.btn
       width: 100%
       padding: 1px 0
 
-// Profile Pic //
-.profilePic
-  position: relative
-  float: left
-  margin: 0px 10px 0px 0px
-  img
-    max-width: 30px
-    max-height: 30px
-  a:hover
-    text-decoration: none
-  .moderator
-    position: absolute
-    bottom: -4px
-    left: -4px
-    height: 16px
-    width: 16px
-    background: none
 
 // Account Profile stats styles //
 .pointsTable_profile
