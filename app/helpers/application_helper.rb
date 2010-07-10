@@ -93,9 +93,11 @@ module ApplicationHelper
     "#{caption} #{link_to 'More', comment.commentable, :anchor => 'commentsListTop'}"
   end
 
-  def caption(text, length = 150)
-    return "" if text.nil?
-    text.length <= length ? text : text[0, length] + '...'
+  # Adopted from http://daniel.collectiveidea.com/blog/2007/7/10/a-prettier-truncate-helper
+  def caption(text, length = 150, truncate_string = "...")
+    return "" if text.nil?    
+    l = length - truncate_string.length
+    text.length > length ? text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] + truncate_string : text
   end
 
   def pfeed_caption(text, length = 150)
