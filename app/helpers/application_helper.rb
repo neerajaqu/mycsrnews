@@ -133,6 +133,10 @@ module ApplicationHelper
   def local_linked_profile_pic(user, options={})
     link_options = {}
     # TODO:: separate this into a method
+    destination = user
+    if options[:destination].present?
+      destination = options.delete(:destination)
+    end
     if options[:format].present?
     	link_options[:format] = options[:format]
     	options.delete(:format)
@@ -145,10 +149,11 @@ module ApplicationHelper
     	link_options[:canvas] = options[:canvas]
     	options.delete(:canvas)
     end
+    destination = user_path(user, link_options) if destination.class.name == 'User' 
     if user.facebook_user?
       options.merge!(:linked => false)
       options[:size] = 'square' unless options[:size].present?
-      temp = link_to fb_profile_pic(user, options), user_path(user, link_options)
+      temp = link_to fb_profile_pic(user, options), destination
     else
       temp = link_to image_tag(default_image), user, link_options
       #link_to gravatar_image(user), user, link_options
