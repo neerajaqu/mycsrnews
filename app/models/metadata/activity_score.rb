@@ -33,6 +33,10 @@ class Metadata::ActivityScore < Metadata
     self.activity_score_value
   end
 
+  def score_type
+    key_sub_type
+  end  
+
   def score_value
     get_multiplier * value.to_i
   end  

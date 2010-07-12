@@ -36,45 +36,17 @@ module Newscloud
     module InstanceMethods
 
       # Misc continuity methods for working with mixins
-      def wall_postable?
-        false
-      end
-
-      def moderatable?
-        false
-      end
-
-      def refineable?
-        false
-      end
-
-      def relatable?
-        false
-      end
-
-      def featured_item?
-        false
-      end
-
-      def media_item?
-        false
-      end
-
-      def image_item?
-        false
-      end
-
-      def video_item?
-        false
-      end
-
-      def audio_item?
-        false
-      end
-
-      def downvoteable?
-        false
-      end
+      def wall_postable?() false end
+      def moderatable?() false end
+      def refineable?() false end
+      def relatable?() false end
+      def featured_item?() false end
+      def media_item?() false end
+      def image_item?() false end
+      def video_item?() false end
+      def audio_item?() false end
+      def downvoteable?() false end
+      def scorable?() false end
 
       # model unique identifier
       def muid

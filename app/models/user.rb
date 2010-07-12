@@ -260,6 +260,18 @@ class User < ActiveRecord::Base
     User.find(:all, :conditions => ['is_admin = true'])
   end
 
+  def add_score! score
+    case score.score_type
+      when "participation"
+        field = :activity_score
+      when "karma"
+        field = :karma_score
+      else
+        field = nil
+    end
+    increment!(field, score.value) unless field.nil?
+  end
+
   private
 
   def check_profile
