@@ -21,8 +21,6 @@
   height: $headerHeight
   margin-bottom: 15px
   position: relative
-  border:
-    bottom: $pageTabOnBdr
   background: $headerBG
   z-index: 10
   .sponsor
@@ -33,7 +31,7 @@
     left: $sponsorleft
     height: $sponsorheight
     width: $sponsorwidth
-    z-index: 1
+    z-index: 3
     a
       display: block
       height: $sponsorheight
@@ -145,7 +143,7 @@
 
 // Footer Container //
 #footer
-  margin-bottom: 15px
+  margin-bottom: 10px
   border:
     top: $FooterBorder
   .dh_links
@@ -275,6 +273,7 @@ li
   border: none
   .tabs
     border-top: $tabTopBdr
+    border-bottom: $tabBotBdr
     position: absolute
     bottom: 0
     left: 0
@@ -319,7 +318,7 @@ li
     .toggle_tabs li
       a.selected
         bottom: $pageTabOnPOS
-        margin: 0px 0px 0px 0px
+        margin: 0px
         padding: 5px 0
         border:
           top: $pageTabOnBdr
@@ -399,26 +398,28 @@ li
 
 // Sub Navigation Styles //
 #subNav
-  height: 19px
+  border-bottom: $subnavBorder
+  height: 20px
   margin: 0px 0px 15px 0px
   padding: 0px 0px 0px 0px
   display: inline-block
   overflow: visible
-  border:
-    bottom: $subnavBorder
 
 #subNav
   .toggle_tabs
-    margin: 0px 0px 0px 0px
-    padding: 0px 0px 0px 0px
+    margin: 0px 10px
+    width: auto
+    padding: 0px
     text-align: center
     li
       display: block
       float: left
-      padding: 0px 0px 0px 0px
-      margin: 0 0 0 1px
+      padding: 0px
+      margin: 0 0 0 2px
       a
-        margin: 0px 0px 0px 0px
+        position: relative
+        bottom: $pageTabOffPOS
+        margin: 0px
         padding: 4px 25px 1px 25px
         height: 14px
         border: none
@@ -431,11 +432,12 @@ li
           background: $subnavTabOffHover
           text-decoration: none
         &.selected
-          margin: -1px 0px 0px 0px
+          bottom: $pageTabOnPOS
+          margin: 0px
           background: $subnavTabOn
           border:
             top: $subnavBorder
-            bottom: $TabBotBorder
+            bottom: $pageTabOnBotBdr
             right: $subnavBorder
             left: $subnavBorder
           color: $subnavTabLinkOn
@@ -498,8 +500,8 @@ li
       width: 16px
   .moderator 
     position: absolute
-    left: 4px
-    bottom: 4px
+    left: 2px
+    bottom: 2px
     background: none
 
 // Moderator badge general styles
@@ -514,13 +516,13 @@ li
     margin: 10px 15px 0
     display: inline-block
     overflow: hidden
-  img
-    width: 280px
-  &.wide
-    height: 160px
     img
-      width: 590px
-      max-width: 590px
+      width: 280px
+    &.wide
+      display: block
+      max-height: 160px
+      img
+        width: 590px
 
 #readArticle
   .thumb
@@ -601,11 +603,11 @@ li
 
 .panel_1, .panel_2
   margin-bottom: 10px
+
 .panel_3
   margin-bottom: 5px
 
 .panel_1, .panel_2
-  background: #fff
   &.textpage
     h2
       font-size: $fontsize * 1.1
@@ -687,23 +689,9 @@ li
         padding: 0 10px
         margin-bottom: 20px
         color: $featureBodyText
-      .featureBtn
-        font-size: $fontsize * 1.25
-        line-height: 14px
-        font-weight: bold
-        display: inline-block
-        background: $featureBtnOff
-        color: $featureBtnText
-        height: 16px
-        padding: 4px 20px
+      .btn
+        font-size: $fontsize * 1.15
         margin: 10px auto
-        border: $featureBtnBorder
-        -moz-border-radius: 4px
-        -webkit-border-radius: 4px
-        border-radius: 4px
-        &:hover
-          background: $featureBtnOn
-          text-decoration: none
   .userBlockWrap
     li
       padding: 0
@@ -1238,25 +1226,15 @@ h3.btn
     margin: 5px 10px
     font-size: $fontsize * 1.1
   .demo
-    margin: 10px 15px
-    padding: 70px 0 10px 0
+    margin: 10px
+    padding: 75px 0 10px 0
     background: $demoBG
+    .btn
+      font-size: 11px
   .fb-btn
     margin-top: 15px
-  .btn
-    display: inline-block
-    color: white
-    font-weight: bold
-    font-size: 11px
-    padding: 5px 10px 6px 10px
-    border: $bookmarkletBtnBorder
-    -moz-border-radius: 4px
-    -webkit-border-radius: 4px
-    border-radius: 4px
-    background: $bookmarkletBtn
-    &:hover
-      text-decoration: none
-      background: $bookmarkletBtnHover
+
+
 
 // pagination styles //
 
