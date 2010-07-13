@@ -11,4 +11,4 @@
           - blog_roll.each do |user|
             %li
               - fb_user = User.find_by_id(user.author_id)
-              .profilePic= local_linked_profile_pic fb_user, :width => '30', :height => '30'
+              .profilePic= local_linked_profile_pic fb_user, :width => '30', :height => '30', :destination => user_articles_path(:user_id => user.author_id)

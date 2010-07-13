@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 6..100, :unless => :facebook_connect_user? #r@a.wk
   validates_uniqueness_of   :email, :unless => :facebook_connect_user?
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message, :unless => :facebook_connect_user?
-
+  
   after_create :register_user_to_fb
   before_save :check_profile
   
@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
   # NOTE:: this must be above has_friendly_id, see below
   attr_accessible :login, :email, :name, :password, :password_confirmation, :karma_score, :is_admin, :is_blocked, :cached_slug, :is_moderator, :is_editor, :is_host
 
+  accepts_nested_attributes_for :user_profile
 
   # NOTE NOTE NOTE NOTE NOTE
   # friendly_id uses attr_protected!!!
@@ -258,6 +259,18 @@ class User < ActiveRecord::Base
 
   def self.find_admin_users
     User.find(:all, :conditions => ['is_admin = true'])
+  end
+
+  def add_score! score
+    case score.score_type
+      when "participation"
+        field = :activity_score
+      when "karma"
+        field = :karma_score
+      else
+        field = nil
+    end
+    increment!(field, score.value) unless field.nil?
   end
 
   private

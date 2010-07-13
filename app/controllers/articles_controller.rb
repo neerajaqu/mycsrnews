@@ -18,6 +18,17 @@ class ArticlesController < ApplicationController
       format.json { @articles = Content.refine(params) }
     end
   end
+
+  def user_index
+    @user = User.find(params[:user_id])    
+    @page = false
+    @current_sub_tab = 'Browse Articles'
+    @articles = @user.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    respond_to do |format|
+      format.html { @refine = false, @paginate = false }
+      #format.json { @articles = Content.articles.refine(params) }
+    end
+  end
     
   def new
     @current_sub_tab = 'New Article'

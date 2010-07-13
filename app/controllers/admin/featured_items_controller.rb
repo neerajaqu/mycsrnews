@@ -85,16 +85,16 @@ class Admin::FeaturedItemsController < AdminController
   def tweet
     return if item.tweeted_item.present?
     
-    if Metadata::Setting.find_setting('bitly_username')
-      bitly = Bitly.new(Metadata::Setting.find_setting('bitly_username'), Metadata::Setting.find_setting('bitly_api_key'))
+    if Metadata::Setting.find_setting('bitly_username').value
+      bitly = Bitly.new(Metadata::Setting.find_setting('bitly_username').value, Metadata::Setting.find_setting('bitly_api_key').value)
       shrt = bitly.shorten(url)
       return shrt.short_url
     else
       return url
     end
     
-    oauth = Twitter::OAuth.new(Metadata::Setting.find_setting('oauth_key'), Metadata::Setting.find_setting('oauth_secret'))
-    oauth.authorize_from_access(Metadata::Setting.find_setting('twitter_oauth_consumer_key'), Metadata::Setting.find_setting('twitter_oauth_consumer_secret'))
+    oauth = Twitter::OAuth.new(Metadata::Setting.find_setting('oauth_key').value, Metadata::Setting.find_setting('oauth_secret').value)
+    oauth.authorize_from_access(Metadata::Setting.find_setting('twitter_oauth_consumer_key').value, Metadata::Setting.find_setting('twitter_oauth_consumer_secret').value)
     twitter = Twitter::Base.new(oauth)
     
     case item.class.name

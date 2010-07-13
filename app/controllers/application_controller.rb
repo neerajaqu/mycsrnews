@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   before_filter :update_last_active
   before_filter :check_post_wall
+  before_filter :verify_request_format
 
 #  before_filter :check_authorized_param
 
@@ -332,6 +333,17 @@ class ApplicationController < ActionController::Base
   def set_custom_sidebar_widget
     cswidget = Metadata::CustomWidget.find_slot('sidebar', "#{self.controller_name}")
     @custom_sidebar_widget = (cswidget and cswidget.has_widget? ? cswidget.metadatable : nil)
+  end
+
+  def verify_request_format
+    format = request.format.to_sym
+    unless ['html', 'json', 'js', 'xml', 'atom', 'rss'].include? format.to_s
+      if request.xhr?
+      	request.format = 'json'
+      else
+      	request.format = 'html'
+      end
+    end
   end
 
 end

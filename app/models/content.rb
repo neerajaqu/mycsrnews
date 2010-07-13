@@ -9,6 +9,7 @@ class Content < ActiveRecord::Base
   acts_as_refineable
   acts_as_wall_postable
   acts_as_relatable
+  acts_as_scorable
 
   belongs_to :user
   belongs_to :article
@@ -104,6 +105,14 @@ class Content < ActiveRecord::Base
     self.story_type == 'full_html'
   end
 
-  private
+  def model_score_name
+    is_article? ? "article" : "story"
+  end
+
+  def scoreable_user
+    is_article? ? article.author : user
+  end
   
+  private
+
 end

@@ -7,6 +7,7 @@ class NotificationWorker
     klass = ar_obj_klass_name.constantize
     ar_obj = klass.find(ar_obj_id)
     pfeed_item.deliver(ar_obj, method_name_arr)
+    # todo - send_email_with(pfeed_item)  
   end
 
 end

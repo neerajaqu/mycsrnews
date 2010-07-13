@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100707181429) do
+ActiveRecord::Schema.define(:version => 20100712194600) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -448,6 +448,21 @@ ActiveRecord::Schema.define(:version => 20100707181429) do
     t.boolean  "is_sponsored",        :default => false
   end
 
+  create_table "scores", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "scorable_type"
+    t.integer  "scorable_id"
+    t.string   "score_type"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scores", ["scorable_type", "scorable_id"], :name => "index_scores_on_scorable_type_and_scorable_id"
+  add_index "scores", ["scorable_type"], :name => "index_scores_on_scorable_type"
+  add_index "scores", ["score_type"], :name => "index_scores_on_score_type"
+  add_index "scores", ["user_id"], :name => "index_scores_on_user_id"
+
   create_table "sent_cards", :force => true do |t|
     t.integer  "from_user_id"
     t.integer  "to_fb_user_id", :limit => 8
@@ -549,15 +564,18 @@ ActiveRecord::Schema.define(:version => 20100707181429) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer   "user_id",               :limit => 8,                    :null => false
-    t.integer   "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean   "isAppAuthorized",                    :default => false
-    t.datetime  "born_at"
-    t.timestamp "created_at",                                            :null => false
-    t.datetime  "updated_at"
-    t.text      "bio"
-    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean   "comment_notifications",              :default => false
+    t.integer  "user_id",                     :limit => 8,                    :null => false
+    t.integer  "facebook_user_id",            :limit => 8, :default => 0
+    t.boolean  "isAppAuthorized",                          :default => false
+    t.datetime "born_at"
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at"
+    t.text     "bio"
+    t.integer  "referred_by_user_id",         :limit => 8, :default => 0
+    t.boolean  "comment_notifications",                    :default => false
+    t.boolean  "receive_email_notifications",              :default => true
+    t.boolean  "dont_ask_me_for_email",                    :default => false
+    t.datetime "email_last_ask"
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

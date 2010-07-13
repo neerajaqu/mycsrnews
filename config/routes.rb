@@ -29,10 +29,14 @@ ActionController::Routing::Routes.draw do |map|
   map.paged_articles '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
   map.paged_forums_with_format '/forums/:id/page/:page.:format', :controller => 'forums', :action => 'show'
   map.paged_forums '/forums/:id/page/:page.:format', :controller => 'forums', :action => 'show'
+  map.paged_user_articles '/articles/user/:user_id/page/:page.:format', :controller => 'articles', :action => 'user_index'
+  map.user_articles '/articles/user/:user_id.:format', :controller => 'articles', :action => 'user_index'
   map.paged_users_with_format '/users/:id/page/:page.:format', :controller => 'users', :action => 'show'
   map.paged_users '/users/:id/page/:page.:format', :controller => 'users', :action => 'show'
   map.paged_ideas '/ideas/page/:page.:format', :controller => 'ideas', :action => 'index'
   map.paged_newswires '/newswires/page/:page.:format', :controller => 'newswires', :action => 'index'
+  map.paged_feed_newswires '/newswires/feed/:feed_id/page/:page.:format', :controller => 'newswires', :action => 'feed_index'
+  map.feed_newswires '/newswires/feed/:feed_id.:format', :controller => 'newswires', :action => 'feed_index'
   map.paged_my_events '/events/:id/my_events/page/:page.:format', :controller => 'events', :action => 'my_events'
   map.paged_events '/events/page/:page.:format', :controller => 'events', :action => 'index'
   map.paged_my_resources '/resources/:id/my_resources/page/:page.:format', :controller => 'resources', :action => 'my_resources'
@@ -58,9 +62,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] },:has_many => [ :flags]
   map.resources :related_items
 
-  map.resources :users, :collection => {:link_user_accounts => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post], :settings => [:get,:post] }
+  map.resources :users, :collection => {:link_user_accounts => :get, :dont_ask_me_for_email => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
   map.resources :articles, :collection => { :index => [:get, :post] }
-  map.resources :users, :collection => { :index => [:get, :post] }
   map.resources :newswires, :member => { :quick_post => [:get, :post] }
   map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags, :related_items ]
   map.resources :idea_boards, :has_many => :ideas
