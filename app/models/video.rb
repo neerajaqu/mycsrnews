@@ -11,7 +11,7 @@ class Video < ActiveRecord::Base
 
   validates_format_of :remote_video_url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :message => "should look like a URL", :allow_blank => true
   validates_format_of :remote_video_url, :with => /(youtube|vimeo|boston).com/i, :message => "should be a youtube or vimeo url", :allow_blank => true
-  validates_format_of :embed_code, :with => /<embed[^>]+src="http(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"/i, :message => "should look like an HTML object", :allow_blank => true
+  validates_format_of :embed_code, :with => /<embed[^>]+src="http(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"/i, :message => "should look like an html embed object block", :allow_blank => true
 
   after_validation :process_video
   #after_validation :set_user
@@ -51,10 +51,10 @@ class Video < ActiveRecord::Base
     			self.remote_video_id = self.parse_vimeo_embed self.embed_src
     		elsif self.embed_src =~ /vmixcore.com/i
     		  self.remote_video_type = 'vmixcore'
-    			self.remote_video_id = self.parse_vmixcore_src self.embed_code
-    		elsif self.embed_src =~ /boston.com/i
-    		  self.remote_video_type = 'boston'
-    			self.remote_video_id = self.parse_boston_src self.embed_code
+    			self.remote_video_id = self.parse_vmixcore_embed self.embed_code
+    		elsif self.embed_src =~ /brightcove.com/i
+    		  self.remote_video_type = 'brightcove_a'
+    			self.remote_video_id = self.parse_brightcove_embed self.embed_code
     		else
     			return false
     		end
@@ -69,7 +69,7 @@ class Video < ActiveRecord::Base
         self.remote_video_type = 'vimeo'
         self.remote_video_id = self.parse_vimeo_url remote_video_url       
       elsif remote_video_url =~ /boston.com/i
-        self.remote_video_type = 'boston'
+        self.remote_video_type = 'brightcove_a'
         self.remote_video_id = self.parse_boston_url remote_video_url
       else
       	return false
@@ -96,10 +96,12 @@ class Video < ActiveRecord::Base
   end
 
   def parse_boston_url url
-    if url =~ /boston.com\/(video\?bctid=|v\/)([^"&]+)/
+    if url =~ /boston.com\/(video\/\?bctid=|v\/)([^"&]+)/
     	self.remote_video_id = $2
+    	self.remote_video_type = 'brightcove_a'
     elsif url =~ /boston.com\/video\/viral_page\/\?\/services\/player\/bcpid21962023001\&(bctid=|v)([^"&]+)/
     	self.remote_video_id = $2
+    	self.remote_video_type = 'brightcove_a'
     else
     	return false
     end
@@ -113,11 +115,15 @@ class Video < ActiveRecord::Base
     end
   end
 
-  def parse_boston_embed src
-  	return false
+  def parse_brightcove_embed src
+    if src =~ /videoId\=([^"&]+)/
+    	self.remote_video_id = $1
+    else
+    	return false
+    end
   end
 
-  def parse_vmixcore_src src
+  def parse_vmixcore_embed src
     if src =~ /<embed[^>]+?src="([^"]+?)player_id=.*?"[^>]+?flashvars="([^"]+)"/i
     	movie = $1
     	flash_vars = $2

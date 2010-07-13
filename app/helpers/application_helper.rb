@@ -321,18 +321,14 @@ module ApplicationHelper
     embed_html_video(video, options)
   end
 
-  def embed_fb_video video, *args
-    options = args.extract_options!
-    options[:width] ||= video.get_width options[:size]
-    options[:height] ||= video.get_height options[:size]
-
-    fb_swf video.video_src, options
-  end
-
   def embed_html_video video, options = {}
     options[:width] ||= video.get_width options[:size]
     options[:height] ||= video.get_height options[:size]
-    <<EMBED
+    case video.remote_video_type
+      when 'brightcove_a'
+    	  render :partial => 'shared/media/video_brightcove_alt_a', :locals => { :video => video, :options => options }
+      else
+        <<EMBED
 <object width="#{options[:width]}" height="#{options[:height]}">
   <param name="movie" value="#{video.video_src}"></param>
   <param name="allowFullScreen" value="true"></param>
@@ -340,6 +336,7 @@ module ApplicationHelper
   <embed src="#{video.video_src}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="#{options[:width]}" height="#{options[:height]}"></embed>
 </object>
 EMBED
+    end
   end
 
   def embed_audio audio, options = {}
