@@ -173,7 +173,7 @@ module ApplicationHelper
 
   def profile_pic_badge user
     if user.is_moderator?
-      image_tag 'default/icon-fan-app.gif', :class => "moderator"
+      image_tag 'default/icon-mod-badge.png', :class => "moderator"
     elsif user.is_host?
       image_tag 'default/icon-host-badge.png', :class => "moderator"    
     end

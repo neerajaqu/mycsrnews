@@ -68,9 +68,13 @@ class Video < ActiveRecord::Base
       elsif remote_video_url =~ /vimeo.com/i
         self.remote_video_type = 'vimeo'
         self.remote_video_id = self.parse_vimeo_url remote_video_url       
-      elsif remote_video_url =~ /boston.com/i
-        self.remote_video_type = 'brightcove_a'
-        self.remote_video_id = self.parse_boston_url remote_video_url
+      elsif Metadata::Setting.find_setting("site_video_url").present?
+        if remote_video_url =~ /#{Metadata::Setting.find_setting("site_video_url").value}/i
+          self.remote_video_type = 'brightcove_a'
+          self.remote_video_id = self.parse_site_url remote_video_url
+        else
+          return false
+        end
       else
       	return false
       end
@@ -96,12 +100,11 @@ class Video < ActiveRecord::Base
   end
 
   def parse_site_url url
-    if url =~ /boston.com\/(video\/\?bctid=|v\/)([^"&]+)/
+    site_video_url = Metadata::Setting.find_setting("site_video_url").value
+    if url =~ /#{site_video_url}\/(video\/\?bctid=|v\/)([^"&]+)/
     	self.remote_video_id = $2
-    	self.remote_video_type = 'brightcove_a'
-    elsif url =~ /boston.com\/video\/viral_page\/\?\/services\/player\/bcpid21962023001\&(bctid=|v)([^"&]+)/
+    elsif url =~ /#{site_video_url}\/video\/viral_page\/\?\/services\/player\/bcpid21962023001\&(bctid=|v)([^"&]+)/
     	self.remote_video_id = $2
-    	self.remote_video_type = 'brightcove_a'
     else
     	return false
     end
