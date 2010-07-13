@@ -32,6 +32,10 @@ class Article < ActiveRecord::Base
     content.item_description
   end
 
+  def item_link
+    content
+  end
+
   def toggle_blocked
     self.is_blocked = !self.is_blocked
     self.content.toggle_blocked
