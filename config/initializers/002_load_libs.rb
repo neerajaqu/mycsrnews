@@ -26,6 +26,12 @@ ActiveRecord::Base.send :include, Newscloud::Acts::Refineable
 require "#{RAILS_ROOT}/lib/acts_as_wall_postable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::WallPostable
 
+# Load acts_as_scorable mixin
+require "#{RAILS_ROOT}/lib/acts_as_scorable.rb"
+ActiveRecord::Base.send :include, Newscloud::Acts::Scorable
+# HACK:: get around Vote model being a plugin model
+Vote.send(:acts_as_scorable)
+
 require "#{RAILS_ROOT}/lib/locale_extensions.rb"
 
 require "#{RAILS_ROOT}/lib/zvent_gem_addon.rb"

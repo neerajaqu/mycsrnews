@@ -1,3 +1,4 @@
+- refine ||= true
 - page ||= ""
 - cache_if page.present?, "articles_list_#{page}html" do
   - contents ||= Article.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
@@ -5,7 +6,7 @@
   .panel_1
     .panelBar
       %h2= t('.articles_title')
-      - if contents.present? and contents.first.refineable?
+      - if refine===true and contents.present? and contents.first.refineable?
         .refine_link
           = render :partial => 'shared/forms/refine_dropdown'
     .subtitle

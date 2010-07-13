@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   cache_sweeper :profile_sweeper, :only => [:update_bio]
   cache_sweeper :user_sweeper, :only => [:create, :link_user_accounts]
 
-  before_filter :login_required, :only => [:update_bio, :feed]
+  before_filter :check_valid_user, :only => [:edit, :update]
+  before_filter :login_required, :only => [:update_bio, :feed, :edit, :update]
   before_filter :load_top_stories, :only => [:show]
   before_filter :ensure_authenticated_to_facebook, :only => :link_user_accounts
 
@@ -12,6 +13,22 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { @paginate = true }
       format.json { @users = User.refine(params) }
+    end
+  end
+
+  def edit
+    @user = current_user
+  end
+  
+  def update    
+    @user = User.find(params[:id])
+    
+    if @user.user_profile.update_attributes(params[:user][:user_profile]) and @user.update_attributes(params[:user])
+      flash[:success] = "Successfully updated your settings."
+  		redirect_to user_path(@user)    	
+    else
+      flash[:error] = "Could not update your settings as requested. Please try again."
+      render :edit
     end
   end
 
@@ -112,10 +129,14 @@ class UsersController < ApplicationController
     end
   end
 
-  def settings
-  end
-
   def link_twitter_account
     
   end
+  
+  private
+  
+  def check_valid_user
+    redirect_to home_index_path and return false unless current_user == User.find(params[:id])
+  end
+
 end
