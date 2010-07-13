@@ -4,7 +4,7 @@
 #col_left
   - if @article_images.present?
     = render_media_items @article_images
-  = render :partial => 'shared/articles', :locals => { :contents => @articles, :paginate => @paginate, :page => @page }
+  = render :partial => 'shared/articles', :locals => { :contents => @articles, :paginate => @paginate, :page => @page , :refine => @refine }
   
 #col_right
   = render :partial => 'shared/sidebar/post_article'
