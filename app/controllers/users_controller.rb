@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   cache_sweeper :profile_sweeper, :only => [:update_bio]
   cache_sweeper :user_sweeper, :only => [:create, :link_user_accounts]
 
-  before_filter :check_valid_user, :only => [:edit, :update]
+  before_filter :check_valid_user, :only => [:edit, :update, :dont_ask_me_for_email]
   before_filter :login_required, :only => [:update_bio, :feed, :edit, :update]
   before_filter :load_top_stories, :only => [:show]
   before_filter :ensure_authenticated_to_facebook, :only => :link_user_accounts
@@ -101,6 +101,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def dont_ask_me_for_email
+    @profile = current_user_profile
+    @profile.dont_ask_me_for_email = true
+    if @profile.save
+  		flash[:success] = "We will no longer ask you to enable email notifications."
+  		redirect_to home_index_path
+    else
+  		flash[:error] = "Could not update your notification settings"
+  		redirect_to home_index_path
+  	end
+  end
+  
   def update_bio    
     if request.post?
       @profile = current_user_profile

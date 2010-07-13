@@ -10,8 +10,8 @@ class Video < ActiveRecord::Base
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
 
   validates_format_of :remote_video_url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :message => "should look like a URL", :allow_blank => true
-  validates_format_of :remote_video_url, :with => /(youtube|vimeo).com/i, :message => "should be a youtube or vimeo url", :allow_blank => true
-  validates_format_of :embed_code, :with => /<embed[^>]+src="http(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"/i, :message => "should look like a URL", :allow_blank => true
+  validates_format_of :remote_video_url, :with => /(youtube|vimeo|boston).com/i, :message => "should be a youtube or vimeo url", :allow_blank => true
+  validates_format_of :embed_code, :with => /<embed[^>]+src="http(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"/i, :message => "should look like an HTML object", :allow_blank => true
 
   after_validation :process_video
   #after_validation :set_user
@@ -30,6 +30,8 @@ class Video < ActiveRecord::Base
         "http://www.youtube.com/v/#{self.remote_video_id}"
       when 'vimeo'
         "http://vimeo.com/moogaloop.swf?clip_id=#{self.remote_video_id}&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=ff0179&amp;fullscreen=1"
+      when 'boston'
+        "http://www.boston.com/video/?bctid=#{self.remote_video_id}"
       when 'vmixcore'
         self.remote_video_id
       else
@@ -50,6 +52,9 @@ class Video < ActiveRecord::Base
     		elsif self.embed_src =~ /vmixcore.com/i
     		  self.remote_video_type = 'vmixcore'
     			self.remote_video_id = self.parse_vmixcore_src self.embed_code
+    		elsif self.embed_src =~ /boston.com/i
+    		  self.remote_video_type = 'boston'
+    			self.remote_video_id = self.parse_boston_src self.embed_code
     		else
     			return false
     		end
@@ -60,20 +65,15 @@ class Video < ActiveRecord::Base
       if remote_video_url =~ /youtube.com/i
         self.remote_video_type = 'youtube'
         self.remote_video_id = self.parse_youtube_url remote_video_url
-      elsif
+      elsif remote_video_url =~ /vimeo.com/i
         self.remote_video_type = 'vimeo'
         self.remote_video_id = self.parse_vimeo_url remote_video_url       
+      elsif remote_video_url =~ /boston.com/i
+        self.remote_video_type = 'boston'
+        self.remote_video_id = self.parse_boston_url remote_video_url
       else
       	return false
       end
-    else
-    	return false
-    end
-  end
-
-  def parse_vimeo_embed url
-    if url =~ /vimeo.com\/moogaloop.swf\?clip_id\=([^"&]+)/
-    	self.remote_video_id = $1
     else
     	return false
     end
@@ -93,6 +93,28 @@ class Video < ActiveRecord::Base
     else
     	return false
     end
+  end
+
+  def parse_boston_url url
+    if url =~ /boston.com\/(video\?bctid=|v\/)([^"&]+)/
+    	self.remote_video_id = $2
+    elsif url =~ /boston.com\/video\/viral_page\/\?\/services\/player\/bcpid21962023001\&(bctid=|v)([^"&]+)/
+    	self.remote_video_id = $2
+    else
+    	return false
+    end
+  end
+  
+  def parse_vimeo_embed src
+    if src =~ /vimeo.com\/moogaloop.swf\?clip_id\=([^"&]+)/
+    	self.remote_video_id = $1
+    else
+    	return false
+    end
+  end
+
+  def parse_boston_embed src
+  	return false
   end
 
   def parse_vmixcore_src src
@@ -140,6 +162,16 @@ class Video < ActiveRecord::Base
         "large" => {
           "width" => 480,
           "height" => 385          
+        }
+      },
+      "boston"=> {
+        "normal" => {
+          "width" => 420,
+          "height" => 376
+        },
+        "large" => {
+          "width" => 420,
+          "height" => 376          
         }
       },
       "default"=> {
