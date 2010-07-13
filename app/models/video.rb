@@ -95,7 +95,7 @@ class Video < ActiveRecord::Base
     end
   end
 
-  def parse_boston_url url
+  def parse_site_url url
     if url =~ /boston.com\/(video\/\?bctid=|v\/)([^"&]+)/
     	self.remote_video_id = $2
     	self.remote_video_type = 'brightcove_a'
