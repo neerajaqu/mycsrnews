@@ -66,6 +66,7 @@ en:
   tweet: "Tweet"
   in: "in"
   link_here: "Link to this page"
+  choose_flag: "- please choose a reason below -"
   karma_score: "Appreciation: {{score}}"
   activity_score: "Participation: {{score}}"
   total_score: "Total: {{score}}"
