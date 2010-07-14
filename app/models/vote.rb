@@ -24,18 +24,9 @@ class Vote < ActiveRecord::Base
   # Uncomment this to limit users to a single vote on each item. 
   # validates_uniqueness_of :voteable_id, :scope => [:voteable_type, :voter_type, :voter_id]
 
-  after_create :update_user_karma
   after_save :update_voteable_count
 
   private
-
-  def update_user_karma
-    user = voteable.user
-    vote_value = vote ? 1 : -1
-    user.karma_score += vote_value
-    user.save
-    return false # return false to prevent additional triggers of this method
-  end
 
   def update_voteable_count
     vote_value = vote ? 1 : -1

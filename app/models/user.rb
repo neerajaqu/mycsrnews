@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
 
   acts_as_voter
 
-  named_scope :top, lambda { |*args| { :order => ["karma_score desc"], :limit => (args.first || 5), :conditions => ["karma_score > 0 and is_admin = 0 and is_editor=0"]} }
+  #named_scope :top, lambda { |*args| { :order => ["karma_score desc"], :limit => (args.first || 5), :conditions => ["karma_score > 0 and is_admin = 0 and is_editor=0"]} }
+  named_scope :top, lambda { |*args| { :order => ["karma_score desc"], :limit => (args.first || 5), :conditions => ["karma_score > 0"]} }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 5), :conditions => ["created_at > ?", 2.months.ago]} }
   named_scope :last_active, lambda { { :conditions => ["last_active > ?", 5.minutes.ago], :order => ["last_active desc"] } }
   named_scope :admins, { :conditions => ["is_admin is true"] }

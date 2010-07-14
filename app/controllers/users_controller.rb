@@ -8,9 +8,29 @@ class UsersController < ApplicationController
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
-    @users = User.top.paginate :page => params[:page], :per_page => Content.per_page, :order => "karma_score desc"
+    #@users = User.top.paginate :page => params[:page], :per_page => Content.per_page, :order => "karma_score desc"
+    case params[:top]
+      when 'daily'
+        @scores = Score.daily_scores
+        @current_sub_tab = 'daily'
+      when 'weekly'
+        @scores = Score.weekly_scores
+        @current_sub_tab = 'weekly'
+      when 'monthly'
+        @scores = Score.monthly_scores
+        @current_sub_tab = 'monthly'
+      when 'yearly'
+        @scores = Score.yearly_scores
+        @current_sub_tab = 'yearly'
+      when 'alltime'
+        @scores = Score.alltime_scores
+        @current_sub_tab = 'alltime'
+      else
+        @scores = Score.weekly_scores
+        @current_sub_tab = 'weekly'
+    end
     respond_to do |format|
-      format.html { @paginate = true }
+      format.html { @paginate = false }
       format.json { @users = User.refine(params) }
     end
   end

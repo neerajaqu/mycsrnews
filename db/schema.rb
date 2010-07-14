@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100709215511) do
+ActiveRecord::Schema.define(:version => 20100712201622) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -457,6 +457,7 @@ ActiveRecord::Schema.define(:version => 20100709215511) do
     t.datetime "updated_at"
   end
 
+  add_index "scores", ["created_at"], :name => "index_scores_on_created_at"
   add_index "scores", ["scorable_type", "scorable_id"], :name => "index_scores_on_scorable_type_and_scorable_id"
   add_index "scores", ["scorable_type"], :name => "index_scores_on_scorable_type"
   add_index "scores", ["score_type"], :name => "index_scores_on_score_type"
