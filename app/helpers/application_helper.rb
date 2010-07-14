@@ -133,6 +133,10 @@ module ApplicationHelper
   def local_linked_profile_pic(user, options={})
     link_options = {}
     # TODO:: separate this into a method
+    destination = user
+    if options[:destination].present?
+      destination = options.delete(:destination)
+    end
     if options[:format].present?
     	link_options[:format] = options[:format]
     	options.delete(:format)
@@ -145,10 +149,11 @@ module ApplicationHelper
     	link_options[:canvas] = options[:canvas]
     	options.delete(:canvas)
     end
+    destination = user_path(user, link_options) if destination.class.name == 'User' 
     if user.facebook_user?
       options.merge!(:linked => false)
       options[:size] = 'square' unless options[:size].present?
-      temp = link_to fb_profile_pic(user, options), user_path(user, link_options)
+      temp = link_to fb_profile_pic(user, options), destination
     else
       temp = link_to image_tag(default_image), user, link_options
       #link_to gravatar_image(user), user, link_options
@@ -168,7 +173,7 @@ module ApplicationHelper
 
   def profile_pic_badge user
     if user.is_moderator?
-      image_tag 'default/icon-fan-app.gif', :class => "moderator"
+      image_tag 'default/icon-mod-badge.png', :class => "moderator"
     elsif user.is_host?
       image_tag 'default/icon-host-badge.png', :class => "moderator"    
     end
@@ -316,18 +321,14 @@ module ApplicationHelper
     embed_html_video(video, options)
   end
 
-  def embed_fb_video video, *args
-    options = args.extract_options!
-    options[:width] ||= video.get_width options[:size]
-    options[:height] ||= video.get_height options[:size]
-
-    fb_swf video.video_src, options
-  end
-
   def embed_html_video video, options = {}
     options[:width] ||= video.get_width options[:size]
     options[:height] ||= video.get_height options[:size]
-    <<EMBED
+    case video.remote_video_type
+      when 'brightcove_a'
+    	  render :partial => 'shared/media/video_brightcove_alt_a', :locals => { :video => video, :options => options }
+      else
+        <<EMBED
 <object width="#{options[:width]}" height="#{options[:height]}">
   <param name="movie" value="#{video.video_src}"></param>
   <param name="allowFullScreen" value="true"></param>
@@ -335,6 +336,7 @@ module ApplicationHelper
   <embed src="#{video.video_src}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="#{options[:width]}" height="#{options[:height]}"></embed>
 </object>
 EMBED
+    end
   end
 
   def embed_audio audio, options = {}
