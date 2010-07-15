@@ -84,25 +84,15 @@ $(function() {
 
   $('.flag-form').change(function(event) {
 		event.preventDefault();
-    if ( $('#flag_type').val() != 'choose_flag') {
-      var url = change_url_format($(this).attr('action'));
-      $('.flag-form').submit();
+		var flag_form = $(this);
+		var flag_parent = flag_form.parent().parent().parent();
+    if ( $('[name=flag_type]', this).val() != 'choose_flag') {
+		  $(this).parent().html("<img src=\"/images/default/spinner-tiny.gif\" />");
+      var url = change_url_format(flag_form.attr('action'));
+      $.post(url, flag_form.serialize(), function(data) {
+				flag_parent.html('<span class="flag-toggle btnComment">'+data.msg+'</span>').fadeIn("normal");
+			});
     } 
-    /*
-      $.post(url, {flag_type: $('#flag_type').val()}, function(data) {
-        $("#flag-form").html( "done")
-      });
-    // send request
-     $.post("rate.php", {rating: $(this).html()}, function(xml) {
-       // format and output result
-       $("#rating").html(
-         "Thanks for rating, current average: " +
-         $("average", xml).text() +
-         ", number of votes: " +
-         $("count", xml).text()
-  	
-  	
-    */
   });
 
 	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').click(function(event) {

@@ -188,9 +188,10 @@ en:
     abuse: "abuse"
     spam: "spam"
     urgent: "urgent"
-    other: "other"
+    miscellaneous: "other"
   reminders:
-    emailsignup_subject: "Keep in touch with email notifications"
-    emailsignup_message: "Be sure to add your email address so that we can notify you when other readers respond to your stories and comments."
-    emailsignup_action: "Update your email settings"
-    emailsignup_stop: "Don't ask me again"
+    emailsignup:
+      subject: "Keep in touch with email notifications"
+      message: "Be sure to add your email address so that we can notify you when other readers respond to your stories and comments."
+      action: "Update your email settings"
+      stop: "Don't ask me again"

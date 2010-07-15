@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :related_items
   has_many :messages
-  has_many :chirps, :after_add => :trigger_chirp
+  has_many :received_chirps, :class_name => "Chirp", :foreign_key => 'recipient_id'
+  has_many :sent_chirps, :class_name => "Chirp", :foreign_key => 'user_id', :after_add => :trigger_chirp
   has_many :activities, :class_name => "PfeedItem", :as => :originator, :order => "created_at desc"
   has_many :questions, :after_add => :trigger_question
   has_many :answers, :after_add => :trigger_answer
@@ -117,7 +118,7 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_resource], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_dashboard_message], :for => [:participant_recipient_voices], :identified_by => :name
   emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
-  emits_pfeeds :on => [:trigger_chirp], :for => [:participant_recipient_voices], :identified_by => :name
+  emits_pfeeds :on => [:trigger_chirp], :for => [:participant_recipient], :identified_by => :name
   receives_pfeed
 
 

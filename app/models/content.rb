@@ -52,12 +52,14 @@ class Content < ActiveRecord::Base
     begin
       domain = URI.parse(self.url).host.gsub("www.","")
       source = Source.find_by_url(domain)
-      # todo - check if source is a partial match
+      unless source
+        # create a new source
+        source = Source.new ({
+            :name => domain,
+            :url => domain
+        })
+      end
     rescue
-      # create a new source
-      source = Source.new()
-      source.name = source.url = domain
-      source.save
     end
     return true
   end

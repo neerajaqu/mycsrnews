@@ -74,6 +74,7 @@ custom_widgets.each do |custom_widget|
 end
 
 settings = [
+ { :key_sub_type => 'options', :key_name => 'site_notification_user',  :value => (User.admins.last || nil) },
  { :key_sub_type => 'options', :key_name => 'enable_activity_popups',  :value => "true" },
  { :key_sub_type => 'options', :key_name => 'allow_web_auth',  :value => (APP_CONFIG['allow_web_auth'] || "false" ) },
  { :key_sub_type => 'options', :key_name => 'site_title',  :value => (APP_CONFIG['site_title'] || "Default Site Title" ) },

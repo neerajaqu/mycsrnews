@@ -1,5 +1,5 @@
 class Chirp < ActiveRecord::Base
-  belongs_to :user
-
-  validates_presence_of :recipient_id, :subject, :body
+  belongs_to :chirper, :class_name => "User", :foreign_key => :user_id
+  belongs_to :recipient, :class_name => "User", :foreign_key => :recipient_id
+  validates_presence_of :recipient_id, :message
 end

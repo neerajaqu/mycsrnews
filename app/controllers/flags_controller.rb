@@ -7,15 +7,19 @@ class FlagsController < ApplicationController
 
   def create
     @flaggable = find_moderatable_item
-    if @flaggable.flag_item params[:flag_type],current_user
-    	# TODO:: change this to work with polymorphic associations, switch to using touch
-    	#expire_page :controller => 'stories', :action => 'show', :id => @story
-    	flash[:success] = "Thank you for flagging this item. We will investigate this shortly."
-    	redirect_to @flaggable
-    else
-    	flash[:error] = "Could not flag this item."
-    	redirect_to @flaggable
+    respond_to do |format|
+      if @flaggable.flag_item params[:flag_type], current_user
+       	success = "Thanks. We'll review shortly."
+      	format.html { flash[:success] = success; redirect_to @flaggable }
+      	format.json { render :json => { :msg => success }.to_json }
+      else
+      	error = "Failed to record flag"
+      	format.html { flash[:error] = error; redirect_to @flaggable }
+      	format.json { render :json => { :msg => error }.to_json }
+      end
     end
+  	# TODO:: change this to work with polymorphic associations, switch to using touch
+  	#expire_page :controller => 'stories', :action => 'show', :id => @story
   end
 
   def block

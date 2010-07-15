@@ -2,6 +2,6 @@
   = link_to t('.flag'), '#', :class => "flag-toggle btnComment"
   .flag-box{:style => "display: none"}
     .flag-item
-      - form_tag [flaggable, Flag.new], :class => "flag-form", id => 'flag-form' do
+      - form_tag [flaggable, Flag.new], :class => "flag-form" do
         - flag_list = [t('choose_flag')] | Flag.flag_types
         = select_tag :flag_type, options_for_select(flag_list.collect {|f| [t("flag_strings.#{f}"), f] })

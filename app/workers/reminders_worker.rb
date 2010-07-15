@@ -11,13 +11,20 @@ class RemindersWorker
     c) haven't been asked in two weeks email_last_ask
 =end
     # reminder: sign up for email
-    recipients = UserProfile.find(:all, :conditions => [ "email != ? AND dont_ask_me_for_email = ? and receive_email_notifications = ? and email_last_ask < date_sub(NOW(), INTERVAL 2 WEEK)", '',0, 1], :order => "user_id DESC", :joins => :user).map(&:user)
-    # each user: construct and send chirp with reminder
-    # t(reminder.emailsignup_subject) and t(reminder.emailsignup_message)
-    # t(emailsignup_action) to link edit_user_path
-    # t(emailsignup_stop) link to stop dont_ask_me_for_email_user_path
-    # update UserProfile email_last_ask = now()
-    #recipients.update_attributes(:email_last_ask, Time.now)
+    admin = Metadata::Setting.find_setting('site_notification_user')
+    user = User.find_by_fb_user_id(admin) || User.find_by_id(admin) || User.admins.last
+    if user
+      recipients = UserProfile.find(:all, :conditions => [ "email != ? AND dont_ask_me_for_email = ? and receive_email_notifications = ? and (email_last_ask < date_sub(NOW(), INTERVAL 2 WEEK) or email_last_ask is null)", '',0, 1], :order => "user_id DESC", :joins => :user).map(&:user)
+      recipients.each do |recipient|
+        chirp = user.sent_chirps.build({
+          :chirper => user,
+          :recipient => recipient,
+          :message => ActionView::Base.new.render(:partial => "#{RAILS_ROOT}/app/views/reminders/email_signup.html.haml", :locals => { :user => recipient } ) 
+        })
+        if chirp.valid? and recipient.sent_chirps.push chirp
+          #recipient.user_profile.update_attribute(:email_last_ask, Time.now)
+        end
+      end      
+    end
   end
-
 end
