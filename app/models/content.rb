@@ -51,15 +51,14 @@ class Content < ActiveRecord::Base
     return true unless source_id.nil?
     begin
       domain = URI.parse(self.url).host.gsub("www.","")
-      source = Source.find_by_url(domain)
+      self.source = Source.find_by_url(domain)      
       unless source
-        # create a new source
-        source = Source.new ({
+        self.source = Source.create ({
             :name => domain,
             :url => domain
         })
       end
-    rescue
+    rescue 
     end
     return true
   end
