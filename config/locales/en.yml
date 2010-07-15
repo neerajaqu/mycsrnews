@@ -66,7 +66,6 @@ en:
   tweet: "Tweet"
   in: "in"
   link_here: "Link to this page"
-  choose_flag: "- please choose a reason below -"
   karma_score: "Appreciation: {{score}}"
   activity_score: "Participation: {{score}}"
   total_score: "Total: {{score}}"
@@ -184,3 +183,14 @@ en:
   pfeeds:
     latest:
       title: "Latest user activity"
+  flag_strings:
+    choose_flag: "- please choose a reason below -"
+    abuse: "abuse"
+    spam: "spam"
+    urgent: "urgent"
+    other: "other"
+  reminders:
+    emailsignup_subject: "Keep in touch with email notifications"
+    emailsignup_message: "Be sure to add your email address so that we can notify you when other readers respond to your stories and comments."
+    emailsignup_action: "Update your email settings"
+    emailsignup_stop: "Don't ask me again"

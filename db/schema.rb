@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100712201622) do
+ActiveRecord::Schema.define(:version => 20100715010547) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -77,6 +77,15 @@ ActiveRecord::Schema.define(:version => 20100712201622) do
     t.datetime "updated_at"
     t.integer  "sent_count",    :default => 0
     t.datetime "created_at"
+  end
+
+  create_table "chirps", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "recipient_id"
+    t.string   "subject"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", :force => true do |t|

@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :related_items
   has_many :messages
+  has_many :chirps, :after_add => :trigger_chirp
   has_many :activities, :class_name => "PfeedItem", :as => :originator, :order => "created_at desc"
   has_many :questions, :after_add => :trigger_question
   has_many :answers, :after_add => :trigger_answer
@@ -80,6 +81,7 @@ class User < ActiveRecord::Base
   def trigger_event(event) end
   def trigger_resource(resource) end
   def trigger_dashboard_message(dashboard_message) end
+  def trigger_chirp(chirp) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -115,6 +117,7 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_resource], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_dashboard_message], :for => [:participant_recipient_voices], :identified_by => :name
   emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_chirp], :for => [:participant_recipient_voices], :identified_by => :name
   receives_pfeed
 
 

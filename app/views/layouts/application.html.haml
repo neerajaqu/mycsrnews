@@ -33,12 +33,6 @@
     =# javascript_include_tag 'http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'
 
     = auto_discovery_link_tag(:atom, stories_path(:format => :atom))
-    %style
-      :sass
-        .moderator-links
-          display: none !important
-        .admin-links
-          display: none !important
 
     = yield :head_content
               

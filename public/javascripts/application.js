@@ -82,20 +82,27 @@ $(function() {
     });
   });
 
-  $('.flag-form').change(function() {
-    $('.flag-form').submit();
-  });
-
-  $('.flag-form').submit(function(event) {
-  	event.preventDefault();
-  	$(this).parent().parent().toggle();
-
-  	var url = change_url_format($(this).attr('action'));
-  	var list = $('.list_stories ul', $(this).parents().filter('.panel_1'));
-  	$.post(url, $(this).serialize(), function(data) {
-  		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
-  		rebuild_facebook_dom();
-    });
+  $('.flag-form').change(function(event) {
+		event.preventDefault();
+    if ( $('#flag_type').val() != 'choose_flag') {
+      var url = change_url_format($(this).attr('action'));
+      $('.flag-form').submit();
+    } 
+    /*
+      $.post(url, {flag_type: $('#flag_type').val()}, function(data) {
+        $("#flag-form").html( "done")
+      });
+    // send request
+     $.post("rate.php", {rating: $(this).html()}, function(xml) {
+       // format and output result
+       $("#rating").html(
+         "Thanks for rating, current average: " +
+         $("average", xml).text() +
+         ", number of votes: " +
+         $("count", xml).text()
+  	
+  	
+    */
   });
 
 	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').click(function(event) {

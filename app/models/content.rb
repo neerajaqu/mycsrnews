@@ -50,8 +50,14 @@ class Content < ActiveRecord::Base
   def set_source
     return true unless source_id.nil?
     begin
-      source = Source.find_by_url(URI.parse(self.url).host.gsub("www.",""))
+      domain = URI.parse(self.url).host.gsub("www.","")
+      source = Source.find_by_url(domain)
+      # todo - check if source is a partial match
     rescue
+      # create a new source
+      source = Source.new()
+      source.name = source.url = domain
+      source.save
     end
     return true
   end

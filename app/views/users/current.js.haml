@@ -6,7 +6,8 @@
       - next unless pfeed_item.participant
       $.jGrowl("#{escape_javascript(pfeed_content(pfeed_item))}", {sticky: true, afterOpen: function() {
       rebuild_facebook_dom(); }});
-
+  $('.user-not-present').addClass('hidden');
+  $('.user-present').removeClass('user-present');
   - if current_user.is_moderator?
     $('.moderator-links').removeClass('moderator-links');
   - if current_user.is_admin?
