@@ -1,5 +1,5 @@
 - page ||= ""
-- cache_if page.present?, "users_list_#{page}html" do
+- cache_if (false and page.present?), "users_list_#{page}html" do
   - scores ||= Score.weekly_scores
   - paginate ||= false
   .panel_1
