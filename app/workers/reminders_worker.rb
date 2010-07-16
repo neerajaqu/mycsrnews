@@ -22,7 +22,7 @@ class RemindersWorker
           :message => ActionView::Base.new.render(:partial => "#{RAILS_ROOT}/app/views/reminders/email_signup.html.haml", :locals => { :user => recipient } ) 
         })
         if chirp.valid? and recipient.sent_chirps.push chirp
-          #recipient.user_profile.update_attribute(:email_last_ask, Time.now)
+          recipient.user_profile.update_attribute(:email_last_ask, Time.now)
         end
       end      
     end

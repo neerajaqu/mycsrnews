@@ -188,6 +188,10 @@ class User < ActiveRecord::Base
     return !fb_user_id.nil? && fb_user_id > 0
   end
 
+  def accepts_email_notifications
+      self.email.present? and self.user_profile.receive_email_notifications == true
+  end
+  
   def friends
     []
   end

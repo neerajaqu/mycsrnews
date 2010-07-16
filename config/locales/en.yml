@@ -193,5 +193,5 @@ en:
     emailsignup:
       subject: "Keep in touch with email notifications"
       message: "Be sure to add your email address so that we can notify you when other readers respond to your stories and comments."
-      action: "Update your email settings"
-      stop: "Don't ask me again"
+      action: "Add your email address"
+      stop: "Don't ask again"
