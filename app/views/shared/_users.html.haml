@@ -23,9 +23,9 @@
                 %p= caption(user.bio,350)
               .storyBlockMeta.float_right
                 %h4.userPoints= t('total_score', :score => score.total_score)
-                - if score.karma_score > 0
+                - if score.karma_score.to_i > 0
                   %h3.userPoints= t('karma_score', :score => score.karma_score)
-                - if score.activity_score > 0
+                - if score.activity_score.to_i > 0
                   %h3.userPoints= t('activity_score', :score => score.activity_score)
     - if paginate
       .clearfix
