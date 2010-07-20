@@ -1,7 +1,7 @@
 -# @expects: local 'story'
 
 - cache :top_stories_html do
-  - top_stories ||= Content.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
+  - top_stories ||= Content.active.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_stories_title')
