@@ -15,8 +15,7 @@
           = form.commit_button :button_html => { :class => 'btn'   }
 
 #col_right
-  -# = render :partial => 'article_drafts', :locals => { :drafts => @drafts }
-  -# = render :partial => 'shared/ads_banner', :locals => { :slot_data => @ad_skyscraper }
+  = render :partial => 'shared/ads_banner', :locals => { :slot_data => @ad_skyscraper }
 
 :javascript
   (function($)

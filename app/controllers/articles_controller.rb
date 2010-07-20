@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :like], :if => :request_comes_from_facebook?
+  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :edit, :update, :like], :if => :request_comes_from_facebook?
+  before_filter :check_valid_user, :only => [:edit, :update ]
   cache_sweeper :story_sweeper, :only => [:create]
 
   before_filter :set_current_tab
@@ -29,11 +30,27 @@ class ArticlesController < ApplicationController
       #format.json { @articles = Content.articles.refine(params) }
     end
   end
-    
+
+  def edit
+    @article = Article.find(params[:id])
+  end
+  
+  def update
+    @article = Article.find(params[:id])
+    if @article.update_attributes(params[:article])
+      flash[:success] = "Successfully updated your article."
+  		redirect_to story_path(@article.content.id)    	
+    else
+      flash[:error] = "Could not update your article. Please try again."
+      render :edit
+    end
+  end
+  
   def new
     @current_sub_tab = 'New Article'
     @article = Article.new
     @article.build_content
+    @drafts = Content.draft_articles.find(:all, :conditions => {:user_id => @current_user })
   end
 
   def create
@@ -70,6 +87,10 @@ class ArticlesController < ApplicationController
   end
 
   private
+  
+  def check_valid_user
+    redirect_to home_index_path and return false unless current_user == Article.find(params[:id]).author
+  end
 
   def set_current_tab
     if MENU.key? 'articles'

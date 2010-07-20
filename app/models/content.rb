@@ -23,9 +23,10 @@ class Content < ActiveRecord::Base
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 10)} }
   named_scope :newest_stories, lambda { |*args| { :conditions => ["article_id IS NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
-  named_scope :newest_articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
-  named_scope :articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["created_at desc"]} }
-  named_scope :top_articles, lambda { |*args| { :conditions => ["article_id IS NOT NULL"], :order => ["votes_tally desc"], :limit => (args.first || 5)} }
+  named_scope :newest_articles, lambda { |*args| { :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 0"], :order => ["created_at desc"], :limit => (args.first || 5)} }
+  named_scope :articles, lambda { |*args| { :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 0"], :order => ["created_at desc"]} }
+  named_scope :draft_articles, lambda { |*args| { :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 1"], :order => ["created_at desc"]} }
+  named_scope :top_articles, lambda { |*args| {:joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 0"], :order => ["votes_tally desc"], :limit => (args.first || 5)} }
   named_scope :stories, lambda { |*args| { :conditions => ["article_id IS NULL"], :order => ["created_at desc"]} }
 
   attr_accessor :image_url, :tags_string
@@ -53,7 +54,7 @@ class Content < ActiveRecord::Base
       domain = URI.parse(self.url).host.gsub("www.","")
       self.source = Source.find_by_url(domain)      
       unless source
-        self.source = Source.create ({
+        self.source = Source.create({
             :name => domain,
             :url => domain
         })

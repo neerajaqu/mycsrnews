@@ -14,8 +14,13 @@ class StoriesController < ApplicationController
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Stories'
+    if get_setting('exclude_articles_from_news').value
+      #raise "setting: #{get_setting('exclude_articles_from_news').value.inspect}"
+      @contents = Content.top_story_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    else
+      @contents = Content.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    end
     #@contents = Content.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
-    @contents = Content.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     respond_to do |format|
       format.html { @paginate = true }
       format.fbml { @paginate = true }
