@@ -1,15 +1,15 @@
 - content_for :sub_nav do
   = render :partial => 'subnav'
 
-#col_left
+#col_full
   #newIdea
-    .panel_1
+    .panel_full
       .panelBar
         %h2 
           Add a new link
       .formBox
         %h4.title== What's your suggested link for #{APP_CONFIG['site_title']}?
-        
+      
         - semantic_form_for @resource do |form|
           - form.inputs do
             = form.input :title, :label => t('.label_title'),:hint =>t('.hint_title')
@@ -23,6 +23,3 @@
             = render :partial => 'shared/forms/wall_postable', :locals => { :form => form }            
           - form.buttons do
             = form.commit_button :label =>t('.label_create'), :button_html => { :class => 'btn'   } 
-
-#col_right
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

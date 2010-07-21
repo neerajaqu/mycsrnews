@@ -4,8 +4,8 @@
   - else
     = render :partial => 'shared/subnav/ideas_subnav'
 
-#col_left
-  .panel_1
+#col_full
+  .panel_full
     .panelBar
       %h2 
         Suggest An Idea
@@ -22,6 +22,3 @@
           = render :partial => 'shared/forms/wall_postable', :locals => { :form => form, :item => @idea }
         - form.buttons do
           = form.commit_button  :button_html => { :class => 'btn_1' } 
-
-#col_right
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

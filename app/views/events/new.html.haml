@@ -4,8 +4,8 @@
 =stylesheet_link_tag "anytimec"
 =javascript_include_tag "anytimec"
 
-#col_left
-  .panel_1
+#col_full
+  .panel_full
     .panelBar
       %h2== What's your event for #{APP_CONFIG['site_topic']}?
     .formBox
@@ -27,10 +27,6 @@
           = render :partial => 'shared/forms/wall_postable', :locals => { :form => form, :item => @event }
         - form.buttons do
           = form.commit_button  :button_html => { :class => 'btn'   } 
-
-#col_right
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
-
 
 :javascript
   var oneDay = 24*60*60*1000;
