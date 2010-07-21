@@ -37,6 +37,11 @@ body
 #header, #footer, #pageBody, #adspace, #subNav, .breadcrumbs
   +grid(12)
 
+#col_full
+  position: relative
+  z-index: 1
+  +grid(12)
+
 #col_left
   position: relative
   z-index: 1
@@ -52,6 +57,14 @@ body
   z-index: 1
   width: 320px
   float: left
+
+.panel_full
+  &.first
+    +alpha
+  &.last
+    +omega
+  +grid(12)
+  margin: 0 10px 10px 0
 
 .panel_1
   .panel_4
