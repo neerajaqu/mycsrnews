@@ -102,6 +102,7 @@ class ApplicationController < ActionController::Base
   def load_top_discussed_stories
     @most_discussed_stories ||= Content.find( :all,
     	:limit    => 5,
+    	:conditions => 'created_at > date_sub(now(), INTERVAL 1 WEEK)',
     	:order    => "comments_count desc"
     )
   end
