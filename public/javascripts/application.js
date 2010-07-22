@@ -82,20 +82,19 @@ $(function() {
     });
   });
 
-  $('.flag-form').change(function() {
-    $('.flag-form').submit();
-  });
 
-  $('.flag-form').submit(function(event) {
-  	event.preventDefault();
-  	$(this).parent().parent().toggle();
+  $('.flag-form').change(function(event) {
+		event.preventDefault();
+		var flag_form = $(this);
+		var flag_parent = flag_form.parent().parent().parent();
+    if ( $('[name=flag_type]', this).val() != 'choose_flag') {
+		  $(this).parent().html("<img src=\"/images/default/spinner-tiny.gif\" />");
+      var url = change_url_format(flag_form.attr('action'));
+      $.post(url, flag_form.serialize(), function(data) {
+				flag_parent.html('<span class="flag-toggle btnComment">'+data.msg+'</span>').fadeIn("normal");
+			});
+    } 
 
-  	var url = change_url_format($(this).attr('action'));
-  	var list = $('.list_items ul', $(this).parents().filter('.panel_1'));
-  	$.post(url, $(this).serialize(), function(data) {
-  		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
-  		rebuild_facebook_dom();
-    });
   });
 
 	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').click(function(event) {

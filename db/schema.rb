@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100707181429) do
+ActiveRecord::Schema.define(:version => 20100715214727) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(:version => 20100707181429) do
     t.datetime "created_at"
   end
 
+  create_table "chirps", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "recipient_id"
+    t.string   "subject"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "comments", :force => true do |t|
     t.integer  "commentid",        :default => 0
     t.integer  "commentable_id",   :default => 0
@@ -123,34 +132,33 @@ ActiveRecord::Schema.define(:version => 20100707181429) do
   add_index "content_images", ["content_id"], :name => "siteContentId"
 
   create_table "contents", :force => true do |t|
-    t.integer  "contentid",                         :default => 0
-    t.string   "title",                             :default => ""
+    t.integer  "contentid",          :default => 0
+    t.string   "title",              :default => ""
     t.text     "caption"
-    t.string   "source",             :limit => 150, :default => ""
-    t.string   "url",                               :default => ""
-    t.string   "permalink",                         :default => ""
-    t.integer  "postedById",                        :default => 0
-    t.string   "postedByName",                      :default => ""
+    t.string   "url",                :default => ""
+    t.string   "permalink",          :default => ""
+    t.integer  "postedById",         :default => 0
+    t.string   "postedByName",       :default => ""
     t.datetime "created_at"
-    t.integer  "score",                             :default => 0
-    t.integer  "numComments",                       :default => 0
-    t.boolean  "is_featured",                       :default => false
-    t.integer  "user_id",                           :default => 0
-    t.integer  "imageid",                           :default => 0
-    t.integer  "videoIntroId",                      :default => 0
-    t.boolean  "is_blocked",                        :default => false
-    t.integer  "videoid",                           :default => 0
-    t.integer  "widgetid",                          :default => 0
-    t.boolean  "isBlogEntry",                       :default => false
-    t.boolean  "isFeatureCandidate",                :default => false
-    t.integer  "comments_count",                    :default => 0
+    t.integer  "score",              :default => 0
+    t.integer  "numComments",        :default => 0
+    t.boolean  "is_featured",        :default => false
+    t.integer  "user_id",            :default => 0
+    t.integer  "imageid",            :default => 0
+    t.integer  "videoIntroId",       :default => 0
+    t.boolean  "is_blocked",         :default => false
+    t.integer  "videoid",            :default => 0
+    t.integer  "widgetid",           :default => 0
+    t.boolean  "isBlogEntry",        :default => false
+    t.boolean  "isFeatureCandidate", :default => false
+    t.integer  "comments_count",     :default => 0
     t.datetime "updated_at"
     t.integer  "article_id"
     t.string   "cached_slug"
-    t.integer  "flags_count",                       :default => 0
-    t.integer  "votes_tally",                       :default => 0
+    t.integer  "flags_count",        :default => 0
+    t.integer  "votes_tally",        :default => 0
     t.integer  "newswire_id"
-    t.string   "story_type",                        :default => "story"
+    t.string   "story_type",         :default => "story"
     t.string   "summary"
     t.text     "full_html"
     t.integer  "source_id"
@@ -448,6 +456,22 @@ ActiveRecord::Schema.define(:version => 20100707181429) do
     t.boolean  "is_sponsored",        :default => false
   end
 
+  create_table "scores", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "scorable_type"
+    t.integer  "scorable_id"
+    t.string   "score_type"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scores", ["created_at"], :name => "index_scores_on_created_at"
+  add_index "scores", ["scorable_type", "scorable_id"], :name => "index_scores_on_scorable_type_and_scorable_id"
+  add_index "scores", ["scorable_type"], :name => "index_scores_on_scorable_type"
+  add_index "scores", ["score_type"], :name => "index_scores_on_score_type"
+  add_index "scores", ["user_id"], :name => "index_scores_on_user_id"
+
   create_table "sent_cards", :force => true do |t|
     t.integer  "from_user_id"
     t.integer  "to_fb_user_id", :limit => 8
@@ -549,15 +573,18 @@ ActiveRecord::Schema.define(:version => 20100707181429) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer   "user_id",               :limit => 8,                    :null => false
-    t.integer   "facebook_user_id",      :limit => 8, :default => 0
-    t.boolean   "isAppAuthorized",                    :default => false
+    t.integer   "user_id",                     :limit => 8,                    :null => false
+    t.integer   "facebook_user_id",            :limit => 8, :default => 0
+    t.boolean   "isAppAuthorized",                          :default => false
     t.datetime  "born_at"
-    t.timestamp "created_at",                                            :null => false
+    t.timestamp "created_at",                                                  :null => false
     t.datetime  "updated_at"
     t.text      "bio"
-    t.integer   "referred_by_user_id",   :limit => 8, :default => 0
-    t.boolean   "comment_notifications",              :default => false
+    t.integer   "referred_by_user_id",         :limit => 8, :default => 0
+    t.boolean   "comment_notifications",                    :default => false
+    t.boolean   "receive_email_notifications",              :default => true
+    t.boolean   "dont_ask_me_for_email",                    :default => false
+    t.datetime  "email_last_ask"
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

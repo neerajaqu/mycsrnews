@@ -1,0 +1,13 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  
+#col_left
+  .panel_1
+    .formBox
+      - semantic_form_for @user do |form|
+        = render :partial => 'user_form', :locals => { :form => form, :user => @user }
+        - form.buttons do
+          = form.commit_button t('save_user_settings'), :button_html => { :class => 'btn' }
+  
+#col_right
+  = render :partial => 'shared/sidebar/invite_users'

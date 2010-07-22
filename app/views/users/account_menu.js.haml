@@ -11,6 +11,8 @@
       = link_to t('account_menu.invite_friends'), invite_users_path(:format => 'html')
     %li
       = link_to t('account_menu.my_profile'), user_path(current_user, :format => 'html')
+    %li
+      = link_to t('account_menu.change_settings'), edit_user_path(current_user, :format => 'html')
   - else
     %li
       = link_to t('account_menu.sign_in'), login_path(:format => 'html')

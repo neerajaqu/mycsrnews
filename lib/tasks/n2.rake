@@ -89,7 +89,7 @@ namespace :n2 do
 
     desc "Generate model slugs"
     task :generate_model_slugs => :environment do
-      ['User', 'Content', 'IdeaBoard'].each do |model_name|
+      ['User', 'Content', 'Idea', 'IdeaBoard', 'Event', 'Forum', 'Topic',  'Resource', 'ResourceSection'].each do |model_name|
         puts "Creating slugs for #{model_name.titleize}"
         #Rake::Task['friendly_id:redo_slugs'].invoke ENV['MODEL']=model_name
         system("rake friendly_id:redo_slugs MODEL=#{model_name}")

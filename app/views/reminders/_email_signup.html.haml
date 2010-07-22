@@ -1,0 +1,5 @@
+-# email reminder sent by admin to get people to sign up for email
+-# expects locals user
+= I18n.translate('reminders.emailsignup.message')
+%a{:href => "/users/#{user.cached_slug}/edit" }= I18n.translate('reminders.emailsignup.action')
+%a{:href => "/users/dont_ask_me_for_email" }= I18n.translate('reminders.emailsignup.stop')

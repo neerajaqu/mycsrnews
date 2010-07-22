@@ -1,5 +1,5 @@
 class Vote < ActiveRecord::Base
-
+  
   named_scope :for_voter,    lambda { |*args| {:conditions => ["voter_id = ? AND voter_type = ?", args.first.id, args.first.type.name]} }
   named_scope :for_voteable, lambda { |*args| {:conditions => ["voteable_id = ? AND voteable_type = ?", args.first.id, args.first.type.name]} }
   named_scope :recent,       lambda { |*args| {:conditions => ["created_at > ?", (args.first || 2.weeks.ago).to_s(:db)]} }
@@ -12,21 +12,21 @@ class Vote < ActiveRecord::Base
   
   attr_accessible :vote, :voter, :voteable
 
+  # ::HACK::
+  # !!!THIS WILL NOT WORK!!!
+  # This model is first loaded in the vote_fu plugin _before_ the lib
+  # extensions have been loaded, so it will blow up.
+  # To get around this, we are doing Vote.send(:acts_as_scorable) in
+  # the libraries initializer
+  #
+  #acts_as_scorable
+
   # Uncomment this to limit users to a single vote on each item. 
   # validates_uniqueness_of :voteable_id, :scope => [:voteable_type, :voter_type, :voter_id]
 
-  after_create :update_user_karma
   after_save :update_voteable_count
 
   private
-
-  def update_user_karma
-    user = voteable.user
-    vote_value = vote ? 1 : -1
-    user.karma_score += vote_value
-    user.save
-    return false # return false to prevent additional triggers of this method
-  end
 
   def update_voteable_count
     vote_value = vote ? 1 : -1
@@ -36,5 +36,14 @@ class Vote < ActiveRecord::Base
     voteable.votes_tally += vote_value
     voteable.save
     return false # return false to prevent additional triggers of this method
- end
+  end
+
+  def model_score_name
+    "item_vote"
+  end
+
+  def scorable_user
+    voteable.user
+  end
+
 end

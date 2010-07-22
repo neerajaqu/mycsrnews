@@ -2,16 +2,53 @@ class UsersController < ApplicationController
   cache_sweeper :profile_sweeper, :only => [:update_bio]
   cache_sweeper :user_sweeper, :only => [:create, :link_user_accounts]
 
-  before_filter :login_required, :only => [:update_bio, :feed]
+  before_filter :check_valid_user, :only => [:edit, :update ]
+  before_filter :login_required, :only => [:update_bio, :feed, :edit, :update, :dont_ask_me_for_email]
   before_filter :load_top_stories, :only => [:show]
   before_filter :ensure_authenticated_to_facebook, :only => :link_user_accounts
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
-    @users = User.top.paginate :page => params[:page], :per_page => Content.per_page, :order => "karma_score desc"
+    #@users = User.top.paginate :page => params[:page], :per_page => Content.per_page, :order => "karma_score desc"
+    case params[:top]
+      when 'daily'
+        @scores = Score.daily_scores
+        @current_sub_tab = 'daily'
+      when 'weekly'
+        @scores = Score.weekly_scores
+        @current_sub_tab = 'weekly'
+      when 'monthly'
+        @scores = Score.monthly_scores
+        @current_sub_tab = 'monthly'
+      when 'yearly'
+        @scores = Score.yearly_scores
+        @current_sub_tab = 'yearly'
+      when 'alltime'
+        @scores = Score.alltime_scores
+        @current_sub_tab = 'alltime'
+      else
+        @scores = Score.weekly_scores
+        @current_sub_tab = 'weekly'
+    end
     respond_to do |format|
-      format.html { @paginate = true }
+      format.html { @paginate = false }
       format.json { @users = User.refine(params) }
+    end
+  end
+
+  def edit
+    @user = current_user
+  end
+  
+  def update    
+    @user = User.find(params[:id])
+    
+    if @user.user_profile.update_attributes(params[:user][:user_profile]) and @user.update_attributes(params[:user])
+      flash[:success] = "Successfully updated your settings."
+  		redirect_to user_path(@user)    	
+    else
+      flash[:error] = "Could not update your settings as requested. Please try again."
+      render :edit
     end
   end
 
@@ -84,6 +121,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def dont_ask_me_for_email
+    if current_user_profile.update_attribute( :dont_ask_me_for_email, true)
+  		flash[:success] = "We will no longer ask you to enable email notifications."
+  		redirect_to home_index_path
+    else
+  		flash[:error] = "Could not update your notification settings"
+  		redirect_to home_index_path
+  	end
+  end
+  
   def update_bio    
     if request.post?
       @profile = current_user_profile
@@ -112,10 +159,14 @@ class UsersController < ApplicationController
     end
   end
 
-  def settings
-  end
-
   def link_twitter_account
     
   end
+  
+  private
+  
+  def check_valid_user
+    redirect_to home_index_path and return false unless current_user == User.find(params[:id])
+  end
+
 end

@@ -3,7 +3,7 @@ class Flag < ActiveRecord::Base
   belongs_to :flaggable, :polymorphic => true, :counter_cache => true, :touch => true
 
   def self.flag_types
-    ['spam', 'abuse', 'urgent', 'other']
+    ['spam', 'abuse', 'urgent', 'miscellaneous']
   end
 
   def self.valid_flag_type? flag_type

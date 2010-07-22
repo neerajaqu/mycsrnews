@@ -10,6 +10,7 @@ en:
     sign_in: "Sign in"
     sign_out: "Sign out"
     my_profile: "Your profile"
+    change_settings: "Change settings"
     register: "Register"
     invite_friends: "Invite your friends"
     fix_scrollbars: "Restore scrollbars"
@@ -32,6 +33,12 @@ en:
     title: "Videos"
   audios:
     title: "Audios"
+  top_users:
+    daily: "Daily"
+    monthly: "Monthly"
+    weekly: "Weekly"
+    yearly: "Yearly"
+    alltime: "All Time"
   newest_newswires_title: "Latest Wire News"
   post_newswire: "Post"
   read_newswire: "Read"
@@ -61,6 +68,7 @@ en:
   link_here: "Link to this page"
   karma_score: "Appreciation: {{score}}"
   activity_score: "Participation: {{score}}"
+  total_score: "Total: {{score}}"
   asked_by: "Asked by {{fb_name}} {{date}} ago"
   answered_by: "Answered by {{fb_name}} {{date}} ago"
   answers_count: "{{answer_string}}"
@@ -76,6 +84,8 @@ en:
   invite_users_title: "Invite Your Friends"
   invite_users_detail: "Choose Facebook friends to invite to our application"
   invite_users_button: "Send Invitations"
+  save_user_settings: "Update settings"
+  label_bio_edit: "Tell us about yourself"
   tags: "Tags"
   tags_hint: "Separate each tag with a comma e.g. dining options, raw food, seattle"
   top_article_tags: "Popular Tags"
@@ -173,3 +183,15 @@ en:
   pfeeds:
     latest:
       title: "Latest user activity"
+  flag_strings:
+    choose_flag: "- please choose a reason below -"
+    abuse: "abuse"
+    spam: "spam"
+    urgent: "urgent"
+    miscellaneous: "other"
+  reminders:
+    emailsignup:
+      subject: "Keep in touch with email notifications"
+      message: "Be sure to add your email address so that we can notify you when other readers respond to your stories and comments."
+      action: "Update your email settings"
+      stop: "Don't ask me again"

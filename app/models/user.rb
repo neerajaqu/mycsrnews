@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
 
   acts_as_voter
 
-  named_scope :top, lambda { |*args| { :order => ["karma_score desc"], :limit => (args.first || 5), :conditions => ["karma_score > 0 and is_admin = 0 and is_editor=0"]} }
+  #named_scope :top, lambda { |*args| { :order => ["karma_score desc"], :limit => (args.first || 5), :conditions => ["karma_score > 0 and is_admin = 0 and is_editor=0"]} }
+  named_scope :top, lambda { |*args| { :order => ["karma_score desc"], :limit => (args.first || 5), :conditions => ["karma_score > 0"]} }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 5), :conditions => ["created_at > ?", 2.months.ago]} }
   named_scope :last_active, lambda { { :conditions => ["last_active > ?", 5.minutes.ago], :order => ["last_active desc"] } }
   named_scope :admins, { :conditions => ["is_admin is true"] }
@@ -25,7 +26,7 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 6..100, :unless => :facebook_connect_user? #r@a.wk
   validates_uniqueness_of   :email, :unless => :facebook_connect_user?
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message, :unless => :facebook_connect_user?
-
+  
   after_create :register_user_to_fb
   before_save :check_profile
   
@@ -34,6 +35,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :related_items
   has_many :messages
+  has_many :received_chirps, :class_name => "Chirp", :foreign_key => 'recipient_id'
+  has_many :sent_chirps, :class_name => "Chirp", :foreign_key => 'user_id', :after_add => :trigger_chirp
   has_many :activities, :class_name => "PfeedItem", :as => :originator, :order => "created_at desc"
   has_many :questions, :after_add => :trigger_question
   has_many :answers, :after_add => :trigger_answer
@@ -59,6 +62,7 @@ class User < ActiveRecord::Base
   # NOTE:: this must be above has_friendly_id, see below
   attr_accessible :login, :email, :name, :password, :password_confirmation, :karma_score, :is_admin, :is_blocked, :cached_slug, :is_moderator, :is_editor, :is_host
 
+  accepts_nested_attributes_for :user_profile
 
   # NOTE NOTE NOTE NOTE NOTE
   # friendly_id uses attr_protected!!!
@@ -78,6 +82,7 @@ class User < ActiveRecord::Base
   def trigger_event(event) end
   def trigger_resource(resource) end
   def trigger_dashboard_message(dashboard_message) end
+  def trigger_chirp(chirp) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -113,6 +118,7 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_resource], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_dashboard_message], :for => [:participant_recipient_voices], :identified_by => :name
   emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_chirp], :for => [:participant_recipient], :identified_by => :name
   receives_pfeed
 
 
@@ -258,6 +264,18 @@ class User < ActiveRecord::Base
 
   def self.find_admin_users
     User.find(:all, :conditions => ['is_admin = true'])
+  end
+
+  def add_score! score
+    case score.score_type
+      when "participation"
+        field = :activity_score
+      when "karma"
+        field = :karma_score
+      else
+        field = nil
+    end
+    increment!(field, score.value) unless field.nil?
   end
 
   private

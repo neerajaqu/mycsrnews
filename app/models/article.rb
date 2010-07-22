@@ -16,7 +16,7 @@ class Article < ActiveRecord::Base
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["featured_at desc"], :limit => (args.first || 1)} }
   #named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 10)} }
-  named_scope :blog_roll, lambda { |*args| {  :group => [ "author_id"], :order => ["created_at desc"], :limit => (args.first || 30)} }
+  named_scope :blog_roll, lambda { |*args| {  :select => "count(author_id) as author_article_count, author_id", :group => "author_id", :order => "author_article_count desc", :limit => (args.first || 30)} }
 
   accepts_nested_attributes_for :content
 
@@ -30,6 +30,10 @@ class Article < ActiveRecord::Base
 
   def item_description
     content.item_description
+  end
+
+  def item_link
+    content
   end
 
   def toggle_blocked

@@ -9,6 +9,7 @@ class Content < ActiveRecord::Base
   acts_as_refineable
   acts_as_wall_postable
   acts_as_relatable
+  acts_as_scorable
 
   belongs_to :user
   belongs_to :article
@@ -35,7 +36,7 @@ class Content < ActiveRecord::Base
   validates_format_of :image_url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :allow_blank => true, :message => "should look like a URL"
   validates_format_of :tags_string, :with => /^([-a-zA-Z0-9_ ]+,?)+$/, :allow_blank => true, :message => "Invalid tags. Tags can be alphanumeric characters or -_ or a blank space."
 
-  before_save :set_source_id, :if => :is_content?
+  before_save :set_source, :if => :is_content?
   after_save :set_published, :if => :is_newswire?
 
   def self.top_tally
@@ -46,14 +47,20 @@ class Content < ActiveRecord::Base
     })
   end
 
-  def set_source_id
-    source = Source.find_by_url(URI.parse(self.url).host.gsub("www.",""))
-    # to do - search for partial match
-    if source
-      self.source_id = source.id
-    else
-      self.source_id = nil
+  def set_source
+    return true unless source_id.nil?
+    begin
+      domain = URI.parse(self.url).host.gsub("www.","")
+      self.source = Source.find_by_url(domain)      
+      unless source
+        self.source = Source.create ({
+            :name => domain,
+            :url => domain
+        })
+      end
+    rescue 
     end
+    return true
   end
   
   def set_published
@@ -104,6 +111,14 @@ class Content < ActiveRecord::Base
     self.story_type == 'full_html'
   end
 
-  private
+  def model_score_name
+    is_article? ? "article" : "story"
+  end
+
+  def scoreable_user
+    is_article? ? article.author : user
+  end
   
+  private
+
 end
