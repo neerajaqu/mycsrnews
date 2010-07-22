@@ -14,7 +14,7 @@
       .list_stories
         %ul
           - contents.each do |content|
-            #todo hack to fix drafts appearing until we can switch articles out of this widget
+            -# todo hack to fix drafts appearing until we can switch articles out of this widget
             - unless content.article.present? and content.article.is_draft?
               %li{'data-id' => content.cache_key}
                 .thumb.story

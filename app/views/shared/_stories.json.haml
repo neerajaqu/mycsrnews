@@ -1,7 +1,7 @@
 - stories ||= Content.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
 %ul
   - stories.each do |content|
-    #todo hack to fix drafts appearing until we can swithc articles out of this widget
+    -# todo hack to fix drafts appearing until we can swithc articles out of this widget
     - unless content.article.present? and content.article.is_draft?
       %li{'data-id' => content.cache_key}
         .thumb

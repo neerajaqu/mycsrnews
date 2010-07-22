@@ -8,7 +8,7 @@
     .list_stories
       %ul
         - top_stories.each do |story|
-          #todo hack to fix drafts appearing until we can swithc articles out of this widget
+          -# todo hack to fix drafts appearing until we can swithc articles out of this widget
           - unless story.article.present? and story.article.is_draft?
             %li
               .storyBlockWrap
