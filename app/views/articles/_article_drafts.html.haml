@@ -1,9 +1,0 @@
-.panel_2
-  .panelBar
-    %h2= t 'article.drafts'
-    - drafts.each do |article|
-      %li
-        = link_to article.title, edit_article_path(article.article_id)
-    
-    
-

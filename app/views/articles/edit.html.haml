@@ -4,8 +4,8 @@
 = stylesheet_link_tag 'jquery.wysiwyg'  
 = javascript_include_tag 'jquery.wysiwyg'
   
-#col_left
-  .panel_1
+#col_full
+  .panel_full
     .panelBar
       %h2= t '.header'
     .formBox
@@ -13,10 +13,7 @@
         = render :partial => 'article_form', :locals => { :form => form }
         - form.buttons do
           = form.commit_button :button_html => { :class => 'btn'   }
-
-#col_right
-  = render :partial => 'shared/ads_banner', :locals => { :slot_data => @ad_skyscraper }
-
+          
 :javascript
   (function($)
   {

@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :edit, :update, :like], :if => :request_comes_from_facebook?
+  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :drafts, :create, :edit, :update, :like], :if => :request_comes_from_facebook?
   before_filter :check_valid_user, :only => [:edit, :update ]
   cache_sweeper :story_sweeper, :only => [:create]
 
@@ -20,6 +20,11 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def drafts
+    @current_sub_tab = 'Draft Articles'
+    @drafts = Content.draft_articles.find(:all, :conditions => {:user_id => @current_user })
+  end
+
   def user_index
     @user = User.find(params[:user_id])    
     @page = false
@@ -32,25 +37,30 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    @current_sub_tab = 'New Article'
     @article = Article.find(params[:id])
   end
   
   def update
     @article = Article.find(params[:id])
-    if @article.update_attributes(params[:article])
-      flash[:success] = "Successfully updated your article."
-  		redirect_to story_path(@article.content.id)    	
+    if @article.update_attributes(params[:article]) and @article.update_attribute(:is_draft, params[:is_draft])
+      unless @article.is_draft
+        flash[:success] = "Successfully posted your updated article!"
+        redirect_to story_path(@article.content.id)
+      else
+        flash[:success] = "Successfully saved your draft article."
+        redirect_to drafts_articles_path()
+      end
     else
       flash[:error] = "Could not update your article. Please try again."
       render :edit
     end
   end
-  
+    
   def new
     @current_sub_tab = 'New Article'
     @article = Article.new
     @article.build_content
-    @drafts = Content.draft_articles.find(:all, :conditions => {:user_id => @current_user })
   end
 
   def create
@@ -59,14 +69,20 @@ class ArticlesController < ApplicationController
     @article.content.caption = @article.body
     @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.post_wall = params[:article][:content_attributes][:post_wall]
+    @article.is_draft = params[:is_draft]
     @article.content.user = current_user
     @article.author = current_user
     if @article.valid? and current_user.articles.push @article
       if @article.post_wall?
         session[:post_wall] = @article.content
       end            
-      flash[:success] = "Successfully posted your article!"
-      redirect_to story_path(@article.content)
+      unless @article.is_draft
+        flash[:success] = "Successfully posted your article!"
+        redirect_to story_path(@article.content)
+      else
+        flash[:success] = "Successfully saved your draft article!"
+        redirect_to drafts_articles_path()
+      end
     else
     	flash[:error] = "Could not create your article. Please fix the errors and try again."
     	render :new

@@ -281,6 +281,10 @@ class User < ActiveRecord::Base
     end
     increment!(field, score.value) unless field.nil?
   end
+  
+  def is_blogger?
+    self.articles.count > 0
+  end
 
   private
 

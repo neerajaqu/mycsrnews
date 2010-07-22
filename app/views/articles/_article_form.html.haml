@@ -4,11 +4,13 @@
       = content_form.input :title
       %p= form.input :body
       = content_form.input :url, :required => false, :hint => t('article_url_hint')
+      = content_form.input :tags_string, :required => false, :hint => t('tags_hint')
       #scrollbox
         %a.prev.browse.left_scroll
         .scrollable
           .items
         %a.next.browse.right_scroll
-      = render :partial => 'shared/forms/media_items', :locals => { :form => content_form, :item => @article.content }
-      = content_form.input :tags_string, :required => false, :hint => t('tags_hint')
+      = render :partial => 'shared/forms/media_items', :locals => { :form => content_form, :item => @article.content }      
+      #article_status= label_tag :status, t('articles.status')
+      = select_tag :is_draft, options_for_select( { t('articles.draft') => 1, t('articles.publish') => 0  }, (@article.is_draft ? 1 : 0) ) 
       = render :partial => 'shared/forms/wall_postable', :locals => { :form => content_form }

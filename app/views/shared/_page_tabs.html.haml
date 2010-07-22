@@ -36,6 +36,8 @@
                       %li= link_to t('.users_list'), users_path, :class => tab_selected?(@current_tab, 'articles')
                     - unless MENU['articles']['new_article'].nil?
                       %li= link_to t('.new_article'), new_article_path, :class => tab_selected?(@current_tab, 'articles')
+                      - if current_user.present? and current_user.is_blogger?
+                        %li= link_to t('articles.drafts'), drafts_articles_path, :class => tab_selected?(@current_tab, 'articles')
         - if MENU.key? 'forums'
           %li
             .menu_item
