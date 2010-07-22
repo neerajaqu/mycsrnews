@@ -5,13 +5,11 @@
   - if story.newswire.present?
     = form.input :newswire_id, :as => :hidden
   = form.input :caption, :input_html => { :rows => '10', :cols => '20' }
+  = form.input :tags_string, :required => false, :hint => t('tags_hint')
   #scrollbox
     %a.prev.browse.left_scroll
     .scrollable
       .items
     %a.next.browse.right_scroll
-  
-    
   = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => story }
-  = form.input :tags_string, :required => false, :hint => t('tags_hint')
   = render :partial => 'shared/forms/wall_postable', :locals => { :form => form }
