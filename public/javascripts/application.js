@@ -11,8 +11,8 @@ $(function() {
   $('.unhide').show().removeClass('hidden');
 
   setTimeout(function() {
-		$('.flash').effect('highlight');
-		$('.flash').hide('slow');
+		$('.flash').effect('shake');
+		$('.flash').hide('puff', {}, 'slow');
   }, 3500);
 
   function dialog_response(title, message) {
@@ -82,7 +82,6 @@ $(function() {
     });
   });
 
-
   $('.flag-form').change(function(event) {
 		event.preventDefault();
 		var flag_form = $(this);
@@ -94,7 +93,6 @@ $(function() {
 				flag_parent.html('<span class="flag-toggle btnComment">'+data.msg+'</span>').fadeIn("normal");
 			});
     } 
-
   });
 
 	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').click(function(event) {
