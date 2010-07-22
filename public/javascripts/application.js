@@ -11,8 +11,8 @@ $(function() {
   $('.unhide').show().removeClass('hidden');
 
   setTimeout(function() {
-		$('.flash').effect('shake');
-		$('.flash').hide('puff', {}, 'slow');
+		$('.flash').effect('highlight');
+		$('.flash').hide('slow');
   }, 3500);
 
   function dialog_response(title, message) {

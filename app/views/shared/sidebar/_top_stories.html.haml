@@ -1,19 +1,29 @@
 -# @expects: local 'story'
 
 - cache :top_stories_html do
-  - top_stories ||= Content.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
+  - top_stories ||= Content.active.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_stories_title')
     .list_items
       %ul
         - top_stories.each do |story|
+<<<<<<< HEAD
           %li
             .article
               .itemBlock
                 %h4= link_to story.title, story_path(story)
                 .profilePic= local_linked_profile_pic story.user
                 .itemMeta
+=======
+          -# todo hack to fix drafts appearing until we can swithc articles out of this widget
+          - unless story.article.present? and story.article.is_draft?
+            %li
+              .storyBlockWrap
+                %h4= link_to story.title, story_path(story)
+                .profilePic= local_linked_profile_pic story.user
+                .storyBlockMeta
+>>>>>>> ce7a64940ec9cac7ea54f853b988d2f5d771a019
                   %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
                   %span.btnComment.float_left== #{like_link story} #{story.votes_tally}
                   %span.btnComment.float_left== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

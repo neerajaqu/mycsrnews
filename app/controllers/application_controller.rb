@@ -102,6 +102,7 @@ class ApplicationController < ActionController::Base
   def load_top_discussed_stories
     @most_discussed_stories ||= Content.find( :all,
     	:limit    => 5,
+    	:conditions => 'created_at > date_sub(now(), INTERVAL 1 WEEK)',
     	:order    => "comments_count desc"
     )
   end
@@ -123,7 +124,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_newest_articles
-    @newest_articles ||= Article.active.newest 5
+    @newest_articles ||= Article.published.active.newest 5
   end
 
   def load_newest_images

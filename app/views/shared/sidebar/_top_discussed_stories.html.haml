@@ -1,6 +1,7 @@
 -# @expects: local 'most_discussed_stories'
 
 - cache :most_discussed_stories_html do
+<<<<<<< HEAD
   - most_discussed_stories ||= Content.find( :all, :limit => 5, :order => "comments_count desc")
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
@@ -13,6 +14,20 @@
               %h4= link_to story.title, story_path(story)
               .profilePic= local_linked_profile_pic story.user
               .itemMeta
+=======
+  - most_discussed_stories ||= Content.find( :all, :conditions => 'created_at > date_sub(now(), INTERVAL 1 WEEK)', :limit => 5, :order => "comments_count desc")
+  - unless most_discussed_stories.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('.top_discussed_title')
+      .list_stories
+        %ul
+          - most_discussed_stories.each do |story|
+            %li
+              %h4= link_to story.title, story_path(story)
+              .profilePic= local_linked_profile_pic story.user
+              .storyBlockMeta
+>>>>>>> ce7a64940ec9cac7ea54f853b988d2f5d771a019
                 %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
                 %span.btnComment.float_left== #{like_link story} #{story.votes_tally}
                 %span.btnComment.float_left== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

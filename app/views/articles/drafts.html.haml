@@ -1,0 +1,24 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/news_subnav'
+  
+#col_left
+  .panel_1
+    .panelBar
+      %h2= t 'articles.drafts'
+    %br
+    %ul.bullet_list
+      - unless @drafts.empty?
+        - @drafts.each do |article|
+          %li
+            = link_to article.title, edit_article_path(article.article_id)
+      - else
+        %li= t('article.nodrafts')
+  
+#col_right
+  = render :partial => 'shared/sidebar/post_article'
+  = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Article, :locale_var => 'top_article_tags' }
+  = render :partial => 'shared/sidebar/moderator_users'
+  = render :partial => 'shared/sidebar/top_articles'
+    
+    
+

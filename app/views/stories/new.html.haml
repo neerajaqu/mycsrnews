@@ -1,5 +1,6 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/subnav/news_subnav'
+  - unless MENU['stories']['new_article'].nil? and MENU['articles'].nil?
+    = render :partial => 'shared/subnav/news_subnav'
 #col_left
   .panel_1
     .panelBar
@@ -16,4 +17,4 @@
     .panelBar
       %h2= t('.new_story_bookmarklet_intro')
     = render :partial => 'shared/bookmarklet_panel'
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_small_square }
+  -# = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_small_square }

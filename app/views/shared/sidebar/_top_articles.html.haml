@@ -1,11 +1,12 @@
 -# @expects: local 'top_articles'
 
 - cache :top_articles_html do
-  - top_articles ||= Article.find( :all, :limit => 7, :order => "created_at desc" )  
+  - top_articles ||= Article.published.find( :all, :limit => 7, :order => "created_at desc" )  
   - unless top_articles.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('articles.top_title')
+<<<<<<< HEAD
       %ul
         - top_articles.each do |article|
           %li
@@ -15,3 +16,15 @@
               %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
               %span.btnComment.float_left== #{like_link article.content} #{article.content.votes_tally}
               %span.btnComment.float_left== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}
+=======
+      .list_stories
+        %ul
+          - top_articles.each do |article|
+            %li
+              %h4= link_to article.content.title, content_path(article.content)
+              .profilePic= local_linked_profile_pic article.author
+              .storyBlockMeta
+                %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
+                %span.btnComment.float_left== #{like_link article.content} #{article.content.votes_tally}
+                %span.btnComment.float_left== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}
+>>>>>>> ce7a64940ec9cac7ea54f853b988d2f5d771a019

@@ -1,16 +1,17 @@
 -# @expects: local 'newest_articles'
 
 - cache :newest_articles_html do
-  - newest_articles ||= Article.active.newest 5
+  - newest_articles ||= Article.published.active.newest 5
   - unless newest_articles.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('articles.newest_title')
-      %ul
-        - newest_articles.each do |article|
-          %li
-            %h4= link_to article.content.title, content_path(article.content)
-            .profilePic= local_linked_profile_pic article.author
-            %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
-            %span.btnComment.float_left== #{like_link article.content} #{article.content.votes_tally}
-            %span.btnComment== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}  
+      .list_stories
+        %ul
+          - newest_articles.each do |article|
+            %li
+              %h4= link_to article.content.title, content_path(article.content)
+              .profilePic= local_linked_profile_pic article.author
+              %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
+              %span.btnComment.float_left== #{like_link article.content} #{article.content.votes_tally}
+              %span.btnComment== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}  

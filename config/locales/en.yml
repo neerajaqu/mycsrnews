@@ -113,6 +113,12 @@ en:
     newest_title: "Newest Articles"
     featured_title: "Featured Article"
     top_title: "Top Articles"
+    drafts: "Draft Articles"
+    draft: "Draft"
+    publish: "Publish"
+    status: "Status: "
+    nodrafts: "You do not have any draft articles at this time."    
+    editdraft: "Update Your Article"
   static_pages:
     faq: "FAQ found here"
     about_us: "About Us found here"
@@ -193,5 +199,5 @@ en:
     emailsignup:
       subject: "Keep in touch with email notifications"
       message: "Be sure to add your email address so that we can notify you when other readers respond to your stories and comments."
-      action: "Update your email settings"
-      stop: "Don't ask me again"
+      action: "Add your email address"
+      stop: "Don't ask again"

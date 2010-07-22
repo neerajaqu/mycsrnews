@@ -64,7 +64,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :related_items
 
   map.resources :users, :collection => {:link_user_accounts => :get, :dont_ask_me_for_email => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
-  map.resources :articles, :collection => { :index => [:get, :post] }
+  map.resources :articles, :collection => { :index => [:get, :post], :drafts => [:get] }
   map.resources :newswires, :member => { :quick_post => [:get, :post] }
   map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags, :related_items ]
   map.resources :idea_boards, :has_many => :ideas
