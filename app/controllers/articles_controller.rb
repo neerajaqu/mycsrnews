@@ -43,17 +43,26 @@ class ArticlesController < ApplicationController
   
   def update
     @article = Article.find(params[:id])
-    if @article.update_attributes(params[:article]) and @article.update_attribute(:is_draft, params[:is_draft])
+    @article.content.caption = @article.body = params[:article][:body]
+    @article.tag_list = params[:article][:content_attributes][:tags_string]
+    @article.post_wall = params[:article][:content_attributes][:post_wall]
+    @article.is_draft = params[:is_draft]
+    @article.content.user = current_user
+    @article.author = current_user
+    if @article.valid? and @article.update_attributes(params[:article]) and @article.update_attribute(:is_draft, params[:is_draft])
       unless @article.is_draft
-        flash[:success] = "Successfully posted your updated article!"
-        redirect_to story_path(@article.content.id)
+        if @article.post_wall?
+          session[:post_wall] = @article.content
+        end            
+        flash[:success] = "Successfully posted your article!"
+        redirect_to story_path(@article.content)
       else
-        flash[:success] = "Successfully saved your draft article."
+        flash[:success] = "Successfully saved your draft article!"
         redirect_to drafts_articles_path()
       end
     else
-      flash[:error] = "Could not update your article. Please try again."
-      render :edit
+    	flash[:error] = "Could not create your article. Please fix the errors and try again."
+    	render :new
     end
   end
     
@@ -72,20 +81,25 @@ class ArticlesController < ApplicationController
     @article.is_draft = params[:is_draft]
     @article.content.user = current_user
     @article.author = current_user
-    if @article.valid? and current_user.articles.push @article
-      if @article.post_wall?
-        session[:post_wall] = @article.content
-      end            
-      unless @article.is_draft
+    unless @article.is_draft
+      if @article.valid? and current_user.articles.push @article
+        if @article.post_wall?
+          session[:post_wall] = @article.content
+        end            
         flash[:success] = "Successfully posted your article!"
         redirect_to story_path(@article.content)
       else
-        flash[:success] = "Successfully saved your draft article!"
-        redirect_to drafts_articles_path()
+      	flash[:error] = "Could not create your article. Please fix the errors and try again."
+      	render :new
       end
     else
-    	flash[:error] = "Could not create your article. Please fix the errors and try again."
-    	render :new
+      if @article.valid? and @article.save
+        flash[:success] = "Successfully saved your draft article!"
+        redirect_to drafts_articles_path()
+      else
+      	flash[:error] = "Could not create your article. Please fix the errors and try again."
+      	render :new
+      end
     end
   end
 
@@ -93,7 +107,6 @@ class ArticlesController < ApplicationController
     tag_name = CGI.unescape(params[:tag])
     @paginate = true
     @articles = Article.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
-
   end
 
   def set_slot_data

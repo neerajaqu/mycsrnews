@@ -7,7 +7,7 @@
 #col_full
   .panel_full
     .panelBar
-      %h2= t '.header'
+      %h2= t('articles.editdraft')
     .formBox
       - semantic_form_for @article, :html => { :multipart => true } do |form|
         = render :partial => 'article_form', :locals => { :form => form }
