@@ -2,15 +2,14 @@
 // Learn more ~ http://960.gs/
 //Licensed under GPL and MIT.
 
-
-
 // Reset and grid stylesheets
 @import "compass/utilities/general/reset"
 @import 960/grid.sass
-
 +global-reset
+
 //App Skin
 @import skin.sass
+
 // App stylesheets
 @import default.sass
 @import application.sass
@@ -20,16 +19,11 @@
 @import jquery.jcarousel.sass
 @import jcarousel.skin.sass
 
-//Image sizing for Non-facebook
-
-
 // The following are the current grid layout boxes for the site.
 $ninesixty_columns: 12
-
 $ninesixty_gutter_width: 20px
 
-//#bodyWrapper, .panel_1, .panel_2
-//  border: 1px dashed red
+// Site wide Grid Container styles
 body
   +grid-system(12)
   padding-bottom: 20px
@@ -40,7 +34,7 @@ body
 #col_left
   position: relative
   z-index: 1
-  width: 640px
+  +grid(8)
   float: left
   .right
     float: right
@@ -50,54 +44,28 @@ body
 #col_right
   position: relative
   z-index: 1
-  width: 320px
+  +grid(4)
   float: left
 
 .panel_1
-  .panel_4
-    &.first
-      +alpha
-    &.last
-      +omega
-    .thumb
-      +grid(2)
-      margin: 0 0 10px 0
-      img
-        +grid(2)
-        margin: 0
-  &.feature_bg
-    .panel_4
-      margin-top: 5px
-      margin-right: 8px
-      margin-left: 8px
-      margin-bottom: 10px
-      &.first
-        margin-left: 5px
-      &.last
-        margin-right: 5px
-      .thumb
-        height: 80px
-        overflow: hidden
-        &.threeFour
-          height: 100px
-          
-.panel_3
-  width: 50%
-  display: inline-block
-  float: left
-
-.panel_4
-  +grid(2)
-
-.panel_1, #hotTopicBar
   +grid(8)
-
-.feature_bg
-  .left
-    +alpha
-  .right
-    +omega
-
+  +alpha
+  +omega
 
 .panel_2
   +grid(4)
+  +alpha
+  +omega
+
+.panel_3
+  width: 50%
+  float: left
+
+.panel_4
+  float: left
+  width: 25%
+
+.panel_5
+  float: left
+  width: 33.333%
+

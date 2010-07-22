@@ -15,8 +15,8 @@
           = render :partial => 'shared/forms/refine_dropdown'
     .subtitle
       %span= subtitle
-    .storyList
-      .list_stories
+    .itemListWrap
+      .list_items
         %ul
           - collection.each do |item|
             %li{'data-id' => item.cache_key}= render_generic_item item

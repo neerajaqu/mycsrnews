@@ -11,7 +11,7 @@
       %span.bar_link= fb_share_item_button(forum)
     .subtitle
       %span= t('forums.topics.list_subtitle', :forum_description => forum.description)
-    .storyList
+    .itemListWrap
       - if topics.any?
         %table.tablesorter
           %thead

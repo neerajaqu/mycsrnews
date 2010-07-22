@@ -6,7 +6,7 @@
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('forums.top_topics_title')
-      .list_stories.clearfix
+      .list_items.clearfix
         %ul
           - top_topics.each do |topic|
             %li

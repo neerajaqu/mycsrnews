@@ -19,9 +19,9 @@
           = image_tag @event.images.first.url(:medium)
         - if !@event.images.present? && @event.pic.present?
           = image_tag @event.pic
-      .storyBlockWrap
-        %h1.storyHead= @event.name
-        .storyBlockMeta
+      .itemBlock
+        %h1= @event.name
+        .itemMeta
           .eventMetaBlock
             .eventMeta.time
               %h4

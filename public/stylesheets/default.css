@@ -727,13 +727,13 @@ ul#nav2-tabs li a:active {
 	max-height: 135px;
 	}
 
-#col_left .featured_story_half .storyBlockWrap {
+#col_left .featured_story_half .itemBlock {
 	clear: both;
 	width: 230px;
 	margin: 0px;
 	}
 
-#col_left #featurePanel .storyBlockWrap {
+#col_left #featurePanel .itemBlock {
 	float: left;
 	width: 280px;
 	margin: 0px;
@@ -782,7 +782,7 @@ ul#nav2-tabs li a:active {
 	position: relative; top: 45px;
 }
 
-#col_left #readStoryList .storyBlockWrap, #teamWrap #readStoryList .storyBlockWrap{
+#col_left #readStoryList .itemBlock, #teamWrap #readStoryList .itemBlock{
 	float: left;
 	width: 300px;
 	margin: 10px 0px 0px 0px;
@@ -823,7 +823,7 @@ ul#nav2-tabs li a:active {
 	display: inline-block;
 	}
 
-#col_left #myProfile .storyBlockWrap {
+#col_left #myProfile .itemBlock {
 	float: left;
 	width: 300px;
 	margin: 10px 0px 0px 0px;
@@ -848,7 +848,7 @@ ul#nav2-tabs li a:active {
 	float: left;
 	margin: 0px 5px;}
 
-#col_left #commentThread .storyBlockWrap {
+#col_left #commentThread .itemBlock {
 	float: left;
 	width: 420px;
 	margin: 0px;
@@ -928,7 +928,7 @@ ul#nav2-tabs li a:active {
 	margin-top: 15px;
 	}
 
-#teamPanel .storyBlockWrap {
+#teamPanel .itemBlock {
 	float: left;
 	width: 400px;
 	margin: 10px 0px 0px 0px;
@@ -947,7 +947,7 @@ ul#nav2-tabs li a:active {
 	border: 1px solid #D8DFEA;
 	}
 
-#rewardsHead .storyBlockWrap {
+#rewardsHead .itemBlock {
 	float: left;
 	width: 290px;
 	margin: 0px;
@@ -984,14 +984,14 @@ ul#nav2-tabs li a:active {
 	max-height: 50px;
 	}
 
-.gridBlock .storyBlockWrap {
+.gridBlock .itemBlock {
 	float: left;
 	width: 72px;
 	margin: 0px;
 	padding: 20px 0 0 0;
 	}
 
-.gridBlock .storyHead {
+.gridBlock  {
 	clear: both;
 	}
 
@@ -1386,18 +1386,18 @@ li {
 	color: #333333;
 	}
 
-.storyHead {
+ {
 	font-size: 14px;
 	font-weight: bold;
 	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 	}
 
-#col_left .storyBlockWrap {
+#col_left .itemBlock {
 	width: 390px;
 	float: right;
 	}
 
-#col_right .storyBlockWrap {
+#col_right .itemBlock {
 	width: 185px;
 	float: right;
 	}
@@ -1405,7 +1405,7 @@ li {
 
 /* Stories List */
 
-.list_stories .thumb img {
+.list_items .thumb img {
 	/*width: 90px; djm - fix for awkward reward image sizes, will break ie 6*/
 	max-width: 90px;
 	max-height: 90px;
@@ -1421,17 +1421,17 @@ li {
 	margin: 0px 10px 0px 0px;
 	}
 
-.list_stories .profilePic img {
+.list_items .profilePic img {
 	width: 30px;
 	height: 30px;
 	}
 
-.list_stories .profilePicLarger img { /* djm: need a small profile pic for action feed that doesnt override fb pic sizes */
+.list_items .profilePicLarger img { /* djm: need a small profile pic for action feed that doesnt override fb pic sizes */
 	/*width: 30px;
 	height: 30px;*/
 	}
 
-.storyBlockMeta {
+.itemMeta {
 	color: #999999;
 	padding-bottom: 7px;
 	margin: 0;
@@ -1473,7 +1473,7 @@ li {
 	margin: 0px 10px 0px 0px;
 	}
 
-#col_right .top_reward .storyBlockWrap {
+#col_right .top_reward .itemBlock {
 	width: 125px;
 	float: right;
 	}
@@ -1557,7 +1557,7 @@ li {
 	margin: 0px 10px 10px 0px;
 	}
 
-#profileSummary .storyBlockWrap {
+#profileSummary .itemBlock {
 	width: 165px;
 	margin-bottom: 3px;
 	}
@@ -1718,7 +1718,7 @@ li {
 	border-bottom: 1px solid #D8DFEA;
 	}
 
-.microFeed .storyBlockWrap {width: 184px;}
+.microFeed .itemBlock {width: 184px;}
 
 /*********************************
 12)  RESOURCES LIST

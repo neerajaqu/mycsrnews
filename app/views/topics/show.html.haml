@@ -13,8 +13,8 @@
       - if @tags.present?
         .subtitle
           %h3== Tags #{tag_list(@tags, @topic)}
-      .storyList
-        .list_stories
+      .itemListWrap
+        .list_items
           %ul
             - @topic.posts.each do |post|
               = render :partial => 'shared/comment', :locals => { :comment => post}

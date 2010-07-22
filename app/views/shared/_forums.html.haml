@@ -10,8 +10,8 @@
       .subtitle
         %span= t('forums.subtitle')
         
-      .storyList
-        .list_stories
+      .itemListWrap
+        .list_items
           %ul
             - forums.each do |forum|
               %li{'data-id' => forum.cache_key}
@@ -20,11 +20,11 @@
                     = image_tag forum.images.first.url(:thumb)
                   - else
                     = image_tag ('default/watermark.jpg', :width => "100%")
-                .storyBlockWrap.storyBlockSpacer
-                  %h2.storyHead= link_to forum.name, forum
+                .itemBlock
+                  %h2= link_to forum.name, forum
                   %p.storyCaption= forum.description
                   -#.profilePic= local_linked_profile_pic forum.user
-                  .storyBlockMeta.float_left
+                  .itemMeta
                     -#%h3= t('forums.last_active', :fb_name => local_linked_profile_name(forum.user), :date => time_ago_in_words(forum.created_at))
                     - if forum.recent_topics.any?
                       %h3== #{t('forums.last_active')} #{link_to forum.recent_topics.first.title, forum.recent_topics.first}

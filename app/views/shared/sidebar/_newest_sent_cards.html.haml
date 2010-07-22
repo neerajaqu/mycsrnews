@@ -6,13 +6,13 @@
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('cards.newest_sent_cards_title')
-      .list_stories
+      .list_items
         %ul
           - newest_sent_cards.each do |sent_card|
             %li
               %h4= link_to sent_card.card.name, card_path(sent_card.card)
               .profilePic= image_tag sent_card.card.image_path
-              .storyBlockMeta
+              .itemMeta
                 %h3= t('cards.sent_at', :date => time_ago_in_words(sent_card.created_at))
                 -#%span.btnComment.float_left== #{like_link sent_card} #{sent_card.votes_tally}
                 -#%span.btnComment== #{link_to t('comments'), sent_card_path(sent_card, :anchor => "commentListTop")} #{sent_card.comments_count}

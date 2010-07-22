@@ -10,17 +10,17 @@
           = render :partial => 'shared/forms/refine_dropdown'
     .subtitle
       %span= t('.users_subtitle')
-    .storyList
-      .list_stories
+    .itemListWrap
+      .list_items
         %ul
           - users.each do |user|
             %li{'data-id' => user.cache_key}
               .thumb.user
                 = local_linked_profile_pic user, :size => "small"
-              .storyBlockMeta.float_left{ :style => 'width: 60%' }
-                %h2.storyHead== #{local_linked_profile_name(user)}
+              .float_left{ :style => 'width: 60%' }
+                %h2== #{local_linked_profile_name(user)}
                 %p= caption(user.bio,350)
-              .storyBlockMeta.float_right
+              .float_right
                 %h4.userPoints= t('karma_score', :score => user.karma_score)
                 %h3.userPoints= t('activity_score', :score => user.activity_score)
     .clearfix

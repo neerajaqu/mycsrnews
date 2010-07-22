@@ -6,7 +6,7 @@
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('feed_roll_title')
-      .list_stories
+      .list_items
         %ul.bullet_list
           - feed_roll.each do |feed|
             %li

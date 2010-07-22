@@ -5,11 +5,11 @@
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_events_title')
-    .list_stories
+    .list_items
       %ul
         - top_events.each do |event|
           %li
-            .storyBlockWrap
+            .itemBlock
               %h4= link_to event.name, event_path(event)
               .profilePic= local_linked_profile_pic event.user
               .eventBlockMeta

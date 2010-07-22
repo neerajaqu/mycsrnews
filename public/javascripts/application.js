@@ -75,7 +75,7 @@ $(function() {
   	$(this).parent().parent().toggle();
 
   	var url = change_url_format($(this).attr('action'));
-  	var list = $('.list_stories ul', $(this).parents().filter('.panel_1'));
+  	var list = $('.list_items ul', $(this).parents().filter('.panel_1'));
   	$.post(url, $(this).serialize(), function(data) {
   		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
   		rebuild_facebook_dom();
@@ -91,7 +91,7 @@ $(function() {
   	$(this).parent().parent().toggle();
 
   	var url = change_url_format($(this).attr('action'));
-  	var list = $('.list_stories ul', $(this).parents().filter('.panel_1'));
+  	var list = $('.list_items ul', $(this).parents().filter('.panel_1'));
   	$.post(url, $(this).serialize(), function(data) {
   		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
   		rebuild_facebook_dom();

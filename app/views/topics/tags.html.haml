@@ -13,7 +13,7 @@
         %span= t('forums.topics.list_subtitle', :forum_description => @forum.description)
       .subtitle
         %span== Tagged with #{@tag_name}
-      .storyList
+      .itemListWrap
         - if @topics.any?
           %table.tablesorter
             %thead

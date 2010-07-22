@@ -8,19 +8,19 @@
       - if events.present? and events.first.refineable?
         .bar_link
           = render :partial => 'shared/forms/refine_dropdown'
-    .storyList
-      .list_stories
+    .itemListWrap
+      .list_items
         %ul
           - events.each do |event|
             %li.eventBlock
               .eventDetailsBlock
-                .storyBlockWrap
+                .itemBlock
                   %h4
                     -# %span.tag
                     -# could be used to show type of event e.g. Lecture, Party, etc.                    
                     = link_to event.name, event_path(event)
                   .profilePic= local_linked_profile_pic event.user, :size => :square
-                  .storyBlockMeta
+                  .itemMeta
                     %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))                  
                     %span.btnComment.float_left== #{like_link event} #{event.votes_tally}
                     %span.btnComment.float_left== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}

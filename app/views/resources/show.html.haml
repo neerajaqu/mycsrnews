@@ -17,9 +17,9 @@
       .thumb
         - if @resource.images.present?
           = image_tag @resource.images.first.url(:medium)
-      .storyBlockWrap
-        %h1.storyHead= @resource.title
-        .storyBlockMeta
+      .itemBlock
+        %h1= @resource.title
+        .itemMeta
           %h3
             = t('posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => time_ago_in_words(@resource.created_at))
             - if @resource.resource_section.present?

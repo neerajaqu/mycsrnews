@@ -1,12 +1,12 @@
 #col_left
-  #myProfile.panel_1.feature_bg
+  #myProfile.panel_1.featureWrap
     .panelBar
       %h2= t('.title', :name => profile_fb_name(@user,false))
     .panel_3
       .thumb.user-details
         = local_linked_profile_pic @user, :size => 'normal', :width => '180'
     .panel_3
-      .storyBlockWrap
+      .itemBlock
         %h1= profile_fb_name (@user,nil, false, false)
         .pointsTable_profile
           %table
@@ -50,15 +50,15 @@
         .bar_link= link_to t('.bio_edit'), '#', :class => "update-bio"
         = render :partial => 'users/bio_form'
     .panel_block
-      .storyBlockWrap.current-bio
+      .itemBlock.current-bio
         %p= (@user.bio.present?) ? @user.bio : default_bio(@user)
 
   .panel_1
     .panelBar
       %h2= t('.action_feeds')
     #actionFeed
-      #feedList.storyList
-        .list_stories
+      #feedList.itemListWrap
+        .list_items
           - unless @activities.any?
             %p= t('.action_feed_empty')
           - else

@@ -4,13 +4,13 @@
   .panelBar
     %h2= title
 
-  .list_stories
+  .list_items
     %ul
       - ideas.each do |idea|
         %li
           %h4= link_to idea.title, idea_path(idea)
           .profilePic= local_linked_profile_pic idea.user
-          .storyBlockMeta
+          .itemMeta
             %h3 
               Asked By 
               %a 

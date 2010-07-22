@@ -8,8 +8,8 @@
       %span.bar_link= fb_share_item_button(@resource_section)
     .subtitle
       %span= @resource_section.description
-    .storyList
-      .list_stories
+    .itemListWrap
+      .list_items
         %ul
           - @resource_section.resources.each do |resource|
             %li{'data-id' => resource.cache_key}
@@ -18,11 +18,11 @@
                   = image_tag resource.images.first.url(:thumb)
                 - else
                   = image_tag ('default/watermark.jpg')
-              .storyBlockWrap.storyBlockSpacer
-                %h2.storyHead= link_to resource.title, [@resource_section, resource]
+              .itemBlock
+                %h2= link_to resource.title, [@resource_section, resource]
                 %p.storyCaption= linked_item_details resource
                 .profilePic= local_linked_profile_pic resource.user
-                .storyBlockMeta.float_left
+                .itemMeta
                   %h3= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => time_ago_in_words(resource.created_at))
                   %span.btnComment.float_left== #{like_link resource} #{resource.votes_tally}
                   %span.btnComment.float_left== #{link_to t('comments'), [@resource_section, resource]} #{resource.comments_count}

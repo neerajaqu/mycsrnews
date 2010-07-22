@@ -20,9 +20,9 @@
       .thumb
         - if @idea.images.present?
           = image_tag @idea.images.first.url(:medium)
-      .storyBlockWrap
-        %h1.storyHead= @idea.title
-        .storyBlockMeta
+      .itemBlock
+        %h1= @idea.title
+        .itemMeta
           %h3
             = t('posted_by', :fb_name => local_linked_profile_name(@idea.user), :date => time_ago_in_words(@idea.created_at))
             - if @idea.idea_board.present?

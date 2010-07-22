@@ -21,9 +21,9 @@
       .thumb
         - if @story.images.present?
           = image_tag @story.images.first.url(:medium)
-      .storyBlockWrap
-        %h1.storyHead= @story.title
-        .storyBlockMeta
+      .itemBlock
+        %h1= @story.title
+        .itemMeta
           - unless @story.is_article?
             - unless @story.source.present?
               %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => story_source_link(@story), :date => time_ago_in_words(@story.created_at))

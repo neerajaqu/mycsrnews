@@ -17,13 +17,13 @@
 
               %li.eventBlock
                 .eventDetailsBlock
-                  .storyBlockWrap
+                  .itemBlock
                     %h4
                       = check_box_tag "fb_events[]", event.id, false, :style=>"width: 20px;"
                       %span.tag
                         Event:
                       = event.name
-                    .storyBlockMeta
+                    .itemMeta
                       %h3= truncate(event.description, :length => 255)       
                 .eventLocationBlock
                   %ul

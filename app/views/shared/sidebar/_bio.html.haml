@@ -5,5 +5,5 @@
     %h2= t('.posted_by', :fb_name => local_linked_profile_name(user))
   .thumb.user-bio
     = local_linked_profile_pic user
-  .storyBlockWrap
+  .itemBlock
     %p= (user.bio.present?) ? user.bio : default_bio(user)

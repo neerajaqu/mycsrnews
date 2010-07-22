@@ -6,7 +6,7 @@
       = image_tag comment.commentable.images.first.url(:thumb)
     - else
       = image_tag ('default/watermark.jpg', :width => "100%")
-  .storyBlockWrap.storyBlockSpacer
+  .itemBlock
     %blockquote
       .quotes      
         %p= linked_comment_caption comment

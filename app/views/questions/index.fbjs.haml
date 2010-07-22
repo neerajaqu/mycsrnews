@@ -6,11 +6,11 @@
           = image_tag question.images.first.url(:thumb)
         - else
           = image_tag ('default/watermark.jpg')
-      .storyBlockWrap.storyBlockSpacer
-        %h2.storyHead= link_to question.question, question
+      .itemBlock
+        %h2= link_to question.question, question
         %p.storyCaption= linked_item_details question
         .profilePic= local_linked_profile_pic question.user
-        .storyBlockMeta.float_left
+        .itemMeta
           %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
           %span.btnComment.float_left== #{like_link question} #{question.votes_tally}
           %span.btnComment.float_left== #{link_to t('comments'), question_path(question, :anchor => "commentListTop")} #{question.comments_count}

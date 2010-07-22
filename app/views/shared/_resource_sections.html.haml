@@ -3,13 +3,13 @@
     %h2= t('.title')
   .subtitle
     %span= t('.subtitle')
-  .storyList
-    .list_stories.clearfix
+  .itemListWrap
+    .list_items.clearfix
       %ul
         - resource_sections.each do |resource_section|
           %li
-            .storyBlockWrap
-              %p.storyHead= link_to resource_section.name, resource_section
+            .itemBlock
+              %p= link_to resource_section.name, resource_section
               %p.storyCaption= resource_section.description
 
   - unless @no_paginate

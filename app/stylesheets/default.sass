@@ -17,7 +17,6 @@
 
 // Header Container // /* -webkit-box-shadow: #999 0px 2px 12px */
 #header
-
   height: $headerHeight
   margin-bottom: 15px
   position: relative
@@ -454,7 +453,7 @@ li
 // Thumb class stylings
 
 .thumb
-  margin: 10px
+  margin: 5px
   position: relative
   overflow: hidden
   img
@@ -470,15 +469,11 @@ li
     padding: 0
     display: block
   &.threeFour
-    max-height: 190px
-    img
-      top: -10px
+    max-height: 225px
   &.bio
     overflow: visible
   &.nineSixteen
     max-height: 150px
-    img
-      top: -40px
   &.story
     width: 90px
     max-height: 75px
@@ -511,18 +506,68 @@ li
   bottom: 2px
   background: none
 
-.feature_bg
+.featureWrap
   .thumb
-    margin: 10px 15px 0
     display: inline-block
     overflow: hidden
     img
-      width: 280px
+      width: 300px
     &.wide
       display: block
       max-height: 160px
       img
         width: 590px
+
+
+// left and right column backgrounds //
+$ColumnCorners: none
+#col_left
+  background: none
+  -moz-border-radius: $ColumnCorners
+  -webkit-border-radius: $ColumnCorners
+  border-radius: $ColumnCorners
+
+// Universal List styles //
+.itemMeta
+  display: block
+
+.itemBlock
+  margin: 5px
+  max-width: 600px
+  min-width: 200px
+
+  h4
+    margin-bottom: 4px
+  h3
+    margin-bottom: 4px
+
+.article, .newswire, .comment
+  display: inline-block
+  width: 100%
+  
+.list_items
+  .article
+    .thumb
+      margin: 0 10px
+      float: left
+      img
+        max-width: 90px
+    .itemBlock
+      float: left
+      max-width: 500px
+      min-width: 300px
+  .newswire
+    .itemBlock
+      display: block
+      margin: 0 10px
+  .comment
+
+
+
+
+
+
+
 
 #readArticle
   .thumb
@@ -530,14 +575,7 @@ li
     img
       max-width: 280px
 
-.storyList
-  .thumb
-    margin: 0 6px
-    float: left
-    img
-      max-width: 90px
-  .storyBlockWrap
-    margin-left: 110px
+
 
 .featuredNewsList
   margin: 10px 0 0 0
@@ -563,9 +601,37 @@ li
     height: 12px
     width: 12px
 
+
+.featureWrap
+  background: $featureStoryBG
+  .btnComment
+    background: $btnCommentFeatureBG
+
+
+
+.panel_4
+  .thumb
+    max-height: 110px
+    width: 145px
+    margin: 5px
+    img
+      max-width: 145px
+  .storyBlock
+    margin: 5px
+
+.panel_5
+  .thumb
+    max-height: 146px
+    width: 196px
+    margin: 5px
+    img
+      max-width: 196px
+  .storyBlock
+    margin: 5px
+
 // Layout panels - should be used for all element containers //
 .panel_1, .panel_2
-
+  margin: 0 0 15px 0
   .top-tags
     display: inline-block
     padding-top: 4px
@@ -584,7 +650,7 @@ li
           text-decoration: none
           background: $featureStoryBG
 
-  .storyBlockWrap
+  .itemBlock
     .featuredNewsList
       ul
         padding: 0
@@ -602,12 +668,6 @@ li
         margin: 3px 0 4px 0
 
 .panel_1, .panel_2
-  margin-bottom: 10px
-
-.panel_3
-  margin-bottom: 5px
-
-.panel_1, .panel_2
   &.textpage
     h2
       font-size: $fontsize * 1.1
@@ -621,7 +681,7 @@ li
       h2
         color: $sponsorBoxPanelBarTextColor
         font-weight: bold
-    .storyBlockWrap
+    .itemBlock
       margin: 0 8px
   .listTags
     li
@@ -647,7 +707,7 @@ li
       float: left
       width: 75%
       padding: 4px 0 6px 0
-      .storyBlockWrap
+      .itemBlock
         padding-left: 6px
     .eventLocationBlock
       float: left
@@ -728,6 +788,10 @@ li
     textarea
       border: $formBoxTextArea
   .panelBar
+    -moz-border-radius-topleft: $ColumnCorners
+    -moz-border-radius-topright: $ColumnCorners
+    -webkit-border-top-right-radius: $ColumnCorners
+    -webkit-border-top-left-radius: $ColumnCorners
     position: relative
     display: block
     padding: 6px 0 2px 0px
@@ -751,17 +815,7 @@ li
     .bar_link
       float: right
       margin: 0 8px
-  .storyBlockMeta
-    &.float_right
-      margin-right: 10px
-    h4
-      margin-bottom: 3px
-    h3
-      margin-bottom: 4px
-  .storyBlockWrap
-    .storyHead
-      margin: 0 0 8px 0
-      color: $headerColor
+  .itemBlock
     .eventMetaBlock
       background: $subTitleBG
       width: 60%
@@ -1022,19 +1076,8 @@ li
         font-weight: bold
         font-size: $fontsize * 0.9
 
-.feature_bg
-  background: $featureStoryBG
-  .panel_2
-    margin-top: 10px
-  .storyBlockWrap
-    margin: 10px 15px
-    &.header-top
-      margin-top: 10px
-      margin-bottom: -10px
-  .btnComment
-    background: $btnCommentFeatureBG
 
-li.feature_bg
+li.featureWrap
   border-bottom: 1px solid white
 
 
