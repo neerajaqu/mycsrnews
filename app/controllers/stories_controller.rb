@@ -32,6 +32,7 @@ class StoriesController < ApplicationController
 
   def show
     @story = Content.find(params[:id])
+    redirect_to home_index_path if @story.is_article? and @story.article.is_draft?
     tag_cloud (@story.is_article? ? @story.article : @story)
     if MENU.key? 'articles'
       @current_tab = 'articles' if @story.is_article?
