@@ -546,12 +546,12 @@ $ColumnCorners: none
   width: 100%
   
 .list_items
+  .thumb
+    margin: 0 10px
+    float: left
+    img
+      max-width: 90px
   .article
-    .thumb
-      margin: 0 10px
-      float: left
-      img
-        max-width: 90px
     .itemBlock
       float: left
       max-width: 500px
@@ -561,12 +561,6 @@ $ColumnCorners: none
       display: block
       margin: 0 10px
   .comment
-
-
-
-
-
-
 
 
 #readArticle
@@ -1598,3 +1592,47 @@ body div.jGrowl div.jGrowl-closer
 #article_status
   clear: both
   float: left
+  
+.flash
+  padding: .3em .4em
+  margin: 0 auto .5em
+  clear: both
+  width: auto
+
+  p
+    padding-left: 25px
+
+  &.flash_error
+    border: $flashErrorBorder
+    background: $flashErrorBG
+
+  &.flash_success
+    border: $flashSuccessBorder
+    background: $flashSuccessBG
+
+  &.flash_notice, &.info
+    border: $flashNoticeBorder
+    background: $flashNoticeBG
+
+  &.flash_warning
+    border: $flashWarningBorder
+    background: $flashWarningBG
+
+.process
+  background: white url(/images/default/vertical_bg_animation.gif) top left repeat
+  opacity: .5
+
+#contactBox
+  .jcarousel-container
+    img
+      margin-left: 0px
+      margin-top: 0px
+
+.moderator-links
+  display: none !important
+  
+.admin-links
+  display: none !important
+
+.user-present
+  display: none !important

@@ -168,10 +168,29 @@ activity_scores.each do |activity_score|
 end
 
 ad_layouts = [
- { :key_sub_type => 'ad_layouts', :key_name => 'stories_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'default', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'stories_index', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'articles_index', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'resources_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'resource_sections_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'ideas_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'idea_boards_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'events_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'forums_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'topics_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'questions_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'users_index', :layout => "Leader_A" },
  { :key_sub_type => 'ad_layouts', :key_name => 'stories_item', :layout => "Banner_A" },
- { :key_sub_type => 'ad_layouts', :key_name => 'ideas_index', :layout => "Leader_C" },
- { :key_sub_type => 'ad_layouts', :key_name => 'ideas_item', :layout => "Banner_A" }
+ { :key_sub_type => 'ad_layouts', :key_name => 'articles_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'resources_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'ideas_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'resource_sections_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'idea_boards_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'events_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'forums_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'topics_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'questions_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'users_item', :layout => "Banner_A" }
 ]
 
 ad_layouts.each do |ad_layout|

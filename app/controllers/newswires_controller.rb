@@ -1,5 +1,6 @@
 class NewswiresController < ApplicationController
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index]
   before_filter :login_required, :only => [:quick_post]
   before_filter :load_top_stories, :only => [:index]
 

@@ -4,6 +4,7 @@ class ResourcesController < ApplicationController
   cache_sweeper :resource_sweeper, :only => [:create, :update, :destroy]
 
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show, :my_resources]
   before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_resources
   before_filter :load_newest_resources

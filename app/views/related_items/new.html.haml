@@ -6,4 +6,5 @@
     = render :partial => 'shared/forms/related_item_form' , :locals => { :relatable => @relatable }
 
 #col_right
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

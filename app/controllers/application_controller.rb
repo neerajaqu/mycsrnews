@@ -352,4 +352,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_ad_layout
+    action = ( params['action'] == 'index' ? 'index' : 'item' )    
+    @ad_layout_info = get_ad_layout("#{params['controller']}_#{action}")
+    if @ad_layout_info.present?
+      @ad_layout = @ad_layout_info.layout
+    elsif get_ad_layout("default").present?
+      @ad_layout = get_ad_layout("default").layout
+    else
+      @ad_layout = nil
+    end      
+  end
+
 end

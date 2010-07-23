@@ -1,13 +1,16 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   
 #col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
   - if @article_images.present?
     = render_media_items @article_images
   = render :partial => 'shared/articles', :locals => { :contents => @articles, :paginate => @paginate, :page => @page , :refine => @refine }
   
 #col_right
   = render :partial => 'shared/sidebar/post_article'
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Article, :locale_var => 'top_article_tags' }
   = render :partial => 'shared/sidebar/moderator_users'
   = render :partial => 'shared/sidebar/top_articles'
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

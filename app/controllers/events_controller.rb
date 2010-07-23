@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   cache_sweeper :event_sweeper, :only => [:create, :update, :destroy, :import_facebook]
 
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show, :my_events, :import_facebook]
   before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_events
   before_filter :load_newest_events

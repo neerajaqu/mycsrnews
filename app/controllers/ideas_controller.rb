@@ -4,6 +4,7 @@ class IdeasController < ApplicationController
   cache_sweeper :idea_sweeper, :only => [:create, :update, :destroy]
 
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show, :my_ideas]
   before_filter :login_required, :only => [:new, :create, :update, :my_ideas]
   before_filter :load_top_ideas
   before_filter :load_newest_ideas

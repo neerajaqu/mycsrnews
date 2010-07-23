@@ -5,7 +5,7 @@ class StoriesController < ApplicationController
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
-  before_filter :set_ad_layout
+  before_filter :set_ad_layout, :only => [:index, :show]
   before_filter :login_required, :only => [:like, :new, :create]
   before_filter :load_top_stories, :only => [:index, :tags]
   before_filter :load_top_discussed_stories, :only => [:index, :tags]
@@ -108,11 +108,6 @@ class StoriesController < ApplicationController
   end
 
   private
-
-  def set_ad_layout
-    action = ( params['action'] == 'index' ? 'index' : 'item' )
-    @ad_layout = get_ad_layout("#{params['controller']}_#{action}").layout    
-  end
   
   def set_current_tab
     @current_tab = 'stories'

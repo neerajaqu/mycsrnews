@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
 
   before_filter :login_required, :only => [:like, :new, :create, :create_answer]
+  before_filter :set_ad_layout, :only => [:index, :show, :my_questions]
 
   cache_sweeper :qanda_sweeper, :only => [:create, :update, :destroy, :create_answer]
 
