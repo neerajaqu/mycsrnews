@@ -46,7 +46,7 @@ class Admin::FeaturedItemsController < AdminController
         item = get_item item_id
         section_data.children.create({:name => "item_#{item_id}", :featured_type => "featured_item", :featurable => item})
         #tweet item
-        tweet(item) if Metadata::Setting.find_setting('tweet_featured_items').value == 'true'
+        #tweet(item) if Metadata::Setting.find_setting('tweet_featured_items').value == 'true'
       end
     end
 

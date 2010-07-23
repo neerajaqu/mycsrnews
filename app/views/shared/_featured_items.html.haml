@@ -13,7 +13,6 @@
             %h2= t('featured_stories')
           .panel_3
             .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
-            .itemBlock
           .panel_3
             .itemBlock
               %h1= link_to primary1.featured_title, primary1.featured_url
@@ -37,8 +36,8 @@
               %p
                 = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
                 = link_to 'More...', primary1
-              %span.btnComment.float_left== #{like_link primary1} #{primary1.num_votes}
-              %span.btnComment.float_left== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
+              %span.btnComment== #{like_link primary1} #{primary1.num_votes}
+              %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
               .bullet_list.float_left
                 %ul
                   %li
