@@ -1,7 +1,9 @@
 - content_for :sub_nav do
   = render :partial => 'shared/breadcrumbs', :locals => { :breadcrumbs => forum_breadcrumbs(@topic) }
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
 
 #col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
   - cache @topic do
     - paginate ||= false
     .panel_1
@@ -24,6 +26,8 @@
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @topic }
 
 #col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/newest_topics'
   = render :partial => 'shared/sidebar/top_topics'
   = render :partial => 'shared/sidebar/topic_voices', :locals => { :topic => @topic }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
