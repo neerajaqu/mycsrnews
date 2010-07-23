@@ -3,7 +3,6 @@
   = render :partial => 'shared/subnav/questions_subnav'
 
 #col_left
-  = render_ad(:banner, @ad_layout, @ad_banner)
   .panel_1
     .panelBar
       %h2 Ask a question
@@ -21,6 +20,7 @@
             - form.buttons do
               = form.commit_button :button_html => { :class => "btn_1" }
 
+  = render_ad(:banner, @ad_layout, @ad_banner)
   - cache "questions_list_#{@page}html" do
     - questions ||= Question.active.paginate :page => params[:page], :per_page => Question.per_page, :order => "created_at desc"
     - @paginate ||= false
