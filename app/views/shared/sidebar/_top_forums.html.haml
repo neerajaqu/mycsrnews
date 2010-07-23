@@ -10,4 +10,5 @@
         %ul
           - top_forums.each do |forum|
             %li
-              = link_to forum.name, forum_path(forum)
+              .itemBlock
+                = link_to forum.name, forum_path(forum)

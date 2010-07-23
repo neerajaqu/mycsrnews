@@ -8,4 +8,5 @@
       %ul
       - story.user.other_stories(story).each do |other_story|
         %li
-          %h4= link_to other_story.title, story_path(other_story)
+          .itemBlock
+            %h4= link_to other_story.title, story_path(other_story)

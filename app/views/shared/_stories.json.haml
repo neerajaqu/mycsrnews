@@ -11,7 +11,7 @@
             = image_tag ('default/watermark.jpg', :width => "100%")
         .itemBlock
           %h2= link_to content.title, story_path(content, :format => 'html')
-          %p.storyCaption= linked_story_caption content, 150, false, :format => 'html'
+          %p= linked_story_caption content, 150, false, :format => 'html'
           .profilePic= local_linked_profile_pic content.user, :format => 'html'
           .itemMeta
             %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user, :format => 'html'), :date => time_ago_in_words(content.created_at))

@@ -10,10 +10,11 @@
         %ul
           - newest_ideas.each do |idea|
             %li
-              %h4= link_to idea.title, idea_path(idea)
-              .profilePic= local_linked_profile_pic idea.user
-              .itemMeta
-                %h3= t('asked_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
-                %span.btnComment.float_left== #{like_link idea} #{idea.votes_tally}
-                %span.btnComment== #{link_to t('comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
-                -# %span.btnComment= fb_share_item_button(idea)
+              .itemBlock
+                %h4= link_to idea.title, idea_path(idea)
+                .profilePic= local_linked_profile_pic idea.user
+                .itemMeta
+                  %h3= t('asked_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
+                  %span.btnComment== #{like_link idea} #{idea.votes_tally}
+                  %span.btnComment== #{link_to t('comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
+                  -# %span.btnComment= fb_share_item_button(idea)

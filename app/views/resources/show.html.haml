@@ -4,7 +4,7 @@
 
 #col_left
   - cache "#{@resource.cache_key}_html" do
-    #readArticle.panel_1
+    #itemDetails.panel_1
       .topBar
         %ul
           %li
@@ -29,7 +29,7 @@
             %h3== #{tag_list(@tags,@resource)}
           - if @resource.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
-      %div.bodyArticle= sanitize @resource.details
+      %div.itemBlock= sanitize @resource.details
       - if @resource.url.present?
         %div.float_left= link_to t('.visit_url'), @resource.url, :target => "_resource", :class => "btn"
     - if @resource.media_item?

@@ -10,7 +10,7 @@
           %li
             .itemBlock
               %p= link_to idea_board.name, idea_board
-              %p.storyCaption= idea_board.description
+              %p= idea_board.description
 
   - unless @no_paginate
     .clearfix

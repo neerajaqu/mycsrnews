@@ -11,7 +11,7 @@
 
 #col_left
   - cache "#{@story.cache_key}_top_html" do
-    #readArticle.panel_1
+    #itemDetails.panel_1
       .topBar
         %ul
           %li
@@ -21,10 +21,11 @@
           %li= fb_share_item_button(@story)
           %li
             = twitter_share_item_link @story, @story.title
-      .thumb
-        - if @story.images.present?
-          = image_tag @story.images.first.url(:medium)
+
       .itemBlock
+        .thumb
+          - if @story.images.present?
+            = image_tag @story.images.first.url(:medium)
         %h1= @story.title
         .itemMeta
           - unless @story.is_article?
@@ -38,17 +39,18 @@
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
           - if @tags.present?
             %h3== Tags #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
-      - if @story.media_item?
-        =render_media_items @story, :size => 'large'
+        - if @story.media_item?
+          =render_media_items @story, :size => 'large'
         
-      - if @story.is_article?
-        %div.bodyArticle= sanitize nl2br(@story.caption)
-      - elsif @story.full_html?
-        %div.bodyArticle= nl2br(@story.caption)
-      - else
-        %div.bodyArticle= sanitize caption(@story.caption, 500)
+        - if @story.is_article?
+          %p= sanitize nl2br(@story.caption)
+        - elsif @story.full_html?
+          %p= nl2br(@story.caption)
+        - else
+          %p= sanitize caption(@story.caption, 500)
       - if @story.url.present?
-        %div.float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
+        %div.itemBlock.clearfix
+          .float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
 
     = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }

@@ -1,3 +1,7 @@
+.panel_1
+  %h1
+    4 story layout
+
 .panel_1.featureWrap
   .panelBar
     %h2
@@ -5,7 +9,7 @@
   .panel_4.first
     .thumb
       %a= image_tag('default/default_thumb.gif')
-    .storyBlock
+    .itemBlock
       %h2 
         %a Title text for sky box goes here - Three line title
       %p
@@ -18,7 +22,7 @@
   .panel_4
     .thumb
       %a= image_tag('default/default_thumb.gif')
-    .storyBlock
+    .itemBlock
       %h2 
         %a Title text for sky box goes here - Three line title
       %p
@@ -31,7 +35,7 @@
   .panel_4
     .thumb
       %a= image_tag('default/default_thumb.gif')
-    .storyBlock
+    .itemBlock
       %h2 
         %a Title text for sky box goes here - Three line title
       %p
@@ -44,7 +48,7 @@
   .panel_4.last
     .thumb
       %a= image_tag('default/default_thumb.gif')
-    .storyBlock
+    .itemBlock
       %h2 
         %a Title text for sky box goes here - Three line title
       %p
@@ -54,99 +58,119 @@
       %span.btnComment
         %a
           Comment
-
-
-.panel_1.featureWrap
-  .panelBar
-    %h2
-      Featured Stories
-  .panel_5
-    .thumb
-      %a= image_tag('default/default_thumb.gif')
-    .storyBlock
-      %h2 
-        %a Title text for sky box goes here - Two line title
-      %p
-        1:45PM Officials shut down an N.C. port and urged people to
-        %a
-          More...
-      %span.btnComment
-        %a
-          Comment
-        16
-  .panel_5
-    .thumb
-      %a= image_tag('default/default_thumb.gif')
-    .storyBlock
-      %h2 
-        %a Title text for sky box goes here - Two line title
-      %p
-        1:45PM Officials shut down an N.C. port and urged people to
-        %a
-          More...
-      %span.btnComment
-        %a
-          Comment
-        16
-  .panel_5
-    .thumb
-      %a= image_tag('default/default_thumb.gif')
-    .storyBlock
-      %h2 
-        %a Title text for sky box goes here - Two line title
-      %p
-        1:45PM Officials shut down an N.C. port and urged people to
-        %a
-          More...
-      %span.btnComment
-        %a
-          Comment
-        16
-
-.panel_1.featureWrap
-  .panelBar
-    %h2
-      Featured Stories
-  .panel_4.first
-    .thumb.threeFour
-      %a= image_tag('default/default_thumb.gif')
-  .panel_4
-    .storyBlock
-      %h2 
-        %a Explosion Warning - Two line title
-      %p
-        1:45PM Officials shut down an N.C. port and urged people to
-        %a
-          More...
-      %span.btnComment
-        16
-        %a
-          Comments
-  .panel_4
-    .thumb.threeFour
-      %a= image_tag('default/default_thumb.gif')
-  .panel_4.last
-    .storyBlock
-      %h2 
-        %a Explosion Warning - Two line title
-      %p
-        1:45PM Officials shut down an N.C. port and urged people to
-        %a
-          More...
-      %span.btnComment
-        16
-        %a
-          Comments
-
 
 .panel_1
   %h1
-    This is the beginning of Layout A
+    3 story layout
 
-#featuredPanel.panel_1.featureWrap
+.panel_1.featureWrap
   .panelBar
     %h2
       Featured Stories
+  .panel_5
+    .thumb
+      %a= image_tag('default/default_thumb.gif')
+    .itemBlock
+      %h2 
+        %a Title text for sky box goes here - Three line title for kicks, giggles and pie
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to
+        %a
+          More...
+      %span.btnComment
+        %a
+          Comment
+        16
+  .panel_5
+    .thumb
+      %a= image_tag('default/default_thumb.gif')
+    .itemBlock
+      %h2 
+        %a Title text for sky box goes here - Two line title
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to
+        %a
+          More...
+      %span.btnComment
+        %a
+          Comment
+        16
+  .panel_5
+    .thumb
+      %a= image_tag('default/default_thumb.gif')
+    .itemBlock
+      %h2 
+        %a Title text for sky box goes here - Two line title
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to
+        %a
+          More...
+      %span.btnComment
+        %a
+          Comment
+        16
+
+.panel_1
+  %h1
+    2 story layouts
+
+.panel_1.featureWrap
+  .panelBar
+    %h2
+      Featured Stories
+  .panel_4.first
+    .thumb.threeFour
+      %a= image_tag('default/default_thumb.gif')
+  .panel_4
+    .itemBlock
+      %h2 
+        %a Explosion Warning - Two line title
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to
+        %a
+          More...
+      %span.btnComment
+        16
+        %a
+          Comments
+  .panel_4
+    .thumb.threeFour
+      %a= image_tag('default/default_thumb.gif')
+  .panel_4.last
+    .itemBlock
+      %h2 
+        %a Explosion Warning - Two line title
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to
+        %a
+          More...
+      %span.btnComment
+        16
+        %a
+          Comments
+
+.panel_1.featureWrap
+  .panelBar
+    %h2
+      Featured News
+  .panel_3
+    .thumb.nineSixteen
+      = image_tag('default/default_thumb.gif')
+    .itemBlock
+      %h1
+        Local News Title Here
+      %p
+        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
+        %a
+          More...
+      %span.btnComment
+        %a.voteUp
+          Like
+        106
+      %span.btnComment
+        %a
+          Comment
+        16
   .panel_3
     .thumb.nineSixteen
       = image_tag('default/default_thumb.gif')
@@ -166,68 +190,9 @@
           Comment
         16
 
-  .panel_3
-    .thumb.nineSixteen
-      = image_tag('default/default_thumb.gif')
-
-    .itemBlock
-      %h1
-        Video News Title here
-      %p
-        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured.
-      %span.btnComment
-        %a.voteUp
-          Like
-        106
-      %span.btnComment
-        %a
-          Comment
-        16
-
 .panel_1
   %h1
-    This is the beginning of Layout A
-
-#featuredPanel.panel_1.featureWrap
-  .panelBar
-    %h2
-      Featured Stories
-  .panel_3
-    .thumb.threeFour
-      = image_tag('default/default_thumb.gif')
-    .itemBlock
-      %h1
-        Local News Title Here
-      %p
-        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
-        %a
-          More...
-      %span.btnComment
-        %a.voteUp
-          Like
-        106
-      %span.btnComment
-        %a
-          Comment
-        16
-
-  .panel_3
-    .thumb.threeFour
-      = image_tag('default/default_thumb.gif')
-
-    .itemBlock
-      %h1
-        Video News Title here
-      %p
-        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured.
-      %span.btnComment
-        %a.voteUp
-          Like
-        106
-      %span.btnComment
-        %a
-          Comment
-        16
+    1 story layout
 
 .panel_1.featureWrap
   .panelBar
@@ -263,6 +228,8 @@
               %a
                 This is a bullet list point
 
+
+
 .panel_1.featureWrap
   .panelBar
     %h2
@@ -297,111 +264,3 @@
     .thumb.threeFour
       = image_tag('default/default_thumb.gif')
 
-.panel_1.featureWrap
-  .panelBar
-    %h2
-      Featured News
-  .panel_3
-    .thumb.nineSixteen
-      = image_tag('default/default_thumb.gif')
-    .itemBlock
-      %h1
-        Local News Title Here
-      %p
-        1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
-        %a
-          More...
-      %span.btnComment
-        %a.voteUp
-          Like
-        106
-      %span.btnComment
-        %a
-          Comment
-        16
-
-  .panel_3
-    .itemBlock
-      .featuredNewsList
-        %ul
-          %li
-            .thumb
-              = image_tag('default/default_thumb.gif')
-            %h4
-              %a
-                Gores split after 40 years o...
-            %p
-              1:45PM Officials shut down an ...
-          %li.selected
-            .thumb
-              = image_tag('default/default_thumb.gif')
-            %h4
-              %a
-                Gores split after 40 years o...
-            %p
-              1:45PM Officials shut down an ...
-          %li
-            .thumb
-              = image_tag('default/default_thumb.gif')
-            %h4
-              %a
-                Gores split after 40 years o...
-            %p
-              1:45PM Officials shut down an ...
-          %li
-            .thumb
-              = image_tag('default/default_thumb.gif')
-            %h4
-              %a
-                Gores split after 40 years o...
-            %p
-              1:45PM Officials shut down an ...
-          %li
-            .thumb
-              = image_tag('default/default_thumb.gif')
-            %h4
-              %a
-                Gores split after 40 years o...
-            %p
-              1:45PM Officials shut down an ...
-
-.panel_1.featureWrap
-  .panelBar
-    %h2
-      Featured News
-  .thumb.wide
-    = image_tag('default/default_thumb.gif')
-  .itemBlock
-    %h1
-      Local News Title thats extra long goes here.
-    %p
-      1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured. 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured. 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
-    %span.btnComment
-      %a.voteUp
-        Like
-      106
-    %span.btnComment
-      %a
-        Comment
-      16
-.panel_1.featureWrap
-  .panelBar
-    %h2
-      Featured News
-  .itemBlock.header-top
-    %h1
-      Local News Title thats extra long goes here.
-  .thumb.wide
-    = image_tag('default/default_thumb.gif')
-  .itemBlock
-    %p
-      1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured. 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured. 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
-    %span.btnComment
-      %a.voteUp
-        Like
-      106
-    %span.btnComment
-      %a
-        Comment
-      16
-  

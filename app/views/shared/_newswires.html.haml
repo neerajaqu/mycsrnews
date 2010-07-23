@@ -15,7 +15,7 @@
               .newswire
                 .itemBlock
                   %h2= link_to newswire.title, newswire.url, :target => "_newswire"
-                  %p.storyCaption= linked_newswire_caption newswire
+                  %p= linked_newswire_caption newswire
                   .itemMeta
                     %h3= t('.via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))
                     %span.btnComment= link_to t('.publish', :site_title => APP_CONFIG['site_title']), new_story_path(:newswire_id => newswire)

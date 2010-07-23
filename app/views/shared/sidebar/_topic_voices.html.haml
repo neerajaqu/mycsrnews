@@ -10,6 +10,7 @@
       %ul
         - topic.voices.uniq.each do |user|
           %li
-            .profilePic= local_linked_profile_pic user
-            .itemMeta
-              %h4== #{local_linked_profile_name(user)}
+            .itemBlock
+              .profilePic= local_linked_profile_pic user
+              .itemMeta
+                %h3== #{local_linked_profile_name(user)}

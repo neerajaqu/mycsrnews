@@ -6,7 +6,7 @@
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('moderator_users', :user_count => moderator_users.size)
-      .userBlockWrap.clearfix
+      .userList
         %ul
           - moderator_users.each do |user|
             %li

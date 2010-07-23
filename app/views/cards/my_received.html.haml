@@ -22,8 +22,8 @@
                 .profilePic= local_linked_profile_pic my_card.from_user
                 .itemMeta
                   %h3= t('cards.sent_by', :fb_name => local_linked_profile_name(my_card.from_user), :date => time_ago_in_words(my_card.created_at))
-                  -#%span.btnComment.float_left== #{link_to t('.stories_like'), like_story_path(card.id), :class => "voteUp"} #{card.votes_tally}
-                  -#%span.btnComment.float_left== #{link_to t('.stories_comments'), story_path(card, :anchor => "commentListTop")} #{card.comments_count}
+                  -#%span.btnComment== #{link_to t('.stories_like'), like_story_path(card.id), :class => "voteUp"} #{card.votes_tally}
+                  -#%span.btnComment== #{link_to t('.stories_comments'), story_path(card, :anchor => "commentListTop")} #{card.comments_count}
     - if @paginate
       .clearfix
         = will_paginate @my_cards
