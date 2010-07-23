@@ -65,12 +65,6 @@ class IdeasController < ApplicationController
     @ideas = @user.ideas.active.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
   end
 
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'ideas')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'ideas')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'ideas')
-  end
-
   private
 
   def set_idea_board

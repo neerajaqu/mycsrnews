@@ -35,12 +35,6 @@ class NewswiresController < ApplicationController
     end
   end
 
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'newswires')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'newswires')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'newswires')
-  end
-
   private
 
   def set_current_tab

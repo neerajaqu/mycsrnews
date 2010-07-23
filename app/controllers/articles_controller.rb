@@ -110,12 +110,6 @@ class ArticlesController < ApplicationController
     @articles = Article.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
 
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'articles')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'articles')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'articles')
-  end
-
   private
   
   def check_valid_user

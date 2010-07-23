@@ -30,7 +30,6 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :set_p3p_header
   before_filter :set_facebook_session_wrapper
-  before_filter :set_slot_data
   before_filter :set_current_tab
   before_filter :set_current_sub_tab
   before_filter :set_locale
@@ -257,12 +256,6 @@ class ApplicationController < ActionController::Base
     @tags = item.tag_counts_on(:tags)
   end
 
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'default')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'default')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'default')
-  end
-  
   def current_user_profile 
     return nil unless current_user.present?
     current_user.profile
@@ -361,7 +354,22 @@ class ApplicationController < ActionController::Base
       @ad_layout = get_ad_layout("default").layout
     else
       @ad_layout = nil
-    end      
+    end
+    unless @ad_layout.nil?
+      # load ad banners
+      if @ad_layout.include? "Leader"
+        @ad_leaderboard = Metadata.get_ad_slot('leaderboard', params['controller'])
+      end
+      if @ad_layout.include? "Banner"
+        @ad_banner = Metadata.get_ad_slot('banner', params['controller'])
+      end
+      if ( @ad_layout.include? "Leader_B" or @ad_layout.include? "Banner_B" or @ad_layout.include? "Sky_A" )
+        @ad_skyscraper = Metadata.get_ad_slot('skyscraper', params['controller'])
+      end
+      if ( @ad_layout.include? "Leader_C" or @ad_layout.include? "Banner_C" or @ad_layout.include? "Square_A" )
+        @ad_leaderboard = Metadata.get_ad_slot('small_square', params['controller'])
+      end
+    end
   end
 
 end

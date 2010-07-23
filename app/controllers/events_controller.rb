@@ -59,12 +59,6 @@ class EventsController < ApplicationController
     @events = @user.events.active.paginate :page => params[:page], :per_page => Event.per_page, :order => "created_at desc"
   end
 
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'events')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'events')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'events')
-  end
-
   def import_facebook
     if request.post?
       @events = current_facebook_user.events(:eids=>params[:fb_events].join(','))

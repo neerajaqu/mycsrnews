@@ -100,13 +100,6 @@ class StoriesController < ApplicationController
     @contents = Content.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
 
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'stories')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'stories')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'stories')
-    @ad_small_square = Metadata.get_ad_slot('small_square', 'stories')
-  end
-
   private
   
   def set_current_tab
