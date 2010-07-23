@@ -1,5 +1,6 @@
 class ForumsController < ApplicationController
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show]
 
   def index
     @forums = Forum.positioned

@@ -1,7 +1,8 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   
 #col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
   .panel_1
     .formBox
       - semantic_form_for @user do |form|
@@ -11,3 +12,5 @@
   
 #col_right
   = render :partial => 'shared/sidebar/invite_users'
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

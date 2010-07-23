@@ -1,8 +1,9 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }  
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   = render :partial => 'shared/subnav/questions_subnav'
 
 #col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
   - @questions ||= Question.active.newest
   - @paginate ||= false
   .panel_1
@@ -40,8 +41,10 @@
           %br
 
 #col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_questions'
   = render :partial => 'shared/sidebar/newest_questions'
   = render :partial => 'shared/sidebar/unanswered_questions'
   = render :partial => 'shared/sidebar/top_answers'
   = render :partial => 'shared/sidebar/newest_answers'
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

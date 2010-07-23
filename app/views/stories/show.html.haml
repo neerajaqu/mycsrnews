@@ -6,6 +6,9 @@
   - content_for :meta_image do
     = meta_image @story.images.first
 
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+
 #col_left
   - cache "#{@story.cache_key}_top_html" do
     #readArticle.panel_1
@@ -47,19 +50,19 @@
       - if @story.url.present?
         %div.float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
 
-
-    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
+    = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
   = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
   - if @story.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
 #col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   - cache "#{@story.cache_key}_sidebar_html" do
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
     = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }
   = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @story, :related_items => @story.related_items }
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
 / #image_box.standard_overlay
 /   #images.scrollable_popup
 /     .items

@@ -46,6 +46,7 @@ class ApplicationController < ActionController::Base
   helper_method :facebook_session
   helper_method :current_facebook_user
   helper_method :get_setting
+  helper_method :get_ad_layout
 
   def logged_in_to_facebook_and_app_authorized
     if ensure_application_is_installed_by_facebook_user  
@@ -331,6 +332,10 @@ class ApplicationController < ActionController::Base
     Metadata::Setting.get name, sub_type
   end
 
+  def get_ad_layout name, sub_type = nil
+    Metadata::AdLayout.get name, sub_type
+  end
+
   def set_custom_sidebar_widget
     cswidget = Metadata::CustomWidget.find_slot('sidebar', "#{self.controller_name}")
     @custom_sidebar_widget = (cswidget and cswidget.has_widget? ? cswidget.metadatable : nil)
@@ -345,6 +350,18 @@ class ApplicationController < ActionController::Base
       	request.format = 'html'
       end
     end
+  end
+
+  def set_ad_layout
+    action = ( params['action'] == 'index' ? 'index' : 'item' )    
+    @ad_layout_info = get_ad_layout("#{params['controller']}_#{action}")
+    if @ad_layout_info.present?
+      @ad_layout = @ad_layout_info.layout
+    elsif get_ad_layout("default").present?
+      @ad_layout = get_ad_layout("default").layout
+    else
+      @ad_layout = nil
+    end      
   end
 
 end

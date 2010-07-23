@@ -1,5 +1,5 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   = render :partial => 'shared/subnav/questions_subnav'
 
 #col_left
@@ -29,7 +29,7 @@
       %div.bodyArticle= sanitize @question.details
       - if @question.media_item?
         = render_media_items @question
-      = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
+      = render_ad(:banner, @ad_layout, @ad_banner)
   #answerForm.panel_1.hide
     .panelBar
       %h2 
@@ -63,7 +63,9 @@
       = render :partial => 'shared/moderate_form', :locals => { :moderatable => @question }
 
 #col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_questions'
   = render :partial => 'shared/sidebar/newest_questions'
   = render :partial => 'shared/sidebar/unanswered_questions'
   = render :partial => 'shared/sidebar/top_answers'
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

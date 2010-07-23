@@ -1,4 +1,8 @@
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+
 #col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
   #myProfile.panel_1.featureWrap
     .panelBar
       %h2= t('.title', :name => profile_fb_name(@user,false))
@@ -72,5 +76,6 @@
         %br
 
 #col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_stories', :locals => { :top_stories => @top_stories }
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }  
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

@@ -1,5 +1,5 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   = render :partial => 'shared/subnav/events_subnav'
 
 #col_left
@@ -53,6 +53,7 @@
       %div.bodyArticle= sanitize @event.description
     - if @event.media_item?
       = render_media_items @event
+    = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @event }
   = render :partial => 'shared/item_footer', :locals => { :item => @event, :title =>@event.name }
@@ -61,3 +62,5 @@
 #col_right
   = render :partial => 'shared/sidebar/bio', :locals => { :user => @event.user }
   = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @event, :related_items => @event.related_items }
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

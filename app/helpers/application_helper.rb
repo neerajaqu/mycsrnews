@@ -451,4 +451,24 @@ EMBED
       link_to_function("Remove", "$(this).parents('.image-fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
     end
   end
+  
+  def render_ad(ad_size, in_layout, ad_slot)
+    unless in_layout.nil?
+      case ad_size
+        when :leaderboard
+          render_ad_partial(ad_slot) if in_layout.include? "Leader"
+        when :banner
+          render_ad_partial(ad_slot) if in_layout.include? "Banner"
+        when :skyscraper
+          render_ad_partial(ad_slot) if ( in_layout.include? "Leader_B" or in_layout.include? "Banner_B" or in_layout.include? "Sky_A" )
+        when :small_square
+          render_ad_partial(ad_slot) if ( in_layout.include? "Leader_C" or in_layout.include? "Banner_C" or in_layout.include? "Square_A" )
+      end
+    end
+  end
+
+  def render_ad_partial(ad_slot)
+    render :partial => 'shared/ads_banner' ,:locals => { :slot_data => ad_slot }
+  end
+
 end

@@ -1,13 +1,16 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   = render :partial => 'shared/subnav/events_subnav'
 
 #col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
   = render :partial => 'shared/events', :locals => { :events => @events, :paginate => @paginate, :page => @page }
 
 #col_right
   = render :partial => 'shared/sidebar/events_whatisthis'
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   - if @custom_sidebar_widget
     = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
   = render :partial => 'shared/sidebar/top_events', :locals => { :top_events => @top_events }
   = render :partial => 'shared/sidebar/newest_events', :locals => { :newest_events => @newest_events }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

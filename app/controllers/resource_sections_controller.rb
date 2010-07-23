@@ -1,5 +1,6 @@
 class ResourceSectionsController < ApplicationController
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show]
   before_filter :login_required, :only => [:new, :create, :update]
   before_filter :load_top_resources, :only => :index
   before_filter :load_newest_resources, :only => :index
