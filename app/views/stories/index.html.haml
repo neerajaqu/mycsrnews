@@ -1,13 +1,20 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  -# if ad_layout(:leaderboard, @ad_layout)
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
   = render :partial => 'shared/subnav/stories_subnav'
 
 #col_left
+  = ad_layout(:banner, @ad_layout, @ad_banner)
+  -# = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_banner }
   = render :partial => 'shared/stories', :locals => { :contents => @contents, :paginate => @paginate, :page => @page }
 
 #col_right
   = render :partial => 'shared/sidebar/post_story'
+  -# if ad_layout(:small_square, @ad_layout)    
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_small_square }
   = render :partial => 'shared/sidebar/top_stories', :locals => { :top_stories => @top_stories }
   = render :partial => 'shared/sidebar/top_discussed_stories', :locals => { :most_discussed_stories => @most_discussed_stories }
   = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Content , :locale_var => 'top_content_tags' }
   = render :partial => 'shared/sidebar/top_users', :locals => { :top_users => @top_users }
+  -# if ad_layout(:skyscraper, @ad_layout)
+    = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }

@@ -46,6 +46,7 @@ class ApplicationController < ActionController::Base
   helper_method :facebook_session
   helper_method :current_facebook_user
   helper_method :get_setting
+  helper_method :get_ad_layout
 
   def logged_in_to_facebook_and_app_authorized
     if ensure_application_is_installed_by_facebook_user  
@@ -329,6 +330,10 @@ class ApplicationController < ActionController::Base
 
   def get_setting name, sub_type = nil
     Metadata::Setting.get name, sub_type
+  end
+
+  def get_ad_layout name, sub_type = nil
+    Metadata::AdLayout.get name, sub_type
   end
 
   def set_custom_sidebar_widget
