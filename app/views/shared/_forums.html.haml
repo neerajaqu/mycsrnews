@@ -15,7 +15,7 @@
           %ul
             - forums.each do |forum|
               %li{'data-id' => forum.cache_key}
-                .thumb
+                .thumb.story
                   - if forum.images.present?
                     = image_tag forum.images.first.url(:thumb)
                   - else
