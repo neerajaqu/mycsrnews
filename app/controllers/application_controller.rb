@@ -367,7 +367,7 @@ class ApplicationController < ActionController::Base
         @ad_skyscraper = Metadata.get_ad_slot('skyscraper', params['controller'])
       end
       if ( @ad_layout.include? "Leader_C" or @ad_layout.include? "Banner_C" or @ad_layout.include? "Square_A" )
-        @ad_leaderboard = Metadata.get_ad_slot('small_square', params['controller'])
+        @ad_small_square = Metadata.get_ad_slot('small_square', params['controller'])
       end
     end
   end

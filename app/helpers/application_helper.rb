@@ -454,6 +454,7 @@ EMBED
   
   def render_ad(ad_size, in_layout, ad_slot)
     unless in_layout.nil?
+      raise in_layout.inspect
       case ad_size
         when :leaderboard
           render_ad_partial(ad_slot) if in_layout.include? "Leader"
