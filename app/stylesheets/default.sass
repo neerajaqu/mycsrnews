@@ -1598,3 +1598,47 @@ body div.jGrowl div.jGrowl-closer
 #article_status
   clear: both
   float: left
+
+.flash
+  padding: .3em .4em
+  margin: 0 auto .5em
+  clear: both
+  width: auto
+
+  p
+    padding-left: 25px
+
+  &.flash_error
+    border: $flashErrorBorder
+    background: $flashErrorBG
+
+  &.flash_success
+    border: $flashSuccessBorder
+    background: $flashSuccessBG
+
+  &.flash_notice, &.info
+    border: $flashNoticeBorder
+    background: $flashNoticeBG
+
+  &.flash_warning
+    border: $flashWarningBorder
+    background: $flashWarningBG
+
+.process
+  background: white url(/images/default/vertical_bg_animation.gif) top left repeat
+  opacity: .5
+
+#contactBox
+  .jcarousel-container
+    img
+      margin-left: 0px
+      margin-top: 0px
+
+.moderator-links
+  display: none !important
+  
+.admin-links
+  display: none !important
+
+.user-present
+  display: none !important
