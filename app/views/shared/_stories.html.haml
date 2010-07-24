@@ -19,7 +19,7 @@
             - unless content.article.present? and content.article.is_draft?
               %li{'data-id' => content.cache_key}
                 .article
-                  .thumb.story
+                  .thumb
                     - if content.images.present?
                       = image_tag content.images.first.url(:thumb)
                     -else

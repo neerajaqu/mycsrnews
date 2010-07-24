@@ -1,4 +1,4 @@
-- cache :featured_items_html do
+ - cache :featured_items_html do
   - featured_items ||= FeaturedItem.find_root_by_item_name('featured_template')
   - if featured_items.present?
     - section1 = featured_items.children.first
@@ -112,7 +112,7 @@
           .panel_5
             .thumb
               %a= link_to image_tag(box1.featured_image_url), box1.featured_url
-            .storyBlock
+            .itemBlock
               %h4 
                 %a= link_to caption(box1.featured_title,limit_title), box1.featured_url
               %h3
@@ -121,7 +121,7 @@
           .panel_5
             .thumb
               %a= link_to image_tag(box2.featured_image_url), box2.featured_url
-            .storyBlock
+            .itemBlock
               %h4 
                 %a= link_to caption(box2.featured_title,limit_title), box2.featured_url
               %h3
@@ -130,7 +130,7 @@
           .panel_5
             .thumb
               %a= link_to image_tag(box3.featured_image_url), box3.featured_url
-            .storyBlock
+            .itemBlock
               %h4 
                 %a= link_to caption(box3.featured_title,limit_title), box3.featured_url
               %h3
