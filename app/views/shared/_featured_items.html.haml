@@ -209,7 +209,6 @@
             %h2= t('featured_stories')
           .thumb.wide
             = link_to image_tag(primary1.featured_image_url), primary1.featured_url
-            .itemBlock
           .itemBlock
             %h1= link_to primary1.featured_title, primary1.featured_url
             %p
@@ -222,13 +221,14 @@
         - primary2 = section2.children.first.featurable
         - primary3 = section3.children.first.featurable
         - primary4 = section4.children.first.featurable
+        - a = [ primary1, primary2, primary3, primary4]
         #featuredPanel.panel_1.featureWrap
           .panelBar
             %h2= t('featured_stories')
-          .scrollable
-            .items
-              .scrollable_item
-                .inner_scrollable
+          .feature_scrollable
+            .feature_scrollable_items
+              - a.each do |primary1|
+                .panel_items
                   .panel_3
                     .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
                   .panel_3
@@ -239,31 +239,7 @@
                         = link_to 'More...', primary1
                       %span.btnComment== #{like_link primary1} #{primary1.num_votes}
                       %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
-              .scrollable_item
-                .inner_scrollable
-                  .panel_3
-                    .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
-                  .panel_3
-                    .itemBlock
-                      %h1= link_to primary2.featured_title, primary2.featured_url
-                      %p
-                        = caption(sanitize(strip_tags(primary2.featured_blurb)),300)
-                        = link_to 'More...', primary2
-                      %span.btnComment== #{like_link primary2} #{primary2.num_votes}
-                      %span.btnComment== #{link_to t("#{primary2.featured_related_locale}"), primary2} #{primary2.featured_related_count}
-              .scrollable_item
-                .inner_scrollable
-                  .panel_3
-                    .thumb.threeFour= link_to image_tag(primary3.featured_image_url), primary3.featured_url
-                  .panel_3
-                    .itemBlock
-                      %h1= link_to primary3.featured_title, primary3.featured_url
-                      %p
-                        = caption(sanitize(strip_tags(primary3.featured_blurb)),300)
-                        = link_to 'More...', primary3
-                      %span.btnComment== #{like_link primary3} #{primary3.num_votes}
-                      %span.btnComment== #{link_to t("#{primary3.featured_related_locale}"), primary3} #{primary3.featured_related_count}
         :javascript
           $(function() {          	
-          	$(".scrollable").scrollable({circular: true}).autoscroll({ autoplay: true});
+          	$(".feature_scrollable").scrollable({circular: true}).autoscroll({ autoplay: true});
           });
