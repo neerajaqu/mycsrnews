@@ -61,25 +61,103 @@ body
   +grid(12)
   margin: 0 10px 10px 0
 
+/* UNIVERSAL LIST PANEL_1 STYLES */
 .panel_1
   +grid(8)
   +alpha
   +omega
+  .list_items
+    .thumb
+      width: 90px
+      height: 68px
+      margin: 5px
+      float: left
+      img
+        max-width: 90px
+    .itemBlock
+      float: left
+      width: 510px
 
+    /* LIST CLASSES WITH IMAGE */
+    .answer, .article, .comment, .content, .idea, .question, .resource, .user
+      .itemBlock
+        float: left
+ 
+    /* LIST CLASSES WITH NO IMAGE */
+    .newswire
+      .itemBlock
+        display: block 
+        width: 600px
+
+    .event
+      .itemBlock
+        display: block
+
+/* UNIVERSAL LIST PANEL_2 STYLES */
 .panel_2
   +grid(4)
   +alpha
   +omega
+  .list_items
+    .itemBlock
+      width: 290px
+
+
+/**********************************************************************************************/
+/* FEATURED STORY PANEL STYLES */
 
 .panel_3
   width: 50%
   float: left
+  .thumb
+    max-height: 225px
+    width: 300px
+    img
+      width: 300px
 
 .panel_4
   float: left
   width: 25%
+  .thumb
+    max-height: 110px
+    width: 145px
+    img
+      max-width: 145px
 
 .panel_5
   float: left
   width: 33.333%
+  .thumb
+    max-height: 146px
+    width: 196px
+    margin: 5px
+    img
+      max-width: 196px
 
+/**********************************************************************************************/
+/* UNIQUE SIZE REQUIREMENT IMAGES */
+.thumb
+  &.banner
+    margin: 2px
+    max-width: 292px
+    padding: 0
+    display: block
+
+/* DETAILS PAGE THUMB SIZE */
+#itemDetails
+  .thumb
+    margin: 0 0 5px 5px
+    width: 300px
+    max-height: 225px
+    float: right
+    img
+      width: 300px
+  .itemMeta
+    width: 50%
+  .itemBlock
+    display: inline-block
+    width: 610px
+    margin: 5px 5px 10px
+    line-height: 140%
+    font-size: $fontsize
+    
