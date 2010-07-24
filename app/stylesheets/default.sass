@@ -573,7 +573,18 @@ $ColumnCorners: none
   display: inline-block
   width: 100%
 
+/* UNVERSAL LIST LI STYLES */
+.panel_1, .panel_2
+  .list_items
+    li
+      display: inline-block
+      position: relative
+      width: 100%
+      border:
+        bottom: $panelListBorder
+
 /* UNIVERSAL LIST PANEL_1 STYLES */
+
 .panel_1
   .list_items
     .thumb
@@ -680,8 +691,6 @@ $ColumnCorners: none
 
 .panel_1, .panel_2, .panel_full
   margin-bottom: 10px
-
-.panel_1, .panel_2, .panel_full
 
   &.textpage
     h2
@@ -862,12 +871,7 @@ $ColumnCorners: none
     p
       margin: 6px 0px
       line-height: 120%
-  li
-    display: inline-block
-    position: relative
-    width: 100%
-    border:
-      bottom: $panelListBorder
+
   .bullet_list
     margin: 0 10px
     ul
