@@ -85,7 +85,6 @@ settings = [
  { :key_sub_type => 'options', :key_name => 'site_video_url', :layout => APP_CONFIG['base_url'].gsub("http://","").gsub("www",""), :hint => "used by some sites with custom video URLs e.g. boston.com"},
  { :key_sub_type => 'design', :key_name => 'typekit', :layout => (APP_CONFIG['typekit'] || "000000" ) },
  { :key_sub_type => 'twitter', :key_name => 'account', :layout =>(APP_CONFIG['twitter_account'] || "userkey_name" ) },
- { :key_sub_type => 'twitter', :key_name => 'connect_key', :layout => (APP_CONFIG['twitter_connect_key'] || "U6qjcn193333331AuA" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_key', :layout => (APP_CONFIG['twitter_oauth_key'] || "U6qjcn193333331AuA" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_secret', :layout => (APP_CONFIG['twitter_oauth_secret'] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_consumer_key', :layout => (APP_CONFIG['twitter_oauth_key'] || "U6qjcn193333331AuA" ) },

@@ -225,7 +225,7 @@ module ApplicationHelper
   end
 
   def twitter_share_item_link(item,caption,button=false)
-    is_bitly_configured = APP_CONFIG['twitter_connect_key'].present?
+    is_bitly_configured = get_setting('oauth_key').present?
     caption =  Rack::Utils.escape(strip_tags(caption))
     
     if is_bitly_configured

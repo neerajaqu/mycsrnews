@@ -56,7 +56,6 @@ defaults: &defaults
   # Uncomment this line to enable twitter
   #Twitter Settings
   #twitter_account: 'username'
-  twitter_connect_key: 'key'
   twitter_oauth_key: 'key'
   twitter_oauth_secret: 'secret'
 

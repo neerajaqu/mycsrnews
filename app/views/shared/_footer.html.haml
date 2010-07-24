@@ -20,7 +20,7 @@
     = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
     = pipe_spacer
     %span#follow-twitterapi
-    -if APP_CONFIG['twitter_account'] && APP_CONFIG['twitter_connect_key'].present?
+    -if APP_CONFIG['twitter_account'] && get_setting('oauth_key').present?
       :javascript
         twttr.anywhere(function (T) {
           T('#follow-twitterapi').followButton("#{APP_CONFIG['twitter_account']}");
