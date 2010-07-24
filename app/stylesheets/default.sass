@@ -463,11 +463,6 @@ li
     text-decoration: none
   &.welcome
     float: left
-  &.banner
-    margin: 2px auto
-    max-width: 292px
-    padding: 0
-    display: block
   &.threeFour
     max-height: 225px
   &.bio
@@ -506,24 +501,6 @@ li
   bottom: 2px
   background: none
 
-#itemDetails
-  .thumb
-    margin: 0 0 5px 5px
-    width: 300px
-    max-height: 225px
-    float: right
-    img
-      width: 300px
-  .itemMeta
-    width: 50%
-  .itemBlock
-    display: inline-block
-    max-width: 610px
-    margin: 5px 5px 10px
-    line-height: 140%
-    font-size: $fontsize
-
-
 .featuredNewsList
   margin: 10px 0 0 0
   .thumb
@@ -558,16 +535,17 @@ $ColumnCorners: none
 
 /**********************************************************************************************/
 /* UNIVERSAL LIST STYLES */
+
 .itemMeta
   display: inline-block
-  width: 88%
+  width: 80%
   h3
     font-size: 11px
     line-height: 11px
     margin: 0 0 4px 0
 
 .itemBlock
-  margin: 5px 5px 7px
+  margin: 5px 5px 7px 5px
 
 .answer, .article, .comment, .content, .event, .idea, .newswire, .question, .resource, .user
   display: inline-block
@@ -583,75 +561,17 @@ $ColumnCorners: none
       border:
         bottom: $panelListBorder
 
-/* UNIVERSAL LIST PANEL_1 STYLES */
-
-.panel_1
-  .list_items
-    .thumb
-      margin: 5px
-      float: left
-      img
-        max-width: 90px
-    .itemBlock
-      float: left
-      max-width: 510px
-      min-width: 300px
-    /* LIST CLASSES WITH IMAGE */
-    .answer, .article, .comment, .content, .idea, .question, .resource, .user
-      .itemBlock
-        float: left
-        max-width: 500px
-        min-width: 300px
-    /* LIST CLASSES WITH NO IMAGE */
-    .newswire
-      .itemBlock
-        display: block
-        max-width: 600px
-        min-width: 200px
-    .event
-      .itemBlock
-        display: block
-        margin: 0 10px
-        max-width: 600px
-        min-width: 200px
-
-/* UNIVERSAL LIST PANEL_2 STYLES */
-.panel_2
-  .list_items
-    .itemBlock
-      max-width: 290px
-      min-width: 240px
-
 /**********************************************************************************************/
 /* FEATURED STORY PANEL STYLES */
+
 .featureWrap
   background: $featureStoryBG
   .btnComment
     background: $btnCommentFeatureBG
 
-.panel_3
-  .thumb
-    max-height: 225px
-    width: 300px
-    img
-      width: 300px
+/**********************************************************************************************/
+/* LAYOUT PANELS - SHOULD BE USED FOR ALL ELEMENT CONTAINERS */
 
-.panel_4
-  .thumb
-    max-height: 110px
-    width: 145px
-    img
-      max-width: 145px
-
-.panel_5
-  .thumb
-    max-height: 146px
-    width: 196px
-    margin: 5px
-    img
-      max-width: 196px
-
-// Layout panels - should be used for all element containers //
 .panel_1, .panel_2
   margin: 0 0 15px 0
   .top-tags

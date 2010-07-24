@@ -21,16 +21,6 @@
 @import flowplayer_tabs.sass
 
 // Image sizing for Facebook
-.thumb
-  img
-    max-height: 210px
-    max-width: 210px
-
-#itemDetails
-  .thumb
-    img
-      max-height: 210px
-      max-width: 210px
 
 // The following generates the default grids provided by the css version of 960.gs
 $ninesixty_columns: 12
@@ -74,24 +64,104 @@ body
   +grid(12)
   margin: 0 10px 10px 0
 
+/* UNIVERSAL LIST PANEL_1 STYLES */
 .panel_1
   +grid(8)
   +alpha
   +omega
+  .list_items
+    .thumb
+      width: 80px
+      height: 60px
+      margin: 5px
+      float: left
+      img
+        width: 80px
+    .itemBlock
+      float: left
+      width: 386px
 
+    /* LIST CLASSES WITH IMAGE */
+    .answer, .article, .comment, .content, .idea, .question, .resource, .user
+      .itemBlock
+        float: left
+ 
+    /* LIST CLASSES WITH NO IMAGE */
+    .newswire
+      .itemBlock
+        display: block
+        width: 486px
+
+    .event
+      .itemBlock
+        display: block
+
+/* UNIVERSAL LIST PANEL_2 STYLES */
 .panel_2
   +grid(4)
   +alpha
   +omega
+  .list_items
+    .itemBlock
+      width: 233px
+
+
+/**********************************************************************************************/
+/* FEATURED STORY PANEL STYLES */
 
 .panel_3
   width: 50%
   float: left
+  .thumb
+    height: 178px
+    width: 238px
+    img
+      width: 238px
 
 .panel_4
   float: left
   width: 25%
+  .thumb
+    height: 85px
+    width: 114px
+    img
+      width: 114px
 
 .panel_5
   float: left
   width: 33.333%
+  .thumb
+    height: 116px
+    width: 155px
+    img
+      width: 155px
+
+/**********************************************************************************************/
+/* UNIQUE SIZE REQUIREMENT IMAGES */
+.thumb
+  &.banner
+    margin: 2px
+    width: 235px
+    padding: 0
+    display: block
+    img
+      width: 235px
+
+/* DETAILS PAGE THUMB SIZE */
+#itemDetails
+  .thumb
+    margin: 0 0 5px 5px
+    width: 233px
+    height: 182px
+    float: right
+    img
+      width: 233px
+  .itemMeta
+    width: 50%
+  .itemBlock
+    display: inline-block
+    width: 486px
+    margin: 5px 5px 10px
+    line-height: 140%
+    font-size: $fontsize
+    
