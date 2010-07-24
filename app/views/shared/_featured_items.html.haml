@@ -50,8 +50,8 @@
         #featuredPanel.panel_1.featureWrap
           .panelBar
             %h2= t('featured_stories')
-          .panel_4.first
-            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+          .panel_4
+            .thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
           .panel_4
             .itemBlock
               %h2= link_to caption(primary1.featured_title,24), primary1.featured_url
@@ -63,8 +63,8 @@
               -else
                 %span.btnComment== #{like_link primary1} #{primary1.num_votes}
           .panel_4
-            .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
-          .panel_4.last
+            .thumb= link_to image_tag(primary2.featured_image_url), primary2.featured_url
+          .panel_4
             .itemBlock
               %h2= link_to caption(primary2.featured_title,24), primary2.featured_url
               %p
@@ -83,7 +83,7 @@
           .panelBar
             %h2= t('featured_stories')
           .panel_3
-            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
+            .thumb= link_to image_tag(primary1.featured_image_url), primary1.featured_url
             .itemBlock
               %h1= link_to primary1.featured_title, primary1.featured_url
               %p
@@ -92,7 +92,7 @@
               %span.btnComment== #{like_link primary1} #{primary1.num_votes}
               %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
           .panel_3
-            .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
+            .thumb= link_to image_tag(primary2.featured_image_url), primary2.featured_url
             .itemBlock
               %h1= link_to primary2.featured_title, primary2.featured_url
               %p

@@ -14,10 +14,10 @@
           %li= fb_share_item_button(@resource)
           %li
             %a= twitter_share_item_link @resource, @resource.title
-      .thumb
-        - if @resource.images.present?
-          = image_tag @resource.images.first.url(:medium)
       .itemBlock
+        .thumb
+          - if @resource.images.present?
+            = image_tag @resource.images.first.url(:medium)
         %h1= @resource.title
         .itemMeta
           %h3

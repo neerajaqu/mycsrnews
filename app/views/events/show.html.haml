@@ -14,12 +14,12 @@
           %li= fb_share_item_button(@event)
           %li
             %a= twitter_share_item_link @event, @event.name           
-      .thumb.threeFour
-        - if @event.images.present?
-          = image_tag @event.images.first.url(:medium)
-        - if !@event.images.present? && @event.pic.present?
-          = image_tag @event.pic
       .itemBlock
+        .thumb
+          - if @event.images.present?
+            = image_tag @event.images.first.url(:medium)
+          - if !@event.images.present? && @event.pic.present?
+            = image_tag @event.pic
         %h1= @event.name
         .itemMeta
           .eventMetaBlock
