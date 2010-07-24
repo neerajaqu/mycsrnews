@@ -10,6 +10,7 @@
         %ul.bullet_list
           - feed_roll.each do |feed|
             %li
-              %h4= link_to feed.title, feed_newswires_path(feed)
-              -#.profilePic= local_linked_profile_pic idea.user
+              .itemBlock
+                %h4= link_to feed.title, feed_newswires_path(feed)
+                -#.profilePic= local_linked_profile_pic idea.user
         %p= link_to t('read_latest_newswires'), newswires_path

@@ -255,7 +255,7 @@ ul
 li
   list-style-type: none
   margin: 0
-  padding: 10px 0 4px 0
+  padding: 0
 
 .meta
   color: $subheadColor
@@ -450,7 +450,7 @@ li
           &:hover
             text-decoration: none
 
-// Thumb class stylings
+// THUMB HACK STYLING //
 
 .thumb
   margin: 5px
@@ -506,69 +506,22 @@ li
   bottom: 2px
   background: none
 
-.featureWrap
+#itemDetails
   .thumb
-    display: inline-block
-    overflow: hidden
-    img
-      width: 300px
-    &.wide
-      display: block
-      max-height: 160px
-      img
-        width: 590px
-
-
-// left and right column backgrounds //
-$ColumnCorners: none
-#col_left
-  background: none
-  -moz-border-radius: $ColumnCorners
-  -webkit-border-radius: $ColumnCorners
-  border-radius: $ColumnCorners
-
-// Universal List styles //
-.itemMeta
-  display: block
-
-.itemBlock
-  margin: 5px
-  max-width: 600px
-  min-width: 200px
-
-  h4
-    margin-bottom: 4px
-  h3
-    margin-bottom: 4px
-
-.article, .newswire, .comment
-  display: inline-block
-  width: 100%
-  
-.list_items
-  .thumb
-    margin: 0 10px
-    float: left
-    img
-      max-width: 90px
-  .article
-    .itemBlock
-      float: left
-      max-width: 500px
-      min-width: 300px
-  .newswire
-    .itemBlock
-      display: block
-      margin: 0 10px
-  .comment
-
-
-#readArticle
-  .thumb
+    margin: 0 0 5px 5px
+    width: 300px
+    max-height: 225px
     float: right
     img
-      max-width: 280px
-
+      width: 300px
+  .itemMeta
+    width: 50%
+  .itemBlock
+    display: inline-block
+    max-width: 610px
+    margin: 5px 5px 10px
+    line-height: 140%
+    font-size: $fontsize
 
 
 .featuredNewsList
@@ -585,7 +538,7 @@ $ColumnCorners: none
 .profilePic
   position: relative
   float: left
-  margin: 0px 10px 0px 0px
+  margin: 0px 5px 0px 0px
   img
     max-width: 30px
     max-height: 30px
@@ -595,23 +548,100 @@ $ColumnCorners: none
     height: 12px
     width: 12px
 
+// left and right column backgrounds //
+$ColumnCorners: none
+#col_left
+  background: none
+  -moz-border-radius: $ColumnCorners
+  -webkit-border-radius: $ColumnCorners
+  border-radius: $ColumnCorners
 
+/**********************************************************************************************/
+/* UNIVERSAL LIST STYLES */
+.itemMeta
+  display: inline-block
+  width: 88%
+  h3
+    font-size: 11px
+    line-height: 11px
+    margin: 0 0 4px 0
+
+.itemBlock
+  margin: 5px 5px 7px
+
+.answer, .article, .comment, .content, .event, .idea, .newswire, .question, .resource, .user
+  display: inline-block
+  width: 100%
+
+/* UNVERSAL LIST LI STYLES */
+.panel_1, .panel_2
+  .list_items
+    li
+      display: inline-block
+      position: relative
+      width: 100%
+      border:
+        bottom: $panelListBorder
+
+/* UNIVERSAL LIST PANEL_1 STYLES */
+
+.panel_1
+  .list_items
+    .thumb
+      margin: 5px
+      float: left
+      img
+        max-width: 90px
+    .itemBlock
+      float: left
+      max-width: 510px
+      min-width: 300px
+    /* LIST CLASSES WITH IMAGE */
+    .answer, .article, .comment, .content, .idea, .question, .resource, .user
+      .itemBlock
+        float: left
+        max-width: 500px
+        min-width: 300px
+    /* LIST CLASSES WITH NO IMAGE */
+    .newswire
+      .itemBlock
+        display: block
+        max-width: 600px
+        min-width: 200px
+    .event
+      .itemBlock
+        display: block
+        margin: 0 10px
+        max-width: 600px
+        min-width: 200px
+
+/* UNIVERSAL LIST PANEL_2 STYLES */
+.panel_2
+  .list_items
+    .itemBlock
+      max-width: 290px
+      min-width: 240px
+
+/**********************************************************************************************/
+/* FEATURED STORY PANEL STYLES */
 .featureWrap
   background: $featureStoryBG
   .btnComment
     background: $btnCommentFeatureBG
 
-
+.panel_3
+  .thumb
+    max-height: 225px
+    width: 300px
+    img
+      width: 300px
 
 .panel_4
   .thumb
     max-height: 110px
     width: 145px
-    margin: 5px
     img
       max-width: 145px
-  .storyBlock
-    margin: 5px
 
 .panel_5
   .thumb
@@ -620,8 +650,6 @@ $ColumnCorners: none
     margin: 5px
     img
       max-width: 196px
-  .storyBlock
-    margin: 5px
 
 // Layout panels - should be used for all element containers //
 .panel_1, .panel_2
@@ -663,8 +691,6 @@ $ColumnCorners: none
 
 .panel_1, .panel_2, .panel_full
   margin-bottom: 10px
-
-.panel_1, .panel_2, .panel_full
 
   &.textpage
     h2
@@ -750,7 +776,7 @@ $ColumnCorners: none
       .btn
         font-size: $fontsize * 1.15
         margin: 10px auto
-  .userBlockWrap
+  .userList
     li
       padding: 0
       margin: 4px 4px 0 0
@@ -845,13 +871,7 @@ $ColumnCorners: none
     p
       margin: 6px 0px
       line-height: 120%
-  li
-    display: inline-block
-    position: relative
-    width: 100%
-    padding: 8px 0
-    border:
-      bottom: $panelListBorder
+
   .bullet_list
     margin: 0 10px
     ul
@@ -1011,11 +1031,9 @@ $ColumnCorners: none
         background: $HTBaseBG
 
 // Article Style modifications //
-#readArticle
-  .thumb
-    margin-top: 0
+#itemDetails
   .topBar
-    margin-bottom: 15px
+    margin-bottom: 10px
     ul
       border-bottom: none
       display: inline-block
@@ -1037,19 +1055,6 @@ $ColumnCorners: none
           padding-bottom: 2px
         a
           color: $linkColor
-  .bodyArticle
-    color: $bodyColor
-    margin: 8px 5px 14px 5px
-    line-height: 140%
-    font-size: $fontsize
-  .storyCaption
-    p
-      padding: 0
-      margin: 4px 0px
-    br
-      margin: 0
-      line-height: 0px
-      visibility: hidden
 
 // Comment Style Modifications and Additions //
 .commentThread, #commentThread

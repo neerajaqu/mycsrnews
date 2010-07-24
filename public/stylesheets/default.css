@@ -799,7 +799,7 @@ ul#nav2-tabs li a:active {
 	max-height: 135px;
 }
 
-#readStoryList .storyCaption {
+#readStoryList  {
 	clear: both;
 	font-size: 12px;
 	}

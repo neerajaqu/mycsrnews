@@ -10,5 +10,6 @@
         %ul
           - top_topics.each do |topic|
             %li
-              .profilePic= local_linked_profile_pic topic.user
-              = link_to topic.title, topic_path(topic)
+              .itemBlock
+                .profilePic= local_linked_profile_pic topic.user
+                = link_to topic.title, topic_path(topic)

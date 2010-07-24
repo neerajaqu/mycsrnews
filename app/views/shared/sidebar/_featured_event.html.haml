@@ -10,6 +10,7 @@
         %ul
           - featured_events.each do |event|
             %li
-              .profilePic= local_linked_profile_pic event.user
-              = link_to event.name, event_path(event)
-              %p= (event.description.present?) ? event.description : 'no description'
+              .itemBlock
+                .profilePic= local_linked_profile_pic event.user
+                = link_to event.name, event_path(event)
+                %p= (event.description.present?) ? event.description : 'no description'

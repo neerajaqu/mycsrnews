@@ -53,7 +53,7 @@
           .panel_4.first
             .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
           .panel_4
-            .storyBlock
+            .itemBlock
               %h2= link_to caption(primary1.featured_title,24), primary1.featured_url
               %p
                 = caption(sanitize(strip_tags(primary1.featured_blurb)),60)
@@ -65,7 +65,7 @@
           .panel_4
             .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
           .panel_4.last
-            .storyBlock
+            .itemBlock
               %h2= link_to caption(primary2.featured_title,24), primary2.featured_url
               %p
                 = caption(sanitize(strip_tags(primary2.featured_blurb)),60)
@@ -89,8 +89,8 @@
               %p
                 = caption(sanitize(strip_tags(primary1.featured_blurb)),limit_caption)
                 = link_to 'More...', primary1
-              %span.btnComment.float_left== #{like_link primary1} #{primary1.num_votes}
-              %span.btnComment.float_left== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
+              %span.btnComment== #{like_link primary1} #{primary1.num_votes}
+              %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
           .panel_3
             .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
             .itemBlock
@@ -98,8 +98,8 @@
               %p
                 = caption(sanitize(strip_tags(primary2.featured_blurb)),limit_caption)
                 = link_to 'More...', primary2
-              %span.btnComment.float_left== #{like_link primary2} #{primary2.num_votes}
-              %span.btnComment.float_left== #{link_to t("#{primary2.featured_related_locale}"), primary2} #{primary2.featured_related_count}
+              %span.btnComment== #{like_link primary2} #{primary2.num_votes}
+              %span.btnComment== #{link_to t("#{primary2.featured_related_locale}"), primary2} #{primary2.featured_related_count}
       - when 'template_5'
         - box1 = section1.children.first.featurable
         - box2 = section2.children.first.featurable
@@ -169,7 +169,7 @@
           .panel_4.first
             .thumb
               %a= link_to image_tag(box1.featured_image_url), box1.featured_url
-            .storyBlock
+            .itemBlock
               %h4 
                 %a= link_to caption(box1.featured_title,limit_title), box1.featured_url
               %h3
@@ -178,7 +178,7 @@
           .panel_4
             .thumb
               %a= link_to image_tag(box2.featured_image_url), box2.featured_url
-            .storyBlock
+            .itemBlock
               %h4 
                 %a= link_to caption(box2.featured_title,limit_title), box2.featured_url
               %h3
@@ -186,17 +186,17 @@
                 = link_to 'More...', box2
           .panel_4
             .thumb
-              %a= link_to caption(box3.featured_title,limit_title), box3.featured_url
-            .storyBlock
+              %a= link_to image_tag(box3.featured_image_url), box3.featured_url
+            .itemBlock
               %h4 
-                %a= link_to box3.featured_title, box3.featured_url
+                %a= link_to caption(box3.featured_title,limit_title), box3.featured_url
               %h3
                 = caption(sanitize(strip_tags(box3.featured_blurb)),limit_caption)
                 = link_to 'More...', box3
           .panel_4.last
             .thumb
               %a= link_to image_tag(box4.featured_image_url), box4.featured_url
-            .storyBlock
+            .itemBlock
               %h4 
                 %a= link_to caption(box4.featured_title,limit_title), box4.featured_url
               %h3

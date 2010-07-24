@@ -8,9 +8,9 @@
       = image_tag ('default/watermark.jpg', :width => "100%")
   .itemBlock
     %h2= link_to story.title, story_path(story)
-    %p.storyCaption= linked_story_caption story
+    %p= linked_story_caption story
     .profilePic= local_linked_profile_pic story.user
     .itemMeta
       %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
-      %span.btnComment.float_left== #{like_link story} #{story.votes_tally}
-      %span.btnComment.float_left== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
+      %span.btnComment== #{like_link story} #{story.votes_tally}
+      %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

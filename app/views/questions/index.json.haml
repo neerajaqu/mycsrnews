@@ -8,10 +8,10 @@
           = image_tag ('default/watermark.jpg')
       .itemBlock
         %h2= link_to question.question, question
-        %p.storyCaption= linked_item_details question
+        %p= linked_item_details question
         .profilePic= local_linked_profile_pic question.user
         .itemMeta
           %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
-          %span.btnComment.float_left== #{like_link question} #{question.votes.size}
-          %span.btnComment.float_left== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
-          %span.btnComment.float_left= fb_share_item_button question
+          %span.btnComment== #{like_link question} #{question.votes.size}
+          %span.btnComment== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
+          %span.btnComment= fb_share_item_button question

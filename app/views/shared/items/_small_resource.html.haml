@@ -1,3 +1,4 @@
 .resource.small
-  .profilePic= local_linked_profile_pic resource.user
-  = link_to resource.title, resource_path(resource)
+  .itemBlock
+    .profilePic= local_linked_profile_pic resource.user
+    = link_to resource.title, resource_path(resource)

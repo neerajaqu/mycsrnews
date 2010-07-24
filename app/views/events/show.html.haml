@@ -4,7 +4,7 @@
 
 #col_left
   - cache "#{@event.cache_key}_html" do
-    #readArticle.panel_1
+    #itemDetails.panel_1
       .topBar
         %ul
           %li
@@ -50,7 +50,7 @@
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
 
 
-      %div.bodyArticle= sanitize @event.description
+      %div.itemBlock= sanitize @event.description
     - if @event.media_item?
       = render_media_items @event
     = render_ad(:banner, @ad_layout, @ad_banner)

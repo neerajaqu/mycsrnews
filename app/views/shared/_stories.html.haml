@@ -26,7 +26,7 @@
                       = image_tag ('default/watermark.jpg')
                   .itemBlock
                     %h2= link_to content.title, story_path(content)
-                    %p.storyCaption= linked_story_caption content
+                    %p= linked_story_caption content
                   
                     .profilePic= local_linked_profile_pic content.user
                     .itemMeta

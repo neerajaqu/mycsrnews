@@ -1,11 +1,11 @@
 #flowplayer-block
   %ul.tabs
     %li
-      %a{:href => "#first"} t('media.add_image')
+      %a{:href => "#first"}= t('media.add_image')
     %li
-      %a{:href => "#second"} t('media.add_video')
+      %a{:href => "#second"}= t('media.add_video')
     %li
-      %a{:href => "#third"} t('media.add_audio')
+      %a{:href => "#third"}= t('media.add_audio')
   .panes
     .image-form
       - item.images.build if item.images.empty?
