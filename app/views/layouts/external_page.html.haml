@@ -1,0 +1,66 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://www.facebook.com/2008/fbml"}
+  %head
+    - title = (out = yield(:title)) ? "#{out} - #{APP_CONFIG['site_title']}" : APP_CONFIG['site_title']
+    %title= title
+    %meta{:name => 'title', :content => title}
+    %meta{:name => 'description', :content => (out = yield(:meta_description)) ? out : ""}
+    %meta{:name => 'medium', :content => 'news'}
+  
+    - if iframe_facebook_request?
+      = stylesheet_link_tag 'compiled/fb_grid.css', :media => 'screen, projection'
+    - else
+      = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/text.css', :media => 'print'
+    = stylesheet_link_tag 'cards'
+    = stylesheet_link_tag 'tablesorter'
+    = stylesheet_link_tag 'jquery.jgrowl'
+
+    - if APP_CONFIG['typekit'].present? and APP_CONFIG['typekit']
+      = javascript_include_tag "http://use.typekit.com/#{APP_CONFIG['typekit']}.js"
+      :javascript
+        try{Typekit.load();}catch(e){}
+        
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', "http://platform.twitter.com/anywhere.js?id=#{get_setting('oauth_key').value}&v=1",'application', 'jquery.jgrowl','scrollable.min.js','scrollable.autoscroll.min.js'
+    = javascript_include_tag '/users/current'
+
+    = auto_discovery_link_tag(:atom, stories_path(:format => :atom))
+
+    = yield :head_content
+            
+    - stream_post = build_app_stream_post
+    :javascript
+      $(function() {
+        $('.app-share-button').click(function(event) {
+          event.preventDefault();
+          #{fb_connect_stream_publish(stream_post, t('facebook_share') )}
+        });
+      });
+
+  %body
+    #bodyWrapper
+      = fb_connect_javascript_tag
+      - if @share_item
+        = init_fb_connect "XFBML", :js => :jquery do
+          = fb_connect_stream_publish(build_stream_post(@share_item), t('facebook_share'))
+      - else
+        = init_fb_connect "XFBML", :js => :jquery
+
+      = render :partial => 'shared/header'
+      = flash_messages
+
+      = yield
+
+    = render :partial => 'shared/google_analytics'
+
+    - if iframe_facebook_request?
+      <!-- Note: Include this div markup as a workaround for a known bug in this release on IE where you may get a "operation aborted" error -->
+      <div id="FB_HiddenIFrameContainer" style="display:none; position:absolute; left:-100px; top:-100px; width:0px; height: 0px;"></div>
+
+      <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+      <script type="text/javascript"> FB_RequireFeatures(["CanvasUtil"], function(){ FB.XdComm.Server.init('/xd_receiver.html'); FB.CanvasClient.startTimerToSizeToContent(); }); </script>
+
+    -# HACK:: non floating div eliminates webkit resizing issues with facebook javascript
+    %div{:style => "clear: both;"}
+    %iframe{:src => 'http://yahoo.com', :frameborder => 0, :style => "margin: 0px 5px 0px 0px; padding: 0px; width: 110%; height: 3000px;"}
+  

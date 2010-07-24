@@ -22,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   map.test_widgets '/test_widgets.:format', :controller => 'home', :action => 'test_widgets'
   map.contact_us '/contact_us.:format', :controller => 'home', :action => 'contact_us'
   map.app_tab '/app_tab.:format', :controller => 'home', :action => 'app_tab'
+  map.external_page '/external_page.:format', :controller => 'home', :action => 'external_page'
 
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'

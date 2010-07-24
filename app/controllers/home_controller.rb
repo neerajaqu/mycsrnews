@@ -89,6 +89,10 @@ class HomeController < ApplicationController
   def terms
   end
 
+  def external_page
+    render(:layout => 'external_page', :template => 'home/external_page_header')
+  end
+
   def contact_us
     if request.post?
     	@message = Message.new(params[:message])

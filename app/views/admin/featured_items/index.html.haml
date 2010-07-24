@@ -114,18 +114,26 @@
     			primary: null,
     			secondary1: null,
     			secondary2: null
+        }, section5: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        }, section6: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
         },
         template: null
       };
 
       $('.template').click(function(event) {
         if ($(this).attr('id').match(/^template_10/)) {
-          alert("At this time template 11 is disabled. Check back soon. (You selected "+$(this).attr('id')+")");
-          return false;
+        //  alert("At this time template 11 is disabled. Check back soon. (You selected "+$(this).attr('id')+")");
+        //  return false;
         }
       	var url = "/admin/featured_items/"+$(this).attr('id')+"/load_template";
       	$('#content').load(url, {}, function(responseText, textStatus, XMLHttpRequest) {
-      		$('#section-1-primary, #section-1-secondary1, #section-1-secondary2, #section-2-primary, #section-2-secondary1, #section-2-secondary2,#section-3-primary, #section-3-secondary1, #section-3-secondary2,#section-4-primary, #section-4-secondary1, #section-4-secondary2,').droppable({
+      		$('#section-1-primary, #section-1-secondary1, #section-1-secondary2, #section-2-primary, #section-2-secondary1, #section-2-secondary2,#section-3-primary, #section-3-secondary1, #section-3-secondary2,#section-4-primary, #section-4-secondary1, #section-4-secondary2,#section-5-primary, #section-5-secondary1, #section-5-secondary2,#section-6-primary, #section-6-secondary1, #section-6-secondary2,').droppable({
       			accept: 'li.ui-widget-content',
       			activeClass: 'ui-state-hover',
       			hoverClass: 'ui-state-active',
@@ -141,6 +149,10 @@
                 	section = 'section3';
                 } else if (match[1] == 'section-4') {
                 	section = 'section4';
+                } else if (match[1] == 'section-5') {
+                	section = 'section5';
+                } else if (match[1] == 'section-6') {
+                	section = 'section6';
                 } else {
                 	return false;
                 }
@@ -213,7 +225,11 @@
     .template-column
       .template#template_3
         = image_tag "featured/template_3.jpg"
+      .template#template_32
+        = image_tag "featured/template_3.jpg"
       .template#template_5
+        = image_tag "featured/template_5.jpg"
+      .template#template_52
         = image_tag "featured/template_5.jpg"
       .template#template_7
         = image_tag "featured/template_7.jpg"
