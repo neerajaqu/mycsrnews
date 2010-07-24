@@ -14,11 +14,10 @@
           %li= fb_share_item_button(@question)
           %li
             %a= twitter_share_item_link @question, @question.question
-
-      .thumb
-        - if @question.images.present?
-          = image_tag @question.images.first.url(:medium)
       .itemBlock
+        .thumb
+          - if @question.images.present?
+            = image_tag @question.images.first.url(:medium)
         %h1.askQuestionHead= @question.question
         .itemMeta
           %h3= t('asked_by', :fb_name => local_linked_profile_name(@question.user), :date => time_ago_in_words(@question.created_at))
