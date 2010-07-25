@@ -1,0 +1,11 @@
+.thumb.story
+  - if prediction_question.images.present?
+    = image_tag prediction_question.images.first.url(:thumb)
+  - else
+    = image_tag ('default/watermark.jpg')
+.itemBlock
+  %h2= link_to prediction_question.prediction_question, prediction_question
+  .profilePic= local_linked_profile_pic prediction_question.user
+  .itemMeta
+    %h3= t('asked_by', :fb_name => local_linked_profile_name(prediction_question.user), :date => time_ago_in_words(prediction_question.created_at))
+    %span.btnComment== #{like_link prediction_question} #{prediction_question.votes.size}
