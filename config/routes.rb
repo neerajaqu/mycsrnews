@@ -123,6 +123,9 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true
     admin.resources :votes,           :active_scaffold => true
+    admin.resources :prediction_groups
+    admin.resources :prediction_questions
+    admin.resources :prediction_guesses
 
     admin.namespace(:metadata) do |metadata|
       metadata.resources :ads

@@ -7,6 +7,11 @@ class CreatePredictionQuestions < ActiveRecord::Migration
       t.string :status
       t.integer :user_id
       t.boolean :is_approved, :default => false
+      t.integer  :votes_tally,                 :default => 0
+      t.integer  :comments_count,              :default => 0
+      t.boolean  :is_blocked,                  :default => false
+      t.boolean  :is_featured,                 :default => false
+      t.datetime :featured_at
       t.timestamps
     end
   end

@@ -6,6 +6,9 @@ class CreatePredictionGuesses < ActiveRecord::Migration
       t.string :guess
       t.integer :guess_numeric
       t.datetime :guess_date
+      t.boolean  :is_blocked,                  :default => false
+      t.boolean  :is_featured,                 :default => false
+      t.datetime :featured_at
       t.timestamps
     end
   end
