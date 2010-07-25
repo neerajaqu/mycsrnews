@@ -101,6 +101,6 @@
         - if MENU.key? 'predictions'
           %li
             .menu_item
-              = link_to t('predictions_tab'), prediction_groups_path, :class => tab_selected?(@current_tab, 'predictions')
+              = link_to t('.predictions'), predictions_path, :class => tab_selected?(@current_tab, 'predictions')
         - if MENU.key? 'cards'
           %li= link_to t('cards.menu_title'), cards_path, :class => tab_selected?(@current_tab, 'cards')

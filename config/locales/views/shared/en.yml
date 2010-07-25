@@ -27,6 +27,7 @@ en:
       new_resource: "Add a new link"
       admin: "Admin"
       forums: "Forums"
+      predictions: "Predictions"
 
     comments:
       comment_title: "Comments"
