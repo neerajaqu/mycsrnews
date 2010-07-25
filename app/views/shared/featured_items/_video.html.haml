@@ -1,12 +1,15 @@
-- limit_title = 0
-- limit_caption = 300
-.panel_3
-  .thumb.threeFour= link_to image_tag(item.featured_image_url), item.featured_url
-.panel_3
+.featureWrap
+  %br
+  .thumb
+    - if item.video_item?
+      = embed_video item.featured_video, :size => 'large'
+    - else
+      = link_to image_tag(item.featured_image_url), item.featured_url
   .itemBlock
     %h1= link_to item.featured_title, item.featured_url
     %p
-      = caption(sanitize(strip_tags(item.featured_blurb)),limit_caption)
+      = caption(sanitize(strip_tags(item.featured_blurb)),300)
       = link_to 'More...', item
     %span.btnComment== #{like_link item} #{item.num_votes}
     %span.btnComment== #{link_to t("#{item.featured_related_locale}"), item} #{item.featured_related_count}
+  %p

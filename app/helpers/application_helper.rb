@@ -196,7 +196,7 @@ module ApplicationHelper
     if user.facebook_user?      
       options.merge!(:linked => false)
       unless options[:useyou] == true
-        options.merge!(:capitalize => true)        
+        options.merge!(:capitalize => false)        
       end
       firstnameonly = APP_CONFIG['firstnameonly'] || false
       options.merge!(:firstnameonly => firstnameonly) if firstnameonly
@@ -222,6 +222,11 @@ module ApplicationHelper
 
   def link_to_path_to_self(item)
     link_to url_for(send("#{item.class.to_s.underscore}_url", item)), url_for(send("#{item.class.to_s.underscore}_url", item))
+  end
+
+  def path_to_self_with_anchor(item,anchor)
+    canvas = iframe_facebook_request? ? true : false
+    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas, :only_path => false, :anchor => anchor))
   end
 
   def twitter_share_item_link(item,caption,button=false)

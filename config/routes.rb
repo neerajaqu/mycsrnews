@@ -79,7 +79,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :forums, :has_many => [:topics]
   map.resources :topics, :has_many => [:comments]
   map.resource :session
-  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
+  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
 
 
   map.root :controller => "home", :action => "index"

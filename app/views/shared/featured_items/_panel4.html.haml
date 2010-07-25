@@ -1,13 +1,13 @@
 - limit_title = 34
-- limit_caption = 78
+- limit_caption = 60
 .panel_4
   .thumb= link_to image_tag(item.featured_image_url), item.featured_url
 .panel_4
   .itemBlock
-    %h2= link_to caption(item.featured_title,24), item.featured_url
+    %h2= link_to caption(item.featured_title,limit_title), item.featured_url
     %p
-      = caption(sanitize(strip_tags(item.featured_blurb)),60)
-      = link_to 'More...', item
+      = caption(sanitize(strip_tags(item.featured_blurb)),limit_caption)
+      -# = link_to 'More...', item
     - unless item.featured_related_count == 0
       %span.btnComment== #{link_to t("#{item.featured_related_locale}"), item} #{item.featured_related_count}
     -else

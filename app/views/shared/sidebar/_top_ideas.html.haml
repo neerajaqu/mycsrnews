@@ -1,19 +1,5 @@
--# @expects: local 'idea'
-
+-# @expects: local 'top_ideas'
 - cache :top_ideas_html do
   - top_ideas ||= Idea.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
   - unless top_ideas.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('.top_ideas_title')
-      .list_items
-        %ul
-          - top_ideas.each do |idea|
-            %li
-              .itemBlock
-                %h4= link_to idea.title, idea_path(idea)
-                .profilePic= local_linked_profile_pic idea.user
-                .itemMeta
-                  %h3= t('posted_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
-                  %span.btnComment== #{like_link idea} #{idea.votes_tally}
-                  %span.btnComment== #{link_to t('comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
+    = render :partial => 'shared/lists/small_generic_list', :locals => { :list_title => t('.top_ideas_title'), :item_list => top_ideas }                  

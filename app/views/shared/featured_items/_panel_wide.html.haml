@@ -1,0 +1,9 @@
+.thumb.wide
+  = link_to image_tag(item.featured_image_url), item.featured_url
+.itemBlock
+  %h1= link_to item.featured_title, item.featured_url
+  %p
+    = caption(sanitize(strip_tags(item.featured_blurb)),200)
+    = link_to 'More...', item
+  -# %span.btnComment== #{like_link item} #{item.num_votes}
+  -# %span.btnComment== #{link_to t("#{item.featured_related_locale}"), item} #{item.featured_related_count}

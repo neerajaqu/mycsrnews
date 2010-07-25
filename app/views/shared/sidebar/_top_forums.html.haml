@@ -1,14 +1,6 @@
--# @expects: local 'forum'
+-# @expects: local 'top_forum'
 
 - cache :top_forums_html do
   - top_forums ||= Forum.all({  :limit => 7, :order => "comments_count desc" })
   - unless top_forums.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('forums.top_forums_title')
-      .list_items.bullet_list
-        %ul
-          - top_forums.each do |forum|
-            %li
-              .itemBlock
-                = link_to forum.name, forum_path(forum)
+    = render :partial => 'shared/lists/bullet_generic_list', :locals => { :list_title => t('forums.top_forums_title'), :item_list => top_forums }

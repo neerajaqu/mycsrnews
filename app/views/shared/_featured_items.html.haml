@@ -29,23 +29,8 @@
           = render :partial => 'shared/featured_items/panel5', :locals => { :item => section2.children.first.featurable }
           = render :partial => 'shared/featured_items/panel5', :locals => { :item => section3.children.first.featurable }
         - when 'template_6'
-          - primary1 = section1.children.first.featurable
           = render :partial => 'shared/featured_items/panelbar'
-          .featureWrap
-            %br
-            .thumb
-              - if primary1.video_item?
-                = embed_video primary1.featured_video, :size => 'large'
-              - else
-                = link_to image_tag(primary1.featured_image_url), primary1.featured_url
-            .itemBlock
-              %h1= link_to primary1.featured_title, primary1.featured_url
-              %p
-                = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
-                = link_to 'More...', primary1
-              %span.btnComment== #{like_link primary1} #{primary1.num_votes}
-              %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
-            %p
+          = render :partial => 'shared/featured_items/video', :locals => { :item => section1.children.first.featurable }
         - when 'template_7'
           = render :partial => 'shared/featured_items/panelbar'
           = render :partial => 'shared/featured_items/panel4b', :locals => { :item => section1.children.first.featurable }
@@ -53,17 +38,8 @@
           = render :partial => 'shared/featured_items/panel4b', :locals => { :item => section3.children.first.featurable }
           = render :partial => 'shared/featured_items/panel4b', :locals => { :item => section4.children.first.featurable }
         - when 'template_8'
-          - primary1 = section1.children.first.featurable
           = render :partial => 'shared/featured_items/panelbar'
-          .thumb.wide
-            = link_to image_tag(primary1.featured_image_url), primary1.featured_url
-          .itemBlock
-            %h1= link_to primary1.featured_title, primary1.featured_url
-            %p
-              = caption(sanitize(strip_tags(primary1.featured_blurb)),200)
-              = link_to 'More...', primary1
-            -# %span.btnComment== #{like_link primary1} #{primary1.num_votes}
-            -# %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
+          = render :partial => 'shared/featured_items/panel_wide', :locals => { :item => section1.children.first.featurable }
         - when 'template_9'
           - a = [ section1.children.first.featurable, section2.children.first.featurable, section3.children.first.featurable, section4.children.first.featurable, section5.children.first.featurable, section6.children.first.featurable ]
           = render :partial => 'shared/featured_items/panelbar'
@@ -72,10 +48,10 @@
               - a.each do |item|
                 .panel_items
                   = render :partial => 'shared/featured_items/panel3', :locals => { :item => item }                
-        :javascript
-          $(function() {          	
-          	$(".feature_scrollable_panel_3").scrollable({circular: true}).autoscroll({ autoplay: true});
-          });
+          :javascript
+            $(function() {          	
+            	$(".feature_scrollable_panel_3").scrollable({circular: true}).autoscroll({ autoplay: true});
+            });
         - when 'template_32'
           - box_list = [0, 2, 4]
           - a = [ section1.children.first.featurable, section2.children.first.featurable, section3.children.first.featurable, section4.children.first.featurable, section5.children.first.featurable, section6.children.first.featurable ]

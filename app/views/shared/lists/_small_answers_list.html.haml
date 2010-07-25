@@ -1,0 +1,9 @@
+-# @expects: local 'list_title, item_list'
+%div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+  .panelBar
+    %h2= list_title
+  .list_items
+    %ul
+      - item_list.each do |item|
+        %li
+          = render :partial => 'shared/items/small_answer', :locals => { :answer => item }
