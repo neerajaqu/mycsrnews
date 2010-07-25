@@ -1,0 +1,2 @@
+module PredictionGroupsHelper
+end

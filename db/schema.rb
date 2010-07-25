@@ -433,7 +433,7 @@ ActiveRecord::Schema.define(:version => 20100725185301) do
   create_table "prediction_questions", :force => true do |t|
     t.integer  "prediction_group_id"
     t.string   "title"
-    t.string   "type"
+    t.string   "prediction_type"
     t.string   "choices"
     t.string   "status",              :default => "open"
     t.integer  "user_id"

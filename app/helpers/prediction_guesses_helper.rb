@@ -1,0 +1,2 @@
+module PredictionGuessesHelper
+end

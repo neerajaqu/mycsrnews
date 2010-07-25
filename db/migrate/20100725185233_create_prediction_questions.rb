@@ -3,7 +3,7 @@ class CreatePredictionQuestions < ActiveRecord::Migration
     create_table :prediction_questions do |t|
       t.integer :prediction_group_id
       t.string :title
-      t.string :type
+      t.string :prediction_type
       t.string :choices
       t.string :status, :default => 'open'
       t.integer :user_id

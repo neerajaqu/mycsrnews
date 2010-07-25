@@ -13,7 +13,9 @@ class PredictionQuestion < ActiveRecord::Base
   attr_accessor :tags_string
 
   has_friendly_id :title, :use_slug => true
-  validates_presence_of :title, :type, :status
+  validates_presence_of :title
+  validates_presence_of :choices
+  validates_presence_of :status
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
 end
