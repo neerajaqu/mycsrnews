@@ -16,5 +16,5 @@
                 .itemMeta
                   %h3= t('via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))
                   %span.btnComment= link_to t('post_newswire', :site_title => APP_CONFIG['site_title']), new_story_path(:newswire_id => newswire)
-                  -# %span.btnComment= link_to t('.quick_post', :site_title => APP_CONFIG['site_title']), quick_post_newswire_path(newswire), :class => 'quick_post'
+                  -# %span.btnComment= link_to t('newswires.quick_post', :site_title => APP_CONFIG['site_title']), quick_post_newswire_path(newswire), :class => 'quick_post'
                   %span.btnComment= link_to t('read_newswire'), newswire.url, :target => "_cts" 

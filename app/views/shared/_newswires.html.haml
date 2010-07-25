@@ -12,16 +12,7 @@
         %ul
           - @newswires.each do |newswire|
             %li{'data-id' => newswire.cache_key}
-              .newswire
-                .itemBlock
-                  %h2= link_to newswire.title, newswire.url, :target => "_newswire"
-                  %p= linked_newswire_caption newswire
-                  .itemMeta
-                    %h3= t('.via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))
-                    %span.btnComment= link_to t('.publish', :site_title => APP_CONFIG['site_title']), new_story_path(:newswire_id => newswire)
-                    -# TODO:: add this to a job queue
-                    %span.btnComment= link_to t('.quick_post', :site_title => APP_CONFIG['site_title']), quick_post_newswire_path(newswire), :class => 'quick_post'
-                    %span.btnComment= link_to t('.read'), newswire.url, :target => "_cts" 
+              = render :partial => 'shared/items/newswire', :locals => { :newswire => newswire }
     - if paginate
       .clearfix
         = will_paginate newswires
