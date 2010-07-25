@@ -4,17 +4,7 @@
     -# todo hack to fix drafts appearing until we can swithc articles out of this widget
     - unless content.article.present? and content.article.is_draft?
       %li{'data-id' => content.cache_key}
-        .thumb
-          - if content.images.present?
-            = image_tag content.images.first.url(:thumb)                  
-          - else
-            = image_tag ('default/watermark.jpg', :width => "100%")
-        .itemBlock
-          %h2= link_to content.title, story_path(content, :format => 'html')
-          %p= linked_story_caption content, 150, false, :format => 'html'
-          .profilePic= local_linked_profile_pic content.user, :format => 'html'
-          .itemMeta
-            %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user, :format => 'html'), :date => time_ago_in_words(content.created_at))
-            %span.btnComment== #{like_link content, :format => 'html'} #{content.votes_tally}
-            %span.btnComment== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop", :format => 'html')} #{content.comments_count}
-
+        - if content.article.present?
+          = render :partial => 'shared/items/article', :locals => { :article => content}  
+        -else
+          = render :partial => 'shared/items/content', :locals => { :content => content}                  

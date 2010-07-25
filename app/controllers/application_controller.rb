@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_users
-    @top_users ||= User.top
+    @top_users ||= User.top.members
   end
 
   def load_contents
