@@ -1,5 +1,5 @@
 class PredictionsController < ApplicationController
-  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :create, :update, :like], :if => :request_comes_from_facebook?
+  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:your, :new, :create, :update, :like], :if => :request_comes_from_facebook?
 
   #cache_sweeper :resource_sweeper, :only => [:create, :update, :destroy]
 
@@ -15,7 +15,8 @@ class PredictionsController < ApplicationController
   def your
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Yours'
-    
+    @user = current_user
+    @guesses = @user.prediction_guesses.paginate :page => params[:page], :per_page => PredictionGuess.per_page, :order => "created_at desc"    
   end
   
   def scores
