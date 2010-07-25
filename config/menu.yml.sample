@@ -12,6 +12,7 @@ menu:
     #new_article: 'enabled'
   forums:
   	#sub_forums: 'enabled' # uncomment to enable a drop down of all forums
+  predictions: 'enabled'
   resources:
     resources_list: 'enabled'
     new_resource: 'enabled'

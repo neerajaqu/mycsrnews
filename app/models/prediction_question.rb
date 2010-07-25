@@ -6,7 +6,7 @@ class PredictionQuestion < ActiveRecord::Base
   acts_as_wall_postable
 
   belongs_to  :user
-  belongs_to  :prediction_groups
+  belongs_to  :prediction_group
   has_many    :prediction_guesses
   has_one :tweeted_item, :as => :item
 

@@ -15,7 +15,7 @@ class PredictionGroup < ActiveRecord::Base
 
 
   has_friendly_id :title, :use_slug => true
-  validates_presence_of :title, :section, :description
+  validates_presence_of :title, :section
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
 

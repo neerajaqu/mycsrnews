@@ -4,9 +4,9 @@ class CreatePredictionGroups < ActiveRecord::Migration
       t.string :title
       t.string :section
       t.text :description
-      t.string :status
+      t.string :status, :default => 'open'
       t.integer :user_id
-      t.boolean :is_approved, :default => false
+      t.boolean :is_approved, :default => true
       t.integer  :votes_tally,                 :default => 0
       t.integer  :comments_count,              :default => 0
       t.boolean  :is_blocked,                  :default => false
