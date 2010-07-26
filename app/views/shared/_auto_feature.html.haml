@@ -4,7 +4,6 @@
     -# todo: choose template based on setting  
     - template_list = ['template_9', 'template_52', 'template_32']
     - auto_template = template_list[rand(3)]
-    - box_list = [0, 2, 4, 6, 8 , 10 ]
     #featuredPanel.panel_1.featureWrap
       - case auto_template
         - when 'template_9'
@@ -19,6 +18,7 @@
             	$(".feature_scrollable_panel_3").scrollable({circular: true}).autoscroll({ autoplay: true});
             });
         - when 'template_32'
+          - box_list = [0, 2, 4, 6, 8 , 10 ]
           = render :partial => 'shared/featured_items/panelbar'
           .feature_scrollable_panel_4.vertical
             .feature_vertical_scrollable_items
@@ -32,6 +32,7 @@
               $(".feature_scrollable_panel_4").scrollable({circular: true, vertical: true, mousewheel: true}).autoscroll({ autoplay: true});
             });
         - when 'template_52'
+          - box_list = [0, 3, 6, 9 ]        
           = render :partial => 'shared/featured_items/panelbar'
           .feature_scrollable_panel_5.vertical
             .feature_vertical_scrollable_items
