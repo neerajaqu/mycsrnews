@@ -1,9 +1,10 @@
 - cache :auto_feature_html do
   - a = auto_feature ||= Image.find(:all, :conditions => "imageable_type = 'Content'", :limit => 12, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
-  - box_list = [0, 2, 4, 6, 8 , 10 ]
   - unless auto_feature.empty? or auto_feature.count < 4
-    -# choose template based on setting  
-    - auto_template = 'template_9'
+    -# todo: choose template based on setting  
+    - template_list = ['template_9', 'template_52', 'template_32']
+    - auto_template = template_list[rand(3)]
+    - box_list = [0, 2, 4, 6, 8 , 10 ]
     #featuredPanel.panel_1.featureWrap
       - case auto_template
         - when 'template_9'
@@ -35,7 +36,7 @@
           .feature_scrollable_panel_5.vertical
             .feature_vertical_scrollable_items
               - box_list.each do |index|
-                - unless index >= ( auto_feature.count - 1 )
+                - unless index >= ( auto_feature.count - 2 )
                   .panel_items
                     = render :partial => 'shared/featured_items/panel5', :locals => { :item => a[index] }
                     = render :partial => 'shared/featured_items/panel5', :locals => { :item => a[index+1] }
