@@ -1,7 +1,7 @@
 -# @expects: local 'most_discussed_stories'
 
 - cache :most_discussed_stories_html do
-  - most_discussed_stories ||= Content.find( :all, :limit => 5, :order => "comments_count desc")
+  - most_discussed_stories ||= Content.find( :all, :limit => 5, :conditions => ["created_at > ?", 1.week.ago], :order => "comments_count desc")
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_discussed_title')
