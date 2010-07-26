@@ -1,0 +1,14 @@
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+  = render :partial => 'shared/subnav/predictions_subnav'
+
+#col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)  
+  = render :partial => 'shared/items/prediction_group', :locals => { :prediction_group => @prediction_group}
+
+#col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/top_prediction_groups', :locals => { :prediction_groups => @newest_prediction_groups }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
+
+= render :partial => 'shared/item_footer', :locals => { :item => @prediction_group, :title => @prediction_group.title }

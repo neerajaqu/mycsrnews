@@ -1,0 +1,9 @@
+-# expects local user and score
+.thumb.user
+  = local_linked_profile_pic user, :size => "small"
+.float_left{ :style => 'width: 60%' }
+  %h2== #{local_linked_profile_name(user)}
+  %p= caption(user.bio,350)
+.float_right
+  %h4.userPoints= t('prediction.accuracy', :score => score.accuracy)
+  %h3.userPoints= t('prediction.count_guesses', :score => score.guess_count)
