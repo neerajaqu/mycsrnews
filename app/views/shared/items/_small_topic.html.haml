@@ -1,3 +1,4 @@
 .forum_topic.small
-  .profilePic= local_linked_profile_pic topic.user
-  = link_to topic.title, topic_path(topic)
+  .itemBlock
+    .profilePic= local_linked_profile_pic topic.user
+    = link_to topic.title, topic_path(topic)

@@ -6,7 +6,7 @@
       = image_tag comment.commentable.images.first.url(:thumb)
     - else
       = image_tag ('default/watermark.jpg', :width => "100%")
-  .storyBlockWrap.storyBlockSpacer
+  .itemBlock
     %blockquote
       .quotes      
         %p= linked_comment_caption comment
@@ -16,5 +16,5 @@
     %h3
       Re: 
       = link_to caption(comment.commentable.title,120), comment.commentable
-    %span.btnComment.float_left== #{like_link comment.commentable} #{comment.commentable.votes_tally}
+    %span.btnComment== #{like_link comment.commentable} #{comment.commentable.votes_tally}
     %span.btnComment== #{link_to t('comments'), content_path(comment.commentable, :anchor => "commentListTop")} #{comment.commentable.comments_count}

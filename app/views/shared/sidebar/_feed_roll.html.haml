@@ -6,10 +6,9 @@
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('feed_roll_title')
-      .list_stories
-        %ul.bullet_list
+      .list_items.bullet_list
+        %ul
           - feed_roll.each do |feed|
-            %li
-              %h4= link_to feed.title, feed_newswires_path(feed)
-              -#.profilePic= local_linked_profile_pic idea.user
+            .itemBlock
+              %li= link_to feed.title, feed_newswires_path(feed)
         %p= link_to t('read_latest_newswires'), newswires_path

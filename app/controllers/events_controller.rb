@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   cache_sweeper :event_sweeper, :only => [:create, :update, :destroy, :import_facebook]
 
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show, :my_events, :import_facebook]
   before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_events
   before_filter :load_newest_events
@@ -56,12 +57,6 @@ class EventsController < ApplicationController
     @current_sub_tab = 'My Events'
     @user = User.find(params[:id])
     @events = @user.events.active.paginate :page => params[:page], :per_page => Event.per_page, :order => "created_at desc"
-  end
-
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'events')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'events')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'events')
   end
 
   def import_facebook

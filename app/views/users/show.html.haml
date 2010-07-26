@@ -1,12 +1,15 @@
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+
 #col_left
-  #myProfile.panel_1.feature_bg
+  #myProfile.panel_1.featureWrap
     .panelBar
       %h2= t('.title', :name => profile_fb_name(@user,false))
     .panel_3
       .thumb.user-details
         = local_linked_profile_pic @user, :size => 'normal', :width => '180'
     .panel_3
-      .storyBlockWrap
+      .itemBlock
         %h1= profile_fb_name (@user,nil, false, false)
         .pointsTable_profile
           %table
@@ -43,6 +46,7 @@
                 %td.bold= link_to 'RSS', user_path(@user, :format => :atom), :class => 'rss_link', :target => "_blank"
                 %td
               -# TODO:: add challenges
+  = render_ad(:banner, @ad_layout, @ad_banner)
   .panel_1
     .panelBar
       %h2= t('.bio_title')
@@ -50,15 +54,15 @@
         .bar_link= link_to t('.bio_edit'), '#', :class => "update-bio"
         = render :partial => 'users/bio_form'
     .panel_block
-      .storyBlockWrap.current-bio
+      .itemBlock.current-bio
         %p= (@user.bio.present?) ? @user.bio : default_bio(@user)
 
   .panel_1
     .panelBar
       %h2= t('.action_feeds')
     #actionFeed
-      #feedList.storyList
-        .list_stories
+      #feedList.itemListWrap
+        .list_items
           - unless @activities.any?
             %p= t('.action_feed_empty')
           - else
@@ -72,6 +76,6 @@
         %br
 
 #col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_stories', :locals => { :top_stories => @top_stories }
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
-  
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

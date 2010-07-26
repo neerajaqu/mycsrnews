@@ -1,10 +1,10 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   = render :partial => 'shared/subnav/events_subnav'
 
 #col_left
   - cache "#{@event.cache_key}_html" do
-    #readArticle.panel_1
+    #itemDetails.panel_1
       .topBar
         %ul
           %li
@@ -14,14 +14,14 @@
           %li= fb_share_item_button(@event)
           %li
             %a= twitter_share_item_link @event, @event.name           
-      .thumb.threeFour
-        - if @event.images.present?
-          = image_tag @event.images.first.url(:medium)
-        - if !@event.images.present? && @event.pic.present?
-          = image_tag @event.pic
-      .storyBlockWrap
-        %h1.storyHead= @event.name
-        .storyBlockMeta
+      .itemBlock
+        .thumb
+          - if @event.images.present?
+            = image_tag @event.images.first.url(:medium)
+          - if !@event.images.present? && @event.pic.present?
+            = image_tag @event.pic
+        %h1= @event.name
+        .itemMeta
           .eventMetaBlock
             .eventMeta.time
               %h4
@@ -50,9 +50,10 @@
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
 
 
-      %div.bodyArticle= sanitize @event.description
+      %div.itemBlock= sanitize @event.description
     - if @event.media_item?
       = render_media_items @event
+    = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @event }
   = render :partial => 'shared/item_footer', :locals => { :item => @event, :title =>@event.name }
@@ -61,3 +62,5 @@
 #col_right
   = render :partial => 'shared/sidebar/bio', :locals => { :user => @event.user }
   = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @event, :related_items => @event.related_items }
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

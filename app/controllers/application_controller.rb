@@ -30,7 +30,6 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :set_p3p_header
   before_filter :set_facebook_session_wrapper
-  before_filter :set_slot_data
   before_filter :set_current_tab
   before_filter :set_current_sub_tab
   before_filter :set_locale
@@ -46,6 +45,7 @@ class ApplicationController < ActionController::Base
   helper_method :facebook_session
   helper_method :current_facebook_user
   helper_method :get_setting
+  helper_method :get_ad_layout
 
   def logged_in_to_facebook_and_app_authorized
     if ensure_application_is_installed_by_facebook_user  
@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_users
-    @top_users ||= User.top
+    @top_users ||= User.top.members
   end
 
   def load_contents
@@ -102,6 +102,7 @@ class ApplicationController < ActionController::Base
   def load_top_discussed_stories
     @most_discussed_stories ||= Content.find( :all,
     	:limit    => 5,
+    	:conditions => 'created_at > date_sub(now(), INTERVAL 1 WEEK)',
     	:order    => "comments_count desc"
     )
   end
@@ -123,7 +124,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_newest_articles
-    @newest_articles ||= Article.active.newest 5
+    @newest_articles ||= Article.published.active.newest 5
   end
 
   def load_newest_images
@@ -255,12 +256,6 @@ class ApplicationController < ActionController::Base
     @tags = item.tag_counts_on(:tags)
   end
 
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'default')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'default')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'default')
-  end
-  
   def current_user_profile 
     return nil unless current_user.present?
     current_user.profile
@@ -330,6 +325,10 @@ class ApplicationController < ActionController::Base
     Metadata::Setting.get name, sub_type
   end
 
+  def get_ad_layout name, sub_type = nil
+    Metadata::AdLayout.get name, sub_type
+  end
+
   def set_custom_sidebar_widget
     cswidget = Metadata::CustomWidget.find_slot('sidebar', "#{self.controller_name}")
     @custom_sidebar_widget = (cswidget and cswidget.has_widget? ? cswidget.metadatable : nil)
@@ -342,6 +341,33 @@ class ApplicationController < ActionController::Base
       	request.format = 'json'
       else
       	request.format = 'html'
+      end
+    end
+  end
+
+  def set_ad_layout
+    action = ( params['action'] == 'index' ? 'index' : 'item' )    
+    @ad_layout_info = get_ad_layout("#{params['controller']}_#{action}")
+    if @ad_layout_info.present?
+      @ad_layout = @ad_layout_info.layout
+    elsif get_ad_layout("default").present?
+      @ad_layout = get_ad_layout("default").layout
+    else
+      @ad_layout = nil
+    end
+    unless @ad_layout.nil?
+      # load ad banners
+      if @ad_layout.include? "Leader"
+        @ad_leaderboard = Metadata.get_ad_slot('leaderboard', params['controller'])
+      end
+      if @ad_layout.include? "Banner"
+        @ad_banner = Metadata.get_ad_slot('banner', params['controller'])
+      end
+      if ( @ad_layout.include? "Leader_B" or @ad_layout.include? "Banner_B" or @ad_layout.include? "Sky_A" )
+        @ad_skyscraper = Metadata.get_ad_slot('skyscraper', params['controller'])
+      end
+      if ( @ad_layout.include? "Leader_C" or @ad_layout.include? "Banner_C" or @ad_layout.include? "Square_A" )
+        @ad_small_square = Metadata.get_ad_slot('small_square', params['controller'])
       end
     end
   end

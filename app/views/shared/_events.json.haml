@@ -2,10 +2,10 @@
 %ul
   - events.each do |event|
     %li.askQuestionWrap
-      .storyBlockWrap
+      .itemBlock
         %p.askQuestionHead= link_to event.name, event_path(event)
         .profilePic= local_linked_profile_pic event.user, :size => :square
-        .storyBlockMeta
+        .itemMeta
           %p= t('.events_asked_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))
           %p
             %span.btn_left== #{like_link event} #{event.votes_tally}

@@ -4,6 +4,7 @@ class IdeasController < ApplicationController
   cache_sweeper :idea_sweeper, :only => [:create, :update, :destroy]
 
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show, :my_ideas]
   before_filter :login_required, :only => [:new, :create, :update, :my_ideas]
   before_filter :load_top_ideas
   before_filter :load_newest_ideas
@@ -62,12 +63,6 @@ class IdeasController < ApplicationController
     @current_sub_tab = 'My Ideas'
     @user = User.find(params[:id])
     @ideas = @user.ideas.active.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
-  end
-
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'ideas')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'ideas')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'ideas')
   end
 
   private

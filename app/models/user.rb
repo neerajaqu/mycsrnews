@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   named_scope :last_active, lambda { { :conditions => ["last_active > ?", 5.minutes.ago], :order => ["last_active desc"] } }
   named_scope :admins, { :conditions => ["is_admin is true"] }
   named_scope :moderators, { :conditions => ["is_moderator is true"] }
+  named_scope :members, { :conditions => ["is_moderator is false and is_admin is false and is_editor is false and is_host is false"] }
 
   validates_presence_of     :login, :unless => :facebook_connect_user?
   validates_length_of       :login,    :within => 3..40, :unless => :facebook_connect_user?
@@ -280,6 +281,10 @@ class User < ActiveRecord::Base
         field = nil
     end
     increment!(field, score.value) unless field.nil?
+  end
+  
+  def is_blogger?
+    self.articles.count > 0
   end
 
   private

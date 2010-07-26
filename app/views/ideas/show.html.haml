@@ -1,5 +1,5 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   - if @idea_board.present?
     = render :partial => 'shared/subnav/idea_boards_subnav'
   - else
@@ -7,7 +7,7 @@
 
 #col_left
   - cache "#{@idea.cache_key}_html" do
-    #readArticle.panel_1
+    #itemDetails.panel_1
       .topBar
         %ul
           %li
@@ -17,12 +17,12 @@
           %li= fb_share_item_button(@idea)
           %li
             %a= twitter_share_item_link @idea, @idea.title
-      .thumb
-        - if @idea.images.present?
-          = image_tag @idea.images.first.url(:medium)
-      .storyBlockWrap
-        %h1.storyHead= @idea.title
-        .storyBlockMeta
+      .itemBlock
+        .thumb
+          - if @idea.images.present?
+            = image_tag @idea.images.first.url(:medium)
+        %h1= @idea.title
+        .itemMeta
           %h3
             = t('posted_by', :fb_name => local_linked_profile_name(@idea.user), :date => time_ago_in_words(@idea.created_at))
             - if @idea.idea_board.present?
@@ -32,9 +32,10 @@
             %h3== #{tag_list(@tags,@idea)}
           - if @idea.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @idea }
-      %div.bodyArticle= sanitize @idea.details
+      %div.itemBlock= sanitize @idea.details
     - if @idea.media_item?
       = render_media_items @idea
+    = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @idea.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @idea }
   = render :partial => 'shared/item_footer', :locals => { :item => @idea, :title => @idea.title }
@@ -42,6 +43,7 @@
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @idea }
 
 #col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/bio', :locals => { :user => @idea.user }
   = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @idea, :related_items => @idea.related_items }
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_skyscraper }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

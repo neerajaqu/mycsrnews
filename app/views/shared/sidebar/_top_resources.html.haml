@@ -1,13 +1,6 @@
--# @expects: local 'resource'
+-# @expects: local 'top_resources'
 
 - cache :top_resources_html do
   - top_resources ||= Resource.active.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc" })
-  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-    .panelBar
-      %h2= t('.top_resources_title')
-    .list_stories
-      %ul
-        - top_resources.each do |resource|
-          %li
-            .profilePic= local_linked_profile_pic resource.user
-            = link_to resource.title, resource_path(resource)
+  - unless top_resources.empty?
+    = render :partial => 'shared/lists/small_generic_list', :locals => { :list_title => t('.top_resources_title'), :item_list => top_resources }                  

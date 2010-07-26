@@ -74,6 +74,7 @@ custom_widgets.each do |custom_widget|
 end
 
 settings = [
+ { :key_sub_type => 'options', :key_name => 'exclude_articles_from_news',  :value => "false" },
  { :key_sub_type => 'options', :key_name => 'site_notification_user',  :value => (User.admins.last || nil) },
  { :key_sub_type => 'options', :key_name => 'enable_activity_popups',  :value => "true" },
  { :key_sub_type => 'options', :key_name => 'allow_web_auth',  :value => (APP_CONFIG['allow_web_auth'] || "false" ) },
@@ -82,13 +83,13 @@ settings = [
  { :key_sub_type => 'options', :key_name => 'contact_us',  :value => (APP_CONFIG['contact_us_recipient'] || "admin@email.com,me@email.com,support@email.com" ) },
  { :key_sub_type => 'options', :key_name => 'firstnameonly', :value => (APP_CONFIG['firstnameonly'] || "false" ) },
  { :key_sub_type => 'options', :key_name => 'site_video_url', :value => APP_CONFIG['base_url'].gsub("http://","").gsub("www",""), :hint => "used by some sites with custom video URLs e.g. boston.com"},
+ { :key_sub_type => 'options', :key_name => 'predictions', :value => APP_CONFIG['base_url'].gsub("http://","").gsub("www",""), :hint => "used by some sites with custom video URLs e.g. boston.com"},
  { :key_sub_type => 'design', :key_name => 'typekit', :value => (APP_CONFIG['typekit'] || "000000" ) },
  { :key_sub_type => 'twitter', :key_name => 'account', :value =>(APP_CONFIG['twitter_account'] || "userkey_name" ) },
- { :key_sub_type => 'twitter', :key_name => 'connect_key', :value => (APP_CONFIG['twitter_connect_key'] || "U6qjcn193333331AuA" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_key', :value => (APP_CONFIG['twitter_oauth_key'] || "U6qjcn193333331AuA" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_secret', :value => (APP_CONFIG['twitter_oauth_secret'] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" ) },
- { :key_sub_type => 'twitter', :key_name => 'oauth_consumer_key', :value => (APP_CONFIG['twitter_oauth_consumer_key'] || "U6qjcn193333331AuA" ) },
- { :key_sub_type => 'twitter', :key_name => 'oauth_consumer_secret', :value => (APP_CONFIG['twitter_oauth_consumer_secret'] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" ) },
+ { :key_sub_type => 'twitter', :key_name => 'oauth_consumer_key', :value => (APP_CONFIG['twitter_oauth_key'] || "U6qjcn193333331AuA" ) },
+ { :key_sub_type => 'twitter', :key_name => 'oauth_consumer_secret', :value => (APP_CONFIG['twitter_oauth_secret'] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" ) },
  { :key_sub_type => 'twitter', :key_name => 'tweet_events_min_votes', :value => (APP_CONFIG['tweet_events_min_votes'] || "15" ) },
  { :key_sub_type => 'twitter', :key_name => 'tweet_events_limit', :value => (APP_CONFIG['tweet_events_limit'] || "3" ) }, 
  { :key_sub_type => 'twitter', :key_name => 'tweet_stories_min_votes', :value => (APP_CONFIG['tweet_stories_min_votes'] || "15" ) },
@@ -162,6 +163,46 @@ activity_scores.each do |activity_score|
 		  :activity_score_name => activity_score[:key_name], 
 		  :activity_score_value => activity_score[:value],
 		  :activity_score_hint => (activity_score[:hint] || "")
+		  }
+  })
+end
+
+ad_layouts = [
+ { :key_sub_type => 'ad_layouts', :key_name => 'default', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'stories_index', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'articles_index', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'resources_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'resource_sections_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'ideas_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'idea_boards_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'events_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'forums_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'topics_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'questions_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'users_index', :layout => "Leader_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'stories_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'articles_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'resources_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'ideas_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'resource_sections_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'idea_boards_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'events_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'forums_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'topics_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'questions_item', :layout => "Banner_A" },
+ { :key_sub_type => 'ad_layouts', :key_name => 'users_item', :layout => "Banner_A" }
+]
+
+ad_layouts.each do |ad_layout|
+  next if Metadata::AdLayout.get(ad_layout[:key_name])
+  puts "Creating ad layout #{ad_layout[:key_name]} -- #{ad_layout[:layout]}" if debug
+
+  Metadata::AdLayout.create!({
+		:data => {
+		  :ad_layout_sub_type_name => ad_layout[:key_sub_type],
+		  :ad_layout_name => ad_layout[:key_name], 
+		  :ad_layout_layout => ad_layout[:layout],
+		  :ad_layout_hint => (ad_layout[:hint] || "")
 		  }
   })
 end

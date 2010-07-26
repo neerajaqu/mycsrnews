@@ -1,10 +1,13 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }  
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   = render :partial => 'shared/subnav/ideas_subnav'
 
 #col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
   = render :partial => 'shared/my_ideas', :locals => { :ideas => @ideas, :paginate => @paginate }
 
 #col_right
   = render :partial => 'shared/sidebar/top_ideas'
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/newest_ideas'
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

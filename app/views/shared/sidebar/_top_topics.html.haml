@@ -3,12 +3,4 @@
 - cache :top_topics_html do
   - top_topics ||= Topic.active.top
   - unless top_topics.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('forums.top_topics_title')
-      .list_stories.clearfix
-        %ul
-          - top_topics.each do |topic|
-            %li
-              .profilePic= local_linked_profile_pic topic.user
-              = link_to topic.title, topic_path(topic)
+    = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => t('forums.top_topics_title'), :item_list => top_topics }

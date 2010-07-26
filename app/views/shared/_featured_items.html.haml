@@ -5,176 +5,79 @@
     - section2 = featured_items.children.second
     - section3 = featured_items.children.third
     - section4 = featured_items.children.fourth
-    - case featured_items.featured_type
-      - when 'template_1'
-        - primary1 = section1.children.first.featurable
-        #featuredPanel.panel_1.feature_bg
-          .panelBar
-            %h2= t('featured_stories')
-          .panel_3
-            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
-            .storyBlockWrap
-          .panel_3
-            .storyBlockWrap
-              %h1= link_to primary1.featured_title, primary1.featured_url
-              %p
-                = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
-                = link_to 'More...', primary1
-              %span.btnComment== #{like_link primary1} #{primary1.num_votes}
-              %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
-      - when 'template_2'
-        - primary1 = section1.children.first.featurable
-        - secondary1 = section1.children.second.featurable
-        - secondary2 = section1.children.third.featurable
-        #featuredPanel.panel_1.feature_bg
-          .panelBar
-            %h2= t('featured_stories')
-          .panel_3
-            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
-          .panel_3
-            .storyBlockWrap
-              %h1= link_to primary1.featured_title, primary1.featured_url
-              %p
-                = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
-                = link_to 'More...', primary1
-              %span.btnComment.float_left== #{like_link primary1} #{primary1.num_votes}
-              %span.btnComment.float_left== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
-              .bullet_list.float_left
-                %ul
-                  %li
-                    %h4= link_to secondary1.featured_title, secondary1.featured_url
-                  %li 
-                    %h4= link_to secondary2.featured_title, secondary2.featured_url
-      - when 'template_3'
-        - primary1 = section1.children.first.featurable
-        - primary2 = section2.children.first.featurable
-        #featuredPanel.panel_1.feature_bg
-          .panelBar
-            %h2= t('featured_stories')
-          .panel_4.first
-            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
-          .panel_4
-            .storyBlock
-              %h2= link_to caption(primary1.featured_title,24), primary1.featured_url
-              %p
-                = caption(sanitize(strip_tags(primary1.featured_blurb)),60)
-                = link_to 'More...', primary1
-              - unless primary1.featured_related_count == 0
-                %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
-              -else
-                %span.btnComment== #{like_link primary1} #{primary1.num_votes}
-          .panel_4
-            .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
-          .panel_4.last
-            .storyBlock
-              %h2= link_to caption(primary2.featured_title,24), primary2.featured_url
-              %p
-                = caption(sanitize(strip_tags(primary2.featured_blurb)),60)
-                = link_to 'More...', primary2
-              - unless primary2.featured_related_count == 0
-                %span.btnComment== #{link_to t("#{primary2.featured_related_locale}"), primary2} #{primary2.featured_related_count}
-              -else
-                %span.btnComment== #{like_link primary2} #{primary2.num_votes}
-      - when 'template_4'
-        - primary1 = section1.children.first.featurable
-        - primary2 = section2.children.first.featurable
-        #featuredPanel.panel_1.feature_bg
-          .panelBar
-            %h2= t('featured_stories')
-          .panel_3
-            .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
-            .storyBlockWrap
-              %h1= link_to primary1.featured_title, primary1.featured_url
-              %p
-                = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
-                = link_to 'More...', primary1
-              %span.btnComment.float_left== #{like_link primary1} #{primary1.num_votes}
-              %span.btnComment.float_left== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
-          .panel_3
-            .thumb.threeFour= link_to image_tag(primary2.featured_image_url), primary2.featured_url
-            .storyBlockWrap
-              %h1= link_to primary2.featured_title, primary2.featured_url
-              %p
-                = caption(sanitize(strip_tags(primary2.featured_blurb)),300)
-                = link_to 'More...', primary2
-              %span.btnComment.float_left== #{like_link primary2} #{primary2.num_votes}
-              %span.btnComment.float_left== #{link_to t("#{primary2.featured_related_locale}"), primary2} #{primary2.featured_related_count}
-      - when 'template_6'
-        - primary1 = section1.children.first.featurable
-        #featuredPanel.panel_1.feature_bg
-          .panelBar
-            %h2= t('featured_stories')
-          .feature_bg
-            %br
-            .thumb
-              - if primary1.video_item?
-                = embed_video primary1.featured_video, :size => 'large'
-              - else
-                = link_to image_tag(primary1.featured_image_url), primary1.featured_url
-            .storyBlockWrap
-              %h1= link_to primary1.featured_title, primary1.featured_url
-              %p
-                = caption(sanitize(strip_tags(primary1.featured_blurb)),300)
-                = link_to 'More...', primary1
-              %span.btnComment== #{like_link primary1} #{primary1.num_votes}
-              %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
-            %p
-      - when 'template_7'
-        - box1 = section1.children.first.featurable
-        - box2 = section2.children.first.featurable
-        - box3 = section3.children.first.featurable
-        - box4 = section4.children.first.featurable
-        #featuredPanel.panel_1.feature_bg
-          .panelBar
-            %h2= t('featured_stories')
-          .panel_4.first
-            .thumb
-              %a= link_to image_tag(box1.featured_image_url), box1.featured_url
-            .storyBlock
-              %h4 
-                %a= link_to box1.featured_title, box1.featured_url
-              %h3
-                = caption(sanitize(strip_tags(box1.featured_blurb)),100)
-                = link_to 'More...', box1
-          .panel_4
-            .thumb
-              %a= link_to image_tag(box2.featured_image_url), box2.featured_url
-            .storyBlock
-              %h4 
-                %a= link_to box2.featured_title, box2.featured_url
-              %h3
-                = caption(sanitize(strip_tags(box2.featured_blurb)),100)
-                = link_to 'More...', box2
-          .panel_4
-            .thumb
-              %a= link_to image_tag(box3.featured_image_url), box3.featured_url
-            .storyBlock
-              %h4 
-                %a= link_to box3.featured_title, box3.featured_url
-              %h3
-                = caption(sanitize(strip_tags(box3.featured_blurb)),100)
-                = link_to 'More...', box3
-          .panel_4.last
-            .thumb
-              %a= link_to image_tag(box4.featured_image_url), box4.featured_url
-            .storyBlock
-              %h4 
-                %a= link_to box4.featured_title, box4.featured_url
-              %h3
-                = caption(sanitize(strip_tags(box4.featured_blurb)),100)
-                = link_to 'More...', box4
-      - when 'template_8'
-        - primary1 = section1.children.first.featurable
-        #featuredPanel.panel_1.feature_bg
-          .panelBar
-            %h2= t('featured_stories')
-          .thumb.wide
-            = link_to image_tag(primary1.featured_image_url), primary1.featured_url
-            .storyBlockWrap
-          .storyBlockWrap
-            %h1= link_to primary1.featured_title, primary1.featured_url
-            %p
-              = caption(sanitize(strip_tags(primary1.featured_blurb)),200)
-              = link_to 'More...', primary1
-            -# %span.btnComment== #{like_link primary1} #{primary1.num_votes}
-            -# %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
+    - section5 = featured_items.children.fifth
+    - section6 = featured_items.children[5]
+    #featuredPanel.panel_1.featureWrap
+      - case featured_items.featured_type
+        - when 'template_1'
+          = render :partial => 'shared/featured_items/panelbar'
+          = render :partial => 'shared/featured_items/panel3', :locals => { :item => section1.children.first.featurable }
+        - when 'template_2'
+          = render :partial => 'shared/featured_items/panelbar'
+          = render :partial => 'shared/featured_items/panel3_subheads', :locals => { :primary1 => section1.children.first.featurable, :secondary1 => section1.children.second.featurable, :secondary2 => section1.children.third.featurable }
+        - when 'template_3'
+          = render :partial => 'shared/featured_items/panelbar'
+          = render :partial => 'shared/featured_items/panel4', :locals => { :item => section1.children.first.featurable }
+          = render :partial => 'shared/featured_items/panel4', :locals => { :item => section2.children.first.featurable }
+        - when 'template_4'
+          = render :partial => 'shared/featured_items/panelbar'
+          = render :partial => 'shared/featured_items/panel4c', :locals => { :item => section1.children.first.featurable }
+          = render :partial => 'shared/featured_items/panel4c', :locals => { :item => section2.children.first.featurable }
+        - when 'template_5'
+          = render :partial => 'shared/featured_items/panelbar'
+          = render :partial => 'shared/featured_items/panel5', :locals => { :item => section1.children.first.featurable }
+          = render :partial => 'shared/featured_items/panel5', :locals => { :item => section2.children.first.featurable }
+          = render :partial => 'shared/featured_items/panel5', :locals => { :item => section3.children.first.featurable }
+        - when 'template_6'
+          = render :partial => 'shared/featured_items/panelbar'
+          = render :partial => 'shared/featured_items/video', :locals => { :item => section1.children.first.featurable }
+        - when 'template_7'
+          = render :partial => 'shared/featured_items/panelbar'
+          = render :partial => 'shared/featured_items/panel4b', :locals => { :item => section1.children.first.featurable }
+          = render :partial => 'shared/featured_items/panel4b', :locals => { :item => section2.children.first.featurable }
+          = render :partial => 'shared/featured_items/panel4b', :locals => { :item => section3.children.first.featurable }
+          = render :partial => 'shared/featured_items/panel4b', :locals => { :item => section4.children.first.featurable }
+        - when 'template_8'
+          = render :partial => 'shared/featured_items/panelbar'
+          = render :partial => 'shared/featured_items/panel_wide', :locals => { :item => section1.children.first.featurable }
+        - when 'template_9'
+          - a = [ section1.children.first.featurable, section2.children.first.featurable, section3.children.first.featurable, section4.children.first.featurable, section5.children.first.featurable, section6.children.first.featurable ]
+          = render :partial => 'shared/featured_items/panelbar'
+          .feature_scrollable_panel_3
+            .feature_scrollable_items
+              - a.each do |item|
+                .panel_items
+                  = render :partial => 'shared/featured_items/panel3', :locals => { :item => item }                
+          :javascript
+            $(function() {          	
+            	$(".feature_scrollable_panel_3").scrollable({circular: true}).autoscroll({ autoplay: true});
+            });
+        - when 'template_32'
+          - box_list = [0, 2, 4]
+          - a = [ section1.children.first.featurable, section2.children.first.featurable, section3.children.first.featurable, section4.children.first.featurable, section5.children.first.featurable, section6.children.first.featurable ]
+          = render :partial => 'shared/featured_items/panelbar'
+          .feature_scrollable_panel_4
+            .feature_vertical_scrollable_items
+              - box_list.each do |index|
+                .panel_items
+                  = render :partial => 'shared/featured_items/panel4', :locals => { :item => a[index] }
+                  = render :partial => 'shared/featured_items/panel4', :locals => { :item => a[index+1] }
+          :javascript
+            $(function() {            
+              $(".feature_scrollable_panel_4").scrollable({circular: true, vertical: true, mousewheel: true}).autoscroll({ autoplay: true});
+            });
+        - when 'template_52'
+          - box_list = [0, 3]
+          - a = [ section1.children.first.featurable, section2.children.first.featurable, section3.children.first.featurable, section4.children.first.featurable, section5.children.first.featurable, section6.children.first.featurable ]
+          = render :partial => 'shared/featured_items/panelbar'
+          .feature_scrollable_panel_5
+            .feature_vertical_scrollable_items
+              - box_list.each do |index|
+                .panel_items
+                  = render :partial => 'shared/featured_items/panel5', :locals => { :item => a[index] }
+                  = render :partial => 'shared/featured_items/panel5', :locals => { :item => a[index+1] }
+                  = render :partial => 'shared/featured_items/panel5', :locals => { :item => a[index+2] }
+          :javascript
+            $(function() {            
+              $(".feature_scrollable_panel_5").scrollable({circular: true, vertical: true, mousewheel: true}).autoscroll({ autoplay: true});
+            });

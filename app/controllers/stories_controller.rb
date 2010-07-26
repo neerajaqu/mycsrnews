@@ -5,6 +5,7 @@ class StoriesController < ApplicationController
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show]
   before_filter :login_required, :only => [:like, :new, :create]
   before_filter :load_top_stories, :only => [:index, :tags]
   before_filter :load_top_discussed_stories, :only => [:index, :tags]
@@ -14,8 +15,13 @@ class StoriesController < ApplicationController
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Stories'
+    if get_setting('exclude_articles_from_news').value
+      #raise "setting: #{get_setting('exclude_articles_from_news').value.inspect}"
+      @contents = Content.top_story_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    else
+      @contents = Content.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    end
     #@contents = Content.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
-    @contents = Content.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     respond_to do |format|
       format.html { @paginate = true }
       format.fbml { @paginate = true }
@@ -27,6 +33,7 @@ class StoriesController < ApplicationController
 
   def show
     @story = Content.find(params[:id])
+    redirect_to home_index_path if @story.is_article? and @story.article.is_draft?
     tag_cloud (@story.is_article? ? @story.article : @story)
     if MENU.key? 'articles'
       @current_tab = 'articles' if @story.is_article?
@@ -93,15 +100,8 @@ class StoriesController < ApplicationController
     @contents = Content.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
 
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'stories')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'stories')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'stories')
-    @ad_small_square = Metadata.get_ad_slot('small_square', 'stories')
-  end
-
   private
-
+  
   def set_current_tab
     @current_tab = 'stories'
   end

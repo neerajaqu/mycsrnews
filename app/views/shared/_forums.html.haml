@@ -1,37 +1,36 @@
-#col_left
-  - cache "forums_list" do
-    - forums ||= Forum.positioned
-    - paginate ||= false
-    .panel_1
-      .panelBar
-        %h2= t('forums.title')
-        -# if forums.present? and forums
-          %span.bar_link= fb_share_item_button(forums)
-      .subtitle
-        %span= t('forums.subtitle')
-        
-      .storyList
-        .list_stories
-          %ul
-            - forums.each do |forum|
-              %li{'data-id' => forum.cache_key}
-                .thumb
-                  - if forum.images.present?
-                    = image_tag forum.images.first.url(:thumb)
-                  - else
-                    = image_tag ('default/watermark.jpg', :width => "100%")
-                .storyBlockWrap.storyBlockSpacer
-                  %h2.storyHead= link_to forum.name, forum
-                  %p.storyCaption= forum.description
-                  -#.profilePic= local_linked_profile_pic forum.user
-                  .storyBlockMeta.float_left
-                    -#%h3= t('forums.last_active', :fb_name => local_linked_profile_name(forum.user), :date => time_ago_in_words(forum.created_at))
-                    - if forum.recent_topics.any?
-                      %h3== #{t('forums.last_active')} #{link_to forum.recent_topics.first.title, forum.recent_topics.first}
-                    %span.btnComment.float_left= t('forums.topics_count', :topics_count => forum.topics_count)
-                    %span.btnComment.float_left= t('forums.posts_count', :posts_count => forum.comments_count)
+- cache "forums_list" do
+  - forums ||= Forum.positioned
+  - paginate ||= false
+  .panel_1
+    .panelBar
+      %h2= t('forums.title')
+      -# if forums.present? and forums
+        %span.bar_link= fb_share_item_button(forums)
+    .subtitle
+      %span= t('forums.subtitle')
+      
+    .itemListWrap
+      .list_items
+        %ul
+          - forums.each do |forum|
+            %li{'data-id' => forum.cache_key}
+              .thumb
+                - if forum.images.present?
+                  = image_tag forum.images.first.url(:thumb)
+                - else
+                  = image_tag ('default/watermark.jpg', :width => "100%")
+              .itemBlock
+                %h2= link_to forum.name, forum
+                %p= forum.description
+                -#.profilePic= local_linked_profile_pic forum.user
+                .itemMeta
+                  -#%h3= t('forums.last_active', :fb_name => local_linked_profile_name(forum.user), :date => time_ago_in_words(forum.created_at))
+                  - if forum.recent_topics.any?
+                    %h3== #{t('forums.last_active')} #{link_to forum.recent_topics.first.title, forum.recent_topics.first}
+                  %span.btnComment= t('forums.topics_count', :topics_count => forum.topics_count)
+                  %span.btnComment= t('forums.posts_count', :posts_count => forum.comments_count)
 
-  .panel_1.moderator-links
-    %div.float_left= link_to t('forums.new'), new_admin_forum_path(), :class => "btn", :target => '_parent'
-                        
-  = render :partial => 'shared/index_footer', :locals => { :index_path => forums_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('forums.title') }
+.panel_1.moderator-links
+  %div.float_left= link_to t('forums.new'), new_admin_forum_path(), :class => "btn", :target => '_parent'
+                      
+= render :partial => 'shared/index_footer', :locals => { :index_path => forums_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('forums.title') }

@@ -22,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   map.test_widgets '/test_widgets.:format', :controller => 'home', :action => 'test_widgets'
   map.contact_us '/contact_us.:format', :controller => 'home', :action => 'contact_us'
   map.app_tab '/app_tab.:format', :controller => 'home', :action => 'app_tab'
+  map.external_page '/external_page.:format', :controller => 'home', :action => 'external_page'
 
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
@@ -64,7 +65,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :related_items
 
   map.resources :users, :collection => {:link_user_accounts => :get, :dont_ask_me_for_email => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
-  map.resources :articles, :collection => { :index => [:get, :post] }
+  map.resources :articles, :collection => { :index => [:get, :post], :drafts => [:get] }
   map.resources :newswires, :member => { :quick_post => [:get, :post] }
   map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags, :related_items ]
   map.resources :idea_boards, :has_many => :ideas
@@ -78,7 +79,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :forums, :has_many => [:topics]
   map.resources :topics, :has_many => [:comments]
   map.resource :session
-  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :bookmarklet_panel => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
+  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
 
 
   map.root :controller => "home", :action => "index"
@@ -96,6 +97,7 @@ ActionController::Routing::Routes.draw do |map|
     #admin.resources :metadatas, :controller => 'custom_widgets'
     admin.resources :settings
     admin.resources :skip_images
+    admin.resources :ad_layouts
     admin.resources :title_filters
     admin.resources :activity_scores
     admin.resources :ideas
@@ -129,6 +131,7 @@ ActionController::Routing::Routes.draw do |map|
       metadata.resources :skip_images
       metadata.resources :title_filters
       metadata.resources :custom_widgets
+      metadata.resources :ad_layouts
     end
   end
 

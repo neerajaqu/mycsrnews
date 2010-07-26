@@ -1,8 +1,8 @@
 .content.small
-  .storyBlockWrap
+  .itemBlock
     %h4= link_to content.title, content_path(content)
     .profilePic= local_linked_profile_pic content.user
-    .storyBlockMeta
+    .itemMeta
       %h3= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
-      %span.btnComment.float_left== #{like_link content} #{content.votes_tally}
-      %span.btnComment.float_left== #{link_to t('comments'), content_path(content, :anchor => "commentListTop")} #{content.comments_count}
+      %span.btnComment== #{like_link content} #{content.votes_tally}
+      %span.btnComment== #{link_to t('comments'), content_path(content, :anchor => "commentListTop")} #{content.comments_count}

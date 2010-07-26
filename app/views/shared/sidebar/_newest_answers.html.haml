@@ -3,16 +3,4 @@
 - cache :newest_answers_html do
   - newest_answers ||= Answer.active.newest 5
   - unless newest_answers.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('answers.newest_title')
-      .list_stories
-        %ul
-          - newest_answers.each do |answer|
-            %li
-              %h4= link_to caption(answer.answer,120), question_path(answer.question)
-              .profilePic= local_linked_profile_pic answer.user
-              .storyBlockMeta
-                %h3= t('asked_by', :fb_name => local_linked_profile_name(answer.user), :date => time_ago_in_words(answer.created_at))
-                %span.btnComment.float_left== #{like_link answer} #{answer.votes_tally}
-                %span.btnComment.float_left== #{link_to answer_comments_translate(answer.comments_count), answer_path(answer, :anchor => "commentListTop")}
+    = render :partial => 'shared/lists/small_answers_list', :locals => { :list_title => t('answers.newest_title'), :item_list => newest_answers }                  

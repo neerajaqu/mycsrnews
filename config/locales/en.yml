@@ -27,6 +27,10 @@ en:
   events:
     newest_events: "Newest Events"
     top_events: "Top Events"
+  media:
+    add_image: "Add Image"
+    add_video: "Add Video"
+    add_audio: "Add Audio"
   images:
     title: "Images"
   videos:
@@ -113,6 +117,12 @@ en:
     newest_title: "Newest Articles"
     featured_title: "Featured Article"
     top_title: "Top Articles"
+    drafts: "Draft Articles"
+    draft: "Draft"
+    publish: "Publish"
+    status: "Status: "
+    nodrafts: "You do not have any draft articles at this time."    
+    editdraft: "Update Your Article"
   static_pages:
     faq: "FAQ found here"
     about_us: "About Us found here"
@@ -195,3 +205,10 @@ en:
       message: "Be sure to add your email address so that we can notify you when other readers respond to your stories and comments."
       action: "Add your email address"
       stop: "Don't ask again"
+  newswires:
+    title: "Newswire Feeds"
+    subtitle: "The latest from our favorite feeds"
+    via:  "Via {{title}}, {{date}} ago"
+    publish: "Publish to {{site_title}}"
+    read: "Read Story"
+    quick_post: "Quick post"

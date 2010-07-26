@@ -38,7 +38,9 @@ class Admin::FeaturedItemsController < AdminController
     @section2 = @template_name.children.create({:name => "section2", :featured_type => "section2"})
     @section3 = @template_name.children.create({:name => "section3", :featured_type => "section3"})
     @section4 = @template_name.children.create({:name => "section4", :featured_type => "section4"})
-    ['section1', 'section2','section3','section4'].each do |section|
+    @section5 = @template_name.children.create({:name => "section5", :featured_type => "section5"})
+    @section6 = @template_name.children.create({:name => "section6", :featured_type => "section6"})
+    ['section1', 'section2','section3','section4','section5','section6'].each do |section|
       section_data = instance_variable_get("@#{section}")
       ['primary', 'secondary1', 'secondary2'].each do |box|
         item_id = data[section][box]
@@ -46,7 +48,7 @@ class Admin::FeaturedItemsController < AdminController
         item = get_item item_id
         section_data.children.create({:name => "item_#{item_id}", :featured_type => "featured_item", :featurable => item})
         #tweet item
-        tweet(item) if Metadata::Setting.find_setting('tweet_featured_items').value == 'true'
+        #tweet(item) if Metadata::Setting.find_setting('tweet_featured_items').value == 'true'
       end
     end
 

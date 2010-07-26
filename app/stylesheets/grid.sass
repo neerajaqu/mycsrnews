@@ -2,15 +2,14 @@
 // Learn more ~ http://960.gs/
 //Licensed under GPL and MIT.
 
-
-
 // Reset and grid stylesheets
 @import "compass/utilities/general/reset"
 @import 960/grid.sass
-
 +global-reset
-//App Skin
+
+// App Skin
 @import skin.sass
+
 // App stylesheets
 @import default.sass
 @import application.sass
@@ -19,17 +18,14 @@
 @import ui-lightness/jquery-ui-1.7.2.custom.sass
 @import jquery.jcarousel.sass
 @import jcarousel.skin.sass
-
-//Image sizing for Non-facebook
-
+@import flowplayer_tabs.sass
+@import scrollable.sass
 
 // The following are the current grid layout boxes for the site.
 $ninesixty_columns: 12
-
 $ninesixty_gutter_width: 20px
 
-//#bodyWrapper, .panel_1, .panel_2
-//  border: 1px dashed red
+// Site wide Grid Container styles
 body
   +grid-system(12)
   padding-bottom: 20px
@@ -37,10 +33,15 @@ body
 #header, #footer, #pageBody, #adspace, #subNav, .breadcrumbs
   +grid(12)
 
+#col_full
+  position: relative
+  z-index: 1
+  +grid(12)
+
 #col_left
   position: relative
   z-index: 1
-  width: 640px
+  +grid(8)
   float: left
   .right
     float: right
@@ -50,54 +51,113 @@ body
 #col_right
   position: relative
   z-index: 1
-  width: 320px
+  +grid(4)
   float: left
 
-.panel_1
-  .panel_4
-    &.first
-      +alpha
-    &.last
-      +omega
-    .thumb
-      +grid(2)
-      margin: 0 0 10px 0
-      img
-        +grid(2)
-        margin: 0
-  &.feature_bg
-    .panel_4
-      margin-top: 5px
-      margin-right: 8px
-      margin-left: 8px
-      margin-bottom: 10px
-      &.first
-        margin-left: 5px
-      &.last
-        margin-right: 5px
-      .thumb
-        height: 80px
-        overflow: hidden
-        &.threeFour
-          height: 100px
-          
-.panel_3
-  width: 50%
-  display: inline-block
-  float: left
-
-.panel_4
-  +grid(2)
-
-.panel_1, #hotTopicBar
-  +grid(8)
-
-.feature_bg
-  .left
+.panel_full
+  &.first
     +alpha
-  .right
+  &.last
     +omega
+  +grid(12)
+  margin: 0 10px 10px 0
 
+/* UNIVERSAL LIST PANEL_1 STYLES */
+.panel_1
+  +grid(8)
+  +alpha
+  +omega
+  .list_items
+    .thumb
+      width: 90px
+      height: 68px
+      margin: 5px
+      float: left
+      img
+        max-width: 90px
+    .itemBlock
+      float: left
+      width: 510px
 
+    /* LIST CLASSES WITH IMAGE */
+    .answer, .article, .comment, .content, .idea, .question, .resource, .user, .generic
+      .itemBlock
+        float: left
+ 
+    /* LIST CLASSES WITH NO IMAGE */
+    .newswire, .generic_no_image
+      .itemBlock
+        display: block 
+        width: 600px
+
+    .event
+      .itemBlock
+        display: block
+
+/* UNIVERSAL LIST PANEL_2 STYLES */
 .panel_2
   +grid(4)
+  +alpha
+  +omega
+  .list_items
+    .itemBlock
+      width: 290px
+
+
+/**********************************************************************************************/
+/* FEATURED STORY PANEL STYLES */
+
+.panel_3
+  width: 50%
+  float: left
+  .thumb
+    max-height: 225px
+    width: 300px
+    img
+      width: 300px
+
+.panel_4
+  float: left
+  width: 25%
+  .thumb
+    max-height: 110px
+    width: 145px
+    img
+      max-width: 145px
+
+.panel_5
+  float: left
+  width: 33.333%
+  .thumb
+    max-height: 146px
+    width: 196px
+    margin: 5px
+    img
+      max-width: 196px
+
+/**********************************************************************************************/
+/* UNIQUE SIZE REQUIREMENT IMAGES */
+.thumb
+  &.banner
+    margin: 2px
+    max-width: 292px
+    padding: 0
+    display: block
+
+/* DETAILS PAGE THUMB SIZE */
+#itemDetails
+  .thumb
+    margin: 0 0 5px 5px
+    width: 300px
+    max-height: 225px
+    float: right
+    img
+      width: 300px
+  .itemMeta
+    width: 50%
+  .itemBlock
+    display: inline-block
+    width: 610px
+    margin: 5px 5px 10px
+    line-height: 140%
+    font-size: $fontsize

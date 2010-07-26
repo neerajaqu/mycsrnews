@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
 
   before_filter :login_required, :only => [:like, :new, :create, :create_answer]
+  before_filter :set_ad_layout, :only => [:index, :show, :my_questions]
 
   cache_sweeper :qanda_sweeper, :only => [:create, :update, :destroy, :create_answer]
 
@@ -65,12 +66,6 @@ class QuestionsController < ApplicationController
     	flash[:error] = "Could not create your question, please try again."
     	redirect_to @question
     end
-  end
-
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'questions')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'questions')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'questions')
   end
 
   private

@@ -1,5 +1,6 @@
 class IdeaBoardsController < ApplicationController
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show]
   before_filter :login_required, :only => [:new, :create, :update]
   before_filter :load_top_ideas, :only => :index
   before_filter :load_newest_ideas, :only => :index

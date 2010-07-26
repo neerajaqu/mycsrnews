@@ -4,6 +4,7 @@ class ResourcesController < ApplicationController
   cache_sweeper :resource_sweeper, :only => [:create, :update, :destroy]
 
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index, :show, :my_resources]
   before_filter :login_required, :only => [:like, :new, :create, :update]
   before_filter :load_top_resources
   before_filter :load_newest_resources
@@ -59,12 +60,6 @@ class ResourcesController < ApplicationController
     @current_sub_tab = 'My Resources'
     @user = User.find(params[:id])
     @resources = @user.resources.active.paginate :page => params[:page], :per_page => Resource.per_page, :order => "created_at desc"
-  end
-
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'resources')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'resources')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'resources')
   end
 
   private

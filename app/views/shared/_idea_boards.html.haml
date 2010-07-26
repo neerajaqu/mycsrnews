@@ -3,14 +3,14 @@
     %h2= t('.title')
   .subtitle
     %span= t('.subtitle')
-  .storyList
-    .list_stories
+  .itemListWrap
+    .list_items
       %ul
         - idea_boards.each do |idea_board|
           %li
-            .storyBlockWrap
-              %p.storyHead= link_to idea_board.name, idea_board
-              %p.storyCaption= idea_board.description
+            .itemBlock
+              %p= link_to idea_board.name, idea_board
+              %p= idea_board.description
 
   - unless @no_paginate
     .clearfix

@@ -5,14 +5,14 @@
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('.top_events_title')
-    .list_stories
+    .list_items
       %ul
         - top_events.each do |event|
           %li
-            .storyBlockWrap
+            .itemBlock
               %h4= link_to event.name, event_path(event)
               .profilePic= local_linked_profile_pic event.user
               .eventBlockMeta
                 %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))
-                %span.btnComment.float_left== #{like_link event} #{event.votes_tally}
-                %span.btnComment.float_left== #{link_to t('comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
+                %span.btnComment== #{like_link event} #{event.votes_tally}
+                %span.btnComment== #{link_to t('comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}

@@ -1,16 +1,2 @@
 -# expects answer
-
-.answer
-  %blockquote
-    .quotes= answer.answer
-  .storyBlockWrap
-    .profilePic= local_linked_profile_pic answer.user
-    .storyBlockMeta
-      %h3= t('answered_by', :fb_name => local_linked_profile_name(answer.user), :date => time_ago_in_words(answer.created_at))
-      %span.btnComment.btn_left== #{like_link answer} #{answer.votes.size}
-      %span.btnComment.btn_mid= link_to answer_comments_translate(answer.comments.size), '#', :class => 'answer_comments_link'
-
-  %br
-  .clearfix
-  = render :partial => 'shared/comments', :locals => { :comments => answer.comments }
-  = render :partial => 'shared/comment_form', :locals => { :commentable => answer }
+= render :partial => 'shared/items/answer', :locals => { :answer => answer , :show_comments => true }

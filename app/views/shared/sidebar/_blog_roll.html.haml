@@ -6,7 +6,7 @@
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('blog_roll_title')
-      .userBlockWrap.clearfix
+      .userList
         %ul
           - blog_roll.each do |user|
             %li

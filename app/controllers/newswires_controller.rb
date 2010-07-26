@@ -1,5 +1,6 @@
 class NewswiresController < ApplicationController
   before_filter :set_current_tab
+  before_filter :set_ad_layout, :only => [:index]
   before_filter :login_required, :only => [:quick_post]
   before_filter :load_top_stories, :only => [:index]
 
@@ -32,12 +33,6 @@ class NewswiresController < ApplicationController
         format.json { render :json => { :error => "Quick post failed" }.to_json, :status => 409 }
       end
     end
-  end
-
-  def set_slot_data
-    @ad_banner = Metadata.get_ad_slot('banner', 'newswires')
-    @ad_leaderboard = Metadata.get_ad_slot('leaderboard', 'newswires')
-    @ad_skyscraper = Metadata.get_ad_slot('skyscraper', 'newswires')
   end
 
   private

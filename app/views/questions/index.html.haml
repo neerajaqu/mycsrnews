@@ -1,5 +1,5 @@
 - content_for :sub_nav do
-  = render :partial => 'shared/ads_banner' ,:locals => { :slot_data => @ad_leaderboard }
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   = render :partial => 'shared/subnav/questions_subnav'
 
 #col_left
@@ -20,6 +20,7 @@
             - form.buttons do
               = form.commit_button :button_html => { :class => "btn_1" }
 
+  = render_ad(:banner, @ad_layout, @ad_banner)
   - cache "questions_list_#{@page}html" do
     - questions ||= Question.active.paginate :page => params[:page], :per_page => Question.per_page, :order => "created_at desc"
     - @paginate ||= false
@@ -32,8 +33,8 @@
               = render :partial => 'shared/forms/refine_dropdown', :locals => { :select_options => Question.refineable_select_options }
         .subtitle
           %span= t('questions.list_subtitle')
-        .storyList
-          #front-stories.list_stories
+        .itemListWrap
+          #front-stories.list_items
             %ul
               - questions.each do |question|
                 %li.askQuestionWrap{'data-id' => question.cache_key}
@@ -42,15 +43,15 @@
                       = image_tag question.images.first.url(:thumb)
                     - else
                       = image_tag ('default/watermark.jpg')
-                  .storyBlockWrap.storyBlockSpacer
-                    %h2.storyHead= link_to question.question, question
-                    %p.storyCaption= linked_item_details question
+                  .itemBlock
+                    %h2= link_to question.question, question
+                    %p= linked_item_details question
                     .profilePic= local_linked_profile_pic question.user
-                    .storyBlockMeta.float_left
+                    .itemMeta
                       %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
-                      %span.btnComment.float_left== #{like_link question} #{question.votes.size}
-                      %span.btnComment.float_left== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
-                      %span.btnComment.float_left= fb_share_item_button question
+                      %span.btnComment== #{like_link question} #{question.votes.size}
+                      %span.btnComment== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
+                      %span.btnComment= fb_share_item_button question
 
       - if @paginate
         .clearfix
@@ -59,8 +60,10 @@
 
 #col_right
   = render :partial => 'shared/sidebar/questions_whatisthis'
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_questions'
   = render :partial => 'shared/sidebar/newest_questions'
   = render :partial => 'shared/sidebar/unanswered_questions'
   = render :partial => 'shared/sidebar/top_answers'
   = render :partial => 'shared/sidebar/newest_answers'
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

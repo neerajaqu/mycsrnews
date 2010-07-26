@@ -1,9 +1,9 @@
 .forum_topic
-  .storyBlockWrap.storyBlockSpacer
-    %h2.storyHead= link_to topic.title, topic.item_link
-    %p.storyCaption= caption topic.item_description
+  .itemBlock
+    %h2= link_to topic.title, topic.item_link
+    %p= caption topic.item_description
     .profilePic= local_linked_profile_pic topic.user
-    .storyBlockMeta.float_left
+    .itemMeta
       %h3= t('.posted_by', :fb_name => local_linked_profile_name(topic.user), :date => time_ago_in_words(topic.created_at))
-      -#%span.btnComment.float_left== #{like_link topic} #{topic.votes_tally}
-      %span.btnComment.float_left== #{link_to t('.stories_comments'), topic.item_link} #{topic.comments_count}
+      -#%span.btnComment== #{like_link topic} #{topic.votes_tally}
+      %span.btnComment== #{link_to t('.stories_comments'), topic.item_link} #{topic.comments_count}

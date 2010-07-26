@@ -15,7 +15,7 @@
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
     = stylesheet_link_tag 'cards'
 
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', "http://platform.twitter.com/anywhere.js?id=#{APP_CONFIG['twitter_connect_key']}&v=1",'application'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', "http://platform.twitter.com/anywhere.js?id=#{get_setting('oauth_key').value}&v=1",'application'
     = javascript_include_tag '/users/current'
 
     -# IE Debugging 

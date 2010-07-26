@@ -10,6 +10,7 @@
         %ul
           - featured_ideas.each do |idea|
             %li
-              .profilePic= local_linked_profile_pic idea.user
-              = link_to idea.title, idea_path(idea)
-              %p= (idea.details.present?) ? idea.details : 'no details'
+              .itemBlock
+                .profilePic= local_linked_profile_pic idea.user
+                = link_to idea.title, idea_path(idea)
+                %p= (idea.details.present?) ? idea.details : 'no details'

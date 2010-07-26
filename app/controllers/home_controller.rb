@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  #caches_page :index, :google_ads, :helios_ads, :bookmarklet_panel
+  #caches_page :index, :google_ads, :helios_ads
   layout proc { |controller| controller.action_name == 'app_tab' ? 'app_tab' : 'application' }
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
@@ -76,10 +76,6 @@ class HomeController < ApplicationController
     render :partial => 'shared/ads/helios_alt4_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 
-  def bookmarklet_panel
-    render :partial => 'shared/bookmarklet_panel.fbml.haml', :layout => false
-  end
-
   def about
   end
 
@@ -87,6 +83,10 @@ class HomeController < ApplicationController
   end
 
   def terms
+  end
+
+  def external_page
+    render(:layout => 'external_page', :template => 'home/external_page_header')
   end
 
   def contact_us

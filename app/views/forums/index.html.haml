@@ -1,9 +1,14 @@
 -# content_for :sub_nav do
   = render :partial => 'shared/breadcrumbs', :locals => { :breadcrumbs => get_forum_breadcrumbs(@forums) }
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
 
 #col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
   = render :partial => 'shared/forums', :locals => { :forums => @forums }
 #col_right
   = render :partial => 'shared/sidebar/forums_whatisthis'
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_forums'
   = render :partial => 'shared/sidebar/newest_topics'
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

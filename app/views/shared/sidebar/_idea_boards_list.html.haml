@@ -3,8 +3,9 @@
 .panel_2
   .panelBar
     %h2= t('.title')
-  .list_stories
+  .list_items
     %ul
       - idea_boards.each do |idea_board|
         %li
-          = link_to idea_board.name, idea_board
+          .itemBlock
+            %h4= link_to idea_board.name, idea_board

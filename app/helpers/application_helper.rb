@@ -196,7 +196,7 @@ module ApplicationHelper
     if user.facebook_user?      
       options.merge!(:linked => false)
       unless options[:useyou] == true
-        options.merge!(:capitalize => true)        
+        options.merge!(:capitalize => false)        
       end
       firstnameonly = APP_CONFIG['firstnameonly'] || false
       options.merge!(:firstnameonly => firstnameonly) if firstnameonly
@@ -224,8 +224,13 @@ module ApplicationHelper
     link_to url_for(send("#{item.class.to_s.underscore}_url", item)), url_for(send("#{item.class.to_s.underscore}_url", item))
   end
 
+  def path_to_self_with_anchor(item,anchor)
+    canvas = iframe_facebook_request? ? true : false
+    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas, :only_path => false, :anchor => anchor))
+  end
+
   def twitter_share_item_link(item,caption,button=false)
-    is_bitly_configured = APP_CONFIG['twitter_connect_key'].present?
+    is_bitly_configured = get_setting('oauth_key').present?
     caption =  Rack::Utils.escape(strip_tags(caption))
     
     if is_bitly_configured
@@ -451,4 +456,24 @@ EMBED
       link_to_function("Remove", "$(this).parents('.image-fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
     end
   end
+  
+  def render_ad(ad_size, in_layout, ad_slot)
+    unless in_layout.nil?
+      case ad_size
+        when :leaderboard
+          render_ad_partial(ad_slot) if in_layout.include? "Leader"
+        when :banner
+          render_ad_partial(ad_slot) if in_layout.include? "Banner"
+        when :skyscraper
+          render_ad_partial(ad_slot) if ( in_layout.include? "Leader_B" or in_layout.include? "Banner_B" or in_layout.include? "Sky_A" )
+        when :small_square
+          render_ad_partial(ad_slot) if ( in_layout.include? "Leader_C" or in_layout.include? "Banner_C" or in_layout.include? "Square_A" )
+      end
+    end
+  end
+
+  def render_ad_partial(ad_slot)
+    render :partial => 'shared/ads_banner' ,:locals => { :slot_data => ad_slot }
+  end
+
 end

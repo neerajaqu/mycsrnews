@@ -1,9 +1,13 @@
 - content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
   = render :partial => 'shared/subnav/idea_boards_subnav'
 
 #col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
   = render :partial => 'shared/idea_boards', :locals => { :idea_boards => @idea_boards }
 
 #col_right
-  = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @top_ideas, :title => t('ideas.top_ideas') }
-  = render :partial => 'shared/sidebar/ideas_list', :locals => { :ideas => @newest_ideas, :title => t('ideas.newest_ideas') }
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/top_ideas'
+  = render :partial => 'shared/sidebar/newest_ideas'
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

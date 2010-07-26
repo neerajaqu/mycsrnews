@@ -26,7 +26,7 @@
       :javascript
         try{Typekit.load();}catch(e){}
           
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', "http://platform.twitter.com/anywhere.js?id=#{APP_CONFIG['twitter_connect_key']}&v=1",'application', 'jquery.jgrowl'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', "http://platform.twitter.com/anywhere.js?id=#{get_setting('oauth_key').value}&v=1",'application', 'jquery.jgrowl','scrollable.min.js','scrollable.autoscroll.min.js'
     = javascript_include_tag '/users/current'
 
     -# IE Debugging 

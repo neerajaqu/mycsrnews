@@ -4,11 +4,11 @@
       = image_tag idea.images.first.url(:thumb)
     - else
       = image_tag ('default/watermark.jpg')
-  .storyBlockWrap.storyBlockSpacer
-    %h2.storyHead= link_to idea.title, idea_path(idea)
-    %p.storyCaption= linked_item_details idea
+  .itemBlock
+    %h2= link_to idea.title, idea_path(idea)
+    %p= linked_item_details idea
     .profilePic= local_linked_profile_pic idea.user
-    .storyBlockMeta.float_left
+    .itemMeta
       %h3= t('posted_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
-      %span.btnComment.float_left== #{like_link idea} #{idea.votes_tally}
-      %span.btnComment.float_left== #{link_to t('.ideas_comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
+      %span.btnComment== #{like_link idea} #{idea.votes_tally}
+      %span.btnComment== #{link_to t('.ideas_comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}

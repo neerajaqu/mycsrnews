@@ -1,18 +1,6 @@
 -# @expects: local 'questions'
 
 - cache :unanswered_questions_html do
-  - top_questions ||= Question.active.unanswered 5
-  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-    .panelBar
-      %h2= t('questions.unanswered_title')
-    .list_stories
-      %ul
-        - top_questions.each do |question|
-          %li
-            %h4= link_to question.question, question_path(question)
-            .profilePic= local_linked_profile_pic question.user
-            .storyBlockMeta
-              %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
-              %span.btnComment.float_left== #{like_link question} #{question.votes_tally}
-              %span.btn_mid== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
-              -# %span.btnComment= fb_share_item_button question
+  - unanswered_questions ||= Question.active.unanswered 5
+  - unless unanswered_questions.empty?
+    = render :partial => 'shared/lists/small_questions_list', :locals => { :list_title => t('questions.unanswered_title'), :item_list => unanswered_questions }

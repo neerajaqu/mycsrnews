@@ -10,23 +10,13 @@
           = render :partial => 'shared/forms/refine_dropdown'
     .subtitle
       %span= t('.users_subtitle')
-    .storyList
-      .list_stories
+    .itemListWrap
+      .list_items
         %ul
           - scores.each do |score|
             - user = score.user
             %li{'data-id' => user.cache_key}
-              .thumb.user
-                = local_linked_profile_pic user, :size => "small"
-              .storyBlockMeta.float_left{ :style => 'width: 60%' }
-                %h2.storyHead== #{local_linked_profile_name(user)}
-                %p= caption(user.bio,350)
-              .storyBlockMeta.float_right
-                %h4.userPoints= t('total_score', :score => score.total_score)
-                - if score.karma_score.to_i > 0
-                  %h3.userPoints= t('karma_score', :score => score.karma_score)
-                - if score.activity_score.to_i > 0
-                  %h3.userPoints= t('activity_score', :score => score.activity_score)
+              = render :partial => 'shared/item/user', :locals => { :user => user, :score => score }
     - if paginate
       .clearfix
         = will_paginate scores

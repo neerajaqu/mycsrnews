@@ -3,12 +3,4 @@
 - cache :newest_topics_html do
   - newest_topics ||= Topic.active.newest
   - unless newest_topics.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar.clearfix
-        %h2= t('forums.newest_topics_title')
-      .list_stories.clearfix
-        %ul
-          - newest_topics.each do |topic|
-            %li
-              .profilePic= local_linked_profile_pic topic.user
-              = link_to topic.title, topic_path(topic)
+    = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => t('forums.newest_topics_title'), :item_list => newest_topics }
