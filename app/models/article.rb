@@ -13,8 +13,8 @@ class Article < ActiveRecord::Base
   has_one :tweeted_item, :as => :item
   belongs_to :author, :class_name => "User"
 
-  named_scope :published, lambda { |*args| { :conditions => ["is_draft = 0"] } }
-  named_scope :draft, lambda { |*args| { :conditions => ["is_draft = 1"] } }
+  named_scope :published, { :conditions => ["is_draft = 0"] }
+  named_scope :draft, { :conditions => ["is_draft = 1"] }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["featured_at desc"], :limit => (args.first || 1)} }
   named_scope :blog_roll, lambda { |*args| {  :select => "count(author_id) as author_article_count, author_id", :group => "author_id", :order => "author_article_count desc", :limit => (args.first || 30)} }
