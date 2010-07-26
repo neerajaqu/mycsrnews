@@ -450,7 +450,7 @@ li
           &:hover
             text-decoration: none
 
-// THUMB HACK STYLING //
+/* GLOBAL IMAGE SIZES */
 
 .thumb
   margin: 5px
@@ -469,9 +469,6 @@ li
     img 
       width: 70px
       height: 70px
-      
-  &.threeFour
-    max-height: 225px
   &.bio
     overflow: visible
   &.nineSixteen
@@ -495,30 +492,22 @@ li
     .moderator
       height: 16px
       width: 16px
-  .moderator 
-    position: absolute
-    left: 2px
-    bottom: 2px
-    background: none
 
-// Moderator badge general styles
+/* MODERATOR BADGE STYLING */
 .moderator 
   position: absolute
   left: 2px
   bottom: 2px
   background: none
 
-.featuredNewsList
-  margin: 10px 0 0 0
-  .thumb
-    background: black
-    margin: 0 8px 0 0
-    height: 34px
-    float: left
-    img
-      max-width: 48px
+.thumb
+  .moderator 
+    position: absolute
+    left: 2px
+    bottom: 2px
+    background: none
 
-// Profile Pic //
+/* PROFILE IMAGE */
 .profilePic
   position: relative
   float: left
@@ -531,6 +520,20 @@ li
   .moderator
     height: 12px
     width: 12px
+
+
+/* 1 BIG STORY 4 SMALL STORY IMAGE SIZING */
+.panel_3
+  .featuredNewsList
+    margin: 10px 0 0 0
+    .thumb
+      width: 48px
+      height: 36px
+      margin: 0 8px 0 0
+      height: 34px
+      float: left
+      img
+        width: 48px
 
 // left and right column backgrounds //
 $ColumnCorners: none
