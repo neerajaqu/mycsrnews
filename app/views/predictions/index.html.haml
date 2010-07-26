@@ -5,17 +5,16 @@
 #col_left
   = render_ad(:banner, @ad_layout, @ad_banner)
 
+  .panel_1.moderator-links
+    = link_to t('predictions.new_group'), new_admin_prediction_group_path(), :class => "btn", :target => '_parent'
+    = link_to t('predictions.new_question'), new_admin_prediction_question_path(), :class => "btn", :target => '_parent'
+
 #col_right
--#  = render :partial => 'shared/sidebar/resources_whatisthis'
+  = render :partial => 'shared/items/what_is_this', :locals => { :title => t('predictions.what_is_intro'), :details => t('predictions.what_is_details')}
   = render_ad(:small_square, @ad_layout, @ad_small_square)
-  = render :partial => 'shared/sidebar/resource_sections_list', :locals => { :resource_sections => @newest_resource_sections }
-  = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @top_resources, :title => t('.top_resources') }
-  = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @newest_resources, :title => t('.newest_resources') }
+  = render :partial => 'shared/sidebar/newest_prediction_groups', :locals => { :prediction_groups => @newest_prediction_groups }
+  = render :partial => 'shared/sidebar/top_prediction_groups', :locals => { :prediction_groups => @newest_prediction_groups }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
 
-.panel_1.moderator-links
-  %div.float_left= link_to t('predictions.new_group'), new_admin_prediction_group_path(), :class => "btn", :target => '_parent'
-  &nbsp;
-  %div.float_left= link_to t('predictions.new_question'), new_admin_prediction_question_path(), :class => "btn", :target => '_parent'
 
 = render :partial => 'shared/index_footer', :locals => { :index_path => predictions_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('predictions') }

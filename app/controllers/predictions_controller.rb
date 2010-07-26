@@ -1,5 +1,5 @@
 class PredictionsController < ApplicationController
-  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:your, :new, :create, :update, :like], :if => :request_comes_from_facebook?
+  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:my_predictions, :new, :create, :update, :like], :if => :request_comes_from_facebook?
 
   #cache_sweeper :resource_sweeper, :only => [:create, :update, :destroy]
 
@@ -9,19 +9,17 @@ class PredictionsController < ApplicationController
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
-    @current_sub_tab = 'Browse'
-  end
-
-  def your
-    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
-    @current_sub_tab = 'Yours'
-    @user = current_user
-    @guesses = @user.prediction_guesses.paginate :page => params[:page], :per_page => PredictionGuess.per_page, :order => "created_at desc"    
+    @current_sub_tab = 'Predict'
   end
   
   def scores
-    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Scores'
+    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
+    @prediction_scores = PredictionScore.top.paginate :page => params[:page], :per_page => PredictionScore.per_page, :order => "accuracy desc"
+    respond_to do |format|
+      format.html { @paginate = false }
+      format.json { @users = User.refine(params) }
+    end
   end
   
   def new
@@ -30,11 +28,11 @@ class PredictionsController < ApplicationController
   def create
   end
 
-  def yours
+  def my_predictions
     @paginate = true
-    @current_sub_tab = 'My Resources'
-    @user = User.find(params[:id])
-    @resources = @user.resources.active.paginate :page => params[:page], :per_page => Resource.per_page, :order => "created_at desc"
+    @current_sub_tab = 'Yours'
+    @user = User.find(current_user)
+    @prediction_guesses = @user.prediction_guesses.active.paginate :page => params[:page], :per_page => PredictionGuess.per_page, :order => "created_at desc"
   end
 
   private

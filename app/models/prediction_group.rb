@@ -18,6 +18,7 @@ class PredictionGroup < ActiveRecord::Base
   validates_presence_of :title, :section
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
+  named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 10)} }
 
   def to_s
     "Prediction Group: #{title}"
