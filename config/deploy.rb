@@ -1,5 +1,5 @@
 set :default_stage, "n2_staging"
-set :stages, %w(n2_production n2_staging chewbranca_staging n2_charlotte n2_freep n2_kpcc n2_genomics n2_wkyc n2_sea n2_nc n2_buzz n2_statepress n2_wharton n2_boston_aws n2_glob_aws)
+set (:stages) { Dir.glob(File.join(File.dirname(__FILE__), "deploy", "*.rb")).map {|s| File.basename(s, ".rb") }.select {|s| not s =~ /sample/} }
 require 'capistrano/ext/multistage'
 require 'eycap/recipes'
 

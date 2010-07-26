@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_users
-    @top_users ||= User.top
+    @top_users ||= User.top.members
   end
 
   def load_contents
@@ -102,7 +102,7 @@ class ApplicationController < ActionController::Base
   def load_top_discussed_stories
     @most_discussed_stories ||= Content.find( :all,
     	:limit    => 5,
-    	:conditions => 'created_at > date_sub(now(), INTERVAL 1 WEEK)',
+    	:conditions => ["created_at > ?", 1.week.ago],
     	:order    => "comments_count desc"
     )
   end

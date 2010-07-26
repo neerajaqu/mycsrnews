@@ -205,3 +205,10 @@ en:
       message: "Be sure to add your email address so that we can notify you when other readers respond to your stories and comments."
       action: "Add your email address"
       stop: "Don't ask again"
+  newswires:
+    title: "Newswire Feeds"
+    subtitle: "The latest from our favorite feeds"
+    via:  "Via {{title}}, {{date}} ago"
+    publish: "Publish to {{site_title}}"
+    read: "Read Story"
+    quick_post: "Quick post"

@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
 
   def drafts
     @current_sub_tab = 'Draft Articles'
-    @drafts = Content.draft_articles.find(:all, :conditions => {:user_id => @current_user })
+    @drafts = current_user.contents.draft_articles
   end
 
   def user_index
