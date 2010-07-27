@@ -70,7 +70,17 @@ body
   +grid(8)
   +alpha
   +omega
+  &.featureWrap
+    .thumb.wide
+      width: 486px
+      height: 160px
+      img
+        top: -139px
+        width: 486px
   .list_items
+    .users
+      .thumb
+        height: 80px
     .thumb
       width: 80px
       height: 60px
@@ -78,24 +88,12 @@ body
       float: left
       img
         width: 80px
+        &.moderator
+          height: 18px
+          width: 18px
     .itemBlock
       float: left
       width: 386px
-
-    /* LIST CLASSES WITH IMAGE */
-    .answer, .article, .comment, .content, .idea, .question, .resource, .user, .generic
-      .itemBlock
-        float: left
- 
-    /* LIST CLASSES WITH NO IMAGE */
-    .newswire, .generic_no_image
-      .itemBlock
-        display: block
-        width: 486px
-
-    .event
-      .itemBlock
-        display: block
 
 /* UNIVERSAL LIST PANEL_2 STYLES */
 .panel_2
@@ -111,8 +109,6 @@ body
 /* FEATURED STORY PANEL STYLES */
 
 .panel_3
-  width: 50%
-  float: left
   .thumb
     height: 178px
     width: 238px
@@ -120,33 +116,35 @@ body
       width: 238px
 
 .panel_4
-  float: left
-  width: 25%
   .thumb
     height: 85px
     width: 114px
     img
       width: 114px
+  p
+    display: none
 
 .panel_5
-  float: left
-  width: 33.333%
   .thumb
     height: 116px
     width: 155px
     img
       width: 155px
+  p
+    display: none
 
 /**********************************************************************************************/
 /* UNIQUE SIZE REQUIREMENT IMAGES */
 .thumb
   &.banner
-    margin: 2px
+    margin: 2px auto
     width: 235px
     padding: 0
     display: block
     img
       width: 235px
+  &.short
+    height: 134px
 
 /* DETAILS PAGE THUMB SIZE */
 #itemDetails
