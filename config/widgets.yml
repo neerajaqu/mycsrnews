@@ -8,6 +8,8 @@ widgets:
       partial: '/shared/featured_items'
       locals: 'featured_items'
       load_functions: 'load_featured_items'
+    auto_feature:
+      partial: '/shared/auto_feature'      
     ads_banner:
       partial: '/shared/ads_banner'
     newest_images:

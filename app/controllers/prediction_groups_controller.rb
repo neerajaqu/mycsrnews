@@ -1,0 +1,2 @@
+class PredictionGroupsController < ApplicationController
+end

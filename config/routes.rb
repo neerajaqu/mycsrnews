@@ -80,7 +80,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :topics, :has_many => [:comments]
   map.resource :session
   map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
-
+  map.resources :predictions, :collection => { :index => [:get, :post], :browse => [:get, :post], :your => [:get, :post], :scores => [:get, :post] }
 
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index
@@ -123,6 +123,9 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true
     admin.resources :votes,           :active_scaffold => true
+    admin.resources :prediction_groups
+    admin.resources :prediction_questions
+    admin.resources :prediction_guesses
 
     admin.namespace(:metadata) do |metadata|
       metadata.resources :ads

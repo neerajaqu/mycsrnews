@@ -212,3 +212,9 @@ en:
     publish: "Publish to {{site_title}}"
     read: "Read Story"
     quick_post: "Quick post"
+  predictions:
+    browse: "Make Predictions"
+    yours: "Your Predictions"
+    scores: "High Scores"
+    new_group: "Add a Group"
+    new_question: "Add a Question"

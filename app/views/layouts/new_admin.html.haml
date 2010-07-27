@@ -104,6 +104,12 @@
                 %ul
                   %li= link_to 'Forums', admin_forums_path
                   %li= link_to 'Topics', admin_topics_path
+              %li
+                %a{:href => "#predictions"} Predictions
+                %ul
+                  %li= link_to 'Groups', admin_prediction_groups_path
+                  %li= link_to 'Questions', admin_prediction_questions_path
+                  %li= link_to 'Guesses', admin_prediction_guesses_path
           %li
             %a{:href => "#members"} Members
             %ul

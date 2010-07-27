@@ -16,7 +16,7 @@
           - scores.each do |score|
             - user = score.user
             %li{'data-id' => user.cache_key}
-              = render :partial => 'shared/item/user', :locals => { :user => user, :score => score }
+              = render :partial => 'shared/items/user', :locals => { :user => user, :score => score }
     - if paginate
       .clearfix
         = will_paginate scores

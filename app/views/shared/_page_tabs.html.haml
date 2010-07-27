@@ -98,5 +98,9 @@
                     - unless MENU['events']['import_facebook'].nil?
                       - if current_facebook_user
                         %li= link_to t('.import_facebook'), import_facebook_events_path, :class => tab_selected?(@current_tab, 'events')
+        - if MENU.key? 'predictions'
+          %li
+            .menu_item
+              = link_to t('.predictions'), predictions_path, :class => tab_selected?(@current_tab, 'predictions')
         - if MENU.key? 'cards'
           %li= link_to t('cards.menu_title'), cards_path, :class => tab_selected?(@current_tab, 'cards')
