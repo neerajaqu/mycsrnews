@@ -1,5 +1,7 @@
 class Admin::ContentsController < AdminController
 
+  cache_sweeper :story_sweeper, :only => [:create, :update, :destroy]
+
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => Content.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
