@@ -1,0 +1,5 @@
+== #{@message[:originator].name} commented on "#{@message[:participant].commentable.item_title}" at #{@message[:site_title]}
+%br
+%p=   nl2br(@message[:participant].comments)
+%br
+%a{:href=> polymorphic_url(@message[:participant].item_link, :only_path => false) }= I18n.translate('message.click_respond')
