@@ -62,7 +62,7 @@ body
   +grid(12)
   margin: 0 10px 10px 0
 
-/* UNIVERSAL LIST PANEL_1 STYLES */
+/* UNIVERSAL LIST PANEL_1 STYLES NON FACEBOOK LAYOUT */
 .panel_1
   +grid(8)
   +alpha
@@ -92,7 +92,7 @@ body
       float: left
       width: 510px
 
-/* UNIVERSAL LIST PANEL_2 STYLES */
+/* UNIVERSAL LIST PANEL_2 STYLES NON FACEBOOK LAYOUT */
 .panel_2
   +grid(4)
   +alpha
@@ -101,6 +101,21 @@ body
     .itemBlock
       width: 290px
 
+    .article
+      &.featured
+        .itemBlock
+          float: left
+          width: 210px
+        .thumb
+          height: 52px
+          width: 70px
+          float: left
+          img
+            width: 70px
+        .itemMeta
+          width: 100%
+      .itemBlock
+        width: 290px
 
 /**********************************************************************************************/
 /* FEATURED STORY PANEL IMAGE SIZES */
@@ -117,14 +132,22 @@ body
     height: 110px
     width: 145px
     img
-      max-width: 145px
+      width: 145px
 
 .panel_5
   .thumb
     height: 146px
     width: 196px
     img
-      max-width: 196px
+      width: 196px
+
+.panel_6
+  .thumb
+    float: left
+    height: 45px
+    width: 60px
+    img
+      width: 60px
 
 /**********************************************************************************************/
 /* UNIQUE SIZE IMAGES */

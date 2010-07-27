@@ -489,7 +489,7 @@ li
       height: 16px
       width: 16px
 
-/* MODERATOR BADGE STYLING */
+/* MODERATOR BADGE */
 .moderator 
   position: absolute
   left: 2px
@@ -497,7 +497,7 @@ li
   background: none
 
 .thumb
-  .moderator 
+  img.moderator 
     position: absolute
     left: 2px
     bottom: 2px
@@ -518,7 +518,7 @@ li
     width: 12px
 
 
-/* 1 BIG STORY 4 SMALL STORY IMAGE SIZING */
+/* 1 BIG STORY 3 SMALL STORY IMAGE SIZING */
 .panel_3
   .list_featured
     margin: 5px 5px 5px 0
@@ -571,6 +571,11 @@ $ColumnCorners: none
     line-height: 11px
     margin: 0 0 4px 0
 
+/* NEWSWIRE ITEMMETA */
+.newswire
+  .itemMeta
+    width: 100%
+
 .itemBlock
   margin: 5px 5px 7px 5px
 
@@ -602,8 +607,9 @@ $ColumnCorners: none
       border:
         bottom: $panelListBorder
 
-.panel_3, .panel_4, .panel_5
+.panel_3, .panel_4, .panel_5, .panel_6
   float: left
+  display: block
 
 .panel_3
   width: 50%
@@ -611,7 +617,7 @@ $ColumnCorners: none
 .panel_4
   width: 25%
 
-.panel_5
+.panel_5, .panel_6
   width: 33.333%
 
 
