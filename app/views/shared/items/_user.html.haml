@@ -1,12 +1,14 @@
 -# expects local user and score
-.thumb.user
-  = local_linked_profile_pic user, :size => "small"
-.float_left{ :style => 'width: 60%' }
-  %h2== #{local_linked_profile_name(user)}
-  %p= caption(user.bio,350)
-.float_right
-  %h4.userPoints= t('total_score', :score => score.total_score)
-  - if score.karma_score.to_i > 0
-    %h3.userPoints= t('karma_score', :score => score.karma_score)
-  - if score.activity_score.to_i > 0
-    %h3.userPoints= t('activity_score', :score => score.activity_score)
+.users
+  .thumb.user
+    = local_linked_profile_pic user, :size => "small"
+  .itemBlock
+    .float_left{ :style => 'width: 60%' }
+      %h2== #{local_linked_profile_name(user)}
+      %p= caption(user.bio,180)
+    .float_right{ :style => 'width: 35%' }
+      %h4.userPoints= t('total_score', :score => score.total_score)
+      - if score.karma_score.to_i > 0
+        %h3.userPoints= t('karma_score', :score => score.karma_score)
+      - if score.activity_score.to_i > 0
+        %h3.userPoints= t('activity_score', :score => score.activity_score)

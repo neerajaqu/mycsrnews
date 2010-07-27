@@ -461,6 +461,9 @@ li
     background: $WaterMark
   a:hover
     text-decoration: none
+  img.moderator
+    height: 18px
+    width: 18px
   &.welcome
     margin: 10px
     float: left
@@ -471,16 +474,9 @@ li
       height: 70px
   &.bio
     overflow: visible
-  &.nineSixteen
-    max-height: 150px
   &.story
     width: 90px
-    max-height: 75px
-  &.user
-    max-height: 90px
-    .moderator
-      height: 18px
-      width: 18px
+    height: 75px
   &.user-details
     max-height: 210px
     .moderator
@@ -524,16 +520,37 @@ li
 
 /* 1 BIG STORY 4 SMALL STORY IMAGE SIZING */
 .panel_3
-  .featuredNewsList
-    margin: 10px 0 0 0
+  .list_featured
+    margin: 5px 5px 5px 0
+    padding: 5px 5px 5px 0
+    background: white
     .thumb
-      width: 48px
-      height: 36px
-      margin: 0 8px 0 0
+      width: 45px
       height: 34px
+      margin: 5px
       float: left
       img
         width: 48px
+    .itemBlock
+      margin: 5px 0
+      float: left
+      width: 245px
+    ul
+      padding: 0
+    li
+      width: auto
+      display: inline-block
+      border-bottom: none
+      margin: 0
+      padding: 0
+      &.selected, &:hover
+        background: $featureStoryBG
+        .btnComment
+          background: $btnCommentBG
+      h4
+        margin: 0
+      p
+        margin: 2px 0 0 0
 
 // left and right column backgrounds //
 $ColumnCorners: none
@@ -557,11 +574,25 @@ $ColumnCorners: none
 .itemBlock
   margin: 5px 5px 7px 5px
 
+/* LIST CLASSES - GLOBAL STYLES */
 .answer, .article, .comment, .content, .event, .idea, .newswire, .question, .resource, .user, .generic
   display: inline-block
   width: 100%
 
-/* UNVERSAL LIST LI STYLES */
+/* LIST CLASSES WITH IMAGE */
+.answer, .article, .comment, .content, .idea, .question, .resource, .users, .generic
+  .itemBlock
+    float: left
+ 
+/* LIST CLASSES WITH NO IMAGE */
+.newswire, .generic_no_image
+  .itemBlock
+    display: block 
+.event
+  .itemBlock
+    display: block
+
+/* UNVERSAL LIST STYLES - PANELS */
 .panel_1, .panel_2
   .list_items
     li
@@ -570,6 +601,19 @@ $ColumnCorners: none
       width: 100%
       border:
         bottom: $panelListBorder
+
+.panel_3, .panel_4, .panel_5
+  float: left
+
+.panel_3
+  width: 50%
+
+.panel_4
+  width: 25%
+
+.panel_5
+  width: 33.333%
+
 
 /**********************************************************************************************/
 /* FEATURED STORY PANEL STYLES */
@@ -602,22 +646,6 @@ $ColumnCorners: none
           text-decoration: none
           background: $featureStoryBG
 
-  .itemBlock
-    .featuredNewsList
-      ul
-        padding: 0
-      li
-        width: auto
-        display: block
-        border-bottom: none
-        margin: 0 0 4px 0
-        padding: 4px
-        &.selected, &:hover
-          background-color: white
-          .btnComment
-            background: $btnCommentBG
-      p
-        margin: 3px 0 4px 0
 
 .panel_1, .panel_2, .panel_full
   margin-bottom: 10px

@@ -1,11 +1,11 @@
-- limit_title = 44
-- limit_caption = 100
+- limit_title = 32
+- limit_caption = 60
 .panel_5
   .thumb
     %a= link_to image_tag(item.featured_image_url), item.featured_url
   .itemBlock
     %h4 
       %a= link_to caption(item.featured_title,limit_title), item.featured_url
-    %h3
+    %p
       = caption(sanitize(strip_tags(item.featured_blurb)),limit_caption)
       -# = link_to 'More...', item
