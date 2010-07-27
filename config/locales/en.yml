@@ -226,3 +226,4 @@ en:
     newest_groups: "Newest Topics"
     top_groups: "Top Topics"
     my_list_title: "Your Predictions"
+    member_of_group: "Part of {{prediction_group}}"

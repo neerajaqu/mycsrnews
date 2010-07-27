@@ -38,11 +38,13 @@
           %li
             .generic.small
               .itemBlock          
-                %h4= render :partial => 'shared/prediction_questions', :locals => { :question => question }
+                %h4= render :partial => 'shared/prediction_question', :locals => { :question => question }
       %br
-      %p
-        = link_to t('predictions.next_topic'), next_prediction_group_predictions_path(@prediction_group), :class => "btn float_right"
-        = link_to t('predictions.previous_topic'), previous_prediction_group_predictions_path(@prediction_group), :class => "btn"
+    %p
+      - unless @next_prediction_group.nil?
+        = link_to t('predictions.next_topic'), prediction_group_path(@next_prediction_group), :class => "btn float_right"
+      - unless @previous_prediction_group.nil?
+        = link_to t('predictions.previous_topic'), prediction_group_path(@previous_prediction_group), :class => "btn float_right", :class => "btn"
     %br
     %br
     = render :partial => 'shared/comments', :locals => { :comments => @prediction_group.comments }

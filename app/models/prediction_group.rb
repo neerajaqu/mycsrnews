@@ -25,4 +25,20 @@ class PredictionGroup < ActiveRecord::Base
     "Prediction Group: #{title}"
   end
 
+  def next
+    if PredictionGroup.count > 0
+      PredictionGroup.find(:first, :conditions => ["id > ?", self.id ], :order => "id asc")
+    else
+      nil
+    end
+  end
+  
+  def previous
+    if PredictionGroup.count > 0
+      PredictionGroup.find(:first, :conditions => ["id < ?", self.id ], :order => "id desc")
+    else
+      nil
+    end
+  end
+
 end

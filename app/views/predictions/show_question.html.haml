@@ -1,0 +1,34 @@
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+  = render :partial => 'shared/subnav/predictions_subnav'
+
+#col_left
+  - cache "#{@prediction_question.cache_key}_top_html" do
+    #itemDetails.panel_1
+      .topBar
+        %ul
+          %li
+            %a== #{like_link @prediction_question} #{@prediction_question.votes_tally}
+          %li= fb_share_item_button(@prediction_question)
+          %li
+            = twitter_share_item_link @prediction_question, @prediction_question.title
+      %ul
+        -# todo - did user answer already?
+        %li
+          .generic.small
+            .itemBlock          
+              %h4= render :partial => 'shared/prediction_question', :locals => { :question => @prediction_question }
+      %p= t('predictions.member_of_group', :prediction_group => link_to(@prediction_question.prediction_group.title, @prediction_question.prediction_group))
+    = render_ad(:banner, @ad_layout, @ad_banner)
+    %br
+    %br
+  = render :partial => 'shared/item_footer', :locals => { :item => @prediction_question,:title => @prediction_question.title }
+
+#col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/predictions_high_scores', :locals => { :top_scorers => nil }
+  = render :partial => 'shared/sidebar/newest_prediction_groups', :locals => { :prediction_groups => @newest_prediction_groups }
+  = render :partial => 'shared/sidebar/newest_prediction_questions', :locals => { :prediction_questions => @newest_prediction_questions }
+  = render :partial => 'shared/sidebar/top_prediction_groups', :locals => { :prediction_groups => @top_prediction_groups }
+  = render :partial => 'shared/sidebar/top_prediction_questions', :locals => { :prediction_questions => @top_prediction_questions }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
