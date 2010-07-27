@@ -12,6 +12,32 @@ class PredictionGroupsController < ApplicationController
   
   def show
     @prediction_group = PredictionGroup.find(params[:id])
+    tag_cloud @prediction_group
     @current_sub_tab = 'Predict'
   end
+  
+  def self.next
+    if PredictionGroup.count > 0
+      @prediction_group = PredictionGroup.find(:first, :conditions => ["id > ?", params[:id] ], :order => "id asc")
+      if @prediction_group.nil?
+        @prediction_group = PredictionGroup.first
+      end
+      prediction_group_path(@prediction_group)
+    else
+      prediction_groups_index_path
+    end    
+  end
+  
+  def self.previous
+    if PredictionGroup.count > 0
+      @prediction_group = PredictionGroup.find(:first, :conditions => ["id > ?", params[:id] ], :order => "id desc")
+      if @prediction_group.nil?
+        flash[:success] = t('predictions.that_was_first_prediction')
+        @prediction_group = PredictionGroup.last
+      end
+      redirect_to prediction_group_path(@prediction_group)
+    else
+      redirect_to prediction_groups_index_path
+    end    end
+  
 end

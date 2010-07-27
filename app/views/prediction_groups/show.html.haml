@@ -3,12 +3,58 @@
   = render :partial => 'shared/subnav/predictions_subnav'
 
 #col_left
-  = render_ad(:banner, @ad_layout, @ad_banner)  
-  = render :partial => 'shared/items/prediction_group', :locals => { :prediction_group => @prediction_group}
+  - cache "#{@prediction_group.cache_key}_top_html" do
+    #itemDetails.panel_1
+      .topBar
+        %ul
+          %li
+            %a== #{like_link @prediction_group} #{@prediction_group.votes_tally}
+          %li
+            %a== #{link_to t('post_comment'), prediction_group_path(@prediction_group, :anchor => "postCommentBox")} #{@prediction_group.comments_count}
+          %li= fb_share_item_button(@prediction_group)
+          %li
+            = twitter_share_item_link @prediction_group, @prediction_group.title
+      .itemBlock
+        .thumb
+          - if @prediction_group.images.present?
+            = image_tag @prediction_group.images.first.url(:medium)
+        %h1= @prediction_group.title
+        .itemMeta
+          %h3= t('posted_by', :fb_name => local_linked_profile_name(@prediction_group.user), :date => time_ago_in_words(@prediction_group.created_at))
+          - if @prediction_group.moderatable?
+            = render :partial => 'shared/flag_form', :locals => { :flaggable => @prediction_group }
+          - if @tags.present?
+            %h3== Tags #{tag_list(@tags, @prediction_group)}
+        - if @prediction_group.media_item?
+          =render_media_items @prediction_group, :size => 'large'        
+        - unless @prediction_group.description.empty?
+          %p= sanitize @prediction_group.description
+    = render_ad(:banner, @ad_layout, @ad_banner)
+    -# expects prediction_group,
+    - unless @prediction_group.prediction_questions.empty?    
+      %ul
+        - @prediction_group.prediction_questions.each do |question|
+          -# todo - did user answer already?
+          %li
+            .generic.small
+              .itemBlock          
+                %h4= render :partial => 'shared/prediction_questions', :locals => { :question => question }
+      %br
+      %p
+        = link_to t('predictions.next_topic'), next_prediction_group_predictions_path(@prediction_group), :class => "btn float_right"
+        = link_to t('predictions.previous_topic'), previous_prediction_group_predictions_path(@prediction_group), :class => "btn"
+    %br
+    %br
+    = render :partial => 'shared/comments', :locals => { :comments => @prediction_group.comments }
+  = render :partial => 'shared/comment_form', :locals => { :commentable => @prediction_group }
+  = render :partial => 'shared/item_footer', :locals => { :item => @prediction_group,:title => @prediction_group.title }
+  - if @prediction_group.moderatable?
+    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @prediction_group }
 
 #col_right
   = render_ad(:small_square, @ad_layout, @ad_small_square)
-  = render :partial => 'shared/sidebar/top_prediction_groups', :locals => { :prediction_groups => @newest_prediction_groups }
+  = render :partial => 'shared/sidebar/newest_prediction_groups', :locals => { :prediction_groups => @newest_prediction_groups }
+  = render :partial => 'shared/sidebar/newest_prediction_questions', :locals => { :prediction_questions => @newest_prediction_questions }
+  = render :partial => 'shared/sidebar/top_prediction_groups', :locals => { :prediction_groups => @top_prediction_groups }
+  = render :partial => 'shared/sidebar/top_prediction_questions', :locals => { :prediction_questions => @top_prediction_questions }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
-
-= render :partial => 'shared/item_footer', :locals => { :item => @prediction_group, :title => @prediction_group.title }

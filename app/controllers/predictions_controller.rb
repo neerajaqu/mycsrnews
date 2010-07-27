@@ -12,6 +12,32 @@ class PredictionsController < ApplicationController
     @current_sub_tab = 'Predict'
   end
   
+  def next_prediction_group
+    if PredictionGroup.count > 0
+      @prediction_group = PredictionGroup.find(:first, :conditions => ["id > ?", params[:id] ], :order => "id asc")
+      if @prediction_group.nil?
+        flash[:success] = t('predictions.last_prediction')
+        @prediction_group = PredictionGroup.first
+      end
+      redirect_to prediction_group_path(@prediction_group)
+    else
+      redirect_to prediction_groups_index_path
+    end    
+  end
+
+  def previous_prediction_group
+    if PredictionGroup.count > 0
+      @prediction_group = PredictionGroup.find(:first, :conditions => ["id > ?", params[:id] ], :order => "id desc")
+      if @prediction_group.nil?
+        flash[:success] = t('predictions.that_was_first_prediction')
+        @prediction_group = PredictionGroup.last
+      end
+      redirect_to prediction_group_path(@prediction_group)
+    else
+      redirect_to prediction_groups_index_path
+    end    
+  end
+  
   def scores
     @current_sub_tab = 'Scores'
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"

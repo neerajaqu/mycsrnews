@@ -2,7 +2,7 @@
   .left_tabs
     %ul#toggle_tabs_unused.toggle_tabs.clearfix
       %li.first= link_to t('predictions.predict'), predictions_path, :class => sub_tab_selected?(@current_sub_tab, 'Predict')
-      %li.first= link_to t('predictions.browse'), prediction_groups_path, :class => sub_tab_selected?(@current_sub_tab, 'Browse')
+      %li.first= link_to t('predictions.browse_groups'), prediction_groups_path, :class => sub_tab_selected?(@current_sub_tab, 'Browse')
       - if current_user
         %li.first= link_to t('predictions.my_predictions'), my_predictions_predictions_path, :class => sub_tab_selected?(@current_sub_tab, 'Yours')
       %li.first= link_to t('predictions.scores'), scores_predictions_path, :class => sub_tab_selected?(@current_sub_tab, 'Scores')

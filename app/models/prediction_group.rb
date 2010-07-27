@@ -10,6 +10,7 @@ class PredictionGroup < ActiveRecord::Base
   belongs_to  :user
   has_many    :prediction_questions
   has_one :tweeted_item, :as => :item
+  has_many :comments, :as => :commentable
 
   attr_accessor :tags_string
 
