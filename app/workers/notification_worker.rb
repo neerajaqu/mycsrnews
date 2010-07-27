@@ -8,28 +8,23 @@ class NotificationWorker
     ar_obj = klass.find(ar_obj_id)
     pfeed_item.deliver(ar_obj, method_name_arr)
 
-=begin
-    # submit via email
-    # comments & dashboard messages
-    admin = Metadata::Setting.find_setting('site_notification_user')
+    #todo - more notification types need to be handled
+    admin = Metadata::Setting.find_setting('site_notification_user').value
     sender = User.find_by_fb_user_id(admin) || User.find_by_id(admin) || User.admins.last
     if sender and sender.email.present?
       pfeed_item.pfeed_deliveries.map(&:pfeed_receiver).each do |recipient|
         if recipient.accepts_email_notifications?
-          #pfeed_item ... originator is the user
-          #participant is a model element e.g. story
-        	msg = recipient.message.build({
-        	  :user => sender,
-        	  :email => sender.email,
-        	  :recipients = recipient.email,
-        	  :subject = ,
-            :message => ActionView::Base.new.render(:partial => "#{RAILS_ROOT}/app/views/reminders/email_signup.html.haml", :locals => { :user => recipient } ) 
-        	})
-        	recipient.message.push msg
+          message = {
+          	  :sender => sender,
+          	  :email => sender.email,
+          	  :recipients => recipient.email,
+          	  :originator => pfeed_item.originator,
+          	  :participant => pfeed_item.participant,
+          	  :site_title => Metadata::Setting.find_setting('site_title').value
+          	}
+          	Notifier.send("deliver_#{pfeed_item.participant_type.underscore}_message",message)
         end
       end
     end
-=end
-  end
-    
+  end 
 end
