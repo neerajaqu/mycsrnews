@@ -16,7 +16,7 @@ class RemindersWorker
     if user
       recipients = UserProfile.find(:all, :conditions => [ "dont_ask_me_for_email = ? and (email = ? or receive_email_notifications = ?) and (email_last_ask < date_sub(NOW(), INTERVAL 2 WEEK) or email_last_ask is null)",0, '', 0], :order => "user_id DESC", :joins => :user).map(&:user)
       recipients.each do |recipient|
-        chirp = user.sent_chirps.build({
+        chirp = Chirp.new({
           :chirper => user,
           :recipient => recipient,
           :message => ActionView::Base.new.render(:partial => "#{RAILS_ROOT}/app/views/reminders/email_signup.html.haml", :locals => { :user => recipient } ) 
