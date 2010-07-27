@@ -2,33 +2,24 @@
   .panelBar
     %h2
       Top Users
+
   .itemListWrap
     .list_items
       %ul
-        %li.featureWrap
-          .thumb
-            = image_tag 'default/icon-mod-badge.png', :class => "moderator"
-            %a= image_tag('default/default_thumb.gif')
-          .itemMeta.float_left{ :style => 'width: 60%' }
-            %h2 
-              %a Johnny McJohn-john
-            %p 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured
-          .itemMeta.float_right
-            %h4.userPoints
-              = t('11,340') 
-              %span.pointsnote
-                Karma
-            %h3.userPoints
-              = t('11,340')
-              %span.pointsnote
-                Activity
-        %li.featureWrap
-          .thumb
-            =link_to image_tag('default/default_thumb.gif'), '#'
-          .float_left
-            %h2 
-              %a name goes here
-            %p city and state
-          .itemMeta.float_right
-            %h4.userPoints 11,340
-            %h3.userPoints points
+        %li
+          .users
+            .thumb.user
+              = image_tag('default/test-profile-pic.png')
+              = image_tag('default/icon-mod-badge.png', :class => 'moderator')
+            .itemBlock
+              .float_left{ :style => 'width: 60%' }
+                %h2 
+                  Bob Bobberson
+                %p
+                  1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured 1:45PM Officials. 1:45PM Officials shut down an N.C. port and urged people to leave the area after nine containers with highly explosive materials were punctured 1:45PM Officials...
+              .float_right{ :style => 'width: 35%' }
+                %h4.userPoints
+                  Total: 10,000
+                %h3.userPoints
+                  Appreciation: 10,000
+            
