@@ -10,6 +10,7 @@ class CreatePredictionQuestions < ActiveRecord::Migration
       t.boolean :is_approved, :default => true
       t.integer  :votes_tally,                 :default => 0
       t.integer  :comments_count,              :default => 0
+      t.integer  :guesses_count,              :default => 0
       t.boolean  :is_blocked,                  :default => false
       t.boolean  :is_featured,                 :default => false
       t.datetime :featured_at

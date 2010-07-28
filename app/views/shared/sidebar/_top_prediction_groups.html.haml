@@ -1,0 +1,5 @@
+-# @expects: local 'prediction_groups'
+- cache :top_prediction_groups_html do
+  - prediction_groups ||= PredictionGroup.active.top 5
+  - unless prediction_groups.empty?
+    = render :partial => 'shared/lists/small_generic_list', :locals => { :list_title => t('predictions.top_groups'), :item_list => prediction_groups }

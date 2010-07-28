@@ -42,6 +42,7 @@ class Admin::PredictionGroupsController < AdminController
 
   def create
     @prediction_group = PredictionGroup.new(params[:prediction_group])
+    @prediction_group.section = @prediction_group.title
     if @prediction_group.save
       flash[:success] = "Successfully created your new PredictionGroup!"
       redirect_to [:admin, @prediction_group]
@@ -66,7 +67,7 @@ class Admin::PredictionGroupsController < AdminController
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
     	:item => @prediction_group,
     	:model => PredictionGroup,
-    	:fields => [:title, :section, lambda {|f| f.input :description, :required => false }, :status, :is_approved, :is_blocked, :user_id],
+    	:fields => [:title, lambda {|f| f.input :description, :required => false }, :status, :is_approved, :is_blocked, :user_id],
     	:associations => { :belongs_to => { :user => :user_id } }
     }
   end

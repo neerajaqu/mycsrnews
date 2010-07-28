@@ -1,0 +1,23 @@
+%li
+  = question.title
+  - case question.prediction_type
+    - when 'multi'
+      - form_tag :class => "form1" do
+        - flag_list = ['- select your guess below -'] | question.choices.split(/,/)
+        = select_tag :flag_type, options_for_select(flag_list.collect {|f| [t("#{f}"), f] })
+    - when 'yesno'
+      - form_tag :class => "form1" do
+        - flag_list = ['Yes', 'No']
+        = select_tag :flag_type, options_for_select(flag_list.collect {|f| [t("#{f}"), f] })
+    - when 'numeric'
+    - when 'float'
+      - form_tag :class => "form1" do
+        = text_field_tag :guess_numeric
+    - when 'year'
+      - form_tag :class => "form1" do
+        - flag_list = question.choices.split(/,/)
+        = select_tag :flag_type, options_for_select(flag_list.collect {|f| [t("#{f}"), f] })
+    - when 'text'
+      - form_tag :class => "form1" do
+        = text_field_tag :guess
+    - when 'date'
