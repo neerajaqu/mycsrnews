@@ -202,7 +202,7 @@ $(function() {
     $('.commentThread, .postComment', $(this).parents().filter('.answer')).toggle();
   });
 
-  /* Predictions */
+  /* Predictions *
 
   $('.prediction-question-form').change(function(event) {
   	event.preventDefault();
@@ -217,7 +217,7 @@ $(function() {
   		});
     } 
   });
-  
+  */
 
 });
 
