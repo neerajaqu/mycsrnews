@@ -1,23 +1,21 @@
 %li
   = question.title
-  - case question.prediction_type
-    - when 'multi'
-      - form_tag :class => "form1" do
-        - flag_list = ['- select your guess below -'] | question.choices.split(/,/)
-        = select_tag :flag_type, options_for_select(flag_list.collect {|f| [t("#{f}"), f] })
-    - when 'yesno'
-      - form_tag :class => "form1" do
-        - flag_list = ['Yes', 'No']
-        = select_tag :flag_type, options_for_select(flag_list.collect {|f| [t("#{f}"), f] })
-    - when 'numeric'
-    - when 'float'
-      - form_tag :class => "form1" do
-        = text_field_tag :guess_numeric
-    - when 'year'
-      - form_tag :class => "form1" do
-        - flag_list = question.choices.split(/,/)
-        = select_tag :flag_type, options_for_select(flag_list.collect {|f| [t("#{f}"), f] })
-    - when 'text'
-      - form_tag :class => "form1" do
-        = text_field_tag :guess
-    - when 'date'
+  .prediction-question-container
+    - form_tag create_prediction_guesses_path, :class => "prediction-question-form" do
+      = hidden_field_tag :prediction_question_id, question.id
+      - case question.prediction_type
+        - when 'multi'
+          - choice_list = [t('predictions.select_guess')] | question.choices.split(/,/)
+          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+        - when 'yesno'
+          - choice_list = [t('predictions.select_guess'), 'Yes', 'No']
+          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+        - when 'numeric'
+        - when 'float'
+          -# wont work on onchange , needs submit
+          = text_field_tag :guess
+        - when 'year'
+          - choice_list = [t('predictions.select_guess')] | question.choices.split(/,/)
+          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+        - when 'text'
+          = text_field_tag :guess

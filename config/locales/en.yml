@@ -227,6 +227,13 @@ en:
     top_groups: "Top Topics"
     my_list_title: "Your Predictions"
     member_of_group: "Part of {{prediction_group}}"
+    select_guess: "select your guess below"
+    types:
+      yes_no: "Yes or No"
+      multi: "Multiple Choice"
+      numeric: "Numeric"
+      text: "Text"
+      year: "Year"
   message:
     commented_on:  "{{name}} commented on {{title}} at {{site_title}}"
     answered:  "{{name}} answered {{title}} at {{site_title}}"

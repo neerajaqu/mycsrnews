@@ -84,6 +84,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :predictions, :collection => { :index => [:get, :post],  :my_predictions => [:get, :post], :scores => [:get, :post] }
   map.resources :prediction_groups, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post] }, :has_many => [:comments, :prediction_questions, :flags]
   map.prediction_question '/prediction_question/:id.:format', :controller => 'predictions', :action => 'show_question'
+  map.resources :prediction_guesses, :collection => { :create => [ :post] }
 
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index

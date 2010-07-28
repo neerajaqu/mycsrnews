@@ -1,5 +1,7 @@
 class Admin::PredictionQuestionsController < AdminController
 
+  before_filter :set_prediction_types 
+  
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => PredictionQuestion.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
@@ -66,7 +68,7 @@ class Admin::PredictionQuestionsController < AdminController
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
     	:item => @prediction_question,
     	:model => PredictionQuestion,
-    	:fields => [:title, :prediction_type, lambda {|f| f.input :choices, :required => false }, :status, :is_approved, :is_blocked, :user_id, :prediction_group_id],
+    	:fields => [:title, lambda {|f| f.input :prediction_type, :as => :select, :collection => @type_list}, lambda {|f| f.input :choices, :required => false }, :status, :is_approved, :is_blocked, :user_id, :prediction_group_id],
     	:associations => { :belongs_to => { :user => :user_id , :prediction_group => :prediction_group_id } }
     }
   end
@@ -75,11 +77,15 @@ class Admin::PredictionQuestionsController < AdminController
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
     	:item => prediction_question,
     	:model => PredictionQuestion,
-    	:fields => [:title, :prediction_type, lambda {|f| f.input :choices, :required => false } , :status, :is_approved, :is_blocked, :user_id, :prediction_group_id, :created_at],
+    	:fields => [:title, lambda {|f| f.input :prediction_type, :as => :select, :collection => @type_list}, lambda {|f| f.input :choices, :required => false } , :status, :is_approved, :is_blocked, :user_id, :prediction_group_id, :created_at],
     	:associations => { :belongs_to => { :user => :user_id , :prediction_group => :prediction_group_id } }
     }
   end
 
+  def set_prediction_types
+    @type_list = { t('predictions.types.yes_no') => 'yesno', t('predictions.types.multi') => 'multi',  t('predictions.types.numeric') => 'numeric', t('predictions.types.text') => 'text', t('predictions.types.year') => 'year' }
+  end
+  
   def set_current_tab
     @current_tab = 'prediction_questions';
   end
