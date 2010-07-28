@@ -450,7 +450,16 @@ li
           &:hover
             text-decoration: none
 
-/* GLOBAL IMAGE SIZES */
+/**********************************************************************************************/
+/* GLOBAL IMAGE SIZES - SLOWLY PHASING THIS OUT */
+.welcome
+  margin: 10px
+  float: left
+  width: 70px
+  height: 70px
+  img 
+    width: 70px
+    height: 70px
 
 .thumb
   margin: 5px
@@ -461,36 +470,29 @@ li
     background: $WaterMark
   a:hover
     text-decoration: none
-  img.moderator
-    height: 18px
-    width: 18px
-  &.welcome
-    margin: 10px
-    float: left
-    width: 70px
-    height: 70px
-    img 
-      width: 70px
-      height: 70px
-  &.bio
-    overflow: visible
-  &.story
-    width: 90px
-    height: 75px
   &.user-details
-    max-height: 210px
-    .moderator
+    img.moderator
       height: 32px
       width: 32px
   &.user-bio
     float: left
     margin: 5px
-    .moderator
+    img.moderator
       height: 16px
       width: 16px
+/********************************/
+/* SECTION TO TRY AND PHASE OUT */
+
+  &.bio
+    overflow: visible
+  &.story
+    width: 90px
+    height: 75px
+/********************************/
+
 
 /* MODERATOR BADGE */
-.moderator 
+img.moderator 
   position: absolute
   left: 2px
   bottom: 2px
@@ -502,6 +504,16 @@ li
     left: 2px
     bottom: 2px
     background: none
+    height: 18px
+    width: 18px
+
+.profilePic
+  img.moderator
+    position: absolute
+    left: 2px
+    bottom: 2px
+    height: 12px
+    width: 12px
 
 /* PROFILE IMAGE */
 .profilePic
@@ -513,44 +525,6 @@ li
     max-height: 30px
   a:hover
     text-decoration: none
-  .moderator
-    height: 12px
-    width: 12px
-
-
-/* 1 BIG STORY 3 SMALL STORY IMAGE SIZING */
-.panel_3
-  .list_featured
-    margin: 5px 5px 5px 0
-    padding: 5px 5px 5px 0
-    background: white
-    .thumb
-      width: 45px
-      height: 34px
-      margin: 5px
-      float: left
-      img
-        width: 48px
-    .itemBlock
-      margin: 5px 0
-      float: left
-      width: 245px
-    ul
-      padding: 0
-    li
-      width: auto
-      display: inline-block
-      border-bottom: none
-      margin: 0
-      padding: 0
-      &.selected, &:hover
-        background: $featureStoryBG
-        .btnComment
-          background: $btnCommentBG
-      h4
-        margin: 0
-      p
-        margin: 2px 0 0 0
 
 // left and right column backgrounds //
 $ColumnCorners: none
@@ -561,7 +535,10 @@ $ColumnCorners: none
   border-radius: $ColumnCorners
 
 /**********************************************************************************************/
-/* UNIVERSAL LIST STYLES */
+/* UNIVERSAL LIST - CHECK GRID.SASS & FB_GRID.SASS FOR MORE IN-DEPTH STYLING */
+
+.itemBlock
+  margin: 5px 5px 7px 5px
 
 .itemMeta
   display: inline-block
@@ -571,26 +548,35 @@ $ColumnCorners: none
     line-height: 11px
     margin: 0 0 4px 0
 
-/* NEWSWIRE ITEMMETA */
+/* NEWSWIRE META */
 .newswire
   .itemMeta
     width: 100%
 
-.itemBlock
-  margin: 5px 5px 7px 5px
+/* ACTIONS BAR FOR PANELS */
+.itemActions
+  display: block
+  width: 100%
+  background: $subTitleBG
+  border-bottom: 1px solid $subTitleBG - #333
+  text-align: right
+  a
+    display: inline-block
+    font-size: 11px
+    margin: 5px 10px
 
 /* LIST CLASSES - GLOBAL STYLES */
-.answer, .article, .comment, .content, .event, .idea, .newswire, .question, .resource, .user, .generic
+.answer, .article, .comment, .content, .event, .idea, .newswire, .question, .resource, .user, .item_1, .item_2
   display: inline-block
   width: 100%
 
 /* LIST CLASSES WITH IMAGE */
-.answer, .article, .comment, .content, .idea, .question, .resource, .users, .generic
+.answer, .article, .comment, .content, .idea, .question, .resource, .users, .item_1
   .itemBlock
     float: left
  
 /* LIST CLASSES WITH NO IMAGE */
-.newswire, .generic_no_image
+.newswire, .item_2
   .itemBlock
     display: block 
 .event
@@ -620,17 +606,39 @@ $ColumnCorners: none
 .panel_5, .panel_6
   width: 33.333%
 
-
 /**********************************************************************************************/
-/* FEATURED STORY PANEL STYLES */
+/* FEATURED STORY WRAP */
 
 .featureWrap
   background: $featureStoryBG
   .btnComment
     background: $btnCommentFeatureBG
 
+/* FEATURED ITEMS WIDGETS - 50% FINISHED */
+
+.featured_item
+  background: #3b5998
+  display: inline-block
+  width: 300px
+
+.featured_item
+  .title
+    padding: 7px 10px 3px 30px
+    background: image_url("default/icon-question.png") left center no-repeat
+    h1
+      color: white
+      margin: 0
+  .display
+    display: block
+    margin: 5px
+    background: white
+    padding: 10px
+    font-size: 14px
+    line-height: 140%
+   
+
 /**********************************************************************************************/
-/* LAYOUT PANELS - SHOULD BE USED FOR ALL ELEMENT CONTAINERS */
+/* LAYOUT PANELS - PANEL_1 & PANEL_2 CONTAINERS */
 
 .panel_1, .panel_2
   margin: 0 0 15px 0
