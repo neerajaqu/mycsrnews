@@ -209,6 +209,11 @@ en:
       message: "Be sure to add your email address so that we can notify you when other readers respond to your stories and comments."
       action: "Add your email address"
       stop: "Don't ask again"
+    invitefriends:
+      subject: "Want your friends to join our community?"
+      message: "Send invitations to your Facebook friends anytime you want."
+      action: "Invite your friends now"
+      stop: "Don't ask again"      
   newswires:
     title: "Newswire Feeds"
     subtitle: "The latest from our favorite feeds"
