@@ -18,7 +18,7 @@ module Newscloud
       def top_article_items limit = 100
         table = self.name.tableize
         now = Time.now.utc.strftime("%Y-%m-%d %H:%M:%S")
-        self.find_by_sql %{SELECT ((1 + (votes_tally * 2)) / (((UNIX_TIMESTAMP("#{now}") - UNIX_TIMESTAMP(created_at)) / 3600) + 5)) AS item_score, #{table}.* FROM #{table} JOIN (SELECT ID FROM #{table} WHERE (is_blocked = 0 AND article_id is NOT NULL and is_draft = 0) ORDER BY created_at DESC LIMIT 100) AS sub_#{table} ON #{table}.id = sub_#{table}.id ORDER BY item_score DESC LIMIT #{limit};}
+        self.find_by_sql %{SELECT ((1 + (votes_tally * 2)) / (((UNIX_TIMESTAMP("#{now}") - UNIX_TIMESTAMP(created_at)) / 3600) + 5)) AS item_score, #{table}.* FROM #{table} JOIN (SELECT ID FROM #{table} WHERE (is_blocked = 0 AND article_id is NOT NULL) ORDER BY created_at DESC LIMIT 100) AS sub_#{table} ON #{table}.id = sub_#{table}.id ORDER BY item_score DESC LIMIT #{limit};}
       end
       
       def top_story_items(limit = 100, within_last_week = false)
