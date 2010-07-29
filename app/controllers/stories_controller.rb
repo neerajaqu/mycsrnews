@@ -16,7 +16,6 @@ class StoriesController < ApplicationController
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Stories'
     if get_setting('exclude_articles_from_news').value
-      #raise "setting: #{get_setting('exclude_articles_from_news').value.inspect}"
       @contents = Content.top_story_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     else
       @contents = Content.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
@@ -33,7 +32,8 @@ class StoriesController < ApplicationController
 
   def show
     @story = Content.find(params[:id])
-    redirect_to home_index_path if @story.is_article? and @story.article.is_draft?
+    # allow only authors and moderators to preview draft articles
+    redirect_to home_index_path if @story.is_article? and @story.article.is_draft? and (!current_user.present? or current_user != @story.article.author or !current_user.is_moderator? ) 
     tag_cloud (@story.is_article? ? @story.article : @story)
     if MENU.key? 'articles'
       @current_tab = 'articles' if @story.is_article?

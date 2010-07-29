@@ -1,0 +1,5 @@
+-# @expects: local 'prediction_questions'
+- cache :top_prediction_questions_html do
+  - prediction_questions ||= PredictionQuestion.top 5
+  - unless prediction_questions.empty?
+    = render :partial => 'shared/lists/bullet_generic_list', :locals => { :list_title => t('predictions.top_questions'), :item_list => prediction_questions }

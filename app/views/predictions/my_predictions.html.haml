@@ -12,8 +12,6 @@
       - if @guesses.present? and @guesses.first.refineable?
         .refine_link
           = render :partial => 'shared/forms/refine_dropdown', :locals => { :select_options => PredictionGuess.refineable_select_options }
-    .subtitle
-      %span= t('predictions.my_list_subtitle')
     - unless @guesses.empty?
       .itemListWrap
         .list_items
@@ -25,4 +23,4 @@
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
 
-= render :partial => 'shared/index_footer', :locals => { :index_path => predictions_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('predictions') }
+= render :partial => 'shared/index_footer', :locals => { :index_path => my_predictions_predictions_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('predictions') }

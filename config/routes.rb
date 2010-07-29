@@ -44,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.paged_resources '/resources/page/:page.:format', :controller => 'resources', :action => 'index'
   map.paged_questions '/questions/page/:page.:format', :controller => 'questions', :action => 'index'
   map.paged_my_questions '/questions/:id/my_questions/page/:page.:format', :controller => 'questions', :action => 'my_questions'
+  map.paged_prediction_groups '/prediction_groups/page/:page.:format', :controller => 'prediction_groups', :action => 'index'
   map.tagged_stories_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
   map.tagged_stories '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
   map.tagged_contents_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
@@ -61,7 +62,7 @@ ActionController::Routing::Routes.draw do |map|
   map.top_users '/users/top/:top.:format', :controller => 'users', :action => 'index'
   map.resources :stories, :member => { :like => [:get, :post] },:collection => { :parse_page => [:get, :post], :index => [:get, :post] }, :has_many => :comments
   map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags, :related_items], :as => 'stories'
-  map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] },:has_many => [ :flags]
+  map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] }, :has_many => [ :flags]
   map.resources :related_items
 
   map.resources :users, :collection => {:link_user_accounts => :get, :dont_ask_me_for_email => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
@@ -80,7 +81,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :topics, :has_many => [:comments]
   map.resource :session
   map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
-  map.resources :predictions, :collection => { :index => [:get, :post], :browse => [:get, :post], :your => [:get, :post], :scores => [:get, :post] }
+  map.resources :predictions, :collection => { :index => [:get, :post],  :my_predictions => [:get, :post], :scores => [:get, :post] }
+  map.resources :prediction_groups, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post] }, :has_many => [:comments, :prediction_questions, :flags]
+  map.prediction_question '/prediction_question/:id.:format', :controller => 'predictions', :action => 'show_question'
+  map.resources :prediction_guesses, :collection => { :create => [ :post] }
 
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index
@@ -98,6 +102,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :settings
     admin.resources :skip_images
     admin.resources :ad_layouts
+    admin.resources :ads
     admin.resources :title_filters
     admin.resources :activity_scores
     admin.resources :ideas
