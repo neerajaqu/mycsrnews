@@ -120,10 +120,13 @@ en:
     top_title: "Top Articles"
     drafts: "Draft Articles"
     draft: "Draft"
+    edit_draft: "Edit"
+    preview_draft: "Preview"
     publish: "Publish"
     status: "Status: "
     nodrafts: "You do not have any draft articles at this time."    
     editdraft: "Update Your Article"
+    label_body: "Your article content*"
   static_pages:
     faq: "FAQ found here"
     about_us: "About Us found here"

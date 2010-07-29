@@ -12,7 +12,11 @@
       - unless @drafts.empty?
         - @drafts.each do |article|
           %li
-            = link_to article.title, edit_article_path(article.article_id)
+            = article.title
+            = pipe_spacer
+            = link_to t('articles.edit_draft'), edit_article_path(article.article_id)
+            = pipe_spacer
+            = link_to t('articles.preview_draft'), story_path(article)
       - else
         %li= t('article.nodrafts')
   

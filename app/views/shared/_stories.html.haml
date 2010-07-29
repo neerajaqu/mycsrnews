@@ -1,7 +1,9 @@
 - page ||= ""
 - cache_if page.present?, "stories_list_#{page}html" do
-  -# contents ||= Content.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
-  - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - if get_setting('exclude_articles_from_news').value
+    - contents ||= Content.top_story_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  -else
+    - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - paginate ||= false
   .panel_1
     .panelBar

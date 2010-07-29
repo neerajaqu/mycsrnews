@@ -23,7 +23,8 @@ class Article < ActiveRecord::Base
 
   validates_presence_of :body
   
-  before_save :sanitize_body
+  #todo - was removing formatting from drafts - not sure of purpose
+  #before_save :sanitize_body
 
   def item_title
     content.item_title
