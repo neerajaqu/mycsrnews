@@ -41,9 +41,9 @@ class Score < ActiveRecord::Base
   def self.calc_scores time = nil, limit = 10
     limit ||= 10
     if time.nil?
-    	self.find(:all, :select => "SUM(IF(score_type = 'karma', value, 0)) AS karma_score, SUM(IF(score_type = 'participation', value, 0)) AS activity_score, SUM(value) AS total_score, user_id", :group => "user_id", :having => "total_score > 0", :limit => limit, :include => :user, :order => "total_score desc")
+    	self.find(:all, :select => "SUM(IF(score_type = 'karma', value, 0)) AS karma_score, SUM(IF(score_type = 'participation', value, 0)) AS activity_score, SUM(value) AS total_score, user_id", :conditions => ["user_id NOT IN (SELECT id FROM users WHERE is_admin is true or is_moderator is true)"], :group => "user_id", :having => "total_score > 0", :limit => limit, :include => :user, :order => "total_score desc")
     else
-    	self.find(:all, :select => "SUM(IF(score_type = 'karma', value, 0)) AS karma_score, SUM(IF(score_type = 'participation', value, 0)) AS activity_score, SUM(value) AS total_score, user_id", :conditions => ["created_at > ?", time], :having => "total_score > 0", :group => "user_id", :limit => limit, :include => :user, :order => "total_score desc")
+    	self.find(:all, :select => "SUM(IF(score_type = 'karma', value, 0)) AS karma_score, SUM(IF(score_type = 'participation', value, 0)) AS activity_score, SUM(value) AS total_score, user_id", :conditions => ["user_id NOT IN (SELECT id FROM users WHERE is_admin is true or is_moderator is true) AND created_at > ?", time], :having => "total_score > 0", :group => "user_id", :limit => limit, :include => :user, :order => "total_score desc")
     end
   end
 
