@@ -102,6 +102,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :settings
     admin.resources :skip_images
     admin.resources :ad_layouts
+    admin.resources :ads
     admin.resources :title_filters
     admin.resources :activity_scores
     admin.resources :ideas
