@@ -6,15 +6,18 @@
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar.clearfix
         %h2= t('newest_newswires_title')
+      - box_list = [0, 5, 10]
       .list_items.clearfix
-        %ul
-          - newest_newswires.each do |newswire|
-            %li
-              .itemBlock
-                %h4= link_to caption(newswire.title,120), newswire.url, :target => "_newswire"
-                -#.profilePic= local_linked_profile_pic answer.user
-                .itemMeta
-                  %h3= t('via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))
-                  %span.btnComment= link_to t('post_newswire', :site_title => APP_CONFIG['site_title']), new_story_path(:newswire_id => newswire)
-                  -# %span.btnComment= link_to t('newswires.quick_post', :site_title => APP_CONFIG['site_title']), quick_post_newswire_path(newswire), :class => 'quick_post'
-                  %span.btnComment= link_to t('read_newswire'), newswire.url, :target => "_cts" 
+        .newswire_scrollable_panel
+          .feature_scrollable_items
+            - box_list.each do |x|
+              .newswire_panel_items
+                %ul
+                  - unless newest_newswires.count < (x+4)
+                    - (0..4).each do |y|
+                      %li
+                        = render :partial => 'shared/items/small_newswire', :locals => { :newswire => newest_newswires[x+y] }
+        :javascript
+          $(function() {          	
+          	$(".newswire_scrollable_panel").delay(3500).scrollable({speed : 1000, circular: true}).autoscroll({ autoplay: true, interval : 7500});
+          });
