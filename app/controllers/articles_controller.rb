@@ -14,6 +14,10 @@ class ArticlesController < ApplicationController
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Articles'
     @articles = Content.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    @articles.each do |article|
+        doc = Hpricot(article.article.body)
+        doc.search("//p")
+    end
     #@article_images = Image.find(:all, :conditions => ["imageable_type = ?", "Article"], :order => "created_at desc")  
     respond_to do |format|
       format.html { @paginate = true }
