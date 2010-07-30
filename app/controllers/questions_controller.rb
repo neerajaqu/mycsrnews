@@ -22,6 +22,8 @@ class QuestionsController < ApplicationController
     	flash[:error] = "This question has been blocked."
     	redirect_to questions_path
     end
+
+    set_outbrain_item @question
   end
 
   def new
