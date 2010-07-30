@@ -31,6 +31,9 @@ en:
     add_image: "Add Image"
     add_video: "Add Video"
     add_audio: "Add Audio"
+    add_image_title: "Add images to your post"
+    add_audio_title: "Link to an audio file (.mp3 only):"
+    add_video_title: "Embed or link to a video (YouTube, Vimeo and Vmixcore only):"    
   images:
     title: "Images"
   videos:
