@@ -38,6 +38,8 @@ class StoriesController < ApplicationController
     if MENU.key? 'articles'
       @current_tab = 'articles' if @story.is_article?
     end
+
+    set_outbrain_item @story
   end
 
   def new
