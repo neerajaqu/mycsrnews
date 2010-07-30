@@ -8,8 +8,7 @@ class PredictionsController < ApplicationController
   before_filter :login_required, :only => [:like, :new, :create, :update]
 
   def index
-    @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
-    @current_sub_tab = 'Predict'
+    redirect_to play_prediction_groups_path
   end
   
   def scores

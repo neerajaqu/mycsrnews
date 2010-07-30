@@ -82,7 +82,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
   map.resources :predictions, :collection => { :index => [:get, :post],  :my_predictions => [:get, :post], :scores => [:get, :post] }
-  map.resources :prediction_groups, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post] }, :has_many => [:comments, :prediction_questions, :flags]
+  map.resources :prediction_groups, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post], :play => [:get, :post] }, :has_many => [:comments, :prediction_questions, :flags]
   map.prediction_question '/prediction_question/:id.:format', :controller => 'predictions', :action => 'show_question'
   map.resources :prediction_guesses, :collection => { :create => [ :post] }
 

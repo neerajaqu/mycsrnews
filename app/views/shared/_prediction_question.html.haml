@@ -14,8 +14,10 @@
         - when 'float'
           -# wont work on onchange , needs submit
           = text_field_tag :guess
+          = submit_tag "Submit"
         - when 'year'
           - choice_list = [t('predictions.select_guess')] | question.choices.split(/,/)
           = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
         - when 'text'
           = text_field_tag :guess
+          = submit_tag "Submit"

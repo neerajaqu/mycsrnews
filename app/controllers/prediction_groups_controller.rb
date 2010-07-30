@@ -11,12 +11,22 @@ class PredictionGroupsController < ApplicationController
   end
   
   def show
-    @prediction_group = PredictionGroup.find(params[:id])
+    self.play
+  end
+  
+  def play
+    if params[:id].nil?
+      # to do - get first open
+      @prediction_group = PredictionGroup.first
+      #:all, :order => "rand()"
+    else
+      @prediction_group = PredictionGroup.find(params[:id])
+    end
     tag_cloud @prediction_group
     @current_sub_tab = 'Predict'
     @previous_prediction_group = @prediction_group.previous
     @next_prediction_group = @prediction_group.next
+    render :template => 'prediction_groups/show'
   end
     
-  
 end
