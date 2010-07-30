@@ -1,0 +1,17 @@
+- page ||= ""
+- cache_if page.present?, "prediction_groups_list_#{page}html" do
+  - prediction_groups ||= PredictionGroup.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - paginate ||= false
+  .panel_1
+    .panelBar
+      %h2= t 'predictions.browse_groups'
+    .itemListWrap
+      #prediction_groups.list_items
+        %ul
+          - prediction_groups.each do |prediction_group|
+            %li{'data-id' => prediction_group.cache_key}
+              = render :partial => 'shared/items/prediction_group', :locals => { :prediction_group => prediction_group }
+    - if paginate
+      .clearfix
+        = will_paginate prediction_groups
+        %br

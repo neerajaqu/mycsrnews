@@ -3,3 +3,4 @@
 
 APPLICATION_CONFIGURATION_FILE_LOCATION = "#{RAILS_ROOT}/config/application_settings.yml"
 APP_CONFIG = YAML.load_file(APPLICATION_CONFIGURATION_FILE_LOCATION)[RAILS_ENV]
+ActionMailer::Base.default_url_options[:host] = APP_CONFIG['base_url'].sub(/^https?:\/\//,'')

@@ -1,18 +1,19 @@
 -# @expects: local 'most_discussed_stories'
 
 - cache :most_discussed_stories_html do
-  - most_discussed_stories ||= Content.find( :all, :limit => 5, :conditions => ["created_at > ?", 1.week.ago], :order => "comments_count desc")
-  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-    .panelBar
-      %h2= t('.top_discussed_title')
-    .list_items
-      %ul
-        - most_discussed_stories.each do |story|
-          %li
-            .itemBlock
-              %h4= link_to story.title, story_path(story)
-              .profilePic= local_linked_profile_pic story.user
-              .itemMeta
-                %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
-                %span.btnComment== #{like_link story} #{story.votes_tally}
-                %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
+  - most_discussed_stories ||= Content.published.find( :all, :limit => 5, :conditions => ["contents.created_at > ?", 1.week.ago], :order => "comments_count desc")
+  - unless most_discussed_stories.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('.top_discussed_title')
+      .list_items
+        %ul
+          - most_discussed_stories.each do |story|
+            %li
+              .itemBlock
+                %h4= link_to story.title, story_path(story)
+                .profilePic= local_linked_profile_pic story.user
+                .itemMeta
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
+                  %span.btnComment== #{like_link story} #{story.votes_tally}
+                  %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

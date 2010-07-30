@@ -2,6 +2,7 @@
   - form.semantic_fields_for :content do |content_form|
     - content_form.inputs do
       = content_form.input :title
+      %p= t('articles.label_body')
       %p= form.input :body
       = content_form.input :url, :required => false, :hint => t('article_url_hint')
       = content_form.input :tags_string, :required => false, :hint => t('tags_hint')

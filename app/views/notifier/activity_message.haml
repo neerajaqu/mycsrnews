@@ -1,7 +1,0 @@
--# needs to be adopted to general purpose plain text notification of activity to send via email
-- if @message.user.present?
-  == #{@message.user.name}(#{@message.email}) contacted us in regards to "#{@message.subject}"
-- else
-  == #{@message.email} contacted us in regards to "#{@message.subject}"
-%br
-%p= @message.body

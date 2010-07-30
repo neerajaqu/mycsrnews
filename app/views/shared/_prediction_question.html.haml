@@ -1,0 +1,23 @@
+%li
+  = question.title
+  .prediction-question-container
+    - form_tag create_prediction_guesses_path, :class => "prediction-question-form" do
+      = hidden_field_tag :prediction_question_id, question.id
+      - case question.prediction_type
+        - when 'multi'
+          - choice_list = [t('predictions.select_guess')] | question.choices.split(/,/)
+          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+        - when 'yesno'
+          - choice_list = [t('predictions.select_guess'), 'Yes', 'No']
+          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+        - when 'numeric'
+        - when 'float'
+          -# wont work on onchange , needs submit
+          = text_field_tag :guess
+          = submit_tag "Submit"
+        - when 'year'
+          - choice_list = [t('predictions.select_guess')] | question.choices.split(/,/)
+          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+        - when 'text'
+          = text_field_tag :guess
+          = submit_tag "Submit"

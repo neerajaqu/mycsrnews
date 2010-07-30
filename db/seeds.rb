@@ -12,6 +12,8 @@ debug = Rails.env.development?
 # Initial Topic Sections
 IdeaBoard.create!({:name => 'General', :section =>'general',:description=>'General ideas.'}) unless IdeaBoard.find_by_name_and_section('General', 'general')
 ResourceSection.create!({:name => 'General', :section =>'general',:description=>'General links.'}) unless ResourceSection.find_by_name_and_section('General', 'general')
+#todo - fix (User.admins.last || nil) - creates fb user as nil, bombs out in fb helper for profilepic
+#PredictionGroup.create!({:title => 'Uncategorized', :section => 'uncategorized', :description => 'These questions are uncategorized'}) unless PredictionGroup.find_by_title_and_section('Uncategorized','uncategorized')
 
 # Populate Sources table with some commonly used sites
 Source.create!({:name => 'New York Times', :url =>'nytimes.com'}) unless Source.find_by_url('nytimes.com')

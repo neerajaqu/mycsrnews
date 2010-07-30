@@ -131,6 +131,16 @@ class UsersController < ApplicationController
   		redirect_to home_index_path
   	end
   end
+
+  def dont_ask_me_invite_friends
+    if current_user_profile.update_attribute( :dont_ask_me_invite_friends, true)
+  		flash[:success] = "We will no longer ask you to invite your friends."
+  		redirect_to home_index_path
+    else
+  		flash[:error] = "Could not update your reminder setting for invite friends"
+  		redirect_to home_index_path
+  	end
+  end
   
   def update_bio    
     if request.post?

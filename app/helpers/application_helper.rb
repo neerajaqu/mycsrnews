@@ -97,7 +97,7 @@ module ApplicationHelper
   def caption(text, length = 150, truncate_string = "...")
     return "" if text.nil?    
     l = length - truncate_string.length
-    text.length > length ? text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] + truncate_string : text
+    text.length > length ? text[/^.{0,#{l}}(?=\w*\;?)/m][/.*[\w\;]/m] + truncate_string : text
   end
 
   def pfeed_caption(text, length = 150)
