@@ -74,12 +74,15 @@ $(function() {
   	event.preventDefault();
   	$(this).parent().parent().toggle();
 
+  	console.log('Submitting form');
   	var url = change_url_format($(this).attr('action'));
   	var list = $('.list_items ul', $(this).parents().filter('.panel_1'));
   	$.post(url, $(this).serialize(), function(data) {
+      console.log('Running quicksand');
+      console.log(data);
   		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
   		rebuild_facebook_dom();
-    });
+    }, 'html');
   });
 
   $('.flag-form').change(function(event) {
