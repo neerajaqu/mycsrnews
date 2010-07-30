@@ -2,8 +2,9 @@
   - a = auto_feature ||= Image.find(:all, :conditions => "imageable_type = 'Content'", :limit => 12, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
   - unless auto_feature.empty? or auto_feature.count < 4
     -# todo: choose template based on setting  
-    - template_list = ['template_9', 'template_52', 'template_32']
-    - auto_template = template_list[rand(3)]
+    -# took out template_9 for now
+    - template_list = ['template_52', 'template_32']
+    - auto_template = template_list[rand(2)]
     #featuredPanel.panel_1.featureWrap
       - case auto_template
         - when 'template_9'
