@@ -47,6 +47,6 @@ class Article < ActiveRecord::Base
   private
   
   def sanitize_body
-    self.body = self.body.sanatize_standard
+    self.body = self.body.sanitize_standard
   end
 end
