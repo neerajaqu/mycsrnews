@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100725185301) do
+ActiveRecord::Schema.define(:version => 20100729204126) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -666,6 +666,8 @@ ActiveRecord::Schema.define(:version => 20100725185301) do
     t.boolean   "receive_email_notifications",              :default => true
     t.boolean   "dont_ask_me_for_email",                    :default => false
     t.datetime  "email_last_ask"
+    t.boolean   "dont_ask_me_invite_friends",               :default => false
+    t.datetime  "invite_last_ask"
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

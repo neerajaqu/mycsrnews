@@ -65,7 +65,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] }, :has_many => [ :flags]
   map.resources :related_items
 
-  map.resources :users, :collection => {:link_user_accounts => :get, :dont_ask_me_for_email => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post] }
+  map.resources :users, :collection => {:link_user_accounts => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post], :dont_ask_me_invite_friends => :get, :dont_ask_me_for_email => :get }
   map.resources :articles, :collection => { :index => [:get, :post], :drafts => [:get] }
   map.resources :newswires, :member => { :quick_post => [:get, :post] }
   map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags, :related_items ]
@@ -82,7 +82,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
   map.resources :predictions, :collection => { :index => [:get, :post],  :my_predictions => [:get, :post], :scores => [:get, :post] }
-  map.resources :prediction_groups, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post] }, :has_many => [:comments, :prediction_questions, :flags]
+  map.resources :prediction_groups, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post], :play => [:get, :post] }, :has_many => [:comments, :prediction_questions, :flags]
   map.resources :prediction_questions, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post] }, :has_many => [ :prediction_guesses ]
   map.prediction_question '/prediction_question/:id.:format', :controller => 'predictions', :action => 'show_question'
   map.resources :prediction_guesses, :collection => { :create => [ :post] }
