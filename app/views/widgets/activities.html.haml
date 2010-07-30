@@ -1,4 +1,4 @@
-- cache :latest_pfeeds_html, :expires_in => 5.minutes do
+- cache "widgets_activities_#{@count}_html", :expires_in => 5.minutes do
   - latest_pfeeds ||= PfeedItem.find(:all, :conditions => ["participant_type != ?", Chirp.name ], :order => "created_at desc", :limit => @count)
   %div{:class => "panel_2"}
     .panelBar
