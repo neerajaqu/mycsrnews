@@ -1,7 +1,7 @@
 -# @expects: local '@contents','@count'
+- @count ||= 7
 - unless @filter
-  - cache "widget_contents_{#@sort}_html", :expires_in => 60.minutes do
-    - @count ||= 7
+  - cache "widget_contents_#{@sort}_#{@count}_html", :expires_in => 60.minutes do
     - unless @contents.empty?
       %div{:class => "panel_2"}
         .panelBar
@@ -17,7 +17,7 @@
                   %span.btnComment== #{link_to t('comments'), content_path(item, :anchor => "commentListTop")} #{item.comments_count}  
 - else
   - unless @scrollable
-    - cache "widget_contents_#{@filter}_html", :expires_in => 60.minutes do
+    - cache "widget_contents_#{@sort}_#{@count}_#{@filter}_html", :expires_in => 60.minutes do
       - unless @contents.empty?
         %div{:class => "panel_2"}
           .panelBar
@@ -34,7 +34,7 @@
                       %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => time_ago_in_words(item.created_at))
                       %span.btnComment== #{link_to t('comments'), content_path(item, :anchor => "commentListTop")} #{item.comments_count}
   - else  
-    - cache "widget_contents_#{@filter}_scrollable_html", :expires_in => 60.minutes do
+    - cache "widget_contents_#{@sort}_#{@count}_#{@filter}_scrollable_html", :expires_in => 60.minutes do
       - unless @contents.empty?
         %div{:class => "panel_2"}
           .panelBar
