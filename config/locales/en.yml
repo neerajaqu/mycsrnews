@@ -253,6 +253,7 @@ en:
     click_respond: "Click here to respond"
     click_return_site: "Click here to return to {{site_title}}"
   widgets:
+    activities_title: "Latest activities from {{site_title}}"
     articles_newest_title: "Latest posts from {{site_title}}"
     articles_top_title: "Top posts from {{site_title}}"
     articles_featured_title: "Featured posts from {{site_title}}"

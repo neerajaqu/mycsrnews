@@ -10,6 +10,11 @@ class WidgetsController < ApplicationController
     @fan = (params[:fan] ? true : false)
   end
   
+  def activities
+    @activity_list = Content.articles.published.newest @count
+    @title = t('widgets.activities_title', :site_title => get_setting('site_title').value)
+  end
+  
   def articles    
     unless @filter
       case @sort      
