@@ -387,7 +387,7 @@ EMBED
     link_text = item.is_a?(Comment) ? ' ' : 'Like'
     options.merge!(:class => css_class)
     format = options.delete(:format)
-    return '' unless item.respond_to? "votes_for"    
+    return '' unless item.respond_to? "votes_for"
     if format
       link_to(link_text, like_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
     else

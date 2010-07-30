@@ -252,3 +252,10 @@ en:
     topic: "{{name}} posted a message at {{site_title}}"
     click_respond: "Click here to respond"
     click_return_site: "Click here to return to {{site_title}}"
+  widgets:
+    articles_newest_title: "Latest posts from {{site_title}}"
+    articles_top_title: "Top posts from {{site_title}}"
+    articles_featured_title: "Featured posts from {{site_title}}"
+    contents_newest_title: "Latest stories from {{site_title}}"
+    contents_top_title: "Top stories from {{site_title}}"
+    contents_featured_title: "Featured stories from {{site_title}}"

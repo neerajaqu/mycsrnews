@@ -140,8 +140,8 @@ settings.each do |setting|
 end
 
 activity_scores = [
- { :key_sub_type => 'importance', :key_name => 'karma',  :value => 1, :hint => "Multiple used when calculating karma actions. High setting maximizes impact of quality of posts as judged by other readers" },
- { :key_sub_type => 'importance', :key_name => 'participation',  :value => 0, :hint => "Multiple used when calculating participation actions. Low setting minimizes impact of posting on user scores." },
+ { :key_sub_type => 'importance', :key_name => 'karma',  :value => 3, :hint => "Multiple used when calculating karma actions. High setting maximizes impact of quality of posts as judged by other readers" },
+ { :key_sub_type => 'importance', :key_name => 'participation',  :value => 1, :hint => "Multiple used when calculating participation actions. Low setting minimizes impact of posting on user scores." },
  { :key_sub_type => 'participation', :key_name => 'story',  :value => 1, :hint => "Points awarded when user creates a story" },
  { :key_sub_type => 'participation', :key_name => 'article',  :value => 1, :hint => "Points awarded when user creates a article" },
  { :key_sub_type => 'participation', :key_name => 'idea',  :value => 1, :hint => "Points awarded when user creates a idea" },

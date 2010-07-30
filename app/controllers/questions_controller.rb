@@ -10,9 +10,7 @@ class QuestionsController < ApplicationController
     @current_sub_tab = 'Browse Questions'
     respond_to do |format|
       format.html { @paginate = true }
-      format.fbml { @paginate = true }
       format.json { @questions = Question.refine(params) }
-      format.fbjs { @questions = Question.refine(params) }
     end
   end
 

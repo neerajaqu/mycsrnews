@@ -17,13 +17,3 @@
                   %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))
                   %span.btnComment== #{like_link event} #{event.votes_tally}
                   %span.btnComment== #{link_to t('comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
-  - else
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('.newest_events_title')
-      .list_items
-        %ul
-          %li
-            .itemBlock
-              %h4
-                No events

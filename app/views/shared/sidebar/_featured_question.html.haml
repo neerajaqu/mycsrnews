@@ -1,6 +1,6 @@
 -# @expects: local 'question'
 
-- cache :featured_questions_html, :expires_in => 15.seconds do
+- cache :featured_questions_html, :expires_in => 15.minutes do
   - featured_questions ||= [Question.featured.first]
   - unless featured_questions.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
