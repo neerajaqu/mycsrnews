@@ -1,0 +1,61 @@
+-# @expects: local '@contents','@count'
+- unless @filter
+  - cache "widget_contents_{#@sort}_html", :expires_in => 60.minutes do
+    - @count ||= 7
+    - unless @contents.empty?
+      %div{:class => "panel_2"}
+        .panelBar
+          %h2= @title
+        .list_stories
+          %ul
+            - @contents.each do |item|
+              %li
+                .itemBlock
+                  %h4= link_to item.title, content_path(item)
+                  .profilePic= local_linked_profile_pic item.user
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => time_ago_in_words(item.created_at))
+                  %span.btnComment== #{link_to t('comments'), content_path(item, :anchor => "commentListTop")} #{item.comments_count}  
+- else
+  - unless @scrollable
+    - cache "widget_contents_#{@filter}_html", :expires_in => 60.minutes do
+      - unless @contents.empty?
+        %div{:class => "panel_2"}
+          .panelBar
+            %h2= @title
+          .list_stories
+            %ul
+              - @contents.each do |item|
+                %li
+                  .itemBlock
+                    %h4= link_to item.title, content_path(item)
+                    %p= caption((item.caption.present?) ? item.caption : 'no caption')
+                    .profilePic= local_linked_profile_pic item.user, :width => '30px', :height => '30px'
+                    .itemMeta
+                      %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => time_ago_in_words(item.created_at))
+                      %span.btnComment== #{link_to t('comments'), content_path(item, :anchor => "commentListTop")} #{item.comments_count}
+  - else  
+    - cache "widget_contents_#{@filter}_scrollable_html", :expires_in => 60.minutes do
+      - unless @contents.empty?
+        %div{:class => "panel_2"}
+          .panelBar
+            %h2= @title
+          .list_stories
+            .widgets_scrollable_panel
+              .feature_scrollable_items
+                - @contents.each do |item|
+                  .widgets_panel_items
+                    %ul
+                      %li
+                        .itemBlock
+                          %h4= link_to item.title, content_path(item)
+                          %p= caption((item.caption.present?) ? item.caption : 'no caption')
+                          .profilePic= local_linked_profile_pic item.user, :width => '30px', :height => '30px'
+                          .itemMeta
+                            %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => time_ago_in_words(item.created_at))
+                            %span.btnComment== #{link_to t('comments'), content_path(item, :anchor => "commentListTop")} #{item.comments_count}
+            :javascript
+              $(function() {          	
+              	$(".widgets_scrollable_panel").scrollable({speed : 2500, circular: true}).autoscroll({ autoplay: true});
+              });
+- if @fan              
+  = render :partial => 'shared/sidebar/fan_application'

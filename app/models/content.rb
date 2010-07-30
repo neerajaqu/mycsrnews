@@ -30,6 +30,7 @@ class Content < ActiveRecord::Base
   named_scope :draft_articles, { :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 1"], :order => ["created_at desc"]}
   named_scope :top_articles, lambda { |*args| {:joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 0 and is_blocked = 0"], :order => ["votes_tally desc"], :limit => (args.first || 5)} }
   named_scope :stories, { :conditions => ["article_id IS NULL"], :order => ["created_at desc"]}
+  named_scope :featured, lambda { |*args| { :conditions => ["contents.is_featured = 1"], :limit  => (args.first || 5) } }
 
   attr_accessor :image_url, :tags_string, :is_draft
 

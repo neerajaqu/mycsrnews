@@ -1,0 +1,36 @@
+-# @expects: local '@article_list','@count'
+- @count ||= 7
+- unless @filter
+  - cache "widget_articles_#{@sort}_html", :expires_in => 60.minutes do
+    - unless @article_list.empty?
+      %div{:class => "panel_2"}
+        .panelBar
+          %h2= @title
+        .list_stories
+          %ul
+            - @article_list.each do |item|
+              %li
+                .itemBlock
+                  %h4= link_to item.title, content_path(item)
+                  .profilePic= local_linked_profile_pic item.article.author
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(item.article.author), :date => time_ago_in_words(item.created_at))
+                  %span.btnComment== #{link_to t('comments'), content_path(item, :anchor => "commentListTop")} #{item.comments_count}  
+- else
+  - cache "widget_articles_#{@filter}_html", :expires_in => 60.minutes do
+    - unless @article_list.empty?
+      %div{:class => "panel_2"}
+        .panelBar
+          %h2= @title
+        .list_stories
+          %ul
+            - @article_list.each do |item|
+              %li
+                .itemBlock
+                  %h4= link_to item.title, content_path(item)
+                  %p= caption((item.caption.present?) ? item.caption : 'no caption')
+                  .profilePic= local_linked_profile_pic item.article.author, :width => '30px', :height => '30px'
+                  .itemMeta
+                    %h3= t('posted_by', :fb_name => local_linked_profile_name(item.article.author), :date => time_ago_in_words(item.created_at))
+                    %span.btnComment== #{link_to t('comments'), content_path(item, :anchor => "commentListTop")} #{item.comments_count}
+- if @fan              
+  = render :partial => 'shared/sidebar/fan_application'                    
