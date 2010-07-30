@@ -55,9 +55,6 @@
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
   = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
-  - if @story.is_article? and current_user.present? and current_user.is_moderator?
-    = pipe_spacer
-    = link_to t('articles.edit_draft'), edit_article_path(@story.article)
   - if @story.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
 #col_right

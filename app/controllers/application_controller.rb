@@ -300,6 +300,8 @@ class ApplicationController < ActionController::Base
         ResourceSweeper.expire_resource_all item
       when "Event"
         EventSweeper.expire_event_all item
+      when "Prediction"
+        PredictionSweeper.expire_prediction_all item
       else
       	nil
     end
