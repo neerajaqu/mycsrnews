@@ -61,6 +61,11 @@
 
       = yield
 
+      - if @outbrain_item and get_setting('outbrain_enabled').try('enabled?')
+        = render :partial => 'shared/external/outbrain_widget', :locals => { :outbrain_item => @outbrain_item }
+        - if verification_html = get_setting('outbrain_verification_html').try(:value)
+          = verification_html
+
       = render :partial => 'shared/footer'
 
     = render :partial => 'shared/google_analytics'

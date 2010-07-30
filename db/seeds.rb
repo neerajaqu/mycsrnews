@@ -77,6 +77,10 @@ end
 
 settings = [
  { :key_sub_type => 'options', :key_name => 'exclude_articles_from_news',  :value => "false" },
+ { :key_sub_type => 'options', :key_name => 'outbrain_enabled',  :value => "false", :hint => "Enable Outbrain(http://outbrain.com) support" },
+ { :key_sub_type => 'options', :key_name => 'outbrain_template_name',  :value => "my_template_name", :hint => "Outbrain template name" },
+ { :key_sub_type => 'options', :key_name => 'outbrain_account_id',  :value => "1234567890", :hint => "Outbrain account id" },
+ { :key_sub_type => 'options', :key_name => 'outbrain_verification_html',  :value => "false", :hint => "Outbrain verification html, copy paste this from Outbrain." },
  { :key_sub_type => 'options', :key_name => 'site_notification_user',  :value => (User.admins.last || nil) },
  { :key_sub_type => 'options', :key_name => 'enable_activity_popups',  :value => "true" },
  { :key_sub_type => 'options', :key_name => 'allow_web_auth',  :value => (APP_CONFIG['allow_web_auth'] || "false" ) },
