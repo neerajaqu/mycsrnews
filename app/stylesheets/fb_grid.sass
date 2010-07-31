@@ -86,15 +86,21 @@ body
       height: 60px
       margin: 5px
       float: left
+      &.article-list
+        float: right
       img
         width: 80px
         &.moderator
           height: 18px
           width: 18px
+    .article
+      &.large
+        .itemBlock
+          width: 100%
     .itemBlock
       float: left
       width: 386px
-
+    
 /* UNIVERSAL LIST PANEL_2 STYLES */
 .panel_2
   +grid(4)

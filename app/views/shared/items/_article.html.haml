@@ -1,7 +1,7 @@
 - content = article.is_a?(Article) ? article.content : article
 .article.large
   .itemBlock
-    .float_right
+    .thumb.article-list
       - if content.images.present?
         = image_tag content.images.first.url(:thumb)
       - else
