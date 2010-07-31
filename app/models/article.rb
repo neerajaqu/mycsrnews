@@ -42,9 +42,24 @@ class Article < ActiveRecord::Base
     self.is_blocked = !self.is_blocked
     self.content.toggle_blocked
     return self.save ? true : false
-  end  
-        
-  private
+  end
+
+  def create_preamble
+    t1 = self.body.gsub("&nbsp;"," ").gsub("\r\n","<br /><br />").gsub("\r", "").gsub("\n", "<br />")
+    t2 = ActionController::Base.helpers.sanitize(t1, :tags => %w(br))
+    t3 = t2.split(/(?:<br>)+/)
+    preamble = ""
+    index = 0
+    t3.each do |graf|
+      unless index >= 3 or preamble.length > 750
+        preamble += "<p>" + graf + "</p>"
+        index +=1
+      end
+    end
+    self.preamble = preamble
+  end
+      
+  private  
   
   def sanitize_body
     self.body = self.body.sanitize_standard

@@ -14,13 +14,6 @@ class ArticlesController < ApplicationController
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Articles'
     @articles = Content.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
-=begin
-    @articles.each do |article|
-        doc = Hpricot(article.article.body)
-        doc.search("//p")
-    end
-    #@article_images = Image.find(:all, :conditions => ["imageable_type = ?", "Article"], :order => "created_at desc")  
-=end
     respond_to do |format|
       format.html { @paginate = true }
       format.json { @articles = Content.refine(params) }
@@ -51,6 +44,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     @article.content.caption = @article.body = params[:article][:body]
+    @article.create_preamble
     @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.post_wall = params[:article][:content_attributes][:post_wall]
     @article.is_draft = params[:is_draft]
@@ -83,6 +77,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(params[:article])
     @article.content = Content.new(params[:article][:content_attributes].merge(:article => @article))
     @article.content.caption = @article.body
+    @article.create_preamble
     @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.post_wall = params[:article][:content_attributes][:post_wall]
     @article.is_draft = params[:is_draft]

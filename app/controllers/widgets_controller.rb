@@ -33,6 +33,12 @@ class WidgetsController < ApplicationController
       render :template => 'widgets/articles', :layout => 'widgets'
   end
 
+  def blog_roll
+    @users = Article.find(:all, :joins => "INNER JOIN user_profiles on user_profiles.user_id = author_id", :select => "count(author_id) as author_article_count, author_id,bio", :group => "author_id", :order => "author_article_count desc", :limit => @count ) 
+    @title = t('widgets.blogger_profiles_title', :site_title => get_setting('site_title').value)
+    render :partial => 'shared/sidebar/blog_roll', :layout => 'widgets'
+  end
+
   def blogger_profiles
     @users = Article.find(:all, :joins => "INNER JOIN user_profiles on user_profiles.user_id = author_id", :select => "count(author_id) as author_article_count, author_id,bio", :group => "author_id", :order => "author_article_count desc", :limit => @count ) 
     @title = t('widgets.blogger_profiles_title', :site_title => get_setting('site_title').value)
