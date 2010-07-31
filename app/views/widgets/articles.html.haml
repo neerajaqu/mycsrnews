@@ -4,8 +4,9 @@
   - cache "widget_articles_#{@sort}_#{@count}_html", :expires_in => 60.minutes do
     - unless @article_list.empty?
       %div{:class => "panel_2"}
-        .panelBar
-          %h2= @title
+        - unless @hide_titlebar
+          .panelBar
+            %h2= @title
         .list_stories
           %ul
             - @article_list.each do |item|
@@ -19,8 +20,9 @@
   - cache "widget_articles_#{@sort}_#{@count}_#{@filter}_html", :expires_in => 60.minutes do
     - unless @article_list.empty?
       %div{:class => "panel_2"}
-        .panelBar
-          %h2= @title
+        - unless @hide_titlebar
+          .panelBar
+            %h2= @title
         .list_stories
           %ul
             - @article_list.each do |item|

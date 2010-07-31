@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100729204126) do
+ActiveRecord::Schema.define(:version => 20100731065950) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20100729204126) do
     t.datetime "featured_at"
     t.boolean  "is_blocked",  :default => false
     t.boolean  "is_draft",    :default => false
+    t.text     "preamble"
   end
 
   create_table "audios", :force => true do |t|

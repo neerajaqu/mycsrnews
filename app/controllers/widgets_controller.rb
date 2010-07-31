@@ -8,11 +8,34 @@ class WidgetsController < ApplicationController
     @filter = (params[:filter] ? params[:filter] : false)
     @scrollable = (params[:scrollable] ? true : false)
     @fan = (params[:fan] ? true : false)
+    @hide_titlebar = (params[:hide_titlebar] ? true : false)
+  end
+  
+  def add_bookmark
+    render :partial => 'shared/sidebar/add_bookmark' , :layout => 'widgets'
+  end
+  
+  def fan_application
+    render :partial => 'shared/sidebar/fan_application' , :layout => 'widgets'
   end
   
   def activities
     @activity_list = Content.articles.published.newest @count
     @title = t('widgets.activities_title', :site_title => get_setting('site_title').value)
+  end
+  
+  def user_articles
+    @user = (params[:user] ? params[:user] : nil)
+    @user_id = User.find_by_cached_slug(@user)
+    #redirect_to articles unless @user
+      @article_list = Content.find(:all, :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and article_id IS NOT NULL and is_draft = 0 and author_id = ?", @user_id], :limit => @count)
+      @title = t('widgets.articles_yours_title', :site_title => get_setting('site_title').value)
+      render :template => 'widgets/articles', :layout => 'widgets'
+  end
+
+  def blogger_profiles
+    @users = Article.find(:all, :joins => "INNER JOIN user_profiles on user_profiles.user_id = author_id", :select => "count(author_id) as author_article_count, author_id,bio", :group => "author_id", :order => "author_article_count desc", :limit => @count ) 
+    @title = t('widgets.blogger_profiles_title', :site_title => get_setting('site_title').value)
   end
   
   def articles    
