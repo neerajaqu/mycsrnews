@@ -9,8 +9,8 @@
     %h2= link_to content.title, story_path(content)
     .preamble
       = content.article.preamble
-      - if content.article.preamble_complete
-        %p= link_to t('articles.read_full'), story_path(content), :class => "float_right"
+      - if !content.article.preamble_complete
+        %p= link_to t('articles.read_full'), story_path(content)
     .itemMeta
       .profilePic.float_left= local_linked_profile_pic content.user
       %h3= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
