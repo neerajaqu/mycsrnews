@@ -48,15 +48,20 @@ class Article < ActiveRecord::Base
     t1 = self.body.gsub("<br><br><br><br>","<br><br>").gsub("&nbsp;"," ").gsub("\r\n","<br /><br />").gsub("\r", "").gsub("\n", "<br />")
     t2 = ActionController::Base.helpers.sanitize(t1, :tags => %w(br))
     t3 = t2.split(/(?:<br>)+/)
+    full_entry = (t3.count > 3 ? false : true)
     preamble = ""
     index = 0
     t3.each do |graf|
-      unless index >= 3 or preamble.length > 500        
-        graf.length > 497 ? graf[/^.{0,497}(?=\w*\;?)/m][/.*[\w\;]/m] + "..." : graf
+      unless index >= 3 or preamble.length > 500
+        if graf.length > 497
+          graf = graf[/^.{0,497}(?=\w*\;?)/m][/.*[\w\;]/m] + "..."
+          full_entry = false
+        end
         preamble += "<p>" + graf + "</p>"
         index +=1
       end
     end
+    self.preamble_complete = full_entry
     self.preamble = preamble
   end
       
