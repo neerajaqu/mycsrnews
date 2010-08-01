@@ -1,0 +1,17 @@
+- cache :widgets_blogger_profiles_html do
+  - unless @users.empty?
+    %div{:class => "panel_2"}
+      .panelBar
+        %h2= t('blog_roll_title')
+      .userList
+        %ul
+          - @users.each do |user|
+            %li{'data-id' => user.cache_key}
+              .featureWrap
+                -# can change size to normal, but need fixed spacer for thumb
+                - fb_user = User.find_by_id(user.author_id)
+                .thumb.user-bio
+                  %h2= t('.posted_by', :fb_name => local_linked_profile_name(fb_user))
+                  = local_linked_profile_pic fb_user
+                .itemBlock
+                  %p= (user.bio.present?) ? user.bio : default_bio(user)

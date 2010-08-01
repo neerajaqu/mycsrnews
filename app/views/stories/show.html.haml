@@ -42,7 +42,8 @@
           =render_media_items @story, :size => 'large'
         
         - if @story.is_article?
-          %p= sanitize nl2br(@story.caption)
+          .articleSpacing
+            %p= sanitize nl2br(@story.caption)
         - elsif @story.full_html?
           %p= nl2br(@story.caption)
         - else

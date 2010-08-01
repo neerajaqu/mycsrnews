@@ -12,7 +12,14 @@ class Newswire < ActiveRecord::Base
     return false unless user_id and user_id > 0
 
     caption = CGI.unescapeHTML self.caption
-    caption = self.feed.full_html? ? caption : ActionController::Base.helpers.strip_tags(caption)
+    begin
+      caption = ActionController::Base.helpers.strip_tags(caption)
+    rescue
+      begin
+        caption = HTML::FullSanitizer.new.sanitize(caption)
+      rescue
+      end
+    end
     story_type = self.feed.full_html? ? 'full_html' : 'story'
     @content = Content.new({
     	:title      => self.title,

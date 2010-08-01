@@ -118,6 +118,7 @@ en:
     newest_title: "Newest Answers"
     logged_in_error: "You must be logged in to answer questions."
   articles:
+    my_articles: "My Articles"
     newest_title: "Newest Articles"
     featured_title: "Featured Article"
     top_title: "Top Articles"
@@ -130,6 +131,8 @@ en:
     nodrafts: "You do not have any draft articles at this time."    
     editdraft: "Update Your Article"
     label_body: "Your article content*"
+    permalink: "Permalink"
+    read_full: "Read the full article"
   static_pages:
     faq: "FAQ found here"
     about_us: "About Us found here"
