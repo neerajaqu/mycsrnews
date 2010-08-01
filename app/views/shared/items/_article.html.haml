@@ -7,7 +7,7 @@
       - else
         = image_tag ('default/watermark.jpg')
     %h2= link_to content.title, story_path(content)
-    .preamble
+    .articleSpacing
       = content.article.preamble
       - if !content.article.preamble_complete
         %p= link_to t('articles.read_full'), story_path(content)
