@@ -45,13 +45,14 @@ class Article < ActiveRecord::Base
   end
 
   def create_preamble
-    t1 = self.body.gsub("&nbsp;"," ").gsub("\r\n","<br /><br />").gsub("\r", "").gsub("\n", "<br />")
+    t1 = self.body.gsub("<br><br><br><br>","<br><br>").gsub("&nbsp;"," ").gsub("\r\n","<br /><br />").gsub("\r", "").gsub("\n", "<br />")
     t2 = ActionController::Base.helpers.sanitize(t1, :tags => %w(br))
     t3 = t2.split(/(?:<br>)+/)
     preamble = ""
     index = 0
     t3.each do |graf|
-      unless index >= 3 or preamble.length > 750
+      unless index >= 3 or preamble.length > 750        
+        graf = caption(graf, 750) if graf.length > 750
         preamble += "<p>" + graf + "</p>"
         index +=1
       end
