@@ -46,7 +46,6 @@
                 %td.bold= link_to 'RSS', user_path(@user, :format => :atom), :class => 'rss_link', :target => "_blank"
                 %td
               -# TODO:: add challenges
-  = render_ad(:banner, @ad_layout, @ad_banner)
   .panel_1
     .panelBar
       %h2= t('.bio_title')
@@ -56,8 +55,24 @@
     .panel_block
       .itemBlock.current-bio
         %p= (@user.bio.present?) ? @user.bio : default_bio(@user)
-
+  = render_ad(:banner, @ad_layout, @ad_banner)
   .panel_1
+    .panelBar
+      %h2= t('my_articles')
+    .itemListWrap
+      .list_items
+        %ul
+          - @articles.each do |article|
+            - content = article.is_a?(Article) ? article.content : article
+            %li{'data-id' => content.cache_key}
+              = render :partial => 'shared/items/article', :locals => { :article => article} 
+    - if @paginate
+      .clearfix
+        = will_paginate @articles
+        %br
+#col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  .panel_2
     .panelBar
       %h2= t('.action_feeds')
     #actionFeed
@@ -70,12 +85,4 @@
               - @activities.each do |activity|
                 -#%li.actionFeedItem
                 %li.pfeed_container= pfeed_content(activity)
-    - if @paginate
-      .clearfix
-        = will_paginate @activities
-        %br
-
-#col_right
-  = render_ad(:small_square, @ad_layout, @ad_small_square)
-  = render :partial => 'shared/sidebar/top_stories', :locals => { :top_stories => @top_stories }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

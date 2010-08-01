@@ -119,6 +119,7 @@ en:
     newest_title: "Newest Answers"
     logged_in_error: "You must be logged in to answer questions."
   articles:
+    my_articles: "My Articles"
     newest_title: "Newest Articles"
     featured_title: "Featured Article"
     top_title: "Top Articles"

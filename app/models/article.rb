@@ -51,8 +51,8 @@ class Article < ActiveRecord::Base
     preamble = ""
     index = 0
     t3.each do |graf|
-      unless index >= 3 or preamble.length > 750        
-        graf.length > 747 ? graf[/^.{0,747}(?=\w*\;?)/m][/.*[\w\;]/m] + "..." : graf
+      unless index >= 3 or preamble.length > 500        
+        graf.length > 497 ? graf[/^.{0,497}(?=\w*\;?)/m][/.*[\w\;]/m] + "..." : graf
         preamble += "<p>" + graf + "</p>"
         index +=1
       end
