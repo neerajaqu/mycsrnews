@@ -25,12 +25,17 @@ class WidgetsController < ApplicationController
   end
   
   def user_articles
-    @user = (params[:user] ? params[:user] : nil)
-    @user_id = User.find_by_cached_slug(@user)
+    @title_possessive = (params[:title_possessive] ? true : false)
+    @user_cached_slug = (params[:user] ? params[:user] : nil)
+    @user = User.find_by_cached_slug(@user_cached_slug)
     #redirect_to articles unless @user
-      @article_list = Content.find(:all, :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and article_id IS NOT NULL and is_draft = 0 and author_id = ?", @user_id], :limit => @count)
-      @title = t('widgets.articles_yours_title', :site_title => get_setting('site_title').value)
-      render :template => 'widgets/articles', :layout => 'widgets'
+    @article_list = Content.find(:all, :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and article_id IS NOT NULL and is_draft = 0 and author_id = ?", @user.id], :limit => @count)
+    if @title_possessive
+      @title = t('widgets.my_articles_title', :site_title => get_setting('site_title').value )
+    else
+      @title = t('widgets.articles_yours_title', :name => @user.name )
+    end
+    render :template => 'widgets/articles', :layout => 'widgets'
   end
 
   def blog_roll
@@ -73,6 +78,22 @@ class WidgetsController < ApplicationController
     else
       @contents = Content.featured @count
       @title = t('widgets.contents_featured_title', :site_title => get_setting('site_title').value)      
+    end
+  end
+
+  def questions
+    unless @filter
+      case @sort
+        when "newest"
+          @questions = Question.active.newest @count
+          @title = t('widgets.questions_newest_title', :site_title => get_setting('site_title').value)
+        when "top"
+          @questions = Question.active.top @count
+          @title = t('widgets.questions_top_title', :site_title => get_setting('site_title').value)
+      end
+    else
+      @questions = Question.featured @count
+      @title = t('widgets.questions_featured_title', :site_title => get_setting('site_title').value)      
     end
   end
   

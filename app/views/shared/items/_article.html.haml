@@ -8,7 +8,10 @@
         = image_tag ('default/watermark.jpg')
     %h2= link_to content.title, story_path(content)
     .articleSpacing
-      = content.article.preamble
+      - unless content.article.preamble.empty?
+        = content.article.preamble
+      - else
+        = content.caption
     .itemMeta
       .profilePic.float_left= local_linked_profile_pic content.user
       %h3= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
