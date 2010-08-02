@@ -102,8 +102,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @activities = @user.activities.paginate :page => params[:page], :per_page => 10
-    @articles = @user.articles.paginate :page => params[:page], :per_page => 10
+    @activities = @user.activities.find(:all, :limit => 7, :order => "created_at desc")
+    @articles = @user.articles.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
     @paginate = true
     @is_owner = current_user && (@user.id == current_user.id)
     respond_to do |format|
