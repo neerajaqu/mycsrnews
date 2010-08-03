@@ -75,7 +75,16 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
 
   def render_edit setting
     setting ||= Metadata::Setting.new
-
+=begin
+    if setting.name = 'site_notification_user'
+      render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
+      	:item => setting,
+      	:model => Metadata::Setting,
+      	:fields => [:setting_name, :setting_hint, lambda {|f| f.input :setting_sub_type_name, :required => false }, lambda {|f| f.input :setting_value, :as => :select, :collection => User.admins, :hint => :setting_hint } ]
+      }
+    else  
+    end
+=end
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
     	:item => setting,
     	:model => Metadata::Setting,
