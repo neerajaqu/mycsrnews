@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :received_chirps, :class_name => "Chirp", :foreign_key => 'recipient_id'
   has_many :sent_chirps, :class_name => "Chirp", :foreign_key => 'user_id', :after_add => :trigger_chirp
-  has_many :activities, :class_name => "PfeedItem", :as => :originator, :order => "created_at desc"
+  has_many :activities, :class_name => "PfeedItem", :as => :originator, :order => "created_at desc", :conditions => ["participant_type != ?", Chirp.name]
   has_many :questions, :after_add => :trigger_question
   has_many :answers, :after_add => :trigger_answer
   has_many :ideas, :after_add => :trigger_idea
