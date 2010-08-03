@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :received_chirps, :class_name => "Chirp", :foreign_key => 'recipient_id'
   has_many :sent_chirps, :class_name => "Chirp", :foreign_key => 'user_id', :after_add => :trigger_chirp
-  has_many :activities, :class_name => "PfeedItem", :as => :originator, :order => "created_at desc"
+  has_many :activities, :class_name => "PfeedItem", :as => :originator, :order => "created_at desc", :conditions => ["participant_type != ?", Chirp.name]
   has_many :questions, :after_add => :trigger_question
   has_many :answers, :after_add => :trigger_answer
   has_many :ideas, :after_add => :trigger_idea
@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
   has_many :received_cards, :class_name => "SentCard", :foreign_key => 'to_fb_user_id', :primary_key => 'fb_user_id', :conditions => 'sent_cards.to_fb_user_id IS NOT NULL'
   has_many :sent_cards, :class_name => "SentCard", :foreign_key => 'from_user_id'
   has_one  :twitter,:class_name=>"TwitterToken", :dependent=>:destroy
+  has_many :prediction_groups
+  has_many :prediction_questions
+  has_many :prediction_guesses
+  has_one :prediction_score
 
   belongs_to :last_viewed_feed_item, :class_name => "PfeedItem", :foreign_key => "last_viewed_feed_item_id"
   belongs_to :last_delivered_feed_item, :class_name => "PfeedItem", :foreign_key => "last_delivered_feed_item_id"
@@ -189,7 +193,7 @@ class User < ActiveRecord::Base
     return !fb_user_id.nil? && fb_user_id > 0
   end
 
-  def accepts_email_notifications
+  def accepts_email_notifications?
       self.email.present? and self.user_profile.receive_email_notifications == true
   end
   

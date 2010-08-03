@@ -34,7 +34,7 @@ en:
           url: "Enter the web address for this story."
           caption: "Please provide an abstract that concisely describes this story"
       article:
-        body: "Enter your article text and html here. Only basic HTML tags allowed for now."
+        body: "Enter your article text and html here. Do NOT paste from Microsoft Word. Only paste unformatted, plain text. Only basic HTML tags allowed for now."
         url: "Link to Web Page (optional)"
       post:
         title: "Choose a good title for you post."

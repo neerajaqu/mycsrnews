@@ -1,15 +1,23 @@
 - content = article.is_a?(Article) ? article.content : article
-.article.large
-  .thumb
-    - if content.images.present?
-      = image_tag content.images.first.url(:thumb)
-    - else
-      = image_tag ('default/watermark.jpg')
+.article
   .itemBlock
+    .thumb
+      - if content.images.present?
+        = image_tag content.images.first.url(:thumb)
+      - else
+        = image_tag ('default/watermark.jpg')
     %h2= link_to content.title, story_path(content)
-    %p= linked_story_caption content
-    .profilePic= local_linked_profile_pic content.user
+    %p
+      - unless content.article.preamble.nil? or content.article.preamble.empty?
+        = content.article.preamble
+      - else
+        = content.caption
     .itemMeta
+      .profilePic.float_left= local_linked_profile_pic content.user
       %h3= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
       %span.btnComment== #{like_link content} #{content.votes_tally}
       %span.btnComment== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+      - if content.article.preamble_complete
+        %span.btnComment== #{link_to t('articles.permalink'), story_path(content)} 
+      - else
+        %span.btnComment== #{link_to t('articles.read_full'), story_path(content)} 

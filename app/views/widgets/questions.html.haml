@@ -1,0 +1,42 @@
+-# @expects: local '@questions','@count'
+- @count ||= 7
+- unless @filter
+  - cache "widget_questions_#{@sort}_#{@count}_html", :expires_in => 60.minutes do
+    - unless @questions.empty?
+      %div{:class => "panel_2"}
+        = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
+        .list_stories
+          %ul
+            - @questions.each do |item|
+              %li
+                = render :partial => 'shared/items/widget_question', :locals => {:question => item}
+- else
+  - unless @scrollable
+    - cache "widget_questions_#{@sort}_#{@count}_#{@filter}_html", :expires_in => 60.minutes do
+      - unless @questions.empty?
+        %div{:class => "panel_2"}
+          = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
+          .list_stories
+            %ul
+              - @questions.each do |item|
+                %li
+                  = render :partial => 'shared/items/widget_question', :locals => {:question => item}
+  - else  
+    - cache "widget_questions_#{@sort}_#{@count}_#{@filter}_scrollable_html", :expires_in => 60.minutes do
+      - unless @questions.empty?
+        %div{:class => "panel_2"}
+          = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
+          .list_stories
+            .widgets_scrollable_panel
+              .feature_scrollable_items
+                - @questions.each do |item|
+                  .widgets_panel_items
+                    %ul
+                      %li
+                        = render :partial => 'shared/items/widget_question', :locals => {:question => item}
+            :javascript
+              $(function() {          	
+              	$(".widgets_scrollable_panel").scrollable({speed : 2500, circular: true}).autoscroll({ autoplay: true});
+              });
+- if @fan              
+  = render :partial => 'shared/sidebar/fan_application'

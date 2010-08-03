@@ -2,6 +2,7 @@ require 'feed_parser'
 require 'magic_parse'
 require 'feedzirra'
 
+
 namespace :n2 do
   namespace :feeds do
     namespace :parse do
@@ -158,7 +159,7 @@ def feedzirra_update_feed(feed)
         #:imageUrl   => item.image,
         :feed       => feed
       })
-      if false and feed.load_all?
+      if feed.load_all?
       	puts "\t\tRunning quick post.."
       	if newswire.imageUrl.present? and not newswire.imageUrl =~ /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?(jpg|jpeg|gif|png)(\?.*)?$/ix
       	  puts "\t\t\tProcessing non standard image: #{newswire.imageUrl}"

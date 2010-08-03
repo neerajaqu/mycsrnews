@@ -32,7 +32,9 @@ class ApplicationController < ActionController::Base
   before_filter :set_facebook_session_wrapper
   before_filter :set_current_tab
   before_filter :set_current_sub_tab
+  before_filter :set_ad_layout
   before_filter :set_locale
+  before_filter :set_outbrain_item
   before_filter :update_last_active
   before_filter :check_post_wall
   before_filter :verify_request_format
@@ -73,6 +75,10 @@ class ApplicationController < ActionController::Base
 
   def set_current_tab
     @current_tab = false
+  end
+
+  def set_outbrain_item item = nil
+    @outbrain_item ||= item
   end
 
   def set_current_sub_tab
@@ -299,6 +305,8 @@ class ApplicationController < ActionController::Base
         ResourceSweeper.expire_resource_all item
       when "Event"
         EventSweeper.expire_event_all item
+      when "Prediction"
+        PredictionSweeper.expire_prediction_all item
       else
       	nil
     end

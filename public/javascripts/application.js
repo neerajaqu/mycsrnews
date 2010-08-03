@@ -74,12 +74,15 @@ $(function() {
   	event.preventDefault();
   	$(this).parent().parent().toggle();
 
+  	console.log('Submitting form');
   	var url = change_url_format($(this).attr('action'));
   	var list = $('.list_items ul', $(this).parents().filter('.panel_1'));
   	$.post(url, $(this).serialize(), function(data) {
+      console.log('Running quicksand');
+      console.log(data);
   		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
   		rebuild_facebook_dom();
-    });
+    }, 'html');
   });
 
   $('.flag-form').change(function(event) {
@@ -202,6 +205,23 @@ $(function() {
     $('.commentThread, .postComment', $(this).parents().filter('.answer')).toggle();
   });
 
+  /* Predictions *
+
+  $('.prediction-question-form').change(function(event) {
+  	event.preventDefault();
+  	var prediction_question_form = $(this);
+    //var $li_parent = $(this).parents().filter('li').first();
+  	var span = $(this).parent();
+    if ( $('[name=guess]', this).val() != 'predictions.select_guess') {
+  	  $(this).parent().html("<img src=\"/images/default/spinner-tiny.gif\" />");
+      var url = change_url_format(prediction_question_form.attr('action'));
+      $.post(url, prediction_question_form.serialize(), function(data) {
+			  span.html(data.msg);
+  		});
+    } 
+  });
+  */
+
 });
 
 
@@ -307,3 +327,4 @@ $(function() {
 		});
 	$("#images").scrollable();
 });
+

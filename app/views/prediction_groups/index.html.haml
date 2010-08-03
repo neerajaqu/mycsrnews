@@ -1,0 +1,22 @@
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+  = render :partial => 'shared/subnav/predictions_subnav'
+
+#col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)  
+  = render :partial => 'prediction_group_list', :locals => { :prediction_groups => @prediction_groups, :paginate => @paginate, :page => @page }
+
+  .panel_1.moderator-links
+    = link_to t('predictions.new_group'), new_admin_prediction_group_path(), :class => "btn", :target => '_parent'
+    = link_to t('predictions.new_question'), new_admin_prediction_question_path(), :class => "btn", :target => '_parent'
+
+#col_right
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/newest_prediction_groups', :locals => { :prediction_groups => @newest_prediction_groups }
+  = render :partial => 'shared/sidebar/newest_prediction_questions', :locals => { :prediction_questions => @newest_prediction_questions }
+  = render :partial => 'shared/sidebar/top_prediction_groups', :locals => { :prediction_groups => @top_prediction_groups }
+  = render :partial => 'shared/sidebar/top_prediction_questions', :locals => { :prediction_questions => @top_prediction_questions }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
+
+
+= render :partial => 'shared/index_footer', :locals => { :index_path => prediction_groups_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('predictions') }

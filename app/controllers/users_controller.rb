@@ -102,7 +102,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @activities = @user.activities.paginate :page => params[:page], :per_page => 10
+    @activities = @user.activities.find(:all, :limit => 7, :order => "created_at desc")
+    @articles = @user.articles.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
     @paginate = true
     @is_owner = current_user && (@user.id == current_user.id)
     respond_to do |format|
@@ -128,6 +129,16 @@ class UsersController < ApplicationController
   		redirect_to home_index_path
     else
   		flash[:error] = "Could not update your notification settings"
+  		redirect_to home_index_path
+  	end
+  end
+
+  def dont_ask_me_invite_friends
+    if current_user_profile.update_attribute( :dont_ask_me_invite_friends, true)
+  		flash[:success] = "We will no longer ask you to invite your friends."
+  		redirect_to home_index_path
+    else
+  		flash[:error] = "Could not update your reminder setting for invite friends"
   		redirect_to home_index_path
   	end
   end

@@ -4,6 +4,9 @@
   = toggle_blocked_link moderatable
   = pipe_spacer
   = toggle_featured_link moderatable
+  - if moderatable.class.name == 'Content' and moderatable.is_article?
+    = pipe_spacer
+    = link_to t('articles.edit_draft'), edit_article_path(moderatable.article)
 .admin-links
 -# TODO:: add this in, need cascading block/unblock
   - if moderatable.user.present? and not moderatable.user.is_blocked?

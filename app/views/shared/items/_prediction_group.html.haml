@@ -1,0 +1,14 @@
+.prediction_group.large
+  .thumb
+    - if prediction_group.images.present?
+      = image_tag prediction_group.images.first.url(:thumb)
+    - else
+      = image_tag ('default/watermark.jpg')
+  .itemBlock
+    %h2= link_to prediction_group.title, prediction_group_path(prediction_group)
+    -#%p= linked_item_details prediction_group
+    .profilePic= local_linked_profile_pic prediction_group.user
+    .itemMeta
+      %h3= t('posted_by', :fb_name => local_linked_profile_name(prediction_group.user), :date => time_ago_in_words(prediction_group.created_at))
+      %span.btnComment== #{like_link prediction_group} #{prediction_group.votes_tally}
+      %span.btnComment== #{link_to t('comments'), prediction_group_path(prediction_group, :anchor => "commentListTop")} #{prediction_group.comments_count}

@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_filter :logged_in_to_facebook_and_app_authorized, :only => [:new, :drafts, :create, :edit, :update, :like], :if => :request_comes_from_facebook?
   before_filter :check_valid_user, :only => [:edit, :update ]
-  cache_sweeper :story_sweeper, :only => [:create]
+  cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
   before_filter :set_ad_layout, :only => [:index, :drafts, :user_index]
@@ -14,7 +14,6 @@ class ArticlesController < ApplicationController
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Articles'
     @articles = Content.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
-    #@article_images = Image.find(:all, :conditions => ["imageable_type = ?", "Article"], :order => "created_at desc")  
     respond_to do |format|
       format.html { @paginate = true }
       format.json { @articles = Content.refine(params) }
@@ -45,6 +44,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     @article.content.caption = @article.body = params[:article][:body]
+    @article.create_preamble
     @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.post_wall = params[:article][:content_attributes][:post_wall]
     @article.is_draft = params[:is_draft]
@@ -77,6 +77,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(params[:article])
     @article.content = Content.new(params[:article][:content_attributes].merge(:article => @article))
     @article.content.caption = @article.body
+    @article.create_preamble
     @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.post_wall = params[:article][:content_attributes][:post_wall]
     @article.is_draft = params[:is_draft]
@@ -113,7 +114,7 @@ class ArticlesController < ApplicationController
   private
   
   def check_valid_user
-    redirect_to home_index_path and return false unless current_user == Article.find(params[:id]).author
+    redirect_to home_index_path and return false unless (current_user == Article.find(params[:id]).author or current_user.is_moderator?)
   end
 
   def set_current_tab

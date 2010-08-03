@@ -71,6 +71,10 @@
         img
           width: 170px
           height: 120px
+
+      .drop-error
+        border: 2px solid red
+
       #items
         width: 400px
 
@@ -168,6 +172,7 @@
               } else {
               	return false;
               }
+              $(this).addClass('dropped').removeClass('drop-error');
               widget_data[section][box] = ui.draggable.attr('id');
               widget_data.template = $(this).parent().parent().attr('id');
       				$('#'+section+'-'+box+'-title').html("<h1>"+$('h5', ui.draggable).text()+"</p>");
@@ -201,13 +206,25 @@
         }).live('mouseup', function() {
     	  	$(this).removeClass('ui-state-active');
         }).live('click', function() {
-        	$.post("/admin/featured_items/save.json", {featured_items: JSON.stringify(widget_data)}, function(data) {
-          	if (typeof(data.success) !== 'undefined') {
-          		alert(data.success);
-            } else {
-            	alert('There was a problem saving your page');
+        	var error_count = 0;
+        	$.each($('.ui-droppable'), function(index, value) {
+        		var item = $(value);
+        		if ( ! item.hasClass('dropped') ) {
+        			error_count += 1;
+        			item.addClass('drop-error');
             }
-          }, "json");
+          });
+          if (error_count > 0) {
+          	alert('You are missing '+error_count+' items in this featured template. Please drag items for all boxes in this template');
+          } else {
+            $.post("/admin/featured_items/save.json", {featured_items: JSON.stringify(widget_data)}, function(data) {
+              if (typeof(data.success) !== 'undefined') {
+                alert(data.success);
+              } else {
+                alert('There was a problem saving your page');
+              }
+            }, "json");
+          }
         }
       );
     });
@@ -235,10 +252,10 @@
         = image_tag "featured/template_52.jpg"
       .template#template_6
         = image_tag "featured/template_6.jpg"
+      .template#template_8
+        = image_tag "featured/template_8.jpg"
       -#.template#template_4
         = image_tag "featured/template_4.jpg"
-      -#.template#template_8
-        = image_tag "featured/template_8.jpg"
     .template-column
       #featured-items-selector
         -# %p Items Loader

@@ -1,0 +1,3 @@
+class PredictionQuestionsController < ApplicationController
+
+end

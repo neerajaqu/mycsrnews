@@ -1,0 +1,5 @@
+-# email reminder sent every 30 days to remind people to invite their friends
+-# expects locals user
+= I18n.translate('reminders.invitefriends.message')
+%a{:href => "#{APP_CONFIG['base_url']}/users/invite" }= I18n.translate('reminders.invitefriends.action')
+%a{:href => "#{APP_CONFIG['base_url']}/users/dont_ask_me_invite_friends" }= I18n.translate('reminders.invitefriends.stop')

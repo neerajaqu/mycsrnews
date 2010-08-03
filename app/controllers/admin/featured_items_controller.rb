@@ -47,8 +47,8 @@ class Admin::FeaturedItemsController < AdminController
         next unless item = get_item(item_id)
         item = get_item item_id
         section_data.children.create({:name => "item_#{item_id}", :featured_type => "featured_item", :featurable => item})
-        #tweet item
-        #tweet(item) if Metadata::Setting.find_setting('tweet_featured_items').value == 'true'
+        #@tweet_features = Metadata::Setting.find_setting('tweet_featured_items')
+        #tweet(item) if (@tweet_features.present? and @tweet_features.value)
       end
     end
 
@@ -84,7 +84,7 @@ class Admin::FeaturedItemsController < AdminController
     @current_tab = 'featured-items';
   end
 
-  def tweet
+  def tweet item
     return if item.tweeted_item.present?
     
     if Metadata::Setting.find_setting('bitly_username').value

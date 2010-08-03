@@ -1,6 +1,9 @@
 - page ||= ""
 - cache_if page.present?, "stories_list_#{page}html" do
-  - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  - if get_setting('exclude_articles_from_news').value
+    - contents ||= Content.top_story_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+  -else
+    - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - paginate ||= false
   .panel_1
     .panelBar
@@ -17,10 +20,22 @@
             -# todo hack to fix drafts appearing until we can switch articles out of this widget
             - unless content.article.present? and content.article.is_draft?
               %li{'data-id' => content.cache_key}
-                - if content.article.present?
-                  = render :partial => 'shared/items/article', :locals => { :article => content}  
-                -else
-                  = render :partial => 'shared/items/content', :locals => { :content => content}                  
+                .article
+                  .thumb
+                    - if content.images.present?
+                      = image_tag content.images.first.url(:thumb)
+                    -else
+                      = image_tag ('default/watermark.jpg')
+                  .itemBlock
+                    %h2= link_to content.title, story_path(content)
+                    %p= linked_story_caption content
+                  
+                    .profilePic= local_linked_profile_pic content.user
+                    .itemMeta
+                      %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
+                      %span.btnComment== #{like_link content} #{content.votes_tally}
+                      %span.btnComment== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+ 
     - if paginate
       .clearfix
         = will_paginate contents

@@ -1,0 +1,24 @@
+-# @expects: local '@article_list','@count'
+- @count ||= 7
+- unless @filter
+  - cache "widget_articles_#{@sort}_#{@count}_html", :expires_in => 60.minutes do
+    - unless @article_list.empty?
+      %div{:class => "panel_2"}
+        = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
+        .list_stories
+          %ul
+            - @article_list.each do |item|
+              %li
+                = render :partial => 'shared/items/widget_article', :locals => {:item => item}
+- else
+  - cache "widget_articles_#{@sort}_#{@count}_#{@filter}_html", :expires_in => 60.minutes do
+    - unless @article_list.empty?
+      %div{:class => "panel_2"}
+        = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
+        .list_stories
+          %ul
+            - @article_list.each do |item|
+              %li
+                = render :partial => 'shared/items/widget_article', :locals => {:item => item}
+- if @fan              
+  = render :partial => 'shared/sidebar/fan_application'                    

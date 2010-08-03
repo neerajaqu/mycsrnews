@@ -72,7 +72,7 @@ module ApplicationHelper
   end
 
   def linked_story_caption(story, length = 150, url = false, options = {})
-    caption = caption(story.caption.sanatize_standard, length)
+    caption = caption(story.caption.sanitize_standard, length)
     "#{caption} #{link_to 'More', (url ? url : story_path(story, options))}"
   end
 
@@ -97,7 +97,7 @@ module ApplicationHelper
   def caption(text, length = 150, truncate_string = "...")
     return "" if text.nil?    
     l = length - truncate_string.length
-    text.length > length ? text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] + truncate_string : text
+    text.length > length ? text[/^.{0,#{l}}(?=\w*\;?)/m][/.*[\w\;]/m] + truncate_string : text
   end
 
   def pfeed_caption(text, length = 150)
@@ -387,7 +387,7 @@ EMBED
     link_text = item.is_a?(Comment) ? ' ' : 'Like'
     options.merge!(:class => css_class)
     format = options.delete(:format)
-    return '' unless item.respond_to? "votes_for"    
+    return '' unless item.respond_to? "votes_for"
     if format
       link_to(link_text, like_item_path(item.class.name.foreign_key.to_sym => item, :format => format), options)
     else

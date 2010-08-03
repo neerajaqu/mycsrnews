@@ -1,0 +1,2 @@
+class PredictionScoresController < ApplicationController
+end
