@@ -78,9 +78,6 @@ body
         top: -139px
         width: 486px
   .list_items
-    .users
-      .thumb
-        height: 80px
     .thumb
       width: 80px
       height: 60px
@@ -88,23 +85,26 @@ body
       float: left
       img
         width: 80px
-        &.moderator
-          height: 18px
-          width: 18px
-    .itemBlock
-      float: left
-      width: 386px
+    /* CATEGORY CLASS STYLES */
+    .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
+      .itemBlock
+        width: 386px
+    .users
+      .thumb
+        height: 80px
 
-/* UNIVERSAL LIST PANEL_2 STYLES */
+    .event, .item_2, .newswire
+      .itemBlock
+        width: 486px
+
+/* UNIVERSAL LIST PANEL_2 STYLES*/
 .panel_2
   +grid(4)
   +alpha
   +omega
   .list_items
-    .itemBlock
-      width: 233px
-
-    .item_1
+    /* CATEGORY CLASSES */
+    .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
       &.featured
         .itemBlock
           float: left
@@ -117,6 +117,7 @@ body
             width: 70px
         .itemMeta
           width: 100%
+    .event, .item_2, .newswire
       .itemBlock
         width: 233px
 

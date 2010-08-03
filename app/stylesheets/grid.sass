@@ -75,9 +75,6 @@ body
         top: -139px
         width: 610px
   .list_items
-    .users
-      .thumb
-        height: 90px
     .thumb
       width: 90px
       height: 68px
@@ -85,29 +82,26 @@ body
       float: left
       img
         width: 90px
-        &.moderator
-          height: 18px
-          width: 18px
-    .itemBlock
-      float: left
-      width: 510px
+    /* CATEGORY CLASSES */
+    .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
+      .itemBlock
+        width: 510px
+    .users
+      .thumb
+        height: 90px
 
-/* UNIVERSAL LIST PANEL_2 STYLES NON FACEBOOK LAYOUT */
+    .event, .item_2, .newswire
+      .itemBlock
+        width: 610px
+
+/* UNIVERSAL LIST PANEL_2 STYLES */
 .panel_2
   +grid(4)
   +alpha
   +omega
   .list_items
-    .itemBlock
-      width: 290px
-
-    .item_2
-      .itemMeta
-        width: 100%
-      .itemBlock
-        width: 290px
-
-    .item_1
+    /* CATEGORY CLASS STYLES */
+    .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
       &.featured
         .itemBlock
           float: left
@@ -120,6 +114,9 @@ body
             width: 70px
         .itemMeta
           width: 100%
+    .event, .item_2, .newswire
+      .itemMeta
+        width: 100%
       .itemBlock
         width: 290px
 

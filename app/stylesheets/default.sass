@@ -451,16 +451,17 @@ li
             text-decoration: none
 
 /**********************************************************************************************/
-/* GLOBAL IMAGE SIZES - SLOWLY PHASING THIS OUT */
-.welcome
-  margin: 10px
-  float: left
-  width: 70px
-  height: 70px
-  img 
-    width: 70px
-    height: 70px
+/* FEATURED ITEM BG ICONS */
+.featured
+  .question
+    background: image_url("default/icon-question.png") top right no-repeat
+  .event
+    background: image_url("default/icon-event.png") top right no-repeat
 
+/**********************************************************************************************/
+/* IMAGE STYLES */
+
+/* THUMB IMAGE CONTAINER */
 .thumb
   margin: 5px
   position: relative
@@ -470,50 +471,16 @@ li
     background: $WaterMark
   a:hover
     text-decoration: none
-  &.user-details
-    img.moderator
-      height: 32px
-      width: 32px
-  &.user-bio
-    float: left
-    margin: 5px
-    img.moderator
-      height: 16px
-      width: 16px
-/********************************/
-/* SECTION TO TRY AND PHASE OUT */
 
-  &.bio
-    overflow: visible
-  &.story
-    width: 90px
-    height: 75px
-/********************************/
-
-
-/* MODERATOR BADGE */
-img.moderator 
-  position: absolute
-  left: 2px
-  bottom: 2px
-  background: none
-
-.thumb
-  img.moderator 
-    position: absolute
-    left: 2px
-    bottom: 2px
-    background: none
-    height: 18px
-    width: 18px
-
-.profilePic
-  img.moderator
-    position: absolute
-    left: 2px
-    bottom: 2px
-    height: 12px
-    width: 12px
+/* WELCOME PANEL IMAGE STYLES */
+.welcome
+  margin: 10px 10px 5px 10px
+  float: left
+  width: 70px
+  height: 70px
+  img 
+    width: 70px
+    height: 70px
 
 /* PROFILE IMAGE */
 .profilePic
@@ -525,6 +492,51 @@ img.moderator
     max-height: 30px
   a:hover
     text-decoration: none
+  img.moderator 
+    position: absolute
+    left: 2px
+    bottom: 2px
+
+/**********************************************************************************************/
+/* MODERATOR BADGE STYLES */
+.thumb
+  img.moderator 
+    position: absolute
+    left: 2px
+    bottom: 2px
+    height: 18px
+    width: 18px
+
+.user-bio
+  float: left
+  margin: 5px
+  img.moderator
+    height: 16px
+    width: 16px
+
+.panel_1
+  .list_items
+    .user
+      img.moderator
+        height: 32px
+        width: 32px
+        position: absolute
+        left: 2px
+        bottom: 2px
+
+.panel_3
+  .user-details
+    img.moderator
+      height: 48px
+      width: 48px
+      position: absolute
+      left: 2px
+      bottom: 2px
+
+.profilePic
+  img.moderator
+    height: 12px
+    width: 12px
 
 // left and right column backgrounds //
 $ColumnCorners: none
@@ -537,9 +549,11 @@ $ColumnCorners: none
 /**********************************************************************************************/
 /* UNIVERSAL LIST - CHECK GRID.SASS & FB_GRID.SASS FOR MORE IN-DEPTH STYLING */
 
+/* CONTENT BLOCK */
 .itemBlock
   margin: 5px 5px 7px 5px
 
+/* META DATA */
 .itemMeta
   display: inline-block
   width: 80%
@@ -548,8 +562,8 @@ $ColumnCorners: none
     line-height: 11px
     margin: 0 0 4px 0
 
-/* NEWSWIRE META */
-.newswire
+/* NO IMAGE META */
+.item_2, .event, .newswire
   .itemMeta
     width: 100%
 
@@ -571,17 +585,19 @@ $ColumnCorners: none
   width: 100%
 
 /* LIST CLASSES WITH IMAGE */
-.answer, .article, .comment, .content, .idea, .question, .resource, .users, .item_1
-  .itemBlock
-    float: left
+.panel_1, .panel_2
+  .answer, .article, .comment, .content, .idea, .question, .resource, .users, .item_1
+    .itemBlock
+      float: left
  
 /* LIST CLASSES WITH NO IMAGE */
-.newswire, .item_2
-  .itemBlock
-    display: block 
-.event
-  .itemBlock
-    display: block
+.panel_1, .panel_2
+  .newswire, .item_2
+    .itemBlock
+      display: block 
+  .event
+    .itemBlock
+      display: block
 
 /* UNVERSAL LIST STYLES - PANELS */
 .panel_1, .panel_2
@@ -640,8 +656,9 @@ $ColumnCorners: none
 /**********************************************************************************************/
 /* LAYOUT PANELS - PANEL_1 & PANEL_2 CONTAINERS */
 
-.panel_1, .panel_2
+.panel_1, .panel_2, .panel_full
   margin: 0 0 15px 0
+
   .top-tags
     display: inline-block
     padding-top: 4px
@@ -660,13 +677,83 @@ $ColumnCorners: none
           text-decoration: none
           background: $featureStoryBG
 
+  /* PANEL BAR STYLES */
+  .panelBar
+    -moz-border-radius-topleft: $ColumnCorners
+    -moz-border-radius-topright: $ColumnCorners
+    -webkit-border-top-right-radius: $ColumnCorners
+    -webkit-border-top-left-radius: $ColumnCorners
+    position: relative
+    display: block
+    padding: 6px 0 2px 0px
+    border:
+      bottom: $panelBarBorder
+    background: $panelBarBG
+    h2
+      margin: 0
+      font-weight: $panelBarHeaderWeight
+      font-size: 12px
+      text-transform: $panelBarTextTransform
+      font-family: $headerFont
+      color: $panelBarHeader
+      display: inline
+      margin-left: 6px
+      a
+        color: $panelBarHeaderLink
+        font-weight: normal
+        text-transform: none
+        font-size: $fontsize
+    .bar_link
+      float: right
+      margin: 0 8px
+
+  /* WELCOME PANEL STYLES */
+  .welcomePanel
+    background: $featureBg
+    -moz-border-radius: $featureBorderRadius
+    -webkit-border-radius: $featureBorderRadius
+    border-radius: $featureBorderRadius
+    border:
+      top: $featureBorderTop
+      bottom: $featureBorderBot
+      left: $featureBorderLeft
+      right: $featureBorderRight
+    display: inline-block
+
+    .itemBlock
+      text-align: center
+      margin: 10px
+
+      h2
+        text-align: left
+        margin-bottom: 5px
+      p
+        text-align: left
+        
+        margin: 0 0 5px 0
+        color: $featureBodyText
+      .btn
+        font-size: $fontsize * 1.15
+        margin: 10px auto
+
+  /* MEDIA WIDGET STYLES */
+  .videoBlockWrap
+    li
+      display: inline-block
+      float: left
+    .videoThumb
+      overflow: hidden
+      padding: 0
+      margin:
+        top: 2px
+        right: 2px
+      width: 72px
+      height: 48px
+      background: #cccccc
+      padding: 0px
 
 .panel_1, .panel_2, .panel_full
-  margin-bottom: 10px
 
-  &.textpage
-    h2
-      font-size: $fontsize * 1.1
   &.sponsorbox
     background: $sponsorBoxBG
     ul
@@ -718,36 +805,6 @@ $ColumnCorners: none
           color: $subheadColor
           b
             color: $headerColor
-  .houseFeatures
-    background: $featureBg
-    -moz-border-radius: $featureBorderRadius
-    -webkit-border-radius: $featureBorderRadius
-    border-radius: $featureBorderRadius
-    border:
-      top: $featureBorderTop
-      bottom: $featureBorderBot
-      left: $featureBorderLeft
-      right: $featureBorderRight
-    display: inline-block
-
-    .featureAd
-      text-align: center
-      h2
-        font-size: $fontsize * 1.35
-        text-align: left
-        line-height: 150%
-        padding: 8px 10px
-        color: $featureH2Text
-        &.push-left
-          margin-right: 40%
-      p
-        text-align: left
-        padding: 0 10px
-        margin-bottom: 20px
-        color: $featureBodyText
-      .btn
-        font-size: $fontsize * 1.15
-        margin: 10px auto
   .userList
     li
       padding: 0
@@ -760,19 +817,7 @@ $ColumnCorners: none
         bottom: none
       .profilePic
         margin: 0
-  .videoBlockWrap
-    li
-      display: inline-block
-      float: left
-    .videoThumb
-      padding: 0
-      margin:
-        top: 2px
-        right: 2px
-      width: 72px
-      height: 48px
-      background: #cccccc
-      padding: 0px
+
   .formBox
     padding: 10px 0px
     background: $formBoxBG
@@ -783,34 +828,6 @@ $ColumnCorners: none
       margin-bottom: 10px
     textarea
       border: $formBoxTextArea
-  .panelBar
-    -moz-border-radius-topleft: $ColumnCorners
-    -moz-border-radius-topright: $ColumnCorners
-    -webkit-border-top-right-radius: $ColumnCorners
-    -webkit-border-top-left-radius: $ColumnCorners
-    position: relative
-    display: block
-    padding: 6px 0 2px 0px
-    border:
-      bottom: $panelBarBorder
-    background: $panelBarBG
-    h2
-      margin: 0
-      font-weight: $panelBarHeaderWeight
-      font-size: $fontsize * 0.9
-      text-transform: $panelBarTextTransform
-      font-family: $headerFont
-      color: $panelBarHeader
-      display: inline
-      margin-left: 6px
-      a
-        color: $panelBarHeader
-        font-weight: normal
-        text-transform: none
-        font-size: $fontsize
-    .bar_link
-      float: right
-      margin: 0 8px
   .itemBlock
     .eventMetaBlock
       background: $subTitleBG
