@@ -8,7 +8,7 @@
         = image_tag ('default/watermark.jpg')
     %h2= link_to content.title, story_path(content)
     .articleSpacing
-      - unless content.article.preamble.empty?
+      - unless content.article.preamble.nil? or content.article.preamble.empty?
         = content.article.preamble
       - else
         = content.caption
