@@ -21,7 +21,7 @@ class RemindersWorker
           :recipient => recipient,
           :message => ActionView::Base.new.render(:partial => "#{RAILS_ROOT}/app/views/reminders/email_signup.html.haml", :locals => { :user => recipient } ) 
         })
-        if chirp.valid? and recipient.sent_chirps.push chirp
+        if chirp.valid? and user.sent_chirps.push chirp
           recipient.user_profile.update_attribute(:email_last_ask, Time.now)
         end
       end      
@@ -33,7 +33,7 @@ class RemindersWorker
           :recipient => recipient,
           :message => ActionView::Base.new.render(:partial => "#{RAILS_ROOT}/app/views/reminders/invite_friends.html.haml", :locals => { :user => recipient } ) 
         })
-        if chirp.valid? and recipient.sent_chirps.push chirp
+        if chirp.valid? and user.sent_chirps.push chirp
           recipient.user_profile.update_attribute(:invite_last_ask, Time.now)
         end
       end      
