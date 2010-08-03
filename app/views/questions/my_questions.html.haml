@@ -20,7 +20,7 @@
           %ul
             - @questions.each do |question|
               %li.askQuestionWrap{'data-id' => question.cache_key}
-                .thumb.story
+                .thumb
                   - if question.images.present?
                     = image_tag question.images.first.url(:thumb)
                   - else

@@ -178,12 +178,8 @@ body
   color: $bodyColor
   background: $bodyBG
   font-size: $fontsize
-  margin: 0px
-  padding: 0px
 
 h1, h2, h3, h4, h5
-  margin: 0px
-  padding: 0px
   a
     color: $headerColor
     &:hover
@@ -205,7 +201,7 @@ h3, h5
       color: $linkColor
 
 h1
-  font-size: $fontsize * 1.5
+  font-size: $fontsize * 1.95
   margin: 0 0 6px 0
 
 h2
@@ -215,7 +211,6 @@ h2
 h4
   font-size: $fontsize * 1.1
   margin: 0 0 4px 0
-  padding: 0
 
 h3
   font-size: 11px
@@ -224,18 +219,15 @@ h3
 h5
   font-family: $headerFont
   color: $subheadColor
-  font-size: $fontsize * 0.9
+  font-size: 11px
   margin: 0px 0px 10px 0
-  padding: 5px 0px
 
 p
   font-family: $copyFont
   color: $bodyColor
-  font-size: 12px
   line-height: 130%
   text-align: left
-  margin: 0 0 8px 0
-  padding: 0px
+  margin: 0 0 6px 0
 
 a
   color: $linkColor
@@ -248,7 +240,6 @@ img
   border: none
 
 ul
-  list-style-type: none
   margin: 0
   padding: 0
 
@@ -354,7 +345,7 @@ li
       .dropdown
         z-index: 20
         display: none
-        margin-top: 1px
+        margin-top: 0
         ul
           padding: 1px 0 0 0
           display: inline-block
@@ -450,8 +441,18 @@ li
           &:hover
             text-decoration: none
 
-/* GLOBAL IMAGE SIZES */
+/**********************************************************************************************/
+/* FEATURED ITEM BG ICONS */
+.featured
+  .question
+    background: image_url("default/icon-question.png") top right no-repeat
+  .event
+    background: image_url("default/icon-event.png") top right no-repeat
 
+/**********************************************************************************************/
+/* IMAGE STYLES */
+
+/* THUMB IMAGE CONTAINER */
 .thumb
   margin: 5px
   position: relative
@@ -461,47 +462,16 @@ li
     background: $WaterMark
   a:hover
     text-decoration: none
-  img.moderator
-    height: 18px
-    width: 18px
-  &.welcome
-    margin: 10px
-    float: left
+
+/* WELCOME PANEL IMAGE STYLES */
+.welcome
+  margin: 10px 10px 5px 10px
+  float: left
+  width: 70px
+  height: 70px
+  img 
     width: 70px
     height: 70px
-    img 
-      width: 70px
-      height: 70px
-  &.bio
-    overflow: visible
-  &.story
-    width: 90px
-    height: 75px
-  &.user-details
-    max-height: 210px
-    .moderator
-      height: 32px
-      width: 32px
-  &.user-bio
-    float: left
-    margin: 5px
-    .moderator
-      height: 16px
-      width: 16px
-
-/* MODERATOR BADGE STYLING */
-.moderator 
-  position: absolute
-  left: 2px
-  bottom: 2px
-  background: none
-
-.thumb
-  .moderator 
-    position: absolute
-    left: 2px
-    bottom: 2px
-    background: none
 
 /* PROFILE IMAGE */
 .profilePic
@@ -513,44 +483,51 @@ li
     max-height: 30px
   a:hover
     text-decoration: none
-  .moderator
+  img.moderator 
+    position: absolute
+    left: 2px
+    bottom: 2px
+
+/**********************************************************************************************/
+/* MODERATOR BADGE STYLES */
+.thumb
+  img.moderator 
+    position: absolute
+    left: 2px
+    bottom: 2px
+    height: 18px
+    width: 18px
+
+.user-bio
+  float: left
+  margin: 5px
+  img.moderator
+    height: 16px
+    width: 16px
+
+.panel_1
+  .list_items
+    .user
+      img.moderator
+        height: 32px
+        width: 32px
+        position: absolute
+        left: 2px
+        bottom: 2px
+
+.panel_3
+  .user-details
+    img.moderator
+      height: 48px
+      width: 48px
+      position: absolute
+      left: 2px
+      bottom: 2px
+
+.profilePic
+  img.moderator
     height: 12px
     width: 12px
-
-
-/* 1 BIG STORY 4 SMALL STORY IMAGE SIZING */
-.panel_3
-  .list_featured
-    margin: 5px 5px 5px 0
-    padding: 5px 5px 5px 0
-    background: white
-    .thumb
-      width: 45px
-      height: 34px
-      margin: 5px
-      float: left
-      img
-        width: 48px
-    .itemBlock
-      margin: 5px 0
-      float: left
-      width: 245px
-    ul
-      padding: 0
-    li
-      width: auto
-      display: inline-block
-      border-bottom: none
-      margin: 0
-      padding: 0
-      &.selected, &:hover
-        background: $featureStoryBG
-        .btnComment
-          background: $btnCommentBG
-      h4
-        margin: 0
-      p
-        margin: 2px 0 0 0
 
 // left and right column backgrounds //
 $ColumnCorners: none
@@ -561,8 +538,13 @@ $ColumnCorners: none
   border-radius: $ColumnCorners
 
 /**********************************************************************************************/
-/* UNIVERSAL LIST STYLES */
+/* UNIVERSAL LIST - CHECK GRID.SASS & FB_GRID.SASS FOR MORE IN-DEPTH STYLING */
 
+/* CONTENT BLOCK */
+.itemBlock
+  margin: 5px 5px 7px 5px
+
+/* META DATA */
 .itemMeta
   display: inline-block
   width: 80%
@@ -571,26 +553,42 @@ $ColumnCorners: none
     line-height: 11px
     margin: 0 0 4px 0
 
-.itemBlock
-  margin: 5px 5px 7px 5px
+/* NO IMAGE META */
+.item_2, .event, .newswire
+  .itemMeta
+    width: 100%
+
+/* ACTIONS BAR FOR PANELS */
+.itemActions
+  display: block
+  width: 100%
+  background: $subTitleBG
+  border-bottom: 1px solid $subTitleBG - #333
+  text-align: right
+  a
+    display: inline-block
+    font-size: 11px
+    margin: 5px 10px
 
 /* LIST CLASSES - GLOBAL STYLES */
-.answer, .article, .comment, .content, .event, .idea, .newswire, .question, .resource, .user, .generic
+.answer, .article, .comment, .content, .event, .idea, .newswire, .question, .resource, .user, .item_1, .item_2
   display: inline-block
   width: 100%
 
 /* LIST CLASSES WITH IMAGE */
-.answer, .article, .comment, .content, .idea, .question, .resource, .users, .generic
-  .itemBlock
-    float: left
+.panel_1, .panel_2
+  .answer, .article, .comment, .content, .idea, .question, .resource, .users, .item_1
+    .itemBlock
+      float: left
  
 /* LIST CLASSES WITH NO IMAGE */
-.newswire, .generic_no_image
-  .itemBlock
-    display: block 
-.event
-  .itemBlock
-    display: block
+.panel_1, .panel_2
+  .newswire, .item_2
+    .itemBlock
+      display: block 
+  .event
+    .itemBlock
+      display: block
 
 /* UNVERSAL LIST STYLES - PANELS */
 .panel_1, .panel_2
@@ -601,9 +599,21 @@ $ColumnCorners: none
       width: 100%
       border:
         bottom: $panelListBorder
+    .blog
+      h2
+        margin-bottom: 0 
+      .thumb
+        margin: 0 10px 5px 0
+        width: 120px
+        height: 90px
+        img
+          width: 120px
+      p
+        line-height: 140%
 
-.panel_3, .panel_4, .panel_5
+.panel_3, .panel_4, .panel_5, .panel_6
   float: left
+  display: block
 
 .panel_3
   width: 50%
@@ -611,23 +621,46 @@ $ColumnCorners: none
 .panel_4
   width: 25%
 
-.panel_5
+.panel_5, .panel_6
   width: 33.333%
 
-
 /**********************************************************************************************/
-/* FEATURED STORY PANEL STYLES */
+/* FEATURED STORY WRAP */
 
 .featureWrap
   background: $featureStoryBG
   .btnComment
     background: $btnCommentFeatureBG
 
-/**********************************************************************************************/
-/* LAYOUT PANELS - SHOULD BE USED FOR ALL ELEMENT CONTAINERS */
+/* FEATURED ITEMS WIDGETS - 50% FINISHED */
 
-.panel_1, .panel_2
+.featured_item
+  background: #3b5998
+  display: inline-block
+  width: 300px
+
+.featured_item
+  .title
+    padding: 7px 10px 3px 30px
+    background: image_url("default/icon-question.png") left center no-repeat
+    h1
+      color: white
+      margin: 0
+  .display
+    display: block
+    margin: 5px
+    background: white
+    padding: 10px
+    font-size: 14px
+    line-height: 140%
+   
+
+/**********************************************************************************************/
+/* LAYOUT PANELS - PANEL_1 & PANEL_2 CONTAINERS */
+
+.panel_1, .panel_2, .panel_full
   margin: 0 0 15px 0
+
   .top-tags
     display: inline-block
     padding-top: 4px
@@ -646,13 +679,83 @@ $ColumnCorners: none
           text-decoration: none
           background: $featureStoryBG
 
+  /* PANEL BAR STYLES */
+  .panelBar
+    -moz-border-radius-topleft: $ColumnCorners
+    -moz-border-radius-topright: $ColumnCorners
+    -webkit-border-top-right-radius: $ColumnCorners
+    -webkit-border-top-left-radius: $ColumnCorners
+    position: relative
+    display: block
+    padding: 6px 0 2px 0px
+    border:
+      bottom: $panelBarBorder
+    background: $panelBarBG
+    h2
+      margin: 0
+      font-weight: $panelBarHeaderWeight
+      font-size: 12px
+      text-transform: $panelBarTextTransform
+      font-family: $headerFont
+      color: $panelBarHeader
+      display: inline
+      margin-left: 6px
+      a
+        color: $panelBarHeaderLink
+        font-weight: normal
+        text-transform: none
+        font-size: $fontsize
+    .bar_link
+      float: right
+      margin: 0 8px
+
+  /* WELCOME PANEL STYLES */
+  .welcomePanel
+    background: $featureBg
+    -moz-border-radius: $featureBorderRadius
+    -webkit-border-radius: $featureBorderRadius
+    border-radius: $featureBorderRadius
+    border:
+      top: $featureBorderTop
+      bottom: $featureBorderBot
+      left: $featureBorderLeft
+      right: $featureBorderRight
+    display: inline-block
+
+    .itemBlock
+      text-align: center
+      margin: 10px
+
+      h2
+        text-align: left
+        margin-bottom: 5px
+      p
+        text-align: left
+        
+        margin: 0 0 5px 0
+        color: $featureBodyText
+      .btn
+        font-size: $fontsize * 1.15
+        margin: 10px auto
+
+  /* MEDIA WIDGET STYLES */
+  .videoBlockWrap
+    li
+      display: inline-block
+      float: left
+    .videoThumb
+      overflow: hidden
+      padding: 0
+      margin:
+        top: 2px
+        right: 2px
+      width: 72px
+      height: 48px
+      background: #cccccc
+      padding: 0px
 
 .panel_1, .panel_2, .panel_full
-  margin-bottom: 10px
 
-  &.textpage
-    h2
-      font-size: $fontsize * 1.1
   &.sponsorbox
     background: $sponsorBoxBG
     ul
@@ -704,36 +807,6 @@ $ColumnCorners: none
           color: $subheadColor
           b
             color: $headerColor
-  .houseFeatures
-    background: $featureBg
-    -moz-border-radius: $featureBorderRadius
-    -webkit-border-radius: $featureBorderRadius
-    border-radius: $featureBorderRadius
-    border:
-      top: $featureBorderTop
-      bottom: $featureBorderBot
-      left: $featureBorderLeft
-      right: $featureBorderRight
-    display: inline-block
-
-    .featureAd
-      text-align: center
-      h2
-        font-size: $fontsize * 1.35
-        text-align: left
-        line-height: 150%
-        padding: 8px 10px
-        color: $featureH2Text
-        &.push-left
-          margin-right: 40%
-      p
-        text-align: left
-        padding: 0 10px
-        margin-bottom: 20px
-        color: $featureBodyText
-      .btn
-        font-size: $fontsize * 1.15
-        margin: 10px auto
   .userList
     li
       padding: 0
@@ -746,19 +819,7 @@ $ColumnCorners: none
         bottom: none
       .profilePic
         margin: 0
-  .videoBlockWrap
-    li
-      display: inline-block
-      float: left
-    .videoThumb
-      padding: 0
-      margin:
-        top: 2px
-        right: 2px
-      width: 72px
-      height: 48px
-      background: #cccccc
-      padding: 0px
+
   .formBox
     padding: 10px 0px
     background: $formBoxBG
@@ -769,34 +830,6 @@ $ColumnCorners: none
       margin-bottom: 10px
     textarea
       border: $formBoxTextArea
-  .panelBar
-    -moz-border-radius-topleft: $ColumnCorners
-    -moz-border-radius-topright: $ColumnCorners
-    -webkit-border-top-right-radius: $ColumnCorners
-    -webkit-border-top-left-radius: $ColumnCorners
-    position: relative
-    display: block
-    padding: 6px 0 2px 0px
-    border:
-      bottom: $panelBarBorder
-    background: $panelBarBG
-    h2
-      margin: 0
-      font-weight: $panelBarHeaderWeight
-      font-size: $fontsize * 0.9
-      text-transform: $panelBarTextTransform
-      font-family: $headerFont
-      color: $panelBarHeader
-      display: inline
-      margin-left: 6px
-      a
-        color: $panelBarHeader
-        font-weight: normal
-        text-transform: none
-        font-size: $fontsize
-    .bar_link
-      float: right
-      margin: 0 8px
   .itemBlock
     .eventMetaBlock
       background: $subTitleBG
@@ -825,10 +858,7 @@ $ColumnCorners: none
         &.tags
           border-top: #fff 1px solid
           width: 100%
-          margin: 0
-    .articleSpacing
-      p
-        line-height: 150%      
+          margin: 0    
     p
       margin: 6px 0px
       line-height: 120%
@@ -1534,6 +1564,9 @@ body div.jGrowl div.jGrowl-notification div.user-wrapper
   .profilePic
     border: #ccc 1px solid
     margin: 0 5px 5px 0
+  p
+    font-size: $fontsize * 0.95
+    color: #666
   
 body div.jGrowl div.jGrowl-notification div.jGrowl-close
   z-index: 99

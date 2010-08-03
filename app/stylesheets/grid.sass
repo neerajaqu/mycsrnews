@@ -26,16 +26,10 @@ $ninesixty_columns: 12
 $ninesixty_gutter_width: 20px
 
 // Site wide Grid Container styles
-body#widgets
-  padding-bottom: 20px
-  width: 200px
-  margin: 0px
-  
 body
   +grid-system(12)
   padding-bottom: 20px
 
-  
 #header, #footer, #pageBody, #adspace, #subNav, .breadcrumbs
   +grid(12)
 
@@ -68,7 +62,7 @@ body
   +grid(12)
   margin: 0 10px 10px 0
 
-/* UNIVERSAL LIST PANEL_1 STYLES */
+/* UNIVERSAL LIST PANEL_1 STYLES NON FACEBOOK LAYOUT */
 .panel_1
   +grid(8)
   +alpha
@@ -81,28 +75,24 @@ body
         top: -139px
         width: 610px
   .list_items
-    .users
-      .thumb
-        height: 90px
     .thumb
       width: 90px
       height: 68px
       margin: 5px
       float: left
-      &.article-list
-        float: left
       img
         width: 90px
-        &.moderator
-          height: 18px
-          width: 18px
-    .article
-      &.large
-        .itemBlock
-          width: 600px
-    .itemBlock
-      float: left
-      width: 510px
+    /* CATEGORY CLASSES */
+    .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
+      .itemBlock
+        width: 510px
+    .users
+      .thumb
+        height: 90px
+
+    .blog, .event, .item_2, .newswire
+      .itemBlock
+        width: 610px
 
 /* UNIVERSAL LIST PANEL_2 STYLES */
 .panel_2
@@ -110,9 +100,25 @@ body
   +alpha
   +omega
   .list_items
-    .itemBlock
-      width: 290px
-
+    /* CATEGORY CLASS STYLES */
+    .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
+      &.featured
+        .itemBlock
+          float: left
+          width: 210px
+        .thumb
+          height: 52px
+          width: 70px
+          float: left
+          img
+            width: 70px
+        .itemMeta
+          width: 100%
+    .event, .item_2, .newswire
+      .itemMeta
+        width: 100%
+      .itemBlock
+        width: 290px
 
 /**********************************************************************************************/
 /* FEATURED STORY PANEL IMAGE SIZES */
@@ -129,14 +135,22 @@ body
     height: 110px
     width: 145px
     img
-      max-width: 145px
+      width: 145px
 
 .panel_5
   .thumb
     height: 146px
     width: 196px
     img
-      max-width: 196px
+      width: 196px
+
+.panel_6
+  .thumb
+    float: left
+    height: 45px
+    width: 60px
+    img
+      width: 60px
 
 /**********************************************************************************************/
 /* UNIQUE SIZE IMAGES */
