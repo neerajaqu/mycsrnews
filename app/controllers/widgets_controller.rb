@@ -96,5 +96,10 @@ class WidgetsController < ApplicationController
       @title = t('widgets.questions_featured_title', :site_title => get_setting('site_title').value)      
     end
   end
+
+  def newswires
+    @newswires = Newswire.unpublished.newest @count
+    @title = t('widgets.newswires_newest_title', :site_title => get_setting('site_title').value)
+  end
   
 end
