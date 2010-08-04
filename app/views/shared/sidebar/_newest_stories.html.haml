@@ -1,0 +1,19 @@
+-# @expects: local 'story'
+
+- cache :newest_stories_html, :expires_in => 60.minutes do
+  - newest_stories ||= Content.active.newest_stories 5
+  - unless newest_stories.empty?
+    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('.newest_stories_title')
+      .list_items
+        %ul
+          - newest_stories.each do |story|
+            %li
+              .itemBlock
+                %h4= link_to story.title, story_path(story)
+                .profilePic= local_linked_profile_pic story.user
+                .itemMeta
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => time_ago_in_words(story.created_at))
+                  %span.btnComment== #{like_link story} #{story.votes_tally}
+                  %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

@@ -12,6 +12,9 @@ en:
 
       top_stories:
         top_stories_title: "Top Stories"
+      
+      newest_stories:
+        newest_stories_title: "Latest Stories"
 
       top_users:
         top_users_karma_title: "Top Users"

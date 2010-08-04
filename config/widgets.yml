@@ -15,6 +15,10 @@ widgets:
     announcements:
       partial: 'shared/announcements'    
   sidebar_content:
+    auto_feature_sidebar:
+      partial: '/shared/sidebar/auto_feature_sidebar'      
+    newest_stories:
+      partial: '/shared/sidebar/newest_stories'
     top_stories:
       partial: '/shared/sidebar/top_stories'
       locals: 'top_stories'
