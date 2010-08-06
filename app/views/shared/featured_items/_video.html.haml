@@ -1,10 +1,10 @@
-.panel_3
+.half-panel
   .thumb
     - if item.video_item?
       = embed_video item.featured_video, :size => 'large'
     - else
       = link_to image_tag(item.featured_image_url), item.featured_url
-.panel_3
+.half-panel
   .itemBlock
     %h1= link_to item.featured_title, item.featured_url
     %p

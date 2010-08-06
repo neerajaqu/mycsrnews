@@ -2,7 +2,7 @@
 - cache_if (false and page.present?), "users_list_#{page}html" do
   - scores ||= Score.weekly_scores
   - paginate ||= false
-  .panel_1
+  .panel_2
     .panelBar
       %h2= t('.users_title')
       - if false and users.present? and users.first.refineable?

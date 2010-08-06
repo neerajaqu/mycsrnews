@@ -2,14 +2,17 @@
 // Learn more ~ http://960.gs/
 // Licensed under GPL and MIT.
 
+/**********************************************************************************************/
 // Reset and grid stylesheets
 @import "compass/utilities/general/reset"
 @import 960/grid.sass
 +global-reset
 
+/**********************************************************************************************/
 // App Skin
 @import skin.sass
 
+/**********************************************************************************************/
 // App stylesheets
 @import default.sass
 @import application.sass
@@ -21,13 +24,13 @@
 @import flowplayer_tabs.sass
 @import scrollable_fb.sass
 
-// Image sizing for Facebook
-
+/**********************************************************************************************/
 // The following generates the default grids provided by the css version of 960.gs
 $ninesixty_columns: 12
 $ninesixty_grid_width: 760px
 $ninesixty_gutter_width: 10px
 
+/**********************************************************************************************/
 // Site wide Grid Container styles
 body
   +grid-system(12)
@@ -57,7 +60,7 @@ body
   +grid(4)
   float: left
 
-.panel_full
+.panel_3
   &.first
     +alpha
   &.last
@@ -66,8 +69,63 @@ body
   margin: 0 10px 10px 0
 
 /**********************************************************************************************/
-/* UNIVERSAL LIST PANEL_1 STYLES */
+/* PANEL TITLE SIZES */
+.panel_1, .panel_2
+  .panelBar
+    h2
+      font-size: 10px
+
+.panel_2
+  h1
+    font-size: 19px
+  h2
+    font-size: 15px
+  h3
+    font-size: 10px
+  h4
+    font-size: 11.75px
+  p
+    font-size: 10.75px
+
 .panel_1
+  h1
+    font-size: 16px
+  h2
+    font-size: 13px
+  h3
+    font-size: 10px
+  h4
+    font-size: 11.5px
+  p
+    font-size: 10.75px
+
+/**********************************************************************************************/
+/* UNIVERSAL LIST PANEL_1 */
+.panel_1
+  +grid(4)
+  +alpha
+  +omega
+  .list_items
+    /* CATEGORY CLASSES */
+    .item_1
+      .itemBlock
+        float: left
+        width: 153px
+      .thumb
+        height: 52px
+        width: 70px
+        float: left
+        img
+          width: 70px
+      .itemMeta
+        width: 100%
+    .item_2
+      .itemBlock
+        width: 233px
+
+/**********************************************************************************************/
+/* UNIVERSAL LIST PANEL_2 */
+.panel_2
   +grid(8)
   +alpha
   +omega
@@ -95,46 +153,21 @@ body
       .thumb
         height: 80px
 
-    .event, .item_2, .newswire
+    .blog, .event, .item_2, .newswire
       .itemBlock
         width: 486px
 
 /**********************************************************************************************/
-/* UNIVERSAL LIST PANEL_2 STYLES*/
-.panel_2
-  +grid(4)
-  +alpha
-  +omega
-  .list_items
-    /* CATEGORY CLASSES */
-    .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
-      &.featured
-        .itemBlock
-          float: left
-          width: 153px
-        .thumb
-          height: 52px
-          width: 70px
-          float: left
-          img
-            width: 70px
-        .itemMeta
-          width: 100%
-    .blog, .event, .item_2, .newswire
-      .itemBlock
-        width: 233px
-
-/**********************************************************************************************/
 /* FEATURED STORY PANEL STYLES */
 
-.panel_3
+.half-panel
   .thumb
     height: 178px
     width: 238px
     img
       width: 238px
 
-.panel_4
+.quarter-panel
   .thumb
     height: 85px
     width: 114px
@@ -143,7 +176,7 @@ body
   p
     display: none
 
-.panel_5
+.third-panel
   .thumb
     height: 116px
     width: 155px
@@ -152,38 +185,13 @@ body
   p
     display: none
 
-.panel_6
+.third-panel-small
   .thumb
     float: left
     height: 45px
     width: 60px
     img
       width: 60px
-
-/* PANEL TITLE SIZES*/
-.panel_1
-  h1
-    font-size: 19px
-  h2
-    font-size: 15px
-  h3
-    font-size: 10px
-  h4
-    font-size: 11.75px
-  p
-    font-size: 10.75px
-
-.panel_2
-  h1
-    font-size: 16px
-  h2
-    font-size: 10.5px
-  h3
-    font-size: 10px
-  h4
-    font-size: 11px
-  p
-    font-size: 10.75px
 
 /**********************************************************************************************/
 /* UNIQUE SIZE REQUIREMENT IMAGES */
@@ -198,6 +206,7 @@ body
   &.short
     height: 134px
 
+/**********************************************************************************************/
 /* DETAILS PAGE THUMB SIZE */
 #itemDetails
   .thumb

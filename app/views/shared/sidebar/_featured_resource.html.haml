@@ -3,7 +3,7 @@
 - cache :featured_resources_html, :expires_in => 15.seconds do
   - featured_resources ||= Resource.featured
   - unless featured_resources.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar.clearfix
         %h2= t('.featured_resource_title')
       .list_items.clearfix

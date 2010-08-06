@@ -3,7 +3,7 @@
   = render :partial => 'shared/subnav/questions_subnav'
 
 #col_left
-  .panel_1
+  .panel_2
     .panelBar
       %h2 Ask a question
     .formBox
@@ -25,7 +25,7 @@
     - questions ||= Question.active.paginate :page => params[:page], :per_page => Question.per_page, :order => "created_at desc"
     - @paginate ||= false
     - unless questions.empty?
-      .panel_1
+      .panel_2
         .panelBar
           %h2= t('questions.list_title')
           - if questions.present? and questions.first.refineable?
@@ -38,20 +38,21 @@
             %ul
               - questions.each do |question|
                 %li.askQuestionWrap{'data-id' => question.cache_key}
-                  .thumb
-                    - if question.images.present?
-                      = image_tag question.images.first.url(:thumb)
-                    - else
-                      = image_tag ('default/watermark.jpg')
-                  .itemBlock
-                    %h2= link_to question.question, question
-                    %p= linked_item_details question
-                    .profilePic= local_linked_profile_pic question.user
-                    .itemMeta
-                      %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
-                      %span.btnComment== #{like_link question} #{question.votes.size}
-                      %span.btnComment== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
-                      %span.btnComment= fb_share_item_button question
+                  .item_1
+                    .thumb
+                      - if question.images.present?
+                        = image_tag question.images.first.url(:thumb)
+                      - else
+                        = image_tag ('default/watermark.jpg')
+                    .itemBlock
+                      %h2= link_to question.question, question
+                      %p= linked_item_details question
+                      .profilePic= local_linked_profile_pic question.user
+                      .itemMeta
+                        %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => time_ago_in_words(question.created_at))
+                        %span.btnComment== #{like_link question} #{question.votes.size}
+                        %span.btnComment== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
+                        %span.btnComment= fb_share_item_button question
 
       - if @paginate
         .clearfix

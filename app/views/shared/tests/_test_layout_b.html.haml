@@ -1,13 +1,13 @@
 %h1
   This is the beginning of Layout B
-#featuredPanel.panel_1.featureWrap
+#featuredPanel.panel_2.featureWrap
   .panelBar
     %h2
       Featured News
-  .panel_2.left
+  .panel_1.left
     .thumb
       = image_tag('default/watermark.jpg', :width => "100%")
-  .panel_2.right
+  .panel_1.right
     .itemBlock
       %h1
         Featured News Title Here: Two line spread
@@ -34,7 +34,7 @@
 
 = render :partial => 'shared/hot_topics'
 
-.panel_1
+.panel_2
   .panelBar
     %h2
       Forum Topics
@@ -82,12 +82,12 @@
         %a
           16 Comments
 
-.panel_1
+.panel_2
   .ad_fullCol
     %span            
       Advertisement
 
-.panel_2.left
+.panel_1.left
   .panelBar
     %h2
       Blogs
@@ -135,7 +135,7 @@
         %a
           16 Comments
 
-.panel_2.right
+.panel_1.right
   .panelBar
     %h2
       Latest Comments

@@ -1,5 +1,5 @@
 -# to do: needs way to hide if the user is already a fan
 
 - cache :fan_application_html do
-  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+  %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     %iframe{:src => "http://www.facebook.com/connect/connect.php?id=#{APP_CONFIG['facebook_application_id']}&connections=0&stream=0", :frameborder => 0, :scrolling => "no", :style => "border: none; width: 300px; height: 60px;", :allowtransparency => "true"}

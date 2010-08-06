@@ -422,12 +422,21 @@ li
             text-decoration: none
 
 /**********************************************************************************************/
-/* FEATURED ITEM BG ICONS */
+/* FEATURED ITEMS */
 .featured
+  background: $featureStoryBG
+  .btnComment
+    background: $btnCommentFeatureBG
+
   .question
-    background: image_url("default/icon-question.png") top right no-repeat
+    background: image_url("default/icon-question.png") center right no-repeat
+
   .event
-    background: image_url("default/icon-event.png") top right no-repeat
+    background: image_url("default/icon-event.png") center right no-repeat
+    h3 
+      color: $bodyColor
+  .idea
+    background: image_url("default/icon-idea.png") center right no-repeat
 
 /**********************************************************************************************/
 /* IMAGE STYLES */
@@ -485,17 +494,26 @@ li
     height: 16px
     width: 16px
 
+.panel_2
+  .user
+    img.moderator
+      height: 32px
+      width: 32px
+      position: absolute
+      left: 2px
+      bottom: 2px
+
 .panel_1
-  .list_items
-    .user
+  .users
+    .thumb.user
       img.moderator
-        height: 32px
-        width: 32px
+        height: 24px
+        width: 24px
         position: absolute
         left: 2px
         bottom: 2px
 
-.panel_3
+.half-panel
   .user-details
     img.moderator
       height: 48px
@@ -522,12 +540,12 @@ $ColumnCorners: none
 
 /* CONTENT BLOCK */
 .itemBlock
-  margin: 5px 5px 7px 5px
+  margin: 5px
 
 /* META DATA */
 .itemMeta
   display: inline-block
-  width: 80%
+  width: 79%
 
 /* NO IMAGE META */
 .item_2, .event, .newswire
@@ -547,18 +565,18 @@ $ColumnCorners: none
     margin: 5px 10px
 
 /* LIST CLASSES - GLOBAL STYLES */
-.answer, .article, .comment, .content, .event, .idea, .newswire, .question, .resource, .user, .item_1, .item_2
+.answer, .article, .comment, .content, .event, .idea, .newswire, .question, .resource, .users, .item_1, .item_2
   display: inline-block
   width: 100%
 
 /* LIST CLASSES WITH IMAGE */
-.panel_1, .panel_2
+.panel_2
   .answer, .article, .comment, .content, .idea, .question, .resource, .users, .item_1
     .itemBlock
       float: left
  
 /* LIST CLASSES WITH NO IMAGE */
-.panel_1, .panel_2
+.panel_2
   .newswire, .item_2
     .itemBlock
       display: block 
@@ -587,18 +605,18 @@ $ColumnCorners: none
       p
         line-height: 140%
 
-.panel_3, .panel_4, .panel_5, .panel_6
+.half-panel, .third-panel, .third-panel-small, .quarter-panel
   float: left
   display: block
 
-.panel_3
+.half-panel
   width: 50%
 
-.panel_4
-  width: 25%
-
-.panel_5, .panel_6
+.third-panel, .third-panel-small
   width: 33.333%
+
+.quarter-panel
+  width: 25%
 
 /**********************************************************************************************/
 /* FEATURED STORY WRAP */
@@ -607,34 +625,12 @@ $ColumnCorners: none
   background: $featureStoryBG
   .btnComment
     background: $btnCommentFeatureBG
-
-/* FEATURED ITEMS WIDGETS - 50% FINISHED */
-
-.featured_item
-  background: #3b5998
-  display: inline-block
-  width: 300px
-
-.featured_item
-  .title
-    padding: 7px 10px 3px 30px
-    background: image_url("default/icon-question.png") left center no-repeat
-    h1
-      color: white
-      margin: 0
-  .display
-    display: block
-    margin: 5px
-    background: white
-    padding: 10px
-    font-size: 14px
-    line-height: 140%
    
 
 /**********************************************************************************************/
 /* LAYOUT PANELS - PANEL_1 & PANEL_2 CONTAINERS */
 
-.panel_1, .panel_2, .panel_full
+.panel_1, .panel_2, .panel_3
   margin: 0 0 15px 0
 
   .top-tags
@@ -668,10 +664,10 @@ $ColumnCorners: none
       bottom: $panelBarBorder
     background: $panelBarBG
     h2
-      margin: 0
+      margin: 0 6px
       display: inline
       line-height: 100%
-      font-size: $fontsize
+      font-size: 11.5px
       font-weight: $panelBarHeaderWeight
       text-transform: $panelBarTextTransform
       font-family: $headerFont
@@ -729,7 +725,7 @@ $ColumnCorners: none
       background: #cccccc
       padding: 0px
 
-.panel_1, .panel_2, .panel_full
+.panel_2, .panel_1, .panel_3
   /* SPONSORED ITEMS STYLES */
   &.sponsorbox
     background: $sponsorBoxBG

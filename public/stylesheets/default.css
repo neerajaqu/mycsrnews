@@ -1110,24 +1110,24 @@ These wrappers cascade to tell .panelBar to which background to use for the titl
 	display: block;
 	}
 
-.panel_1 {
-	border-bottom: 1px solid #999999;
-	margin-bottom: 15px;
-	display: block;
-	}
-
 .panel_2 {
 	border-bottom: 1px solid #999999;
 	margin-bottom: 15px;
 	display: block;
 	}
 
-.panel_1 .panelBar {
+.panel_1 {
+	border-bottom: 1px solid #999999;
+	margin-bottom: 15px;
+	display: block;
+	}
+
+.panel_2 .panelBar {
 	border-top: 1px solid #999999;
 	background: #D8DFEA;
 	}
 
-.panel_2 .panelBar {
+.panel_1 .panelBar {
 	border-top: 1px solid #999999;
 	background: #D8DFEA;
 	}
@@ -1354,13 +1354,13 @@ li {
 	clear: both;
 	}
 
-.panel_1 ul li {
+.panel_2 ul li {
 	clear: both;
 	float: left;
 	border-bottom: 1px solid #CCCCCC;
 	}
 
-.panel_2 ul li {
+.panel_1 ul li {
 	clear: both;
 	float: left;
 	border-bottom: 1px solid #CCCCCC;

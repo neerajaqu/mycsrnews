@@ -2,7 +2,7 @@
 - cache :sidebar_top_users_html, :expires_in => 120.minutes do
   - scores ||= Score.alltime_scores 7
   - unless scores.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.top_users_karma_title')
       .list_items

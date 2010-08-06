@@ -3,7 +3,7 @@
 - cache :newest_articles_html do
   - newest_articles ||= Article.published.active.newest 5
   - unless newest_articles.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('articles.newest_title')
       .list_stories
