@@ -76,6 +76,9 @@ defaults: &defaults
   # Yahoo AppId used for sitemap ping
   yahoo_app_id: 'ELIZq2LV44444.rGdRR5abc888HCGL1zDOegJakZyHIrugVqPip3YK333P8-'
 
+  # Select timezone from $ rake time:zones:all
+  time_zone: 'Pacific Time (US & Canada)'
+
 development:
   <<: *defaults
   fb_rss_url: "http://my.site.com/stories.atom"
