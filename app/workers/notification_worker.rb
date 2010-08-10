@@ -11,12 +11,13 @@ class NotificationWorker
     #todo - more notification types need to be handled
     admin = Metadata::Setting.find_setting('site_notification_user').value
     sender = User.find_by_fb_user_id(admin) || User.find_by_id(admin) || User.admins.last
-    if sender and sender.email.present?
+    if sender
+      from_email = (sender.email.present? ? sender.email : ActionMailer::Base.smtp_settings['user_name'] )
       pfeed_item.pfeed_deliveries.map(&:pfeed_receiver).each do |recipient|
         if recipient.accepts_email_notifications?
           message = {
           	  :sender => sender,
-          	  :email => sender.email,
+          	  :email => from_email,
           	  :recipients => recipient.email,
           	  :originator => pfeed_item.originator,
           	  :participant => pfeed_item.participant,

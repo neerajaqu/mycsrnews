@@ -71,6 +71,9 @@ class StorySweeper < ActionController::Caching::Sweeper
     ['blog_roll','newest_articles', 'top_articles'].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
+    ['', 'page_1_', 'page_2_'].each do |page|
+      controller.expire_fragment "articles_list_#{page}html"
+    end
   end
 
 end

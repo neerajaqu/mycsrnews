@@ -1,0 +1,12 @@
+-# @expects: local '@newswires','@count'
+- @count ||= @count
+- unless @filter
+  - cache "widget_newswires_#{@count}_html", :expires_in => 15.minutes do
+    - unless @newswires.empty?
+      %div{:class => "panel_2"}
+        = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
+        .list_stories
+          %ul
+            - @newswires.each do |item|
+              %li
+                = render :partial => 'shared/items/small_newswire', :locals => {:newswire => item}
