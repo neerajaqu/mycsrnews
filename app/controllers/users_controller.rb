@@ -174,6 +174,11 @@ class UsersController < ApplicationController
   def link_twitter_account
     
   end
+
+  def set_auto_discovery_rss
+    @user = User.find(params[:id])
+    @auto_discovery_rss = user_path(@user, :format => :atom)
+  end
   
   private
   

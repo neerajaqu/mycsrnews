@@ -5,6 +5,7 @@ class Video < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :videoable, :polymorphic => true
+  belongs_to :source
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
