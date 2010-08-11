@@ -270,3 +270,4 @@ en:
     questions_newest_title: "Latest questions from {{site_title}}"
     questions_top_title: "Top questions from {{site_title}}"
     questions_featured_title: "Featured questions from {{site_title}}"
+  error_daily_post_limit: "Sorry, you've exceeded your daily posting limit. Please try again tomorrow."

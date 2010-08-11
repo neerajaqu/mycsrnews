@@ -290,6 +290,10 @@ class User < ActiveRecord::Base
   def is_blogger?
     self.articles.count > 0
   end
+  
+  def count_daily_posts
+    self.contents.find(:all, :conditions => ["created_at > ?", 24.hours.ago]).count
+  end
 
   private
 
