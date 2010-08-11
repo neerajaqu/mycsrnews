@@ -75,6 +75,13 @@ body
     h2
       font-size: 10px
 
+  .third-panel
+    p
+      font-size: 10.5px
+
+  .quarter-panel
+    p
+      font-size: 10.5px
 .panel_2
   h1
     font-size: 19px
@@ -122,6 +129,13 @@ body
     .item_2
       .itemBlock
         width: 233px
+  .users
+    .thumb
+      float: left
+      height: 70px
+      width: 70px
+      img
+        width: 70px
 
 /**********************************************************************************************/
 /* UNIVERSAL LIST PANEL_2 */
@@ -136,27 +150,32 @@ body
       img
         top: -139px
         width: 486px
-  .list_items
-    .thumb
+  .thumb
+    width: 80px
+    height: 60px
+    margin: 5px
+    float: left
+    img
       width: 80px
-      height: 60px
-      margin: 5px
-      float: left
-      img
-        width: 80px
-    /* CATEGORY CLASSES */
+  /* CATEGORY CLASSES */
+  .list_items
     .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
       .itemBlock
         width: 386px
 
     .users
       .thumb
+        width: 80px
         height: 80px
 
     .blog, .event, .item_2, .newswire
       .itemBlock
         width: 486px
-
+  /* MEDIA WIDGET STYLES */
+  .list_media
+    li
+      width: 58px
+      height: 43.5px
 /**********************************************************************************************/
 /* FEATURED STORY PANEL STYLES */
 
@@ -175,7 +194,9 @@ body
       width: 114px
   p
     display: none
-
+  &.show-caption
+    p
+      display: inline
 .third-panel
   .thumb
     height: 116px
@@ -216,6 +237,12 @@ body
     float: right
     img
       width: 233px
+    .video
+      height: 182px
+      width: 233px
+      position: absolute
+      top: 0
+      left: 0
   .itemMeta
     width: 50%
   .itemBlock

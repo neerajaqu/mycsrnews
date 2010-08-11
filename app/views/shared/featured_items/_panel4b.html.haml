@@ -4,8 +4,9 @@
   .thumb
     %a= link_to image_tag(item.featured_image_url), item.featured_url
   .itemBlock
-    %h4 
-      %a= link_to caption(item.featured_title,limit_title), item.featured_url
+    %h4
+      %span.ellipsis_title_2
+        = link_to caption(item.featured_title,limit_title), item.featured_url, { :class => 'ellipsis_text'}
     %p
       = caption(sanitize(strip_tags(item.featured_blurb)),limit_caption)
       = link_to 'More...', item

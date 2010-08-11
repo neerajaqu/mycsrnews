@@ -1,7 +1,9 @@
 .thumb.wide
   = link_to image_tag(item.featured_image_url), item.featured_url
 .itemBlock
-  %h1= link_to item.featured_title, item.featured_url
+  %h1
+    %span.ellipsis_title_2
+      = link_to item.featured_title, item.featured_url, { :class => 'ellipsis_text'}
   %p
     = caption(sanitize(strip_tags(item.featured_blurb)),170)
     = link_to 'More...', item
