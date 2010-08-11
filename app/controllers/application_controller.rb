@@ -79,8 +79,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_auto_discovery_rss url = nil
-    url = stories_path(:format => :atom) if url.nil?
-    @auto_discovery_rss ||= url
+    @auto_discovery_rss ||= url || stories_path(:format => :atom)
   end
   
   def set_outbrain_item item = nil
