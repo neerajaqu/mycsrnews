@@ -176,8 +176,12 @@ class UsersController < ApplicationController
   end
 
   def set_auto_discovery_rss
-    @user = User.find(params[:id])
-    @auto_discovery_rss = user_path(@user, :format => :atom)
+    unless params[:id].nil?
+      @user = User.find(params[:id])
+      @auto_discovery_rss = user_path(@user, :format => :atom)
+    else
+      @auto_discovery_rss = stories_path(:format => :atom)
+    end
   end
   
   private
