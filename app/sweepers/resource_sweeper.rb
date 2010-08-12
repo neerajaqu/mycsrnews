@@ -10,13 +10,11 @@ class ResourceSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_resource_cache(resource)
-    ['top_resources', 'newest_resources', 'featured_resources'].each do |fragment|
+    ['top_resources', 'newest_resources', 'featured_resources', "#{resource.cache_key}_who_liked" ].each do |fragment|
       expire_fragment "#{fragment}_html"
-      expire_fragment "#{fragment}_fbml"
     end
     ['', 'page_1_', 'page_2_'].each do |page|
       expire_fragment "resources_list_#{page}html"
-      expire_fragment "resources_list_#{page}fbml"
     end
   end
 

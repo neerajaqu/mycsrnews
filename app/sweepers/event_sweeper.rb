@@ -10,13 +10,11 @@ class EventSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_event_cache(event)
-    ['top_events', 'newest_events', 'featured_events'].each do |fragment|
+    ['top_events', 'newest_events', 'featured_events', "#{event.cache_key}_who_liked" ].each do |fragment|
       expire_fragment "#{fragment}_html"
-      expire_fragment "#{fragment}_fbml"
     end
     ['', 'page_1_', 'page_2_'].each do |page|
       expire_fragment "events_list_#{page}html"
-      expire_fragment "events_list_#{page}fbml"
     end
   end
 

@@ -22,7 +22,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_group_cache(prediction_group)
-    ['top_prediction_groups', 'newest_prediction_groups', "#{prediction_group.cache_key}_top", "#{prediction_group.cache_key}_bottom"].each do |fragment|
+    ['top_prediction_groups', 'newest_prediction_groups', "#{prediction_group.cache_key}_top", "#{prediction_group.cache_key}_bottom", "#{prediction_group.cache_key}_who_liked" ].each do |fragment|
       expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|
@@ -31,7 +31,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_question_cache(prediction_question)
-    ['top_prediction_questions', 'newest_prediction_questions', "#{prediction_question.cache_key}_top", "#{prediction_question.cache_key}_bottom"].each do |fragment|
+    ['top_prediction_questions', 'newest_prediction_questions', "#{prediction_question.cache_key}_top", "#{prediction_question.cache_key}_bottom", "#{prediction_question.cache_key}_who_liked" ].each do |fragment|
       expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|

@@ -22,7 +22,7 @@ class QandaSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_question_cache(question)
-    ['featured_questions','top_questions', 'newest_questions', 'unanswered_questions', "#{question.cache_key}_top", "#{question.cache_key}_bottom"].each do |fragment|
+    ['featured_questions','top_questions', 'newest_questions', 'unanswered_questions', "#{question.cache_key}_top", "#{question.cache_key}_bottom" , "#{question.cache_key}_who_liked" ].each do |fragment|
       expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|

@@ -26,7 +26,7 @@ class ForumSweeper < ActionController::Caching::Sweeper
 
   def self.expire_topic_all topic
     controller = ActionController::Base.new
-    ["#{topic.cache_key}_voices"].each do |fragment|
+    ["#{topic.cache_key}_voices", "#{topic.cache_key}_who_liked" ].each do |fragment|
       controller.expire_fragment fragment
     end
 

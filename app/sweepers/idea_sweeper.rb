@@ -10,13 +10,11 @@ class IdeaSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_idea_cache(idea)
-    ['top_ideas', 'newest_ideas', 'featured_ideas'].each do |fragment|
+    ['top_ideas', 'newest_ideas', 'featured_ideas', "#{idea.cache_key}_who_liked" ].each do |fragment|
       expire_fragment "#{fragment}_html"
-      expire_fragment "#{fragment}_fbml"
     end
     ['', 'page_1_', 'page_2_'].each do |page|
       expire_fragment "ideas_list_#{page}html"
-      expire_fragment "ideas_list_#{page}fbml"
     end
   end
 
