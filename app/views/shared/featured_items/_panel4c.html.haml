@@ -8,6 +8,5 @@
         = link_to caption(item.featured_title,limit_title), item.featured_url, { :class => 'ellipsis_text'}
     %p
       = caption(sanitize(strip_tags(primary1.featured_blurb)),limit_caption)
-      = link_to 'More...', primary1
     %span.btnComment== #{like_link primary1} #{primary1.num_votes}
     %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}

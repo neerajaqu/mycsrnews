@@ -11,7 +11,7 @@ $(function() {
   $('.unhide').show().removeClass('hidden');
 
   setTimeout(function() {
-		$('.flash').effect('shake');
+		$('.flash').effect('fade');
 		$('.flash').hide('puff', {}, 'slow');
   }, 3500);
 

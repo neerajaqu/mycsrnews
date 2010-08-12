@@ -9,4 +9,3 @@
         = link_to caption(item.featured_title,limit_title), item.featured_url, { :class => 'ellipsis_text'}
     %p
       = caption(sanitize(strip_tags(item.featured_blurb)),limit_caption)
-      = link_to 'More...', item

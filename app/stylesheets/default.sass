@@ -605,6 +605,9 @@ $ColumnCorners: none
       p
         line-height: 140%
 
+/**********************************************************************************************/
+/* INTERIOR PANELS */
+
 .half-panel, .third-panel, .third-panel-small, .quarter-panel
   float: left
   display: block
@@ -618,9 +621,8 @@ $ColumnCorners: none
 .quarter-panel
   width: 25%
 
-
 /**********************************************************************************************/
-/* FEATURED STORY WRAP */
+/* FEATURED STORY STYLES */
 
 .featureWrap
   background: $featureStoryBG
@@ -720,6 +722,24 @@ $ColumnCorners: none
       margin: 2px
       padding: 0px
 
+  /* ACTIVE USERS WIDGET */
+  .userList
+    li
+      padding: 0
+      margin: 4px 2px 0 2px
+      display: inline-block
+      width: 30px
+      height: 30px
+      float: left
+      border:
+        bottom: none
+      .profilePic
+        margin: 0
+
+
+
+
+
 .panel_2, .panel_1, .panel_3
   /* SPONSORED ITEMS STYLES */
   &.sponsorbox
@@ -774,20 +794,6 @@ $ColumnCorners: none
           b
             color: $headerColor
 
-  /* ACTIVE USERS WIDGET */
-  .userList
-    li
-      padding: 0
-      margin: 4px 2px 0 2px
-      display: inline-block
-      width: 30px
-      height: 30px
-      float: left
-      border:
-        bottom: none
-      .profilePic
-        margin: 0
-
   /* FORM STYLES - (Outside of formtastic) */
   .formBox
     padding: 10px 0px
@@ -829,7 +835,7 @@ $ColumnCorners: none
           width: 100%
           margin: 0    
     p
-      margin: 6px 0px
+      margin: 0 0 6px 0
       line-height: 120%
 
   /* BULLETED LIST */
@@ -1566,6 +1572,8 @@ body div.jGrowl div.jGrowl-closer
   clear: both
   float: left
 
+/**********************************************************************************************/
+/* FLASH ERROR STYLES */
 .flash
   padding: .3em .4em
   margin: 0 auto .5em
@@ -1590,6 +1598,8 @@ body div.jGrowl div.jGrowl-closer
   &.flash_warning
     border: $flashWarningBorder
     background: $flashWarningBG
+
+
 
 .process
   background: white url(/images/default/vertical_bg_animation.gif) top left repeat
