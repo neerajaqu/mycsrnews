@@ -12,7 +12,7 @@ $(function() {
 
   setTimeout(function() {
 		$('.flash').effect('fade');
-		$('.flash').hide('puff', {}, 'slow');
+
   }, 3500);
 
   function dialog_response(title, message) {
