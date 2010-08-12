@@ -94,7 +94,7 @@ module Juixe
           self.votes.each { |v|
             voters << v.voter
           }
-          voters.uniq
+          voters
         end
         
         def voted_by?(voter)

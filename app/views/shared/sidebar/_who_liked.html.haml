@@ -1,6 +1,6 @@
 -# @expects: local 'item'
 - cache "#{item.cache_key}_who_liked", :expires_in => 60.minute do
-  - user_list ||= item.voters_who_voted
+  - user_list ||= item.voters_who_voted.uniq[0,40]
   %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('who_liked.title', :user_count => user_list.size)
