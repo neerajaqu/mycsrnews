@@ -1,85 +1,72 @@
-require 'rss'
+require 'feedzirra'
 
 
-class FeedParser
-  class << self; attr_accessor :title_fields, :date_fields, :body_fields, :link_fields, :image_fields; end
-  @title_fields  = ['title', 'subtitle', 'link']
-  @date_fields   = ['updated', 'date', 'updated_at', 'pubDate', 'published', 'lastBuildDate', 'dc_date']
-  @body_fields   = ['description', 'content', 'summary', 'caption']
-  @link_fields   = ['link', 'guid']
-  @image_fields  = ['image', 'imageUrl', 'image_url', 'logo', 'icon']
+module N2
+  class FeedParser
+    def self.update_feeds
+      feeds = Feed.find(:all, :conditions => ["specialType = ?", "default"])
+      feeds.each { |feed| update_feed feed, false }
 
-  ['title', 'date', 'body', 'link', 'image'].each do |func|
-    define_method func do |*args|
-      feed, fields, is_atom = *args
-      feed      ||= @feed
-      fields    ||= FeedParser.send("#{func}_fields")
-      atom_feed ||= self.atom_feed?
-
-      get_value feed, fields, atom_feed
-    end
-  end
-
-  def initialize(url)
-    @url = url
-    @feed_type = false
-    @title_filters = Metadata::TitleFilter.all.map(&:keyword)  
-    parse
-  end
-  
-  def parse
-    @raw_feed = RSS::Parser.parse(@url)
-    raise FeedError, "Invalid feed url: #{@url}" if @raw_feed.nil?
-    if @raw_feed.respond_to? 'channel'
-      @feed_type = 'RSS'
-      @feed = @raw_feed.channel
-    else
-      @feed_type = 'Atom'
-      @feed = @raw_feed
-    end
-  end
-
-  def get_value feed_object, fields, is_atom
-    command = fields.select { |field| feed_object.respond_to? field }.first
-    return nil unless command.present?
-
-    # If atom feed, we need to call content on the field to get the data
-    original_command = command
-    command = is_atom == true ? (command == 'link' ? [command, 'href'] : [command, 'content']) : command
-
-    begin
-      command.inject(feed_object) { |item, cmd| item.send(cmd) }
-    rescue NoMethodError
-      subfields = fields.delete(original_command)
-      return get_value(feed_object, subfields, is_atom) if subfields and subfields.present?
-      nil
-    end
-  end
-
-  def atom_feed?
-    @feed_type == 'Atom'
-  end
-
-  def rss_feed?
-    @feed_type == 'RSS'
-  end
-
-  def items
-    items = []
-    @raw_feed.items.each do |item|
-      tempTitle = title(item)
-      tempTitle = @title_filters.inject(tempTitle) {|str,key| str.gsub(%r{#{key}}, '') }
-      tempTitle.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'')
-      items << {
-      	:title => tempTitle,
-      	:body => body(item),
-      	:date => date(item),
-      	:link => link(item),
-      	:image => image(item),
-      }
+      expire_newswire_cache
     end
 
-    items
-  end
+    def self.update_feed(feed, trigger_expire_cache = true)
+      return false unless feed
+      Rails.logger.info "Running feedzirra on #{feed.item_title}"
+      begin
+        rss = Feedzirra::Feed.fetch_and_parse(feed.rss)
+      rescue => e
+        Rails.logger.info "Failed to open feed at #{feed.url} -- #{e}"
+        return false
+      end
+      Rails.logger.info "The feed #{feed.title}(#{feed.url}) could not be reached -- status: #{rss.inspect}" and return false unless rss and rss.respond_to?(:entries)
+      items = rss.entries
+      Rails.logger.info "The feed #{feed.title}(#{feed.url}) is presently empty." and return false unless items.present?
+      Rails.logger.info "Parsing #{feed.title} with #{items.size} items -- updated on #{rss.last_modified} -- last fetched #{feed.last_fetched_at}"
 
+      feed_date = feed.last_fetched_at
+      pub_date = rss.last_modified
+      if !feed_date or (pub_date and feed_date < pub_date)
+        items.each do |item|
+          Rails.logger.info "\tChecking feed items"
+          break if feed_date and item.published and (item.published <= feed_date)
+          next if Newswire.find_by_title item.title
+          next unless item.summary and item.url and item.title
+
+          Rails.logger.info "\tCreating newswire for \"#{item.title.chomp}\""
+
+          newswire = Newswire.create!({
+            :title      => item.title,
+            :caption    => item.summary,
+            :created_at => item.published,
+            :url        => item.url,
+            #:imageUrl   => item.image,
+            :feed       => feed
+          })
+          if feed.load_all?
+            Rails.logger.info "\t\tRunning quick post.."
+            if newswire.imageUrl.present? and not newswire.imageUrl =~ /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?(jpg|jpeg|gif|png)(\?.*)?$/ix
+              Rails.logger.info "\t\t\tProcessing non standard image: #{newswire.imageUrl}"
+              unless newswire.quick_post(nil, true)
+                Rails.logger.info "\t\t\tCould not process image, skipping image."
+                newswire.update_attribute(:imageUrl, nil)
+                newswire.quick_post
+              end
+            else
+              newswire.quick_post
+            end
+          end
+        end
+
+        feed.update_attributes({:updated_at => Time.now, :last_fetched_at => (pub_date || Time.now)})
+      end
+
+      expire_newswire_cache if trigger_expire_cache
+    end
+
+    def self.expire_newswire_cache
+      Rails.logger.info "Expiring newswires cache"
+      NewswireSweeper.expire_newswires
+    end
+  end
 end

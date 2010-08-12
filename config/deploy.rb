@@ -28,8 +28,6 @@ after("deploy:update_code") do
   deploy.cleanup
 end
 
-after "deploy:symlink", "deploy:update_crontab"
-
 before("deploy") do
   deploy.god.stop
 end
@@ -44,12 +42,14 @@ end
 
 after("deploy") do
   run "cd #{current_path} && rake n2:queue:restart_workers"
+  run "APP_NAME=#{application} cd #{current_path} && rake n2:queue:restart_scheduler"
   deploy.god.start
   newrelic.notice_deployment
 end
 
 after("deploy:migrations") do
   run "cd #{current_path} && rake n2:queue:restart_workers"
+  run "APP_NAME=#{application} cd #{current_path} && rake n2:queue:restart_scheduler"
   deploy.god.start
   newrelic.notice_deployment
 end
@@ -118,11 +118,6 @@ namespace :deploy do
   desc "Stop application"
   task :stop, :roles => :app do
     run "cat #{current_path}/tmp/pids/unicorn.pid | xargs kill -QUIT"
-  end
-
-  desc "Update the crontab file"
-  task :update_crontab, :roles => :db do
-    run "cd #{release_path} && whenever --set 'environment=#{rails_env}&cron_log=#{shared_path}/log/cron.log' --update-crontab #{application}"
   end
 
   desc "Bootstrap initial app and setup database"

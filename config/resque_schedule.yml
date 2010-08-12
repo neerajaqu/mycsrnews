@@ -1,0 +1,7 @@
+parse_feeds:
+  cron: "30 * * * *"
+  class: FeedsWorker
+  queue: feeds
+  args:
+  rails_env: development, staging, production
+  description: "This job will parse the RSS/atom feeds"
