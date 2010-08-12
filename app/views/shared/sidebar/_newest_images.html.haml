@@ -9,4 +9,4 @@
       .list_media
         %ul          
           - newest_images.each do |image|
-            %li= link_to image_tag(image.url(:media_item)), image.imageable
+            %li= link_to image_tag(image.url(:thumb)), image.imageable
