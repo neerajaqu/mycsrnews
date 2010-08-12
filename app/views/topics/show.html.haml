@@ -27,6 +27,7 @@
 
 #col_right
   = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @topic }
   = render :partial => 'shared/sidebar/newest_topics'
   = render :partial => 'shared/sidebar/top_topics'
   = render :partial => 'shared/sidebar/topic_voices', :locals => { :topic => @topic }

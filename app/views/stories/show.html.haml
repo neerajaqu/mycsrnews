@@ -63,6 +63,7 @@
   - cache "#{@story.cache_key}_sidebar_html" do
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
     = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }
+    = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @story }
   = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @story, :related_items => @story.related_items }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
 / #image_box.standard_overlay
