@@ -101,7 +101,7 @@ module ApplicationHelper
   end
 
   def pfeed_caption(text, length = 150)
-    caption(text, length)
+    caption(strip_tags(text), length)
   end
 
   def voteable_type_name(vote)
