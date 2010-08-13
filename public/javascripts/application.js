@@ -11,8 +11,8 @@ $(function() {
   $('.unhide').show().removeClass('hidden');
 
   setTimeout(function() {
-		$('.flash').effect('shake');
-		$('.flash').hide('puff', {}, 'slow');
+		$('.flash').effect('fade');
+
   }, 3500);
 
   function dialog_response(title, message) {
@@ -76,7 +76,7 @@ $(function() {
 
   	console.log('Submitting form');
   	var url = change_url_format($(this).attr('action'));
-  	var list = $('.list_items ul', $(this).parents().filter('.panel_1'));
+  	var list = $('.list_items ul', $(this).parents().filter('.panel_2'));
   	$.post(url, $(this).serialize(), function(data) {
       console.log('Running quicksand');
       console.log(data);

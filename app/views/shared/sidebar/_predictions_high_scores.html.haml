@@ -5,7 +5,7 @@
   - top_scorers ||= User.top 25
   - user_list = top_scorers
   - unless top_scorers.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('predictions.high_scores')
       .userList

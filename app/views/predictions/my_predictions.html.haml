@@ -6,7 +6,7 @@
   = render_ad(:banner, @ad_layout, @ad_banner)
   - @guesses ||= current_user.prediction_guesses
   - @paginate ||= false
-  .panel_1
+  .panel_2
     .panelBar
       %h2= t('predictions.my_list_title')
       - if @guesses.present? and @guesses.first.refineable?

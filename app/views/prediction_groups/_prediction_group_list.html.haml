@@ -2,7 +2,7 @@
 - cache_if page.present?, "prediction_groups_list_#{page}html" do
   - prediction_groups ||= PredictionGroup.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - paginate ||= false
-  .panel_1
+  .panel_2
     .panelBar
       %h2= t 'predictions.browse_groups'
     .itemListWrap

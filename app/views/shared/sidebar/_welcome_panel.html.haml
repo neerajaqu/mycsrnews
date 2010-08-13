@@ -4,7 +4,7 @@
     - if get_setting('welcome_layout').present?
       - case get_setting('welcome_layout').value
         - when 'host'
-          .panel_2
+          .panel_1
             .welcomePanel
               .thumb.welcome
                 - if get_setting('welcome_host').present? and get_setting('welcome_host').value.empty?
@@ -20,7 +20,7 @@
                 %h2= t('.welcome_panel_headline')
                 %p= t('.welcome_panel_message_fbml')
         - when 'thumb'
-          .panel_2
+          .panel_1
             .welcomePanel
               .thumb.welcome
                 - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
@@ -31,7 +31,7 @@
                 %h2= t('.welcome_panel_headline')
                 %p= t('.welcome_panel_message_fbml')
         - when 'banner'
-          .panel_2
+          .panel_1
             .welcomePanel
               .thumb.banner
                 - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?
@@ -42,7 +42,7 @@
                 %h2= t('.welcome_panel_headline')
                 %p= t('.welcome_panel_message_fbml')
         - else
-          .panel_2
+          .panel_1
             .welcomePanel
               .thumb.welcome
                 - unless get_setting('welcome_image_url').value.present? and get_setting('welcome_image_url').value.empty?

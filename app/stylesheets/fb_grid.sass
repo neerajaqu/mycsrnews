@@ -2,14 +2,17 @@
 // Learn more ~ http://960.gs/
 // Licensed under GPL and MIT.
 
+/**********************************************************************************************/
 // Reset and grid stylesheets
 @import "compass/utilities/general/reset"
 @import 960/grid.sass
 +global-reset
 
+/**********************************************************************************************/
 // App Skin
 @import skin.sass
 
+/**********************************************************************************************/
 // App stylesheets
 @import default.sass
 @import application.sass
@@ -21,13 +24,13 @@
 @import flowplayer_tabs.sass
 @import scrollable_fb.sass
 
-// Image sizing for Facebook
-
+/**********************************************************************************************/
 // The following generates the default grids provided by the css version of 960.gs
 $ninesixty_columns: 12
 $ninesixty_grid_width: 760px
 $ninesixty_gutter_width: 10px
 
+/**********************************************************************************************/
 // Site wide Grid Container styles
 body
   +grid-system(12)
@@ -57,7 +60,7 @@ body
   +grid(4)
   float: left
 
-.panel_full
+.panel_3
   &.first
     +alpha
   &.last
@@ -66,8 +69,97 @@ body
   margin: 0 10px 10px 0
 
 /**********************************************************************************************/
-/* UNIVERSAL LIST PANEL_1 STYLES */
+/* PANEL TITLE SIZES */
+.panel_1, .panel_2
+  .panelBar
+    h2
+      font-size: 10px
+
+  .third-panel
+    p
+      font-size: 10.5px
+
+  .quarter-panel
+    p
+      font-size: 10.5px
+.panel_2
+  h1
+    font-size: 19px
+  h2
+    font-size: 15px
+  h3
+    font-size: 10px
+  h4
+    font-size: 13px
+  p
+    font-size: 10.5px
+
 .panel_1
+  h1
+    font-size: 16px
+  h2
+    font-size: 13px
+  h3
+    font-size: 10px
+  h4
+    font-size: 13px
+  p
+    font-size: 10.5px
+
+/**********************************************************************************************/
+/* UNIVERSAL LIST PANEL_1 */
+.panel_1
+  +grid(4)
+  +alpha
+  +omega
+  .list_items
+    /* CATEGORY CLASSES */
+    .item_1
+      .itemBlock
+        float: left
+        width: 153px
+      .thumb
+        height: 52px
+        width: 70px
+        float: left
+        img
+          width: 70px
+      .itemMeta
+        width: 100%
+    .item_2
+      .itemBlock
+        width: 233px
+  .users
+    .thumb
+      float: left
+      height: 70px
+      width: 70px
+      img
+        width: 70px
+  .media
+    .thumb
+      width: 223px
+      height: 167px
+      margin: 5px 10px
+      img
+        width: 270px
+      object
+        width: 270px
+        height: 202px
+  .list_media
+    ul
+      width: 100%
+      display: inline-block      
+      margin: 4px 0
+      li
+        width: 56px
+        height: 42px
+        img
+          width: 56px
+
+/**********************************************************************************************/
+/* UNIVERSAL LIST PANEL_2 */
+.panel_2
   +grid(8)
   +alpha
   +omega
@@ -78,63 +170,45 @@ body
       img
         top: -139px
         width: 486px
-  .list_items
-    .thumb
+  .thumb
+    width: 80px
+    height: 60px
+    margin: 5px
+    float: left
+    img
       width: 80px
-      height: 60px
-      margin: 5px
-      float: left
-      img
-        width: 80px
-    /* CATEGORY CLASSES */
+  /* CATEGORY CLASSES */
+  .list_items
     .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
       .itemBlock
         width: 386px
 
     .users
       .thumb
+        width: 80px
         height: 80px
 
-    .event, .item_2, .newswire
-      .itemBlock
-        width: 486px
-
-/**********************************************************************************************/
-/* UNIVERSAL LIST PANEL_2 STYLES*/
-.panel_2
-  +grid(4)
-  +alpha
-  +omega
-  .list_items
-    /* CATEGORY CLASSES */
-    .answer, .article, .comment, .content, .idea, .item_1, .question, .resource, .users
-      &.featured
-        .itemBlock
-          float: left
-          width: 153px
-        .thumb
-          height: 52px
-          width: 70px
-          float: left
-          img
-            width: 70px
-        .itemMeta
-          width: 100%
     .blog, .event, .item_2, .newswire
       .itemBlock
-        width: 233px
-
+        width: 486px
+  /* MEDIA WIDGET STYLES */
+  .list_media
+    li
+      width: 58px
+      height: 43.5px
+      img
+        width: 58px
 /**********************************************************************************************/
 /* FEATURED STORY PANEL STYLES */
 
-.panel_3
+.half-panel
   .thumb
     height: 178px
     width: 238px
     img
       width: 238px
 
-.panel_4
+.quarter-panel
   .thumb
     height: 85px
     width: 114px
@@ -142,8 +216,10 @@ body
       width: 114px
   p
     display: none
-
-.panel_5
+  &.show-caption
+    p
+      display: inline-block
+.third-panel
   .thumb
     height: 116px
     width: 155px
@@ -152,26 +228,13 @@ body
   p
     display: none
 
-.panel_6
+.third-panel-small
   .thumb
     float: left
     height: 45px
     width: 60px
     img
       width: 60px
-
-/* FONT SIZES FOR FB LAYOUT */
-.panel_1, .panel_2, .panel_3, .panel_4, .panel_5, .panel_6
-  h1
-    font-size: 18px
-  h2
-    font-size: 11.5px
-  h3
-    font-size: 10px
-  h4
-    font-size: 11.25px
-  p
-    font-size: 10.75px
 
 /**********************************************************************************************/
 /* UNIQUE SIZE REQUIREMENT IMAGES */
@@ -186,6 +249,7 @@ body
   &.short
     height: 134px
 
+/**********************************************************************************************/
 /* DETAILS PAGE THUMB SIZE */
 #itemDetails
   .thumb
@@ -195,6 +259,13 @@ body
     float: right
     img
       width: 233px
+    .video
+      position: absolute
+      top: 0
+      left: 0
+      object
+        height: 182px
+        width: 233px
   .itemMeta
     width: 50%
   .itemBlock

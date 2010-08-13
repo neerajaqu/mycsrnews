@@ -1,7 +1,7 @@
 - cache "forums_list" do
   - forums ||= Forum.positioned
   - paginate ||= false
-  .panel_1
+  .panel_2
     .panelBar
       %h2= t('forums.title')
       -# if forums.present? and forums
@@ -30,7 +30,7 @@
                   %span.btnComment= t('forums.topics_count', :topics_count => forum.topics_count)
                   %span.btnComment= t('forums.posts_count', :posts_count => forum.comments_count)
 
-.panel_1.moderator-links
+.panel_2.moderator-links
   %div.float_left= link_to t('forums.new'), new_admin_forum_path(), :class => "btn", :target => '_parent'
                       
 = render :partial => 'shared/index_footer', :locals => { :index_path => forums_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('forums.title') }

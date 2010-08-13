@@ -1,13 +1,15 @@
-- limit_title ||= 40
-- limit_caption ||= 65
-.panel_4
+- limit_title = 100
+- limit_caption = 300
+.quarter-panel
   .thumb= link_to image_tag(item.featured_image_url), item.featured_url
-.panel_4
+.quarter-panel
   .itemBlock
-    %h2= link_to caption(item.featured_title,limit_title), item.featured_url
-    %p
-      = caption(sanitize(strip_tags(item.featured_blurb)),limit_caption)
-      -# = link_to 'More...', item
+    %h4
+      %span.ellipsis_title_2
+        = link_to caption(item.featured_title,limit_title), item.featured_url, { :class => 'ellipsis_text'}
+    %p.ellipsis_caption_3
+      %span.ellipsis_text= caption(sanitize(strip_tags(item.featured_blurb)),limit_caption)
+
     - unless item.featured_related_count == 0
       %span.btnComment== #{link_to t("#{item.featured_related_locale}"), item} #{item.featured_related_count}
     -else

@@ -3,7 +3,7 @@
 - cache :featured_ideas_html do
   - featured_ideas ||= Idea.featured
   - unless featured_ideas.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.featured_idea_title')
       .list_items

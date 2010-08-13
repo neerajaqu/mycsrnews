@@ -1,9 +1,10 @@
 .thumb.wide
   = link_to image_tag(item.featured_image_url), item.featured_url
 .itemBlock
-  %h1= link_to item.featured_title, item.featured_url
+  %h1
+    %span.ellipsis_title_2
+      = link_to item.featured_title, item.featured_url, { :class => 'ellipsis_text'}
   %p
-    = caption(sanitize(strip_tags(item.featured_blurb)),170)
-    = link_to 'More...', item
+    = caption(sanitize(strip_tags(item.featured_blurb)),300)
   -# %span.btnComment== #{like_link item} #{item.num_votes}
   -# %span.btnComment== #{link_to t("#{item.featured_related_locale}"), item} #{item.featured_related_count}

@@ -3,7 +3,7 @@
 - unless @filter
   - cache "widget_articles_#{@sort}_#{@count}_html", :expires_in => 60.minutes do
     - unless @article_list.empty?
-      %div{:class => "panel_2"}
+      %div{:class => "panel_1"}
         = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
         .list_stories
           %ul
@@ -13,7 +13,7 @@
 - else
   - cache "widget_articles_#{@sort}_#{@count}_#{@filter}_html", :expires_in => 60.minutes do
     - unless @article_list.empty?
-      %div{:class => "panel_2"}
+      %div{:class => "panel_1"}
         = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
         .list_stories
           %ul

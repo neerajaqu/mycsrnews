@@ -5,7 +5,7 @@
   -else
     - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   - paginate ||= false
-  .panel_1
+  .panel_2
     .panelBar
       %h2= t('.stories_title')
       - if contents.present? and contents.first.refineable?

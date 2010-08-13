@@ -11,7 +11,7 @@
 
 #col_left
   - cache "#{@story.cache_key}_top_html" do
-    #itemDetails.panel_1
+    #itemDetails.panel_2
       .topBar
         %ul
           %li
@@ -25,6 +25,10 @@
         .thumb
           - if @story.images.present?
             = image_tag @story.images.first.url(:medium)
+          
+          - if @story.media_item?
+            =render_media_items @story, :size => 'large'
+
         %h1= @story.title
         .itemMeta
           - unless @story.is_article?
@@ -38,12 +42,10 @@
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
           - if @tags.present?
             %h3== Tags #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
-        - if @story.media_item?
-          =render_media_items @story, :size => 'large'
+
         
         - if @story.is_article?
-          .articleSpacing
-            %p= sanitize nl2br(@story.caption)
+          %p= sanitize nl2br(@story.caption)
         - elsif @story.full_html?
           %p= nl2br(@story.caption)
         - else

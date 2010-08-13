@@ -3,7 +3,7 @@
 - cache :featured_answers_html, :expires_in => 15.minutes do
   - featured_answers ||= Answer.featured
   - unless featured_answers.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.featured_answer_title')
       .list_items

@@ -2,7 +2,7 @@
 - cache_if page.present?, "prediction_scores_list_#{page}html" do
   - prediction_scores ||= PredictionScore.paginate :page => params[:page], :per_page => 10, :order => "accuracy desc"
   - paginate ||= false
-  .panel_1
+  .panel_2
     .panelBar
       %h2= t 'predictions.top_users'
     .itemListWrap

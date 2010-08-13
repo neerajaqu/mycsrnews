@@ -3,7 +3,7 @@
   
 #col_left
   = render_ad(:banner, @ad_layout, @ad_banner)
-  .panel_1
+  .panel_2
     .formBox
       - semantic_form_for @user do |form|
         = render :partial => 'user_form', :locals => { :form => form, :user => @user }

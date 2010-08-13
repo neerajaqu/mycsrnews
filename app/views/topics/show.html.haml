@@ -6,7 +6,7 @@
   = render_ad(:banner, @ad_layout, @ad_banner)
   - cache @topic do
     - paginate ||= false
-    .panel_1
+    .panel_2
       .panelBar
         %h2= t('forums.topics.item_title', :title => @topic.title)
         %span.bar_link= fb_share_item_button(@topic)

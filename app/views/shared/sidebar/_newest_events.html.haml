@@ -3,7 +3,7 @@
 - cache :newest_events_html do
   - newest_events ||= Event.active.upcoming
   - unless newest_events.empty?
-    %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('.newest_events_title')
       .list_items
