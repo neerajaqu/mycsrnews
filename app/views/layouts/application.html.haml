@@ -45,39 +45,6 @@
         });
       });
 
-      // Add Threedots support
-      $(function() {
-        $('.ellipsis_title_1').ThreeDots({max_rows : 1});
-      });
-
-      $(function() {
-        $('.ellipsis_title_2').ThreeDots({max_rows : 2});
-      });
-
-      $(function() {
-        $('.ellipsis_title_3').ThreeDots({max_rows : 3});
-      });
-
-      $(function() {
-        $('.ellipsis_caption_3').ThreeDots({max_rows : 3});
-      });
-
-      $(function() {
-        $('.ellipsis_caption_4').ThreeDots({max_rows : 4});
-      });
-
-      $(function() {
-        $('.ellipsis_caption_5').ThreeDots({max_rows : 5});
-      });
-
-      $(function() {
-        $('.ellipsis_caption_7').ThreeDots({max_rows : 7});
-      });
-
-      // truncation with link, need to figure out how to make this dynamic
-      $(function() {
-        $('.text_here4').ThreeDots({max_rows:1, ellipsis_string:'<a href="google.com">More...</a>'});
-      });
   %body
     #bodyWrapper
       = fb_connect_javascript_tag
