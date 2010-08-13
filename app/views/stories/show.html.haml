@@ -55,6 +55,10 @@
     = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
+
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
+
   = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
   - if @story.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
@@ -66,10 +70,3 @@
     = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @story }
   = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @story, :related_items => @story.related_items }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
-/ #image_box.standard_overlay
-/   #images.scrollable_popup
-/     .items
-/       - @story.images.each do |image|
-/         = image_tag image.url(:medium)
-/   / .navi.prev
-/   / .navi.next

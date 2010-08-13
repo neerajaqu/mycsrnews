@@ -83,7 +83,11 @@ class ApplicationController < ActionController::Base
   end
   
   def set_outbrain_item item = nil
-    @outbrain_item ||= item
+    if get_setting('outbrain_enabled').try('enabled?')
+      @outbrain_item ||= item
+    else
+      @outbrain_item = nil
+    end
   end
 
   def set_current_sub_tab

@@ -53,6 +53,7 @@ class ResourcesController < ApplicationController
   def show
     @resource = Resource.find(params[:id])
     tag_cloud @resource
+    set_outbrain_item @resource
   end
 
   def my_resources

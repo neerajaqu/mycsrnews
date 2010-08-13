@@ -60,13 +60,7 @@
       = yield :sub_nav
 
       = yield
-
-      - if get_setting('outbrain_enabled').try('enabled?')
-        - if @outbrain_item
-          = render :partial => 'shared/external/outbrain_widget', :locals => { :outbrain_item => @outbrain_item }
-        - if verification_html = get_setting('outbrain_verification_html').try(:value)
-          = verification_html
-
+      
       = render :partial => 'shared/footer'
 
     = render :partial => 'shared/google_analytics'

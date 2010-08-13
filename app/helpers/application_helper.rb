@@ -220,6 +220,10 @@ module ApplicationHelper
     url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas, :only_path => false))
   end
 
+  def path_to_self_no_canvas(item)
+    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => false, :only_path => false))
+  end
+
   def link_to_path_to_self(item)
     link_to url_for(send("#{item.class.to_s.underscore}_url", item)), url_for(send("#{item.class.to_s.underscore}_url", item))
   end
