@@ -24,7 +24,7 @@
       -if get_setting('account').present? && get_setting('oauth_key').present?
         :javascript
           twttr.anywhere(function (T) {
-            T('#follow-twitterapi').followButton(get_setting('account').value);
+            T('#follow-twitterapi').followButton("#{get_setting('account').value}");
           });
         %a.twitter_link{:style=>"display:none;",:target => "_tweet", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
   #overlay.standard_overlay
