@@ -13,7 +13,7 @@
           %li
             %a== #{like_link @idea} #{@idea.votes_tally}
           %li
-            %a== #{link_to t('.post_comment'), idea_path(@idea, :anchor => "postCommentBox")} #{@idea.comments_count}
+            %a== #{link_to t('comment'), idea_path(@idea, :anchor => "postCommentBox")} #{@idea.comments_count}
           %li= fb_share_item_button(@idea)
           %li
             %a= twitter_share_item_link @idea, @idea.title
