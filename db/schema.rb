@@ -634,20 +634,20 @@ ActiveRecord::Schema.define(:version => 20100801015214) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer  "user_id",                     :limit => 8,                    :null => false
-    t.integer  "facebook_user_id",            :limit => 8, :default => 0
-    t.boolean  "isAppAuthorized",                          :default => false
-    t.datetime "born_at"
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at"
-    t.text     "bio"
-    t.integer  "referred_by_user_id",         :limit => 8, :default => 0
-    t.boolean  "comment_notifications",                    :default => false
-    t.boolean  "receive_email_notifications",              :default => true
-    t.boolean  "dont_ask_me_for_email",                    :default => false
-    t.datetime "email_last_ask"
-    t.boolean  "dont_ask_me_invite_friends",               :default => false
-    t.datetime "invite_last_ask"
+    t.integer   "user_id",                     :limit => 8,                    :null => false
+    t.integer   "facebook_user_id",            :limit => 8, :default => 0
+    t.boolean   "isAppAuthorized",                          :default => false
+    t.datetime  "born_at"
+    t.timestamp "created_at",                                                  :null => false
+    t.datetime  "updated_at"
+    t.text      "bio"
+    t.integer   "referred_by_user_id",         :limit => 8, :default => 0
+    t.boolean   "comment_notifications",                    :default => false
+    t.boolean   "receive_email_notifications",              :default => true
+    t.boolean   "dont_ask_me_for_email",                    :default => false
+    t.datetime  "email_last_ask"
+    t.boolean   "dont_ask_me_invite_friends",               :default => false
+    t.datetime  "invite_last_ask"
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

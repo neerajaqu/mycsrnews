@@ -142,6 +142,7 @@
         padding: 0
 // Body containers //
 #bodyWrapper
+  position: relative
   background: $bodyWrapperBG
   display: inline-block
   border: 
@@ -276,6 +277,7 @@ li
         color: $pageTablinkOff
         background: $pageTabOff
         &:hover
+          text-decoration: none
           background: $pageTabOffHover
       &.first 
         width: 30px
@@ -428,15 +430,29 @@ li
   .btnComment
     background: $btnCommentFeatureBG
 
-  .question
-    background: image_url("default/icon-question.png") center right no-repeat
+  .answer
+    background: image_url("default/icon-answer.png") center right no-repeat
+
+  .article
+    background: image_url("default/icon-article.png") center right no-repeat
+
+  .comment
+    background: image_url("default/icon-comment.png") center right no-repeat
 
   .event
     background: image_url("default/icon-event.png") center right no-repeat
     h3 
       color: $bodyColor
+
   .idea
     background: image_url("default/icon-idea.png") center right no-repeat
+
+  .resource
+    background: image_url("default/icon-resource.png") center right no-repeat
+
+  .question
+    background: image_url("default/icon-question.png") center right no-repeat
+
 
 /**********************************************************************************************/
 /* IMAGE STYLES */
@@ -1575,13 +1591,17 @@ body div.jGrowl div.jGrowl-closer
 /**********************************************************************************************/
 /* FLASH ERROR STYLES */
 .flash
-  padding: .3em .4em
-  margin: 0 auto .5em
+  padding: 15px 0
+  margin: 0 auto
   clear: both
-  width: auto
-
+  z-index: 900
+  position: absolute
+  top: -1px
   p
-    padding-left: 25px
+    font-weight: bold
+    font-size: 13px
+    display: block
+    text-align: center
 
   &.flash_error
     border: $flashErrorBorder
@@ -1613,9 +1633,15 @@ body div.jGrowl div.jGrowl-closer
 
 .moderator-links
   display: none !important
+.mod-links-style
+  display: inline-block
+  position: relative
+
+  
   
 .admin-links
   display: none !important
+.admin-links-style
 
 .user-present
   display: none !important
