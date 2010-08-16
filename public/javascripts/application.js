@@ -11,7 +11,7 @@ $(function() {
   $('.unhide').show().removeClass('hidden');
 
   setTimeout(function() {
-		$('.flash').effect('fade');
+		$('.flash').effect('fade', {}, 1000);
 
   }, 3500);
 
@@ -297,6 +297,16 @@ $(function() {
     $('#content_url').trigger('blur');
   }
 
+  // Add Threedots support
+  $('.ellipsis_title_1').ThreeDots({max_rows : 1});
+  $('.ellipsis_title_2').ThreeDots({max_rows : 2});
+  $('.ellipsis_title_3').ThreeDots({max_rows : 3});
+  $('.ellipsis_caption_3').ThreeDots({max_rows : 3});
+  $('.ellipsis_caption_4').ThreeDots({max_rows : 4});
+  $('.ellipsis_caption_5').ThreeDots({max_rows : 5});
+  $('.ellipsis_caption_7').ThreeDots({max_rows : 7});
+  // truncation with link, need to figure out how to make this dynamic
+  $('.text_here4').ThreeDots({max_rows:1, ellipsis_string:'<a href="google.com">More...</a>'});
 });
 
 /** IMAGE VIEWER **/

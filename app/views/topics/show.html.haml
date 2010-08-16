@@ -21,12 +21,15 @@
             - @topic.posts.each do |post|
               = render :partial => 'shared/comment', :locals => { :comment => post}
   = render :partial => 'shared/comment_form', :locals => { :commentable => @topic , :post_locale => 'forums.topics.post_comment', :commit_text => 'forums.topics.commit_reply' }
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @topic,:title => @topic.title }
   - if @topic.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @topic }
 
 #col_right
   = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @topic }
   = render :partial => 'shared/sidebar/newest_topics'
   = render :partial => 'shared/sidebar/top_topics'
   = render :partial => 'shared/sidebar/topic_voices', :locals => { :topic => @topic }

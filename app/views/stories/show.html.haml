@@ -26,8 +26,8 @@
           - if @story.images.present?
             = image_tag @story.images.first.url(:medium)
           
-          - if @story.media_item?
-            =render_media_items @story, :size => 'large'
+          -# if @story.media_item?
+            = render_media_items @story, :size => 'large'
 
         %h1= @story.title
         .itemMeta
@@ -42,7 +42,6 @@
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
           - if @tags.present?
             %h3== Tags #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
-
         
         - if @story.is_article?
           %p= sanitize nl2br(@story.caption)
@@ -53,10 +52,17 @@
       - if @story.url.present?
         %div.itemBlock.clearfix
           .float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
+      - if @story.media_item?
+        = render_media_items @story, :size => 'large'
+
 
     = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
+
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
+
   = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
   - if @story.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
@@ -65,12 +71,6 @@
   - cache "#{@story.cache_key}_sidebar_html" do
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @story.user }
     = render :partial => 'shared/sidebar/other_posts', :locals => { :story => @story }
+    = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @story }
   = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @story, :related_items => @story.related_items }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
-/ #image_box.standard_overlay
-/   #images.scrollable_popup
-/     .items
-/       - @story.images.each do |image|
-/         = image_tag image.url(:medium)
-/   / .navi.prev
-/   / .navi.next

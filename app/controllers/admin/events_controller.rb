@@ -47,6 +47,7 @@ class Admin::EventsController < AdminController
       zevents[:events].each do |event|
         Event.create_from_zvent_event(event,current_user)
       end
+      EventSweeper.expire_event_all Event.last
       redirect_to [:admin]
     else
       zvent =Zvent::Session.new(APP_CONFIG['zvent_api_key'])

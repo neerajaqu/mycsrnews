@@ -146,7 +146,7 @@ class UsersController < ApplicationController
   def update_bio    
     if request.post?
       @profile = current_user_profile
-      @profile.bio = params['bio']
+      @profile.bio = @template.linkify @template.sanitize_user_content params['bio']
       if @profile.save
     		flash[:success] = "Successfully edited your bio."
     		redirect_to user_path(@profile.user)    	
@@ -173,6 +173,15 @@ class UsersController < ApplicationController
 
   def link_twitter_account
     
+  end
+
+  def set_auto_discovery_rss
+    unless params[:id].nil?
+      @user = User.find(params[:id])
+      @auto_discovery_rss = user_path(@user, :format => :atom)
+    else
+      @auto_discovery_rss = stories_path(:format => :atom)
+    end
   end
   
   private

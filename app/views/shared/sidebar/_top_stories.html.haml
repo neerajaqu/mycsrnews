@@ -1,6 +1,6 @@
 -# @expects: local 'story'
 
-- cache :top_stories_html do
+- cache :top_stories_html, :expires_in => 60.minutes do
   -# top_stories ||= Content.active.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc", :conditions => ["contents.created_at > ?", 1.week.ago] })
   - top_stories = (get_setting('exclude_articles_from_news').value ? Content.top_story_items(5,true ) : Content.top_items(5,true))
   - unless top_stories.empty?

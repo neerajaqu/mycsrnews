@@ -68,6 +68,10 @@ class ArticlesController < ApplicationController
   end
     
   def new
+    if get_setting('limit_daily_member_posts').present? and get_setting('limit_daily_member_posts').value.to_i <= current_user.count_daily_posts
+      flash[:error] = t('error_daily_post_limit')
+      redirect_to home_index_path
+    end
     @current_sub_tab = 'New Article'
     @article = Article.new
     @article.build_content

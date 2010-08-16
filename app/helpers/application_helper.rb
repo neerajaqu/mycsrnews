@@ -101,7 +101,7 @@ module ApplicationHelper
   end
 
   def pfeed_caption(text, length = 150)
-    caption(text, length)
+    caption(strip_tags(text), length)
   end
 
   def voteable_type_name(vote)
@@ -218,6 +218,10 @@ module ApplicationHelper
   def path_to_self(item)
     canvas = iframe_facebook_request? ? true : false
     url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas, :only_path => false))
+  end
+
+  def path_to_self_no_canvas(item)
+    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => false, :only_path => false))
   end
 
   def link_to_path_to_self(item)

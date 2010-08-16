@@ -1,66 +1,67 @@
 -# TODO:: fix hardcoded css
-#footer
-  .dh_links
-    %a.rss_link{:target => "_blank", :title => t('.rss_title'), :href => stories_path(:format => :atom)}= t('.rss')
-    - if APP_CONFIG['twitter_account'].present? && !get_setting('oauth_key').present?
+- cache :footer_html, :expires_in => 180.minutes do
+  #footer
+    .dh_links
+      %a.rss_link{:target => "_blank", :title => t('.rss_title'), :href => stories_path(:format => :atom)}= t('.rss')
+      - if get_setting('account').present? && !get_setting('oauth_key').present?
+        = pipe_spacer
+        %a.twitter_link{:target => "_blank", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
       = pipe_spacer
-      %a.twitter_link{:target => "_blank", :title => t('.twitter_title'), :href => twitter_url(APP_CONFIG['twitter_account']) }= t('.twitter')
-    = pipe_spacer
-    = link_to t('.faq'), faq_path
-    = pipe_spacer
-    = link_to t('.terms'), terms_path
-    = pipe_spacer
-    = link_to t('.about'), about_path
-    = pipe_spacer
-    = link_to t('footer.contact'), contact_us_path
-    %span.admin-links
+      = link_to t('.faq'), faq_path
       = pipe_spacer
-      = link_to t('.admin'), admin_path
-    = pipe_spacer
-    = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
-    = pipe_spacer
-    %span#follow-twitterapi
-    -if APP_CONFIG['twitter_account'] && get_setting('oauth_key').present?
-      :javascript
-        twttr.anywhere(function (T) {
-          T('#follow-twitterapi').followButton("#{APP_CONFIG['twitter_account']}");
-        });
-      %a.twitter_link{:style=>"display:none;",:target => "_tweet", :title => t('.twitter_title'), :href => twitter_url(APP_CONFIG['twitter_account']) }= t('.twitter')
-#overlay.standard_overlay
-  .contentWrap
+      = link_to t('.terms'), terms_path
+      = pipe_spacer
+      = link_to t('.about'), about_path
+      = pipe_spacer
+      = link_to t('footer.contact'), contact_us_path
+      %span.admin-links
+        = pipe_spacer
+        = link_to t('.admin'), admin_path
+      = pipe_spacer
+      = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
+      = pipe_spacer
+      %span#follow-twitterapi
+      -if get_setting('account').present? && get_setting('oauth_key').present?
+        :javascript
+          twttr.anywhere(function (T) {
+            T('#follow-twitterapi').followButton("#{get_setting('account').value}");
+          });
+        %a.twitter_link{:style=>"display:none;",:target => "_tweet", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
+  #overlay.standard_overlay
+    .contentWrap
  
-:javascript
-  if(top !== self) {
-    $("#twitter-link").attr("href", $("#twitter-link").attr("burl"));
-    $("#follow-twitterapi").hide();
-    $(".twitter_link").show();
-  }
-  else {
-    $(function() {
+  :javascript
+    if(top !== self) {
+      $("#twitter-link").attr("href", $("#twitter-link").attr("burl"));
+      $("#follow-twitterapi").hide();
+      $(".twitter_link").show();
+    }
+    else {
+      $(function() {
 
-    	// if the function argument is given to overlay,
-    	// it is assumed to be the onBeforeLoad event listener
-    	$("a[rel]").overlay({
+      	// if the function argument is given to overlay,
+      	// it is assumed to be the onBeforeLoad event listener
+      	$("a[rel]").overlay({
 
-    		mask: 'white',
-    		effect: 'apple',
+      		mask: 'white',
+      		effect: 'apple',
 
-    		onBeforeLoad: function() {
+      		onBeforeLoad: function() {
 
-    			// grab wrapper element inside content
-    			var wrap = this.getOverlay().find(".contentWrap");
+      			// grab wrapper element inside content
+      			var wrap = this.getOverlay().find(".contentWrap");
 
-    			// load the page specified in the trigger
-    			wrap.load(this.getTrigger().attr("link"));
+      			// load the page specified in the trigger
+      			wrap.load(this.getTrigger().attr("link"));
   			
-    		}
+      		}
 
-    	});
-    });
-  }
+      	});
+      });
+    }
   
    
--#    = pipe_spacer
--#    %span= t('.locale')
--#    = link_to "EN", root_path(:locale => :en)
--#    = link_to "FR", root_path(:locale => :fr)
+  -#    = pipe_spacer
+  -#    %span= t('.locale')
+  -#    = link_to "EN", root_path(:locale => :en)
+  -#    = link_to "FR", root_path(:locale => :fr)

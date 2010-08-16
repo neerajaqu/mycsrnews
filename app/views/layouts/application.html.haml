@@ -32,7 +32,7 @@
     -# IE Debugging 
     =# javascript_include_tag 'http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'
 
-    = auto_discovery_link_tag(:atom, stories_path(:format => :atom))
+    = auto_discovery_link_tag(:atom, @auto_discovery_rss)
 
     = yield :head_content
               
@@ -45,39 +45,6 @@
         });
       });
 
-      // Add Threedots support
-      $(function() {
-        $('.ellipsis_title_1').ThreeDots({max_rows : 1});
-      });
-
-      $(function() {
-        $('.ellipsis_title_2').ThreeDots({max_rows : 2});
-      });
-
-      $(function() {
-        $('.ellipsis_title_3').ThreeDots({max_rows : 3});
-      });
-
-      $(function() {
-        $('.ellipsis_caption_3').ThreeDots({max_rows : 3});
-      });
-
-      $(function() {
-        $('.ellipsis_caption_4').ThreeDots({max_rows : 4});
-      });
-
-      $(function() {
-        $('.ellipsis_caption_5').ThreeDots({max_rows : 5});
-      });
-
-      $(function() {
-        $('.ellipsis_caption_7').ThreeDots({max_rows : 7});
-      });
-
-      // truncation with link, need to figure out how to make this dynamic
-      $(function() {
-        $('.text_here4').ThreeDots({max_rows:1, ellipsis_string:'<a href="google.com">More...</a>'});
-      });
   %body
     #bodyWrapper
       = fb_connect_javascript_tag
@@ -93,13 +60,7 @@
       = yield :sub_nav
 
       = yield
-
-      - if get_setting('outbrain_enabled').try('enabled?')
-        - if @outbrain_item
-          = render :partial => 'shared/external/outbrain_widget', :locals => { :outbrain_item => @outbrain_item }
-        - if verification_html = get_setting('outbrain_verification_html').try(:value)
-          = verification_html
-
+      
       = render :partial => 'shared/footer'
 
     = render :partial => 'shared/google_analytics'

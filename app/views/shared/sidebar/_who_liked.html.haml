@@ -1,0 +1,16 @@
+-# @expects: local 'item'
+- cache "#{item.cache_key}_who_liked", :expires_in => 60.minute do
+  -# user_list ||= item.voters_who_voted.uniq[0,40]
+  - user_list ||= Vote.find(:all, :group => :voter_id, :conditions => ["voteable_type = ? AND voteable_id = ?", item.class.name, item.id], :order => "rand()", :limit => 40)
+  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('who_liked.title', :user_count => user_list.size)
+    .userList
+      - unless user_list.empty?
+        %ul
+          - user_list.each do |user|
+            - fb_user = User.find_by_id(user.voter_id)
+            %li
+              .profilePic= local_linked_profile_pic fb_user, :width => '30', :height => '30'
+      - else
+        %p= t('who_liked.none')
