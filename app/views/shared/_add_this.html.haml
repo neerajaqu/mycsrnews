@@ -1,0 +1,38 @@
+.addthis_toolbox
+  .custom_hover
+    %span.custom_button= t('addthis_share')
+    .hover_menu
+      %a.addthis_button_email Email
+      %a.addthis_button_digg Digg
+      %a.addthis_button_stumbleupon Stumble
+      %a.addthis_button_reddit Reddit
+      %a.addthis_button_delicious Delicious
+      %a.addthis_button_google Google
+      %a.addthis_button_linkedin LinkedIn
+      .clear
+      .more
+        %a.addthis_button_expanded More...
+  = javascript_include_tag 'http://s7.addthis.com/js/250/addthis_widget.js'
+  :javascript
+    $(function() {
+        var delay = 400;
+    
+        function hideMenu() {
+            if (!$('.custom_button').data('in') && !$('.hover_menu').data('in') && !$('.hover_menu').data('hidden')) {
+                $('.hover_menu').fadeOut('fast');
+                $('.custom_button').removeClass('active');
+                $('.hover_menu').data('hidden', true);
+            }
+        }
+    
+        $('.custom_button, .hover_menu').mouseenter(function() {
+            $('.hover_menu').fadeIn('fast');
+            $('.custom_button').addClass('active');
+            $(this).data('in', true);
+            $('.hover_menu').data('hidden', false);
+        }).mouseleave(function() {
+            $(this).data('in', false);
+            setTimeout(hideMenu, delay);
+        });    
+    
+    });

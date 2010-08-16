@@ -249,9 +249,9 @@ module ApplicationHelper
     end
 
     if is_bitly_configured
-      link_to link_text, "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :burl=>twitter_url, :id=>"twitter-link", :target => "_tweet"
+      link_to link_text, "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :burl=>twitter_url, :id=>"twitter-link", :target => "_tweet", :class => "tweet-share"
     else
-      link_to link_text, twitter_url, :target => "_tweet"
+      link_to link_text, twitter_url, :target => "_tweet", :class => "tweet-share"
     end
 
   end

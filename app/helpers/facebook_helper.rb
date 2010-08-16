@@ -13,7 +13,6 @@ module FacebookHelper
 
   def fb_share_item_button item
     stream_post = build_stream_post item
-
     render :partial => 'shared/misc/share_button', :locals => {:item => item, :stream_post => stream_post}
   end
 
