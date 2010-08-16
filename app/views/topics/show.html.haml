@@ -6,7 +6,7 @@
   = render_ad(:banner, @ad_layout, @ad_banner)
   - cache @topic do
     - paginate ||= false
-    .panel_1
+    .panel_2
       .panelBar
         %h2= t('forums.topics.item_title', :title => @topic.title)
         %span.bar_link= fb_share_item_button(@topic)
@@ -21,6 +21,8 @@
             - @topic.posts.each do |post|
               = render :partial => 'shared/comment', :locals => { :comment => post}
   = render :partial => 'shared/comment_form', :locals => { :commentable => @topic , :post_locale => 'forums.topics.post_comment', :commit_text => 'forums.topics.commit_reply' }
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @topic,:title => @topic.title }
   - if @topic.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @topic }

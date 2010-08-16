@@ -1,18 +1,21 @@
-- limit_title = 50
-- limit_caption = 160
-.panel_3
+- limit_title = 100
+- limit_caption = 600
+.half-panel
   .thumb.threeFour= link_to image_tag(primary1.featured_image_url), primary1.featured_url
-.panel_3
+.half-panel
   .itemBlock
-    %h1= link_to primary1.featured_title, primary1.featured_url
-    %p
-      = caption(sanitize(strip_tags(primary1.featured_blurb)),limit_caption)
-      = link_to 'More...', primary1
+    %h1
+      %span.ellipsis_title_2
+        = link_to primary1.featured_title, primary1.featured_url, {:class => 'ellipsis_text'}
+    %p.ellipsis_caption_4
+      %span.ellipsis_text= caption(sanitize(strip_tags(primary1.featured_blurb)),limit_caption)
     %span.btnComment== #{like_link primary1} #{primary1.num_votes}
     %span.btnComment== #{link_to t("#{primary1.featured_related_locale}"), primary1} #{primary1.featured_related_count}
     .bullet_list.float_left
       %ul
         %li
-          %h4= link_to secondary1.featured_title, secondary1.featured_url
+          %h4
+            %span.ellipsis_title_1= link_to secondary1.featured_title, secondary1.featured_url, {:class => 'ellipsis_text'}
         %li 
-          %h4= link_to secondary2.featured_title, secondary2.featured_url
+          %h4
+            %span.ellipsis_title_1= link_to secondary2.featured_title, secondary2.featured_url, {:class => 'ellipsis_text'}

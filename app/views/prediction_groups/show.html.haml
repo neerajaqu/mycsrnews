@@ -4,7 +4,7 @@
 
 #col_left
   - cache "#{@prediction_group.cache_key}_top_html" do
-    #itemDetails.panel_1
+    #itemDetails.panel_2
       .topBar
         %ul
           %li
@@ -51,6 +51,8 @@
     %br
     = render :partial => 'shared/comments', :locals => { :comments => @prediction_group.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @prediction_group }
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @prediction_group,:title => @prediction_group.title }
   - if @prediction_group.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @prediction_group }

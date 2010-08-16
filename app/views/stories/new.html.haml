@@ -2,7 +2,7 @@
   - unless MENU['stories']['new_article'].nil? and MENU['articles'].nil?
     = render :partial => 'shared/subnav/news_subnav'
 #col_left
-  .panel_1
+  .panel_2
     .panelBar
       %h2= t('.new_story_header')
     .formBox
@@ -13,7 +13,7 @@
           = form.commit_button "Post Story", :button_html => { :class => 'btn' }
 
 #col_right
-  .panel_2
+  .panel_1
     .panelBar
       %h2= t('.new_story_bookmarklet_intro')
     = render :partial => 'shared/bookmarklet_panel'

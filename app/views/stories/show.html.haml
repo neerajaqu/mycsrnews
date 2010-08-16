@@ -11,7 +11,7 @@
 
 #col_left
   - cache "#{@story.cache_key}_top_html" do
-    #itemDetails.panel_1
+    #itemDetails.panel_2
       .topBar
         %ul
           %li
@@ -27,6 +27,10 @@
         .thumb
           - if @story.images.present?
             = image_tag @story.images.first.url(:medium)
+          
+          -# if @story.media_item?
+            = render_media_items @story, :size => 'large'
+
         %h1= @story.title
         .itemMeta
           - unless @story.is_article?
@@ -35,17 +39,18 @@
             - else
               %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => source_link(@story), :date => time_ago_in_words(@story.created_at))
           - else
-            %h3= t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
+            %h3 
+              = t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
+              = pipe_spacer
+              - if current_user.present? and @story.user = current_user
+                = link_to t('articles.edit_draft'), edit_article_path(@story.article)
           - if @story.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
           - if @tags.present?
             %h3== Tags #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
-        - if @story.media_item?
-          =render_media_items @story, :size => 'large'
         
         - if @story.is_article?
-          .articleSpacing
-            %p= sanitize nl2br(@story.caption)
+          %p= sanitize nl2br(@story.caption)
         - elsif @story.full_html?
           %p= nl2br(@story.caption)
         - else
@@ -53,10 +58,17 @@
       - if @story.url.present?
         %div.itemBlock.clearfix
           .float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
+      - if @story.media_item?
+        = render_media_items @story, :size => 'large'
+
 
     = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
+
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
+
   = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
   - if @story.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
@@ -68,10 +80,3 @@
     = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @story }
   = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @story, :related_items => @story.related_items }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
-/ #image_box.standard_overlay
-/   #images.scrollable_popup
-/     .items
-/       - @story.images.each do |image|
-/         = image_tag image.url(:medium)
-/   / .navi.prev
-/   / .navi.next

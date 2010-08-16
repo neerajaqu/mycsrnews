@@ -10,6 +10,7 @@ class TopicsController < ApplicationController
     @topic = @forum.topics.find(params[:id])
     @topic.viewed!
     tag_cloud @topic
+    set_outbrain_item @topic
   end
 
   def create

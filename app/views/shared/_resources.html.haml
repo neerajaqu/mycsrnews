@@ -1,7 +1,7 @@
 - cache_if page.present?, "resources_list_#{page}html" do
   - resources ||= Resource.active.paginate :page => params[:page], :per_page => Resource.per_page, :order => "created_at desc"
   - paginate ||= false
-  .panel_1
+  .panel_2
     .panelBar
       %h2= t('.resources_title')
       - if resources.present? and resources.first.refineable?

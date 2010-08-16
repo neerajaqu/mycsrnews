@@ -3,7 +3,7 @@
   = render :partial => 'shared/subnav/questions_subnav'
 
 #col_left
-  #itemDetails.panel_1
+  #itemDetails.panel_2
     - cache "#{@question.cache_key}_top_html" do
       .topBar
         %ul
@@ -31,7 +31,7 @@
       - if @question.media_item?
         = render_media_items @question
       = render_ad(:banner, @ad_layout, @ad_banner)
-  #answerForm.panel_1.hide
+  #answerForm.panel_2.hide
     .panelBar
       %h2 
         Answer this question
@@ -45,7 +45,7 @@
           - form.buttons do
             = form.commit_button :button_html => { :class => "btn_1" }
   - cache "#{@question.cache_key}_bottom_html" do
-    #answersList.panel_1
+    #answersList.panel_2
       - unless @question.answers.present?
         .panelBar
           %h2
@@ -59,6 +59,8 @@
             %ul
               - @question.answers.each do |answer|
                 = render :partial => 'shared/answer', :locals => { :answer => answer }
+    - if @outbrain_item
+      = render :partial => 'shared/external/outbrain_wrapper'
     = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
     - if @question.moderatable?
       = render :partial => 'shared/moderate_form', :locals => { :moderatable => @question }

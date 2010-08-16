@@ -5,7 +5,7 @@
   - page ||= ""
   - cache_if page.present?, "#{@forum.cache_key}_topics_tags_list#{page}" do
     - @paginate ||= false
-    .panel_1
+    .panel_2
       .panelBar
         %h2= t('forums.topics.list_title', :forum_name => @forum.name)
         -#%span.bar_link= fb_share_item_button(forum)

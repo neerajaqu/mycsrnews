@@ -5,7 +5,7 @@
   - topics ||= forum.topics.active
   - paginate ||= false
   - page ||= ""
-  .panel_1
+  .panel_2
     .panelBar
       %h2= t('forums.topics.list_title', :forum_name => forum.name)
       %span.bar_link= fb_share_item_button(forum)
@@ -34,6 +34,8 @@
         = will_paginate topics
         %br
 
-  .panel_1
+  .panel_2
     %div.float_left= link_to t('forums.topics.new'), new_forum_topic_path(forum), :class => "btn"
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => forum, :title => forum.name }

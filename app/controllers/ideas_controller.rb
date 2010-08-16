@@ -56,6 +56,7 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.find(params[:id])
     tag_cloud @idea
+    set_outbrain_item @idea
   end
 
   def my_ideas

@@ -11,8 +11,8 @@ $(function() {
   $('.unhide').show().removeClass('hidden');
 
   setTimeout(function() {
-		$('.flash').effect('shake');
-		$('.flash').hide('puff', {}, 'slow');
+		$('.flash').effect('fade', {}, 1000);
+
   }, 3500);
 
   function dialog_response(title, message) {
@@ -76,7 +76,7 @@ $(function() {
 
   	console.log('Submitting form');
   	var url = change_url_format($(this).attr('action'));
-  	var list = $('.list_items ul', $(this).parents().filter('.panel_1'));
+  	var list = $('.list_items ul', $(this).parents().filter('.panel_2'));
   	$.post(url, $(this).serialize(), function(data) {
       console.log('Running quicksand');
       console.log(data);
@@ -297,6 +297,16 @@ $(function() {
     $('#content_url').trigger('blur');
   }
 
+  // Add Threedots support
+  $('.ellipsis_title_1').ThreeDots({max_rows : 1});
+  $('.ellipsis_title_2').ThreeDots({max_rows : 2});
+  $('.ellipsis_title_3').ThreeDots({max_rows : 3});
+  $('.ellipsis_caption_3').ThreeDots({max_rows : 3});
+  $('.ellipsis_caption_4').ThreeDots({max_rows : 4});
+  $('.ellipsis_caption_5').ThreeDots({max_rows : 5});
+  $('.ellipsis_caption_7').ThreeDots({max_rows : 7});
+  // truncation with link, need to figure out how to make this dynamic
+  $('.text_here4').ThreeDots({max_rows:1, ellipsis_string:'<a href="google.com">More...</a>'});
 });
 
 /** IMAGE VIEWER **/

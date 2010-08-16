@@ -4,7 +4,7 @@
 
 #col_left
   - cache "#{@resource.cache_key}_html" do
-    #itemDetails.panel_1
+    #itemDetails.panel_2
       .topBar
         %ul
           %li
@@ -39,6 +39,8 @@
     = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @resource, :title => @resource.title }
   - if @resource.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }

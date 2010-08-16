@@ -50,6 +50,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     tag_cloud @event
+    set_outbrain_item @event
   end
 
   def my_events

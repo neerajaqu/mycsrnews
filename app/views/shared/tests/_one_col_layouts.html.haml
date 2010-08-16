@@ -1,15 +1,26 @@
-.panel_2
-  %h1
-    Panel_2 Layouts
+.panel_1.featureWrap
+  .item_1.users
+    .thumb.user
+      = image_tag('default/test-profile-pic.png')
+      = image_tag('default/icon-mod-badge.png', :class => 'moderator')  
+    .itemBlock
+      %h4 Welcome, Name!
+      %h3 City, State
+      %h3 Participation: 10,000
+      %h3 Appreciation: 10,000
 
-.panel_2
+.panel_1
+  %h1
+    One Column Widget Layouts
+
+.panel_1
   .panelBar
     %h2 
       top Stories
   .list_items
     %ul
       %li
-        .item_1.featured
+        .item_1.article
           .thumb
             = image_tag('default/default_thumb.gif')
           .itemBlock
@@ -26,19 +37,19 @@
                   like
                 2
       %li
-        .item_1
+        .item_2
           .itemBlock
             %h4
               %a
                 Story Title goes here - one line spread.
       %li
-        .item_1
+        .item_2
           .itemBlock
             %h4
               %a
                 Story Title goes here - one line spread.
       %li
-        .item_1
+        .item_2
           .itemBlock
             %h4
               %a
@@ -49,15 +60,14 @@
       View More Items
 
 
-
-.panel_2
+.panel_1
   .panelBar
     %h2 
       Newest Stories
   .list_items
     %ul
       %li
-        .item_2.featured
+        .item_2
           .itemBlock
             %h4
               %a
@@ -101,56 +111,190 @@
       View More Items
 
 
-
-.panel_2
+.panel_1
   %h1
-    Panel_2 Featured Item Layouts
+    Featured One Column Widget Layouts
 
-.panel_2.featureWrap
+.panel_1
   .panelBar
     %h2
       Featured Question/Idea layout
-  .featured
-    .item_2.question
-      .itemBlock
-        %h2
-          %a
-            Where can I purchase fresh star fruit and pomagranites near Shoreline Community College?
-        .itemMeta
-          %span.btnComment
-            %a
-              View
-          %span.btnComment
-            %a
-              Answer
-          %span.btnComment
-            %a.voteUp
-              Like
+  .list_items
+    %ul
+      %li
+        .featured
+          .item_2.question
+            .itemBlock
+              %h2
+                %a
+                  Where can I purchase fresh star fruit and pomagranites near Shoreline Community College?
+              .itemMeta
+                %span.btnComment
+                  %a
+                    View
+                %span.btnComment
+                  %a
+                    Answer
+                %span.btnComment
+                  %a.voteUp
+                    Like
+      %li
+        .item_2
+          .itemBlock
+            %h4
+              %a
+                Question Title goes here - one line spread.
+      %li
+        .item_2
+          .itemBlock
+            %h4
+              %a
+                Question Title goes here - one line spread.
+      %li
+        .item_2
+          .itemBlock
+            %h4
+              %a
+                Question Title goes here - one line spread.
 
-.panel_2.featureWrap
+  .itemActions
+    %a
+      View More Items
+
+
+.panel_1
+  .panelBar
+    %h2
+      Featured Question/Idea layout
+  .list_items
+    %ul
+      %li
+        .featured
+          .item_2.idea
+            .itemBlock
+              %h2
+                %a
+                  Where can I purchase fresh star fruit and pomagranites near Shoreline Community College?
+              .itemMeta
+                %span.btnComment
+                  %a
+                    View
+                %span.btnComment
+                  %a
+                    Answer
+                %span.btnComment
+                  %a.voteUp
+                    Like
+      %li
+        .item_2
+          .itemBlock
+            %h4
+              %a
+                Idea Title goes here - one line spread.
+      %li
+        .item_2
+          .itemBlock
+            %h4
+              %a
+                Idea Title goes here - one line spread.
+      %li
+        .item_2
+          .itemBlock
+            %h4
+              %a
+                Idea Title goes here - one line spread.
+
+  .itemActions
+    %a
+      View More Items
+
+
+
+.panel_1
   .panelBar
     %h2
       Featured Event
-  .featured
-    .item_2.event
-      .itemBlock
-        %h4
-          %a
-            LOLCAT party in capitlol hill.
-        .itemMeta
-          %h3
-            Time: 9:30pm
-          %h3
-            Place: 123 N Carminite wy, Capitol Hill
-        .itemMeta
-          %span.btnComment
-            %a
-              View Details
-          %span.btnComment
-            %a
-              Comment
-          %span.btnComment
-            %a.voteUp
-              Like
-  
+  .list_items
+    %ul
+      %li
+        .featured
+          .event
+            .itemBlock
+              %h2
+                %a
+                  LOLCAT party in capitlol hill.
+              .itemMeta
+                %h3
+                  Place: 123 N Carminite wy, Capitol Hill
+                %h3
+                  Time: 9:30pm
+              .itemMeta
+                %span.btnComment
+                  %a
+                    View Details
+                %span.btnComment
+                  %a
+                    Comment
+                %span.btnComment
+                  %a.voteUp
+                    Like
+        %li
+        .event
+          .itemBlock
+            %h4
+              %a
+                Event Title goes here - one line spread.
+            .itemMeta
+              %h3 Time: 9:30pm | Place: Capitol Hill
+        %li
+        .event
+          .itemBlock
+            %h4
+              %a
+                Event Title goes here - one line spread.
+            .itemMeta
+              %h3 Time: 9:30pm | Place: Capitol Hill
+        %li
+        .event
+          .itemBlock
+            %h4
+              %a
+                Event Title goes here - one line spread.
+            .itemMeta
+              %h3 Time: 9:30pm | Place: Capitol Hill
 
+  .itemActions
+    %a
+      View More Items
+
+
+
+.panel_1
+  .panelBar
+    %h2
+      Featured Media
+  .featured.media
+    .thumb
+      %a= image_tag('default/default_thumb.gif')
+  .list_media
+    %ul
+      %li
+        %a= image_tag('default/default_thumb.gif')
+      %li
+        %a= image_tag('default/default_thumb.gif')
+      %li
+        %a= image_tag('default/default_thumb.gif')
+      %li
+        %a= image_tag('default/default_thumb.gif')
+      %li
+        %a= image_tag('default/default_thumb.gif')
+      %li
+        %a= image_tag('default/default_thumb.gif')
+      %li
+        %a= image_tag('default/default_thumb.gif')
+      %li
+        %a= image_tag('default/default_thumb.gif')
+
+  .itemActions
+    %a
+      View More Items
