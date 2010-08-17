@@ -1,6 +1,6 @@
 -# expects @outbrain_item
-- unless iframe_facebook_request?
-  .panel_2
-    = render :partial => 'shared/external/outbrain_widget', :locals => { :outbrain_item => @outbrain_item }
-    - if verification_html = get_setting('outbrain_verification_html').try(:value)
-      = verification_html
+-# - unless iframe_facebook_request?
+.panel_2
+  = render :partial => 'shared/external/outbrain_widget', :locals => { :outbrain_item => @outbrain_item }
+  - if verification_html = get_setting('outbrain_verification_html').try(:value)
+    = verification_html

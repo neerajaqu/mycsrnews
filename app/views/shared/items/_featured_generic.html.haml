@@ -1,0 +1,22 @@
+-# expects: local 'model_name, item, index'
+- if index = 0
+  .featured
+    .item_1
+      .thumb
+        = image_tag('default/default_thumb.gif')
+      .itemBlock
+        %h2
+          = link_to item.title, path_to_self(item)
+      .itemMeta
+        %span.btnComment
+          %a
+            Comment
+          16
+        %span.btnComment
+          %a.voteUp
+            like
+          2        
+- else
+  .item_2
+    .item_block
+      %h4= link_to item.title, path_to_self(item)
