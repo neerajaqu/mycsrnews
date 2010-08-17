@@ -1,22 +1,19 @@
 -# expects: local 'model_name, item, index'
 - if index = 0
   .featured
-    .item_1
+    %div{:class => "item_1 #{model_name.underscore}"}
       .thumb
-        = image_tag('default/default_thumb.gif')
+        - if item.images.present?
+          = image_tag item.images.first.url(:thumb)
+        -else
+          = image_tag ('default/default_thumb.gif')
       .itemBlock
         %h2
-          = link_to item.title, path_to_self(item)
+          = link_to item.item_title, path_to_self(item.item_link)
       .itemMeta
-        %span.btnComment
-          %a
-            Comment
-          16
-        %span.btnComment
-          %a.voteUp
-            like
-          2        
+        %span.btnComment== #{link_to t('comments'), polymorphic_url(item.item_link, :anchor => "commentListTop")} #{item.comments_count}
+        %span.btnComment== #{like_link item.item_link} #{item.votes_tally}
 - else
   .item_2
     .item_block
-      %h4= link_to item.title, path_to_self(item)
+      %h4= link_to item.item_title, path_to_self(item.item_link)
