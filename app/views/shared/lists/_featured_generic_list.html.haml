@@ -1,0 +1,14 @@
+-# @expects: local 'model_name, list_title, item_list'
+- cache "#{model_name}_featured_list_html", :expires_in => 60.minutes do
+  %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= list_title
+    .list_items
+      - unless item_list.empty?
+        %ul
+          - item_list.each_with_index do |item, index|
+            %li
+              = render :partial => 'shared/items/featured_generic', :locals => { :model_name => model_name, :item => item, :index => index }
+      - else
+        %ul
+          %li= t('no_features')
