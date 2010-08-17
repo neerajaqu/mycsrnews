@@ -43,7 +43,7 @@ class StoriesController < ApplicationController
   end
 
   def wizard
-    new
+    render :new
   end
   
   def new 
