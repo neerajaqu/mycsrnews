@@ -24,12 +24,14 @@
           %li
             = render :partial => 'shared/add_this'
       .itemBlock
-        .thumb
+        .half-panel
           - if @story.images.present?
-            = image_tag @story.images.first.url(:medium)
-          
-          -# if @story.media_item?
-            = render_media_items @story, :size => 'large'
+            .thumb
+              = image_tag @story.images.first.url(:medium)
+            
+          - if @story.media_item?
+            .thumb
+              = render_media_items @story, :size => 'large'
 
         %h1= @story.title
         .itemMeta
@@ -58,8 +60,7 @@
       - if @story.url.present?
         %div.itemBlock.clearfix
           .float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
-      - if @story.media_item?
-        = render_media_items @story, :size => 'large'
+
 
 
     = render_ad(:banner, @ad_layout, @ad_banner)

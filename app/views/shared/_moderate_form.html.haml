@@ -1,5 +1,5 @@
 -# expects local :moderatable => moderatable
-.moderator-links
+.moderator-links.mod-links-style
   = pipe_spacer
   = toggle_blocked_link moderatable
   = pipe_spacer
@@ -17,4 +17,3 @@
     = pipe_spacer
     = t('.unban')
     -#{link_to = t('.unban'), ban_moderatable_path(moderatable, :return_to => moderatable_path(moderatable))}
-%br
