@@ -1,7 +1,17 @@
 - content_for :head_content do
   :javascript
     $(function() {
-    	$("ul.tabs").tabs("div.panes > div");
+    	$("ul.tabs").tabs("div.panes > div", function(event, index) {
+    		console.log(index);
+    		if (index > 0) {
+    			var url = $("#content_url");
+    			if (url.val() == '') {
+    				url.siblings("label").addClass("inline-errors");
+    				return false;
+          }
+          url.siblings("label").removeClass("inline-errors");
+        }
+      });
     });      
 - content_for :sub_nav do
   - unless MENU['stories']['new_article'].nil? and MENU['articles'].nil?
