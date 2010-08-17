@@ -1,0 +1,73 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+    	$("ul.tabs").tabs("div.panes > div");
+    });      
+- content_for :sub_nav do
+  - unless MENU['stories']['new_article'].nil? and MENU['articles'].nil?
+    = render :partial => 'shared/subnav/news_subnav'
+#col_left
+  .panel_2
+    .panelBar
+      %h2= t('.new_story_header')
+    .formBox
+      #wizard
+        #flowplayer-block
+          %ul.tabs
+            %li
+              %a{:href => "#"} Web Page
+            %li
+              %a{:href => "#"} Details
+            %li
+              %a{:href => "#"} Multimedia
+          - semantic_form_for @story, :url => stories_path, :html => { :multipart => true, :class => "post_story" } do |form|
+            .panes
+              .panel1
+                - form.inputs do
+                  = form.input :url      
+                - form.buttons do
+                  = form.commit_button t('quick_post'), :button_html => { :class => 'btn' }
+                  = form.commit_button t('continue'), :button_html => { :class => 'btn next' }
+              .panel2
+                - form.inputs do
+                  = form.input :title
+                  - if @story.newswire.present?
+                    = form.input :newswire_id, :as => :hidden
+                  = form.input :caption, :input_html => { :rows => '10', :cols => '20' }
+                  = form.input :tags_string, :required => false, :hint => t('tags_hint')      
+                  = render :partial => 'shared/forms/wall_postable', :locals => { :form => form }
+                - form.buttons do
+                  = form.commit_button t('back'), :button_html => { :class => 'btn prev' }
+                  = form.commit_button t('post_now'), :button_html => { :class => 'btn' }
+                  = form.commit_button t('continue'), :button_html => { :class => 'btn next' }
+              .panel3
+                = render :partial => 'shared/forms/media_items_simple', :locals => { :form => form, :item => @story }
+                - form.buttons do
+                  = form.commit_button t('back'), :button_html => { :class => 'btn prev' }
+                  = form.commit_button t('post_now'), :button_html => { :class => 'btn' }
+      :javascript
+        $(function() {
+          // var wizard = $("#wizard").expose({color: '#789', lazy: true});
+          // wizard.click(function() {
+          //  $(this).expose().load();
+          // });     
+          $("ul.tabs", wizard).tabs("div.panes > div", function(event, index) {
+            /* now we are inside the onBeforeClick event */
+          });
+          var api = $("ul.tabs", wizard).data("tabs");
+
+          // "next tab" button
+          $("button.next", wizard).click(function() {
+            api.next();
+          });
+
+          // "previous tab" button
+          $("button.prev", wizard).click(function() {
+            api.prev();
+          });
+        });            
+#col_right
+  .panel_1
+    .panelBar
+      %h2= t('.new_story_bookmarklet_intro')
+    = render :partial => 'shared/bookmarklet_panel'
