@@ -93,10 +93,20 @@ class StoriesController < ApplicationController
 
   def parse_page
     @url = params[:url]
-    @page_data = Parse::Page.parse_page(@url) unless @url.empty?
+    error = nil
+    begin
+      @page_data = Parse::Page.parse_page(@url) unless @url.empty?
+    rescue
+      error = true
+    end
     respond_to do |format|
-      format.html { render :text => @page_data }
-      format.json { render :json => @page_data.to_json }
+      if error
+        format.html { render :text => @page_data }
+        format.json { render :json => {:error => "Could not parse url, try a different url"}.to_json, :status => 400 }
+      else
+        format.html { render :text => @page_data }
+        format.json { render :json => @page_data.to_json, :status => 200 }
+      end
     end
   end
 
