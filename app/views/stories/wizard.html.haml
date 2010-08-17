@@ -11,6 +11,17 @@
           }
           url.siblings("label").removeClass("inline-errors");
         }
+        var api = $("ul.tabs", wizard).data("tabs");
+
+        // "next tab" button
+        $("button.next", wizard).click(function() {
+          api.next();
+        });
+
+        // "previous tab" button
+        $("button.prev", wizard).click(function() {
+          api.prev();
+        });
       });
     });      
 - content_for :sub_nav do
@@ -34,13 +45,13 @@
               %a{:href => "#"}= t('wizard.more') 
           - semantic_form_for @story, :url => stories_path, :html => { :multipart => true, :class => "post_story" } do |form|
             .panes
-              .panel1
+              .tab_panel.panel1
                 - form.inputs do
                   = form.input :url      
                 - form.buttons do
                   = form.commit_button t('wizard.quick_post'), :button_html => { :class => 'btn' }
                   = form.commit_button t('wizard.continue'), :button_html => { :class => 'btn next' }
-              .panel2
+              .tab_panel.panel2
                 - form.inputs do
                   = form.input :title
                   - if @story.newswire.present?
@@ -52,38 +63,23 @@
                   = form.commit_button t('wizard.back'), :button_html => { :class => 'btn prev' }
                   = form.commit_button t('wizard.post_now'), :button_html => { :class => 'btn' }
                   = form.commit_button t('wizard.continue'), :button_html => { :class => 'btn next' }
-              .panel3
+              .tab_panel.panel3
                 = render :partial => 'shared/forms/images_simple', :locals => { :form => form, :item => @story }
+                #scrollbox
+                  %a.prev.browse.left_scroll
+                  .scrollable
+                    .items
+                  %a.next.browse.right_scroll
                 - form.buttons do
                   = form.commit_button t('wizard.back'), :button_html => { :class => 'btn prev' }
                   = form.commit_button t('wizard.post_now'), :button_html => { :class => 'btn' }
                   = form.commit_button t('wizard.continue'), :button_html => { :class => 'btn next' }
-              .panel4
+              .tab_panel.panel4
                 = render :partial => 'shared/forms/media_items_simple', :locals => { :form => form, :item => @story }
                 - form.buttons do
                   = form.commit_button t('wizard.back'), :button_html => { :class => 'btn prev' }
                   = form.commit_button t('wizard.post_now'), :button_html => { :class => 'btn' }
-      :javascript
-        $(function() {
-          // var wizard = $("#wizard").expose({color: '#789', lazy: true});
-          // wizard.click(function() {
-          //  $(this).expose().load();
-          // });     
-          $("ul.tabs", wizard).tabs("div.panes > div", function(event, index) {
-            /* now we are inside the onBeforeClick event */
-          });
-          var api = $("ul.tabs", wizard).data("tabs");
 
-          // "next tab" button
-          $("button.next", wizard).click(function() {
-            api.next();
-          });
-
-          // "previous tab" button
-          $("button.prev", wizard).click(function() {
-            api.prev();
-          });
-        });            
 #col_right
   .panel_1
     .panelBar
