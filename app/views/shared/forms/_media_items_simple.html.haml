@@ -1,13 +1,3 @@
-- item.images.build if item.images.empty?
-%h1= t('media.add_image')
-%h3= t('media.add_image_title')
-- form.semantic_fields_for :images do |image_form|
-  = image_form.input :remote_image_url, :required => false, :label => false
-  = image_form.input :image, :required => false, :as => :file, :label => false
-  %a{:href=> "#"}= t('edit_caption')
-  %p= add_image_simple(form)
-%br
-%br
 %h1= t('media.add_video')
 %h3= t('media.add_video_title')
 - item.videos.build if item.videos.empty?
