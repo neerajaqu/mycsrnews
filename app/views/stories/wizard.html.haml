@@ -25,19 +25,21 @@
         #flowplayer-block
           %ul.tabs
             %li
-              %a{:href => "#"} Web Page
+              %a{:href => "#"}= t('wizard.url')
             %li
-              %a{:href => "#"} Details
+              %a{:href => "#"}= t('wizard.details')
             %li
-              %a{:href => "#"} Multimedia
+              %a{:href => "#"}= t('wizard.images') 
+            %li
+              %a{:href => "#"}= t('wizard.more') 
           - semantic_form_for @story, :url => stories_path, :html => { :multipart => true, :class => "post_story" } do |form|
             .panes
               .panel1
                 - form.inputs do
                   = form.input :url      
                 - form.buttons do
-                  = form.commit_button t('quick_post'), :button_html => { :class => 'btn' }
-                  = form.commit_button t('continue'), :button_html => { :class => 'btn next' }
+                  = form.commit_button t('wizard.quick_post'), :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.continue'), :button_html => { :class => 'btn next' }
               .panel2
                 - form.inputs do
                   = form.input :title
@@ -47,14 +49,20 @@
                   = form.input :tags_string, :required => false, :hint => t('tags_hint')      
                   = render :partial => 'shared/forms/wall_postable', :locals => { :form => form }
                 - form.buttons do
-                  = form.commit_button t('back'), :button_html => { :class => 'btn prev' }
-                  = form.commit_button t('post_now'), :button_html => { :class => 'btn' }
-                  = form.commit_button t('continue'), :button_html => { :class => 'btn next' }
+                  = form.commit_button t('wizard.back'), :button_html => { :class => 'btn prev' }
+                  = form.commit_button t('wizard.post_now'), :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.continue'), :button_html => { :class => 'btn next' }
               .panel3
+                = render :partial => 'shared/forms/images_simple', :locals => { :form => form, :item => @story }
+                - form.buttons do
+                  = form.commit_button t('wizard.back'), :button_html => { :class => 'btn prev' }
+                  = form.commit_button t('wizard.post_now'), :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.continue'), :button_html => { :class => 'btn next' }
+              .panel4
                 = render :partial => 'shared/forms/media_items_simple', :locals => { :form => form, :item => @story }
                 - form.buttons do
-                  = form.commit_button t('back'), :button_html => { :class => 'btn prev' }
-                  = form.commit_button t('post_now'), :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.back'), :button_html => { :class => 'btn prev' }
+                  = form.commit_button t('wizard.post_now'), :button_html => { :class => 'btn' }
       :javascript
         $(function() {
           // var wizard = $("#wizard").expose({color: '#789', lazy: true});
