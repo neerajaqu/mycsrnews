@@ -1,7 +1,7 @@
 - cache :auto_feature_sidebar_html, :expires_in => 15.minutes do
   - auto_feature ||= Image.find(:all, :conditions => "imageable_type = 'Content'", :limit => 12, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
   - unless auto_feature.empty? 
-    %div{:class => "panel_1.featureWrap #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    %div{:class => "panel_1 featureWrap #{defined?(widget_page) ? widget_page.css_class : ''}"}
       = render :partial => 'shared/featured_items/panelbar'
       .feature_scrollable_panel_sidebar
         .feature_scrollable_items
