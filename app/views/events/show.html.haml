@@ -10,10 +10,12 @@
           %li
             #{like_link @event} #{@event.votes_tally}
           %li
-            %a== #{link_to t('.post_comment'), event_path(@event, :anchor => "postCommentBox")} #{@event.comments_count}
+            %a== #{link_to t('comment'), event_path(@event, :anchor => "postCommentBox")} #{@event.comments_count}
           %li= fb_share_item_button(@event)
           %li
             %a= twitter_share_item_link @event, @event.name           
+          %li
+            = render :partial => 'shared/add_this'
       .itemBlock
         .thumb
           - if @event.images.present?

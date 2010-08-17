@@ -74,12 +74,9 @@ $(function() {
   	event.preventDefault();
   	$(this).parent().parent().toggle();
 
-  	console.log('Submitting form');
   	var url = change_url_format($(this).attr('action'));
   	var list = $('.list_items ul', $(this).parents().filter('.panel_2'));
   	$.post(url, $(this).serialize(), function(data) {
-      console.log('Running quicksand');
-      console.log(data);
   		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
   		rebuild_facebook_dom();
     }, 'html');
@@ -238,9 +235,16 @@ $(function() {
 		if ($(this).val() != '') {
       $(this).addClass('process');
       $('#content_title').addClass('process');
-      $.post("/stories/parse_page", 
-        {url: $(this).val()},
-        function(data, status) {
+      $.ajax({
+        type: "POST",
+        url: "/stories/parse_page", 
+        // Yet another chrome hack
+        // chrome sends this xml if both contentType and data are not set
+        // and as a result rails flips out
+        //contentType: 'application/json',
+        data: {url: $(this).val()},
+        dataType: "json",
+        success: function(data, textStatus) {
           if ($('#content_title').val() == '') {
             $('#content_title').val(data.title);
           }
@@ -289,7 +293,13 @@ $(function() {
           $('#content_url').removeClass('process');
           $('#content_title').removeClass('process');
         },
-        "json");
+        error: function(xhr, status, errorThrown) {
+          var result = $.parseJSON(xhr.responseText);
+        	alert(result.error);
+          $('#content_url').removeClass('process');
+          $('#content_title').removeClass('process');
+        }
+      });
     }
   });
 

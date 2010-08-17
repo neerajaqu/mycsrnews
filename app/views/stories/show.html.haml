@@ -17,10 +17,12 @@
           %li
             %a== #{like_link @story} #{@story.votes_tally}
           %li
-            %a== #{link_to t('.post_comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
+            %a== #{link_to t('comment'), story_path(@story, :anchor => "postCommentBox")} #{@story.comments_count}
           %li= fb_share_item_button(@story)
           %li
             = twitter_share_item_link @story, @story.title
+          %li
+            = render :partial => 'shared/add_this'
       .itemBlock
         .half-panel
           - if @story.images.present?
@@ -39,7 +41,11 @@
             - else
               %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => source_link(@story), :date => time_ago_in_words(@story.created_at))
           - else
-            %h3= t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
+            %h3 
+              = t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
+              = pipe_spacer
+              - if current_user.present? and @story.user = current_user
+                = link_to t('articles.edit_draft'), edit_article_path(@story.article)
           - if @story.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
           - if @tags.present?

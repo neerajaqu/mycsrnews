@@ -253,9 +253,9 @@ module ApplicationHelper
     end
 
     if is_bitly_configured
-      link_to link_text, "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :burl=>twitter_url, :id=>"twitter-link", :target => "_tweet"
+      link_to link_text, "#", :rel=>"#overlay", :link => overlay_tweet_url(:text=>caption, :link=>url), :burl=>twitter_url, :id=>"twitter-link", :target => "_tweet", :class => "tweet-share"
     else
-      link_to link_text, twitter_url, :target => "_tweet"
+      link_to link_text, twitter_url, :target => "_tweet", :class => "tweet-share"
     end
 
   end
@@ -458,6 +458,24 @@ EMBED
     else 
       form_builder.hidden_field(:_delete) +
       link_to_function("Remove", "$(this).parents('.image-fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
+    end
+  end
+
+  def add_image_simple(form_builder)
+    link_to_function "+", :id => "add_image" do |page|
+        form_builder.fields_for :images, Image.new, :child_index => 'NEW_RECORD' do |image_form|
+          html = render(:partial => 'shared/forms/image_simple', :locals => {:f => image_form })
+          page << "$('#{escape_javascript(html)}'.replace(/NEW_RECORD/g, new Date().getTime())).insertBefore('#add_image');" 
+        end
+      end
+  end
+
+  def delete_image_simple(form_builder)
+    if form_builder.object.new_record?
+      link_to_function("-", "$(this).parents('.image-fieldset').remove()", :class=>"delete_image")
+    else 
+      form_builder.hidden_field(:_delete) +
+      link_to_function("-", "$(this).parents('.image-fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
     end
   end
   

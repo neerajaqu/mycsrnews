@@ -10,10 +10,12 @@
           %li
             %a==  #{like_link @resource} #{@resource.votes_tally}
           %li
-            %a== #{link_to t('.post_comment'), resource_path(@resource, :anchor => "postCommentBox")} #{@resource.comments_count}
+            %a== #{link_to t('comment'), resource_path(@resource, :anchor => "postCommentBox")} #{@resource.comments_count}
           %li= fb_share_item_button(@resource)
           %li
             %a= twitter_share_item_link @resource, @resource.title
+          %li
+            = render :partial => 'shared/add_this'
       .itemBlock
         .thumb
           - if @resource.images.present?
