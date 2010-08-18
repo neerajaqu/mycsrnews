@@ -465,17 +465,17 @@ EMBED
     link_to_function "+", :id => "add_image" do |page|
         form_builder.fields_for :images, Image.new, :child_index => 'NEW_RECORD' do |image_form|
           html = render(:partial => 'shared/forms/image_simple', :locals => {:f => image_form })
-          page << "$('#{escape_javascript(html)}'.replace(/NEW_RECORD/g, new Date().getTime())).insertBefore('#add_image');" 
+          page << "$('#{escape_javascript(html)}'.replace(/NEW_RECORD/g, new Date().getTime())).insertBefore($('#add_image').parent());" 
         end
       end
   end
 
   def delete_image_simple(form_builder)
     if form_builder.object.new_record?
-      link_to_function("-", "$(this).parents('.image-fieldset').remove()", :class=>"delete_image")
+      link_to_function("-", "$(this).parents('.multi-image-wrapper').remove()", :class=>"delete_image")
     else 
       form_builder.hidden_field(:_delete) +
-      link_to_function("-", "$(this).parents('.image-fieldset').hide(); $(this).prev().value = '1'", :class=>"delete_image")
+      link_to_function("-", "$(this).parents('.multi-image-wrapper').hide(); $(this).prev().value = '1'", :class=>"delete_image")
     end
   end
   
