@@ -1060,7 +1060,7 @@ h3.btn
     color: white
     &:hover
       text-decoration: none
-.btn
+.btn, .form-btn
   display: inline-block
   color: $btnTextColor
   font-weight: bold
@@ -1074,6 +1074,11 @@ h3.btn
     cursor: pointer
     text-decoration: none
     background: $btnBGHover
+
+.form-btn
+  background: image_url("default/form-btn-off.png") top left repeat-x
+  &:hover
+    background: image_url("default/form-btn-on.png") top left repeat-x
 
 /* ACTION LINKS */
 .btnComment

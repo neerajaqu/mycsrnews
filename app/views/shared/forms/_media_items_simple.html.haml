@@ -1,4 +1,9 @@
 %h1= t('media.add_video')
+
+%fieldset
+  %p
+    Add an video to display along with your story from another website i.e. YouTube
+
 %h3= t('media.add_video_title')
 
 %fieldset.inputs
@@ -10,6 +15,11 @@
     %a{:href=> "#"}= t('edit_caption')
 
 %h1= t('media.add_audio')
+
+%fieldset
+  %p
+    Add an audio track to display along with your story from another website.
+
 %h3= t('media.add_audio_title')
 %fieldset.inputs
   - item.audios.build if item.audios.empty?
