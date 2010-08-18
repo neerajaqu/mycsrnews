@@ -28,8 +28,8 @@
                 - form.inputs do
                   = form.input :url      
                 - form.buttons do
-                  = form.commit_button t('continue'), :class => 'float_right', :button_html => { :class => 'btn next' }
-                  = form.commit_button t('quick_post'), :class => 'float_right', :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'btn' }
 
               .panel2
                 - form.inputs do
@@ -40,21 +40,22 @@
                   = form.input :tags_string, :required => false, :hint => t('tags_hint')      
                   = render :partial => 'shared/forms/wall_postable', :locals => { :form => form }
                 - form.buttons do
-                  = form.commit_button t('continue'), :class => 'float_right', :button_html => { :class => 'btn next' }
-                  = form.commit_button t('post_now'), :class => 'float_right', :button_html => { :class => 'btn' }
-                  = form.commit_button t('back'), :class => 'float_left', :button_html => { :class => 'btn prev' }
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'btn prev' }
+
               .panel3
                 = render :partial => 'shared/forms/images_simple', :locals => { :form => form, :item => @story }
                 - form.buttons do
-                  = form.commit_button t('continue'), :class => 'float_right', :button_html => { :class => 'btn next' }
-                  = form.commit_button t('post_now'), :class => 'float_right', :button_html => { :class => 'btn' }
-                  = form.commit_button t('back'), :class => 'float_left', :button_html => { :class => 'btn prev' }
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'btn prev' }
 
               .panel4
                 = render :partial => 'shared/forms/media_items_simple', :locals => { :form => form, :item => @story }
                 - form.buttons do
-                  = form.commit_button t('post_now'), :class => 'float_right', :button_html => { :class => 'btn' }
-                  = form.commit_button t('back'), :class => 'float_left', :button_html => { :class => 'btn prev' }
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'btn prev' }
 
       :javascript
         $(function() {
