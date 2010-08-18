@@ -12,9 +12,9 @@
       .itemBlock
         %h2
           = link_to item.item_title, path_to_self(item.item_link)
-      .itemMeta
-        %span.btnComment== #{link_to t('comments'), polymorphic_url(item.item_link, :anchor => "commentListTop")} #{item.comments_count}
-        %span.btnComment== #{like_link item.item_link} #{item.votes_tally}
+        .itemMeta
+          %span.btnComment== #{link_to t('comments'), polymorphic_url(item.item_link, :anchor => "commentListTop")} #{item.comments_count}
+          %span.btnComment== #{like_link item.item_link} #{item.votes_tally}
 - else
   .item_2
     .item_block
