@@ -1,4 +1,4 @@
--# @expects: local 'model_name, list_title, item_list'
+-# @expects: local 'model_name, model_home, list_title, item_list'
 - cache "#{model_name}_featured_list_html", :expires_in => 60.minutes do
   %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
@@ -12,3 +12,7 @@
       - else
         %ul
           %li= t('no_features')
+    - unless item_list.empty?
+      .itemActions
+        %a{:href => model_home}= t('view_more') 
+          

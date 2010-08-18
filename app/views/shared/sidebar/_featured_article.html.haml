@@ -1,18 +1,2 @@
--# @expects: local 'content'
-- cache :featured_articles_html do
-  - featured_contents ||= Article.featured
-  - unless featured_contents.empty?
-    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('articles.featured_title')
-      %ul
-        - featured_contents.each do |article|
-          %li
-            .itemBlock
-              %h4= link_to article.content.title, content_path(article.content)
-              %p= caption((article.content.caption.present?) ? article.content.caption : 'no caption')
-              .profilePic= local_linked_profile_pic article.author, :width => '30px', :height => '30px'
-              .itemMeta
-                %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => time_ago_in_words(article.created_at))
-                %span.btnComment== #{like_link article.content} #{article.content.votes_tally}
-                %span.btnComment== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}
+- item_list ||= Content.articles.featured
+= render :partial => 'shared/lists/featured_generic_list', :locals => { :model_name => "article", :model_home => articles_path, :list_title => t('articles.featured_title'), :item_list => item_list}
