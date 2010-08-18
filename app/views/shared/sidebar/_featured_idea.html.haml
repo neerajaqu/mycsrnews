@@ -1,16 +1,2 @@
--# @expects: local 'idea'
-
-- cache :featured_ideas_html do
-  - featured_ideas ||= Idea.featured
-  - unless featured_ideas.empty?
-    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('.featured_idea_title')
-      .list_items
-        %ul
-          - featured_ideas.each do |idea|
-            %li
-              .itemBlock
-                .profilePic= local_linked_profile_pic idea.user
-                = link_to idea.title, idea_path(idea)
-                %p= (idea.details.present?) ? idea.details : 'no details'
+- item_list ||= Idea.featured
+= render :partial => 'shared/lists/featured_generic_list', :locals => { :model_name => "idea", :model_home => ideas_path, :list_title => t('ideas.featured_title'), :item_list => item_list}
