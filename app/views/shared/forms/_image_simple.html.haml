@@ -1,7 +1,7 @@
-%fieldset.image-fieldset
+%fieldset.image-fieldset.inputs
   - if !f.object.new_record?
     = image_tag f.object.image.url  
   = f.input :remote_image_url, :label => false, :required => false, :hint => false, :input_html => {:class=>"image-url-input"}
-  = f.file_field :image, :label=>nil
+  = f.file_field :image, :label=>nil, :class=>"browse-media-item"
   %a{:href=> "#"}= t('edit_caption')
   = delete_image_simple(f)

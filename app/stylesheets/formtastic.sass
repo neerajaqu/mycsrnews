@@ -1,4 +1,5 @@
 form.formtastic
+  position: relative
   margin: 0
   padding: 0
 
@@ -10,8 +11,6 @@ form.formtastic
     margin: 0
     padding: 0
 
-  fieldset
-    border: 0
 
   em, strong
     font-style: normal
@@ -36,157 +35,62 @@ form.formtastic
     color: #000
 
   fieldset
-    width: 90%
-    margin: 0 auto
+    border: 0
+    width: 95%
+    margin: 0 auto 10px
 
     &.inputs
-      input
-        width: 100%
- 
-    &.buttons
-      text-align: right
-
-    ol
-      &.buttons li
-        float: left
-        padding-right: 0.5em
-
-      &:after
-        content: "."
-        display: block
-        height: 0
-        clear: both
-        visibility: hidden
-
-
-html[xmlns] form.formtastic fieldset
-  display: block
-
-
-* html form.formtastic fieldset
-  height: 1%
-
-
-form.formtastic fieldset ol li
-  margin-bottom: 1.5em
-  display: inline-block
-
-  &:after
-    content: "."
-    display: block
-    height: 0
-    clear: both
-    visibility: hidden
-
-
-html[xmlns] form.formtastic fieldset ol li
-  display: block
-
-
-* html form.formtastic fieldset ol li
-  height: 1%
-
-
-form.formtastic fieldset ol li
-  &.required, &.optional, &.error
-    label
-      display: block
-      width: 100%
-      float: left
-      padding: 4px 0
-
-  li label
-    line-height: 100%
-    padding-top: 0
-
-    input
-      line-height: 100%
-      vertical-align: middle
-      margin-top: -0.1em
-
-  fieldset
-    position: relative
-
-    legend
-      position: absolute
-      width: 25%
-      padding-top: 0.1em
-
-      span, &.label label
-        position: absolute
-
-    ol
-      float: left
-      width: 74%
-      margin: 0
-      padding: 0 0 0 25%
-
       li
-        padding: 0
-        border: 0
-
-  p
-    &.inline-hints
-      color: #666
-      margin: 4px 0 0 0
-
-    &.inline-errors
-      color: #cc0000
-      margin: 0.5em 0 0 25%
-
-  ul.errors
-    color: #cc0000
-    margin: 0.5em 0 0 25%
-    list-style: square
-
-    li
-      padding: 0
-      border: none
-      display: list-item
-
-  //&.password input, &.numeric input 
-    
-  &.string input
-    width: 75%
-
-  &.text textarea
-    width: 100%
-
-  &.hidden
-    display: none
-
-  &.boolean label
-    margin: 10px 0 0 0 
-    padding-left: 5%
-    width: auto
-
-    input
-      margin: 10px 0 0 0 
-      margin: 0 0.5em 0 0.2em
-      width: auto
-
-  &.radio fieldset ol, &.check_boxes fieldset ol
-    margin-bottom: -0.6em
-
-    li
-      margin: 0.1em 0 0.5em 0
-
-      label
-        float: none
         width: 100%
+        display: inline-block
+        margin: 0 auto 10px
+
+        label
+          display: block
+          padding: 4px  4px
+          font-size: 12px
+          font-weight: bold
 
         input
-          margin-right: 0.2em
+          border: 1px solid #ddd
+          width: 80%
+          &.browse-media-item
+            border: none
 
-  &.date fieldset ol li, &.time fieldset ol li, &.datetime fieldset ol li
-    float: left
-    width: auto
-    margin: 0 .3em 0 0
+        textarea
+          border: 1px solid #ddd
+          width: 100%
+          resize: vertical
+          max-height: 300px
 
-  //&.date fieldset ol li label, &.time fieldset ol li label, &.datetime fieldset ol li label
-    //display: none
+        p.inline-hints
+          display: block
+          width: 100%
+          font-size: 11px
+          color: #666
 
-  &.date fieldset ol li label input, &.time fieldset ol li label input, &.datetime fieldset ol li label input
-    display: inline
-    margin: 0
-    padding: 0
+      .boolean 
+        margin: 0 0 10px
+        label
+          padding: 0
+          margin: 0 
+          width: auto
+
+        input
+          margin: 0 5px 0 0
+          width: auto
+ 
+    &.buttons
+      width: 100%
+      background: #ddd
+      margin: 0px
+
+      li
+        margin: 5px 10px
+        display: inline-block
+
+
+
+
+
+

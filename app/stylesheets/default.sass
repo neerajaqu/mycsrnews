@@ -593,6 +593,8 @@ $ColumnCorners: none
  
 /* LIST CLASSES WITH NO IMAGE */
 .panel_2
+  .article, .newswire
+    margin: 5px 0
   .newswire, .item_2
     .itemBlock
       display: block 
@@ -812,47 +814,7 @@ $ColumnCorners: none
 
   /* FORM STYLES - (Outside of formtastic) */
   .formBox
-    padding: 10px 0px
     background: $formBoxBG
-    p
-      margin: 0 10px
-    h4
-      font-weight: normal
-      margin-bottom: 10px
-    textarea
-      border: $formBoxTextArea
-  .itemBlock
-    .eventMetaBlock
-      background: $subTitleBG
-      width: 60%
-      display: inline-block
-      padding: 4px
-      h3
-        display: inline-block
-      .eventMeta
-        float: left
-        display: inline-block
-        h4
-          margin: 0 6px 4px 
-        h3
-          color: $bodyColor
-          margin: 0 6px 4px
-          line-height: 150%
-        &.time
-          border-right: #fff 1px solid
-          margin-left: -1px
-          width: 50%
-        &.location
-          margin-left: -1px
-          border-left: #fff 1px solid
-          width: 50%
-        &.tags
-          border-top: #fff 1px solid
-          width: 100%
-          margin: 0    
-    p
-      margin: 0 0 6px 0
-      line-height: 120%
 
   /* BULLETED LIST */
   .bullet_list
@@ -1513,20 +1475,20 @@ a.disabled
       padding: 2px
       
 
-.navi
-  position: absolute
-  bottom: 33px
-  left: 50px
-  display: block
-  width: 30px
-  height: 20px
+  .navi
+    position: absolute
+    bottom: 33px
+    left: 50px
+    display: block
+    width: 30px
+    height: 20px
   
-.next
-  left: 450px
-  background: url(/images/arrow/right.png) no-repeat
+  .next
+    left: 450px
+    background: url(/images/arrow/right.png) no-repeat
   
-.prev
-  background: url(/images/arrow/left.png) no-repeat
+  .prev
+    background: url(/images/arrow/left.png) no-repeat
 
 
 // jgrowl styling //
@@ -1632,7 +1594,7 @@ body div.jGrowl div.jGrowl-closer
 
 
 .process
-  background: white url(/images/default/vertical_bg_animation.gif) top left repeat
+  background: white image_url("default/vertical_bg_animation.gif") top left repeat
   opacity: .5
 
 #contactBox
