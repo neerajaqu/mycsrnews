@@ -1,4 +1,5 @@
 - cache :featured_items_html do
+  - animation_speed = get_setting('animation_speed_features').try(:value) || 500
   - featured_items ||= FeaturedItem.find_root_by_item_name('featured_template')
   - if featured_items.present?
     - section1 = featured_items.children.first
@@ -50,7 +51,7 @@
                   = render :partial => 'shared/featured_items/panel3', :locals => { :item => item }                
           :javascript
             $(function() {          	
-            	$(".feature_scrollable_panel_3").scrollable({circular: true}).autoscroll({ autoplay: true});
+            	$(".feature_scrollable_panel_3").scrollable({speed : #{animation_speed}, circular: true, mousewheel: true}).autoscroll({ autoplay: true});
             });
         - when 'template_32'
           - box_list = [0, 2, 4]
@@ -64,7 +65,7 @@
                   = render :partial => 'shared/featured_items/panel4', :locals => { :item => a[index+1] }
           :javascript
             $(function() {            
-              $(".feature_scrollable_panel_4").scrollable({circular: true, vertical: true, mousewheel: true}).autoscroll({ autoplay: true});
+              $(".feature_scrollable_panel_4").scrollable({speed : #{animation_speed}, circular: true, vertical: true, mousewheel: true}).autoscroll({ autoplay: true});
             });
         - when 'template_52'
           - box_list = [0, 3]
@@ -79,5 +80,5 @@
                   = render :partial => 'shared/featured_items/panel5', :locals => { :item => a[index+2] }
           :javascript
             $(function() {            
-              $(".feature_scrollable_panel_5").scrollable({circular: true, vertical: true, mousewheel: true}).autoscroll({ autoplay: true});
+              $(".feature_scrollable_panel_5").scrollable({speed : #{animation_speed}, circular: true, vertical: true, mousewheel: true}).autoscroll({ autoplay: true});
             });

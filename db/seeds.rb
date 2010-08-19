@@ -76,6 +76,9 @@ custom_widgets.each do |custom_widget|
 end
 
 settings = [
+ { :key_sub_type => 'options', :key_name => 'animation_speed_features',  :value => "400" },
+ { :key_sub_type => 'options', :key_name => 'animation_speed_newswires',  :value => "1000" },
+ { :key_sub_type => 'options', :key_name => 'animation_speed_widgets',  :value => "2500" },
  { :key_sub_type => 'options', :key_name => 'exclude_articles_from_news',  :value => "false" },
  { :key_sub_type => 'options', :key_name => 'outbrain_enabled',  :value => "false", :hint => "Enable Outbrain(http://outbrain.com) support" },
  { :key_sub_type => 'options', :key_name => 'outbrain_template_name',  :value => "my_template_name", :hint => "Outbrain template name" },

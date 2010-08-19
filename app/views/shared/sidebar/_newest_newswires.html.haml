@@ -10,14 +10,15 @@
       .list_items.clearfix
         .newswire_scrollable_panel
           .feature_scrollable_items
-            - box_list.each do |x|
+            - box_list.each do |box|
               .newswire_panel_items
                 %ul
-                  - unless newest_newswires.count < (x+4)
-                    - (0..4).each do |y|
+                  - unless newest_newswires.count < (box+4)
+                    - (0..4).each do |ynumber|
                       %li
-                        = render :partial => 'shared/items/small_newswire', :locals => { :newswire => newest_newswires[x+y] }
+                        = render :partial => 'shared/items/small_newswire', :locals => { :newswire => newest_newswires[box+ynumber] }
+        - animation_speed = get_setting('animation_speed_newswires').try(:value) || 2500
         :javascript
           $(function() {          	
-          	$(".newswire_scrollable_panel").delay(3500).scrollable({speed : 1000, circular: true}).autoscroll({ autoplay: true, interval : 7500});
+          	$(".newswire_scrollable_panel").delay(3500).scrollable({speed : #{animation_speed}, circular: true, mousewheel: true}).autoscroll({ autoplay: true, interval : 7500});
           });
