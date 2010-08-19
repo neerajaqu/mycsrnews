@@ -34,9 +34,10 @@
                     %ul
                       %li
                         = render :partial => 'shared/items/widget_question', :locals => {:question => item}
+            - animation_speed = get_setting('animation_speed_widgets').try(:value) || 2500
             :javascript
               $(function() {          	
-              	$(".widgets_scrollable_panel").scrollable({speed : 2500, circular: true}).autoscroll({ autoplay: true});
+              	$(".widgets_scrollable_panel").scrollable({speed : #{animation_speed}, circular: true}).autoscroll({ autoplay: true});
               });
 - if @fan              
   = render :partial => 'shared/sidebar/fan_application'

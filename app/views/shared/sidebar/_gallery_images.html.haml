@@ -1,0 +1,55 @@
+-# @expects: local 'newest_images'
+
+- cache :gallery_images_html, :expires_in => 60.minutes do
+  - newest_images ||= Image.newest
+  - unless newest_images.empty? or newest_images.count < 8
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('newest_images_title')
+      .featured.media
+        .thumb#image_wrap
+          - image = newest_images.first
+          -# = link_to image_tag(image.url(:medium)), image.imageable.item_link
+          = link_to(image_tag("/images/default/spacer.gif"), image.imageable.item_link)
+        .scrollable_list_media
+          .items
+            .list_media
+              %ul 
+                - newest_images.each_with_index do |image,index|
+                  - unless index > 7
+                    %li
+                      = link_to(image_tag(image.url(:thumb)), image.imageable.item_link)
+        -# .itemActions
+          %a{:href => home_index_path}= t('view_gallery')
+    :javascript
+      $(function() {
+        $(".scrollable_list_media").scrollable();
+        $(".list_media img").click(function(event) {
+          event.preventDefault();          
+        	// see if same thumb is being clicked
+        	if ($(this).hasClass("active")) { return; }
+        	// calclulate large image's URL based on the thumbnail URL (flickr specific)
+        	var url = $(this).attr("src").replace("thumb", "medium");
+        	// get href around image
+          var img_link = $(this).parent().attr('href');
+        	// get handle to element that wraps the image and make it semi-transparent
+        	var wrap = $("#image_wrap").fadeTo("medium", 0.5);
+        	// the large image
+        	var img = new Image();
+        	// call this function after it's loaded
+        	img.onload = function() {
+        		// make wrapper fully visible
+        		wrap.fadeTo("fast", 1);
+        		// change the image
+        		wrap.find("img").attr("src", url);
+        	};
+        	// begin loading the image
+        	img.src = url;
+      		// change destination link
+      	  wrap.find("img").parent().attr('href', img_link);
+        	// activate item
+        	$(".list_media img").removeClass("active");
+        	$(this).addClass("active");
+        // when page loads simulate a "click" on the first image
+        }).filter(":first").click();
+      });
