@@ -48,9 +48,8 @@
           %td= link_to image.imageable.item_title, [:admin, image.imageable.item_link]
           %td
             %ul
-              %li= link_to 'View', '#'
-              %li= link_to 'Edit', '#'
-              -#%li= link_to 'Destroy', [:admin, image], :confirm => 'Are you sure?', :method => :delete, :class => 'destroy'
+              -#%li= link_to 'View', '#'
+              -#%li= link_to 'Edit', '#'
               %li= link_to 'Destroy', [:admin, image], :class => 'destroy'
               - if image.remote_image_url?
                 %li= link_to 'Destroy and Ignore', polymorphic_path([:admin, image], :ignore => true), :class => 'destroy-ignore'
