@@ -1,0 +1,57 @@
+- content_for :extra_javascript do
+  :javascript
+    $(function() {
+      $('.destroy, .destroy-ignore').click(function(event) {
+        event.preventDefault();
+      	var message;
+      	if ($(this).hasClass('destroy-ignore')) {
+      		message = "Are you sure you want to destroy this image and ignore all future copies of this image url?";
+      	} else {
+      		message = "Are you sure you want to delete this image?";
+        }
+        if (confirm(message)) {
+        	var $link = $(this).parents('tr');
+        	$.ajax({
+        		url   : this.href.replace(/html/, 'json'),
+        		type  : 'post',
+        		dataType  : 'script',
+        		data      : { '_method' : 'delete' },
+        		success   : function() {
+              setTimeout(function() {
+                $link.effect('highlight', {color: 'green'}, 2000);
+                $link.hide('fold', {}, 'slow');
+              }, 1500);
+            }
+          });
+        }
+      });
+    });
+%br
+%h1 Images List
+%br
+
+- unless @images.any?
+  %p No images found
+- else
+  %table.admin-table#images-table
+    %thead
+      %tr
+        %th Image
+        %th File or URL
+        %th Image Item
+        %th Actions
+    %tbody
+      - @images.each do |image|
+        %tr{:class => "images #{cycle('odd', 'even')}"}
+          %td= link_to image_tag(image.url(:medium), :size => "75x75"), [:admin, image]
+          %td= image.remote_image_url || image.image_file_name
+          %td= link_to image.imageable.item_title, [:admin, image.imageable.item_link]
+          %td
+            %ul
+              %li= link_to 'View', '#'
+              %li= link_to 'Edit', '#'
+              -#%li= link_to 'Destroy', [:admin, image], :confirm => 'Are you sure?', :method => :delete, :class => 'destroy'
+              %li= link_to 'Destroy', [:admin, image], :class => 'destroy'
+              - if image.remote_image_url?
+                %li= link_to 'Destroy and Ignore', polymorphic_path([:admin, image], :ignore => true), :class => 'destroy-ignore'
+  = will_paginate @images

@@ -123,6 +123,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :related_items
     admin.resources :newswires
     admin.resources :feeds
+    admin.resources :images
     admin.resources :sources
     admin.resources :announcements
     admin.resources :dashboard_messages, :member => { :send_global => [:get, :post], :clear_global => [:get, :post] }, :collection => { :clear_global => [:get, :post] }
