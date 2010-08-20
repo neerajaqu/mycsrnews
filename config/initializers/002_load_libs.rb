@@ -37,3 +37,4 @@ require "#{RAILS_ROOT}/lib/locale_extensions.rb"
 require "#{RAILS_ROOT}/lib/zvent_gem_addon.rb"
 
 require "#{RAILS_ROOT}/lib/string_extensions.rb"
+require "#{RAILS_ROOT}/lib/feed_parser.rb"

@@ -9,6 +9,8 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
+require 'resque_scheduler/tasks'
+
 begin
    require 'sitemap_generator/tasks'
  rescue Exception => e

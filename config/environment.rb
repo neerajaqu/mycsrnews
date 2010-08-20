@@ -36,7 +36,6 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   #config.gem "haml"
   config.gem "eycap"
-  config.gem "whenever"
   config.gem "rack"
   config.gem "formtastic"
   config.gem "hpricot"
@@ -49,6 +48,8 @@ Rails::Initializer.run do |config|
   config.gem "oauth"
   config.gem "twitter"
   config.gem "bitly"
+  config.gem "resque"
+  config.gem "resque-scheduler", :lib => 'resque_scheduler'
   config.gem 'sitemap_generator', :lib => false
   
   # Only load the plugins named here, in the order given (default is alphabetical).
