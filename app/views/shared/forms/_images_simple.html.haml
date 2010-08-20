@@ -1,12 +1,13 @@
 - item.images.build if item.images.empty?
 %h1= t('media.add_image')
+%fieldset
+  %p
+    Add as many images as you would like to your story, to add more images click the "add more images" button below.  You may either provide a url to an image or upload them from your local computer.
+
 %h3= t('media.add_image_title')
-- form.semantic_fields_for :images do |image_form|
-  .add-image
+%fieldset.inputs
+  - form.semantic_fields_for :images do |image_form|
     = image_form.input :remote_image_url, :required => false, :label => false
-    = image_form.input :image, :required => false, :as => :file, :label => false
-    %p
-      %a{:href=> "#"}= t('edit_caption')
-    %p= add_image_simple(form)
-%br
-%br
+    = image_form.input :image, :required => false, :as => :file, :label => false, :class => "browse-media-item"
+    %a{:href=> "#"}= t('Edit caption')
+    = add_image_simple(form)

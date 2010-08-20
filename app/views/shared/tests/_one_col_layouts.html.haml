@@ -78,6 +78,10 @@
                 More...
 
             .itemMeta
+              %h3 
+                Posted by 
+                %a Bob Bobberson Jr.
+                1 hour ago
               %span.btnComment
                 %a
                   Comment
@@ -171,8 +175,9 @@
       %li
         .featured
           .item_1.article
-            .thumb
-              = image_tag('default/default_thumb.gif')
+            .profilePic
+              = image_tag('default/test-profile-pic.png')
+              = image_tag('default/icon-mod-badge.png', :class => 'moderator')  
             .itemBlock
               %h2
                 %a

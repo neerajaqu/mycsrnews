@@ -457,6 +457,28 @@ li
 /**********************************************************************************************/
 /* IMAGE STYLES */
 
+/* THUMB CAPTION STYLES */
+.thumb
+  .caption-note
+    background: image_url("default/caption-bg.png") top left repeat
+    display: block
+    width: 100%
+    padding: 5px 0
+    position: absolute
+    bottom: -100px
+    left: 0px
+    z-index: 10
+    h5
+      font-size: 11px
+      color: #fff
+      line-height: 120%
+      margin: 0 5px
+      padding: 0
+  &:hover
+    .caption-note
+      bottom: 0px
+      
+
 /* THUMB IMAGE CONTAINER */
 .thumb
   margin: 5px
@@ -483,9 +505,11 @@ li
   position: relative
   float: left
   margin: 0px 5px 0px 0px
+  width: 30px
+  height: 30px
   img
-    max-width: 30px
-    max-height: 30px
+    width: 30px
+    height: 30px
   a:hover
     text-decoration: none
   img.moderator 
@@ -593,12 +617,11 @@ $ColumnCorners: none
  
 /* LIST CLASSES WITH NO IMAGE */
 .panel_2
-  .newswire, .item_2
+  .article, .newswire
+    margin: 5px 0 10px
+  .newswire, .item_2, .event
     .itemBlock
       display: block 
-  .event
-    .itemBlock
-      display: block
 
 /* UNVERSAL LIST STYLES - PANELS */
 .panel_1, .panel_2
@@ -812,47 +835,7 @@ $ColumnCorners: none
 
   /* FORM STYLES - (Outside of formtastic) */
   .formBox
-    padding: 10px 0px
     background: $formBoxBG
-    p
-      margin: 0 10px
-    h4
-      font-weight: normal
-      margin-bottom: 10px
-    textarea
-      border: $formBoxTextArea
-  .itemBlock
-    .eventMetaBlock
-      background: $subTitleBG
-      width: 60%
-      display: inline-block
-      padding: 4px
-      h3
-        display: inline-block
-      .eventMeta
-        float: left
-        display: inline-block
-        h4
-          margin: 0 6px 4px 
-        h3
-          color: $bodyColor
-          margin: 0 6px 4px
-          line-height: 150%
-        &.time
-          border-right: #fff 1px solid
-          margin-left: -1px
-          width: 50%
-        &.location
-          margin-left: -1px
-          border-left: #fff 1px solid
-          width: 50%
-        &.tags
-          border-top: #fff 1px solid
-          width: 100%
-          margin: 0    
-    p
-      margin: 0 0 6px 0
-      line-height: 120%
 
   /* BULLETED LIST */
   .bullet_list
@@ -1098,7 +1081,7 @@ h3.btn
     color: white
     &:hover
       text-decoration: none
-.btn
+.btn, .form-btn
   display: inline-block
   color: $btnTextColor
   font-weight: bold
@@ -1112,6 +1095,11 @@ h3.btn
     cursor: pointer
     text-decoration: none
     background: $btnBGHover
+
+.form-btn
+  background: image_url("default/form-btn-off.png") top left repeat-x
+  &:hover
+    background: image_url("default/form-btn-on.png") top left repeat-x
 
 /* ACTION LINKS */
 .btnComment
@@ -1389,7 +1377,7 @@ h3.btn
 
 .items div 
   float: left
-  width: 350px
+  width: 100%
 
   /* single image */
 #images
@@ -1513,20 +1501,20 @@ a.disabled
       padding: 2px
       
 
-.navi
-  position: absolute
-  bottom: 33px
-  left: 50px
-  display: block
-  width: 30px
-  height: 20px
+  .navi
+    position: absolute
+    bottom: 33px
+    left: 50px
+    display: block
+    width: 30px
+    height: 20px
   
-.next
-  left: 450px
-  background: url(/images/arrow/right.png) no-repeat
+  .next
+    left: 450px
+    background: url(/images/arrow/right.png) no-repeat
   
-.prev
-  background: url(/images/arrow/left.png) no-repeat
+  .prev
+    background: url(/images/arrow/left.png) no-repeat
 
 
 // jgrowl styling //
@@ -1632,7 +1620,7 @@ body div.jGrowl div.jGrowl-closer
 
 
 .process
-  background: white url(/images/default/vertical_bg_animation.gif) top left repeat
+  background: white image_url("default/vertical_bg_animation.gif") top left repeat
   opacity: .5
 
 #contactBox
