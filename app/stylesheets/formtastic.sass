@@ -1,113 +1,90 @@
-form.formtastic
-  position: relative
-  margin: 0
-  padding: 0
-
-  h1, h2, h3
-    color: #555
-    line-height: 100%
-    display: block
-    width: 95%
-    margin: 0 auto 10px
-  
-  h1
-    font-size: 18px
-  h2
-    font-weight: normal
-    font-size: 16px
-  h3
-    font-weight: normal
-    font-size: 14px
-
-
-  ul, ol, li, fieldset, legend, select, p
-    margin: 0px
-    padding: 0px
-
-  textarea
+.panel_1, .panel_2, .panel_3
+  form.formtastic
+    position: relative
     margin: 0
     padding: 0
 
+    h1, h2, h3
+      color: #555
+      line-height: 100%
+      display: block
+      width: 95%
+      margin: 0 auto 10px
+  
+    h1
+      font-size: 18px
+    h2
+      font-weight: normal
+      font-size: 16px
+    h3
+      font-weight: normal
+      font-size: 14px
 
-  em, strong
-    font-style: normal
-    font-weight: normal
+.panel_1, .panel_2, .panel_3
+  form.formtastic
+    fieldset
+      &.inputs
+        li
+          width: 100%
+          display: inline-block
+          margin: 0 auto 10px
 
-  ol, ul
-    list-style: none
+          label
+            display: block
+            padding: 4px  4px
+            font-size: 12px
+            font-weight: bold
 
-  abbr, acronym
-    border: 0
-    font-variant: normal
+          input
+            border: 1px solid #ddd
+            width: 80%
+            &.browse-media-item
+              border: none
 
-  input, textarea, select
-    font-family: inherit
-    font-size: inherit
-    font-weight: inherit
+          textarea
+            border: 1px solid #ddd
+            width: 100%
+            resize: vertical
+            max-height: 300px
 
-  input, textarea, select
-    font-size: 100%
+          p.inline-hints
+            display: block
+            width: 100%
+            font-size: 11px
+            color: #666
 
-  legend
-    color: #000
+        .boolean 
+          margin: 0 0 10px
+          label
+            padding: 0
+            margin: 0 
+            width: auto
 
-  fieldset
-    border: 0
-    width: 95%
-    margin: 0 auto 10px
+          input
+            margin: 0 5px 0 0
+            width: auto
 
-    &.inputs
-      li
+      &.buttons
         width: 100%
-        display: inline-block
-        margin: 0 auto 10px
+        background: #ddd
+        margin: 0px
 
-        label
-          display: block
-          padding: 4px  4px
-          font-size: 12px
-          font-weight: bold
-
-        input
-          border: 1px solid #ddd
-          width: 80%
-          &.browse-media-item
-            border: none
-
-        textarea
-          border: 1px solid #ddd
-          width: 100%
-          resize: vertical
-          max-height: 300px
-
-        p.inline-hints
-          display: block
-          width: 100%
-          font-size: 11px
-          color: #666
-
-      .boolean 
-        margin: 0 0 10px
-        label
-          padding: 0
-          margin: 0 
-          width: auto
-
-        input
-          margin: 0 5px 0 0
-          width: auto
- 
-    &.buttons
-      width: 100%
-      background: #ddd
-      margin: 0px
-
-      li
-        margin: 5px 10px
-        display: inline-block
+        li
+          margin: 5px 10px
+          display: inline-block
 
 
+.panel_2
+  form.formtastic
+    fieldset
+      border: 0
+      width: 95%
+      margin: 0 auto 10px
 
-
-
+.panel_3
+  form.formtastic
+    fieldset
+      border: 0
+      width: 80%
+      margin: 20px auto
 

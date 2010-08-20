@@ -457,6 +457,28 @@ li
 /**********************************************************************************************/
 /* IMAGE STYLES */
 
+/* THUMB CAPTION STYLES */
+.thumb
+  .caption-note
+    background: image_url("default/caption-bg.png") top left repeat
+    display: block
+    width: 100%
+    padding: 5px 0
+    position: absolute
+    bottom: -100px
+    left: 0px
+    z-index: 10
+    h5
+      font-size: 11px
+      color: #fff
+      line-height: 120%
+      margin: 0 5px
+      padding: 0
+  &:hover
+    .caption-note
+      bottom: 0px
+      
+
 /* THUMB IMAGE CONTAINER */
 .thumb
   margin: 5px
@@ -483,9 +505,11 @@ li
   position: relative
   float: left
   margin: 0px 5px 0px 0px
+  width: 30px
+  height: 30px
   img
-    max-width: 30px
-    max-height: 30px
+    width: 30px
+    height: 30px
   a:hover
     text-decoration: none
   img.moderator 
@@ -594,13 +618,10 @@ $ColumnCorners: none
 /* LIST CLASSES WITH NO IMAGE */
 .panel_2
   .article, .newswire
-    margin: 5px 0
-  .newswire, .item_2
+    margin: 5px 0 10px
+  .newswire, .item_2, .event
     .itemBlock
       display: block 
-  .event
-    .itemBlock
-      display: block
 
 /* UNVERSAL LIST STYLES - PANELS */
 .panel_1, .panel_2
