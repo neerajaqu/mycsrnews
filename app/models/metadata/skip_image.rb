@@ -21,7 +21,7 @@ class Metadata::SkipImage < Metadata
   end
 
   def remove_all_images
-    image_list = Image.find_by_remote_image_url(self.image_url)
+    image_list = Image.find(:all, :conditions => ["remote_image_url = ?", self.image_url])
     image_list.each do |image|
       current_imageable = image.imageable
       if image.destroy

@@ -76,7 +76,7 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
   def render_edit setting
     setting ||= Metadata::Setting.new
 =begin
-    if setting.name = 'site_notification_user'
+    if setting.name == 'site_notification_user'
       render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
       	:item => setting,
       	:model => Metadata::Setting,
