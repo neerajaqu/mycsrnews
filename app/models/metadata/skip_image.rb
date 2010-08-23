@@ -22,7 +22,7 @@ class Metadata::SkipImage < Metadata
 
   def remove_all_images
     image_list = Image.find_by_remote_image_url(self.image_url)
-    image_list.each |image| do
+    image_list.each do |image|
       current_imageable = image.imageable
       if image.destroy
         WrapperSweeper.expire_item current_imageable
