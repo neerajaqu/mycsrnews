@@ -272,6 +272,15 @@ en:
     questions_newest_title: "Latest questions from {{site_title}}"
     questions_top_title: "Top questions from {{site_title}}"
     questions_featured_title: "Featured questions from {{site_title}}"
+  new_story_header: "Post a story from the Web"
+  wizard:
+    continue: "Continue"
+    post_now: "Post Now"
+    back: "Back"
+    url: "Web Page"
+    details: "Details"
+    images: "Images"
+    more: "More"
   who_liked:
     title: "{{user_count}} people like this"
     none: "Be the first to like this"  
