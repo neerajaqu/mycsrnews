@@ -45,13 +45,23 @@
               %a{:href => "#"}= t('wizard.more') 
           - semantic_form_for @story, :url => stories_path, :html => { :multipart => true, :class => "post_story" } do |form|
             .panes
-              .tab_panel.panel1
+
+              .panel1
+                %h1 Add a Story url
+                %fieldset
+                  %p
+                    Copy and Paste the link to the story you would like to post in the text field below. Then either click "quick post" or "continue" to further customize the details of the story you are going to post.
                 - form.inputs do
                   = form.input :url      
                 - form.buttons do
-                  = form.commit_button t('wizard.quick_post'), :button_html => { :class => 'btn' }
-                  = form.commit_button t('wizard.continue'), :button_html => { :class => 'btn next' }
-              .tab_panel.panel2
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+
+              .panel2
+                %h1 Story Details
+                %fieldset
+                  %p
+                    Customize your story by editing the title, creating your own summary caption, and add tags to your story that will help other site users to find the story you posted.
                 - form.inputs do
                   = form.input :title
                   - if @story.newswire.present?
@@ -60,10 +70,11 @@
                   = form.input :tags_string, :required => false, :hint => t('tags_hint')      
                   = render :partial => 'shared/forms/wall_postable', :locals => { :form => form }
                 - form.buttons do
-                  = form.commit_button t('wizard.back'), :button_html => { :class => 'btn prev' }
-                  = form.commit_button t('wizard.post_now'), :button_html => { :class => 'btn' }
-                  = form.commit_button t('wizard.continue'), :button_html => { :class => 'btn next' }
-              .tab_panel.panel3
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
+
+              .panel3
                 = render :partial => 'shared/forms/images_simple', :locals => { :form => form, :item => @story }
                 #scrollbox
                   %a.prev.browse.left_scroll
@@ -71,14 +82,15 @@
                     .items
                   %a.next.browse.right_scroll
                 - form.buttons do
-                  = form.commit_button t('wizard.back'), :button_html => { :class => 'btn prev' }
-                  = form.commit_button t('wizard.post_now'), :button_html => { :class => 'btn' }
-                  = form.commit_button t('wizard.continue'), :button_html => { :class => 'btn next' }
-              .tab_panel.panel4
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
+
+              .panel4
                 = render :partial => 'shared/forms/media_items_simple', :locals => { :form => form, :item => @story }
                 - form.buttons do
-                  = form.commit_button t('wizard.back'), :button_html => { :class => 'btn prev' }
-                  = form.commit_button t('wizard.post_now'), :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
 
 #col_right
   .panel_1

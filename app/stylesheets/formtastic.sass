@@ -1,192 +1,90 @@
-form.formtastic
-  margin: 0
-  padding: 0
-
-  ul, ol, li, fieldset, legend, select, p
-    margin: 0px
-    padding: 0px
-
-  textarea
-    margin: 0
-    padding: 0
-
-  fieldset
-    border: 0
-
-  em, strong
-    font-style: normal
-    font-weight: normal
-
-  ol, ul
-    list-style: none
-
-  abbr, acronym
-    border: 0
-    font-variant: normal
-
-  input, textarea, select
-    font-family: inherit
-    font-size: inherit
-    font-weight: inherit
-
-  input, textarea, select
-    font-size: 100%
-
-  legend
-    color: #000
-
-  fieldset
-    width: 90%
-    margin: 0 auto
-
-    &.inputs
-      input
-        width: 100%
- 
-    &.buttons
-      text-align: right
-
-    ol
-      &.buttons li
-        float: left
-        padding-right: 0.5em
-
-      &:after
-        content: "."
-        display: block
-        height: 0
-        clear: both
-        visibility: hidden
-
-
-html[xmlns] form.formtastic fieldset
-  display: block
-
-
-* html form.formtastic fieldset
-  height: 1%
-
-
-form.formtastic fieldset ol li
-  margin-bottom: 1.5em
-  display: inline-block
-
-  &:after
-    content: "."
-    display: block
-    height: 0
-    clear: both
-    visibility: hidden
-
-
-html[xmlns] form.formtastic fieldset ol li
-  display: block
-
-
-* html form.formtastic fieldset ol li
-  height: 1%
-
-
-form.formtastic fieldset ol li
-  &.required, &.optional, &.error
-    label
-      display: block
-      width: 100%
-      float: left
-      padding: 4px 0
-
-  li label
-    line-height: 100%
-    padding-top: 0
-
-    input
-      line-height: 100%
-      vertical-align: middle
-      margin-top: -0.1em
-
-  fieldset
+.panel_1, .panel_2, .panel_3
+  form.formtastic
     position: relative
-
-    legend
-      position: absolute
-      width: 25%
-      padding-top: 0.1em
-
-      span, &.label label
-        position: absolute
-
-    ol
-      float: left
-      width: 74%
-      margin: 0
-      padding: 0 0 0 25%
-
-      li
-        padding: 0
-        border: 0
-
-  p, label
-    &.inline-hints
-      color: #666
-      margin: 4px 0 0 0
-
-    &.inline-errors
-      color: #cc0000
-      margin: 0.5em 0 0 25%
-
-  ul.errors
-    color: #cc0000
-    margin: 0.5em 0 0 25%
-    list-style: square
-
-    li
-      padding: 0
-      border: none
-      display: list-item
-
-  //&.password input, &.numeric input 
-    
-  &.string input
-    width: 75%
-
-  &.text textarea
-    width: 100%
-
-  &.hidden
-    display: none
-
-  &.boolean label
-    margin: 10px 0 0 0 
-    padding-left: 5%
-    width: auto
-
-    input
-      margin: 10px 0 0 0 
-      margin: 0 0.5em 0 0.2em
-      width: auto
-
-  &.radio fieldset ol, &.check_boxes fieldset ol
-    margin-bottom: -0.6em
-
-    li
-      margin: 0.1em 0 0.5em 0
-
-      label
-        float: none
-        width: 100%
-
-        input
-          margin-right: 0.2em
-
-  &.date fieldset ol li, &.time fieldset ol li, &.datetime fieldset ol li
-    float: left
-    width: auto
-    margin: 0 .3em 0 0
-
-  //&.date fieldset ol li label, &.time fieldset ol li label, &.datetime fieldset ol li label
-    //display: none
-
-  &.date fieldset ol li label input, &.time fieldset ol li label input, &.datetime fieldset ol li label input
-    display: inline
     margin: 0
     padding: 0
+
+    h1, h2, h3
+      color: #555
+      line-height: 100%
+      display: block
+      width: 95%
+      margin: 0 auto 10px
+  
+    h1
+      font-size: 18px
+    h2
+      font-weight: normal
+      font-size: 16px
+    h3
+      font-weight: normal
+      font-size: 14px
+
+.panel_1, .panel_2, .panel_3
+  form.formtastic
+    fieldset
+      &.inputs
+        li
+          width: 100%
+          display: inline-block
+          margin: 0 auto 10px
+
+          label
+            display: block
+            padding: 4px  4px
+            font-size: 12px
+            font-weight: bold
+
+          input
+            border: 1px solid #ddd
+            width: 80%
+            &.browse-media-item
+              border: none
+
+          textarea
+            border: 1px solid #ddd
+            width: 100%
+            resize: vertical
+            max-height: 300px
+
+          p.inline-hints
+            display: block
+            width: 100%
+            font-size: 11px
+            color: #666
+
+        .boolean 
+          margin: 0 0 10px
+          label
+            padding: 0
+            margin: 0 
+            width: auto
+
+          input
+            margin: 0 5px 0 0
+            width: auto
+
+      &.buttons
+        width: 100%
+        background: #ddd
+        margin: 0px
+
+        li
+          margin: 5px 10px
+          display: inline-block
+
+
+.panel_2
+  form.formtastic
+    fieldset
+      border: 0
+      width: 95%
+      margin: 0 auto 10px
+
+.panel_3
+  form.formtastic
+    fieldset
+      border: 0
+      width: 80%
+      margin: 20px auto
+

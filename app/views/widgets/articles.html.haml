@@ -5,7 +5,7 @@
     - unless @article_list.empty?
       %div{:class => "panel_1"}
         = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
-        .list_stories
+        .list_items
           %ul
             - @article_list.each do |item|
               %li
@@ -15,7 +15,7 @@
     - unless @article_list.empty?
       %div{:class => "panel_1"}
         = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
-        .list_stories
+        .list_items
           %ul
             - @article_list.each do |item|
               %li

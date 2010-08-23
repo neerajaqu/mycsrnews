@@ -1,53 +1,62 @@
+form.formtastic
+  #flowplayer-block
+    ul.tabs li
+      width: auto
+
 #flowplayer-block
+
   /* root element for tabs  */
   ul.tabs
-    margin: 0 !important 
-    padding: 0
-    height: 30px
-    border-bottom: 1px solid #666   
+    display:  inline-block
+    width: 100%
+    margin: 20px 0 !important 
+    padding: 0 0 0 20px
+
 
   /* single tab */
   ul.tabs li
     float: left  
     padding: 0 
-    margin: 0  
+    margin: 0 4px 0 0  
     list-style-type: none 
-    width: 130px
 
   /* link inside the tab. uses a background image */
   ul.tabs a  
+    background: image_url("default/form-tab.png") -3px right no-repeat
     float: left
-    font-size: 11px
+    line-height: 12px
+    font-size: 12px
+    font-weight: bold
     display: block
-    padding: 5px 30px 
-    text-decoration: none
-    border: 1px solid #666  
-    border-bottom: 0px
     height: 18px
-    background-color: #efefef
-    color: #777
-    margin-right: 2px
-    -moz-border-radius-topleft:  4px
-    -moz-border-radius-topright: 4px
+    padding: 6px 25px 2px 10px
+    text-decoration: none
+    color: #fff
+    border-top-left-radius: 4px
+    -moz-border-radius-topleft: 4px
+    border-bottom-left-radius: 4px
+    -moz-border-radius-bottomleft: 4px
     position: relative
     top: 1px  
   
   ul.tabs a:hover 
-    background-color: #F7F7F7
-    color: #333
+    background: image_url("default/form-tab.png") -35px right no-repeat
+    color: #fff
   
   /* selected tab */
   ul.tabs a.current 
-    background-color: #ddd
-    border-bottom: 2px solid #ddd 
-    color: #000 
+    background: image_url("default/form-tab.png") -67px right no-repeat
+    color: #fff
     cursor: default
   
   /* tab pane */
   .panes .tab_panel
     display: none
-    border: 1px solid #666
-    border-width: 0 1px 1px 1px
-    min-height: 150px
-    padding: 15px 20px
-    background-color: #ddd  
+    background: #f0f0f0
+
+  /* next and previous btn styles */
+  .prev
+    float: left
+
+  .next
+    float: right

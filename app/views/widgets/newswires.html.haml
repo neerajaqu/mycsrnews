@@ -5,7 +5,7 @@
     - unless @newswires.empty?
       %div{:class => "panel_2"}
         = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
-        .list_stories
+        .list_items
           %ul
             - @newswires.each do |item|
               %li

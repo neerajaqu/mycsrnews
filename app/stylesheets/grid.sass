@@ -17,7 +17,6 @@
 @import default.sass
 @import application.sass
 @import formtastic.sass
-@import formtastic_changes.sass
 @import ui-lightness/jquery-ui-1.7.2.custom.sass
 @import jquery.jcarousel.sass
 @import jcarousel.skin.sass
@@ -101,9 +100,9 @@ body
   h3
     font-size: 11px
   h4
-    font-size: 13px
+    font-size: 14px
   p
-    font-size: 11.5px
+    font-size: 12px
 
 /**********************************************************************************************/
 /* UNIVERSAL LIST PANEL_1 */
@@ -116,6 +115,11 @@ body
     .itemBlock
       float: left
       width: 210px
+      .profilePic
+        height: 70px
+        width: 70px
+        img
+          width: 70px
     .thumb
       height: 52px
       width: 70px
@@ -124,6 +128,17 @@ body
         width: 70px
     .itemMeta
       width: 100%
+  .article
+    .profilePic
+      margin: 5px
+      width: 70px
+      height: 70px
+      img
+        width: 70px
+        height: 70px
+        &.moderator
+          height: 18px 
+          width: 18px
   .item_2
     .itemMeta
       width: 100%

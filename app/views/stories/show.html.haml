@@ -26,13 +26,11 @@
       .itemBlock
         .half-panel
           - if @story.images.present?
-            .thumb
-              = image_tag @story.images.first.url(:medium)
+            .thumb= image_tag @story.images.first.url(:medium)
             
           - if @story.media_item?
-            .thumb
-              = render_media_items @story, :size => 'large'
-
+            = render_media_items @story, :size => 'large'
+            
         %h1= @story.title
         .itemMeta
           - unless @story.is_article?
