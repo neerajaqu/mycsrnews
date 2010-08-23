@@ -2,7 +2,7 @@ class Admin::NewswiresController < AdminController
 
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
-    	:items => Newswire.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
+    	:items => Newswire.newest.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => Newswire,
     	:fields => [:title, :feed_id, :created_at],
     	:associations => { :belongs_to => { :feed => :feed_id } },
