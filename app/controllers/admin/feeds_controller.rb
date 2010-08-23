@@ -2,7 +2,7 @@ class Admin::FeedsController < AdminController
 
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
-    	:items => Feed.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
+    	:items => Feed.active.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => Feed,
     	:fields => [:title, :url, :rss, :created_at, :user_id],
     	:associations => { :belongs_to => { :user => :user_id } },
@@ -52,7 +52,7 @@ class Admin::FeedsController < AdminController
 
   def destroy
     @feed = Feed.find(params[:id])
-    @feed.destroy
+    @feed.update_attribute(:deleted_at, Time.now)
 
     redirect_to admin_feeds_path
   end

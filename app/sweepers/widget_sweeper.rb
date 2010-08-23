@@ -16,7 +16,14 @@ class WidgetSweeper < ActionController::Caching::Sweeper
     controller ||= ActionController::Base.new
     controller.expire_fragment "#{widget}_html"
   end  
-
+  
+  def self.expire_features
+    feature_list = [ "auto_feature", "featured_items"]
+    feature_list.each do |widget|
+      self.expire_item widget
+    end
+  end
+  
   def self.expire_some filter = nil, controller = nil
     widgets = self.widgets
     controller ||= ActionController::Base.new

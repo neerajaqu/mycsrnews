@@ -1,5 +1,5 @@
 class Metadata::SkipImage < Metadata
-
+  after_save :remove_all_images
   named_scope :key_sub_type_name, lambda { |*args| { :conditions => ["key_sub_type = ? AND key_name = ?", args.first, args.second] } }
 
   # HACK:: emulate validate_presence_of
@@ -20,4 +20,14 @@ class Metadata::SkipImage < Metadata
     self.key_name     ||= self.setting_name
   end
 
+  def remove_all_images
+    image_list = Image.find_by_remote_image_url(self.image_url)
+    image_list.each |image| do
+      current_imageable = image.imageable
+      if image.destroy
+        WrapperSweeper.expire_item current_imageable
+      end
+    end
+  end
+  
 end
