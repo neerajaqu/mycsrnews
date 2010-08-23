@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100811214903) do
+ActiveRecord::Schema.define(:version => 20100823173716) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -262,6 +262,7 @@ ActiveRecord::Schema.define(:version => 20100811214903) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "load_all",                     :default => false
+    t.datetime "deleted_at"
   end
 
   create_table "flags", :force => true do |t|
@@ -331,6 +332,7 @@ ActiveRecord::Schema.define(:version => 20100811214903) do
   end
 
   add_index "images", ["imageable_type", "imageable_id"], :name => "index_images_on_imageable_type_and_imageable_id"
+  add_index "images", ["remote_image_url"], :name => "index_images_on_remote_image_url"
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
   create_table "locales", :force => true do |t|
@@ -637,20 +639,20 @@ ActiveRecord::Schema.define(:version => 20100811214903) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer   "user_id",                     :limit => 8,                    :null => false
-    t.integer   "facebook_user_id",            :limit => 8, :default => 0
-    t.boolean   "isAppAuthorized",                          :default => false
-    t.datetime  "born_at"
-    t.timestamp "created_at",                                                  :null => false
-    t.datetime  "updated_at"
-    t.text      "bio"
-    t.integer   "referred_by_user_id",         :limit => 8, :default => 0
-    t.boolean   "comment_notifications",                    :default => false
-    t.boolean   "receive_email_notifications",              :default => true
-    t.boolean   "dont_ask_me_for_email",                    :default => false
-    t.datetime  "email_last_ask"
-    t.boolean   "dont_ask_me_invite_friends",               :default => false
-    t.datetime  "invite_last_ask"
+    t.integer  "user_id",                     :limit => 8,                    :null => false
+    t.integer  "facebook_user_id",            :limit => 8, :default => 0
+    t.boolean  "isAppAuthorized",                          :default => false
+    t.datetime "born_at"
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at"
+    t.text     "bio"
+    t.integer  "referred_by_user_id",         :limit => 8, :default => 0
+    t.boolean  "comment_notifications",                    :default => false
+    t.boolean  "receive_email_notifications",              :default => true
+    t.boolean  "dont_ask_me_for_email",                    :default => false
+    t.datetime "email_last_ask"
+    t.boolean  "dont_ask_me_invite_friends",               :default => false
+    t.datetime "invite_last_ask"
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

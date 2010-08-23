@@ -4,7 +4,7 @@ require 'feedzirra'
 module N2
   class FeedParser
     def self.update_feeds
-      feeds = Feed.find(:all, :conditions => ["specialType = ?", "default"])
+      feeds = Feed.find(:all, :conditions => ["deleted_at is null and specialType = ?", "default"])
       feeds.each { |feed| update_feed feed, false }
 
       expire_newswire_cache

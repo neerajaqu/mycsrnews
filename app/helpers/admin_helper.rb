@@ -90,6 +90,9 @@ module AdminHelper
       links << link_to('Send', send_global_admin_dashboard_message_path(item)) unless item.sent?
       links << link_to('Clear', clear_global_admin_dashboard_message_path(item)) if item.sent?
     end
+    if item.class.name == 'Feed'
+      links << link_to('Destroy', [:admin, item], :confirm => 'Are you sure?', :method => :delete)
+    end
     links.join ' | '
   end
 

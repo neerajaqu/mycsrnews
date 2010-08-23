@@ -53,6 +53,7 @@ class Admin::ImagesController < AdminController
     end
     if @image.destroy
     	expire_cache @imageable
+    	WidgetSweeper.expire_features
     end
 
     respond_to do |format|
