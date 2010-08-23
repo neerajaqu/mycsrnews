@@ -42,14 +42,14 @@ end
 
 after("deploy") do
   run "cd #{current_path} && rake n2:queue:restart_workers"
-  run "APP_NAME=#{application} cd #{current_path} && rake n2:queue:restart_scheduler"
+  run "cd #{current_path} && rake n2:queue:restart_scheduler APP_NAME=#{application}"
   deploy.god.start
   newrelic.notice_deployment
 end
 
 after("deploy:migrations") do
   run "cd #{current_path} && rake n2:queue:restart_workers"
-  run "APP_NAME=#{application} cd #{current_path} && rake n2:queue:restart_scheduler"
+  run "cd #{current_path} && rake n2:queue:restart_scheduler APP_NAME=#{application}"
   deploy.god.start
   newrelic.notice_deployment
 end
