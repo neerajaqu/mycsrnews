@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100823173716) do
+ActiveRecord::Schema.define(:version => 20100823190356) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -264,6 +264,8 @@ ActiveRecord::Schema.define(:version => 20100823173716) do
     t.boolean  "load_all",                     :default => false
     t.datetime "deleted_at"
   end
+
+  add_index "feeds", ["deleted_at"], :name => "index_feeds_on_deleted_at"
 
   create_table "flags", :force => true do |t|
     t.string   "flag_type"
