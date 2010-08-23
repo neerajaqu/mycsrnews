@@ -1,7 +1,6 @@
 en:
   stories:
     new:
-      new_story_header: "Post a story from the Web"
       new_story_bookmarklet_intro: "Try our bookmarklet!"
     show:
       via:  "Via {{source}} on {{date}}"
