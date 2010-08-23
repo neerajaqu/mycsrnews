@@ -5,7 +5,7 @@
   #thumbnails.scrollable
     .items
       - images.each do |image|
-        = image_tag image.url(:medium), :size=>"100x100"
+        = image_tag image.url(:thumb), :size=>"100x100"
   %a.prev.browse.right_scroll.next
 
   %hr{:style=>"clear: both"}

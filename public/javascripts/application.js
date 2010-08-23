@@ -335,7 +335,7 @@ $(function() {
     			var wrap = this.getOverlay().find(".contentWrap");
 
     			// load the page specified in the trigger
-    			wrap.html("<img src=\""+this.getTrigger().attr("src")+"\"\/>");
+    			wrap.html("<img src=\""+this.getTrigger().attr("src").replace(/thumb/, 'medium')+"\"\/>");
   			
   			
     		}
