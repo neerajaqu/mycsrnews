@@ -32,12 +32,10 @@
     :javascript
       $(function() {
         var audio = $('#audioplayer_1');
-        console.log(audio);
         if (audio) {
           AudioPlayer.setup("#{APP_CONFIG['base_url']}" + "/swfs/audio_player.swf", {
             width: 290
           });
-          console.log("Finished audio player setup");
         }
       });
 
