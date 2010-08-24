@@ -8,7 +8,7 @@
         .feature_scrollable_items
           - auto_feature.each do |item|
             .panel_items
-              = render :partial => 'shared/featured_items/panel4', :locals => { :item => item, :limit_title => 80, :limit_caption => 200}
+              = render :partial => 'shared/featured_items/panel3', :locals => { :item => item, :limit_title => 80, :limit_caption => 200}
       :javascript
         $(function() {            
           $(".feature_scrollable_panel_sidebar").scrollable({speed : #{animation_speed}, circular: true, mousewheel: true}).autoscroll({ autoplay: true});

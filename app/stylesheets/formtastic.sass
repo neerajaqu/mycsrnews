@@ -1,76 +1,81 @@
-.panel_1, .panel_2, .panel_3
-  form.formtastic
-    position: relative
-    margin: 0
-    padding: 0
+form.formtastic
+  position: relative
+  margin: 0
+  padding: 0
 
-    h1, h2, h3
-      color: #555
-      line-height: 100%
-      display: block
-      width: 95%
-      margin: 0 auto 10px
-  
-    h1
-      font-size: 18px
-    h2
-      font-weight: normal
-      font-size: 16px
-    h3
-      font-weight: normal
-      font-size: 14px
+  h1, h2, h3
+    color: #555
+    line-height: 100%
+    display: block
+    width: 95%
+    margin: 0 auto 10px
 
-.panel_1, .panel_2, .panel_3
-  form.formtastic
-    fieldset
-      &.inputs
-        li
-          width: 100%
-          display: inline-block
-          margin: 0 auto 10px
+  h1
+    font-size: 18px
+  h2
+    font-weight: normal
+    font-size: 16px
+  h3
+    font-weight: normal
+    font-size: 14px
 
-          label
-            display: block
-            padding: 4px  4px
-            font-size: 12px
-            font-weight: bold
 
-          input
-            width: 80%
-            &.browse-media-item
-              border: none
+form.formtastic
 
-          textarea
-            width: 100%
-            resize: vertical
-            max-height: 300px
 
-          p.inline-hints
-            display: block
-            width: 100%
-            font-size: 11px
-            color: #666
+  fieldset
 
-        .boolean 
-          margin: 0 0 10px
-          label
-            padding: 0
-            margin: 0 
-            width: auto
 
-          input
-            margin: 0 5px 0 0
-            width: auto
 
-      &.buttons
+    &.inputs
+      li
         width: 100%
-        background: #ddd
-        margin: 0px
+        display: inline-block
+        margin: 0 auto 10px
 
-        li
-          margin: 5px 10px
-          display: inline-block
+        label
+          display: block
+          padding: 4px  4px
+          font-size: 12px
+          font-weight: bold
 
+        input
+          width: 80%
+          &.browse-media-item
+            border: none
+
+        textarea
+          width: 100%
+          resize: vertical
+          max-height: 300px
+
+        p.inline-hints
+          display: block
+          width: 100%
+          font-size: 11px
+          color: #666
+
+      .boolean 
+        margin: 0 0 10px
+        label
+          padding: 0
+          margin: 0 
+          width: auto
+
+        input
+          margin: 0 5px 0 0
+          width: auto
+
+
+.panel_2, .panel_3
+  form.formtastic
+    fieldset.buttons
+      width: 100%
+      background: #ddd
+      margin: 0px
+      li
+        margin: 5px 10px
+        display: inline-block
 
 .panel_2
   form.formtastic
@@ -78,6 +83,7 @@
       border: 0
       width: 95%
       margin: 0 auto 10px
+
 
 .panel_3
   form.formtastic
