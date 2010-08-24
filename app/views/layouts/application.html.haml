@@ -26,8 +26,20 @@
       :javascript
         try{Typekit.load();}catch(e){}
           
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', "http://platform.twitter.com/anywhere.js?id=#{get_setting('oauth_key').value}&v=1",'application', 'jquery.jgrowl','scrollable.min.js','scrollable.autoscroll.min.js', 'jquery.ThreeDots.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', "http://platform.twitter.com/anywhere.js?id=#{get_setting('oauth_key').value}&v=1",'application', 'jquery.jgrowl','scrollable.min.js','scrollable.autoscroll.min.js', 'jquery.ThreeDots.min.js', 'audio-player.js'
     = javascript_include_tag '/users/current'
+
+    :javascript
+      $(function() {
+        var audio = $('#audioplayer_1');
+        console.log(audio);
+        if (audio) {
+          AudioPlayer.setup("#{APP_CONFIG['base_url']}" + "/swfs/audio_player.swf", {
+            width: 290
+          });
+          console.log("Finished audio player setup");
+        }
+      });
 
     -# IE Debugging 
     =# javascript_include_tag 'http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'

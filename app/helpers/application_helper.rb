@@ -358,7 +358,17 @@ EMBED
 
   def embed_html_audio audio, options = {}
     <<EMBED
-<embed src= "http://www.odeo.com/flash/audio_player_standard_gray.swf" quality="high" width="300" height="52" allowScriptAccess="always" wmode="transparent"  type="application/x-shockwave-flash" flashvars= "valid_sample_rate=true&external_url=#{audio.url}" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+<h3>#{audio.title || audio.url}</h3>
+<p id="audioplayer_1">#{audio.artist}</p>
+<script type="text/javascript">  
+$(function() {
+  AudioPlayer.embed("audioplayer_1", {  
+        soundFile: "#{audio.url}",  
+        titles: "#{audio.title}",  
+        artists: "#{audio.artist}"  
+  });  
+});
+</script>  
 EMBED
   end
 
