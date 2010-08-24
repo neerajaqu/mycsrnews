@@ -48,7 +48,7 @@ class Admin::Metadata::SkipImagesController < Admin::MetadataController
       render_new @skip_image
     end
   end
-
+  
   def destroy
     @skip_image = Metadata::SkipImage.find(params[:id])
     @skip_image.destroy

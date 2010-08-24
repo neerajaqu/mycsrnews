@@ -1,7 +1,7 @@
 -# expects: local 'model_name, item, index'
-- if model_name = "article"
+- if item.class.name.underscore == "article"
   - item = item.content
-- if index = 0
+- if index == 0
   .featured
     %div{:class => "item_1 #{model_name.underscore}"}
       .thumb

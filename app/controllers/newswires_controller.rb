@@ -7,7 +7,7 @@ class NewswiresController < ApplicationController
   def index
     @current_sub_tab = 'Browse Wires'
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
-    @newswires = Newswire.unpublished.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @newswires = Newswire.unpublished.newest.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
     @paginate = true
   end
 
