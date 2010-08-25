@@ -15,4 +15,8 @@ class Audio < ActiveRecord::Base
     self.user = current_user unless self.user.present?
   end
 
+  def default_title
+    title.present? ? title : url
+  end
+
 end

@@ -358,7 +358,7 @@ EMBED
 
   def embed_html_audio audio, options = {}
     <<EMBED
-<h3>#{audio.title || audio.url}</h3>
+<h3>#{audio.default_title}</h3>
 <p id="audioplayer_1">#{audio.artist}</p>
 <script type="text/javascript">  
 $(function() {
