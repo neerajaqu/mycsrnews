@@ -12,4 +12,5 @@
   = render :partial => 'shared/sidebar/resource_sections_list', :locals => { :resource_sections => @newest_resource_sections }
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @top_resources, :title => t('.top_resources') }
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @newest_resources, :title => t('.newest_resources') }
+  = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Resource , :locale_var => 'popular_tags' }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

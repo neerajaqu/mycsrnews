@@ -113,6 +113,7 @@ class ArticlesController < ApplicationController
     tag_name = CGI.unescape(params[:tag])
     @paginate = true
     @articles = Article.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    render :template => 'articles/index'
   end
 
   private
