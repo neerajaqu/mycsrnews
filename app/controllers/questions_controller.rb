@@ -68,6 +68,13 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def tags
+    tag_name = CGI.unescape(params[:tag])
+    @paginate = true
+    @questions = Question.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    render :template => 'questions/index'
+  end
+
   private
 
   def set_current_tab

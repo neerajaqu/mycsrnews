@@ -52,8 +52,8 @@
           %p= nl2br(@story.caption)
         - else
           %p= sanitize caption(@story.caption, 500)
-        - if @story.media_item?
-          = render_media_items @story, :size => 'large'
+      - if @story.media_item?
+        = render_media_items @story, :size => 'large'
       - if @story.url.present?
         %div.itemBlock.clearfix
           .float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
