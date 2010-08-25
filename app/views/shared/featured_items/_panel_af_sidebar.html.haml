@@ -1,0 +1,13 @@
+.full-panel
+  .thumb= link_to image_tag(item.featured_image_url), item.featured_url
+  .itemBlock
+    %h1
+      %a.ellipsis_title_2
+        %span.ellipsis_text
+          = link_to item.featured_title, item.featured_url, { :class => 'ellipsis_text'}
+    %p.ellipsis_caption_5
+      %span.ellipsis_text= sanitize(strip_tags(item.featured_blurb))
+    - unless item.featured_related_count == 0
+      %span.btnComment== #{link_to t("#{item.featured_related_locale}"), item} #{item.featured_related_count}
+    -else
+      %span.btnComment== #{like_link item} #{item.num_votes}
