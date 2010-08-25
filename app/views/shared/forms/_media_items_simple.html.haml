@@ -12,7 +12,7 @@
     = video_form.input :remote_video_url, :label => false, :required => false
     %a{:href=> "#"}= t('add_by_embed_code')
     -# = video_form.input :embed_code, :label => false, :required => false
-    %a{:href=> "#"}= t('edit_caption')
+    -#%a{:href=> "#"}= t('edit_caption')
 
 %h1= t('media.add_audio')
 
@@ -25,7 +25,7 @@
   - item.audios.build if item.audios.empty?
   - form.semantic_fields_for :audios do |audio_form|
     = audio_form.input :url, :required => false, :label => false
-    %a{:href=> "#"}= t('edit_caption')
+    -#%a{:href=> "#"}= t('edit_caption')
     -#
       = audio_form.input :title, :required => false
       = audio_form.input :album, :required => false

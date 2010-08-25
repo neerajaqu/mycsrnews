@@ -3,5 +3,5 @@
     = image_tag f.object.image.url  
   = f.input :remote_image_url, :label => false, :required => false, :hint => false, :input_html => {:class=>"image-url-input"}
   %li= f.file_field :image, :label=>nil, :class => "browse-media-item"
-  %a{:href=> "#"}= t('edit_caption')
+  -#%a{:href=> "#"}= t('edit_caption')
   = delete_image_simple(f)
