@@ -7,8 +7,12 @@
       - unless item_list.empty?
         %ul
           - item_list.each_with_index do |item, index|
-            %li
-              = render :partial => 'shared/items/featured_generic', :locals => { :model_name => model_name, :item => item, :index => index }
+            - if item.class.name.underscore == "event"
+              %li
+                = render :partial => 'shared/items/featured_event', :locals => { :item => item, :index => index }            
+            - else            
+              %li
+                = render :partial => 'shared/items/featured_generic', :locals => { :item => item, :index => index }
       - else
         %ul
           %li= t('no_features')

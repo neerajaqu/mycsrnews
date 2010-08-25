@@ -19,14 +19,20 @@ en:
     top_ideas: "Top Ideas"
     top_board_ideas: "Top {{name}} Ideas"
     newest_board_ideas: "Newest {{name}} Ideas"
+    featured_title: "Featured Ideas"    
   resources:
     newest_resource_sections: "Newest {{name}} Links"
     top_resource_sections: "Top {{name}} Links"
     top_resources: "Top Links"
     newest_resources: "Newest Links"
+    featured_title: "Featured Resources"    
   events:
     newest_events: "Newest Events"
     top_events: "Top Events"
+    featured_title: "Featured Events"    
+    place: "Place: {{place}}"
+    start_time: "Time: {{start_time}}"
+
   media:
     add_image: "Add Image"
     add_video: "Add Video"

@@ -1,0 +1,47 @@
+-# expects: local 'item, index'
+- if index == 0
+  .featured
+    %div{:class => "item_2 event"}
+      .thumb
+        - if item.images.present?
+          = image_tag item.images.first.url(:thumb)
+        -else
+          = image_tag ('default/default_thumb.gif')
+      .itemBlock
+        %h2
+          = link_to item.item_title, path_to_self(item.item_link)
+        .itemMeta
+          %h3
+            == t('events.place',item.location)
+          %h3
+            == t('events.start_time',item.start_time.to_s :short_with_time)
+        .itemMeta
+          %span.btnComment== #{link_to t('comments'), polymorphic_url(item.item_link, :anchor => "commentListTop")} #{item.comments_count}
+          %span.btnComment== #{like_link item.item_link} #{item.votes_tally}
+- else
+  .item_2
+    .item_block
+      %h4= link_to item.item_title, path_to_self(item.item_link)
+      
+        .featured
+          .item_2.event
+            .itemBlock
+              %h2
+                %a
+                  LOLCAT party in capitlol hill.
+              .itemMeta
+                %h3
+                  Place: 123 N Carminite wy, Capitol Hill
+                %h3
+                  Time: 9:30pm
+              .itemMeta
+                %span.btnComment
+                  %a
+                    View Details
+                %span.btnComment
+                  %a
+                    Comment
+                %span.btnComment
+                  %a.voteUp
+                    Like
+      

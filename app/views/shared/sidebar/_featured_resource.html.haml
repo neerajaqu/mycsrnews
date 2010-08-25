@@ -1,16 +1,3 @@
--# @expects: local 'resource'
-
-- cache :featured_resources_html, :expires_in => 15.seconds do
-  - featured_resources ||= Resource.featured
-  - unless featured_resources.empty?
-    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar.clearfix
-        %h2= t('.featured_resource_title')
-      .list_items.clearfix
-        %ul
-          - featured_resources.each do |resource|
-            %li
-              .itemBlock
-                .profilePic= local_linked_profile_pic resource.user
-                = link_to resource.title, resource_path(resource)
-                %p= (resource.details.present?) ? resource.details : 'no details'
+- cache :featured_resources_html, :expires_in => 15.minutes do
+  - item_list ||= Resource.featured
+  = render :partial => 'shared/lists/featured_generic_list', :locals => { :model_home => resources_path, :list_title => t('resources.featured_title'), :item_list => item_list}

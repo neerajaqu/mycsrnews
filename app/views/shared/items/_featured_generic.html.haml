@@ -1,9 +1,10 @@
--# expects: local 'model_name, item, index'
-- if item.class.name.underscore == "article"
+-# expects: local 'item, index'
+- model_name = item.class.name.underscore
+- if model_name == "article"
   - item = item.content
 - if index == 0
   .featured
-    %div{:class => "item_1 #{model_name.underscore}"}
+    %div{:class => "item_1 #{model_name}"}
       .thumb
         - if item.images.present?
           = image_tag item.images.first.url(:thumb)
