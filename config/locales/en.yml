@@ -51,6 +51,7 @@ en:
     weekly: "Weekly"
     yearly: "Yearly"
     alltime: "All Time"
+  welcome_name: "Welcome {{name}}"  
   newest_newswires_title: "Latest Wire News"
   post_newswire: "Post"
   read_newswire: "Read"

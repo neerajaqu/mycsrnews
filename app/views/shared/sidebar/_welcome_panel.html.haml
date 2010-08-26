@@ -1,5 +1,14 @@
 -# later could add FB connect button if not signed in or registered in web connect
-- unless current_user.present? and current_user.is_established?
+- if current_user.present? and current_user.is_established?
+  .panel_1.featureWrap
+    .item_1.users
+      .thumb.user
+        = local_linked_profile_pic current_user
+      .itemBlock
+        %h4= t('welcome_name', :name => current_user.name)
+        %h3= t('karma_score', :score => current_user.karma_score)
+        -# %h3 City, State
+- else
   - cache :welcome_panel_html do
     - if get_setting('welcome_layout').present?
       - case get_setting('welcome_layout').value
