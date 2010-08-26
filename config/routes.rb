@@ -4,6 +4,10 @@ ActionController::Routing::Routes.draw do |map|
   # Set locale and make pretty urls
   map.filter 'locale'
 
+  # Mogli
+  map.resource :oauth, :controller=>"oauth"
+  map.oauth_callback "/oauth/create", :controller=>"oauth", :action=>"create"
+
   # TEST DESIGN ROUTE
   map.test_design '/test_design.:format', :controller => 'home', :action => 'test_design'
 

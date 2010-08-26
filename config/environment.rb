@@ -46,6 +46,7 @@ Rails::Initializer.run do |config|
   config.gem "compass-960-plugin", :lib => 'ninesixty'
   config.gem "eostrom-zvent", :lib => 'zvent'
   config.gem "oauth"
+  config.gem "mogli"
   config.gem "twitter"
   config.gem "bitly"
   config.gem "resque"
