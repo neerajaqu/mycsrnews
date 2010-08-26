@@ -1,5 +1,6 @@
 !*.gitignore
 public/maintenance.*
+public/sitemap*
 public/uploads
 public/cache/*
 !public/cache/.gitignore

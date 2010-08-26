@@ -38,7 +38,7 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
     sitemap.add idea_path(a), :lastmod => a.updated_at
   end
 
-  IdeaBoard.active.find(:all).each do |a|
+  IdeaBoard.find(:all).each do |a|
     sitemap.add idea_board_path(a), :lastmod => a.updated_at, :priority => 0.4
   end
 
