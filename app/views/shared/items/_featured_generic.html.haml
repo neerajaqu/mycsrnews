@@ -1,5 +1,5 @@
 -# expects: local 'model_name, item, index'
-- if item.class.name == "article"
+- if item.class.name.underscore == "article"
   - item = item.content
 - if index == 0
   .featured

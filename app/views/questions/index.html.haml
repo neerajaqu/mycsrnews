@@ -67,4 +67,5 @@
   = render :partial => 'shared/sidebar/unanswered_questions'
   = render :partial => 'shared/sidebar/top_answers'
   = render :partial => 'shared/sidebar/newest_answers'
+  = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Question , :locale_var => 'popular_tags' }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

@@ -647,6 +647,10 @@ $ColumnCorners: none
 /**********************************************************************************************/
 /* INTERIOR PANELS */
 
+.full-panel
+  width: 100%
+  float: left
+
 .half-panel, .third-panel, .third-panel-small, .quarter-panel
   float: left
   display: block
@@ -835,6 +839,7 @@ $ColumnCorners: none
 
   /* FORM STYLES - (Outside of formtastic) */
   .formBox
+    display: inline-block
     background: $formBoxBG
 
   /* BULLETED LIST */
@@ -1643,3 +1648,6 @@ body div.jGrowl div.jGrowl-closer
 
 .user-present
   display: none !important
+
+.wizard-errors
+  color: red

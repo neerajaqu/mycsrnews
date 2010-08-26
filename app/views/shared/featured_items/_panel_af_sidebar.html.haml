@@ -1,0 +1,14 @@
+- limit_title = 100
+- limit_caption = 300
+.full-panel
+  .thumb= link_to image_tag(item.featured_image_url), item.featured_url
+  .itemBlock
+    %h1
+      %a.ellipsis_title_2
+        %span.ellipsis_text
+          = link_to caption(item.featured_title,limit_title), item.featured_url, { :class => 'ellipsis_text'}
+    %p.ellipsis_caption_5
+      %span.ellipsis_text= caption(sanitize(strip_tags(item.featured_blurb)),limit_caption)
+    %span.btnComment== #{like_link item} #{item.num_votes}
+    %span.btnComment== #{link_to t("#{item.featured_related_locale}"), item} #{item.featured_related_count}
+

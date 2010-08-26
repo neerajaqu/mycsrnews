@@ -113,12 +113,13 @@ class ArticlesController < ApplicationController
     tag_name = CGI.unescape(params[:tag])
     @paginate = true
     @articles = Article.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    render :template => 'articles/index'
   end
 
   private
   
   def check_valid_user
-    redirect_to home_index_path and return false unless (current_user == Article.find(params[:id]).author or current_user.is_moderator?)
+    redirect_to home_index_path and return false unless current_user and ((current_user == Article.find(params[:id]).author or current_user.is_moderator?))
   end
 
   def set_current_tab
