@@ -7,16 +7,20 @@
       - unless item_list.empty?
         %ul
           - item_list.each_with_index do |item, index|
-            - if item.class.name.underscore == "event"
-              %li
-                = render :partial => 'shared/items/featured_event', :locals => { :item => item, :index => index }            
-            - else            
-              %li
-                = render :partial => 'shared/items/featured_generic', :locals => { :item => item, :index => index }
+            - case item.class.name.underscore
+              - when "event"
+                %li
+                  = render :partial => 'shared/items/featured_event', :locals => { :item => item, :index => index }            
+              - when "comment"
+                %li
+                  = render :partial => 'shared/items/featured_comment', :locals => { :item => item }
+              - else
+                %li
+                  = render :partial => 'shared/items/featured_generic', :locals => { :item => item, :index => index }
       - else
         %ul
           %li= t('no_features')
-    - unless item_list.empty?
+    - unless item_list.empty? or model_name == 'comment'
       .itemActions
         %a{:href => model_home}= t('more_features') 
           

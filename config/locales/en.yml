@@ -78,6 +78,9 @@ en:
   like: "Like"
   dislike: "Dislike"
   comments: "Comments"
+  comments:
+    featured_title: "Featured Comments"
+    view: "View"
   tweet: "Tweet"
   in: "in"
   link_here: "Link to this page"
