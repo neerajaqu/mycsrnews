@@ -42,10 +42,6 @@ class StoriesController < ApplicationController
     set_outbrain_item @story
   end
 
-  def wizard
-    new
-  end
-  
   def new 
    if current_user.present? and !current_user.is_moderator? and get_setting('limit_daily_member_posts').present? and get_setting('limit_daily_member_posts').value.to_i <= current_user.count_daily_posts
       flash[:error] = t('error_daily_post_limit')
