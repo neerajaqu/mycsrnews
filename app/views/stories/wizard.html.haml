@@ -7,28 +7,28 @@
     			var url = $("#content_url");
     			if (url.val() == '') {
     				url.siblings("label").addClass("wizard-errors")
-    				console.log("ERROR:: BLANK URL");
     				return false;
           }
           url.siblings("label").removeClass("wizard-errors");
         }
       });
       var api = $("ul.tabs", wizard).data("tabs");
-      console.log(wizard);
-      console.log(api);
-      	console.log(api.getTabs());
 
       // "next tab" button
       $("input.form-btn.next", wizard).click(function(event) {
       	event.preventDefault();
         api.next();
-        console.log("post next");
       });
 
       // "previous tab" button
       $("input.form-btn.prev", wizard).click(function() {
       	event.preventDefault();
         api.prev();
+      });
+      $('.toggle-embed-video').click(function(event) {
+      	event.preventDefault();
+      	$('textarea.embed-video', $(this).parents('fieldset.inputs')).removeClass('hide').show();
+      	$(this).remove();
       });
     });      
 - content_for :sub_nav do
