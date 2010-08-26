@@ -125,6 +125,16 @@ settings = [
  { :key_sub_type => 'ads', :key_name => 'helios_url', :value => (APP_CONFIG['helios_url'] || "http://subdomain.xxx.com" ) },
  { :key_sub_type => 'ads', :key_name => 'helios_script_url', :value => (APP_CONFIG['helios_script_url'] || "http://scriptsubdomain.xxx.com" ) },
  { :key_sub_type => 'ads', :key_name => 'helios_list_pos', :value => (APP_CONFIG['helios_list_pos'] || "728x90_1,468x60_1,300x250_1,160x600_1,250x250_1,200x200_1,336x280_1" ) },
+ { :key_sub_type => 'ads', :key_name => 'helios_slot_name', :value => (APP_CONFIG['helios_slot_name'] || "default" ) },
+ { :key_sub_type => 'ads', :key_name => 'openx_slot_name', :value => (APP_CONFIG['openx_slot_name'] || "default" ) },
+ { :key_sub_type => 'ads', :key_name => 'openx_zone_banner', :value => "1" },
+ { :key_sub_type => 'ads', :key_name => 'openx_zone_leaderboard', :value => "2" },
+ { :key_sub_type => 'ads', :key_name => 'openx_zone_small_square', :value => "3" },
+ { :key_sub_type => 'ads', :key_name => 'openx_zone_skyscraper', :value => "4" },
+ { :key_sub_type => 'ads', :key_name => 'openx_zone_square', :value => "5" },
+ { :key_sub_type => 'ads', :key_name => 'openx_zone_medium_rectangle', :value => "6" },
+ { :key_sub_type => 'ads', :key_name => 'openx_zone_large_rectangle', :value => "7" }, 
+ { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => ( APP_CONFIG['google_adsense_slot_name'] || "default") },
  { :key_sub_type => 'ads', :key_name => 'google_adsense_account_id', :value => (APP_CONFIG['google_adsense_account_id'] || "ca-pub-9975156792632579" ) },
  { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => (APP_CONFIG['google_adsense_slot_name'] || "Needle_Small") }
 ]

@@ -32,7 +32,6 @@ en:
     featured_title: "Featured Events"    
     place: "Place: {{place}}"
     start_time: "Time: {{start_time}}"
-
   media:
     add_image: "Add Image"
     add_video: "Add Video"

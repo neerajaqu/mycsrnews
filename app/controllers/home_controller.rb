@@ -56,6 +56,11 @@ class HomeController < ApplicationController
     render :partial => 'shared/google_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 
+  def openx_ads
+    slot_name = params[:slot_name] || get_setting('openx_slot_name').try(:value)
+    render :partial => 'shared/ads/openx_ads', :locals => { :slot_name => slot_name },:layout => false
+  end
+
   def helios_ads
     slot_name = params[:slot_name] || APP_CONFIG['helios_slot_name']
     render :partial => 'shared/ads/helios_ads', :locals => { :slot_name => slot_name },:layout => false
