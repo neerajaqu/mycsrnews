@@ -15,6 +15,7 @@ class Forum < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true
 
   named_scope :positioned, :order => ["position desc, created_at desc"]
+  named_scope :alpha, :order => ["name asc"]
 
   validates_presence_of :name, :description
 

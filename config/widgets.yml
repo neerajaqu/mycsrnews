@@ -118,6 +118,8 @@ widgets:
     newest_newswires:
       partial: '/shared/sidebar/newest_newswires'
       locals: 'newest_newswires'
+    newest_topics:
+      partial: '/shared/sidebar/newest_topics'
     rotate_question_widgets:
       partial: '/shared/sidebar/rotate_question_widgets'
     top_answers:
