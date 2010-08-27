@@ -53,6 +53,14 @@ ActionController::Routing::Routes.draw do |map|
   map.tagged_articles '/articles/tag/:tag.:format', :controller => 'articles', :action => 'tags'
   map.tagged_forum_with_page '/forums/:forum_id/tag/:tag/page/:page.:format', :controller => 'topics', :action => 'tags'
   map.tagged_forum '/forums/:forum_id/tag/:tag.:format', :controller => 'topics', :action => 'tags'
+  map.tagged_ideas_with_page '/ideas/tag/:tag/page/:page.:format', :controller => 'ideas', :action => 'tags'
+  map.tagged_ideas '/ideas/tag/:tag.:format', :controller => 'ideas', :action => 'tags'
+  map.tagged_resources_with_page '/resources/tag/:tag/page/:page.:format', :controller => 'resources', :action => 'tags'
+  map.tagged_resources '/resources/tag/:tag.:format', :controller => 'resources', :action => 'tags'
+  map.tagged_questions_with_page '/questions/tag/:tag/page/:page.:format', :controller => 'questions', :action => 'tags'
+  map.tagged_questions '/questions/tag/:tag.:format', :controller => 'questions', :action => 'tags'
+  map.tagged_events_with_page '/events/tag/:tag/page/:page.:format', :controller => 'events', :action => 'tags'
+  map.tagged_events '/events/tag/:tag.:format', :controller => 'events', :action => 'tags'
   map.idea_tag_with_page '/ideas/tag/:tag/page/:page.:format', :controller => 'ideas', :action => 'tags'
   map.idea_tag '/ideas/tag/:tag.:format', :controller => 'ideas', :action => 'tags'
   map.resource_tag_with_page '/resources/tag/:tag/page/:page.:format', :controller => 'resources', :action => 'tags'
@@ -60,7 +68,7 @@ ActionController::Routing::Routes.draw do |map|
   map.event_tag_with_page '/events/tag/:tag/page/:page.:format', :controller => 'events', :action => 'tags'
   map.event_tag '/events/tag/:tag.:format', :controller => 'events', :action => 'tags'
   map.top_users '/users/top/:top.:format', :controller => 'users', :action => 'index'
-  map.resources :stories, :member => { :like => [:get, :post] },:collection => { :wizard => [:get, :post], :parse_page => [:get, :post], :index => [:get, :post] }, :has_many => :comments
+  map.resources :stories, :member => { :like => [:get, :post] },:collection => { :parse_page => [:get, :post], :index => [:get, :post] }, :has_many => :comments
   map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags, :related_items], :as => 'stories'
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] }, :has_many => [ :flags]
   map.resources :related_items
@@ -80,7 +88,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :forums, :has_many => [:topics]
   map.resources :topics, :has_many => [:comments]
   map.resource :session
-  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
+  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:openx_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
   map.resources :predictions, :collection => { :index => [:get, :post],  :my_predictions => [:get, :post], :scores => [:get, :post] }
   map.resources :prediction_groups, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post], :play => [:get, :post] }, :has_many => [:comments, :prediction_questions, :flags]
   map.resources :prediction_questions, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post] }, :has_many => [ :prediction_guesses ]

@@ -27,6 +27,17 @@ form.formtastic
 /**********************************************************************************************/
 /* GENERAL FORM STYLES*/
 form.formtastic
+
+  ul.errors
+    color: #cc0000
+    margin: 0.5em 0 0 25%
+    list-style: square
+
+    li
+      padding: 0
+      border: none
+      display: list-item
+
   fieldset
     &.inputs
       li
@@ -52,11 +63,16 @@ form.formtastic
           min-height: 170px
           max-height: 300px
 
-        p.inline-hints
-          display: block
-          width: 100%
-          font-size: 11px
-          color: #666
+        p
+          &.inline-hints
+            display: block
+            width: 100%
+            font-size: 11px
+            color: #666
+
+          &.inline-errors
+            color: #cc0000
+            margin: 0.5em 0 0 25%
 
       .boolean 
         margin: 0 0 10px

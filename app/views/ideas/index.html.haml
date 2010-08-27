@@ -12,4 +12,6 @@
   = render :partial => 'shared/sidebar/idea_boards_list', :locals => { :idea_boards => @newest_idea_boards }
   = render :partial => 'shared/sidebar/top_ideas'
   = render :partial => 'shared/sidebar/newest_ideas'
+  = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Idea , :locale_var => 'popular_tags' }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
+  

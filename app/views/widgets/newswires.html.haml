@@ -3,7 +3,7 @@
 - unless @filter
   - cache "widget_newswires_#{@count}_html", :expires_in => 15.minutes do
     - unless @newswires.empty?
-      %div{:class => "panel_2"}
+      %div{:class => "panel_1"}
         = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
         .list_items
           %ul

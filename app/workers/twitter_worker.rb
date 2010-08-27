@@ -2,10 +2,10 @@ class TwitterWorker
   @queue = :twitter
 
   def self.perform()
-    return unless Metadata::Setting.find_setting( 'tweet_popular_items')
+    return unless Metadata::Setting.find_setting('tweet_popular_items').try(:enabled?)
     default_url_options[:host] = Metadata::Setting.find_setting('default_host').value
     
-    if !Metadata::Setting.find_setting('oauth_consumer_key').present? && !Metadata::Setting.find_setting('oauth_consumer_secret'].present?
+    if !Metadata::Setting.find_setting('oauth_consumer_key').present? && !Metadata::Setting.find_setting('oauth_consumer_secret').present?
       puts "Your Twitter account is not configured run 'rake n2:twitter:connect'."
     else
       options =Event.options_for_tally().merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
@@ -66,8 +66,6 @@ class TwitterWorker
       # tweet_articles(twitter, @articles)
       tweet_stories(twitter, @stories)
     end
-  end
-
   end
 
   def tweet_events(twitter, events)

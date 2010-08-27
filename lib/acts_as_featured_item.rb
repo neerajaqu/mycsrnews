@@ -32,7 +32,7 @@ module Newscloud
         def featured_image_url
           @default_image_url = APP_CONFIG['default_image']
           if self.respond_to?('images')
-            return self.images.first.url(:featured) if self.images.present?
+            return self.images.first.url(:medium) if self.images.present?
           else
             [:image_url, :get_image_url].each do |method|
               return self.send(method) if self.respond_to?(method) and self.send(method).present?
