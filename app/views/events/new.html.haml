@@ -16,8 +16,12 @@
           = form.input :description, :input_html => { :rows => 5 }, :label => t('.label_event_description'), :hint => t('.hint_event_description'), :required => false
           = form.input :url, :required => false, :label => t('.label_event_url'), :hint => t('.hint_event_url')
           = form.input :tags_string,:label => t('tags'),  :required => false, :hint => t('tags_hint')
-          = form.input(:start_time, :as => :string, :required =>true) 
-          = form.input(:end_time, :as => :string, :required =>false) 
+        - form.inputs do
+          .half-panel
+            = form.input(:start_time, :as => :string, :required =>true)
+          .half-panel
+            = form.input(:end_time, :as => :string, :required =>false) 
+        - form.inputs do
           = form.input :location, :required => true,:label => t('.label_event_location'), :hint => t('.hint_event_location')
           = form.input :street, :required => false
           = form.input :city, :required => false

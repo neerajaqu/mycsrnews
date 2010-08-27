@@ -1,9 +1,11 @@
+/**********************************************************************************************/
+/* FORMTASTIC HEADER STYLES */
 form.formtastic
   position: relative
   margin: 0
   padding: 0
 
-  h1, h2, h3
+  h1, h2, h3, h4
     color: #555
     line-height: 100%
     display: block
@@ -18,20 +20,20 @@ form.formtastic
   h3
     font-weight: normal
     font-size: 14px
-
-
+  h4
+    font-size: 14px
+    font-weight: bold
+    margin: 10px 0
+/**********************************************************************************************/
+/* GENERAL FORM STYLES*/
 form.formtastic
-
-
   fieldset
-
-
-
     &.inputs
       li
-        width: 100%
-        display: inline-block
+        display: block
         margin: 0 auto 10px
+        &.date-picker
+          width: 50%
 
         label
           display: block
@@ -47,6 +49,7 @@ form.formtastic
         textarea
           width: 100%
           resize: vertical
+          min-height: 170px
           max-height: 300px
 
         p.inline-hints
@@ -66,6 +69,8 @@ form.formtastic
           margin: 0 5px 0 0
           width: auto
 
+/**********************************************************************************************/
+/* PANEL FORM ITERATIONS */
 
 .panel_2, .panel_3
   form.formtastic
@@ -82,13 +87,14 @@ form.formtastic
     fieldset
       border: 0
       width: 95%
-      margin: 0 auto 10px
-
+      margin: 10px auto 
 
 .panel_3
   form.formtastic
     fieldset
       border: 0
-      width: 80%
-      margin: 20px auto
+      width: 90%
+      margin: 10px auto
+    .date-picker
+      
 
