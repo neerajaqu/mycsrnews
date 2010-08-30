@@ -4,6 +4,7 @@ class ForumsController < ApplicationController
 
   def index
     @forums = Forum.alpha
+    set_sponsor_zone('forums')
   end
 
   def show

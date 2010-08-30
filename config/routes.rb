@@ -114,6 +114,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :ad_layouts
     admin.resources :ads
     admin.resources :title_filters
+    admin.resources :sponsor_zones
     admin.resources :activity_scores
     admin.resources :ideas
     admin.resources :idea_boards
@@ -149,6 +150,7 @@ ActionController::Routing::Routes.draw do |map|
       metadata.resources :activity_scores
       metadata.resources :skip_images
       metadata.resources :title_filters
+      metadata.resources :sponsor_zones
       metadata.resources :custom_widgets
       metadata.resources :ad_layouts
     end

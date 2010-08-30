@@ -8,6 +8,8 @@
   = render :partial => 'shared/forums', :locals => { :forums => @forums }
 #col_right
   = render :partial => 'shared/sidebar/forums_whatisthis'
+  - if @sponsor_zone_code
+    = render :partial => 'shared/external/traffic_spaces_wrapper'
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_forums'
   = render :partial => 'shared/sidebar/newest_topics'

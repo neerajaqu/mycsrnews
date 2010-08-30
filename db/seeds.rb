@@ -120,6 +120,7 @@ settings = [
  { :key_sub_type => 'stats', :key_name => 'google_analytics_site_id', :value => (APP_CONFIG['google_analytics_site_id'] || "1231232" ) },
  { :key_sub_type => 'sitemap', :key_name => 'google-site-verification', :value => "WS8kMC8-Ds77777777777Xy6QcmRpWAfY" },
  { :key_sub_type => 'sitemap', :key_name => 'yahoo-site-verification', :value => "WS87ds77" },
+ { :key_sub_type => 'ads', :key_name => 'sponsor_zones_enabled', :value => "false" },
  { :key_sub_type => 'ads', :key_name => 'platform', :value => (APP_CONFIG['ad_platform'] || "google" ) },
  { :key_sub_type => 'ads', :key_name => 'helios_sitepage', :value => (APP_CONFIG['helios_sitepage'] || "youraddomain.com/yourfacebookproject.htm" ) },
  { :key_sub_type => 'ads', :key_name => 'helios_url', :value => (APP_CONFIG['helios_url'] || "http://subdomain.xxx.com" ) },
@@ -224,6 +225,30 @@ ad_layouts.each do |ad_layout|
 		  :ad_layout_name => ad_layout[:key_name], 
 		  :ad_layout_layout => ad_layout[:layout],
 		  :ad_layout_hint => (ad_layout[:hint] || "")
+		  }
+  })
+end
+
+sponsor_zones = [
+ { :sponsor_zone_name => 'home', :sponsor_zone_topic => 'default',  :sponsor_zone_code => "xxxxxxxxx" },
+ { :sponsor_zone_name => 'stories', :sponsor_zone_topic => 'default',  :sponsor_zone_code => "xxxxxxxxx" },
+ { :sponsor_zone_name => 'articles', :sponsor_zone_topic => 'default',  :sponsor_zone_code => "xxxxxxxxx" },
+ { :sponsor_zone_name => 'questions', :sponsor_zone_topic => 'default',  :sponsor_zone_code => "xxxxxxxxx" },
+ { :sponsor_zone_name => 'ideas', :sponsor_zone_topic => 'default',  :sponsor_zone_code => "xxxxxxxxx" },
+ { :sponsor_zone_name => 'forums', :sponsor_zone_topic => 'default',  :sponsor_zone_code => "xxxxxxxxx" },
+ { :sponsor_zone_name => 'resources', :sponsor_zone_topic => 'default',  :sponsor_zone_code => "xxxxxxxxx" },
+ { :sponsor_zone_name => 'events', :sponsor_zone_topic => 'default',  :sponsor_zone_code => "xxxxxxxxx" }
+]
+
+sponsor_zones.each do |sponsor_zone|
+  next if Metadata::SponsorZone.get(sponsor_zone[:sponsor_zone_name], sponsor_zone[:sponsor_zone_topic])
+  puts "Creating sponsor_zone #{sponsor_zone[:sponsor_zone_name]} -- #{sponsor_zone[:sponsor_zone_topic]}" if debug
+
+  Metadata::SponsorZone.create!({
+		:data => {
+		  :sponsor_zone_name => sponsor_zone[:sponsor_zone_name], 
+		  :sponsor_zone_topic => sponsor_zone[:sponsor_zone_topic],
+		  :sponsor_zone_code => sponsor_zone[:sponsor_zone_code]
 		  }
   })
 end
