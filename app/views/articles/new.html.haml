@@ -12,7 +12,7 @@
       - semantic_form_for @article, :html => { :multipart => true } do |form|
         = render :partial => 'article_form', :locals => { :form => form }
         - form.buttons do
-          = form.commit_button :button_html => { :class => 'btn'   }
+          = form.commit_button :class => 'float_right', :button_html => { :class => 'btn'   }
 
 :javascript
   (function($)

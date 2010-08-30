@@ -10,15 +10,15 @@
       %h2 
         Suggest An Idea
     .formBox
-      %h4.title== What's your idea?
-
       - semantic_form_for @idea do |form|
+        %fieldset
+          %h4.title== What's your idea?
         - form.inputs do
           = form.input :title, :label => t('.title'), :hint => t('.hint_idea_title')
-          = form.input :details, :input_html => { :rows => 5 }, :hint => t('.hint_idea_details') 
+          = form.input :details, :hint => t('.hint_idea_details') 
           = form.input :idea_board, :label => t('.idea_board'), :required => true, :include_blank => false, :hint => t('.hint_idea_boards')
           = form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
           = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
           = render :partial => 'shared/forms/wall_postable', :locals => { :form => form, :item => @idea }
         - form.buttons do
-          = form.commit_button  :button_html => { :class => 'btn_1' } 
+          = form.commit_button  :class => 'float_right', :button_html => { :class => 'btn' } 

@@ -68,6 +68,8 @@ widgets:
       partial: '/shared/sidebar/add_bookmark'
     active_users:
       partial: '/shared/sidebar/active_users'
+    rotate_featured:
+      partial: '/shared/sidebar/rotate_featured'
     rotate_idea_widgets:
       partial: '/shared/sidebar/rotate_idea_widgets'
     rotate_user_widgets:
@@ -116,6 +118,8 @@ widgets:
     newest_newswires:
       partial: '/shared/sidebar/newest_newswires'
       locals: 'newest_newswires'
+    newest_topics:
+      partial: '/shared/sidebar/newest_topics'
     rotate_question_widgets:
       partial: '/shared/sidebar/rotate_question_widgets'
     top_answers:

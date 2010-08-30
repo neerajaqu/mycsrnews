@@ -1,12 +1,12 @@
 class StoriesController < ApplicationController
   #caches_page :show, :index
-  before_filter :logged_in_to_facebook_and_app_authorized, :only => [:wizard, :new, :create, :update, :like], :if => :request_comes_from_facebook?
+  before_filter :logged_in_to_facebook_and_app_authorized, :only => [ :new, :create, :update, :like], :if => :request_comes_from_facebook?
 
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
   before_filter :set_ad_layout, :only => [:index, :show]
-  before_filter :login_required, :only => [:wizard, :like, :new, :create]
+  before_filter :login_required, :only => [:like, :new, :create]
   before_filter :load_top_stories, :only => [:index, :tags]
   before_filter :load_top_discussed_stories, :only => [:index, :tags]
   before_filter :load_top_users, :only => [:index, :app_tab, :tags]
@@ -42,10 +42,6 @@ class StoriesController < ApplicationController
     set_outbrain_item @story
   end
 
-  def wizard
-    new
-  end
-  
   def new 
    if current_user.present? and !current_user.is_moderator? and get_setting('limit_daily_member_posts').present? and get_setting('limit_daily_member_posts').value.to_i <= current_user.count_daily_posts
       flash[:error] = t('error_daily_post_limit')

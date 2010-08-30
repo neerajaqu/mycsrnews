@@ -1,16 +1,5 @@
 -# @expects: local 'event'
 
 - cache :featured_events_html, :expires_in => 15.minutes do
-  - featured_events ||= Event.featured
-  - unless featured_events.empty?
-    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('.featured_event_title')
-      .list_items
-        %ul
-          - featured_events.each do |event|
-            %li
-              .itemBlock
-                .profilePic= local_linked_profile_pic event.user
-                = link_to event.name, event_path(event)
-                %p= (event.description.present?) ? event.description : 'no description'
+  - item_list ||= Event.featured
+  = render :partial => 'shared/lists/featured_generic_list', :locals => { :model_name => "event", :model_home => events_path, :list_title => t('events.featured_title'), :item_list => item_list}

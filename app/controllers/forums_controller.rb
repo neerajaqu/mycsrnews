@@ -3,7 +3,7 @@ class ForumsController < ApplicationController
   before_filter :set_ad_layout, :only => [:index, :show]
 
   def index
-    @forums = Forum.positioned
+    @forums = Forum.alpha
   end
 
   def show

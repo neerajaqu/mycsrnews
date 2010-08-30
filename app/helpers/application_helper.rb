@@ -482,10 +482,10 @@ EMBED
 
   def delete_image_simple(form_builder)
     if form_builder.object.new_record?
-      link_to_function("-", "$(this).parents('.multi-image-wrapper').remove()", :class=>"delete_image")
+      link_to_function("-", "$(this).parents('fieldset.inputs').remove()", :class=>"delete_image")
     else 
       form_builder.hidden_field(:_delete) +
-      link_to_function("-", "$(this).parents('.multi-image-wrapper').hide(); $(this).prev().value = '1'", :class=>"delete_image")
+      link_to_function("-", "$(this).parents('fieldset.inputs').hide(); $(this).prev().value = '1'", :class=>"delete_image")
     end
   end
   

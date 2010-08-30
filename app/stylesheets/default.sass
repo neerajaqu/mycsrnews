@@ -15,6 +15,10 @@
 .float_right
   float: right
 
+/* CLEAR WIDTH */
+.clear_width
+  width: auto
+
 /* HEADER */ /* -webkit-box-shadow: #999 0px 2px 12px */
 #header
   height: $headerHeight
@@ -75,7 +79,7 @@
   .dh_links
     font-size: 12px
     position: absolute
-    top: 10px
+    top: $dhlinkspostop
     right: 0px
     float: right
     padding: 5px 20px 5px 10px
@@ -91,7 +95,7 @@
   position: relative
   z-index: 3
   padding-right: 10px
-  background: $TextDropDownArrow
+  background: $AccountArrow
 
 .account-links
   width: 180px
@@ -153,7 +157,6 @@
 
 // Footer Container //
 #footer
-  margin-bottom: 10px
   border:
     top: $FooterBorder
   .dh_links
@@ -190,7 +193,7 @@ body
   background: $bodyBG
   font-size: $fontsize
 
-h1, h2, h3, h4, h5
+h1, h2, h4, h5
   a
     color: $headerColor
     &:hover
@@ -250,7 +253,7 @@ li
     left: 0
     background: $tabsBG
     width: 100%
-    height: 24px
+    height: 23px
     .tab-float
       float: $pagetabFloat
       padding: 0 0 0 1px
@@ -390,7 +393,7 @@ li
       margin: 0 0 0 2px
       a
         position: relative
-        bottom: $pageTabOffPOS
+        bottom: -1px
         margin: 0px
         padding: 4px 25px 1px 25px
         height: 14px
@@ -404,7 +407,7 @@ li
           background: $subnavTabOffHover
           text-decoration: none
         &.selected
-          bottom: $pageTabOnPOS
+          bottom: -1px
           margin: 0px
           background: $subnavTabOn
           border:
@@ -477,7 +480,6 @@ li
   &:hover
     .caption-note
       bottom: 0px
-      
 
 /* THUMB IMAGE CONTAINER */
 .thumb
@@ -566,6 +568,9 @@ li
   img.moderator
     height: 12px
     width: 12px
+  fb:profile-pic
+    width: 30px
+    height: 30px
 
 // left and right column backgrounds //
 $ColumnCorners: none
@@ -644,6 +649,17 @@ $ColumnCorners: none
       p
         line-height: 140%
 
+/* CURRENT USER BADGE */
+.users
+  h4
+    margin-bottom: 0px
+  h3
+    color: $bodyColor
+  .loc
+    font-size: 12px
+    margin-bottom: 8px
+
+
 /**********************************************************************************************/
 /* INTERIOR PANELS */
 
@@ -705,7 +721,7 @@ $ColumnCorners: none
     -webkit-border-top-left-radius: $ColumnCorners
     position: relative
     display: block
-    padding: 6px 0 2px 0px
+    padding: 4px 0
     border:
       bottom: $panelBarBorder
     background: $panelBarBG
@@ -718,10 +734,11 @@ $ColumnCorners: none
       text-transform: $panelBarTextTransform
       font-family: $headerFont
       color: $panelBarHeader
-      a
-        color: $panelBarHeaderLink
-        font-weight: normal
-        text-transform: none
+    a
+      color: $panelBarHeaderLink
+      font-weight: normal
+      text-transform: none
+      
     .bar_link
       float: right
       margin: 0 8px
@@ -840,7 +857,9 @@ $ColumnCorners: none
   /* FORM STYLES - (Outside of formtastic) */
   .formBox
     display: inline-block
-    background: $formBoxBG
+    width: 100%
+    background: $subTitleBG
+
 
   /* BULLETED LIST */
   .bullet_list
@@ -905,11 +924,12 @@ $ColumnCorners: none
         margin-bottom: 5px
       .submit-box
         text-align: right
+
   .refine-toggle
     position: relative
     z-index: 10
     padding-right: 10px
-    background: $TextDropDownArrow
+    background: $RefineArrow
   .refine_link
     float: right
     position: relative
@@ -917,27 +937,13 @@ $ColumnCorners: none
     padding: 0px 8px
     a
       font-size: 11px
-      color: $linkColor
-    .refine-tab
-      height: 32px
-      width: 99px
-      position: absolute
-      top: -33px
-      right: -1px
-      border:
-        top: $DropDownBorder
-        bottom: none
-        left: $DropDownBorder
-        right: $DropDownBorder
-      background-color: $DropDownBG
-      z-index: 9
     .refine-box
       z-index: 8
       display: none
       position: absolute
       padding: 8px
       width: 142px
-      top: 25px
+      top: 15px
       right: 0px
       border: $DropDownBorder
       background-color: $DropDownBG

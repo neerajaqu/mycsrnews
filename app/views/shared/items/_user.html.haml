@@ -5,7 +5,7 @@
   .itemBlock
     .float_left{ :style => 'width: 60%' }
       %h2== #{local_linked_profile_name(user)}
-      %p= caption(user.bio,180)
+      %p= user.bio
     .float_right{ :style => 'width: 35%' }
       %h4.userPoints= t('total_score', :score => score.total_score)
       - if score.karma_score.to_i > 0
