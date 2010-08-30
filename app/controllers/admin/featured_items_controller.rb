@@ -15,15 +15,15 @@ class Admin::FeaturedItemsController < AdminController
   def load_items
     case params[:id]
       when Content.name.tableize
-        @items = Content.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+        @items = Content.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Idea.name.tableize
-        @items = Idea.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+        @items = Idea.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Event.name.tableize
-        @items = Event.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+        @items = Event.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Resource.name.tableize
-        @items = Resource.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+        @items = Resource.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Question.name.tableize
-        @items = Question.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+        @items = Question.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       else
       	return false
     end
