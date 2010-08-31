@@ -49,8 +49,8 @@
             = image_tag('default/default_thumb.gif')
           .itemBlock
             %h4
-              %a
-                Story Title goes here - two line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
             .itemMeta
               %span.btnComment
                 %a
@@ -64,20 +64,20 @@
         .item_2
           .itemBlock
             %h4
-              %a
-                Story Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Story Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Story Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
 
   .itemActions
     %a
@@ -94,18 +94,14 @@
         .item_2
           .itemBlock
             %h4
-              %a
-                Story Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
             %p
               1:45PM Officials shut down an N.C. port and urged people to leave the area after...
               %a
                 More...
 
             .itemMeta
-              %h3 
-                Posted by 
-                %a Bob Bobberson Jr.
-                1 hour ago
               %span.btnComment
                 %a
                   Comment
@@ -118,20 +114,20 @@
         .item_2
           .itemBlock
             %h4
-              %a
-                Story Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Story Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Story Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
 
 
   .itemActions
@@ -153,41 +149,22 @@
         .featured
           .item_2.answer
             .itemBlock
-              %h2
-                %a
-                  Where can I purchase fresh star fruit and pomagranites near Shoreline Community College?
+              %h4
+                %a.ellipsis_title_1
+                  %span.ellipsis_text Re: Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
+              %p.ellipsis_caption_3
+                %span.ellipsis_text Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet
               .itemMeta
-                %span.btnComment
-                  %a
-                    View
-                %span.btnComment
-                  %a
-                    Answer
-                %span.btnComment
-                  %a.voteUp
-                    Like
-      %li
-        .item_2
-          .itemBlock
-            %h4
-              %a
-                Question Title goes here - one line spread.
-      %li
-        .item_2
-          .itemBlock
-            %h4
-              %a
-                Question Title goes here - one line spread.
-      %li
-        .item_2
-          .itemBlock
-            %h4
-              %a
-                Question Title goes here - one line spread.
-
-  .itemActions
-    %a
-      View More Items
+                .profilePic
+                  = image_tag('default/test-profile-pic.jpg')
+                  = image_tag('default/icon-mod-badge.png', :class => 'moderator')  
+                %h3 
+                  Posted by
+                  %a Bob Bobberson
+                  5 hours ago
+                %h3 
+                  Re:
+                  %a How to be awesome with just ...
 
 
 .panel_1
@@ -199,13 +176,13 @@
       %li
         .featured
           .item_1.article
-            .profilePic
+            .thumb.user
               = image_tag('default/test-profile-pic.jpg')
               = image_tag('default/icon-mod-badge.png', :class => 'moderator')  
             .itemBlock
-              %h2
-                %a
-                  Story Title goes here - two line spread.
+              %h4
+                %a.ellipsis_title_2
+                  %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
               .itemMeta
                 %span.btnComment
                   %a
@@ -219,20 +196,20 @@
         .item_2
           .itemBlock
             %h4
-              %a
-                Idea Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Idea Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Idea Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
 
   .itemActions
     %a
@@ -248,42 +225,22 @@
         .featured
           .item_2.comment
             .itemBlock
-              %h2
-                %a
-                  Where can I purchase fresh star fruit and pomagranites near Shoreline Community College?
+              %h4
+                %a.ellipsis_title_1
+                  %span.ellipsis_text Re: Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
+              %p.ellipsis_caption_3
+                %span.ellipsis_text Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet
               .itemMeta
-                %span.btnComment
-                  %a
-                    View
-                %span.btnComment
-                  %a
-                    Reply
-                %span.btnComment
-                  %a.voteUp
-                    Like
-      %li
-        .item_2
-          .itemBlock
-            %h4
-              %a
-                Question Title goes here - one line spread.
-      %li
-        .item_2
-          .itemBlock
-            %h4
-              %a
-                Question Title goes here - one line spread.
-      %li
-        .item_2
-          .itemBlock
-            %h4
-              %a
-                Question Title goes here - one line spread.
-
-  .itemActions
-    %a
-      View More Items
-
+                .profilePic
+                  = image_tag('default/test-profile-pic.jpg')
+                  = image_tag('default/icon-mod-badge.png', :class => 'moderator')  
+                %h3 
+                  Posted by
+                  %a Bob Bobberson
+                  5 hours ago
+                %h3 
+                  Re:
+                  %a How to be awesome with just ...
 .panel_1
   .panelBar
     %h2
@@ -295,8 +252,8 @@
           .item_2.idea
             .itemBlock
               %h2
-                %a
-                  Where can I purchase fresh star fruit and pomagranites near Shoreline Community College?
+                %a.ellipsis_title_2
+                  %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
               .itemMeta
                 %span.btnComment
                   %a
@@ -311,20 +268,20 @@
         .item_2
           .itemBlock
             %h4
-              %a
-                Question Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Question Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Question Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
 
   .itemActions
     %a
@@ -341,8 +298,8 @@
           .item_2.question
             .itemBlock
               %h2
-                %a
-                  Where can I purchase fresh star fruit and pomagranites near Shoreline Community College?
+                %a.ellipsis_title_2
+                  %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
               .itemMeta
                 %span.btnComment
                   %a
@@ -357,20 +314,20 @@
         .item_2
           .itemBlock
             %h4
-              %a
-                Question Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Question Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Question Title goes here - one line spread.
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
 
   .itemActions
     %a
@@ -388,7 +345,9 @@
             .itemBlock
               %h2
                 %a
-                  LOLCAT party in capitlol hill.
+              %h2
+                %a.ellipsis_title_1
+                  %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
               .itemMeta
                 %h3
                   Place: 123 N Carminite wy, Capitol Hill
@@ -408,24 +367,24 @@
         .event
           .itemBlock
             %h4
-              %a
-                Event Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
             .itemMeta
               %h3 Time: 9:30pm | Place: Capitol Hill
         %li
         .event
           .itemBlock
             %h4
-              %a
-                Event Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
             .itemMeta
               %h3 Time: 9:30pm | Place: Capitol Hill
         %li
         .event
           .itemBlock
             %h4
-              %a
-                Event Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
             .itemMeta
               %h3 Time: 9:30pm | Place: Capitol Hill
 
@@ -446,9 +405,9 @@
             .thumb
               = image_tag('default/default_thumb.gif')
             .itemBlock
-              %h2
-                %a
-                  Story Title goes here - two line spread.
+              %h4
+                %a.ellipsis_title_1
+                  %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
               .itemMeta
                 %span.btnComment
                   %a
@@ -462,20 +421,20 @@
         .item_2
           .itemBlock
             %h4
-              %a
-                Question Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Question Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
       %li
         .item_2
           .itemBlock
             %h4
-              %a
-                Question Title goes here - one line spread.
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
 
   .itemActions
     %a
