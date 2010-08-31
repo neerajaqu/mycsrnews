@@ -10,6 +10,6 @@
         .refine_link
           = render :partial => 'shared/forms/refine_dropdown'
     %ul
-      = render :partial => 'shared/comment', :collection => comments
+      = render :partial => 'shared/comment', :collection => comments.active
   - else
     %p= t '.no_comments_msg'
