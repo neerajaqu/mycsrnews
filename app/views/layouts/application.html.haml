@@ -30,6 +30,10 @@
     = javascript_include_tag '/users/current'
     - unless @sponsor_zone_code.nil?
       = javascript_include_tag 'http://ads.trafficspaces.net/v1.22/adservice.js'
+      :javascript
+        $(function() {
+          TS_AdService.FetchAds();
+        });
 
     :javascript
       $(function() {
