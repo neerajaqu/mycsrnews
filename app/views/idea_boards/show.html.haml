@@ -32,3 +32,7 @@
       .clearfix
         = will_paginate ideas
         %br
+        
+#col_right
+  - if @sponsor_zone_code
+    = render :partial => 'shared/ads/sponsor_zone_wrapper'

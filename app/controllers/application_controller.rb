@@ -82,6 +82,16 @@ class ApplicationController < ActionController::Base
     @auto_discovery_rss ||= url || stories_path(:format => :atom)
   end
   
+  def set_sponsor_zone name = nil, topic = 'default'
+    if get_setting('sponsor_zones_enabled').try('enabled?')
+      @sponsor_zone_code ||= Metadata::SponsorZone.get(name, topic).try(:sponsor_zone_code)
+      @sponsor_zone_topic ||= topic
+    else
+      @sponsor_zone_code = nil
+      @sponsor_zone_topic = nil
+    end    
+  end
+  
   def set_outbrain_item item = nil
     if get_setting('outbrain_enabled').try('enabled?')
       @outbrain_item ||= item
