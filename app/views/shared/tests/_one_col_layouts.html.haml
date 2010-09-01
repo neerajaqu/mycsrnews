@@ -40,6 +40,52 @@
 .panel_1
   .panelBar
     %h2 
+      Top Articles
+  .list_items
+    %ul
+      %li
+        .item_1.article
+          .thumb.user
+            = image_tag('default/test-profile-pic.jpg')
+            = image_tag('default/icon-mod-badge.png', :class => 'moderator')  
+          .itemBlock
+            %h4
+              %a.ellipsis_title_2
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
+            .itemMeta
+              %span.btnComment
+                %a
+                  Comment
+                16
+              %span.btnComment
+                %a.voteUp
+                  like
+                2
+      %li
+        .item_2
+          .itemBlock
+            %h4
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
+      %li
+        .item_2
+          .itemBlock
+            %h4
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
+      %li
+        .item_2
+          .itemBlock
+            %h4
+              %a.ellipsis_title_1
+                %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
+
+  .itemActions
+    %a
+      View More Items
+.panel_1
+  .panelBar
+    %h2 
       top Stories
   .list_items
     %ul
@@ -184,6 +230,10 @@
                 %a.ellipsis_title_2
                   %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
               .itemMeta
+
+                %h3 
+                  Written by:
+                  %a Bob Bobberson
                 %span.btnComment
                   %a
                     Comment
@@ -198,18 +248,31 @@
             %h4
               %a.ellipsis_title_2
                 %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
+            .itemMeta
+              %h3 
+                Written by:
+                %a Bob Bobberson
       %li
         .item_2
           .itemBlock
             %h4
               %a.ellipsis_title_2
                 %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
+            .itemMeta
+              %h3 
+                Written by:
+                %a Bob Bobberson
+
       %li
         .item_2
           .itemBlock
             %h4
               %a.ellipsis_title_2
                 %span.ellipsis_text Nemo enim ipsam volup tatem quia voluptas sit aspernatur aut odit aut fugit
+            .itemMeta
+              %h3 
+                Written by:
+                %a Bob Bobberson
 
   .itemActions
     %a

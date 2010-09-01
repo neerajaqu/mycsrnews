@@ -6,18 +6,19 @@
 - if index == 0
   .featured
     %div{:class => "item_1 #{model_name}"}
-      .thumb
-        - if thumb_type.present? and thumb_type == 'profile'
-          .profilePic= local_linked_profile_pic item.user
-          -# , :width => '30px', :height => '30px'
-        - else
+      - if thumb_type.present? and thumb_type == 'profile'
+        .thumb.user
+          = local_linked_profile_pic item.user
+      - else
+        .thumb
           - if item.images.present?
             = image_tag item.images.first.url(:thumb)
           -else
-            = image_tag ('default/default_thumb.gif')
+            = image_tag ('default/watermark.jpg')
       .itemBlock
         %h2
-          = link_to item.item_title, path_to_self(item.item_link)
+          %span.ellipsis_title_2
+            = link_to item.item_title, path_to_self(item.item_link), {:class => 'ellipsis_text'}
         .itemMeta
           %span.btnComment== #{link_to t('comments'), polymorphic_url(item.item_link, :anchor => "commentListTop")} #{item.comments_count}
           %span.btnComment== #{like_link item.item_link} #{item.votes_tally}
