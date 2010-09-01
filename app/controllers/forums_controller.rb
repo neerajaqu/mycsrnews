@@ -12,6 +12,7 @@ class ForumsController < ApplicationController
     @forum = Forum.find(params[:id])
     @topics = @forum.topics.active.paginate :page => params[:page], :per_page => Topic.per_page, :order => "created_at desc"
     @paginate = true
+    set_sponsor_zone('forums', @forum.item_title.underscore)
   end
 
   private

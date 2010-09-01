@@ -6,6 +6,8 @@
   = render_ad(:banner, @ad_layout, @ad_banner)
   = render :partial => 'shared/topics', :locals => { :forum => @forum, :topics => @topics, :page => @page, :paginate => @paginate }
 #col_right
+  - if @sponsor_zone_code
+    = render :partial => 'shared/external/traffic_spaces_wrapper'
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_topics'
   = render :partial => 'shared/sidebar/newest_topics'

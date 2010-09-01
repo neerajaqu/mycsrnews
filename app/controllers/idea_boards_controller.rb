@@ -19,6 +19,7 @@ class IdeaBoardsController < ApplicationController
     	:order    => "votes.count desc"
     })
     @newest_ideas = @idea_board.ideas.newest 5
+    set_sponsor_zone('ideas', @idea_board.item_title.underscore)
   end
 
   private
