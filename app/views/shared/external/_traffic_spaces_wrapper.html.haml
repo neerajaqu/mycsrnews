@@ -1,7 +1,0 @@
--# expects @sponsor_zone_code
-.panel_1
-  .sponsor_250
-    = render :partial => 'shared/external/traffic_spaces_widget', :locals => { :sponsor_zone_code => @sponsor_zone_code }
-  - if get_setting('sponsor_zones_store_url').try(:value)
-    .advertise_here
-      = link_to t('advertise_here'), get_setting('sponsor_zones_store_url').value
