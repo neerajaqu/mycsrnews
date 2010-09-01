@@ -4,7 +4,8 @@ class Admin::CommentsController < AdminController
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => Comment.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => Comment,
-    	:fields => [:comments, :postedByName, :created_at],
+    	:fields => [:comments, :user_id, :created_at],
+    	:associations => { :belongs_to => { :user => :user_id } },
     	:paginate => true
     }
   end
