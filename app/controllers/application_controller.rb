@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
   
   def set_sponsor_zone name = nil, topic = 'default'
     if get_setting('sponsor_zones_enabled').try('enabled?')
-      @sponsor_zone_code ||= Metadata::SponsorZone.get(name, topic).try(:sponsor_zone_code)
+      @sponsor_zone_code ||= Metadata::SponsorZone.get(name, 'default').try(:sponsor_zone_code)
       @sponsor_zone_topic ||= topic
     else
       @sponsor_zone_code = nil
