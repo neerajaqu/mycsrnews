@@ -2,7 +2,7 @@
   :javascript
     $(function() {
       var wizard = $('#wizard');
-    	$("ul.tabs", wizard).tabs("div.panes > div", function(event, index) {
+    	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
     		if (index > 0) {
     			var url = $("#content_url");
     			if (url.val() == '') {
@@ -12,7 +12,7 @@
           url.siblings("label").removeClass("wizard-errors");
         }
       });
-      var api = $("ul.tabs", wizard).data("tabs");
+      var api = $("ul.arrows", wizard).data("tabs");
 
       // "next tab" button
       $("input.form-btn.next", wizard).click(function(event) {
