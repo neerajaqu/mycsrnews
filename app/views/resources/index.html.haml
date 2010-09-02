@@ -8,6 +8,8 @@
 
 #col_right
   = render :partial => 'shared/sidebar/resources_whatisthis'
+  - if @sponsor_zone_code
+    = render :partial => 'shared/ads/sponsor_zone_wrapper'
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/resource_sections_list', :locals => { :resource_sections => @newest_resource_sections }
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @top_resources, :title => t('.top_resources') }

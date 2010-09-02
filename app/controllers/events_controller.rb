@@ -15,6 +15,7 @@ class EventsController < ApplicationController
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Events'
     @events = Event.upcoming.active.paginate :page => params[:page], :per_page => Event.per_page
+    set_sponsor_zone('events')
    respond_to do |format|
       format.html { @paginate = true }
       format.fbml { @paginate = true }
@@ -50,6 +51,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     tag_cloud @event
+    set_sponsor_zone('events', @event.item_title.underscore)
     set_outbrain_item @event
   end
 

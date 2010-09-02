@@ -31,6 +31,8 @@
   = render :partial => 'shared/index_footer', :locals => { :index_path => resource_section_path(:only_path => false, :canvas => iframe_facebook_request?), :title => @resource_section.name }
                   
 #col_right
+  - if @sponsor_zone_code
+    = render :partial => 'shared/ads/sponsor_zone_wrapper'
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @top_resources, :title => t('resources.top_resource_sections', :name => @resource_section.name) }
   = render :partial => 'shared/sidebar/resources_list', :locals => { :resources => @newest_resources, :title => t('resources.newest_resource_sections', :name => @resource_section.name) }
   = render :partial => 'shared/sidebar/resource_sections_list', :locals => { :resource_sections => @newest_resource_sections }

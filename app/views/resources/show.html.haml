@@ -46,6 +46,8 @@
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
 
 #col_right
+  - if @sponsor_zone_code
+    = render :partial => 'shared/ads/sponsor_zone_wrapper'
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/bio', :locals => { :user => @resource.user }
   = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @resource, :related_items => @resource.related_items }
