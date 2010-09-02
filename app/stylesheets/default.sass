@@ -1609,33 +1609,41 @@ body div.jGrowl div.jGrowl-closer
 /**********************************************************************************************/
 /* FLASH ERROR STYLES */
 .flash
-  padding: 15px 0
   margin: 0 auto
   clear: both
   z-index: 900
-  position: absolute
-  top: -1px
+  position: relative
   p
+    position: absolute
+    top: -5px
+    width: 80%
+    padding: 5px
+    margin: 0 10%
     font-weight: bold
     font-size: 13px
     display: block
     text-align: center
+    color: #fff
 
   &.flash_error
-    border: $flashErrorBorder
-    background: $flashErrorBG
+    p
+      border: $flashErrorBorder
+      background: $flashErrorBG
 
   &.flash_success
-    border: $flashSuccessBorder
-    background: $flashSuccessBG
+    p
+      border: $flashSuccessBorder
+      background: $flashSuccessBG
 
   &.flash_notice, &.info
-    border: $flashNoticeBorder
-    background: $flashNoticeBG
+    p
+      border: $flashNoticeBorder
+      background: $flashNoticeBG
 
   &.flash_warning
-    border: $flashWarningBorder
-    background: $flashWarningBG
+    p
+      border: $flashWarningBorder
+      background: $flashWarningBG
 
 
 
