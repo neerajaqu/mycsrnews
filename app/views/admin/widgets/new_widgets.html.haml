@@ -1,0 +1,107 @@
+- content_for :head_content do
+  %style
+    :sass
+      .float-toggle
+        position: absolute
+        top: 2px
+        right: 2px
+      #content-box
+        width: 960px
+      #left
+        width: 700px
+        display: inline
+        position: relative
+        clear: both
+        float: left
+        .left
+          width: 300px
+          //position: relative
+          //left: 0
+          //margin-left: 0px
+          float: left
+          clear: left
+        .right
+          //position: absolute
+          //right: 0
+          width: 300px
+          float: right
+          clear: right
+          //margin-right: 0px
+      #right
+        width: 200px
+      #main-widgets-list
+        width: 440px
+      #sidebar-widgets-list
+        width: 440px
+      .box
+        margin-left: 25px
+        min-height: 500px
+        float: left
+        border: 1px solid black
+      .title
+        margin-left: 10px
+      .clear
+        clear: both
+      .draggable-main, .draggable-sidebar
+        position: relative
+        width: 100px
+        //height: 100px
+        padding: 5px
+        margin: 10px 10px 10px 0
+        float: left
+        background-color: #AEAEAE
+        overflow: hidden
+
+  = javascript_include_tag admin_widgets_path(:format => 'js', :only_path => false)
+
+#col_full
+  #content-box
+    - [@main_widgets, @sidebar_widgets].each do |widget_set|
+      - widget_set.each do |main_widget|
+        - mwidget = main_widget.widget
+        - @controller.send mwidget.load_functions if mwidget.load_functions.present?
+        - locals = mwidget.locals.present? ? { mwidget.locals.to_sym => instance_variable_get("@#{mwidget.locals}") } : {}
+        - locals[:widget] = mwidget
+
+        :javascript
+          $(function() {
+            var content = $("<div class='box'>#{escape_javascript(render :partial => mwidget.partial, :locals => locals)}</div>");
+            console.log(content.html());
+            $('#content-box').append(content.html())
+              .masonry({ appendedContent : content, columnWidth: 310, itemSelector : '.box' });
+          });
+
+-#
+  %h1.title Select Widgets for Your Page Layout
+  %br
+  %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
+  %button#clear-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Clear Widgets
+  .clear
+  %br
+  #left.box.droppable-main.ui-widget-content.ui-state-default
+    %h1 Main Column
+    %ul#sortable-main
+  #right.box.droppable-sidebar.ui-widget-content.ui-state-default
+    %h1 Sidebar Column
+    %ul#sortable-sidebar
+  .clear
+  %br
+  -# TODO this second button is not working
+  -# %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
+%br
+.clear
+%br
+-#sidebar-widgets
+  %p.title Drag widgets below to their appropriate box and desired position above
+  #main-widgets-list.box
+    %h1 Wide Widgets
+    %ul
+      - @main.each do |widget|
+        %li.draggable-main.ui-widget-content{:id => "widget_#{widget.id}", :name => widget.name}
+          %p== #{widget.name}
+  #sidebar-widgets-list.box
+    %h1 Narrow Widgets
+    %ul
+      - @sidebar.each do |widget|
+        %li.draggable-sidebar.ui-widget-content{:id => "widget_#{widget.id}", :name => widget.name}
+          %p== #{widget.name}

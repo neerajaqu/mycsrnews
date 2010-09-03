@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  layout proc {|c| c.request.xhr? ? false : "new_admin" }
+  layout proc {|c| c.request.xhr? ? false : "application" }
 
   before_filter :check_admin_or_default_status
   before_filter :set_current_tab

@@ -106,7 +106,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :locales, :collection => { :refresh => [:get] }, :has_many => :translations
     admin.translations '/translations.:format', :controller => 'translations', :action => 'translations'
     admin.asset_translations '/asset_translations.:format', :controller => 'translations', :action => 'asset_translations'
-    admin.resources :widgets, :collection => { :save => :post }
+    admin.resources :widgets, :collection => { :save => :post, :new_widgets => :get }
     #admin.resources :custom_widgets
     #admin.resources :metadatas, :controller => 'custom_widgets'
     admin.resources :settings

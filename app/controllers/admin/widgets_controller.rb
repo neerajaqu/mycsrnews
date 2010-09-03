@@ -14,6 +14,20 @@ class Admin::WidgetsController < AdminController
     end
   end
 
+  def new_widgets
+    @controller = self
+    @main = Widget.main
+    @sidebar = Widget.sidebar
+    @page = WidgetPage.find_root_by_page_name('home')
+    if @page.present? and @page.children.present?
+      @main_widgets = @page.children.first.children
+      @sidebar_widgets = @page.children.second.children
+    else
+    	@main_widgets = nil
+    	@sidebar_widgets = nil
+    end
+  end
+
   def save
     # TODO:: Switch to updating instead of deleting
     WidgetPage.all.each {|w| w.destroy}
