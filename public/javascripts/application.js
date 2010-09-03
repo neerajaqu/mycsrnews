@@ -119,20 +119,23 @@ $(function() {
 			data: "foo", // data has to be set to explicitly set the content type
 			dataType: "json",
 			success: function(data, status) {
-				span.fadeOut("normal", function() {
-				  span.html(data.msg).fadeIn("normal");
-        });
-      },
-      error: function(xhr, status, errorThrown) {
-      	var result = $.parseJSON(xhr.responseText);
-      	if (xhr.status == 401) {
-      	  dialog_response(result.error, result.dialog);
-          span.fadeOut("normal", function() {
-            span.html(data.msg).fadeIn("normal");
+              span.fadeOut("normal", function() {
+                span.html(data.msg).fadeIn("normal");
+              });
+              if (data.trigger_oauth && data.trigger_oauth == true) {
+                window.location = '/oauth/new';
+              }
+            },
+            error: function(xhr, status, errorThrown) {
+              var result = $.parseJSON(xhr.responseText);
+              if (xhr.status == 401) {
+                dialog_response(result.error, result.dialog);
+                span.fadeOut("normal", function() {
+                  span.html(data.msg).fadeIn("normal");
+                });
+              }
+            }
           });
-        }
-      }
-    });
   });
 
 	$('.quick_post').click(function(event) {
