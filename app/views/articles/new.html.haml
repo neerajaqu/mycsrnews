@@ -67,7 +67,6 @@
                       %p= form.input :body
                 - form.buttons do
                   = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
-                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
               .panel2
                 - form.semantic_fields_for :content do |content_form|
                   - content_form.inputs do

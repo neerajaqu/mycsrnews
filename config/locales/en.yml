@@ -27,7 +27,9 @@ en:
     top_resource_sections: "Top {{name}} Links"
     top_resources: "Top Links"
     newest_resources: "Newest Links"
-    featured_title: "Featured Resources"    
+    featured_title: "Featured Links"    
+    add_new: "Add a new link"
+    add_link_title: "What link do you want to add?"
   events:
     newest_events: "Newest Events"
     top_events: "Top Events"
