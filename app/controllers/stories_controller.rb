@@ -36,9 +36,11 @@ class StoriesController < ApplicationController
     redirect_to home_index_path if @story.is_article? and @story.article.is_draft? and (!current_user.present? or current_user != @story.article.author or !current_user.is_moderator? ) 
     tag_cloud (@story.is_article? ? @story.article : @story)
     if MENU.key? 'articles'
-      @current_tab = 'articles' if @story.is_article?
+      if @story.is_article?
+        @current_tab = 'articles' 
+        set_sponsor_zone('articles', @story.article.item_title.underscore)
+      end
     end
-
     set_outbrain_item @story
   end
 

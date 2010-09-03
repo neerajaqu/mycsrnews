@@ -16,6 +16,7 @@ class ResourcesController < ApplicationController
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Resources'
     @resources = Resource.active.paginate :page => params[:page], :per_page => Resource.per_page, :order => "created_at desc"
+    set_sponsor_zone('resources')
     respond_to do |format|
       format.html { @paginate = true }
       format.fbml { @paginate = true }
@@ -54,6 +55,7 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
     tag_cloud @resource
     set_outbrain_item @resource
+    set_sponsor_zone('resources', @resource.item_title.underscore)
   end
 
   def my_resources

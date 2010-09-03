@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Questions'
+    set_sponsor_zone('questions')
     respond_to do |format|
       format.html { @paginate = true }
       format.json { @questions = Question.refine(params) }
@@ -17,12 +18,11 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer   = Answer.new
-
     if @question.is_blocked?
     	flash[:error] = "This question has been blocked."
     	redirect_to questions_path
     end
-
+    set_sponsor_zone('questions', @question.item_title.underscore)
     set_outbrain_item @question
   end
 

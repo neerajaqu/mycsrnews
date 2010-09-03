@@ -20,12 +20,16 @@ en:
     top_board_ideas: "Top {{name}} Ideas"
     newest_board_ideas: "Newest {{name}} Ideas"
     featured_title: "Featured Ideas"    
+    suggest_idea: "Suggest an Idea"
+    your_idea: "What's your idea?"
   resources:
     newest_resource_sections: "Newest {{name}} Links"
     top_resource_sections: "Top {{name}} Links"
     top_resources: "Top Links"
     newest_resources: "Newest Links"
-    featured_title: "Featured Resources"    
+    featured_title: "Featured Links"    
+    add_new: "Add a new link"
+    add_link_title: "What link do you want to add?"
   events:
     newest_events: "Newest Events"
     top_events: "Top Events"
@@ -39,6 +43,7 @@ en:
     add_image_title: "Add images to your post"
     add_audio_title: "Link to an audio file (.mp3 only):"
     add_video_title: "Embed or link to a video (YouTube, Vimeo and Vmixcore only):"    
+  add_by_embed_code: "Use an embed code"
   images:
     title: "Images"
   videos:
@@ -67,6 +72,7 @@ en:
   post_article_title: "Welcome to our community blogosphere!"
   post_article_detail: "Start your own blog or follow posts by fellow readers. This is your soap box!"
   post_article_button: "Compose an article"
+  article_url_label: "Related Web Page"
   article_url_hint: "If you are writing about a story on another web page, please provide a link or URL to that page."
   post_wall: "Post on my Facebook wall"
   user_posted_item: "{{fb_name}} posted {{title}} {{date}} ago"
@@ -285,10 +291,12 @@ en:
     questions_featured_title: "Featured questions from {{site_title}}"
   new_story_header: "Post a story from the Web"
   wizard:
+    compose: "Compose"
     continue: "Continue"
     post_now: "Post Now"
     back: "Back"
     url: "Web Page"
+    idea: "Idea"
     details: "Details"
     images: "Images"
     more: "More"

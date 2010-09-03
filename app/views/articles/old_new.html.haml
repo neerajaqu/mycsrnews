@@ -1,0 +1,77 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/news_subnav'
+
+= stylesheet_link_tag 'jquery.wysiwyg'  
+= javascript_include_tag 'jquery.wysiwyg'
+  
+#col_full
+  .panel_3
+    .panelBar
+      %h2= t '.header'
+    .formBox
+      - semantic_form_for @article, :html => { :multipart => true } do |form|
+        = render :partial => 'article_form', :locals => { :form => form }
+        - form.buttons do
+          = form.commit_button :class => 'float_right', :button_html => { :class => 'btn'   }
+
+:javascript
+  (function($)
+  {
+    $('textarea#article_body').wysiwyg({
+      controls: {
+        strikeThrough : { visible : true },
+        underline     : { visible : true },
+
+        separator00 : { visible : false },
+
+        justifyLeft   : { visible : true },
+        justifyCenter : { visible : true },
+        justifyRight  : { visible : true },
+        justifyFull   : { visible : true },
+
+        separator01 : { visible : false },
+
+        indent  : { visible : true },
+        outdent : { visible : true },
+
+        separator02 : { visible : false },
+
+        subscript   : { visible : true },
+        superscript : { visible : true },
+
+        separator03 : { visible : false },
+
+        undo : { visible : true },
+        redo : { visible : true },
+
+        separator04 : { visible : false },
+
+        insertOrderedList    : { visible : true },
+        insertUnorderedList  : { visible : true },
+        insertHorizontalRule : { visible : true },
+        
+        createLink : {
+            visible : true,
+        },
+
+        insertImage : {
+            visible : false,
+        },
+        separator05 : { visible : false },
+        separator06 : { visible : false },
+        h4mozilla : { visible : true && $.browser.mozilla, className : 'h4', command : 'heading', arguments : ['h4'], tags : ['h4'], tooltip : "Header 4" },
+        h5mozilla : { visible : true && $.browser.mozilla, className : 'h5', command : 'heading', arguments : ['h5'], tags : ['h5'], tooltip : "Header 5" },
+        h6mozilla : { visible : true && $.browser.mozilla, className : 'h6', command : 'heading', arguments : ['h6'], tags : ['h6'], tooltip : "Header 6" },
+
+        h4 : { visible : true && !( $.browser.mozilla ), className : 'h4', command : 'formatBlock', arguments : ['<H4>'], tags : ['h4'], tooltip : "Header 4" },
+        h5 : { visible : true && !( $.browser.mozilla ), className : 'h5', command : 'formatBlock', arguments : ['<H5>'], tags : ['h5'], tooltip : "Header 5" },
+        h6 : { visible : true && !( $.browser.mozilla ), className : 'h6', command : 'formatBlock', arguments : ['<H6>'], tags : ['h6'], tooltip : "Header 6" },
+
+        separator07 : { visible : false },
+
+        cut   : { visible : true },
+        copy  : { visible : true },
+        paste : { visible : true }
+      }
+    });
+  })(jQuery);

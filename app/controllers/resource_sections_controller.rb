@@ -20,6 +20,7 @@ class ResourceSectionsController < ApplicationController
     	:order    => "votes.count desc"
     })
     @newest_resources = @resource_section.resources.newest 5
+    set_sponsor_zone('resources', @resource_section.item_title.underscore)    
   end
 
   private
