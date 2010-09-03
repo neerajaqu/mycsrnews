@@ -307,6 +307,70 @@ $(function() {
     $('#content_url').trigger('blur');
   }
 
+	$('form.post_article #article_content_attributes_url').blur(function() {
+		if ($(this).val() != '') {
+      $(this).addClass('process');
+      $.ajax({
+        type: "POST",
+        url: "/stories/parse_page", 
+        // Yet another chrome hack
+        // chrome sends this xml if both contentType and data are not set
+        // and as a result rails flips out
+        //contentType: 'application/json',
+        data: {url: $(this).val()},
+        dataType: "json",
+        success: function(data, textStatus) {
+          if (data.images.length > 0) {
+            // Hack to make this work in chrome..
+            // can't use your typical itemLoadCallback
+						$("#scrollbox").show();
+
+						$(".scrollable").scrollable();
+						
+						var api = $(".scrollable").data("scrollable");
+            jQuery.each(data.images, function(i, url) {
+              api.addItem('<img src="'+url+'" width="75" height="75" />');
+            });
+						$(".items img").click(function() {
+							if ($(this).hasClass("selected-image"))
+							{
+								$(this).removeClass('selected-image');
+							}
+							else {
+        	    	$(this).addClass('selected-image');
+								var in_use = false;
+								var current_src = $(this).attr('src');
+								$('.image-url-input').each( function(i, input){
+									if ($(input).val() == current_src)
+									{
+										in_use = true;
+									}
+								});
+								if (!in_use){
+									$('#add_image').click();
+	            		$('.image-url-input').last().val($(this).attr('src'));
+
+									$('.image-url-input').last().parent().next().remove();
+									$('.image-url-input').last().next().remove();
+									$('.image-url-input').last().after($('.delete_image').last());
+								}
+							}
+						});
+          }
+          $('#article_content_attributes_url').removeClass('process');
+        },
+        error: function(xhr, status, errorThrown) {
+          var result = $.parseJSON(xhr.responseText);
+        	alert(result.error);
+          $('#article_content_attributes_url').removeClass('process');
+        }
+      });
+    }
+  });
+
+  if ($('form.post_article #article_content_attributes_url').val() != '') {
+    $('#article_content_attributes_url').trigger('blur');
+  }
   // Add Threedots support
   $('.ellipsis_title_1').ThreeDots({max_rows : 1});
   $('.ellipsis_title_2').ThreeDots({max_rows : 2});

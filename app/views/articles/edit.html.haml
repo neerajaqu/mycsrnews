@@ -1,24 +1,113 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+      var wizard = $('#wizard');
+    	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
+    		if (index > 0) {
+    			var title = $("#article_content_attributes_title");
+    			if (title.val() == '') {
+    				title.siblings("label").addClass("wizard-errors")
+    				return false;
+          }
+          title.siblings("label").removeClass("wizard-errors");
+    			var body = $("#article_body");
+    			if (body.val() == '') {
+    				body.siblings("label").addClass("wizard-errors")
+    				return false;
+          }
+          body.siblings("label").removeClass("wizard-errors");
+        }
+      });
+      var api = $("ul.arrows", wizard).data("tabs");
+
+      // "next tab" button
+      $("input.form-btn.next", wizard).click(function(event) {
+      	event.preventDefault();
+        api.next();
+      });
+
+      // "previous tab" button
+      $("input.form-btn.prev", wizard).click(function() {
+      	event.preventDefault();
+        api.prev();
+      });
+      $('.toggle-embed-video').click(function(event) {
+      	event.preventDefault();
+      	$('textarea.embed-video', $(this).parents('fieldset.inputs')).removeClass('hide').show();
+      	$(this).remove();
+      });
+    });
+
 - content_for :sub_nav do
   = render :partial => 'shared/subnav/news_subnav'
 
-= stylesheet_link_tag 'jquery.wysiwyg'  
-= javascript_include_tag 'jquery.wysiwyg'
-  
 #col_full
   .panel_3
     .panelBar
       %h2= t('articles.editdraft')
     .formBox
-      - semantic_form_for @article, :html => { :multipart => true } do |form|
-        = render :partial => 'article_form', :locals => { :form => form }
-        - form.buttons do
-          = form.commit_button :button_html => { :class => 'btn'   }
-          
+      #wizard
+        #flowplayer-block
+          %ul.arrows
+            %li
+              %a{:href => "#"}= t('wizard.compose')
+            %li
+              %a{:href => "#"}= t('wizard.details')
+            %li
+              %a{:href => "#"}= t('wizard.images') 
+            %li
+              %a{:href => "#"}= t('wizard.more') 
+          - semantic_form_for @article, :html => { :multipart => true, :class => "post_article" } do |form|
+            .panes
+              .panel1
+                - form.inputs do
+                  - form.semantic_fields_for :content do |content_form|
+                    - content_form.inputs do
+                      = content_form.input :title
+                      %p= form.input :body
+                - form.buttons do
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+              .panel2
+                - form.semantic_fields_for :content do |content_form|
+                  - content_form.inputs do
+                    = content_form.input :url, :required => false, :label => t('article_url_label'),  :hint => t('article_url_hint')
+                    = content_form.input :tags_string, :required => false, :hint => t('tags_hint')
+                    = render :partial => 'shared/forms/wall_postable', :locals => { :form => content_form }
+                    #article_status= label_tag :status, t('articles.status')
+                    = select_tag :is_draft, options_for_select( { t('articles.draft') => 1, t('articles.publish') => 0  }, (@article.is_draft ? 1 : 0) ) 
+                - form.buttons do
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
+
+              .panel3
+                - form.semantic_fields_for :content do |content_form|
+                  = render :partial => 'shared/forms/images_simple', :locals => { :form => content_form, :item => @article.content }
+                  #scrollbox
+                    %a.prev.browse.left_scroll
+                    .scrollable
+                      .items
+                    %a.next.browse.right_scroll
+                - form.buttons do
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
+
+              .panel4
+                - form.semantic_fields_for :content do |content_form|
+                  = render :partial => 'shared/forms/media_items_simple', :locals => { :form => content_form, :item => @article.content }
+                - form.buttons do
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
+
+= stylesheet_link_tag 'jquery.wysiwyg'  
+= javascript_include_tag 'jquery.wysiwyg'
 :javascript
   (function($)
   {
     $('textarea#article_body').wysiwyg({
-      resizeOptions : {}, controls: {
+      controls: {
         strikeThrough : { visible : true },
         underline     : { visible : true },
 
@@ -49,7 +138,7 @@
         insertOrderedList    : { visible : true },
         insertUnorderedList  : { visible : true },
         insertHorizontalRule : { visible : true },
-        
+      
         createLink : {
             visible : true,
         },
@@ -74,4 +163,4 @@
         paste : { visible : true }
       }
     });
-  })(jQuery);
+  })(jQuery);                     

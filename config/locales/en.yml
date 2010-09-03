@@ -67,6 +67,7 @@ en:
   post_article_title: "Welcome to our community blogosphere!"
   post_article_detail: "Start your own blog or follow posts by fellow readers. This is your soap box!"
   post_article_button: "Compose an article"
+  article_url_label: "Related Web Page"
   article_url_hint: "If you are writing about a story on another web page, please provide a link or URL to that page."
   post_wall: "Post on my Facebook wall"
   user_posted_item: "{{fb_name}} posted {{title}} {{date}} ago"
@@ -285,6 +286,7 @@ en:
     questions_featured_title: "Featured questions from {{site_title}}"
   new_story_header: "Post a story from the Web"
   wizard:
+    compose: "Compose"
     continue: "Continue"
     post_now: "Post Now"
     back: "Back"
