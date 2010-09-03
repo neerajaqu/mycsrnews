@@ -371,6 +371,7 @@ $(function() {
   if ($('form.post_article #article_content_attributes_url').val() != '') {
     $('#article_content_attributes_url').trigger('blur');
   }
+  
   // Add Threedots support
   $('.ellipsis_title_1').ThreeDots({max_rows : 1});
   $('.ellipsis_title_2').ThreeDots({max_rows : 2});

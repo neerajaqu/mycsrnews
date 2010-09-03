@@ -1,24 +1,81 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+      var wizard = $('#wizard');
+    	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
+    		if (index > 0) {
+    			var url = $("#idea_title");
+    			if (url.val() == '') {
+    				url.siblings("label").addClass("wizard-errors")
+    				return false;
+          }
+          url.siblings("label").removeClass("wizard-errors");
+        }
+      });
+      var api = $("ul.arrows", wizard).data("tabs");
+
+      // "next tab" button
+      $("input.form-btn.next", wizard).click(function(event) {
+      	event.preventDefault();
+        api.next();
+      });
+
+      // "previous tab" button
+      $("input.form-btn.prev", wizard).click(function() {
+      	event.preventDefault();
+        api.prev();
+      });
+      $('.toggle-embed-video').click(function(event) {
+      	event.preventDefault();
+      	$('textarea.embed-video', $(this).parents('fieldset.inputs')).removeClass('hide').show();
+      	$(this).remove();
+      });
+    });      
 - content_for :sub_nav do
   - if @idea_board.present?
     = render :partial => 'shared/subnav/idea_boards_subnav'
   - else
     = render :partial => 'shared/subnav/ideas_subnav'
-
 #col_full
   .panel_3
     .panelBar
-      %h2 
-        Suggest An Idea
+      %h2= t('ideas.suggest_idea')
     .formBox
-      - semantic_form_for @idea do |form|
-        %fieldset
-          %h4.title== What's your idea?
-        - form.inputs do
-          = form.input :title, :label => t('.title'), :hint => t('.hint_idea_title')
-          = form.input :details, :hint => t('.hint_idea_details') 
-          = form.input :idea_board, :label => t('.idea_board'), :required => true, :include_blank => false, :hint => t('.hint_idea_boards')
-          = form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
-          = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @idea }
-          = render :partial => 'shared/forms/wall_postable', :locals => { :form => form, :item => @idea }
-        - form.buttons do
-          = form.commit_button  :class => 'float_right', :button_html => { :class => 'btn' } 
+      #wizard
+        #flowplayer-block
+          %ul.arrows
+            %li
+              %a{:href => "#"}= t('wizard.idea')
+            %li
+              %a{:href => "#"}= t('wizard.images') 
+            %li
+              %a{:href => "#"}= t('wizard.more') 
+          - semantic_form_for @idea, :url => ideas_path, :html => { :multipart => true, :class => "post_idea" } do |form|
+            .panes
+              .panel1
+                %h1.title= t('ideas.your_idea')
+                %fieldset
+                  - form.inputs do                
+                    = form.input :title, :label => t('.title'), :hint => t('.hint_idea_title')
+                    = form.input :details, :hint => t('.hint_idea_details'), :required => false 
+                    = form.input :idea_board, :label => t('.idea_board'), :required => true, :include_blank => false, :hint => t('.hint_idea_boards')
+                    = form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
+                - form.buttons do
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+              .panel2
+                = render :partial => 'shared/forms/images_simple', :locals => { :form => form, :item => @idea }
+                #scrollbox
+                  %a.prev.browse.left_scroll
+                  .scrollable
+                    .items
+                  %a.next.browse.right_scroll
+                - form.buttons do
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
+              .panel3
+                = render :partial => 'shared/forms/media_items_simple', :locals => { :form => form, :item => @idea }
+                - form.buttons do
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }

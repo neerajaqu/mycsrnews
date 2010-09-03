@@ -20,6 +20,8 @@ en:
     top_board_ideas: "Top {{name}} Ideas"
     newest_board_ideas: "Newest {{name}} Ideas"
     featured_title: "Featured Ideas"    
+    suggest_idea: "Suggest an Idea"
+    your_idea: "What's your idea?"
   resources:
     newest_resource_sections: "Newest {{name}} Links"
     top_resource_sections: "Top {{name}} Links"
@@ -292,6 +294,7 @@ en:
     post_now: "Post Now"
     back: "Back"
     url: "Web Page"
+    idea: "Idea"
     details: "Details"
     images: "Images"
     more: "More"
