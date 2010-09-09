@@ -1,5 +1,5 @@
 class OauthController < ApplicationController
-  #before_filter :login_required
+  before_filter :login_required
 
   def new
     session[:at]=nil
@@ -23,13 +23,6 @@ class OauthController < ApplicationController
     else
       redirect_to home_index_path
     end
-  end
-  
-  def index
-    redirect_to new_oauth_path and return unless session[:at]
-    user = Mogli::User.find("me",Mogli::Client.new(session[:at]))
-    @user = user
-    @posts = user.posts
   end
   
   def authenticator
