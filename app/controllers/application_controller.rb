@@ -370,4 +370,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # NOTE:: THIS SUCKS!!! DON'T USE THIS!!!
+  # This is an annoying hack to redirect the top page url of a facebook canvas iframe app
+  def redirect_top location
+    render(:text => %{<script type="text/javascript">window.top.location = "#{location}";</script>}, :layout => 'application') and return
+  end
+
 end

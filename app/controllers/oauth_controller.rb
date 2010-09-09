@@ -3,14 +3,26 @@ class OauthController < ApplicationController
 
   def new
     session[:at]=nil
-    redirect_to authenticator.authorize_url(:scope => 'publish_stream', :display => 'page')
+    if iframe_facebook_request?
+      redirect_top authenticator.authorize_url(:scope => 'publish_stream', :display => 'page')
+    else
+      redirect_to authenticator.authorize_url(:scope => 'publish_stream', :display => 'page')
+    end
   end
   
   def create    
-    mogli_client = Mogli::Client.create_from_code_and_authenticator(params[:code],authenticator)
-    session[:at]=mogli_client.access_token
-    current_user.update_attribute(:fb_oauth_key, mogli_client.access_token)
-    redirect_to "/"
+    if params[:error].present?
+      current_user.update_attribute(:fb_oauth_denied_at, Time.now)
+    else
+      mogli_client = Mogli::Client.create_from_code_and_authenticator(params[:code],authenticator)
+      session[:at]=mogli_client.access_token
+      current_user.update_attribute(:fb_oauth_key, mogli_client.access_token)
+    end
+    if iframe_facebook_request?
+    	redirect_top home_index_path(:only_path => false, :canvas => true)
+    else
+      redirect_to home_index_path
+    end
   end
   
   def index
@@ -21,6 +33,6 @@ class OauthController < ApplicationController
   end
   
   def authenticator
-    @authenticator ||= Mogli::Authenticator.new(APP_CONFIG['facebook_application_id'], Facebooker.secret_key, oauth_callback_url)
+    @authenticator ||= Mogli::Authenticator.new(APP_CONFIG['facebook_application_id'], Facebooker.secret_key, oauth_callback_path(:only_path => false, :canvas => iframe_facebook_request?))
   end
 end

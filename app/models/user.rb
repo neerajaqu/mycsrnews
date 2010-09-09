@@ -295,6 +295,14 @@ class User < ActiveRecord::Base
     self.contents.find(:all, :conditions => ["created_at > ?", 24.hours.ago]).count
   end
 
+  def fb_oauth_active?
+    fb_oauth_key.present? and fb_oauth_denied_at.nil?
+  end
+
+  def fb_oauth_desired?
+    fb_oauth_key.nil? and fb_oauth_denied_at.nil?
+  end
+
   private
 
   def check_profile

@@ -7,14 +7,16 @@ class VotesController < ApplicationController
     @voteable = find_voteable
     respond_to do |format|
       error = (current_user and current_user.voted_for?(@voteable)) ? "You already voted" : false
-      if !error and current_user and @voteable.present? and current_user.vote_for(@voteable)
+      if !error and current_user and @voteable.present? and (vote = current_user.vote_for(@voteable))
+      	image_url = vote.voteable.images.any? ? @template.base_url(vote.voteable.images.first.url(:thumb)) : nil
+      	vote.async_vote_messenger polymorphic_path(@voteable, :only_path => false, :canvas => iframe_facebook_request?, :format => 'html'), image_url
       	success = "Thanks for your vote!"
       	format.html { flash[:success] = success; redirect_to params[:return_to] || @voteable }
-      	format.json { render :json => { :trigger_oauth => true, :msg => "#{@voteable.votes_tally} likes" }.to_json }
+      	format.json { render :json => { :trigger_oauth => current_user.fb_oauth_desired?, :msg => "#{@voteable.votes_tally} likes" }.to_json }
       else
       	error ||= "Vote failed"
       	format.html { flash[:error] = error; redirect_to params[:return_to] || @voteable }
-      	format.json { render :json => { :trigger_oauth => true, :msg => error }.to_json }
+      	format.json { render :json => { :msg => error }.to_json }
       end
     end
   end
