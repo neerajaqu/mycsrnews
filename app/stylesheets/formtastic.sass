@@ -24,6 +24,8 @@ form.formtastic
     font-size: 14px
     font-weight: bold
     margin: 10px 0
+
+
 /**********************************************************************************************/
 /* GENERAL FORM STYLES*/
 form.formtastic
@@ -45,10 +47,13 @@ form.formtastic
         margin: 0 auto 10px
         &.date-picker
           width: 50%
+        &.error
+          label
+            color: #cc0000
 
         label
           display: block
-          padding: 4px  4px
+          margin: 6px
           font-size: 12px
           font-weight: bold
 
@@ -65,14 +70,15 @@ form.formtastic
 
         p
           &.inline-hints
+            margin: 4px
             display: block
             width: 100%
             font-size: 11px
             color: #666
 
           &.inline-errors
+            margin-left: 4px
             color: #cc0000
-            margin: 0.5em 0 0 25%
 
       .boolean 
         margin: 0 0 10px

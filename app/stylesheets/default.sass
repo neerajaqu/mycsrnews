@@ -280,6 +280,7 @@ li
         color: $pageTablinkOff
         background: $pageTabOff
         &:hover
+          color: $pageTabLinkOffHover
           text-decoration: none
           background: $pageTabOffHover
       &.first 
@@ -333,7 +334,7 @@ li
         margin-top: 0
         ul
           padding: 1px 0 0 0
-          display: inline-block
+          display: block
           li
             width: $dropdownWidth
             height: 100%
@@ -694,7 +695,6 @@ $ColumnCorners: none
 
 .panel_1, .panel_2, .panel_3
   margin: 0 0 15px 0
-
   .top-tags
     display: inline-block
     padding-top: 4px
@@ -1225,7 +1225,7 @@ h3.btn
   width: 728px
   margin: 0 auto
 
-.ad_468, .ad_200, .ad_728, .ad_160, .ad_250, .ad_300, .ad_336
+.ad_468, .ad_200, .ad_728, .ad_160, .ad_250, .ad_300, .ad_336, .sponsor_250
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
   border-radius: 4px
@@ -1249,6 +1249,17 @@ h3.btn
         margin: 0
         padding: 0
 
+.sponsor_250
+  width: 250px
+  margin: 0 auto
+  background: #ccc image_url("default/sponsor-bg-title.gif") top center no-repeat
+  div
+    background-color: #fff
+  
+.advertise_here
+  font-size: $fontsize * .9
+  text-align: center
+  
 // Bookmarklet Styles //
 .bookmarklet
   padding-bottom: 10px
@@ -1600,33 +1611,41 @@ body div.jGrowl div.jGrowl-closer
 /**********************************************************************************************/
 /* FLASH ERROR STYLES */
 .flash
-  padding: 15px 0
   margin: 0 auto
   clear: both
   z-index: 900
-  position: absolute
-  top: -1px
+  position: relative
   p
+    position: absolute
+    top: -5px
+    width: 80%
+    padding: 5px
+    margin: 0 10%
     font-weight: bold
     font-size: 13px
     display: block
     text-align: center
+    color: #fff
 
   &.flash_error
-    border: $flashErrorBorder
-    background: $flashErrorBG
+    p
+      border: $flashErrorBorder
+      background: $flashErrorBG
 
   &.flash_success
-    border: $flashSuccessBorder
-    background: $flashSuccessBG
+    p
+      border: $flashSuccessBorder
+      background: $flashSuccessBG
 
   &.flash_notice, &.info
-    border: $flashNoticeBorder
-    background: $flashNoticeBG
+    p
+      border: $flashNoticeBorder
+      background: $flashNoticeBG
 
   &.flash_warning
-    border: $flashWarningBorder
-    background: $flashWarningBG
+    p
+      border: $flashWarningBorder
+      background: $flashWarningBG
 
 
 
@@ -1646,8 +1665,6 @@ body div.jGrowl div.jGrowl-closer
   display: inline-block
   position: relative
 
-  
-  
 .admin-links
   display: none !important
 .admin-links-style

@@ -14,6 +14,7 @@ class ArticlesController < ApplicationController
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Articles'
     @articles = Content.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    set_sponsor_zone('articles')
     respond_to do |format|
       format.html { @paginate = true }
       format.json { @articles = Content.refine(params) }
@@ -48,8 +49,8 @@ class ArticlesController < ApplicationController
     @article.tag_list = params[:article][:content_attributes][:tags_string]
     @article.post_wall = params[:article][:content_attributes][:post_wall]
     @article.is_draft = params[:is_draft]
-    @article.content.user = current_user
-    @article.author = current_user
+    @article.content.user = @article.author
+    @article.author = @article.author
     if @article.valid? and @article.update_attributes(params[:article]) and @article.update_attribute(:is_draft, params[:is_draft])
       unless @article.is_draft
         if @article.post_wall?

@@ -194,22 +194,22 @@ form.formtastic fieldset ol li
 
 #flowplayer-block
 
-  /* root element for tabs  */
-  ul.tabs
+  /* root element for arrows  */
+  ul.arrows
     display:  inline-block
     width: 100%
     margin: 20px 0 !important 
     padding: 0 0 0 20px
 
   /* single tab */
-  ul.tabs li
+  ul.arrows li
     float: left  
     padding: 0 
     margin: 0 4px 0 0  
     list-style-type: none 
 
-  /* link inside the tab. uses a background image */
-  ul.tabs a  
+  /* link inside the arrow. uses a background image */
+  ul.arrows a  
     background: image_url("default/form-tab.png") -3px right no-repeat
     float: left
     line-height: 12px
@@ -227,18 +227,13 @@ form.formtastic fieldset ol li
     position: relative
     top: 1px  
   
-  ul.tabs a:hover 
+  ul.arrows a:hover 
     background: image_url("default/form-tab.png") -35px right no-repeat
     color: #fff
   
-  /* selected tab */
-  ul.tabs a.current 
+  /* selected arrow */
+  ul.arrows a.current 
     background: image_url("default/form-tab.png") -67px right no-repeat
     color: #fff
     cursor: default
   
-  /* tab pane */
-  .panes div 
-    display: none
-    margin: 0 10px
-    background-color: #fff 

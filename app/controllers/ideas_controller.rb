@@ -16,6 +16,7 @@ class IdeasController < ApplicationController
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Ideas'
     @ideas = Idea.active.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
+    set_sponsor_zone('ideas')
     respond_to do |format|
       format.html { @paginate = true }
       format.fbml { @paginate = true }
@@ -57,6 +58,7 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     tag_cloud @idea
     set_outbrain_item @idea
+    set_sponsor_zone('ideas', @idea.item_title.underscore)
   end
 
   def my_ideas

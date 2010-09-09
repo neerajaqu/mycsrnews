@@ -40,17 +40,68 @@ form.formtastic
     top: 1px  
   
   ul.tabs a:hover 
-    background-color: #cecece
+    background: #cecece
     color: #000
   
   /* selected tab */
   ul.tabs a.current 
-    background-color: #EFEFEF
+    background: #EFEFEF
     border-bottom: 1px solid #EFEFEF 
     color: #666
     cursor: default
 
+ 
+#flowplayer-block
+
+  /* root element for arrows  */
+  ul.arrows
+    display:  inline-block
+    width: 100%
+    margin: 20px 0 !important 
+    padding: 0 0 0 20px
+
+  /* single tab */
+  ul.arrows li
+    float: left  
+    padding: 0 
+    margin: 0 4px 0 0  
+    list-style-type: none 
+
+  /* link inside the arrow. uses a background image */
+  ul.arrows a  
+    background: image_url("default/form-tab.png") right -3px  no-repeat
+    float: left
+    line-height: 12px
+    font-size: 12px
+    font-weight: bold
+    display: block
+    height: 18px
+    min-width: 70px
+    padding: 6px 25px 2px 10px
+    text-decoration: none
+    color: #fff
+    border-top-left-radius: 4px
+    -moz-border-radius-topleft: 4px
+    border-bottom-left-radius: 4px
+    -moz-border-radius-bottomleft: 4px
+    position: relative
+    top: 1px  
   
+  ul.arrows a:hover 
+    background: image_url("default/form-tab.png") right -35px  no-repeat
+    color: #fff
+  
+  /* selected arrow */
+  ul.arrows a.current 
+    background: image_url("default/form-tab.png") right -67px  no-repeat
+    color: #fff
+    cursor: default
+  
+
+
+
+
+ 
   /* tab pane */
   .panes .tab_panel
     display: none

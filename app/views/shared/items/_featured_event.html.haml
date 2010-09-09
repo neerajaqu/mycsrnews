@@ -6,10 +6,11 @@
         - if item.images.present?
           = image_tag item.images.first.url(:thumb)
         -else
-          = image_tag ('default/default_thumb.gif')
+          = image_tag ('default/watermark.jpg')
       .itemBlock
         %h2
-          = link_to item.item_title, path_to_self(item.item_link)
+          %span.ellipsis_title_2
+            = link_to item.item_title, path_to_self(item.item_link),{ :class => 'ellipsis_text'}
         .itemMeta
           %h3
             = t('events.place', :place => item.location)

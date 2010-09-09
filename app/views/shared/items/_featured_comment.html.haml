@@ -1,11 +1,19 @@
 -# expects: local 'item' 
 .featured
-  %div{:class => "item_1 comment"}
-    .thumb
-      .profilePic= local_linked_profile_pic item.user, :width => '50px', :height => '50px'
+  .item_2.comment
+
     .itemBlock
-      %p
-        = item.comments
+      %h4
+        Re:
+        %a.ellipsis_title_1
+          %span.ellipsis_text
+            Commented story title goes here.
+      %p.ellipsis_caption_4
+        %span.ellipsis_text= item.comments
       .itemMeta
+        .profilePic= local_linked_profile_pic item.user
+        %h3
+          Posted by
+          %a Bob Bobberson
         %span.btnComment== #{link_to t('comments.view'), polymorphic_url(item.item_link, :anchor => "commentListTop")}
         %span.btnComment= votes_link(item, item.votes_tally)        

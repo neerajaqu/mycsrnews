@@ -1,0 +1,6 @@
+-# expects locals sponsor_zone_code and sponsor_zone_topic
+- if sponsor_zone_topic.nil?
+  - sponsor_zone_topic = ""
+:javascript
+  TS_AdService.flags.interests = ["#{sponsor_zone_topic}"];
+  TS_AdService.DisplayZone("#{sponsor_zone_code}");
