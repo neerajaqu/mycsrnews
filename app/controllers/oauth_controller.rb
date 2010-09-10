@@ -12,8 +12,11 @@ class OauthController < ApplicationController
   
   def create    
     if params[:error].present?
-    	Rails.logger.error params.inspect
-      current_user.update_attribute(:fb_oauth_denied_at, Time.now)
+      if params[:error][:type] == "OAuthAccessDeniedException"
+        current_user.update_attribute(:fb_oauth_denied_at, Time.now)
+      else
+        Rails.logger.error "***FB OAUTH ERROR*** #{params.inspect}"
+      end
     else
       mogli_client = Mogli::Client.create_from_code_and_authenticator(params[:code],authenticator)
       session[:at]=mogli_client.access_token
