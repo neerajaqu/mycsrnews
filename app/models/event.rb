@@ -95,5 +95,10 @@ class Event < ActiveRecord::Base
       e.images.create(:remote_image_url=>image) if image
     end
   end
+
+  def get_url
+    return "http://#{url}" unless url =~ /^http:\/\//
+    url
+  end
 end
 
