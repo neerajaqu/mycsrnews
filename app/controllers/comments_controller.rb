@@ -14,7 +14,11 @@ class CommentsController < ApplicationController
       end
     	# TODO:: change this to work with polymorphic associations, switch to using touch
     	#expire_page :controller => 'stories', :action => 'show', :id => @story
-    	redirect_to @commentable
+    	respond_to do |format|
+    	  format.html { redirect_to @commentable }
+    	  format.json { render(:partial => 'shared/comments.html', :locals => { :comments => @commentable.comments }) and return }
+    	  #format.json { @comments = @commentable.comments }
+    	end
     else
     	redirect_to @commentable
     end

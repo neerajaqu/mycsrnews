@@ -82,6 +82,56 @@ $(function() {
     }, 'html');
   });
 
+  // TODO FINISH AND REENABLE
+  $('form.comment.false').submit(function(event) {
+  	event.preventDefault();
+  	var form = $(this);
+  	//if ($("textarea[name=comment\\[comments\\]]", this).val() === '') {
+  	if ($("textarea:first", form).val() === '') {
+  		$("textarea:first", form).css('border', '1px solid red');
+  		return false;
+    } else {
+    	console.log("VAL:: ("+$('textarea[name=comment\\[comments\\]]', form).val()+")");
+    }
+  	var submitBtn = $('input[type=submit]', this);
+  	submitBtn.attr('disabled', 'disabled');
+  	submitBtn.hide();
+  	submitBtn.parent().append('<img style="float: left;" src="/images/default/spinner-tiny.gif" /><p style="float: left;">&nbsp; Processing your comment...</p>');
+
+  	var url = change_url_format($(this).attr('action'));
+  	var parentForm = $(this).parents('.postComment');
+  	var commentThread = parentForm.siblings('.commentThread');
+
+  	$.post(url, $(this).serialize(), function(data) {
+      commentThread.fadeOut("normal", function() {
+        //commentThread.replaceWith(data).fadeIn("normal");
+        commentThread.html(data).fadeIn("normal");
+        rebuild_facebook_dom();
+        setTimeout(function() {
+          $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, { duration: 'slow', easing: 'swing'});
+          $('.commentThread li').last().effect('highlight', {color: 'green'}, 3000);
+          /*
+          // TODO:: FIX THIS
+          // here are two different queueing options
+          // they are both triggering highlight twice for some reason
+          $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, { duration: 'slow', easing: 'swing'}).queue(function() {
+            $('.commentThread li').last().effect('highlight', {color: 'green'}, 3000);
+            $(this).dequeue();
+          });
+          $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, 'slow', 'swing', function() {
+            $('.commentThread li').last().effect('highlight', {color: 'green'}, 3000);
+            //$(this).dequeue();
+          });
+          */
+        }, 500);
+      });
+  		submitBtn.siblings('p, img').remove();
+  		submitBtn.removeAttr('disabled');
+  		submitBtn.show();
+  		$(':input', form).not(':button, :submit, :reset, :hidden').val('');
+    }, 'html');
+  });
+
   $('.flag-form').change(function(event) {
 		event.preventDefault();
 		var flag_form = $(this);
@@ -95,7 +145,7 @@ $(function() {
     } 
   });
 
-	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').click(function(event) {
+	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').live('click', function(event) {
 		event.preventDefault();
 		var span = $(this).parent();
 		$(this).parent().html("<img src=\"/images/default/spinner-tiny.gif\" />");
