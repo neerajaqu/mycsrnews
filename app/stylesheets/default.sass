@@ -1106,6 +1106,13 @@ h3.btn
     cursor: pointer
     text-decoration: none
     background: $btnBGHover
+  &.disabled
+    border: 1px solid #666
+    color: #f0f0f0
+    cursor: default
+    background: image_url("default/disabled-btn.gif") top left repeat-x
+    &:hover
+      background: image_url("default/disabled-btn.gif") top left repeat-x
 
 .form-btn
   background: image_url("default/form-btn-off.png") top left repeat-x
@@ -1305,7 +1312,7 @@ h3.btn
     color: $paginationLinkOff
   span.disabled
     color: $paginationLinkDisabled
-    background: $paginationBgDisabled
+    background: none
     border: $paginationBdrDisabled
     &:hover
       text-decoration: none
