@@ -261,7 +261,7 @@ li
       padding-right: 20px
     .toggle_tabs li
       margin-right: 1px
-      height: 23px
+      height: 24px
       width: $pageTabWidth
       float: left
       padding: 0
@@ -388,10 +388,12 @@ li
     padding: 0px
     text-align: center
     li
+      position: relative
+      bottom: 0px
       display: block
       float: left
       padding: 0px
-      margin: 0 0 0 2px
+      margin: 0 0 0 1px
       a
         position: relative
         bottom: -1px
@@ -408,7 +410,7 @@ li
           background: $subnavTabOffHover
           text-decoration: none
         &.selected
-          bottom: -1px
+          bottom: 0px
           margin: 0px
           background: $subnavTabOn
           border:
@@ -681,6 +683,25 @@ $ColumnCorners: none
 .quarter-panel
   width: 25%
 
+.panel-shadow
+  width: 70%
+  padding:
+    right: 1px
+    bottom: 1px
+  background: #ccc
+    
+
+.empty-panel
+  width: 70%
+  margin: 15px auto 0
+  padding: 10px
+  background: #f1f1f1
+  border: 1px solid #ccc
+  text-align: center
+  p
+    text-align: center
+    font-size: 14px
+    color: #666
 /**********************************************************************************************/
 /* FEATURED STORY STYLES */
 
@@ -1106,6 +1127,13 @@ h3.btn
     cursor: pointer
     text-decoration: none
     background: $btnBGHover
+  &.disabled
+    border: 1px solid #666
+    color: #f0f0f0
+    cursor: default
+    background: image_url("default/disabled-btn.gif") top left repeat-x
+    &:hover
+      background: image_url("default/disabled-btn.gif") top left repeat-x
 
 .form-btn
   background: image_url("default/form-btn-off.png") top left repeat-x
@@ -1305,7 +1333,7 @@ h3.btn
     color: $paginationLinkOff
   span.disabled
     color: $paginationLinkDisabled
-    background: $paginationBgDisabled
+    background: none
     border: $paginationBdrDisabled
     &:hover
       text-decoration: none
