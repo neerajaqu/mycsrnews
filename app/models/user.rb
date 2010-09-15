@@ -76,6 +76,11 @@ class User < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true, :reserved => RESERVED_NAMES
 
 
+  # FB Graph API settings
+  delegate :post_comments?, :to => :user_profile
+  delegate :post_likes?, :to => :user_profile
+  delegate :post_items?, :to => :user_profile
+
   # NOTE:: must be above emits_pfeeds call
   def trigger_comment(comment) end
   def trigger_article(article) end
