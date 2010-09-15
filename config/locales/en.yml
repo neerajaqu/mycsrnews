@@ -2,6 +2,7 @@ en:
   app:
     facebook:
       vote_caption: "Visit {{title}} to respond"
+      comment_caption: "Visit {{title}} to respond"
   date: 
     order: [:month, :day, :year] 
   header:

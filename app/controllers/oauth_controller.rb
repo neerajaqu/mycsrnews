@@ -4,9 +4,9 @@ class OauthController < ApplicationController
   def new
     session[:at]=nil
     if iframe_facebook_request?
-      redirect_top authenticator.authorize_url(:scope => 'publish_stream', :display => 'page')
+      redirect_top authenticator.authorize_url(:scope => 'publish_stream,offline_access', :display => 'page')
     else
-      redirect_to authenticator.authorize_url(:scope => 'publish_stream', :display => 'page')
+      redirect_to authenticator.authorize_url(:scope => 'publish_stream,offline_access', :display => 'page')
     end
   end
   

@@ -82,16 +82,16 @@ $(function() {
     }, 'html');
   });
 
-  // TODO FINISH AND REENABLE
-  $('form.comment.false').submit(function(event) {
+  $('form.comment').submit(function(event) {
+  	// Skip forums for now
+  	if ($(this).parents('.topic-form').length) return true;
+
   	event.preventDefault();
   	var form = $(this);
   	//if ($("textarea[name=comment\\[comments\\]]", this).val() === '') {
   	if ($("textarea:first", form).val() === '') {
   		$("textarea:first", form).css('border', '1px solid red');
   		return false;
-    } else {
-    	console.log("VAL:: ("+$('textarea[name=comment\\[comments\\]]', form).val()+")");
     }
   	var submitBtn = $('input[type=submit]', this);
   	submitBtn.attr('disabled', 'disabled');
@@ -109,11 +109,12 @@ $(function() {
         rebuild_facebook_dom();
         setTimeout(function() {
           $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, { duration: 'slow', easing: 'swing'});
-          $('.commentThread li').last().effect('highlight', {color: 'green'}, 3000);
+          $('li', commentThread).last().effect('highlight', {color: 'green'}, 3000);
           /*
           // TODO:: FIX THIS
           // here are two different queueing options
           // they are both triggering highlight twice for some reason
+          // but the delay on highlighting is much more natural
           $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, { duration: 'slow', easing: 'swing'}).queue(function() {
             $('.commentThread li').last().effect('highlight', {color: 'green'}, 3000);
             $(this).dequeue();

@@ -19,7 +19,18 @@ class VoteMessenger
       end
     end
     caption = caption[0,250]
-    fb_client.post("#{vote.voter.fb_user_id}/feed", "Post", :message => "likes", :link => item_url, :name => vote.voteable.item_title, :caption => app_caption, :description => caption, :picture => image_url)
+    begin
+      fb_client.post("#{vote.voter.fb_user_id}/feed", "Post", :message => "likes", :link => item_url, :name => vote.voteable.item_title, :caption => app_caption, :description => caption, :picture => image_url)
+    rescue Exception => exception
+      type, error = exception.to_s.split(':').map {|e| e.strip}
+      if type == "OAuthException" and error =~ /^Error processing access token/
+        Rails.logger.error "***FB OAUTH ERROR*** #{exception.inspect}"
+        vote.voter.update_attribute(:fb_oauth_key, nil)
+      else
+        Rails.logger.error "***FB MISC ERROR*** #{exception.inspect}"
+      end
+      raise Exception.new("FB GRAPH API EXCEPTION: #{exception.inspect}")
+    end
   end
     
 end

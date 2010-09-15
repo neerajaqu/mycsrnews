@@ -20,7 +20,7 @@
           %ul
             - @topic.posts.each do |post|
               = render :partial => 'shared/comment', :locals => { :comment => post}
-  = render :partial => 'shared/comment_form', :locals => { :commentable => @topic , :post_locale => 'forums.topics.post_comment', :commit_text => 'forums.topics.commit_reply' }
+  .topic-form= render :partial => 'shared/comment_form', :locals => { :commentable => @topic , :post_locale => 'forums.topics.post_comment', :commit_text => 'forums.topics.commit_reply' }
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @topic,:title => @topic.title }

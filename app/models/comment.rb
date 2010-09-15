@@ -59,6 +59,10 @@ class Comment < ActiveRecord::Base
     [self.commentable.crumb_items].flatten
   end
 
+  def async_comment_messenger item_url, app_caption, image_url = nil
+    Resque.enqueue(CommentMessenger, id, item_url, app_caption, image_url) if user.fb_oauth_active?
+  end
+
   private
 
   def custom_callback
