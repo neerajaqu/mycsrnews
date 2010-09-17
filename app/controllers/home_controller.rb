@@ -11,6 +11,18 @@ class HomeController < ApplicationController
   def test_design
   end
 
+  def preview_widgets
+    @page = true
+    @page = WidgetPage.find_root_by_page_name('home')
+    if @page.present? and @page.children.present?
+      @main = @page.children.first.children
+    end
+    #@main = params[:widget_ids].split(',').map {|wid| WidgetPage.find(wid) }
+    @sidebar = []
+    render :template => 'home/test_widgets'
+    return
+  end
+
   def index
     @page = "page_1_"
     if request.post?

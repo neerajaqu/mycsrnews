@@ -1,6 +1,19 @@
-- content_for :head_content do
+- content_for :head do
   %style
+    #sortable1, #sortable2 { list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; }
+    #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
     :sass
+
+      #col_full
+        #widget-tabs
+          float: left
+          width: 400px
+        #widget-tabs-destination
+          float: left
+          width: 250px
+          border: 1px solid black
+          min-height: 250px
+          margin-left: 40px
       .float-toggle
         position: absolute
         top: 2px
@@ -52,9 +65,27 @@
         background-color: #AEAEAE
         overflow: hidden
 
-  = javascript_include_tag admin_widgets_path(:format => 'js', :only_path => false)
+  :javascript
+    $(function() {
+      var $tabs = $('#widget-tabs').tabs();
+      $('ul.sortable, ul.destination').sortable({placeholder:'ui-state-highlight'}).disableSelection();
+      $('#widget-tabs-destination').droppable({
+        accept: 'li',
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        helper: 'clone',
+        drop: function(event, ui) {
+        	if (!ui.draggable.parent().hasClass('destination')) {
+            var widget = ui.draggable;
+            widget.fadeOut(function() {
+              widget.appendTo($('ul.destination')).fadeIn();
+            });
+          }
+        }
+      });
+    });
 
-#col_full
+-#col_full
   #content-box
     - [@main_widgets, @sidebar_widgets].each do |widget_set|
       - widget_set.each do |main_widget|
@@ -71,6 +102,33 @@
               .masonry({ appendedContent : content, columnWidth: 310, itemSelector : '.box' });
           });
 
+#col_full
+  #content-box
+    #widget-tabs{:style => "width: 410px; float: left;"}
+      %ul
+        %li
+          %a{:href => "#tabs-1"} Tabs 1
+        %li
+          %a{:href => "#tabs-2"} Tabs 2
+        %li
+          %a{:href => "#tabs-3"} Tabs 3
+        %li
+          %a{:href => "#tabs-4"} Tabs 4
+        %li
+          %a{:href => "#tabs-5"} Tabs 5
+      - @widgets = Widget.all(:order => :name)
+      - per = (@widgets.size / 5.0).ceil
+      - 5.times do |i|
+        - index = i * per
+        - w_list = @widgets[index,per]
+        %div{:id => "tabs-#{i+1}"}
+          %ul.sortable.ui-helper-reset
+            - w_list.each do |widget|
+              %li.ui-state-default= widget.name
+    -#widget-tabs-destination{:style => "width: 200px; float: left; border: 1px solid black; min-height: 200px;"}
+    #widget-tabs-destination
+      %h2 Drop Widgets Here
+      %ul.destination
 -#
   %h1.title Select Widgets for Your Page Layout
   %br
