@@ -83,6 +83,25 @@
           }
         }
       });
+      $('#preview-button')
+        .hover(
+          function() { $(this).addClass('ui-state-hover'); },
+          function() { $(this).removeClass('ui-state-hover'); }
+        ).mousedown(function() {
+          $(this).addClass('ui-state-active');
+        }).mouseup(function() {
+          $(this).removeClass('ui-state-active');
+        }).click(function() {
+        	var widget_ids = [];
+        	$('ul.destination li').each(function(index, element) {
+        		var wids = $(element).attr('id').split(/-/);
+        		if (wids.length && wids[1]) {
+        			widget_ids.push(wids[1]);
+            }
+          });
+          $(this).attr('href', $(this).attr('href').replace(/\?.*$/, '') + '?widget_ids=' + widget_ids.join(','));
+          return true;
+        });
     });
 
 -#col_full
@@ -104,27 +123,21 @@
 
 #col_full
   #content-box
+    %a#preview-button.title.fg-button.ui-state-default.ui-corner-all{:href => "/home/preview_widgets", :target => "_preview", :type => "button"} Preview Widgets
+    .clear
     #widget-tabs{:style => "width: 410px; float: left;"}
       %ul
-        %li
-          %a{:href => "#tabs-1"} Tabs 1
-        %li
-          %a{:href => "#tabs-2"} Tabs 2
-        %li
-          %a{:href => "#tabs-3"} Tabs 3
-        %li
-          %a{:href => "#tabs-4"} Tabs 4
-        %li
-          %a{:href => "#tabs-5"} Tabs 5
+        - @filters.each_with_index do |filter, i|
+          %li
+            %a{:href => "#tabs-#{i+1}"}= filter[:name].titleize
       - @widgets = Widget.all(:order => :name)
-      - per = (@widgets.size / 5.0).ceil
-      - 5.times do |i|
-        - index = i * per
-        - w_list = @widgets[index,per]
+      - @filters.each_with_index do |filter, i|
+        - w_list = []
+        - @widgets.delete_if {|w| w.name =~ filter[:regex] and w_list.push w }
         %div{:id => "tabs-#{i+1}"}
           %ul.sortable.ui-helper-reset
             - w_list.each do |widget|
-              %li.ui-state-default= widget.name
+              %li.ui-state-default{:id => "widget-#{widget.id}"}= widget.name
     -#widget-tabs-destination{:style => "width: 200px; float: left; border: 1px solid black; min-height: 200px;"}
     #widget-tabs-destination
       %h2 Drop Widgets Here

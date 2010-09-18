@@ -1,3 +1,5 @@
+class Foo; def css_class() '' end; end
+
 class HomeController < ApplicationController
   #caches_page :index, :google_ads, :helios_ads
   layout proc { |controller| controller.action_name == 'app_tab' ? 'app_tab' : 'application' }
@@ -14,10 +16,10 @@ class HomeController < ApplicationController
   def preview_widgets
     @page = true
     @page = WidgetPage.find_root_by_page_name('home')
-    if @page.present? and @page.children.present?
+    if false and @page.present? and @page.children.present?
       @main = @page.children.first.children
     end
-    #@main = params[:widget_ids].split(',').map {|wid| WidgetPage.find(wid) }
+    @main = params[:widget_ids].split(',').map {|wid| Widget.find(wid) }
     @sidebar = []
     render :template => 'home/test_widgets'
     return
