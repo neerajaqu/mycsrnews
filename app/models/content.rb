@@ -34,7 +34,7 @@ class Content < ActiveRecord::Base
 
   attr_accessor :image_url, :tags_string, :is_draft
 
-  validates_presence_of :title, :caption
+  validates_presence_of :title, :caption, :user_id
   validates_presence_of :url, :if =>  :is_content?
   validates_format_of :url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :message => "should look like a URL", :allow_blank => true
   validates_format_of :image_url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :allow_blank => true, :message => "should look like a URL"

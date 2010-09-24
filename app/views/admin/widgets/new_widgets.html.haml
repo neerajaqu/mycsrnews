@@ -14,6 +14,12 @@
           border: 1px solid black
           min-height: 250px
           margin-left: 40px
+      li.widget
+        width: 200px
+      ul.destination
+        margin-bottom: 10px
+        li
+          margin-left: 10px
       .float-toggle
         position: absolute
         top: 2px
@@ -69,8 +75,22 @@
     $(function() {
       var $tabs = $('#widget-tabs').tabs();
       $('ul.sortable, ul.destination').sortable({placeholder:'ui-state-highlight'}).disableSelection();
+
+      $('li.widget').each(function(i, ele) {
+      	//$$(ele).birth_parent = $(ele).parent().parent().attr('id');
+      	$(ele).data('birth_parent', $(ele).parent().parent());
+      });
+
+      var getWidgetID = function(widget_str) {
+        if ((match = widget_str.match(/^widget-([0-9]+)$/)) != null) {
+          return match[1];
+        } else {
+          return false;
+        }
+      }
+
       $('#widget-tabs-destination').droppable({
-        accept: 'li',
+        accept: 'ul.source li',
         activeClass: 'ui-state-hover',
         hoverClass: 'ui-state-active',
         helper: 'clone',
@@ -83,7 +103,60 @@
           }
         }
       });
-      $('#preview-button')
+      $('#widget-tabs').droppable({
+        accept: 'ul.destination li',
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        helper: 'clone',
+        drop: function(event, ui) {
+        	if (ui.draggable.parent().hasClass('destination')) {
+            var widget = ui.draggable;
+            widget.fadeOut(function() {
+              widget.appendTo($('ul', $(widget).data('birth_parent'))).fadeIn();
+            });
+          }
+        }
+      });
+      $('#preview-button').click(function() {
+        var widget_ids = [];
+        $('ul.destination li').each(function(index, element) {
+          var wids = $(element).attr('id').split(/-/);
+          if (wids.length && wids[1]) {
+            widget_ids.push(wids[1]);
+          }
+        });
+        $(this).attr('href', $(this).attr('href').replace(/\?.*$/, '') + '?widget_ids=' + widget_ids.join(','));
+        return true;
+      });
+
+      $('#clear-button').click(function(event) {
+        event.preventDefault();
+        $('ul.destination li').each(function(index, element) {
+          $(element).fadeOut(function() {
+            $(element).appendTo($('ul', $(element).data('birth_parent'))).fadeIn();
+          });
+        });
+      });
+
+      $('#save-button').click(function(event) {
+        event.preventDefault();
+        var widgets = {
+          main: [],
+          sidebar: []
+        };
+        $('ul.destination li.widget').each(function(i) {
+          widgets.main.push(getWidgetID(this.id));
+        });
+        $.post("/admin/widgets/save.json", {main: widgets.main.join(','), sidebar: widgets.sidebar.join(',')}, function(data) {
+          if (typeof(data.success) !== 'undefined') {
+            alert(data.success);
+          } else {
+            alert('There was a problem saving your page');
+          }
+        }, "json");
+      });
+
+      $('#save-button, #preview-button, #clear-button')
         .hover(
           function() { $(this).addClass('ui-state-hover'); },
           function() { $(this).removeClass('ui-state-hover'); }
@@ -91,17 +164,16 @@
           $(this).addClass('ui-state-active');
         }).mouseup(function() {
           $(this).removeClass('ui-state-active');
-        }).click(function() {
-        	var widget_ids = [];
-        	$('ul.destination li').each(function(index, element) {
-        		var wids = $(element).attr('id').split(/-/);
-        		if (wids.length && wids[1]) {
-        			widget_ids.push(wids[1]);
-            }
-          });
-          $(this).attr('href', $(this).attr('href').replace(/\?.*$/, '') + '?widget_ids=' + widget_ids.join(','));
-          return true;
         });
+
+      var current_widgets = #{@main_widgets.map {|wp| wp.widget.id}.to_json};
+      $(current_widgets).each(function(index, widget_id) {
+      	var element = $('#widget-'+widget_id);
+        $(element).fadeOut(function() {
+          $(element).appendTo($('ul.destination')).fadeIn();
+        });
+      });
+
     });
 
 -#col_full
@@ -123,9 +195,13 @@
 
 #col_full
   #content-box
+    %a#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
+    %a#clear-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Clear Widgets
+    %span.separator &nbsp;||
     %a#preview-button.title.fg-button.ui-state-default.ui-corner-all{:href => "/home/preview_widgets", :target => "_preview", :type => "button"} Preview Widgets
     .clear
-    #widget-tabs{:style => "width: 410px; float: left;"}
+    %br
+    #widget-tabs{:style => "width: 450px; float: left;"}
       %ul
         - @filters.each_with_index do |filter, i|
           %li
@@ -135,12 +211,12 @@
         - w_list = []
         - @widgets.delete_if {|w| w.name =~ filter[:regex] and w_list.push w }
         %div{:id => "tabs-#{i+1}"}
-          %ul.sortable.ui-helper-reset
+          %ul.source.sortable.ui-helper-reset
             - w_list.each do |widget|
-              %li.ui-state-default{:id => "widget-#{widget.id}"}= widget.name
+              %li.widget.ui-state-default{:id => "widget-#{widget.id}"}= widget.name
     -#widget-tabs-destination{:style => "width: 200px; float: left; border: 1px solid black; min-height: 200px;"}
     #widget-tabs-destination
-      %h2 Drop Widgets Here
+      %h2 Drop and Rearrange Widgets Here
       %ul.destination
 -#
   %h1.title Select Widgets for Your Page Layout
