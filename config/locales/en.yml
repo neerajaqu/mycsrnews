@@ -313,3 +313,8 @@ en:
   no_features: "Sorry, no featured items right now"
   more_features: "View more"
   advertise_here: "advertise here"
+  hint:
+    user_profile:
+      post_comments: "Post your comments to your facebook stream"
+      post_likes: "Post your likes to your facebook stream"
+      post_items: "Post your items to your facebook stream"
