@@ -72,6 +72,7 @@ class EventsController < ApplicationController
       redirect_to events_path
     else
       if current_facebook_user
+        @events_allowed = current_facebook_user.has_permission?('user_events')
         @event = Event.new
         @fb_events = current_facebook_user.events(:start_time => Time.now, :end_time => 1.month.from_now)
         current_events = Event.find(:all, :conditions=>["eid IN (?)", @fb_events.collect { |e| e.eid }]).collect { |e| e.eid }

@@ -40,6 +40,7 @@ en:
     featured_title: "Featured Events"    
     place: "Place: {{place}}"
     start_time: "Time: {{start_time}}"
+    fb_prompt: "Click here to add events from your facebook account"
   media:
     add_image: "Add Image"
     add_video: "Add Video"
