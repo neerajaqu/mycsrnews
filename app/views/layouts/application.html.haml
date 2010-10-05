@@ -48,10 +48,19 @@
       $(function() {
       	$('.left').removeClass('left');
       	$('.right').removeClass('right');
-      	$('#col_full').masonry({
-      		columnWidth: 310,
-      		itemSelector: '.box'
-        });
+      	var runMasonry = function() {
+          $('#col_full').masonry({
+            columnWidth: #{iframe_facebook_request? ? 250 : 313},
+            itemSelector: '.box'
+          });
+        };
+        /* MAKE DAMN WELL SURE THIS RUNS IN FACEBOOK */
+        runMasonry();
+        setTimeout(function() { runMasonry(); }, 1000);
+        setTimeout(function() { runMasonry(); }, 3000);
+        setTimeout(function() { runMasonry(); }, 5000);
+        window.onload = function() { runMasonry(); };
+        /* </annoying_facebook_hack> */
       });
 
     -# IE Debugging 
@@ -71,7 +80,7 @@
       });
 
   %body
-    #bodyWrapper
+    #bodyWrapper{:style => "width: 760px"}
       = fb_connect_javascript_tag
       - if @share_item
         = init_fb_connect "XFBML", :js => :jquery do

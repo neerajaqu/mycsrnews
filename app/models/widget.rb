@@ -8,4 +8,8 @@ class Widget < ActiveRecord::Base
   def metadata
     self.metadatas.first
   end
+
+  def css_class
+    ''
+  end
 end

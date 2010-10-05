@@ -1,7 +1,7 @@
 -# @expects: local 'newest_images'
 
 - cache :newest_images_html do
-  - newest_images ||= Image.newest
+  - newest_images ||= Image.newest 8
   - unless newest_images.empty?
     %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar

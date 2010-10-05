@@ -1,5 +1,3 @@
-class Foo; def css_class() '' end; end
-
 class HomeController < ApplicationController
   #caches_page :index, :google_ads, :helios_ads
   layout proc { |controller| controller.action_name == 'app_tab' ? 'app_tab' : 'application' }
@@ -21,8 +19,6 @@ class HomeController < ApplicationController
     end
     @main = params[:widget_ids].split(',').map {|wid| Widget.find(wid) }
     @sidebar = []
-    render :template => 'home/test_widgets'
-    return
   end
 
   def index
@@ -45,8 +41,6 @@ class HomeController < ApplicationController
         @main.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
         @sidebar.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
       end
-      render :template => 'home/test_widgets'
-      return
     end
     #expires_in 1.minutes, :private => false, :public => true
     @no_paginate = true

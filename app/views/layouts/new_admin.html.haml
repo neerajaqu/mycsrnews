@@ -10,6 +10,7 @@
     = javascript_include_tag 'hoverIntent'
     = javascript_include_tag 'superfish'
     = javascript_include_tag 'jquery.tablesorter.min'
+    = javascript_include_tag 'admin.js'
 
     -# IE Debugging 
     =# javascript_include_tag 'http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'
@@ -64,7 +65,7 @@
               %li
                 %a{:href => "#widgets"} Build Layout
                 %ul
-                  %li= link_to 'Choose Widgets', admin_widgets_path
+                  %li= link_to 'Choose Widgets', new_widgets_admin_widgets_path
                   %li= link_to 'Custom Widgets', admin_metadata_custom_widgets_path
               %li= link_to 'Announcements', admin_announcements_path
           %li
