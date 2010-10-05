@@ -14,6 +14,28 @@ class Admin::WidgetsController < AdminController
     end
   end
 
+  def new_widgets
+    @filters = [
+      { :name => 'stories', :regex => /(stor(y|ies))|article/i },
+      { :name => 'content', :regex => /idea|question|answer|event|resource|forum|topic/i },
+      { :name => 'media', :regex => /image|video/i },
+      { :name => 'users', :regex => /user?/i },
+      { :name => 'ads', :regex => /\bad[s_\.]/i },
+      { :name => 'misc', :regex => /.+/i }
+    ]
+    @controller = self
+    @main = Widget.main
+    @sidebar = Widget.sidebar
+    @page = WidgetPage.find_root_by_page_name('home')
+    if @page.present? and @page.children.present?
+      @main_widgets = @page.children.first.children
+      @sidebar_widgets = @page.children.second.children
+    else
+    	@main_widgets = nil
+    	@sidebar_widgets = nil
+    end
+  end
+
   def save
     # TODO:: Switch to updating instead of deleting
     WidgetPage.all.each {|w| w.destroy}
