@@ -16,7 +16,7 @@ class EventsController < ApplicationController
     @current_sub_tab = 'Browse Events'
     @events = Event.upcoming.active.paginate :page => params[:page], :per_page => Event.per_page
     set_sponsor_zone('events')
-   respond_to do |format|
+    respond_to do |format|
       format.html { @paginate = true }
       format.fbml { @paginate = true }
       format.atom
