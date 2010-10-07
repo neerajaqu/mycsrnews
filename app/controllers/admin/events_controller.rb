@@ -42,8 +42,8 @@ class Admin::EventsController < AdminController
   
   def import_zvents
     if request.post?
-      zvent =Zvent::Session.new(APP_CONFIG['zvent_api_key'])
-      zevents = zvent.find_events_by_date('next 30 days', :where=>APP_CONFIG['zvent_location'])
+      zvent = Zvent::Session.new(APP_CONFIG['zvent_api_key'])
+      zevents = zvent.find_events_by_date('next 30 days', :where => APP_CONFIG['zvent_location'], :limit => 50)
       count = 0
       zevents[:events].each do |event|
         if params[:commit] == "Import Selected Events"
@@ -62,7 +62,7 @@ class Admin::EventsController < AdminController
       redirect_to admin_events_path
     else
       zvent =Zvent::Session.new(APP_CONFIG['zvent_api_key'])
-      zevents = zvent.find_events_by_date('next 30 days',:where=>APP_CONFIG['zvent_location'])
+      zevents = zvent.find_events_by_date('next 30 days', :where => APP_CONFIG['zvent_location'], :limit => 50)
       @events = zevents[:events]
     end
   end
