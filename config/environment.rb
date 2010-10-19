@@ -21,7 +21,12 @@ RESERVED_NAMES = ["admin", "administrator", "update", "delete", "show", "create"
 #require "#{RAILS_ROOT}/lib/acts_as_moderatable.rb"
 #ActiveRecord::Base.send :include, Newscloud::Acts::Moderatable
 
+# Load Iframe Rewriter Middleware
+require "#{RAILS_ROOT}/lib/iframe_rewriter.rb"
+
 Rails::Initializer.run do |config|
+  config.middleware.use Newscloud::IframeRewriter
+
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

@@ -23,7 +23,7 @@ class VoteMessenger
       fb_client.post("#{vote.voter.fb_user_id}/feed", "Post", :message => "likes", :link => item_url, :name => vote.voteable.item_title, :caption => app_caption, :description => caption, :picture => image_url)
     rescue Exception => exception
       type, error = exception.to_s.split(':').map {|e| e.strip}
-      if type == "OAuthException" and error =~ /^Error processing access token/
+      if type == "OAuthException" and error =~ /^Error (processing|validating) access token/
         Rails.logger.error "***FB OAUTH ERROR*** #{exception.inspect}"
         vote.voter.update_attribute(:fb_oauth_key, nil)
       else

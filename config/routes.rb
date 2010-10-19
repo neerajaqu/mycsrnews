@@ -3,6 +3,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # Set locale and make pretty urls
   map.filter 'locale'
+  # Determine iframe or web origin of request
+  map.filter :iframe
 
   # Mogli
   map.resource :oauth, :controller=>"oauth"

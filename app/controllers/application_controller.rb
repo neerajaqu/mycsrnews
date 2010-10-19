@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
 
   helper :all # include all helpers, all the time
+  before_filter :set_iframe_status
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :set_p3p_header
   before_filter :set_facebook_session_wrapper
@@ -49,6 +50,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_facebook_user
   helper_method :get_setting
   helper_method :get_ad_layout
+  helper_method :iframe_facebook_request?
 
   def logged_in_to_facebook_and_app_authorized
     if ensure_application_is_installed_by_facebook_user  
@@ -68,7 +70,7 @@ class ApplicationController < ActionController::Base
   def set_facebook_session_wrapper
     begin
       set_facebook_session
-      session[:facebook_request] = true if request_comes_from_facebook? or params[:iframe_req].present?
+      #session[:facebook_request] = true if request_comes_from_facebook? or params[:iframe_req].present?
     rescue
       return facebook_session_expired
     end
@@ -251,6 +253,11 @@ class ApplicationController < ActionController::Base
     cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale)
   end
 
+  def set_iframe_status
+    @iframe_status = params[:iframe] || false
+    headers["Newscloud-Origin"] = @iframe_status ? 'iframe' : 'web'
+  end
+
   def default_url_options(options={})
     format = options[:format] || request.format.to_sym
     unless ['html', 'fbml', 'json', 'js', 'fbjs', 'xml', 'atom', 'rss'].include? format.to_s
@@ -271,10 +278,13 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    {
+    opts = {
     	:locale => I18n.locale,
       :format => format
     } 
+    # Disabled this and moved to IframeRewriter middleware due to fragment caching
+    #opts[:iframe] = @iframe_status if @iframe_status and not options[:canvas] == true
+    opts
   end
 
   def tag_cloud(item)
@@ -313,11 +323,11 @@ class ApplicationController < ActionController::Base
   end
 
   def canvas?
-    iframe_facebook_request? ? true : false
+    iframe_facebook_request?
   end
 
   def iframe_facebook_request?
-    (session and session[:facebook_request]) or request_comes_from_facebook?
+    !! @iframe_status
   end
 
   def after_facebook_login_url
