@@ -9,7 +9,7 @@ module Newscloud
     def initialize(app, flag = "iframe")
       @app = app
       @flag = flag
-      @base_url = FACEBOOKER["callback_url"].downcase
+      @base_url = FACEBOOKER["callback_url"].downcase.sub(%r(^https?://), '')
     end
 
     def call(env)
@@ -38,10 +38,8 @@ module Newscloud
 
     def add_iframe path
       uri = URI.parse(path)
-      if uri.relative?
+      if uri.relative? or uri.host == @base_url
       	uri.path = "/#{@flag}#{uri.path}"
-      elsif uri.host.downcase.include? @base_url
-      	uri.path = uri.path.sub(%r((^#{@base_url}/?)), '\1iframe/')
       end
       uri.to_s
     end
