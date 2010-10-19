@@ -39,7 +39,7 @@ class WidgetSweeper < ActionController::Caching::Sweeper
   end
 
   def self.widgets
-    ['latest_activity','newest_newswires','blog_roll','feed_roll','auto_feature','auto_feature_sidebar','top_stories', 'stories_list', 'active_stories', 'most_discussed_stories', 'top_users', 'top_ideas', 'top_events', 'featured_items', 'newest_users', 'newest_ideas', 'header', 'fan_application', 'prompt_permissions', 'newest_images', 'newest_videos','announcements','welcome_panel']
+    ['latest_activity','newest_newswires','blog_roll','feed_roll','auto_feature','auto_feature_sidebar','top_stories', 'stories_list', 'active_stories', 'most_discussed_stories', 'top_users', 'top_ideas', 'top_events', 'featured_items', 'newest_users', 'newest_ideas', 'header', 'fan_application', 'prompt_permissions', 'newest_images', 'newest_videos','newest_announcements','welcome_panel']
   end
 
 end

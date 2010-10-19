@@ -1,6 +1,6 @@
 .generic.small
   .itemBlock
-    %h4= link_to item.title, path_to_self(item)
+    %h4= link_to item.item_title, path_to_self(item.item_link)
     .profilePic= local_linked_profile_pic item.user
     .itemMeta
       %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => time_ago_in_words(item.created_at))

@@ -3,7 +3,13 @@
 
   %p Did you want to import these events?
   - form_tag import_zvents_admin_events_path do
-    =submit_tag "Import All Events"
-  %ol
-  - @events.each do |event|
-    %li== #{event.name} on #{event.startTime.to_s :us}
+    = submit_tag "Import All Events"
+    = submit_tag "Import Selected Events"
+    .clear
+    %br
+    %ol
+      - @events.each do |event|
+        %li
+          %p
+            = check_box_tag "event-#{event.id}", event.id, false, :name => "events[]"
+            = label_tag "event-#{event.id}", "#{event.name} on #{event.startTime.to_s :us}"
