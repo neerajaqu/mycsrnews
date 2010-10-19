@@ -215,13 +215,13 @@ module ApplicationHelper
     fb_name(user, :use_you => use_you, :possessive => possessive, :capitalize => true, :linked => linked, :firstnameonly => firstnameonly )
   end
   
-  def path_to_self(item)
-    canvas = iframe_facebook_request? ? true : false
+  def path_to_self(item, use_canvas = false)
+    canvas = (use_canvas and iframe_facebook_request?) ? true : false
     url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas, :only_path => false))
   end
 
   def path_to_self_no_canvas(item)
-    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => false, :only_path => false))
+    path_to_self(item, false)
   end
 
   def link_to_path_to_self(item)
