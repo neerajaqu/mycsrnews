@@ -20,7 +20,8 @@ module RoutingFilter
 
       returning yield do |result|
         # Disabled due to fragment caching
-        if false and iframe
+        # Reenabled for ajax hack
+        if iframe
           url = result.is_a?(Array) ? result.first : result
           prepend_iframe!(url, iframe)
         end
@@ -36,7 +37,8 @@ module RoutingFilter
 
       def prepend_iframe!(url, iframe)
         # Moved this to a rack middleware due to fragment caching issues
-        #url.sub!(%r(^(http.?://[^/]*)?(.*))) { "#{$1}/#{iframe}#{$2}" }
+        # Reenabled for ajax hack
+        url.sub!(%r(^(http.?://[^/]*)?(.*))) { "#{$1}/#{iframe}#{$2}" }
       end
   end
 end

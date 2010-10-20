@@ -284,6 +284,8 @@ class ApplicationController < ActionController::Base
     } 
     # Disabled this and moved to IframeRewriter middleware due to fragment caching
     #opts[:iframe] = @iframe_status if @iframe_status and not options[:canvas] == true
+    # TODO:: FIX:: Reenabled as a hack to update ajax json urls that aren't cached
+    opts[:iframe] = @iframe_status if @iframe_status and (not options[:canvas] == true) and request.xhr?
     opts
   end
 

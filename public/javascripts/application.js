@@ -174,7 +174,11 @@ $(function() {
                 span.html(data.msg).fadeIn("normal");
               });
               if (data.trigger_oauth && data.trigger_oauth == true) {
-                window.location = '/oauth/new';
+                if (data.canvas && data.canvas == true) {
+                  window.location = '/iframe/oauth/new';
+                } else {
+                  window.location = '/oauth/new';
+                }
               }
             },
             error: function(xhr, status, errorThrown) {

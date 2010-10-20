@@ -15,7 +15,7 @@ module Newscloud
     def call(env)
       status, headers, response = @app.call(env)
 
-      if headers["Newscloud-Origin"] and headers["Newscloud-Origin"] == 'iframe'
+      if headers['Content-Type'] =~ /html/ and headers["Newscloud-Origin"] and headers["Newscloud-Origin"] == 'iframe'
       	response = add_iframes(response)
       	headers["Content-Length"] = response[0].size.to_s
       end

@@ -15,7 +15,7 @@ class VotesController < ApplicationController
         end
       	success = "Thanks for your vote!"
       	format.html { flash[:success] = success; redirect_to params[:return_to] || @voteable }
-      	format.json { render :json => { :trigger_oauth => current_user.fb_oauth_desired?, :msg => "#{@voteable.votes_tally} likes" }.to_json }
+      	format.json { render :json => { :trigger_oauth => current_user.fb_oauth_desired?, :msg => "#{@voteable.votes_tally} likes", :canvas => iframe_facebook_request? }.to_json }
       else
       	error ||= "Vote failed"
       	format.html { flash[:error] = error; redirect_to params[:return_to] || @voteable }
