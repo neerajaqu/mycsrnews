@@ -17,16 +17,16 @@
     - else
       = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
-    = stylesheet_link_tag 'cards'
-    = stylesheet_link_tag 'tablesorter'
-    = stylesheet_link_tag 'jquery.jgrowl'
+    = stylesheet_link_merged :base
 
     - if APP_CONFIG['typekit'].present? and APP_CONFIG['typekit']
       = javascript_include_tag "http://use.typekit.com/#{APP_CONFIG['typekit']}.js"
       :javascript
         try{Typekit.load();}catch(e){}
           
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', "http://platform.twitter.com/anywhere.js?id=#{get_setting('oauth_key').value}&v=1",'application', 'jquery.jgrowl','scrollable.min.js','scrollable.autoscroll.min.js', 'jquery.ThreeDots.min.js', 'audio-player.js', 'jquery.masonry.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', "http://platform.twitter.com/anywhere.js?id=#{get_setting('oauth_key').value}&v=1"
+    = javascript_include_merged :base
+    = javascript_include_tag 'application'
     = javascript_include_tag '/users/current'
     - unless @sponsor_zone_code.nil?
       = javascript_include_tag 'http://ads.trafficspaces.net/v1.22/adservice.js'
@@ -103,7 +103,6 @@
       <!-- Note: Include this div markup as a workaround for a known bug in this release on IE where you may get a "operation aborted" error -->
       <div id="FB_HiddenIFrameContainer" style="display:none; position:absolute; left:-100px; top:-100px; width:0px; height: 0px;"></div>
 
-      <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
       <script type="text/javascript"> FB_RequireFeatures(["CanvasUtil"], function(){ FB.XdComm.Server.init('/xd_receiver.html'); FB.CanvasClient.startTimerToSizeToContent(); }); </script>
 
     -# HACK:: non floating div eliminates webkit resizing issues with facebook javascript
