@@ -2,6 +2,11 @@
 module ApplicationHelper
   include TagsHelper
 
+  def time_ago_in_words date, options = {}
+    options[:class] ||= "timeago"
+    content_tag(:abbr, date.to_s, options.merge(:title => date.getutc.iso8601)) if date
+  end
+
   def pipe_spacer
     '<span class="pipe">|</span>'
   end

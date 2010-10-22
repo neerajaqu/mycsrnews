@@ -10,6 +10,9 @@ $(function() {
   $('.hide').hide();
   $('.unhide').show().removeClass('hidden');
 
+  $.timeago.settings.strings.suffixAgo = '';
+  $('abbr.timeago').timeago();
+
   setTimeout(function() {
 		$('.flash').effect('fade', {}, 1000);
 
@@ -106,6 +109,9 @@ $(function() {
       commentThread.fadeOut("normal", function() {
         //commentThread.replaceWith(data).fadeIn("normal");
         commentThread.html(data).fadeIn("normal");
+        $.timeago.settings.strings.suffixAgo = '';
+        $('abbr.timeago', commentThread).timeago();
+
         rebuild_facebook_dom();
         setTimeout(function() {
           $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, { duration: 'slow', easing: 'swing'});
