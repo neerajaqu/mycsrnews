@@ -15,10 +15,12 @@ $(function() {
 
   }, 3500);
 
-  function dialog_response(title, message) {
-      $("<p>"+message+"</p>").dialog({
-          title: title,
-          modal: true
+  function modal_dialog_response(title, message) {
+  	  $('#login-overlay .contentWrap').html(message);
+  	  $('#login-overlay').overlay({
+  	  	mask: 'white',
+  	  	load: true,
+  	  	effect: 'apple'
       });
   }
 
@@ -184,9 +186,9 @@ $(function() {
             error: function(xhr, status, errorThrown) {
               var result = $.parseJSON(xhr.responseText);
               if (xhr.status == 401) {
-                dialog_response(result.error, result.dialog);
+                modal_dialog_response(result.error, result.dialog);
                 span.fadeOut("normal", function() {
-                  span.html(data.msg).fadeIn("normal");
+                  span.html('Please Login').fadeIn("normal");
                 });
               }
             }
@@ -229,9 +231,9 @@ $(function() {
       error: function(xhr, status, errorThrown) {
       	var result = $.parseJSON(xhr.responseText);
       	if (xhr.status == 401) {
-      	  dialog_response(result.error, result.dialog);
+          modal_dialog_response(result.error, result.dialog);
           span.fadeOut("normal", function() {
-            span.html(data.msg).fadeIn("normal");
+            span.html('Please Login').fadeIn("normal");
           });
         } else if (xhr.status == 409) {
           span.fadeOut("normal", function() {
