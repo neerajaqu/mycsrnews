@@ -394,8 +394,23 @@ class ApplicationController < ActionController::Base
 
   # NOTE:: THIS SUCKS!!! DON'T USE THIS!!!
   # This is an annoying hack to redirect the top page url of a facebook canvas iframe app
+  # Updated from: http://groups.google.com/group/facebooker/msg/f5790d4d45c80685
   def redirect_top location
-    render(:text => %{<script type="text/javascript">window.top.location = "#{location}";</script>}, :layout => 'application') and return
+    headers["Newscloud-Origin"] = 'no-rewrite'
+    @redirect_url = location
+    text = %{
+      <html><head> 
+        <script type="text/javascript">   
+          window.top.location.href = <%= @redirect_url.to_json %>; 
+        </script> 
+        <noscript> 
+          <meta http-equiv="refresh" content="0;url=<%=h @redirect_url %>" /> 
+          <meta http-equiv="window-target" content="_top" /> 
+        </noscript>                 
+      </head></html> 
+    }
+    render :layout => false, :inline => text
+
   end
 
 end

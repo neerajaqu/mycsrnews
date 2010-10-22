@@ -24,6 +24,7 @@ config/compass.rb
 !config/widgets.yml
 !config/resque_schedule.yml
 !config/cucumber.yml
+!config/asset_packages.yml
 config/deploy/*.rb
 !config/deploy/sample.rb
 *.pid
