@@ -26,7 +26,7 @@
         %h1= @idea.title
         .itemMeta
           %h3
-            = t('posted_by', :fb_name => local_linked_profile_name(@idea.user), :date => time_ago_in_words(@idea.created_at))
+            = t('posted_by', :fb_name => local_linked_profile_name(@idea.user), :date => timeago(@idea.created_at))
             - if @idea.idea_board.present?
               in
               = link_to(@idea.idea_board.name, @idea.idea_board)

@@ -26,7 +26,7 @@
                 %td= link_to topic.title, [forum, topic]
                 %td= topic.comments_count
                 %td= topic.views_count
-                %td= t('posted_by', :fb_name => local_linked_profile_name(topic.replied_user), :date => time_ago_in_words(topic.replied_at))
+                %td= t('posted_by', :fb_name => local_linked_profile_name(topic.replied_user), :date => timeago(topic.replied_at))
       - else
         %p There are no topics yet, create one
     - if paginate

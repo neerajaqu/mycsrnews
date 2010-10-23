@@ -25,7 +25,7 @@
                   %p= linked_item_details idea
                   .profilePic= local_linked_profile_pic idea.user
                   .itemMeta
-                    %h3= t('posted_by', :fb_name => local_linked_profile_name(idea.user), :date => time_ago_in_words(idea.created_at))
+                    %h3= t('posted_by', :fb_name => local_linked_profile_name(idea.user), :date => timeago(idea.created_at))
                     %span.btnComment== #{like_link idea} #{idea.votes_tally}
                     %span.btnComment== #{link_to t('.ideas_comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
  

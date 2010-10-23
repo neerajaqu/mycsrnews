@@ -13,4 +13,4 @@
               .itemBlock
                 .profilePic= local_linked_profile_pic user
                 %h4== #{local_linked_profile_name(user)}
-                %h3== registered #{time_ago_in_words user.created_at} ago
+                %h3== registered #{timeago user.created_at} ago

@@ -25,9 +25,9 @@
                   .profilePic= fb_profile_pic my_card.to_fb_user_id
                 .itemMeta
                   - if my_card.to_user
-                    %h3= t('cards.sent_to', :fb_name => local_linked_profile_name(my_card.to_user), :date => time_ago_in_words(my_card.created_at))
+                    %h3= t('cards.sent_to', :fb_name => local_linked_profile_name(my_card.to_user), :date => timeago(my_card.created_at))
                   - else
-                    %h3= t('cards.sent_to', :fb_name => fb_name(my_card.to_fb_user_id), :date => time_ago_in_words(my_card.created_at))
+                    %h3= t('cards.sent_to', :fb_name => fb_name(my_card.to_fb_user_id), :date => timeago(my_card.created_at))
                   -#%span.btnComment== #{link_to t('.stories_like'), like_story_path(card.id), :class => "voteUp"} #{card.votes_tally}
                   -#%span.btnComment== #{link_to t('comments'), story_path(card, :anchor => "commentListTop")} #{card.comments_count}
     - if @paginate
