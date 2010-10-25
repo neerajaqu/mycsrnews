@@ -31,8 +31,8 @@ class Admin::WidgetsController < AdminController
       @main_widgets = @page.children.first.children
       @sidebar_widgets = @page.children.second.children
     else
-    	@main_widgets = nil
-    	@sidebar_widgets = nil
+    	@main_widgets = []
+    	@sidebar_widgets = []
     end
   end
 
