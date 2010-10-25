@@ -32,12 +32,12 @@
         .itemMeta
           - unless @story.is_article?
             - unless @story.source.present?
-              %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => story_source_link(@story), :date => time_ago_in_words(@story.created_at))
+              %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => story_source_link(@story), :date => timeago(@story.created_at))
             - else
-              %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => source_link(@story), :date => time_ago_in_words(@story.created_at))
+              %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => source_link(@story), :date => timeago(@story.created_at))
           - else
             %h3 
-              = t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => time_ago_in_words(@story.created_at))
+              = t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => timeago(@story.created_at))
               = pipe_spacer
               - if current_user.present? and @story.user == current_user
                 = link_to t('articles.edit_draft'), edit_article_path(@story.article)

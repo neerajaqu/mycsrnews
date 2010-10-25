@@ -3,6 +3,6 @@
   .itemBlock
     %h4= link_to caption(newswire.title,120), newswire.url, :target => "_newswire", :only_path => false
     .itemMeta
-      %h3= t('via', :title => newswire.feed.title, :date => time_ago_in_words((newswire.updated_at || newswire.created_at)))
+      %h3= t('via', :title => newswire.feed.title, :date => timeago((newswire.updated_at || newswire.created_at)))
       %span.btnComment= link_to t('post_newswire', :site_title => APP_CONFIG['site_title']), new_story_path(:newswire_id => newswire, :only_path => false)
       %span.btnComment= link_to t('read_newswire'), newswire.url, :target => "_cts" 

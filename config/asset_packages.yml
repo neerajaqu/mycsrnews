@@ -12,6 +12,8 @@ javascripts:
   - jquery.quicksand.min
   - jquery.jcarousel.pack
   - jquery.masonry.min
+  - jquery.timeago
+  - jquery-ui-1.8.5.custom.effects.min
 stylesheets: 
 - base: 
   - cards

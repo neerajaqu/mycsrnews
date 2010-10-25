@@ -46,7 +46,7 @@
                 %h4 Tags:
                 %h3==#{tag_list(@tags,@event)}
           %h3
-            = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => time_ago_in_words(@event.created_at))
+            = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => timeago(@event.created_at))
           = link_to(t('.view'), @event.get_url, :class=>"btn", :target=>"_new") if @event.url 
           - if @event.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }

@@ -6,7 +6,7 @@
   .profilePic= local_linked_profile_pic comment.user
   .itemBlock
     .itemMeta
-      %h3= t('.posted_by', :fb_name => (local_linked_profile_name comment.user), :date => time_ago_in_words(comment.created_at))
+      %h3= t('.posted_by', :fb_name => (local_linked_profile_name comment.user), :date => timeago(comment.created_at))
       %span.btnComment= votes_link(comment, comment.votes_tally)
       - if comment.moderatable?
         = render :partial => 'shared/flag_form.html', :class => "btnComment, float_left", :locals => { :flaggable => comment }

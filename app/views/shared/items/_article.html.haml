@@ -2,7 +2,7 @@
 .blog
   .itemBlock
     %h2= link_to content.title, story_path(content)
-    %h3= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => time_ago_in_words(content.created_at))
+    %h3= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
     .itemContent
       - if content.images.present?
         .thumb

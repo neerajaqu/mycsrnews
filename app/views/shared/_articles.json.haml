@@ -13,6 +13,6 @@
           %p= linked_story_caption content, 150, false, :format => 'html'
           .profilePic= local_linked_profile_pic content.user, :format => 'html'
           .itemMeta
-            %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user, :format => 'html'), :date => time_ago_in_words(content.created_at))
+            %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user, :format => 'html'), :date => timeago(content.created_at))
             %span.btnComment== #{like_link content, :format => 'html'} #{content.votes_tally}
             %span.btnComment== #{link_to t('comments'), story_path(content, :anchor => "commentListTop", :format => 'html')} #{content.comments_count}

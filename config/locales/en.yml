@@ -62,6 +62,7 @@ en:
     yearly: "Yearly"
     alltime: "All Time"
   welcome_name: "Welcome {{name}}"  
+  login_dialog: "You need to be logged in to perform this action. Please <a href=\"{{login_url}}\"><b>Login</b></a> or <a href=\"{{register_url}}\"><b>Register</b></a>."
   newest_newswires_title: "Latest Wire News"
   post_newswire: "Post"
   read_newswire: "Read"

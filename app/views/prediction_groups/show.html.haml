@@ -22,7 +22,7 @@
             = image_tag @prediction_group.images.first.url(:medium)
         %h1= @prediction_group.title
         .itemMeta
-          %h3= t('posted_by', :fb_name => local_linked_profile_name(@prediction_group.user), :date => time_ago_in_words(@prediction_group.created_at))
+          %h3= t('posted_by', :fb_name => local_linked_profile_name(@prediction_group.user), :date => timeago(@prediction_group.created_at))
           - if @prediction_group.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @prediction_group }
           - if @tags.present?

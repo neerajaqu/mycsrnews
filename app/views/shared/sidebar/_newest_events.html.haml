@@ -14,6 +14,6 @@
                 %h4= link_to event.name, event_path(event)
                 .profilePic= local_linked_profile_pic event.user
                 .eventBlockMeta
-                  %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => time_ago_in_words(event.created_at))
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => timeago(event.created_at))
                   %span.btnComment== #{like_link event} #{event.votes_tally}
                   %span.btnComment== #{link_to t('comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}

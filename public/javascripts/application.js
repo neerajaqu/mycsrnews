@@ -10,15 +10,20 @@ $(function() {
   $('.hide').hide();
   $('.unhide').show().removeClass('hidden');
 
+  $.timeago.settings.strings.suffixAgo = '';
+  $('abbr.timeago').timeago();
+
   setTimeout(function() {
 		$('.flash').effect('fade', {}, 1000);
 
   }, 3500);
 
-  function dialog_response(title, message) {
-      $("<p>"+message+"</p>").dialog({
-          title: title,
-          modal: true
+  function modal_dialog_response(title, message) {
+  	  $('#login-overlay .contentWrap').html(message);
+  	  $('#login-overlay').overlay({
+  	  	mask: 'white',
+  	  	load: true,
+  	  	effect: 'apple'
       });
   }
 
@@ -106,6 +111,9 @@ $(function() {
       commentThread.fadeOut("normal", function() {
         //commentThread.replaceWith(data).fadeIn("normal");
         commentThread.html(data).fadeIn("normal");
+        $.timeago.settings.strings.suffixAgo = '';
+        $('abbr.timeago', commentThread).timeago();
+
         rebuild_facebook_dom();
         setTimeout(function() {
           $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, { duration: 'slow', easing: 'swing'});
@@ -184,9 +192,9 @@ $(function() {
             error: function(xhr, status, errorThrown) {
               var result = $.parseJSON(xhr.responseText);
               if (xhr.status == 401) {
-                dialog_response(result.error, result.dialog);
+                modal_dialog_response(result.error, result.dialog);
                 span.fadeOut("normal", function() {
-                  span.html(data.msg).fadeIn("normal");
+                  span.html('Please Login').fadeIn("normal");
                 });
               }
             }
@@ -229,9 +237,9 @@ $(function() {
       error: function(xhr, status, errorThrown) {
       	var result = $.parseJSON(xhr.responseText);
       	if (xhr.status == 401) {
-      	  dialog_response(result.error, result.dialog);
+          modal_dialog_response(result.error, result.dialog);
           span.fadeOut("normal", function() {
-            span.html(data.msg).fadeIn("normal");
+            span.html('Please Login').fadeIn("normal");
           });
         } else if (xhr.status == 409) {
           span.fadeOut("normal", function() {

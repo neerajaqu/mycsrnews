@@ -1,7 +1,7 @@
 -# @expects: local 'newest_users'
 
 - cache :newest_users_html do
-  - newest_users ||= User.newest
+  - newest_users ||= User.active.newest
   - unless newest_users.empty?
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
@@ -13,4 +13,4 @@
               .itemBlock
                 .profilePic= local_linked_profile_pic user
                 %h4== #{local_linked_profile_name(user)}
-                %h3== registered #{time_ago_in_words user.created_at} ago
+                %h3== registered #{timeago user.created_at} ago

@@ -21,7 +21,7 @@
                 %p.storyCaption= my_card.card.short_caption
                 .profilePic= local_linked_profile_pic my_card.from_user
                 .itemMeta
-                  %h3= t('cards.sent_by', :fb_name => local_linked_profile_name(my_card.from_user), :date => time_ago_in_words(my_card.created_at))
+                  %h3= t('cards.sent_by', :fb_name => local_linked_profile_name(my_card.from_user), :date => timeago(my_card.created_at))
                   -#%span.btnComment== #{link_to t('.stories_like'), like_story_path(card.id), :class => "voteUp"} #{card.votes_tally}
                   -#%span.btnComment== #{link_to t('comments'), story_path(card, :anchor => "commentListTop")} #{card.comments_count}
     - if @paginate
