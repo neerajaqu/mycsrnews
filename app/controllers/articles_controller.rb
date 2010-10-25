@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
     set_sponsor_zone('articles')
     respond_to do |format|
       format.html { @paginate = true }
-      format.json { @articles = Content.refine(params) }
+      format.json { @articles = Content.articles.refine(params) }
     end
   end
 
