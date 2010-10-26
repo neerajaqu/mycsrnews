@@ -13,11 +13,11 @@ class ArticlesController < ApplicationController
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Articles'
-    @articles = Content.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    @articles = Content.articles.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     set_sponsor_zone('articles')
     respond_to do |format|
       format.html { @paginate = true }
-      format.json { @articles = Content.articles.refine(params) }
+      format.json { @articles = Content.articles.active.refine(params) }
     end
   end
 
@@ -30,7 +30,7 @@ class ArticlesController < ApplicationController
     @user = User.find(params[:user_id])    
     @page = false
     @current_sub_tab = 'Browse Articles'
-    @articles = @user.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    @articles = @user.articles.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     respond_to do |format|
       format.html { @refine = false, @paginate = false }
       #format.json { @articles = Content.articles.refine(params) }

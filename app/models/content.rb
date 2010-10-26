@@ -111,6 +111,17 @@ class Content < ActiveRecord::Base
     end
   end
 
+  def toggle_blocked
+    if is_article?
+      self.article.is_blocked = !self.article.is_blocked
+      self.is_blocked = !self.is_blocked
+      self.save
+    else
+      self.is_blocked = !self.is_blocked
+      self.save
+    end
+  end
+
   def full_html?
     self.story_type == 'full_html'
   end
