@@ -7,7 +7,7 @@
   .dh_links
     - if logged_in?
       .account-dropdown
-        = link_to t('header.account'), '#', :class => "account-toggle"
+        = link_to t('header.account'), account_menu_path, :class => "account-toggle"
         .account-links{:style => 'display:none'}
       %span.admin-links
         = pipe_spacer
