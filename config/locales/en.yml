@@ -316,6 +316,6 @@ en:
   advertise_here: "advertise here"
   hint:
     user_profile:
-      post_comments: "Post your comments to your facebook stream"
-      post_likes: "Post your likes to your facebook stream"
-      post_items: "Post your items to your facebook stream"
+      post_comments: "Comments you post will be added to your Facebook stream"
+      post_likes: "Stories and items you like will be added to your Facebook stream"
+      post_items: "Any story or item you post will be added to your Facebook stream"
