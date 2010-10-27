@@ -247,7 +247,7 @@ module ApplicationHelper
     else
       url =  Rack::Utils.escape(path_to_self(item))
     end
-    text = "#{caption}+#{url}"
+    # text = "#{caption}+#{url}"
     twitter_url = "http://twitter.com/share?url=#{url}&text=#{caption}"
 
     if button == true

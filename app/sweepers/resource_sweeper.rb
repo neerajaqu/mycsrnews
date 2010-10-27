@@ -22,11 +22,9 @@ class ResourceSweeper < ActionController::Caching::Sweeper
     controller = ActionController::Base.new
     ['top_resources', 'newest_resources', 'featured_resources'].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
-      controller.expire_fragment "#{fragment}_fbml"
     end
     ['', 'page_1_', 'page_2_'].each do |page|
       controller.expire_fragment "resources_list_#{page}html"
-      controller.expire_fragment "resources_list_#{page}fbml"
     end
   end
 
