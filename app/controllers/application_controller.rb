@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     clear_facebook_session_information
     reset_session # remove your cookies!
     flash[:error] = "Your facebook session has expired."
-    redirect_to root_url(:canvas => false)
+    redirect_to root_url(:only_path => false, :canvas => canvas)
   end
   
   include AuthenticatedSystem
@@ -333,6 +333,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_facebook_login_url
+    headers["Newscloud-Origin"] = 'no-rewrite'
     if canvas?
       link_user_accounts_users_path(:only_path => false, :canvas => true)
     else

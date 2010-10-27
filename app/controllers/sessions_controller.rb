@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
     logout_killing_session!
     flash[:notice] = "You have been logged out."
     if canvas
-      redirect_back_or_default(root_path(:iframe_req => true))
+      redirect_back_or_default(root_path(:iframe => 'iframe'))
     else
       redirect_back_or_default(root_path)
     end
