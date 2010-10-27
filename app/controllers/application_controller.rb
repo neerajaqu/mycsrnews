@@ -333,6 +333,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_facebook_login_url
+    headers["Newscloud-Origin"] = 'no-rewrite'
     if canvas?
       link_user_accounts_users_path(:only_path => false, :canvas => true)
     else
