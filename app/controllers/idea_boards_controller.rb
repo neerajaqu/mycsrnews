@@ -7,7 +7,7 @@ class IdeaBoardsController < ApplicationController
 
   def index
     @current_sub_tab = 'Browse Idea Topics'
-    @idea_boards = IdeaBoard.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+    @idea_boards = IdeaBoard.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   end
 
   def show

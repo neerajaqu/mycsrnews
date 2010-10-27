@@ -184,11 +184,11 @@ class ApplicationController < ActionController::Base
   end
   
   def load_newest_idea_boards
-    @newest_idea_boards ||= IdeaBoard.newest 5
+    @newest_idea_boards ||= IdeaBoard.active.newest 5
   end
 
   def load_newest_resource_sections
-    @newest_resource_sections ||= ResourceSection.newest 5
+    @newest_resource_sections ||= ResourceSection.active.newest 5
   end
 
   def load_top_resources
