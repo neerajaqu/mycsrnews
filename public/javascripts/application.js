@@ -42,10 +42,11 @@ $(function() {
 
   $('.account-toggle').click(function(event) {
   	event.preventDefault();
+  	var url = change_url_format($(this).attr('href')).replace(/json/, 'js');
 	if ($(this).next().children().length==0) {
 		$(this).next().html("<img src=\"/images/default/spinner-tiny.gif\" />");
   	$(this).next().toggle(); // after spinner appears, toggle it
- 		$(this).next().load('/account_menu.js', function() {
+ 		$(this).next().load(url, function() {
   			rebuild_facebook_dom();
 		});
 	} else {

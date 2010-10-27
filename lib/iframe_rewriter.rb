@@ -37,6 +37,7 @@ module Newscloud
     end
 
     def add_iframe path
+      return path if path =~ /^javascript:/
       uri = URI.parse(path)
       if uri.relative? or uri.host == @base_url
       	uri.path = "/#{@flag}#{uri.path}"

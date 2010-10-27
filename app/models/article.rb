@@ -39,9 +39,7 @@ class Article < ActiveRecord::Base
   end
 
   def toggle_blocked
-    self.is_blocked = !self.is_blocked
     self.content.toggle_blocked
-    return self.save ? true : false
   end
 
   def create_preamble

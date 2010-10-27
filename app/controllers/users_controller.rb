@@ -160,6 +160,7 @@ class UsersController < ApplicationController
   def account_menu
     respond_to do |format|
       format.js
+      format.html { redirect_to current_user }
     end     
   end
   
