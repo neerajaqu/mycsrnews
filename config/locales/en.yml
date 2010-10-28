@@ -125,7 +125,7 @@ en:
   top_content_tags: "Popular Tags"
   logged_in_error: "You must be logged in to perform this action."
   questions:
-    tab_title: "Answers"
+    tab_title: "Q &amp; A"
     title: "Questions"
     list_title: "Questions and Answers"
     list_subtitle: "Help your community by answering questions"
