@@ -16,12 +16,15 @@ class ApplicationController < ActionController::Base
   end
 
   def facebook_session_expired
-    canvas = iframe_facebook_request? ? true : false
     clear_fb_cookies!
     clear_facebook_session_information
     reset_session # remove your cookies!
-    flash[:error] = "Your facebook session has expired."
-    redirect_to root_url(:canvas => false)
+    #flash[:error] = "Your facebook session has expired."
+    if canvas?
+      redirect_top home_index_path(:only_path => false, :canvas => true)
+    else
+      redirect_to home_index_path(:only_path => false, :canvas => false)
+    end
   end
   
   include AuthenticatedSystem
@@ -51,6 +54,14 @@ class ApplicationController < ActionController::Base
   helper_method :get_setting
   helper_method :get_ad_layout
   helper_method :iframe_facebook_request?
+
+  def newscloud_redirect_to(options = {}, response_status = {})
+    @enable_iframe_hack = !! @iframe_status
+    headers["Newscloud-Redirect"] = @enable_iframe_hack ? 'redirect' : 'static'
+    rails_redirect_to options, response_status
+  end
+  alias_method :rails_redirect_to, :redirect_to
+  alias_method :redirect_to, :newscloud_redirect_to
 
   def logged_in_to_facebook_and_app_authorized
     if ensure_application_is_installed_by_facebook_user  
@@ -184,11 +195,11 @@ class ApplicationController < ActionController::Base
   end
   
   def load_newest_idea_boards
-    @newest_idea_boards ||= IdeaBoard.newest 5
+    @newest_idea_boards ||= IdeaBoard.active.newest 5
   end
 
   def load_newest_resource_sections
-    @newest_resource_sections ||= ResourceSection.newest 5
+    @newest_resource_sections ||= ResourceSection.active.newest 5
   end
 
   def load_top_resources
@@ -254,6 +265,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_iframe_status
+    @enable_iframe_hack = false
     @iframe_status = params[:iframe] || false
     headers["Newscloud-Origin"] = @iframe_status ? 'iframe' : 'web'
   end
@@ -333,6 +345,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_facebook_login_url
+    headers["Newscloud-Origin"] = 'no-rewrite'
     if canvas?
       link_user_accounts_users_path(:only_path => false, :canvas => true)
     else

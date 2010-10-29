@@ -8,7 +8,7 @@ class ResourceSectionsController < ApplicationController
 
   def index
     @current_sub_tab = 'Browse Resource Sections'
-    @resource_sections = ResourceSection.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+    @resource_sections = ResourceSection.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   end
 
   def show

@@ -241,15 +241,14 @@ module ApplicationHelper
   def twitter_share_item_link(item,caption,button=false)
     is_bitly_configured = get_setting('oauth_key').present?
     caption =  Rack::Utils.escape(strip_tags(caption))
-    
     if is_bitly_configured
       bitly = Bitly.new(APP_CONFIG['bitly_username'], APP_CONFIG['bitly_api_key'])
       url = bitly.shorten(path_to_self(item)).short_url
     else
       url =  Rack::Utils.escape(path_to_self(item))
     end
-    text = "#{caption}+#{url}"
-    twitter_url = "http://twitter.com/?status=#{text}"
+    # text = "#{caption}+#{url}"
+    twitter_url = "http://twitter.com/share?url=#{url}&text=#{caption}"
 
     if button == true
       link_text = image_tag('/images/default/tweet_button.gif')

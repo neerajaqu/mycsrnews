@@ -3,7 +3,7 @@ en:
     subnav:
       stories_subnav:
         browse_stories: "All Stories"
-        browse_wires: "Wires"
+        browse_wires: "Newswire"
       questions_subnav:
         browse_questions: "Browse Questions"
         ask_question: "Ask a Question"
