@@ -18,6 +18,8 @@ module Newscloud
       if headers['Content-Type'] =~ /html/ and headers["Newscloud-Origin"] and headers["Newscloud-Origin"] == 'iframe'
       	response = add_iframes(response)
       	headers["Content-Length"] = response[0].size.to_s
+
+      	headers["Location"] = add_iframe(headers["Location"]) if headers["Newscloud-Redirect"] and headers["Newscloud-Redirect"] == 'redirect' and headers["Location"]
       end
 
       [status, headers, response]
@@ -39,6 +41,7 @@ module Newscloud
     def add_iframe path
       return path if path =~ /^javascript:/
       uri = URI.parse(path)
+      return uri.to_s if uri.path =~ /^\/iframe/
       if uri.relative? or uri.host == @base_url
       	uri.path = "/#{@flag}#{uri.path}"
       end
