@@ -21,9 +21,9 @@ class ApplicationController < ActionController::Base
     reset_session # remove your cookies!
     #flash[:error] = "Your facebook session has expired."
     if canvas?
-      redirect_top home_index_path(:only_path => false, :canvas => true)
+      redirect_top link_user_accounts_users_path(:only_path => false, :canvas => true)
     else
-      redirect_to home_index_path(:only_path => false, :canvas => false)
+      redirect_to link_user_accounts_users_path(:only_path => false, :canvas => false)
     end
   end
   
