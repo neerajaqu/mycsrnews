@@ -31,13 +31,14 @@ module N2
           Rails.logger.info "\tChecking feed items"
           break if feed_date and item.published and (item.published <= feed_date)
           next if Newswire.find_by_title item.title
-          next unless item.summary and item.url and item.title
+          item_summary = item.summary || item.content
+          next unless item_summary and item.url and item.title
 
           Rails.logger.info "\tCreating newswire for \"#{item.title.chomp}\""
 
           newswire = Newswire.create!({
             :title      => item.title,
-            :caption    => item.summary,
+            :caption    => item_summary,
             :created_at => item.published,
             :url        => item.url,
             #:imageUrl   => item.image,
