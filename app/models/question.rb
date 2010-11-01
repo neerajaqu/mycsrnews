@@ -47,4 +47,8 @@ class Question < ActiveRecord::Base
     'answers_label'
   end
 
+  def item_description
+    details.present? ? details : item_title
+  end
+
 end
