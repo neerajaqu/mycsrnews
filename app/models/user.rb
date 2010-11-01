@@ -45,7 +45,8 @@ class User < ActiveRecord::Base
   has_many :ideas, :after_add => :trigger_idea
   has_many :events, :after_add => :trigger_event
   has_many :resources, :after_add => :trigger_resource
-  has_many :topics, :after_add => :trigger_topic
+  #has_many :topics, :after_add => :trigger_topic
+  has_many :topics
   has_many :dashboard_messages, :after_add => :trigger_dashboard_message
   has_one :profile, :class_name => "UserProfile"
   has_one :user_profile #TODO:: convert views and remove this
@@ -86,7 +87,7 @@ class User < ActiveRecord::Base
   def trigger_comment(comment) end
   def trigger_article(article) end
   def trigger_story(story) end
-  def trigger_topic(topic) end
+  #def trigger_topic(topic) end
   def trigger_question(question) end
   def trigger_answer(answer) end
   def trigger_idea(idea) end
@@ -121,7 +122,7 @@ class User < ActiveRecord::Base
 
   emits_pfeeds :on => [:trigger_story], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_article], :for => [:friends], :identified_by => :name
-  emits_pfeeds :on => [:trigger_topic], :for => [:friends], :identified_by => :name
+  #emits_pfeeds :on => [:trigger_topic], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_question], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_answer], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_idea], :for => [:friends], :identified_by => :name
