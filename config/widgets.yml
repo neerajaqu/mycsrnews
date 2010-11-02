@@ -2,6 +2,8 @@ widgets:
   main_content:
     stories:
       partial: '/shared/stories'
+    stories_short:
+      partial: '/shared/stories_short'
     featured_content:
       partial: '/shared/featured_items'
       locals: 'featured_items'
