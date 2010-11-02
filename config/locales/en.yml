@@ -91,7 +91,7 @@ en:
   like: "Like"
   dislike: "Dislike"
   comments: "Comments"
-  comments:
+  featured_comment:
     featured_title: "Featured Comments"
     view: "View"
   tweet: "Tweet"
