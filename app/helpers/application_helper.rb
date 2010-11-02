@@ -139,12 +139,16 @@ module ApplicationHelper
     link_options = {}
     # TODO:: separate this into a method
     destination = user
+    target = nil
     if options[:destination].present?
       destination = options.delete(:destination)
     end
     if options[:format].present?
     	link_options[:format] = options[:format]
     	options.delete(:format)
+    end
+    if options[:target].present?
+    	target = options.delete(:target)
     end
     unless options[:only_path].nil?
     	link_options[:only_path] = options[:only_path]
@@ -158,7 +162,11 @@ module ApplicationHelper
     if user.facebook_user?
       options.merge!(:linked => false)
       options[:size] = 'square' unless options[:size].present?
-      temp = link_to fb_profile_pic(user, options), destination
+      if target
+        temp = link_to fb_profile_pic(user, options), destination, :target => target
+      else
+        temp = link_to fb_profile_pic(user, options), destination
+      end
     else
       temp = link_to image_tag(default_image), user, link_options
       #link_to gravatar_image(user), user, link_options
@@ -215,7 +223,7 @@ module ApplicationHelper
     string.gsub("\n\r","<br>").gsub("\r", "").gsub("\n", "<br />")
   end
 
-  def profile_fb_name(user,linked = nil,use_you = true, possessive = false)
+  def profile_fb_name(user,linked = false,use_you = true, possessive = false)
     firstnameonly = APP_CONFIG['firstnameonly'] || false
     fb_name(user, :use_you => use_you, :possessive => possessive, :capitalize => true, :linked => linked, :firstnameonly => firstnameonly )
   end

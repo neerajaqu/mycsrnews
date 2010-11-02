@@ -71,5 +71,9 @@ module FacebookHelper
     stream_post.attachment = attachment
     stream_post
   end
-      
+
+  def fb_profile_link user
+    "http://www.facebook.com/profile.php?id=#{user.fb_user_id}"
+  end
+
 end
