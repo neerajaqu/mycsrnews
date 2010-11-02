@@ -6,7 +6,7 @@
   .panel_2
     .panelBar
       %h2= t('.articles_title')
-      - if refine===true and contents.present? and contents.first.refineable?
+      -# if refine===true and contents.present? and contents.first.refineable?
         .refine_link
           = render :partial => 'shared/forms/refine_dropdown'
     .subtitle
