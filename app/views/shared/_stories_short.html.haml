@@ -1,0 +1,37 @@
+- page ||= ""
+- cache_if page.present?, "stories_short_#{page}html" do
+  - if get_setting('exclude_articles_from_news').value
+    - contents ||= Content.top_story_items.paginate :page => params[:page], :per_page => 3, :order => "created_at desc"
+  -else
+    - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 3, :order => "created_at desc"
+  - paginate = false
+  .panel_2
+    .panelBar
+      %h2= t('shared.stories.stories_title')
+    .subtitle
+      %span= t('shared.stories.stories_subtitle')
+    .itemListWrap
+      .list_items
+        %ul
+          - contents.each do |content|
+            -# todo hack to fix drafts appearing until we can switch articles out of this widget
+            - unless content.article.present? and content.article.is_draft?
+              %li{'data-id' => content.cache_key}
+                .article
+                  .thumb
+                    - if content.images.present?
+                      = image_tag content.images.first.url(:thumb)
+                    -else
+                      = image_tag ('default/watermark.jpg')
+                  .itemBlock
+                    %h2= link_to content.title, story_path(content)
+                    %p= linked_story_caption content
+                  
+                    .profilePic= local_linked_profile_pic content.user
+                    .itemMeta
+                      %h3= t('shared.stories.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
+                      %span.btnComment== #{like_link content} #{content.votes_tally}
+                      %span.btnComment== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count} 
+    .clearfix
+    %p= link_to t('read_more'), stories_path, :class => "float_right"
+    %br
