@@ -18,6 +18,8 @@ class VoteSweeper < ActionController::Caching::Sweeper
       EventSweeper.expire_event_all vote.voteable
     elsif vote.voteable.is_a?(Resource)
       ResourceSweeper.expire_resource_all vote.voteable
+    elsif vote.voteable.is_a?(Topic)
+      ForumSweeper.expire_topic_all vote.voteable
     elsif vote.voteable.is_a?(PredictionGroup)
       PredictionSweeper.expire_group_all vote.voteable
     elsif vote.voteable.is_a?(PredictionQuestion)
