@@ -38,7 +38,7 @@ module AuthenticatedSystem
     #  end
     #
     def authorized?(action = action_name, resource = nil)
-      logged_in?
+      logged_in? and not current_user.is_blocked?
     end
 
     # Filter method to enforce a login requirement.
