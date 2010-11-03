@@ -34,7 +34,7 @@ class StoriesController < ApplicationController
     @story = Content.find(params[:id])
     # allow only authors and moderators to preview draft articles
     redirect_to home_index_path if @story.is_article? and @story.article.is_draft? and (!current_user.present? or current_user != @story.article.author or !current_user.is_moderator? ) 
-    redirect_to stories_path if @story.is_blocked?
+    redirect_to stories_path and return if @story.is_blocked?
     tag_cloud (@story.is_article? ? @story.article : @story)
     if MENU.key? 'articles'
       if @story.is_article?
