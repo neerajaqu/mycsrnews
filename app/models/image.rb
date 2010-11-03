@@ -14,10 +14,10 @@ class Image < ActiveRecord::Base
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
 
   has_attached_file :image, :styles => {
-  	:media_item => ["75x75#", :jpg],
+  	:media_item => ["75x56#", :jpg],
   	:thumb => ["100x100#", :jpg],
-  	:medium => ["320x320>", :jpg],
-  	:large => ["610x610>", :jpg]
+  	:medium => ["320x240#", :jpg],
+  	:large => ["610x458#", :jpg]
   }
 
   validate :download_image, :if => :remote_image_url?

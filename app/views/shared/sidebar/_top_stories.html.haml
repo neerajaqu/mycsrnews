@@ -1,7 +1,6 @@
 -# @expects: local 'story'
 
 - cache :top_stories_html, :expires_in => 60.minutes do
-  -# top_stories ||= Content.active.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc", :conditions => ["contents.created_at > ?", 1.week.ago] })
   - top_stories = (get_setting('exclude_articles_from_news').value ? Content.top_story_items(5,true) : Content.top_items(5,true))
   - unless top_stories.any?
     - top_stories = (get_setting('exclude_articles_from_news').value ? Content.top_story_items(5,false) : Content.top_items(5,false))
@@ -11,14 +10,29 @@
         %h2= t('.top_stories_title')
       .list_items
         %ul
-          - top_stories.each do |story|
+          - top_stories.each_with_index do |story, index|
             -# todo hack to fix drafts appearing until we can switch articles out of this widget
             - unless story.is_article? and story.article.is_draft?
               %li
-                .itemBlock
-                  %h4= link_to story.title, story_path(story)
-                  .profilePic= local_linked_profile_pic story.user
-                  .itemMeta
-                    %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => timeago(story.created_at))
-                    %span.btnComment== #{like_link story} #{story.votes_tally}
-                    %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
+                - if index == 0
+                  .item_1.article
+                    .thumb
+                      - if story.images.present?
+                        = link_to image_tag(story.images.first.url(:thumb)), story_path(story)
+                      -else
+                        = link_to image_tag('default/watermark.jpg'), story_path(story)
+                    .itemBlock  
+                      %h4
+                        %span.ellipsis_title_2
+                          = link_to story.title, story_path(story), { :class => 'ellipsis_text'}
+                      .itemMeta
+                        %span.btnComment== #{like_link story} #{story.votes_tally}
+                        %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
+                - else
+                  .item_2
+                    .itemBlock
+                      %h4
+                        %span.ellipsis_title_1
+                          = link_to story.title, story_path(story), { :class => 'ellipsis_text'}
+      .itemActions
+        = link_to t('read_more'), stories_path                          

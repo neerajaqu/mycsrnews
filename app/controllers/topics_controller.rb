@@ -26,6 +26,8 @@ class TopicsController < ApplicationController
     end
 
     if success
+    	ForumSweeper.expire_topic_all @topic
+
       if @topic.post_wall?
         session[:post_wall] = @topic
       end                

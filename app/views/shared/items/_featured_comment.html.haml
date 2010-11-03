@@ -15,5 +15,5 @@
         %h3
           Posted by
           %a Bob Bobberson
-        %span.btnComment== #{link_to t('comments.view'), polymorphic_url(item.item_link, :anchor => "commentListTop")}
+        %span.btnComment== #{link_to t('featured_comment.view'), polymorphic_url(item.item_link, :anchor => "commentListTop")}
         %span.btnComment= votes_link(item, item.votes_tally)        
