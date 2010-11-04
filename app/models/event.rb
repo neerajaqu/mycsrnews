@@ -79,8 +79,8 @@ class Event < ActiveRecord::Base
       if Metadata::Setting.find_setting('zvents_replacement_url').present?
         replacement_url = Metadata::Setting.find_setting('zvents_replacement_url').value
         if replacement_url.present?
-          url.gsub("www.zvents.com", replacement_url)
-          alt_url.gsub("www.zvents.com", replacement_url)
+          url = url.gsub("www.zvents.com", replacement_url)
+          alt_url = alt_url.gsub("www.zvents.com", replacement_url)
         end
       end
       e = Event.create!(
