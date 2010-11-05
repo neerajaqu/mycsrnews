@@ -23,6 +23,8 @@
             = twitter_share_item_link @story, @story.title
           %li
             = render :partial => 'shared/add_this'
+      - if @story.moderatable?
+        = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
       .itemBlock
         .half-panel
           - if @story.images.present?
@@ -68,8 +70,7 @@
     = render :partial => 'shared/external/outbrain_wrapper'
 
   = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
-  - if @story.moderatable?
-    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
+
 #col_right
   - if  @story.is_article? and @sponsor_zone_code
     = render :partial => 'shared/ads/sponsor_zone_wrapper'
