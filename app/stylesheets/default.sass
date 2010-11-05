@@ -994,6 +994,22 @@ $ColumnCorners: none
             color: $refineInputHoverText
             background: $refineInputHoverBG
 
+.curtain
+  position: relative
+  background: #000 image_url("default/curtain.png") top left repeat-x
+  border-top: 1px solid #000
+  border-bottom: 1px solid #535353
+
+.panel_2
+  .video
+    min-width: 200px
+    max-width: 480px
+    margin: 2px auto
+    z-index: 1
+    object
+      z-index: 1
+      
+
 /* HOT TOPIC BAR */
 #hotTopicBar
   float: left
@@ -1402,28 +1418,28 @@ h3.btn
 
 /*
 /*	root element for the scrollable.
-/*	when scrolling occurs this element stays still.
+/*	when scrolling occurs this element stays still.*/
 
 .scrollable 
-
   /* required settings */
   position: relative
   overflow: hidden
-  width: 350px
-  height: 120px
+  width: 85%
+  height: 110px
+  margin: 2px auto
 
   /* custom decorations */
-  border: 1px solid #ccc
-  background: url(/images/h300.png) repeat-x
+  border: 1px solid #636363
+  background: #000
 
 
 #scrollbox
   display: none
-  height: 150px
+  height: 110px
 /*	root element for scrollable items. Must be absolutely positioned
 /*	and it should have a extremely large width to accomodate scrollable items.
 /*	it's enough that you set the width and height for the root element and
-/*	not for this element.
+/*	not for this element.  */
 
 .scrollable .items 
   /* this cannot be too large */
@@ -1453,12 +1469,11 @@ h3.btn
 /* single scrollable item */
 .scrollable img 
   float: left
-  margin: 20px 5px 20px 21px
-  background-color: #fff
-  padding: 2px
+  margin: 15px 10px
+  background-color: #888
+  padding: 3px
   width: 100px
   height: 75px
-
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
 
@@ -1469,41 +1484,45 @@ h3.btn
   cursor: default
 
 /* this makes it possible to add next button beside scrollable */
-.scrollable 
-  float: left
 
 
 /* prev, next, prevPage and nextPage buttons */
 a.browse 
   display: block
-  width: 30px
-  height: 20px
+  width: 20px
+  height: 40px
   float: left
-  margin: 60px 10px 60px 10px
   cursor: pointer
   font-size: 1px
 
 
 /* right */
 a.right_scroll
+  position: absolute
+  right: 10px
+  top: 40px
   background: url(/images/arrow/right.png) no-repeat
   clear: right
   margin-right: 0px
   
   &:hover
-    background-position: 0px -20px
+    background-position: 0px -40px
   
   &:active
-    background-position: 0px -30px
+    background-position: 0px -40px
 
 /* left */
 a.left_scroll
+  position: absolute
+  left: 10px
+  top: 40px
+
   background: url(/images/arrow/left.png) no-repeat
   margin-left: 0px
   &:hover
-    background-position: 0px -20px
+    background-position: 0px -40px
   &:active
-    background-position: 0px -20px
+    background-position: 0px -40px
 
 /* up and down */
 a.up_scroll		
