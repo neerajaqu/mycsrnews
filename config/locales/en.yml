@@ -91,6 +91,7 @@ en:
   like: "Like"
   dislike: "Dislike"
   loading: "Loading"
+  google_search_title: "Search"
   no_search_engine_id: "Please visit http://google.com/cse to get a search engine ID and edit your application settings."
   learn_more: "Learn more"
   comments: "Comments"
