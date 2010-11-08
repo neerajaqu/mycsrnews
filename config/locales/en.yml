@@ -90,6 +90,9 @@ en:
   facebook_learn_more: "Learn more"
   like: "Like"
   dislike: "Dislike"
+  loading: "Loading"
+  no_search_engine_id: "Please visit http://google.com/cse to get a search engine ID and edit your application settings."
+  learn_more: "Learn more"
   comments: "Comments"
   featured_comment:
     featured_title: "Featured Comments"
