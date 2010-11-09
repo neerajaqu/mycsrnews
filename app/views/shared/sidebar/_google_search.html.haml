@@ -1,0 +1,23 @@
+- cache :google_search_html, :expires_in => 180.minute do
+  - if Metadata::Setting.find_setting('google_search_engine_id').present?
+    - search_engine_id = Metadata::Setting.find_setting('google_search_engine_id').value
+  .panel_1
+    .panelBar
+      %h2= t('google_search_title')
+      - if search_engine_id and search_engine_id != "your-google-search-engine-id"
+        #cse
+          %p= t('loading') 
+        %script{:type => "text/javascript", :src => "http://www.google.com/jsapi"}  
+        :javascript
+          google.load('search', '1', {language : 'en'});
+          google.setOnLoadCallback(function() {
+            var customSearchControl = new google.search.CustomSearchControl('#{search_engine_id}');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            customSearchControl.draw('cse');
+          }, true);              
+        = stylesheet_link_tag 'http://www.google.com/cse/style/look/default.css'
+      - else
+        #cse
+          %p= t('no_search_engine_id') 
+          %p= link_to t('learn_more'), "http://support.newscloud.com/faqs/configuring-your-application/adding-a-google-search-widget-to-your-home-page"
+        

@@ -70,6 +70,8 @@ widgets:
       partial: '/shared/sidebar/add_bookmark'
     active_users:
       partial: '/shared/sidebar/active_users'
+    recent_users:
+      partial: '/shared/sidebar/recent_users'
     rotate_featured:
       partial: '/shared/sidebar/rotate_featured'
     rotate_idea_widgets:
@@ -138,3 +140,5 @@ widgets:
       partial: '/shared/sidebar/featured_answer'
     latest_activity:
       partial: '/shared/sidebar/latest_pfeeds'
+    google_search:
+      partial: '/shared/sidebar/google_search'
