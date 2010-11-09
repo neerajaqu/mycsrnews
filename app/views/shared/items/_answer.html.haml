@@ -1,6 +1,6 @@
 .answer.large
   %blockquote
-    .quotes= answer.answer
+    .quotes= nl2br linkify(answer.answer)
   .itemBlock
     .profilePic= local_linked_profile_pic answer.user
     .itemMeta
