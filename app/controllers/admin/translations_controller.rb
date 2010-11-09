@@ -7,10 +7,11 @@ class Admin::TranslationsController < AdminController
   # GET /translations
   # GET /translations.xml
   def index
+    @paginate = true
     if params[:type].nil?
-      @translations = @locale.translations.find(:all, :order => "raw_key, pluralization_index")
+      @translations = @locale.translations.paginate :page => params[:page], :per_page => 100, :order => "value"
     else
-      @translations = @locale.translations.with_type params[:type]
+      @translations = @locale.translations.with_type(params[:type]).paginate :page => params[:page], :per_page => 100, :order => "value"
     end
 
     respond_to do |format|
