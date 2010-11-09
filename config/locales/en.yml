@@ -34,6 +34,7 @@ en:
     featured_title: "Featured Links"    
     add_new: "Add a new link"
     add_link_title: "What link do you want to add?"
+    resource_section_roll_title: "Browse our Directory"
   events:
     newest_events: "Newest Events"
     top_events: "Top Events"
@@ -202,6 +203,7 @@ en:
     topics_count: "{{topics_count}} Topics"
     posts_count: "{{posts_count}} Posts"
     top_forums_title: "Popular Forums"
+    forum_roll_title: "Visit our Forums"
     top_topics_title: "Popular Topics"
     newest_topics_title: "Newest Topics"
     new: "Create a new Forum"

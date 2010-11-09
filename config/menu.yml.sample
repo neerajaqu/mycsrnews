@@ -11,11 +11,12 @@ menu:
     #articles_list: 'enabled'
     #new_article: 'enabled'
   forums:
-  	#sub_forums: 'enabled' # uncomment to enable a drop down of all forums
+  	sub_forums: 'enabled'
   predictions: 'enabled'
   resources:
     resources_list: 'enabled'
     new_resource: 'enabled'
+    sub_resource_sections: 'enabled' 
   ideas:
     ideas_list: 'enabled'
     idea_boards_list: 'enabled'

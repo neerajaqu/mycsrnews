@@ -119,6 +119,12 @@ widgets:
     feed_roll:
       partial: '/shared/sidebar/feed_roll'
       locals: 'feed_roll'      
+    forum_roll:
+      partial: '/shared/sidebar/forum_roll'
+      locals: 'forum_roll'      
+    resource_section_roll:
+      partial: '/shared/sidebar/resource_section_roll'
+      locals: 'resource_section_roll'      
     newest_newswires:
       partial: '/shared/sidebar/newest_newswires'
       locals: 'newest_newswires'
