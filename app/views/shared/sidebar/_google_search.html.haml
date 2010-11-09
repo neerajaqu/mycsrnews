@@ -7,7 +7,7 @@
       - if search_engine_id and search_engine_id != "your-google-search-engine-id"
         #cse
           %p= t('loading') 
-        = javascript_include_tag "http://www.google.com/jsapi"
+        %script{:type => "text/javascript", :src => "http://www.google.com/jsapi"}  
         :javascript
           google.load('search', '1', {language : 'en'});
           google.setOnLoadCallback(function() {
