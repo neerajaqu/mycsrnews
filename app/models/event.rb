@@ -97,7 +97,7 @@ class Event < ActiveRecord::Base
   end
 
   def get_url
-    return "http://#{url}" unless url =~ /^http:\/\//
+    return "http://#{url}" unless url.empty? or url =~ /^http:\/\//
     url
   end
 end
