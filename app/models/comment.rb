@@ -73,4 +73,17 @@ class Comment < ActiveRecord::Base
     self.user.trigger_comment(self)
   end
 
+  def expire
+    self.commentable.expire
+  end
+
+# TODO:: get expire_all working with comments
+#  def self.expire_all
+#    self.sweeper.expire_story_all self.new
+#  end
+#
+#  def self.sweeper
+#    StorySweeper
+#  end
+
 end

@@ -100,5 +100,18 @@ class Event < ActiveRecord::Base
     return "http://#{url}" unless url =~ /^http:\/\//
     url
   end
+
+  def expire
+    self.class.sweeper.expire_event_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_event_all self.new
+  end
+
+  def self.sweeper
+    EventSweeper
+  end
+
 end
 

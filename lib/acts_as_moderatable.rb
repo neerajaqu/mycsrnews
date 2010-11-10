@@ -82,6 +82,9 @@ module Newscloud
             	  if item.class.included_modules.include? Newscloud::Acts::Moderatable
             	  	Rails.logger.debug "*******#{item.class.name} is missing :is_blocked field" and break unless item.respond_to? :is_blocked
             	  	item.toggle_blocked
+            	  	Rails.logger.debug "##############FIXING BLOCKED VALUE for #{item.class.name} -- #{item.id}###############" unless blocked.nil? or item.is_blocked == blocked
+            	  	item.is_blocked == blocked unless blocked.nil? or item.is_blocked == blocked
+            	  	APP_CONFIG[:mismatches].push "#{item.class.name} -- #{item.id}" unless blocked.nil? or item.is_blocked == blocked
                   count += 1
             	  	Rails.logger.debug "*******BLOCKED VALUE MISMATCH: GOT #{item.is_blocked.to_s} EXPECTED #{blocked.to_s}" unless blocked.nil? or blocked == item.is_blocked
                   #puts "\tTriggering cascading block for #{item.class.name.titleize}--#{item.item_title}" if item.respond_to?(:blockable?) and item.blockable?

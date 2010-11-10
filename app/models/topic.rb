@@ -62,7 +62,19 @@ class Topic < ActiveRecord::Base
 
     save!
 
-    ForumSweeper.expire_topic_all self
+    self.expire
+  end
+
+  def expire
+    self.class.sweeper.expire_topic_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_topic_all self.new
+  end
+
+  def self.sweeper
+    ForumSweeper
   end
 
 end

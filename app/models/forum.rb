@@ -19,4 +19,16 @@ class Forum < ActiveRecord::Base
 
   validates_presence_of :name, :description
 
+  def expire
+    self.class.sweeper.expire_forum_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_forum_all self.new
+  end
+
+  def self.sweeper
+    ForumSweeper
+  end
+
 end

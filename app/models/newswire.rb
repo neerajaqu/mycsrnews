@@ -1,4 +1,6 @@
 class Newswire < ActiveRecord::Base
+  acts_as_moderatable
+
 
   belongs_to :feed
   belongs_to :user
@@ -59,5 +61,18 @@ class Newswire < ActiveRecord::Base
   def set_published
     self.update_attribute(:published, true)
   end
+
+  def expire
+    self.class.sweeper.expire_newswires
+  end
+
+  def self.expire_all
+    self.sweeper.expire_newswires
+  end
+
+  def self.sweeper
+    NewswireSweeper
+  end
+
 
 end

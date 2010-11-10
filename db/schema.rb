@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101027210809) do
+ActiveRecord::Schema.define(:version => 20101109205202) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -20,18 +20,19 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked", :default => false
   end
 
   create_table "answers", :force => true do |t|
-    t.integer  "question_id",                 :default => 0
-    t.integer  "user_id",        :limit => 8, :default => 0
-    t.text     "answer"
-    t.integer  "votes_tally",                 :default => 0
-    t.integer  "comments_count",              :default => 0
+    t.integer  "question_id",                          :default => 0
+    t.integer  "user_id",        :limit => 8,          :default => 0
+    t.text     "answer",         :limit => 2147483647
+    t.integer  "votes_tally",                          :default => 0
+    t.integer  "comments_count",                       :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_blocked",                  :default => false
-    t.boolean  "is_featured",                 :default => false
+    t.boolean  "is_blocked",                           :default => false
+    t.boolean  "is_featured",                          :default => false
     t.datetime "featured_at"
   end
 
@@ -65,22 +66,25 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.datetime "updated_at"
     t.integer  "votes_tally",    :default => 0
     t.integer  "source_id"
+    t.boolean  "is_blocked",     :default => false
   end
 
   add_index "audios", ["audioable_type", "audioable_id"], :name => "index_audios_on_audioable_type_and_audioable_id"
   add_index "audios", ["user_id"], :name => "index_audios_on_user_id"
 
   create_table "cards", :force => true do |t|
-    t.string   "name"
-    t.string   "short_caption"
-    t.text     "long_caption"
-    t.integer  "points",        :default => 0
-    t.string   "slug_name"
-    t.boolean  "not_sendable",  :default => false
-    t.boolean  "is_featured",   :default => false
+    t.string   "name",                                :default => ""
+    t.string   "short_caption",                       :default => ""
+    t.text     "long_caption",  :limit => 2147483647
+    t.integer  "points",                              :default => 0
+    t.string   "slug_name",     :limit => 25,         :default => ""
+    t.boolean  "not_sendable",                        :default => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "available_at",                                           :null => false
+    t.boolean  "is_featured",                         :default => false
     t.datetime "updated_at"
-    t.integer  "sent_count",    :default => 0
-    t.datetime "created_at"
+    t.integer  "sent_count",                          :default => 0
+    t.boolean  "is_blocked",                          :default => false
   end
 
   create_table "chirps", :force => true do |t|
@@ -90,24 +94,25 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",   :default => false
   end
 
   create_table "comments", :force => true do |t|
-    t.integer  "commentid",        :default => 0
-    t.integer  "commentable_id",   :default => 0
-    t.integer  "contentid",        :default => 0
-    t.text     "comments"
-    t.string   "postedByName",     :default => ""
-    t.integer  "postedById",       :default => 0
-    t.integer  "user_id",          :default => 0
+    t.integer  "commentid",                              :default => 0
+    t.integer  "commentable_id",                         :default => 0
+    t.integer  "contentid",                              :default => 0
+    t.text     "comments",         :limit => 2147483647
+    t.string   "postedByName",                           :default => ""
+    t.integer  "postedById",                             :default => 0
+    t.integer  "user_id",                                :default => 0
     t.datetime "created_at"
-    t.boolean  "is_blocked",       :default => false
-    t.integer  "videoid",          :default => 0
+    t.boolean  "is_blocked",                             :default => false
+    t.integer  "videoid",                                :default => 0
     t.datetime "updated_at"
     t.string   "commentable_type"
-    t.integer  "flags_count",      :default => 0
-    t.integer  "votes_tally",      :default => 0
-    t.boolean  "is_featured",      :default => false
+    t.integer  "flags_count",                            :default => 0
+    t.integer  "votes_tally",                            :default => 0
+    t.boolean  "is_featured",                            :default => false
     t.datetime "featured_at"
   end
 
@@ -171,7 +176,6 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
   add_index "contents", ["contentid"], :name => "contentid"
   add_index "contents", ["story_type"], :name => "index_contents_on_story_type"
   add_index "contents", ["title"], :name => "relatedItems"
-  add_index "contents", ["title"], :name => "relatedText"
 
   create_table "dashboard_messages", :force => true do |t|
     t.string   "message"
@@ -183,6 +187,7 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "news_id"
+    t.boolean  "is_blocked",  :default => false
   end
 
   create_table "events", :force => true do |t|
@@ -263,6 +268,7 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.datetime "updated_at"
     t.boolean  "load_all",                     :default => false
     t.datetime "deleted_at"
+    t.boolean  "is_blocked",                   :default => false
   end
 
   add_index "feeds", ["deleted_at"], :name => "index_feeds_on_deleted_at"
@@ -289,29 +295,6 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.boolean  "is_blocked",     :default => false
     t.boolean  "is_featured",    :default => false
     t.datetime "featured_at"
-  end
-
-  create_table "galleries", :force => true do |t|
-    t.string   "name"
-    t.string   "section"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "gallery_items", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.text     "caption"
-    t.integer  "votes_tally",    :default => 0
-    t.integer  "comments_count", :default => 0
-    t.boolean  "is_featured",    :default => false
-    t.datetime "featured_at"
-    t.integer  "flags_count",    :default => 0
-    t.boolean  "is_blocked",     :default => false
-    t.integer  "gallery_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "idea_boards", :force => true do |t|
@@ -399,23 +382,23 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
   add_index "metadatas", ["metadatable_type", "metadatable_id"], :name => "index_metadatas_on_metadatable_type_and_metadatable_id"
 
   create_table "newswires", :force => true do |t|
-    t.string   "title",                     :default => ""
-    t.text     "caption"
-    t.string   "source",     :limit => 150, :default => ""
-    t.string   "url",                       :default => ""
+    t.string   "title",                            :default => ""
+    t.text     "caption",    :limit => 2147483647
+    t.string   "source",     :limit => 150,        :default => ""
+    t.string   "url",                              :default => ""
     t.datetime "created_at"
-    t.integer  "wireid",                    :default => 0
-    t.string   "feedType",                  :default => "wire"
-    t.string   "mediaUrl",                  :default => ""
-    t.string   "imageUrl",                  :default => ""
-    t.text     "embed"
-    t.integer  "feed_id",                   :default => 0
+    t.integer  "wireid",                           :default => 0
+    t.string   "feedType",                         :default => "wire"
+    t.string   "mediaUrl",                         :default => ""
+    t.string   "imageUrl",                         :default => ""
+    t.text     "embed",      :limit => 2147483647
+    t.integer  "feed_id",                          :default => 0
     t.datetime "updated_at"
-    t.boolean  "published",                 :default => false
+    t.boolean  "published",                        :default => false
     t.integer  "read_count"
+    t.boolean  "is_blocked",                       :default => false
   end
 
-  add_index "newswires", ["feed_id"], :name => "feedid"
   add_index "newswires", ["title"], :name => "index_newswires_on_title"
 
   create_table "pfeed_deliveries", :force => true do |t|
@@ -424,6 +407,7 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.integer  "pfeed_item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",          :default => false
   end
 
   create_table "pfeed_items", :force => true do |t|
@@ -436,20 +420,20 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.datetime "expiry"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",       :default => false
   end
 
   create_table "prediction_groups", :force => true do |t|
     t.string   "title"
     t.string   "section"
     t.text     "description"
-    t.string   "status",          :default => "open"
+    t.string   "status",         :default => "open"
     t.integer  "user_id"
-    t.boolean  "is_approved",     :default => true
-    t.integer  "votes_tally",     :default => 0
-    t.integer  "comments_count",  :default => 0
-    t.integer  "questions_count", :default => 0
-    t.boolean  "is_blocked",      :default => false
-    t.boolean  "is_featured",     :default => false
+    t.boolean  "is_approved",    :default => true
+    t.integer  "votes_tally",    :default => 0
+    t.integer  "comments_count", :default => 0
+    t.boolean  "is_blocked",     :default => false
+    t.boolean  "is_featured",    :default => false
     t.datetime "featured_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -478,7 +462,6 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.boolean  "is_approved",         :default => true
     t.integer  "votes_tally",         :default => 0
     t.integer  "comments_count",      :default => 0
-    t.integer  "guesses_count",       :default => 0
     t.boolean  "is_blocked",          :default => false
     t.boolean  "is_featured",         :default => false
     t.datetime "featured_at"
@@ -493,6 +476,7 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.float    "accuracy"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",    :default => false
   end
 
   create_table "questions", :force => true do |t|
@@ -501,8 +485,8 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.text     "details"
     t.integer  "votes_tally",                 :default => 0
     t.integer  "comments_count",              :default => 0
-    t.datetime "created_at"
     t.integer  "answers_count",               :default => 0
+    t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_blocked",                  :default => false
     t.boolean  "is_featured",                 :default => false
@@ -574,6 +558,7 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.integer  "card_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",                 :default => false
   end
 
   add_index "sent_cards", ["card_id"], :name => "index_sent_cards_on_card_id"
@@ -610,6 +595,7 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.boolean  "all_subdomains_valid", :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",           :default => false
   end
 
   add_index "sources", ["url"], :name => "index_sources_on_url", :unique => true
@@ -622,13 +608,15 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
     t.string   "taggable_type"
     t.string   "context"
     t.datetime "created_at"
+    t.boolean  "is_blocked",    :default => false
   end
 
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
   add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
 
   create_table "tags", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.boolean "is_blocked", :default => false
   end
 
   create_table "topics", :force => true do |t|
@@ -672,23 +660,24 @@ ActiveRecord::Schema.define(:version => 20101027210809) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer  "user_id",                     :limit => 8,                    :null => false
-    t.integer  "facebook_user_id",            :limit => 8, :default => 0
-    t.boolean  "isAppAuthorized",                          :default => false
+    t.integer  "user_id",                     :limit => 8,                             :null => false
+    t.integer  "facebook_user_id",            :limit => 8,          :default => 0
+    t.boolean  "isAppAuthorized",                                   :default => false
     t.datetime "born_at"
-    t.datetime "created_at",                                                  :null => false
+    t.datetime "created_at",                                                           :null => false
     t.datetime "updated_at"
-    t.text     "bio"
-    t.integer  "referred_by_user_id",         :limit => 8, :default => 0
-    t.boolean  "comment_notifications",                    :default => false
-    t.boolean  "receive_email_notifications",              :default => true
-    t.boolean  "dont_ask_me_for_email",                    :default => false
+    t.text     "bio",                         :limit => 2147483647
+    t.integer  "referred_by_user_id",         :limit => 8,          :default => 0
+    t.boolean  "comment_notifications",                             :default => false
+    t.boolean  "receive_email_notifications",                       :default => true
+    t.boolean  "dont_ask_me_for_email",                             :default => false
     t.datetime "email_last_ask"
-    t.boolean  "dont_ask_me_invite_friends",               :default => false
+    t.boolean  "dont_ask_me_invite_friends",                        :default => false
     t.datetime "invite_last_ask"
-    t.boolean  "post_comments",                            :default => true
-    t.boolean  "post_likes",                               :default => true
-    t.boolean  "post_items",                               :default => true
+    t.boolean  "post_comments",                                     :default => true
+    t.boolean  "post_likes",                                        :default => true
+    t.boolean  "post_items",                                        :default => true
+    t.boolean  "is_blocked",                                        :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

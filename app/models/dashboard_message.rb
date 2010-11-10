@@ -1,4 +1,6 @@
 class DashboardMessage < ActiveRecord::Base
+  acts_as_moderatable
+
 
   belongs_to :user
 
