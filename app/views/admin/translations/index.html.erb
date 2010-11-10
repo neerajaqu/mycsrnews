@@ -67,6 +67,14 @@
   </tbody>
 </table>
 
+<% if @paginate %>
+  <br />
+  <div class="clearfix">
+    <%= will_paginate @translations %>
+  </div>
+  <br />
+<% end %>
+
 <br />
 
 <%= link_to 'New translation', new_admin_locale_translation_path %> |

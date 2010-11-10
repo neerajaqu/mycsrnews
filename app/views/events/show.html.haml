@@ -27,14 +27,14 @@
           .eventMetaBlock
             .eventMeta.time
               %h4
-                Date and Time:
+                = t('.date_time') 
               %h3 
                 == #{@event.start_time.to_s :short_with_time}
                 - if @event.end_time.present?
                   == - #{@event.end_time.to_s :short_time} 
             .eventMeta.location
               %h4
-                Location:
+                = t('.location') 
               %h3
                 =h @event.location
                 %br
@@ -42,15 +42,18 @@
                 %br
                 == #{h @event.city}, #{h @event.state}
             - if @tags.present?
-              .eventMeta.tags  
+              .eventMeta.tags
                 %h4 Tags:
                 %h3==#{tag_list(@tags,@event)}
+            - if @event.url.present?
+              .eventMeta.website
+                %h4
+                  = link_to t('.website'), @event.get_url
           %h3
             = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => timeago(@event.created_at))
-          = link_to(t('.view'), @event.get_url, :class=>"btn", :target=>"_new") if @event.url.present?
+          = link_to(t('.view'), @event.get_url, :class=>"btn", :target=>"_new") if @event.url.present? or @event.alt_url.present?
           - if @event.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
-
 
       %div.itemBlock= sanitize @event.description
     - if @event.media_item?

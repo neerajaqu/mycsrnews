@@ -1,0 +1,6 @@
+-# @expects: local 'resource_section_roll'
+
+- cache :resource_section_roll_html, :expires_in => 180.minutes do
+  - rs_roll ||= ResourceSection.alpha
+  - unless rs_roll.empty?
+    = render :partial => 'shared/lists/bullet_generic_list', :locals => { :list_title => t('resources.resource_section_roll_title'), :item_list => rs_roll }

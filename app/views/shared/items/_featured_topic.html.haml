@@ -1,0 +1,19 @@
+-# expects: local 'item, index' optional thumb_type
+- model_name = item.class.name.underscore
+- thumb_type = thumb_type || "profile"
+- if index == 0
+  .featured
+    %div{:class => "item_1 #{model_name}"}
+      - if thumb_type.present? and thumb_type == 'profile'
+        .thumb.user
+          = local_linked_profile_pic item.user
+      .itemBlock
+        %h2
+          %span.ellipsis_title_2
+            = link_to item.item_title, path_to_self(item.item_link), {:class => 'ellipsis_text'}
+        .itemMeta
+          %span.btnComment== #{link_to t('forums.topics.replies'), path_to_self(item.item_link)} #{item.comments_count}
+- else
+  .item_2
+    .itemBlock
+      %h4= link_to item.item_title, path_to_self(item.item_link)

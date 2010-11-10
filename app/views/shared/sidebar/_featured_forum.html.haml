@@ -1,0 +1,4 @@
+- forum ||= Forum.featured.rand
+- unless forum.nil?
+  - item_list = forum.topics.active :order => "created_at desc"
+  = render :partial => 'shared/lists/featured_generic_list', :locals => { :model_name => "topic", :model_home => path_to_self(forum), :list_title => t('forums.featured_forum_title', :forum_name => forum.featured_title), :item_list => item_list}

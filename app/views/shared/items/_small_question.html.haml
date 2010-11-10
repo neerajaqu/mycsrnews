@@ -1,6 +1,6 @@
 .question.small
   .itemBlock
-    %h4= link_to caption(question.question,120), question_path(question)
+    %h4= link_to caption(question.question,80), question_path(question)
     .profilePic= local_linked_profile_pic question.user
     .itemMeta
       %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => timeago(question.created_at))
