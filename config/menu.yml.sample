@@ -28,5 +28,5 @@ menu:
   events:
     events_list: 'enabled'
     new_event: 'enabled'
-	import_facebook: 'enabled'
+    import_facebook: 'enabled'  
   admin:
