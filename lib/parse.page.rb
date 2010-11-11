@@ -31,6 +31,8 @@ module Parse
 
     def self.parse_description(doc)
       desc = (doc/"head/meta[@name='description']")
+      desc = (doc/"head/meta[@http-equiv='Description']") unless desc.present?
+      desc = (doc/"head/meta[@http-equiv='description']") unless desc.present?
       return false unless desc.present?
       desc.first.attributes['content']
     end
