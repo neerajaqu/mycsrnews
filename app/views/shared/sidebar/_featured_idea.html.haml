@@ -1,2 +1,2 @@
-- item_list ||= Idea.featured
+- item_list ||= Idea.active.featured
 = render :partial => 'shared/lists/featured_generic_list', :locals => { :model_name => "idea", :model_home => ideas_path, :list_title => t('ideas.featured_title'), :item_list => item_list}

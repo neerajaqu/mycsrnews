@@ -7,12 +7,12 @@ class NewswiresController < ApplicationController
   def index
     @current_sub_tab = 'Browse Wires'
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
-    @newswires = Newswire.unpublished.newest.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @newswires = Newswire.active.unpublished.newest.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
     @paginate = true
   end
 
   def feed_index
-    @feed = Feed.find(params[:feed_id])    
+    @feed = Feed.active.find(params[:feed_id])    
     @current_sub_tab = 'Browse Wires'
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @newswires = @feed.newswires.unpublished.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
@@ -20,7 +20,7 @@ class NewswiresController < ApplicationController
   end
 
   def quick_post
-    @newswire = Newswire.find_by_id(params[:id])
+    @newswire = Newswire.active.find_by_id(params[:id])
     redirect_to newswire_path and return if @newswire.nil?
 
     respond_to do |format|

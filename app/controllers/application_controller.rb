@@ -126,19 +126,19 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_users
-    @top_users ||= User.top.members
+    @top_users ||= User.active.top.members
   end
 
   def load_contents
-    @contents ||= Content.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    @contents ||= Content.active.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
   end
 
   def load_newest_users
-    @newest_users ||= User.newest
+    @newest_users ||= User.active.newest
   end
 
   def load_top_discussed_stories
-    @most_discussed_stories ||= Content.find( :all,
+    @most_discussed_stories ||= Content.active.find( :all,
     	:limit    => 5,
     	:conditions => ["created_at > ?", 1.week.ago],
     	:order    => "comments_count desc"
@@ -154,15 +154,15 @@ class ApplicationController < ActionController::Base
   end
 
   def load_featured_articles
-    @featured_articles ||= Article.featured
+    @featured_articles ||= Article.active.featured
   end
 
   def load_featured_comments
-    @featured_comments ||= Comment.featured
+    @featured_comments ||= Comment.active.featured
   end
 
   def load_newest_articles
-    @newest_articles ||= Article.published.active.newest 5
+    @newest_articles ||= Article.active.published.newest 5
   end
 
   def load_newest_images
@@ -179,15 +179,15 @@ class ApplicationController < ActionController::Base
   end
 
   def load_featured_ideas
-    @featured_ideas ||= Idea.featured
+    @featured_ideas ||= Idea.active.featured
   end
 
   def load_featured_events
-    @featured_events ||= Event.featured
+    @featured_events ||= Event.active.featured
   end
 
   def load_featured_resources
-    @featured_resources ||= Resource.featured
+    @featured_resources ||= Resource.active.featured
   end
 
   def load_featured_items
@@ -219,7 +219,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_top_events
-    @top_events ||= Event.upcoming.active.tally({
+    @top_events ||= Event.active.upcoming.tally({
     	:at_least => 1,
     	:limit    => 5,
     	:order    => "votes.count desc"
@@ -227,7 +227,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_newest_events
-    @newest_events ||= Event.upcoming.active 5
+    @newest_events ||= Event.active.upcoming 5
   end
 
   def load_newest_announcements

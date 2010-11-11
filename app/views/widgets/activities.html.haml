@@ -1,5 +1,5 @@
 - cache "widgets_activities_#{@count}_html", :expires_in => 5.minutes do
-  - latest_pfeeds ||= PfeedItem.find(:all, :conditions => ["participant_type != ?", Chirp.name ], :order => "created_at desc", :limit => @count)
+  - latest_pfeeds ||= PfeedItem.find(:all, :conditions => ["participant_type != ?", Chirp.active.name ], :order => "created_at desc", :limit => @count)
   %div{:class => "panel_1"}
     = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => t('pfeeds.latest.title')}
     .list_items

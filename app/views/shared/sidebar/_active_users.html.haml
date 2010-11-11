@@ -1,7 +1,7 @@
 -# @expects: local 'active_users'
 
 - cache :active_users_html, :expires_in => 1.minute do
-  - active_users ||= User.last_active
+  - active_users ||= User.active.last_active
 
   %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar

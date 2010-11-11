@@ -1,9 +1,9 @@
 - page ||= ""
 - cache_if page.present?, "stories_short_#{page}html" do
   - if get_setting('exclude_articles_from_news').value
-    - contents ||= Content.top_story_items.paginate :page => params[:page], :per_page => 3, :order => "created_at desc"
+    - contents ||= Content.active.top_story_items.paginate :page => params[:page], :per_page => 3, :order => "created_at desc"
   -else
-    - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 3, :order => "created_at desc"
+    - contents ||= Content.active.top_items.paginate :page => params[:page], :per_page => 3, :order => "created_at desc"
   - paginate = false
   .panel_2
     .panelBar

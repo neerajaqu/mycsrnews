@@ -4,7 +4,7 @@ class RemindersWorker
   # needs to run nightly
   def self.perform()
     admin = Metadata::Setting.find_setting('site_notification_user').value
-    user = User.find_by_fb_user_id(admin) || User.find_by_id(admin) || User.admins.last
+    user = User.active.find_by_fb_user_id(admin) || User.active.find_by_id(admin) || User.active.admins.last
     if user
       # reminder: sign up for email
 =begin
@@ -14,7 +14,7 @@ class RemindersWorker
     b) haven't turned off email reminders  dont_ask_me_for_email
     c) haven't been asked in two weeks email_last_ask
 =end
-      recipients = UserProfile.find(:all, :conditions => [ "dont_ask_me_for_email = ? and (email = ? or receive_email_notifications = ?) and (email_last_ask < date_sub(NOW(), INTERVAL 2 WEEK) or email_last_ask is null)",0, '', 0], :order => "user_id DESC", :joins => :user).map(&:user)
+      recipients = UserProfile.active.find(:all, :conditions => [ "dont_ask_me_for_email = ? and (email = ? or receive_email_notifications = ?) and (email_last_ask < date_sub(NOW(), INTERVAL 2 WEEK) or email_last_ask is null)",0, '', 0], :order => "user_id DESC", :joins => :user).map(&:user)
       recipients.each do |recipient|
         chirp = Chirp.new({
           :chirper => user,
@@ -26,7 +26,7 @@ class RemindersWorker
         end
       end      
       # reminder: invite your friends
-      recipients = UserProfile.find(:all, :conditions => [ "dont_ask_me_invite_friends = ? and (invite_last_ask < date_sub(NOW(), INTERVAL 4 WEEK) or invite_last_ask is null)",0 ], :order => "user_id DESC", :joins => :user).map(&:user)
+      recipients = UserProfile.active.find(:all, :conditions => [ "dont_ask_me_invite_friends = ? and (invite_last_ask < date_sub(NOW(), INTERVAL 4 WEEK) or invite_last_ask is null)",0 ], :order => "user_id DESC", :joins => :user).map(&:user)
       recipients.each do |recipient|
         chirp = Chirp.new({
           :chirper => user,

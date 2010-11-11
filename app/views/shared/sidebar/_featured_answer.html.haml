@@ -1,7 +1,7 @@
 -# @expects: local 'answer'
 
 - cache :featured_answers_html, :expires_in => 15.minutes do
-  - featured_answers ||= Answer.featured
+  - featured_answers ||= Answer.active.featured
   - unless featured_answers.empty?
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar

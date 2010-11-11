@@ -18,7 +18,7 @@ class TwitterWorker
             :order => "events.created_at desc"
         }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
       
-      @events = Event.find(:all, event_options)
+      @events = Event.active.find(:all, event_options)
       # 
       # article_options = Article.options_for_tally(
       #   {   :at_least => APP_CONFIG['tweet_articles_min_votes'], 
@@ -36,7 +36,7 @@ class TwitterWorker
             :limit => Metadata::Setting.find_setting('tweet_stories_limit').value,
             :order => "contents.created_at desc"
         }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
-      @stories = Content.find(:all, content_options)
+      @stories = Content.active.find(:all, content_options)
               
       question_options = Question.options_for_tally(
         {   :at_least => Metadata::Setting.find_setting('tweet_questions_min_votes').value, 
@@ -45,7 +45,7 @@ class TwitterWorker
             :limit => Metadata::Setting.find_setting('tweet_questions_limit').value,
             :order => "questions.created_at desc"
         }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})  
-      @questions = Question.find(:all, question_options)
+      @questions = Question.active.find(:all, question_options)
       
       idea_options = Idea.options_for_tally(
         {   :at_least => Metadata::Setting.find_setting('tweet_ideas_min_votes').value, 
@@ -54,7 +54,7 @@ class TwitterWorker
             :limit => Metadata::Setting.find_setting('tweet_ideas_limit').value,
             :order => "ideas.created_at desc"
         }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
-      @ideas = Idea.find(:all, idea_options)
+      @ideas = Idea.active.find(:all, idea_options)
         
       oauth = Twitter::OAuth.new(Metadata::Setting.find_setting('oauth_key').value, Metadata::Setting.find_setting('oauth_secret').value)
       oauth.authorize_from_access(Metadata::Setting.find_setting('twitter_oauth_consumer_key').value, Metadata::Setting.find_setting('twitter_oauth_consumer_secret').value)

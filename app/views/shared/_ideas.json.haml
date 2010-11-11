@@ -1,4 +1,4 @@
-- ideas ||= Idea.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+- ideas ||= Idea.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
 %ul
   - ideas.each do |idea|
     %li{'data-id' => idea.cache_key}

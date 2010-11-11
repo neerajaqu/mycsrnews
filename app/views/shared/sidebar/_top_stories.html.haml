@@ -2,9 +2,9 @@
 
 - cache :top_stories_html, :expires_in => 60.minutes do
   -# top_stories ||= Content.active.tally({ :at_least => 1, :limit => 5, :order => "votes.count desc", :conditions => ["contents.created_at > ?", 1.week.ago] })
-  - top_stories = (get_setting('exclude_articles_from_news').value ? Content.top_story_items(5,true) : Content.top_items(5,true))
+  - top_stories = (get_setting('exclude_articles_from_news').value ? Content.active.top_story_items(5,true) : Content.active.top_items(5,true))
   - unless top_stories.any?
-    - top_stories = (get_setting('exclude_articles_from_news').value ? Content.top_story_items(5,false) : Content.top_items(5,false))
+    - top_stories = (get_setting('exclude_articles_from_news').value ? Content.active.top_story_items(5,false) : Content.active.top_items(5,false))
   - unless top_stories.empty?
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar

@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = Question.active.find(params[:id])
     @answer   = Answer.new
     if @question.is_blocked?
     	flash[:error] = "This question has been blocked."
@@ -51,12 +51,12 @@ class QuestionsController < ApplicationController
   def my_questions
     @paginate = true
     @current_sub_tab = 'My Questions'
-    @user = User.find(params[:id])
+    @user = User.active.find(params[:id])
     @questions = @user.questions.active.paginate :page => params[:page], :per_page => Question.per_page, :order => "created_at desc"
   end
 
   def create_answer
-    @question = Question.find(params[:id])
+    @question = Question.active.find(params[:id])
     @answer = @question.answers.build(params[:answer])
     @answer.user = current_user
     if @answer.valid? and current_user.answers.push @answer
@@ -71,7 +71,7 @@ class QuestionsController < ApplicationController
   def tags
     tag_name = CGI.unescape(params[:tag])
     @paginate = true
-    @questions = Question.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @questions = Question.active.tagged_with(tag_name, :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
     render :template => 'questions/index'
   end
 

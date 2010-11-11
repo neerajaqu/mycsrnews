@@ -1,7 +1,7 @@
 -# @expects: local 'newest_newswires'
 
 - cache :newest_newswires_html do
-  - newest_newswires ||= Newswire.unpublished.newest 15
+  - newest_newswires ||= Newswire.active.unpublished.newest 15
   - unless newest_newswires.empty?
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar.clearfix

@@ -8,6 +8,11 @@ Tables missing is blocked:
 
 
 
+for m in `cat klasses`; do echo "Checking $m\n\n"; grep -r "$m\." app/ | grep -v "$m\.active\|$m.create\|$m.new\|$m.per_page\|$m.find\|$m.refine"; done
+
+
+
+
 Models without acts_as_moderatable:
 -----------------------------------
 
