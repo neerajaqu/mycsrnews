@@ -106,13 +106,17 @@ class Event < ActiveRecord::Base
   end
 
   def get_url
-    return "http://#{url}" unless url =~ /^http:\/\//
+    return "http://#{url}" unless url.empty? or url =~ /^http:\/\//
     url
   end
 
-  def get_alt_url
-    return "http://#{alt_url}" unless alt_url =~ /^http:\/\//
-    alt_url
+  def get_view_button_url
+    if alt_url.present?
+      return "http://#{alt_url}" unless alt_url =~ /^http:\/\//
+      alt_url
+    else
+      get_url
+    end
   end
 
 end

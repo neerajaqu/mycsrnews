@@ -56,6 +56,9 @@
                   %ul
                     - unless MENU['resources']['resources_list'].nil?
                       %li= link_to t('.resources_list'), resources_path, :class => tab_selected?(@current_tab, 'resources')
+                    - unless MENU['resources']['sub_resource_sections'].nil?
+                      - ResourceSection.alpha.each do |item|
+                        %li= link_to item.featured_title, path_to_self(item), :class => tab_selected?(@current_tab, 'resources')
                     - unless MENU['resources']['new_resource'].nil?
                       %li= link_to t('.new_resource'), new_resource_path, :class => tab_selected?(@current_tab, 'resources')
         - if MENU.key? 'ideas'

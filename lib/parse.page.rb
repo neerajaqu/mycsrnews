@@ -15,7 +15,6 @@ module Parse
       page = open(url) { |f| Hpricot(f) }
       results = {}
       results[:title] = self.parse_title(page)
-      results[:title] = self.parse_title(page).gsub(/&nbsp;/,' ')
       results[:description] = self.parse_description(page)
       results[:images] = self.parse_images(page, parsed_url)
       results[:images_sized] = @images_sized.sort {|a,b| a[:size] <=> b[:size]}.reverse
@@ -26,7 +25,7 @@ module Parse
     def self.parse_title(doc)
       title = (doc/"head/title").inner_html
       title = @title_filters.inject(title) {|str,key| str.gsub(%r{#{key}}, '') }
-      title.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'')
+      title.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'').gsub(/&nbsp;/,' ')
     end
 
     def self.parse_description(doc)

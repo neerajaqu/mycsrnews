@@ -107,6 +107,9 @@ widgets:
     featured_event:
       partial: '/shared/sidebar/featured_event'
       locals: 'featured_events'
+    featured_forum:
+      partial: '/shared/sidebar/featured_forum'
+      locals: 'featured_forum'
     featured_article:
       partial: '/shared/sidebar/featured_article'
       locals: 'featured_articles'
@@ -119,6 +122,12 @@ widgets:
     feed_roll:
       partial: '/shared/sidebar/feed_roll'
       locals: 'feed_roll'      
+    forum_roll:
+      partial: '/shared/sidebar/forum_roll'
+      locals: 'forum_roll'      
+    resource_section_roll:
+      partial: '/shared/sidebar/resource_section_roll'
+      locals: 'resource_section_roll'      
     newest_newswires:
       partial: '/shared/sidebar/newest_newswires'
       locals: 'newest_newswires'

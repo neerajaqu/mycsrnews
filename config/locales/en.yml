@@ -34,6 +34,7 @@ en:
     featured_title: "Featured Links"    
     add_new: "Add a new link"
     add_link_title: "What link do you want to add?"
+    resource_section_roll_title: "Browse our Directory"
   events:
     newest_events: "Newest Events"
     top_events: "Top Events"
@@ -165,6 +166,7 @@ en:
     label_body: "Your article content*"
     permalink: "Permalink"
     read_full: "Read the full article"
+    user_none: "This member hasn't posted any articles yet."
   static_pages:
     faq: "FAQ found here"
     about_us: "About Us found here"
@@ -202,6 +204,8 @@ en:
     topics_count: "{{topics_count}} Topics"
     posts_count: "{{posts_count}} Posts"
     top_forums_title: "Popular Forums"
+    forum_roll_title: "Visit our Forums"
+    featured_forum_title: "Just posted in {{forum_name}}"
     top_topics_title: "Popular Topics"
     newest_topics_title: "Newest Topics"
     new: "Create a new Forum"
@@ -219,6 +223,7 @@ en:
       commit_reply: "Post your reply"
       new: "Create a new topic"
       new_header: "Create a New Topic"
+      replies: "Replies"
   blog_roll_title: "Blog Roll"
   feed_roll_title: "News Sources"
   read_latest_newswires: "Read the latest newswires"    

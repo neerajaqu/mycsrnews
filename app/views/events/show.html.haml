@@ -45,13 +45,14 @@
               .eventMeta.tags
                 %h4 Tags:
                 %h3==#{tag_list(@tags,@event)}
-            - if @event.url.present?
+            -# only show if both event urls are present
+            - if @event.alt_url.present? and @event.url.present?
               .eventMeta.website
                 %h4
                   = link_to t('.website'), @event.get_url
           %h3
             = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => timeago(@event.created_at))
-          = link_to(t('.view'), @event.get_alt_url, :class=>"btn", :target=>"_new") if @event.alt_url
+          = link_to(t('.view'), @event.get_view_button_url, :class=>"btn", :target=>"_new") if @event.url.present? or @event.alt_url.present?
           - if @event.moderatable?
             = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
 
