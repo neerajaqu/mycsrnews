@@ -59,17 +59,21 @@
   .panel_2
     .panelBar
       %h2= t('articles.my_articles')
-    .itemListWrap
-      .list_items
-        %ul
-          - @articles.each do |article|
-            - content = article.is_a?(Article) ? article.content : article
-            %li{'data-id' => content.cache_key}
-              = render :partial => 'shared/items/article', :locals => { :article => article} 
-    - if @paginate
-      .clearfix
-        = will_paginate @articles
-        %br
+    - unless @articles.empty?
+      .itemListWrap
+        .list_items
+          %ul  
+            - @articles.each do |article|
+              - content = article.is_a?(Article) ? article.content : article
+              %li{'data-id' => content.cache_key}
+                = render :partial => 'shared/items/article', :locals => { :article => article} 
+      - if @paginate
+        .clearfix
+          = will_paginate @articles
+          %br
+    - else
+      %br
+      %h3= t('articles.user_none')
 #col_right
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   .panel_1

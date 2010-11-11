@@ -166,6 +166,7 @@ en:
     label_body: "Your article content*"
     permalink: "Permalink"
     read_full: "Read the full article"
+    user_none: "This member hasn't posted any articles yet."
   static_pages:
     faq: "FAQ found here"
     about_us: "About Us found here"
