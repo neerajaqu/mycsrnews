@@ -63,16 +63,6 @@ class Comment < ActiveRecord::Base
     Resque.enqueue(CommentMessenger, id, item_url, app_caption, image_url) if user.fb_oauth_active?
   end
 
-  private
-
-  def custom_callback
-    self.commentable.comments_callback if self.commentable.respond_to?(:comments_callback)
-  end
-
-  def trigger_user_comment
-    self.user.trigger_comment(self)
-  end
-
   def expire
     self.commentable.expire
   end
@@ -85,5 +75,15 @@ class Comment < ActiveRecord::Base
 #  def self.sweeper
 #    StorySweeper
 #  end
+
+  private
+
+  def custom_callback
+    self.commentable.comments_callback if self.commentable.respond_to?(:comments_callback)
+  end
+
+  def trigger_user_comment
+    self.user.trigger_comment(self)
+  end
 
 end
