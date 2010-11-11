@@ -46,6 +46,7 @@ en:
       sign_out: "Sign Out"
       sign_in: "Sign In"
       register: "Register"
+      register_facebook: "Connect via Facebook"
       invite_friends: "Invite Friends"
       # too long
       #resources: "{{site_topic}} Resources"
