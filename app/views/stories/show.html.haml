@@ -58,8 +58,6 @@
         %div.itemBlock.clearfix
           .float_left= link_to t('.read_story'), @story.url, :target => "_cts", :class => "btn"
 
-
-
     = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @story.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @story }
@@ -70,6 +68,7 @@
   = render :partial => 'shared/item_footer', :locals => { :item => @story,:title => @story.title }
   - if @story.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
+
 #col_right
   - if  @story.is_article? and @sponsor_zone_code
     = render :partial => 'shared/ads/sponsor_zone_wrapper'
