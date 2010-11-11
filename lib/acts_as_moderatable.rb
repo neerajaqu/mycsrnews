@@ -79,7 +79,8 @@ module Newscloud
 
             	count = 0
             	items.each do |item|
-            	  if item.class.included_modules.include? Newscloud::Acts::Moderatable
+            	  #if item.class.included_modules.include? Newscloud::Acts::Moderatable
+            	  if item.moderatable?
             	  	Rails.logger.debug "*******#{item.class.name} is missing :is_blocked field" and break unless item.respond_to? :is_blocked
             	  	item.toggle_blocked
             	  	Rails.logger.debug "##############FIXING BLOCKED VALUE for #{item.class.name} -- #{item.id}###############" unless blocked.nil? or item.is_blocked == blocked
