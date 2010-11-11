@@ -90,6 +90,7 @@ module Newscloud
             	  	Rails.logger.debug "*******BLOCKED VALUE MISMATCH: GOT #{item.is_blocked.to_s} EXPECTED #{blocked.to_s}" unless blocked.nil? or blocked == item.is_blocked
                   #puts "\tTriggering cascading block for #{item.class.name.titleize}--#{item.item_title}" if item.respond_to?(:blockable?) and item.blockable?
                   #puts "\n\n\n\n\n\n\n**************************************START NESTED BLOCK" if item.respond_to? :cascade_block
+                  item.expire
                   item.cascade_block blocked if item.respond_to? :cascade_block
                   #puts "**************************************END NESTED BLOCK\n\n\n\n\n\n\n" if item.respond_to? :cascade_block
                 end
