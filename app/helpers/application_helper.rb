@@ -220,7 +220,7 @@ module ApplicationHelper
   end
 
   def nl2br(string)
-    string.gsub("<br>","<br/>").gsub("\n\r","<br>").gsub("\r", "").gsub("\n", "<br />")
+    string.gsub(/<.?br.*?>/i,"<br />").gsub("\n\r","<br />").gsub("\r", "").gsub("\n", "<br />")
   end
 
   def profile_fb_name(user,linked = false,use_you = true, possessive = false)
