@@ -98,6 +98,12 @@
       = yield
       
       = render :partial => 'shared/footer'
+    -# Move these out of the footer, they can't be in a wrapper class... oh IE how I loathe thee
+    #overlay.standard_overlay
+      .contentWrap
+    #login-overlay.standard_overlay
+      .contentWrap
+ 
 
     = render :partial => 'shared/google_analytics'
 
