@@ -553,8 +553,8 @@ li
   .users
     .thumb.user
       img.moderator
-        height: 24px
-        width: 24px
+        height: 18px
+        width: 18px
         position: absolute
         left: 2px
         bottom: 2px
@@ -614,13 +614,13 @@ $ColumnCorners: none
     margin: 5px 10px
 
 /* LIST CLASSES - GLOBAL STYLES */
-.answer, .article, .comment, .content, .event, .idea, .media, .newswire, .question, .resource, .users, .item_1, .item_2
+.answer, .article, .comment, .content, .event, .idea, .media, .newswire, .question, .resource, .topic, .users, .item_1, .item_2
   display: inline-block
   width: 100%
 
 /* LIST CLASSES WITH IMAGE */
 .panel_2
-  .answer, .article, .comment, .content, .idea, .question, .resource, .users, .item_1
+  .answer, .article, .comment, .content, .idea, .question, .resource, .topic, .users, .item_1
     .itemBlock
       float: left
  
@@ -656,7 +656,7 @@ $ColumnCorners: none
 /* CURRENT USER BADGE */
 .users
   h4
-    margin-bottom: 0px
+    margin-bottom: 3px
   h3
     color: $bodyColor
   .loc
@@ -1051,6 +1051,9 @@ $ColumnCorners: none
 
 /* DETAILS/SHOW PAGE STYLES */
 #itemDetails
+  .tag-wrap
+    margin: 0 0 10px 0
+    font-size: 11px
   .topBar
     margin-bottom: 10px
     ul
@@ -1119,7 +1122,7 @@ blockquote
   color: $bodyColor
   font-size: $fontsize
   line-height: 130%
-  margin: 10px 0
+  margin: 0
   padding: 5px 10px
   .quotes
     padding: 4px 0
