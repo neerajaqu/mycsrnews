@@ -3,9 +3,10 @@
   - jgrowl_setting = get_setting 'enable_activity_popups'
   - if jgrowl_setting and jgrowl_setting.enabled?
     - current_user.pfeed_inbox_get_new!.each do |pfeed_item|
+      $.timeago.settings.strings.suffixAgo = '';
       - next unless pfeed_item.participant
       $.jGrowl("#{escape_javascript(pfeed_content(pfeed_item))}", {sticky: true, afterOpen: function() {
-      rebuild_facebook_dom(); }});
+      rebuild_facebook_dom(); $('abbr.timeago', $('.jGrowl-notification')).timeago(); }});
   $('.user-not-present').addClass('hidden');
   $('.user-present').removeClass('user-present');
   - if current_user.is_moderator?
