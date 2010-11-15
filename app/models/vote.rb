@@ -26,6 +26,10 @@ class Vote < ActiveRecord::Base
 
   after_save :update_voteable_count
 
+  def async_vote_messenger item_url, app_caption, image_url = nil
+    Resque.enqueue(VoteMessenger, id, item_url, app_caption, image_url) if voter.fb_oauth_active?
+  end
+
   private
 
   def update_voteable_count

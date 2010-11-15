@@ -76,9 +76,9 @@ custom_widgets.each do |custom_widget|
 end
 
 settings = [
- { :key_sub_type => 'options', :key_name => 'animation_speed_features',  :value => "400" },
- { :key_sub_type => 'options', :key_name => 'animation_speed_newswires',  :value => "1000" },
- { :key_sub_type => 'options', :key_name => 'animation_speed_widgets',  :value => "2500" },
+ { :key_sub_type => 'options', :key_name => 'animation_speed_features',  :value => "300" },
+ { :key_sub_type => 'options', :key_name => 'animation_speed_newswires',  :value => "750" },
+ { :key_sub_type => 'options', :key_name => 'animation_speed_widgets',  :value => "1000" },
  { :key_sub_type => 'options', :key_name => 'exclude_articles_from_news',  :value => "false" },
  { :key_sub_type => 'options', :key_name => 'outbrain_enabled',  :value => "false", :hint => "Enable Outbrain(http://outbrain.com) support" },
  { :key_sub_type => 'options', :key_name => 'outbrain_template_name',  :value => "my_template_name", :hint => "Outbrain template name" },
@@ -139,7 +139,10 @@ settings = [
  { :key_sub_type => 'ads', :key_name => 'openx_url_m3_u', :value => (APP_CONFIG['openx_slot_url'] || "http://openx.com/m3_u_address" ) },
  { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => ( APP_CONFIG['google_adsense_slot_name'] || "default") },
  { :key_sub_type => 'ads', :key_name => 'google_adsense_account_id', :value => (APP_CONFIG['google_adsense_account_id'] || "ca-pub-9975156792632579" ) },
- { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => (APP_CONFIG['google_adsense_slot_name'] || "Needle_Small") }
+ { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => (APP_CONFIG['google_adsense_slot_name'] || "Needle_Small") },
+ { :key_sub_type => 'options', :key_name => 'google_search_engine_id', :value => ("your-google-search-engine-id") },
+ { :key_sub_type => 'options', :key_name => 'widget_stories_short_max', :value => "3" },
+ { :key_sub_type => 'zvents', :key_name => 'zvents_replacement_url', :value => ("www.zvents.com") }
 ]
 
 settings.each do |setting|

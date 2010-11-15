@@ -1,0 +1,21 @@
+--- 
+javascripts: 
+- base: 
+  - jquery.tablesorter.min
+  - jquery.jgrowl_minimized
+  - jquery.wysiwyg
+  - jquery.jgrowl
+  - scrollable.autoscroll.min
+  - audio-player
+  - scrollable.min
+  - jquery.ThreeDots.min
+  - jquery.quicksand.min
+  - jquery.jcarousel.pack
+  - jquery.masonry.min
+  - jquery.timeago
+  - jquery-ui-1.8.5.custom.effects.min
+stylesheets: 
+- base: 
+  - cards
+  - jquery.jgrowl
+  - tablesorter

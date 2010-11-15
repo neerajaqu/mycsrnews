@@ -8,7 +8,10 @@
     .panelBar
       %h2== What's your event for #{APP_CONFIG['site_topic']}?
     .formBox
-      - if @fb_events.empty?
+      - if not @events_allowed
+        %br
+        = fb_prompt_permission('user_events', t('events.fb_prompt'), 'window.location.reload()');
+      - elsif @fb_events.empty?
         %strong No Events to Import
       - else
 

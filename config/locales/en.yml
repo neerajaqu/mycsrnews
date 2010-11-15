@@ -1,4 +1,8 @@
 en:
+  app:
+    facebook:
+      vote_caption: "Visit {{title}} to respond"
+      comment_caption: "Visit {{title}} to respond"
   date: 
     order: [:month, :day, :year] 
   header:
@@ -30,12 +34,14 @@ en:
     featured_title: "Featured Links"    
     add_new: "Add a new link"
     add_link_title: "What link do you want to add?"
+    resource_section_roll_title: "Browse our Directory"
   events:
     newest_events: "Newest Events"
     top_events: "Top Events"
     featured_title: "Featured Events"    
     place: "Place: {{place}}"
     start_time: "Time: {{start_time}}"
+    fb_prompt: "Click here to add events from your facebook account"
   media:
     add_image: "Add Image"
     add_video: "Add Video"
@@ -57,6 +63,7 @@ en:
     yearly: "Yearly"
     alltime: "All Time"
   welcome_name: "Welcome {{name}}"  
+  login_dialog: "You need to be logged in to perform this action. Please <a href=\"{{login_url}}\"><b>Login</b></a> or <a href=\"{{register_url}}\"><b>Register</b></a>."
   newest_newswires_title: "Latest Wire News"
   post_newswire: "Post"
   read_newswire: "Read"
@@ -84,8 +91,12 @@ en:
   facebook_learn_more: "Learn more"
   like: "Like"
   dislike: "Dislike"
+  loading: "Loading"
+  google_search_title: "Search"
+  no_search_engine_id: "Please visit http://google.com/cse to get a search engine ID and edit your application settings."
+  learn_more: "Learn more"
   comments: "Comments"
-  comments:
+  featured_comment:
     featured_title: "Featured Comments"
     view: "View"
   tweet: "Tweet"
@@ -105,6 +116,9 @@ en:
   answers_label: "Answers"
   please_elaborate: "Please elaborate a bit more (optional)"
   active_users: "{{user_count}} users online now"
+  active_users_none: "No users are online right now."
+  recent_users: "{{user_count}} recently online"
+  recent_users_none: "No recently active users."
   moderator_users: "Our Moderators"
   invite_users_title: "Invite Your Friends"
   invite_users_detail: "Choose Facebook friends to invite to our application"
@@ -119,7 +133,7 @@ en:
   top_content_tags: "Popular Tags"
   logged_in_error: "You must be logged in to perform this action."
   questions:
-    tab_title: "Answers"
+    tab_title: "Q &amp; A"
     title: "Questions"
     list_title: "Questions and Answers"
     list_subtitle: "Help your community by answering questions"
@@ -152,6 +166,7 @@ en:
     label_body: "Your article content*"
     permalink: "Permalink"
     read_full: "Read the full article"
+    user_none: "This member hasn't posted any articles yet."
   static_pages:
     faq: "FAQ found here"
     about_us: "About Us found here"
@@ -189,6 +204,8 @@ en:
     topics_count: "{{topics_count}} Topics"
     posts_count: "{{posts_count}} Posts"
     top_forums_title: "Popular Forums"
+    forum_roll_title: "Visit our Forums"
+    featured_forum_title: "Just posted in {{forum_name}}"
     top_topics_title: "Popular Topics"
     newest_topics_title: "Newest Topics"
     new: "Create a new Forum"
@@ -206,6 +223,7 @@ en:
       commit_reply: "Post your reply"
       new: "Create a new topic"
       new_header: "Create a New Topic"
+      replies: "Replies"
   blog_roll_title: "Blog Roll"
   feed_roll_title: "News Sources"
   read_latest_newswires: "Read the latest newswires"    
@@ -308,3 +326,8 @@ en:
   no_features: "Sorry, no featured items right now"
   more_features: "View more"
   advertise_here: "advertise here"
+  hint:
+    user_profile:
+      post_comments: "Comments you post will be added to your Facebook stream"
+      post_likes: "Stories and items you like will be added to your Facebook stream"
+      post_items: "Any story or item you post will be added to your Facebook stream"

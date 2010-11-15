@@ -2,6 +2,8 @@ widgets:
   main_content:
     stories:
       partial: '/shared/stories'
+    stories_short:
+      partial: '/shared/stories_short'
     featured_content:
       partial: '/shared/featured_items'
       locals: 'featured_items'
@@ -68,6 +70,8 @@ widgets:
       partial: '/shared/sidebar/add_bookmark'
     active_users:
       partial: '/shared/sidebar/active_users'
+    recent_users:
+      partial: '/shared/sidebar/recent_users'
     rotate_featured:
       partial: '/shared/sidebar/rotate_featured'
     rotate_idea_widgets:
@@ -103,6 +107,9 @@ widgets:
     featured_event:
       partial: '/shared/sidebar/featured_event'
       locals: 'featured_events'
+    featured_forum:
+      partial: '/shared/sidebar/featured_forum'
+      locals: 'featured_forum'
     featured_article:
       partial: '/shared/sidebar/featured_article'
       locals: 'featured_articles'
@@ -115,6 +122,12 @@ widgets:
     feed_roll:
       partial: '/shared/sidebar/feed_roll'
       locals: 'feed_roll'      
+    forum_roll:
+      partial: '/shared/sidebar/forum_roll'
+      locals: 'forum_roll'      
+    resource_section_roll:
+      partial: '/shared/sidebar/resource_section_roll'
+      locals: 'resource_section_roll'      
     newest_newswires:
       partial: '/shared/sidebar/newest_newswires'
       locals: 'newest_newswires'
@@ -136,3 +149,5 @@ widgets:
       partial: '/shared/sidebar/featured_answer'
     latest_activity:
       partial: '/shared/sidebar/latest_pfeeds'
+    google_search:
+      partial: '/shared/sidebar/google_search'

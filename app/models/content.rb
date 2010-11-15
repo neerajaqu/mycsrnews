@@ -34,7 +34,7 @@ class Content < ActiveRecord::Base
 
   attr_accessor :image_url, :tags_string, :is_draft
 
-  validates_presence_of :title, :caption
+  validates_presence_of :title, :caption, :user_id
   validates_presence_of :url, :if =>  :is_content?
   validates_format_of :url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :message => "should look like a URL", :allow_blank => true
   validates_format_of :image_url, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :allow_blank => true, :message => "should look like a URL"
@@ -107,6 +107,17 @@ class Content < ActiveRecord::Base
     else
       self.is_featured = ! self.is_featured
       self.featured_at = Time.now if self.respond_to? 'featured_at'
+      self.save
+    end
+  end
+
+  def toggle_blocked
+    if is_article?
+      self.article.is_blocked = !self.article.is_blocked
+      self.is_blocked = !self.is_blocked
+      self.save
+    else
+      self.is_blocked = !self.is_blocked
       self.save
     end
   end

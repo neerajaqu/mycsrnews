@@ -23,7 +23,7 @@
         %h1= @resource.title
         .itemMeta
           %h3
-            = t('posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => time_ago_in_words(@resource.created_at))
+            = t('posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => timeago(@resource.created_at))
             - if @resource.resource_section.present?
               = t('in')
               = link_to(@resource.resource_section.name, @resource.resource_section)

@@ -39,13 +39,11 @@ class Article < ActiveRecord::Base
   end
 
   def toggle_blocked
-    self.is_blocked = !self.is_blocked
     self.content.toggle_blocked
-    return self.save ? true : false
   end
 
   def create_preamble
-    t1 = self.body.gsub("<br><br><br><br>","<br><br>").gsub("&nbsp;"," ").gsub("\r\n","<br /><br />").gsub("\r", "").gsub("\n", "<br />")
+    t1 = self.body.gsub("<br><br><br><br>","<br /><br />").gsub("&nbsp;"," ").gsub("\r\n","<br /><br />").gsub("\r", "").gsub("\n", "<br />")
     t2 = ActionController::Base.helpers.sanitize(t1, :tags => %w(br))
     t3 = t2.split(/(?:<br>)+/)
     full_entry = (t3.count > 3 ? false : true)

@@ -39,10 +39,6 @@ module FacebookHelper
     text
   end
 
-  def iframe_facebook_request?
-    (session and session[:facebook_request]) or request_comes_from_facebook?
-  end
-
   private
 
   def build_stream_post item
@@ -75,5 +71,9 @@ module FacebookHelper
     stream_post.attachment = attachment
     stream_post
   end
-      
+
+  def fb_profile_link user
+    "http://www.facebook.com/profile.php?id=#{user.fb_user_id}"
+  end
+
 end

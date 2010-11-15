@@ -5,7 +5,7 @@ class WrapperSweeper < ActionController::Caching::Sweeper
       when "Content"
         StorySweeper.expire_story_all item
       when "Article"
-        StorySweeper.expire_article_all item
+        StorySweeper.expire_story_all item.content
       when "Idea"
         IdeaSweeper.expire_idea_all item
       when "Question"

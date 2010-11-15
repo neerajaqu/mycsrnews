@@ -7,7 +7,7 @@
   .dh_links
     - if logged_in?
       .account-dropdown
-        = link_to t('header.account'), '#', :class => "account-toggle"
+        = link_to t('header.account'), account_menu_path, :class => "account-toggle"
         .account-links{:style => 'display:none'}
       %span.admin-links
         = pipe_spacer
@@ -17,9 +17,7 @@
           = link_to t('.admin'), admin_path
     - else
       - if iframe_facebook_request?
-        = link_to t('.sign_in'), link_user_accounts_users_path(:only_path => false, :canvas => true), :target => '_parent'
-        = pipe_spacer
-        = link_to t('.register'), link_user_accounts_users_path(:only_path => false, :canvas => true), :target => '_parent'
+        = link_to t('.register_facebook'), link_user_accounts_users_path(:only_path => false, :canvas => true), :target => '_parent'
       - else
         = link_to t('.sign_in'), login_path
         = pipe_spacer

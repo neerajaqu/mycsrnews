@@ -3,7 +3,11 @@
   - fb_serverfbml do
     %script{:type=>"text/fbml"}
       %fb:fbml
-        - fb_multi_friend_request("Invite", "Invite friends", base_url(invite_users_path)) do
+        - if iframe_facebook_request?
+          - url = invite_users_path(:only_path => false, :iframe => 'iframe')
+        - else
+          - url = invite_users_path(:only_path => false)
+        - fb_multi_friend_request("Invite", "Invite friends", url) do
           == #{fb_name current_user} wants you to sign up for #{APP_CONFIG['site_title']}.
           -#TODO:: get register link working
           = fb_req_choice("Visit #{APP_CONFIG['site_title']}", home_index_url)

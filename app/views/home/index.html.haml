@@ -1,17 +1,21 @@
-#col_left
-  = render :partial => 'shared/featured_items'
-  = render :partial => 'shared/hot_topics'
-  = render :partial => 'shared/sidebar/active_users'
-  = render :partial => 'shared/sidebar/top_discussed_stories'
-  = render :partial => 'shared/sidebar/active_users'
-  = render :partial => 'shared/stories'
-
-#col_right
-  = render :partial => 'shared/sidebar/top_stories'
-  = render :partial => 'shared/sidebar/top_discussed_stories'
-  = render :partial => 'shared/sidebar/top_users'
-  = render :partial => 'shared/sidebar/newest_users'
-  = render :partial => 'shared/sidebar/active_users'
-  = render :partial => 'shared/sidebar/fan_application'
-  = render :partial => 'shared/sidebar/add_bookmark'
-  = render :partial => 'shared/sidebar/prompt_permissions'
+#col_full
+  - unless @page.present?
+    %h1 No content setup yet. Admins please configure your home page.
+  - else
+    - @main.each do |widget_page|
+      - widget = widget_page.widget
+      - locals = {}
+      - locals = { widget.locals.to_sym => instance_variable_get("@#{widget.locals}")} if widget.locals.present?
+      - locals[:widget] = widget
+      - locals[:widget_page] = widget_page
+      %div{:class => "#{widget_page.css_class} box"}
+        = render :partial => widget.partial, :locals => locals
+  - unless @page.present?
+    %h1 No content setup yet. Admins please configure your home page.
+  - else
+    - @sidebar.each do |widget_page|
+      - widget = widget_page.widget
+      - locals = {}
+      - locals = { widget.locals.to_sym => instance_variable_get("@#{widget.locals}")} if widget.locals.present?
+      - locals[:widget] = widget
+      .box= render :partial => widget.partial, :locals => locals

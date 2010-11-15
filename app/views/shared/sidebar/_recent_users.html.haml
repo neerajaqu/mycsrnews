@@ -1,0 +1,19 @@
+-# @expects: local 'recent_users'
+
+- cache :recent_users_html, :expires_in => 60.minute do
+  - recent_users ||= User.recently_active
+
+  -# to do : user block should be made a generic partial with vars for titles
+  -# in active_users and recent_users
+  
+  %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('recent_users', :user_count => recent_users.size)
+    .userList
+      - unless recent_users.empty?
+        %ul
+          - recent_users.each do |user|
+            %li
+              .profilePic= local_linked_profile_pic user, :width => '30', :height => '30'
+      - else
+        %p= t('recent_users_none')

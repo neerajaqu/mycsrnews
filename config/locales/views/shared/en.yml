@@ -12,8 +12,8 @@ en:
       newswire: "Wires"
       ideas: "Ideas"
       ideas_list: "Browse Ideas"
-      idea_boards_list: "Browse Idea Topics"
-      new_idea: "Suggest an Idea"
+      idea_boards_list: "Browse Topics"
+      new_idea: "Post an Idea"
       events: "Calendar"
       events_list: "Browse the Calendar"
       new_event: "Add an Event"
@@ -46,6 +46,7 @@ en:
       sign_out: "Sign Out"
       sign_in: "Sign In"
       register: "Register"
+      register_facebook: "Connect via Facebook"
       invite_friends: "Invite Friends"
       # too long
       #resources: "{{site_topic}} Resources"

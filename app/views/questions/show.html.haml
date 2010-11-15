@@ -17,12 +17,12 @@
           %li
             = render :partial => 'shared/add_this'
       .itemBlock
-        .thumb
+        .half-panel
           - if @question.images.present?
-            = image_tag @question.images.first.url(:medium)
+            .thumb= image_tag @question.images.first.url(:medium)
         %h1.askQuestionHead= @question.question
         .itemMeta
-          %h3= t('asked_by', :fb_name => local_linked_profile_name(@question.user), :date => time_ago_in_words(@question.created_at))
+          %h3= t('asked_by', :fb_name => local_linked_profile_name(@question.user), :date => timeago(@question.created_at))
           - if @tags.present?
             %h3== #{tag_list(@tags, @question)}
           - if @question.moderatable?

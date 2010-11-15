@@ -74,6 +74,15 @@ class Event < ActiveRecord::Base
       return check
     else
       image = (zvent.images.empty? ? nil : zvent.images.first["url"]) || (zvent.venue.images.empty? ? nil : zvent.venue.images.first["url"])
+      url = zvent.url || "http://www.zvents.com"+zvent.zurl
+      alt_url = "http://www.zvents.com"+zvent.zurl
+      if Metadata::Setting.find_setting('zvents_replacement_url').present?
+        replacement_url = Metadata::Setting.find_setting('zvents_replacement_url').value
+        if replacement_url.present?
+          url = url.gsub("www.zvents.com", replacement_url)
+          alt_url = alt_url.gsub("www.zvents.com", replacement_url)
+        end
+      end
       e = Event.create!(
       :source => "Zvent",
       :user => user,
@@ -89,11 +98,26 @@ class Event < ActiveRecord::Base
       :country => zvent.venue.country,
       :creator => nil, #not yet support in gem
       :pic => image,
-      :url => zvent.url || "http://www.zvents.com"+zvent.zurl,
-      :alt_url => "http://www.zvents.com"+zvent.zurl)
+      :url => url,
+      :alt_url => alt_url)
       
       e.images.create(:remote_image_url=>image) if image
     end
   end
+
+  def get_url
+    return "http://#{url}" unless url.empty? or url =~ /^http:\/\//
+    url
+  end
+
+  def get_view_button_url
+    if alt_url.present?
+      return "http://#{alt_url}" unless alt_url =~ /^http:\/\//
+      alt_url
+    else
+      get_url
+    end
+  end
+
 end
 

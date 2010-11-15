@@ -1,5 +1,7 @@
 en:
   users:
+    edit:
+      title: "Edit Your Settings"
     show:
       title: "{{name}} Profile"
       points: "points"

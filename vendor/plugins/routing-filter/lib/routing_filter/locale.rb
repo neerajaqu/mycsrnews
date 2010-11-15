@@ -20,7 +20,7 @@ module RoutingFilter
       end
 
       def locales_pattern
-        @@locales_pattern ||= %r(^/(#{self.locales.map { |l| Regexp.escape(l.to_s) }.join('|')})(?=/|$))
+        @@locales_pattern ||= %r(^(/iframe)?/(#{self.locales.map { |l| Regexp.escape(l.to_s) }.join('|')})(?=/|$))
       end
     end
 
@@ -48,8 +48,8 @@ module RoutingFilter
     protected
 
       def extract_locale!(path)
-        path.sub! self.class.locales_pattern, ''
-        $1
+        path.sub! self.class.locales_pattern, '\1'
+        $2
       end
 
       def prepend_locale?(locale)

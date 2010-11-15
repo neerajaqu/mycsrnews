@@ -38,7 +38,7 @@ module AuthenticatedSystem
     #  end
     #
     def authorized?(action = action_name, resource = nil)
-      logged_in?
+      logged_in? and not current_user.is_blocked?
     end
 
     # Filter method to enforce a login requirement.
@@ -97,8 +97,9 @@ module AuthenticatedSystem
         # for a workaround.)
         format.any(:json, :xml) do
           #request_http_basic_authentication 'Web Password'
-          dialog = "Account membership required. Please <a href=\"#{url_for login_path(:format => 'html')}\"><b>Login</b></a> or <a href=\"#{url_for register_path(:format => 'html')}\"><b>Register</b></a>."
-          render :json => { :error => "Account Required", :dialog => dialog }.to_json, :status => 401
+          #dialog = "Account membership required. Please <a href=\"#{url_for login_path(:format => 'html')}\"><b>Login</b></a> or <a href=\"#{url_for register_path(:format => 'html')}\"><b>Register</b></a>."
+          dialog = I18n.translate('login_dialog', :login_url => url_for(login_path(:format => 'html')), :register_url => url_for(register_path(:format => 'html')))
+          render :json => { :error => "Account Required", :dialog => "<p>#{dialog}</p>" }.to_json, :status => 401
         end
       end
       return false

@@ -1,0 +1,8 @@
+Plugins that have been modified:
+--------------------------------
+
+* routing-filter
+* facebooker
+* vote_fu
+* pfeed is from github.com/chewbranca/pfeed
+* i18n_backend_database?

@@ -1,8 +1,11 @@
 -# @expects: local 'active_users'
 
-- cache :active_users_html, :expires_in => 1.minute do
+- cache :active_users_html, :expires_in => 5.minute do
   - active_users ||= User.last_active
 
+  -# to do : user block should be made a generic partial with vars for titles
+  -# in active_users and recent_users
+  
   %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
     .panelBar
       %h2= t('active_users', :user_count => active_users.size)
@@ -13,4 +16,4 @@
             %li
               .profilePic= local_linked_profile_pic user, :width => '30', :height => '30'
       - else
-        %p No currently active users.
+        %p= t('active_users_none')

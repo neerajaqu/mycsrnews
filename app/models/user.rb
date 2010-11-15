@@ -6,12 +6,14 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
 
   acts_as_voter
+  acts_as_moderatable
 
   #named_scope :top, lambda { |*args| { :order => ["karma_score desc"], :limit => (args.first || 5), :conditions => ["karma_score > 0 and is_admin = 0 and is_editor=0"]} }
   named_scope :top, lambda { |*args| { :order => ["karma_score desc"], :limit => (args.first || 5), :conditions => ["karma_score > 0"]} }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 5), :conditions => ["created_at > ?", 2.months.ago]} }
   named_scope :last_active, lambda { { :conditions => ["last_active > ?", 60.minutes.ago], :order => ["last_active desc"] } }
-  named_scope :admins, { :conditions => ["is_admin is true"] }
+  named_scope :recently_active, lambda { |*args| { :order => ["last_active desc"], :limit => (args.first || 21) } }
+  named_scope :admins, { :conditions => ["is_admin is true"] } 
   named_scope :moderators, { :conditions => ["is_moderator is true"] }
   named_scope :members, { :conditions => ["is_moderator is false and is_admin is false and is_editor is false and is_host is false"] }
 
@@ -44,7 +46,8 @@ class User < ActiveRecord::Base
   has_many :ideas, :after_add => :trigger_idea
   has_many :events, :after_add => :trigger_event
   has_many :resources, :after_add => :trigger_resource
-  has_many :topics, :after_add => :trigger_topic
+  #has_many :topics, :after_add => :trigger_topic
+  has_many :topics
   has_many :dashboard_messages, :after_add => :trigger_dashboard_message
   has_one :profile, :class_name => "UserProfile"
   has_one :user_profile #TODO:: convert views and remove this
@@ -76,11 +79,16 @@ class User < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true, :reserved => RESERVED_NAMES
 
 
+  # FB Graph API settings
+  delegate :post_comments?, :to => :user_profile
+  delegate :post_likes?, :to => :user_profile
+  delegate :post_items?, :to => :user_profile
+
   # NOTE:: must be above emits_pfeeds call
   def trigger_comment(comment) end
   def trigger_article(article) end
   def trigger_story(story) end
-  def trigger_topic(topic) end
+  #def trigger_topic(topic) end
   def trigger_question(question) end
   def trigger_answer(answer) end
   def trigger_idea(idea) end
@@ -115,7 +123,7 @@ class User < ActiveRecord::Base
 
   emits_pfeeds :on => [:trigger_story], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_article], :for => [:friends], :identified_by => :name
-  emits_pfeeds :on => [:trigger_topic], :for => [:friends], :identified_by => :name
+  #emits_pfeeds :on => [:trigger_topic], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_question], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_answer], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_idea], :for => [:friends], :identified_by => :name
@@ -293,6 +301,14 @@ class User < ActiveRecord::Base
   
   def count_daily_posts
     self.contents.find(:all, :conditions => ["created_at > ?", 24.hours.ago]).count
+  end
+
+  def fb_oauth_active?
+    fb_oauth_key.present? and fb_oauth_denied_at.nil?
+  end
+
+  def fb_oauth_desired?
+    fb_oauth_key.nil? and fb_oauth_denied_at.nil?
   end
 
   private

@@ -7,10 +7,10 @@
       %h2= t('.title', :name => profile_fb_name(@user,false))
     .half-panel
       .thumb.user-details
-        = local_linked_profile_pic @user, :size => 'normal', :width => '180'
+        = local_linked_profile_pic @user, :destination => fb_profile_link(@user), :width => '180', :size => 'normal', :target => '_top'
     .half-panel
       .itemBlock
-        %h1= profile_fb_name (@user,nil, false, false)
+        %h1= link_to profile_fb_name(@user,false, false, false), fb_profile_link(@user), :target => "_top"
         .pointsTable_profile
           %table
             %tbody
@@ -59,17 +59,21 @@
   .panel_2
     .panelBar
       %h2= t('articles.my_articles')
-    .itemListWrap
-      .list_items
-        %ul
-          - @articles.each do |article|
-            - content = article.is_a?(Article) ? article.content : article
-            %li{'data-id' => content.cache_key}
-              = render :partial => 'shared/items/article', :locals => { :article => article} 
-    - if @paginate
-      .clearfix
-        = will_paginate @articles
-        %br
+    - unless @articles.empty?
+      .itemListWrap
+        .list_items
+          %ul  
+            - @articles.each do |article|
+              - content = article.is_a?(Article) ? article.content : article
+              %li{'data-id' => content.cache_key}
+                = render :partial => 'shared/items/article', :locals => { :article => article} 
+      - if @paginate
+        .clearfix
+          = will_paginate @articles
+          %br
+    - else
+      %br
+      %h3= t('articles.user_none')
 #col_right
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   .panel_1

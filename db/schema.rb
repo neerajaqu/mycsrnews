@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100823190356) do
+ActiveRecord::Schema.define(:version => 20101027210809) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -286,6 +286,9 @@ ActiveRecord::Schema.define(:version => 20100823190356) do
     t.integer  "position",       :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",     :default => false
+    t.boolean  "is_featured",    :default => false
+    t.datetime "featured_at"
   end
 
   create_table "idea_boards", :force => true do |t|
@@ -294,6 +297,7 @@ ActiveRecord::Schema.define(:version => 20100823190356) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",  :default => false
   end
 
   create_table "ideas", :force => true do |t|
@@ -503,6 +507,7 @@ ActiveRecord::Schema.define(:version => 20100823190356) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_blocked",  :default => false
   end
 
   create_table "resources", :force => true do |t|
@@ -617,6 +622,9 @@ ActiveRecord::Schema.define(:version => 20100823190356) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_blocked",      :default => false
+    t.boolean  "is_featured",     :default => false
+    t.datetime "featured_at"
+    t.integer  "flags_count",     :default => 0
   end
 
   add_index "topics", ["forum_id", "replied_at"], :name => "index_topics_on_forum_id_and_replied_at"
@@ -655,6 +663,9 @@ ActiveRecord::Schema.define(:version => 20100823190356) do
     t.datetime "email_last_ask"
     t.boolean  "dont_ask_me_invite_friends",               :default => false
     t.datetime "invite_last_ask"
+    t.boolean  "post_comments",                            :default => true
+    t.boolean  "post_likes",                               :default => true
+    t.boolean  "post_items",                               :default => true
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true
@@ -705,6 +716,8 @@ ActiveRecord::Schema.define(:version => 20100823190356) do
     t.integer  "last_delivered_feed_item_id"
     t.boolean  "is_host",                                   :default => false
     t.integer  "activity_score",                            :default => 0
+    t.string   "fb_oauth_key"
+    t.datetime "fb_oauth_denied_at"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

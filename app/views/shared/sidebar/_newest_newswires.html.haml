@@ -20,5 +20,5 @@
         - animation_speed = get_setting('animation_speed_newswires').try(:value) || 2500
         :javascript
           $(function() {          	
-          	$(".newswire_scrollable_panel").delay(3500).scrollable({speed : #{animation_speed}, circular: true, mousewheel: true}).autoscroll({ autoplay: true, interval : 7500});
+          	$(".newswire_scrollable_panel").delay(3500).scrollable({speed : #{animation_speed}, circular: true, mousewheel: false}).autoscroll({ autoplay: true, interval : 7500});
           });

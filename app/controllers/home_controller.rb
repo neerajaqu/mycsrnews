@@ -11,6 +11,16 @@ class HomeController < ApplicationController
   def test_design
   end
 
+  def preview_widgets
+    @page = true
+    @page = WidgetPage.find_root_by_page_name('home')
+    if false and @page.present? and @page.children.present?
+      @main = @page.children.first.children
+    end
+    @main = params[:widget_ids].split(',').map {|wid| Widget.find(wid) }
+    @sidebar = []
+  end
+
   def index
     @page = "page_1_"
     if request.post?
@@ -31,8 +41,6 @@ class HomeController < ApplicationController
         @main.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
         @sidebar.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
       end
-      render :template => 'home/test_widgets'
-      return
     end
     #expires_in 1.minutes, :private => false, :public => true
     @no_paginate = true

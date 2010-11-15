@@ -16,7 +16,7 @@ class EventsController < ApplicationController
     @current_sub_tab = 'Browse Events'
     @events = Event.upcoming.active.paginate :page => params[:page], :per_page => Event.per_page
     set_sponsor_zone('events')
-   respond_to do |format|
+    respond_to do |format|
       format.html { @paginate = true }
       format.fbml { @paginate = true }
       format.atom
@@ -72,6 +72,7 @@ class EventsController < ApplicationController
       redirect_to events_path
     else
       if current_facebook_user
+        @events_allowed = current_facebook_user.has_permission?('user_events')
         @event = Event.new
         @fb_events = current_facebook_user.events(:start_time => Time.now, :end_time => 1.month.from_now)
         current_events = Event.find(:all, :conditions=>["eid IN (?)", @fb_events.collect { |e| e.eid }]).collect { |e| e.eid }

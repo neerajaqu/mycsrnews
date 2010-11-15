@@ -12,8 +12,8 @@ module Newscloud
         def acts_as_moderatable
           has_many :flags, :as => :flaggable
 
-          named_scope :active, { :conditions => ["is_blocked = 0"] }
-          named_scope :inactive, { :conditions => ["is_blocked = 1"] }
+          named_scope :active, { :conditions => ["#{self.name.tableize}.is_blocked = 0"] }
+          named_scope :inactive, { :conditions => ["#{self.name.tableize}.is_blocked = 1"] }
 
           include Newscloud::Acts::Moderatable::InstanceMethods
         end

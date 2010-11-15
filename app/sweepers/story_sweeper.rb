@@ -39,7 +39,7 @@ class StorySweeper < ActionController::Caching::Sweeper
     #expire_page :controller => '/home', :action => 'index', :format => 'fbml'
     #expire_page :controller => '/stories', :action => 'show', :id => story, :format => 'html'
     #expire_page :controller => '/stories', :action => 'show', :id => story, :format => 'fbml'
-    ['top_stories', 'active_users', 'most_discussed_stories', 'top_users', 'top_ideas', 'top_events', 'featured_items', 'newest_users', 'newest_ideas', 'header', 'fan_application', 'prompt_permissions', "#{story.cache_key}_top", "#{story.cache_key}_bottom", "#{story.cache_key}_sidebar", "#{story.cache_key}_who_liked", "top_contents_tags", "top_contents_sections"].each do |fragment|
+    ['stories_short','top_stories', 'active_users', 'most_discussed_stories', 'top_users', 'top_ideas', 'top_events', 'featured_items', 'newest_users', 'newest_ideas', 'header', 'fan_application', 'prompt_permissions', "#{story.cache_key}_top", "#{story.cache_key}_bottom", "#{story.cache_key}_sidebar", "#{story.cache_key}_who_liked", "top_contents_tags", "top_contents_sections"].each do |fragment|
       expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|

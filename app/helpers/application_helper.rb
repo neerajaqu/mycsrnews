@@ -2,6 +2,11 @@
 module ApplicationHelper
   include TagsHelper
 
+  def timeago(date, options = {})
+    options[:class] ||= "timeago"
+    content_tag(:abbr, date.to_s, options.merge(:title => date.getutc.iso8601)) if date
+  end
+
   def pipe_spacer
     '<span class="pipe">|</span>'
   end
@@ -79,7 +84,7 @@ module ApplicationHelper
   #remove this method when self.title methods created
   def linked_item_details(item, length = 150, url = false)
     return "" if item.details.nil?
-    caption = caption(item.details, length)
+    caption = caption(item.details.sanitize_standard, length)
     "#{caption} #{link_to 'More', (url ? url : item)}"
   end
 
@@ -134,12 +139,16 @@ module ApplicationHelper
     link_options = {}
     # TODO:: separate this into a method
     destination = user
+    target = nil
     if options[:destination].present?
       destination = options.delete(:destination)
     end
     if options[:format].present?
     	link_options[:format] = options[:format]
     	options.delete(:format)
+    end
+    if options[:target].present?
+    	target = options.delete(:target)
     end
     unless options[:only_path].nil?
     	link_options[:only_path] = options[:only_path]
@@ -153,7 +162,11 @@ module ApplicationHelper
     if user.facebook_user?
       options.merge!(:linked => false)
       options[:size] = 'square' unless options[:size].present?
-      temp = link_to fb_profile_pic(user, options), destination
+      if target
+        temp = link_to fb_profile_pic(user, options), destination, :target => target
+      else
+        temp = link_to fb_profile_pic(user, options), destination
+      end
     else
       temp = link_to image_tag(default_image), user, link_options
       #link_to gravatar_image(user), user, link_options
@@ -207,21 +220,21 @@ module ApplicationHelper
   end
 
   def nl2br(string)
-    string.gsub("\n\r","<br>").gsub("\r", "").gsub("\n", "<br />")
+    string.gsub(/<.?br.*?>/i,"<br />").gsub("\n\r","<br />").gsub("\r", "").gsub("\n", "<br />")
   end
 
-  def profile_fb_name(user,linked = nil,use_you = true, possessive = false)
+  def profile_fb_name(user,linked = false,use_you = true, possessive = false)
     firstnameonly = APP_CONFIG['firstnameonly'] || false
     fb_name(user, :use_you => use_you, :possessive => possessive, :capitalize => true, :linked => linked, :firstnameonly => firstnameonly )
   end
   
-  def path_to_self(item)
-    canvas = iframe_facebook_request? ? true : false
+  def path_to_self(item, use_canvas = false)
+    canvas = (use_canvas and iframe_facebook_request?) ? true : false
     url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => canvas, :only_path => false))
   end
 
   def path_to_self_no_canvas(item)
-    url_for(send("#{item.class.to_s.underscore}_url", item, :canvas => false, :only_path => false))
+    path_to_self(item, false)
   end
 
   def link_to_path_to_self(item)
@@ -236,15 +249,14 @@ module ApplicationHelper
   def twitter_share_item_link(item,caption,button=false)
     is_bitly_configured = get_setting('oauth_key').present?
     caption =  Rack::Utils.escape(strip_tags(caption))
-    
     if is_bitly_configured
       bitly = Bitly.new(APP_CONFIG['bitly_username'], APP_CONFIG['bitly_api_key'])
       url = bitly.shorten(path_to_self(item)).short_url
     else
       url =  Rack::Utils.escape(path_to_self(item))
     end
-    text = "#{caption}+#{url}"
-    twitter_url = "http://twitter.com/?status=#{text}"
+    # text = "#{caption}+#{url}"
+    twitter_url = "http://twitter.com/share?url=#{url}&text=#{caption}"
 
     if button == true
       link_text = image_tag('/images/default/tweet_button.gif')

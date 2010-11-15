@@ -14,7 +14,11 @@ class SessionsController < ApplicationController
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
-      redirect_back_or_default(root_path)
+      if canvas?
+        redirect_back_or_default(home_index_path(:iframe => 'iframe'))
+      else
+        redirect_back_or_default(home_index_path)
+      end
       flash[:notice] = "Logged in successfully"
     else
       note_failed_signin
@@ -29,9 +33,9 @@ class SessionsController < ApplicationController
     logout_killing_session!
     flash[:notice] = "You have been logged out."
     if canvas
-      redirect_back_or_default(root_path(:iframe_req => true))
+      redirect_back_or_default(home_index_path(:iframe => 'iframe'))
     else
-      redirect_back_or_default(root_path)
+      redirect_back_or_default(home_index_path)
     end
   end
 

@@ -10,15 +10,20 @@ $(function() {
   $('.hide').hide();
   $('.unhide').show().removeClass('hidden');
 
+  $.timeago.settings.strings.suffixAgo = '';
+  $('abbr.timeago').timeago();
+
   setTimeout(function() {
 		$('.flash').effect('fade', {}, 1000);
 
   }, 3500);
 
-  function dialog_response(title, message) {
-      $("<p>"+message+"</p>").dialog({
-          title: title,
-          modal: true
+  function modal_dialog_response(title, message) {
+  	  $('#login-overlay .contentWrap').html(message);
+  	  $('#login-overlay').overlay({
+  	  	mask: 'white',
+  	  	load: true,
+  	  	effect: 'apple'
       });
   }
 
@@ -37,10 +42,11 @@ $(function() {
 
   $('.account-toggle').click(function(event) {
   	event.preventDefault();
+  	var url = change_url_format($(this).attr('href')).replace(/json/, 'js');
 	if ($(this).next().children().length==0) {
 		$(this).next().html("<img src=\"/images/default/spinner-tiny.gif\" />");
   	$(this).next().toggle(); // after spinner appears, toggle it
- 		$(this).next().load('/account_menu.js', function() {
+ 		$(this).next().load(url, function() {
   			rebuild_facebook_dom();
 		});
 	} else {
@@ -82,6 +88,60 @@ $(function() {
     }, 'html');
   });
 
+  $('form.comment').submit(function(event) {
+  	// Skip forums for now
+  	if ($(this).parents('.topic-form').length) return true;
+
+  	event.preventDefault();
+  	var form = $(this);
+  	//if ($("textarea[name=comment\\[comments\\]]", this).val() === '') {
+  	if ($("textarea:first", form).val() === '') {
+  		$("textarea:first", form).css('border', '1px solid red');
+  		return false;
+    }
+  	var submitBtn = $('input[type=submit]', this);
+  	submitBtn.attr('disabled', 'disabled');
+  	submitBtn.hide();
+  	submitBtn.parent().append('<img style="float: left;" src="/images/default/spinner-tiny.gif" /><p style="float: left;">&nbsp; Processing your comment...</p>');
+
+  	var url = change_url_format($(this).attr('action'));
+  	var parentForm = $(this).parents('.postComment');
+  	var commentThread = parentForm.siblings('.commentThread');
+
+  	$.post(url, $(this).serialize(), function(data) {
+      commentThread.fadeOut("normal", function() {
+        //commentThread.replaceWith(data).fadeIn("normal");
+        commentThread.html(data).fadeIn("normal");
+        $.timeago.settings.strings.suffixAgo = '';
+        $('abbr.timeago', commentThread).timeago();
+
+        rebuild_facebook_dom();
+        setTimeout(function() {
+          $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, { duration: 'slow', easing: 'swing'});
+          $('li', commentThread).last().effect('highlight', {color: 'green'}, 3000);
+          /*
+          // TODO:: FIX THIS
+          // here are two different queueing options
+          // they are both triggering highlight twice for some reason
+          // but the delay on highlighting is much more natural
+          $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, { duration: 'slow', easing: 'swing'}).queue(function() {
+            $('.commentThread li').last().effect('highlight', {color: 'green'}, 3000);
+            $(this).dequeue();
+          });
+          $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, 'slow', 'swing', function() {
+            $('.commentThread li').last().effect('highlight', {color: 'green'}, 3000);
+            //$(this).dequeue();
+          });
+          */
+        }, 500);
+      });
+  		submitBtn.siblings('p, img').remove();
+  		submitBtn.removeAttr('disabled');
+  		submitBtn.show();
+  		$(':input', form).not(':button, :submit, :reset, :hidden').val('');
+    }, 'html');
+  });
+
   $('.flag-form').change(function(event) {
 		event.preventDefault();
 		var flag_form = $(this);
@@ -95,7 +155,7 @@ $(function() {
     } 
   });
 
-	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').click(function(event) {
+	$('.voteLink, .voteUp, .voteDown, .thumb-up, .thumb-down').live('click', function(event) {
 		event.preventDefault();
 		var span = $(this).parent();
 		$(this).parent().html("<img src=\"/images/default/spinner-tiny.gif\" />");
@@ -119,20 +179,27 @@ $(function() {
 			data: "foo", // data has to be set to explicitly set the content type
 			dataType: "json",
 			success: function(data, status) {
-				span.fadeOut("normal", function() {
-				  span.html(data.msg).fadeIn("normal");
-        });
-      },
-      error: function(xhr, status, errorThrown) {
-      	var result = $.parseJSON(xhr.responseText);
-      	if (xhr.status == 401) {
-      	  dialog_response(result.error, result.dialog);
-          span.fadeOut("normal", function() {
-            span.html(data.msg).fadeIn("normal");
+              span.fadeOut("normal", function() {
+                span.html(data.msg).fadeIn("normal");
+              });
+              if (data.trigger_oauth && data.trigger_oauth == true) {
+                if (data.canvas && data.canvas == true) {
+                  window.location = '/iframe/oauth/new';
+                } else {
+                  window.location = '/oauth/new';
+                }
+              }
+            },
+            error: function(xhr, status, errorThrown) {
+              var result = $.parseJSON(xhr.responseText);
+              if (xhr.status == 401) {
+                modal_dialog_response(result.error, result.dialog);
+                span.fadeOut("normal", function() {
+                  span.html('Please Login').fadeIn("normal");
+                });
+              }
+            }
           });
-        }
-      }
-    });
   });
 
 	$('.quick_post').click(function(event) {
@@ -171,9 +238,9 @@ $(function() {
       error: function(xhr, status, errorThrown) {
       	var result = $.parseJSON(xhr.responseText);
       	if (xhr.status == 401) {
-      	  dialog_response(result.error, result.dialog);
+          modal_dialog_response(result.error, result.dialog);
           span.fadeOut("normal", function() {
-            span.html(data.msg).fadeIn("normal");
+            span.html('Please Login').fadeIn("normal");
           });
         } else if (xhr.status == 409) {
           span.fadeOut("normal", function() {

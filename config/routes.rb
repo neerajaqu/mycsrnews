@@ -3,6 +3,12 @@ ActionController::Routing::Routes.draw do |map|
 
   # Set locale and make pretty urls
   map.filter 'locale'
+  # Determine iframe or web origin of request
+  map.filter :iframe
+
+  # Mogli
+  map.resource :oauth, :controller=>"oauth"
+  map.oauth_callback "/oauth/create", :controller=>"oauth", :action=>"create"
 
   # TEST DESIGN ROUTE
   map.test_design '/test_design.:format', :controller => 'home', :action => 'test_design'
@@ -88,7 +94,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :forums, :has_many => [:topics]
   map.resources :topics, :has_many => [:comments]
   map.resource :session
-  map.resources :home, :collection => { :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:openx_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
+  map.resources :home, :collection => { :preview_widgets => :get, :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:openx_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
   map.resources :predictions, :collection => { :index => [:get, :post],  :my_predictions => [:get, :post], :scores => [:get, :post] }
   map.resources :prediction_groups, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post], :play => [:get, :post] }, :has_many => [:comments, :prediction_questions, :flags]
   map.resources :prediction_questions, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post] }, :has_many => [ :prediction_guesses ]
@@ -106,7 +112,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :locales, :collection => { :refresh => [:get] }, :has_many => :translations
     admin.translations '/translations.:format', :controller => 'translations', :action => 'translations'
     admin.asset_translations '/asset_translations.:format', :controller => 'translations', :action => 'asset_translations'
-    admin.resources :widgets, :collection => { :save => :post }
+    admin.resources :widgets, :collection => { :save => :post, :new_widgets => :get }
     #admin.resources :custom_widgets
     #admin.resources :metadatas, :controller => 'custom_widgets'
     admin.resources :settings

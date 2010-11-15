@@ -2,4 +2,4 @@
   .share_and_hide
     %h4
       Link to this page
-    %input{:type => "text", :value => "#{path_to_self item}",:onclick =>"this.focus();this.select();" }
+    %input{:type => "text", :value => "#{path_to_self item, true}",:onclick =>"this.focus();this.select();" }

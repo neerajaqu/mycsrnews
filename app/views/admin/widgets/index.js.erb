@@ -84,21 +84,19 @@
     }
 
     function loadWidget(widget) {
-        setTimeout(function() {
-          var widget_id = getWidgetID(widget.attr('id'));
-          if (widget_id) {
-            var url = "/home/" + widget_id + "/render_widget";
-            widget.load(url, {}, function(responseText, textStatus, XMLHttpRequest) {
-              $('a', $(this)).click(function() { return false; });
-              if ($(this).hasClass('left')) {
-                $(this).append('<span class="float-toggle">Move right</span>');
-              } else if ($(this).hasClass('right')) {
-                $(this).append('<span class="float-toggle">Move left</span>');
-              } else {
-              }
-            });
-          }
-        }, 1000);
+        var widget_id = getWidgetID(widget.attr('id'));
+        if (widget_id) {
+          var url = "/home/" + widget_id + "/render_widget";
+          widget.load(url, {}, function(responseText, textStatus, XMLHttpRequest) {
+            $('a', $(this)).click(function() { return false; });
+            if ($(this).hasClass('left')) {
+              $(this).append('<span class="float-toggle">Move right</span>');
+            } else if ($(this).hasClass('right')) {
+              $(this).append('<span class="float-toggle">Move left</span>');
+            } else {
+            }
+          });
+        }
     }
 
     function deleteWidget($widget, $list, $width, $height) {
@@ -162,7 +160,7 @@
         });
     });
 
-    <% if @main_widgets %>
+    <% if false and @main_widgets %>
       <% @main_widgets.each do |mwidget| %>
         var curr_widget = $('#widget_<%= mwidget.widget.id %>');
         var width = "680px";
@@ -175,7 +173,7 @@
       <% end %>
     <% end %>
 
-    <% if @sidebar_widgets %>
+    <% if false and @sidebar_widgets %>
       <% @sidebar_widgets.each do |swidget| %>
         var curr_widget = $('#widget_<%= swidget.widget.id %>');
         deleteWidget(curr_widget, sidebar_list, '180px', '140px');

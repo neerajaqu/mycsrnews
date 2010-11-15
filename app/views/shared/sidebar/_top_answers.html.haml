@@ -2,5 +2,4 @@
 
 - cache :top_answers_html do
   - top_answers ||= Answer.active.top 5
-  - unless top_answers.empty?
-    = render :partial => 'shared/lists/small_answers_list', :locals => { :list_title => t('answers.top_title'), :item_list => top_answers }                  
+  = render :partial => 'shared/lists/small_answers_list', :locals => { :list_title => t('answers.top_title'), :item_list => top_answers }                  
