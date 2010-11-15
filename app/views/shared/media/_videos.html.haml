@@ -1,4 +1,5 @@
 -# @expects: local 'videos', 'size'
-- videos.each do |video|
-  .video
-    = embed_video video, size
+.panel_2.curtain
+  - videos.each do |video|
+    .video
+      = embed_video video, size

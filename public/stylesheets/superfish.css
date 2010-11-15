@@ -4,9 +4,15 @@
 	margin:			0;
 	padding:		0;
 	list-style:		none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #3b5998;
 }
 .sf-menu {
 	line-height:	1.0;
+	width: 958px;
+	background: url(../images/admin_menu_gradient_bg.gif) top left repeat-x #b0bdf3;
 }
 .sf-menu ul {
 	position:		absolute;
@@ -59,18 +65,17 @@ ul.sf-menu li li li.sfHover ul {
 }
 .sf-menu a {
 	border-left:	1px solid #fff;
-	border-top:		1px solid #CFDEFF;
+	border-right:	1px solid #f0f0f0;
 	padding: 		.75em 1em;
-	text-decoration:none;
+	text-decoration: none;
 }
 .sf-menu a, .sf-menu a:visited  { /* visited pseudo selector so IE6 applies text colour*/
-	color:			#13a;
+	color: #3b5998;
 }
 .sf-menu li {
-	background:		#BDD2FF;
 }
 .sf-menu li li {
-	background:		#AABDE6;
+	background:		#b0bdf3;
 }
 .sf-menu li li li {
 	background:		#9AAEDB;

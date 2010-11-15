@@ -210,6 +210,7 @@ h3
   line-height: 100%
   margin: 0 0 4px 0
   font-family: $copyFont
+  font-weight: normal
   color: $subheadColor
 
 p
@@ -410,7 +411,7 @@ li
           background: $subnavTabOffHover
           text-decoration: none
         &.selected
-          bottom: 0px
+          bottom: -1px
           margin: 0px
           background: $subnavTabOn
           border:
@@ -552,8 +553,8 @@ li
   .users
     .thumb.user
       img.moderator
-        height: 24px
-        width: 24px
+        height: 18px
+        width: 18px
         position: absolute
         left: 2px
         bottom: 2px
@@ -613,13 +614,13 @@ $ColumnCorners: none
     margin: 5px 10px
 
 /* LIST CLASSES - GLOBAL STYLES */
-.answer, .article, .comment, .content, .event, .idea, .media, .newswire, .question, .resource, .users, .item_1, .item_2
+.answer, .article, .comment, .content, .event, .idea, .media, .newswire, .question, .resource, .topic, .users, .item_1, .item_2
   display: inline-block
   width: 100%
 
 /* LIST CLASSES WITH IMAGE */
 .panel_2
-  .answer, .article, .comment, .content, .idea, .question, .resource, .users, .item_1
+  .answer, .article, .comment, .content, .idea, .question, .resource, .topic, .users, .item_1
     .itemBlock
       float: left
  
@@ -655,7 +656,7 @@ $ColumnCorners: none
 /* CURRENT USER BADGE */
 .users
   h4
-    margin-bottom: 0px
+    margin-bottom: 3px
   h3
     color: $bodyColor
   .loc
@@ -993,6 +994,22 @@ $ColumnCorners: none
             color: $refineInputHoverText
             background: $refineInputHoverBG
 
+.curtain
+  position: relative
+  background: #000 image_url("default/curtain.png") top left repeat-x
+  border-top: 1px solid #000
+  border-bottom: 1px solid #535353
+
+.panel_2
+  .video
+    min-width: 200px
+    max-width: 480px
+    margin: 2px auto
+    z-index: 1
+    object
+      z-index: 1
+      
+
 /* HOT TOPIC BAR */
 #hotTopicBar
   float: left
@@ -1034,6 +1051,9 @@ $ColumnCorners: none
 
 /* DETAILS/SHOW PAGE STYLES */
 #itemDetails
+  .tag-wrap
+    margin: 0 0 10px 0
+    font-size: 11px
   .topBar
     margin-bottom: 10px
     ul
@@ -1102,7 +1122,7 @@ blockquote
   color: $bodyColor
   font-size: $fontsize
   line-height: 130%
-  margin: 10px 0 10px 60px
+  margin: 0
   padding: 5px 10px
   .quotes
     padding: 4px 0
@@ -1115,11 +1135,14 @@ h3.btn
     color: white
     &:hover
       text-decoration: none
+
+
 .btn, .form-btn
+  padding: 3px 10px 4px 10px
+  line-height: 100%
   display: inline-block
   color: $btnTextColor
   font-weight: bold
-  padding: 3px 10px 4px 10px
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
   border-radius: 4px
@@ -1203,6 +1226,10 @@ h3.btn
 
 // Extra styles for Login Page //
 .login
+  width: 90%
+  margin: 20px 5%
+  p
+    margin-bottom: 20px
   .desc
     display: inline-block
     margin-bottom: 10px
@@ -1401,28 +1428,28 @@ h3.btn
 
 /*
 /*	root element for the scrollable.
-/*	when scrolling occurs this element stays still.
+/*	when scrolling occurs this element stays still.*/
 
 .scrollable 
-
   /* required settings */
   position: relative
   overflow: hidden
-  width: 350px
-  height: 120px
+  width: 85%
+  height: 110px
+  margin: 2px auto
 
   /* custom decorations */
-  border: 1px solid #ccc
-  background: url(/images/h300.png) repeat-x
+  border: 1px solid #636363
+  background: #000
 
 
 #scrollbox
   display: none
-  height: 150px
+  height: 110px
 /*	root element for scrollable items. Must be absolutely positioned
 /*	and it should have a extremely large width to accomodate scrollable items.
 /*	it's enough that you set the width and height for the root element and
-/*	not for this element.
+/*	not for this element.  */
 
 .scrollable .items 
   /* this cannot be too large */
@@ -1452,12 +1479,11 @@ h3.btn
 /* single scrollable item */
 .scrollable img 
   float: left
-  margin: 20px 5px 20px 21px
-  background-color: #fff
-  padding: 2px
+  margin: 15px 10px
+  background-color: #888
+  padding: 3px
   width: 100px
   height: 75px
-
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
 
@@ -1468,41 +1494,45 @@ h3.btn
   cursor: default
 
 /* this makes it possible to add next button beside scrollable */
-.scrollable 
-  float: left
 
 
 /* prev, next, prevPage and nextPage buttons */
 a.browse 
   display: block
-  width: 30px
-  height: 20px
+  width: 20px
+  height: 40px
   float: left
-  margin: 60px 10px 60px 10px
   cursor: pointer
   font-size: 1px
 
 
 /* right */
 a.right_scroll
+  position: absolute
+  right: 10px
+  top: 40px
   background: url(/images/arrow/right.png) no-repeat
   clear: right
   margin-right: 0px
   
   &:hover
-    background-position: 0px -20px
+    background-position: 0px -40px
   
   &:active
-    background-position: 0px -30px
+    background-position: 0px -40px
 
 /* left */
 a.left_scroll
+  position: absolute
+  left: 10px
+  top: 40px
+
   background: url(/images/arrow/left.png) no-repeat
   margin-left: 0px
   &:hover
-    background-position: 0px -20px
+    background-position: 0px -40px
   &:active
-    background-position: 0px -20px
+    background-position: 0px -40px
 
 /* up and down */
 a.up_scroll		
@@ -1697,6 +1727,7 @@ body div.jGrowl div.jGrowl-closer
 .mod-links-style
   display: inline-block
   position: relative
+  padding: 4px
 
 .admin-links
   display: none !important

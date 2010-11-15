@@ -17,6 +17,7 @@
 
     = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
+    = stylesheet_link_tag 'compiled/admin'
     = stylesheet_link_tag 'superfish'
     = stylesheet_link_tag 'tablesorter'
     = stylesheet_link_tag 'ui-lightness/jquery-ui-1.7.2.custom'
@@ -39,23 +40,13 @@
 
       });
 
-    %style
-      :sass
-        form.formtastic
-          display: block
-          fieldset ol li
-            display: block
-        .admin-menu-content
-          padding-left: 30px
-          padding-bottom: 30px
-        .admin-blocked
-          background-color: red
+
 
     = yield :head
     = yield :extra_javascript
 
   %body
-    #admin-content.ui-tabs-panel.ui-widget-content.ui-corner-bottom
+    #admin-content.clearfix
       .admin-menu-content
         %ul#admin-menu.sf-menu.sf-js-enabled.sf-shadow
           %li= link_to 'Dashboard', admin_path
@@ -166,8 +157,6 @@
             %li= link_to 'Users', '#users'
             %li= link_to 'User Infos', '#user_infos'
             %li= link_to 'Votes', '#votes'
-      .main-content.clear
-        .div{:style => 'clear:both'}
-        %br
+      .main-content.clearfix
         = flash_messages
         = yield

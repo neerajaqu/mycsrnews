@@ -1,11 +1,5 @@
 -# @expects: local 'audios'
-
-.panel_2
-  .panelBar.clearfix
-    %h2= t 'audios.title'
-  .itemListWrap
-    .list_items.clearfix
-      %ul
-        - audios.each do |audio|
-          .audio.clearfix
-            = embed_audio audio
+.panel_2.curtain
+  - audios.each do |audio|
+    .audio.clearfix
+      = embed_audio audio
