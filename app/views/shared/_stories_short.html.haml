@@ -1,10 +1,14 @@
-- page ||= ""
-- cache_if page.present?, "stories_short_#{page}html" do
+- page = ""
+- paginate = false
+- cache :stories_short_html, :expires_in => 15.minutes do
+  - if get_setting('widget_stories_short_max').present?
+    - story_count = get_setting('widget_stories_short_max').value
+  - else
+    - story_count = 3
   - if get_setting('exclude_articles_from_news').value
-    - contents ||= Content.top_story_items.paginate :page => params[:page], :per_page => 3, :order => "created_at desc"
+    - contents ||= Content.top_story_items.paginate :page => params[:page], :per_page => story_count, :order => "created_at desc"
   -else
-    - contents ||= Content.top_items.paginate :page => params[:page], :per_page => 3, :order => "created_at desc"
-  - paginate = false
+    - contents ||= Content.top_items.paginate :page => params[:page], :per_page => story_count, :order => "created_at desc"
   .panel_2
     .panelBar
       %h2= t('shared.stories.stories_title')
