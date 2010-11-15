@@ -85,7 +85,7 @@
     #bodyWrapper
       = fb_connect_javascript_tag
       - if @share_item
-        = init_fb_connect "XFBML", :js => :jquery do
+        - init_fb_connect "XFBML", :js => :jquery do
           = fb_connect_stream_publish(build_stream_post(@share_item), t('facebook_share'))
       - else
         = init_fb_connect "XFBML", :js => :jquery
