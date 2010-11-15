@@ -24,7 +24,6 @@
           %li
             = render :partial => 'shared/add_this'
       .itemBlock
-
         .half-panel
           - if @story.images.present?
             .thumb= image_tag @story.images.first.url(:medium)
