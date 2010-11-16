@@ -102,17 +102,18 @@ class User < ActiveRecord::Base
   end
 
   def pfeed_inbox_unread
-    return pfeed_inbox unless last_viewed_feed_item
-    pfeed_inbox.newer_than(last_viewed_feed_item)
+    return pfeed_inbox.find(:all, :limit => 3) unless last_viewed_feed_item
+    pfeed_inbox.newer_than(last_viewed_feed_item).find(:all, :limit => 3)
   end
 
   def pfeed_inbox_get_new!
     items = pfeed_inbox_unread
-    pfeed_set_last_viewed_as_delivered!
+    pfeed_set_last_viewed! items.last
     items
   end
 
   def pfeed_set_last_viewed! pfeed_item
+    return true if last_viewed_feed_item == last_delivered_feed_item
     self.update_attribute(:last_viewed_feed_item, pfeed_item)
   end
 
