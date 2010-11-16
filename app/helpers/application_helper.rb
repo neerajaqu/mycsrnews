@@ -310,7 +310,7 @@ module ApplicationHelper
       tag_list << link_to(tag.name, tag_link(tag, item), :class => css_class)
     end
 
-    tag_list.size > 0 ? tag_list.join('&nbsp;') : ''
+    tag_list.size > 0 ? tag_list.join(', ') : ''
   end
 
   def tag_link(tag, item)

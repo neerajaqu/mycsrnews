@@ -27,7 +27,11 @@
         .half-panel
           - if @story.images.present?
             .thumb= image_tag @story.images.first.url(:medium)
-            
+        - if @story.moderatable?
+          .half-panel.clearfix
+            .float_right= render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
+            .float_left= render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
+
         %h1= @story.title
         .itemMeta
           - unless @story.is_article?
@@ -41,10 +45,9 @@
               = pipe_spacer
               - if current_user.present? and @story.user == current_user
                 = link_to t('articles.edit_draft'), edit_article_path(@story.article)
-          - if @story.moderatable?
-            = render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
           - if @tags.present?
-            %h3== Tags #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
+            .tag-wrap
+              == Tags: #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
         
         - if @story.is_article?
           %p= sanitize nl2br(@story.caption)

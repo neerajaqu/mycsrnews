@@ -1,14 +1,13 @@
-<div class="panel_2 left">
+<div id="col_left">
+
+<div class="panel_2">
 	<div class="panelBar"><h2>Sign In</h2></div>
-	<div class="formBox login">
+	<div class="formBox">
+		<div class="login">
     <p>Use your Facebook account for easy access to our community</p>
-    <br /><br />
     <p><%= fb_login_button('window.location = "/users/link_user_accounts";')%></p>
-    <br /><p>&nbsp;&nbsp;
     <%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %>
     </p>
-   <br /><br />
-
     <% if APP_CONFIG['allow_web_auth'].present? and APP_CONFIG['allow_web_auth'] %>
       <% form_tag session_path do -%>
       <p><%= label_tag 'login', t('.login') %><br />
@@ -24,6 +23,7 @@
       <p><%= submit_tag t('.submit') %></p>
       <% end -%>
     <% end -%>
+		</div>
 	</div>
 </div>
-<br />
+</div>

@@ -1,5 +1,5 @@
 .flag-wrap
-  = link_to t('.flag'), '#', :class => "flag-toggle btnComment"
+  = link_to t('.flag'), '#', :class => "flag-toggle mod-links-style"
   .flag-box{:style => "display: none"}
     .flag-item
       - form_tag [flaggable, Flag.new], :class => "flag-form" do
