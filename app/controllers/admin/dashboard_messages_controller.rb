@@ -92,7 +92,7 @@ class Admin::DashboardMessagesController < AdminController
     end
     
     User.find_in_batches(:batch_size => 100) do |users|
-      Facebooker::User.multi_clear_news users.inject({}) {|arr,u| arr[u.id.to_s] = []; arr}
+      Facebooker::User.multi_clear_news users.inject({}) {|arr,u| arr[u.fb_user_id.to_s] = []; arr}
     end
          
 #    if result =~ /^[0-9]+$/
