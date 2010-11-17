@@ -10,7 +10,7 @@ class Notifier < ActionMailer::Base
     body          :message => message
     content_type  "text/html"
   end
-
+  
   def chirp_message(message)
     subject       I18n.translate('message.chirped_at', :name => message[:originator].name, :site_title => Metadata::Setting.get_setting('site_title').value)
     from          message[:email]
@@ -26,6 +26,15 @@ class Notifier < ActionMailer::Base
     recipients    message[:recipients]
     sent_on       Time.now
     body          :message => message
+    content_type  "text/html"
+  end
+
+  def flag_message(flag)
+    subject       "Flag (#{flag.flag_type}): #{flag.flaggable.item_title}"
+    from          ActionMailer::Base.smtp_settings['user_name']
+    recipients    APP_CONFIG['contact_us_recipients']
+    sent_on       Time.now
+    body          :flag => flag
     content_type  "text/html"
   end
 

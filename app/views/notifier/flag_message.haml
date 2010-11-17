@@ -1,0 +1,3 @@
+== #{@flag.user.name} flagged "#{@flag.flaggable.item_title}"
+%br
+%a{:href=> polymorphic_url(@flag.flaggable.item_link, :only_path => false) }= I18n.translate('message.visit_flagged_item')

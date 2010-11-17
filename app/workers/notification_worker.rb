@@ -18,7 +18,8 @@ class NotificationWorker
           message = {
           	  :sender => sender,
           	  :email => from_email,
-          	  :recipients => recipient.email,
+          	  :recipient => recipient,
+          	  :recipients => recipient.email,          	  
           	  :originator => pfeed_item.originator,
           	  :participant => pfeed_item.participant,
           	  :site_title => Metadata::Setting.find_setting('site_title').value
