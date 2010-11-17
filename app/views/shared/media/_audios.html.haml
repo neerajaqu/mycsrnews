@@ -1,5 +1,6 @@
 -# @expects: local 'audios'
-.panel_2.curtain
-  - audios.each do |audio|
-    .audio.clearfix
-      = embed_audio audio
+- if audios.any?
+	.panel_2.curtain
+		- audios.each do |audio|
+			.audio
+				= embed_audio audio
