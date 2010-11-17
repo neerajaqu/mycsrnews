@@ -5,7 +5,11 @@
 	<div class="formBox">
 		<div class="login">
     <p>Use your Facebook account for easy access to our community</p>
-    <p><%= fb_login_button('window.location = "/users/link_user_accounts";')%></p>
+    <% if iframe_facebook_request? %>
+      <p><%= fb_login_button("window.location = '#{link_user_accounts_users_path(:iframe => 'iframe')}';")%></p>
+    <% else %>
+      <p><%= fb_login_button("window.location = '#{link_user_accounts_users_path}';")%></p>
+    <% end %>
     <%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %>
     </p>
     <% if APP_CONFIG['allow_web_auth'].present? and APP_CONFIG['allow_web_auth'] %>
