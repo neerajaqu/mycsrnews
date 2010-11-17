@@ -22,8 +22,9 @@
               .itemBlock
                 %h2= link_to resource.title, resource_path(resource)
                 %p= linked_item_details resource
-                .profilePic= local_linked_profile_pic resource.user
+
                 .itemMeta
+                  .profilePic= local_linked_profile_pic resource.user
                   %h3= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => timeago(resource.created_at))
                   %span.btnComment== #{like_link resource} #{resource.votes_tally}
                   %span.btnComment== #{link_to t('.resources_comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}

@@ -6,7 +6,7 @@
     .panelBar
       %h2= t('.events_title')
       - if events.present? and events.first.refineable?
-        .bar_link
+        .refine_link
           = render :partial => 'shared/forms/refine_dropdown'
     .itemListWrap
       .list_items
@@ -14,8 +14,7 @@
           - events.each do |event|
             %li.eventBlock
               .eventDetailsBlock
-                -# TODO:: currently blows up layout
-                -#.thumb
+                .thumb
                   - if event.images.present?
                     = image_tag event.images.first.url(:thumb)
                   -else
@@ -25,9 +24,10 @@
                     -# %span.tag
                     -# could be used to show type of event e.g. Lecture, Party, etc.                    
                     = link_to event.name, event_path(event)
-                  %p= caption event.description
-                  .profilePic= local_linked_profile_pic event.user, :size => :square
+
+
                   .itemMeta
+                    .profilePic= local_linked_profile_pic event.user, :size => :square
                     %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => timeago(event.created_at))                  
                     %span.btnComment== #{like_link event} #{event.votes_tally}
                     %span.btnComment== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
@@ -36,16 +36,13 @@
                   %li 
                     %b== #{event.location}
                   %li
-                    == #{event.start_time.to_s :short_with_time}
-                    - unless event.end_time.nil?
-                      == - #{event.end_time.to_s :short_time} 
+                    == #{event.start_time.to_s :short_day}
                   %li
-                    .thumb
-                      - if event.images.present?
-                        = image_tag event.images.first.url(:thumb)
-                      -else
-                        = image_tag ('default/watermark.jpg')
+                    == Start: #{event.start_time.to_s :short_time}
+                  %li
+                    - unless event.end_time.nil?
+                      == End: #{event.end_time.to_s :short_time} 
+
     - if paginate
       .clearfix
         = will_paginate events
-        %br
