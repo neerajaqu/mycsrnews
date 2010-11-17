@@ -32,7 +32,7 @@ class Notifier < ActionMailer::Base
   def flag_message(flag)
     subject       "Flag (#{flag.flag_type}): #{flag.flaggable.item_title}"
     from          ActionMailer::Base.smtp_settings['user_name']
-    recipients    APP_CONFIG['contact_us_recipients']
+    recipients    (Metadata::Setting.get_setting('contact_us').try(:value) || APP_CONFIG['contact_us_recipients'])
     sent_on       Time.now
     body          :flag => flag
     content_type  "text/html"
