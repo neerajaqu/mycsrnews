@@ -9,7 +9,7 @@
       %h3= t('.posted_by', :fb_name => (local_linked_profile_name comment.user), :date => timeago(comment.created_at))
       %span.btnComment= votes_link(comment, comment.votes_tally)
       - if comment.moderatable?
-        .float_left= render :partial => 'shared/flag_form', :locals => { :flaggable => comment }
+        .float_left= render :partial => 'shared/flag_form.html', :locals => { :flaggable => comment }
 
 -#  .comment_reply
 -#    %a.commentReply{:href => '#'}= "Reply" 

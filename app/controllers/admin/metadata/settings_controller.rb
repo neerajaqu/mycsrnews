@@ -30,6 +30,9 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
       if @setting.key_name.include? "google_search_engine_id"
         WidgetSweeper.expire_item "google_search"
       end
+      if @setting.key_name.include? "widget_stories_short_max"
+        WidgetSweeper.expire_item "stories_short"
+      end
       flash[:success] = "Successfully updated your setting."
       redirect_to admin_metadata_setting_path(@setting)
     else

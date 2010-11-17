@@ -1,7 +1,6 @@
 class Admin::DashboardMessagesController < AdminController
 
   def index
-    current_facebook_user.dashboard_increment_count
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
     	:items => DashboardMessage.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => DashboardMessage,
@@ -90,9 +89,13 @@ class Admin::DashboardMessagesController < AdminController
       @dashboardMessage.each do |dashboardMessage|
         dashboardMessage.set_draft! dashboardMessage.news_id
       end
-    
     end
-      
+    
+    User.find_in_batches(:batch_size => 100) do |users|
+      Facebooker::User.multi_clear_news users.inject({}) {|arr,u| arr[u.fb_user_id.to_s] = []; arr}
+      Facebooker::User.dashboard_multi_set_count users.inject({}) {|arr,u| arr[u.fb_user_id.to_s] = 0; arr}
+    end
+         
 #    if result =~ /^[0-9]+$/
       flash[:success] = "Successfully cleared the message(s)"
       redirect_to admin_dashboard_messages_path
