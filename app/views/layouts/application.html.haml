@@ -28,7 +28,10 @@
     = javascript_include_merged :base
 
     = javascript_include_tag 'application'
-    = javascript_include_tag '/users/current'
+    - if iframe_facebook_request?
+      = javascript_include_tag '/iframe/users/current'
+    - else
+      = javascript_include_tag '/users/current'
 
     - unless @sponsor_zone_code.nil?
       = javascript_include_tag 'http://ads.trafficspaces.net/v1.22/adservice.js'

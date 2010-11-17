@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   before_filter :load_top_stories, :only => [:show]
   before_filter :ensure_authenticated_to_facebook, :only => :link_user_accounts
   before_filter :set_ad_layout, :only => [:index, :show]
+  before_filter :enable_iframe_urls, :only => [:current]
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"

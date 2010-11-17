@@ -266,8 +266,15 @@ class ApplicationController < ActionController::Base
 
   def set_iframe_status
     @enable_iframe_hack = false
+    @force_enable_iframe = false
     @iframe_status = params[:iframe] || false
     headers["Newscloud-Origin"] = @iframe_status ? 'iframe' : 'web'
+  end
+
+  def enable_iframe_urls
+    @iframe_status = 'iframe'
+    @force_enable_iframe = true
+    headers["Newscloud-Origin"] = 'static'
   end
 
   def default_url_options(options={})
@@ -298,6 +305,7 @@ class ApplicationController < ActionController::Base
     #opts[:iframe] = @iframe_status if @iframe_status and not options[:canvas] == true
     # TODO:: FIX:: Reenabled as a hack to update ajax json urls that aren't cached
     opts[:iframe] = @iframe_status if @iframe_status and (not options[:canvas] == true) and request.xhr?
+    opts[:iframe] = @iframe_status if @iframe_status and @force_enable_iframe
     opts
   end
 
