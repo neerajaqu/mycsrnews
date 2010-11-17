@@ -272,7 +272,6 @@ class ApplicationController < ActionController::Base
   end
 
   def enable_iframe_urls
-    @iframe_status = 'iframe'
     @force_enable_iframe = true
     headers["Newscloud-Origin"] = 'static'
   end
