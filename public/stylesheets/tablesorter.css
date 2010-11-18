@@ -1,29 +1,39 @@
 /* tables */
 table.tablesorter {
-	font-family:arial;
+	font-family: arial;
 	background-color: #ccc;
-	margin:10px 0pt 15px;
-	font-size: 10pt;
+	margin: 10px 0pt 15px;
+	font-size: 8pt;
 	width: 100%;
 	text-align: left;
 }
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {
-	background-color: #e6EEEE;
+	color: #fff;
+	background-color: #959595;
 	border: 1px solid #FFF;
 	font-size: 8pt;
-	padding: 4px;
+	font-weight: bold;
+	padding: 4px 6px;
 }
 table.tablesorter thead tr .header {
 	cursor: pointer;
 }
 table.tablesorter tbody td {
+	max-width: 300px;
+	border: 1px solid #FFF;
 	color: #333;
 	padding: 4px 6px;
-	background-color: #FFF;
+	background-color: #F0F0F0;
 	vertical-align: top;
+	line-height: 130%;
+	text-align: center;
 }
+
+table.tablesorter tbody td:last-child { text-align: right;}
+table.tablesorter tbody td:first-child { text-align: left;}
+
 table.tablesorter tbody tr.odd td {
-	background-color:#F0f0f0;
+	background-color:#FFF;
 }
 table.tablesorter thead tr .headerSortUp {
 	background-image: url(../images/asc.gif);

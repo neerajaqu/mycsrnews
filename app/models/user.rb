@@ -277,7 +277,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    "User: #{self.name}"
+    "#{self.name}"
   end
 
   def self.find_admin_users
