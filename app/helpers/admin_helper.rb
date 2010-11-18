@@ -86,6 +86,10 @@ module AdminHelper
     	  links << link_to('Flag', admin_flag_item_path(item.class.name.foreign_key.to_sym => item))
     	end
     end
+    if item.class.name == 'User'
+      links << link_to('FB Profile', "http://www.facebook.com/profile.php?id=#{item.fb_user_id}", :target => "_fb")
+    end
+    
     if item.class.name == 'DashboardMessage'
       links << link_to('Send', send_global_admin_dashboard_message_path(item)) unless item.sent?
       links << link_to('Clear', clear_global_admin_dashboard_message_path(item)) if item.sent?
