@@ -6,10 +6,11 @@ namespace :n2 do
 
     desc "Connect with Twitter"
     task :connect => :environment do
-      if Metadata::Setting.find_setting('twitter_oauth_consumer_key').present? && Metadata::Setting.find_setting('twitter_oauth_consumer_secret').present?
+      if Metadata::Setting.find_setting('oauth_consumer_key').present? && Metadata::Setting.find_setting('oauth_consumer_secret').present? && Metadata::Setting.find_setting('oauth_consumer_key').value != 'U6qjcn193333331AuA' && Metadata::Setting.find_setting('oauth_consumer_secret').value != 'Heu0GGaRuzn762323gg0qFGWCp923viG8Haw'
+
         puts "Your Twitter account is already configured. Remove the variables from application_settings.yml and run again to recreate them."
       else
-        if Metadata::Setting.find_setting('oauth_key').present? && Metadata::Setting.find_setting('oauth_secret').present?
+        if Metadata::Setting.find_setting('oauth_key').present? && Metadata::Setting.find_setting('oauth_secret').present? && Metadata::Setting.find_setting('oauth_key').value != 'U6qjcn193333331AuA' && Metadata::Setting.find_setting('oauth_secret').value != 'Heu0GGaRuzn762323gg0qFGWCp923viG8Haw'
           oauth = Twitter::OAuth.new(Metadata::Setting.find_setting('oauth_key').value, Metadata::Setting.find_setting('oauth_secret').value)
           request_token = oauth.request_token
           puts "please go to this twitter URL to authorize, then enter the PIN code..."
@@ -28,16 +29,18 @@ namespace :n2 do
             puts "> FAIL!"
           end
           
-          atk = Metadata::Setting.find_setting('oauth_consumer_key').value
-          ats = Metadata::Setting.find_setting('oauth_consumer_secret').value
+          atk = Metadata::Setting.find_setting('oauth_consumer_key')
+          ats = Metadata::Setting.find_setting('oauth_consumer_secret')
           
-          atk.update_attribute(:value, oauth.access_token.token)
-          ats.update_attribute(:value, oauth.access_token.secret)
+          atk.value = oauth.access_token.token
+          ats.value = oauth.access_token.secret
+          atk.save
+          ats.save
           
           puts "Your settings have been updated"
 
         else
-          puts "You need to configure your Twitter OAuth settings in application_settings.yml"
+          puts "You need to configure your Twitter OAuth settings in the admin interface."
         end
       end
     end
@@ -99,7 +102,7 @@ namespace :n2 do
           @ideas = Idea.find(:all, idea_options)
           
           oauth = Twitter::OAuth.new(Metadata::Setting.find_setting('oauth_key').value, Metadata::Setting.find_setting('oauth_secret').value)
-          oauth.authorize_from_access(Metadata::Setting.find_setting('twitter_oauth_consumer_key').value, Metadata::Setting.find_setting('twitter_oauth_consumer_secret').value)
+          oauth.authorize_from_access(Metadata::Setting.find_setting('oauth_consumer_key').value, Metadata::Setting.find_setting('oauth_consumer_secret').value)
           twitter = Twitter::Base.new(oauth)  
         
           tweet_events(twitter, @events)
