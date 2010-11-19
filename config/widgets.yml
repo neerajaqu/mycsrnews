@@ -61,6 +61,9 @@ widgets:
     top_users:
       partial: '/shared/sidebar/top_users'
       locals: 'top_users'
+    top_users_weekly:
+      partial: '/shared/sidebar/top_users_weekly'
+      locals: 'top_users_weekly'
     newest_users:
       partial: '/shared/sidebar/newest_users'
       locals: 'newest_users'
