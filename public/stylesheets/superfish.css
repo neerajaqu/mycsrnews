@@ -29,9 +29,13 @@
 	position:		relative;
 	width: 			120px;
 }
-.sf-menu li li, .sf-menu li li li {
+.sf-menu li li {
 	float: right;
 	width: 119px;
+}
+.sf-menu li li li {
+	float: left;
+	width: 120px;
 }
 .sf-menu a {
 	display:		block;
@@ -49,7 +53,7 @@ ul.sf-menu li.sfHover li ul {
 }
 ul.sf-menu li li:hover ul,
 ul.sf-menu li li.sfHover ul {
-	left:			120px; /* match ul width */
+	left:			118px; /* match ul width */
 	top:			0;
 }
 ul.sf-menu li li:hover li ul,
@@ -58,17 +62,17 @@ ul.sf-menu li li.sfHover li ul {
 }
 ul.sf-menu li li li:hover ul,
 ul.sf-menu li li li.sfHover ul {
-	left:			120px; /* match ul width */
+	left:			119px; /* match ul width */
 	top:			0;
 }
 
 /*** DEMO SKIN ***/
 .sf-menu {
 	float:			left;
-	margin-bottom:	1em;
+	margin-bottom:	40px;
 }
 .sf-menu a {
-	padding: 		.75em 1em;
+	padding: 		8px 14px;
 	text-decoration: none;
 }
 .sf-menu a, .sf-menu a:visited  { /* visited pseudo selector so IE6 applies text colour*/
@@ -76,6 +80,10 @@ ul.sf-menu li li li.sfHover ul {
 }
 .sf-menu li a {
 	border-left:	1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+.sf-menu li:first-child a {
+	border-left: none;
 }
 .sf-menu li li a, .sf-menu li li li a {
 	border: none;
@@ -85,22 +93,22 @@ ul.sf-menu li li li.sfHover ul {
 	background:		#707070;
 }
 .sf-menu li:hover {
-	background:		#676767;	
+	background:		#969696;	
 	
 }
 .sf-menu li li {
 	background:		#969696;
 }
+
 .sf-menu li li:hover{
 	background:		#8a8a8a;	
 	
 }
 .sf-menu li li li {
-	background:		#a9a9a9;
+	background:		#8a8a8a;
 }
 .sf-menu li li li:hover {
-	background:		#959595;	
-
+	background:		#707070;	
 }
 .sf-menu li.sfHover, .sf-menu a:focus, 
 .sf-menu a:hover, .sf-menu a:active {
@@ -150,15 +158,6 @@ li.sfHover > a > .sf-sub-indicator {
 
 /*** shadows for all but IE6 ***/
 .sf-shadow ul {
-	background:	url('../images/shadow.png') no-repeat bottom right;
-	width: 120px;
-	padding: 0 8px 8px 0;
-	margin: 0;
-	-moz-border-radius-bottomleft: 17px;
-	-moz-border-radius-topright: 17px;
-	-webkit-border-top-right-radius: 17px;
-	-webkit-border-bottom-left-radius: 17px;
 }
 .sf-shadow ul.sf-shadow-off {
-	background: transparent;
 }
