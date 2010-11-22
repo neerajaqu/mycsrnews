@@ -17,6 +17,12 @@
               - when "topic"
                 %li
                   = render :partial => 'shared/items/featured_topic', :locals => { :item => item, :index => index }
+              - when "question"
+                %li
+                  = render :partial => 'shared/items/featured_question', :locals => { :item => item, :index => index }
+              - when "answer"
+                %li
+                  = render :partial => 'shared/items/featured_answer', :locals => { :item => item, :index => index }
               - else
                 %li
                   = render :partial => 'shared/items/featured_generic', :locals => { :item => item, :index => index }

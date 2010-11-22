@@ -12,4 +12,5 @@
     .clearfix
     = render :partial => 'shared/comments', :locals => { :comments => answer.comments }
     = render :partial => 'shared/comment_form', :locals => { :commentable => answer }
-  
+  - if @answer.moderatable?
+    = render :partial => 'shared/moderate_form', :locals => { :moderatable => answer }
