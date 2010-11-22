@@ -76,6 +76,7 @@ custom_widgets.each do |custom_widget|
 end
 
 settings = [
+ { :key_sub_type => 'options', :key_name => 'default_site_preference',  :value => "iframe" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_features',  :value => "300" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_newswires',  :value => "750" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_widgets',  :value => "1000" },
