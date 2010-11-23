@@ -8,6 +8,7 @@ en:
   header:
     account: "Account"
     share_description: "Join the growing community at our new Facebook application!"
+    contact: "Contact"
   footer:
     contact: "Contact us"
   account_menu:
