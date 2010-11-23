@@ -8,6 +8,7 @@ en:
   header:
     account: "Account"
     share_description: "Join the growing community at our new Facebook application!"
+    contact: "Contact"
   footer:
     contact: "Contact us"
   account_menu:
@@ -328,6 +329,10 @@ en:
   no_features: "Sorry, no featured items right now"
   more_features: "View more"
   advertise_here: "advertise here"
+  contact_us:
+    title: "Contact Us"
+    message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips and feedback.</a>"
+    feedback_message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips</a> or <a href=\"{{forum_link}}\">share your feedback</a>."
   hint:
     user_profile:
       post_comments: "Comments you post will be added to your Facebook stream"

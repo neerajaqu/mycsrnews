@@ -4,9 +4,6 @@
 - if index == 0
   .featured
     %div{:class => "item_1 #{model_name}"}
-      - if thumb_type.present? and thumb_type == 'profile'
-        .thumb.user
-          = local_linked_profile_pic item.user
       .itemBlock
         %h2
           %span.ellipsis_title_2

@@ -1,0 +1,14 @@
+- cache :contact_us_html, :expires_in => 180.minutes do
+  %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('contact_us.title')
+    .list_items
+      %ul
+        %li
+          .featured
+            .item_2.idea
+              .itemBlock
+                - if ( forum = Forum.find_by_name('Feedback') )
+                  %p= t('contact_us.feedback_message', :contact_link => contact_us_path, :forum_link => forum_path(forum))
+                - else
+                  %p= t('contact_us.message', :contact_link => contact_us_path)

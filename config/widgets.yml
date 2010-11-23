@@ -58,6 +58,9 @@ widgets:
     welcome_panel:
       partial: '/shared/sidebar/welcome_panel'
       locals: 'welcome_message'
+    contact_us:
+      partial: '/shared/sidebar/contact_us'
+      locals: 'contact_us'
     top_users:
       partial: '/shared/sidebar/top_users'
       locals: 'top_users'
