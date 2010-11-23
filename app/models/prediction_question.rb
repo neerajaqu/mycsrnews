@@ -4,11 +4,11 @@ class PredictionQuestion < ActiveRecord::Base
   acts_as_featured_item
   acts_as_moderatable
   acts_as_wall_postable
+  acts_as_tweetable
 
   belongs_to  :user
   belongs_to  :prediction_group
   has_many    :prediction_guesses
-  has_one :tweeted_item, :as => :item
 
   attr_accessor :tags_string
 

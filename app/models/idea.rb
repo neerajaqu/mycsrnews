@@ -7,6 +7,7 @@ class Idea < ActiveRecord::Base
   acts_as_media_item
   acts_as_refineable
   acts_as_wall_postable
+  acts_as_tweetable
   
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
@@ -14,7 +15,6 @@ class Idea < ActiveRecord::Base
   belongs_to :user
   belongs_to :idea_board
   has_many :comments, :as => :commentable
-  has_one :tweeted_item, :as => :item
   attr_accessor :tags_string
 
   has_friendly_id :title, :use_slug => true

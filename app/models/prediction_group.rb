@@ -6,10 +6,10 @@ class PredictionGroup < ActiveRecord::Base
   acts_as_media_item
   acts_as_refineable
   acts_as_wall_postable
+  acts_as_tweetable
 
   belongs_to  :user
   has_many    :prediction_questions
-  has_one :tweeted_item, :as => :item
   has_many :comments, :as => :commentable
 
   attr_accessor :tags_string

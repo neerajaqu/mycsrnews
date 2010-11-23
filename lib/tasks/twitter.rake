@@ -47,7 +47,7 @@ namespace :n2 do
     
     desc "Post hot items to Twitter"
     task :post_hot_items => :environment do
-      default_url_options[:host] = Metadata::Setting.find_setting('default_host').value
+      default_url_options[:host] = APP_CONFIG['base_url'].sub(%r{^https?://}, '')
 
       if Metadata::Setting.find_setting( 'tweet_popular_items').value
         if !Metadata::Setting.find_setting('oauth_consumer_key').present? && !Metadata::Setting.find_setting('oauth_consumer_secret').present?
@@ -81,7 +81,7 @@ namespace :n2 do
                 :limit => Metadata::Setting.find_setting('tweet_stories_limit').value,
                 :order => "contents.created_at desc"
             }).merge({:include => [:tweeted_item], :conditions=>"tweeted_items.item_id IS NULL"})
-          @stories = Content.find(:all, content_options)
+          @stories = Content.find(:all, story_options)
                 
           question_options = Question.options_for_tally(
             {   :at_least => Metadata::Setting.find_setting('tweet_questions_min_votes').value, 

@@ -8,9 +8,9 @@ class Article < ActiveRecord::Base
   acts_as_refineable
   acts_as_wall_postable
   acts_as_relatable
+  acts_as_tweetable
 
   has_one :content
-  has_one :tweeted_item, :as => :item
   belongs_to :author, :class_name => "User"
 
   named_scope :published, { :conditions => ["is_draft = 0"] }

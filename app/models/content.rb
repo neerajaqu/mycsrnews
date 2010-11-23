@@ -10,6 +10,7 @@ class Content < ActiveRecord::Base
   acts_as_wall_postable
   acts_as_relatable
   acts_as_scorable
+  acts_as_tweetable
 
   belongs_to :user
   belongs_to :article
@@ -132,6 +133,10 @@ class Content < ActiveRecord::Base
 
   def scoreable_user
     is_article? ? article.author : user
+  end
+
+  def self.tweet_setting_group
+    'stories'
   end
   
   private

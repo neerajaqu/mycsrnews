@@ -11,10 +11,6 @@ module Newscloud
 
     module ClassMethods
 
-      def refineable?
-        false
-      end
-
       def top_article_items limit = 100
         table = self.name.tableize
         now = Time.now.utc.strftime("%Y-%m-%d %H:%M:%S")
@@ -51,6 +47,9 @@ module Newscloud
         #self.find_by_sql %{SELECT ((1 + (votes_tally * 2)) / (((UNIX_TIMESTAMP("2010-03-23 14:20:24") - UNIX_TIMESTAMP(created_at)) / 3600) + 5)) AS item_score, #{table}.* FROM #{table} JOIN (SELECT ID FROM #{table} ORDER BY created_at DESC LIMIT 100) AS sub_#{table} ON #{table}.id = sub_#{table}.id ORDER BY item_score DESC LIMIT #{limit};}
       end
 
+      def refineable?() false end
+      def tweetable?() false end
+
     end
 
     module InstanceMethods
@@ -67,6 +66,7 @@ module Newscloud
       def audio_item?() false end
       def downvoteable?() false end
       def scorable?() false end
+      def tweetable?() false end
 
       # model unique identifier
       def muid

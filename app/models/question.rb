@@ -7,10 +7,10 @@ class Question < ActiveRecord::Base
   acts_as_media_item
   acts_as_refineable
   acts_as_wall_postable
+  acts_as_tweetable
 
   belongs_to  :user
   has_many    :answers
-  has_one :tweeted_item, :as => :item
 
   validates_presence_of :question
 

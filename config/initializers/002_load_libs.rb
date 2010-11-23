@@ -26,6 +26,10 @@ ActiveRecord::Base.send :include, Newscloud::Acts::Refineable
 require "#{RAILS_ROOT}/lib/acts_as_wall_postable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::WallPostable
 
+# Load acts_as_tweetable mixin
+require "#{RAILS_ROOT}/lib/acts_as_tweetable.rb"
+ActiveRecord::Base.send :include, Newscloud::Acts::Tweetable
+
 # Load acts_as_scorable mixin
 require "#{RAILS_ROOT}/lib/acts_as_scorable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Scorable
@@ -38,3 +42,4 @@ require "#{RAILS_ROOT}/lib/zvent_gem_addon.rb"
 
 require "#{RAILS_ROOT}/lib/string_extensions.rb"
 require "#{RAILS_ROOT}/lib/feed_parser.rb"
+require "#{RAILS_ROOT}/lib/tweeter.rb"

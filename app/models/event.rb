@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   acts_as_refineable
   acts_as_wall_postable
   acts_as_relatable
+  acts_as_tweetable
  
   named_scope :newest, lambda { |*args| { :conditions => ["start_time > now()"], :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1 AND start_time > now()"],:order => ["created_at desc"], :limit => (args.first || 3)} }
@@ -15,7 +16,6 @@ class Event < ActiveRecord::Base
   belongs_to :user
 
   has_many :comments, :as => :commentable
-  has_one :tweeted_item, :as => :item
   attr_accessor :tags_string
 
   has_friendly_id :name, :use_slug => true

@@ -99,6 +99,8 @@ settings = [
  { :key_sub_type => 'twitter', :key_name => 'oauth_secret', :value => (APP_CONFIG['twitter_oauth_secret'] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_consumer_key', :value => (APP_CONFIG['twitter_oauth_key'] || "U6qjcn193333331AuA" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_consumer_secret', :value => (APP_CONFIG['twitter_oauth_secret'] || "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw" ) },
+ { :key_sub_type => 'twitter', :key_name => 'tweet_default_min_votes', :value => (APP_CONFIG['tweet_default_min_votes'] || "15" ) },
+ { :key_sub_type => 'twitter', :key_name => 'tweet_default_limit', :value => (APP_CONFIG['tweet_default_limit'] || "3" ) }, 
  { :key_sub_type => 'twitter', :key_name => 'tweet_events_min_votes', :value => (APP_CONFIG['tweet_events_min_votes'] || "15" ) },
  { :key_sub_type => 'twitter', :key_name => 'tweet_events_limit', :value => (APP_CONFIG['tweet_events_limit'] || "3" ) }, 
  { :key_sub_type => 'twitter', :key_name => 'tweet_stories_min_votes', :value => (APP_CONFIG['tweet_stories_min_votes'] || "15" ) },
