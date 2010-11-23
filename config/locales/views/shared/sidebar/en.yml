@@ -18,6 +18,7 @@ en:
 
       top_users:
         top_users_karma_title: "Top Users"
+        top_users_weekly_title: "This Week's Top Users"
 
       top_ideas:
         top_ideas_title: "Top Ideas"

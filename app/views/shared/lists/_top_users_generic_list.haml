@@ -1,0 +1,18 @@
+-# @expects: local 'list_title, scores'
+- list_title ||= "Top Users"
+%div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+  .panelBar
+    %h2= list_title
+  .list_items
+    %ul
+      - scores.each do |score|
+        - user = score.user
+        %li
+          .itemBlock
+            .profilePic= local_linked_profile_pic user
+            .float_left
+              %h4== #{local_linked_profile_name(user)}
+              -#TODO:: add something in here
+              -#%h3= "City and State"
+            .float_right
+              %h4.userPoints= score.total_score

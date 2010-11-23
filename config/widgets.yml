@@ -61,6 +61,9 @@ widgets:
     top_users:
       partial: '/shared/sidebar/top_users'
       locals: 'top_users'
+    top_users_weekly:
+      partial: '/shared/sidebar/top_users_weekly'
+      locals: 'top_users_weekly'
     newest_users:
       partial: '/shared/sidebar/newest_users'
       locals: 'newest_users'
@@ -116,6 +119,10 @@ widgets:
     featured_comment:
       partial: '/shared/sidebar/featured_comment'
       locals: 'featured_comments'        
+    featured_question:
+      partial: '/shared/sidebar/featured_question'
+    featured_answer:
+      partial: '/shared/sidebar/featured_answer'
     blog_roll:
       partial: '/shared/sidebar/blog_roll'
       locals: 'blog_roll'              
@@ -143,10 +150,6 @@ widgets:
       partial: '/shared/sidebar/top_questions'
     newest_questions:
       partial: '/shared/sidebar/newest_questions'
-    featured_question:
-      partial: '/shared/sidebar/featured_question'
-    featured_answer:
-      partial: '/shared/sidebar/featured_answer'
     latest_activity:
       partial: '/shared/sidebar/latest_pfeeds'
     google_search:

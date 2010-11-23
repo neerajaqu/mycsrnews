@@ -1,19 +1,2 @@
--# @expects: local 'answer'
-
-- cache :featured_answers_html, :expires_in => 15.minutes do
-  - featured_answers ||= Answer.featured
-  - unless featured_answers.empty?
-    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('.featured_answer_title')
-      .list_items
-        %ul
-          - featured_answers.each do |answer|
-            %li
-              .itemBlock
-                %h4= link_to caption(answer.answer,80), question_path(answer.question)
-                .profilePic= local_linked_profile_pic answer.user
-                .itemMeta
-                  %h3= t('asked_by', :fb_name => local_linked_profile_name(answer.user), :date => timeago(answer.created_at))
-                  %span.btnComment== #{like_link answer} #{answer.votes_tally}
-                  %span.btnComment== #{link_to answer_comments_translate(answer.comments_count), question_path(answer.question, :anchor => "commentListTop")}
+- item_list = Answer.featured.active
+= render :partial => 'shared/lists/featured_generic_list', :locals => { :model_name => "Answer", :model_home => questions_path, :list_title => t('.featured_answer_title'), :item_list => item_list}
