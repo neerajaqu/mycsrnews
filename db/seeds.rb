@@ -12,6 +12,10 @@ debug = Rails.env.development?
 # Initial Topic Sections
 IdeaBoard.create!({:name => 'General', :section =>'general',:description=>'General ideas.'}) unless IdeaBoard.find_by_name_and_section('General', 'general')
 ResourceSection.create!({:name => 'General', :section =>'general',:description=>'General links.'}) unless ResourceSection.find_by_name_and_section('General', 'general')
+if Forum.count == 0
+  Forum.create!({:name => 'General', :description=>'Talk about whatever you want. This area is for open discussion.'}) unless Forum.find_by_name('General')
+  Forum.create!({:name => 'Feedback', :description=>"Tell us how we're doing. Share your thoughts about #{APP_CONFIG['site_title']}!"}) unless Forum.find_by_name('Feedback')
+end
 #todo - fix (User.admins.last || nil) - creates fb user as nil, bombs out in fb helper for profilepic
 #PredictionGroup.create!({:title => 'Uncategorized', :section => 'uncategorized', :description => 'These questions are uncategorized'}) unless PredictionGroup.find_by_title_and_section('Uncategorized','uncategorized')
 

@@ -9,6 +9,8 @@
       .account-dropdown
         = link_to t('header.account'), account_menu_path, :class => "account-toggle"
         .account-links{:style => 'display:none'}
+      = pipe_spacer
+      = link_to t('header.contact'), contact_us_path        
       %span.admin-links
         = pipe_spacer
         - if iframe_facebook_request?
