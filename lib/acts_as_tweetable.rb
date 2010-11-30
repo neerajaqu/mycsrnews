@@ -39,7 +39,7 @@ module Newscloud
                   :order    => "#{self.table_name}.created_at desc"
               }).merge({:include => [:tweeted_item], :conditions=>"votes.voteable_type = '#{self.name}' AND tweeted_items.item_id IS NULL"})
             self.find(:all, hot_options)
-          rescue e
+          rescue Exception => e
             Rails.logger.error("ERROR: Tweet Hot Items error:: #{e}")
           end
         end
