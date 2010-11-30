@@ -60,6 +60,8 @@
             = form.commit_button :button_html => { :class => "btn_1" }
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
+  - if @question.moderatable?
+    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @question }
   = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
 
 #col_right
