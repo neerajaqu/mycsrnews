@@ -20,18 +20,19 @@
         .thumb
           - if @resource.images.present?
             = image_tag @resource.images.first.url(:medium)
+        - if @resource.moderatable?
+          .mod-panel
+            .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
+            .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
         %h1= @resource.title
-        .itemMeta
-          %h3
-            = t('posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => timeago(@resource.created_at))
-            - if @resource.resource_section.present?
-              = t('in')
-              = link_to(@resource.resource_section.name, @resource.resource_section)
-          - if @tags.present?
-            %h3== #{tag_list(@tags,@resource)}
-          - if @resource.moderatable?
-            = render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
-      %div.itemBlock= sanitize @resource.details
+        %h3
+          = t('posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => timeago(@resource.created_at))
+          - if @resource.resource_section.present?
+            = t('in')
+            = link_to(@resource.resource_section.name, @resource.resource_section)
+        - if @tags.present?
+          %h3== #{tag_list(@tags,@resource)}
+        = sanitize @resource.details
       - if @resource.url.present?
         %div.float_left= link_to t('.visit_url'), @resource.url, :target => "_resource", :class => "btn"
     - if @resource.media_item?
@@ -42,8 +43,6 @@
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @resource, :title => @resource.title }
-  - if @resource.moderatable?
-    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
 
 #col_right
   - if @sponsor_zone_code
