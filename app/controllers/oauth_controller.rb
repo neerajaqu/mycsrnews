@@ -12,7 +12,7 @@ class OauthController < ApplicationController
   
   def create    
     if params[:error].present?
-      if params[:error][:type] == "OAuthAccessDeniedException"
+      if params[:error][:type] == "OAuthAccessDeniedException" or params[:error][:error_reason] == "user_denied"
         current_user.update_attribute(:fb_oauth_denied_at, Time.now)
       else
         Rails.logger.error "***FB OAUTH ERROR*** #{params.inspect}"
