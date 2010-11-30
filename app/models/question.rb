@@ -15,6 +15,8 @@ class Question < ActiveRecord::Base
   validates_presence_of :question
 
   attr_accessor :tags_string
+  
+  has_friendly_id :question, :use_slug => true
 
   named_scope :top, lambda { |*args| { :order => ["(2*answers_count+votes_tally) desc, created_at desc"], :limit => (args.first || 10)} }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
