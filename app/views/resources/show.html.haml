@@ -17,8 +17,8 @@
           %li
             = render :partial => 'shared/add_this'
       .itemBlock
-        .thumb
-          - if @resource.images.present?
+        - if @resource.images.present?
+          .thumb
             = image_tag @resource.images.first.url(:medium)
         - if @resource.moderatable?
           .mod-panel
