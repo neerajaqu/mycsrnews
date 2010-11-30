@@ -1,6 +1,6 @@
 #content
   #admin-actions
-    = link_to 'Return to template selector', admin_featured_items_path
+    = link_to 'Return to template selector', admin_featured_items_path, :class=>"admin-btn"
     %button#save-button.admin-btn.float_right{:type => "button"} Save Featured Stories
 
 - case @template_id
@@ -23,15 +23,19 @@
         .drop-zone
           #section-1-primary.primary-drop
             %p Drop Primary Item 1 Here
+          #section1-primary-title
+          .clear
           #section-1-secondary1.secondary-drop.clear
             %p Drop Secondary Item 1 Here
-            .clear
+          #section1-secondary1-title
+          .clear
           #section-1-secondary2.secondary-drop
             %p Drop Secondary Item 2 Here
-            .clear
-        #section1-primary-title
-        #section1-secondary1-title
-        #section1-secondary2-title
+          #section1-secondary2-title
+          .clear
+
+
+
   - when "template_3"
     %h2 Template Builder for Template 3
     .template-builder-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
@@ -41,11 +45,15 @@
         .drop-zone
           #section-1-primary.primary-drop
             %p Drop Primary Item 1 Here
+          #section1-primary-title
+          .clear
           #section-2-primary.primary-drop
             %p Drop Primary Item 2 Here
-            .clear
-        #section1-primary-title
-        #section2-primary-title
+          #section2-primary-title
+          .clear
+
+
+
   - when "template_4"
     %h2 Template Builder for Template 4
     .template-builder-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
@@ -55,11 +63,14 @@
         .drop-zone
           #section-1-primary.primary-drop
             %p Drop Primary Item 1 Here
+          #section1-primary-title
+          .clear
           #section-2-primary.primary-drop
             %p Drop Primary Item 2 Here
-            .clear
-        #section1-primary-title
-        #section2-primary-title
+          #section2-primary-title
+          .clear
+        
+
   - when "template_5"
     %h2 Template Builder for 3 Pic Skybox
     .template-builder-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
@@ -69,16 +80,19 @@
         .drop-zone
           #section-1-primary.primary-drop
             %p Drop First Item
-            .clear
+          #section1-primary-title
+          .clear
           #section-2-primary.primary-drop
             %p Drop Second Item
-            .clear
+          #section2-primary-title
+          .clear
           #section-3-primary.primary-drop
             %p Drop Third Item
-            .clear
-        #section1-primary-title
-        #section2-primary-title
-        #section3-primary-title
+          #section3-primary-title
+          .clear
+
+
+
   - when "template_6"
     %h2 Template Builder for Template 6
     .template-builder-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
@@ -89,6 +103,7 @@
           #section-1-primary.primary-drop
             %p Drop Primary Item 1 Here
           #section1-primary-title
+
   - when "template_7"
     %h2 Template Builder for Skyboxes
     .template-builder-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
@@ -98,20 +113,23 @@
         .drop-zone
           #section-1-primary.primary-drop
             %p Drop First Item
-            .clear
+          #section1-primary-title
+          .clear
           #section-2-primary.primary-drop
             %p Drop Second Item
-            .clear
+          #section2-primary-title
+          .clear
           #section-3-primary.primary-drop
             %p Drop Third Item
-            .clear
+          #section3-primary-title
+          .clear
           #section-4-primary.primary-drop
             %p Drop Fourth Item
-            .clear
-        #section1-primary-title
-        #section2-primary-title
-        #section3-primary-title
-        #section4-primary-title
+          #section4-primary-title
+          .clear
+
+
+
   - when "template_8"
     %h2 Large one pic headline
     .template-builder-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
@@ -122,6 +140,9 @@
           #section-1-primary.primary-drop
             %p Drop Primary Item 1 Here
           #section1-primary-title
+
+
+
   - when "template_9"
     %h2 Scrollable version of template1
     .template-builder-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
@@ -131,28 +152,31 @@
         .drop-zone
           #section-1-primary.primary-drop
             %p Drop First Item
-            .clear
+          #section1-primary-title
+          .clear
           #section-2-primary.primary-drop
             %p Drop Second Item
-            .clear
+          #section2-primary-title
+          .clear
           #section-3-primary.primary-drop
             %p Drop Third Item
-            .clear
+          #section3-primary-title
+          .clear
           #section-4-primary.primary-drop
             %p Drop Fourth Item
-            .clear
+          #section4-primary-title
+          .clear
           #section-5-primary.primary-drop
             %p Drop Fifth Item
-            .clear
+          #section5-primary-title
+          .clear
           #section-6-primary.primary-drop
             %p Drop Sixth Item
-            .clear
-        #section1-primary-title
-        #section2-primary-title
-        #section3-primary-title
-        #section4-primary-title
-        #section5-primary-title
-        #section6-primary-title
+          #section6-primary-title
+          .clear
+
+
+
   - when "template_32"
     %h2 Scrollable version of template1
     .template-builder-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
@@ -162,28 +186,31 @@
         .drop-zone
           #section-1-primary.primary-drop
             %p Drop First Item
-            .clear
+          #section1-primary-title
+          .clear
           #section-2-primary.primary-drop
             %p Drop Second Item
-            .clear
+          #section2-primary-title
+          .clear
           #section-3-primary.primary-drop
             %p Drop Third Item
-            .clear
+          #section3-primary-title
+          .clear
           #section-4-primary.primary-drop
             %p Drop Fourth Item
-            .clear
+          #section4-primary-title
+          .clear
           #section-5-primary.primary-drop
             %p Drop Fifth Item
-            .clear
+          #section5-primary-title
+          .clear
           #section-6-primary.primary-drop
             %p Drop Sixth Item
-            .clear
-        #section1-primary-title
-        #section2-primary-title
-        #section3-primary-title
-        #section4-primary-title
-        #section5-primary-title
-        #section6-primary-title
+          #section6-primary-title
+          .clear
+
+
+
   - when "template_52"
     %h2 Scrollable version of template5
     .template-builder-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
@@ -193,28 +220,28 @@
         .drop-zone
           #section-1-primary.primary-drop
             %p Drop First Item
-            .clear
+          #section1-primary-title
+          .clear
           #section-2-primary.primary-drop
             %p Drop Second Item
-            .clear
+          #section2-primary-title
+          .clear
           #section-3-primary.primary-drop
             %p Drop Third Item
-            .clear
+          #section3-primary-title
+          .clear
           #section-4-primary.primary-drop
             %p Drop Fourth Item
-            .clear
+          #section4-primary-title
+          .clear
           #section-5-primary.primary-drop
             %p Drop Fifth Item
-            .clear
+          #section5-primary-title
+          .clear
           #section-6-primary.primary-drop
             %p Drop Sixth Item
-            .clear
-        #section1-primary-title
-        #section2-primary-title
-        #section3-primary-title
-        #section4-primary-title
-        #section5-primary-title
-        #section6-primary-title        
+          #section6-primary-title
+          .clear     
   
 .template-item-selector-column.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
   %h2 Items
