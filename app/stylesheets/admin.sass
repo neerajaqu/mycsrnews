@@ -1,8 +1,9 @@
 /*** ADMIN PANEL STYLES***/
 
 h1, h2, h3, h4, h5, p, ul 
-  margin: 10px 20px
-
+  margin: 10px 0
+h1, h2, h3, h4, h5
+  margin: 10px auto
 h1 
   font-size: 25px
 
@@ -13,20 +14,126 @@ h3
 h4 
   font-size: 15px
 
+p, ul
+  margin: 0 auto 20px
+
 a 
   color: #3B5998
 
 li
   margin-bottom: 10px
-  margin-left: 20px
+  margin-left: 30px
+  list-style: disc
+
+body 
+  background: #f0f0f0
+  width: 982px
+
+#admin-content 
+  padding: 0 10px 10px
+  background: #fff
+  border: 1px solid #ccc
+  border-top-width: 0px
+
+#admin-actions
+  padding: 6px 0
+  display: inline-block
+  background: #f0f0f0
+  width: 100%
+  margin-bottom: 20px
+
 
 .main-content 
   width: 100%
 
+.admin-btn
+  color: #fff
+  display: inline-block
+  padding: 4px 14px
+  border: 1px solid #104839
+  background: #169f7a image_url("admin/btn-off.gif") left center repeat-x
+  font-weight: bold
+  text-decoration: none
+  -moz-border-radius: 12px
+  -webkit-border-radius: 12px
+  margin: 0 10px
+  &:hover
+    color: #fff
+    text-decoration: none
+    border: 1px solid #104839
+    font-weight: bold
+    background: #22876c image_url("admin/btn-on.gif") left center repeat-x
+  &.save
+    background: #22876c image_url("admin/btn-on.gif") left center repeat-x
+    &:hover
+      background: #22876c image_url("admin/btn-on.gif") left center repeat-x
+
+
+
+
+/* FRONT PAGE LAYOUT BUILDER STYLES */
+.main-content
+  #widget-tabs
+    float: left
+    width: 450px
+  #widget-tabs-destination
+    float: left
+    width: 450px
+    min-height: 250px
+    margin-left: 50px
+  ul
+    margin: 0
+  li.widget
+    margin: 10px 10px
+    padding:  8px 0 20px 8px
+    &:hover
+      cursor: move
+
+#widget-tabs-destination, #widget-tabs
+  li
+    list-style: none
+
+  h1, h2, h3, h4, h5
+    margin: 10px
+
+
+
+
+
+/* FEATURED WIDGETS STYLES */
+.template-column
+  width: 306px
+  float: left
+  margin-right: 40px
+
+.template-builder-column
+  width: 400px
+  float: left
+  margin-right: 25px
+  padding: 10px
+  img
+    max-width: 400px
+
+.template-item-selector-column
+  width: 466px
+  margin-left: 25px
+  float: left
+  padding: 10px
+
+.template-builder
+  display: inline-block
+  width: 378px
+  border: 1px solid #ccc
+  background: #f0f0f0
+  padding: 10px 10px 0
+  h1
+    font-size: 14px
+    margin: 0
+
+
 .featured-item-templates
   width: 100%
   display: inline-block
-  margin-top: 40px
 
 .clear
   clear: both
@@ -35,61 +142,49 @@ li
   border: 1px solid #ccc
   padding: 2px
   width: auto
-  margin-bottom: 25px
+  margin: 0 0 25px
   float: left
-
+  display: inline-block
+  &:hover
+    background: #ccc
   img
-    width: 290px
-
-.template-column
-  width: 300px
-  float: left
-
-.template-builder-column
-  margin-top: 15px
-  width: 500px
-  float: left
-  margin-left: 25px
-
-.template-item-selector-column
-  width: 400px
-  margin-right: 25px
-  float: left
-
-.template-builder
-  width: 450px
-  border: 1px solid black
-  padding: 10px
+    width: 300px
 
 #template_1
-  height: 150px
 
 #template_2.template-builder
   height: 250px
 
 .primary-drop
-  border: 2px solid #aaaaaa
+  border: 2px solid #ccc
   background-color: #dddddd
   color: #666666
   text-align: center
-  width: 180px
-  height: 130px
+  width: 100px
+  height: 75px
   float: left
-  margin: 0 10px 0 0
+  margin: 0 10px 10px 0
+
+  p
+    font-size: 11px
+    text-align: center
+    margin: 10px 4px 0
+    font-weight: bold
+    
 
   h1 h2 h3 h4 h5
     float: left
   img
-    width: 170px
-    height: 120px
+    width: 100px
+    height: 75px
 
 .secondary-drop
   border: 2px solid #aaaaaa
   background-color: #dddddd
   color: #666666
   text-align: center
-  width: 80px
-  height: 80px
+  min-width: 80px
+  min-height: 80px
   float: left
   margin: 10px 10px 0 0
 
@@ -103,9 +198,12 @@ li
   border: 2px solid red
 
 #items
-  width: 400px
+  .pagination
+    font-size: 11px
 
 .items-list
+  width: 100%
+  display: inline-block
   li
     float: left
     width: 100px
@@ -125,3 +223,10 @@ li
       width: 100%
       max-height: 100px
       cursor: move
+
+.drop-zone
+  margin: 0
+  padding: 0 
+  display: inline-block
+  width: 100%
+  height: 100%

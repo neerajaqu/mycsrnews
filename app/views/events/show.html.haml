@@ -22,40 +22,39 @@
             = image_tag @event.images.first.url(:medium)
           - if !@event.images.present? && @event.pic.present?
             = image_tag @event.pic
+        - if @event.moderatable?
+          .mod-panel
+            .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @event }
+            .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
         %h1= @event.name
-        .itemMeta
-          .eventMetaBlock
-            .eventMeta.time
+        %h3
+          = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => timeago(@event.created_at))
+        - if @tags.present?
+          .tag-wrap
+            %h3== Tags: #{tag_list(@tags,@event)}
+        .eventMetaBlock
+          .eventMeta.time
+            %h4
+              = t('.date_time') 
+            %h3 
+              == #{@event.start_time.to_s :short_with_time}
+              - if @event.end_time.present?
+                == - #{@event.end_time.to_s :short_time} 
+          .eventMeta.location
+            %h4
+              = t('.location') 
+            %h3
+              =h @event.location
+              %br
+              =h @event.street
+              %br
+              == #{h @event.city}, #{h @event.state}
+          -# only show if both event urls are present
+          - if @event.alt_url.present? and @event.url.present?
+            .eventMeta.website
               %h4
-                = t('.date_time') 
-              %h3 
-                == #{@event.start_time.to_s :short_with_time}
-                - if @event.end_time.present?
-                  == - #{@event.end_time.to_s :short_time} 
-            .eventMeta.location
-              %h4
-                = t('.location') 
-              %h3
-                =h @event.location
-                %br
-                =h @event.street
-                %br
-                == #{h @event.city}, #{h @event.state}
-            - if @tags.present?
-              .eventMeta.tags
-                %h4 Tags:
-                %h3==#{tag_list(@tags,@event)}
-            -# only show if both event urls are present
-            - if @event.alt_url.present? and @event.url.present?
-              .eventMeta.website
-                %h4
-                  = link_to t('.website'), @event.get_url
-          %h3
-            = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => timeago(@event.created_at))
-          = link_to(t('.view'), @event.get_view_button_url, :class=>"btn", :target=>"_new") if @event.url.present? or @event.alt_url.present?
-          - if @event.moderatable?
-            = render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
-
+                = link_to t('.website'), @event.get_url
+            = link_to(t('.view'), @event.get_view_button_url, :class=>"btn", :target=>"_new") if @event.url.present? or @event.alt_url.present?
       %div.itemBlock= sanitize @event.description
     - if @event.media_item?
       = render_media_items @event
@@ -65,8 +64,6 @@
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @event, :title =>@event.name }
-  - if @event.moderatable?
-    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @event }
 #col_right
   - if @sponsor_zone_code
     = render :partial => 'shared/ads/sponsor_zone_wrapper'

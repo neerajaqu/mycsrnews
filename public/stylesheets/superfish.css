@@ -7,20 +7,19 @@
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	font-weight: bold;
-	color: #3b5998;
+	color: #fff;
 }
 .sf-menu {
 	line-height:	1.0;
-	width: 958px;
-	background: url(../images/admin_menu_gradient_bg.gif) top left repeat-x #b0bdf3;
+	width: 960px;
 }
 .sf-menu ul {
 	position:		absolute;
 	top:			-999em;
-	width:			10em; /* left offset of submenus need to match (see below) */
+	width:			120px; /* left offset of submenus need to match (see below) */
 }
 .sf-menu ul li {
-	width:			100%;
+	width:			120px;
 }
 .sf-menu li:hover {
 	visibility:		inherit; /* fixes IE7 'sticky bug' */
@@ -28,6 +27,15 @@
 .sf-menu li {
 	float:			left;
 	position:		relative;
+	width: 			120px;
+}
+.sf-menu li li {
+	float: right;
+	width: 119px;
+}
+.sf-menu li li li {
+	float: left;
+	width: 120px;
 }
 .sf-menu a {
 	display:		block;
@@ -45,7 +53,7 @@ ul.sf-menu li.sfHover li ul {
 }
 ul.sf-menu li li:hover ul,
 ul.sf-menu li li.sfHover ul {
-	left:			10em; /* match ul width */
+	left:			118px; /* match ul width */
 	top:			0;
 }
 ul.sf-menu li li:hover li ul,
@@ -54,35 +62,56 @@ ul.sf-menu li li.sfHover li ul {
 }
 ul.sf-menu li li li:hover ul,
 ul.sf-menu li li li.sfHover ul {
-	left:			10em; /* match ul width */
+	left:			119px; /* match ul width */
 	top:			0;
 }
 
 /*** DEMO SKIN ***/
 .sf-menu {
 	float:			left;
-	margin-bottom:	1em;
+	margin-bottom:	40px;
 }
 .sf-menu a {
-	border-left:	1px solid #fff;
-	border-right:	1px solid #f0f0f0;
-	padding: 		.75em 1em;
+	padding: 		8px 14px;
 	text-decoration: none;
 }
 .sf-menu a, .sf-menu a:visited  { /* visited pseudo selector so IE6 applies text colour*/
-	color: #3b5998;
+	color: #fff;
+}
+.sf-menu li a {
+	border-left:	1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+.sf-menu li:first-child a {
+	border-left: none;
+}
+.sf-menu li li a, .sf-menu li li li a {
+	border: none;
+	
 }
 .sf-menu li {
+	background:		#707070;
+}
+.sf-menu li:hover {
+	background:		#969696;	
+	
 }
 .sf-menu li li {
-	background:		#b0bdf3;
+	background:		#969696;
+}
+
+.sf-menu li li:hover{
+	background:		#8a8a8a;	
+	
 }
 .sf-menu li li li {
-	background:		#9AAEDB;
+	background:		#8a8a8a;
 }
-.sf-menu li:hover, .sf-menu li.sfHover,
-.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
-	background:		#CFDEFF;
+.sf-menu li li li:hover {
+	background:		#707070;	
+}
+.sf-menu li.sfHover, .sf-menu a:focus, 
+.sf-menu a:hover, .sf-menu a:active {
 	outline:		0;
 }
 
@@ -129,13 +158,6 @@ li.sfHover > a > .sf-sub-indicator {
 
 /*** shadows for all but IE6 ***/
 .sf-shadow ul {
-	background:	url('../images/shadow.png') no-repeat bottom right;
-	padding: 0 8px 9px 0;
-	-moz-border-radius-bottomleft: 17px;
-	-moz-border-radius-topright: 17px;
-	-webkit-border-top-right-radius: 17px;
-	-webkit-border-bottom-left-radius: 17px;
 }
 .sf-shadow ul.sf-shadow-off {
-	background: transparent;
 }

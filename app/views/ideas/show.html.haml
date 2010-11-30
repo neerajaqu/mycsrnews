@@ -20,21 +20,23 @@
           %li
             = render :partial => 'shared/add_this'
       .itemBlock
-        .thumb
-          - if @idea.images.present?
+        - if @idea.images.present?
+          .thumb
             = image_tag @idea.images.first.url(:medium)
+        - if @idea.moderatable?
+          .mod-panel
+            .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @idea }
+            .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @idea }
         %h1= @idea.title
-        .itemMeta
-          %h3
-            = t('posted_by', :fb_name => local_linked_profile_name(@idea.user), :date => timeago(@idea.created_at))
-            - if @idea.idea_board.present?
-              in
-              = link_to(@idea.idea_board.name, @idea.idea_board)
-          - if @tags.present?
-            %h3== #{tag_list(@tags,@idea)}
-          - if @idea.moderatable?
-            = render :partial => 'shared/flag_form', :locals => { :flaggable => @idea }
-      %div.itemBlock= sanitize @idea.details
+        %h3
+          = t('posted_by', :fb_name => local_linked_profile_name(@idea.user), :date => timeago(@idea.created_at))
+          - if @idea.idea_board.present?
+            in
+            = link_to(@idea.idea_board.name, @idea.idea_board)
+        - if @tags.present?
+          .tag-wrap
+            %h3== Tags: #{tag_list(@tags,@idea)}
+        = sanitize @idea.details
     - if @idea.media_item?
       = render_media_items @idea
     = render_ad(:banner, @ad_layout, @ad_banner)

@@ -3,23 +3,6 @@
     #sortable1, #sortable2 { list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; }
     #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
     :sass
-
-      #col_full
-        #widget-tabs
-          float: left
-          width: 400px
-        #widget-tabs-destination
-          float: left
-          width: 250px
-          border: 1px solid black
-          min-height: 250px
-          margin-left: 40px
-      li.widget
-        width: 200px
-      ul.destination
-        margin-bottom: 10px
-        li
-          margin-left: 10px
       .float-toggle
         position: absolute
         top: 2px
@@ -193,36 +176,33 @@
               .masonry({ appendedContent : content, columnWidth: 310, itemSelector : '.box' });
           });
 
-#col_full
-  #content-box
-    %a#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
-    %a#clear-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Clear Widgets
-    %span.separator &nbsp;||
-    %a#preview-button.title.fg-button.ui-state-default.ui-corner-all{:href => "/home/preview_widgets", :target => "_preview", :type => "button"} Preview Widgets
-    .clear
-    %br
-    #widget-tabs{:style => "width: 450px; float: left;"}
-      %ul
-        - @filters.each_with_index do |filter, i|
-          %li
-            %a{:href => "#tabs-#{i+1}"}= filter[:name].titleize
-      - @widgets = Widget.all(:order => :name)
+.main-content
+  #admin-actions
+    %a#save-button.admin-btn.float_right{:type => "button"} Save your layout
+    %a#clear-button.admin-btn{:type => "button"} Clear Widgets
+    %a.admin-btn{:href => "/home/preview_widgets", :target => "_preview", :type => "button"} Preview Widgets
+
+  #widget-tabs
+    %ul
       - @filters.each_with_index do |filter, i|
-        - w_list = []
-        - @widgets.delete_if {|w| w.name =~ filter[:regex] and w_list.push w }
-        %div{:id => "tabs-#{i+1}"}
-          %ul.source.sortable.ui-helper-reset
-            - w_list.each do |widget|
-              %li.widget.ui-state-default{:id => "widget-#{widget.id}"}= widget.name
-    -#widget-tabs-destination{:style => "width: 200px; float: left; border: 1px solid black; min-height: 200px;"}
-    #widget-tabs-destination
-      %h2 Drop and Rearrange Widgets Here
-      %ul.destination
+        %li
+          %a{:href => "#tabs-#{i+1}"}= filter[:name].titleize
+    - @widgets = Widget.all(:order => :name)
+    - @filters.each_with_index do |filter, i|
+      - w_list = []
+      - @widgets.delete_if {|w| w.name =~ filter[:regex] and w_list.push w }
+      %div{:id => "tabs-#{i+1}"}
+        %ul.source.sortable.ui-helper-reset
+          - w_list.each do |widget|
+            %li.widget.ui-state-default{:id => "widget-#{widget.id}"}= widget.name
+  -#widget-tabs-destination{:style => "width: 200px; float: left; border: 1px solid black; min-height: 200px;"}
+  #widget-tabs-destination.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
+    %h2 Drop and Rearrange Widgets Here
+    %ul.destination
 -#
   %h1.title Select Widgets for Your Page Layout
-  %br
-  %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
-  %button#clear-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Clear Widgets
+  %button#save-button.admin-btn.float_right{:type => "button"} Save your layout
+  %button#clear-button.admin-btn{:type => "button"} Clear Widgets
   .clear
   %br
   #left.box.droppable-main.ui-widget-content.ui-state-default
@@ -234,7 +214,7 @@
   .clear
   %br
   -# TODO this second button is not working
-  -# %button#save-button.title.fg-button.ui-state-default.ui-corner-all{:type => "button"} Save your layout
+  -# %button#save-button.admin-btn{:type => "button"} Save your layout
 %br
 .clear
 %br
