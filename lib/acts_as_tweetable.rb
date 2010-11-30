@@ -41,6 +41,7 @@ module Newscloud
             self.find(:all, hot_options)
           rescue Exception => e
             Rails.logger.error("ERROR: Tweet Hot Items error:: #{e}")
+            return false
           end
         end
 

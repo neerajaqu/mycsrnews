@@ -61,9 +61,11 @@ module Newscloud
     def tweet_hot_items
       klasses = Dir.glob("#{RAILS_ROOT}/app/models/*.rb").map {|f| f.sub(%r{^.*/(.*?).rb$}, '\1').pluralize.classify }.map(&:constantize).select {|m| m.respond_to?(:tweetable?) and m.tweetable? }
       klasses.each do |klass|
+        hot_items = klass.hot_items
+        next unless hot_items
         puts "Hot items for #{klass.name.titleize}"
-        puts klass.hot_items.inspect
-        tweet_items klass.hot_items
+        puts hot_items.inspect
+        tweet_items hot_items
       end
     end
 
