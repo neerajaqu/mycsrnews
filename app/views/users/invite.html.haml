@@ -7,11 +7,10 @@
           - url = invite_users_path(:only_path => false, :iframe => 'iframe')
         - else
           - url = invite_users_path(:only_path => false)
-        - fb_multi_friend_request("Invite", "Invite friends", url) do
+        - fb_multi_friend_request("Invite", t('invite_users_title'), url, :bypass => "cancel") do
           == #{fb_name current_user} wants you to sign up for #{APP_CONFIG['site_title']}.
-          -#TODO:: get register link working
           = fb_req_choice("Visit #{APP_CONFIG['site_title']}", home_index_url)
+          -#TODO:: get register link working
 - else
   #col_left
     %h2= "Successfully invited your #{pluralize @fb_user_ids.size, 'friend'} #{fb_list_of_names @fb_user_ids}."
--# = fb_success("Successfully invited your #{pluralize @fb_user_ids.size, 'friend'} #{fb_list_of_names @fb_user_ids}.")
