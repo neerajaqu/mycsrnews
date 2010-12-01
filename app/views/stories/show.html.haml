@@ -24,30 +24,28 @@
           %li
             = render :partial => 'shared/add_this'
       .itemBlock
-        .half-panel
-          - if @story.images.present?
-            .thumb= image_tag @story.images.first.url(:medium)
+        - if @story.images.present?
+          .thumb= image_tag @story.images.first.url(:medium)
         - if @story.moderatable?
-          .half-panel.clearfix
+          .mod-panel
             .float_right= render :partial => 'shared/moderate_form', :locals => { :moderatable => @story }
             .float_left= render :partial => 'shared/flag_form', :locals => { :flaggable => @story }
 
         %h1= @story.title
-        .itemMeta
-          - unless @story.is_article?
-            - unless @story.source.present?
-              %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => story_source_link(@story), :date => timeago(@story.created_at))
-            - else
-              %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => source_link(@story), :date => timeago(@story.created_at))
+        - unless @story.is_article?
+          - unless @story.source.present?
+            %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => story_source_link(@story), :date => timeago(@story.created_at))
           - else
-            %h3 
-              = t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => timeago(@story.created_at))
-              = pipe_spacer
-              - if current_user.present? and @story.user == current_user
-                = link_to t('articles.edit_draft'), edit_article_path(@story.article)
-          - if @tags.present?
-            .tag-wrap
-              == Tags: #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
+            %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => source_link(@story), :date => timeago(@story.created_at))
+        - else
+          %h3 
+            = t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => timeago(@story.created_at))
+            = pipe_spacer
+            - if current_user.present? and @story.user == current_user
+              = link_to t('articles.edit_draft'), edit_article_path(@story.article)
+        - if @tags.present?
+          .tag-wrap
+            == Tags: #{tag_list(@tags, (@story.is_article? ? @story.article : @story))}
         - if @story.is_article?
           %p= sanitize nl2br(@story.caption)
         - elsif @story.full_html?

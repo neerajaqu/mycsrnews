@@ -1,7 +1,6 @@
 - select_options ||= ['Newest', 'Top rated'].collect {|k| [k, k.gsub(/\s+/, '_')]}
 = link_to 'Refine Results', '#', :class => "refine-toggle"
 .refine-box{:style => "display: none"}
-  .refine-tab
   .refine-content
     - form_tag nil, :class => "refine-form", :id => 'refine-form' do
       = label_tag :sort_by, 'Sort By:'

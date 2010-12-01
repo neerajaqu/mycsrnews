@@ -125,19 +125,7 @@
         display: inline-block
         &:hover
           background: none
-  .account-tab
-    height: 24px
-    width: 65px
-    z-index: 2
-    position: absolute
-    top: -25px
-    right: -1px
-    border:
-      top: $DropDownBorder
-      bottom: none
-      left: $DropDownBorder
-      right: $DropDownBorder
-    background-color: $DropDownBG
+  
 .account-links
   .account-profile
     .thumb
@@ -343,7 +331,6 @@ li
             clear: both
             padding: 0
             text-align: left
-            margin-top: -1px
             margin-right: 0
             a
               height: 100%
@@ -376,7 +363,7 @@ li
 // Sub Navigation Styles //
 #subNav
   border-bottom: $subnavBorder
-  height: 20px
+  height: 21px
   margin: 0px 0px 15px 0px
   padding: 0px 0px 0px 0px
   display: inline-block
@@ -397,10 +384,10 @@ li
       margin: 0 0 0 1px
       a
         position: relative
-        bottom: -1px
+        bottom: -2px
         margin: 0px
-        padding: 4px 25px 1px 25px
-        height: 14px
+        padding: 4px 25px 2px 25px
+        height: 13px
         border: none
         font-weight: bold
         font-size: $fontsize
@@ -725,15 +712,15 @@ $ColumnCorners: none
       width: auto
       border-bottom: none
       float: left
-      padding: 2px 0
+      padding: 4px
       h4
         margin: 0
         padding: 0
       a
-        padding: 4px 6px
-        &:hover
-          text-decoration: none
-          background: $featureStoryBG
+        padding: 4px 0
+      &:hover
+        text-decoration: none
+        background: $featureStoryBG
 
   /* PANEL BAR STYLES */
   .panelBar
@@ -863,6 +850,8 @@ $ColumnCorners: none
       padding: 4px 0 6px 0
       .itemBlock
         padding-left: 6px
+        float: left
+        width: 70%
     .eventLocationBlock
       float: left
       width: 25%
@@ -870,10 +859,11 @@ $ColumnCorners: none
       ul
         margin: 4px 0 8px 0
         li
+          display: block
           width: auto
           border: none
           padding: 4px 8px 0 8px
-          font-size: $fontsize * 0.9
+          font-size: $fontsize * 0.95
           color: $subheadColor
           b
             color: $bodyColor
@@ -1091,9 +1081,15 @@ $ColumnCorners: none
           padding-bottom: 2px
         a, span
           color: $linkColor
-       
-  .half-panel
+
+  .thumb
+    margin: 0 0 10px 10px
     float: right
+
+  .mod-panel
+    display: block
+    height: 24px
+
 
 // Comment Style Modifications and Additions //
 .commentThread, #commentThread
@@ -1125,7 +1121,7 @@ li.featureWrap
 
 .subtitle
   position: relative
-  font-size: $fontsize * 0.9
+  font-size: $fontsize
   color: $subheadColor
   background: $subTitleBG
   border: none
@@ -1133,7 +1129,6 @@ li.featureWrap
 
 // Blockquote styles //
 blockquote
-  background: $blockQuote
   color: $bodyColor
   font-size: $fontsize
   line-height: 130%

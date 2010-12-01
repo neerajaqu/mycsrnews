@@ -17,17 +17,19 @@
           %li
             = render :partial => 'shared/add_this'
       .itemBlock
-        .half-panel
-          - if @question.images.present?
-            .thumb= image_tag @question.images.first.url(:medium)
+        - if @question.images.present?
+          .thumb= image_tag @question.images.first.url(:medium)
+        - if @question.moderatable?
+          .mod-panel
+            .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @question }
+            .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @question }
         %h1.askQuestionHead= @question.question
-        .itemMeta
-          %h3= t('asked_by', :fb_name => local_linked_profile_name(@question.user), :date => timeago(@question.created_at))
-          - if @tags.present?
-            %h3== #{tag_list(@tags, @question)}
-          - if @question.moderatable?
-            = render :partial => 'shared/flag_form', :locals => { :flaggable => @question }
-      %div.itemBlock= sanitize @question.details
+
+        %h3= t('asked_by', :fb_name => local_linked_profile_name(@question.user), :date => timeago(@question.created_at))
+        - if @tags.present?
+          .tag-wrap
+            %h3== Tags: #{tag_list(@tags, @question)}
+        = sanitize @question.details
       - if @question.media_item?
         = render_media_items @question
       = render_ad(:banner, @ad_layout, @ad_banner)
@@ -58,9 +60,9 @@
             = form.commit_button :button_html => { :class => "btn_1" }
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
-  = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
   - if @question.moderatable?
     = render :partial => 'shared/moderate_form', :locals => { :moderatable => @question }
+  = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
 
 #col_right
   - if @sponsor_zone_code
