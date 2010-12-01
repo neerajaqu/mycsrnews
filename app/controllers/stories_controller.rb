@@ -12,6 +12,8 @@ class StoriesController < ApplicationController
   before_filter :load_top_users, :only => [:index, :app_tab, :tags]
   before_filter :load_newest_users, :only => [:index, :app_tab, :tags]
 
+  after_filter :store_location, :only => [:index, :new, :show]
+
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Stories'

@@ -12,6 +12,8 @@ class IdeasController < ApplicationController
   before_filter :set_idea_board
   before_filter :load_newest_idea_boards
 
+  after_filter :store_location, :only => [:index, :new, :show]
+
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Ideas'

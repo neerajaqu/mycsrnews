@@ -5,10 +5,12 @@ class ArticlesController < ApplicationController
 
   before_filter :set_current_tab
   before_filter :set_ad_layout, :only => [:index, :drafts, :user_index]
-  before_filter :login_required, :only => [:new, :create]
+  before_filter :login_required, :only => [:new, :create, :edit, :update]
   before_filter :load_top_stories, :only => [:index]
   before_filter :load_top_discussed_stories, :only => [:index]
   before_filter :load_newest_articles, :only => [:index]
+
+  after_filter :store_location, :only => [:index, :new, :edit]
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"

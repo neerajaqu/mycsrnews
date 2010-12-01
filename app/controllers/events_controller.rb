@@ -5,11 +5,13 @@ class EventsController < ApplicationController
 
   before_filter :set_current_tab
   before_filter :set_ad_layout, :only => [:index, :show, :my_events, :import_facebook]
-  before_filter :login_required, :only => [:like, :new, :create, :update]
+  before_filter :login_required, :only => [:like, :new, :create, :update, :my_events, :import_facebook]
   before_filter :load_top_events
   before_filter :load_newest_events
   before_filter :load_featured_events, :only => [:index]
   before_filter :set_custom_sidebar_widget, :only => [:index, :new, :show, :my_events, :import_facebook]
+
+  after_filter :store_location, :only => [:index, :new, :edit, :my_events, :import_facebook]
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"

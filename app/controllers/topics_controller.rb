@@ -2,6 +2,8 @@ class TopicsController < ApplicationController
   before_filter :find_forum
   before_filter :login_required, :only => [:new, :create]
 
+  after_filter :store_location, :only => [:index, :new, :show]
+
   def new
     @topic = @forum.topics.new
   end

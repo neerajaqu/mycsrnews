@@ -4,6 +4,8 @@ class NewswiresController < ApplicationController
   before_filter :login_required, :only => [:quick_post]
   before_filter :load_top_stories, :only => [:index]
 
+  after_filter :store_location, :only => [:index]
+
   def index
     @current_sub_tab = 'Browse Wires'
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"

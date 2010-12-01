@@ -1,7 +1,9 @@
 class RelatedItemsController < ApplicationController
-  before_filter :login_required, :only => [:create]
+  before_filter :login_required, :only => [:create, :new]
   before_filter :moderator_required, :only => [:create]
   cache_sweeper :story_sweeper, :only => [:create, :update, :destroy]
+
+  after_filter :store_location, :only => [:new]
 
   def new
     @relatable = find_relatable_item

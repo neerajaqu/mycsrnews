@@ -1,9 +1,11 @@
 class QuestionsController < ApplicationController
 
-  before_filter :login_required, :only => [:like, :new, :create, :create_answer]
+  before_filter :login_required, :only => [:like, :new, :create, :create_answer, :new_answer, :my_questions]
   before_filter :set_ad_layout, :only => [:index, :show, :my_questions]
 
   cache_sweeper :qanda_sweeper, :only => [:create, :update, :destroy, :create_answer]
+
+  after_filter :store_location, :only => [:index, :new, :show, :new_answer, :my_questions]
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
