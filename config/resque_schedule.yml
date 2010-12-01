@@ -20,7 +20,7 @@ reminders:
   rails_env: development, staging, production
   description: "This job will send reminders to appropriate users"
 twitter_hot_items:
-  cron: "0 * * * *"
+  cron: "*/15 * * * *"
   class: TwitterScheduledWorker
   queue: twitter_scheduled
   args:
