@@ -5,10 +5,24 @@
       .thumb.user
         = local_linked_profile_pic current_user
       .itemBlock
-        %h4= t('welcome_name', :name => current_user.name)
-        %h3= t('karma_score', :score => current_user.karma_score)
-        %h3= t('activity_score', :score => current_user.activity_score)
-        -# %h3 City, State
+        %h4= t('welcome_name', :name => current_user.name.split(' ').first)
+        - unless current_user.activity_score < 15    
+          %h3= t('karma_score', :score => current_user.karma_score)
+          %h3= t('activity_score', :score => current_user.activity_score)
+          -# %h3 City, State    
+        - else
+          %p= t('newbie_headline')
+    - if current_user.activity_score < 15    
+      .list_items.bullet_list
+        %ul
+          %li= t('newbie_tip_like')
+          %li= t('newbie_tip_story', :href => new_story_path )
+          - if MENU.key? 'forums'
+            %li= t('newbie_tip_forum', :href => forums_path )
+          - unless MENU['stories']['new_article'].nil? and MENU['articles']['new_article'].nil?
+            %li= t('newbie_tip_article', :href => new_article_path )
+          - if MENU.key? 'questions'
+            %li= t('newbie_tip_question', :href => new_question_path )
 - else
   - cache :welcome_panel_html do
     - if get_setting('welcome_layout').present?
