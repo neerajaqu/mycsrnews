@@ -74,28 +74,18 @@ module Newscloud
         def cascade_block blocked = nil
           [self.class.reflect_on_all_associations(:has_many), self.class.reflect_on_all_associations(:has_one)].flatten.each do |association|
             if not association.options.include?(:through)
-            	puts "Triggering cascading block for #{association.macro} #{association.name}"
             	items = Array(self.send(association.name)).flatten.compact
 
             	count = 0
             	items.each do |item|
-            	  #if item.class.included_modules.include? Newscloud::Acts::Moderatable
             	  if item.moderatable?
-            	  	Rails.logger.debug "*******#{item.class.name} is missing :is_blocked field" and break unless item.respond_to? :is_blocked
             	  	item.toggle_blocked
-            	  	Rails.logger.debug "##############FIXING BLOCKED VALUE for #{item.class.name} -- #{item.id}###############" unless blocked.nil? or item.is_blocked == blocked
             	  	item.is_blocked = blocked and item.save unless blocked.nil? or item.is_blocked == blocked
-            	  	APP_CONFIG[:mismatches].push "#{item.class.name} -- #{item.id}" unless blocked.nil? or item.is_blocked == blocked
                   count += 1
-            	  	Rails.logger.debug "*******BLOCKED VALUE MISMATCH: GOT #{item.is_blocked.to_s} EXPECTED #{blocked.to_s}" unless blocked.nil? or blocked == item.is_blocked
-                  #puts "\tTriggering cascading block for #{item.class.name.titleize}--#{item.item_title}" if item.respond_to?(:blockable?) and item.blockable?
-                  #puts "\n\n\n\n\n\n\n**************************************START NESTED BLOCK" if item.respond_to? :cascade_block
                   item.expire
                   item.cascade_block blocked if item.respond_to? :cascade_block
-                  #puts "**************************************END NESTED BLOCK\n\n\n\n\n\n\n" if item.respond_to? :cascade_block
                 end
             	end
-            	puts "\tBlocked #{count} #{association.name}"
             end
           end
           return true
