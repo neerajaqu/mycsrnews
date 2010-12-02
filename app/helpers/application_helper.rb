@@ -206,6 +206,9 @@ module ApplicationHelper
     	link_options[:canvas] = options[:canvas]
     	options.delete(:canvas)
     end
+    if options[:target].present?
+    	target = options.delete(:target)
+    end
     if user.facebook_user?      
       options.merge!(:linked => false)
       unless options[:useyou] == true
@@ -213,7 +216,11 @@ module ApplicationHelper
       end
       firstnameonly = APP_CONFIG['firstnameonly'] || false
       options.merge!(:firstnameonly => firstnameonly) if firstnameonly
-      link_to fb_name(user, options), user_path(user, link_options)
+      if target
+        link_to fb_name(user, options), user_path(user, link_options), :target => target
+      else
+        link_to fb_name(user, options), user_path(user, link_options)
+      end
     else
       link_to user.public_name, user_path(user, link_options)
     end
