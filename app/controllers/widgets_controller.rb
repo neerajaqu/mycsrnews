@@ -1,6 +1,7 @@
 class WidgetsController < ApplicationController
 
   before_filter :get_parameters
+  before_filter :set_canvas_preference
   
   def get_parameters
     @count = (params[:count] ? params[:count] : 5)
@@ -100,6 +101,10 @@ class WidgetsController < ApplicationController
   def newswires
     @newswires = Newswire.unpublished.newest @count
     @title = t('widgets.newswires_newest_title', :site_title => get_setting('site_title').value)
+  end
+
+  def set_canvas_preference
+    @canvas_preference = get_canvas_preference true
   end
   
 end

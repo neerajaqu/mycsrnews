@@ -54,6 +54,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_setting
   helper_method :get_ad_layout
   helper_method :iframe_facebook_request?
+  helper_method :get_canvas_preference
 
   def newscloud_redirect_to(options = {}, response_status = {})
     @enable_iframe_hack = !! @iframe_status
@@ -359,6 +360,13 @@ class ApplicationController < ActionController::Base
     	home_index_path(:only_path => false)
     end
     #root_url(:only_path => false, :canvas => true)
+  end
+
+  def get_canvas_preference force = false
+    return false unless force
+    preference = get_setting('default_site_preference').try(:value)
+    return false unless preference
+    return preference == 'iframe' ? true : false
   end
 
   def get_setting name, sub_type = nil
