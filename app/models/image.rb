@@ -36,7 +36,11 @@ class Image < ActiveRecord::Base
   end
   
   def expire
-    self.imageable.expire
+    self.class.sweeper.expire_image_all self
+  end
+
+  def self.sweeper
+    ImageSweeper
   end
 
   private
