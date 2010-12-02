@@ -117,6 +117,7 @@ ActionController::Routing::Routes.draw do |map|
     #admin.resources :metadatas, :controller => 'custom_widgets'
     admin.resources :settings
     admin.resources :skip_images
+    admin.resources :twitter_settings, :collection => { :update_keys => :post, :update_auth => :post, :reset_keys => :get }
     admin.resources :ad_layouts
     admin.resources :ads
     admin.resources :title_filters
