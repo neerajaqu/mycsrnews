@@ -53,4 +53,16 @@ class Question < ActiveRecord::Base
     details.present? ? details : item_title
   end
 
+  def expire
+    self.class.sweeper.expire_question_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_question_all self.new
+  end
+
+  def self.sweeper
+    QandaSweeper
+  end
+
 end

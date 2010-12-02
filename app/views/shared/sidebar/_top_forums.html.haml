@@ -1,6 +1,4 @@
 -# @expects: local 'top_forum'
 
 - cache :top_forums_html, :expires_in => 180.minutes do
-  - top_forums ||= Forum.all({  :limit => 7, :order => "comments_count desc" })
-  - unless top_forums.empty?
-    = render :partial => 'shared/lists/bullet_generic_list', :locals => { :list_title => t('forums.top_forums_title'), :item_list => top_forums }
+  - top_forums ||= Forum.active.all({  :limit => 7, :order => "comments_count desc" })

@@ -119,5 +119,16 @@ class Event < ActiveRecord::Base
     end
   end
 
-end
+  def expire
+    self.class.sweeper.expire_event_all self
+  end
 
+  def self.expire_all
+    self.sweeper.expire_event_all self.new
+  end
+
+  def self.sweeper
+    EventSweeper
+  end
+
+end

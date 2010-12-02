@@ -1,4 +1,6 @@
 class Feed < ActiveRecord::Base
+  acts_as_moderatable
+
   has_many :newswires
   belongs_to :user
 

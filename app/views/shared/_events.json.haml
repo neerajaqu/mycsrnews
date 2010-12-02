@@ -1,4 +1,4 @@
-- events ||= Event.paginate :page => params[:page], :per_page => 10, :order => "start_time asc"
+- events ||= Event.active.paginate :page => params[:page], :per_page => 10, :order => "start_time asc"
 %ul
   - events.each do |event|
     %li.askQuestionWrap

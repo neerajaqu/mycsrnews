@@ -13,7 +13,7 @@ class ResourceSectionsController < ApplicationController
 
   def show
     @current_sub_tab = 'Browse Section Resources'
-    @resource_section = ResourceSection.find(params[:id])
+    @resource_section = ResourceSection.active.find(params[:id])
     @top_resources = @resource_section.resources.tally({
     	:at_least => 1,
     	:limit    => 5,

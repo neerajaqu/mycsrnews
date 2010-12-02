@@ -312,6 +312,18 @@ class User < ActiveRecord::Base
     fb_oauth_key.nil? and fb_oauth_denied_at.nil?
   end
 
+  def expire
+    self.class.sweeper.expire_user_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_user_all self.new
+  end
+
+  def self.sweeper
+    UserSweeper
+  end
+
   private
 
   def check_profile

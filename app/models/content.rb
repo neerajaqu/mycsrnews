@@ -139,6 +139,18 @@ class Content < ActiveRecord::Base
     'stories'
   end
   
+  def expire
+    self.class.sweeper.expire_story_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_story_all self.new
+  end
+
+  def self.sweeper
+    StorySweeper
+  end
+
   private
 
 end

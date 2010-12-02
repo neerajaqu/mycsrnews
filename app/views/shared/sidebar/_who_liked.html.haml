@@ -9,7 +9,8 @@
       - unless user_list.empty?
         %ul
           - user_list.each do |user|
-            - fb_user = User.find_by_id(user.voter_id)
+            - next if user.voter.is_blocked?
+            - fb_user = User.active.find_by_id(user.voter_id)
             %li
               .profilePic= local_linked_profile_pic fb_user, :width => '30', :height => '30'
       - else

@@ -7,4 +7,10 @@ class UserSweeper < ActionController::Caching::Sweeper
     end
   end
 
+  def self.expire_user_all user
+    puts "Sweeping newswires"
+    controller = ActionController::Base.new
+    controller.expire_fragment "newest_users"
+  end
+
 end

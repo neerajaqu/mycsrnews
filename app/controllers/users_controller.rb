@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
-    #@users = User.top.paginate :page => params[:page], :per_page => Content.per_page, :order => "karma_score desc"
     case params[:top]
       when 'daily'
         @scores = Score.daily_scores
@@ -43,7 +42,7 @@ class UsersController < ApplicationController
   end
   
   def update    
-    @user = User.find(params[:id])
+    @user = User.active.find(params[:id])
     
     if @user.user_profile.update_attributes(params[:user][:user_profile]) and @user.update_attributes(params[:user])
       flash[:success] = "Successfully updated your settings."
@@ -103,7 +102,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.active.find(params[:id])
     @activities = @user.activities.find(:all, :limit => 7, :order => "created_at desc")
     @articles = @user.articles.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
     @paginate = true
@@ -180,7 +179,7 @@ class UsersController < ApplicationController
 
   def set_auto_discovery_rss
     unless params[:id].nil?
-      @user = User.find(params[:id])
+      @user = User.active.find(params[:id])
       @auto_discovery_rss = user_path(@user, :format => :atom)
     else
       @auto_discovery_rss = stories_path(:format => :atom)
@@ -190,7 +189,7 @@ class UsersController < ApplicationController
   private
   
   def check_valid_user
-    redirect_to home_index_path and return false unless current_user == User.find(params[:id])
+    redirect_to home_index_path and return false unless current_user == User.active.find(params[:id])
   end
 
 end

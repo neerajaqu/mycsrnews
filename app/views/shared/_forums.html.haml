@@ -1,5 +1,5 @@
 - cache "forums_list" do
-  - forums ||= Forum.alpha
+  - forums ||= Forum.active.alpha
   - paginate ||= false
   .panel_2
     .panelBar

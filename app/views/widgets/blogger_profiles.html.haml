@@ -9,7 +9,7 @@
             %li{'data-id' => user.cache_key}
               .featureWrap
                 -# can change size to normal, but need fixed spacer for thumb
-                - fb_user = User.find_by_id(user.author_id)
+                - fb_user = User.active.find_by_id(user.author_id)
                 .thumb.user-bio
                   %h2= t('.posted_by', :fb_name => local_linked_profile_name(fb_user))
                   = local_linked_profile_pic fb_user

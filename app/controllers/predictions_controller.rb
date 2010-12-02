@@ -30,14 +30,13 @@ class PredictionsController < ApplicationController
   def show_question
     #todo - change question link
     #todo - handle question with no group
-    @prediction_question = PredictionQuestion.find(params[:id])
+    @prediction_question = PredictionQuestion.active.find(params[:id])
   end
   
   def my_predictions
     @paginate = true
     @current_sub_tab = 'Yours'
-    @user = User.find(current_user)
-    @prediction_guesses = @user.prediction_guesses.active.paginate :page => params[:page], :per_page => PredictionGuess.per_page, :order => "created_at desc"
+    @prediction_guesses = current_user.prediction_guesses.active.paginate :page => params[:page], :per_page => PredictionGuess.per_page, :order => "created_at desc"
   end
 
   private

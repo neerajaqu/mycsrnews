@@ -1,4 +1,6 @@
 class Source < ActiveRecord::Base
+  acts_as_moderatable
+
 
   validates_presence_of :name
   validates_presence_of :url
