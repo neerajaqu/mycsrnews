@@ -6,7 +6,7 @@
         Re:
         %a.ellipsis_title_1
           %span.ellipsis_text
-            = item.item_title
+            = link_to item.item_title, polymorphic_url(item.item_link)
       %p.ellipsis_caption_4
         %span.ellipsis_text= item.comments
       .itemMeta
