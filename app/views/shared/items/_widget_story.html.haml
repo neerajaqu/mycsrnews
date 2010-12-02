@@ -1,5 +1,5 @@
 .itemBlock
-  %h4= link_to item.title, content_path(item, :only_path => false)
-  .profilePic= local_linked_profile_pic(item.user, :only_path => false)
-  %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user, :only_path => false), :date => timeago(item.created_at))
-  %span.btnComment== #{link_to t('comments'), content_path(item, :only_path => false, :anchor => "commentListTop")} #{item.comments_count}  
+  %h4= link_to item.title, content_path(item, :only_path => false), :target => "_top"
+  .profilePic= local_linked_profile_pic(item.user, :only_path => false), :target => "_top"
+  %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user, :only_path => false, :target => "_top"), :date => timeago(item.created_at))
+  %span.btnComment== #{link_to t('comments'), content_path(item, :only_path => false, :anchor => "commentListTop"), :target => "_top"} #{item.comments_count}  
