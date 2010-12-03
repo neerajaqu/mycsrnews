@@ -1,5 +1,5 @@
 class ResourceSweeper < ActionController::Caching::Sweeper
-  observe Resource
+  observe Resource, ResourceSection
 
   def after_save(resource)
     clear_resource_cache(resource)
@@ -10,7 +10,7 @@ class ResourceSweeper < ActionController::Caching::Sweeper
   end
 
   def clear_resource_cache(resource)
-    ['top_resources', 'newest_resources', 'featured_resources', "#{resource.cache_key}_who_liked" ].each do |fragment|
+    ['top_resources', 'newest_resources', 'featured_resources', "#{resource.cache_key}_who_liked", 'resource_section_roll'].each do |fragment|
       expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|

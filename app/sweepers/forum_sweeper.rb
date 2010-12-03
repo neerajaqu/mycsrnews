@@ -19,14 +19,14 @@ class ForumSweeper < ActionController::Caching::Sweeper
 
   def self.expire_forum_all forum
     controller = ActionController::Base.new
-    ['forums_list', "#{forum.cache_key}_topics_list"].each do |fragment|
+    ['forums_list', "#{forum.cache_key}_topics_list", 'forum_roll'].each do |fragment|
       controller.expire_fragment fragment
     end
   end
 
   def self.expire_topic_all topic
     controller = ActionController::Base.new
-    ["#{topic.cache_key}_voices", "#{topic.cache_key}_who_liked", "newest_topics_html", "top_topics_html"].each do |fragment|
+    ["#{topic.cache_key}_voices", "#{topic.cache_key}_who_liked", "newest_topics_html", "top_topics_html", "top_forums"].each do |fragment|
       controller.expire_fragment fragment
     end
 

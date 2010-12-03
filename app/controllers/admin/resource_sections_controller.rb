@@ -1,5 +1,7 @@
 class Admin::ResourceSectionsController < AdminController
 
+  cache_sweeper :resource_sweeper, :only => [:create, :update, :destroy]
+
   def index
     @resource_sections = ResourceSection.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
