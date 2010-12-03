@@ -17,4 +17,3 @@ class UserSweeper < ActionController::Caching::Sweeper
   end
 
 end
-, 
