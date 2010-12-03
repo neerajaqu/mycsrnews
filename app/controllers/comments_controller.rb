@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
   end
 
   def like
-     @comment = Comment.find_by_id(params[:id])
+     @comment = Comment.active.find_by_id(params[:id])
      respond_to do |format|
        if current_user and @comment.present? and current_user.vote_for(@comment)
        	success = "Thanks for your vote!"
@@ -49,7 +49,7 @@ class CommentsController < ApplicationController
    end
 
   def dislike
-     @comment = Comment.find_by_id(params[:id])
+     @comment = Comment.active.find_by_id(params[:id])
      respond_to do |format|
        if current_user and @comment.present? and current_user.vote_against(@comment)
        	success = "Thanks for your vote!"

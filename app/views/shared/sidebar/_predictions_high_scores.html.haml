@@ -2,7 +2,7 @@
 
 - cache :prediction_high_scores_html do
   -#todo - replace with named scope
-  - top_scorers ||= User.top 25
+  - top_scorers ||= User.active.top 25
   - user_list = top_scorers
   - unless top_scorers.empty?
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
@@ -12,5 +12,5 @@
         %ul
           - user_list.each do |user|
             %li
-              - fb_user = User.find(user)
+              - fb_user = User.active.find(user)
               .profilePic= local_linked_profile_pic fb_user, :width => '30', :height => '30', :destination => user_path(user)

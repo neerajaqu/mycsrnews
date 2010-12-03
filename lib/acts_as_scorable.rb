@@ -8,7 +8,7 @@ module Newscloud
 
       module ClassMethods
         def acts_as_scorable
-          has_many :user_scores, :as => :scorable
+          has_many :scores, :as => :scorable
 
           after_create :async_score_later
 

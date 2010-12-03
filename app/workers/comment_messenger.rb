@@ -2,7 +2,7 @@ class CommentMessenger
   @queue = :comment_messenger
 
   def self.perform(comment_id, item_url, app_caption, image_url)
-    comment = Comment.find(comment_id)
+    comment = Comment.active.find(comment_id)
 
     self.facebook_messenger comment, item_url, app_caption, image_url
   end

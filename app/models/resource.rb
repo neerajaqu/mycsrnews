@@ -36,4 +36,17 @@ class Resource < ActiveRecord::Base
     })
   end
 
+  def expire
+    self.class.sweeper.expire_resource_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_resource_all self.new
+  end
+
+  def self.sweeper
+    ResourceSweeper
+  end
+
+
 end

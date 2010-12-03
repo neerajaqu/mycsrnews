@@ -12,7 +12,7 @@ class IdeaBoardsController < ApplicationController
 
   def show
     @current_sub_tab = 'Browse Board Ideas'
-    @idea_board = IdeaBoard.find(params[:id])
+    @idea_board = IdeaBoard.active.find(params[:id])
     @top_ideas = @idea_board.ideas.tally({
     	:at_least => 1,
     	:limit    => 5,

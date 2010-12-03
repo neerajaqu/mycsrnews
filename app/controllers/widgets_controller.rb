@@ -1,6 +1,7 @@
 class WidgetsController < ApplicationController
 
   before_filter :get_parameters
+  before_filter :set_canvas_preference
   
   def get_parameters
     @count = (params[:count] ? params[:count] : 5)
@@ -20,16 +21,16 @@ class WidgetsController < ApplicationController
   end
   
   def activities
-    @activity_list = Content.articles.published.newest @count
+    @activity_list = Content.active.articles.published.newest @count
     @title = t('widgets.activities_title', :site_title => get_setting('site_title').value)
   end
   
   def user_articles
     @title_possessive = (params[:title_possessive] ? true : false)
     @user_cached_slug = (params[:user] ? params[:user] : nil)
-    @user = User.find_by_cached_slug(@user_cached_slug)
+    @user = User.active.find_by_cached_slug(@user_cached_slug)
     #redirect_to articles unless @user
-    @article_list = Content.find(:all, :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and article_id IS NOT NULL and is_draft = 0 and author_id = ?", @user.id], :limit => @count)
+    @article_list = Content.active.find(:all, :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and article_id IS NOT NULL and is_draft = 0 and author_id = ?", @user.id], :limit => @count)
     if @title_possessive
       @title = t('widgets.my_articles_title', :site_title => get_setting('site_title').value )
     else
@@ -39,13 +40,13 @@ class WidgetsController < ApplicationController
   end
 
   def blog_roll
-    @users = Article.find(:all, :joins => "INNER JOIN user_profiles on user_profiles.user_id = author_id", :select => "count(author_id) as author_article_count, author_id,bio", :group => "author_id", :order => "author_article_count desc", :limit => @count ) 
+    @users = Article.active.find(:all, :joins => "INNER JOIN user_profiles on user_profiles.user_id = author_id", :select => "count(author_id) as author_article_count, author_id,bio", :group => "author_id", :order => "author_article_count desc", :limit => @count ) 
     @title = t('widgets.blogger_profiles_title', :site_title => get_setting('site_title').value)
     render :partial => 'shared/sidebar/blog_roll', :layout => 'widgets'
   end
 
   def blogger_profiles
-    @users = Article.find(:all, :joins => "INNER JOIN user_profiles on user_profiles.user_id = author_id", :select => "count(author_id) as author_article_count, author_id,bio", :group => "author_id", :order => "author_article_count desc", :limit => @count ) 
+    @users = Article.active.find(:all, :joins => "INNER JOIN user_profiles on user_profiles.user_id = author_id", :select => "count(author_id) as author_article_count, author_id,bio", :group => "author_id", :order => "author_article_count desc", :limit => @count ) 
     @title = t('widgets.blogger_profiles_title', :site_title => get_setting('site_title').value)
   end
   
@@ -53,14 +54,14 @@ class WidgetsController < ApplicationController
     unless @filter
       case @sort      
         when "newest"
-          @article_list = Content.articles.published.newest @count
+          @article_list = Content.active.articles.published.newest @count
           @title = t('widgets.articles_newest_title', :site_title => get_setting('site_title').value)
         when "top"
-          @article_list = Content.articles.published.top @count
+          @article_list = Content.active.articles.published.top @count
           @title = t('widgets.articles_top_title', :site_title => get_setting('site_title').value)
       end
     else
-      @article_list = Content.articles.featured @count
+      @article_list = Content.active.articles.featured @count
       @title = t('widgets.articles_featured_title', :site_title => get_setting('site_title').value)      
     end
   end
@@ -76,7 +77,7 @@ class WidgetsController < ApplicationController
           @title = t('widgets.contents_top_title', :site_title => get_setting('site_title').value)
       end
     else
-      @contents = Content.featured @count
+      @contents = Content.active.featured @count
       @title = t('widgets.contents_featured_title', :site_title => get_setting('site_title').value)      
     end
   end
@@ -92,14 +93,18 @@ class WidgetsController < ApplicationController
           @title = t('widgets.questions_top_title', :site_title => get_setting('site_title').value)
       end
     else
-      @questions = Question.featured @count
+      @questions = Question.active.featured @count
       @title = t('widgets.questions_featured_title', :site_title => get_setting('site_title').value)      
     end
   end
 
   def newswires
-    @newswires = Newswire.unpublished.newest @count
+    @newswires = Newswire.active.unpublished.newest @count
     @title = t('widgets.newswires_newest_title', :site_title => get_setting('site_title').value)
+  end
+
+  def set_canvas_preference
+    @canvas_preference = get_canvas_preference true
   end
   
 end

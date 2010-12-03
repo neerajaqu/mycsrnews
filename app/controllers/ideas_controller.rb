@@ -40,7 +40,7 @@ class IdeasController < ApplicationController
     @idea.tag_list = params[:idea][:tags_string]
     @idea.user = current_user
     if params[:idea][:idea_board_id].present?
-    	@idea_board = IdeaBoard.find_by_id(params[:idea][:idea_board_id])
+    	@idea_board = IdeaBoard.active.find_by_id(params[:idea][:idea_board_id])
     	@idea.section_list = @idea_board.section unless @idea_board.nil?
     end
 
@@ -57,7 +57,7 @@ class IdeasController < ApplicationController
   end
 
   def show
-    @idea = Idea.find(params[:id])
+    @idea = Idea.active.find(params[:id])
     tag_cloud @idea
     set_outbrain_item @idea
     set_sponsor_zone('ideas', @idea.item_title.underscore)
@@ -66,21 +66,21 @@ class IdeasController < ApplicationController
   def my_ideas
     @paginate = true
     @current_sub_tab = 'My Ideas'
-    @user = User.find(params[:id])
+    @user = User.active.find(params[:id])
     @ideas = @user.ideas.active.paginate :page => params[:page], :per_page => Idea.per_page, :order => "created_at desc"
   end
 
   def tags
     tag_name = CGI.unescape(params[:tag])
     @paginate = true
-    @ideas = Idea.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @ideas = Idea.active.tagged_with(tag_name, :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
     render :template => 'ideas/index'
   end
 
   private
 
   def set_idea_board
-    @idea_board = params[:idea_board_id].present? ? IdeaBoard.find(params[:idea_board_id]) : nil
+    @idea_board = params[:idea_board_id].present? ? IdeaBoard.active.find(params[:idea_board_id]) : nil
   end
 
   def set_current_tab

@@ -50,6 +50,14 @@ module Newscloud
       def refineable?() false end
       def tweetable?() false end
 
+      def expire_all
+        nil
+      end
+
+      def sweeper
+        nil
+      end
+
     end
 
     module InstanceMethods
@@ -111,6 +119,10 @@ module Newscloud
 
       def crumb_link
         self
+      end
+
+      def expire
+        nil
       end
 
     end

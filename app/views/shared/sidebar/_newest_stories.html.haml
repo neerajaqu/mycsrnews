@@ -1,6 +1,6 @@
 -# @expects: local 'story'
 
-- cache :newest_stories_html, :expires_in => 60.minutes do
+- cache :newest_stories_html do
   - newest_stories ||= Content.active.newest_stories 5
   - unless newest_stories.empty?
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}

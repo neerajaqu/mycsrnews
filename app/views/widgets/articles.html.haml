@@ -9,7 +9,7 @@
           %ul
             - @article_list.each do |item|
               %li
-                = render :partial => 'shared/items/widget_article', :locals => {:item => item}
+                = render :partial => 'shared/items/widget_article', :locals => {:item => item, :canvas_preference => @canvas_preference}
 - else
   - cache "widget_articles_#{@sort}_#{@count}_#{@filter}_html", :expires_in => 60.minutes do
     - unless @article_list.empty?
@@ -19,6 +19,6 @@
           %ul
             - @article_list.each do |item|
               %li
-                = render :partial => 'shared/items/widget_article', :locals => {:item => item}
+                = render :partial => 'shared/items/widget_article', :locals => {:item => item, :canvas_preference => @canvas_preference}
 - if @fan              
   = render :partial => 'shared/sidebar/fan_application'                    

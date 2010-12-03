@@ -17,6 +17,11 @@ ActiveRecord::Base.send :include, Newscloud::Acts::Moderatable
 # Load acts_as_relatable mixin
 require "#{RAILS_ROOT}/lib/acts_as_relatable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Relatable
+# Send acts_as_moderatable to plugin models
+Tagging.send(:acts_as_moderatable)
+Tag.send(:acts_as_moderatable)
+PfeedItem.send(:acts_as_moderatable)
+PfeedDelivery.send(:acts_as_moderatable)
 
 # Load acts_as_refineable mixin
 require "#{RAILS_ROOT}/lib/acts_as_refineable.rb"

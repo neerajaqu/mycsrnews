@@ -6,9 +6,9 @@
   - else
     - story_count = 3
   - if get_setting('exclude_articles_from_news').value
-    - contents ||= Content.top_story_items.paginate :page => params[:page], :per_page => story_count, :order => "created_at desc"
+    - contents ||= Content.active.top_story_items.paginate :page => params[:page], :per_page => story_count, :order => "created_at desc"
   -else
-    - contents ||= Content.top_items.paginate :page => params[:page], :per_page => story_count, :order => "created_at desc"
+    - contents ||= Content.active.top_items.paginate :page => params[:page], :per_page => story_count, :order => "created_at desc"
   .panel_2
     .panelBar
       %h2= t('shared.stories.stories_title')

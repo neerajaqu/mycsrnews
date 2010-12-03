@@ -1,2 +1,2 @@
-- item_list ||= Article.featured
+- item_list ||= Article.active.featured
 = render :partial => 'shared/lists/featured_generic_list', :locals => { :model_name => "article", :model_home => articles_path, :list_title => t('articles.featured_title'), :item_list => item_list}
