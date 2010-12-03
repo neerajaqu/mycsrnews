@@ -76,14 +76,28 @@ module Newscloud
             if not association.options.include?(:through)
             	items = Array(self.send(association.name)).flatten.compact
 
+            	items.each do |item|
+            	  if item.moderatable?
+                  item.update_attribute(:is_blocked, blocked) unless item.is_blocked == blocked
+                  item.expire
+                  item.cascade_block blocked if item.respond_to? :cascade_block
+                end
+            	end
+            end
+          end
+          return true
+        end
+
+        def verify_cascade blocked = nil
+          [self.class.reflect_on_all_associations(:has_many), self.class.reflect_on_all_associations(:has_one)].flatten.each do |association|
+            if not association.options.include?(:through)
+            	items = Array(self.send(association.name)).flatten.compact
+
             	count = 0
             	items.each do |item|
             	  if item.moderatable?
-            	  	item.toggle_blocked
-            	  	item.is_blocked = blocked and item.save unless blocked.nil? or item.is_blocked == blocked
-                  count += 1
-                  item.expire
-                  item.cascade_block blocked if item.respond_to? :cascade_block
+                  raise "Block Discrepancy: #{item.inspect}" unless item.is_blocked == blocked
+                  item.verify_cascade blocked if item.respond_to? :verify_cascade
                 end
             	end
             end
