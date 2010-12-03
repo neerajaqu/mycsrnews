@@ -11,6 +11,10 @@ class UserSweeper < ActionController::Caching::Sweeper
     puts "Sweeping newswires"
     controller = ActionController::Base.new
     controller.expire_fragment "newest_users"
+    ['newest_users', 'recent_users', 'active_users', 'moderator_users', 'sidebar_top_users_weekly'].each do |fragment|
+      controller.expire_fragment "#{fragment}_html"
+    end
   end
 
 end
+, 
