@@ -41,7 +41,9 @@ ActiveRecord::Base.send :include, Newscloud::Acts::Scorable
 # HACK:: get around Vote model being a plugin model
 Vote.send(:acts_as_scorable)
 
+# Load plugin model extensions
 require "#{RAILS_ROOT}/lib/locale_extensions.rb"
+require "#{RAILS_ROOT}/lib/pfeed_extensions.rb"
 
 require "#{RAILS_ROOT}/lib/zvent_gem_addon.rb"
 
