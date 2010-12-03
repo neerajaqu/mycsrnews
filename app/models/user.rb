@@ -284,6 +284,10 @@ class User < ActiveRecord::Base
     User.find(:all, :conditions => ['is_admin = true'])
   end
 
+  def combined_score
+    self.activity_score + self.karma_score
+  end
+  
   def add_score! score
     case score.score_type
       when "participation"
