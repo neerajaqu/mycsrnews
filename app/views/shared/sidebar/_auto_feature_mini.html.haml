@@ -1,0 +1,15 @@
+- cache :auto_feature_mini_html, :expires_in => 15.minutes do
+  - animation_speed = get_setting('animation_speed_features').try(:value) || 500
+  - auto_feature ||= Image.active.find(:all, :conditions => "imageable_type = 'Content'", :limit => 12, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
+  - unless auto_feature.empty? 
+    %div{:class => "panel_1 featureWrap #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      = render :partial => 'shared/featured_items/panelbar'
+      .feature_scrollable_panel_sidebar
+        .feature_scrollable_items
+          - auto_feature.each do |item|
+            .panel_items
+              = render :partial => 'shared/featured_items/panel_af_sidebar', :locals => { :item => item, :limit_title => 80, :limit_caption => 200}
+      :javascript
+        $(function() {            
+          $(".feature_scrollable_panel_sidebar").scrollable({speed : #{animation_speed}, circular: true, mousewheel: false}).autoscroll({ autoplay: true});
+        });
