@@ -1,0 +1,7 @@
+- cache :external_topics_html do
+  - count = (not @count.nil? and @count ) || 5
+  - newest_topics ||= Topic.active.newest count
+  - unless newest_topics.empty?
+    = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => t('forums.newest_topics_title'), :item_list => newest_topics }
+  - if @fan              
+    = render :partial => 'shared/sidebar/fan_application'    

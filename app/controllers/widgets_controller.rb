@@ -4,7 +4,7 @@ class WidgetsController < ApplicationController
   before_filter :set_canvas_preference
   
   def get_parameters
-    @count = (params[:count] ? params[:count] : 5)
+    @count = Integer(params[:count] ? params[:count] : 5)
     @sort = (params[:sort] ? params[:sort] : "newest")
     @filter = (params[:filter] ? params[:filter] : false)
     @scrollable = (params[:scrollable] ? true : false)
@@ -43,10 +43,6 @@ class WidgetsController < ApplicationController
     @users = Article.active.find(:all, :joins => "INNER JOIN user_profiles on user_profiles.user_id = author_id", :select => "count(author_id) as author_article_count, author_id,bio", :group => "author_id", :order => "author_article_count desc", :limit => @count ) 
     @title = t('widgets.blogger_profiles_title', :site_title => get_setting('site_title').value)
     render :partial => 'shared/sidebar/blog_roll', :layout => 'widgets'
-  end
-
-  def forum_roll
-    render :template => 'widgets/forum_roll', :layout => 'widgets'
   end
 
   def blogger_profiles

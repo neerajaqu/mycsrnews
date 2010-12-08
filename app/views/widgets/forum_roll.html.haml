@@ -2,3 +2,5 @@
   - forum_roll ||= Forum.alpha
   - unless forum_roll.empty?
     = render :partial => 'shared/lists/bullet_generic_list', :locals => { :list_title => t('forums.forum_roll_title'), :item_list => forum_roll, :external_widget => true, :canvas_preference => @canvas_preference }
+  - if @fan              
+    = render :partial => 'shared/sidebar/fan_application'    
