@@ -1,18 +1,18 @@
-require 'hpricot'
+require 'nokogiri'
 require 'net/http'
 require 'open-uri'
 
 module Parse
   module Page
     
-    def parse_page(url)
+    def parse_page(url, local_file = false)
       parsed_url = URI.parse(url)
-      url = "http://#{url}" unless url =~ %r(^https?://)
+      url = "http://#{url}" unless url =~ %r(^https?://) or local_file == true
 
       @images_sized = []
       @skip_images = Metadata::SkipImage.all.map(&:image_url)
       @title_filters = Metadata::TitleFilter.all.map(&:keyword)
-      page = open(url) { |f| Hpricot(f) }
+      page = open(url) { |f| Nokogiri::HTML(f) }
       results = {}
       results[:title] = self.parse_title(page)
       results[:description] = self.parse_description(page)
@@ -33,14 +33,14 @@ module Parse
       desc = (doc/"head/meta[@http-equiv='Description']") unless desc.present?
       desc = (doc/"head/meta[@http-equiv='description']") unless desc.present?
       return false unless desc.present?
-      desc.first.attributes['content']
+      desc.first.attributes['content'].value
     end
 
     def self.parse_images(doc, url)
       images = (doc/"img")
       valid_images = []
       images.each do |image|
-        image_url = self.concat_url(url, image.attributes['src'])
+        image_url = self.concat_url(url, image.attributes['src'].value)
         valid_images << image_url if self.is_valid_image? image_url
       end
 

@@ -5,12 +5,14 @@ class ResourcesController < ApplicationController
 
   before_filter :set_current_tab
   before_filter :set_ad_layout, :only => [:index, :show, :my_resources]
-  before_filter :login_required, :only => [:like, :new, :create, :update]
+  before_filter :login_required, :only => [:like, :new, :create, :update, :my_resources]
   before_filter :load_top_resources
   before_filter :load_newest_resources
   before_filter :set_resource_section
   before_filter :load_featured_resources, :only => [:index]
   before_filter :load_newest_resource_sections
+
+  after_filter :store_location, :only => [:index, :new, :show, :my_resources]
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
@@ -52,7 +54,7 @@ class ResourcesController < ApplicationController
   end
 
   def show
-    @resource = Resource.find(params[:id])
+    @resource = Resource.active.find(params[:id])
     tag_cloud @resource
     set_outbrain_item @resource
     set_sponsor_zone('resources', @resource.item_title.underscore)
@@ -61,21 +63,21 @@ class ResourcesController < ApplicationController
   def my_resources
     @paginate = true
     @current_sub_tab = 'My Resources'
-    @user = User.find(params[:id])
+    @user = User.active.find(params[:id])
     @resources = @user.resources.active.paginate :page => params[:page], :per_page => Resource.per_page, :order => "created_at desc"
   end
 
   def tags
     tag_name = CGI.unescape(params[:tag])
     @paginate = true
-    @resources = Resource.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @resources = Resource.active.tagged_with(tag_name, :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
     render :template => 'resources/index'
   end
 
   private
 
   def set_resource_section
-     @resource_section = params[:resource_section_id].present? ? ResourceSection.find(params[:resource_section_id]) : nil
+     @resource_section = params[:resource_section_id].present? ? ResourceSection.active.find(params[:resource_section_id]) : nil
   end
    
   def set_current_tab

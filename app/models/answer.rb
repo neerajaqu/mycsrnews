@@ -44,4 +44,16 @@ class Answer < ActiveRecord::Base
     answer
   end
 
+  def expire
+    self.class.sweeper.expire_answer_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_answer_all self.new
+  end
+
+  def self.sweeper
+    QandaSweeper
+  end
+
 end

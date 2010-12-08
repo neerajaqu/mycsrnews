@@ -82,8 +82,8 @@ module ApplicationHelper
   end
 
   #remove this method when self.title methods created
-  def linked_item_details(item, length = 150, url = false)
-    return "" if item.details.nil?
+  def linked_item_details(item, length = 150, url = false)    
+    return "" if item.details.nil? || item.details.empty?
     caption = caption(item.details.sanitize_standard, length)
     "#{caption} #{link_to 'More', (url ? url : item)}"
   end
@@ -206,6 +206,9 @@ module ApplicationHelper
     	link_options[:canvas] = options[:canvas]
     	options.delete(:canvas)
     end
+    if options[:target].present?
+    	target = options.delete(:target)
+    end
     if user.facebook_user?      
       options.merge!(:linked => false)
       unless options[:useyou] == true
@@ -213,7 +216,11 @@ module ApplicationHelper
       end
       firstnameonly = APP_CONFIG['firstnameonly'] || false
       options.merge!(:firstnameonly => firstnameonly) if firstnameonly
-      link_to fb_name(user, options), user_path(user, link_options)
+      if target
+        link_to fb_name(user, options), user_path(user, link_options), :target => target
+      else
+        link_to fb_name(user, options), user_path(user, link_options)
+      end
     else
       link_to user.public_name, user_path(user, link_options)
     end
@@ -502,7 +509,8 @@ EMBED
   end
   
   def render_ad(ad_size, in_layout, ad_slot)
-    unless in_layout.nil?
+    platform = get_setting('platform').try(:value) || 'none'
+    unless in_layout.nil? || platform == 'none'
       case ad_size
         when :leaderboard
           render_ad_partial(ad_slot) if in_layout.include? "Leader"

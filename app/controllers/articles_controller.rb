@@ -5,19 +5,21 @@ class ArticlesController < ApplicationController
 
   before_filter :set_current_tab
   before_filter :set_ad_layout, :only => [:index, :drafts, :user_index]
-  before_filter :login_required, :only => [:new, :create]
+  before_filter :login_required, :only => [:new, :create, :edit, :update]
   before_filter :load_top_stories, :only => [:index]
   before_filter :load_top_discussed_stories, :only => [:index]
   before_filter :load_newest_articles, :only => [:index]
 
+  after_filter :store_location, :only => [:index, :new, :edit]
+
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Articles'
-    @articles = Content.articles.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+    @articles = Content.active.articles.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     set_sponsor_zone('articles')
     respond_to do |format|
       format.html { @paginate = true }
-      format.json { @articles = Content.articles.active.refine(params) }
+      format.json { @articles = Content.active.articles.refine(params) }
     end
   end
 
@@ -27,23 +29,23 @@ class ArticlesController < ApplicationController
   end
 
   def user_index
-    @user = User.find(params[:user_id])    
+    @user = User.active.find(params[:user_id])    
     @page = false
     @current_sub_tab = 'Browse Articles'
     @articles = @user.articles.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     respond_to do |format|
       format.html { @refine = false, @paginate = false }
-      #format.json { @articles = Content.articles.refine(params) }
+      #format.json { @articles = Content.active.articles.refine(params) }
     end
   end
 
   def edit
     @current_sub_tab = 'New Article'
-    @article = Article.find(params[:id])
+    @article = Article.active.find(params[:id])
   end
   
   def update
-    @article = Article.find(params[:id])
+    @article = Article.active.find(params[:id])
     @article.content.caption = @article.body = params[:article][:body]
     @article.create_preamble
     @article.tag_list = params[:article][:content_attributes][:tags_string]
@@ -113,14 +115,14 @@ class ArticlesController < ApplicationController
   def tags
     tag_name = CGI.unescape(params[:tag])
     @paginate = true
-    @articles = Article.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @articles = Article.active.tagged_with(tag_name, :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
     render :template => 'articles/index'
   end
 
   private
   
   def check_valid_user
-    redirect_to home_index_path and return false unless current_user and ((current_user == Article.find(params[:id]).author or current_user.is_moderator?))
+    redirect_to home_index_path and return false unless current_user and ((current_user == Article.active.find(params[:id]).author or current_user.is_moderator?))
   end
 
   def set_current_tab

@@ -1,2 +1,2 @@
-- item_list ||= Comment.featured
+- item_list ||= Comment.active.featured
 = render :partial => 'shared/lists/featured_generic_list', :locals => { :model_name => "comment", :model_home => nil, :list_title => t('featured_comment.featured_title'), :item_list => item_list}

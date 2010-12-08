@@ -12,15 +12,16 @@ class StoriesController < ApplicationController
   before_filter :load_top_users, :only => [:index, :app_tab, :tags]
   before_filter :load_newest_users, :only => [:index, :app_tab, :tags]
 
+  after_filter :store_location, :only => [:index, :new, :show]
+
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @current_sub_tab = 'Browse Stories'
     if get_setting('exclude_articles_from_news').try(:value)
-      @contents = Content.top_story_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+      @contents = Content.active.top_story_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     else
-      @contents = Content.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
+      @contents = Content.active.top_items.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     end
-    #@contents = Content.active.paginate :page => params[:page], :per_page => Content.per_page, :order => "created_at desc"
     respond_to do |format|
       format.html { @paginate = true }
       format.fbml { @paginate = true }
@@ -31,7 +32,7 @@ class StoriesController < ApplicationController
   end
 
   def show
-    @story = Content.find(params[:id])
+    @story = Content.active.find(params[:id])
     # allow only authors and moderators to preview draft articles
     redirect_to home_index_path if @story.is_article? and @story.article.is_draft? and (!current_user.present? or current_user != @story.article.author or !current_user.is_moderator? ) 
     redirect_to stories_path and return if @story.is_blocked?
@@ -62,7 +63,7 @@ class StoriesController < ApplicationController
       	:caption  => params[:c]
       })
     elsif params[:newswire_id].present?
-      @newswire = Newswire.find(params[:newswire_id])
+      @newswire = Newswire.active.find(params[:newswire_id])
       title = @newswire.title
       title = @title_filters.inject(title) {|str,key| str.gsub(%r{#{key}}, '') }
       title.sub(/^[|\s]+/,'').sub(/[|\s]+$/,'')
@@ -116,7 +117,7 @@ class StoriesController < ApplicationController
   def tags
     tag_name = CGI.unescape(params[:tag])
     @paginate = true
-    @contents = Content.tagged_with(tag_name, :on => 'tags').active.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    @contents = Content.active.tagged_with(tag_name, :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
 
   private

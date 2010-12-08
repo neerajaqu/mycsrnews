@@ -56,7 +56,7 @@ class StorySweeper < ActionController::Caching::Sweeper
 
   def self.expire_story_all story
     controller = ActionController::Base.new
-    ['top_stories', 'stories_list', 'featured_items', 'most_discussed_stories', "#{story.cache_key}_top", "#{story.cache_key}_bottom", "#{story.cache_key}_sidebar", "top_contents_tags", "top_contents_sections"].each do |fragment|
+    ['top_stories', 'stories_list', 'featured_items', 'most_discussed_stories', "#{story.cache_key}_top", "#{story.cache_key}_bottom", "#{story.cache_key}_sidebar", "top_contents_tags", "top_contents_sections", 'newest_stories'].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|

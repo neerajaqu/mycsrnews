@@ -65,6 +65,7 @@
   = render :partial => 'shared/item_footer', :locals => { :item => @question,:title => @question.question }
 
 #col_right
+  = render :partial => 'shared/sidebar/questions_whatisthis'
   - if @sponsor_zone_code
     = render :partial => 'shared/ads/sponsor_zone_wrapper'
   = render_ad(:small_square, @ad_layout, @ad_small_square)

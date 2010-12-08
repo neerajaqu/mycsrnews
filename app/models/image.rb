@@ -34,6 +34,14 @@ class Image < ActiveRecord::Base
   def override_image= bool
     @override_image = !! bool
   end
+  
+  def expire
+    self.class.sweeper.expire_image_all self
+  end
+
+  def self.sweeper
+    ImageSweeper
+  end
 
   private
 

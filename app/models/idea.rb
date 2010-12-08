@@ -34,4 +34,16 @@ class Idea < ActiveRecord::Base
     })
   end
 
+  def expire
+    self.class.sweeper.expire_idea_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_idea_all self.new
+  end
+
+  def self.sweeper
+    IdeaSweeper
+  end
+
 end

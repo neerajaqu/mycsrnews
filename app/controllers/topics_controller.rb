@@ -2,6 +2,8 @@ class TopicsController < ApplicationController
   before_filter :find_forum
   before_filter :login_required, :only => [:new, :create]
 
+  after_filter :store_location, :only => [:index, :new, :show]
+
   def new
     @topic = @forum.topics.new
   end
@@ -48,9 +50,9 @@ class TopicsController < ApplicationController
 
   def find_forum
     if params[:forum_id]
-      @forum = Forum.find(params[:forum_id])
+      @forum = Forum.active.find(params[:forum_id])
     elsif params[:id]
-    	@topic = Topic.find(params[:id])
+    	@topic = Topic.active.find(params[:id])
     	redirect_to forum_topic_path(@topic.forum, @topic)
     else
     	redirect_to forums_path

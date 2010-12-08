@@ -15,3 +15,10 @@ var $$ = function(param) {
 
   return $.cache[id];
 };
+
+$(function() {
+  setTimeout(function() {
+		$('.flash').effect('fade', {}, 1000);
+
+  }, 3500);
+});

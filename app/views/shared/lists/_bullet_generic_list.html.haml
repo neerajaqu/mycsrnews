@@ -1,4 +1,6 @@
 -# @expects: local 'list_title, item_list'
+- canvas_preference ||= false
+- external_widget ||= external_widget
 %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
   .panelBar
     %h2= list_title
@@ -6,4 +8,7 @@
     %ul
       - item_list.each do |item|
         %li
-          = link_to item.featured_title, path_to_self(item)
+          - unless external_widget
+            = link_to item.featured_title, path_to_self(item)
+          - else
+            = link_to item.featured_title, path_to_self(item, canvas_preference), :target => "_top"

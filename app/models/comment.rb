@@ -63,6 +63,19 @@ class Comment < ActiveRecord::Base
     Resque.enqueue(CommentMessenger, id, item_url, app_caption, image_url) if user.fb_oauth_active?
   end
 
+  def expire
+    self.commentable.expire
+  end
+
+# TODO:: get expire_all working with comments
+#  def self.expire_all
+#    self.sweeper.expire_story_all self.new
+#  end
+#
+#  def self.sweeper
+#    StorySweeper
+#  end
+
   private
 
   def custom_callback

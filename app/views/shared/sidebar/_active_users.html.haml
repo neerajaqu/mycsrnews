@@ -1,7 +1,7 @@
 -# @expects: local 'active_users'
 
 - cache :active_users_html, :expires_in => 5.minute do
-  - active_users ||= User.last_active
+  - active_users ||= User.active.last_active
 
   -# to do : user block should be made a generic partial with vars for titles
   -# in active_users and recent_users

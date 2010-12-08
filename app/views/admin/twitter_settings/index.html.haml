@@ -1,0 +1,66 @@
+%h1 Configure Twitter
+
+%h2
+  Status::
+  - if @error
+    %span{:style => "color: red"} Not Configured Properly
+  - else
+    %span{:style => "color: green"} Configured
+
+- if not @error
+  %h3 Your keys:
+  %ul
+    %li== Twitter OAuth Key: #{@oauth_key.value} | #{link_to 'edit', edit_admin_metadata_setting_path(@oauth_key)}
+    %li== Twitter OAuth Secret: #{@oauth_secret.value} | #{link_to 'edit', edit_admin_metadata_setting_path(@oauth_secret)}
+    %li== Click to #{link_to 'Reset OAuth keys', reset_keys_admin_twitter_settings_path}
+  - if @extra_settings.any?
+    %h3 Your Misc Twitter Settings:
+    %ul
+      - @extra_settings.each do |setting|
+        %li== #{setting.key_name.titleize}: #{setting.value} | #{link_to 'edit', edit_admin_metadata_setting_path(setting)}
+  - if @tweets
+    %h3 Your Latest Tweets
+    %ul
+      - @tweets.each do |tweet|
+        %li== #{tweet.user.screen_name} said #{tweet.text}
+- elsif @error == :bad_settings_error
+  %h3 There was an authorization error when accessing Twitter. Please reset your keys and try again.
+  %ul
+    %li== Click to #{link_to 'Reset OAuth keys', reset_keys_admin_twitter_settings_path}
+- elsif @error == :settings_error
+  %h3 You must first configure your Twitter OAuth Keys
+  %p Login to twitter and create a new application. Copy and paste the OAuth Key and OAuth Secret into the fields below.
+  - form_tag update_keys_admin_twitter_settings_path, :class => 'formtastic' do
+    %fieldset.inputs
+      %ol
+        - ['oauth_key', 'oauth_secret'].each do |key|
+          - form_error = @form_errors["twitter_#{key}"]
+          %li.string.required{:class => form_error ? 'error' : ''}
+            = label_tag "twitter_#{key}"
+            = text_field_tag "twitter_#{key}", instance_variable_get("@twitter_#{key}")
+            - if form_error 
+              %p.inline-errors= form_error
+    %fieldset.buttons
+      %ol
+        %li.commit= submit_tag 'Save Keys'
+- elsif @error == :auth_error
+  %h3 Now you need to authorize your application to use twitter
+  %p Click the link below and then fill in your pin code.
+  %p= link_to @oauth.request_token.authorize_url, @oauth.request_token.authorize_url, :target => "_external"
+  - form_tag update_auth_admin_twitter_settings_path, :class => 'formtastic' do
+    = hidden_field_tag 'request_token', @request_token.token
+    = hidden_field_tag 'request_secret', @request_token.secret
+    %fieldset.inputs
+      %ol
+        - ['oauth_pin'].each do |key|
+          - form_error = @form_errors["twitter_#{key}"]
+          %li.string.required{:class => form_error ? 'error' : ''}
+            = label_tag "twitter_#{key}"
+            = text_field_tag "twitter_#{key}", instance_variable_get("@twitter_#{key}")
+            - if form_error 
+              %p.inline-errors= form_error
+    %fieldset.buttons
+      %ol
+        %li.commit= submit_tag 'Save Pin Code'
+- else
+  = raise @error.inspect

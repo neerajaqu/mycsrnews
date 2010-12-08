@@ -284,6 +284,10 @@ class User < ActiveRecord::Base
     User.find(:all, :conditions => ['is_admin = true'])
   end
 
+  def combined_score
+    self.activity_score + self.karma_score
+  end
+  
   def add_score! score
     case score.score_type
       when "participation"
@@ -310,6 +314,18 @@ class User < ActiveRecord::Base
 
   def fb_oauth_desired?
     fb_oauth_key.nil? and fb_oauth_denied_at.nil?
+  end
+
+  def expire
+    self.class.sweeper.expire_user_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_user_all self.new
+  end
+
+  def self.sweeper
+    UserSweeper
   end
 
   private

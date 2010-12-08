@@ -43,7 +43,6 @@ Rails::Initializer.run do |config|
   config.gem "eycap"
   config.gem "rack"
   config.gem "formtastic"
-  config.gem "hpricot"
   config.gem "friendly_id"
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem "compass"

@@ -1,5 +1,5 @@
 -# @expects: local 'event'
 
 - cache :featured_events_html, :expires_in => 15.minutes do
-  - item_list ||= Event.featured
+  - item_list ||= Event.active.featured
   = render :partial => 'shared/lists/featured_generic_list', :locals => { :model_name => "event", :model_home => events_path, :list_title => t('events.featured_title'), :item_list => item_list}

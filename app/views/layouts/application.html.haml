@@ -114,7 +114,7 @@
       <!-- Note: Include this div markup as a workaround for a known bug in this release on IE where you may get a "operation aborted" error -->
       <div id="FB_HiddenIFrameContainer" style="display:none; position:absolute; left:-100px; top:-100px; width:0px; height: 0px;"></div>
 
-      <script type="text/javascript"> FB_RequireFeatures(["CanvasUtil"], function(){ FB.XdComm.Server.init('/xd_receiver.html'); FB.CanvasClient.startTimerToSizeToContent(); }); </script>
+      <script type="text/javascript"> FB_RequireFeatures(["CanvasUtil"], function(){ FB.XdComm.Server.init('/xd_receiver.html'); FB.CanvasClient.startTimerToSizeToContent(); FB.CanvasClient.scrollTo(0,0); }); </script>
 
     -# HACK:: non floating div eliminates webkit resizing issues with facebook javascript
     %div{:style => "clear: both;"}

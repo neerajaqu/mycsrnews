@@ -1,19 +1,16 @@
 -# expects: local 'item' 
 .featured
   .item_2.comment
-
     .itemBlock
-      %h4
-        Re:
-        %a.ellipsis_title_1
-          %span.ellipsis_text
-            Commented story title goes here.
       %p.ellipsis_caption_4
         %span.ellipsis_text= item.comments
       .itemMeta
         .profilePic= local_linked_profile_pic item.user
+        %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => timeago(item.created_at))
         %h3
-          Posted by
-          %a Bob Bobberson
-        %span.btnComment== #{link_to t('featured_comment.view'), polymorphic_url(item.item_link, :anchor => "commentListTop")}
-        %span.btnComment= votes_link(item, item.votes_tally)        
+          Re:
+          %a.ellipsis_title_1
+          %span.ellipsis_text
+            = link_to item.item_title, polymorphic_url(item.item_link)
+        -# %span.btnComment== #{link_to t('featured_comment.view'), polymorphic_url(item.item_link, :anchor => "commentListTop")}
+        -# %span.btnComment= votes_link(item, item.votes_tally)        

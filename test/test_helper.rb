@@ -35,4 +35,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+
+  # Helper Constants
+  FILES_DIR = File.expand_path(File.join(File.dirname("__FILE__"), 'files'))
 end

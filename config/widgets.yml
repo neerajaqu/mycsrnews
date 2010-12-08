@@ -21,6 +21,8 @@ widgets:
       partial: '/shared/sidebar/gallery_images'
     auto_feature_sidebar:
       partial: '/shared/sidebar/auto_feature_sidebar'      
+    auto_feature_mini:
+      partial: '/shared/sidebar/auto_feature_mini'      
     newest_stories:
       partial: '/shared/sidebar/newest_stories'
     top_stories:

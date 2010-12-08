@@ -1,4 +1,6 @@
 class SentCard < ActiveRecord::Base
+  acts_as_moderatable
+
 
   belongs_to :card
   belongs_to :from_user, :class_name => "User", :foreign_key => "from_user_id"
@@ -9,6 +11,14 @@ class SentCard < ActiveRecord::Base
 
   def self.top limit = 5
     self.find(:all, :group => 'card_id', :select => 'card_id, count(card_id) as card_count', :order => 'card_count desc', :limit => limit)
+  end
+
+  def expire
+    self.card.expire
+  end
+
+  def self.expire_all
+    Card.expire_all
   end
 
 end

@@ -37,6 +37,11 @@ class Metadata::Setting < Metadata
     self.setting_value = val
   end
 
+  def update_value val
+    self.value = val
+    save
+  end
+
   def enabled?
     !! self.value
   end

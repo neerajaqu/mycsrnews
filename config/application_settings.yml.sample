@@ -9,8 +9,8 @@ defaults: &defaults
   # Yahoo AppId used for sitemap ping
   yahoo_app_id: 'ELIZq2LV44444.rGdRR5abc888HCGL1zDOegJakZyHIrugVqPip3YK333P8-'
   
-  # ad platforms supported: google, helios
-  ad_platform: 'google' 
+  # ad platforms supported: google, helios, none = turn ads off
+  ad_platform: 'none' 
   
   # Uncomment these lines to enable google adsense
   google_adsense_account_id: 'ca-pub-22233344444555555'

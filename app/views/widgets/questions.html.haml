@@ -4,28 +4,28 @@
   - cache "widget_questions_#{@sort}_#{@count}_html", :expires_in => 60.minutes do
     - unless @questions.empty?
       %div{:class => "panel_1"}
-        = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
+        = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title, :canvas_preference => @canvas_preference}
         .list_items
           %ul
             - @questions.each do |item|
               %li
-                = render :partial => 'shared/items/widget_question', :locals => {:question => item}
+                = render :partial => 'shared/items/widget_question', :locals => {:question => item, :canvas_preference => @canvas_preference}
 - else
   - unless @scrollable
     - cache "widget_questions_#{@sort}_#{@count}_#{@filter}_html", :expires_in => 60.minutes do
       - unless @questions.empty?
         %div{:class => "panel_1"}
-          = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
+          = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title, :canvas_preference => @canvas_preference}
           .list_items
             %ul
               - @questions.each do |item|
                 %li
-                  = render :partial => 'shared/items/widget_question', :locals => {:question => item}
+                  = render :partial => 'shared/items/widget_question', :locals => {:question => item, :canvas_preference => @canvas_preference}
   - else  
     - cache "widget_questions_#{@sort}_#{@count}_#{@filter}_scrollable_html", :expires_in => 60.minutes do
       - unless @questions.empty?
         %div{:class => "panel_1"}
-          = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title}
+          = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => @hide_titlebar, :title => @title, :canvas_preference => @canvas_preference}
           .list_items
             .widgets_scrollable_panel
               .feature_scrollable_items
@@ -33,7 +33,7 @@
                   .widgets_panel_items
                     %ul
                       %li
-                        = render :partial => 'shared/items/widget_question', :locals => {:question => item}
+                        = render :partial => 'shared/items/widget_question', :locals => {:question => item, :canvas_preference => @canvas_preference}
             - animation_speed = get_setting('animation_speed_widgets').try(:value) || 2500
             :javascript
               $(function() {          	
