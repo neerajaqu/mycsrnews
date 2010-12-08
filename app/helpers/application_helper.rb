@@ -82,8 +82,8 @@ module ApplicationHelper
   end
 
   #remove this method when self.title methods created
-  def linked_item_details(item, length = 150, url = false)
-    return "" if item.details.nil?
+  def linked_item_details(item, length = 150, url = false)    
+    return "" if item.details.nil? || item.details.empty?
     caption = caption(item.details.sanitize_standard, length)
     "#{caption} #{link_to 'More', (url ? url : item)}"
   end

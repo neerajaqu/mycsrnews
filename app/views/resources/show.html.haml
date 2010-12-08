@@ -31,8 +31,10 @@
             = t('in')
             = link_to(@resource.resource_section.name, @resource.resource_section)
         - if @tags.present?
-          %h3== #{tag_list(@tags,@resource)}
-        = sanitize @resource.details
+          .tag-wrap
+            == Tags: #{tag_list(@tags, @resource)}
+        - unless @resource.details.empty?
+          = sanitize @resource.details
       - if @resource.url.present?
         %div.float_left= link_to t('.visit_url'), @resource.url, :target => "_resource", :class => "btn"
     - if @resource.media_item?
