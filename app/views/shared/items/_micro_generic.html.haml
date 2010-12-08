@@ -1,4 +1,5 @@
 .generic.small
+  .profilePic.margins= local_linked_profile_pic item.user
   .itemBlock
-    = link_to item.title, path_to_self(item)
-    .profilePic= local_linked_profile_pic item.user
+    %h4= link_to item.title, path_to_self(item)
+

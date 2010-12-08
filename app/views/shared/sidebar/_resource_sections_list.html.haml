@@ -4,7 +4,8 @@
   .panelBar
     %h2= t('.title')
   .list_items
-    %ul.listTags.bullet_list
+    %ul
       - resource_sections.each do |resource_section|
         %li
-          = link_to resource_section.name, resource_section
+          .itemBlock
+            %h4= link_to resource_section.name, resource_section
