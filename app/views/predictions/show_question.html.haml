@@ -12,7 +12,7 @@
           %li= fb_share_item_button(@prediction_question)
           %li
             = twitter_share_item_link @prediction_question, @prediction_question.title
-          %li
+          %li.nomargin
             = render :partial => 'shared/add_this'
       %ul
         -# todo - did user answer already?

@@ -1,9 +1,10 @@
 - canvas_preference ||= false
 - external_widget ||= external_widget
 .generic.small
+  .profilePic.margins= local_linked_profile_pic item.user
   .itemBlock
     - unless external_widget
-      = link_to item.title, path_to_self(item)
+      %h4= link_to item.title, path_to_self(item)
     - else
-      = link_to item.title, path_to_self(item, canvas_preference), :target => "_top"
+      %h4= link_to item.title, path_to_self(item, canvas_preference), :target => "_top"
     .profilePic= local_linked_profile_pic item.user

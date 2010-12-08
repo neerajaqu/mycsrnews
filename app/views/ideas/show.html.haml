@@ -17,7 +17,7 @@
           %li= fb_share_item_button(@idea)
           %li
             %a= twitter_share_item_link @idea, @idea.title
-          %li
+          %li.nomargin
             = render :partial => 'shared/add_this'
       .itemBlock
         - if @idea.images.present?
