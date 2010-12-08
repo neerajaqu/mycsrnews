@@ -1,5 +1,5 @@
-- cache :external_topics_html do
-  - count = (not @count.nil? and @count ) || 5
+- cache :external_topics_#{@count}_html do
+  - count = @count
   - newest_topics ||= Topic.active.newest count
   - unless newest_topics.empty?
     = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => t('forums.newest_topics_title'), :item_list => newest_topics }
