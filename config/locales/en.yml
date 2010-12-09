@@ -341,6 +341,15 @@ en:
     title: "Contact Us"
     message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips and feedback.</a>"
     feedback_message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips</a> or <a href=\"{{forum_link}}\">share your feedback</a>."
+  add_stuff:
+    title: "Post Something!"
+    story: "Add a story from the Web"
+    idea: "Suggest an Idea"
+    resource: "Contribute a link to our directory"
+    topic: "Post a new discussion topic"
+    article: "Write your own blog post"
+    question: "Ask a question of other readers"    
+    event: "Add an event from Facebook"
   hint:
     user_profile:
       post_comments: "Comments you post will be added to your Facebook stream"
