@@ -344,7 +344,7 @@ en:
   add_stuff:
     title: "Post Something!"
     story: "Add a story from the Web"
-    idea: "Suggest an Idea"
+    idea: "Suggest an idea"
     resource: "Contribute a link to our directory"
     topic: "Post a new discussion topic"
     article: "Write your own blog post"
