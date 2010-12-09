@@ -8,6 +8,8 @@
   = render :partial => 'shared/articles', :locals => { :contents => @articles, :paginate => @paginate, :page => @page , :refine => @refine }
   
 #col_right
+  - if @custom_sidebar_widget
+    = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
   = render :partial => 'shared/sidebar/post_article'
   - if @sponsor_zone_code
     = render :partial => 'shared/ads/sponsor_zone_wrapper'

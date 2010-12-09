@@ -7,6 +7,8 @@
   = render :partial => 'shared/stories', :locals => { :contents => @contents, :paginate => @paginate, :page => @page }
 
 #col_right
+  - if @custom_sidebar_widget
+    = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
   = render :partial => 'shared/sidebar/post_story'
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_stories', :locals => { :top_stories => @top_stories }

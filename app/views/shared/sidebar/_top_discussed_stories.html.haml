@@ -1,5 +1,4 @@
 -# @expects: local 'most_discussed_stories'
-
 - cache :most_discussed_stories_html do
   - most_discussed_stories ||= Content.active.published.find( :all, :limit => 5, :conditions => ["contents.created_at > ?", 1.week.ago], :order => "comments_count desc")
   - if most_discussed_stories.empty?
@@ -23,4 +22,3 @@
           %li
             .itemBlock
               %h4= t('empty.top_discussed_stories')
-          
