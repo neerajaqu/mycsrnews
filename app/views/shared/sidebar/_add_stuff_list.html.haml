@@ -8,7 +8,7 @@
         - unless MENU['stories']['new_article'].nil? and MENU['articles']['new_article'].nil?
           %li= link_to t('add_stuff.article'), new_article_path
         - if MENU.key? 'forums'
-          %li= link_to t('add_stuff.forum'), forums_path
+          %li= link_to t('add_stuff.topic'), forums_path
         - if MENU.key? 'questions'
           %li= link_to t('add_stuff.question'), new_question_path
         - if MENU.key? 'ideas'
