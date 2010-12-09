@@ -92,6 +92,7 @@ en:
   user_posted_item: "{{fb_name}} posted {{title}} {{date}} ago"
   posted_by: "Posted by {{fb_name}} {{date}} ago"
   posted_by_via: "Posted by {{fb_name}} via {{source}}, {{date}} ago"
+  posted_by_in_topic: "Posted by {{fb_name}} in {{topic}}"
   read_more: "read more"
   facebook_share_link: "Facebook"
   facebook_share: "What do you want to write on your wall?"
@@ -355,3 +356,5 @@ en:
       post_comments: "Comments you post will be added to your Facebook stream"
       post_likes: "Stories and items you like will be added to your Facebook stream"
       post_items: "Any story or item you post will be added to your Facebook stream"
+  empty:
+    top_discussed_stories: "Sorry, no discussions found."

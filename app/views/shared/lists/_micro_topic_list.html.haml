@@ -1,0 +1,13 @@
+-# @expects: local 'list_title, item_list'
+- count = (not @count.nil? and @count ) || 5
+- canvas_preference ||= false
+- external_widget ||= external_widget
+- hide_titlebar =  (not @hide_titlebar.nil? and @hide_titlebar ) || false
+%div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+  = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => hide_titlebar, :title => list_title}
+  .list_items
+    %ul
+      - item_list.each_with_index do |item, index|
+        - unless index > count
+          %li
+            = render :partial => 'shared/items/micro_topic', :locals => { :item => item, :external_widget => external_widget, :canvas_preference => canvas_preference }

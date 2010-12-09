@@ -2,12 +2,14 @@
 
 - cache :most_discussed_stories_html do
   - most_discussed_stories ||= Content.active.published.find( :all, :limit => 5, :conditions => ["contents.created_at > ?", 1.week.ago], :order => "comments_count desc")
-  - unless most_discussed_stories.empty?
-    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      .panelBar
-        %h2= t('.top_discussed_title')
-      .list_items
-        %ul
+  - if most_discussed_stories.empty?
+    - most_discussed_stories ||= Content.active.published.find( :all, :limit => 5, :order => "comments_count desc")
+  %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('.top_discussed_title')
+    .list_items
+      %ul
+        - unless most_discussed_stories.empty?
           - most_discussed_stories.each do |story|
             %li
               .itemBlock
@@ -17,3 +19,8 @@
                   %h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => timeago(story.created_at))
                   %span.btnComment== #{like_link story} #{story.votes_tally}
                   %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
+        - else
+          %li
+            .itemBlock
+              %h4= t('empty_discussed_stories')
+          
