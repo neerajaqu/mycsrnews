@@ -342,7 +342,7 @@ en:
     message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips and feedback.</a>"
     feedback_message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips</a> or <a href=\"{{forum_link}}\">share your feedback</a>."
   add_stuff:
-    title: "Post Something!"
+    title: "Try Posting Something!"
     story: "Add a story from the Web"
     idea: "Suggest an idea"
     resource: "Contribute a link to our directory"

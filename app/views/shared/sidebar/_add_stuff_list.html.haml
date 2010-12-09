@@ -1,21 +1,21 @@
 - cache :add_stuff_list_html, :expires_in => 24.hours do
   %div{:class => "panel_1 featureWrap #{defined?(widget_page) ? widget_page.css_class : ''}"}
-    .panelBar
-      %h2= t('add_stuff.title')
-    .featured
-      .item_1.answer
-        .list_items.bullet_list
-          %ul
-            %li= link_to t('add_stuff.story'), new_story_path
-            - unless MENU['stories']['new_article'].nil? and MENU['articles']['new_article'].nil?
-              %li= link_to t('add_stuff.article'), new_article_path
-            - if MENU.key? 'forums'
-              %li= link_to t('add_stuff.topic'), forums_path
-            - if MENU.key? 'questions'
-              %li= link_to t('add_stuff.question'), new_question_path
-            - if MENU.key? 'ideas'
-              %li= link_to t('add_stuff.idea'), new_idea_path
-            - if MENU.key? 'events'
-              %li= link_to t('add_stuff.event'), new_event_path
-            - if MENU.key? 'resources'
-              %li= link_to t('add_stuff.resource'), new_resource_path
+    .itemBlock
+      .featured
+        .item_1.answer
+          %h4= t('add_stuff.title')
+          .list_items.bullet_list
+            %ul
+              %li= link_to t('add_stuff.story'), new_story_path
+              - unless MENU['stories']['new_article'].nil? and MENU['articles']['new_article'].nil?
+                %li= link_to t('add_stuff.article'), new_article_path
+              - if MENU.key? 'forums'
+                %li= link_to t('add_stuff.topic'), forums_path
+              - if MENU.key? 'questions'
+                %li= link_to t('add_stuff.question'), new_question_path
+              - if MENU.key? 'ideas'
+                %li= link_to t('add_stuff.idea'), new_idea_path
+              - if MENU.key? 'events'
+                %li= link_to t('add_stuff.event'), new_event_path
+              - if MENU.key? 'resources'
+                %li= link_to t('add_stuff.resource'), new_resource_path
