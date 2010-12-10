@@ -24,24 +24,15 @@ GEM
     activeresource (2.3.4)
       activesupport (= 2.3.4)
     activesupport (2.3.4)
-    bitly (0.5.4)
+    bitly (0.5.1)
       crack (>= 0.1.4)
       httparty (>= 0.5.2)
     builder (2.1.2)
-    capistrano (2.5.19)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.0.0)
     compass (0.10.6)
       haml (>= 3.0.4)
     compass-960-plugin (0.10.0)
       compass (>= 0.10.0)
     crack (0.1.8)
-    eycap (0.5.6)
-      capistrano (>= 2.2.0)
-      hoe (>= 1.5.1)
     feedzirra (0.0.18.1)
       activesupport (>= 2.0.0)
       builder (>= 2.1.2)
@@ -58,9 +49,6 @@ GEM
       activesupport (>= 2.2.3)
     haml (3.0.24)
     hashie (0.4.0)
-    highline (1.6.1)
-    hoe (2.8.0)
-      rake (>= 0.8.7)
     httparty (0.6.1)
       crack (= 0.1.8)
     i18n (0.5.0)
@@ -73,13 +61,7 @@ GEM
       hashie (>= 0.2.0)
       httparty (>= 0.4.3)
     multi_json (0.0.5)
-    net-scp (1.0.4)
-      net-ssh (>= 1.99.1)
-    net-sftp (2.0.5)
-      net-ssh (>= 2.0.9)
-    net-ssh (2.0.23)
-    net-ssh-gateway (1.0.1)
-      net-ssh (>= 1.99.1)
+    mysql (2.8.1)
     nokogiri (1.4.4)
     oauth (0.4.4)
     pauldix-sax-machine (0.0.14)
@@ -125,18 +107,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bitly
+  bitly (= 0.5.1)
   builder (= 2.1.2)
   compass (~> 0.10.0)
   compass-960-plugin
   curb!
-  eycap
   feedzirra (= 0.0.18.1)
-  formtastic
+  formtastic (= 1.1.0)
   friendly_id (= 2.2.7)
   json (= 1.4.6)
   loofah (= 0.4.7)
   mogli
+  mysql
   nokogiri
   oauth
   rack (= 1.0.1)

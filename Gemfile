@@ -7,7 +7,6 @@ gem 'compass-960-plugin'
 gem 'json', '1.4.6'
 gem 'mogli'
 
-gem "eycap"
 gem "rack", '1.0.1'
 gem "formtastic", "1.1.0"
 gem "friendly_id", '2.2.7'
@@ -15,6 +14,7 @@ gem 'will_paginate', '~> 2.3.11'
 gem "tzinfo", '0.3.23'
 gem "oauth"
 gem "twitter"
+gem "mysql"
 gem "bitly", "0.5.1"
 gem "redis"
 gem "redis-namespace"
