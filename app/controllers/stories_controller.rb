@@ -11,6 +11,7 @@ class StoriesController < ApplicationController
   before_filter :load_top_discussed_stories, :only => [:index, :tags]
   before_filter :load_top_users, :only => [:index, :app_tab, :tags]
   before_filter :load_newest_users, :only => [:index, :app_tab, :tags]
+  before_filter :set_custom_sidebar_widget, :only => [:index, :show]
 
   after_filter :store_location, :only => [:index, :new, :show]
 
