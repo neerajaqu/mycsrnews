@@ -125,6 +125,7 @@ en:
   add_your_own_answer: "Add your own answer to this question"
   be_first_to_answer: "This question has not yet been answered, be the first to answer it"
   please_elaborate: "Please elaborate a bit more (optional)"
+  other_posts_by: "Other posts by {{fb_name}}"
   active_users: "{{user_count}} users online now"
   active_users_none: "No users are online right now."
   recent_users: "{{user_count}} recently online"
