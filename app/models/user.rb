@@ -235,8 +235,12 @@ class User < ActiveRecord::Base
     fb_user_id
   end
 
+  def other_posts
+    self.contents.find(:all, :conditions => ["article_id is null"], :limit => 7, :order => "created_at desc")
+  end
+  
   def other_stories curr_story
-    self.contents.find(:all, :conditions => ["id != ?", curr_story.id], :limit => 10, :order => "created_at desc")
+    self.contents.find(:all, :conditions => ["id != ?", curr_story.id], :limit => 7, :order => "created_at desc")
   end
 
   def is_admin?
