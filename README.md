@@ -12,7 +12,7 @@ Clone this application to your machine and checkout release 2
         git clone git://github.com/newscloud/n2.git
         git checkout --track -b release2 origin/release2
 
-Alternatively, download release 2 directly http://github.com/newscloud/n2/archives/v2.0_stable
+Alternatively, download release 2 directly [http://github.com/newscloud/n2/archives/v2.0_stable](https://github.com/newscloud/n2/tree/release2)
 
 Register a facebook application
 -------------------------------
