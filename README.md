@@ -17,7 +17,7 @@ Alternatively, download release 2 directly [http://github.com/newscloud/n2/archi
 Register a facebook application
 -------------------------------
 
-  * Visit http://www.facebook.com/developers/ and register your application
+  * Visit [http://www.facebook.com/developers/](http://www.facebook.com/developers/) and register your application
   * You **must** set your canvas url to end in /iframe/, ie http://my.site.com/iframe/
   * However, when you set your config files you only want to use http://my.site.com
   * This is used internally to allow the use of a facebook canvas app and an external web pages
