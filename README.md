@@ -7,15 +7,16 @@ NewsCloud is an open-sourceFacebook application that brings the power of communi
 Getting Started
 ---------------
 
-1. Download the application
-  Clone this application to your machine and checkout release 2
+Clone this application to your machine and checkout release 2
 
         git clone git://github.com/newscloud/n2.git
         git checkout --track -b release2 origin/release2
 
-  Alternatively, download release 2 directly http://github.com/newscloud/n2/archives/v2.0_stable
+Alternatively, download release 2 directly http://github.com/newscloud/n2/archives/v2.0_stable
 
-2. Register a facebook application
+Register a facebook application
+-------------------------------
+
   * Visit http://www.facebook.com/developers/ and register your application
   * You **must** set your canvas url to end in /iframe/, ie http://my.site.com/iframe/
   * However, when you set your config files you only want to use http://my.site.com
@@ -24,39 +25,47 @@ Getting Started
     * Canvas Type = Iframe
 	* Iframe Size = Auto-resize
 
-3. Install required software
+Install required software
+-------------------------
+
   * MySQL
   * Memcached
   * Redis 2.x
 
-  We currently require the use of Memcached and Redis for caching and background job processing respectively.  We are in the process of fully converting over to Redis, but for the time being both are required.
+We currently require the use of Memcached and Redis for caching and background job processing respectively.  We are in the process of fully converting over to Redis, but for the time being both are required.
 
-  Memcached is only required in production and can be disabled in config/environments/production.rb
-  Redis/Resque are required in both development and production environments as Rails does not have a generic job queue hook.
+Memcached is only required in production and can be disabled in config/environments/production.rb
+Redis/Resque are required in both development and production environments as Rails does not have a generic job queue hook.
 
-4. Setup your config files
-  The primary(required) config files are:
-    * application_settings.yml -- misc config options
-    * database.yml
-	* facebooker.yml -- remember to set callback_url to your base site, ie http://my.site.com
-	* compass.rb -- need to set http_images_path to your absolute web address
-	* locales.yml -- select the languagues you will be using
-	* menu.yml -- configure what menu items you want to appear in your application
-	* resque.yml -- where to find your redis server
+Setup your config files
+-----------------------
 
-  The option config files for advanced settings are:
-    * newrelic.yml for use with the [New Relic](http://newrelic.com/) monitoring (Note: we are not affiliated, we just like their application)
-    * smtp.yml for outgoing mail
-	* application.god for use with the [God monitoring system](http://god.rubyforge.org/)
-	* unicorn.conf.rb
-	* There are a number of other advanced files in the config directory
+The primary(required) config files are:
 
-  We provide .sample files for the majority of these config files to facilitate easy setup.
+  * application_settings.yml -- misc config options
+  * database.yml
+  * facebooker.yml -- remember to set callback_url to your base site, ie http://my.site.com
+  * compass.rb -- need to set http_images_path to your absolute web address
+  * locales.yml -- select the languagues you will be using
+  * menu.yml -- configure what menu items you want to appear in your application
+  * resque.yml -- where to find your redis server
 
-  As mentioned above, when you set your config options, **remember to use** http://my.site.com and **not** http://my.site.com/iframe/
+The optional config files for advanced settings are:
 
-5. Install dependencies and setup the framework
-  Now that we got the hard part out of the way, there are just a few commands left to run.
+  * newrelic.yml for use with the [New Relic](http://newrelic.com/) monitoring (Note: we are not affiliated, we just like their application)
+  * smtp.yml for outgoing mail
+  * application.god for use with the [God monitoring system](http://god.rubyforge.org/)
+  * unicorn.conf.rb
+  * There are a number of other advanced files in the config directory
+
+We provide .sample files for the majority of these config files to facilitate easy setup.
+
+As mentioned above, when you set your config options, **remember to use** http://my.site.com and **not** http://my.site.com/iframe/
+
+Install dependencies and setup the framework
+--------------------------------------------
+
+Now that we got the hard part out of the way, there are just a few commands left to run.
 
         # Install [Bundler](http://gembundler.com/)
         sudo gem install bundler
@@ -91,6 +100,7 @@ For more information about configuring you home page, read our [Widget Builder G
 We have a wide array of documentation and articles located at http://support.newscloud.com/
 
 Some useful starting points are:
+
   * [Configuring Your Application](http://support.newscloud.com/faqs/configuring-your-application)
   * [Managing Your Application](http://support.newscloud.com/faqs/managing-your-application)
   * [Using your Facebook Application](http://support.newscloud.com/faqs/using-your-facebook-application)
