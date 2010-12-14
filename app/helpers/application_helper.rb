@@ -279,7 +279,8 @@ module ApplicationHelper
 
   end
       
-  def base_url(path)
+  def base_url(path = '')
+    path = "/#{path}" if path.present? and not path =~ %r{^/} and not APP_CONFIG['base_url'] =~ %r{/$}
     if APP_CONFIG['base_url'].present?
     	"#{APP_CONFIG['base_url']}#{path}"
     end

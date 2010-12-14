@@ -55,6 +55,10 @@ class ApplicationController < ActionController::Base
   helper_method :get_ad_layout
   helper_method :iframe_facebook_request?
   helper_method :get_canvas_preference
+  helper_method :canvas_url
+  helper_method :replace_url_with_canvas_url
+  helper_method :replace_text_with_canvas_urls
+  helper_method :replace_text_with_urls
 
   def newscloud_redirect_to(options = {}, response_status = {})
     @enable_iframe_hack = !! @iframe_status
@@ -439,6 +443,27 @@ class ApplicationController < ActionController::Base
     }
     render :layout => false, :inline => text
 
+  end
+
+  def canvas_url
+    "http://#{Facebooker.canvas_server_base}/#{FACEBOOKER["canvas_page_name"]}/"
+  end
+
+  def replace_url_with_canvas_url url
+    url.sub %r{^#{APP_CONFIG["base_url"]}/?(iframe/)?}, canvas_url
+  end
+
+  def replace_text_with_canvas_urls text
+    text.gsub %r{#{APP_CONFIG["base_url"]}/?(iframe/)?}, canvas_url
+  end
+
+  def replace_text_with_urls text, url
+    txt = text.clone
+    url ||= get_canvas_preference ? canvas_url : APP_CONFIG['base_url']
+    url += '/' unless url =~ %r{/$}
+    txt.gsub! %r{#{APP_CONFIG["base_url"]}/?(iframe/)?}, url
+    txt.gsub! %r{#{canvas_url}}, url
+    txt
   end
 
 end
