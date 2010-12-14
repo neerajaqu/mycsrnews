@@ -29,3 +29,8 @@ gem 'builder', '2.1.2'
 gem 'curb', :git => 'git://github.com/taf2/curb.git'
 gem 'sax-machine', :git => 'git://github.com/pauldix/sax-machine.git'
 gem 'feedzirra', '0.0.18.1'
+
+group :development do
+  gem "wirble"
+  gem "awesome_print"
+end
