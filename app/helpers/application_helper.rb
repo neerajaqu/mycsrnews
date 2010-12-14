@@ -368,7 +368,8 @@ EMBED
   end
 
   def embed_audio audio, options = {}
-    request_comes_from_facebook? ? embed_fb_audio(audio, options) : embed_html_audio(audio, options)
+    #request_comes_from_facebook? ? embed_fb_audio(audio, options) : embed_html_audio(audio, options)
+    embed_html_audio(audio, options)
   end
 
   def embed_fb_audio audio, options = {}
