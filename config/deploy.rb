@@ -26,6 +26,7 @@ after("deploy:update_code") do
   deploy.load_skin
   deploy.restore_previous_sitemap
   deploy.cleanup
+  bundler.bundle_new_release
 end
 
 before("deploy") do
@@ -152,9 +153,21 @@ namespace :deploy do
       run "if [ -e #{current_path}/public/sitemap_index.xml.gz ]; then cp #{current_path}/public/sitemap* #{release_path}/public/; fi"
   end
 
-
 end
 
+namespace :bundler do
+  task :create_symlink, :roles => :app do
+    shared_dir = File.join(shared_path, 'vendor_bundle')
+    release_dir = File.join(current_release, 'vendor', 'bundle')
+    run("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
+  end
+ 
+  task :bundle_new_release, :roles => :app do
+    bundler.create_symlink
+    run "cd #{release_path} && bundle install --deployment --without test --without development"
+  end
+end
+ 
 
 #########################################################################
 # Helper Methods

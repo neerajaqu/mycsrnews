@@ -15,7 +15,7 @@ namespace :n2 do
       desc "Compile Compass css for specific application"
       task :compile_css do
         puts "Compiling Compass css"
-        system("`which compass` --force")
+        system("`which compass` compile")
       end
     end
 

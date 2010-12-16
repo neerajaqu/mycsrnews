@@ -45,3 +45,4 @@ config/s3.yml
 spec/fixtures
 *.tmproj
 dump.rdb
+.bundle

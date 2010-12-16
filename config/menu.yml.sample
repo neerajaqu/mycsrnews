@@ -12,7 +12,6 @@ menu:
     #new_article: 'enabled'
   forums:
   	sub_forums: 'enabled'
-  predictions: 'enabled'
   resources:
     resources_list: 'enabled'
     new_resource: 'enabled'

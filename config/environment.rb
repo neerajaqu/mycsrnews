@@ -40,22 +40,22 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   #config.gem "haml"
-  config.gem "eycap"
-  config.gem "rack"
-  config.gem "formtastic"
-  config.gem "friendly_id"
-  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
-  config.gem "compass"
-  config.gem 'json', :version => '1.4.6'
-  config.gem "compass-960-plugin", :lib => 'ninesixty'
-  config.gem "eostrom-zvent", :lib => 'zvent'
-  config.gem "oauth"
-  config.gem "mogli"
-  config.gem "twitter"
-  config.gem "bitly"
-  config.gem "resque"
-  config.gem "resque-scheduler", :lib => 'resque_scheduler'
-  config.gem 'sitemap_generator', :lib => false
+  #config.gem "eycap"
+  #config.gem "rack"
+  #config.gem "formtastic"
+  #config.gem "friendly_id"
+  #config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
+  #config.gem "compass"
+  #config.gem 'json', :version => '1.4.6'
+  #config.gem "compass-960-plugin", :lib => 'ninesixty'
+  #config.gem "eostrom-zvent", :lib => 'zvent'
+  #config.gem "oauth"
+  #config.gem "mogli"
+  #config.gem "twitter"
+  #config.gem "bitly"
+  #config.gem "resque"
+  #config.gem "resque-scheduler", :lib => 'resque_scheduler'
+  #config.gem 'sitemap_generator', :lib => false
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -82,6 +82,7 @@ Rails::Initializer.run do |config|
 
   # Set rails cache directory to public/cache
   config.action_controller.page_cache_directory = RAILS_ROOT + "/public/cache"
+
 end
 
 if FileTest.exists?("#{RAILS_ROOT}/config/smtp.yml")
@@ -90,4 +91,3 @@ if FileTest.exists?("#{RAILS_ROOT}/config/smtp.yml")
 end
 
 require "#{RAILS_ROOT}/lib/parse.page.rb"
-
