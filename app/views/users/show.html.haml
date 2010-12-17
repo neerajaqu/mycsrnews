@@ -89,5 +89,6 @@
               - @activities.each do |activity|
                 -#%li.actionFeedItem
                 %li.pfeed_container= pfeed_content(activity)
+  = render :partial => 'shared/sidebar/user_posts', :locals => { :user => @user }
   = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => @user.articles , :locale_var => 'popular_tags' }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

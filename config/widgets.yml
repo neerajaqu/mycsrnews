@@ -17,6 +17,8 @@ widgets:
     announcements:
       partial: 'shared/announcements'    
   sidebar_content:
+    add_stuff_list:
+      partial: '/shared/sidebar/add_stuff_list'
     gallery_images:
       partial: '/shared/sidebar/gallery_images'
     auto_feature_sidebar:

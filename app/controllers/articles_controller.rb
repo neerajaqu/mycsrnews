@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
   before_filter :load_top_stories, :only => [:index]
   before_filter :load_top_discussed_stories, :only => [:index]
   before_filter :load_newest_articles, :only => [:index]
+  before_filter :set_custom_sidebar_widget, :only => [:index]
 
   after_filter :store_location, :only => [:index, :new, :edit]
 

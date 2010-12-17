@@ -3,4 +3,4 @@
 - cache :newest_topics_html do
   - newest_topics ||= Topic.active.newest
   - unless newest_topics.empty?
-    = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => t('forums.newest_topics_title'), :item_list => newest_topics }
+    = render :partial => 'shared/lists/micro_topic_list', :locals => { :list_title => t('forums.newest_topics_title'), :item_list => newest_topics }

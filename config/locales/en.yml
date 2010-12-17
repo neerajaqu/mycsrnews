@@ -92,6 +92,7 @@ en:
   user_posted_item: "{{fb_name}} posted {{title}} {{date}} ago"
   posted_by: "Posted by {{fb_name}} {{date}} ago"
   posted_by_via: "Posted by {{fb_name}} via {{source}}, {{date}} ago"
+  posted_by_in_topic: "Posted by {{fb_name}} in {{topic}}"
   read_more: "read more"
   facebook_share_link: "Facebook"
   facebook_share: "What do you want to write on your wall?"
@@ -124,6 +125,7 @@ en:
   add_your_own_answer: "Add your own answer to this question"
   be_first_to_answer: "This question has not yet been answered, be the first to answer it"
   please_elaborate: "Please elaborate a bit more (optional)"
+  other_posts_by: "Other posts by {{fb_name}}"
   active_users: "{{user_count}} users online now"
   active_users_none: "No users are online right now."
   recent_users: "{{user_count}} recently online"
@@ -341,8 +343,19 @@ en:
     title: "Contact Us"
     message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips and feedback.</a>"
     feedback_message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips</a> or <a href=\"{{forum_link}}\">share your feedback</a>."
+  add_stuff:
+    title: "Try Posting Something!"
+    story: "Add a story from the Web"
+    idea: "Suggest an idea"
+    resource: "Contribute a link to our directory"
+    topic: "Post a new discussion topic"
+    article: "Write your own blog post"
+    question: "Ask a question of other readers"    
+    event: "Add an event from Facebook"
   hint:
     user_profile:
       post_comments: "Comments you post will be added to your Facebook stream"
       post_likes: "Stories and items you like will be added to your Facebook stream"
       post_items: "Any story or item you post will be added to your Facebook stream"
+  empty:
+    top_discussed_stories: "Sorry, no discussions found."

@@ -7,3 +7,6 @@
       %h4= link_to item.title, path_to_self(item)
     - else
       %h4= link_to item.title, path_to_self(item, canvas_preference), :target => "_top"
+    .itemMeta
+      %h3= t('posted_by_in_topic', :fb_name => local_linked_profile_name(item.user), :topic => item.forum.item_title)
+      

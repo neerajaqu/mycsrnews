@@ -1,4 +1,4 @@
-- cache :external_topics_#{@count}_html do
+- cache "external_topics_#{@count}_html" do
   - count = @count
   - newest_topics ||= Topic.active.newest count
   - unless newest_topics.empty?
