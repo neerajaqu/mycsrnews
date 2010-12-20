@@ -101,6 +101,8 @@ GEM
       multi_json (~> 0.0.4)
       oauth (~> 0.4.3)
     tzinfo (0.3.23)
+    unicorn (0.95.2)
+      rack
     vegas (0.1.8)
       rack (>= 1.0.0)
     will_paginate (2.3.15)
@@ -135,5 +137,6 @@ DEPENDENCIES
   sitemap_generator
   twitter
   tzinfo (= 0.3.23)
+  unicorn (= 0.95.2)
   will_paginate (~> 2.3.11)
   wirble
