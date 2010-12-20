@@ -29,6 +29,7 @@ class Admin::AnnouncementsController < AdminController
   def update
     @announcement = Announcement.find(params[:id])
     if @announcement.update_attributes(params[:announcement])
+    	@announcement.expire
       flash[:success] = "Successfully updated your Announcement."
       redirect_to [:admin, @announcement]
     else

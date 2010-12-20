@@ -26,6 +26,7 @@ class Admin::ContentsController < AdminController
     @content = Content.find(params[:id])
     if @content.update_attributes(params[:content])
       flash[:success] = "Successfully updated your Content."
+      @content.expire
       redirect_to [:admin, @content]
     else
       flash[:error] = "Could not update your Content as requested. Please try again."

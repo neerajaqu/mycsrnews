@@ -23,6 +23,7 @@ class Admin::RelatedItemsController < AdminController
   def update
     @related_item = RelatedItem.find(params[:id])
     if @related_item.update_attributes(params[:related_item])
+    	@related_item.expire
       flash[:success] = "Successfully updated your RelatedItem."
       redirect_to [:admin, @related_item]
     else

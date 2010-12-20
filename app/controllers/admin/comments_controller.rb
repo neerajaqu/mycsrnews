@@ -18,19 +18,20 @@ class Admin::CommentsController < AdminController
   end
 
   def edit
-    @Comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:id])
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => @Comment,
+    	:item => @comment,
     	:model => Comment,
     	:fields => [:comments, :created_at],
     }
   end
 
   def update
-    @Comment = Comment.find(params[:id])
-    if @Comment.update_attributes(params[:Comment])
+    @comment = Comment.find(params[:id])
+    if @comment.update_attributes(params[:Comment])
+    	@comment.expire
       flash[:success] = "Successfully updated your Comment."
-      redirect_to [:admin, @Comment]
+      redirect_to [:admin, @comment]
     else
       flash[:error] = "Could not update your Comment as requested. Please try again."
       render :edit
@@ -46,10 +47,10 @@ class Admin::CommentsController < AdminController
   end
 
   def create
-    @Comment = Comment.new(params[:Comment])
-    if @Comment.save
+    @comment = Comment.new(params[:Comment])
+    if @comment.save
       flash[:success] = "Successfully created your new Comment!"
-      redirect_to [:admin, @Comment]
+      redirect_to [:admin, @comment]
     else
       flash[:error] = "Could not create your Comment, please try again"
       render :new
@@ -57,8 +58,8 @@ class Admin::CommentsController < AdminController
   end
 
   def destroy
-    @Comment = Comment.find(params[:id])
-    @Comment.destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
 
     redirect_to admin_Comments_path
   end

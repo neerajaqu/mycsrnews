@@ -15,6 +15,7 @@ class Admin::IdeasController < AdminController
   def update
     @idea = Idea.find(params[:id])
     if @idea.update_attributes(params[:idea])
+    	@idea.expire
       flash[:success] = "Successfully updated your Idea ."
       redirect_to [:admin, @idea]
     else

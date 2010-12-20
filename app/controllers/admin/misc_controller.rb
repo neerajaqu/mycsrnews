@@ -4,7 +4,7 @@ class Admin::MiscController < AdminController
     @item = find_moderatable_item
 
     if @item.moderatable? and @item.toggle_featured
-    	expire_cache @item
+    	@item.expire
     	flash[:success] = "Successfully #{@item.is_featured? ? 'featured' : 'unfeatured'} your item."
     	#redirect_to [:admin, :contents]
     	redirect_to [:admin, @item]
@@ -18,7 +18,7 @@ class Admin::MiscController < AdminController
     @item = find_moderatable_item
 
     if @item.moderatable? and @item.toggle_blocked
-    	expire_cache @item
+    	@item.expire
     	flash[:success] = "Successfully #{@item.is_blocked? ? 'blocked' : 'unblocked'} your item."
     	#redirect_to [:admin, :contents]
     	redirect_to [:admin, @item]
