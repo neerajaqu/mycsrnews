@@ -14,7 +14,7 @@ class Forum < ActiveRecord::Base
 
   has_friendly_id :name, :use_slug => true
 
-  named_scope :positioned, :order => ["position desc, created_at desc"]
+  named_scope :positioned, :order => ["position desc, name asc"]
   named_scope :alpha, :order => ["name asc"]
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["featured_at desc"], :limit => (args.first || 3)} }
 
