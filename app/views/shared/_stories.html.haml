@@ -1,5 +1,5 @@
 - page ||= ""
-- cache_if page.present?, "stories_list_#{page}_html" do
+- cache_if page.present?, "stories_list_#{page}html" do
   - if get_setting('exclude_articles_from_news').value
     - contents ||= Content.active.top_story_items.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
   -else
