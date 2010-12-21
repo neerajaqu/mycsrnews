@@ -37,3 +37,7 @@ group :development do
   gem "wirble"
   gem "awesome_print"
 end
+
+group :production do
+  gem "unicorn", "0.95.2"
+end
