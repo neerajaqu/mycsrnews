@@ -112,6 +112,11 @@ class Admin::TranslationsController < AdminController
 
     respond_to do |format|
       if @translation.update_attributes(params[:translation])
+
+        if @translation.raw_key.include? "welcome_panel"
+          WidgetSweeper.expire_item "welcome_panel"
+        end
+
         format.html do
           flash[:notice] = 'Translation was successfully updated.'
           redirect_to admin_locale_translation_path(@locale, @translation)
