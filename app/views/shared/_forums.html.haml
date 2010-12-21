@@ -33,4 +33,4 @@
 .panel_2.moderator-links
   %div.float_left= link_to t('forums.new'), new_admin_forum_path(), :class => "btn", :target => '_parent'
                       
-= render :partial => 'shared/index_footer', :locals => { :index_path => forums_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('forums.title') }
+= render :partial => 'shared/index_footer', :locals => { :index_path => forums_path(:only_path => false, :canvas => iframe_facebook_request?), :title => t('forums.title') }

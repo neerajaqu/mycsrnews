@@ -1,13 +1,11 @@
-<div class="panel_2 left">
-	<div class="panelBar"><h2>Sign up as a new user</h2></div>
-	<div class="formBox login">
+<div id="col_left">
+  <div class="panel_2">
+	  <div class="panelBar"><h2>Sign up as a new user</h2></div>
+	  <div class="formBox">
+		  <div class="login">
     <p>Join our community using your Facebook account</p>
-    <br /><br />
-    <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
-    <br /><p>&nbsp;&nbsp;
-    <%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %>
-    </p>
-    <br /><br />
+    <p><%= fb_login_button('window.location = "/users/link_user_accounts";')%></p>
+    <p><%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %></p>
     <% if APP_CONFIG['allow_web_auth'].present? and APP_CONFIG['allow_web_auth'] %>
       <p>Or, register as a new user below:</p>
 
@@ -34,6 +32,7 @@
       <% end -%>
     <% end -%>
 
+		  </div>
+	  </div>
   </div>
 </div>
-<br />

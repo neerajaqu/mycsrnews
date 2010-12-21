@@ -62,6 +62,7 @@ class Admin::LocalesController < AdminController
     respond_to do |format|
       if @locale.update_attributes(params[:locale_form])
         flash[:notice] = 'Locale was successfully updated.'
+
         format.html { redirect_to [:admin, @locale] }
         format.xml  { head :ok }
       else

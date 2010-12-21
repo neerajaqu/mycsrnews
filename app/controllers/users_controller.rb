@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   cache_sweeper :user_sweeper, :only => [:create, :link_user_accounts]
 
   before_filter :check_valid_user, :only => [:edit, :update ]
-  before_filter :login_required, :only => [:update_bio, :feed, :edit, :update, :dont_ask_me_for_email]
+  before_filter :login_required, :only => [:update_bio, :feed, :edit, :update, :dont_ask_me_for_email, :invite]
   before_filter :load_top_stories, :only => [:show]
   before_filter :ensure_authenticated_to_facebook, :only => :link_user_accounts
   before_filter :set_ad_layout, :only => [:index, :show]

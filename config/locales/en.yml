@@ -343,6 +343,13 @@ en:
     title: "Contact Us"
     message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips and feedback.</a>"
     feedback_message: "We'd love to hear from you! <a href=\"{{contact_link}}\">Send us your news tips</a> or <a href=\"{{forum_link}}\">share your feedback</a>."
+  invite_friends:
+    title: "Invite Your Friends"
+    message: "Ask your friends to join {{site_title}}: <a href=\"{{invite_link}}\">Send invitations</a>!"
+  email_reminder:
+    title: "Stay in Touch!"
+    message: "Want to be notified when other people respond to your posts? <a href=\"{{settings_link}}\">Update your email address</a>!"
+    login_required: "You must be signed in to update your email address."
   add_stuff:
     title: "Try Posting Something!"
     story: "Add a story from the Web"
