@@ -1,0 +1,12 @@
+- case rand(3)
+  - when 0
+    = render :partial => 'shared/sidebar/contact_us'
+  - when 1
+    = render :partial => 'shared/sidebar/invite_friends'
+  - when 2
+    - if current_user.present? and current_user.email.empty?
+      = render :partial => 'shared/sidebar/email_reminder'
+    - else
+      = render :partial => 'shared/sidebar/contact_us'
+
+

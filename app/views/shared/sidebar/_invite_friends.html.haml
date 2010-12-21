@@ -1,0 +1,11 @@
+- cache :invite_friends_html, :expires_in => 1.days do
+  %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('invite_friends.title')
+    .list_items
+      %ul
+        %li
+          .featured
+            .item_2.resource
+              .itemBlock
+                %p= t('invite_friends.message', :site_title => APP_CONFIG['site_title'], :invite_link => invite_users_path(:format => 'html') )
