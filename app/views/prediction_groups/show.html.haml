@@ -40,16 +40,16 @@
       %ul
         - @prediction_group.prediction_questions.each do |prediction_question|
           - if current_user.present?
-            - unless prediction_question.user_guessed? current_user
-              %li
-                .generic.small
-                  .itemBlock          
-                    %h4= render :partial => 'shared/prediction_question', :locals => { :prediction_question => prediction_question }
-            - else
-              %li
-                .generic.small
-                  .itemBlock          
-                    %h4 display stats here
+            %li
+              .generic.small
+                .itemBlock          
+                  %h4= prediction_question.title
+                  - unless prediction_question.user_guessed? current_user
+                    = render :partial => 'shared/prediction_question', :locals => { :prediction_question => prediction_question }
+                  - else
+                    - cache "#{prediction_question.cache_key}_stats_html" do
+                      = render :partial => 'shared/prediction_question_stats', :locals => { :prediction_question => prediction_question }
+                    -# todo - show your guess, possibly use jscript to bold your choice
           - else
             -# do nothing
     - else

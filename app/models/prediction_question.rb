@@ -7,7 +7,7 @@ class PredictionQuestion < ActiveRecord::Base
   acts_as_tweetable
 
   belongs_to  :user
-  belongs_to  :prediction_group
+  belongs_to  :prediction_group, :counter_cache => true, :touch => true
   has_many    :prediction_guesses
 
   attr_accessor :tags_string
@@ -24,4 +24,12 @@ class PredictionQuestion < ActiveRecord::Base
     prediction_guesses.exists?(:user_id => user.id)
   end
 
+  def update_stats
+    case self.prediction_type
+      when "yesno"
+        PredictionGuess.count(:group => :guess, :conditions => {:prediction_question_id => self.id})
+      when "multi"
+        PredictionGuess.count(:group => :guess, :conditions => {:prediction_question_id => self.id})
+    end    
+  end
 end

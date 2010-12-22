@@ -14,12 +14,12 @@ class PredictionGroup < ActiveRecord::Base
 
   attr_accessor :tags_string
 
-
   has_friendly_id :title, :use_slug => true
   validates_presence_of :title, :section
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 10)} }
+  named_scope :open, lambda { |*args| { :conditions => ["prediction_questions_count > 0" ] } }
 
   def to_s
     "Prediction Group: #{title}"
@@ -27,7 +27,7 @@ class PredictionGroup < ActiveRecord::Base
 
   def next
     if PredictionGroup.count > 0
-      PredictionGroup.find(:first, :conditions => ["id > ?", self.id ], :order => "id asc")
+      PredictionGroup.open.find(:first, :conditions => ["id > ?", self.id ], :order => "id asc")
     else
       nil
     end
@@ -35,7 +35,7 @@ class PredictionGroup < ActiveRecord::Base
   
   def previous
     if PredictionGroup.count > 0
-      PredictionGroup.find(:first, :conditions => ["id < ?", self.id ], :order => "id desc")
+      PredictionGroup.open.find(:first, :conditions => ["id < ?", self.id ], :order => "id desc")
     else
       nil
     end
