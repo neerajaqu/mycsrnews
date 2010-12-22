@@ -57,6 +57,7 @@ class User < ActiveRecord::Base
   has_many :prediction_groups
   has_many :prediction_questions
   has_many :prediction_guesses
+  has_many :user_prediction_questions, :source=> :prediction_question, :through => :prediction_guesses
   has_one :prediction_score
 
   belongs_to :last_viewed_feed_item, :class_name => "PfeedItem", :foreign_key => "last_viewed_feed_item_id"
