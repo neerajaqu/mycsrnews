@@ -5,7 +5,7 @@ class PredictionsController < ApplicationController
 
   before_filter :set_current_tab
   before_filter :set_ad_layout, :only => [:index]
-  before_filter :login_required, :only => [:like, :new, :create, :update]
+  before_filter :login_required, :only => [:like, :new, :create, :update, :my_predictions]
 
   def index
     redirect_to play_prediction_groups_path

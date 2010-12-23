@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101109205202) do
+ActiveRecord::Schema.define(:version => 20101221232829) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -451,17 +451,18 @@ ActiveRecord::Schema.define(:version => 20101109205202) do
     t.string   "title"
     t.string   "section"
     t.text     "description"
-    t.string   "status",          :default => "open"
+    t.string   "status",                     :default => "open"
     t.integer  "user_id"
-    t.boolean  "is_approved",     :default => true
-    t.integer  "votes_tally",     :default => 0
-    t.integer  "comments_count",  :default => 0
-    t.integer  "questions_count", :default => 0
-    t.boolean  "is_blocked",      :default => false
-    t.boolean  "is_featured",     :default => false
+    t.boolean  "is_approved",                :default => true
+    t.integer  "votes_tally",                :default => 0
+    t.integer  "comments_count",             :default => 0
+    t.integer  "questions_count",            :default => 0
+    t.boolean  "is_blocked",                 :default => false
+    t.boolean  "is_featured",                :default => false
     t.datetime "featured_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "prediction_questions_count", :default => 0
   end
 
   create_table "prediction_guesses", :force => true do |t|
@@ -482,17 +483,18 @@ ActiveRecord::Schema.define(:version => 20101109205202) do
     t.string   "title"
     t.string   "prediction_type"
     t.string   "choices"
-    t.string   "status",              :default => "open"
+    t.string   "status",                   :default => "open"
     t.integer  "user_id"
-    t.boolean  "is_approved",         :default => true
-    t.integer  "votes_tally",         :default => 0
-    t.integer  "comments_count",      :default => 0
-    t.integer  "guesses_count",       :default => 0
-    t.boolean  "is_blocked",          :default => false
-    t.boolean  "is_featured",         :default => false
+    t.boolean  "is_approved",              :default => true
+    t.integer  "votes_tally",              :default => 0
+    t.integer  "comments_count",           :default => 0
+    t.integer  "guesses_count",            :default => 0
+    t.boolean  "is_blocked",               :default => false
+    t.boolean  "is_featured",              :default => false
     t.datetime "featured_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "prediction_guesses_count", :default => 0
   end
 
   create_table "prediction_scores", :force => true do |t|

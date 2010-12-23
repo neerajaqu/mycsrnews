@@ -4,4 +4,9 @@ class PredictionGuess < ActiveRecord::Base
   acts_as_moderatable
 
   #validates_presence_of 
+
+  def user_guessed? user
+    prediction_question.user_guessed? user
+  end
+  
 end

@@ -1,23 +1,27 @@
-%li
-  = question.title
-  .prediction-question-container
-    - form_tag create_prediction_guesses_path, :class => "prediction-question-form" do
-      = hidden_field_tag :prediction_question_id, question.id
-      - case question.prediction_type
-        - when 'multi'
-          - choice_list = [t('predictions.select_guess')] | question.choices.split(/,/)
-          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-        - when 'yesno'
-          - choice_list = [t('predictions.select_guess'), 'Yes', 'No']
-          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-        - when 'numeric'
-        - when 'float'
-          -# wont work on onchange , needs submit
-          = text_field_tag :guess
-          = submit_tag "Submit"
-        - when 'year'
-          - choice_list = [t('predictions.select_guess')] | question.choices.split(/,/)
-          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-        - when 'text'
-          = text_field_tag :guess
-          = submit_tag "Submit"
+.prediction-question-container
+  - form_for [prediction_question, PredictionGuess.new] do |form|
+    - case prediction_question.prediction_type
+      - when 'multi'
+        - choice_list = [t('predictions.select_guess')] | prediction_question.choices.split(/,/)
+        = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+        = form.submit "Submit"
+      - when 'yesno'
+        - choice_list = [t('predictions.select_guess'), 'Yes', 'No']
+        = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+        = form.submit "Submit"
+      - when 'year'
+        - choice_list = [t('predictions.select_guess')] | prediction_question.choices.split(/,/)
+        = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+        = form.submit "Submit"
+      - when 'float'
+        = form.text_field :guess_numeric
+        = form.submit "Submit"
+      - when 'numeric'
+        = form.text_field :guess_numeric
+        = form.submit "Submit"
+      - when 'text'
+        = form.text_field :guess
+        = form.submit "Submit"
+  .predictions
+    .suggest_answer
+      %a= link_to "Is this question out of date?", "#"

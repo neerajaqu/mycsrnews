@@ -3,25 +3,25 @@ class PredictionGuessesController < ApplicationController
   #cache_sweeper :prediction_sweeper, :only => [:create, :update, :destroy]
 
   def create
-    raise params.inspect
-    respond_to do |format|
-      format.json { @prediction_question = PredictionQuestion(params[:prediction_question_id]) }
-    end
-    return @prediction_question.id
-    @comment = @commentable.comments.build(params[:comment])
-    @comment.user = current_user
-    @comment.comments = @template.sanitize_user_content @comment.comments
-    if @comment.save
-      # to do doesn't work for topic replies
-      if @comment.post_wall?
-        session[:post_wall] = @comment
+    @prediction_question = PredictionQuestion.find(params[:prediction_question_id])
+    if @prediction_question.user_guessed?(current_user)
+      respond_to do |format|
+        format.html {  redirect_to @prediction_question.prediction_group }
+        format.json {  }
       end
-    	# TODO:: change this to work with polymorphic associations, switch to using touch
-    	#expire_page :controller => 'stories', :action => 'show', :id => @story
-    	redirect_to @commentable
-    else
-    	redirect_to @commentable
     end
+    # validate that user hasn't already guessed
+    @prediction_guess = @prediction_question.prediction_guesses.build(params[:prediction_guess])
+    @prediction_guess.user = current_user
+    if @prediction_guess.save
+      respond_to do |format|
+        format.html {  redirect_to @prediction_question.prediction_group }
+        format.json {  }
+      end
+    else
+      raise params.inspect
+    end
+
   end
 
 end
