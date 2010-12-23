@@ -19,9 +19,11 @@
           google.setOnLoadCallback(function() {
             var customSearchControl = new google.search.CustomSearchControl('#{search_engine_id}');
             customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
-            customSearchControl.setSearchCompleteCallback(this, masonryCallback);
-            //customSearchControl.setOnClearCallback(this, masonryCallback);
             customSearchControl.draw('cse');
+
+            customSearchControl.setSearchCompleteCallback(this, masonryCallback);
+            var searchForm = new google.search.SearchForm(true, document.getElementById('searchcontrol'));
+            searchForm.setOnClearCallback(customSearchControl, masonryCallback);
           }, true);              
         = stylesheet_link_tag 'http://www.google.com/cse/style/look/default.css'
       - else
