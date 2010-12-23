@@ -1,10 +1,15 @@
 .prediction-question-container
   - stats = prediction_question.update_stats
-  - prediction_question.choices.split(/,/).each do |prediction_guess|
+  - if prediction_question.prediction_type == 'yesno'
+    - choices = "yes,no"
+  - else
+    - choices = prediction_question.choices
+  - choices.split(/,/).each do |prediction_guess|
     %p
       = prediction_guess
       - unless stats.nil?
         - if stats[prediction_guess].nil?
           0
         - else
-          = stats[prediction_guess]
+          = (stats[prediction_guess] / prediction_question.prediction_guesses.count * 100)
+          ="%"
