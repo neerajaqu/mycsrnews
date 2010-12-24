@@ -359,7 +359,7 @@ class ApplicationController < ActionController::Base
   def after_facebook_login_url
     headers["Newscloud-Origin"] = 'no-rewrite'
     if canvas?
-      link_user_accounts_users_path(:only_path => false, :canvas => true)
+      link_user_accounts_users_path(:only_path => false, :iframe => 'iframe')
     else
     	home_index_path(:only_path => false)
     end

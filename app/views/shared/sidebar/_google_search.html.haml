@@ -9,11 +9,21 @@
           %p= t('loading') 
         %script{:type => "text/javascript", :src => "http://www.google.com/jsapi"}  
         :javascript
+          var masonryCallback = function() {
+            $('#col_full').masonry({
+              columnWidth: #{iframe_facebook_request? ? 250 : 313},
+              itemSelector: '.box'
+            });
+          };
           google.load('search', '1', {language : 'en'});
           google.setOnLoadCallback(function() {
             var customSearchControl = new google.search.CustomSearchControl('#{search_engine_id}');
             customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
             customSearchControl.draw('cse');
+
+            customSearchControl.setSearchCompleteCallback(this, masonryCallback);
+            //var searchForm = new google.search.SearchForm(true, document.getElementById('searchcontrol'));
+            //searchForm.setOnClearCallback(customSearchControl, masonryCallback);
           }, true);              
         = stylesheet_link_tag 'http://www.google.com/cse/style/look/default.css'
       - else

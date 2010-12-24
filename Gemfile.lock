@@ -1,4 +1,16 @@
 GIT
+  remote: git://github.com/chewbranca/feedzirra.git
+  revision: 48476ebcc6008f33e54a6705497de101c2107f0b
+  specs:
+    feedzirra (0.0.24)
+      activesupport (>= 2.3.4)
+      builder (>= 2.1.2)
+      curb (>= 0.2.3)
+      loofah (>= 0.3.1)
+      nokogiri (> 0.0.0)
+      sax-machine (>= 0.0.12)
+
+GIT
   remote: git://github.com/pauldix/sax-machine.git
   revision: a25dff90d5d59ee76b2ef976dbe40825bc8d5477
   specs:
@@ -35,13 +47,6 @@ GEM
     compass-960-plugin (0.10.0)
       compass (>= 0.10.0)
     crack (0.1.8)
-    feedzirra (0.0.18.1)
-      activesupport (>= 2.0.0)
-      builder (>= 2.1.2)
-      mdalessio-dryopteris (>= 0.0.0)
-      nokogiri (> 0.0.0)
-      pauldix-sax-machine (>= 0.0.12)
-      taf2-curb (>= 0.2.3)
     formtastic (1.1.0)
       actionpack (>= 2.3.0)
       activesupport (>= 2.3.0)
@@ -57,8 +62,6 @@ GEM
     json (1.4.6)
     loofah (0.4.7)
       nokogiri (>= 1.3.3)
-    mdalessio-dryopteris (0.1.2)
-      nokogiri (> 0.0.0)
     mogli (0.0.16)
       hashie (>= 0.2.0)
       httparty (>= 0.4.3)
@@ -66,8 +69,6 @@ GEM
     mysql (2.8.1)
     nokogiri (1.4.4)
     oauth (0.4.4)
-    pauldix-sax-machine (0.0.14)
-      nokogiri (> 0.0.0)
     rack (1.0.1)
     rails (2.3.4)
       actionmailer (= 2.3.4)
@@ -94,7 +95,6 @@ GEM
     sinatra (1.0)
       rack (>= 1.0)
     sitemap_generator (1.3.5)
-    taf2-curb (0.5.4.0)
     twitter (0.9.12)
       hashie (~> 0.4.0)
       httparty (~> 0.6.1)
@@ -118,7 +118,7 @@ DEPENDENCIES
   compass (~> 0.10.0)
   compass-960-plugin
   curb!
-  feedzirra (= 0.0.18.1)
+  feedzirra!
   formtastic (= 1.1.0)
   friendly_id (= 2.2.7)
   json (= 1.4.6)
