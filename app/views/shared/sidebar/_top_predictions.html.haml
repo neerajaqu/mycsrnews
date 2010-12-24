@@ -1,5 +1,5 @@
 -# @expects: local 'topic_list'
 
-- cache :top_prediction_groups_html, :expires_in => 180.minutes do
-  - topic_list ||= PredictionGroup.active.open.top
-  = render :partial => 'shared/lists/bullet_generic_list', :locals => { :list_title => t('predictions.newest_groups'), :item_list => topic_list }
+- cache :top_prediction_questions_html, :expires_in => 180.minutes do
+  - item_list ||= PredictionQuestion.active.open.top
+  = render :partial => 'shared/lists/bullet_generic_list', :locals => { :list_title => t('predictions.newest_questions'), :item_list => item_list }
