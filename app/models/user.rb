@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   has_many :prediction_groups
   has_many :prediction_questions
   has_many :prediction_guesses
-  has_many :user_prediction_questions, :source=> :prediction_question, :through => :prediction_guesses
+  has_many :prediction_results
   has_one :prediction_score
 
   belongs_to :last_viewed_feed_item, :class_name => "PfeedItem", :foreign_key => "last_viewed_feed_item_id"
@@ -333,6 +333,11 @@ class User < ActiveRecord::Base
     UserSweeper
   end
 
+  def get_prediction_score
+    return self.prediction_score unless self.prediction_score.nil?
+    self.build_prediction_score
+  end
+  
   private
 
   def check_profile

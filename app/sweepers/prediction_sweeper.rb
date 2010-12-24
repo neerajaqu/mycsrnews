@@ -1,71 +1,73 @@
 class PredictionSweeper < ActionController::Caching::Sweeper
-  observe PredictionGroup, PredictionQuestion
+  observe PredictionGroup, PredictionQuestion, PredictionGuess, PredictionResult, PredictionScore
 
   def after_save(record)
     if record.is_a?(PredictionGroup)
-    	clear_group_cache(record)
+      PredictionSweeper.expire_prediction_group_all(record)
     elsif record.is_a?(PredictionQuestion)
-    	clear_question_cache(record)
-    else
-    	return false
+      PredictionSweeper.expire_prediction_question_all(record)
+    elsif record.is_a?(PredictionGuess)
+      PredictionSweeper.expire_prediction_guess_all(record)
+    elsif record.is_a?(PredictionResult)
+      PredictionSweeper.expire_prediction_result_all(record)
+    elsif record.is_a?(PredictionScore)
+      PredictionSweeper.expire_prediction_score_all(record)
     end
   end
 
   def after_destroy(record)
     if record.is_a?(PredictionGroup)
-    	clear_group_cache(record)
+      PredictionSweeper.expire_prediction_group_all(record)
     elsif record.is_a?(PredictionQuestion)
-    	clear_question_cache(record)
-    else
-    	return false
+      PredictionSweeper.expire_prediction_question_all(record)
+    elsif record.is_a?(PredictionGuess)
+      PredictionSweeper.expire_prediction_guess_all(record)
+    elsif record.is_a?(PredictionResult)
+      PredictionSweeper.expire_prediction_result_all(record)
+    elsif record.is_a?(PredictionScore)
+      PredictionSweeper.expire_prediction_score_all(record)
     end
   end
 
-  def clear_group_cache(prediction_group)
-    ['top_prediction_groups', 'prediction_high_scores', 'newest_prediction_groups', "#{prediction_group.cache_key}_top", "#{prediction_group.cache_key}_bottom", "#{prediction_group.cache_key}_who_liked" ].each do |fragment|
-      expire_fragment "#{fragment}_html"
-    end
-    ['', 'page_1_', 'page_2_'].each do |page|
-      expire_fragment "prediction_groups_#{page}html"
-    end
-  end
-
-  def clear_question_cache(prediction_question)
-    ['top_prediction_questions', 'prediction_high_scores', 'newest_prediction_questions', "#{prediction_question.cache_key}_top", "#{prediction_question.cache_key}_bottom", "#{prediction_question.cache_key}_who_liked" ].each do |fragment|
-      expire_fragment "#{fragment}_html"
-    end
-    ['', 'page_1_', 'page_2_'].each do |page|
-      expire_fragment "prediction_questions_#{page}html"
-    end
-  end
-
-  def self.expire_group_all prediction_group
+  def self.expire_prediction_group_all prediction_group
     controller = ActionController::Base.new
-    ['top_prediction_groups', 'prediction_high_scores', 'newest_prediction_groups', "#{prediction_group.cache_key}_top", "#{prediction_group.cache_key}_bottom"].each do |fragment|
-      controller.expire_fragment "#{fragment}_html"
-    end
-    ['', 'page_1_', 'page_2_'].each do |page|
-      controller.expire_fragment "questions_list_#{page}html"
+    ['newest_prediction_groups', 'top_prediction_groups', "#{prediction_group.cache_key}_group_list"].each do |fragment|
+      controller.expire_fragment fragment
     end
   end
 
-  def self.expire_question_all prediction_question
+  def self.expire_prediction_question_all prediction_question
     controller = ActionController::Base.new
-    ['top_prediction_questions', 'prediction_high_scores', 'newest_prediction_questions', "#{prediction_question.cache_key}_top", "#{prediction_question.cache_key}_bottom"].each do |fragment|
-      controller.expire_fragment "#{fragment}_html"
+    ["closed_predictions","top_predictions","newest_predictions","#{prediction_question.cache_key}_stats_html"].each do |fragment|
+      controller.expire_fragment fragment
     end
-    ['', 'page_1_', 'page_2_'].each do |page|
-      controller.expire_fragment "questions_list_#{page}html"
-    end
+
+    PredictionSweeper.expire_prediction_group_all prediction_question.prediction_group
   end
 
-  def self.expire_answer_all answer
+  def self.expire_prediction_guess_all prediction_guess
     controller = ActionController::Base.new
-    ['top_answers', 'newest_answers', 'unanswered_questions'].each do |fragment|
-      controller.expire_fragment "#{fragment}_html"
-      controller.expire_fragment "#{fragment}_fbml"
+    ["#{prediction_guess.cache_key}_voices"].each do |fragment|
+      controller.expire_fragment fragment
     end
-    PredictionSweeper.expire_question_all answer.question
+
+    PredictionSweeper.expire_prediction_question_all prediction_guess.prediction_question
+  end
+
+  def self.expire_prediction_result_all prediction_result
+    controller = ActionController::Base.new
+    ["#{prediction_result.cache_key}_voices"].each do |fragment|
+      controller.expire_fragment fragment
+    end
+
+    PredictionSweeper.expire_prediction_question_all prediction_result.prediction_question
+  end
+
+  def self.expire_prediction_score_all prediction_score
+    controller = ActionController::Base.new
+    ["#{prediction_score.cache_key}_voices"].each do |fragment|
+      controller.expire_fragment fragment
+    end
   end
 
 end

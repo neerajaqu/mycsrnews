@@ -21,9 +21,9 @@ class VoteSweeper < ActionController::Caching::Sweeper
     elsif vote.voteable.is_a?(Topic)
       ForumSweeper.expire_topic_all vote.voteable
     elsif vote.voteable.is_a?(PredictionGroup)
-      PredictionSweeper.expire_group_all vote.voteable
+      PredictionSweeper.expire_prediction_group_all vote.voteable
     elsif vote.voteable.is_a?(PredictionQuestion)
-      PredictionSweeper.expire_question_all vote.voteable
+      PredictionSweeper.expire_prediction_question_all vote.voteable
     end
   end
 

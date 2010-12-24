@@ -1,6 +1,6 @@
 class PredictionGuessesController < ApplicationController
   before_filter :login_required, :only => [:create]
-  #cache_sweeper :prediction_sweeper, :only => [:create, :update, :destroy]
+  cache_sweeper :prediction_sweeper, :only => [:create, :update, :destroy]
 
   def create
     @prediction_question = PredictionQuestion.find(params[:prediction_question_id])
@@ -21,7 +21,6 @@ class PredictionGuessesController < ApplicationController
     else
       raise params.inspect
     end
-
   end
 
 end

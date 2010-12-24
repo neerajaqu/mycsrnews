@@ -1,0 +1,50 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+      var wizard = $('#wizard');
+    	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
+    		if (index > 0) {
+    			var url = $("#idea_title");
+          url.siblings("label").removeClass("wizard-errors");
+        }
+      });
+      var api = $("ul.arrows", wizard).data("tabs");
+
+      // "next tab" button
+      $("input.form-btn.next", wizard).click(function(event) {
+      	event.preventDefault();
+        api.next();
+      });
+
+      // "previous tab" button
+      $("input.form-btn.prev", wizard).click(function() {
+      	event.preventDefault();
+        api.prev();
+      });
+    });      
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/predictions_subnav'
+#col_full
+  .panel_3
+    .panelBar
+      %h2= t('predictions.suggest_result')
+    .formBox
+      #wizard
+        #flowplayer-block
+          - semantic_form_for [@prediction_question, @prediction_result], :html => { :class => "post_prediction_result" } do |form|
+            .panes
+              .panel1
+                %fieldset
+                  - form.inputs do                
+                    - case @prediction_question.prediction_type
+                      - when 'multi'
+                        - choice_list = @prediction_question.choices.split(/,/)
+                        = form.input :result, :as => :select, :collection => choice_list.collect {|f| [t("#{f}"), f.underscore] }.push(['None of the above','incorrect'])
+                      -# when 'yesno'
+                        - choice_list = [t('predictions.select_guess'), 'Yes', 'No']
+                        = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+                    = form.input :result, :label => t('.title'), :hint => t('.hint_idea_title')
+                    = form.input :url, :label => t('.url'), :hint => t('.hint_idea_url')
+                    = form.input :details, :hint => t('.hint_idea_details'), :required => false 
+                - form.buttons do
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }

@@ -17,9 +17,9 @@ class PredictionGroup < ActiveRecord::Base
   has_friendly_id :title, :use_slug => true
   validates_presence_of :title, :section
 
-  named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
-  named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 10)} }
-  named_scope :open, lambda { |*args| { :conditions => ["prediction_questions_count > 0" ] } }
+  named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 7)} }
+  named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 7)} }
+  named_scope :open, lambda { |*args| { :conditions => ["prediction_questions_count > 0 and status = 'open'" ] } }
 
   def to_s
     "Prediction Group: #{title}"
@@ -39,6 +39,14 @@ class PredictionGroup < ActiveRecord::Base
     else
       nil
     end
+  end
+
+  def expire
+    self.class.sweeper.expire_prediction_group_all self
+  end
+
+  def self.sweeper
+    PredictionSweeper
   end
 
 end

@@ -7,7 +7,13 @@
   = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => hide_titlebar, :title => list_title}
   .list_items
     %ul
-      - item_list.each_with_index do |item, index|
-        - unless index > count
-          %li
-            = render :partial => 'shared/items/micro_generic', :locals => { :item => item, :external_widget => external_widget, :canvas_preference => canvas_preference }
+      - unless item_list.empty?
+        - item_list.each_with_index do |item, index|
+          - unless index > count
+            %li
+              = render :partial => 'shared/items/micro_generic', :locals => { :item => item, :external_widget => external_widget, :canvas_preference => canvas_preference }
+      - else
+        %li
+          .itemBlock
+            %p= t('empty.default')
+        

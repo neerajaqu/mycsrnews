@@ -1,30 +1,33 @@
-.prediction-question-container
-  - stats = prediction_question.update_stats
-  - guess_count = prediction_question.prediction_guesses.count
-  - prediction_type = prediction_question.prediction_type
-  - if prediction_type == 'yesno'
-    - choices = "yes,no"
-  - else
-    - choices = prediction_question.choices
-  - choices.split(/,/).each do |prediction_guess|
-    - unless stats.nil?
-      - if stats[prediction_guess].nil? 
-        - if prediction_type == 'yesno'
+.predictions
+  .itemBlock          
+    - stats = prediction_question.update_stats
+    - guess_count = prediction_question.prediction_guesses.count
+    - prediction_type = prediction_question.prediction_type
+    - if prediction_type == 'yesno'
+      - choices = "yes,no"
+    - else
+      - choices = prediction_question.choices
+    - choices.downcase.split(/,/).each do |prediction_guess|
+      - unless stats.nil?
+        - if stats[prediction_guess].nil? 
+          - if prediction_type == 'yesno'
+            %p
+              = prediction_guess.capitalize
+              0%
+        - else       
           %p
-            = prediction_guess
-            0%
-      - else       
-        %p
-          = prediction_guess
-          = (stats[prediction_guess] / prediction_question.prediction_guesses.count * 100)
-          \%
-  %p
-    %i
+            = prediction_guess.capitalize
+            = (stats[prediction_guess] / prediction_question.prediction_guesses.count * 100)
+            \%
+    %p.guess_count
       - case guess_count
         - when 0
-          No one has answered this question
+          No answers yet
         - when 1
-          1 person has answered this question
+          1 answer
         - else
           = prediction_question.prediction_guesses.count
-          people have answered this question      
+          answers
+    %p.suggest_answer
+      %a= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)
+    %br

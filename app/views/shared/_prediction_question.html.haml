@@ -1,4 +1,4 @@
-.prediction-question-container
+.predictions
   - form_for [prediction_question, PredictionGuess.new] do |form|
     - case prediction_question.prediction_type
       - when 'multi'
@@ -22,6 +22,5 @@
       - when 'text'
         = form.text_field :guess
         = form.submit "Submit"
-  .predictions
-    .suggest_answer
-      %a= link_to "Is this question out of date?", "#"
+  .suggest_answer
+    %a= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)

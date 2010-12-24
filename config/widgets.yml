@@ -164,13 +164,15 @@ widgets:
       partial: '/shared/sidebar/latest_pfeeds'
     google_search:
       partial: '/shared/sidebar/google_search'
-#    newest_predictions:
-#      partial: '/shared/sidebar/newest_predictions'
-#    top_predictions:
-#      partial: '/shared/sidebar/top_predictions'
-#    newest_prediction_topics:
-#      partial: '/shared/sidebar/newest_prediction_topics'
-#    top_prediction_topics:
-#      partial: '/shared/sidebar/top_prediction_topics'
-#    closed_predictions:
-#      partial: '/shared/sidebar/closed_predictions'
+    newest_prediction_groups:
+      partial: '/shared/sidebar/newest_prediction_groups'
+    top_prediction_groups:
+      partial: '/shared/sidebar/top_prediction_groups'
+    newest_predictions:
+      partial: '/shared/sidebar/newest_predictions'
+    top_predictions:
+      partial: '/shared/sidebar/top_predictions'
+    closed_predictions:
+      partial: '/shared/sidebar/closed_predictions'
+    top_prediction_scores:
+      partial: '/shared/sidebar/top_prediction_scores'      

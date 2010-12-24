@@ -2,5 +2,4 @@
 
 - cache :forum_roll_html, :expires_in => 180.minutes do
   - forum_roll ||= Forum.active.positioned
-  - unless forum_roll.empty?
-    = render :partial => 'shared/lists/bullet_generic_list', :locals => { :list_title => t('forums.forum_roll_title'), :item_list => forum_roll }
+  = render :partial => 'shared/lists/bullet_generic_list', :locals => { :list_title => t('forums.forum_roll_title'), :item_list => forum_roll }

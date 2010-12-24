@@ -3,4 +3,4 @@
 - cache :top_topics_html do
   - top_topics ||= Topic.active.top
   - unless top_topics.empty?
-    = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => t('forums.top_topics_title'), :item_list => top_topics }
+    = render :partial => 'shared/lists/micro_topic_list', :locals => { :list_title => t('forums.top_topics_title'), :item_list => top_topics }
