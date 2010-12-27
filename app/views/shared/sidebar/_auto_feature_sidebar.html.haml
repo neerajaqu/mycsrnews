@@ -1,6 +1,6 @@
 - cache :auto_feature_sidebar_html, :expires_in => 15.minutes do
   - animation_speed = get_setting('animation_speed_features').try(:value) || 500
-  - auto_feature ||= Image.active.find(:all, :conditions => "imageable_type = 'Content'", :limit => 12, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
+  - auto_feature ||= Image.active.find(:all, :conditions => "imageable_type = 'Content'", :limit => 6, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
   - unless auto_feature.empty? 
     %div{:class => "panel_1 featureWrap #{defined?(widget_page) ? widget_page.css_class : ''}"}
       = render :partial => 'shared/featured_items/panelbar'

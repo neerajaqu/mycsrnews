@@ -88,6 +88,11 @@ class StoriesController < ApplicationController
       if @story.post_wall?
         session[:post_wall] = @story
       end
+      if get_setting('tweet_all_moderator_items').try(:value)
+        if current_user.present? and current_user.is_moderator?
+          @story.tweet
+        end
+      end
       flash[:success] = "Successfully posted your story!"
       redirect_to story_path(@story)
     else
