@@ -7,6 +7,9 @@
       - choices = "yes,no"
     - else
       - choices = prediction_question.choices
+    -# stats.each_with_index do |stat,index|
+      %p
+        = stat >> "," >> index        
     - choices.downcase.split(/,/).each do |prediction_guess|
       - unless stats.nil?
         - if stats[prediction_guess].nil? 

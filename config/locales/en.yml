@@ -304,6 +304,15 @@ en:
       numeric: "Numeric"
       text: "Text"
       year: "Year"
+    new:
+      result_heading: "Tell Us How This Question Ended"
+      result: ""
+      url: ""
+      detail: ""
+      hint:
+        result: ""
+        url: ""
+        detail: ""
   message:
     chirped_at:  "{{name}} sent you a message from {{site_title}}"
     commented_on:  "{{name}} commented on {{title}} at {{site_title}}"

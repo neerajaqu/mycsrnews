@@ -27,7 +27,7 @@
 #col_full
   .panel_3
     .panelBar
-      %h2= t('predictions.suggest_result')
+      %h2= t('predictions.new.result_heading')
     .formBox
       #wizard
         #flowplayer-block
@@ -40,11 +40,13 @@
                       - when 'multi'
                         - choice_list = @prediction_question.choices.split(/,/)
                         = form.input :result, :as => :select, :collection => choice_list.collect {|f| [t("#{f}"), f.underscore] }.push(['None of the above','incorrect'])
-                      -# when 'yesno'
-                        - choice_list = [t('predictions.select_guess'), 'Yes', 'No']
-                        = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-                    = form.input :result, :label => t('.title'), :hint => t('.hint_idea_title')
-                    = form.input :url, :label => t('.url'), :hint => t('.hint_idea_url')
-                    = form.input :details, :hint => t('.hint_idea_details'), :required => false 
+                      - when 'yesno'
+                        - choice_list = @prediction_question.choices.split(/,/)
+                        = form.input :result, :as => :select, :collection => choice_list.collect {|f| [t("#{f}"), f.underscore] }.push(['None of the above','incorrect'])
+                      - when 'numeric'
+                        = form.input :result
+                    = form.input :result, :label => t('prediction.new.result'), :hint => t('prediction.new.hint.result')
+                    = form.input :url, :label => t('prediction.new.url'), :hint => t('prediction.new.hint.url')
+                    = form.input :details, :hint => t('prediction.new.hint.details'), :required => false 
                 - form.buttons do
                   = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }

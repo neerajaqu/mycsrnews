@@ -35,7 +35,9 @@ class PredictionQuestion < ActiveRecord::Base
         PredictionGuess.count(:group => :guess, :conditions => {:prediction_question_id => self.id})
       when "multi"
         PredictionGuess.count(:group => :guess, :conditions => {:prediction_question_id => self.id})
-    end    
+      when "numeric"
+        PredictionGuess.count(:group => :guess, :conditions => {:prediction_question_id => self.id})
+    end
   end
   
   def accept_prediction_result prediction_result

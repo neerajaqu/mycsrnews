@@ -25,7 +25,6 @@
                 - else
                   - cache "#{@prediction_question.cache_key}_stats_html" do
                     = render :partial => 'shared/prediction_question_stats', :locals => { :prediction_question => @prediction_question }
-                  -# todo - show your guess, possibly use jscript to bold your choice
               - else
                 -# do nothing
       %p= t('predictions.member_of_group', :prediction_group => link_to(@prediction_question.prediction_group.title, @prediction_question.prediction_group))
