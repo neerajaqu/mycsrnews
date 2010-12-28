@@ -47,6 +47,7 @@ class Newswire < ActiveRecord::Base
       if @content.save
       	set_published
       	NewswireSweeper.expire_newswires
+      	@content.expire
         if Metadata::Setting.find_setting('tweet_all_moderator_items').try(:value)
           if @content.user.is_moderator?
             tweeter = Newscloud::Tweeter.new
