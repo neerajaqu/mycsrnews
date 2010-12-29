@@ -54,10 +54,10 @@ class WidgetsController < ApplicationController
     unless @filter
       case @sort      
         when "newest"
-          @article_list = Content.active.articles.published.newest @count
+          @article_list = Content.active.articles.newest @count
           @title = t('widgets.articles_newest_title', :site_title => get_setting('site_title').value)
         when "top"
-          @article_list = Content.active.articles.published.top @count
+          @article_list = Content.active.articles.top @count
           @title = t('widgets.articles_top_title', :site_title => get_setting('site_title').value)
       end
     else
