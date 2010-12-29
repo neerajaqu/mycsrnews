@@ -51,7 +51,8 @@ class Newswire < ActiveRecord::Base
         if Metadata::Setting.find_setting('tweet_all_moderator_items').try(:value)
           if @content.user.is_moderator?
             tweeter = Newscloud::Tweeter.new
-            tweeter.tweet_item @content
+            tweeter.twe
+            et_item @content
             # todo - wasn't working / ask russell
             #@content.tweet
           end

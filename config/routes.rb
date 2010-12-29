@@ -151,7 +151,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :prediction_questions
     admin.resources :prediction_guesses
     admin.resources :prediction_results, :member => { :accept => [:get, :post] }
-    admin.resources :prediction_scores, :member => { :refresh_all => [:get] }
+    admin.resources :prediction_scores, :collection => { :refresh_all => [:get, :post ] }
 
     admin.namespace(:metadata) do |metadata|
       metadata.resources :ads
