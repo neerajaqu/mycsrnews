@@ -21,7 +21,8 @@ class WidgetsController < ApplicationController
   end
   
   def activities
-    @activity_list = Content.active.articles.published.newest @count
+    #todo - this looks wrong for activities?
+    @activity_list = Content.active.articles.newest @count
     @title = t('widgets.activities_title', :site_title => get_setting('site_title').value)
   end
   
