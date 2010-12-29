@@ -15,11 +15,13 @@ class PredictionGuessesController < ApplicationController
     @prediction_guess.user = current_user
     if @prediction_guess.save
       respond_to do |format|
+        #todo - if no prediction group, send to prediction question
         format.html {  redirect_to @prediction_question.prediction_group }
-        format.json {  }
+    	  format.json {  render(:partial => 'shared/prediction_question_stats.html', :locals => { :prediction_question => @prediction_question }) and return }
       end
     else
-      raise params.inspect
+      #todo - conditionally redirect to topic or question based on which page guess came from
+    	redirect_to @prediction_question.prediction_group
     end
   end
 

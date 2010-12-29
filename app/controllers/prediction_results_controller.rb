@@ -17,7 +17,8 @@ class PredictionResultsController < ApplicationController
         format.json {  }
       end
     else
-      raise params.inspect
+      #todo - sometimes nil prediction group
+      redirect_to @prediction_question.prediction_group 
     end
   end
 end

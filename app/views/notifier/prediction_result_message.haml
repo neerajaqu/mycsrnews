@@ -1,0 +1,9 @@
+== #{@message[:originator].name} sent a message to #{@message[:site_title]} members
+%br
+%p=   nl2br(@message[:participant].message)
+%a{:href=> @message[:participant].action_text }= @message[:participant].action_url
+%br
+%br
+%a{:href=> home_index_url(:only_path => false) }= I18n.translate('message.click_return_site', :site_title => @message[:site_title])
+%br
+%p= I18n.translate('message.unsubscribe', :href => edit_user_path(@message[:recipient], :only_path => false), :site_title => @message[:site_title] )

@@ -37,6 +37,8 @@ class PredictionQuestion < ActiveRecord::Base
         PredictionGuess.count(:group => :guess, :conditions => {:prediction_question_id => self.id})
       when "numeric"
         PredictionGuess.count(:group => :guess, :conditions => {:prediction_question_id => self.id})
+      when "text"
+        PredictionGuess.count(:group => :guess, :conditions => {:prediction_question_id => self.id})
     end
   end
   
@@ -48,12 +50,26 @@ class PredictionQuestion < ActiveRecord::Base
       prediction_guess.update_attribute("is_correct",true)
     end
     update_scores
+    #todo - send notifications
+    #Notifier.deliver_prediction_question_message(prediction_result.prediction_question)
   end
   
   def update_scores
     self.prediction_guesses.each do |prediction_guess|
       prediction_guess.user.get_prediction_score.increment_score prediction_guess.is_correct?
     end
+  end
+
+  def voices
+    self.prediction_guesses.find(:all, :include => :user, :group => :user_id).map(&:user)
+  end
+
+  def recipient_voices
+    users = self.voices
+    users << self.user
+    # todo - get list of people who liked question prediction group
+    #users.concat self.commentable.votes.map(&:voter) 
+    users.uniq
   end
   
   def expire

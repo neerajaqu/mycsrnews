@@ -57,7 +57,7 @@ class Admin::PredictionResultsController < AdminController
 
     redirect_to admin_prediction_results_path
   end
-  
+    
   def accept
     @prediction_result = PredictionResult.find(params[:id])
     unless @prediction_result

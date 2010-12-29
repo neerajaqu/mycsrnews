@@ -47,9 +47,9 @@ class PredictionSweeper < ActionController::Caching::Sweeper
 
   def self.expire_prediction_guess_all prediction_guess
     controller = ActionController::Base.new
-    ["#{prediction_guess.cache_key}_voices"].each do |fragment|
-      controller.expire_fragment fragment
-    end
+    #["#{prediction_guess.cache_key}_voices"].each do |fragment|
+    #  controller.expire_fragment fragment
+    #end
 
     PredictionSweeper.expire_prediction_question_all prediction_guess.prediction_question
   end
