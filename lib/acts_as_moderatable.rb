@@ -16,7 +16,7 @@ module Newscloud
           named_scope :inactive, { :conditions => ["#{self.name.tableize}.is_blocked = 1"] }
           named_scope :user_items, { :conditions => 
               "user_id not in (select id from users where is_editor = true or is_moderator = true or is_admin = true)" }
-          named_scope :currator_items, { :conditions => 
+          named_scope :curator_items, { :conditions => 
               "user_id in (select id from users where is_editor = true or is_moderator = true or is_admin = true)" }
 
           include Newscloud::Acts::Moderatable::InstanceMethods

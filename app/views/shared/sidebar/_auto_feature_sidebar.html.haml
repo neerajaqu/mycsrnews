@@ -1,7 +1,7 @@
 - cache :auto_feature_sidebar_html, :expires_in => 15.minutes do
   - animation_speed = get_setting('animation_speed_features').try(:value) || 500
   - animation_interval = get_setting('animation_interval_general').try(:value) || 1000
-  - auto_feature ||= Image.active.currator_items.find(:all, :conditions => "imageable_type = 'Content'", :limit => 6, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
+  - auto_feature ||= Image.active.curator_items.find(:all, :conditions => "imageable_type = 'Content'", :limit => 6, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
   - unless auto_feature.empty? 
     - if get_setting('auto_feature_only_moderator_items').try(:value)
       - auto_feature = auto_feature.delete_if{|imageable| imageable.user.is_admin == false and imageable.user.is_editor == false and imageable.user.is_moderator == false}
