@@ -50,11 +50,7 @@ class Newswire < ActiveRecord::Base
       	@content.expire
         if Metadata::Setting.find_setting('tweet_all_moderator_items').try(:value)
           if @content.user.is_moderator?
-            tweeter = Newscloud::Tweeter.new
-            tweeter.twe
-            et_item @content
-            # todo - wasn't working / ask russell
-            #@content.tweet
+            @content.tweet
           end
         end      	
       	return true
