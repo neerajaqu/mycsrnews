@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
 
   def drafts
     @current_sub_tab = 'Draft Articles'
-    @drafts = current_user.contents.draft_articles
+    @drafts = current_user.contents.active.articles.unpublished
   end
 
   def user_index

@@ -21,8 +21,6 @@ class WidgetsController < ApplicationController
   end
   
   def activities
-    #todo - this looks wrong for activities?
-    @activity_list = Content.active.articles.newest @count
     @title = t('widgets.activities_title', :site_title => get_setting('site_title').value)
   end
   
@@ -55,14 +53,14 @@ class WidgetsController < ApplicationController
     unless @filter
       case @sort      
         when "newest"
-          @article_list = Content.active.articles.newest @count
+          @article_list = Content.active.articles.published.newest @count
           @title = t('widgets.articles_newest_title', :site_title => get_setting('site_title').value)
         when "top"
-          @article_list = Content.active.articles.top @count
+          @article_list = Content.active.articles.published.top @count
           @title = t('widgets.articles_top_title', :site_title => get_setting('site_title').value)
       end
     else
-      @article_list = Content.active.articles.featured @count
+      @article_list = Content.active.articles.published.featured @count
       @title = t('widgets.articles_featured_title', :site_title => get_setting('site_title').value)      
     end
   end
