@@ -157,10 +157,10 @@ settings = [
  { :key_sub_type => 'options', :key_name => 'google_search_engine_id', :value => ("your-google-search-engine-id") },
  { :key_sub_type => 'options', :key_name => 'widget_stories_short_max', :value => "3" },
  { :key_sub_type => 'zvents', :key_name => 'zvents_replacement_url', :value => ("www.zvents.com") },
- { :key_sub_type => 'twitter_standard_list', :key_name => 'list_account', :value =>"", :hint => 'The account name which owns the Twitter list' }, 
- { :key_sub_type => 'twitter_standard_list', :key_name => 'list_name', :value =>"", :hint => 'The hyphenated name of the twitter list' }, 
- { :key_sub_type => 'twitter_standard_list', :key_name => 'list_widget_title', :value =>"", :hint => 'The title for the widget' }, 
- { :key_sub_type => 'twitter_standard_list', :key_name => 'list_widget_caption', :value =>"", :hint => 'The caption for the widget' }
+ { :key_sub_type => 'twitter_standard_list', :key_name => 'list_account', :value =>"twitter-account", :hint => 'The account name which owns the Twitter list' }, 
+ { :key_sub_type => 'twitter_standard_list', :key_name => 'list_name', :value =>"default-list", :hint => 'The hyphenated name of the twitter list' }, 
+ { :key_sub_type => 'twitter_standard_list', :key_name => 'list_widget_title', :value => APP_CONFIG['site_title'], :hint => 'The title for the widget' }, 
+ { :key_sub_type => 'twitter_standard_list', :key_name => 'list_widget_caption', :value =>"Tweets about #{APP_CONFIG['site_topic']}", :hint => 'The caption for the widget' }
 ]
 
 settings.each do |setting|

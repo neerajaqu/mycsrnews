@@ -2,7 +2,7 @@
   - animation_speed = get_setting('animation_speed_features').try(:value) || 500
   - animation_interval = get_setting('animation_interval_general').try(:value) || 1000
   - if get_setting('auto_feature_only_moderator_items').try(:value)
-    - auto_feature ||= Image.active.currator_items.find(:all, :conditions => "imageable_type = 'Content'", :limit => 15, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
+    - auto_feature ||= Image.active.curator_items.find(:all, :conditions => "imageable_type = 'Content'", :limit => 15, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
   - else
     - auto_feature ||= Image.active.user_items.find(:all, :conditions => "imageable_type = 'Content'", :limit => 15, :order => ["created_at desc"], :include => 'imageable').map(&:imageable).uniq
   - unless auto_feature.empty? or auto_feature.count < 4
