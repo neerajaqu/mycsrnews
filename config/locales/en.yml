@@ -386,3 +386,4 @@ en:
     default: "Sorry, nothing available yet."
     top_discussed_stories: "Sorry, no discussions found."
     no_scores: "Sorry, no scores available yet."
+    twitter_standard_list: "Either your Twitter account name or list name is invalid. Change them in the administrative settings."

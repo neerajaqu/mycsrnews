@@ -1,0 +1,39 @@
+- list_account = get_setting('list_account','twitter_standard_list').try(:value)
+- list_name = get_setting('list_name','twitter_standard_list').try(:value)
+- list_widget_title = get_setting('list_widget_title','twitter_standard_list').try(:value)
+- list_widget_caption = get_setting('list_widget_caption','twitter_standard_list').try(:value)
+- unless list_account.empty? or list_name.empty?
+  = javascript_include_tag "http://widgets.twimg.com/j/2/widget.js"
+  %script{:type => "text/javascript"}
+    new TWTR.Widget({
+      version: 2,
+      type: 'list',
+      rpp: 30,
+      interval: 6000,
+      title: '#{list_widget_title}',
+      subject: '#{list_widget_caption}',
+      width: 250,
+      height: 300,
+      theme: {
+        shell: {
+          background: '#ff96e7',
+          color: '#ffffff'
+        },
+        tweets: {
+          background: '#ffffff',
+          color: '#444444',
+          links: '#b740c2'
+        }
+      },
+      features: {
+        scrollbar: true,
+        loop: false,
+        live: true,
+        hashtags: true,
+        timestamp: true,
+        avatars: true,
+        behavior: 'all'
+      }
+    }).render().setList('#{list_account}', '#{list_name}').start();
+- else
+  %p= t('empty.twitter_standard_list')
