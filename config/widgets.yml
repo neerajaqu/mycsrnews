@@ -17,6 +17,8 @@ widgets:
     announcements:
       partial: 'shared/announcements'    
   sidebar_content:
+    twitter_standard_list:
+      partial: '/shared/sidebar/twitter_standard_list'
     add_stuff_list:
       partial: '/shared/sidebar/add_stuff_list'
     gallery_images:
