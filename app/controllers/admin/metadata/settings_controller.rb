@@ -2,7 +2,7 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
 
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
-    	:items => Metadata::Setting.paginate(:page => params[:page], :per_page => 30, :order => "key_sub_type asc, key_name asc"),
+    	:items => Metadata::Setting.find(:all, :conditions => [ "key_sub_type not like ?", 'twitter%' ] ).paginate(:page => params[:page], :per_page => 30, :order => "key_sub_type asc, key_name asc"),
     	:model => Metadata::Setting,
     	:fields => [:setting_name, :setting_sub_type_name, :setting_value],
     	:paginate => true
