@@ -1,0 +1,14 @@
+- limit = get_setting('widget_articles_as_blog_max').try(:value) || 1
+- cache :articles_as_blog_html do
+  - contents ||= Content.articles.active.find(:all, :order => "created_at desc", :limit => limit)
+  .panel_2
+    .itemListWrap
+      .list_items
+        %ul
+          - contents.each do |article|
+            - content = article.is_a?(Article) ? article.content : article
+            %li{'data-id' => content.cache_key}
+              = render :partial => 'shared/items/article', :locals => { :article => article} 
+    .clearfix
+    %p= link_to t('read_more'), articles_path, :class => "float_right"
+    %br

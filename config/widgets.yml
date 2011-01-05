@@ -4,6 +4,8 @@ widgets:
       partial: '/shared/stories'
     stories_short:
       partial: '/shared/stories_short'
+    articles_as_blog:
+      partial: 'shared/articles_as_blog'    
     featured_content:
       partial: '/shared/featured_items'
       locals: 'featured_items'
@@ -19,6 +21,12 @@ widgets:
   sidebar_content:
     twitter_standard_list:
       partial: '/shared/sidebar/twitter_standard_list'
+    twitter_standard_profile:
+      partial: '/shared/sidebar/twitter_standard_profile'
+    twitter_standard_favorites:
+      partial: '/shared/sidebar/twitter_standard_favorites'
+    twitter_standard_search:
+      partial: '/shared/sidebar/twitter_standard_search'
     add_stuff_list:
       partial: '/shared/sidebar/add_stuff_list'
     gallery_images:
