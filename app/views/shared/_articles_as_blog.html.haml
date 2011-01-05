@@ -1,7 +1,9 @@
 - limit = get_setting('widget_articles_as_blog_max').try(:value) || 1
 - cache :articles_as_blog_html do
-  - contents ||= Content.articles.active.curator_items.find(:all, :order => "created_at desc", :limit => limit)
+  - contents ||= Content.articles.active.published.curator_items.find(:all, :order => "created_at desc", :limit => limit)
   .panel_2
+    .panelBar
+      %h2= t('widgets.articles_as_blog_title')
     .itemListWrap
       .list_items
         %ul

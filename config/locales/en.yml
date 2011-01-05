@@ -325,6 +325,7 @@ en:
     unsubscribe: "To unsubscribe from email notifications, <a href='{{href}}'>change your settings</a> at {{site_title}}"
     visit_flagged_item: "Click here to view the flagged item"
   widgets:
+    articles_as_blog_title: "What's new from {{site_title}}"
     activities_title: "Latest activities from {{site_title}}"
     articles_newest_title: "Latest posts from {{site_title}}"
     articles_top_title: "Top posts from {{site_title}}"
