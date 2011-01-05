@@ -387,3 +387,6 @@ en:
     top_discussed_stories: "Sorry, no discussions found."
     no_scores: "Sorry, no scores available yet."
     twitter_standard_list: "Either your Twitter account name or list name is invalid. Change them in the administrative settings."
+    twitter_standard_search: "Your twitter search widget settings need to be configured via the Administrative console"
+    twitter_standard_favorites: "Your twitter favorites widget settings need to be configured via the Administrative console"  
+    twitter_standard_profile: "Your twitter profile widget settings need to be configured via the Administrative console"      

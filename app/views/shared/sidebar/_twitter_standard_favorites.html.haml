@@ -1,0 +1,24 @@
+- account = get_setting('favorites_account','twitter_standard_favorites').try(:value)
+- favorites_widget_title = get_setting('favorites_widget_title','twitter_standard_favorites').try(:value)
+- favorites_widget_caption = get_setting('favorites_widget_caption','twitter_standard_favorites').try(:value)
+- unless account.empty? or favorites_widget_caption.empty? or favorites_widget_title.empty?
+  = javascript_include_tag "http://widgets.twimg.com/j/2/widget.js"
+  %script{:type => "text/javascript"}
+    new TWTR.Widget({
+    version: 2,
+    type: 'faves',
+    rpp: 10,
+    interval: 6000,
+    title: '#{favorites_widget_title}',
+    subject: '#{favorites_widget_caption}',
+    width: 250,
+    height: 300,
+    theme: {
+    shell: { background: '#333333', color: '#ffffff'},
+    tweets: {
+    background: '#ffffff', color: '#000000', links: '#1985b5'}},
+    features: { scrollbar: true, loop: false, live: true, hashtags: true, timestamp: true, avatars: true, behavior: 'all' }
+    }).render().setUser('#{account}').start();
+  %br
+- else
+  %p= t('empty.twitter_standard_favorites')

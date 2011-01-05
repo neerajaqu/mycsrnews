@@ -49,7 +49,7 @@ class StorySweeper < ActionController::Caching::Sweeper
   end
 
   def clear_article_cache article
-    ['blog_roll','newest_articles', 'top_articles'].each do |fragment|
+    ['blog_roll','newest_articles', 'top_articles', 'articles_as_blog'].each do |fragment|
       expire_fragment "#{fragment}_html"
     end
   end
@@ -68,7 +68,7 @@ class StorySweeper < ActionController::Caching::Sweeper
 
   def self.expire_article_all article
     controller = ActionController::Base.new
-    ['blog_roll','newest_articles', 'top_articles'].each do |fragment|
+    ['blog_roll','newest_articles', 'top_articles', 'articles_as_blog'].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|
