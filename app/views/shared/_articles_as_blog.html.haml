@@ -3,7 +3,7 @@
   - contents ||= Content.articles.active.published.curator_items.find(:all, :order => "created_at desc", :limit => limit)
   .panel_2
     .panelBar
-      %h2= t('widgets.articles_as_blog_title')
+      %h2= t('widgets.articles_as_blog_title', :site_title => get_setting('site_title').value)
     .itemListWrap
       .list_items
         %ul
