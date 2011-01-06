@@ -25,6 +25,14 @@ class PredictionQuestion < ActiveRecord::Base
   #todo add migration for timestamp closed_at
   named_scope :closed, lambda { |*args| { :order => ["status = 'closed', updated_at desc"], :limit => (args.first || 7)} }
 
+  def self.prediction_types friendly
+    unless friendly.nil?
+      ['multiple choice','yes or no','year','foating point number','whole number e.g. integer','text']    
+    else
+      ['multi','yesno','year','float','numeric','text']
+    end
+  end
+
   def user_guessed? user
     prediction_guesses.exists?(:user_id => user.id)
   end

@@ -15,7 +15,7 @@ class PredictionGroup < ActiveRecord::Base
   attr_accessor :tags_string
 
   has_friendly_id :title, :use_slug => true
-  validates_presence_of :title, :section
+  validates_presence_of :title
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 7)} }
   named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 7)} }

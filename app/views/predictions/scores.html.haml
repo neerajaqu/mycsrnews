@@ -8,6 +8,7 @@
 
 #col_right
   = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/suggest_predictions'
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
 
 = render :partial => 'shared/index_footer', :locals => { :index_path => scores_predictions_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('predictions') }

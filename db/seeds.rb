@@ -17,7 +17,11 @@ if Forum.count == 0
   Forum.create!({:name => 'Feedback', :description=>"Tell us how we're doing. Share your thoughts about #{APP_CONFIG['site_title']}!"}) unless Forum.find_by_name('Feedback')
 end
 #todo - fix (User.admins.last || nil) - creates fb user as nil, bombs out in fb helper for profilepic
-#PredictionGroup.create!({:title => 'Uncategorized', :section => 'uncategorized', :description => 'These questions are uncategorized'}) unless PredictionGroup.find_by_title_and_section('Uncategorized','uncategorized')
+
+# Default Prediction Group 
+if PredictionGroup.count == 0
+  PredictionGroup.create!({:title => 'Other', :section => 'other', :description => 'This topic is for uncategorized questions'}) unless PredictionGroup.find_by_title_and_section('Other','other')
+end
 
 # Populate Sources table with some commonly used sites
 Source.create!({:name => 'New York Times', :url =>'nytimes.com'}) unless Source.find_by_url('nytimes.com')

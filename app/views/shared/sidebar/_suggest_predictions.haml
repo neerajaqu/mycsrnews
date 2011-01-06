@@ -1,0 +1,5 @@
+- hide_titlebar = false
+%div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+  = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => false, :title => t('predictions.suggest_predictions_title')}
+  %p
+    =t('predictions.suggest_predictions_info', :link_topic => new_prediction_group_path(), :link_question => new_prediction_question_path())

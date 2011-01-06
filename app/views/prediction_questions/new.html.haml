@@ -1,0 +1,47 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+      var wizard = $('#wizard');
+    	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
+    		if (index > 0) {
+    			var url = $("#idea_title");
+          url.siblings("label").removeClass("wizard-errors");
+        }
+      });
+      var api = $("ul.arrows", wizard).data("tabs");
+
+      // "next tab" button
+      $("input.form-btn.next", wizard).click(function(event) {
+      	event.preventDefault();
+        api.next();
+      });
+
+      // "previous tab" button
+      $("input.form-btn.prev", wizard).click(function() {
+      	event.preventDefault();
+        api.prev();
+      });
+    });      
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/predictions_subnav'
+#col_full
+  .panel_3
+    .panelBar
+      %h2= t('predictions.new.suggest_prediction_question')
+    .formBox
+      #wizard
+        #flowplayer-block
+          - semantic_form_for @prediction_question, :url => prediction_questions_path do |form|
+            .panes
+              .panel1
+                %fieldset
+                  - form.inputs do                
+                    = form.input :title, :label => t('predictions.new.prediction_group_title'), :hint => t('predictions.new.prediction_group_title_hint')
+                    = form.input :prediction_group, :label => t('predictions.select_prediction_group'), :required => true, :include_blank => false
+                    - prediction_type_list = [t('predictions.choose_prediction_type')] | PredictionQuestion.prediction_types(true)
+                    %p.strong= t('choose_prediction_type_below')
+                    = form.select :prediction_type, options_for_select(prediction_type_list.collect {|f| [t("#{f}"), f.underscore] })
+                    = form.input :choices, :label => t('predictions.suggested_choices'), :required => true, :hint => t('predictions.suggested_choices_hint')
+                    = form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
+                - form.buttons do
+                  = form.commit_button t('wizard.submit'), :class => 'float_right', :button_html => { :class => 'form-btn' }
