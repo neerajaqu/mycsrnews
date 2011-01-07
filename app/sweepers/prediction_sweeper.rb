@@ -29,9 +29,14 @@ class PredictionSweeper < ActionController::Caching::Sweeper
     end
   end
 
+  def self.expire_static
+    controller = ActionController::Base.new
+    controller.expire_fragment 'suggest_prediction'
+  end
+  
   def self.expire_prediction_group_all prediction_group
     controller = ActionController::Base.new
-    ['newest_prediction_groups', 'top_prediction_groups', "#{prediction_group.cache_key}_group_list"].each do |fragment|
+    ['suggest_prediction','newest_prediction_groups', 'top_prediction_groups', "#{prediction_group.cache_key}_group_list"].each do |fragment|
       controller.expire_fragment fragment
     end
   end

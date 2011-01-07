@@ -10,6 +10,10 @@ class PredictionQuestionsController < ApplicationController
     @prediction_question.tag_list = params[:prediction_question][:tags_string]
     @prediction_question.user = current_user
     @prediction_question.is_approved = current_user.is_moderator?      
+    if params[:prediction_question][:prediction_group_id].present?
+    	@prediction_group = PredictionGroup.active.find_by_id(params[:prediction_question][:prediction_group_id])
+    	@prediction_question.prediction_group = @prediction_group unless @prediction_group.nil?
+    end
 
     if @prediction_question.valid? and current_user.prediction_questions.push @prediction_question
     	flash[:success] = t('predictions.create_prediction_question')

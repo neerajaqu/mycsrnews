@@ -106,6 +106,7 @@ settings = [
  { :key_sub_type => 'options', :key_name => 'firstnameonly', :value => (APP_CONFIG['firstnameonly'] || "false" ) },
  { :key_sub_type => 'options', :key_name => 'site_video_url', :value => APP_CONFIG['base_url'].gsub("http://","").gsub("www",""), :hint => "used by some sites with custom video URLs e.g. boston.com"},
  { :key_sub_type => 'options', :key_name => 'predictions_max_daily_guesses', :value => 25, :hint => "maximum number of guesses allowed per day"},
+ { :key_sub_type => 'options', :key_name => 'predictions_allow_suggestions',  :value => true },
  { :key_sub_type => 'design', :key_name => 'typekit', :value => (APP_CONFIG['typekit'] || "000000" ) },
  { :key_sub_type => 'twitter', :key_name => 'account', :value =>(APP_CONFIG['twitter_account'] || "userkey_name" ) },
  { :key_sub_type => 'twitter', :key_name => 'oauth_key', :value => (APP_CONFIG['twitter_oauth_key'] || "U6qjcn193333331AuA" ) },

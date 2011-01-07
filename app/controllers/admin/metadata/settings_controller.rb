@@ -27,6 +27,9 @@ class Admin::Metadata::SettingsController < Admin::MetadataController
       if @setting.key_name.include? "welcome_"
         WidgetSweeper.expire_item "welcome_panel"
       end
+      if @setting.key_name.include? "predictions_"
+        PredictionSweeper.expire_static
+      end
       if @setting.key_name.include? "google_search_engine_id"
         WidgetSweeper.expire_item "google_search"
       end
