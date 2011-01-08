@@ -22,10 +22,6 @@
             = image_tag @event.images.first.url(:medium)
           - if !@event.images.present? && @event.pic.present?
             = image_tag @event.pic
-        - if @event.moderatable?
-          .mod-panel
-            .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @event }
-            .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
         %h1= @event.name
         %h3
           = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => timeago(@event.created_at))
@@ -58,6 +54,11 @@
       %div.itemBlock= sanitize @event.description
     - if @event.media_item?
       = render_media_items @event
+    - if @event.moderatable?
+      .mod-panel.panel_2
+        .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @event }
+        .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @event }
+
     = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @event.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @event }

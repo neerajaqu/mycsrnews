@@ -23,10 +23,6 @@
         - if @idea.images.present?
           .thumb
             = image_tag @idea.images.first.url(:medium)
-        - if @idea.moderatable?
-          .mod-panel
-            .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @idea }
-            .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @idea }
         %h1= @idea.title
         %h3
           = t('posted_by', :fb_name => local_linked_profile_name(@idea.user), :date => timeago(@idea.created_at))
@@ -39,14 +35,19 @@
         = sanitize @idea.details
     - if @idea.media_item?
       = render_media_items @idea
+      - if @idea.moderatable?
+        .mod-panel.panel_2
+          .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @idea }
+          .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @idea }
+
+
     = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @idea.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @idea }
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @idea, :title => @idea.title }
-  - if @idea.moderatable?
-    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @idea }
+
 
 #col_right
   = render :partial => 'shared/sidebar/ideas_whatisthis'
