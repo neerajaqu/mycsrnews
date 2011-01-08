@@ -95,7 +95,12 @@ class ArticlesController < ApplicationController
       if @article.valid? and current_user.articles.push @article
         if @article.post_wall?
           session[:post_wall] = @article.content
-        end            
+        end
+        if get_setting('tweet_all_moderator_items').try(:value)
+          if current_user.present? and current_user.is_moderator?
+            @article.tweet
+          end
+        end                    
         flash[:success] = "Successfully posted your article!"
         redirect_to story_path(@article.content)
       else
