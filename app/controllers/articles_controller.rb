@@ -98,7 +98,7 @@ class ArticlesController < ApplicationController
         end
         if get_setting('tweet_all_moderator_items').try(:value)
           if current_user.present? and current_user.is_moderator?
-            @article.tweet
+            @article.content.tweet
           end
         end                    
         flash[:success] = "Successfully posted your article!"
