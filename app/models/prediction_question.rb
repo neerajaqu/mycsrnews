@@ -71,7 +71,7 @@ class PredictionQuestion < ActiveRecord::Base
   def approve
     @prediction_question = PredictionQuestion.find(params[:id])
     @prediction_question.is_approved = true
-    if @prediction_question.update_attributes(params[:id])
+    #if @prediction_question.update_attributes(params[:id])
   end  
 
   def voices
