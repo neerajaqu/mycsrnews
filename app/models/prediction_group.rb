@@ -28,7 +28,7 @@ class PredictionGroup < ActiveRecord::Base
   def approve
     @prediction_group = PredictionGroup.find(params[:id])
     @prediction_group.is_approved = true
-    if @prediction_group.update_attributes(params[:id])
+    #if @prediction_group.update_attributes(params[:id])
   end  
 
   def next
