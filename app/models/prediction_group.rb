@@ -24,6 +24,12 @@ class PredictionGroup < ActiveRecord::Base
   def to_s
     "Prediction Group: #{title}"
   end
+  
+  def approve
+    @prediction_group = PredictionGroup.find(params[:id])
+    @prediction_group.is_approved = true
+    if @prediction_group.update_attributes(params[:id])
+  end  
 
   def next
     if PredictionGroup.count > 0

@@ -15,7 +15,7 @@ class Image < ActiveRecord::Base
 
   has_attached_file :image, :styles => {
   	:media_item => ["75x56#", :jpg],
-  	:thumb => ["100x100#", :jpg],
+  	:thumb => ["100x75#", :jpg],
   	:medium => ["320x240#", :jpg],
   	:large => ["610x458#", :jpg]
   }

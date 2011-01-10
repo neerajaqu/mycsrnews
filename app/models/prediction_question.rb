@@ -68,6 +68,12 @@ class PredictionQuestion < ActiveRecord::Base
     end
   end
 
+  def approve
+    @prediction_question = PredictionQuestion.find(params[:id])
+    @prediction_question.is_approved = true
+    if @prediction_question.update_attributes(params[:id])
+  end  
+
   def voices
     self.prediction_guesses.find(:all, :include => :user, :group => :user_id).map(&:user)
   end
