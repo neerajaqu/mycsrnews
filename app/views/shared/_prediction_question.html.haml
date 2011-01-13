@@ -17,4 +17,4 @@
             = form.input :guess
       - form.buttons do
         = form.submit "Submit"
-        %li.suggest_answer= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)
+        %p.suggest_answer= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)

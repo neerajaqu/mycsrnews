@@ -36,25 +36,13 @@
     -# expects prediction_group,
     - if not current_user.present?
       %p display login link
-    - if @prediction_group.prediction_questions.present?    
-      %ul
-        - @prediction_group.prediction_questions.each do |prediction_question|
-          - if current_user.present?
-            %li
-              .generic.small
-                .itemBlock          
-                  %h4= prediction_question.title
-                  - unless prediction_question.user_guessed? current_user
-                    = render :partial => 'shared/prediction_question', :locals => { :prediction_question => prediction_question, :from_groups => true }
-                  - else
-                    - cache "#{prediction_question.cache_key}_stats_html" do
-                      = render :partial => 'shared/prediction_question_stats', :locals => { :prediction_question => prediction_question }
-                    -# todo - show your guess, possibly use jscript to bold your choice
-          - else
-            -# do nothing
-    - else
-      %p no questions yet
-      %br
+    .predictions.question_block
+      - if @prediction_group.prediction_questions.present?    
+        %ul
+          - @prediction_group.prediction_questions.each do |prediction_question|
+            = render :partial => 'shared/prediction_question_container', :locals => { :prediction_question => prediction_question }
+      - else
+        %p =t('predictions.empty_group')
     %p
       - unless @next_prediction_group.nil?
         = link_to t('predictions.next_topic'), prediction_group_path(@next_prediction_group), :class => "btn float_right"
