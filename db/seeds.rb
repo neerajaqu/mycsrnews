@@ -19,9 +19,9 @@ end
 #todo - fix (User.admins.last || nil) - creates fb user as nil, bombs out in fb helper for profilepic
 
 # Default Prediction Group 
-if PredictionGroup.count == 0
-  PredictionGroup.create!({:title => 'Other', :section => 'other', :description => 'This topic is for uncategorized questions'}) unless PredictionGroup.find_by_title_and_section('Other','other')
-end
+#if PredictionGroup.count == 0
+#  PredictionGroup.create!({:title => 'Other', :section => 'other', :description => 'This topic is for uncategorized questions'}) unless PredictionGroup.find_by_title_and_section('Other','other')
+#end
 
 # Populate Sources table with some commonly used sites
 Source.create!({:name => 'New York Times', :url =>'nytimes.com'}) unless Source.find_by_url('nytimes.com')

@@ -13,26 +13,65 @@ class PredictionQuestion < ActiveRecord::Base
   has_many  :prediction_results
 
   attr_accessor :tags_string
+  attr_accessor :list_of_choices, :start_range, :end_range
 
   has_friendly_id :title, :use_slug => true
+  validate :validate_choices
+  validate :validate_prediction_type
   validates_presence_of :title
   validates_presence_of :choices
   validates_presence_of :status
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
-  named_scope :top, lambda { |*args| { :order => ["guesses_count desc, created_at desc"], :limit => (args.first || 10)} }
+  named_scope :top, lambda { |*args| { :order => ["prediction_guesses_count desc, created_at desc"], :limit => (args.first || 10)} }
   named_scope :open, lambda { |*args| { :order => ["status = 'open'" ]} }
   #todo add migration for timestamp closed_at
   named_scope :closed, lambda { |*args| { :order => ["status = 'closed', updated_at desc"], :limit => (args.first || 7)} }
 
-  def self.prediction_types friendly
-    unless friendly.nil?
-      ['multiple choice','yes or no','year','foating point number','whole number e.g. integer','text']    
-    else
-      ['multi','yesno','year','float','numeric','text']
+  def validate_choices
+    case self.prediction_type
+      when 'multi'
+        unless list_of_choices =~ /^([-a-zA-Z0-9_ ]+,?)+$/
+          errors.add(:list_of_choices, 'Please provide a comma separated list of options')
+        else
+          choices = list_of_choices.split(',')
+        end
+      when 'text'
+        choices = []
+      when 'yesno'
+        choices = ['yes', 'no']
+      when 'numeric'
+        errors.add(:start_range, 'Please provide a valid numeric start range') unless start_range.present? 
+        errors.add(:end_range, 'Please provide a valid numeric end range') unless end_range.present? 
+        errors.add(:start_range, 'Start range must be a numeric value') unless start_range =~ /^[0-9]+$/
+        errors.add(:end_range, 'End range must be a numeric value') unless end_range =~ /^[0-9]+$/
+        errors.add(:end_range, 'End range must be greater than start range') unless end_range.to_i > start_range.to_i
+      when 'year'
+        errors.add(:start_range, 'Please provide a valid numeric start year') unless start_range.present? 
+        errors.add(:end_range, 'Please provide a valid numeric end year') unless end_range.present? 
+        errors.add(:start_range, 'Start year must be a valid year') unless start_range =~ /^[0-9]{4}$/
+        errors.add(:end_range, 'End year must be a valid year') unless end_range =~ /^[0-9]{4}$/
+        errors.add(:end_range, 'End year must be greater than start year') unless end_range.to_i > start_range.to_i
     end
   end
 
+  def validate_prediction_type
+      errors.add(:prediction_type, 'Please select a valid question type') unless self.class.prediction_types.keys.include? prediction_type
+  end
+  
+  def self.prediction_types
+      { 'multi' => 'multiple choice', 
+        'yesno' => 'yes or no',
+        'year' => 'year',
+        'numeric' => 'number',
+        'text' => 'text'
+        }
+  end
+
+  def self.prediction_type_options
+    self.prediction_types.collect {|k,v| [ v, k] }
+  end
+  
   def user_guessed? user
     prediction_guesses.exists?(:user_id => user.id)
   end
