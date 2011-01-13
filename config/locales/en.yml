@@ -276,6 +276,8 @@ en:
     read: "Read Story"
     quick_post: "Quick post"
   predictions:
+    open: "question remains open"
+    see_results: "<a href=\"{{results_link}}\">See results</a>"
     login_required: "Please <a href=\"{{login_url}}\"><b>sign in</b></a> or <a href=\"{{register_url}}\"><b>register</b></a> to make predictions."
     predict: "Make Predictions"
     tabulation_title: "Summary of current guesses"
@@ -304,6 +306,7 @@ en:
     suggest_predictions_title: "Want to suggest topics and questions?"
     suggest_predictions_info: "We appreciate your ideas. Propose a <a href=\"{{link_topic}}\">topic</a> or a <a href=\"{{link_question}}\">new question</a>."
     empty_group: "There are no questions for this topic yet."
+    posted_by_in_topic_with_status: "Posted by {{fb_name}} in <a href=\"{{link_topic}}\">{{topic}}</a>, {{status}}"
     types:
       yes_no: "Yes or No"
       multi: "Multiple Choice"
