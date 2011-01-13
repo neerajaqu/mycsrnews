@@ -1,26 +1,28 @@
 .predictions
-  - form_for [prediction_question, PredictionGuess.new] do |form|
-    - case prediction_question.prediction_type
-      - when 'multi'
-        - choice_list = [t('predictions.select_guess')] | prediction_question.choices.split(/,/)
-        = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-        = form.submit "Submit"
-      - when 'yesno'
-        - choice_list = [t('predictions.select_guess'), 'Yes', 'No']
-        = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-        = form.submit "Submit"
-      - when 'year'
-        - choice_list = [t('predictions.select_guess')] | prediction_question.choices.split(/,/)
-        = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-        = form.submit "Submit"
-      - when 'float'
-        = form.text_field :guess_numeric
-        = form.submit "Submit"
-      - when 'numeric'
-        = form.text_field :guess_numeric
-        = form.submit "Submit"
-      - when 'text'
-        = form.text_field :guess
-        = form.submit "Submit"
-  .suggest_answer
-    %a= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)
+  .question_block
+    - form_for [prediction_question, PredictionGuess.new] do |form|
+      - case prediction_question.prediction_type
+        - when 'multi'
+          - choice_list = [t('predictions.select_guess')] | prediction_question.choices.split(/,/)
+          = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+          = form.submit "Submit"
+        - when 'yesno'
+          - choice_list = [t('predictions.select_guess'), 'Yes', 'No']
+          = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+          = form.submit "Submit"
+        - when 'year'
+          - choice_list = [t('predictions.select_guess')] | prediction_question.choices.split(/,/)
+          = form.select :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
+          = form.submit "Submit"
+        - when 'float'
+          = form.text_field :guess_numeric
+          = form.submit "Submit"
+        - when 'numeric'
+          = form.text_field :guess_numeric
+          = form.submit "Submit"
+        - when 'text'
+          = form.text_field :guess
+          = form.submit "Submit"
+    %br
+    %p.suggest_answer
+      %a= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)

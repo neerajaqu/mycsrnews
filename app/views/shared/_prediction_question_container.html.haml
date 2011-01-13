@@ -1,12 +1,16 @@
-%li
-  .generic.small
-    .itemBlock          
-      %h4= prediction_question.title
-      - unless current_user.present?
-        %p= t('predictions.login_required', :login_url => url_for(login_path(:format => 'html')), :register_url => url_for(register_path(:format => 'html')))
-      - else
+-# expects prediction_question
+- if current_user.present?
+  %li
+    .generic.small
+      .itemBlock          
+        %h4= prediction_question.title
         - unless prediction_question.user_guessed? current_user
           = render :partial => 'shared/prediction_question', :locals => { :prediction_question => prediction_question }
         - else
+          .your_guess
+            =t('predictions.your_guess', :guess => prediction_question.prediction_guesses.find_by_user_id(current_user.id).guess)
           - cache "#{prediction_question.cache_key}_stats_html" do
             = render :partial => 'shared/prediction_question_stats', :locals => { :prediction_question => prediction_question }
+- else
+  - cache "#{prediction_question.cache_key}_stats_html" do
+    = render :partial => 'shared/prediction_question_stats', :locals => { :prediction_question => prediction_question }
