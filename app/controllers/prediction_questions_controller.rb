@@ -17,9 +17,9 @@ class PredictionQuestionsController < ApplicationController
 
     if @prediction_question.valid? and current_user.prediction_questions.push @prediction_question
     	flash[:success] = t('predictions.create_prediction_question')
-    	redirect_to predictions_path
+    	redirect_to @prediction_question
     else
-      @prediction_questions = PredictionQuestion.active.open.newest
+    	flash[:error] = "Could not create your question, please clear the errors and try again."
     	render :new
     end
   end  

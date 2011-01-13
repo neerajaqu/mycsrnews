@@ -45,7 +45,7 @@
                 .itemBlock          
                   %h4= prediction_question.title
                   - unless prediction_question.user_guessed? current_user
-                    = render :partial => 'shared/prediction_question', :locals => { :prediction_question => prediction_question }
+                    = render :partial => 'shared/prediction_question', :locals => { :prediction_question => prediction_question, :from_groups => true }
                   - else
                     - cache "#{prediction_question.cache_key}_stats_html" do
                       = render :partial => 'shared/prediction_question_stats', :locals => { :prediction_question => prediction_question }

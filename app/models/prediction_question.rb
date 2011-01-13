@@ -6,6 +6,8 @@ class PredictionQuestion < ActiveRecord::Base
   acts_as_wall_postable
   acts_as_tweetable
 
+  serialize :choices
+
   belongs_to  :user
   belongs_to  :prediction_group, :counter_cache => true, :touch => true
   has_many    :prediction_guesses
@@ -29,29 +31,48 @@ class PredictionQuestion < ActiveRecord::Base
   named_scope :closed, lambda { |*args| { :order => ["status = 'closed', updated_at desc"], :limit => (args.first || 7)} }
 
   def validate_choices
+    return true unless self.new_record? or self.list_of_choices.present? or self.start_range.present? or self.end_range.present?
     case self.prediction_type
       when 'multi'
         unless list_of_choices =~ /^([-a-zA-Z0-9_ ]+,?)+$/
           errors.add(:list_of_choices, 'Please provide a comma separated list of options')
         else
-          choices = list_of_choices.split(',')
+          self.choices = list_of_choices.split(',')
         end
       when 'text'
-        choices = []
+        self.choices = []
       when 'yesno'
-        choices = ['yes', 'no']
+        self.choices = ['yes', 'no']
       when 'numeric'
-        errors.add(:start_range, 'Please provide a valid numeric start range') unless start_range.present? 
-        errors.add(:end_range, 'Please provide a valid numeric end range') unless end_range.present? 
-        errors.add(:start_range, 'Start range must be a numeric value') unless start_range =~ /^[0-9]+$/
-        errors.add(:end_range, 'End range must be a numeric value') unless end_range =~ /^[0-9]+$/
-        errors.add(:end_range, 'End range must be greater than start range') unless end_range.to_i > start_range.to_i
+        unless start_range.present? and end_range.present?
+          errors.add(:start_range, 'Please provide a valid numeric start range') unless start_range.present? 
+          errors.add(:end_range, 'Please provide a valid numeric end range') unless end_range.present? 
+        else
+          errors.add(:start_range, 'Start range must be a numeric value') unless start_range =~ /^[0-9]+$/
+          errors.add(:end_range, 'End range must be a numeric value') unless end_range =~ /^[0-9]+$/
+          errors.add(:end_range, 'End range must be greater than start range') unless end_range.to_i > start_range.to_i
+        end
+        unless errors.any?
+          self.choices = {
+          	:start_range => start_range,
+          	:end_range => end_range
+          }
+        end
       when 'year'
-        errors.add(:start_range, 'Please provide a valid numeric start year') unless start_range.present? 
-        errors.add(:end_range, 'Please provide a valid numeric end year') unless end_range.present? 
-        errors.add(:start_range, 'Start year must be a valid year') unless start_range =~ /^[0-9]{4}$/
-        errors.add(:end_range, 'End year must be a valid year') unless end_range =~ /^[0-9]{4}$/
-        errors.add(:end_range, 'End year must be greater than start year') unless end_range.to_i > start_range.to_i
+        unless start_range.present? and end_range.present?
+          errors.add(:start_range, 'Please provide a valid numeric start year') unless start_range.present? 
+          errors.add(:end_range, 'Please provide a valid numeric end year') unless end_range.present? 
+        else
+          errors.add(:start_range, 'Start year must be a valid year') unless start_range =~ /^[0-9]{4}$/
+          errors.add(:end_range, 'End year must be a valid year') unless end_range =~ /^[0-9]{4}$/
+          errors.add(:end_range, 'End year must be greater than start year') unless end_range.to_i > start_range.to_i
+        end
+        unless errors.any?
+          self.choices = {
+          	:start_range => start_range,
+          	:end_range => end_range
+          }
+        end
     end
   end
 
@@ -69,7 +90,43 @@ class PredictionQuestion < ActiveRecord::Base
   end
 
   def self.prediction_type_options
-    self.prediction_types.collect {|k,v| [ v, k] }
+    self.prediction_types.collect {|k,v| [v.titleize, k] }
+  end
+
+  def valid_guess? guess
+    case self.prediction_type
+      when 'multi'
+      when 'yesno'
+        self.choices.include? guess
+      when 'year'
+        start_year = self.choices[:start_range].to_i
+        end_year = self.choices[:end_range].to_i
+        start_year <= guess.to_i and guess.to_i <= end_year
+      when 'numeric'
+        start_range = self.choices[:start_range].to_f
+        end_range = self.choices[:end_range].to_f
+        start_range <= guess.to_f and guess.to_f <= end_range
+      when 'text'
+        guess.present?
+      else
+      	false
+    end
+  end
+
+
+  def prediction_choice_options
+    case self.prediction_type
+      when 'multi'
+        self.choices.collect {|k,v| [v.titleize, k] }
+      when 'yesno'
+        self.choices.collect {|k| [k.titleize, k] }
+      when 'year'
+        start_year = self.choices[:start_range].to_i
+        end_year = self.choices[:end_range].to_i
+        (start_year..end_year).to_a.collect {|y| [y, y] }
+      else
+      	[]
+    end
   end
   
   def user_guessed? user

@@ -1,25 +1,47 @@
 - content_for :head_content do
   :javascript
     $(function() {
-      var wizard = $('#wizard');
-    	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
-    		if (index > 0) {
-    			var url = $("#idea_title");
-          url.siblings("label").removeClass("wizard-errors");
+    	$('#prediction_question_prediction_type option:selected').each(function() {
+    		console.log("SELECT VALUE: "+$(this).val());
+    		switch ($(this).val()) {
+    			case 'text':
+    			case 'yesno':
+    			  $('li.question-values').addClass('hidden');
+    			  break;
+    			case 'multi':
+    			  $('li.question-values').addClass('hidden');
+    			  $('li.question-values.choices').removeClass('hidden');
+    			  break;
+    			case 'year':
+    			case 'numeric':
+    			  $('li.question-values').addClass('hidden');
+    			  $('li.question-values.range').removeClass('hidden');
+    			  break;
+    			default:
+    			  $('li.question-values').addClass('hidden');
+    			  break;
         }
       });
-      var api = $("ul.arrows", wizard).data("tabs");
-
-      // "next tab" button
-      $("input.form-btn.next", wizard).click(function(event) {
-      	event.preventDefault();
-        api.next();
-      });
-
-      // "previous tab" button
-      $("input.form-btn.prev", wizard).click(function() {
-      	event.preventDefault();
-        api.prev();
+    	$('select#prediction_question_prediction_type').change(function() {
+    		console.log("SELECT VALUE: "+$('option:selected', $(this)).val());
+    		switch ($('option:selected', $(this)).val()) {
+    			case 'text':
+    			case 'yesno':
+    			  $('li.question-values').addClass('hidden');
+    			  break;
+    			case 'multi':
+    			  $('li.question-values').addClass('hidden');
+    			  $('li.question-values.choices').removeClass('hidden');
+    			  break;
+    			case 'year':
+    			case 'numeric':
+    			  $('li.question-values').addClass('hidden');
+    			  $('li.question-values.range').removeClass('hidden');
+    			  break;
+    			default:
+    			  $('li.question-values').addClass('hidden');
+    			  break;
+        }
       });
     });      
 - content_for :sub_nav do
@@ -39,10 +61,10 @@
                     = form.input :title, :label => t('predictions.new.prediction_group_title'), :hint => t('predictions.new.prediction_group_title_hint')
                     = form.input :prediction_group, :label => t('predictions.select_prediction_group'), :required => true, :include_blank => false
                     %p.strong= t('choose_prediction_type_below')
-                    = form.select :prediction_type, options_for_select( PredictionQuestion.prediction_type_options.unshift [ t('predictions.choose_prediction_type'), 'default'])
-                    = form.input :list_of_choices, :label => t('predictions.suggested_choices'), :required => true, :hint => t('predictions.suggested_choices_hint')
-                    = form.input :start_range
-                    = form.input :end_range
+                    = form.input :prediction_type, :as => :select, :collection => PredictionQuestion.prediction_type_options.unshift([ t('predictions.choose_prediction_type'), 'default']), :default => 'default'
+                    = form.input :list_of_choices, :label => t('predictions.suggested_choices'), :required => true, :hint => t('predictions.suggested_choices_hint'), :wrapper_html => { :class => 'question-values choices hidden' }
+                    = form.input :start_range, :wrapper_html => { :class => 'question-values range hidden' }
+                    = form.input :end_range, :wrapper_html => { :class => 'question-values range hidden' }
                     = form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
                 - form.buttons do
                   = form.commit_button t('wizard.submit'), :class => 'float_right', :button_html => { :class => 'form-btn' }
