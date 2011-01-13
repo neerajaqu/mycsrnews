@@ -42,6 +42,12 @@ class PredictionGroupsController < ApplicationController
     else
       @prediction_group = PredictionGroup.find(params[:id])
     end
+
+    unless @prediction_group
+      flash[:error] = "Could not find the prediction group."
+      redirect_to prediction_groups_path and return
+    end
+
     tag_cloud @prediction_group
     set_outbrain_item @prediction_group
     @current_sub_tab = 'Predict'

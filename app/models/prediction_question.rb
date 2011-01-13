@@ -20,7 +20,7 @@ class PredictionQuestion < ActiveRecord::Base
   validates_presence_of :status
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
-  named_scope :top, lambda { |*args| { :order => ["guesses_count desc, created_at desc"], :limit => (args.first || 10)} }
+  named_scope :top, lambda { |*args| { :order => ["prediction_guesses_count desc, created_at desc"], :limit => (args.first || 10)} }
   named_scope :open, lambda { |*args| { :order => ["status = 'open'" ]} }
   #todo add migration for timestamp closed_at
   named_scope :closed, lambda { |*args| { :order => ["status = 'closed', updated_at desc"], :limit => (args.first || 7)} }
