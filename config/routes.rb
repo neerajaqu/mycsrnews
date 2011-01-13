@@ -98,7 +98,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :predictions, :collection => { :index => [:get, :post],  :my_predictions => [:get, :post], :scores => [:get, :post] }
   map.resources :prediction_groups, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post], :play => [:get, :post] }, :has_many => [:comments, :prediction_questions, :flags]
   map.resources :prediction_questions, :member => { :like => [:get, :post] } , :collection => { :index => [:get, :post] }, :has_many => [ :prediction_guesses, :prediction_results ]
-  map.prediction_question '/prediction_question/:id.:format', :controller => 'predictions', :action => 'show_question'
+  #map.prediction_question '/prediction_question/:id.:format', :controller => 'predictions', :action => 'show_question'
   #map.resources :prediction_guesses, :collection => { :create => [ :post] }
   map.resources :widgets, :collection => { :newswires => [:get], :questions => [:get], :forum_roll => [:get], :topics => [:get], :blog_roll => [:get], :blogger_profiles => [:get], :fan_application => [:get], :add_bookmark => [:get], :user_articles => [:get], :articles => [:get], :stories => [:get], :activities => [:get]  }, :layout => 'widgets'
   

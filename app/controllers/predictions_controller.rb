@@ -27,12 +27,6 @@ class PredictionsController < ApplicationController
   def create
   end
 
-  def show_question
-    #todo - change question link
-    #todo - handle question with no group
-    @prediction_question = PredictionQuestion.active.find(params[:id])
-  end
-  
   def my_predictions
     @paginate = true
     @current_sub_tab = 'Yours'

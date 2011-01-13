@@ -24,4 +24,8 @@ class PredictionQuestionsController < ApplicationController
     end
   end  
 
+  def show
+    @prediction_question = PredictionQuestion.active.find(params[:id])
+  end
+  
 end
