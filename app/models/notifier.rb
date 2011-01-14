@@ -1,18 +1,14 @@
 class Notifier < ActionMailer::Base
   helper :application
-  #todo       from          "\"#{Metadata::Setting.find_setting('site_title').value}\" <#{message[:email]}>"
 
-=begin
-    def prediction_question_message(message)
-      #subject       "Flag (#{flag.flag_type}): #{flag.flaggable.item_title}"
-      subject       "test"
-      from          ActionMailer::Base.smtp_settings['user_name']
-      recipients    message[:recipients]
-      sent_on       Time.now
-      body          :message => message
-      content_type  "text/html"
-    end
-=end
+  def prediction_result_message(message)
+    subject       I18n.translate('message.prediction_closed', :title => message[:participant].item_title, :site_title => Metadata::Setting.get_setting('site_title').value )
+    from          ActionMailer::Base.smtp_settings['user_name']
+    recipients    message[:recipients]
+    sent_on       Time.now
+    body          :message => message
+    content_type  "text/html"
+  end
   
   def contact_us_message(message)
     subject       "Contact Us: #{message.subject}"

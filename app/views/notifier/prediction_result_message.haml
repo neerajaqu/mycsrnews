@@ -1,6 +1,6 @@
 == #{@message[:originator].name} sent a message to #{@message[:site_title]} members
 %br
-%p=   nl2br(@message[:participant].message)
+%p= nl2br(@message[:participant].message)
 %a{:href=> @message[:participant].action_text }= @message[:participant].action_url
 %br
 %br

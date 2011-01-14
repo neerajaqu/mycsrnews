@@ -334,7 +334,8 @@ en:
         url: ""
         detail: ""
   message:
-    chirped_at:  "{{name}} sent you a message from {{site_title}}"
+    prediction_closed: "{{title}} has completed at {{site_title}} "
+    chirped_at:  "{{name}} sent you a message from {{site_title}}"    
     commented_on:  "{{name}} commented on {{title}} at {{site_title}}"
     answered:  "{{name}} answered {{title}} at {{site_title}}"
     dashboard_message:  "{{name}} sent a message to members of {{site_title}}"
