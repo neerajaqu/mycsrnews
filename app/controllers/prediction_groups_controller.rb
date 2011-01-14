@@ -55,5 +55,12 @@ class PredictionGroupsController < ApplicationController
     @next_prediction_group = @prediction_group.next
     render :template => 'prediction_groups/show'
   end
+
+  def tags
+    tag_name = CGI.unescape(params[:tag])
+    @paginate = true
+    @prediction_groups = PredictionGroup.active.tagged_with(tag_name, :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
+    render :template => 'prediction_groups/index'
+  end
     
 end
