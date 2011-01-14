@@ -21,7 +21,8 @@ class PredictionQuestion < ActiveRecord::Base
   validate :validate_choices
   validate :validate_prediction_type
   validates_presence_of :title
-  validates_presence_of :choices
+  # TODO:: fix this, fails on text with [].present?
+  #validates_presence_of :choices
   validates_presence_of :status
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
@@ -37,7 +38,7 @@ class PredictionQuestion < ActiveRecord::Base
         unless list_of_choices =~ /^([-a-zA-Z0-9_ ]+,?)+$/
           errors.add(:list_of_choices, 'Please provide a comma separated list of options')
         else
-          self.choices = list_of_choices.split(',')
+          self.choices = list_of_choices.split(',').map(&:strip)
         end
       when 'text'
         self.choices = []
@@ -96,6 +97,7 @@ class PredictionQuestion < ActiveRecord::Base
   def valid_guess? guess
     case self.prediction_type
       when 'multi'
+        self.choices.include? guess
       when 'yesno'
         self.choices.include? guess
       when 'year'
@@ -117,7 +119,7 @@ class PredictionQuestion < ActiveRecord::Base
   def prediction_choice_options
     case self.prediction_type
       when 'multi'
-        self.choices.collect {|k,v| [v.titleize, k] }
+        self.choices.collect {|k| [k.titleize, k] }
       when 'yesno'
         self.choices.collect {|k| [k.titleize, k] }
       when 'year'
@@ -131,6 +133,23 @@ class PredictionQuestion < ActiveRecord::Base
   
   def user_guessed? user
     prediction_guesses.exists?(:user_id => user.id)
+  end
+
+  def get_guess_totals
+    @get_prediction_guess_totals ||= prediction_guesses.count
+  end
+
+  def get_guess_percentages
+    get_guess_counts.collect do |g|
+      {
+        :guess    => g.guess,
+        :percent  => (100.0 * g.count.to_f / get_guess_totals)
+      }
+    end
+  end
+
+  def get_guess_counts
+    prediction_guesses.find(:all, :select => 'count(*) count, guess', :group => 'guess', :limit => 10, :order => "count desc")
   end
 
   def update_stats

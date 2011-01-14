@@ -1,37 +1,8 @@
 .predictions
   .itemBlock          
-    - stats = prediction_question.update_stats
-    - guess_count = prediction_question.prediction_guesses.count
-    - prediction_type = prediction_question.prediction_type
-    - if prediction_type == 'yesno'
-      - choices = "yes,no"
-    - else
-      - choices = prediction_question.choices
-    -# stats.each_with_index do |stat,index|
-      %p
-        = stat >> "," >> index        
     %p= t('predictions.tabulation_title')
-    - choices.downcase.split(/,/).each do |prediction_guess|
-      - unless stats.nil?
-        - if stats[prediction_guess].nil? 
-          - if prediction_type == 'yesno'
-            %p
-              = prediction_guess.capitalize
-              0%
-        - else       
-          %p
-            = prediction_guess.capitalize
-            = (stats[prediction_guess] / prediction_question.prediction_guesses.count * 100)
-            \%
-    %p.guess_count
-      - case guess_count
-        - when 0
-          No answers yet
-        - when 1
-          1 answer
-        - else
-          = prediction_question.prediction_guesses.count
-          answers
+    - prediction_question.get_guess_percentages.each do |guess|
+      %p== #{guess[:guess].titleize} #{number_to_percentage(guess[:percent], :precision => 2)}
     %p.suggest_answer
       %a= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)
     %br

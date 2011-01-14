@@ -12,7 +12,7 @@
           - when 'year'
             = form.input :guess, :as => :select, :collection => prediction_question.prediction_choice_options
           - when 'numeric'
-            = form.input :guess_numeric
+            = form.input :guess
           - when 'text'
             = form.input :guess
       - form.buttons do
