@@ -1,5 +1,5 @@
 class PredictionGuessesController < ApplicationController
-  before_filter :login_required, :only => [:create]
+  before_filter :login_required, :only => [:new, :create]
   cache_sweeper :prediction_sweeper, :only => [:create, :update, :destroy]
 
   def create

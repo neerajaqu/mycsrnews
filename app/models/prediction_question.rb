@@ -196,8 +196,8 @@ class PredictionQuestion < ActiveRecord::Base
   def recipient_voices
     users = self.voices
     users << self.user
-    # todo - get list of people who liked question prediction group
-    #users.concat self.commentable.votes.map(&:voter) 
+    # add people who liked group that the question is in
+    users.concat self.prediction_group.votes.map(&:voter) 
     users.uniq
   end
   

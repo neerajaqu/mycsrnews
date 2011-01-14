@@ -34,10 +34,6 @@ class PredictionsController < ApplicationController
   end
 
   private
-
-#  def set_resource_section
-#     @resource_section = params[:resource_section_id].present? ? ResourceSection.find(params[:resource_section_id]) : nil
-#  end
    
   def set_current_tab
     @current_tab = 'predictions'
