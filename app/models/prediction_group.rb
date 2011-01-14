@@ -19,6 +19,7 @@ class PredictionGroup < ActiveRecord::Base
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 7)} }
   named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 7)} }
+  named_scope :approved, :conditions => { :is_approved => true }
   named_scope :open, lambda { |*args| { :conditions => ["prediction_questions_count > 0 and status = 'open'" ] } }
 
   def to_s
