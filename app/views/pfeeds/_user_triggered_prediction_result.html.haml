@@ -1,8 +1,8 @@
 - user = user_triggered_answer.originator
 - item = user_triggered_answer.participant
-%p= pfeed_caption item.item_description
+%p= pfeed_caption t('predictions.question_closed', :question => link_to(item.prediction_question.item_title, polymorphic_url(item.prediction_question,:only_path => false) ), :group => link_to(item.prediction_question.prediction_group.item_title, polymorphic_url(item.prediction_question.prediction_group,:only_path => false) ) )
 
 .user-wrapper
   .profilePic= local_linked_profile_pic user, :width => '30px', :height => '30px', :only_path => false, :format => 'html'
   %h3
-    = t('user_posted_item', :fb_name => local_linked_profile_name(user, :only_path => false, :format => 'html'), :title => link_to(item.item_title, polymorphic_url(item,:only_path => false) ), :date => timeago(item.created_at))
+    = t('posted_by', :fb_name => local_linked_profile_name(user, :only_path => false, :format => 'html'), :date => timeago(item.created_at))

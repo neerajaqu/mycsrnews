@@ -276,6 +276,8 @@ en:
     read: "Read Story"
     quick_post: "Quick post"
   predictions:
+    question_closed: ""
+    new_question_posted: "A new prediction question: {{question}} has been added to {{group}}."
     open: "question remains open"
     see_results: "<a href=\"{{results_link}}\">See results</a>"
     login_required: "You must <a href=\"{{login_url}}\"><b>sign in</b></a> or <a href=\"{{register_url}}\"><b>register</b></a> in order to make predictions."
