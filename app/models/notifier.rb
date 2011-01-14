@@ -2,7 +2,16 @@ class Notifier < ActionMailer::Base
   helper :application
 
   def prediction_result_message(message)
-    subject       I18n.translate('message.prediction_closed', :title => message[:participant].item_title, :site_title => Metadata::Setting.get_setting('site_title').value )
+    subject       I18n.translate('message.prediction_closed', :title => message[:participant].prediction_question.item_title, :site_title => Metadata::Setting.get_setting('site_title').value )
+    from          ActionMailer::Base.smtp_settings['user_name']
+    recipients    message[:recipients]
+    sent_on       Time.now
+    body          :message => message
+    content_type  "text/html"
+  end
+
+  def prediction_question_message(message)
+    subject       I18n.translate('message.prediction_question_added', :title => message[:participant].prediction_group.item_title, :site_title => Metadata::Setting.get_setting('site_title').value )
     from          ActionMailer::Base.smtp_settings['user_name']
     recipients    message[:recipients]
     sent_on       Time.now

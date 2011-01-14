@@ -334,6 +334,7 @@ en:
         url: ""
         detail: ""
   message:
+    prediction_question_added: "A new prediction question has been added to {{title}} at {{site_title}}"
     prediction_closed: "{{title}} has completed at {{site_title}} "
     chirped_at:  "{{name}} sent you a message from {{site_title}}"    
     commented_on:  "{{name}} commented on {{title}} at {{site_title}}"
