@@ -276,6 +276,8 @@ en:
     read: "Read Story"
     quick_post: "Quick post"
   predictions:
+    question_closed: ""
+    new_question_posted: "A new prediction question: {{question}} has been added to {{group}}."
     open: "question remains open"
     see_results: "<a href=\"{{results_link}}\">See results</a>"
     login_required: "You must <a href=\"{{login_url}}\"><b>sign in</b></a> or <a href=\"{{register_url}}\"><b>register</b></a> in order to make predictions."
@@ -335,7 +337,9 @@ en:
         url: ""
         detail: ""
   message:
-    chirped_at:  "{{name}} sent you a message from {{site_title}}"
+    prediction_question_added: "A new prediction question has been added to {{title}} at {{site_title}}"
+    prediction_closed: "{{title}} has completed at {{site_title}} "
+    chirped_at:  "{{name}} sent you a message from {{site_title}}"    
     commented_on:  "{{name}} commented on {{title}} at {{site_title}}"
     answered:  "{{name}} answered {{title}} at {{site_title}}"
     dashboard_message:  "{{name}} sent a message to members of {{site_title}}"
