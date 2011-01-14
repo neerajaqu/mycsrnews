@@ -1,6 +1,6 @@
 -# expects prediction_question
 - from_groups ||= false
-- if current_user.present?
+- if current_user.present? and prediction_question.status == 'open'
   %li
     .generic.small
       .itemBlock          

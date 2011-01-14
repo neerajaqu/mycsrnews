@@ -45,6 +45,11 @@ class ResourcesController < ApplicationController
       if @resource.post_wall?
         session[:post_wall] = @resource
       end      
+      if get_setting('tweet_all_moderator_items').try(:value)
+        if current_user.present? and current_user.is_moderator?
+          @resource.tweet
+        end
+      end
     	flash[:success] = "Thank you for adding to our directory!"
     	redirect_to resource_path(@resource)
     else

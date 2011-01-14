@@ -39,6 +39,11 @@ class QuestionsController < ApplicationController
       if @question.post_wall?
         session[:post_wall] = @question
       end      
+      if get_setting('tweet_all_moderator_items').try(:value)
+        if current_user.present? and current_user.is_moderator?
+          @question.tweet
+        end
+      end
       flash[:success] = "Successfully posted your question!"
       redirect_to question_path(@question)
     else

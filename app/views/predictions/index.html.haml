@@ -11,13 +11,13 @@
 
 #col_right
   = render :partial => 'shared/items/what_is_this', :locals => { :title => t('predictions.what_is_intro'), :details => t('predictions.what_is_details')}
+  = render :partial => 'shared/sidebar/suggest_predictions'
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/predictions_high_scores', :locals => { :top_scorers => nil }
   = render :partial => 'shared/sidebar/newest_prediction_groups', :locals => { :prediction_groups => @newest_prediction_groups }
   = render :partial => 'shared/sidebar/newest_prediction_questions', :locals => { :prediction_questions => @newest_prediction_questions }
   = render :partial => 'shared/sidebar/top_prediction_groups', :locals => { :prediction_groups => @top_prediction_groups }
   = render :partial => 'shared/sidebar/top_prediction_questions', :locals => { :prediction_questions => @top_prediction_questions }
-  = render :partial => 'shared/sidebar/suggest_predictions'
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
 
 

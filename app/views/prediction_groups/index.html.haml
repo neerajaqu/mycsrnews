@@ -12,11 +12,11 @@
 
 #col_right
   = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/suggest_predictions'
   = render :partial => 'shared/sidebar/newest_prediction_groups', :locals => { :prediction_groups => @newest_prediction_groups }
   = render :partial => 'shared/sidebar/newest_prediction_questions', :locals => { :prediction_questions => @newest_prediction_questions }
   = render :partial => 'shared/sidebar/top_prediction_groups', :locals => { :prediction_groups => @top_prediction_groups }
   = render :partial => 'shared/sidebar/top_prediction_questions', :locals => { :prediction_questions => @top_prediction_questions }
-  = render :partial => 'shared/sidebar/suggest_predictions'
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
 
 

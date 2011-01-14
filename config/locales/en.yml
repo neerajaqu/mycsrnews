@@ -348,6 +348,7 @@ en:
     click_return_site: "Click here to return to {{site_title}}"
     unsubscribe: "To unsubscribe from email notifications, <a href='{{href}}'>change your settings</a> at {{site_title}}"
     visit_flagged_item: "Click here to view the flagged item"
+    visit_item: "Click here to view this item"
   widgets:
     articles_as_blog_title: "What's new from {{site_title}}"
     activities_title: "Latest activities from {{site_title}}"

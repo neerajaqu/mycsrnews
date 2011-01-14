@@ -48,6 +48,11 @@ class IdeasController < ApplicationController
       if @idea.post_wall?
         session[:post_wall] = @idea
       end      
+      if get_setting('tweet_all_moderator_items').try(:value)
+        if current_user.present? and current_user.is_moderator?
+          @idea.tweet
+        end
+      end
     	flash[:success] = "Thank you for your idea!"
     	redirect_to @idea_board.present? ? [@idea_board, @idea] : @idea
     else
