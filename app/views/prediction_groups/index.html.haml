@@ -6,7 +6,7 @@
   = render_ad(:banner, @ad_layout, @ad_banner)  
   = render :partial => 'prediction_group_list', :locals => { :prediction_groups => @prediction_groups, :paginate => @paginate, :page => @page }
 
-  .panel_2.moderator-links
+  -# .panel_2.moderator-links
     = link_to t('predictions.new_group'), new_admin_prediction_group_path(), :class => "btn", :target => '_parent'
     = link_to t('predictions.new_question'), new_admin_prediction_question_path(), :class => "btn", :target => '_parent'
 

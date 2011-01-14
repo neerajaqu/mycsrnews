@@ -1,4 +1,5 @@
 class PredictionQuestionsController < ApplicationController
+  before_filter :login_required, :only => [:new, :create]
 
   def new 
    @current_sub_tab = 'New Prediction Question'

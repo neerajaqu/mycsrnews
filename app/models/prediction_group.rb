@@ -55,4 +55,16 @@ class PredictionGroup < ActiveRecord::Base
     PredictionSweeper
   end
 
+  def voices
+    # users who guessed on questions for this group
+    self.prediction_questions.prediction_guesses.find(:all, :include => :user, :group => :user_id).map(&:user)
+  end
+
+  def recipient_voices
+    users = self.voices
+    users << self.user
+    users.concat self.votes.map(&:voter) 
+    users.uniq
+  end
+
 end
