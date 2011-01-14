@@ -331,6 +331,7 @@ en:
       detail: ""
       hint:
         result: ""
+        alternate_result: "Provide an alternate result if you selected none of the above"
         url: ""
         detail: ""
   message:

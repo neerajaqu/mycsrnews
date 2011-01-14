@@ -1,29 +1,6 @@
-- content_for :head_content do
-  :javascript
-    $(function() {
-      var wizard = $('#wizard');
-    	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
-    		if (index > 0) {
-    			var url = $("#idea_title");
-          url.siblings("label").removeClass("wizard-errors");
-        }
-      });
-      var api = $("ul.arrows", wizard).data("tabs");
-
-      // "next tab" button
-      $("input.form-btn.next", wizard).click(function(event) {
-      	event.preventDefault();
-        api.next();
-      });
-
-      // "previous tab" button
-      $("input.form-btn.prev", wizard).click(function() {
-      	event.preventDefault();
-        api.prev();
-      });
-    });      
 - content_for :sub_nav do
   = render :partial => 'shared/subnav/predictions_subnav'
+
 #col_full
   .panel_3
     .panelBar
@@ -38,15 +15,17 @@
                   - form.inputs do                
                     - case @prediction_question.prediction_type
                       - when 'multi'
-                        - choice_list = @prediction_question.choices.split(/,/)
-                        = form.input :result, :as => :select, :collection => choice_list.collect {|f| [t("#{f}"), f.underscore] }.push(['None of the above','incorrect'])
+                        = form.input :result, :as => :select, :collection => @prediction_question.prediction_choice_options.push(['None of the above', 'incorrect'])
                       - when 'yesno'
-                        - choice_list = @prediction_question.choices.split(/,/)
-                        = form.input :result, :as => :select, :collection => choice_list.collect {|f| [t("#{f}"), f.underscore] }.push(['None of the above','incorrect'])
+                        = form.input :result, :as => :select, :collection => @prediction_question.prediction_choice_options.push(['None of the above', 'incorrect'])
+                      - when 'year'
+                        = form.input :result, :as => :select, :collection => @prediction_question.prediction_choice_options.push(['None of the above', 'incorrect'])
                       - when 'numeric'
                         = form.input :result
-                    = form.input :result, :label => t('prediction.new.result'), :hint => t('prediction.new.hint.result')
-                    = form.input :url, :label => t('prediction.new.url'), :hint => t('prediction.new.hint.url')
-                    = form.input :details, :hint => t('prediction.new.hint.details'), :required => false 
+                      - when 'text'
+                        = form.input :result
+                    = form.input :alternate_result, :required => false, :hint => t('predictions.new.hint.alternate_result')
+                    = form.input :url, :required => false, :hint => t('predictions.new.hint.url')
+                    = form.input :details, :required => false, :input_html => { :rows => 5 }
                 - form.buttons do
                   = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }

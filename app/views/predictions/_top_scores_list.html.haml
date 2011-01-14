@@ -11,7 +11,7 @@
           %ul
             - prediction_scores.each do |score|
               - user = score.user
-              %li{'data-id' => prediction_user.cache_key}
+              %li{'data-id' => user.cache_key}
                 = render :partial => 'shared/items/prediction_user_score', :locals => { :user => user, :score => score }
       - else
         %br

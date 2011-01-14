@@ -9,6 +9,7 @@ class PredictionScore < ActiveRecord::Base
   def increment_score correct
     self.class.increment_counter :guess_count, self.id
     self.class.increment_counter :correct_count, self.id if correct
+    self.reload
     self.update_attribute("accuracy", self.accuracy)
     #todo - send notification to guessers that question is complete  
   end

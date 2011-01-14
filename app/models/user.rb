@@ -335,7 +335,8 @@ class User < ActiveRecord::Base
 
   def get_prediction_score
     return self.prediction_score unless self.prediction_score.nil?
-    self.build_prediction_score
+    prediction_score = self.build_prediction_score
+    prediction_score.save ? prediction_score : nil
   end
   
   private

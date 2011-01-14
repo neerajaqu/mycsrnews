@@ -35,7 +35,7 @@ class Admin::PredictionResultsController < AdminController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
     	:item => PredictionResult.find(params[:id]),
     	:model => PredictionResult,
-    	:fields => [:result, :url, :details, :is_accepted, :user_id, :prediction_question_id, :created_at],
+    	:fields => [:result, :alternate_result, :url, :details, :is_accepted, :user_id, :prediction_question_id, :created_at],
     	:associations => { :belongs_to => { :user => :user_id, :prediction_question => :prediction_question_id } }
     }
   end
@@ -65,9 +65,7 @@ class Admin::PredictionResultsController < AdminController
       redirect_to admin_prediction_results_path
     end
 
-    result = false
-    if result =~ /^[0-9]+$/
-      @dashboardMessage.set_success! result
+    if @prediction_result.accept! current_user
       flash[:success] = "Successfully accepted this result"
       redirect_to admin_prediction_results_path
     else
