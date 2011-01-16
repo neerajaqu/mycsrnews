@@ -27,13 +27,13 @@ class PredictionQuestionsController < ApplicationController
 
   def show
     @prediction_question = PredictionQuestion.active.find(params[:id])
+    tag_cloud(@prediction_question)
   end
 
   def tags
     tag_name = CGI.unescape(params[:tag])
     @paginate = true
     @prediction_questions = PredictionQuestion.active.tagged_with(tag_name, :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
-    render :template => 'prediction_questions/index'
   end
   
 end
