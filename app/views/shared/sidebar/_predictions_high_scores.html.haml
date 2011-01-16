@@ -1,14 +1,18 @@
--# @expects: local 'top_scorers'
-
 - cache :prediction_high_scores_html do
-  - user_list = PredictionScore.top
-  - unless user_list.empty?
+  - top_prediction_scores = PredictionScore.top
+  - unless top_prediction_scores.empty?
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
         %h2= t('predictions.high_scores')
-      .userList
+      .list_items
         %ul
-          - user_list.each do |user|
+          - top_prediction_scores.each do |prediction_score|
             %li
-              - fb_user = User.active.find(user)
-              .profilePic= local_linked_profile_pic fb_user, :width => '30', :height => '30', :destination => user_path(user)
+              .itemBlock
+                -#%h4= link_to story.title, story_path(story)
+                .profilePic= local_linked_profile_pic prediction_score.user
+                .itemMeta
+                  -#%h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => timeago(story.created_at))
+                  %h3== Accuracy: #{number_to_percentage(prediction_score.accuracy * 100)}
+                  -#%span.btnComment== #{like_link story} #{story.votes_tally}
+                  -#%span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}
