@@ -6,3 +6,8 @@ Plugins that have been modified:
 * vote_fu
 * pfeed is from github.com/chewbranca/pfeed
 * i18n_backend_database?
+
+Javascript:
+-----------
+
+* Pretty Photo minified version, updated with: var regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif)(?:\\?[0-9]+)?$");

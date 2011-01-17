@@ -14,6 +14,8 @@ widgets:
       partial: '/shared/ads_banner'
     newest_images:
       partial: '/shared/sidebar/newest_images'
+    featured_gallery:
+      partial: '/shared/media/featured_gallery'
     announcements:
       partial: 'shared/announcements'    
   sidebar_content:
@@ -21,6 +23,14 @@ widgets:
       partial: '/shared/sidebar/add_stuff_list'
     gallery_images:
       partial: '/shared/sidebar/gallery_images'
+    gallery_small_images:
+      partial: '/shared/media/gallery_small_images'
+    gallery_big_image:
+      partial: '/shared/media/gallery_big_image'
+    newest_galleries:
+      partial: '/shared/sidebar/newest_galleries'
+    top_galleries:
+      partial: '/shared/sidebar/top_galleries'
     auto_feature_sidebar:
       partial: '/shared/sidebar/auto_feature_sidebar'      
     auto_feature_mini:

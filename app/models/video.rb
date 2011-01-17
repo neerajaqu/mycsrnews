@@ -2,6 +2,8 @@ class Video < ActiveRecord::Base
 
   acts_as_moderatable
   acts_as_voteable
+  acts_as_galleryable
+  acts_as_async_processable
 
   belongs_to :user
   belongs_to :videoable, :polymorphic => true
@@ -40,6 +42,14 @@ class Video < ActiveRecord::Base
     end
   end
 
+  def youtube_video?
+    self.remote_video_type == 'youtube'
+  end
+
+  def vimeo_video?
+    self.remote_video_type == 'vimeo'
+  end
+
   def process_video
     if embed_code?
     	if embed_code =~ /<embed[^>]+?src="([^"]+)"/i
@@ -57,10 +67,8 @@ class Video < ActiveRecord::Base
     		  self.remote_video_type = 'brightcove_a'
     			self.remote_video_id = self.parse_brightcove_embed self.embed_code
     		else
-    			return false
     		end
     	else
-    		return false
     	end
     elsif remote_video_url?
       if remote_video_url =~ /youtube.com/i
@@ -74,14 +82,14 @@ class Video < ActiveRecord::Base
           self.remote_video_type = 'brightcove_a'
           self.remote_video_id = self.parse_site_url remote_video_url
         else
-          return false
         end
       else
-      	return false
       end
     else
-    	return false
     end
+    # TODO:: switch to async processing
+    # Rails.env.production? ? async(:set_video_info!) : set_video_info
+    self.set_video_info
   end
 
   def parse_vimeo_url url
@@ -93,7 +101,7 @@ class Video < ActiveRecord::Base
   end
 
   def parse_youtube_url url
-    if url =~ /youtube.com\/(watch\?v=|v\/)([^"&]+)/
+    if url =~ /youtube.com\/(watch\?v=|v\/)([^"&?]+)/
     	self.remote_video_id = $2
     else
     	return false
@@ -195,6 +203,73 @@ class Video < ActiveRecord::Base
         }
       }  
     }
+  end
+
+  def set_video_info
+    return true unless self.title.nil? and self.description.nil?
+    if youtube_video?
+    	#thumb_url = "http://img.youtube.com/vi/#{remote_video_id}/2.jpg"
+    	info = get_youtube_info
+    elsif vimeo_video?
+      info = get_vimeo_info
+    else
+    	info = {}
+    end
+    self.title = info[:title]
+    self.description = info[:description]
+    self.thumb_url = info[:thumb_url]
+  end
+  def set_video_info!() set_video_info and save end
+
+=begin
+  # TODO:: use this or set_video_info!
+  def process
+    set_video_info
+    save
+    # update galleryable set_item_info
+  end
+=end
+
+  def get_vimeo_info
+    vimeo_json_url = "http://vimeo.com/api/v2/video/#{remote_video_id}.json"
+    info = JSON.parse(open(vimeo_json_url).read).first rescue nil
+    return {} if info.nil?
+    {
+    	:title => info["title"],
+    	:description => info["description"],
+    	:thumb_url => info["thumbnail_medium"]
+    }
+  end
+
+  def get_youtube_info
+    youtube_json_url = "http://gdata.youtube.com/feeds/api/videos/#{remote_video_id}?v=2&alt=json"
+    info = JSON.parse(open(youtube_json_url).read) rescue nil
+    return {} if info.nil?
+    {
+    	:title => info["entry"]["media$group"]["media$title"]["$t"],
+    	:description => info["entry"]["media$group"]["media$description"]["$t"],
+    	:thumb_url => info["entry"]["media$group"]["media$thumbnail"].first["url"]
+    }
+  end
+
+  def thumb_url
+    super
+  end
+
+  def full_url
+    if self.youtube_video?
+    	"http://www.youtube.com/watch?v=#{remote_video_id}"
+    else
+      self.remote_video_url
+    end
+  end
+
+  def self.youtube_url? url
+    url =~ %r{^https?://(?:www\.)?youtube.com\/(watch\?v=|v\/)([^"&]+)}
+  end
+
+  def self.vimeo_url? url
+    url =~ %r{^https?://(?:www\.)?vimeo.com/([^"&/]+)}
   end
   
 end

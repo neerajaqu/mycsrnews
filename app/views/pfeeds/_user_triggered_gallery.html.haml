@@ -1,0 +1,8 @@
+- user = user_triggered_gallery.originator
+- item = user_triggered_gallery.participant
+%p= pfeed_caption item.item_description
+
+.user-wrapper
+  .profilePic= local_linked_profile_pic user, :width => '30px', :height => '30px', :only_path => false, :format => 'html'
+  %h3
+    = t('user_posted_item', :fb_name => local_linked_profile_name(user, :only_path => false, :format => 'html'), :title => link_to(item.item_title, polymorphic_url(item,:only_path => false) ), :date => timeago(item.created_at))

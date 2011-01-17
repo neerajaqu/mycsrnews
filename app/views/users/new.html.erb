@@ -8,7 +8,7 @@
     <%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %>
     </p>
     <br /><br />
-    <% if APP_CONFIG['allow_web_auth'].present? and APP_CONFIG['allow_web_auth'] %>
+    <% if Metadata::Setting.get('allow_web_auth').try(:value) %>
       <p>Or, register as a new user below:</p>
 
       <% @user.password = @user.password_confirmation = nil %>

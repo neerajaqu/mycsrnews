@@ -7,52 +7,22 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-    
+
     when /the home\s?page/
       '/'
-    when /the new idea_board page/
-      new_idea_board_path
 
-    when /the new idea page/
-      new_idea_path
+    when /the home_index\s?page/
+      '/en/home.html'
 
-    when /the new story page/
-      new_story_path
+    when /the show page for (?:that )?(.+)/
+      polymorphic_path(model($1))
 
-    when /the new session page/
-      new_session_path
+    when /the edit page for (?:that )?(.+)/
+      edit_polymorphic_path(model($1))
 
-    when /the new resource page/
-      new_resource_path
+    when /the (.*?) tag (.*?) page/
+      self.send("tagged_#{$2}_path", :tag => $1)
 
-    when /the new newswire page/
-      new_newswire_path
-
-    when /the new home page/
-      new_home_path
-
-    when /the new comment page/
-      new_comment_path
-
-    when /the new related_item page/
-      new_related_item_path
-
-    when /the new article page/
-      new_article_path
-
-    when /the new article page/
-      new_article_path
-
-    when /the new article page/
-      new_article_path
-
-    when /the new frooble page/
-      new_frooble_path
-
-    when /the new test page/
-      new_test_path
-
-    
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
@@ -60,8 +30,14 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
 
     else
-      raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-        "Now, go and add a mapping in #{__FILE__}"
+      begin
+        page_name =~ /the (.*) page/
+        path_components = $1.split(/\s+/)
+        self.send(path_components.push('path').join('_').to_sym)
+      rescue Object => e
+        raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
+          "Now, go and add a mapping in #{__FILE__}"
+      end
     end
   end
 end

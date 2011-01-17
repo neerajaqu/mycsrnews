@@ -1,0 +1,46 @@
+-# content_for :sub_nav do
+  = render :partial => 'shared/breadcrumbs', :locals => { :breadcrumbs => get_forum_breadcrumbs(@galleries) }
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+
+#col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
+  - cache_if @page.present?, "gallery_tags_list#{@page}" do
+    - @paginate ||= false
+    .panel_2
+      .panelBar
+        %h2= t('galleries.title')
+        -# if galleries.present? and galleries
+          %span.bar_link= fb_share_item_button(galleries)
+      .subtitle
+        %span= t('galleries.subtitle')
+        
+      .itemListWrap
+        .list_items
+          %ul.galleries
+            - @galleries.each do |gallery|
+              %li{'data-id' => gallery.cache_key}
+                .thumb
+                  = link_to image_tag(thumb_image_or_default(gallery)), gallery
+                .itemBlock
+                  %h2= link_to gallery.title, gallery
+                  %p= gallery.description
+                  -#.profilePic= local_linked_profile_pic gallery.user
+                  .itemMeta
+                    -#%h3= t('galleries.last_active', :fb_name => local_linked_profile_name(gallery.user), :date => timeago(gallery.created_at))
+                    -#%span.btnComment= t('galleries.topics_count', :topics_count => gallery.topics_count)
+                    -#%span.btnComment= t('galleries.posts_count', :posts_count => gallery.comments_count)
+    - if @paginate
+      .clearfix
+        = will_paginate @galleries
+        %br
+
+                      
+#col_right
+  = render :partial => 'shared/sidebar/galleries_whatisthis'
+  - if @sponsor_zone_code
+    = render :partial => 'shared/ads/sponsor_zone_wrapper'
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/top_galleries'
+  = render :partial => 'shared/sidebar/newest_galleries'
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

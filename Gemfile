@@ -37,3 +37,20 @@ group :development do
   gem "wirble"
   gem "awesome_print"
 end
+
+group :test, :cucumber do
+	gem "rspec", "1.3.0"
+	gem "rspec-rails", "1.3.2"
+	gem "faker"
+	gem "database_cleaner", :git => "git://github.com/bmabey/database_cleaner.git"
+	gem "capybara", :git => "git://github.com/jnicklas/capybara.git"
+	#gem "capybara-envjs"
+	gem "cucumber"
+	gem "cucumber-rails"
+	gem "factory_girl"
+	#gem "email_spec"
+	gem "rcov"
+	gem "faker"
+	gem "pickle"
+	gem "launchy"
+end

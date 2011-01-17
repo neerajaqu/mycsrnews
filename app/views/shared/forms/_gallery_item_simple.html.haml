@@ -1,0 +1,6 @@
+- if full_form
+  = gallery_form.input :item_url, :hint => false, :input_html => {:class=>"gallery_item-url-input"}
+  = gallery_form.input :title, :required => false
+  = gallery_form.input :caption, :required => false, :input_html => { :rows => 5 }
+- else
+  = gallery_form.input :item_url, :label => false, :required => false, :hint => false, :input_html => {:class=>"gallery_item-url-input"}

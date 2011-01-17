@@ -101,6 +101,20 @@
                     - unless MENU['events']['import_facebook'].nil?
                       - if current_facebook_user
                         %li= link_to t('.import_facebook'), import_facebook_events_path, :class => tab_selected?(@current_tab, 'events')
+        - if MENU.key? 'galleries'
+          %li
+            .menu_item
+              = link_to t('.galleries'), galleries_path, :class => tab_selected?(@current_tab, 'galleries')
+              - unless MENU['galleries'].nil? or (MENU['galleries']['sub_galleries'].nil? and MENU['galleries']['new_gallery'].nil? and MENU['galleries']['galleries_list'].nil?)
+                .dropdown
+                  %ul
+                    - unless MENU['galleries']['galleries_list'].nil?
+                      %li= link_to t('.galleries_list'), galleries_path, :class => tab_selected?(@current_tab, 'galleries')
+                    - unless MENU['galleries']['new_gallery'].nil?
+                      %li= link_to t('.new_gallery'), new_gallery_path, :class => tab_selected?(@current_tab, 'galleries')
+                    - unless MENU['galleries']['sub_galleries'].nil?
+                      - Gallery.active.top.each do |gallery|
+                        %li= link_to gallery.title, gallery_path(gallery), :class => tab_selected?(@current_tab, 'galleries')
         - if MENU.key? 'predictions'
           %li
             .menu_item

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101109205202) do
+ActiveRecord::Schema.define(:version => 20110107194323) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -298,27 +298,48 @@ ActiveRecord::Schema.define(:version => 20101109205202) do
   end
 
   create_table "galleries", :force => true do |t|
-    t.string   "name"
-    t.string   "section"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "gallery_items", :force => true do |t|
-    t.integer  "user_id"
     t.string   "title"
-    t.text     "caption"
+    t.text     "description"
+    t.integer  "user_id"
+    t.boolean  "is_public",      :default => false
     t.integer  "votes_tally",    :default => 0
     t.integer  "comments_count", :default => 0
     t.boolean  "is_featured",    :default => false
     t.datetime "featured_at"
     t.integer  "flags_count",    :default => 0
     t.boolean  "is_blocked",     :default => false
-    t.integer  "gallery_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "galleries", ["title"], :name => "index_galleries_on_title"
+  add_index "galleries", ["user_id"], :name => "index_galleries_on_user_id"
+
+  create_table "gallery_items", :force => true do |t|
+    t.string   "galleryable_type"
+    t.integer  "galleryable_id"
+    t.integer  "user_id"
+    t.integer  "gallery_id"
+    t.string   "title"
+    t.string   "cached_slug"
+    t.text     "caption"
+    t.string   "item_url"
+    t.integer  "position",         :default => 0
+    t.integer  "votes_tally",      :default => 0
+    t.integer  "comments_count",   :default => 0
+    t.boolean  "is_featured",      :default => false
+    t.datetime "featured_at"
+    t.integer  "flags_count",      :default => 0
+    t.boolean  "is_blocked",       :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "gallery_items", ["cached_slug"], :name => "index_gallery_items_on_cached_slug"
+  add_index "gallery_items", ["gallery_id"], :name => "index_gallery_items_on_gallery_id"
+  add_index "gallery_items", ["galleryable_type", "galleryable_id"], :name => "index_gallery_items_on_galleryable_type_and_galleryable_id"
+  add_index "gallery_items", ["title"], :name => "index_gallery_items_on_title"
+  add_index "gallery_items", ["user_id"], :name => "index_gallery_items_on_user_id"
 
   create_table "idea_boards", :force => true do |t|
     t.string   "name"
@@ -451,14 +472,13 @@ ActiveRecord::Schema.define(:version => 20101109205202) do
     t.string   "title"
     t.string   "section"
     t.text     "description"
-    t.string   "status",          :default => "open"
+    t.string   "status",         :default => "open"
     t.integer  "user_id"
-    t.boolean  "is_approved",     :default => true
-    t.integer  "votes_tally",     :default => 0
-    t.integer  "comments_count",  :default => 0
-    t.integer  "questions_count", :default => 0
-    t.boolean  "is_blocked",      :default => false
-    t.boolean  "is_featured",     :default => false
+    t.boolean  "is_approved",    :default => true
+    t.integer  "votes_tally",    :default => 0
+    t.integer  "comments_count", :default => 0
+    t.boolean  "is_blocked",     :default => false
+    t.boolean  "is_featured",    :default => false
     t.datetime "featured_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -487,7 +507,6 @@ ActiveRecord::Schema.define(:version => 20101109205202) do
     t.boolean  "is_approved",         :default => true
     t.integer  "votes_tally",         :default => 0
     t.integer  "comments_count",      :default => 0
-    t.integer  "guesses_count",       :default => 0
     t.boolean  "is_blocked",          :default => false
     t.boolean  "is_featured",         :default => false
     t.datetime "featured_at"
@@ -777,6 +796,8 @@ ActiveRecord::Schema.define(:version => 20101109205202) do
     t.integer  "votes_tally",       :default => 0
     t.string   "title"
     t.integer  "source_id"
+    t.string   "thumb_url"
+    t.boolean  "video_processing"
   end
 
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"

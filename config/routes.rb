@@ -32,6 +32,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.paged_stories_with_format '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
   map.paged_stories '/stories/page/:page.:format', :controller => 'stories', :action => 'index'
+  map.paged_galleries_with_format '/galleries/page/:page.:format', :controller => 'galleries', :action => 'index'
+  map.paged_galleries '/galleries/page/:page.:format', :controller => 'galleries', :action => 'index'
   map.paged_articles_with_format '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
   map.paged_articles '/articles/page/:page.:format', :controller => 'articles', :action => 'index'
   map.paged_forums_with_format '/forums/:id/page/:page.:format', :controller => 'forums', :action => 'show'
@@ -53,6 +55,8 @@ ActionController::Routing::Routes.draw do |map|
   map.paged_prediction_groups '/prediction_groups/page/:page.:format', :controller => 'prediction_groups', :action => 'index'
   map.tagged_stories_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
   map.tagged_stories '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
+  map.tagged_galleries_with_page '/galleries/tag/:tag/page/:page.:format', :controller => 'galleries', :action => 'tags'
+  map.tagged_galleries '/galleries/tag/:tag.:format', :controller => 'galleries', :action => 'tags'
   map.tagged_contents_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
   map.tagged_contents '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
   map.tagged_articles_with_page '/articles/tag/:tag/page/:page.:format', :controller => 'articles', :action => 'tags'
@@ -101,6 +105,7 @@ ActionController::Routing::Routes.draw do |map|
   map.prediction_question '/prediction_question/:id.:format', :controller => 'predictions', :action => 'show_question'
   map.resources :prediction_guesses, :collection => { :create => [ :post] }
   map.resources :widgets, :collection => { :newswires => [:get], :questions => [:get], :forum_roll => [:get], :topics => [:get], :blog_roll => [:get], :blogger_profiles => [:get], :fan_application => [:get], :add_bookmark => [:get], :user_articles => [:get], :articles => [:get], :stories => [:get], :activities => [:get]  }, :layout => 'widgets'
+  map.resources :galleries, :has_many => [:comments, :flags, :related_items], :member => { :add_gallery_item => [:get, :post] }
   
   map.root :controller => "home", :action => "index"
   map.admin 'admin', :controller => :admin, :action => :index

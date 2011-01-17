@@ -31,9 +31,17 @@ ActiveRecord::Base.send :include, Newscloud::Acts::Refineable
 require "#{RAILS_ROOT}/lib/acts_as_wall_postable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::WallPostable
 
+# Load acts_as_galleryable mixin
+require "#{RAILS_ROOT}/lib/acts_as_galleryable.rb"
+ActiveRecord::Base.send :include, Newscloud::Acts::Galleryable
+
 # Load acts_as_tweetable mixin
 require "#{RAILS_ROOT}/lib/acts_as_tweetable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Tweetable
+
+# Load acts_as_async_processable mixin
+require "#{RAILS_ROOT}/lib/acts_as_async_processable.rb"
+ActiveRecord::Base.send :include, Newscloud::Acts::AsyncProcessable
 
 # Load acts_as_scorable mixin
 require "#{RAILS_ROOT}/lib/acts_as_scorable.rb"

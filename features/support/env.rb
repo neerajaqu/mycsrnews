@@ -4,8 +4,15 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-ENV["RAILS_ENV"] ||= "cucumber"
+#ENV["RAILS_ENV"] ||= "cucumber"
+ENV["RAILS_ENV"] = "cucumber"
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
+
+# Build up seeds
+require File.expand_path(File.dirname(__FILE__) + '/../../db/seeds.rb')
+# TODO:: HACK
+allow_web_auth = Metadata::Setting.get('allow_web_auth')
+allow_web_auth.value = true and allow_web_auth.save
 
 require 'cucumber/formatter/unicode' # Remove this line if you don't want Cucumber Unicode support
 require 'cucumber/rails/rspec'
@@ -13,14 +20,18 @@ require 'cucumber/rails/world'
 require 'cucumber/rails/active_record'
 require 'cucumber/web/tableish'
 
-require 'webrat'
-require 'webrat/core/matchers'
-
-Webrat.configure do |config|
-  config.mode = :rails
-  config.open_error_files = false # Set to true if you want error pages to pop up in the browser
-end
-
+require 'capybara/rails'
+require 'capybara/cucumber'
+require 'capybara/session'
+#require 'capybara/envjs'
+#Capybara.default_driver = :envjs
+#Capybara.default_driver = :selenium
+#require 'cucumber/rails/capybara_javascript_emulation' # Lets you click links with onclick javascript handlers without using @culerity or @javascript
+# Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
+# order to ease the transition to Capybara we set the default here. If you'd
+# prefer to use XPath just remove this line and adjust any selectors in your
+# steps to use the XPath syntax.
+Capybara.default_selector = :css
 
 # If you set this to false, any error raised from within your app will bubble 
 # up to your step definition and out to cucumber unless you catch it somewhere
@@ -46,9 +57,12 @@ ActionController::Base.allow_rescue = false
 # subsequent scenarios. If you do this, we recommend you create a Before
 # block that will explicitly put your database in a known state.
 Cucumber::Rails::World.use_transactional_fixtures = true
-
 # How to clean your database when transactions are turned off. See
 # http://github.com/bmabey/database_cleaner for more info.
-require 'database_cleaner'
-DatabaseCleaner.strategy = :truncation
-
+if defined?(ActiveRecord::Base)
+  begin
+    require 'database_cleaner'
+    DatabaseCleaner.strategy = :truncation
+  rescue LoadError => ignore_if_database_cleaner_not_present
+  end
+end

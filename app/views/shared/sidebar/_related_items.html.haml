@@ -10,4 +10,3 @@
   - if current_user.present?
     - if (current_user.is_moderator? or current_user.is_host?)
       %h3.btn= link_to t('add_related_item'), new_polymorphic_path([relatable, :related_item])
-

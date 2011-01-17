@@ -1,0 +1,70 @@
+- content_for :title do
+  = @gallery.item_title
+- content_for :meta_description do
+  = meta_description @gallery
+- if @gallery.images.present?
+  - content_for :meta_image do
+    = meta_image @gallery.images.first
+
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+
+#col_left
+  - cache "#{@gallery.cache_key}_html" do
+    #itemDetails.panel_2
+      .topBar
+        %ul
+          %li
+            %a== #{like_link @gallery} #{@gallery.votes_tally}
+          %li
+            %a== #{link_to t('comment'), gallery_path(@gallery, :anchor => "postCommentBox")} #{@gallery.comments_count}
+          %li= fb_share_item_button(@gallery)
+          %li
+            = twitter_share_item_link @gallery, @gallery.title
+          %li.nomargin
+            = render :partial => 'shared/add_this'
+      .itemBlock
+        - if @gallery.moderatable?
+          .mod-panel
+            .float_right= render :partial => 'shared/moderate_form', :locals => { :moderatable => @gallery }
+            .float_left= render :partial => 'shared/flag_form', :locals => { :flaggable => @gallery }
+
+        %h1= @gallery.title
+        %h3 
+          = t('posted_by', :fb_name => local_linked_profile_name(@gallery.user), :date => timeago(@gallery.created_at))
+          %span.moderator-links.hidden{:class => "user-#{@gallery.user.id}"}
+            = pipe_spacer
+            = link_to t('galleries.edit'), edit_gallery_path(@gallery)
+        - if @tags.present?
+          .tag-wrap
+            == Tags: #{tag_list(@tags, @gallery)}
+        %p= sanitize @gallery.description
+
+      .gallery
+        - @gallery.gallery_items.each do |item|
+          .gallery-item= link_to image_tag(item.thumb_url, :alt => item.item_title), item.full_url, :rel => "gallery[#{@gallery.title.parameterize}]", :title => item.item_description
+
+    = render_ad(:banner, @ad_layout, @ad_banner)
+    = render :partial => 'shared/comments', :locals => { :comments => @gallery.comments }
+  = render :partial => 'shared/comment_form', :locals => { :commentable => @gallery }
+
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
+
+  = render :partial => 'shared/item_footer', :locals => { :item => @gallery,:title => @gallery.title }
+
+
+#col_right
+  - if  @sponsor_zone_code
+    = render :partial => 'shared/ads/sponsor_zone_wrapper'
+  - if @custom_sidebar_widget
+    = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  - cache "#{@gallery.cache_key}_sidebar_html" do
+    = render :partial => 'shared/sidebar/bio', :locals => { :user => @gallery.user }
+    = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @gallery }
+    = render :partial => 'shared/sidebar/gallery_voices', :locals => { :gallery => @gallery }
+  = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @gallery, :related_items => @gallery.related_items }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
+  - if @gallery.is_public?
+    %h3.btn= link_to t('galleries.add_new_item'), add_gallery_item_gallery_path(@gallery)

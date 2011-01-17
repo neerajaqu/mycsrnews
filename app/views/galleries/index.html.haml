@@ -1,0 +1,16 @@
+-# content_for :sub_nav do
+  = render :partial => 'shared/breadcrumbs', :locals => { :breadcrumbs => get_forum_breadcrumbs(@galleries) }
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+
+#col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
+  = render :partial => 'shared/galleries', :locals => { :galleries => @galleries, :paginate => @paginate, :page => @page }
+#col_right
+  = render :partial => 'shared/sidebar/galleries_whatisthis'
+  = render :partial => 'shared/sidebar/top_galleries'
+  - if @sponsor_zone_code
+    = render :partial => 'shared/ads/sponsor_zone_wrapper'
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/newest_galleries'
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

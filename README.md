@@ -1,7 +1,7 @@
 Welcome to the Newscloud framework
 ==================================
 
-NewsCloud is an open-sourceFacebook application that brings the power of community to news organizations. It is powered in part by technology funded by the John S. and James L. Knight Foundation.
+NewsCloud is an open-source Facebook application that brings the power of community to news organizations. It is powered in part by technology funded by the John S. and James L. Knight Foundation.
 
 
 Getting Started

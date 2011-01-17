@@ -12,7 +12,7 @@
     <% end %>
     <%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %>
     </p>
-    <% if APP_CONFIG['allow_web_auth'].present? and APP_CONFIG['allow_web_auth'] %>
+    <% if Metadata::Setting.get('allow_web_auth').try(:value) %>
       <% form_tag session_path do -%>
       <p><%= label_tag 'login', t('.login') %><br />
       <%= text_field_tag 'login', @login %></p>
@@ -24,7 +24,7 @@
       <p><%= label_tag 'remember_me', 'Remember me' %>
       <%= check_box_tag 'remember_me', '1', @remember_me %></p>
   -->
-      <p><%= submit_tag t('.submit') %></p>
+      <p><%= submit_tag t('.submit'), :id => "login-button" %></p>
       <% end -%>
     <% end -%>
 		</div>

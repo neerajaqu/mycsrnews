@@ -329,6 +329,8 @@ module ApplicationHelper
     	tagged_articles_path(:tag => tag_name)
     elsif item.class.name == 'Topic'
     	tagged_forum_path(item.forum, :tag => tag_name)
+    elsif item.class.name == 'Gallery'
+    	tagged_galleries_path(:tag => tag_name)
     else
     	[item.class, tag]
     end
@@ -492,11 +494,20 @@ EMBED
     end
   end
 
-  def add_image_simple(form_builder)
-    link_to_function "+", :id => "add_image" do |page|
+  def add_image_simple(form_builder, title = '+')
+    link_to_function title, :id => "add_image" do |page|
         form_builder.fields_for :images, Image.new, :child_index => 'NEW_RECORD' do |image_form|
           html = render(:partial => 'shared/forms/image_simple', :locals => {:f => image_form })
           page << "$('#{escape_javascript(html)}'.replace(/NEW_RECORD/g, new Date().getTime())).insertBefore($('#add_image').parent());" 
+        end
+      end
+  end
+
+  def add_gallery_item_simple(form_builder, full_form = false)
+    link_to_function I18n.translate('galleries.add_additional_items'), :id => "add_gallery_item" do |page|
+        form_builder.fields_for :gallery_items, GalleryItem.new, :child_index => 'NEW_RECORD' do |gallery_item_form|
+          html = render(:partial => 'shared/forms/gallery_item_simple', :locals => {:gallery_form => gallery_item_form, :full_form => full_form })
+          page << "$('#{escape_javascript(html)}'.replace(/NEW_RECORD/g, new Date().getTime())).insertBefore($('#add_gallery_item'));" 
         end
       end
   end

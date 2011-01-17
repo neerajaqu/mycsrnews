@@ -1,0 +1,21 @@
+#col_left
+  .panel_2
+    .panelBar
+      %h2= t('galleries.new_gallery_item')
+    .subtitle
+      %span= t('galleries.add_to_gallery', :gallery_title => @gallery.title)
+    .formBox
+      - unless current_user.present?
+        %p== #{t 'galleries.logged_in_error'} #{link_to 'Login now', login_path}
+      - else
+        - semantic_form_for @gallery_item, :url => add_gallery_item_gallery_path(@gallery) do |form|
+          - form.inputs do
+            = form.input :item_url, :hint => t('galleries.item_url_hint')
+            = form.input :title, :required => false
+            = form.input :caption, :input_html => { :rows => 5 }, :required => false
+          - form.buttons do
+            = form.commit_button :class => 'float_right', :button_html => { :class => "btn" }
+
+#col_right
+  = render :partial => 'shared/sidebar/newest_galleries'
+  = render :partial => 'shared/sidebar/top_galleries'

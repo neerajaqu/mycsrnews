@@ -1,0 +1,22 @@
+- cache :newest_galleries_html do
+  - newest_galleries ||= Gallery.active.newest(5)
+  - unless newest_galleries.empty?
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('galleries.newest_galleries_title')
+      .list_items
+        %ul
+          - newest_galleries.each_with_index do |gallery, index|
+            %li
+              .item_1.article
+                .thumb
+                  = link_to image_tag(thumb_image_or_default(gallery)), gallery
+                .itemBlock  
+                  %h4
+                    %span.ellipsis_title_2
+                      = link_to gallery.title, gallery_path(gallery), { :class => 'ellipsis_text'}
+                  .itemMeta
+                    %span.btnComment== #{like_link gallery} #{gallery.votes_tally}
+                    %span.btnComment== #{link_to t('comments'), gallery_path(gallery, :anchor => "commentListTop")} #{gallery.comments_count}
+      .itemActions
+        = link_to t('galleries.see_more'), galleries_path                          

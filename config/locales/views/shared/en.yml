@@ -28,6 +28,9 @@ en:
       admin: "Admin"
       forums: "Forums"
       predictions: "Predictions"
+      galleries: "Galleries"
+      galleries_list: "Browse Galleries"
+      new_gallery: "Add a Gallery"
 
     comments:
       comment_title: "Comments"

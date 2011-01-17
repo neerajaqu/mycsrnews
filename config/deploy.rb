@@ -164,7 +164,7 @@ namespace :bundler do
  
   task :bundle_new_release, :roles => :app do
     bundler.create_symlink
-    run "cd #{release_path} && bundle install --deployment --without test --without development"
+    run "cd #{release_path} && bundle install --deployment --without test --without development --without cucumber"
   end
 end
  

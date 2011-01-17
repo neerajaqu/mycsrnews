@@ -30,7 +30,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :unless => :facebook_connect_user?
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message, :unless => :facebook_connect_user?
   
-  after_create :register_user_to_fb
+  # TODO::HACK:: fb registration errors
+  after_create :register_user_to_fb, :if => Proc.new { Rails.env.production? }
   before_save :check_profile
   
   has_many :contents, :after_add => :trigger_story
@@ -57,6 +58,8 @@ class User < ActiveRecord::Base
   has_many :prediction_groups
   has_many :prediction_questions
   has_many :prediction_guesses
+  has_many :galleries, :after_add => :trigger_gallery
+  has_many :gallery_items
   has_one :prediction_score
 
   belongs_to :last_viewed_feed_item, :class_name => "PfeedItem", :foreign_key => "last_viewed_feed_item_id"
@@ -96,6 +99,7 @@ class User < ActiveRecord::Base
   def trigger_resource(resource) end
   def trigger_dashboard_message(dashboard_message) end
   def trigger_chirp(chirp) end
+  def trigger_gallery(gallery) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -129,6 +133,7 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_answer], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_idea], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_event], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_gallery], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_resource], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_dashboard_message], :for => [:participant_recipient_voices], :identified_by => :name
   emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name

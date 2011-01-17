@@ -18,7 +18,7 @@ class Admin::WidgetsController < AdminController
     @filters = [
       { :name => 'stories', :regex => /(stor(y|ies))|article|featured_content/i },
       { :name => 'content', :regex => /idea|question|answer|event|resource|forum|topic/i },
-      { :name => 'media', :regex => /image|video/i },
+      { :name => 'media', :regex => /image|video|galler(y|ies)/i },
       { :name => 'users', :regex => /user?/i },
       { :name => 'ads', :regex => /\bad[s_\.]/i },
       { :name => 'misc', :regex => /.+/i }

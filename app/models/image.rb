@@ -5,6 +5,7 @@ class Image < ActiveRecord::Base
 
   acts_as_moderatable
   acts_as_voteable
+  acts_as_galleryable
 
   belongs_to :user
   belongs_to :imageable, :polymorphic => true
@@ -27,6 +28,14 @@ class Image < ActiveRecord::Base
 
   delegate :url, :to => :image
 
+  def thumb_url
+    url(:thumb)
+  end
+
+  def full_url
+    url(:large)
+  end
+
   def override_image?
     @override_image ||= false
   end
@@ -41,6 +50,10 @@ class Image < ActiveRecord::Base
 
   def self.sweeper
     ImageSweeper
+  end
+
+  def self.image_url? url
+    url =~ /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?(jpg|jpeg|gif|png)(\?.*)?$/ix
   end
 
   private

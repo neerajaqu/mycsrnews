@@ -1,0 +1,34 @@
+- cache_if page.present?, "galleries_list_#{page}html" do
+  - galleries ||= Gallery.active.newest
+  - paginate ||= false
+  .panel_2
+    .panelBar
+      %h2= t('galleries.title')
+    .subtitle
+      %span= t('galleries.subtitle')
+      
+    .itemListWrap
+      .list_items
+        %ul.galleries
+          - galleries.each do |gallery|
+            %li{'data-id' => gallery.cache_key}
+              .thumb
+                = link_to image_tag(thumb_image_or_default(gallery)), gallery
+              .itemBlock
+                %h2= link_to gallery.title, gallery
+                %p= gallery.description
+                .itemMeta
+                  .profilePic= local_linked_profile_pic gallery.user
+                  -#%h3= t('galleries.last_active', :fb_name => local_linked_profile_name(gallery.user), :date => timeago(gallery.created_at))
+                  %h3= t('posted_by', :fb_name => local_linked_profile_name(gallery.user), :date => timeago(gallery.created_at))
+                  %span.btnComment== #{like_link gallery} #{gallery.votes_tally}
+                  %span.btnComment== #{link_to t('comments'), gallery_path(gallery, :anchor => "commentListTop")} #{gallery.comments_count}
+                  -#%span.btnComment= t('galleries.topics_count', :topics_count => gallery.topics_count)
+                  -#%span.btnComment= t('galleries.posts_count', :posts_count => gallery.comments_count)
+              %hr
+
+    - if paginate
+      .clearfix
+        = will_paginate galleries
+        %br
+= render :partial => 'shared/index_footer', :locals => { :index_path => galleries_path(:only_path => false,:canvas => iframe_facebook_request?), :title => t('galleries.title') }

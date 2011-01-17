@@ -1,0 +1,27 @@
+#col_left
+  .panel_2
+    .panelBar
+      %h2= t('galleries.edit', :gallery => @gallery.title)
+    .formBox
+      - semantic_form_for @gallery do |form|
+        - form.inputs do
+          = form.input :title
+          = form.input :description, :input_html => { :rows => 5 }
+          = form.input :tag_list, :label => t('tags'), :required => false, :hint => t('tags_hint')
+        - @gallery.gallery_items.build if @gallery.gallery_items.empty?
+        - form.semantic_fields_for :gallery_items do |item_form|
+          -# TODO:: get style working for <legend> in <fieldset>
+          -# item_form.inputs :id => "gallery-items-fieldset", :title => "Gallery Items" do
+          - item_form.inputs do
+            = image_tag item_form.object.thumb_url if item_form.object.galleryable
+            = item_form.input :item_url
+            = item_form.input :title, :required => false
+            = item_form.input :caption, :required => false, :input_html => { :rows => 5 }
+        - form.inputs do
+          = add_gallery_item_simple(form, true)
+        - form.buttons do
+          = form.commit_button  :class => 'float_right', :button_html => { :class => "btn" }
+
+#col_right
+  = render :partial => 'shared/sidebar/newest_galleries'
+  = render :partial => 'shared/sidebar/top_galleries'

@@ -69,6 +69,7 @@ module Newscloud
       def relatable?() false end
       def featured_item?() false end
       def media_item?() false end
+      def galleryable?() false end
       def image_item?() false end
       def video_item?() false end
       def audio_item?() false end

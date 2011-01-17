@@ -1,0 +1,17 @@
+Feature: Predictions
+	In order to make predictions
+	As a user
+	I want to be able to make predictions
+
+	Scenario: List of Predictions
+		When I am on the predictions page
+		Then I should see a list of prediction groups
+	
+	Scenario: Make predictions
+		Given there is a viaduct prediction group
+		When I am on the viaduct prediction group page
+		Then I should see a list of viaduct prediction questions
+		And I should not not be able to answer previously answered questions
+		And I should see stats for previously answered questions
+		And I should see unanswered questions
+		When I should be able to flag a question as answered

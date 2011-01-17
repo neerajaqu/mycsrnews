@@ -46,3 +46,4 @@ spec/fixtures
 *.tmproj
 dump.rdb
 .bundle
+capybara*.html

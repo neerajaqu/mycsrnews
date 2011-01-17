@@ -1,0 +1,16 @@
+-# @expects: local 'gallery'
+
+- cache "#{gallery.cache_key}_voices" do
+  %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('galleries.voices_title')
+    .subtitle
+      %span= t('galleries.voices_subtitle')
+    .list_items
+      %ul
+        - gallery.user_voices.uniq.each do |user|
+          %li
+            .itemBlock
+              .profilePic= local_linked_profile_pic user
+              .itemMeta
+                %h3== #{local_linked_profile_name(user)}

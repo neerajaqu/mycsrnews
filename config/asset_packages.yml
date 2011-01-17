@@ -14,8 +14,10 @@ javascripts:
   - jquery.masonry.min
   - jquery.timeago
   - jquery-ui-1.8.5.custom.effects.min
+  - jquery.prettyPhoto
 stylesheets: 
 - base: 
   - cards
   - jquery.jgrowl
   - tablesorter
+  - prettyPhoto

@@ -1,0 +1,19 @@
+-# @expects: local 'gallery'
+
+- cache :featured_gallery_html do
+  - gallery ||= Gallery.featured.first || Gallery.top.first
+  %div{:class => "panel_2 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t('galleries.featured_title', :gallery_title => gallery.title)
+    .subtitle
+      %span= t('galleries.featured_description', :gallery_description => gallery.description, :gallery_url => gallery_path(gallery))
+    .list_media
+      %ul          
+        -# gallery.gallery_items.find(:all, :limit => 8).each do |gallery_item|
+        - count = 0
+        - gallery.gallery_items.each do |gallery_item|
+          - count += 1
+          - if count > 8
+            %li.hide-strong= link_to image_tag(gallery_item.thumb_url, :alt => gallery_item.item_title), gallery_item.full_url, :rel => "gallery[#{gallery.title.parameterize}]", :title => gallery_item.item_description
+          - else
+            %li.gallery-item= link_to image_tag(gallery_item.thumb_url, :alt => gallery_item.item_title), gallery_item.full_url, :rel => "gallery[#{gallery.title.parameterize}]", :title => gallery_item.item_description
