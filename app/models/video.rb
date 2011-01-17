@@ -151,7 +151,6 @@ class Video < ActiveRecord::Base
     unless self.user.present? or self.videoable.nil?
       self.user = self.videoable.user if self.videoable.respond_to? :user
     end
-    self.user = current_user unless self.user.present?
   end
 
   def get_width size = "normal"

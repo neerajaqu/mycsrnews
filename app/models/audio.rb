@@ -15,7 +15,6 @@ class Audio < ActiveRecord::Base
     unless self.user.present? or self.audioable.nil?
       self.user = self.audioable.user if self.audioable.respond_to? :user
     end
-    self.user = current_user unless self.user.present?
   end
 
   def default_title
