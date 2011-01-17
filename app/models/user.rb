@@ -97,6 +97,7 @@ class User < ActiveRecord::Base
   def trigger_resource(resource) end
   def trigger_dashboard_message(dashboard_message) end
   def trigger_chirp(chirp) end
+  #def trigger_accepted_prediction_question(prediction_question) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -134,6 +135,7 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_dashboard_message], :for => [:participant_recipient_voices], :identified_by => :name
   emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_chirp], :for => [:participant_recipient], :identified_by => :name
+  #emits_pfeeds :on => [:trigger_accepted_prediction_question], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   receives_pfeed
 
 

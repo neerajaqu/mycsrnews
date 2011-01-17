@@ -175,6 +175,9 @@ class PredictionQuestion < ActiveRecord::Base
     update_scores
     #todo - send notifications
     #Notifier.deliver_prediction_question_message(prediction_result.prediction_question)
+    # TRIGGER NOTIFICATION ON USER
+    # NEED AN ASSOCIATED USER TO ACCEPTING THE ANSWER
+    # user.trigger_accepted_prediction_question(self)
   end
   
   def update_scores
