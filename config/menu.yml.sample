@@ -29,3 +29,7 @@ menu:
     new_event: 'enabled'
     import_facebook: 'enabled'  
   admin:
+  galleries:
+    galleries_list: 'enabled'
+    new_gallery: 'enabled'
+    sub_galleries: 'enabled'
