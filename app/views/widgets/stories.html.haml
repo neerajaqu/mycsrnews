@@ -35,9 +35,10 @@
                       %li
                         = render :partial => 'shared/items/widget_story', :locals => {:item => item, :canvas_preference => @canvas_preference}
             - animation_speed = get_setting('animation_speed_widgets').try(:value) || 2500
+            - animation_interval = get_setting('animation_interval_general').try(:value) || 1000
             :javascript
               $(function() {          	
-              	$(".widgets_scrollable_panel").scrollable({speed : #{animation_speed}, circular: true}).autoscroll({ autoplay: true});
+              	$(".widgets_scrollable_panel").scrollable({speed : #{animation_speed}, circular: true}).autoscroll({ interval : #{animation_interval}, autoplay: true});
               });
 - if @fan              
   = render :partial => 'shared/sidebar/fan_application'

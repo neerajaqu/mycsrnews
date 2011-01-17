@@ -1,0 +1,4 @@
+-# @expects: local 'top_prediction_scores'
+- cache :_top_prediction_scores_html, :expires_in => 60.minutes do
+  - scores ||= PredictionScore.top
+  = render :partial => 'shared/lists/top_users_generic_list', :locals => { :list_title => t('predictions.top_predictors'), :scores => scores, :item_type => 'prediction', :list_empty => t('predictions.no_scores') }

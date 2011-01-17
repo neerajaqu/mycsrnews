@@ -22,6 +22,7 @@ class Admin::TopicsController < AdminController
   def update
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
+    	@topic.expire
       flash[:success] = "Successfully updated your Topic."
       redirect_to [:admin, @topic]
     else

@@ -15,11 +15,10 @@
           %li.nomargin
             = render :partial => 'shared/add_this'
       %ul
-        -# todo - did user answer already?
-        %li
-          .generic.small
-            .itemBlock          
-              %h4= render :partial => 'shared/prediction_question', :locals => { :question => @prediction_question }
+        = render :partial => 'shared/prediction_question_container', :locals => { :prediction_question => @prediction_question }
+        - if @tags.present?
+          .tag-wrap
+            == Tags: #{tag_list(@tags, @prediction_question)}
       %p= t('predictions.member_of_group', :prediction_group => link_to(@prediction_question.prediction_group.title, @prediction_question.prediction_group))
     = render_ad(:banner, @ad_layout, @ad_banner)
     %br

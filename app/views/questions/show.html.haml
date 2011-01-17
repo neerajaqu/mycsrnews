@@ -19,10 +19,6 @@
       .itemBlock
         - if @question.images.present?
           .thumb= image_tag @question.images.first.url(:medium)
-        - if @question.moderatable?
-          .mod-panel
-            .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @question }
-            .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @question }
         %h1.askQuestionHead= @question.question
 
         %h3= t('asked_by', :fb_name => local_linked_profile_name(@question.user), :date => timeago(@question.created_at))
@@ -32,6 +28,11 @@
         = sanitize @question.details
       - if @question.media_item?
         = render_media_items @question
+      - if @question.moderatable?
+        .mod-panel.panel_2
+          .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @question }
+          .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @question }
+
       = render_ad(:banner, @ad_layout, @ad_banner)
   - if @question.answers.present?
     - cache "#{@question.cache_key}_bottom_html" do

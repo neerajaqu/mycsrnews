@@ -21,7 +21,6 @@ class WidgetsController < ApplicationController
   end
   
   def activities
-    @activity_list = Content.active.articles.published.newest @count
     @title = t('widgets.activities_title', :site_title => get_setting('site_title').value)
   end
   
@@ -61,7 +60,7 @@ class WidgetsController < ApplicationController
           @title = t('widgets.articles_top_title', :site_title => get_setting('site_title').value)
       end
     else
-      @article_list = Content.active.articles.featured @count
+      @article_list = Content.active.articles.published.featured @count
       @title = t('widgets.articles_featured_title', :site_title => get_setting('site_title').value)      
     end
   end

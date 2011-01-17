@@ -22,14 +22,13 @@ class Content < ActiveRecord::Base
   has_friendly_id :title, :use_slug => true
 
 
-  named_scope :published, {  :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and (article_id is NULL OR (article_id IS NOT NULL and is_draft = 0))"] }
+  named_scope :published, { :joins => "LEFT JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and (article_id is NULL OR (article_id IS NOT NULL and articles.is_draft = 0))"] }
+  named_scope :unpublished, { :joins => "LEFT JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and (article_id is NULL OR (article_id IS NOT NULL and articles.is_draft = 1))"] }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
+  named_scope :commented, :conditions => ["comments_count > 0"]
   named_scope :top, lambda { |*args| { :order => ["votes_tally desc, created_at desc"], :limit => (args.first || 10)} }
   named_scope :newest_stories, lambda { |*args| { :conditions => ["article_id IS NULL"], :order => ["created_at desc"], :limit => (args.first || 5)} }
-  named_scope :newest_articles, lambda { |*args| { :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 0"], :order => ["created_at desc"], :limit => (args.first || 5)} }
-  named_scope :articles, { :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 0"], :order => ["created_at desc"]}
-  named_scope :draft_articles, { :joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 1"], :order => ["created_at desc"]}
-  named_scope :top_articles, lambda { |*args| {:joins => "INNER JOIN articles on contents.article_id = articles.id", :conditions => ["article_id IS NOT NULL and is_draft = 0 and is_blocked = 0"], :order => ["votes_tally desc"], :limit => (args.first || 5)} }
+  named_scope :articles, { :conditions => ["article_id is not null"] }
   named_scope :stories, { :conditions => ["article_id IS NULL"], :order => ["created_at desc"]}
   named_scope :featured, lambda { |*args| { :conditions => ["contents.is_featured = 1"], :limit  => (args.first || 5) } }
 
@@ -116,9 +115,11 @@ class Content < ActiveRecord::Base
     if is_article?
       self.article.is_blocked = !self.article.is_blocked
       self.is_blocked = !self.is_blocked
+      self.cascade_block self.is_blocked
       self.save
     else
       self.is_blocked = !self.is_blocked
+      self.cascade_block self.is_blocked
       self.save
     end
   end

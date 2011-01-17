@@ -1,0 +1,10 @@
+#col_left
+  -# TODO:: FILL THIS IN
+  %h2 Prediction Questions
+  %ul
+    - @prediction_questions.each do |prediction_question|
+      %li= link_to prediction_question.item_title, prediction_question
+
+#col_right
+  = render :partial => 'shared/sidebar/newest_prediction_questions'
+  = render :partial => 'shared/sidebar/top_prediction_questions'

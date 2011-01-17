@@ -17,6 +17,7 @@ class Admin::ResourcesController < AdminController
   def update
     @resource = Resource.find(params[:id])
     if @resource.update_attributes(params[:resource])
+    	@resource.expire
       flash[:success] = "Successfully updated your Resource ."
       redirect_to [:admin, @resource]
     else

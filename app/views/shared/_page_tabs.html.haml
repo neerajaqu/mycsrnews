@@ -45,8 +45,21 @@
               - unless MENU['forums'].nil? or MENU['forums']['sub_forums'].nil?
                 .dropdown
                   %ul
-                    - Forum.active.alpha.each do |forum|
+                    - Forum.active.positioned.each do |forum|
                       %li= link_to forum.name, forum_path(forum), :class => tab_selected?(@current_tab, 'forums')
+        - if MENU.key? 'questions'
+          %li
+            .menu_item
+              = link_to t('questions.tab_title'), questions_path, :class => tab_selected?(@current_tab, 'questions')
+              - unless MENU['questions'].nil?
+                .dropdown
+                  %ul
+                    - unless MENU['questions']['questions_list'].nil?
+                      %li= link_to t('questions.list'), questions_path, :class => tab_selected?(@current_tab, 'questions')
+                    - unless MENU['questions']['new_question'].nil?
+                      %li= link_to t('questions.new'), new_question_path, :class => tab_selected?(@current_tab, 'ask question')
+                    -# - unless MENU['questions']['my_questions'].nil?
+                      -# %li= link_to t('questions.my_questions'), my_questions_question_path, :class => tab_selected?(@current_tab, 'my questions')
         - if MENU.key? 'resources'
           %li
             .menu_item
@@ -61,32 +74,6 @@
                         %li= link_to item.featured_title, path_to_self(item), :class => tab_selected?(@current_tab, 'resources')
                     - unless MENU['resources']['new_resource'].nil?
                       %li= link_to t('.new_resource'), new_resource_path, :class => tab_selected?(@current_tab, 'resources')
-        - if MENU.key? 'ideas'
-          %li
-            .menu_item
-              = link_to t('.ideas'), ideas_path, :class => tab_selected?(@current_tab, 'ideas')
-              - unless MENU['ideas'].nil?
-                .dropdown
-                  %ul
-                    - unless MENU['ideas']['ideas_list'].nil?
-                      %li= link_to t('.ideas_list'), ideas_path, :class => tab_selected?(@current_tab, 'ideas')
-                    - unless MENU['ideas']['idea_boards_list'].nil?
-                      %li= link_to t('.idea_boards_list'), idea_boards_path, :class => tab_selected?(@current_tab, 'ideas')
-                    - unless MENU['ideas']['new_idea'].nil?
-                      %li= link_to t('.new_idea'), new_idea_path, :class => tab_selected?(@current_tab, 'ideas')
-        - if MENU.key? 'questions'
-          %li
-            .menu_item
-              = link_to t('questions.tab_title'), questions_path, :class => tab_selected?(@current_tab, 'questions')
-              - unless MENU['questions'].nil?
-                .dropdown
-                  %ul
-                    - unless MENU['questions']['questions_list'].nil?
-                      %li= link_to t('questions.list'), questions_path, :class => tab_selected?(@current_tab, 'questions')
-                    - unless MENU['questions']['new_question'].nil?
-                      %li= link_to t('questions.new'), new_question_path, :class => tab_selected?(@current_tab, 'ask question')
-                    -# - unless MENU['questions']['my_questions'].nil?
-                      -# %li= link_to t('questions.my_questions'), my_questions_question_path, :class => tab_selected?(@current_tab, 'my questions')
         - if MENU.key? 'events'
           %li
             .menu_item
@@ -115,6 +102,19 @@
                     - unless MENU['galleries']['sub_galleries'].nil?
                       - Gallery.active.top.each do |gallery|
                         %li= link_to gallery.title, gallery_path(gallery), :class => tab_selected?(@current_tab, 'galleries')
+        - if MENU.key? 'ideas'
+          %li
+            .menu_item
+              = link_to t('.ideas'), ideas_path, :class => tab_selected?(@current_tab, 'ideas')
+              - unless MENU['ideas'].nil?
+                .dropdown
+                  %ul
+                    - unless MENU['ideas']['ideas_list'].nil?
+                      %li= link_to t('.ideas_list'), ideas_path, :class => tab_selected?(@current_tab, 'ideas')
+                    - unless MENU['ideas']['idea_boards_list'].nil?
+                      %li= link_to t('.idea_boards_list'), idea_boards_path, :class => tab_selected?(@current_tab, 'ideas')
+                    - unless MENU['ideas']['new_idea'].nil?
+                      %li= link_to t('.new_idea'), new_idea_path, :class => tab_selected?(@current_tab, 'ideas')
         - if MENU.key? 'predictions'
           %li
             .menu_item

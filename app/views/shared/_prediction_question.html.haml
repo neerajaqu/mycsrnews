@@ -1,23 +1,20 @@
-%li
-  = question.title
-  .prediction-question-container
-    - form_tag create_prediction_guesses_path, :class => "prediction-question-form" do
-      = hidden_field_tag :prediction_question_id, question.id
-      - case question.prediction_type
-        - when 'multi'
-          - choice_list = [t('predictions.select_guess')] | question.choices.split(/,/)
-          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-        - when 'yesno'
-          - choice_list = [t('predictions.select_guess'), 'Yes', 'No']
-          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-        - when 'numeric'
-        - when 'float'
-          -# wont work on onchange , needs submit
-          = text_field_tag :guess
-          = submit_tag "Submit"
-        - when 'year'
-          - choice_list = [t('predictions.select_guess')] | question.choices.split(/,/)
-          = select_tag :guess, options_for_select(choice_list.collect {|f| [t("#{f}"), f.underscore] })
-        - when 'text'
-          = text_field_tag :guess
-          = submit_tag "Submit"
+- from_groups ||= false
+.formBox
+  .predictions
+    - semantic_form_for [prediction_question, PredictionGuess.new] do |form|
+      - form.inputs do
+        = hidden_field_tag 'from_groups', from_groups
+        - case prediction_question.prediction_type
+          - when 'multi'
+            = form.input :guess, :as => :select, :collection => prediction_question.prediction_choice_options
+          - when 'yesno'
+            = form.input :guess, :as => :select, :collection => prediction_question.prediction_choice_options
+          - when 'year'
+            = form.input :guess, :as => :select, :collection => prediction_question.prediction_choice_options
+          - when 'numeric'
+            = form.input :guess
+          - when 'text'
+            = form.input :guess
+      - form.buttons do
+        = form.submit "Submit"
+        %p.suggest_answer= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)

@@ -152,9 +152,7 @@
       var current_widgets = #{@main_widgets.map {|wp| wp.widget.id}.to_json};
       $(current_widgets).each(function(index, widget_id) {
       	var element = $('#widget-'+widget_id);
-        $(element).fadeOut(function() {
-          $(element).appendTo($('ul.destination')).fadeIn();
-        });
+        $(element).appendTo($('ul.destination')).fadeIn();
       });
 
     });

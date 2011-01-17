@@ -3,15 +3,20 @@
 - external_widget ||= external_widget
 - hide_titlebar =  (not @hide_titlebar.nil? and @hide_titlebar ) || false
 - count =  (not @count.nil? and @count ) || 5
+- list_empty ||= t('empty.default')
 %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
   = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => hide_titlebar, :title => list_title}
   .list_items.bullet_list
     %ul
-      - item_list.each_with_index do |item,index|
-        - unless external_widget
-          %li
-            = link_to item.featured_title, path_to_self(item)
-        - else
-          - unless index > count
+      - unless item_list.empty?
+        - item_list.each_with_index do |item,index|
+          - unless external_widget
             %li
-              = link_to item.featured_title, path_to_self(item, canvas_preference), :target => "_top"
+              = link_to item.featured_title, path_to_self(item)
+          - else
+            - unless index > count
+              %li
+                = link_to item.featured_title, path_to_self(item, canvas_preference), :target => "_top"
+      - else
+        %li
+          = list_empty

@@ -1,0 +1,8 @@
+.predictions
+  .itemBlock          
+    %p= t('predictions.tabulation_title')
+    - prediction_question.get_guess_percentages.each do |guess|
+      %p== #{guess[:guess].titleize} #{number_to_percentage(guess[:percent], :precision => 2)}
+    %p.suggest_answer
+      %a= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)
+    %br

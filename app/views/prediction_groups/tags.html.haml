@@ -1,0 +1,10 @@
+#col_left
+  -# TODO:: FILL THIS IN
+  %h2 Prediction Groups
+  %ul
+    - @prediction_groups.each do |prediction_group|
+      %li= link_to prediction_group.item_title, prediction_group
+
+#col_right
+  = render :partial => 'shared/sidebar/newest_prediction_groups'
+  = render :partial => 'shared/sidebar/top_prediction_groups'

@@ -7,6 +7,7 @@
   = render :partial => 'predictions/top_scores_list', :locals => { :scores => @scores, :paginate => @paginate, :page => @page }
 
 #col_right
+  = render :partial => 'shared/sidebar/suggest_predictions'
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
 

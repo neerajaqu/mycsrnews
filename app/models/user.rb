@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
   has_many :prediction_guesses
   has_many :galleries, :after_add => :trigger_gallery
   has_many :gallery_items
+  has_many :prediction_results
   has_one :prediction_score
 
   belongs_to :last_viewed_feed_item, :class_name => "PfeedItem", :foreign_key => "last_viewed_feed_item_id"
@@ -100,6 +101,7 @@ class User < ActiveRecord::Base
   def trigger_dashboard_message(dashboard_message) end
   def trigger_chirp(chirp) end
   def trigger_gallery(gallery) end
+  #def trigger_accepted_prediction_question(prediction_question) end
   
   def pfeed_trigger_delivery_callback(pfeed_item)
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
@@ -138,6 +140,7 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_dashboard_message], :for => [:participant_recipient_voices], :identified_by => :name
   emits_pfeeds :on => [:trigger_comment], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_chirp], :for => [:participant_recipient], :identified_by => :name
+  #emits_pfeeds :on => [:trigger_accepted_prediction_question], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   receives_pfeed
 
 
@@ -337,6 +340,12 @@ class User < ActiveRecord::Base
     UserSweeper
   end
 
+  def get_prediction_score
+    return self.prediction_score unless self.prediction_score.nil?
+    prediction_score = self.build_prediction_score
+    prediction_score.save ? prediction_score : nil
+  end
+  
   private
 
   def check_profile

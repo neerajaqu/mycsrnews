@@ -21,6 +21,7 @@ class Admin::NewswiresController < AdminController
   def update
     @newswire = Newswire.find(params[:id])
     if @newswire.update_attributes(params[:newswire])
+    	@newswire.expire
       flash[:success] = "Successfully updated your Newswire."
       redirect_to [:admin, @newswire]
     else

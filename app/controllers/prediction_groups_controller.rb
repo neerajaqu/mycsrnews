@@ -6,9 +6,29 @@ class PredictionGroupsController < ApplicationController
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
-    @prediction_groups = PredictionGroup.paginate :page => params[:page], :per_page => PredictionGroup.per_page, :order => "created_at desc"    
+    @prediction_groups = PredictionGroup.active.open.paginate :page => params[:page], :per_page => PredictionGroup.per_page, :order => "created_at desc"    
     @current_sub_tab = 'Browse'
   end
+  
+  def new 
+   @current_sub_tab = 'New Prediction Group'
+   @prediction_group = PredictionGroup.new
+  end
+
+  def create
+    @prediction_group = PredictionGroup.new(params[:prediction_group])
+    @prediction_group.tag_list = params[:prediction_group][:tags_string]
+    @prediction_group.user = current_user
+    @prediction_group.is_approved = current_user.is_moderator?      
+
+    if @prediction_group.valid? and current_user.prediction_groups.push @prediction_group
+    	flash[:success] = t('predictions.create_prediction_group')
+    	play
+    else
+      @prediction_groups = PredictionGroup.active.newest
+    	render :new
+    end
+  end  
   
   def show
     self.play    
@@ -22,12 +42,24 @@ class PredictionGroupsController < ApplicationController
     else
       @prediction_group = PredictionGroup.find(params[:id])
     end
+
+    unless @prediction_group
+      flash[:error] = "Could not find the prediction group."
+      redirect_to prediction_groups_path and return
+    end
+
     tag_cloud @prediction_group
     set_outbrain_item @prediction_group
     @current_sub_tab = 'Predict'
     @previous_prediction_group = @prediction_group.previous
     @next_prediction_group = @prediction_group.next
     render :template => 'prediction_groups/show'
+  end
+
+  def tags
+    tag_name = CGI.unescape(params[:tag])
+    @paginate = true
+    @prediction_groups = PredictionGroup.active.tagged_with(tag_name, :on => 'tags').paginate :page => params[:page], :per_page => 20, :order => "created_at desc"
   end
     
 end

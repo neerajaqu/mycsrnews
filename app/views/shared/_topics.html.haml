@@ -38,4 +38,4 @@
     %div.float_left= link_to t('forums.topics.new'), new_forum_topic_path(forum), :class => "btn"
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
-  = render :partial => 'shared/item_footer', :locals => { :item => forum, :title => forum.name }
+= render :partial => 'shared/item_footer', :locals => { :item => forum, :title => forum.name }

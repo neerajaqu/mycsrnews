@@ -105,6 +105,8 @@
                   %li= link_to 'Groups', admin_prediction_groups_path
                   %li= link_to 'Questions', admin_prediction_questions_path
                   %li= link_to 'Guesses', admin_prediction_guesses_path
+                  %li= link_to 'Results', admin_prediction_results_path
+                  %li= link_to 'Refresh All Scores', refresh_all_admin_prediction_scores_path
           %li
             %a{:href => "#members"} Members
             %ul
@@ -140,24 +142,19 @@
                   %li= link_to 'Default pages', admin_locale_translations_path(:locale_id => 'en',:type => 'static_pages')
                   %li= link_to 'Locales', admin_locales_path
                   %li= link_to 'Translations', admin_translations_path
-                  %li= link_to 'Clear cache (use rarely)', refresh_admin_locales_path
+                  %li= link_to 'Refresh changes', refresh_admin_locales_path
           %li
             %a{:href => "#home-page"} Links
             %ul
-              %li= link_to 'Web site', home_index_path
-              %li= link_to 'Facebook Application', "http://apps.facebook.com/#{ENV['FACEBOOKER_RELATIVE_URL_ROOT']}"
-              %li= link_to 'Facebook App Page', "http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['facebook_application_id']}"
-              %li= link_to 'Facebook App Statistics', "http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['facebook_application_id']}"
+              %li= link_to 'Web site', home_index_path, :target => "_fbc"
+              %li= link_to 'Facebook Application', "http://apps.facebook.com/#{ENV['FACEBOOKER_RELATIVE_URL_ROOT']}", :target => "_fbapp"
+              %li= link_to 'Facebook App Page', "http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
+              %li= link_to 'Facebook App Statistics', "http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
               - if APP_CONFIG['google_analytics_site_id'].present? and APP_CONFIG['google_analytics_site_id']
-                %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1&id=#{APP_CONFIG['google_analytics_site_id']}"
+                %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1&id=#{APP_CONFIG['google_analytics_site_id']}", :target => "_analytics"
               - elsif APP_CONFIG['google_analytics_account_id'].present? and APP_CONFIG['google_analytics_account_id']
-                %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1"
-              %li= link_to 'Report a problem', 'http://support.newscloud.com/discussions/problems'
-          -#
-            %li= link_to 'Comments', '#comments'
-            %li= link_to 'Users', '#users'
-            %li= link_to 'User Infos', '#user_infos'
-            %li= link_to 'Votes', '#votes'
+                %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1", :target => "_analytics"
+              %li= link_to 'Report a problem', 'http://support.newscloud.com/discussions/problems', :target => "_support"
       .main-content.clearfix
         = flash_messages
         = yield

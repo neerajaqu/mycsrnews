@@ -20,12 +20,16 @@
           %ul
             - @topic.posts.each do |post|
               = render :partial => 'shared/comment', :locals => { :comment => post}
+
+
+      - if @topic.moderatable?
+        .mod-panel.panel_2
+          .float_right= render :partial => 'shared/moderate_form', :locals => { :moderatable => @topic }
   .topic-form= render :partial => 'shared/comment_form', :locals => { :commentable => @topic , :post_locale => 'forums.topics.post_comment', :commit_text => 'forums.topics.commit_reply' }
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @topic,:title => @topic.title }
-  - if @topic.moderatable?
-    = render :partial => 'shared/moderate_form', :locals => { :moderatable => @topic }
+
 
 #col_right
   = render_ad(:small_square, @ad_layout, @ad_small_square)

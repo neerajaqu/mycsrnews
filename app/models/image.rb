@@ -16,7 +16,7 @@ class Image < ActiveRecord::Base
 
   has_attached_file :image, :styles => {
   	:media_item => ["75x56#", :jpg],
-  	:thumb => ["100x100#", :jpg],
+  	:thumb => ["100x75#", :jpg],
   	:medium => ["320x240#", :jpg],
   	:large => ["610x458#", :jpg]
   }
@@ -24,7 +24,7 @@ class Image < ActiveRecord::Base
   validate :download_image, :if => :remote_image_url?
   validates_presence_of :image, :image_file_name, :image_content_type, :image_file_size
 
-  #after_validation :set_user
+  before_save :set_user
 
   delegate :url, :to => :image
 
@@ -59,7 +59,9 @@ class Image < ActiveRecord::Base
   private
 
   def set_user
-    self.user = current_user unless self.user.present?
+    unless self.user.present? or self.imageable.nil?
+      self.user = self.imageable.user if self.imageable.respond_to? :user
+    end
   end
 
   def download_image

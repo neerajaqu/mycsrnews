@@ -1,6 +1,3 @@
-require 'feedzirra'
-
-
 module N2
   class FeedParser
     def self.update_feeds

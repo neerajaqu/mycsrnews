@@ -4,6 +4,8 @@ widgets:
       partial: '/shared/stories'
     stories_short:
       partial: '/shared/stories_short'
+    articles_as_blog:
+      partial: 'shared/articles_as_blog'    
     featured_content:
       partial: '/shared/featured_items'
       locals: 'featured_items'
@@ -12,6 +14,10 @@ widgets:
       partial: '/shared/auto_feature'      
     ads_banner:
       partial: '/shared/ads_banner'
+    ads_leaderboard:
+      locals: 'slot_widget_leaderboard'
+      load_functions: 'load_ad_leaderboard'
+      partial: '/shared/ads_banner'
     newest_images:
       partial: '/shared/sidebar/newest_images'
     featured_gallery:
@@ -19,6 +25,14 @@ widgets:
     announcements:
       partial: 'shared/announcements'    
   sidebar_content:
+    twitter_standard_list:
+      partial: '/shared/sidebar/twitter_standard_list'
+    twitter_standard_profile:
+      partial: '/shared/sidebar/twitter_standard_profile'
+    twitter_standard_favorites:
+      partial: '/shared/sidebar/twitter_standard_favorites'
+    twitter_standard_search:
+      partial: '/shared/sidebar/twitter_standard_search'
     add_stuff_list:
       partial: '/shared/sidebar/add_stuff_list'
     gallery_images:
@@ -75,6 +89,9 @@ widgets:
     contact_us:
       partial: '/shared/sidebar/contact_us'
       locals: 'contact_us'
+    user_tips:
+      partial: '/shared/sidebar/user_tips'
+      locals: 'user_tips'
     top_users:
       partial: '/shared/sidebar/top_users'
       locals: 'top_users'
@@ -171,3 +188,15 @@ widgets:
       partial: '/shared/sidebar/latest_pfeeds'
     google_search:
       partial: '/shared/sidebar/google_search'
+    newest_prediction_groups:
+      partial: '/shared/sidebar/newest_prediction_groups'
+    top_prediction_groups:
+      partial: '/shared/sidebar/top_prediction_groups'
+    newest_predictions:
+      partial: '/shared/sidebar/newest_predictions'
+    top_predictions:
+      partial: '/shared/sidebar/top_predictions'
+    closed_predictions:
+      partial: '/shared/sidebar/closed_predictions'
+    top_prediction_scores:
+      partial: '/shared/sidebar/top_prediction_scores'      

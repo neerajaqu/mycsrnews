@@ -16,6 +16,7 @@ class Admin::AnswersController < AdminController
   def update
     @answer = Answer.find(params[:id])
     if @answer.update_attributes(params[:answer])
+    	@answer.expire
       flash[:success] = "Successfully updated your Answer ."
       redirect_to [:admin, @answer]
     else

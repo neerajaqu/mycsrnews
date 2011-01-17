@@ -70,7 +70,7 @@ class Admin::TwitterSettingsController < AdminController
     @oauth_consumer_secret = Metadata::Setting.find_setting('oauth_consumer_secret')
     @base_consumer_key = 'U6qjcn193333331AuA'
     @base_consumer_secret = 'Heu0GGaRuzn762323gg0qFGWCp923viG8Haw'
-    @extra_settings = Metadata::Setting.find(:all, :conditions => { :key_sub_type => 'twitter' } ).select {|k| k unless k.key_name =~ /oauth/}
+    @extra_settings = Metadata::Setting.find(:all, :conditions => [ "key_sub_type like ?", 'twitter%' ] ).select {|k| k unless k.key_name =~ /oauth/}
     @error = nil
     @form_errors = {}
     ['key', 'secret', 'consumer_key', 'consumer_secret'].each do |key|

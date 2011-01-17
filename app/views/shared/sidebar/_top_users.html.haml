@@ -1,5 +1,4 @@
 -# @expects: local 'top_users'
 - cache :sidebar_top_users_html, :expires_in => 60.minutes do
   - scores ||= Score.alltime_scores 5
-  - unless scores.empty?
-    = render :partial => 'shared/lists/top_users_generic_list', :locals => { :list_title => t('.top_users_karma_title'), :scores => scores }
+  = render :partial => 'shared/lists/top_users_generic_list', :locals => { :list_title => t('.top_users_karma_title'), :scores => scores, :list_empty => t('empty.no_scores') }

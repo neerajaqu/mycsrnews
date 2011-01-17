@@ -16,6 +16,7 @@ class Admin::QuestionsController < AdminController
   def update
     @question = Question.find(params[:id])
     if @question.update_attributes(params[:question])
+    	@question.expire
       flash[:success] = "Successfully updated your Question ."
       redirect_to [:admin, @question]
     else

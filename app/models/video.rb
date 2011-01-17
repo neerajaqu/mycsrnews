@@ -17,7 +17,8 @@ class Video < ActiveRecord::Base
   validates_format_of :embed_code, :with => /<embed[^>]+src="http(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"/i, :message => "should look like an html embed object block", :allow_blank => true
 
   after_validation :process_video
-  #after_validation :set_user
+
+  before_save :set_user
 
   def url_video?
     remote_video_url?
@@ -147,6 +148,9 @@ class Video < ActiveRecord::Base
   end
 
   def set_user
+    unless self.user.present? or self.videoable.nil?
+      self.user = self.videoable.user if self.videoable.respond_to? :user
+    end
     self.user = current_user unless self.user.present?
   end
 

@@ -172,7 +172,7 @@
 
 // Russell's Section Stuff //
 .hidden
-  display: none
+  display: none !important
 
 .hide-strong
   display: none !important
@@ -183,6 +183,9 @@ body
   color: $bodyColor
   background: $bodyBG
   font-size: $fontsize
+
+body#widgets, body#widget
+  background: #fff
 
 h1, h2, h4, h5
   a
@@ -450,6 +453,8 @@ li
   .question
     background: image_url("default/icon-question.png") center right no-repeat
 
+  .prediction
+    background: image_url("default/icon-question.png") center right no-repeat
 
 /**********************************************************************************************/
 /* IMAGE STYLES */
@@ -1804,3 +1809,19 @@ body div.jGrowl div.jGrowl-closer
 
 .wizard-errors
   color: red
+  
+.predictions
+  .question_block
+    margin-bottom: 10px
+  .guess_count
+    font-style: italic
+    font-size: $fontsize * 0.8
+  .suggest_answer
+    a
+      color: $commentReplyText
+      font-style: italic
+      font-size: $fontsize * 0.8
+
+.your_guess
+  font-style: italic
+  font-size: $fontsize * 0.8

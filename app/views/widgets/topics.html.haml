@@ -2,6 +2,6 @@
   - count = @count
   - newest_topics ||= Topic.active.newest count
   - unless newest_topics.empty?
-    = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => t('forums.newest_topics_title'), :item_list => newest_topics }
+    = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => t('forums.newest_topics_title'), :item_list => newest_topics, :external_widget => true, :canvas_preference => @canvas_preference }
   - if @fan              
     = render :partial => 'shared/sidebar/fan_application'    

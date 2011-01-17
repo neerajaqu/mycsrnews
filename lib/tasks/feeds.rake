@@ -1,6 +1,3 @@
-require 'feed_parser'
-
-
 namespace :n2 do
   namespace :feeds do
     namespace :parse do

@@ -1,16 +1,15 @@
 <div id="col_left">
-
-<div class="panel_2">
-	<div class="panelBar"><h2>Sign In</h2></div>
-	<div class="formBox">
-		<div class="login">
+  <div class="panel_2">
+	  <div class="panelBar"><h2>Sign In</h2></div>
+	  <div class="formBox">
+		  <div class="login">
     <p>Use your Facebook account for easy access to our community</p>
     <% if iframe_facebook_request? %>
       <p><%= fb_login_button("window.location = '#{link_user_accounts_users_path(:iframe => 'iframe')}';")%></p>
     <% else %>
       <p><%= fb_login_button("window.location = '#{link_user_accounts_users_path}';")%></p>
     <% end %>
-    <%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %>
+    <p><%= fb_prompt_permission('offline_access', t('sessions.request_offline_access')) %></p>
     </p>
     <% if Metadata::Setting.get('allow_web_auth').try(:value) %>
       <% form_tag session_path do -%>
@@ -27,7 +26,7 @@
       <p><%= submit_tag t('.submit'), :id => "login-button" %></p>
       <% end -%>
     <% end -%>
-		</div>
-	</div>
-</div>
+		  </div>
+	  </div>
+  </div>
 </div>

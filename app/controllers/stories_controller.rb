@@ -8,7 +8,7 @@ class StoriesController < ApplicationController
   before_filter :set_ad_layout, :only => [:index, :show]
   before_filter :login_required, :only => [:like, :new, :create]
   before_filter :load_top_stories, :only => [:index, :tags]
-  before_filter :load_top_discussed_stories, :only => [:index, :tags]
+  #before_filter :load_top_discussed_stories, :only => [:index, :tags]
   before_filter :load_top_users, :only => [:index, :app_tab, :tags]
   before_filter :load_newest_users, :only => [:index, :app_tab, :tags]
   before_filter :set_custom_sidebar_widget, :only => [:index, :show]
@@ -87,6 +87,11 @@ class StoriesController < ApplicationController
     if @story.valid? and current_user.contents.push @story
       if @story.post_wall?
         session[:post_wall] = @story
+      end
+      if get_setting('tweet_all_moderator_items').try(:value)
+        if current_user.present? and current_user.is_moderator?
+          @story.tweet
+        end
       end
       flash[:success] = "Successfully posted your story!"
       redirect_to story_path(@story)

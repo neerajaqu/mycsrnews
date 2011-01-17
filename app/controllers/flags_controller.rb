@@ -25,7 +25,7 @@ class FlagsController < ApplicationController
   def block
     @item = find_moderatable_item
     if @item.moderatable? and @item.blockable? and @item.toggle_blocked
-    	expire_cache @item
+    	@item.expire
       # todo - if block user, then use fb:ban api call too! or unban
     	flash[:success] = "Successfully #{@item.blocked? ? "Blocked" : "UnBlocked"} your item."
     	redirect_to @item

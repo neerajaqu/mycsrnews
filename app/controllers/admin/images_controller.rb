@@ -17,6 +17,7 @@ class Admin::ImagesController < AdminController
   def update
     @image = Image.find(params[:id])
     if @image.update_attributes(params[:image])
+    	@image.expire
       flash[:success] = "Successfully updated your Image."
       redirect_to [:admin, @image]
     else
@@ -52,7 +53,7 @@ class Admin::ImagesController < AdminController
     	Metadata::SkipImage.create({:image_url => @image.remote_image_url})
     end
     if @image.destroy
-    	expire_cache @imageable
+    	@imageable.expire
     	WidgetSweeper.expire_features
     end
 

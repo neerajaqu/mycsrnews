@@ -31,7 +31,8 @@ gem 'sax-machine', :git => 'git://github.com/pauldix/sax-machine.git'
 
 source("http://gems.github.com") { gem "mdalessio-dryopteris", "0.1.2" }
 
-gem 'feedzirra', '0.0.18.1'
+#gem 'feedzirra', '0.0.18.1'
+gem 'feedzirra', :git => 'git://github.com/chewbranca/feedzirra.git'
 
 group :development do
   gem "wirble"
@@ -53,4 +54,8 @@ group :test, :cucumber do
 	gem "faker"
 	gem "pickle"
 	gem "launchy"
+end
+
+group :production do
+  gem "unicorn", "0.95.2"
 end

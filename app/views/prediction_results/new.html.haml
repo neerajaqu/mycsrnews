@@ -1,0 +1,31 @@
+- content_for :sub_nav do
+  = render :partial => 'shared/subnav/predictions_subnav'
+
+#col_full
+  .panel_3
+    .panelBar
+      %h2= t('predictions.new.result_heading')
+    .formBox
+      #wizard
+        #flowplayer-block
+          - semantic_form_for [@prediction_question, @prediction_result], :html => { :class => "post_prediction_result" } do |form|
+            .panes
+              .panel1
+                %fieldset
+                  - form.inputs do                
+                    - case @prediction_question.prediction_type
+                      - when 'multi'
+                        = form.input :result, :as => :select, :collection => @prediction_question.prediction_choice_options.push(['None of the above', 'incorrect'])
+                      - when 'yesno'
+                        = form.input :result, :as => :select, :collection => @prediction_question.prediction_choice_options.push(['None of the above', 'incorrect'])
+                      - when 'year'
+                        = form.input :result, :as => :select, :collection => @prediction_question.prediction_choice_options.push(['None of the above', 'incorrect'])
+                      - when 'numeric'
+                        = form.input :result
+                      - when 'text'
+                        = form.input :result
+                    = form.input :alternate_result, :required => false, :hint => t('predictions.new.hint.alternate_result')
+                    = form.input :url, :required => false, :hint => t('predictions.new.hint.url')
+                    = form.input :details, :required => false, :input_html => { :rows => 5 }
+                - form.buttons do
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }

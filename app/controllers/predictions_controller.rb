@@ -5,7 +5,7 @@ class PredictionsController < ApplicationController
 
   before_filter :set_current_tab
   before_filter :set_ad_layout, :only => [:index]
-  before_filter :login_required, :only => [:like, :new, :create, :update]
+  before_filter :login_required, :only => [:like, :new, :create, :update, :my_predictions]
 
   def index
     redirect_to play_prediction_groups_path
@@ -27,12 +27,6 @@ class PredictionsController < ApplicationController
   def create
   end
 
-  def show_question
-    #todo - change question link
-    #todo - handle question with no group
-    @prediction_question = PredictionQuestion.active.find(params[:id])
-  end
-  
   def my_predictions
     @paginate = true
     @current_sub_tab = 'Yours'
@@ -40,10 +34,6 @@ class PredictionsController < ApplicationController
   end
 
   private
-
-#  def set_resource_section
-#     @resource_section = params[:resource_section_id].present? ? ResourceSection.find(params[:resource_section_id]) : nil
-#  end
    
   def set_current_tab
     @current_tab = 'predictions'

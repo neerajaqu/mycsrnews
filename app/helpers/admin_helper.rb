@@ -90,6 +90,18 @@ module AdminHelper
       links << link_to('FB Profile', "http://www.facebook.com/profile.php?id=#{item.fb_user_id}", :target => "_fb")
     end
     
+    if item.class.name == 'PredictionGroup'
+      links << link_to('Approve', approve_admin_prediction_group_path(item)) unless item.is_approved?
+    end
+
+    if item.class.name == 'PredictionQuestion'
+      links << link_to('Approve', approve_admin_prediction_question_path(item)) unless item.is_approved?
+    end
+
+    if item.class.name == 'PredictionResult'
+      links << link_to('Accept', accept_admin_prediction_result_path(item)) unless item.is_accepted?
+    end
+    
     if item.class.name == 'DashboardMessage'
       links << link_to('Send', send_global_admin_dashboard_message_path(item)) unless item.sent?
       links << link_to('Clear', clear_global_admin_dashboard_message_path(item)) if item.sent?

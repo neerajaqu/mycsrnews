@@ -20,10 +20,6 @@
         - if @resource.images.present?
           .thumb
             = image_tag @resource.images.first.url(:medium)
-        - if @resource.moderatable?
-          .mod-panel
-            .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
-            .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
         %h1= @resource.title
         %h3
           = t('posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => timeago(@resource.created_at))
@@ -39,6 +35,10 @@
         %div.float_left= link_to t('.visit_url'), @resource.url, :target => "_resource", :class => "btn"
     - if @resource.media_item?
       = render_media_items @resource
+    - if @resource.moderatable?
+      .mod-panel.panel_2
+        .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @resource }
+        .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @resource }
     = render_ad(:banner, @ad_layout, @ad_banner)
     = render :partial => 'shared/comments', :locals => { :comments => @resource.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @resource }

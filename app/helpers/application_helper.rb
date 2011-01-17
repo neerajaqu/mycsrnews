@@ -331,6 +331,10 @@ module ApplicationHelper
     	tagged_forum_path(item.forum, :tag => tag_name)
     elsif item.class.name == 'Gallery'
     	tagged_galleries_path(:tag => tag_name)
+    elsif item.class.name == 'PredictionQuestion'
+    	tagged_prediction_questions_path(:tag => tag_name)
+    elsif item.class.name == 'PredictionGroup'
+    	tagged_prediction_groups_path(:tag => tag_name)
     else
     	[item.class, tag]
     end
