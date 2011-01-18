@@ -31,7 +31,8 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message, :unless => :facebook_connect_user?
   
   # TODO::HACK:: fb registration errors
-  after_create :register_user_to_fb, :if => Proc.new { Rails.env.production? }
+  # TODO::REMOVE:: deprecated: http://developers.facebook.com/docs/reference/rest/connect.registerusers/
+  #after_create :register_user_to_fb, :if => Proc.new { Rails.env.production? }
   before_save :check_profile
   
   has_many :contents, :after_add => :trigger_story
@@ -177,7 +178,7 @@ class User < ActiveRecord::Base
     new_facebooker.fb_user_id = fb_user.uid.to_i
     #We need to save without validations
     new_facebooker.save(false)
-    new_facebooker.register_user_to_fb
+    #new_facebooker.register_user_to_fb
   end
 
   #We are going to connect this user object with a facebook id. But only ever one account.
