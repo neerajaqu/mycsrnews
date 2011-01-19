@@ -43,14 +43,6 @@ class Content < ActiveRecord::Base
   before_save :set_source, :if => :is_content?
   after_save :set_published, :if => :is_newswire?
 
-  def self.top_tally
-    self.tally({
-    	:at_least => 1,
-    	:limit    => 10,
-    	:order    => "votes.count desc"
-    })
-  end
-
   def set_source
     return true unless source_id.nil?
     begin
@@ -89,14 +81,11 @@ class Content < ActiveRecord::Base
     10
   end
 
-  def get_image_url
-    self.content_image.present? ? self.content_image.url : nil
-  end
-
   def featured_url
     { :controller => '/stories', :action => 'show', :id => self }
   end
 
+  # Remove this?
   def to_s
     self.title
   end
@@ -132,7 +121,7 @@ class Content < ActiveRecord::Base
     is_article? ? "article" : "story"
   end
 
-  def scoreable_user
+  def scorable_user
     is_article? ? article.author : user
   end
 
@@ -151,7 +140,5 @@ class Content < ActiveRecord::Base
   def self.sweeper
     StorySweeper
   end
-
-  private
 
 end
