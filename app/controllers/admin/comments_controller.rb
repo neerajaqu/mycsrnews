@@ -13,7 +13,7 @@ class Admin::CommentsController < AdminController
   def new
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
     	:model => Comment,
-    	:fields => [:comments, :postedByName, :created_at],
+    	:fields => [:comments, :created_at],
     }
   end
 
@@ -22,13 +22,13 @@ class Admin::CommentsController < AdminController
     render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
     	:item => @comment,
     	:model => Comment,
-    	:fields => [:comments, :created_at],
+    	:fields => [:comments],
     }
   end
 
   def update
     @comment = Comment.find(params[:id])
-    if @comment.update_attributes(params[:Comment])
+    if @comment.update_attributes(params[:comment])
     	@comment.expire
       flash[:success] = "Successfully updated your Comment."
       redirect_to [:admin, @comment]
@@ -42,12 +42,12 @@ class Admin::CommentsController < AdminController
     render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
     	:item => Comment.find(params[:id]),
     	:model => Comment,
-    	:fields => [:comments, :postedByName, :created_at],
+    	:fields => [:comments, :postedByName, :created_at, :is_blocked],
     }
   end
 
   def create
-    @comment = Comment.new(params[:Comment])
+    @comment = Comment.new(params[:comment])
     if @comment.save
       flash[:success] = "Successfully created your new Comment!"
       redirect_to [:admin, @comment]
