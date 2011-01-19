@@ -97,6 +97,7 @@ module Newscloud
         def cascade_block_pfeed_items blocked = nil
           PfeedItem.find(:all, :conditions => ["participant_type = ? and participant_id = ?", self.class.name, self.id]).each do |pitem|
             pitem.update_attribute(:is_blocked, blocked || false)
+            pitem.expire
             pitem.participant.cascade_block blocked if pitem.participant.moderatable?
           end
         end
