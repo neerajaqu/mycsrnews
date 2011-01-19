@@ -47,6 +47,7 @@ GEM
   remote: http://rubygems.org/
   remote: http://gems.github.com/
   specs:
+    ZenTest (4.4.2)
     actionmailer (2.3.4)
       actionpack (= 2.3.4)
     actionpack (2.3.4)
@@ -180,6 +181,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ZenTest
   awesome_print
   bitly (= 0.5.1)
   builder (= 2.1.2)

@@ -54,6 +54,7 @@ group :test, :cucumber do
 	gem "faker"
 	gem "pickle"
 	gem "launchy"
+	gem "ZenTest"
 end
 
 group :production do

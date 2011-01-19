@@ -212,9 +212,10 @@ class User < ActiveRecord::Base
   end
 
   def accepts_email_notifications?
-      self.email.present? and self.user_profile.receive_email_notifications == true
+    self.email.present? and self.user_profile.receive_email_notifications == true
   end
   
+# TODO:: Update this
   def friends
     []
   end
@@ -222,7 +223,7 @@ class User < ActiveRecord::Base
   def fb_user_id
     return super unless super.nil?
     return nil unless self.user_profile.present?
-    return self.user_profile.facebook_user_id unless self.user_profile.facebook_user_id.nil?
+    return self.user_profile.facebook_user_id unless self.user_profile.facebook_user_id.nil? or self.user_profile.facebook_user_id.zero?
 
     nil
   end
@@ -238,10 +239,6 @@ class User < ActiveRecord::Base
   # Skip password validations if facebook connect user
   def facebook_connect_user?
     facebook_user? and password.blank?
-  end
-
-  def facebook_id
-    fb_user_id
   end
 
   def other_posts
@@ -283,6 +280,7 @@ class User < ActiveRecord::Base
     actions.sort_by {|a| a.created_at}.reverse[0,10]
   end
 
+# TODO:: move this to a setting
   def public_name
     firstnameonly = APP_CONFIG['firstnameonly'] || false
     return self.name.split(' ').first if firstnameonly
@@ -291,10 +289,6 @@ class User < ActiveRecord::Base
 
   def to_s
     "#{self.name}"
-  end
-
-  def self.find_admin_users
-    User.find(:all, :conditions => ['is_admin = true'])
   end
 
   def combined_score
