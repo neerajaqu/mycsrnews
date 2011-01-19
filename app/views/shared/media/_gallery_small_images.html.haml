@@ -3,7 +3,7 @@
   - if gallery
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
       .panelBar
-        %h2= t('galleries.featured_title', :gallery_title => gallery.title)
+        %h2= gallery.title
       .featured.media
         .scrollable_list_media
           .items
