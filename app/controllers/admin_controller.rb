@@ -20,7 +20,7 @@ class AdminController < ApplicationController
   def check_admin_or_default_status
     return true if current_user and current_user.is_admin?
 
-    if User.find_admin_users.empty?
+    if User.admins.empty?
       authenticate_or_request_with_http_basic do |username, password|
         username == APP_CONFIG['default_admin_user'] and password == APP_CONFIG['default_admin_password']
       end
