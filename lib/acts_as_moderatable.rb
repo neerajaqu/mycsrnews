@@ -66,6 +66,7 @@ module Newscloud
         def toggle_blocked
           self.is_blocked = ! self.is_blocked
           cascade_block self.is_blocked
+          self.cascade_block_pfeed_items self.is_blocked
           return self.save ? true : false
         end
 
@@ -85,11 +86,19 @@ module Newscloud
                   item.update_attribute(:is_blocked, blocked) unless item.is_blocked == blocked
                   item.expire
                   item.cascade_block blocked if item.respond_to? :cascade_block
+                  item.cascade_block_pfeed_items blocked
                 end
             	end
             end
           end
           return true
+        end
+
+        def cascade_block_pfeed_items blocked = nil
+          PfeedItem.find(:all, :conditions => ["participant_type = ? and participant_id = ?", self.class.name, self.id]).each do |pitem|
+            pitem.update_attribute(:is_blocked, blocked || false)
+            pitem.participant.cascade_block blocked if pitem.participant.moderatable?
+          end
         end
 
         def verify_cascade blocked = nil
