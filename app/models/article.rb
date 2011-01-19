@@ -22,6 +22,9 @@ class Article < ActiveRecord::Base
   accepts_nested_attributes_for :content
 
   validates_presence_of :body
+  # TODO:: add author validation or remove author
+  # TODO:: add content validation or remove author
+  #validates_presence_of :body
   
   #todo - was removing formatting from drafts - not sure of purpose
   #before_save :sanitize_body

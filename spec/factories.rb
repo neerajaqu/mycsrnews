@@ -13,6 +13,14 @@ Factory.define :content do |f|
   f.association :user, :factory => :user
 end
 
+Factory.define :article do |f|
+  f.body   Faker::Lorem.paragraph
+  # TODO:: ADD VALIDATION FOR USER
+  f.association :author, :factory => :user
+  #f.association :content, :factory => :content
+  f.content {|a| a.association :content, :user => a.author }
+end
+
 Factory.define :gallery do |f|
   f.title       Faker::Company.catch_phrase
   f.description Faker::Lorem.paragraph
