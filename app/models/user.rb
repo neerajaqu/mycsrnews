@@ -228,6 +228,10 @@ class User < ActiveRecord::Base
     nil
   end
 
+  def facebook_id
+    fb_user_id
+  end
+
   # Taken from vendor/plugins/restful_authentication/lib/authentication/by_password.rb
   # We need to add the check to ignore password validations if using facebook connect
   def password_required?
