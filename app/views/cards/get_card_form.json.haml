@@ -4,5 +4,5 @@
     = fb_req_choice t('cards.accept_message'), received_card_path(:card_id => @card, :user_id => current_user, :only_path => false, :format => 'html', :canvas => true)
   %script{:type => 'text/fbml'}
     %fb:fbml
-      - fb_request_form(t('cards.request_type'), "card_message", post_sent_card_path(@card, :only_path => false, :format => 'html'), :invite => false) do
+      - fb_request_form(t('cards.request_type'), "card_message", post_sent_card_path(@card, :only_path => false, :format => 'html', :iframe => @iframe_status), :invite => false) do
         = fb_multi_friend_selector "Select friends to send this card to.", :cols => 3, :email_invite => false, :exclude_ids => @card.already_sent_to(current_user)
