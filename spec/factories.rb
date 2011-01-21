@@ -35,3 +35,15 @@ end
 Factory.define :video do |f|
   f.remote_video_url  "http://www.youtube.com/watch?v=ObR3qi4Guys"
 end
+
+Factory.define :forum do |f|
+  f.name        Faker::Company.catch_phrase
+  f.description Faker::Lorem.paragraph
+end
+
+Factory.define :topic do |f|
+  f.title       Faker::Company.catch_phrase
+  f.body        Faker::Lorem.paragraph
+  f.association :user, :factory => :user
+  f.association :forum, :factory => :forum
+end
