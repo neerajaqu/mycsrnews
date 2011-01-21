@@ -430,6 +430,7 @@ en:
     see_full_gallery: "See full Gallery"
     new_gallery_item: "Add a new Item to this Gallery"
     add_to_gallery: "Contribute to Gallery: {{gallery_title}}"
+    item_count: "{{count}} items"
   empty:
     default: "Sorry, nothing available yet."
     top_discussed_stories: "Sorry, no discussions found."
@@ -438,3 +439,10 @@ en:
     twitter_standard_search: "Your twitter search widget settings need to be configured via the Administrative console"
     twitter_standard_favorites: "Your twitter favorites widget settings need to be configured via the Administrative console"  
     twitter_standard_profile: "Your twitter profile widget settings need to be configured via the Administrative console"      
+  generic:
+    newest_items:
+      title: "Newest Items"
+      subtitle: "Newest items added by users"
+    top_items:
+      title: "Top Items"
+      subtitle: "Most popular items"

@@ -11,6 +11,10 @@ module Newscloud
 
     module ClassMethods
 
+      def item_klasses
+        ['article', 'audio', 'content', 'event', 'gallery', 'idea', 'question', 'resource']
+      end
+
       def top_article_items limit = 100
         table = self.name.tableize
         now = Time.now.utc.strftime("%Y-%m-%d %H:%M:%S")
