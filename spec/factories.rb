@@ -47,3 +47,15 @@ Factory.define :topic do |f|
   f.association :user, :factory => :user
   f.association :forum, :factory => :forum
 end
+
+Factory.define :comment do |f|
+  f.comments    Faker::Lorem.paragraph
+  f.association :user, :factory => :user
+  f.commentable {|a| a.association :content, :user => a.user }
+end
+
+Factory.define :flag do |f|
+  f.flag_type   Flag.flag_types.rand
+  f.association :flaggable, :factory => :content
+  f.association :user, :factory => :user
+end
