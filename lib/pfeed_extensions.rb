@@ -9,7 +9,7 @@ PfeedItem.class_eval do
   end
 
   def self.newest_items limit = 5
-    self.find(:all, :conditions => ["participant_type IN ('#{self.item_klasses.join "', '"}')"], :limit => limit, :order => "created_at desc").map(&:participant)
+    self.active.find(:all, :conditions => ["participant_type IN ('#{self.item_klasses.join "', '"}')"], :limit => limit, :order => "created_at desc").map(&:participant)
   end
 
 end
