@@ -59,3 +59,14 @@ Factory.define :flag do |f|
   f.association :flaggable, :factory => :content
   f.association :user, :factory => :user
 end
+
+Factory.define :question do |f|
+  f.question    Faker::Lorem.paragraph
+  f.association :user, :factory => :user
+end
+
+Factory.define :answer do |f|
+  f.answer      Faker::Lorem.paragraph
+  f.association :user, :factory => :user
+  f.association :question, :factory => :question
+end
