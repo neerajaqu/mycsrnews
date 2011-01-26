@@ -1,6 +1,6 @@
 .predictions
   .itemBlock          
-    %p= t('predictions.tabulation_title')
+    %p= t('predictions.tabulation_count_title', :total_guesses => prediction_question.get_guess_totals)
     - prediction_question.get_guess_percentages.each do |guess|
       %p== #{guess[:guess].titleize} #{number_to_percentage(guess[:percent], :precision => 2)}
     %p.suggest_answer

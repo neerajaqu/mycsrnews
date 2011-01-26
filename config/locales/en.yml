@@ -284,6 +284,7 @@ en:
     login_required: "You must <a href=\"{{login_url}}\"><b>sign in</b></a> or <a href=\"{{register_url}}\"><b>register</b></a> in order to make predictions."
     predict: "Make Predictions"
     tabulation_title: "Summary of current guesses"
+    tabulation_count_title: "Summary of {{total_guesses}} current guesses"
     my_predictions: "Your Predictions"
     what_is_intro: "Do you know the future?"
     what_is_details: "Show off your skills at prediction with our new game."

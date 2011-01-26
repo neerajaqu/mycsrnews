@@ -1,8 +1,7 @@
 class PredictionGroupsController < ApplicationController
   before_filter :login_required, :only => [:like, :new, :create]
   before_filter :set_ad_layout, :only => [:index, :show]
-
-#  cache_sweeper :qanda_sweeper, :only => [:create, :update, :destroy, :create_answer]
+  cache_sweeper :prediction_sweeper, :only => [:create, :update, :destroy]
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
