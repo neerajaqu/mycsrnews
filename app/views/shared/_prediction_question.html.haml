@@ -16,5 +16,5 @@
           - when 'text'
             = form.input :guess
       - form.buttons do
-        = form.submit "Submit"
+        = form.commit_button t('predictions.submit_guess'), :button_html => { :class => 'btn'   }      
         %p.suggest_answer= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)

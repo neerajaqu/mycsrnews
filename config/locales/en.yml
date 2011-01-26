@@ -276,6 +276,7 @@ en:
     read: "Read Story"
     quick_post: "Quick post"
   predictions:
+    submit_guess: "Submit"
     question_closed: ""
     new_question_posted: "A new prediction question: {{question}} has been added to {{group}}."
     open: "question remains open"

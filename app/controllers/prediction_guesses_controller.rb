@@ -10,7 +10,7 @@ class PredictionGuessesController < ApplicationController
           flash[:error] = "You already guessed on this question"
           redirect_to @prediction_question.prediction_group
         end
-        format.json {  }
+    	  format.json { render(:partial => 'shared/prediction_question_stats.html', :locals => { :prediction_question => @prediction_question }) and return }
       end
     else
       # validate that user hasn't already guessed
