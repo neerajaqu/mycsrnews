@@ -3,26 +3,29 @@
   = render :partial => 'shared/subnav/predictions_subnav'
 
 #col_left
-  - cache "#{@prediction_question.cache_key}_top_html" do
-    #itemDetails.panel_2
-      .topBar
-        %ul
-          %li
-            %a== #{like_link @prediction_question} #{@prediction_question.votes_tally}
-          %li= fb_share_item_button(@prediction_question)
-          %li
-            = twitter_share_item_link @prediction_question, @prediction_question.title
-          %li.nomargin
-            = render :partial => 'shared/add_this'
+  #itemDetails.panel_2
+    .topBar
       %ul
-        = render :partial => 'shared/prediction_question_container', :locals => { :prediction_question => @prediction_question }
-        - if @tags.present?
-          .tag-wrap
-            == Tags: #{tag_list(@tags, @prediction_question)}
-      %p= t('predictions.member_of_group', :prediction_group => link_to(@prediction_question.prediction_group.title, @prediction_question.prediction_group))
-    = render_ad(:banner, @ad_layout, @ad_banner)
+        %li
+          %a== #{like_link @prediction_question} #{@prediction_question.votes_tally}
+        %li= fb_share_item_button(@prediction_question)
+        %li
+          = twitter_share_item_link @prediction_question, @prediction_question.title
+        %li.nomargin
+          = render :partial => 'shared/add_this'
+  - if not current_user.present?
+    %p= t('predictions.login_required',:login_url => login_path, :register_url => register_path)
     %br
-    %br
+  .predictions.question_block
+    %ul
+      = render :partial => 'shared/prediction_question_container', :locals => { :prediction_question => @prediction_question }
+      - if @tags.present?
+        .tag-wrap
+          == Tags: #{tag_list(@tags, @prediction_question)}
+    %p= t('predictions.member_of_group', :prediction_group => link_to(@prediction_question.prediction_group.title, @prediction_question.prediction_group))
+  = render_ad(:banner, @ad_layout, @ad_banner)
+  %br
+  %br
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
   = render :partial => 'shared/item_footer', :locals => { :item => @prediction_question,:title => @prediction_question.title }

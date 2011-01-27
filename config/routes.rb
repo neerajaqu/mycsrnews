@@ -160,8 +160,8 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true
     admin.resources :votes,           :active_scaffold => true
-    admin.resources :prediction_groups
-    admin.resources :prediction_questions
+    admin.resources :prediction_groups, :member => { :approve => [:get, :post] }
+    admin.resources :prediction_questions, :member => { :approve => [:get, :post] }
     admin.resources :prediction_guesses
     admin.resources :prediction_results, :member => { :accept => [:get, :post] }
     admin.resources :prediction_scores, :collection => { :refresh_all => [:get, :post ] }

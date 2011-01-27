@@ -59,6 +59,22 @@ class Admin::PredictionGroupsController < AdminController
     redirect_to admin_prediction_groups_path
   end
 
+  def approve
+    @prediction_group = PredictionGroup.find(params[:id])
+    unless @prediction_group
+      flash[:error] = "Invalid prediction group"
+      redirect_to admin_prediction_groups_path
+    end
+
+    if @prediction_group.update_attribute(:is_approved, true)
+      flash[:success] = "Successfully approved this topic"
+      redirect_to admin_prediction_groups_path
+    else
+    	flash[:error] = "Could not approve this topic"
+      redirect_to admin_prediction_groups_path
+    end
+  end
+
   private
 
   def render_new prediction_group = nil
@@ -84,22 +100,6 @@ class Admin::PredictionGroupsController < AdminController
   def set_current_tab
     @current_tab = 'prediction_groups';
   end
-  
-  def approve
-    @prediction_group = PredictionGroup.find(params[:id])
-    unless @prediction_group
-      flash[:error] = "Invalid prediction group"
-      redirect_to admin_prediction_groups_path
-    end
-
-    if @prediction_group.approve
-      flash[:success] = "Successfully approved this topic"
-      redirect_to admin_prediction_groups_path
-    else
-    	flash[:error] = "Could not approve this topic"
-      redirect_to admin_prediction_groups_path
-    end
-  end
-  
+    
 
 end
