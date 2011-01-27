@@ -1,0 +1,5 @@
+%h2 Update Prediction Question
+- semantic_form_for [:admin, @prediction_question] do |form|
+  = render :partial => 'prediction_question_form', :locals => { :form => form }
+  - form.buttons do
+    = form.commit_button

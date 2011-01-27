@@ -14,6 +14,10 @@
             = twitter_share_item_link @prediction_question, @prediction_question.title
           %li.nomargin
             = render :partial => 'shared/add_this'
+    - if not current_user.present?
+      %p= t('predictions.login_required',:login_url => login_path, :register_url => register_path)
+      %br
+    .predictions.question_block
       %ul
         = render :partial => 'shared/prediction_question_container', :locals => { :prediction_question => @prediction_question }
         - if @tags.present?

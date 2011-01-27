@@ -53,6 +53,22 @@ class Admin::PredictionQuestionsController < AdminController
     end
   end
 
+  def approve
+    @prediction_question = PredictionQuestion.find(params[:id])
+    unless @prediction_question
+      flash[:error] = "Invalid prediction question"
+      redirect_to admin_prediction_questions_path
+    end
+
+    if @prediction_question.update_attribute(:is_approved, true)
+      flash[:success] = "Successfully approved this topic"
+      redirect_to admin_prediction_questions_path
+    else
+    	flash[:error] = "Could not approve this topic"
+      redirect_to admin_prediction_questions_path
+    end
+  end
+
   def destroy
     @prediction_question = PredictionQuestion.find(params[:id])
     @prediction_question.destroy
