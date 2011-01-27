@@ -40,7 +40,7 @@
     .predictions.question_block
       - if @prediction_group.prediction_questions.present?    
         %ul
-          - @prediction_group.prediction_questions.approved.each do |prediction_question|
+          - @prediction_group.prediction_questions.find(:all,:conditions => "is_approved=1 and is_blocked = 0 and status = 'open' ").each do |prediction_question|
             = render :partial => 'shared/prediction_question_container', :locals => { :prediction_question => prediction_question }
       - else
         %p =t('predictions.empty_group')

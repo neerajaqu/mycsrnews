@@ -32,7 +32,7 @@ class PredictionGroup < ActiveRecord::Base
 
   def next
     if PredictionGroup.count > 0
-      PredictionGroup.open.find(:first, :conditions => ["id > ?", self.id ], :order => "id asc")
+      PredictionGroup.approved.active.open.find(:first, :conditions => ["id > ?", self.id ], :order => "id asc")
     else
       nil
     end
@@ -40,7 +40,7 @@ class PredictionGroup < ActiveRecord::Base
   
   def previous
     if PredictionGroup.count > 0
-      PredictionGroup.open.find(:first, :conditions => ["id < ?", self.id ], :order => "id desc")
+      PredictionGroup.approved.active.open.find(:first, :conditions => ["id < ?", self.id ], :order => "id desc")
     else
       nil
     end
