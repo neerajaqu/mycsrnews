@@ -3,55 +3,54 @@
   = render :partial => 'shared/subnav/predictions_subnav'
 
 #col_left
-  - cache "#{@prediction_group.cache_key}_top_html" do
-    #itemDetails.panel_2
-      .topBar
-        %ul
-          %li
-            %a== #{like_link @prediction_group} #{@prediction_group.votes_tally}
-          %li
-            %a== #{link_to t('comment'), prediction_group_path(@prediction_group, :anchor => "postCommentBox")} #{@prediction_group.comments_count}
-          %li= fb_share_item_button(@prediction_group)
-          %li
-            = twitter_share_item_link @prediction_group, @prediction_group.title
-          %li.nomargin
-            = render :partial => 'shared/add_this'
-      .itemBlock
-        - if @prediction_group.images.present?
-          .thumb
-            = image_tag @prediction_group.images.first.url(:medium)
-        - if @prediction_group.moderatable?
-          .mod-panel
-            .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @prediction_group }
-            .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @prediction_group }
-        %h1= @prediction_group.title
-        %h3= t('posted_by', :fb_name => local_linked_profile_name(@prediction_group.user), :date => timeago(@prediction_group.created_at))
-        - if @tags.present?
-          %h3== Tags #{tag_list(@tags, @prediction_group)}
-        - if @prediction_group.media_item?
-          =render_media_items @prediction_group, :size => 'large'        
-        - unless @prediction_group.description.empty?
-          %p= sanitize @prediction_group.description
-    = render_ad(:banner, @ad_layout, @ad_banner)
-    -# expects prediction_group,
-    - if not current_user.present?
-      %p= t('predictions.login_required',:login_url => login_path, :register_url => register_path)
-      %br
-    .predictions.question_block
-      - if @prediction_group.prediction_questions.present?    
-        %ul
-          - @prediction_group.prediction_questions.find(:all,:conditions => "is_approved=1 and is_blocked = 0 and status = 'open' ").each do |prediction_question|
-            = render :partial => 'shared/prediction_question_container', :locals => { :prediction_question => prediction_question }
-      - else
-        %p =t('predictions.empty_group')
-    %p
-      - unless @next_prediction_group.nil?
-        = link_to t('predictions.next_topic'), prediction_group_path(@next_prediction_group), :class => "btn float_right"
-      - unless @previous_prediction_group.nil?
-        = link_to t('predictions.previous_topic'), prediction_group_path(@previous_prediction_group), :class => "btn float_right", :class => "btn"
+  #itemDetails.panel_2
+    .topBar
+      %ul
+        %li
+          %a== #{like_link @prediction_group} #{@prediction_group.votes_tally}
+        %li
+          %a== #{link_to t('comment'), prediction_group_path(@prediction_group, :anchor => "postCommentBox")} #{@prediction_group.comments_count}
+        %li= fb_share_item_button(@prediction_group)
+        %li
+          = twitter_share_item_link @prediction_group, @prediction_group.title
+        %li.nomargin
+          = render :partial => 'shared/add_this'
+    .itemBlock
+      - if @prediction_group.images.present?
+        .thumb
+          = image_tag @prediction_group.images.first.url(:medium)
+      - if @prediction_group.moderatable?
+        .mod-panel
+          .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @prediction_group }
+          .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @prediction_group }
+      %h1= @prediction_group.title
+      %h3= t('posted_by', :fb_name => local_linked_profile_name(@prediction_group.user), :date => timeago(@prediction_group.created_at))
+      - if @tags.present?
+        %h3== Tags #{tag_list(@tags, @prediction_group)}
+      - if @prediction_group.media_item?
+        =render_media_items @prediction_group, :size => 'large'        
+      - unless @prediction_group.description.empty?
+        %p= sanitize @prediction_group.description
+  = render_ad(:banner, @ad_layout, @ad_banner)
+  -# expects prediction_group,
+  - if not current_user.present?
+    %p= t('predictions.login_required',:login_url => login_path, :register_url => register_path)
     %br
-    %br
-    = render :partial => 'shared/comments', :locals => { :comments => @prediction_group.comments }
+  .predictions.question_block
+    - if @prediction_group.prediction_questions.present?    
+      %ul
+        - @prediction_group.prediction_questions.find(:all,:conditions => "is_approved=1 and is_blocked = 0 and status = 'open' ").each do |prediction_question|
+          = render :partial => 'shared/prediction_question_container', :locals => { :prediction_question => prediction_question }
+    - else
+      %p =t('predictions.empty_group')
+  %p
+    - unless @next_prediction_group.nil?
+      = link_to t('predictions.next_topic'), prediction_group_path(@next_prediction_group), :class => "btn float_right"
+    - unless @previous_prediction_group.nil?
+      = link_to t('predictions.previous_topic'), prediction_group_path(@previous_prediction_group), :class => "btn float_right", :class => "btn"
+  %br
+  %br
+  = render :partial => 'shared/comments', :locals => { :comments => @prediction_group.comments }
   = render :partial => 'shared/comment_form', :locals => { :commentable => @prediction_group }
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
