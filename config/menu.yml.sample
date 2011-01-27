@@ -33,3 +33,5 @@ menu:
     galleries_list: 'enabled'
     new_gallery: 'enabled'
     sub_galleries: 'enabled'
+  predictions:
+    predictions_play: 'enabled'
