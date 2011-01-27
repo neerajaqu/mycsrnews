@@ -1,5 +1,6 @@
 class PredictionsController < ApplicationController
   before_filter :logged_in_to_facebook_and_app_authorized, :only => [:my_predictions, :new, :create, :update, :like], :if => :request_comes_from_facebook?
+  after_filter :store_location, :only => [:index, :scores, :my_predictions ]
 
   #cache_sweeper :resource_sweeper, :only => [:create, :update, :destroy]
 
