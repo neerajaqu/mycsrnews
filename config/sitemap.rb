@@ -29,6 +29,7 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
   sitemap.add resources_path, :priority => 0.6, :changefreq => 'daily'
   sitemap.add idea_boards_path, :priority => 0.5, :changefreq => 'daily'
   sitemap.add resource_sections_path, :priority => 0.5, :changefreq => 'daily'
+  sitemap.add prediction_groups_path, :priority => 0.5, :changefreq => 'daily'
 
   Content.active.find(:all).each do |a|
     sitemap.add story_path(a), :lastmod => a.updated_at, :priority => 0.6
@@ -60,6 +61,14 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
 
   Forum.find(:all).each do |a|
     sitemap.add forum_path(a), :lastmod => a.updated_at
+  end
+
+  PredictionGroup.active.find(:all).each do |a|
+    sitemap.add prediction_group_path(a), :lastmod => a.updated_at, :priority => 0.4
+  end
+
+  PredictionQuestion.active.find(:all).each do |a|
+    sitemap.add prediction_question_path(a), :lastmod => a.updated_at, :priority => 0.4
   end
 
 end

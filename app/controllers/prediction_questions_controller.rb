@@ -1,5 +1,6 @@
 class PredictionQuestionsController < ApplicationController
   before_filter :login_required, :only => [:new, :create]
+  after_filter :store_location, :only => [:new, :create, :show ]
   cache_sweeper :prediction_sweeper, :only => [:create, :update, :destroy]
 
   def new 

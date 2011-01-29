@@ -43,7 +43,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
 
   def self.expire_prediction_question_all prediction_question
     controller = ActionController::Base.new
-    ["closed_predictions","top_predictions","newest_predictions","#{prediction_question.cache_key}_stats","#{prediction_question.cache_key}_top"].each do |fragment|
+    ["closed_predictions","top_predictions","newest_predictions","newest_prediction_questions","#{prediction_question.cache_key}_stats","#{prediction_question.cache_key}_top"].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
 
