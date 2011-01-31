@@ -3,6 +3,12 @@
     %p= t('predictions.tabulation_count_title', :total_guesses => prediction_question.get_guess_totals)
     - prediction_question.get_guess_percentages.each do |guess|
       %p== #{guess[:guess].titleize} #{number_to_percentage(guess[:percent], :precision => 2)}
-    %p.suggest_answer
+      .userList.clearleft
+        - unless guess[:users].empty?
+          %ul
+            - guess[:users].each do |user|
+              %li
+                .profilePic= local_linked_profile_pic user.user, :width => '30', :height => '30'
+    %p.clearleft.suggest_answer
       %a= link_to "Is this question out of date?", new_prediction_question_prediction_result_path(prediction_question)
     %br

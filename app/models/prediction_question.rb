@@ -144,13 +144,14 @@ class PredictionQuestion < ActiveRecord::Base
     get_guess_counts.collect do |g|
       {
         :guess    => g.guess,
-        :percent  => (100.0 * g.count.to_f / get_guess_totals)
+        :percent  => (100.0 * g.count.to_f / get_guess_totals),
+        :users => self.prediction_guesses.find(:all, :conditions => [ "guess = ?",g.guess], :include => :user,:order => 'rand()', :limit => 10 )
       }
     end
   end
 
   def get_guess_counts
-    prediction_guesses.find(:all, :select => 'count(*) count, guess', :group => 'guess', :limit => 10, :order => "count desc")
+    prediction_guesses.find(:all, :select => 'count(*) count, guess, prediction_question_id', :group => 'guess', :limit => 10, :order => "count desc")
   end
 
   def update_stats

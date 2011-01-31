@@ -31,6 +31,11 @@
         =render_media_items @prediction_group, :size => 'large'        
       - unless @prediction_group.description.empty?
         %p= sanitize @prediction_group.description
+      %p
+        - unless @next_prediction_group.nil?
+          = link_to t('predictions.next_topic'), prediction_group_path(@next_prediction_group), :class => "btn float_right"
+        - unless @previous_prediction_group.nil?
+          = link_to t('predictions.previous_topic'), prediction_group_path(@previous_prediction_group), :class => "btn float_right", :class => "btn"
   = render_ad(:banner, @ad_layout, @ad_banner)
   -# expects prediction_group,
   - if not current_user.present?
