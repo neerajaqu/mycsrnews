@@ -1,5 +1,8 @@
 class OverlaysController < ApplicationController
-  layout "overlay"
+  # NOTE:: current overlay layout reloads javascript and breaks overlays
+  # to use a layout for overlays, we need to remove duplication
+  # layout "overlay"
+  layout false
   
   def tweet
     if params[:text]
