@@ -21,6 +21,7 @@ gem "redis-namespace"
 gem "resque"
 gem "resque-scheduler", :require => 'resque_scheduler'
 gem 'sitemap_generator'
+gem "SystemTimer"
 
 # Feedzirra related
 gem 'nokogiri'
