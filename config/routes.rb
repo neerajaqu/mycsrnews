@@ -133,6 +133,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :twitter_settings, :collection => { :update_keys => :post, :update_auth => :post, :reset_keys => :get }
     admin.resources :ad_layouts
     admin.resources :ads
+    admin.resources :galleries
     admin.resources :title_filters
     admin.resources :sponsor_zones
     admin.resources :activity_scores
