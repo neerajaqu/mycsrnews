@@ -143,7 +143,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :events, :collection => { :import_zvents => [:get, :post]}
     admin.resources :flags
     admin.resources :questions
-    admin.resources :forums
+    admin.resources :forums, :collection => { :reorder => [:get, :post] }
     admin.resources :topics
     admin.resources :answers    
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }

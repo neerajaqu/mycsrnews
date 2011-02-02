@@ -9,6 +9,20 @@ class Admin::ForumsController < AdminController
     }
   end
 
+  def reorder
+    if request.post?
+    	begin
+        params[:forums].map {|f| f.sub(/^forum-([0-9]+)$/, '\1') }.reverse.each_with_index do |forum_id, position|
+          Forum.find_by_id(forum_id).update_attribute(:position, position + 1)
+        end
+        Forum.expire_all 
+        render :json => {:success => "Success!"}.to_json and return
+      rescue
+        render :json => {:success => "Could not save your new order!"}.to_json and return
+      end
+    end
+  end
+
   def new
     render_new
   end
