@@ -137,6 +137,7 @@ settings = [
  { :key_sub_type => 'stats', :key_name => 'google_analytics_site_id', :value => (APP_CONFIG['google_analytics_site_id'] || "1231232" ) },
  { :key_sub_type => 'sitemap', :key_name => 'google-site-verification', :value => "WS8kMC8-Ds77777777777Xy6QcmRpWAfY" },
  { :key_sub_type => 'sitemap', :key_name => 'yahoo-site-verification', :value => "WS87ds77" },
+ { :key_sub_type => 'sitemap', :key_name => 'yahoo_app_id',  :value => (APP_CONFIG['yahoo_app_id'] || "ELIZq2L333322.rGdRR5abc888HCGL1zDOegJakZyHIrugVqPip3YK333P8-") },
  { :key_sub_type => 'ads', :key_name => 'sponsor_zones_enabled', :value => "false" },
  { :key_sub_type => 'ads', :key_name => 'sponsor_zones_store_url', :value => "http://newscloud.trafficspaces.com", :hint => "The website URL used to sell your sponsored ad zones"  },
  { :key_sub_type => 'ads', :key_name => 'platform', :value => (APP_CONFIG['ad_platform'] || "none" ) },
