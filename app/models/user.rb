@@ -219,7 +219,7 @@ class User < ActiveRecord::Base
   def friends
     []
   end
-  
+
   def fb_user_id
     return super unless super.nil?
     return nil unless self.user_profile.present?
@@ -344,8 +344,35 @@ class User < ActiveRecord::Base
     prediction_score = self.build_prediction_score
     prediction_score.save ? prediction_score : nil
   end
+
+  def mogli_user
+    return nil unless fb_oauth_active?
+    @mogli_user ||= Mogli::User.find("me", mogli_client)
+  end
+  
+  def mogli_friends
+    return [] unless mogli_user
+
+    mogli_user.friends
+  end
+
+  def facebook_friends
+    return [] unless mogli_user
+
+    mogli_friends.map {|f| User.find_by_fb_user_id(f.id) }.compact
+  end
+  
+  def facebook_friend_ids
+    return [] unless mogli_user
+
+    mogli_friends.map {|f| User.find_by_fb_user_id(f.id, :select => "id").try(:id) }.compact
+  end
   
   private
+
+  def mogli_client
+    @mogli_client ||= Mogli::Client.new fb_oauth_key
+  end
 
   def check_profile
     self.build_profile if self.profile.nil?

@@ -103,6 +103,23 @@ describe User do
       end
     end
 
+    describe "#mogli_user" do
+      context "not a facebook user" do
+        it "returns nil for mogli_user" do
+          @user.mogli_user.should be_nil
+        end
+      end
+      context "given a facebook user" do
+        it "returns a mogli user" do
+          pending("Add mock facebook user")
+          @user.mogli_user.should be_an_instance_of(Mogli::User)
+        end
+        it "returns mogli friends"
+        it "returns facebook friends"
+        it "saves the facebook friends in redis"
+      end
+    end
+
     describe "#public name" do
       before(:each) do
         @first = "Robert"
