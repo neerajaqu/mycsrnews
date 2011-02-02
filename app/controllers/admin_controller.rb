@@ -14,10 +14,12 @@ class AdminController < ApplicationController
     #   - add mixin logic
     #   - add action links
     #   - only show new links if actions.include? :new
+    #   - add related links
+    #   - add return links
     def self.admin_scaffold(model_id = nil, &block)
       raise ArgumentError.new("Must provide model_id or config block") unless model_id.present? or block_given?
 
-      cattr_accessor :admin_scaffold
+      cattr_accessor :admin_scaffold_config
       config = OpenStruct.new
       if model_id
         config.model_id = model_id
@@ -27,7 +29,7 @@ class AdminController < ApplicationController
         config.fields = config.model_klass.columns
         config.paginate = true
         config.associations = {}
-        config.edit_fields = config.fields.select {|f| not (f.name =~ /_at$/ or f.name == 'id') }
+        config.edit_fields = config.fields.select {|f| not (f.name =~ /_at$/ or f.name == 'id' or f.name =~ /tally|count$/) }
       end
       yield config if block_given?
 
@@ -62,7 +64,7 @@ class AdminController < ApplicationController
         end
       end
 
-      self.admin_scaffold = config
+      self.admin_scaffold_config = config
     end
 
     def self.admin_action
