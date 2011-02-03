@@ -7,7 +7,7 @@
   = render :partial => 'shared/classifieds', :locals => { :classifieds => @classifieds, :paginate => @paginate, :page => @page }
 
 #col_right
-  -#= render :partial => 'shared/sidebar/post_classified'
+  = render :partial => 'shared/sidebar/post_classified'
   - if @custom_sidebar_widget
     = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
   = render_ad(:small_square, @ad_layout, @ad_small_square)

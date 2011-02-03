@@ -12,6 +12,7 @@ class Classified < ActiveRecord::Base
   acts_as_tweetable
   
   named_scope :active
+  named_scope :top, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
 
   belongs_to :user
 
@@ -76,6 +77,10 @@ class Classified < ActiveRecord::Base
   
   def comments_count
     0
+  end
+
+  def votes_tally
+    votes_count
   end
   
   def votes_count

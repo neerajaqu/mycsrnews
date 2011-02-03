@@ -1,0 +1,5 @@
+-# @expects: local 'top_classifieds'
+- cache :top_classifieds_html do
+  - top_classifieds ||= Classified.active.top 5
+  - unless top_classifieds.empty?
+    = render :partial => 'shared/lists/small_generic_list', :locals => { :list_title => t('classifieds.top_classifieds_title'), :item_list => top_classifieds }
