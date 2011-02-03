@@ -90,6 +90,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags, :related_items], :as => 'stories'
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] }, :has_many => [ :flags]
   map.resources :related_items
+  map.resources :classifieds, :collection => [:borrowed_items, :my_items]
 
   map.resources :users, :collection => {:link_user_accounts => :get, :feed => [:get], :invite => [:get, :post], :current => [:get, :post], :update_bio => [:get,:post], :dont_ask_me_invite_friends => :get, :dont_ask_me_for_email => :get }
   map.resources :articles, :collection => { :index => [:get, :post], :drafts => [:get] }
