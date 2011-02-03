@@ -38,7 +38,7 @@
           %h3 
             = t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => timeago(@story.created_at))
             = pipe_spacer
-            - if current_user.present? and @story.user == current_user
+            %span.moderator-links.hidden{:class => user_css_class(@story.user)}
               = link_to t('articles.edit_draft'), edit_article_path(@story.article)
         - if @tags.present?
           .tag-wrap
