@@ -21,13 +21,13 @@
                 -#else
                 = image_tag ('default/watermark.jpg')
               .itemBlock
-                %h2= link_to classified.title, story_path(classified)
+                %h2= link_to classified.title, classified_path(classified)
                 %p= linked_item_details classified              
                 .profilePic= local_linked_profile_pic classified.user
                 .itemMeta
                   %h3= t('posted_by', :fb_name => local_linked_profile_name(classified.user), :date => timeago(classified.created_at))
                   %span.btnComment== #{like_link classified} #{classified.votes_count}
-                  %span.btnComment== #{link_to t('comments'), story_path(classified, :anchor => "commentListTop")} #{classified.comments_count}
+                  %span.btnComment== #{link_to t('comments'), classified_path(classified, :anchor => "commentListTop")} #{classified.comments_count}
   - if paginate
     .clearfix
       = will_paginate classifieds

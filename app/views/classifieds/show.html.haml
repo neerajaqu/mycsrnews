@@ -1,2 +1,65 @@
-<h1>Classifieds#show</h1>
-<p>Find me in app/views/classifieds/show.html.erb</p>
+- content_for :title do
+  = @classified.item_title
+- content_for :meta_description do
+  = meta_description @classified
+- if @classified.images.present?
+  - classified_for :meta_image do
+    = meta_image @classified.images.first
+
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+  = render :partial => 'shared/subnav/classifieds_subnav'
+
+#col_left
+  - cache "#{@classified.cache_key}_top_html" do
+    #itemDetails.panel_2
+      .topBar
+        %ul
+          %li
+            %a== #{like_link @classified} #{@classified.votes_count}
+          %li
+            %a== #{link_to t('comment'), classified_path(@classified, :anchor => "postCommentBox")} #{@classified.comments_count}
+          %li= fb_share_item_button(@classified)
+          %li
+            = twitter_share_item_link @classified, @classified.title
+          %li.nomargin
+            = render :partial => 'shared/add_this'
+      .itemBlock
+
+        - if @classified.images.present?
+          .thumb= image_tag @classified.images.first.url(:medium)
+
+        %h1= @classified.title
+        %h3= t('posted_by', :fb_name => local_linked_profile_name(@classified.user), :date => timeago(@classified.created_at))
+        - if @tags.present?
+          .tag-wrap
+            == Tags: #{tag_list(@tags, @classified)}
+        %p= sanitize caption(@classified.details, 500)
+        -# if @classified.url.present?
+          .float_left= link_to t('.read_classified'), @classified.url, :target => "_cts", :class => "btn"
+      - if @classified.media_item?
+        = render_media_items @classified, :size => 'large'
+
+    - if @classified.moderatable?
+      .mod-panel.panel_2
+        .float_right= render :partial => 'shared/moderate_form', :locals => { :moderatable => @classified }
+        .float_left= render :partial => 'shared/flag_form', :locals => { :flaggable => @classified }
+
+    = render_ad(:banner, @ad_layout, @ad_banner)
+    -# = render :partial => 'shared/comments', :locals => { :comments => @classified.comments }
+  -# = render :partial => 'shared/comment_form', :locals => { :commentable => @classified }
+
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
+
+  = render :partial => 'shared/item_footer', :locals => { :item => @classified,:title => @classified.title }
+
+#col_right
+  - if @custom_sidebar_widget
+    = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  - cache "#{@classified.cache_key}_sidebar_html" do
+    = render :partial => 'shared/sidebar/bio', :locals => { :user => @classified.user }
+    = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @classified }
+  -# = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @classified, :related_items => @classified.related_items }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

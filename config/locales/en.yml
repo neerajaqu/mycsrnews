@@ -455,3 +455,5 @@ en:
     browse:
       title: "Browse classifieds"
       subtitle: "Find stuff to borrow, buy or pick up for free"
+    top_classifieds_title: "Top Classifieds"
+    newest_classifieds_title: "Newest Classifieds"
