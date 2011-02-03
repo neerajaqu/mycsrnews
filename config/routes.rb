@@ -137,6 +137,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :title_filters
     admin.resources :sponsor_zones
     admin.resources :activity_scores
+    admin.resources :classifieds
     admin.resources :ideas
     admin.resources :idea_boards
     admin.resources :resources

@@ -1,7 +1,9 @@
 class Classified < ActiveRecord::Base
   include AASM
 
-  acts_as_taggable_on :tags, :category, :subcategories
+  acts_as_taggable_on :tags, :category, :subcategories, :location
+
+  named_scope :active
 
   belongs_to :user
 
