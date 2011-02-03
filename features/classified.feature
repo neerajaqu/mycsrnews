@@ -3,7 +3,7 @@ Feature: Classifieds
 	As a user
 	I want to be able to interact with classifieds
 
-	@wip
+	#@wip
 	Scenario: List of Galleries without a user
 # TODO:: SWITCH TO TABLE WITH FREE/PUBLIC/NONPUBLIC ITEMS
 		Given a classified exists with title: "My Cool Classified"
@@ -30,17 +30,20 @@ Feature: Classifieds
 		And I should see the classifieds sidebar widget shared classifieds
 		And I should see the classifieds sidebar widget post classified
 
+	@wip
 	Scenario: View a classified as a logged in user
 		Given a user is logged in
 		And a classified exists
 		When I visit the show page for that classified
 		Then I should see the contact link for the classified owner
 
+	@wip
 	Scenario: View a classified as a non logged in user
 		Given a classified exists
 		When I visit the show page for that classified
 		Then I should not see the contact link for the classified owner
 
+	@wip
 	Scenario: View a classified as owner
 		Given a user is logged in
 		And a classified exists with user: the user

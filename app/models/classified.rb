@@ -24,10 +24,10 @@ class Classified < ActiveRecord::Base
   aasm_state :unpublished
   aasm_state :available, :enter => [:expire, :set_published], :exit => :expire
   aasm_state :sold, :enter => :expire
-  aasm_state :loaned_out
+  aasm_state :loaned_out, :enter => :expire
   aasm_state :expired, :enter => :expire
-  aasm_state :closed
-  aasm_state :hidden # what is this used for?
+  aasm_state :closed, :enter => :expire
+  aasm_state :hidden, :enter => :expire
 
 =begin
 # REMOVE METHODS
@@ -41,7 +41,7 @@ class Classified < ActiveRecord::Base
   end
 
   aasm_event :renewed do
-    transitions :to => :available, :from => [:expired, :closed], :success => :update_renewed
+    transitions :to => :available, :from => [:expired, :closed, :hidden], :success => :update_renewed
   end
 
   aasm_event :closed do
