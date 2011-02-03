@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe Classified do
   it "should create a new instance given valid attributes" do
-    Factory.create(:classified)
+    classified = Factory.create(:classified)
+    classified.state.should == "unpublished"
   end
 
   describe "#state_machine" do
@@ -10,12 +11,16 @@ describe Classified do
       @classified = Factory(:classified)
     end
 
+    it "should have votes_count"
+    it "should have comments_count"
     it "should be in the unpublished state" do
       @classified.unpublished?.should be_true
     end
 
     context "state :unpublished" do
       it "switches to the available state when published!" do
+        #@classified.should_receive(:expire).should_receive(:set_published)
+        @classified.should_receive(:expire)
         @classified.should_receive(:set_published)
         @classified.publish!
         @classified.aasm_current_state.should == :available
@@ -26,12 +31,6 @@ describe Classified do
     context "state :available" do
       before(:each) do
         @classified.publish!
-      end
-
-      it "switches to the unpublished state when unpublished" do
-        @classified.should_receive(:set_unpublish)
-        @classified.unpublish!
-        @classified.aasm_current_state.should == :unpublished
       end
 
       context "loaner item" do
@@ -63,7 +62,7 @@ describe Classified do
 
     context "state :expired" do
       before(:each) do
-        @classified.expire!
+        @classified.expired!
       end
 
       it "should be renewable" do

@@ -13,24 +13,31 @@ class Classified < ActiveRecord::Base
 
   aasm_initial_state :unpublished
 
-  aasm_state :unpublished, :enter => :set_unpublish
-  aasm_state :available, :enter => :set_published, :exit => :expire
-  aasm_state :sold
+  aasm_state :unpublished
+  aasm_state :available, :enter => [:expire, :set_published], :exit => :expire
+  aasm_state :sold, :enter => :expire
   aasm_state :loaned_out
-  aasm_state :expired
+  aasm_state :expired, :enter => :expire
   aasm_state :closed
   aasm_state :hidden # what is this used for?
+
+=begin
+# REMOVE METHODS
+  aasm_event :unpublish do
+    transitions :to => :unpublished, :from => [:available, :sold, :loaned_out, :expired, :closed, :hidden]
+  end
+=end
 
   aasm_event :publish do
     transitions :to => :available, :from => [:unpublished]
   end
 
-  aasm_event :unpublish do
-    transitions :to => :unpublished, :from => [:available, :sold, :loaned_out, :expired, :closed, :hidden]
-  end
-
   aasm_event :renew do
     transitions :to => :available, :from => [:expired, :closed], :success => :update_renewed
+  end
+
+  aasm_event :sold do
+    transitions :to => :sold, :from => :available
   end
 
   aasm_event :loan_out do
@@ -41,7 +48,7 @@ class Classified < ActiveRecord::Base
     transitions :to => :available, :from => :loaned_out, :success => :update_renewed
   end
 
-  aasm_event :expire do
+  aasm_event :expired do
     transitions :to => :expired, :from => [:unpublished, :available, :loaned_out, :hidden]
   end
 
@@ -53,4 +60,5 @@ class Classified < ActiveRecord::Base
     # create loaning
     loan_out!
   end
+  def state() aasm_state end
 end
