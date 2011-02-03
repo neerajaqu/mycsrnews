@@ -49,6 +49,7 @@ GEM
   specs:
     SystemTimer (1.2.2)
     ZenTest (4.4.2)
+    aasm (2.2.0)
     actionmailer (2.3.4)
       actionpack (= 2.3.4)
     actionpack (2.3.4)
@@ -184,6 +185,7 @@ PLATFORMS
 DEPENDENCIES
   SystemTimer
   ZenTest
+  aasm
   awesome_print
   bitly (= 0.5.1)
   builder (= 2.1.2)

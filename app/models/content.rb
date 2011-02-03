@@ -1,16 +1,16 @@
 class Content < ActiveRecord::Base
 
-  acts_as_voteable
-  acts_as_taggable_on :tags, :sections
   acts_as_featured_item
-  acts_as_moderatable
-  acts_as_relatable
   acts_as_media_item
+  acts_as_moderatable
   acts_as_refineable
-  acts_as_wall_postable
+  acts_as_relatable
   acts_as_relatable
   acts_as_scorable
+  acts_as_taggable_on :tags, :sections
   acts_as_tweetable
+  acts_as_voteable
+  acts_as_wall_postable
 
   belongs_to :user
   belongs_to :article

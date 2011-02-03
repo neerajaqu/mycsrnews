@@ -123,3 +123,9 @@ Factory.define :related_item do |f|
   f.title       Faker::Company.catch_phrase
   f.url         "http://#{Faker::Internet.domain_name}"
 end
+
+Factory.define :classified do |f|
+  f.title       Faker::Company.catch_phrase
+  f.details     Faker::Lorem.paragraph
+  f.association :user, :factory => :user
+end
