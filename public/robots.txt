@@ -8,3 +8,4 @@ Disallow: /*quick_post.html
 Disallow: /*new.html
 Disallow: /*edit.html
 Disallow: /*block.html
+Disallow: /*feature.html
