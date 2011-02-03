@@ -449,6 +449,9 @@ en:
       title: "Top Items"
       subtitle: "Most popular items"
   classifieds:
+    subnav:
+      browse: "Browse"
+      my_items: "Your Items"
     browse:
       title: "Browse classifieds"
       subtitle: "Find stuff to borrow, buy or pick up for free"
