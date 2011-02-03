@@ -448,3 +448,7 @@ en:
     top_items:
       title: "Top Items"
       subtitle: "Most popular items"
+  classifieds:
+    browse:
+      title: "Browse classifieds"
+      subtitle: "Find stuff to borrow, buy or pick up for free"
