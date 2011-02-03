@@ -22,7 +22,7 @@ describe Classified do
         #@classified.should_receive(:expire).should_receive(:set_published)
         @classified.should_receive(:expire)
         @classified.should_receive(:set_published)
-        @classified.publish!
+        @classified.published!
         @classified.aasm_current_state.should == :available
       end
     end
@@ -30,7 +30,7 @@ describe Classified do
 
     context "state :available" do
       before(:each) do
-        @classified.publish!
+        @classified.published!
       end
 
       context "loaner item" do
@@ -39,7 +39,7 @@ describe Classified do
 
         context "state: available" do
           it "loans the item to a user" do
-            @classified.should_receive(:loan_out!)
+            @classified.should_receive(:loaned_out!)
             @classified.loan_to Factory(:user)
           end
         end
@@ -52,7 +52,7 @@ describe Classified do
           it "becomes available when returned" do
             pending("Needs to have working success callback")
             @classified.should_receive(:update_renewed)
-            @classified.return!
+            @classified.returned!
           end
         end
 
@@ -68,7 +68,7 @@ describe Classified do
       it "should be renewable" do
         pending("Needs to have working success callback")
         @classified.should_receive(:update_renewed)
-        @classified.renew!
+        @classified.renewed!
         @classified.aasm_current_state.should == :available
       end
     end

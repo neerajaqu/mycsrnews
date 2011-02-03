@@ -29,24 +29,28 @@ class Classified < ActiveRecord::Base
   end
 =end
 
-  aasm_event :publish do
+  aasm_event :published do
     transitions :to => :available, :from => [:unpublished]
   end
 
-  aasm_event :renew do
+  aasm_event :renewed do
     transitions :to => :available, :from => [:expired, :closed], :success => :update_renewed
+  end
+
+  aasm_event :closed do
+    transitions :to => :closed, :fromt => [:hidden, :available, :loaned_out]
   end
 
   aasm_event :sold do
     transitions :to => :sold, :from => :available
   end
 
-  aasm_event :loan_out do
+  aasm_event :loaned_out do
     transitions :to => :loaned_out, :from => :available
   end
 
-  aasm_event :return do
-    transitions :to => :available, :from => :loaned_out, :success => :update_renewed
+  aasm_event :returned do
+    transitions :to => :hidden, :from => :loaned_out, :success => :update_renewed
   end
 
   aasm_event :expired do
@@ -59,7 +63,7 @@ class Classified < ActiveRecord::Base
   def expire; puts "Expiring" end
   def loan_to user
     # create loaning
-    loan_out!
+    loaned_out!
   end
   def state() aasm_state end
   
