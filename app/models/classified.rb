@@ -2,7 +2,8 @@ class Classified < ActiveRecord::Base
   include AASM
 
   acts_as_taggable_on :tags, :category, :subcategories, :location
-
+  acts_as_voteable 
+  
   named_scope :active
 
   belongs_to :user
@@ -52,5 +53,13 @@ class Classified < ActiveRecord::Base
   def loan_to user
     # create loaning
     loan_out!
+  end
+  
+  def comments_count
+    0
+  end
+  
+  def votes_count
+    0
   end
 end
