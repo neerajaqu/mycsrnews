@@ -30,6 +30,11 @@ class OauthController < ApplicationController
   end
   
   def authenticator
-    @authenticator ||= Mogli::Authenticator.new(APP_CONFIG['facebook_application_id'], Facebooker.secret_key, oauth_callback_path(:only_path => false, :canvas => iframe_facebook_request?))
+    if Metadata::Setting.find_setting('app_id').present?
+      app_id = Metadata::Setting.find_setting('app_id').value
+    else
+      app_id ||= APP_CONFIG['facebook_application_id']
+    end
+    @authenticator ||= Mogli::Authenticator.new(app_id, Facebooker.secret_key, oauth_callback_path(:only_path => false, :canvas => iframe_facebook_request?))
   end
 end

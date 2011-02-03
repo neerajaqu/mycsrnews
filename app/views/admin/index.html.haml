@@ -27,10 +27,12 @@
     %a= link_to 'Set up the text in your application',admin_locale_translations_path(:locale_id => 'en')
   %li
     %a= link_to 'Set up HTML for default pages such as About, FAQ and Terms of Services', admin_locale_translations_path(:locale_id => 'en',:type => 'static_pages')
-  %li
-    %a= link_to 'Author the Application\'s page in Facebook for its directory listing',"http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['facebook_application_id']}",:target=>'_blank'
-  %li
-    %a= link_to 'Visit your Facebook application statistics',"http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['facebook_application_id']}",:target=>'_blank'
+  - if get_setting('app_id').present?
+    - app_id = get_setting('app_id').value
+    %li
+      %a= link_to 'Author the Application\'s page in Facebook for its directory listing',"http://www.facebook.com/apps/application.php?id=#{app_id}",:target=>'_blank'
+    %li
+      %a= link_to 'Visit your Facebook application statistics',"http://www.facebook.com/business/insights/app.php?id=#{app_id}",:target=>'_blank'
 %p
   Please be sure to 
   %a= link_to 'follow @NewsCloud on Twitter', 'http://twitter.com/newscloud',:target=>'_blank'
