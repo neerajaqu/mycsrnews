@@ -6,9 +6,6 @@ defaults: &defaults
   google_analytics_account_id: 'UF-123456890-7'
   google_analytics_site_id: '5407321'
 
-  # Yahoo AppId used for sitemap ping
-  yahoo_app_id: 'ELIZq2LV44444.rGdRR5abc888HCGL1zDOegJakZyHIrugVqPip3YK333P8-'
-  
   # ad platforms supported: google, helios, none = turn ads off
   ad_platform: 'none' 
   
