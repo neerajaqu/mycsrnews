@@ -1,0 +1,7 @@
+-# @expects: local 'recently_viewed_classifieds'
+- if current_user.present?
+  - cache "#{current_user.cache_key}_recently_viewed_classifieds_html" do
+    -# to do: build recently viewed by current user method
+    - recently_viewed_classifieds ||= Classified.active.newest 5
+    - unless recently_viewed_classifieds.empty?
+      = render :partial => 'shared/lists/small_generic_list', :locals => { :list_title => t('classifieds.recently_viewed_classifieds_title'), :item_list => recently_viewed_classifieds }

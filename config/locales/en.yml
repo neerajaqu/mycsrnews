@@ -375,6 +375,7 @@ en:
     back: "Back"
     url: "Web Page"
     idea: "Idea"
+    classified: "Classified"
     details: "Details"
     images: "Images"
     more: "More"
@@ -450,14 +451,23 @@ en:
       subtitle: "Most popular items"
   classifieds:
     menu_title: "Classifieds"
+    menu_browse: "Browse"
+    menu_new: "Post an item"
     subnav:
       browse: "Browse"
       my_items: "Your Items"
     browse:
       title: "Browse classifieds"
       subtitle: "Find stuff to borrow, buy or pick up for free"
-    top_classifieds_title: "Top Classifieds"
-    newest_classifieds_title: "Newest Classifieds"
+    new:
+      title: "Title"
+      hint_classified_title: "Please provide a short title for your item"
+      hint_classified_detail: "Please provide a brief description of your item."
+      heading: "Post Your Classified Item"
+      your_item: "Your Item"
+    top_classifieds_title: "Popular Items"
+    newest_classifieds_title: "Latest Items"
+    recently_viewed_classifieds_title: "Recently Viewed Items"
     post_classified_title: "Got extra stuff?"
     post_classified_detail: "Sell, give away or share your stuff with our community."
     post_classified_button: "Post Your Stuff"

@@ -13,6 +13,7 @@ class Classified < ActiveRecord::Base
   
   named_scope :active
   named_scope :top, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
+  named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
 
   belongs_to :user
 
