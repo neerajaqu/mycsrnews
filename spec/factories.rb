@@ -128,4 +128,5 @@ Factory.define :classified do |f|
   f.title       Faker::Company.catch_phrase
   f.details     Faker::Lorem.paragraph
   f.association :user, :factory => :user
+  f.listing_type  "sale"
 end

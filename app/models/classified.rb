@@ -23,6 +23,8 @@ class Classified < ActiveRecord::Base
 
   validates_presence_of :title, :details, :user_id
 
+  validate :validate_listing_type
+
   before_save :set_expires_at
 
   aasm_initial_state :unpublished
@@ -80,8 +82,10 @@ class Classified < ActiveRecord::Base
   end
   def state() aasm_current_state end
 
-  def sellable?; true end
-  def loanable?; true end
+  def sellable?; listing_type == "sale" end
+  def loanable?; listing_type == "loan" end
+  def wanted?; listing_type == "wanted" end
+  def free?; listing_type == "free" end
 
   def unhide!
     # notify waiting list users
@@ -107,10 +111,27 @@ class Classified < ActiveRecord::Base
   def self.auto_expire_all
     self.auto_expired.each {|c| c.expired! }
   end
+
+  def self.listing_types
+    [:free, :sale, :loan, :wanted]
+  end
+
+  def valid_listing_type?
+    self.class.valid_listing_type? listing_type
+  end
+
+  def self.valid_listing_type? type
+    return false unless type
+    self.listing_types.include? type.to_sym
+  end
   
   private
     
     def set_expires_at
       self.expires_at ||= 2.weeks.from_now
+    end
+
+    def validate_listing_type
+      errors.add(:listing_type, "must be a valid listing type") unless self.valid_listing_type?
     end
 end

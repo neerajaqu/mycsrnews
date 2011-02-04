@@ -39,11 +39,22 @@ describe Classified do
       end
 
       context "loaner item" do
-        it "should be loanable" do
-          @classified.loanable?.should be true
+        before(:each) do
+          @classified.listing_type = "loan"
         end
 
-        it "should not be sellable"
+        it "should be loanable" do
+          @classified.loanable?.should be_true
+        end
+
+        it "should not be sellable" do
+          @classified.sellable?.should_not be_true
+        end
+
+        it "should not be free" do
+          @classified.free?.should_not be_true
+        end
+
         it "should create the loaning for the user and the item"
 
         it "loans the item to a user" do
@@ -57,6 +68,10 @@ describe Classified do
       end
 
       context "sellable item" do
+        before(:each) do
+          @classified.listing_type = "sale"
+        end
+
         it "should be sellable" do
           @classified.sellable?.should be true
         end
@@ -65,7 +80,14 @@ describe Classified do
           @classified.sold!
           @classified.state.should == :sold
         end
-        it "should not be loanable"
+
+        it "should not be loanable" do
+          @classified.loanable?.should_not be_true
+        end
+
+        it "should not be free" do
+          @classified.free?.should_not be_true
+        end
       end
 
       it "should be closeable"

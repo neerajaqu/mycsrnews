@@ -4,9 +4,18 @@ class CreateClassifieds < ActiveRecord::Migration
       t.string :title
       t.text :details
       t.string :aasm_state
+      t.string :listing_type
       t.integer :user_id
       t.datetime :expires_at, :default => nil
       t.price :float
+
+      # Default fields
+      t.integer :votes_tally, :default => 0
+      t.integer :comments_count, :default => 0
+      t.boolean :is_featured, :default => false
+      t.datetime  :featured_at, :default => nil
+      t.integer :flags_count, :default => 0
+      t.boolean :is_blocked, :default => false
 
       t.timestamps
     end
