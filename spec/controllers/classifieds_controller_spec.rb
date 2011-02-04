@@ -17,14 +17,18 @@ describe ClassifiedsController do
 
   describe "GET 'show'" do
     it "should be successful" do
-      get 'show'
+      pending("figure out how to pass an id to a get in rspec")
+      classified = Factory(:classified)
+      get classified.title
       response.should be_success
     end
   end
 
   describe "GET 'edit'" do
     it "should be successful" do
-      get 'edit'
+      pending("figure out how to pass an id to a get in rspec")
+      classified = Factory(:classified)
+      get "#{classified.title}/edit"
       response.should be_success
     end
   end

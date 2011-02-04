@@ -22,35 +22,46 @@ class Classified < ActiveRecord::Base
 
   aasm_initial_state :unpublished
 
-  aasm_state :unpublished, :enter => :set_unpublish
-  aasm_state :available, :enter => :set_published, :exit => :expire
-  aasm_state :sold
-  aasm_state :loaned_out
-  aasm_state :expired
-  aasm_state :closed
-  aasm_state :hidden # what is this used for?
+# TODO:: ADD GUARDS
+#   - loanable item should not be sellable
+#   - sellable item should not be loanable
+  aasm_state :unpublished
+  aasm_state :available, :enter => [:expire, :set_published], :exit => :expire
+  aasm_state :sold, :enter => :expire
+  aasm_state :loaned_out, :enter => :expire
+  aasm_state :expired, :enter => :expire
+  aasm_state :closed, :enter => :expire
+  aasm_state :hidden, :enter => :expire
 
-  aasm_event :publish do
+  aasm_event :published do
     transitions :to => :available, :from => [:unpublished]
   end
 
-  aasm_event :unpublish do
-    transitions :to => :unpublished, :from => [:available, :sold, :loaned_out, :expired, :closed, :hidden]
+  aasm_event :renewed do
+    transitions :to => :available, :from => [:expired, :closed, :hidden], :success => :update_renewed
   end
 
-  aasm_event :renew do
-    transitions :to => :available, :from => [:expired, :closed], :success => :update_renewed
+  aasm_event :closed do
+    transitions :to => :closed, :from => [:hidden, :available, :loaned_out]
   end
 
-  aasm_event :loan_out do
+  aasm_event :sold do
+    transitions :to => :sold, :from => :available
+  end
+
+  aasm_event :loaned_out do
     transitions :to => :loaned_out, :from => :available
   end
 
-  aasm_event :return do
-    transitions :to => :available, :from => :loaned_out, :success => :update_renewed
+  aasm_event :hidden do
+    transitions :to => :hidden, :from => :available
   end
 
-  aasm_event :expire do
+  aasm_event :returned do
+    transitions :to => :hidden, :from => :loaned_out, :after => :update_renewed
+  end
+
+  aasm_event :expired do
     transitions :to => :expired, :from => [:unpublished, :available, :loaned_out, :hidden]
   end
 
@@ -58,9 +69,15 @@ class Classified < ActiveRecord::Base
   def set_unpublish; puts "Publishing" end
   def update_renewed; puts "Renewed" end
   def expire; puts "Expiring" end
-  def loan_to user
+  def loan_to! user
     # create loaning
-    loan_out!
+    loaned_out!
+  end
+  def state() aasm_current_state end
+
+  def unhide!
+    # notify waiting list users
+    renewed!
   end
   
   def comments_count
