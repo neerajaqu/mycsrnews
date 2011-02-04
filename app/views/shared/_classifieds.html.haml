@@ -16,10 +16,7 @@
           %li{'data-id' => classified.cache_key}
             .article
               .thumb
-                -# if classified.images.present?
-                  = image_tag classified.images.first.url(:thumb)
-                -#else
-                = image_tag ('default/watermark.jpg')
+                = link_to image_tag(thumb_image_or_default(classified)), classified
               .itemBlock
                 %h2= link_to classified.title, classified_path(classified)
                 %p= linked_item_details classified              

@@ -3,7 +3,7 @@ Feature: Classifieds
 	As a user
 	I want to be able to interact with classifieds
 
-	#@wip
+	@wip
 	Scenario: List of Galleries without a user
 # TODO:: SWITCH TO TABLE WITH FREE/PUBLIC/NONPUBLIC ITEMS
 		Given a classified exists with title: "My Cool Classified"
@@ -12,10 +12,10 @@ Feature: Classifieds
 		Then I should see "My Cool Classified"
 		#But I should not see non public classifieds
 		#And I should not see classifieds shared only with friends
-		And I should see the classifieds sidebar widget categories list
 		And I should see the classifieds sidebar widget top classifieds
 		And I should see the classifieds sidebar widget newest classifieds
 		And I should see the classifieds sidebar widget free classifieds
+		And I should see the classifieds sidebar widget categories list
 		And I should see the classifieds sidebar widget shared classifieds
 
 	Scenario: List of Galleries as a logged in user
@@ -25,22 +25,29 @@ Feature: Classifieds
 		And I should see all shareable items and friends items
 		And I should see the classifieds sidebar widget categories list
 		And I should see the classifieds sidebar widget top classifieds
+		And I should see the classifieds sidebar widget post classifieds
 		And I should see the classifieds sidebar widget newest classifieds
 		And I should see the classifieds sidebar widget free classifieds
 		And I should see the classifieds sidebar widget shared classifieds
-		And I should see the classifieds sidebar widget post classified
 
-	@wip
 	Scenario: View a classified as a logged in user
 		Given a user is logged in
 		And a classified exists
 		When I visit the show page for that classified
 		Then I should see the contact link for the classified owner
 
-	@wip
 	Scenario: View a classified as a non logged in user
 		Given a classified exists
 		When I visit the show page for that classified
+		Then I should not see the owner edit link for that classified
+		Then I should not see the contact link for the classified owner
+
+	@wip
+	Scenario: View a classified as a non owner
+		Given a user is logged in
+		Given a classified exists
+		When I visit the show page for that classified
+		Then I should not see the owner edit link for that classified
 		Then I should not see the contact link for the classified owner
 
 	@wip
@@ -48,7 +55,7 @@ Feature: Classifieds
 		Given a user is logged in
 		And a classified exists with user: the user
 		When I visit the show page for that classified
-		Then I should see the edit status link
+		Then I should see the owner edit link for that classified
 		And I should be able to return the item
 		And I should be able to renew the item
 	

@@ -30,7 +30,11 @@
           .thumb= image_tag @classified.images.first.url(:medium)
 
         %h1= @classified.title
-        %h3= t('posted_by', :fb_name => local_linked_profile_name(@classified.user), :date => timeago(@classified.created_at))
+        %h3
+          = t('posted_by', :fb_name => local_linked_profile_name(@classified.user), :date => timeago(@classified.created_at))
+          %span.moderator-links.hidden{:class => "user-#{@classified.user.id}"}
+            = pipe_spacer
+            = link_to t('classifieds.edit'), edit_classified_path(@classified)
         - if @tags.present?
           .tag-wrap
             == Tags: #{tag_list(@tags, @classified)}

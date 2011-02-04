@@ -22,6 +22,9 @@ class Classified < ActiveRecord::Base
 
   aasm_initial_state :unpublished
 
+# TODO:: ADD GUARDS
+#   - loanable item should not be sellable
+#   - sellable item should not be loanable
   aasm_state :unpublished
   aasm_state :available, :enter => [:expire, :set_published], :exit => :expire
   aasm_state :sold, :enter => :expire
@@ -29,13 +32,6 @@ class Classified < ActiveRecord::Base
   aasm_state :expired, :enter => :expire
   aasm_state :closed, :enter => :expire
   aasm_state :hidden, :enter => :expire
-
-=begin
-# REMOVE METHODS
-  aasm_event :unpublish do
-    transitions :to => :unpublished, :from => [:available, :sold, :loaned_out, :expired, :closed, :hidden]
-  end
-=end
 
   aasm_event :published do
     transitions :to => :available, :from => [:unpublished]
@@ -46,7 +42,7 @@ class Classified < ActiveRecord::Base
   end
 
   aasm_event :closed do
-    transitions :to => :closed, :fromt => [:hidden, :available, :loaned_out]
+    transitions :to => :closed, :from => [:hidden, :available, :loaned_out]
   end
 
   aasm_event :sold do
@@ -57,8 +53,12 @@ class Classified < ActiveRecord::Base
     transitions :to => :loaned_out, :from => :available
   end
 
+  aasm_event :hidden do
+    transitions :to => :hidden, :from => :available
+  end
+
   aasm_event :returned do
-    transitions :to => :hidden, :from => :loaned_out, :success => :update_renewed
+    transitions :to => :hidden, :from => :loaned_out, :after => :update_renewed
   end
 
   aasm_event :expired do
@@ -69,11 +69,16 @@ class Classified < ActiveRecord::Base
   def set_unpublish; puts "Publishing" end
   def update_renewed; puts "Renewed" end
   def expire; puts "Expiring" end
-  def loan_to user
+  def loan_to! user
     # create loaning
     loaned_out!
   end
-  def state() aasm_state end
+  def state() aasm_current_state end
+
+  def unhide!
+    # notify waiting list users
+    renewed!
+  end
   
   def comments_count
     0
