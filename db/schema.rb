@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110202235232) do
+ActiveRecord::Schema.define(:version => 20110204222901) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20110202235232) do
     t.text     "details"
     t.string   "aasm_state"
     t.string   "listing_type"
+    t.string   "allow"
     t.integer  "user_id"
     t.datetime "expires_at"
     t.integer  "votes_tally",    :default => 0
@@ -617,6 +618,21 @@ ActiveRecord::Schema.define(:version => 20110202235232) do
     t.boolean  "is_featured",         :default => false
     t.datetime "featured_at"
     t.boolean  "is_sponsored",        :default => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "authorizable_type"
+    t.integer  "authorizble_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "scores", :force => true do |t|

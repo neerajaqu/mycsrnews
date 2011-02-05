@@ -1,6 +1,8 @@
 class Classified < ActiveRecord::Base
   include AASM
 
+  acts_as_authorization_object
+
   acts_as_taggable_on :tags, :category, :subcategories, :location
   acts_as_voteable 
   acts_as_media_item
@@ -24,6 +26,7 @@ class Classified < ActiveRecord::Base
   validates_presence_of :title, :details, :user_id
 
   validate :validate_listing_type
+  validate :validate_allow_type
 
   before_save :set_expires_at
 
@@ -125,6 +128,96 @@ class Classified < ActiveRecord::Base
     self.listing_types.include? type.to_sym
   end
   
+  def self.allow_types
+    [:friends, :friends_of_friends, :all]
+  end
+
+  def valid_allow_type?
+    self.class.valid_allow_type? allow
+  end
+
+  def self.valid_allow_type? type
+    return false unless type
+    self.allow_types.include? type.to_sym
+  end
+  
+  def is_owner? user
+    user == self.user
+  end
+
+  def is_allowed? user = nil
+    return true if is_owner? user
+
+    method = "__#{state.to_s}_is_allowed?".to_sym
+
+    if respond_to?(method)
+    	send(method, user)
+    else
+    	false
+    end
+  end
+
+  def allow_type() allow.to_sym end
+  def allow_type=(atype) self.allow = atype end
+
+  protected
+    #
+    # STATE METHODS
+    # Should be of the form __STATE__#{overloaded_method_name}
+    #
+    def allow_user? user = nil, opts = {}
+      return false if opts[:require_user] and not user
+
+      default = opts[:default].present? ? opts[:default] : false
+      default_all = opts[:default_all].present? ? opts[:default_all] : true
+
+      case allow_type
+      when :all
+        default_all
+      when :friends
+        user and user.friends_with? self.user
+      when :friends_of_friends
+        user and user.friends_of_friends_with? self.user
+      else
+        default
+      end
+    end
+
+    def __unpublished_is_allowed?(user = nil)
+      user == self.user
+    end
+
+    def __hidden_is_allowed?(user = nil)
+      user == self.user
+    end
+
+    def __loaned_out_is_allowed?(user = nil)
+      allow_user? user, :require_user => true
+    end
+
+    def __expired_is_allowed?(user = nil)
+      allow_user? user
+    end
+
+    def __sold_is_allowed?(user = nil)
+      allow_user? user
+    end
+
+    def __closed_is_allowed?(user = nil)
+      allow_user? user
+    end
+
+    def __available_is_allowed?(user = nil)
+      # TODO::: REFACTOR
+      if free? or sellable?
+        allow_user? user, :default => true
+      elsif loanable?
+        allow_user? user, :require_user => true, :default => false
+      else
+      	false
+      end
+    end
+
   private
     
     def set_expires_at
@@ -134,4 +227,9 @@ class Classified < ActiveRecord::Base
     def validate_listing_type
       errors.add(:listing_type, "must be a valid listing type") unless self.valid_listing_type?
     end
+
+    def validate_allow_type
+      errors.add(:allow, "must be a valid allow group") unless self.valid_allow_type?
+    end
+
 end

@@ -204,7 +204,7 @@ describe Classified do
 
       context "::STATE:: unpublished" do
         before(:each) do
-          @classified.aasm_state = :unpublished
+          @classified.aasm_state = "unpublished"
         end
 
         it "should expire" do
@@ -214,7 +214,7 @@ describe Classified do
 
       context "::STATE:: available" do
         before(:each) do
-          @classified.aasm_state = :available
+          @classified.aasm_state = "available"
         end
 
         it "should expire" do
@@ -224,7 +224,7 @@ describe Classified do
 
       context "::STATE:: hidden" do
         before(:each) do
-          @classified.aasm_state = :hidden
+          @classified.aasm_state = "hidden"
         end
 
         it "should expire" do
@@ -265,5 +265,315 @@ describe Classified do
       end
     end
 
-  end
+  end # describe #statemachine
+
+  # TODO:: MAJOR REFACTORING
+  describe "#ownership" do
+    before(:each) do
+      @user = Factory(:user)
+      @classified = Factory(:classified, :user => @user)
+    end
+
+    it "should be allowed" do
+      @classified.is_allowed?(@user).should be_true
+    end
+
+    context "::STATE:: :unpublished" do
+      before(:each) do
+        @classified.aasm_state = "unpublished"
+      end
+
+      it "owner should be allowed" do
+        @classified.is_allowed?(@user).should be_true
+      end
+
+      it "another user should not be allowed" do
+        @classified.is_allowed?(Factory(:user)).should_not be_true
+      end
+
+      it "anonymous user should not be allowed" do
+        @classified.is_allowed?(nil).should_not be_true
+      end
+    end
+
+    context "::STATE:: :available" do
+      before(:each) do
+        @classified.aasm_state = "available"
+      end
+
+      it "owner should be allowed" do
+        @classified.is_allowed?(@user).should be_true
+      end
+
+      describe "another user" do
+        before(:each) do
+          @user2 = Factory(:user)
+        end
+
+        describe "#sellable item" do
+          before(:each) do
+            @classified.listing_type = "sale"
+          end
+
+          context "allow all" do
+            before(:each) do
+              @classified.allow_type = "all"
+            end
+
+            it "should allow the owner" do
+              @classified.is_allowed?(@user).should be_true
+            end
+
+            it "should allow another user" do
+              @classified.is_allowed?(@user2).should be_true
+            end
+
+            it "should allow an anonymous user" do
+              @classified.is_allowed?(nil).should be_true
+            end
+          end
+
+          context "allow friends" do
+            before(:each) do
+              @classified.allow_type = "friends"
+            end
+
+            it "should not allow non friends to view" do
+              @user2.should_receive(:friends_with?).with(@user).and_return(false)
+              @classified.is_allowed?(@user2).should_not be_true
+            end
+
+            it "should allow friends to view" do
+              @user2.should_receive(:friends_with?).with(@user).and_return(true)
+              @classified.is_allowed?(@user2).should be_true
+            end
+
+            it "anonymous user should not be allowed" do
+              @classified.is_allowed?(nil).should_not be_true
+            end
+          end
+
+          context "allow friends of friends" do
+            before(:each) do
+              @classified.allow_type = "friends_of_friends"
+            end
+
+            it "should not allow non friends to view" do
+              @user2.should_receive(:friends_of_friends_with?).with(@user).and_return(false)
+              @classified.is_allowed?(@user2).should_not be_true
+            end
+
+            it "should allow friends to view" do
+              @user2.should_receive(:friends_of_friends_with?).with(@user).and_return(true)
+              @classified.is_allowed?(@user2).should be_true
+            end
+
+            it "anonymous user should not be allowed" do
+              @classified.is_allowed?(nil).should_not be_true
+            end
+          end
+        end
+        describe "#loanable item" do
+          before(:each) do
+            @classified.listing_type = "loan"
+          end
+
+          describe "anonymous user" do
+            context "allow all" do
+              before(:each) do
+                @classified.allow_type = "all"
+              end
+
+              it "should not allow an anonymous user" do
+                @classified.is_allowed?(nil).should be_false
+              end
+            end
+
+            context "allow friends" do
+              before(:each) do
+                @classified.allow_type = "friends"
+              end
+
+              it "should not allow an anonymous user" do
+                @classified.is_allowed?(nil).should be_false
+              end
+            end
+
+            context "allow friends of friends" do
+              before(:each) do
+                @classified.allow_type = "friends_of_friends"
+              end
+
+              it "should not allow an anonymous user" do
+                @classified.is_allowed?(nil).should be_false
+              end
+            end
+          end
+
+        end
+
+      end
+    end
+
+    context "::STATE:: :closed" do
+      before(:each) do
+        @classified.aasm_state = "closed"
+      end
+
+      context "owner" do
+        it "has appropriate permissions" do
+          @classified.is_allowed?(@user).should be_true
+        end
+      end
+
+      context "friends" do
+        it "has appropriate permissions for all" do
+          @classified.is_allowed?(@user).should be_true
+        end
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "friends of friends" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "anonymous" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+    end
+
+    context "::STATE:: :expired" do
+      before(:each) do
+        @classified.aasm_state = "expired"
+      end
+
+      context "owner" do
+        it "has appropriate permissions" do
+          @classified.is_allowed?(@user).should be_true
+        end
+      end
+
+      context "friends" do
+        it "has appropriate permissions for all" do
+          @classified.is_allowed?(@user).should be_true
+        end
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "friends of friends" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "anonymous" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+    end
+
+    context "::STATE:: :sold" do
+      before(:each) do
+        @classified.aasm_state = "sold"
+      end
+
+      context "owner" do
+        it "has appropriate permissions" do
+          @classified.is_allowed?(@user).should be_true
+        end
+      end
+
+      context "friends" do
+        it "has appropriate permissions for all" do
+          @classified.is_allowed?(@user).should be_true
+        end
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "friends of friends" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "anonymous" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+    end
+
+    context "::STATE:: :hidden" do
+      before(:each) do
+        @classified.aasm_state = "hidden"
+      end
+
+      context "owner" do
+        it "has appropriate permissions" do
+          @classified.is_allowed?(@user).should be_true
+        end
+      end
+
+      context "friends" do
+        it "has appropriate permissions for all" do
+          @classified.is_allowed?(@user).should be_true
+        end
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "friends of friends" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "anonymous" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+    end
+
+    context "::STATE:: :loaned_out" do
+      before(:each) do
+        @classified.aasm_state = "loaned_out"
+      end
+
+      context "owner" do
+        it "has appropriate permissions" do
+          @classified.is_allowed?(@user).should be_true
+        end
+      end
+
+      context "friends" do
+        it "has appropriate permissions for all" do
+          @classified.is_allowed?(@user).should be_true
+        end
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "friends of friends" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+
+      context "anonymous" do
+        it "has appropriate permissions for all"
+        it "has appropriate permissions for friends"
+        it "has appropriate permissions for friends of friends"
+      end
+    end
+  end #describe ownership
+
 end

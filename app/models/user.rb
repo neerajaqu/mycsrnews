@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
 
+  acts_as_authorization_subject
+
   acts_as_voter
   acts_as_moderatable
 
@@ -368,6 +370,19 @@ class User < ActiveRecord::Base
     mogli_friends.map {|f| User.find_by_fb_user_id(f.id, :select => "id").try(:id) }.compact
   end
   
+  # Overload has_role? from ACL9 to delegate access to given model
+  def has_role?(role_name, object = nil)
+    method = "is_#{role_name.to_s}?".to_sym
+    !! if object.nil? and ( self.roles.find_by_name(role_name.to_s) || self.roles.member?(get_role(role_name, nil)) )
+      true
+    elsif object.respond_to?(method)
+    	  object.send(method, self)
+    else
+      role = get_role(role_name, object)
+      role && self.roles.exists?(role.id)
+    end
+  end
+
   private
 
   def mogli_client

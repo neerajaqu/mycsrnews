@@ -5,6 +5,7 @@ class CreateClassifieds < ActiveRecord::Migration
       t.text :details
       t.string :aasm_state
       t.string :listing_type
+      t.string :allow
       t.integer :user_id
       t.datetime :expires_at, :default => nil
       t.price :float
