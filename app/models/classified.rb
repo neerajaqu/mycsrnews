@@ -15,6 +15,7 @@ class Classified < ActiveRecord::Base
   
   named_scope :active
   named_scope :top, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
+  named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :auto_expired, lambda { |*args| { :conditions => ["expires_at < ? AND aasm_state IN (?)", Time.zone.now, [:unpublished, :available, :hidden].map(&:to_s)] } }
   named_scope :no_auto_expire, lambda { |*args| { :conditions => ["expires_at < ? AND aasm_state NOT IN (?)", Time.zone.now, [:unpublished, :available, :hidden].map(&:to_s)] } }
   named_scope :with_state, lambda { |*args| { :conditions => ["aasm_state = ?", args.first] } }
@@ -175,9 +176,9 @@ class Classified < ActiveRecord::Base
       when :all
         default_all
       when :friends
-        user and user.friends_with? self.user
+        !! user and user.friends_with? self.user
       when :friends_of_friends
-        user and user.friends_of_friends_with? self.user
+        !! user and user.friends_of_friends_with? self.user
       else
         default
       end
@@ -196,7 +197,7 @@ class Classified < ActiveRecord::Base
     end
 
     def __expired_is_allowed?(user = nil)
-      allow_user? user
+      allow_user? user, :require_user => loanable?
     end
 
     def __sold_is_allowed?(user = nil)
@@ -204,7 +205,7 @@ class Classified < ActiveRecord::Base
     end
 
     def __closed_is_allowed?(user = nil)
-      allow_user? user
+      allow_user? user, :require_user => loanable?
     end
 
     def __available_is_allowed?(user = nil)
