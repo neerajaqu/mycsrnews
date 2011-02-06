@@ -2,25 +2,20 @@ Given /^a (.+) classifed user exists$/ do |user_status|
   case user_status
   when "owner"
     @user = model('user')
-    @user.stub(:friends_of_friends_with?).and_return true
-    @user.stub(:friends_with?).and_return true
-    @user.should_not_receive(:friends_with?)
-    @user.should_not_receive(:friends_of_friends_with?)
+    mock(@user).friends_of_friends_with? { true }
+    mock(@user).friends_with? { true }
   when "generic"
-    @user = Factory(:user)
-    @user.stub(:friends_of_friends_with?).and_return false
-    @user.stub(:friends_with?).and_return false
+    @user = Factory.build(:user)
+    mock(@user).friends_of_friends_with?(is_a(User)) { false }
+    mock(@user).friends_with?(is_a(User)) { false }
   when "friend"
-    @user = Factory(:user)
-    @user.stub(:friends_of_friends_with?).and_return true
-    @user.stub(:friends_with?).and_return true
+    @user = Factory.build(:user)
+    mock(@user).friends_of_friends_with?(is_a(User)) { true }
+    mock(@user).friends_with?(is_a(User)) { true }
   when "friend_of_friend"
-    @user = Factory(:user)
-    #@user.should_receive(:friends_with?).and_return(false)
-    #@user.stub :friends_of_friends_with?, true
-    @user.stub(:friends_of_friends_with?).and_return true
-    @user.stub(:friends_with?).and_return false
-    #@user.should_receive(:friends_of_friends_with?)
+    @user = Factory.build(:user)
+    mock(@user).friends_of_friends_with?(is_a(User)) { true }
+    mock(@user).friends_with?(is_a(User)) { false }
   when "anonymous"
     @user = nil
   else

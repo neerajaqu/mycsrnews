@@ -8,8 +8,9 @@ describe AdminController do
   end
 
   it "should should allow scaffolding " do
-    user_mock = double('User')
-    controller.class.should_receive(:admin_scaffold_build_config)
+    user = mock(User)
+    mock(controller.class).admin_scaffold_build_config(:user)
+
     controller.class.admin_scaffold(:user)
   end
 

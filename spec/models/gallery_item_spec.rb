@@ -2,6 +2,18 @@ require 'spec_helper'
 
 describe GalleryItem do
 
+  def video_mock(opts = {})
+    any_instance_of(Video) do |v|
+      mock(v).process_video
+      stub(v).remote_video_type { opts[:remote_video_type] }
+      stub(v).remote_video_id { opts[:remote_video_id] }
+      stub(v).url { opts[:url] }
+      stub(v).title { opts[:title] }
+      stub(v).caption { opts[:caption] }
+      stub(v).thumb_url { opts[:thumb_url] }
+    end
+  end
+
   it "should create a new instance given valid attributes" do
     Factory.create(:gallery_item)
   end
@@ -15,14 +27,6 @@ describe GalleryItem do
     gallery_item.errors.on(:item_url).should_not be_nil
     gallery_item.item_url = "http://example.com/foo.jpg"
     gallery_item.should be_valid
-  end
-
-  it "should allow a youtube url" do
-    youtube_video_id = "ZV-AFnCkRLY"
-    gallery_item = Factory.build(:gallery_item, :item_url => "http://www.youtube.com/watch?v=#{youtube_video_id}")
-    gallery_item.should be_valid
-    gallery_item.save.should_not == false
-    gallery_item.galleryable.should_not be_nil 
   end
 
   it "should not require a caption" do
@@ -67,6 +71,14 @@ describe GalleryItem do
       @url = "http://www.youtube.com/watch?v=#{@youtube_video_id}"
       @title = "Feynman 'Fun to Imagine' 4: Magnets (and 'Why?' questions...)"
       @caption = "Physicist Richard Feynman explains to a non-scientist just how difficult it is to answer certain questions in lay terms! A classic example of Feynman's clarity of thought, powers of explanation and intellectual honesty - and his refusal to 'cheat' with misleading analogies...\r\nFrom the BBC TV series 'Fun to Imagine'(1983). You can now watch higher quality versions of some of these episodes at www.bbc.co.uk/archive/feynman/"
+      video_mock({
+      	:remote_video_type => "youtube",
+      	:remote_video_id   => @youtube_video_id,
+      	:url               => @url,
+      	:title             => @title,
+      	:caption           => @caption,
+      	:thumb_url         => "http://i.ytimg.com/vi/#{@youtube_video_id}/default.jpg"
+      })
       @gallery_item = Factory(:gallery_item, :item_url => @url)
     end
 
@@ -109,6 +121,14 @@ describe GalleryItem do
       @url = "http://vimeo.com/#{@vimeo_video_id}"
       @title = "Functional Fluid Dynamics in Clojure"
       @caption = "Please read this http://www.bestinclass.dk/index.php/2010/03/functional-fluid-dynamics-in-clojure/"
+      video_mock({
+      	:remote_video_type => "vimeo",
+      	:remote_video_id   => @vimeo_video_id,
+      	:url               => @url,
+      	:title             => @title,
+      	:caption           => @caption,
+      	:thumb_url         => "http://foo.com/bar.jpg"
+      })
       @gallery_item = Factory(:gallery_item, :item_url => @url)
     end
 

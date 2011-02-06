@@ -26,8 +26,8 @@ describe Classified do
       end
 
       it "switches to the available state when published!" do
-        @classified.should_receive(:expire)
-        @classified.should_receive(:set_published)
+        mock(@classified).expire
+        mock(@classified).set_published
         @classified.published!
         @classified.state.should == :available
       end
@@ -105,7 +105,7 @@ describe Classified do
 
       it "should be renewable" do
         pending("Needs to have working success callback")
-        @classified.should_receive(:update_renewed)
+        mock(@classified).update_renewed
         @classified.renewed!
         @classified.state.should == :available
       end
@@ -145,7 +145,7 @@ describe Classified do
 
       it "becomes hidden when returned" do
         pending("Needs to have working success callback")
-        @classified.should_receive(:update_renewed)
+        mock(@classified).update_renewed
         @classified.returned!
         @classified.state.should == :hidden
       end

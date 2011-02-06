@@ -16,9 +16,13 @@ class Video < ActiveRecord::Base
   validates_format_of :remote_video_url, :with => /(youtube|vimeo|boston).com/i, :message => "should be a youtube or vimeo url", :allow_blank => true
   validates_format_of :embed_code, :with => /<embed[^>]+src="http(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"/i, :message => "should look like an html embed object block", :allow_blank => true
 
-  after_validation :process_video
+  after_validation :process_video, :if => lambda {|video| video.dirty? }
 
   before_save :set_user
+
+  def dirty?
+    new_record? or remote_video_url_changed? or remote_video_id_changed? or embed_code_changed?
+  end
 
   def url_video?
     remote_video_url?
