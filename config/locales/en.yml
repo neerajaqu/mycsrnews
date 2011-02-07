@@ -276,6 +276,8 @@ en:
     read: "Read Story"
     quick_post: "Quick post"
   predictions:
+    guess_count: "Predictions: {{guess_count}}"
+    accuracy: "Accuracy: {{accuracy}}"
     submit_guess: "Submit"
     question_closed: ""
     new_question_posted: "A new prediction question: {{question}} has been added to {{group}}."
