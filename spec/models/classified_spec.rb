@@ -7,6 +7,60 @@ describe Classified do
     classified.expires_at.should be > Time.now
   end
 
+  describe "#named scopes" do
+    describe "Classified.sale" do
+      it "should return sale classifieds" do
+        @classified = Factory(:sale_classified)
+        Classified.for_sale.should == [@classified]
+      end
+    end
+
+    describe "Classified.free" do
+      it "should return free classifieds" do
+        @classified = Factory(:free_classified)
+        Classified.for_free.should == [@classified]
+      end
+    end
+
+    describe "Classified.loan" do
+      it "should return loan classifieds" do
+        @classified = Factory(:loan_classified)
+        Classified.for_loan.should == [@classified]
+      end
+    end
+
+    describe "Classified.allow_all" do
+      it "should return classifieds with allow all" do
+        @classified = Factory(:available_classified, :allow => "all")
+        Classified.allow_all.should == [@classified]
+      end
+    end
+
+    describe "Classified.allow_friends" do
+      it "should return classifieds with allow friends" do
+        @classified = Factory(:available_classified, :allow => "friends")
+        Classified.allow_friends.should == [@classified]
+      end
+    end
+
+    describe "Classified.allow_friends_of_friends" do
+      it "should return classifieds with allow friends_of_friends" do
+        @classified = Factory(:available_classified, :allow => "friends_of_friends")
+        Classified.allow_friends_of_friends.should == [@classified]
+      end
+    end
+
+    describe "Classified.available" do
+      it "should return availalbe classifieds" do
+        @classified1 = Factory(:available_classified)
+        @classified2 = Factory(:sale_classified)
+        @classified3 = Factory(:free_classified)
+        @classified4 = Factory(:loan_classified)
+        Classified.available.should == [@classified1, @classified2, @classified3, @classified4]
+      end
+    end
+  end
+
   describe "#state_machine" do
     describe "#details" do
       before(:each) do

@@ -131,3 +131,19 @@ Factory.define :classified do |f|
   f.association :user, :factory => :user
   f.listing_type  "sale"
 end
+
+Factory.define :available_classified, :parent => :classified do |f|
+  f.aasm_state "available"
+end
+
+Factory.define :sale_classified, :parent => :available_classified do |f|
+  f.listing_type "sale"
+end
+
+Factory.define :free_classified, :parent => :available_classified do |f|
+  f.listing_type "free"
+end
+
+Factory.define :loan_classified, :parent => :available_classified do |f|
+  f.listing_type "loan"
+end
