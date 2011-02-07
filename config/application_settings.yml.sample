@@ -1,6 +1,4 @@
 defaults: &defaults
-  # Uncomment this line to enable hoptoad
-  hoptoad_api_key: '1234567890987654321'
 
   # Uncomment this line to enable google analytics
   google_analytics_account_id: 'UF-123456890-7'
