@@ -22,9 +22,6 @@ defaults: &defaults
   site_topic: 'Default Site Topic'
   site_title: 'Default Site Name'
 
-  # Uncomment to use TypeKit.com fonts
-  # typekit: 'yourcode'
-
   # allow web log in system
   allow_web_auth: false
 
