@@ -1,0 +1,164 @@
+/****************************************************
+ V2 GLOBALS */
+body
+  font-size: 12px
+
+p
+  margin-bottom: 10px
+
+
+/****************************************************
+ V2 HEADERS */
+
+.panel-1, .panel-2, .panel-3, .panel-4, .panel-5, .panel-6, .panel-7, .panel-8, .panel-9, .panel-10, .panel-11, .panel-12
+  h1, h2, h3, h4, h5, h6
+    color: $HDRFNTCLR
+    margin: 0 0 10px
+    padding: 0
+  h1, h2, h3, h4
+    font-weight: bold
+    line-height: 100%
+  h5, h6
+    font-weight: normal
+    line-height: 140%
+  h1
+    font-size: 240%
+
+  h2
+    font-size: 190%
+
+  h3
+    font-size: 150%
+
+  h4
+    font-size: 130%
+
+  h5
+    color: #555
+    font-size: 100%
+
+  h6
+    color: #555
+    font-size: 90%
+    
+
+
+/****************************************************
+ V2 GRID CLASSES */
+
+/* Columns */
+#left-col
+#right-col
+#full-col
+
+/* Panels */
+.panel-1
+  +grid(1)
+.panel-2
+  +grid(2)
+.panel-3
+  +grid(3)
+.panel-4
+  +grid(4)
+.panel-5
+  +grid(5)
+.panel-6
+  +grid(6)
+.panel-7
+  +grid(7)
+.panel-8
+  +grid(8)
+.panel-9
+  +grid(9)
+.panel-10
+.panel-11
+.panel-12  
+  +grid(12)
+
+.alpha
+  margin-left: 0
+.omega
+  margin-right: 0
+
+
+/****************************************************
+ V2 WIDGETS */
+
+.panel-1, .panel-2, .panel-3, .panel-4, .panel-5, .panel-6, .panel-7, .panel-8, .panel-9, .panel-10, .panel-11, .panel-12
+  position: relative
+  z-index: 1
+
+  &.container
+    margin-bottom: 20px
+    padding: 20px 0
+
+  &.featured-article
+    background: $FTRDARTCLBG
+
+  .panel-bar
+
+.text-area
+  margin: 0 2%
+  width: 65%
+  display: inline
+  float: left
+
+
+/* Meta Info container */
+
+.meta-info
+  display: inline
+  float: left
+  margin: 0 2%
+  &.alpha
+    width: 65%
+  &.omega
+    width: 30%
+  span.count
+    font-size: 130%
+    font-weight: bold
+
+/* Widget Images */
+
+.new-thumb
+  background: #000
+  float: left
+  dislay: inline
+  margin: 0 2%
+  width: 30%
+  img
+    width: 100%
+
+
+/* Proflie Pic */
+.profile-pic
+  border: 1px solid #ccc
+  float: left
+  display: inline
+  margin: 0 10px
+  width: 48px
+  img
+    width: 48px
+
+
+/****************************************************
+ V2 LISTS */
+.list-items
+  li
+    display: inline-block
+    margin-bottom: 20px
+    width: 100%
+
+.text-left
+  text-align: left
+
+.text-right
+  text-align: right
+
+/****************************************************
+ V2 ROUNDED CORNERS */
+
+.panel-1, .panel-2, .panel-3, .panel-4, .panel-5, .panel-6, .panel-7, .panel-8, .panel-9, .panel-10, .panel-11, .panel-12, .panel-bar
+  -webkit-border-radius: 16px
+  -moz-border-radius: 16px
+  border-radius: 16px
