@@ -60,13 +60,6 @@ defaults: &defaults
   tweet_ideas_limit: 3
   tweet_featured_items: true
   
-  #Uncomment to allow bit.ly
-  #bitly_username: 'username'
-  #bitly_api_key: 'key'
-
-  # Yahoo AppId used for sitemap ping
-  yahoo_app_id: 'ELIZq2LV44444.rGdRR5abc888HCGL1zDOegJakZyHIrugVqPip3YK333P8-'
-
   # Select timezone from $ rake time:zones:all
   time_zone: 'Pacific Time (US & Canada)'
 
