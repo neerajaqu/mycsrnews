@@ -623,7 +623,7 @@ ActiveRecord::Schema.define(:version => 20110204222901) do
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.string   "authorizable_type"
-    t.integer  "authorizble_id"
+    t.integer  "authorizable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

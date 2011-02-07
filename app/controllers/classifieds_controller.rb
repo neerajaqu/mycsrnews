@@ -1,4 +1,18 @@
 class ClassifiedsController < ApplicationController
+  rescue_from 'Acl9::AccessDenied', :with => :access_denied
+
+  before_filter :find_classified, :only => [:show, :edit, :update]
+  
+  access_control do
+    allow all, :to => [:index]
+    # HACK:: use current_user.is_admin? rather than current_user.has_role?(:admin)
+    # FIXME:: get admins switched over to using :admin role
+    allow :admin, :of => :current_user
+    allow :admin
+    allow logged_in, :to => [:new, :create, :borrowed_items, :my_items]
+    allow anonymous, :to => [:show], :if => :classified_allows_anonymous_users?
+    allow :allowed, :of => :classified, :to => [:show, :edit, :update]
+  end
 
   before_filter :set_current_tab
 
@@ -58,8 +72,28 @@ class ClassifiedsController < ApplicationController
     @current_sub_tab = 'My Borrowed Items'
   end
 
-  def set_current_tab
-    @current_tab = 'classifieds'
-  end
+  private 
+
+    def set_current_tab
+      @current_tab = 'classifieds'
+    end
+
+    def access_denied
+      if current_user
+      	flash[:notice] = "Access Denied"
+      	redirect_to classifieds_path
+      else
+      	flash[:notice] = "Access Denied. Try logging in first."
+      	redirect_to new_session_path
+      end
+    end
+
+    def find_classified
+      @classified ||= Classified.find(params[:id])
+    end
+
+    def classified_allows_anonymous_users?
+      @classified.is_allowed? nil
+    end
 
 end

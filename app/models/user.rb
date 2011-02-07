@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
 
   acts_as_authorization_subject
+  has_and_belongs_to_many :roles
 
   acts_as_voter
   acts_as_moderatable
@@ -376,8 +377,11 @@ class User < ActiveRecord::Base
   # Overload has_role? from ACL9 to delegate access to given model
   def has_role?(role_name, object = nil)
     method = "is_#{role_name.to_s}?".to_sym
+
     !! if object.nil? and ( self.roles.find_by_name(role_name.to_s) || self.roles.member?(get_role(role_name, nil)) )
       true
+    elsif method == :is_admin?
+      self.is_admin?
     elsif object.respond_to?(method)
     	  object.send(method, self)
     else
