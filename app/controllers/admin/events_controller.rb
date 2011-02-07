@@ -42,9 +42,9 @@ class Admin::EventsController < AdminController
   end
   
   def import_zvents
-    if request.post?
-      zvent = Zvent::Session.new(APP_CONFIG['zvent_api_key'])
-      zevents = zvent.find_events_by_date('next 30 days', :where => APP_CONFIG['zvent_location'], :limit => 50)
+    if request.post? and Metadata::Setting.find_setting('zvent_api_key').try(:value) and Metadata::Setting.find_setting('zvent_location').try(:value)
+      zvent = Zvent::Session.new(Metadata::Setting.find_setting('zvent_api_key').try(:value))
+      zevents = zvent.find_events_by_date('next 30 days', :where => Metadata::Setting.find_setting('zvent_location').try(:value), :limit => 50)
       count = 0
       zevents[:events].each do |event|
         if params[:commit] == "Import Selected Events"
@@ -62,9 +62,11 @@ class Admin::EventsController < AdminController
       EventSweeper.expire_event_all Event.last
       redirect_to admin_events_path
     else
-      zvent =Zvent::Session.new(APP_CONFIG['zvent_api_key'])
-      zevents = zvent.find_events_by_date('next 30 days', :where => APP_CONFIG['zvent_location'], :limit => 50)
-      @events = zevents[:events]
+      if Metadata::Setting.find_setting('zvent_api_key').try(:value) and Metadata::Setting.find_setting('zvent_location').try(:value)
+        zvent =Zvent::Session.new(Metadata::Setting.find_setting('zvent_api_key').try(:value))
+        zevents = zvent.find_events_by_date('next 30 days', :where => Metadata::Setting.find_setting('zvent_location').try(:value), :limit => 50)
+        @events = zevents[:events]
+      end
     end
   end
 

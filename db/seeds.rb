@@ -165,6 +165,8 @@ settings = [
  { :key_sub_type => 'options', :key_name => 'widget_stories_short_max', :value => "3" },
  { :key_sub_type => 'options', :key_name => 'widget_articles_as_blog_max', :value => "1" },
  { :key_sub_type => 'zvents', :key_name => 'zvents_replacement_url', :value => ("www.zvents.com") },
+ { :key_sub_type => 'zvents', :key_name => 'zvent_api_key', :value => (APP_CONFIG['zvent_api_key'] || "false" ) },
+ { :key_sub_type => 'zvents', :key_name => 'zvent_location', :value => (APP_CONFIG['zvent_location'] || "false" ) },
  { :key_sub_type => 'twitter_standard_favorites', :key_name => 'favorites_account', :value =>"twitter-account", :hint => 'The account name of the Twitter account to show favorites from' }, 
  { :key_sub_type => 'twitter_standard_favorites', :key_name => 'favorites_widget_title', :value =>"Selected tweets from", :hint => 'A title for the favorites widget' }, 
  { :key_sub_type => 'twitter_standard_favorites', :key_name => 'favorites_widget_caption', :value => APP_CONFIG['site_title'], :hint => 'A subject for the favorites widget' }, 

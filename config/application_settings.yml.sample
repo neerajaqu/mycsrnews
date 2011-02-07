@@ -31,10 +31,6 @@ defaults: &defaults
   #Privacy settings
   firstnameonly: false
   
-  #Zvent settings
-  zvent_api_key: 'FRXBFQTGJOMXVKIQSFGSBDFWYMLXSJPBQGJDGPXJICGBSGPWGULKGTJGOXXKLUOG'
-  zvent_location: 'Seattle, WA'
-      
   # Select timezone from $ rake time:zones:all
   time_zone: 'Pacific Time (US & Canada)'
 
