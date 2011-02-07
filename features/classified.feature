@@ -1,3 +1,4 @@
+@wip
 Feature: Classifieds
 	In order to create, buy, loan and borrow classifieds
 	As a user

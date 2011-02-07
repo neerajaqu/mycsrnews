@@ -1,4 +1,3 @@
-@allow-rescue
 Feature: Classified Authorization
 	In order to ensure the appropriate classified authorizations are maintained
 	As a user

@@ -34,16 +34,10 @@ Then /^the user should be able to view the page: (.+)$/ do |allowed|
     stub(controller).current_user { @user }
     stub(controller).update_last_active { true }
   end
-  if @user
-    #visit new_session_path
-    #login_with_credentials(@user.login, @user.password)
-  end
-
-  visit classified_path(classified)
 
   if allowed == "true"
-    current_path.should == classified_path(classified)
+    lambda { visit classified_path(classified) }.should_not raise_error(Acl9::AccessDenied)
   else
-    current_path.should_not == classified_path(classified)
+    lambda { visit classified_path(classified) }.should raise_error(Acl9::AccessDenied)
   end
 end
