@@ -1,0 +1,8 @@
+.gallery.small
+  .itemBlock
+    %h4= link_to gallery.title, gallery_path(gallery)
+    .profilePic= local_linked_profile_pic gallery.user
+    .itemMeta
+      %h3= t('posted_by', :fb_name => local_linked_profile_name(gallery.user), :date => timeago(gallery.created_at))
+      %span.btnComment== #{like_link gallery} #{gallery.votes_tally}
+      %span.btnComment== #{link_to t('galleries.item_count', :count => gallery.gallery_items.count), gallery_path(gallery)}

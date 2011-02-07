@@ -48,6 +48,7 @@ require "#{RAILS_ROOT}/lib/acts_as_scorable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Scorable
 # HACK:: get around Vote model being a plugin model
 Vote.send(:acts_as_scorable)
+Vote.send(:acts_as_moderatable)
 
 # Load plugin model extensions
 require "#{RAILS_ROOT}/lib/locale_extensions.rb"

@@ -133,6 +133,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :twitter_settings, :collection => { :update_keys => :post, :update_auth => :post, :reset_keys => :get }
     admin.resources :ad_layouts
     admin.resources :ads
+    admin.resources :galleries
     admin.resources :title_filters
     admin.resources :sponsor_zones
     admin.resources :activity_scores
@@ -143,7 +144,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :events, :collection => { :import_zvents => [:get, :post]}
     admin.resources :flags
     admin.resources :questions
-    admin.resources :forums
+    admin.resources :forums, :collection => { :reorder => [:get, :post] }
     admin.resources :topics
     admin.resources :answers    
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post }
@@ -160,8 +161,8 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users,           :active_scaffold => true
     admin.resources :user_profiles,      :active_scaffold => true
     admin.resources :votes,           :active_scaffold => true
-    admin.resources :prediction_groups
-    admin.resources :prediction_questions
+    admin.resources :prediction_groups, :member => { :approve => [:get, :post] }
+    admin.resources :prediction_questions, :member => { :approve => [:get, :post] }
     admin.resources :prediction_guesses
     admin.resources :prediction_results, :member => { :accept => [:get, :post] }
     admin.resources :prediction_scores, :collection => { :refresh_all => [:get, :post ] }

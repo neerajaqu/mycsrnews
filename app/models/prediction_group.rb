@@ -26,15 +26,13 @@ class PredictionGroup < ActiveRecord::Base
     "Prediction Group: #{title}"
   end
   
-  def approve
-    @prediction_group = PredictionGroup.find(params[:id])
-    @prediction_group.is_approved = true
-    #if @prediction_group.update_attributes(params[:id])
+  def approve!
+    @prediction_group.update_attribute(:is_approved, true)
   end  
 
   def next
     if PredictionGroup.count > 0
-      PredictionGroup.open.find(:first, :conditions => ["id > ?", self.id ], :order => "id asc")
+      PredictionGroup.approved.active.open.find(:first, :conditions => ["id > ?", self.id ], :order => "id asc")
     else
       nil
     end
@@ -42,7 +40,7 @@ class PredictionGroup < ActiveRecord::Base
   
   def previous
     if PredictionGroup.count > 0
-      PredictionGroup.open.find(:first, :conditions => ["id < ?", self.id ], :order => "id desc")
+      PredictionGroup.approved.active.open.find(:first, :conditions => ["id < ?", self.id ], :order => "id desc")
     else
       nil
     end

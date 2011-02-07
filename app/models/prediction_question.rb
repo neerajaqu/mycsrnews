@@ -27,7 +27,8 @@ class PredictionQuestion < ActiveRecord::Base
 
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :top, lambda { |*args| { :order => ["prediction_guesses_count desc, created_at desc"], :limit => (args.first || 10)} }
-  named_scope :open, lambda { |*args| { :order => ["status = 'open'" ]} }
+  named_scope :open, lambda { |*args| { :conditions => ["status = 'open'" ] } }
+  named_scope :approved, :conditions => { :is_approved => true }
   #todo add migration for timestamp closed_at
   named_scope :closed, lambda { |*args| { :order => ["status = 'closed', updated_at desc"], :limit => (args.first || 7)} }
 
@@ -143,13 +144,14 @@ class PredictionQuestion < ActiveRecord::Base
     get_guess_counts.collect do |g|
       {
         :guess    => g.guess,
-        :percent  => (100.0 * g.count.to_f / get_guess_totals)
+        :percent  => (100.0 * g.count.to_f / get_guess_totals),
+        :users => self.prediction_guesses.find(:all, :conditions => [ "guess = ?",g.guess], :include => :user,:order => 'rand()', :limit => 10 )
       }
     end
   end
 
   def get_guess_counts
-    prediction_guesses.find(:all, :select => 'count(*) count, guess', :group => 'guess', :limit => 10, :order => "count desc")
+    prediction_guesses.find(:all, :select => 'count(*) count, guess, prediction_question_id', :group => 'guess', :limit => 10, :order => "count desc")
   end
 
   def update_stats

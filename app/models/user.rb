@@ -31,7 +31,8 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message, :unless => :facebook_connect_user?
   
   # TODO::HACK:: fb registration errors
-  after_create :register_user_to_fb, :if => Proc.new { Rails.env.production? }
+  # TODO::REMOVE:: deprecated: http://developers.facebook.com/docs/reference/rest/connect.registerusers/
+  #after_create :register_user_to_fb, :if => Proc.new { Rails.env.production? }
   before_save :check_profile
   
   has_many :contents, :after_add => :trigger_story
@@ -177,7 +178,7 @@ class User < ActiveRecord::Base
     new_facebooker.fb_user_id = fb_user.uid.to_i
     #We need to save without validations
     new_facebooker.save(false)
-    new_facebooker.register_user_to_fb
+    #new_facebooker.register_user_to_fb
   end
 
   #We are going to connect this user object with a facebook id. But only ever one account.
@@ -211,9 +212,10 @@ class User < ActiveRecord::Base
   end
 
   def accepts_email_notifications?
-      self.email.present? and self.user_profile.receive_email_notifications == true
+    self.email.present? and self.user_profile.receive_email_notifications == true
   end
   
+# TODO:: Update this
   def friends
     []
   end
@@ -221,9 +223,13 @@ class User < ActiveRecord::Base
   def fb_user_id
     return super unless super.nil?
     return nil unless self.user_profile.present?
-    return self.user_profile.facebook_user_id unless self.user_profile.facebook_user_id.nil?
+    return self.user_profile.facebook_user_id unless self.user_profile.facebook_user_id.nil? or self.user_profile.facebook_user_id.zero?
 
     nil
+  end
+
+  def facebook_id
+    fb_user_id
   end
 
   # Taken from vendor/plugins/restful_authentication/lib/authentication/by_password.rb
@@ -237,10 +243,6 @@ class User < ActiveRecord::Base
   # Skip password validations if facebook connect user
   def facebook_connect_user?
     facebook_user? and password.blank?
-  end
-
-  def facebook_id
-    fb_user_id
   end
 
   def other_posts
@@ -282,6 +284,7 @@ class User < ActiveRecord::Base
     actions.sort_by {|a| a.created_at}.reverse[0,10]
   end
 
+# TODO:: move this to a setting
   def public_name
     firstnameonly = APP_CONFIG['firstnameonly'] || false
     return self.name.split(' ').first if firstnameonly
@@ -290,10 +293,6 @@ class User < ActiveRecord::Base
 
   def to_s
     "#{self.name}"
-  end
-
-  def self.find_admin_users
-    User.find(:all, :conditions => ['is_admin = true'])
   end
 
   def combined_score

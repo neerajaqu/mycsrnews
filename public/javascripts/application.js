@@ -145,7 +145,7 @@ $(function() {
   $('.flag-form').change(function(event) {
 		event.preventDefault();
 		var flag_form = $(this);
-		var flag_parent = flag_form.parent().parent().parent();
+ 		var flag_parent = flag_form.parent().parent().parent();
     if ( $('[name=flag_type]', this).val() != 'choose_flag') {
 		  $(this).parent().html("<img src=\"/images/default/spinner-tiny.gif\" />");
       var url = change_url_format(flag_form.attr('action'));
@@ -269,22 +269,44 @@ $(function() {
     $('.commentThread, .postComment', $(this).parents().filter('.answer')).toggle();
   });
 
-  /* Predictions *
+  /* Predictions */
 
-  $('.prediction-question-form').change(function(event) {
+  $('form.prediction_guess').submit(function(event) {
   	event.preventDefault();
-  	var prediction_question_form = $(this);
-    //var $li_parent = $(this).parents().filter('li').first();
-  	var span = $(this).parent();
-    if ( $('[name=guess]', this).val() != 'predictions.select_guess') {
-  	  $(this).parent().html("<img src=\"/images/default/spinner-tiny.gif\" />");
-      var url = change_url_format(prediction_question_form.attr('action'));
-      $.post(url, prediction_question_form.serialize(), function(data) {
-			  span.html(data.msg);
-  		});
-    } 
+  	var form = $(this);
+  	if ($("input:first", form).val() === '') {
+  		$("input:first", form).css('border', '1px solid red');
+  		return false;
+    }
+  	var submitBtn = $('input[type=submit]', this);
+  	submitBtn.attr('disabled', 'disabled');
+  	submitBtn.hide();
+  	submitBtn.parent().append('<img style="float: left;" src="/images/default/spinner-tiny.gif" /><p style="float: left;">&nbsp; Processing your guess...</p>');
+
+  	var url = change_url_format($(this).attr('action'));
+  	var parentForm = $(this).parents('.prediction_question_wrapper');
+  //	var commentThread = parentForm.siblings('.commentThread');
+
+  	$.post(url, $(this).serialize(), function(data) {
+      parentForm.fadeOut("normal", function() {
+        //commentThread.replaceWith(data).fadeIn("normal");
+        parentForm.html(data).fadeIn("normal");
+        //$.timeago.settings.strings.suffixAgo = '';
+        //$('abbr.timeago', prediction_question_wrapper).timeago();
+
+        rebuild_facebook_dom();
+        setTimeout(function() {
+          // $('html,body').animate({ scrollTop: ($('.commentThread li').last().offset().top - 50) }, { duration: 'slow', easing: 'swing'});
+          $('li', parentForm).last().effect('highlight', {color: 'green'}, 3000);
+        }, 500);
+      });
+  		submitBtn.siblings('p, img').remove();
+  		submitBtn.removeAttr('disabled');
+  		submitBtn.show();
+  		$(':input', form).not(':button, :submit, :reset, :hidden').val('');
+    }, 'html');
   });
-  */
+
 
 });
 

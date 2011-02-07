@@ -39,7 +39,7 @@ module Newscloud
     end
 
     def add_iframe path
-      return path if path =~ /^javascript:/ or path =~ /^\/system/
+      return path if path =~ /^javascript:/ or path =~ /^\/system/ or path =~ /^mailto/
       uri = URI.parse(path)
       return uri.to_s if uri.path =~ /^\/iframe/
       if uri.relative? or uri.host == @base_url

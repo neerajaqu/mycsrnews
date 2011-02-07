@@ -51,6 +51,10 @@ widgets:
       partial: '/shared/sidebar/auto_feature_mini'      
     newest_stories:
       partial: '/shared/sidebar/newest_stories'
+    newest_items:
+      partial: '/shared/sidebar/newest_items'
+    top_items:
+      partial: '/shared/sidebar/top_items'
     top_stories:
       partial: '/shared/sidebar/top_stories'
       locals: 'top_stories'

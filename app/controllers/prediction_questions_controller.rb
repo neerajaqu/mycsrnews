@@ -1,5 +1,7 @@
 class PredictionQuestionsController < ApplicationController
   before_filter :login_required, :only => [:new, :create]
+  after_filter :store_location, :only => [:new, :create, :show ]
+  cache_sweeper :prediction_sweeper, :only => [:create, :update, :destroy]
 
   def new 
    @current_sub_tab = 'New Prediction Question'
@@ -17,7 +19,7 @@ class PredictionQuestionsController < ApplicationController
     end
 
     if @prediction_question.valid? and current_user.prediction_questions.push @prediction_question
-    	flash[:success] = t('predictions.create_prediction_question')
+    	flash[:success] = t('predictions.new.create_prediction_question')
     	redirect_to @prediction_question
     else
     	flash[:error] = "Could not create your question, please clear the errors and try again."

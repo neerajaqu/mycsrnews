@@ -1,5 +1,6 @@
 class PredictionResultsController < ApplicationController
   before_filter :login_required, :only => [:new, :create]
+  cache_sweeper :prediction_sweeper, :only => [:create, :update, :destroy]
 
   def new
     @prediction_question = PredictionQuestion.find(params[:prediction_question_id])

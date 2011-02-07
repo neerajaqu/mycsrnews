@@ -276,6 +276,9 @@ en:
     read: "Read Story"
     quick_post: "Quick post"
   predictions:
+    guess_count: "Predictions: {{guess_count}}"
+    accuracy: "Accuracy: {{accuracy}}"
+    submit_guess: "Submit"
     question_closed: ""
     new_question_posted: "A new prediction question: {{question}} has been added to {{group}}."
     open: "question remains open"
@@ -283,6 +286,7 @@ en:
     login_required: "You must <a href=\"{{login_url}}\"><b>sign in</b></a> or <a href=\"{{register_url}}\"><b>register</b></a> in order to make predictions."
     predict: "Make Predictions"
     tabulation_title: "Summary of current guesses"
+    tabulation_count_title: "Summary of {{total_guesses}} current guesses"
     my_predictions: "Your Predictions"
     what_is_intro: "Do you know the future?"
     what_is_details: "Show off your skills at prediction with our new game."
@@ -430,6 +434,7 @@ en:
     see_full_gallery: "See full Gallery"
     new_gallery_item: "Add a new Item to this Gallery"
     add_to_gallery: "Contribute to Gallery: {{gallery_title}}"
+    item_count: "{{count}} items"
   empty:
     default: "Sorry, nothing available yet."
     top_discussed_stories: "Sorry, no discussions found."
@@ -438,3 +443,10 @@ en:
     twitter_standard_search: "Your twitter search widget settings need to be configured via the Administrative console"
     twitter_standard_favorites: "Your twitter favorites widget settings need to be configured via the Administrative console"  
     twitter_standard_profile: "Your twitter profile widget settings need to be configured via the Administrative console"      
+  generic:
+    newest_items:
+      title: "Newest Items"
+      subtitle: "Newest items added by users"
+    top_items:
+      title: "Top Items"
+      subtitle: "Most popular items"

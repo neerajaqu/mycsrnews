@@ -36,15 +36,15 @@ class PredictionSweeper < ActionController::Caching::Sweeper
   
   def self.expire_prediction_group_all prediction_group
     controller = ActionController::Base.new
-    ['suggest_prediction','newest_prediction_groups', 'top_prediction_groups', "#{prediction_group.cache_key}_group_list"].each do |fragment|
-      controller.expire_fragment fragment
+    ['suggest_prediction','newest_prediction_groups', 'top_prediction_groups', "#{prediction_group.cache_key}_group_list", "#{prediction_group.cache_key}_top"].each do |fragment|
+      controller.expire_fragment "#{fragment}_html"
     end
   end
 
   def self.expire_prediction_question_all prediction_question
     controller = ActionController::Base.new
-    ["closed_predictions","top_predictions","newest_predictions","#{prediction_question.cache_key}_stats_html"].each do |fragment|
-      controller.expire_fragment fragment
+    ["closed_predictions","top_predictions","newest_predictions","newest_prediction_questions","#{prediction_question.cache_key}_stats","#{prediction_question.cache_key}_top"].each do |fragment|
+      controller.expire_fragment "#{fragment}_html"
     end
 
     PredictionSweeper.expire_prediction_group_all prediction_question.prediction_group
@@ -61,11 +61,11 @@ class PredictionSweeper < ActionController::Caching::Sweeper
 
   def self.expire_prediction_result_all prediction_result
     controller = ActionController::Base.new
-    ["#{prediction_result.cache_key}_voices","prediction_high_scores_html"].each do |fragment|
-      controller.expire_fragment fragment
+    ["#{prediction_result.cache_key}_voices","prediction_high_scores"].each do |fragment|
+      controller.expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|
-      expire_fragment "prediction_scores_list_#{page}html"
+      controller.expire_fragment "prediction_scores_list_#{page}html"
     end
     PredictionSweeper.expire_prediction_question_all prediction_result.prediction_question
   end
@@ -73,7 +73,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
   def self.expire_prediction_score_all prediction_score
     controller = ActionController::Base.new
     ["#{prediction_score.cache_key}_voices"].each do |fragment|
-      controller.expire_fragment fragment
+      controller.expire_fragment "#{fragment}_html"
     end
   end
 

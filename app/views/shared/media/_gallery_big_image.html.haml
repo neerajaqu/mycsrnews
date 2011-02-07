@@ -1,14 +1,15 @@
 - cache :gallery_big_image_html do
   - gallery ||= Gallery.featured.first || Gallery.top.first
-  %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-    .panelBar
-      %h2= t('galleries.featured_title', :gallery_title => gallery.title)
-    .featured.media
-      .thumb#image_wrap
-        = link_to image_tag(gallery.thumb_url, :alt => gallery.item_title), gallery.full_url, :rel => "gallery[big-image-#{gallery.title.parameterize}]", :title => gallery.item_description
-        .hidden
-          %ul
-            - gallery.gallery_items.slice(1,10).each do |gallery_item|
-              %li.hide-strong= link_to image_tag(gallery_item.thumb_url, :alt => gallery_item.item_title), gallery_item.full_url, :rel => "gallery[big-image-#{gallery.title.parameterize}]", :title => gallery_item.item_description
-    .itemActions
-      = link_to t('galleries.see_full_gallery'), gallery_path(gallery)
+  - if gallery
+    %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+      .panelBar
+        %h2= t('galleries.featured_title', :gallery_title => gallery.title)
+      .featured.media
+        .thumb#image_wrap
+          = link_to image_tag(gallery.thumb_url, :alt => gallery.item_title), gallery.full_url, :rel => "gallery[big-image-#{gallery.title.parameterize}]", :title => gallery.item_description
+          .hidden
+            %ul
+              - gallery.gallery_items.slice(1,10).each do |gallery_item|
+                %li.hide-strong= link_to image_tag(gallery_item.thumb_url, :alt => gallery_item.item_title), gallery_item.full_url, :rel => "gallery[big-image-#{gallery.title.parameterize}]", :title => gallery_item.item_description
+      .itemActions
+        = link_to t('galleries.see_full_gallery'), gallery_path(gallery)

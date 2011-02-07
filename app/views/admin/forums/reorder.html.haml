@@ -1,0 +1,36 @@
+- content_for :extra_javascript do
+  :javascript
+    $(function() {
+    	$('ul.forums').sortable();
+
+      $('#save-button')
+        .hover(
+          function() { $(this).addClass('ui-state-hover'); },
+          function() { $(this).removeClass('ui-state-hover'); }
+        ).mousedown(function() {
+          $(this).addClass('ui-state-active');
+        }).mouseup(function() {
+          $(this).removeClass('ui-state-active');
+        }).click(function() {
+        	var order = $('ul.forums').sortable('toArray');
+          $.post("/admin/forums/reorder.json", {forums: order}, function(data) {
+            if (typeof(data.success) !== 'undefined') {
+              alert(data.success);
+            } else {
+              alert('There was a problem saving your order');
+            }
+          }, "json");
+        });
+
+    });
+
+%h1 Reorder Forums
+%h3 Drag forums to reorder as desired
+%br
+%ul.forums
+  - Forum.positioned.each do |forum|
+    %li{:id => "forum-#{forum.id}"}= forum.name
+.clear
+%br
+.buttons
+  %button#save-button.admin-btn{:type => "button"} Save New Order

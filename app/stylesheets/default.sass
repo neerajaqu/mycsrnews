@@ -183,6 +183,7 @@ body
   color: $bodyColor
   background: $bodyBG
   font-size: $fontsize
+  min-height: 600px
 
 body#widgets, body#widget
   background: #fff
@@ -214,6 +215,9 @@ p
   text-align: left
   margin: 0 0 6px 0
 
+.clearleft
+  clear: left
+    
 a
   color: $linkColor
   cursor: pointer
@@ -1821,6 +1825,9 @@ body div.jGrowl div.jGrowl-closer
       color: $commentReplyText
       font-style: italic
       font-size: $fontsize * 0.8
+  .guess_block
+    clear: left
+    margin-bottom: 10px
 
 .your_guess
   font-style: italic
@@ -1828,9 +1835,9 @@ body div.jGrowl div.jGrowl-closer
 
 .gallery-item
   float: left
-  max-width: 133px
-  max-height: 100px
   padding: 10px
 
   img
     border: 1px solid black
+    max-width: 133px
+    max-height: 100px

@@ -1,0 +1,5 @@
+- cache :top_items_html, :expires_in => 7.minutes do
+  - top_items ||= Vote.top_items(5, nil, 4)
+  - title ||= t('generic.top_items.title')
+  - subtitle ||= t('generic.top_items.subtitle')
+  = render :partial => 'shared/lists/half_list', :locals => { :title => title, :subtitle => subtitle, :collection => top_items }

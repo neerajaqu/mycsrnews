@@ -59,7 +59,7 @@
                 %fieldset
                   - form.inputs do                
                     = form.input :title, :label => t('predictions.new.prediction_group_title'), :hint => t('predictions.new.prediction_group_title_hint')
-                    = form.input :prediction_group, :label => t('predictions.select_prediction_group'), :required => true, :include_blank => false
+                    = form.input :prediction_group, :label => t('predictions.select_prediction_group'), :required => true, :include_blank => false, :as => :select, :collection => PredictionGroup.active
                     %p.strong= t('choose_prediction_type_below')
                     = form.input :prediction_type, :as => :select, :collection => PredictionQuestion.prediction_type_options.unshift([ t('predictions.choose_prediction_type'), 'default']), :default => 'default'
                     = form.input :list_of_choices, :label => t('predictions.suggested_choices'), :required => true, :hint => t('predictions.suggested_choices_hint'), :wrapper_html => { :class => 'question-values choices hidden' }

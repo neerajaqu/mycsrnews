@@ -1,0 +1,5 @@
+- cache :newest_items_html, :expires_in => 7.minutes do
+  - newest_items ||= PfeedItem.newest_items
+  - title ||= t('generic.newest_items.title')
+  - subtitle ||= t('generic.newest_items.subtitle')
+  = render :partial => 'shared/lists/half_list', :locals => { :title => title, :subtitle => subtitle, :collection => newest_items }

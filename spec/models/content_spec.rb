@@ -36,4 +36,39 @@ describe Content do
     content.caption = Faker::Lorem.paragraph
     content.should be_valid
   end
+
+  it "should set a valid tweet setting group" do
+    Content.tweet_setting_group.should == 'stories'
+  end
+
+  describe "#details" do
+    before(:each) do
+      @content = Factory.create(:content)
+    end
+
+    it "should not set full_html by default" do
+      @content.full_html?.should be_false
+    end
+
+    it "should set model_score_name to story" do
+      @content.model_score_name.should == 'story'
+    end
+
+    it "should return the content user for scoreable user" do
+      @content.scorable_user.should == @content.user
+    end
+
+    it "should set the appropriate hash for featured url" do
+      expected = {
+      	:controller => '/stories',
+      	:action => 'show',
+      	:id => @content
+      }
+      @content.featured_url.should == expected
+    end
+
+    it "should set to_s to the content title" do
+      @content.to_s.should == @content.title
+    end
+  end
 end
