@@ -3,7 +3,6 @@ Feature: Classifieds
 	As a user
 	I want to be able to interact with classifieds
 
-	@wip
 	Scenario: List of Galleries without a user
 # TODO:: SWITCH TO TABLE WITH FREE/PUBLIC/NONPUBLIC ITEMS
 		Given a classified exists with title: "My Cool Classified"
@@ -42,7 +41,6 @@ Feature: Classifieds
 		Then I should not see the owner edit link for that classified
 		Then I should not see the contact link for the classified owner
 
-	@wip
 	Scenario: View a classified as a non owner
 		Given a user is logged in
 		Given a classified exists
@@ -50,7 +48,6 @@ Feature: Classifieds
 		Then I should not see the owner edit link for that classified
 		Then I should not see the contact link for the classified owner
 
-	@wip
 	Scenario: View a classified as owner
 		Given a user is logged in
 		And a classified exists with user: the user

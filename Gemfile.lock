@@ -50,6 +50,7 @@ GEM
     SystemTimer (1.2.2)
     ZenTest (4.4.2)
     aasm (2.2.0)
+    acl9 (0.12.0)
     actionmailer (2.3.4)
       actionpack (= 2.3.4)
     actionpack (2.3.4)
@@ -186,6 +187,7 @@ DEPENDENCIES
   SystemTimer
   ZenTest
   aasm
+  acl9
   awesome_print
   bitly (= 0.5.1)
   builder (= 2.1.2)

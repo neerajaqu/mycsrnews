@@ -4,6 +4,7 @@ describe Classified do
   it "should create a new instance given valid attributes" do
     classified = Factory.create(:classified)
     classified.state.should == :unpublished
+    classified.expires_at.should be > Time.now
   end
 
   describe "#state_machine" do
@@ -19,13 +20,12 @@ describe Classified do
       end
     end
 
-    context "state :unpublished" do
+    context "::STATE:: :unpublished" do
       before(:each) do
         @classified = Factory(:classified, :aasm_state => "unpublished")
       end
 
       it "switches to the available state when published!" do
-        #@classified.should_receive(:expire).should_receive(:set_published)
         @classified.should_receive(:expire)
         @classified.should_receive(:set_published)
         @classified.published!
@@ -33,20 +33,33 @@ describe Classified do
       end
     end
 
-
-    context "state :available" do
+    context "::STATE:: :available" do
       before(:each) do
         @classified = Factory(:classified, :aasm_state => "available")
       end
 
       context "loaner item" do
-        it "should be loanable"
-        it "should not be sellable"
+        before(:each) do
+          @classified.listing_type = "loan"
+        end
+
+        it "should be loanable" do
+          @classified.loanable?.should be_true
+        end
+
+        it "should not be sellable" do
+          @classified.sellable?.should_not be_true
+        end
+
+        it "should not be free" do
+          @classified.free?.should_not be_true
+        end
+
         it "should create the loaning for the user and the item"
 
         it "loans the item to a user" do
-          @classified.should_receive(:loaned_out!)
           @classified.loan_to! Factory(:user)
+          @classified.state.should == :loaned_out
         end
 
         context "friends only" do
@@ -55,16 +68,37 @@ describe Classified do
       end
 
       context "sellable item" do
-        it "should be sellable"
-        it "should not be loanable"
+        before(:each) do
+          @classified.listing_type = "sale"
+        end
+
+        it "should be sellable" do
+          @classified.sellable?.should be true
+        end
+
+        it "should be sellable" do
+          @classified.sold!
+          @classified.state.should == :sold
+        end
+
+        it "should not be loanable" do
+          @classified.loanable?.should_not be_true
+        end
+
+        it "should not be free" do
+          @classified.free?.should_not be_true
+        end
       end
 
       it "should be closeable"
       it "should be hideable"
-      it "should auto expire"
+      it "should auto expire" do
+        @classified.update_attribute(:expires_at, 1.minute.ago)
+        Classified.auto_expired.should_not be_empty
+      end
     end
 
-    context "state :expired" do
+    context "::STATE:: :expired" do
       before(:each) do
         @classified = Factory(:classified, :aasm_state => "expired")
       end
@@ -76,56 +110,161 @@ describe Classified do
         @classified.state.should == :available
       end
 
-      it "should not auto expire"
+      it "should not auto expire" do
+        @classified.update_attribute(:expires_at, 1.minute.ago)
+        Classified.auto_expired.should be_empty
+      end
     end
 
-    context "state :closed"do
+    context "::STATE:: :closed"do
       before(:each) do
         @classified = Factory(:classified, :aasm_state => "closed")
       end
 
-      it "should not auto expire"
+      it "should not auto expire" do
+        @classified.update_attribute(:expires_at, 1.minute.ago)
+        Classified.auto_expired.should be_empty
+      end
     end
 
-    context "state :sold"do
+    context "::STATE:: :sold"do
       before(:each) do
         @classified = Factory(:classified, :aasm_state => "sold")
       end
 
-      it "should not auto expire"
+      it "should not auto expire" do
+        @classified.update_attribute(:expires_at, 1.minute.ago)
+        Classified.auto_expired.should be_empty
+      end
     end
 
-    context "state :loaned_out"do
+    context "::STATE:: :loaned_out"do
       before(:each) do
         @classified = Factory(:classified, :aasm_state => "loaned_out")
       end
 
-      it "becomes available when returned" do
+      it "becomes hidden when returned" do
         pending("Needs to have working success callback")
         @classified.should_receive(:update_renewed)
         @classified.returned!
+        @classified.state.should == :hidden
       end
 
-      it "should not auto expire"
-      it "should be closeable"
+      it "should not have an expires_at ????"
+      it "should be closeable" do
+        @classified.closed!
+        @classified.state.should == :closed
+      end
+
+      it "should not be sellable" do
+        lambda {@classified.sold!}.should raise_error
+      end
+
       it "should be hideable????"
+
+      it "should not auto expire" do
+        @classified.update_attribute(:expires_at, 1.minute.ago)
+        Classified.auto_expired.should be_empty
+      end
     end
 
-    context "state :hidden"do
+    context "::STATE:: :hidden"do
       before(:each) do
         @classified = Factory(:classified, :aasm_state => "hidden")
       end
 
       it "should become available after unhide" do
-        # WTF:!?!?!?!?!??!?!?!?!?!??!?!
-        # this breaks the test..........
-        #@classified.should_receive(:renewed!)
         @classified.unhide!
         @classified.state.should == :available
       end
 
-      it "should auto expire"
+      it "should be closable" do
+        @classified.closed!
+        @classified.state.should == :closed
+      end
+
+      it "should auto expire" do
+        @classified.update_attribute(:expires_at, 1.minute.ago)
+        Classified.auto_expired.should_not be_empty
+      end
     end
 
-  end
+    describe "#auto_expire" do
+      before(:each) do
+        @classified = Factory(:classified, :expires_at => 1.minute.ago)
+      end
+
+      it "should be expired" do
+        @classified.should have_expired
+      end
+
+      it "should find auto expired items" do
+        Classified.auto_expired.should have_at_least(1).things
+      end
+
+      context "::STATE:: unpublished" do
+        before(:each) do
+          @classified.aasm_state = "unpublished"
+        end
+
+        it "should expire" do
+          @classified.expired!.should be_true
+        end
+      end
+
+      context "::STATE:: available" do
+        before(:each) do
+          @classified.aasm_state = "available"
+        end
+
+        it "should expire" do
+          @classified.expired!.should be_true
+        end
+      end
+
+      context "::STATE:: hidden" do
+        before(:each) do
+          @classified.aasm_state = "hidden"
+        end
+
+        it "should expire" do
+          @classified.expired!.should be_true
+        end
+      end
+
+
+    end
+
+    describe "#expire_all" do
+      before(:each) do
+        @auto_expire = [
+          Factory(:classified, :aasm_state => "unpublished"),
+          Factory(:classified, :aasm_state => "available"),
+          Factory(:classified, :aasm_state => "hidden")
+        ]
+        @no_auto_expire = [
+          Factory(:classified, :aasm_state => "sold"),
+          Factory(:classified, :aasm_state => "loaned_out"),
+          Factory(:classified, :aasm_state => "expired"),
+          Factory(:classified, :aasm_state => "closed")
+        ]
+      end
+
+      it "should expire the appropriate items" do
+        pending("FIXME")
+        #Classified.with_state(:expired).should have(1).things
+        Classified.auto_expire_all.should be_true
+        #Classified.with_state(:expired).should have(4).things
+        @auto_expire.each {|c| c.expired?.should be_true }
+      end
+
+      it "should not expire items that do not expire" do
+        pending("FIXME")
+        Classified.auto_expire_all.should be_true
+        Classified.no_auto_expire.should have(3).things
+      end
+    end
+
+  end # describe #statemachine
+
 end

@@ -23,6 +23,7 @@ gem "resque-scheduler", :require => 'resque_scheduler'
 gem 'sitemap_generator'
 gem "SystemTimer"
 gem "aasm"
+gem "acl9"
 
 # Feedzirra related
 gem 'nokogiri'
