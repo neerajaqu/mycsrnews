@@ -100,12 +100,24 @@ ActiveRecord::Schema.define(:version => 20110204222901) do
     t.string   "title"
     t.text     "details"
     t.string   "aasm_state"
+    t.string   "listing_type"
+    t.string   "allow"
     t.integer  "user_id"
     t.datetime "expires_at"
+    t.integer  "votes_tally",    :default => 0
+    t.integer  "comments_count", :default => 0
+    t.boolean  "is_featured",    :default => false
+    t.datetime "featured_at"
+    t.integer  "flags_count",    :default => 0
+    t.boolean  "is_blocked",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "classifieds", ["aasm_state"], :name => "index_classifieds_on_aasm_state"
+  add_index "classifieds", ["allow"], :name => "index_classifieds_on_allow"
+  add_index "classifieds", ["expires_at"], :name => "index_classifieds_on_expires_at"
+  add_index "classifieds", ["listing_type"], :name => "index_classifieds_on_listing_type"
   add_index "classifieds", ["user_id"], :name => "index_classifieds_on_user_id"
 
   create_table "comments", :force => true do |t|
