@@ -1,7 +1,7 @@
 !!!
 %html{:xmlns => "http://www.w3.org/1999/xhtml"}
   %head
-    - title = (out = yield(:title)) ? "#{out} - #{APP_CONFIG['site_title']}" : APP_CONFIG['site_title']
+    - title = (out = yield(:title)) ? "#{out} - #{get_setting('site_title').try(:value)}" : get_setting('site_title').try(:value)
     %title= title
     %meta{:name => 'title', :content => title}
     %meta{:name => 'description', :content => (out = yield(:meta_description)) ? out : ""}

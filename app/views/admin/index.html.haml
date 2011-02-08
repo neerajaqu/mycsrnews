@@ -1,4 +1,4 @@
-%h1 Administer #{APP_CONFIG['site_title']}
+%h1 Administer #{get_setting('site_title').try(:value)}
 %p
   %i
     %b Note: 

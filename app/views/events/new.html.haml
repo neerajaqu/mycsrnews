@@ -7,7 +7,10 @@
 #col_full
   .panel_3
     .panelBar
-      %h2== What's your event for #{APP_CONFIG['site_topic']}?
+      - if get_setting('site_topic').present?
+        %h2== What's your event for #{get_setting('site_topic').value}?
+      - else
+        %h2== What's your event for?      
     .formBox
       - semantic_form_for @event, :html => { :multipart => true } do |form|
         - form.inputs do

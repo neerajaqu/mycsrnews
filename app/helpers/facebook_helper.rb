@@ -64,7 +64,7 @@ module FacebookHelper
     stream_post.message = ''
     stream_post.action_links = [{:text => t('facebook_learn_more'), :href => home_index_path(:only_path => false, :canvas => true)}]
     attachment = Facebooker::Attachment.new
-    attachment.name = APP_CONFIG['site_title']
+    attachment.name = Metadata::Setting.find_setting('site_title').try(:value)
     attachment.description = t('header.share_description')
     attachment.href = home_index_path(:only_path => false, :canvas => true)
 	  attachment.add_image(image_path('default/icon-fan-app.gif'), home_index_path(:only_path => false, :canvas => true))

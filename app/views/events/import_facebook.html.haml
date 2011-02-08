@@ -6,7 +6,10 @@
   = render_ad(:banner, @ad_layout, @ad_banner)
   .panel_2
     .panelBar
-      %h2== What's your event for #{APP_CONFIG['site_topic']}?
+      - if get_setting('site_topic').present?
+        %h2== What's your event for #{get_setting('site_topic').value}?
+      - else
+        %h2== What's your event for?      
     .formBox
       - if not @events_allowed
         %br

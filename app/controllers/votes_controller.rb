@@ -10,7 +10,7 @@ class VotesController < ApplicationController
       if !error and current_user and @voteable.present? and (vote = current_user.vote_for(@voteable))
       	if vote.voter.post_likes?
           image_url = (vote.voteable.respond_to?(:images) and vote.voteable.images.any?) ? @template.base_url(vote.voteable.images.first.url(:thumb)) : nil
-          app_caption = t('app.facebook.vote_caption', :title => APP_CONFIG['site_title'])
+          app_caption = t('app.facebook.vote_caption', :title => get_setting('site_title').try(:value))
           vote.async_vote_messenger polymorphic_path(@voteable.item_link, :only_path => false, :canvas => iframe_facebook_request?, :format => 'html'), app_caption, image_url
         end
       	success = "Thanks for your vote!"

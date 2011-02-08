@@ -2,8 +2,8 @@
   .sponsor
     %a
   .headerTitle
-    %a{:title => "Front Page - #{APP_CONFIG['site_title']}", :href => "#{home_index_path(:only_path => false)}"}
-      %h1= APP_CONFIG['site_title']
+    %a{:title => "Front Page - #{get_setting('site_title').try(:value)}", :href => "#{home_index_path(:only_path => false)}"}
+      %h1= get_setting('site_title').try(:value)
   .dh_links
     - if logged_in?
       .account-dropdown
