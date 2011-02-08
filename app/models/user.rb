@@ -125,7 +125,7 @@ class User < ActiveRecord::Base
   end
 
   def pfeed_set_last_viewed! pfeed_item
-    return true if last_viewed_feed_item == last_delivered_feed_item
+    return true if last_viewed_feed_item == last_delivered_feed_item and last_delivered_feed_item.id > pfeed_item.id
     self.update_attribute(:last_viewed_feed_item, pfeed_item)
   end
 
