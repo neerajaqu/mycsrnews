@@ -151,9 +151,9 @@
               %li= link_to 'Facebook Application', "http://apps.facebook.com/#{ENV['FACEBOOKER_RELATIVE_URL_ROOT']}", :target => "_fbapp"
               %li= link_to 'Facebook App Page', "http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
               %li= link_to 'Facebook App Statistics', "http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
-              - if APP_CONFIG['google_analytics_site_id'].present? and APP_CONFIG['google_analytics_site_id']
-                %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1&id=#{APP_CONFIG['google_analytics_site_id']}", :target => "_analytics"
-              - elsif APP_CONFIG['google_analytics_account_id'].present? and APP_CONFIG['google_analytics_account_id']
+              - if get_setting('google_analytics_site_id').try(:value)
+                %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1&id=#{get_setting('google_analytics_site_id').try(:value)}", :target => "_analytics"
+              - elsif get_setting('google_analytics_account_id').try(:value)
                 %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1", :target => "_analytics"
               %li= link_to 'Report a problem', 'http://support.newscloud.com/discussions/problems', :target => "_support"
       .main-content.clearfix
