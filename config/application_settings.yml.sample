@@ -1,6 +1,4 @@
 defaults: &defaults
-  # Uncomment this line to enable hoptoad
-  hoptoad_api_key: '1234567890987654321'
 
   # Uncomment this line to enable google analytics
   google_analytics_account_id: 'UF-123456890-7'
@@ -21,16 +19,6 @@ defaults: &defaults
 
   site_title: 'Default Site Name'
 
-  # Uncomment to use TypeKit.com fonts
-  # typekit: 'yourcode'
-
-  # allow web log in system
-  allow_web_auth: false
-
-  # Uncomment this line if you wish to enable contact_us email notifications
-  # NOTE:: you must setup smtp.yml for outgoing emails to work
-  contact_us_recipients: 'admin@email.com,me@email.com,support@email.com'
-
   # Default admin login info, this will only be used when you do not have an admin user in the system
   # Connect to /admin to be prompted for this login info
   default_admin_user: 'admin'
@@ -42,33 +30,6 @@ defaults: &defaults
   #Privacy settings
   firstnameonly: false
   
-  #Zvent settings
-  zvent_api_key: 'FRXBFQTGJOMXVKIQSFGSBDFWYMLXSJPBQGJDGPXJICGBSGPWGULKGTJGOXXKLUOG'
-  zvent_location: 'Seattle, WA'
-    
-  # Uncomment this line to enable twitter
-  #Twitter Settings
-  #twitter_account: 'username'
-  twitter_oauth_key: 'key'
-  twitter_oauth_secret: 'secret'
-
-  tweet_events_min_votes: 5
-  tweet_events_limit: 3
-  tweet_stories_min_votes: 5   
-  tweet_stories_limit: 3
-  tweet_questions_min_votes: 5
-  tweet_questions_limit: 3
-  tweet_ideas_min_votes: 5
-  tweet_ideas_limit: 3
-  tweet_featured_items: true
-  
-  #Uncomment to allow bit.ly
-  #bitly_username: 'username'
-  #bitly_api_key: 'key'
-
-  # Yahoo AppId used for sitemap ping
-  yahoo_app_id: 'ELIZq2LV44444.rGdRR5abc888HCGL1zDOegJakZyHIrugVqPip3YK333P8-'
-
   # Select timezone from $ rake time:zones:all
   time_zone: 'Pacific Time (US & Canada)'
 

@@ -5,5 +5,5 @@
   %h2== #{local_linked_profile_name(user)}
   %p= caption(user.bio,350)
 .float_right
-  %h4.userPoints= t('prediction.accuracy', :score => score.accuracy)
-  %h3.userPoints= t('prediction.count_guesses', :score => score.guess_count)
+  %h4.userPoints= t('predictions.accuracy', :accuracy => score.accuracy)
+  %h3.userPoints= t('predictions.guess_count', :guess_count => score.guess_count)
