@@ -11,42 +11,42 @@ describe Classified do
     describe "Classified.sale" do
       it "should return sale classifieds" do
         @classified = Factory(:sale_classified)
-        Classified.for_sale.should == [@classified]
+        Classified.for_sale.should include(@classified)
       end
     end
 
     describe "Classified.free" do
       it "should return free classifieds" do
         @classified = Factory(:free_classified)
-        Classified.for_free.should == [@classified]
+        Classified.for_free.should include(@classified)
       end
     end
 
     describe "Classified.loan" do
       it "should return loan classifieds" do
         @classified = Factory(:loan_classified)
-        Classified.for_loan.should == [@classified]
+        Classified.for_loan.should include(@classified)
       end
     end
 
     describe "Classified.allow_all" do
       it "should return classifieds with allow all" do
         @classified = Factory(:available_classified, :allow => "all")
-        Classified.allow_all.should == [@classified]
+        Classified.allow_all.should include(@classified)
       end
     end
 
     describe "Classified.allow_friends" do
       it "should return classifieds with allow friends" do
         @classified = Factory(:available_classified, :allow => "friends")
-        Classified.allow_friends.should == [@classified]
+        Classified.allow_friends.should include(@classified)
       end
     end
 
     describe "Classified.allow_friends_of_friends" do
       it "should return classifieds with allow friends_of_friends" do
         @classified = Factory(:available_classified, :allow => "friends_of_friends")
-        Classified.allow_friends_of_friends.should == [@classified]
+        Classified.allow_friends_of_friends.should include(@classified)
       end
     end
 
@@ -320,5 +320,44 @@ describe Classified do
     end
 
   end # describe #statemachine
+
+  describe "#sections" do
+    before(:all) do
+      @default_categories = [:pizza, :coffee, :oreos]
+      @default_subcategories = [:delicious, :deal, :yum]
+
+      @default_categories.each do |category|
+        Classified.add_default_category(category)
+      end
+
+      @default_subcategories.each do |subcategory|
+        Classified.add_default_subcategory(subcategory)
+      end
+    end
+
+    it "should set appropriate categories" do
+      @default_categories.each do |category|
+        Classified.valid_category?(category).should be_true
+      end
+    end
+
+    it "should not allow subcategories as valid categories" do
+      @default_subcategories.each do |subcategory|
+        Classified.valid_category?(subcategory).should be_false
+      end
+    end
+
+    it "should set appropriate subcategories" do
+      @default_subcategories.each do |subcategory|
+        Classified.valid_subcategory?(subcategory).should be_true
+      end
+    end
+
+    it "should not allow categories as valid subcategories" do
+      @default_categories.each do |category|
+        Classified.valid_subcategory?(category).should be_false
+      end
+    end
+  end
 
 end

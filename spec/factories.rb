@@ -130,6 +130,8 @@ Factory.define :classified do |f|
   f.allow       "all"
   f.association :user, :factory => :user
   f.listing_type  "sale"
+  f.category_list  Classified.default_category_names.first
+  f.subcategory_list  Classified.default_subcategory_names.first
 end
 
 Factory.define :available_classified, :parent => :classified do |f|

@@ -34,6 +34,8 @@ class Classified < ActiveRecord::Base
 
   validate :validate_listing_type
   validate :validate_allow_type
+  validate :validate_category_type
+  validate :validate_subcategory_type
 
   before_save :set_expires_at
 
@@ -135,6 +137,24 @@ class Classified < ActiveRecord::Base
     self.listing_types.include? type.to_sym
   end
   
+  def valid_category?
+    self.class.valid_category? category_list
+  end
+
+  def self.valid_category? type
+    return false unless type
+    self.default_category_names.include? type.to_s
+  end
+  
+  def valid_subcategory?
+    self.class.valid_subcategory? subcategory_list
+  end
+
+  def self.valid_subcategory? type
+    return false unless type
+    self.default_subcategory_names.include? type.to_s
+  end
+  
   def self.allow_types
     [:friends, :friends_of_friends, :all]
   end
@@ -166,6 +186,17 @@ class Classified < ActiveRecord::Base
 
   def allow_type() allow.to_sym end
   def allow_type=(atype) self.allow = atype end
+
+  def self.default_categories() self.default_tags(:on => "category") end
+  def self.default_subcategories() self.default_tags(:on => "subcategories") end
+  def self.default_category_names() self.default_categories.map(&:name) end
+  def self.default_subcategory_names() self.default_subcategories.map(&:name) end
+  def self.add_default_category(category) self.build_default_tag_on(category, "category") end
+  def self.add_default_subcategory(subcategory) self.build_default_tag_on(subcategory, "subcategories") end
+
+  def category_name
+    category.first.name
+  end
 
   protected
     #
@@ -227,6 +258,28 @@ class Classified < ActiveRecord::Base
 
   private
     
+    def self.default_tags(options = {})
+      conditions = {
+        :context       => (options[:on] || "tags").to_s,
+        :taggable_type => self.name,
+        :taggable_id   => nil
+      }
+      Tagging.find(:all, :include => :tag, :conditions => conditions).map(&:tag).uniq
+    end
+
+    def self.build_default_tag_on(tag_name, context = "tags")
+      return true if self.default_tags(:on => context).map(&:name).include? tag_name.to_s
+      tag = Tag.find_or_create_by_name(tag_name.to_s)
+      if tag
+      	Tagging.create!({
+          :context       => context,
+          :taggable_type => self.name,
+          :taggable_id   => nil,
+          :tag           => tag
+        })
+      end
+    end
+
     def set_expires_at
       self.expires_at ||= 2.weeks.from_now
     end
@@ -237,6 +290,14 @@ class Classified < ActiveRecord::Base
 
     def validate_allow_type
       errors.add(:allow, "must be a valid allow group") unless self.valid_allow_type?
+    end
+
+    def validate_category_type
+      errors.add(:category_list, "must be a valid category group") unless self.valid_category?
+    end
+
+    def validate_subcategory_type
+      errors.add(:subcategory_list, "must be a valid subcategory group") unless self.valid_subcategory?
     end
 
 end

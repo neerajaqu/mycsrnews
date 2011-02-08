@@ -453,6 +453,14 @@ en:
     menu_title: "Classifieds"
     menu_browse: "Browse"
     menu_new: "Post an item"
+    listing_type:
+      title: "Select a listing type"
+    allow:
+      title: "Allow Group"
+    tags:
+      tags_title: "Tags"
+      category_title: "Category"
+      subcategories_title: "Subcategories"
     subnav:
       browse: "Browse"
       my_items: "Your Items"

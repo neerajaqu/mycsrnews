@@ -113,9 +113,9 @@ class User < ActiveRecord::Base
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
   end
 
-  def pfeed_inbox_unread
-    return pfeed_inbox.find(:all, :limit => 3) unless last_viewed_feed_item
-    pfeed_inbox.newer_than(last_viewed_feed_item).find(:all, :limit => 3)
+  def pfeed_inbox_unread limit = 3
+    return pfeed_inbox.find(:all, :limit => limit) unless last_viewed_feed_item
+    pfeed_inbox.newer_than(last_viewed_feed_item).find(:all, :limit => limit)
   end
 
   def pfeed_inbox_get_new!

@@ -109,7 +109,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :answers, :member => { :like => [:get, :post] }, :has_many => [:comments, :answers, :flags]
   map.resources :articles, :collection => { :index => [:get, :post], :drafts => [:get] }
   map.resources :cards, :member => { :get_card_form => [:get, :post], :post_sent => [:get, :post] }, :collection => { :my_received => :get, :my_sent => :get }
-  map.resources :classifieds, :collection => [:borrowed_items, :my_items]
+  map.resources :classifieds, :collection => [:borrowed_items, :my_items], :has_many => [:comments, :flags, :related_items]
   map.resources :comments, :member => { :like => [:get, :post],:dislike => [:get, :post] }, :has_many => [ :flags]
   map.resources :contents, :controller => 'stories', :has_many => [:comments, :flags, :related_items], :as => 'stories'
   map.resources :events, :member => { :like => [:get, :post],:my_events => [:get, :post] }, :collection => { :index => [:get, :post], :import_facebook => [:get, :post] },:has_many => [:comments, :flags, :related_items]
