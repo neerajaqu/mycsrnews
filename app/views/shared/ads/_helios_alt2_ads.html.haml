@@ -5,9 +5,9 @@
 %html
   %head
     :javascript
-      OAS_url='#{APP_CONFIG['helios_url']}/RealMedia/ads/';
-      OAS_sitepage='#{APP_CONFIG['helios_sitepage']}';
-      OAS_listpos='#{APP_CONFIG['helios_list_pos']}';
+      OAS_url='#{get_setting('helios_url').try(:value)]}/RealMedia/ads/';
+      OAS_sitepage='#{get_setting('helios_sitepage').try(:value)}';
+      OAS_listpos='#{get_setting('helios_list_pos').try(:value)}';
       OAS_query='';
       OAS_target='_top';
       OAS_version=10;
