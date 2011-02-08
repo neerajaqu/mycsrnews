@@ -15,6 +15,7 @@ Feature: Classified Authorization
 		And a <user_status> classifed user exists
 		And a classified exists with aasm_state: "<aasm_state>", listing_type: "<listing_type>", allow: "<allow>", user: the user
 		Then the user is_allowed? should return "<is_allowed>"
+		Then the user should be able to view the page: <is_allowed>
 
 		Scenarios: STATE:: available
 			| aasm_state | user_status      | listing_type | allow              | is_allowed |

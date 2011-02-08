@@ -115,7 +115,9 @@ ActiveRecord::Schema.define(:version => 20110204222901) do
   end
 
   add_index "classifieds", ["aasm_state"], :name => "index_classifieds_on_aasm_state"
+  add_index "classifieds", ["allow"], :name => "index_classifieds_on_allow"
   add_index "classifieds", ["expires_at"], :name => "index_classifieds_on_expires_at"
+  add_index "classifieds", ["listing_type"], :name => "index_classifieds_on_listing_type"
   add_index "classifieds", ["user_id"], :name => "index_classifieds_on_user_id"
 
   create_table "comments", :force => true do |t|
@@ -623,7 +625,7 @@ ActiveRecord::Schema.define(:version => 20110204222901) do
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.string   "authorizable_type"
-    t.integer  "authorizble_id"
+    t.integer  "authorizable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

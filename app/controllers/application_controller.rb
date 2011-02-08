@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   rescue_from Facebooker::Session::SessionExpired, :with => :facebook_session_expired
   rescue_from Facebooker::Session::MissingOrInvalidParameter, :with => :facebook_session_expired
+  rescue_from Acl9::AccessDenied, :with => :access_denied
 
   def rescue_action(exception)
     if (defined?(exception.message) and defined?(exception.file_name) and defined?(exception.source_extract)) and
@@ -464,6 +465,16 @@ class ApplicationController < ActionController::Base
     txt.gsub! %r{#{APP_CONFIG["base_url"]}/?(iframe/)?}, url
     txt.gsub! %r{#{canvas_url}}, url
     txt
+  end
+
+  def access_denied
+    if current_user
+      flash[:notice] = "Access Denied"
+      redirect_to home_path
+    else
+      flash[:notice] = "Access Denied. Try logging in first."
+      redirect_to new_session_path
+    end
   end
 
 end

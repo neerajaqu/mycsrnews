@@ -58,6 +58,7 @@ group :test, :cucumber do
 	gem "pickle"
 	gem "launchy"
 	gem "ZenTest"
+	gem "rr"
 end
 
 group :production do

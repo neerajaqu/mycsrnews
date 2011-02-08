@@ -8,17 +8,23 @@ class Classified < ActiveRecord::Base
   acts_as_media_item
 
   acts_as_featured_item
-  #acts_as_moderatable
+  acts_as_moderatable
   acts_as_relatable
   acts_as_wall_postable
   acts_as_tweetable
   
-  named_scope :active
   named_scope :top, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 10)} }
   named_scope :auto_expired, lambda { |*args| { :conditions => ["expires_at < ? AND aasm_state IN (?)", Time.zone.now, [:unpublished, :available, :hidden].map(&:to_s)] } }
   named_scope :no_auto_expire, lambda { |*args| { :conditions => ["expires_at < ? AND aasm_state NOT IN (?)", Time.zone.now, [:unpublished, :available, :hidden].map(&:to_s)] } }
   named_scope :with_state, lambda { |*args| { :conditions => ["aasm_state = ?", args.first] } }
+  named_scope :for_sale, { :conditions => ["listing_type = ?", "sale"] }
+  named_scope :for_free, { :conditions => ["listing_type = ?", "free"] }
+  named_scope :for_loan, { :conditions => ["listing_type = ?", "loan"] }
+  named_scope :allow_all, { :conditions => ["allow = ?", "all"] }
+  named_scope :allow_friends, { :conditions => ["allow = ?", "friends"] }
+  named_scope :allow_friends_of_friends, { :conditions => ["allow = ?", "friends_of_friends"] }
+  named_scope :available, { :conditions => ["aasm_state = ?", "available"] }
 
   belongs_to :user
 

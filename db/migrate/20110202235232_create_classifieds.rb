@@ -24,12 +24,16 @@ class CreateClassifieds < ActiveRecord::Migration
     add_index :classifieds, :user_id
     add_index :classifieds, :aasm_state
     add_index :classifieds, :expires_at
+    add_index :classifieds, :listing_type
+    add_index :classifieds, :allow
   end
 
   def self.down
     remove_index :classifieds, :user_id
     remove_index :classifieds, :aasm_state
     remove_index :classifieds, :expires_at
+    remove_index :classifieds, :listing_type
+    remove_index :classifieds, :allow
     drop_table :classifieds
   end
 end

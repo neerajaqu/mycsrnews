@@ -1,8 +1,10 @@
+@wip
 Feature: Classifieds
 	In order to create, buy, loan and borrow classifieds
 	As a user
 	I want to be able to interact with classifieds
 
+	@wip
 	Scenario: List of Galleries without a user
 # TODO:: SWITCH TO TABLE WITH FREE/PUBLIC/NONPUBLIC ITEMS
 		Given a classified exists with title: "My Cool Classified"
@@ -14,29 +16,31 @@ Feature: Classifieds
 		And I should see the classifieds sidebar widget top classifieds
 		And I should see the classifieds sidebar widget newest classifieds
 		And I should see the classifieds sidebar widget free classifieds
+		And I should not see the classifieds sidebar widget shared classifieds
 		And I should see the classifieds sidebar widget categories list
-		And I should see the classifieds sidebar widget shared classifieds
 
 	Scenario: List of Galleries as a logged in user
 		Given a user is logged in
 		When I am on the classifieds page
 		Then I should see the public and free classifieds
 		And I should see all shareable items and friends items
-		And I should see the classifieds sidebar widget categories list
 		And I should see the classifieds sidebar widget top classifieds
 		And I should see the classifieds sidebar widget post classifieds
 		And I should see the classifieds sidebar widget newest classifieds
-		And I should see the classifieds sidebar widget free classifieds
 		And I should see the classifieds sidebar widget shared classifieds
+		And I should see the classifieds sidebar widget free classifieds
+		And I should see the classifieds sidebar widget categories list
 
+	@wip
 	Scenario: View a classified as a logged in user
 		Given a user is logged in
-		And a classified exists
+		And a classified exists with aasm_state: "available"
 		When I visit the show page for that classified
 		Then I should see the contact link for the classified owner
 
+	@wip
 	Scenario: View a classified as a non logged in user
-		Given a classified exists
+		Given a classified exists with aasm_state: "available"
 		When I visit the show page for that classified
 		Then I should not see the owner edit link for that classified
 		Then I should not see the contact link for the classified owner
