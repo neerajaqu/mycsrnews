@@ -1,9 +1,5 @@
 defaults: &defaults
 
-  # Uncomment this line to enable google analytics
-  google_analytics_account_id: 'UF-123456890-7'
-  google_analytics_site_id: '5407321'
-
   # ad platforms supported: google, helios, none = turn ads off
   ad_platform: 'none' 
   
@@ -16,8 +12,6 @@ defaults: &defaults
   #helios_url: 'http://subdomain.ur.gcion.com'
   #helios_script_url: 'http://scriptsubdomain.ur.gcion.com'
   #helios_list_pos: '728x90_1,468x60_1,300x250_1,160x600_1,250x250_1,200x200_1,336x280_1'
-
-  site_title: 'Default Site Name'
 
   # Default admin login info, this will only be used when you do not have an admin user in the system
   # Connect to /admin to be prompted for this login info
