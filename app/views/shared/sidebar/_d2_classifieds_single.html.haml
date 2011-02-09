@@ -1,0 +1,10 @@
+-# @expects: local 'classifieds'
+- cache :d2_classifieds_single do
+  .panel_1
+    .welcomePanel
+      .itemBlock
+        %h2= t('classifieds.single_classifieds_title')
+        %p= t('classifieds.single_classifieds_intro')
+        = link_to t('classifieds.single_classifieds_post'), new_classified_path, :class => "btn"
+    - classifieds ||= Classified.active.newest 1
+    = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => nil, :item_list => classifieds, :item_type => 'classified' }
