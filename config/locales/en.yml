@@ -276,6 +276,7 @@ en:
     read: "Read Story"
     quick_post: "Quick post"
   predictions:
+    final_result: "The correct result for this question is {{accepted_result}}. Closed: {{accepted_time}}"
     high_scores: "Top Predictors"
     guess_count: "Predictions: {{guess_count}}"
     accuracy: "Accuracy: {{accuracy}}"
