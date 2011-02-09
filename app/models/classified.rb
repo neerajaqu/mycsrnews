@@ -261,17 +261,4 @@ class Classified < ActiveRecord::Base
     def validate_allow_type
       errors.add(:allow, "must be a valid allow group") unless self.valid_allow_type?
     end
-<<<<<<< HEAD:app/models/classified.rb
-=======
-
-    def validate_category_type
-      errors.add(:category_list, "must be a valid category group") unless self.valid_category?
-    end
-
-    def validate_subcategory_type
-      return true unless subcategory_list.present?
-      errors.add(:subcategory_list, "must be a valid subcategory group") unless self.valid_subcategory?
-    end
-
->>>>>>> 3086d4aebc4c34b0fc54efe5b3fd126d86185ed6:app/models/classified.rb
 end
