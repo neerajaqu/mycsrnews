@@ -25,6 +25,8 @@ widgets:
     announcements:
       partial: 'shared/announcements'    
   sidebar_content:
+    d2_classifieds_single:  
+      partial: '/shared/sidebar/d2_classifieds_single'
     twitter_standard_list:
       partial: '/shared/sidebar/twitter_standard_list'
     twitter_standard_profile:
