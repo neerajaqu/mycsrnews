@@ -85,6 +85,8 @@ custom_widgets.each do |custom_widget|
 end
 
 settings = [
+ { :key_sub_type => 'options', :key_name => 'default_admin_user',  :value => (APP_CONFIG['default_admin_user'] || "admin") },
+ { :key_sub_type => 'options', :key_name => 'default_admin_password',  :value => (APP_CONFIG['default_admin_password'] || "n2adminpassword") },
  { :key_sub_type => 'options', :key_name => 'default_site_preference',  :value => "iframe" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_features',  :value => "300" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_newswires',  :value => "750" },
@@ -160,7 +162,6 @@ settings = [
  { :key_sub_type => 'ads', :key_name => 'openx_noscript_imgsrc', :value => "http://openx.com/ns_imgsrc_address" },
  { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => ( APP_CONFIG['google_adsense_slot_name'] || "default") },
  { :key_sub_type => 'ads', :key_name => 'google_adsense_account_id', :value => (APP_CONFIG['google_adsense_account_id'] || "ca-pub-9975156792632579" ) },
- { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => (APP_CONFIG['google_adsense_slot_name'] || "Needle_Small") },
  { :key_sub_type => 'options', :key_name => 'google_search_engine_id', :value => ("your-google-search-engine-id") },
  { :key_sub_type => 'options', :key_name => 'widget_stories_short_max', :value => "3" },
  { :key_sub_type => 'options', :key_name => 'widget_articles_as_blog_max', :value => "1" },

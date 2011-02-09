@@ -116,7 +116,7 @@ describe User do
       end
 
       it "should return the first name when first name only is configured" do
-        APP_CONFIG['firstnameonly'] = true
+        get_setting('firstnameonly').try(:value) = true
         @user.public_name.should == @first
       end
     end

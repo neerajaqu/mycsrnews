@@ -214,7 +214,7 @@ module ApplicationHelper
       unless options[:useyou] == true
         options.merge!(:capitalize => false)        
       end
-      firstnameonly = APP_CONFIG['firstnameonly'] || false
+      firstnameonly = get_setting('firstnameonly').try(:value) || false
       options.merge!(:firstnameonly => firstnameonly) if firstnameonly
       if target
         link_to fb_name(user, options), user_path(user, link_options), :target => target
@@ -231,7 +231,7 @@ module ApplicationHelper
   end
 
   def profile_fb_name(user,linked = false,use_you = true, possessive = false)
-    firstnameonly = APP_CONFIG['firstnameonly'] || false
+    firstnameonly = get_setting('firstnameonly').try(:value) || false
     fb_name(user, :use_you => use_you, :possessive => possessive, :capitalize => true, :linked => linked, :firstnameonly => firstnameonly )
   end
   
@@ -292,7 +292,7 @@ module ApplicationHelper
 
   def fb_list_of_names(fb_user_ids)
     return false if fb_user_ids.empty?
-    firstnameonly = APP_CONFIG['firstnameonly'] || false
+    firstnameonly = get_setting('firstnameonly').try(:value) || false
     return fb_name(fb_user_ids.first,:firstnameonly => firstnameonly) if fb_user_ids.size == 1
     last = fb_user_ids.pop
     "#{fb_user_ids.collect { |c| fb_name c }.join ', '} and #{fb_name last}"
