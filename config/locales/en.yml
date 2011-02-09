@@ -488,3 +488,12 @@ en:
     edit: "Edit this Classified"
     new_item: "Create a new Classified"
     new_classified_posted: "A new classified item: {{classified}} has been posted."
+    near_expiration:
+      subject: "Your classified item {{classified}} is nearing expiration"
+      message: "Click the link below if you want to edit or renew the listing."
+      action: "Visit listing"
+    expired:
+      subject: "Your classified item {{classified}} has expired"
+      message: "Click the link below if you want to reactivate the listing."
+      action: "Visit listing"
+    
