@@ -321,6 +321,7 @@ describe Classified do
 
   end # describe #statemachine
 
+=begin
   describe "#sections" do
     before(:all) do
       @default_categories = [:pizza, :coffee, :oreos]
@@ -359,5 +360,6 @@ describe Classified do
       end
     end
   end
+=end
 
 end

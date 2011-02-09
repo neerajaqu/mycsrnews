@@ -3,10 +3,11 @@ class Classified < ActiveRecord::Base
 
   acts_as_authorization_object
 
-  acts_as_taggable_on :tags, :category, :subcategories, :location
+  acts_as_taggable_on :tags, :location
   acts_as_voteable 
   acts_as_media_item
 
+  acts_as_categorizable
   acts_as_featured_item
   acts_as_moderatable
   acts_as_relatable
@@ -28,18 +29,12 @@ class Classified < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :categorizations, :as => :categorizable
-  has_many :categories, :through => :categorizations, :conditions => ["parent_id IS NULL"]
-  has_many :subcategories, :source => :category, :through => :categorizations, :conditions => ["parent_id IS NOT NULL"]
-
   has_friendly_id :title, :use_slug => true
 
   validates_presence_of :title, :details, :user_id
 
   validate :validate_listing_type
   validate :validate_allow_type
-  validate :validate_category_type
-  validate :validate_subcategory_type
 
   before_save :set_expires_at
 
@@ -129,7 +124,7 @@ class Classified < ActiveRecord::Base
   end
 
   def self.listing_types
-    [:free, :sale, :loan, :wanted]
+    [:sale, :free, :loan, :wanted]
   end
 
   def valid_listing_type?
@@ -141,26 +136,8 @@ class Classified < ActiveRecord::Base
     self.listing_types.include? type.to_sym
   end
   
-  def valid_category?
-    self.class.valid_category? category_list
-  end
-
-  def self.valid_category? type
-    return false unless type
-    self.default_category_names.include? type.to_s
-  end
-  
-  def valid_subcategory?
-    self.class.valid_subcategory? subcategory_list
-  end
-
-  def self.valid_subcategory? type
-    return false unless type
-    self.default_subcategory_names.include? type.to_s
-  end
-  
   def self.allow_types
-    [:friends, :friends_of_friends, :all]
+    [:all, :friends, :friends_of_friends]
   end
 
   def valid_allow_type?
@@ -190,17 +167,6 @@ class Classified < ActiveRecord::Base
 
   def allow_type() allow.to_sym end
   def allow_type=(atype) self.allow = atype end
-
-  def self.default_categories() self.default_tags(:on => "category") end
-  def self.default_subcategories() self.default_tags(:on => "subcategories") end
-  def self.default_category_names() self.default_categories.map(&:name) end
-  def self.default_subcategory_names() self.default_subcategories.map(&:name) end
-  def self.add_default_category(category) self.build_default_tag_on(category, "category") end
-  def self.add_default_subcategory(subcategory) self.build_default_tag_on(subcategory, "subcategories") end
-
-  def category_name
-    category.first.name
-  end
 
   protected
     #
@@ -295,13 +261,4 @@ class Classified < ActiveRecord::Base
     def validate_allow_type
       errors.add(:allow, "must be a valid allow group") unless self.valid_allow_type?
     end
-
-    def validate_category_type
-      errors.add(:category_list, "must be a valid category group") unless self.valid_category?
-    end
-
-    def validate_subcategory_type
-      errors.add(:subcategory_list, "must be a valid subcategory group") unless self.valid_subcategory?
-    end
-
 end
