@@ -3,7 +3,7 @@
 - content_for :meta_description do
   = meta_description @classified
 - if @classified.images.present?
-  - classified_for :meta_image do
+  - content_for :meta_image do
     = meta_image @classified.images.first
 
 - content_for :sub_nav do

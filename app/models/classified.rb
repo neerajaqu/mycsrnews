@@ -297,6 +297,7 @@ class Classified < ActiveRecord::Base
     end
 
     def validate_subcategory_type
+      return true unless subcategory_list.present?
       errors.add(:subcategory_list, "must be a valid subcategory group") unless self.valid_subcategory?
     end
 
