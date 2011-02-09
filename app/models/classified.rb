@@ -28,6 +28,10 @@ class Classified < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :categorizations, :as => :categorizable
+  has_many :categories, :through => :categorizations, :conditions => ["parent_id IS NULL"]
+  has_many :subcategories, :source => :category, :through => :categorizations, :conditions => ["parent_id IS NOT NULL"]
+
   has_friendly_id :title, :use_slug => true
   has_many :comments, :as => :commentable
 

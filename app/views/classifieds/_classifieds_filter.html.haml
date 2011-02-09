@@ -1,0 +1,14 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+    	$('a.classifieds-refine').click(function(event) {
+    		event.preventDefault();
+    		$('.classifieds-filter').toggle()
+      });
+    });
+
+.classifieds-filter{:style => "min-height: 100px; border: 1px solid black; display: none;"}
+  %form
+    - Classified.default_category_names.each do |category|
+      = check_box_tag 'categories[]', category
+      = category

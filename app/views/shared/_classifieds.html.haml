@@ -4,6 +4,8 @@
 .panel_2
   .panelBar
     %h2= t('classifieds.browse.title')
+    .refine_link
+      %a.classifieds-refine{:href => '#'} Refine
     - if classifieds.present? and classifieds.first.refineable?
       .refine_link
         = render :partial => 'shared/forms/refine_dropdown'
