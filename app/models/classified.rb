@@ -191,6 +191,15 @@ class Classified < ActiveRecord::Base
     category.first.name
   end
 
+  def recipient_voices
+    users = self.voices
+    users << self.commentable.user
+    # get list of people who liked commentable item
+    users.concat self.commentable.votes.map(&:voter) 
+    users.delete self.user
+    users.uniq
+  end
+
   protected
     #
     # STATE METHODS

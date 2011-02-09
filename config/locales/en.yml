@@ -339,6 +339,9 @@ en:
         url: ""
         detail: ""
   message:
+    classified_added: "A new classified listing {{title}} has been added"
+    classified_near_expiration: "Classified listing: {{title}} is near expiration"
+    classified_expired: "Classified listing: {{title}} has expired"
     prediction_question_added: "A new prediction question has been added to {{title}} at {{site_title}}"
     prediction_closed: "{{title}} has completed at {{site_title}} "
     chirped_at:  "{{name}} sent you a message from {{site_title}}"    
@@ -483,4 +486,5 @@ en:
     post_classified_detail: "Sell, give away or share your stuff with our community."
     post_classified_button: "Post Your Stuff"
     edit: "Edit this Classified"
-    new: "Create a new Classified"
+    new_item: "Create a new Classified"
+    new_classified_posted: "A new classified item: {{classified}} has been posted."

@@ -1,6 +1,24 @@
 class Notifier < ActionMailer::Base
   helper :application
 
+  def classified_near_expiration_message(message)
+    subject       I18n.translate('message.classified_near_expiration', :title => message[:participant].item_title )
+    from          ActionMailer::Base.smtp_settings['user_name']
+    recipients    message[:recipients]
+    sent_on       Time.now
+    body          :message => message
+    content_type  "text/html"
+  end
+
+  def classified_expired_message(message)
+    subject       I18n.translate('message.classified_expired', :title => message[:participant].item_title, :site_title => Metadata::Setting.get_setting('site_title').value )
+    from          ActionMailer::Base.smtp_settings['user_name']
+    recipients    message[:recipients]
+    sent_on       Time.now
+    body          :message => message
+    content_type  "text/html"
+  end
+
   def prediction_result_message(message)
     subject       I18n.translate('message.prediction_closed', :title => message[:participant].prediction_question.item_title, :site_title => Metadata::Setting.get_setting('site_title').value )
     from          ActionMailer::Base.smtp_settings['user_name']

@@ -1,0 +1,8 @@
+- user = user_triggered_answer.originator
+- item = user_triggered_answer.participant
+%p= pfeed_caption t('classifieds.new_classified_posted', :classified => link_to(item.item_title, polymorphic_url(item,:only_path => false) ) )
+
+.user-wrapper
+  .profilePic= local_linked_profile_pic user, :width => '30px', :height => '30px', :only_path => false, :format => 'html'
+  %h3
+    = t('posted_by', :fb_name => local_linked_profile_name(user, :only_path => false, :format => 'html'), :date => timeago(item.created_at))
