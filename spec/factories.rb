@@ -130,8 +130,8 @@ Factory.define :classified do |f|
   f.allow       "all"
   f.association :user, :factory => :user
   f.listing_type  "sale"
-  f.category_list  Classified.default_category_names.first
-  f.subcategory_list  Classified.default_subcategory_names.first
+  #f.category_list  Classified.categories.first
+  #f.subcategory_list  Classified.default_subcategory_names.first
 end
 
 Factory.define :available_classified, :parent => :classified do |f|
@@ -148,4 +148,13 @@ end
 
 Factory.define :loan_classified, :parent => :available_classified do |f|
   f.listing_type "loan"
+end
+
+Factory.define :category do |f|
+  f.name Faker::Company.bs
+end
+
+Factory.define :subcategory, :parent => :category do |f|
+  f.name Faker::Company.bs
+  f.association :parent, :factory => :category
 end
