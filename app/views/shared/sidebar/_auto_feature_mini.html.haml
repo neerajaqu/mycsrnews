@@ -7,6 +7,8 @@
   - unless auto_feature.empty? 
     - if get_setting('auto_feature_only_moderator_items').try(:value)
       - auto_feature = auto_feature.delete_if{|imageable| imageable.user.is_admin == false and imageable.user.is_editor == false and imageable.user.is_moderator == false}
+    - if get_setting('exclude_articles_from_news').try(:value)
+      - auto_feature = auto_feature.delete_if{|imageable| imageable.is_article == true}
     %div{:class => "panel_1 featureWrap #{defined?(widget_page) ? widget_page.css_class : ''}"}
       = render :partial => 'shared/featured_items/panelbar'
       .feature_scrollable_panel_mini
