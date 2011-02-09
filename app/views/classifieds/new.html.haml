@@ -50,7 +50,7 @@
               %a{:href => "#"}= t('wizard.images') 
             %li
               %a{:href => "#"}= t('wizard.more') 
-          - semantic_form_for @classified, :url => classifieds_path, :html => { :multipart => true, :class => "post_classified" } do |form|
+          - semantic_form_for @classified, :html => { :multipart => true, :class => "post_classified" } do |form|
             .panes
               .panel1
                 %h1.title= t('classifieds.new.your_item')

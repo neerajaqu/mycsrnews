@@ -62,7 +62,20 @@ class ClassifiedsController < ApplicationController
 
   def edit
     @current_sub_tab = 'Edit'
+    @classified = Classified.active.find(params[:id])
   end
+  
+  def update
+    @classified = Classified.active.find(params[:id])
+    if @classified.valid? and @classified.update_attributes(params[:article])
+      flash[:success] = "Successfully updated your listing!"
+      redirect_to classified_path(@classified)
+    else
+    	flash[:error] = "Could not update your listing. Please fix the errors and try again."
+    	render :new
+    end
+  end
+  
 
   def my_items
     @current_sub_tab = 'My Items'

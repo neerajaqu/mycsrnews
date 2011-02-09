@@ -374,6 +374,7 @@ en:
     compose: "Compose"
     continue: "Continue"
     post_now: "Post Now"
+    save_changes: "Save Changes"
     submit: "Submit"
     back: "Back"
     url: "Web Page"
@@ -488,6 +489,7 @@ en:
     edit: "Edit this Classified"
     new_item: "Create a new Classified"
     new_classified_posted: "A new classified item: {{classified}} has been posted."
+    edit: "Edit this item"
     near_expiration:
       subject: "Your classified item {{classified}} is nearing expiration"
       message: "Click the link below if you want to edit or renew the listing."
