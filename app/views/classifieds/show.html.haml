@@ -50,8 +50,8 @@
         .float_left= render :partial => 'shared/flag_form', :locals => { :flaggable => @classified }
 
     = render_ad(:banner, @ad_layout, @ad_banner)
-    -# = render :partial => 'shared/comments', :locals => { :comments => @classified.comments }
-  -# = render :partial => 'shared/comment_form', :locals => { :commentable => @classified }
+    = render :partial => 'shared/comments', :locals => { :comments => @classified.comments }
+    = render :partial => 'shared/comment_form', :locals => { :commentable => @classified }
 
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'

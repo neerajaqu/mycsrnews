@@ -29,6 +29,7 @@ class Classified < ActiveRecord::Base
   belongs_to :user
 
   has_friendly_id :title, :use_slug => true
+  has_many :comments, :as => :commentable
 
   validates_presence_of :title, :details, :user_id
 
@@ -104,18 +105,6 @@ class Classified < ActiveRecord::Base
     renewed!
   end
   
-  def comments_count
-    0
-  end
-
-  def votes_tally
-    votes_count
-  end
-  
-  def votes_count
-    0
-  end
-
   def has_expired?
     Time.now > expires_at
   end
