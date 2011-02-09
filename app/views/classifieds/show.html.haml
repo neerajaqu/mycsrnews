@@ -3,7 +3,7 @@
 - content_for :meta_description do
   = meta_description @classified
 - if @classified.images.present?
-  - classified_for :meta_image do
+  - content_for :meta_image do
     = meta_image @classified.images.first
 
 - content_for :sub_nav do
@@ -44,14 +44,16 @@
       - if @classified.media_item?
         = render_media_items @classified, :size => 'large'
 
+    - if current_user.present? and current_user == @classified.user
+      = link_to t('classifieds.edit'), edit_classified_path(@classified)
     - if @classified.moderatable?
       .mod-panel.panel_2
         .float_right= render :partial => 'shared/moderate_form', :locals => { :moderatable => @classified }
         .float_left= render :partial => 'shared/flag_form', :locals => { :flaggable => @classified }
 
     = render_ad(:banner, @ad_layout, @ad_banner)
-    -# = render :partial => 'shared/comments', :locals => { :comments => @classified.comments }
-  -# = render :partial => 'shared/comment_form', :locals => { :commentable => @classified }
+    = render :partial => 'shared/comments', :locals => { :comments => @classified.comments }
+    = render :partial => 'shared/comment_form', :locals => { :commentable => @classified }
 
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'

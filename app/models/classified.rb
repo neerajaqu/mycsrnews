@@ -30,6 +30,7 @@ class Classified < ActiveRecord::Base
   belongs_to :user
 
   has_friendly_id :title, :use_slug => true
+  has_many :comments, :as => :commentable
 
   validates_presence_of :title, :details, :user_id
 
@@ -103,18 +104,6 @@ class Classified < ActiveRecord::Base
     renewed!
   end
   
-  def comments_count
-    0
-  end
-
-  def votes_tally
-    votes_count
-  end
-  
-  def votes_count
-    0
-  end
-
   def has_expired?
     Time.now > expires_at
   end
@@ -167,6 +156,17 @@ class Classified < ActiveRecord::Base
 
   def allow_type() allow.to_sym end
   def allow_type=(atype) self.allow = atype end
+
+=begin
+  def recipient_voices
+    users = self.voices
+    users << self.commentable.user
+    # get list of people who liked commentable item
+    users.concat self.commentable.votes.map(&:voter) 
+    users.delete self.user
+    users.uniq
+  end
+=end
 
   protected
     #
@@ -261,4 +261,17 @@ class Classified < ActiveRecord::Base
     def validate_allow_type
       errors.add(:allow, "must be a valid allow group") unless self.valid_allow_type?
     end
+<<<<<<< HEAD:app/models/classified.rb
+=======
+
+    def validate_category_type
+      errors.add(:category_list, "must be a valid category group") unless self.valid_category?
+    end
+
+    def validate_subcategory_type
+      return true unless subcategory_list.present?
+      errors.add(:subcategory_list, "must be a valid subcategory group") unless self.valid_subcategory?
+    end
+
+>>>>>>> 3086d4aebc4c34b0fc54efe5b3fd126d86185ed6:app/models/classified.rb
 end
