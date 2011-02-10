@@ -88,6 +88,22 @@ $(function() {
     }, 'html');
   });
 
+  $('.classifieds-filter form').submit(function(event) {
+  	event.preventDefault();
+  	$(this).after('<p class="status"><i>submitting...</i></p>');
+
+  	var url = change_url_format($(this).attr('action'));
+  	url += "?" + $(this).serialize();
+  	console.log(url);
+  	console.log($(this).serialize());
+  	var list = $('ul.classifieds');
+    $.get(url, function(data) {
+    	$('.classifieds-filter p.status').remove();
+      $(list).quicksand( $(data).find('li'), {adjustHeight: false} );
+      rebuild_facebook_dom();
+    }, 'html');
+  });
+
   $('form.comment').submit(function(event) {
   	// Skip forums for now
   	if ($(this).parents('.topic-form').length) return true;

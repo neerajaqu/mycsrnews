@@ -26,6 +26,11 @@ class Classified < ActiveRecord::Base
   named_scope :allow_friends, { :conditions => ["allow = ?", "friends"] }
   named_scope :allow_friends_of_friends, { :conditions => ["allow = ?", "friends_of_friends"] }
   named_scope :available, { :conditions => ["aasm_state = ?", "available"] }
+  named_scope :search_on, lambda { |keyword| { :conditions => ["title LIKE ? OR details LIKE ?", "%#{keyword}%", "%#{keyword}%"] } }
+  named_scope :in_category, lambda { |category_id|
+    return {} if category_id.nil?
+    { :conditions => ["id IN (SELECT categorizable_id FROM categorizations WHERE categorizable_type = ? AND category_id = ?)", self.name, category_id] }
+  }
 
   belongs_to :user
 
@@ -113,7 +118,8 @@ class Classified < ActiveRecord::Base
   end
 
   def self.listing_types
-    [:sale, :free, :loan, :wanted]
+    #[:sale, :free, :loan, :wanted]
+    [:sale, :free, :loan]
   end
 
   def valid_listing_type?
@@ -156,6 +162,48 @@ class Classified < ActiveRecord::Base
 
   def allow_type() allow.to_sym end
   def allow_type=(atype) self.allow = atype end
+
+  def self.filtered_results options
+    keyword = options['keyword'].present? ? options['keyword'] : nil
+
+    chains = []
+
+    chains << [:in_category, options['categories']] if options['categories'] =~ /^[0-9]+$/
+
+    case options['allow_type']
+    when 'all'
+      chains << :allow_all
+    when 'friends'
+      chains << :allow_friends
+    when 'friends_of_friends'
+      chains << :allow_friends_of_friends
+    else
+    end
+
+    case options['listing_type']
+    when 'free'
+      chains << :for_free
+    when 'sale'
+      chains << :for_sale
+    when 'loan'
+      chains << :for_loan
+    else
+    end
+
+    if keyword
+    	chains << [:search_on, keyword]
+    end
+
+    chains << :newest
+
+    chains.inject(self) do |chain, scope|
+      if scope.is_a? Array
+      	chain.send scope[0], scope[1]
+      else
+      	chain.send scope
+      end
+    end
+  end
 
 =begin
   def recipient_voices

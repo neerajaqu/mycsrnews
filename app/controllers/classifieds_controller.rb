@@ -20,6 +20,11 @@ class ClassifiedsController < ApplicationController
     @current_sub_tab = 'Browse'
     # to do - implement recently viewed scope or method for current user 
     @recently_viewed_classifieds = Classified.newest 5
+
+    respond_to do |format|
+      format.html
+      format.json { render :partial => 'shared/classifieds', :locals => { :classifieds => Classified.filtered_results(params) } }
+    end
   end
 
   def new

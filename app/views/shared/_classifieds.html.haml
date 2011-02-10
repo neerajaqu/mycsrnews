@@ -13,7 +13,7 @@
     %span= t('classifieds.browse.subtitle')
   .itemListWrap
     .list_items
-      %ul
+      %ul.classifieds
         - classifieds.each do |classified|
           %li{'data-id' => classified.cache_key}
             .article

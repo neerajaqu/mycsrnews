@@ -64,6 +64,10 @@ module Newscloud
           subcategories.first
         end
 
+        def add_category category
+          self.categorizations << Categorization.new(:categorizable => self, :category => category)
+        end
+
         private
           def validate_category_type
             errors.add(:category_list, "must be a valid category group") unless self.valid_category?
