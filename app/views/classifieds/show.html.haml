@@ -64,6 +64,7 @@
   - if @custom_sidebar_widget
     = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
   = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/post_classified'
   - cache "#{@classified.cache_key}_sidebar_html" do
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @classified.user }
     = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @classified }
