@@ -1,10 +1,8 @@
-#subNav.tabs.clearfix
-  .left_tabs
-    %ul#toggle_tabs_unused.toggle_tabs.clearfix
-      %li.first= link_to t('.browse_resources'), resources_path, :class => sub_tab_selected?(@current_sub_tab, 'Browse Resources')
-      %li.first= link_to t('.suggest_resource'), new_resource_path, :class => sub_tab_selected?(@current_sub_tab, 'Suggest Resource')
+#subNav
+  .tabs
+    %ul#toggle_tabs_unused.toggle_tabs
+      %li= link_to t('.browse_resources'), resources_path, :class => "tab #{ sub_tab_selected?(@current_sub_tab, 'Browse Resources')}"
+      %li= link_to t('.suggest_resource'), new_resource_path, :class =>"tab #{sub_tab_selected?(@current_sub_tab, 'Suggest Resource')}" 
       - if current_user
-        %li.first= link_to t('.my_resources'), my_resources_resource_path(:id => current_user), :class => sub_tab_selected?(@current_sub_tab, 'My Resources')
-%br
-%br
+        %li= link_to t('.my_resources'), my_resources_resource_path(:id => current_user), :class => "tab #{sub_tab_selected?(@current_sub_tab, 'My Resources')}"
 
