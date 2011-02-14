@@ -442,6 +442,7 @@ en:
     default: "Sorry, nothing available yet."
     top_discussed_stories: "Sorry, no discussions found."
     no_scores: "Sorry, no scores available yet."
+    no_classified_listings: "Sorry, no listings match your search criteria."
     twitter_standard_list: "Either your Twitter account name or list name is invalid. Change them in the administrative settings."
     twitter_standard_search: "Your twitter search widget settings need to be configured via the Administrative console"
     twitter_standard_favorites: "Your twitter favorites widget settings need to be configured via the Administrative console"  
@@ -454,20 +455,25 @@ en:
       title: "Top Items"
       subtitle: "Most popular items"
   classifieds:
+    listing_type_strings:
+      sale: "For Sale"
+      free: "Free"
+      loan: "To Share"
     menu_title: "Classifieds"
-    menu_browse: "Browse"
+    menu_browse: "Browse Listings"
     menu_new: "Post an item"
     listing_type:
       title: "Select a listing type"
-    allow:
-      title: "Allow Group"
+    allow_type:
+      title: "Viewable by"
     tags:
       tags_title: "Tags"
       category_title: "Category"
       subcategories_title: "Subcategories"
     subnav:
-      browse: "Browse"
-      my_items: "Your Items"
+      browse: "Browse Listings"
+      my_items: "Your Listings"
+      post_item: "Post an Item"
     browse:
       title: "Browse classifieds"
       subtitle: "Find stuff to borrow, buy or pick up for free"
@@ -499,15 +505,15 @@ en:
       message: "Click the link below if you want to reactivate the listing."
       action: "Visit listing"
     actions:
-      title: "Your classified is currently {{state}}"
-      details: "Update your classified"
-      closed: "Close this item"
-      hidden: "Temporarily hide this item"
-      sold: "Mark this item as sold"
-      loaned_out: "Mark this item as loaned out"
-      renewed: "Renew this item"
-      returned: "Set this item as returned"
-      published: "Publish this item"
+      title: "Item status: {{state}}"
+      details: "You can modify the status of this item using the option(s) below."
+      closed: "Close item"
+      hidden: "Hide item"
+      sold: "Set item as sold"
+      loaned_out: "Set item as loaned out"
+      renewed: "Renew item"
+      returned: "Set item as returned"
+      published: "Publish item"
     categories_top_title: "Top Classified Categories"
   categories:
     top_title: "Top Categories"
