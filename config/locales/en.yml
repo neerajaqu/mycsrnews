@@ -514,3 +514,7 @@ en:
       renewed: "Renew item"
       returned: "Set item as returned"
       published: "Publish item"
+    categories_top_title: "Top Classified Categories"
+  categories:
+    top_title: "Top Categories"
+    no_items: "No Categories"

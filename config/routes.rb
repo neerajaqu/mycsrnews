@@ -87,7 +87,6 @@ ActionController::Routing::Routes.draw do |map|
   map.tagged_stories '/stories/tag/:tag.:format', :controller => 'stories', :action => 'tags'
   map.tagged_stories_with_page '/stories/tag/:tag/page/:page.:format', :controller => 'stories', :action => 'tags'
 
-
   map.idea_tag_with_page '/ideas/tag/:tag/page/:page.:format', :controller => 'ideas', :action => 'tags'
   map.idea_tag '/ideas/tag/:tag.:format', :controller => 'ideas', :action => 'tags'
   map.resource_tag_with_page '/resources/tag/:tag/page/:page.:format', :controller => 'resources', :action => 'tags'
@@ -98,8 +97,16 @@ ActionController::Routing::Routes.draw do |map|
   map.prediction_group_tag '/prediction_groups/tag/:tag.:format', :controller => 'prediction_groups', :action => 'tags'
   map.prediction_question_tag_with_page '/prediction_questions/tag/:tag/page/:page.:format', :controller => 'prediction_questions', :action => 'tags'
   map.prediction_question_tag '/prediction_questions/tag/:tag.:format', :controller => 'prediction_questions', :action => 'tags'
+
   map.top_users '/users/top/:top.:format', :controller => 'users', :action => 'index'
   map.set_status_classified '/classifieds/:id/set_status/:status.:format', :controller => 'classifieds', :action => 'set_status'
+#
+#
+# Categories
+#
+  map.categorized_classifieds '/classifieds/category/:category.:format', :controller => 'classifieds', :action => 'categories'
+  map.categorized_classifieds_with_page '/classifieds/category/:category/page/:page.:format', :controller => 'classifieds', :action => 'categories'
+
 
 #
 # RESOURCES
