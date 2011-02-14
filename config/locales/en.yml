@@ -454,6 +454,10 @@ en:
       title: "Top Items"
       subtitle: "Most popular items"
   classifieds:
+    listing_type_strings:
+      sale: "For Sale"
+      free: "Free"
+      loan: "To Share"
     menu_title: "Classifieds"
     menu_browse: "Browse"
     menu_new: "Post an item"
