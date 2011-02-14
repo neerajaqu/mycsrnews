@@ -58,7 +58,8 @@
                   - form.inputs do                
                     = form.input :title, :label => t('.title'), :hint => t('.hint_classified_title')
                     = form.input :details, :hint => t('.hint_classified_details'), :required => false 
-                    = form.input :listing_type, :label => t('classifieds.listing_type.title'), :as => :select, :collection => Classified.listing_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false
+                    = listing_type_select
+                    =# form.input :listing_type, :label => t('classifieds.listing_type.title'), :as => :select, :collection => Classified.listing_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false
                     = form.input :allow, :label => t('classifieds.allow_type.title'), :as => :select, :collection => Classified.allow_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false
                     =# form.input :category_list, :label => t('classifieds.tags.categories_title'), :as => :select, :collection => Classified.default_categories.map {|c| [c.name.humanize, c.name] }, :include_blank => false
                     =# form.input :subcategory_list, :label => t('classifieds.tags.subcategories_title'), :as => :select, :collection => Classified.default_subcategories.map {|c| [c.name.humanize, c.name] }, :include_blank => false

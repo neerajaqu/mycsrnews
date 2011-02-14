@@ -3,3 +3,4 @@
     %ul#toggle_tabs_unused.toggle_tabs.clearfix
       %li.first= link_to t('classifieds.subnav.browse'), classifieds_path, :class => sub_tab_selected?(@current_sub_tab, 'Browse')
       %li.first= link_to t('classifieds.subnav.my_items'), my_items_classifieds_path, :class => sub_tab_selected?(@current_sub_tab, 'My Items')
+      %li.first= link_to t('classifieds.subnav.post_item'), new_classified_path, :class => sub_tab_selected?(@current_sub_tab, 'New Item')

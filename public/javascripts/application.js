@@ -104,7 +104,7 @@ $(function() {
 
   $('.classifieds-filter form').submit(function(event) {
   	event.preventDefault();
-  	$(this).after('<p class="status"><i>submitting...</i></p>');
+  	$(this).after('<p class="status"><i>...updating...</i></p>');
 
   	var url = change_url_format($(this).attr('action'));
   	url += "?" + $(this).serialize();

@@ -442,6 +442,7 @@ en:
     default: "Sorry, nothing available yet."
     top_discussed_stories: "Sorry, no discussions found."
     no_scores: "Sorry, no scores available yet."
+    no_classified_listings: "Sorry, no listings match your search criteria."
     twitter_standard_list: "Either your Twitter account name or list name is invalid. Change them in the administrative settings."
     twitter_standard_search: "Your twitter search widget settings need to be configured via the Administrative console"
     twitter_standard_favorites: "Your twitter favorites widget settings need to be configured via the Administrative console"  
@@ -463,8 +464,8 @@ en:
     menu_new: "Post an item"
     listing_type:
       title: "Select a listing type"
-    allow:
-      title: "Allow Group"
+    allow_type:
+      title: "Viewable by"
     tags:
       tags_title: "Tags"
       category_title: "Category"
@@ -472,6 +473,7 @@ en:
     subnav:
       browse: "Browse"
       my_items: "Your Items"
+      post_item: "Post an Item"
     browse:
       title: "Browse classifieds"
       subtitle: "Find stuff to borrow, buy or pick up for free"
