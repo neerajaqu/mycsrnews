@@ -13,7 +13,7 @@
     = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Classified , :locale_var => 'top_classified_tags' }
-  - if current_user.present?
+  -# if current_user.present?
     = render :partial => 'shared/sidebar/recently_viewed_classifieds', :locals => { :recenlty_viewed_classifieds => @recently_viewed_classifieds }
   = render :partial => 'shared/sidebar/top_classifieds', :locals => { :top_classifieds => @top_classifieds }
   = render :partial => 'shared/sidebar/newest_classifieds', :locals => { :newest_classifieds => @newest_classifieds }
