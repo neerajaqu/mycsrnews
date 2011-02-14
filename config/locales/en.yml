@@ -508,3 +508,7 @@ en:
       renewed: "Renew this item"
       returned: "Set this item as returned"
       published: "Publish this item"
+    categories_top_title: "Top Classified Categories"
+  categories:
+    top_title: "Top Categories"
+    no_items: "No Categories"
