@@ -88,6 +88,20 @@ $(function() {
     }, 'html');
   });
 
+  $('.classifieds-filter form #categories').change(function(event) {
+		event.preventDefault();
+		var category_select = $(this);
+ 		var select_parent = category_select.parent().parent().parent();
+ 		select_parent.submit();
+  });  
+
+  $('.classifieds-filter form #listing_type').change(function(event) {
+		event.preventDefault();
+		var listing_type_select = $(this);
+ 		var select_parent = listing_type_select.parent().parent().parent();
+ 		select_parent.submit();
+  });  
+
   $('.classifieds-filter form').submit(function(event) {
   	event.preventDefault();
   	$(this).after('<p class="status"><i>submitting...</i></p>');
