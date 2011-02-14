@@ -9,3 +9,4 @@ Disallow: /*new.html
 Disallow: /*edit.html
 Disallow: /*block.html
 Disallow: /*feature.html
+Disallow: /*set_status*

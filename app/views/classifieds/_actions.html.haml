@@ -1,0 +1,9 @@
+-# nothing expected
+
+.panel_1
+  .welcomePanel
+    .itemBlock
+      %h2= t('classifieds.actions.title', :state => classified.state.to_s.humanize)
+      %p= t('classifieds.actions.details')
+      - classified_actions(classified).each do |title, action_url|
+        = link_to title, action_url, :class => "btn"

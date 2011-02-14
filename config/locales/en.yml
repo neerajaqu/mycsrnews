@@ -498,4 +498,13 @@ en:
       subject: "Your classified item {{classified}} has expired"
       message: "Click the link below if you want to reactivate the listing."
       action: "Visit listing"
-    
+    actions:
+      title: "Your classified is currently {{state}}"
+      details: "Update your classified"
+      closed: "Close this item"
+      hidden: "Temporarily hide this item"
+      sold: "Mark this item as sold"
+      loaned_out: "Mark this item as loaned out"
+      renewed: "Renew this item"
+      returned: "Set this item as returned"
+      published: "Publish this item"

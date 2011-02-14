@@ -1,7 +1,7 @@
 class ClassifiedsController < ApplicationController
   rescue_from 'Acl9::AccessDenied', :with => :access_denied
 
-  before_filter :find_classified, :only => [:show, :edit, :update]
+  before_filter :find_classified, :only => [:show, :edit, :update, :set_status]
   
   access_control do
     allow all, :to => [:index]
@@ -11,7 +11,8 @@ class ClassifiedsController < ApplicationController
     allow :admin
     allow logged_in, :to => [:new, :create, :borrowed_items, :my_items]
     allow anonymous, :to => [:show], :if => :classified_allows_anonymous_users?
-    allow :allowed, :of => :classified, :to => [:show, :edit, :update]
+    allow :allowed, :of => :classified, :to => [:show]
+    allow :owner, :of => :classified, :to => [:edit, :update, :set_status]
   end
 
   before_filter :set_current_tab
@@ -72,7 +73,7 @@ class ClassifiedsController < ApplicationController
   
   def update
     @classified = Classified.active.find(params[:id])
-    if @classified.valid? and @classified.update_attributes(params[:article])
+    if @classified.valid? and @classified.update_attributes(params[:classified])
       flash[:success] = "Successfully updated your listing!"
       redirect_to classified_path(@classified)
     else
@@ -88,6 +89,22 @@ class ClassifiedsController < ApplicationController
 
   def borrowed_items
     @current_sub_tab = 'My Borrowed Items'
+  end
+
+  def set_status
+    if @classified.valid_user_events.include? params[:status].to_sym
+    	method = "#{params[:status]}!".to_sym
+    	if @classified.send(method)
+    		flash[:success] = "Successfully updated your classified"
+    		redirect_to @classified
+    	else
+    		flash[:error] = "Could not update your classified"
+    		redirect_to @classified
+    	end
+    else
+      flash[:error] = "Invalid action for this classified"
+      redirect_to @classified
+    end
   end
 
   private 

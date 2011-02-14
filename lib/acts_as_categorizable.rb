@@ -48,6 +48,10 @@ module Newscloud
         def valid_subcategory? name
           self.subcategories.map(&:name).include? name.to_s
         end
+
+        def category_counts limit = 10
+          Categorization.find(:all, :conditions => ["categorizable_type = ?", self.name], :group => :category_id, :select => "count(*) count, category_id", :include => :category)
+        end
       end
 
       module InstanceMethods
@@ -58,6 +62,10 @@ module Newscloud
 
         def category
           categories.first
+        end
+
+        def category_name
+          category.try(:name)
         end
 
         def subcategory

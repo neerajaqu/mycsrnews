@@ -57,7 +57,13 @@ describe Category do
       Category.default_subcategories.should_not include(subcategory)
     end
 
-    it "should add a category to a classified"
+    it "should add a category to a classified" do
+      category = Classified.add_category Faker::Company.bs
+      classified = Factory(:classified)
+      classified.add_category category
+      classified.categories.should include(category)
+    end
+
     it "should add a subcategory to a category of a classified"
   end
 end

@@ -58,11 +58,20 @@
                   - form.inputs do                
                     = form.input :title, :label => t('.title'), :hint => t('.hint_classified_title')
                     = form.input :details, :hint => t('.hint_classified_details'), :required => false 
-                    = form.input :listing_type, :label => t('classifieds.listing_type.title'), :as => :select, :collection => Classified.listing_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false
-                    = form.input :allow, :label => t('classifieds.allow_type.title'), :as => :select, :collection => Classified.allow_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false
-                    = form.input :category_list, :label => t('classifieds.tags.categories_title'), :as => :select, :collection => Classified.default_categories.map {|c| [c.name.humanize, c.name] }, :include_blank => false
-                    = form.input :subcategory_list, :label => t('classifieds.tags.subcategories_title'), :as => :select, :collection => Classified.default_subcategories.map {|c| [c.name.humanize, c.name] }, :include_blank => false
-                    -#= form.input :tags_list, :label => t('tags'), :required => false, :hint => t('tags_hint')
+                    -# stupid formtastic and its lacked of :selected
+                    =# form.input :listing_type, :label => t('classifieds.listing_type.title'), :as => :select, :collection => Classified.listing_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false, :selected => 'Free'
+                    %li
+                      %label{:for => "classified_listing_type"}= t('classifieds.listing_type.title')
+                      = form.select :listing_type, options_for_select(Classified.listing_types.map {|c| c.to_s }, @classified.listing_type)
+                    %li
+                      %label{:for => "classified_allow_type"}= t('classifieds.allow_type.title')
+                      =# form.select :allow_type, options_for_select(Classified.allow_types.map {|c| [c.to_s.humanize, c] }, @classified.allow)
+                      = form.select :allow, options_for_select(Classified.allow_types.map {|c| c.to_s }, @classified.allow)
+                - @classified.categorizations.build if @classified.categorizations.empty?
+                %fieldset
+                  - form.semantic_fields_for :categorizations do |category_form|
+                    - category_form.inputs do
+                      = category_form.input :category, :as => :select, :collection => @classified.class.categories.map {|c| [c.name, c.id]}, :include_blank => false
                 - form.buttons do
                   = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
                   = form.commit_button t('wizard.save_changes'), :class => 'float_right', :button_html => { :class => 'form-btn' }

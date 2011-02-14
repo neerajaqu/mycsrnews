@@ -160,6 +160,16 @@ class Classified < ActiveRecord::Base
     end
   end
 
+  def valid_user_events
+    events = aasm_events_for_current_state
+
+    events.delete :expired
+    events.delete :sold if loanable?
+    events.delete :loaned_out if sellable? or free?
+
+    events
+  end
+
   def allow_type() allow.to_sym end
   def allow_type=(atype) self.allow = atype end
 

@@ -99,6 +99,7 @@ ActionController::Routing::Routes.draw do |map|
   map.prediction_question_tag_with_page '/prediction_questions/tag/:tag/page/:page.:format', :controller => 'prediction_questions', :action => 'tags'
   map.prediction_question_tag '/prediction_questions/tag/:tag.:format', :controller => 'prediction_questions', :action => 'tags'
   map.top_users '/users/top/:top.:format', :controller => 'users', :action => 'index'
+  map.set_status_classified '/classifieds/:id/set_status/:status.:format', :controller => 'classifieds', :action => 'set_status'
 
 #
 # RESOURCES
