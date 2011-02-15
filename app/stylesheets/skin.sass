@@ -17,7 +17,6 @@ $colorTen:     #ffffff    // body BG, #bodyWrapper BG, V1 .panelBar BG, button T
 //****************************************************************************************************
 //****************************************************************************************************
 
-
 //****************************************************
 // ALERTS
 
@@ -73,24 +72,26 @@ $sponsorLeft: 300px
 $sponsorLogoImage: image_url("default/sponsor-logo.png") center left no-repeat
 
 // Page Tab Float
-$pagetabFloat: left
+$pagetabFloat: right
 
 // Page Tab Width
 $pageTabWidth: 100px
 
 // Page Tabs
-$tabBG: $colorSeven image_url("default/v2/btn-gradient.png") top left repeat-x
-$tabBGHover: $colorSeven - #222 image_url("default/v2/btn-gradient.png") top left repeat-x
+$tabBG: $colorSeven image_url("default/site/btn-gradient.png") top left repeat-x
+$tabBGHover: $colorSeven - #222 image_url("default/site/btn-gradient.png") top left repeat-x
 $tabBorder: 1px solid $colorSeven
 $tabTextColor: $colorTen
 $tabSelectedBG: $colorTen
 $tabSelectedTextColor: $colorSeven
+// Non-Tab navigation
+$PageTabRoundedCorners: none
 
-//Page Tab Dropdowns
-$PageTabDropDownBackground: $colorSeven + #444
-$PageTabDropDownHover: $colorSeven - #222
+// Page Tab Dropdowns
+$PageTabDropDownBG: $colorSeven + #444
+$PageTabDropDownBGHover: $colorSeven - #222
 
-//Page Sub-Navigation Tabs
+// Page Sub-Navigation Tabs
 $subTabBG: $colorOne 
 $subTabBGHover: $colorOne - #222 
 $subTabBorder: 1px solid $colorNine
@@ -111,11 +112,14 @@ $bodyWrapperBG: $colorTen
 // WIDGETS
 
 //Panel Featured 
-$PanelFeaturedBackground: $colorTwo
+$PanelFeaturedBG: $colorTwo
+$PanelBarFeaturedBG: $colorTwo
 
 //Panel Generic (V2)
-$PanelBarBackground: $colorOne
-$PanelBarBorderColor: $colorOne + #222
+$PanelBarBG: $colorOne
+$PaneBarHeaderColor: $colorTen
+
+$PanelBorderColor: 1px solid $PanelBarFeaturedBG - #222
 
 //Panel Generic (V1)
 $subTitleBG: $colorEight - #010101
@@ -147,17 +151,19 @@ $paginationBdrDisabled: 1px solid $colorFive
 
 
 //Buttons (V2)
-
+//General Button
 $BtnBG: $colorOne
 $BtnBGHover: $colorOne - #222
 $BtnBorder: $colorOne
 $BtnTextColor: $colorTen
-
-
+//Panel Bar Button
+$PanelBarBtnBG: $colorTen
+$PanelBarBtnTextColor: $colorOne
+$PanelBarBtnTextColorHover: $colorTen
 
 //Buttons (V1)
-$btnBG: $colorSeven image_url("default/v2/btn-gradient.png") top left repeat-x
-$btnBGHover: $colorSeven - #222 image_url("default/v2/btn-gradient.png") top left repeat-x
+$btnBG: $colorSeven image_url("default/site/btn-gradient.png") top left repeat-x
+$btnBGHover: $colorSeven - #222 image_url("default/site/btn-gradient.png") top left repeat-x
 $btnBorder:  1px solid $colorSeven
 $btnTextColor: $colorTen
 

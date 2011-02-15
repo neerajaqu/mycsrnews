@@ -80,8 +80,8 @@
     top: 0px
     right: 0px
     float: right
-    padding: 8px 0 8px 30px 
-    background: image_url("default/v2/meta-links-bg.png") top left repeat-y
+    padding: 8px 20px 8px 50px 
+    background: image_url("default/site/meta-links-bg.png") top left repeat-y
 
 // account dropdown styles //
 .account-dropdown
@@ -185,7 +185,7 @@ h1, h2, h4, h5
   a
     color: $headerColor
     &:hover
-      color: $headerLinkHover - #222222 
+      color: $headerLinkHover
 
 h1, h2, h4
   line-height: 130%
@@ -230,6 +230,7 @@ li
   margin: 0
   padding: 0
 
+
 // top level menu page tabs //
 #pageTabs
   height: 24px
@@ -251,7 +252,7 @@ li
         border-bottom: $tabBorder
         color: $tabTextColor
         height: 13px
-        padding: 5px 0
+        padding: 6px 0 4px
         &:hover
           background: $tabBGHover
           text-decoration: none
@@ -265,6 +266,7 @@ li
         color: $tabSelectedTextColor
       a.tab.selected:hover
         background: $tabSelectedBG
+
 
 // Sub Navigation Styles //
 #subNav
@@ -324,6 +326,9 @@ li
         -moz-border-radius-topleft: $SecondaryBorderRadius
         border-top-right-radius: $SecondaryBorderRadius
         border-top-left-radius: $SecondaryBorderRadius
+        -webkit-border-radius: $PageTabRoundedCorners
+        -moz-border-radius: $PageTabRoundedCorners 
+        border-radius: $PageTabRoundedCorners
       &.first 
         width: 30px
         a
@@ -334,6 +339,7 @@ li
 
     .toggle_tabs li
       a.tab.selected
+        text-shadow: none
       &.first a.tab.selected
         padding: 5px 7px
       a.tab.selected:hover
@@ -353,7 +359,7 @@ li
         ul.dropdown
           display: inline-block
       ul.dropdown
-        background: $PageTabDropDownBackground image_url("default/v2/dropdown-arrow.png") top center no-repeat
+        background: $PageTabDropDownBG image_url("default/site/dropdown-arrow.png") top center no-repeat
         display: none
         left: -$pageTabWidth * .35 
         margin-top: 4px
@@ -388,20 +394,21 @@ li
             height: auto
             line-height: 130%
             margin: 4px 8px
-            padding: 4px 8px
+            padding: 5px 8px 3px
+            text-shadow: 0 0 2px $PageTabDropDownBGHover
             width: $pageTabWidth * 1.75 - 32px
             -webkit-border-radius: 100px
             -moz-border-radius: 100px
             border-radius: 100px
             &:hover
-              background: $PageTabDropDownHover
+              background: $PageTabDropDownBGHover
               text-decoration: none
 
 
 //**********************************************************************************************
 /* FEATURED ITEMS */
 .featured
-  background: $PanelFeaturedBackground
+  background: $PanelFeaturedBG
   .btnComment
     background: $btnCommentFeatureBG
   .answer
@@ -673,7 +680,7 @@ $ColumnCorners: none
 /* FEATURED STORY STYLES */
 
 .featureWrap
-  background: $PanelFeaturedBackground
+  background: $PanelFeaturedBG
   .btnComment
     background: $btnCommentFeatureBG
    
@@ -699,7 +706,7 @@ $ColumnCorners: none
         padding: 4px 0
       &:hover
         text-decoration: none
-        background: $PanelFeaturedBackground
+        background: $PanelFeaturedBG
 
   /* PANEL BAR STYLES */
   .panelBar

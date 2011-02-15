@@ -5,6 +5,35 @@
 p
   margin-bottom: $PanelGutters * .5
 
+/* Float Adjustors */
+.float-left
+  float: left
+
+.float-right
+  float: right
+
+
+/* Shadows */
+.v-shadow
+.h-shadow
+
+/* Rounded Corners */
+.top-secondary-corners
+  -webkit-border-top-right-radius: $SecondaryBorderRadius
+  -webkit-border-top-left-radius: $SecondaryBorderRadius
+  -moz-border-radius-topright: $SecondaryBorderRadius
+  -moz-border-radius-topleft: $SecondaryBorderRadius
+  border-top-right-radius: $SecondaryBorderRadius
+  border-top-left-radius: $SecondaryBorderRadius
+
+.bottom-secondary-corners
+  -webkit-border-bottom-right-radius: $SecondaryBorderRadius
+  -webkit-border-bottom-left-radius: $SecondaryBorderRadius
+  -moz-border-radius-bottomright: $SecondaryBorderRadius
+  -moz-border-radius-bottomleft: $SecondaryBorderRadius
+  border-bottom-right-radius: $SecondaryBorderRadius
+  border-bottom-left-radius: $SecondaryBorderRadius
+
 
 /****************************************************
  V2 HEADERS */
@@ -16,6 +45,10 @@ p
   h1, h2, h3, h4
     font-weight: bold
     line-height: 120%
+    a
+      color: $headerColor
+      &:hover
+        color: $headerLinkHover
   h5, h6
     color: $subheadColor
     font-weight: normal
@@ -42,6 +75,13 @@ p
 
 /****************************************************
  V2 GRID CLASSES */
+
+
+/* Columns */
+#left-col
+#right-col
+#full-col
+
 /* Global Panel Styles */
 .panel-1, .panel-2, .panel-3, .panel-content, .panel-half, .panel-third, .panel-twothird, .panel-quarter, .panel-threequarter, .panel-full, .panel-bar, .panel-border
   display: inline
@@ -51,39 +91,57 @@ p
 
 .panel-1, .panel-2, .panel-3
   margin-bottom: $PanelGutters
+  .panel-half.featured-panel
+    background: $PanelBarFeaturedBG
+  &.featured-panel
+    background: $PanelBarFeaturedBG
+  .panel-half.featured-panel, &.featured-panel
+    .profile-pic
+      border-color: $PanelBarFeaturedBG - #222
+  .featured-panel
+    background: $PanelFeaturedBG
+    .profile-pic
+      border-color: $PanelFeaturedBG - #222
+
+  &.float-right
+    float: right
 
 .panel-bar
   display: block
-  background-color: $PanelBarBackground
+  background-color: $PanelBarBG
   padding-top: $PanelGutters
   h1, h2, h3, h4, h5, h6, p
-    color: #fff /* SKIN VARIABLE */
+    color: $PaneBarHeaderColor
   h5, h4, h3
     margin: 0
   h3
     display: inline-block
+  &.panel-full
+    margin-left: 0
+    margin-right: 0
+    margin-bottom: 0
+    padding: $PanelGutters $PanelGutters 0 $PanelGutters
 
 
 .panel-border
-  border: 1px solid #e6ecf3
+  border: $PanelBorderColor
   top: -1px
   right: -1px
   bottom: -1px
   left: -1px
 
 
-.featured-panel
-  background-color: $PanelFeaturedBackground
-
 .panel-content
   display: inline
   float: left
   width: 100%
   &.meta-panel
-    background: $PanelMetaBackground  
+    background-color: $PanelMetaBackground  
     -moz-box-shadow: inset 0 0 22px #d1d1d1
     -webkit-box-shadow: inset 0 0 22px #d1d1d1
     box-shadow: inset 0 0 22px #d1d1d1
+    .profile-pic
+      border-color: $PanelMetaBackground - #222
   &.meta-panel, &.featured-panel
     padding-top: $PanelGutters
     -webkit-border-radius: $PrimaryBorderRadius
@@ -119,20 +177,23 @@ p
     overflow: hidden
 
 
-/* Panels - ( Needs to be placed in grid.css and fb_grid.css for scaling purposes ) */
+/* Panels */
 .panel-1
   +grid(4)
   .panel-full
     width: $PanelOnePanelFull
   .panel-content
     padding-top: $PanelGutters
+    width: auto
+  &.featured-panel
+    .panel-content
+      padding-left: $PanelGutters
+      padding-right: $PanelGutters
+      margin-bottom: $PanelGutters
   
 
 .panel-2
   +grid(8)
-
-  .panel-border.left-shadow
-    background: image_url("default/v2/tdv-shadow.png") $PanelTwoPanelHalf - 20px 0px  repeat-y 
   .panel-half
     width: $PanelTwoPanelHalf
     .panel-full
@@ -143,7 +204,6 @@ p
       padding-right: $PanelGutters
   .panel-third
     width: $PanelTwoPanelThird
-
   .position-left
     position: absolute
     bottom: -1px
@@ -154,8 +214,13 @@ p
     .panel-content
       width: auto
       padding-left: $PanelGutters
-      padding-right: $PanelGutters
+      padding-right: $PanelGutters 
+      margin-top: $PanelGutters
       margin-bottom: $PanelGutters
+    &.no-border-position
+      bottom: 0px
+      left: 0px
+      top: 0px
 
   .pad-left
     width: $PanelTwoPanelHalf + $PanelGutters
@@ -177,13 +242,32 @@ p
     width: $PanelThreePanelTwoThird
 
 
-/* Columns */
-#left-col
-#right-col
-#full-col
+/****************************************************
+ PANEL BACKGROUND IMAGES */
+.news, .blogs, .comments, .events, .ideas, .questions
+  background-position: 90% 0 
+  background-repeat: no-repeat
 
+.latest, .active
+  background-position: 25% center
+  background-repeat: no-repeat
 
-/* Margin Adjustors */
+.active
+  background-image: image_url("default/site/mark-comments.png")
+.news
+  background-image: image_url("default/site/mark-news.png")
+.blogs
+  background-image: image_url("default/site/mark-blogs.png")
+.comments
+  background-image: image_url("default/site/mark-comments.png")
+.events
+  background-image: image_url("default/site/mark-events.png")
+.ideas
+  background-image: image_url("default/site/mark-ideas.png")
+.questions
+  backgroun-image: image_url("default/site/mark-qa.png")
+.latest
+  background-image: image_url("default/site/mark-latest.png")
 
 
 /****************************************************
@@ -206,10 +290,22 @@ p
   display: inline
   .item-text
     margin-left: 40%
-    padding-left: 10px
+    padding-left: $PanelGutters * .5
   .item-thumb
     width: 40%
-    margin-right: 10px
+    margin-right: $PanelGutters * .5
+  &.flip
+    .item-text
+      margin-left: 0
+      margin-right: 30%
+      margin-bottom: $PanelGutters * .5
+      padding-right: $PanelGutters * .5
+      padding-left: 0
+    .item-thumb
+      float: right
+      width: 30%
+      margin-left: $PanelGutters * .5
+      margin-right: 0
 
 
 .item-thumb
@@ -230,20 +326,24 @@ p
 
 
 .profile-pic
+  border-width: 1px
+  border-style: solid
+  border-color: #ccc
   float: left
   margin-right: 10px
-  width: $ProfilePicSize
-  height: $ProfilePicSize
+  width: $ProfilePicSize - 2px
+  height: $ProfilePicSize - 2px
   img
     width: 100%
+
 
 /****************************************************
  META PANEL */
 .meta-panel
   .profile-pic
     margin-bottom: 10px
-    width: $ProfilePicSize * 1.5
-    height: $ProfilePicSize * 1.5
+    width: $ProfilePicSize * 1.5 - 2px
+    height: $ProfilePicSize * 1.5 - 2px
   p
     display: inline-block
     width: 100%
@@ -253,12 +353,6 @@ p
 /****************************************************
  BUTTONS */
 
-.float-left
-  float: left
-
-.float-right
-  float: right
-
 .button-link, .button-panel-bar
   -webkit-border-radius: 100px
   -moz-border-radius: 100px
@@ -266,10 +360,9 @@ p
   &:hover
     text-decoration: none
 
-
 .button-link
   border: 2px solid $BtnBorder
-  background: $BtnBG  image_url("default/v2/btn-gradient.png") center left repeat-x 
+  background: $BtnBG  image_url("default/site/btn-gradient.png") top left repeat-x 
   color: $BtnTextColor
   display: block
   font-size: $ButtonLinkFontSize
@@ -284,69 +377,23 @@ p
     border-color: $BtnBGHover
     background-color: $BtnBGHover
 
-
 .button-panel-bar
-  background: #fff /* SKIN VARIABLE */
-  color: #3B5998 /* SKIN VARIABLE */
+  background: $PanelBarBtnBG
+  color: $PanelBarBtnTextColor
   display: inline-block
   font-weight: bold
   line-height: 100%
   padding: 4px 18px
   &:hover
-    background: image_url("default/v2/btn-highlight.png") top left repeat 
-    color: #fff /* SKIN VARIABLE */
+    background: $PanelBarBG image_url("default/site/btn-highlight.png") top left repeat 
+    color: $PanelBarBtnTextColorHover
   &.center
     margin-bottom: $PanelGutters * .75
     text-align: center
     width: 100%
     padding: 4px 0
 
+
 /****************************************************
  MISC (Stuff I haven't found a place for) */
 
-
-.news, .blogs, .comments, .events, .ideas, .questions
-  background-position: 90% 0 
-  background-repeat: no-repeat
-
-.latest, .active
-  background-position: 25% center
-  background-repeat: no-repeat
-
-
-.active
-  background-image: image_url("default/v2/mark-comments.png")
-.news
-  background-image: image_url("default/v2/mark-news.png")
-.blogs
-  background-image: image_url("default/v2/mark-blogs.png")
-.comments
-  background-image: image_url("default/v2/mark-comments.png")
-.events
-  background-image: image_url("default/v2/mark-events.png")
-.ideas
-  background-image: image_url("default/v2/mark-ideas.png")
-.questions
-  backgroun-image: image_url("default/v2/mark-qa.png")
-.latest
-  background-image: image_url("default/v2/mark-latest.png")
-
-
-
-
-
-.top-secondary-corners
-  -webkit-border-top-right-radius: $SecondaryBorderRadius
-  -webkit-border-top-left-radius: $SecondaryBorderRadius
-  -moz-border-radius-topright: $SecondaryBorderRadius
-  -moz-border-radius-topleft: $SecondaryBorderRadius
-  border-top-right-radius: $SecondaryBorderRadius
-  border-top-left-radius: $SecondaryBorderRadius
-
-.bottom-secondary-corners
-  -webkit-border-bottom-right-radius: $SecondaryBorderRadius
-  -webkit-border-bottom-left-radius: $SecondaryBorderRadius
-  -moz-border-radius-bottomright: $SecondaryBorderRadius
-  -moz-border-radius-bottomleft: $SecondaryBorderRadius
-  border-bottom-right-radius: $SecondaryBorderRadius
-  border-bottom-left-radius: $SecondaryBorderRadius
