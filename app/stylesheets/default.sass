@@ -1,5 +1,3 @@
-@import skin.sass
-
 *
   margin: 0
   padding: 0
@@ -19,28 +17,28 @@
 .clear_width
   width: auto
 
-/* HEADER */ /* -webkit-box-shadow: #999 0px 2px 12px */
+/* HEADER */
 #header
   height: $headerHeight
   background: $headerBG
-  margin-bottom: 15px
+  margin-bottom: $PanelGutters
   position: relative
   z-index: 10
 
   /* Sponsor logo */
   .sponsor
-    background: $sponsorBG
-    display: $sponsordisplay
+    background: $sponsorLogoImage
+    display: $sponsorDisplay
     position: absolute
-    top: $sponsortop
-    left: $sponsorleft
-    height: $sponsorheight
-    width: $sponsorwidth
+    top: $sponsorTop
+    left: $sponsorLeft
+    height: $sponsorHeight
+    width: $sponsorWidth
     z-index: 3
     a
       display: block
-      height: $sponsorheight
-      width: $sponsorwidth
+      height: $sponsorHeight
+      width: $sponsorWidth
       &:hover
         text-decoration: none
 
@@ -77,13 +75,13 @@
     margin: 0 5px
     color: $subheadColor
   .dh_links
-    font-size: 12px
+    font-size: $fontsize
     position: absolute
-    top: $dhlinkspostop
+    top: 0px
     right: 0px
     float: right
-    padding: 5px 20px 5px 10px
-    background: $dhlinkscolor
+    padding: 8px 20px 8px 50px 
+    background: image_url("default/site/meta-links-bg.png") top left repeat-y
 
 // account dropdown styles //
 .account-dropdown
@@ -137,11 +135,6 @@
   position: relative
   background: $bodyWrapperBG
   display: inline-block
-  border: 
-    top: $bodyWrapperBorderTop
-    bottom: $bodyWrapperBorderBot
-    left: $bodyWrapperBorderleft
-    right: $bodyWrapperBorderRight
 
 // Footer Container //
 #footer
@@ -159,15 +152,15 @@
 
 // Various Icon Links //
 .rss_link
-  background: $rss
+  background: image_url("default/icon_rss.png") left no-repeat
   padding: 3px 0 3px 18px
 
 .twitter_link
-  background: $twitter
+  background: image_url("default/icon_twitter.gif") left no-repeat
   padding: 3px 0 3px 18px
 
 .newscloud_link
-  background: $newsCloud
+  background: image_url("default/icon_newscloud.gif") left no-repeat
   padding: 3px 0 3px 20px
 
 // Russell's Section Stuff //
@@ -199,7 +192,7 @@ h1, h2, h4
   margin: 0 0 6px 0
   font-family: $headerFont
   color: $headerColor
-  font-weight: $headerweight
+  font-weight: $headerWeight
 
 h3
   line-height: 100%
@@ -237,51 +230,105 @@ li
   margin: 0
   padding: 0
 
+
 // top level menu page tabs //
 #pageTabs
-  width: 100%
+  height: 24px
   position: absolute
-  bottom: 0px
-  overflow: visible
-  border: none
+  bottom: 0
+  left: 0
+  right: 0
   .tabs
-    border-top: $tabTopBdr
-    border-bottom: $tabBotBdr
+    border-bottom: $tabBorder
+    height: 24px
     position: absolute
     bottom: 0
     left: 0
-    background: $tabsBG
-    width: 100%
-    height: 23px
+    right: 0
+    .toggle_tabs li
+      width: $pageTabWidth
+      a.tab
+        background: $tabBG
+        border-bottom: $tabBorder
+        color: $tabTextColor
+        height: 13px
+        padding: 6px 0 4px
+        &:hover
+          background: $tabBGHover
+          text-decoration: none
+      a.tab.selected
+        border:
+          top: $tabBorder
+          bottom: $bodyBG
+          right: $tabBorder
+          left: $tabBorder
+        background: $tabSelectedBG
+        color: $tabSelectedTextColor
+      a.tab.selected:hover
+        background: $tabSelectedBG
+
+
+// Sub Navigation Styles //
+#subNav
+  height: 20px
+  margin: 0px 0px $PanelGutters 0px
+  position: relative
+  .tabs
+    border-bottom: $subTabBorder
+    height: 21px
+    padding: 0 $PanelGutters
+    .toggle_tabs li
+      width: auto
+      a.tab
+        background: $subTabBG
+        border-bottom: $subTabBorder
+        color: $subTabTextColor
+        height: 10px
+        padding: 4px $PanelGutters * .5 6px
+        width: auto
+        &:hover
+          background: $subTabBGHover
+          text-decoration: none
+      a.tab.selected
+        border:
+          top: $subTabBorder
+          bottom: $bodyBG
+          right: $subTabBorder
+          left: $subTabBorder
+        background: $subTabSelectedBG
+        color: $subTabSelectedTextColor
+      a.tab.selected:hover
+        background: $subTabSelectedBG
+
+
+// Shared Tab Styles
+#pageTabs, #subNav
+  border: none
+  .tabs
     .tab-float
       float: $pagetabFloat
-      padding: 0 0 0 1px
-    .back_links
-      padding-right: 20px
+      padding: 0 10px
     .toggle_tabs li
-      margin-right: 1px
-      height: 24px
-      width: $pageTabWidth
+      margin: 0 1px
       float: left
       padding: 0
       text-align: center
-
-    .toggle_tabs li
-      a
-        position: relative
-        bottom: $pageTabOffPOS
+      a.tab
         display: block
-        height: 13px
-        margin: 0px 0px 0px 0px
-        padding: 5px 0
-        font-weight: bold
         font-size: $fontsize
-        color: $pageTablinkOff
-        background: $pageTabOff
-        &:hover
-          color: $pageTabLinkOffHover
-          text-decoration: none
-          background: $pageTabOffHover
+        font-weight: bold
+        margin: 0
+        position: relative
+        bottom: -1px
+        -webkit-border-top-right-radius: $SecondaryBorderRadius
+        -webkit-border-top-left-radius: $SecondaryBorderRadius
+        -moz-border-radius-topright: $SecondaryBorderRadius
+        -moz-border-radius-topleft: $SecondaryBorderRadius
+        border-top-right-radius: $SecondaryBorderRadius
+        border-top-left-radius: $SecondaryBorderRadius
+        -webkit-border-radius: $PageTabRoundedCorners
+        -moz-border-radius: $PageTabRoundedCorners 
+        border-radius: $PageTabRoundedCorners
       &.first 
         width: 30px
         a
@@ -291,176 +338,100 @@ li
             display: inline-block
 
     .toggle_tabs li
-      a.selected
-        bottom: $pageTabOnPOS
-        margin: 0px
-        padding: 5px 0
-        border:
-          top: $pageTabOnBdr
-          bottom: $pageTabOnBotBdr
-          right: $pageTabOnBdr
-          left: $pageTabOnBdr
-        background: $pageTabOn
-        color: $pageTablinkOn
-      &.first a.selected
+      a.tab.selected
+        text-shadow: none
+      &.first a.tab.selected
         padding: 5px 7px
-      a.selected:hover
+      a.tab.selected:hover
         text-decoration: none
         &.disabled
           color: $subheadColor
           cursor: default
           &:hover
             text-decoration: none
+
 #pageTabs
   .toggle_tabs
-    .menu_item
+    li.menu_item
       &:hover
         a
-          background: $pageTabOffHover
-          &.selected
-            background: $pageTabOn
-            
-
-#pageTabs
-  .toggle_tabs
-    .menu_item
-      &:hover
-        .dropdown
-          display: block
-      .dropdown
-        z-index: 20
+          background: $tabBGHover
+        ul.dropdown
+          display: inline-block
+      ul.dropdown
+        background: $PageTabDropDownBG image_url("default/site/dropdown-arrow.png") top center no-repeat
         display: none
-        margin-top: 0
-        ul
-          padding: 1px 0 0 0
-          display: block
-          li
-            width: $dropdownWidth
-            height: 100%
-            float: $pagetabFloat
-            clear: both
-            padding: 0
-            text-align: left
-            margin-right: 0
-            a
-              height: 100%
-              font-size: $fontsize * 0.95
-              line-height: 13px
-              font-weight: normal
-              display: block
-              background: $dropdownTabOff
-              padding: 5px
-              color: $dropdownTabText
-              border:
-                top: $dropdownTabTopBorder
-                bottom: $dropdownListBorder
-                left: $dropdownListBorder
-                right: $dropdownListBorder
-              &:hover
-                background: $dropdownTabOn
-            a.selected
-              padding: 5px
-              background: $dropdownTabSelectOff
-              border:
-                top: $dropdownTabTopBorderSelect
-                bottom: $dropdownTabListBorderSelect
-                left: $dropdownTabListBorderSelect
-                right: $dropdownTabListBorderSelect
-              color: $dropdownTabTextSelect
-              &.selected:hover
-                background: $dropdownTabSelectOn
-
-// Sub Navigation Styles //
-#subNav
-  border-bottom: $subnavBorder
-  height: 21px
-  margin: 0px 0px 15px 0px
-  padding: 0px 0px 0px 0px
-  display: inline-block
-  overflow: visible
-
-#subNav
-  .toggle_tabs
-    margin: 0px 10px
-    width: auto
-    padding: 0px
-    text-align: center
-    li
-      position: relative
-      bottom: 0px
-      display: block
-      float: left
-      padding: 0px
-      margin: 0 0 0 1px
-      a
+        left: -$pageTabWidth * .35 
+        margin-top: 4px
+        overflow: hidden
+        padding: 8px 0
         position: relative
-        bottom: -2px
-        margin: 0px
-        padding: 4px 25px 2px 25px
-        height: 13px
-        border: none
-        font-weight: bold
-        font-size: $fontsize
-        background: $subnavTabOff
-        display: block
-        color: $subnavTabLinkOff
-        &:hover
-          background: $subnavTabOffHover
-          text-decoration: none
-        &.selected
-          bottom: -1px
-          margin: 0px
-          background: $subnavTabOn
-          border:
-            top: $subnavBorder
-            bottom: $pageTabOnBotBdr
-            right: $subnavBorder
-            left: $subnavBorder
-          color: $subnavTabLinkOn
-          &:hover
-            background: $subnavTabOn
-            text-decoration: none
-            cursor: default
-        &.disabled
-          color: $subheadColor
-          cursor: default
-          &:hover
-            text-decoration: none
+        width: $pageTabWidth * 1.75
+        -webkit-border-radius: $SecondaryBorderRadius
+        -moz-border-radius: $SecondaryBorderRadius
+        border-radius: $SecondaryBorderRadius
+        z-index: 20
+        -moz-box-shadow: 0px 4px 5px #333
+        -webkit-box-shadow: 0px 4px 5px #333
+        box-shadow: 4px 0px 5px #333
+        li
+          display: inline-block
+          float: none
+          height: 100%
+          margin: 0
+          position: relative
+          padding: 0
+          text-align: left
+          width: $pageTabWidth * 1.75
+          a
+            background: none
+            bottom: 0px
+            border: none
+            color: $tabTextColor
+            display: inline-block
+            font-size: $fontsize * .9
+            font-weight: normal
+            height: auto
+            line-height: 130%
+            margin: 4px 8px
+            padding: 5px 8px 3px
+            text-shadow: 0 0 2px $PageTabDropDownBGHover
+            width: $pageTabWidth * 1.75 - 32px
+            -webkit-border-radius: 100px
+            -moz-border-radius: 100px
+            border-radius: 100px
+            &:hover
+              background: $PageTabDropDownBGHover
+              text-decoration: none
 
-/**********************************************************************************************/
+
+//**********************************************************************************************
 /* FEATURED ITEMS */
 .featured
-  background: $featureStoryBG
+  background: $PanelFeaturedBG
   .btnComment
     background: $btnCommentFeatureBG
-
   .answer
     background: image_url("default/icon-answer.png") center right no-repeat
-
   .article
     background: image_url("default/icon-article.png") center right no-repeat
-
   .comment
     background: image_url("default/icon-comment.png") center right no-repeat
-
   .event
     background: image_url("default/icon-event.png") center right no-repeat
     h3 
       color: $bodyColor
-
   .idea
     background: image_url("default/icon-idea.png") center right no-repeat
-
   .resource
     background: image_url("default/icon-resource.png") center right no-repeat
-
   .question
     background: image_url("default/icon-question.png") center right no-repeat
-
   .prediction
     background: image_url("default/icon-question.png") center right no-repeat
 
-/**********************************************************************************************/
+
+//**********************************************************************************************
 /* IMAGE STYLES */
 
 /* THUMB CAPTION STYLES */
@@ -491,7 +462,7 @@ li
   overflow: hidden
   img
     position: relative
-    background: $WaterMark
+    background: image_url("default/watermark.jpg") center no-repeat
   a:hover
     text-decoration: none
 
@@ -525,7 +496,7 @@ li
     margin: 5px
 
 
-/**********************************************************************************************/
+//**********************************************************************************************
 /* MODERATOR BADGE STYLES */
 .thumb
   img.moderator 
@@ -586,7 +557,7 @@ $ColumnCorners: none
   -webkit-border-radius: $ColumnCorners
   border-radius: $ColumnCorners
 
-/**********************************************************************************************/
+//**********************************************************************************************
 /* UNIVERSAL LIST - CHECK GRID.SASS & FB_GRID.SASS FOR MORE IN-DEPTH STYLING */
 
 /* CONTENT BLOCK */
@@ -666,7 +637,7 @@ $ColumnCorners: none
     margin-bottom: 8px
 
 
-/**********************************************************************************************/
+//**********************************************************************************************
 /* INTERIOR PANELS */
 
 .full-panel
@@ -705,16 +676,16 @@ $ColumnCorners: none
     text-align: center
     font-size: 14px
     color: #666
-/**********************************************************************************************/
+//**********************************************************************************************
 /* FEATURED STORY STYLES */
 
 .featureWrap
-  background: $featureStoryBG
+  background: $PanelFeaturedBG
   .btnComment
     background: $btnCommentFeatureBG
    
 
-/**********************************************************************************************/
+//**********************************************************************************************
 /* LAYOUT PANELS - PANEL_1 & PANEL_2 CONTAINERS */
 
 .panel_1, .panel_2, .panel_3
@@ -735,7 +706,7 @@ $ColumnCorners: none
         padding: 4px 0
       &:hover
         text-decoration: none
-        background: $featureStoryBG
+        background: $PanelFeaturedBG
 
   /* PANEL BAR STYLES */
   .panelBar
@@ -827,26 +798,6 @@ $ColumnCorners: none
 
 .panel_2, .panel_1, .panel_3
   /* SPONSORED ITEMS STYLES */
-  &.sponsorbox
-    background: $sponsorBoxBG
-    ul
-      border: $sponsorBoxBorder
-    .panelBar
-      background: $sponsorBoxPanelBarBG
-      border: none
-      h2
-        color: $sponsorBoxPanelBarTextColor
-        font-weight: bold
-    .itemBlock
-      margin: 0 8px
-  .listTags
-    li
-      border: none
-      padding: 2px 0
-    h4
-      font-weight: normal
-      font-size: $fontsize
-      color: $subheadColor
   .eventBlock
     background: $subTitleBG
     margin: 4px 0 0 0
@@ -900,7 +851,7 @@ $ColumnCorners: none
       margin: 0 0 10px 10px
       padding: 0
       line-height: 120%
-      list-style-image: $bulletList
+      list-style-image: image_url("default/bullet1.gif")
       list-style-type: disc
       list-style-position: outside
       border-bottom: none
@@ -1052,7 +1003,7 @@ $ColumnCorners: none
         a
           margin-left: 5px
           padding-left: 8px
-          background: $hotTopicBar
+          background: image_url("default/topic_arrow.gif") center left no-repeat
       &.topicTitle
         background: $HTTitleBG
         color: $HTTitleText
@@ -1172,7 +1123,7 @@ $ColumnCorners: none
       position: absolute
       bottom: 8px
       left: 70px
-      background: $commentReply
+      background: image_url("default/reply_arrow.png") top left no-repeat
       a
         color: $commentReplyText
         font-weight: bold
@@ -1259,19 +1210,19 @@ h3.btn
   padding-left: 18px
   
 .voteUp
-  background: $voteUp
+  background: image_url("default/icon_vote_up.gif") left no-repeat
   padding-left: 15px
 
 .voteDown
-  background: $voteDown
+  background: image_url("default/icon_vote_down.gif") left no-repeat
   padding-left: 15px
 
 .thumb-up
-  background: $thumbUp
+  background: image_url("default/thumb-up.gif") left no-repeat
   padding-left: 15px
 
 .thumb-down
-  background: $thumbDown
+  background: image_url("default/thumb-down.gif") left no-repeat
   padding-left: 15px
 
 // Action Legend Panell//
@@ -1746,7 +1697,7 @@ body div.jGrowl div.jGrowl-closer
   clear: both
   float: left
 
-/**********************************************************************************************/
+//**********************************************************************************************
 /* FLASH ERROR STYLES */
 .flash
   margin: 0 auto

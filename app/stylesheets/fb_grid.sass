@@ -1,6 +1,42 @@
 // 960 Grid System ~ Core CSS.
 // Learn more ~ http://960.gs/
 // Licensed under GPL and MIT.
+/**********************************************************************************************/
+// The following generates the default grids provided by the css version of 960.gs
+$ninesixty_columns: 12
+$ninesixty_grid_width: 760px
+$ninesixty_gutter_width: 10px
+
+/**********************************************************************************************/
+// GRID VARIABLES
+
+$HeaderOne= 200%
+$HeaderTwo= 160%
+$HeaderThree= 140%
+$HeaderFour= 120%
+$HeaderFive= 100%
+$HeaderSix= 90%
+
+$fontsize= 11px
+
+$PrimaryBorderRadius= 10px
+$SecondaryBorderRadius= 5px
+
+$PanelOnePanelFull= 223.333px
+
+$PanelTwoPanelHalf= 233.3335px
+$PanelTwoPanelThird= 152.22233333px
+
+$panelThreePanelHalf= 240px
+$PanelThreePanelThird= 236px
+$PanelThreePanelTwoThird= 484px
+
+$PanelGutters= 10px
+
+$ButtonLinkFontSize= 120%
+
+$ProfilePicSize: 40px
+
 
 /**********************************************************************************************/
 // Reset and grid stylesheets
@@ -15,6 +51,7 @@
 /**********************************************************************************************/
 // App stylesheets
 @import default.sass
+@import default_v2.sass
 @import application.sass
 @import formtastic.sass
 //@import ui-lightness/jquery-ui-1.7.2.custom.sass
@@ -24,11 +61,7 @@
 @import scrollable_fb.sass
 @import addthis.sass
 
-/**********************************************************************************************/
-// The following generates the default grids provided by the css version of 960.gs
-$ninesixty_columns: 12
-$ninesixty_grid_width: 760px
-$ninesixty_gutter_width: 10px
+
 
 /**********************************************************************************************/
 // Site wide Grid Container styles
