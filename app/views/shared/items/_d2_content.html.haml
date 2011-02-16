@@ -10,7 +10,7 @@
       %h6 
         %span.count== #{like_link content} #{content.votes_tally}
       %h6
-        %span.count== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+        %span.count== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
 - else
   .item-with-no-image
     .item-text
@@ -21,4 +21,4 @@
       %h6 
         %span.count== #{like_link content} #{content.votes_tally}
       %h6
-        %span.count== #{link_to t('.stories_comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+        %span.count== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
