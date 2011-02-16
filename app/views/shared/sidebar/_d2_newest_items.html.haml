@@ -1,0 +1,6 @@
+- cache :d2_newest_items_html, :expires_in => 7.minutes do
+  - newest_items ||= PfeedItem.newest_items
+  - title ||= t('generic.newest_items.title')
+  - subtitle ||= t('generic.newest_items.subtitle')
+  - button_title ||= t('generic.newest_items.post_title')
+  = render :partial => 'shared/lists/d2_item_list', :locals => { :title => title, :subtitle => subtitle, :button_title => button_title, :collection => newest_items }

@@ -6,7 +6,7 @@
   %head
   %body{:style => "margin: 0px; padding: 0px;"}
     :javascript
-      OAS_url='#{get_setting('helios_url').try(:value)]}/RealMedia/ads/';
+      OAS_url='#{get_setting('helios_url').try(:value)}/RealMedia/ads/';
       OAS_sitepage='#{get_setting('helios_sitepage').try(:value)}';
     - case slot_name
       - when "slot_skyscraper"

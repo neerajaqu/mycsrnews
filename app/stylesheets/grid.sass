@@ -1,6 +1,42 @@
 // 960 Grid System ~ Core CSS.
 // Learn more ~ http://960.gs/
-//Licensed under GPL and MIT.
+// Licensed under GPL and MIT.
+/**********************************************************************************************/
+// The following generates the default grids provided by the css version of 960.gs
+$ninesixty_columns: 12
+$ninesixty_grid_width: 960px
+$ninesixty_gutter_width: 20px
+
+/**********************************************************************************************/
+// GRID VARIABLES
+
+$HeaderOne: 240%
+$HeaderTwo: 190%
+$HeaderThree: 150%
+$HeaderFour: 130%
+$HeaderFive: 100%
+$HeaderSix: 90%
+
+$fontsize: 12px
+
+$PrimaryBorderRadius: 16px
+$SecondaryBorderRadius: 8px
+
+$PanelOnePanelFull: 260px
+
+$PanelTwoPanelHalf: 280px
+$PanelTwoPanelThird: 180px
+
+$panelThreePanelHalf: 440px
+$PanelThreePanelThird: 286px
+$PanelThreePanelTwoThird: 594px
+
+$PanelGutters: 20px
+
+$ButtonLinkFontSize: 130%
+
+$ProfilePicSize: 50px
+
 
 /**********************************************************************************************/
 // Reset and grid stylesheets
@@ -15,6 +51,7 @@
 /**********************************************************************************************/
 // App stylesheets
 @import default.sass
+@import default_v2.sass
 @import application.sass
 @import formtastic.sass
 //@import ui-lightness/jquery-ui-1.7.2.custom.sass
@@ -23,11 +60,6 @@
 @import flowplayer_tabs.sass
 @import scrollable.sass
 @import addthis.sass
-
-/**********************************************************************************************/
-// The following are the current grid layout boxes for the site.
-$ninesixty_columns: 12
-$ninesixty_gutter_width: 20px
 
 /**********************************************************************************************/
 // Site wide Grid Container styles

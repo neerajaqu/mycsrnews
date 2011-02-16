@@ -1,0 +1,24 @@
+- if resource.images.present?
+  .item-with-image
+    .item-thumb
+      %a= image_tag resource.images.first.url(:thumb)
+    .item-text
+      %h3= link_to resource.title, resource_path(resource)
+    .meta-data
+      .profilePic= local_linked_profile_pic resource.user
+      %h6= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => timeago(resource.created_at))
+      %h6 
+        %span.count== #{like_link resource} #{resource.votes_tally}
+      %h6
+        %span.count== #{link_to t('comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}
+- else
+  .item-with-no-image
+    .item-text
+      %h3= link_to resource.title, resource_path(resource)
+    .meta-data
+      .profilePic= local_linked_profile_pic resource.user
+      %h6= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => timeago(resource.created_at))
+      %h6 
+        %span.count== #{like_link resource} #{resource.votes_tally}
+      %h6
+        %span.count== #{link_to t('comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}

@@ -204,3 +204,8 @@ widgets:
       partial: '/shared/sidebar/closed_predictions'
     top_prediction_scores:
       partial: '/shared/sidebar/top_prediction_scores'      
+    d2_newest_items:
+      partial: '/shared/sidebar/d2_newest_items'
+    d2_top_items:
+      partial: '/shared/sidebar/d2_top_items'
+      

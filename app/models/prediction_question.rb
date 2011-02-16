@@ -214,4 +214,7 @@ class PredictionQuestion < ActiveRecord::Base
     PredictionSweeper
   end
 
+  def get_accepted_result
+    self.prediction_results.find(:first, :conditions => "is_accepted = 1")
+  end
 end
