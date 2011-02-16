@@ -1,0 +1,25 @@
+-# @expects: local 'collection'
+- page ||= ""
+- paginate ||= false
+- title ||= "Small list of items"
+- subtitle ||= "Subtitle of small list of items"
+- button_title ||= false
+-# TODO:: make caching work
+-# TODO - RB - WTF? how to make generic?
+- cache_if false, :generic_items_html do
+  -#%div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+
+  .panel-1.float-right
+    -# change the class where "active" is to switch out the icon in the background.
+    .panel-bar.top-secondary-corners.active
+      .panel-full
+        %h3.float-left
+          = title
+        - unless button_title === false
+          %a.button-panel-bar.float-right
+            = button_title
+
+  .panel-content
+    %ul.list-items
+      - collection.each do |item|
+        %li= d2_render_generic_item item
