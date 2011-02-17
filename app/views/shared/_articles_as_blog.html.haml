@@ -1,17 +1,12 @@
 - limit = get_setting('widget_articles_as_blog_max').try(:value) || 1
 - cache :articles_as_blog_html do
   - contents ||= Content.articles.active.published.curator_items.find(:all, :order => "created_at desc", :limit => limit)
-  .panel_2
-    .panelBar
-      %h2= t('widgets.articles_as_blog_title', :site_title => get_setting('site_title').value)
-    .itemListWrap
-      .list_items
-        %ul
-          - contents.each do |article|
-            - content = article.is_a?(Article) ? article.content : article
-            %li{'data-id' => content.cache_key}
-              = render :partial => 'shared/items/article', :locals => { :article => article} 
-    - if limit.to_i > 1
-      .clearfix
-        %p= link_to t('read_more'), articles_path, :class => "float_right"
-    %br
+  .panel-2
+    .panel-content.featured-panel
+      .panel-full
+        -# %h2= t('widgets.articles_as_blog_title', :site_title => get_setting('site_title').value)
+        - contents.each do |article|
+          = render :partial => 'shared/items/d2_article', :locals => { :article => article} 
+        - if limit.to_i > 1
+          .clearfix
+            %p= link_to t('read_more'), articles_path, :class => "float_right"

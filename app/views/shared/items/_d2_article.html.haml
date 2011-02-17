@@ -1,0 +1,41 @@
+- content = article.is_a?(Article) ? article.content : article
+- if content.images.present?
+  .item-with-image{'data-id' => content.cache_key}
+    .item-thumb
+      %a= image_tag content.images.first.url(:thumb)
+    .item-text
+      %h1= link_to content.title, story_path(content)
+      %p
+        - unless content.article.preamble.nil? or content.article.preamble.empty?
+          = content.article.preamble
+        - else
+          = content.caption
+    .meta-data
+      .profilePic= local_linked_profile_pic content.user
+      %h6= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
+      %h6 
+        %span.count== #{like_link content} #{content.votes_tally}
+        %span.count== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+        - if content.article.preamble_complete
+          %span.count== #{link_to t('articles.permalink'), story_path(content)} 
+        - else
+          %span.count== #{link_to t('articles.read_full'), story_path(content)}
+-else
+  .item-with-no-image{'data-id' => content.cache_key}
+    .item-text
+      %h1= link_to content.title, story_path(content)
+      %p
+        - unless content.article.preamble.nil? or content.article.preamble.empty?
+          = content.article.preamble
+        - else
+          = content.caption
+    .meta-data
+      .profilePic= local_linked_profile_pic content.user
+      %h6= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
+      %h6 
+        %span.count== #{like_link content} #{content.votes_tally}
+        %span.count== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
+        - if content.article.preamble_complete
+          %span.count== #{link_to t('articles.permalink'), story_path(content)} 
+        - else
+          %span.count== #{link_to t('articles.read_full'), story_path(content)}
