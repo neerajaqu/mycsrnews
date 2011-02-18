@@ -44,6 +44,8 @@ class Classified < ActiveRecord::Base
 
   before_save :set_expires_at
 
+  after_create :save_to_redis
+
   aasm_initial_state :unpublished
 
 # TODO:: ADD GUARDS
@@ -92,7 +94,6 @@ class Classified < ActiveRecord::Base
   def set_published; puts "Publishing" end
   def set_unpublish; puts "Publishing" end
   def update_renewed; puts "Renewed" end
-  def expire; puts "Expiring" end
   def loan_to! user
     # create loaning
     loaned_out!
@@ -173,8 +174,10 @@ class Classified < ActiveRecord::Base
   def allow_type() allow.to_sym end
   def allow_type=(atype) self.allow = atype end
 
-  def self.filtered_results options
+  def self.filtered_results options, user = nil
     keyword = options['keyword'].present? ? options['keyword'] : nil
+
+    user_sets = self.sets_for_user(user)
 
     chains = []
 
@@ -206,13 +209,15 @@ class Classified < ActiveRecord::Base
 
     chains << :newest
 
-    chains.inject(self) do |chain, scope|
+    results = chains.inject(self) do |chain, scope|
       if scope.is_a? Array
       	chain.send scope[0], scope[1]
       else
       	chain.send scope
       end
     end
+
+    results.find(:all, :conditions => ["id IN (?)", $redis.sunion(*user_sets)])
   end
 
 =begin
@@ -225,6 +230,32 @@ class Classified < ActiveRecord::Base
     users.uniq
   end
 =end
+
+  def self.for_user user = nil
+    sets = sets_for_user(user)
+    self.available.active.find(:all, :conditions => ["id IN (?)", $redis.sunion(*sets)], :order => "created_at desc")
+  end
+
+  def self.sets_for_user user = nil
+    sets = ["items:classifieds:public:free", "items:classifieds:public:sale"]
+    if user
+    	sets.push "items:classifieds:public:loan"
+    	sets = sets | $redis.smembers("#{user.cache_id}:friends").map {|f| "user:#{f}:items:classifieds:friends"}
+    end
+    sets
+  end
+
+  def expire
+    self.class.sweeper.expire_classified_all self
+  end
+
+  def self.expire_all
+    self.sweeper.expire_classified_all self.new
+  end
+
+  def self.sweeper
+    ClassifiedSweeper
+  end
 
   protected
     #
@@ -318,5 +349,10 @@ class Classified < ActiveRecord::Base
 
     def validate_allow_type
       errors.add(:allow, "must be a valid allow group") unless self.valid_allow_type?
+    end
+
+    def save_to_redis
+      $redis.sadd "user:#{user_id}:items:classifieds:#{allow}", id
+      $redis.sadd "items:classifieds:public:#{listing_type}", id if allow == 'all'
     end
 end

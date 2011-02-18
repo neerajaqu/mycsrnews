@@ -11,6 +11,8 @@ module MediaHelper
         url = image.thumb_url
       when Video.name
         url = image.thumb_url
+      when Classified.name
+        url = image.images.first
       else
       	url = nil
     end

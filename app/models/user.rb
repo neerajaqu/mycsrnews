@@ -391,6 +391,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  #
+  # REDIS FUNCTIONS
+  #
+  def redis_update_friends friends_string
+    friends = friend_ids friends_string.split(',')
+    $redis.multi do
+      friends.each {|f| $redis.sadd "#{self.cache_id}:friends", f }
+    end
+  end
+
+  def redis_friends friends_array = nil
+    friends_array ||= $redis.smembers "#{self.cache_id}:friends"
+    User.find(:all, :conditions => ["ID IN (?)", friends_array])
+  end
+
+  def friend_ids friends_array = []
+    User.find(:all, :select => "id", :conditions => ["fb_user_id IN (?)", friends_array]).map(&:id)
+  end
+
   private
 
   def mogli_client

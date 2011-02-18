@@ -86,6 +86,11 @@ module Newscloud
         "#{self.class.name.underscore}_#{self.id}"
       end
 
+      # model unique identifier for redis cache keys
+      def cache_id
+        "#{self.class.name.underscore}:#{self.id}"
+      end
+
       def item_link
         self
       end

@@ -1,6 +1,6 @@
 - page ||= ""
 - paginate ||= false
-- classifieds ||= Classified.all.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
+- classifieds ||= Classified.active.available.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
 .panel_2
   .panelBar
     %h2= t('classifieds.browse.title')

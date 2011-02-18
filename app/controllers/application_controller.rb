@@ -326,7 +326,19 @@ class ApplicationController < ActionController::Base
   def update_last_active
     return false unless current_user.present?
 
+    last_active = current_user.last_active
     current_user.touch(:last_active)
+    if current_facebook_user
+      unless not Rails.env.development? and current_user.last_active < last_active + 1.hour
+        fb_friends = current_facebook_user.friend_ids.join(',')
+        redis_friends = $redis.get "#{current_user.cache_id}:friends_string"
+        unless fb_friends == redis_friends or current_user.last_active < last_active + 4.hours
+          $redis.set "#{current_user.cache_id}:friends_string", fb_friends
+          current_user.redis_update_friends fb_friends
+        end
+      else
+      end
+    end
   end
 
   def check_authorized_param

@@ -44,7 +44,8 @@
       - if @classified.media_item?
         = render_media_items @classified, :size => 'large'
 
-    - if current_user.present? and current_user == @classified.user
+    %span.moderator-links.hidden{:class => "user-#{@classified.user.id}"}
+      = pipe_spacer
       = link_to t('classifieds.edit'), edit_classified_path(@classified)
     - if @classified.moderatable?
       .mod-panel.panel_2
