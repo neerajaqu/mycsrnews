@@ -4,7 +4,7 @@ module ClassifiedsHelper
   end
 
   def listing_type_select
-    select_tag 'listing_type', options_for_select(Classified.listing_types.map {|c| [c.to_s.humanize, c] }.unshift(['Any', 'any']))
+    select_tag 'listing_type', options_for_select(Classified.listing_types.map {|c| [t("classifieds.listing_type_strings.#{c}"), c] }.unshift(['Any', 'any']))
   end
 
   def classified_actions classified

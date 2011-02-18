@@ -62,7 +62,7 @@
                     =# form.input :listing_type, :label => t('classifieds.listing_type.title'), :as => :select, :collection => Classified.listing_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false, :selected => 'Free'
                     %li
                       %label{:for => "classified_listing_type"}= t('classifieds.listing_type.title')
-                      = form.select :listing_type, options_for_select(Classified.listing_types.map {|c| c.to_s }, @classified.listing_type)
+                      = form.select :listing_type, options_for_select(Classified.listing_types.map {|c| [t("classifieds.listing_type_strings.#{c}"), c] }, @classified.listing_type)
                     %li
                       %label{:for => "classified_allow_type"}= t('classifieds.allow_type.title')
                       =# form.select :allow_type, options_for_select(Classified.allow_types.map {|c| [c.to_s.humanize, c] }, @classified.allow)

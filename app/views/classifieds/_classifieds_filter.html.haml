@@ -7,26 +7,26 @@
       });
     });
 
-.classifieds-filter{:style => "min-height: 100px; border: 1px solid black; display: block;"}
+.classifieds-filter
   %form{:action => classifieds_path}
-    %ul{:style => "list-style: none"}
+    %ul
       %li
-        Categories:
+        Category:
         = categories_select Classified
       -#%li
-        Subcategories:
+        Subcategy:
         = subcategories_select Classified
       -#%li
         Allow:
         = allow_type_select
       %li
-        Listing Type:
+        Type:
         = listing_type_select
       -#%li
         Sort:
         = select_tag 'sort', options_for_select(['newest', 'most_discussed', 'votes_count', 'comments_count'].map {|s| [s.humanize, s]})
-    %p
-      Keyword:
-      = text_field_tag 'keyword'
-    %p
-      = submit_tag "Filter"
+      %li
+        Keyword:
+        = text_field_tag 'keyword'
+      %li
+        = submit_tag "Search", :button_html => { :class => 'btn' }, :class => 'btn'

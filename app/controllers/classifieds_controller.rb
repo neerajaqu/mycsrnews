@@ -110,6 +110,17 @@ class ClassifiedsController < ApplicationController
     end
   end
 
+  def categories
+    category_name = CGI.unescape(params[:category])
+    @category = Classified.categories.find_by_name(category_name)
+    if @category
+    	@classifieds = Classified.in_category(@category.id)
+    else
+    	flash[:error] = "Invalid category"
+    	redirect_to classifieds_path
+    end
+  end
+
   private 
 
     def set_current_tab
