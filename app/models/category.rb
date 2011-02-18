@@ -22,11 +22,11 @@ class Category < ActiveRecord::Base
   end
 
   def self.add_default_category name
-    create!(:name => name)
+    create!(:name => name.to_s)
   end
 
   def self.add_default_category_for klass, name
-    create!(:categorizable_type => klass.name, :name => name)
+    create!(:categorizable_type => klass.name, :name => name.to_s)
   end
 
   def self.find_for_model_and_id klass, id

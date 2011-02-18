@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Classified do
   it "should create a new instance given valid attributes" do
     classified = Factory.create(:classified)
-    classified.state.should == :unpublished
+    classified.state.should == :available
     classified.expires_at.should be > Time.now
   end
 
@@ -69,8 +69,8 @@ describe Classified do
 
       it "should have votes_count"
       it "should have comments_count"
-      it "should be in the unpublished state" do
-        @classified.unpublished?.should be_true
+      it "should be in the available state" do
+        @classified.available?.should be_true
       end
     end
 

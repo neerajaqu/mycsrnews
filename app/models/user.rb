@@ -227,6 +227,15 @@ class User < ActiveRecord::Base
     []
   end
 
+  def friends_with? user
+    redis_friend_ids.include? user
+  end
+
+  def friends_of_friends_with? user
+    # TODO:: add this
+    friends_with? user
+  end
+
   def fb_user_id
     return super unless super.nil?
     return nil unless self.user_profile.present?
@@ -404,6 +413,10 @@ class User < ActiveRecord::Base
   def redis_friends friends_array = nil
     friends_array ||= $redis.smembers "#{self.cache_id}:friends"
     User.find(:all, :conditions => ["ID IN (?)", friends_array])
+  end
+
+  def redis_friend_ids
+    $redis.smembers "#{self.cache_id}:friends"
   end
 
   def friend_ids friends_array = []

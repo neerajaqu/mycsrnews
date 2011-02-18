@@ -46,7 +46,7 @@ class Classified < ActiveRecord::Base
 
   after_create :save_to_redis
 
-  aasm_initial_state :unpublished
+  aasm_initial_state :available
 
 # TODO:: ADD GUARDS
 #   - loanable item should not be sellable
@@ -91,9 +91,9 @@ class Classified < ActiveRecord::Base
     transitions :to => :expired, :from => [:unpublished, :available, :hidden]
   end
 
-  def set_published; puts "Publishing" end
-  def set_unpublish; puts "Publishing" end
-  def update_renewed; puts "Renewed" end
+  def set_published; Rails.logger.debug "Publishing" end
+  def set_unpublish; Rails.logger.debug "Publishing" end
+  def update_renewed; Rails.logger.debug "Renewed" end
   def loan_to! user
     # create loaning
     loaned_out!
