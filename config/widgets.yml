@@ -90,6 +90,9 @@ widgets:
     welcome_panel:
       partial: '/shared/sidebar/welcome_panel'
       locals: 'welcome_message'
+    d2_welcome_panel:
+      partial: '/shared/sidebar/d2_welcome_panel'
+      locals: 'welcome_message'
     contact_us:
       partial: '/shared/sidebar/contact_us'
       locals: 'contact_us'

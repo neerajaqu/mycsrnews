@@ -449,6 +449,7 @@ en:
     newest_items:
       title: "Newest Items"
       subtitle: "Newest items added by users"
+      post_title: "Post Something"
     top_items:
       title: "Top Items"
       subtitle: "Most popular items"

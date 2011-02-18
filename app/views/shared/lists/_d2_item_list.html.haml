@@ -16,10 +16,10 @@
         %h3.float-left
           = title
         - unless button_title === false
-          %a.button-panel-bar.float-right
+          %a.button-panel-bar.float-right{ :href => new_story_path }
             = button_title
 
-  .panel-content
-    %ul.list-items
-      - collection.each do |item|
-        %li= d2_render_generic_item item
+    .panel-content
+      %ul.list-items
+        - collection.each do |item|
+          %li= d2_render_generic_item item

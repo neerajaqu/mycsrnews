@@ -9,7 +9,6 @@
       %h6= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
       %h6 
         %span.count== #{like_link content} #{content.votes_tally}
-      %h6
         %span.count== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
 - else
   .item-with-no-image
@@ -20,5 +19,4 @@
       %h6= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
       %h6 
         %span.count== #{like_link content} #{content.votes_tally}
-      %h6
         %span.count== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
