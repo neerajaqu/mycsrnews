@@ -113,6 +113,7 @@ ActionController::Routing::Routes.draw do |map|
 #
   #map.prediction_question '/prediction_question/:id.:format', :controller => 'predictions', :action => 'show_question'
   #map.resources :prediction_guesses, :collection => { :create => [ :post] }
+  map.resources :amazon_products, :collection => { :search => [:get, :post] }
   map.resource :session
   map.resources :answers, :member => { :like => [:get, :post] }, :has_many => [:comments, :answers, :flags]
   map.resources :articles, :collection => { :index => [:get, :post], :drafts => [:get] }

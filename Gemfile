@@ -24,6 +24,8 @@ gem 'sitemap_generator'
 gem "SystemTimer"
 gem "aasm"
 gem "acl9"
+#gem "ruby-aaws"
+gem 'amazon-ecs', :git => 'git://github.com/stipple/amazon-ecs.git'
 
 # Feedzirra related
 gem 'nokogiri'

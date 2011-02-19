@@ -38,6 +38,14 @@ GIT
       nokogiri (> 0.0.0)
 
 GIT
+  remote: git://github.com/stipple/amazon-ecs.git
+  revision: eb7b3d02db9252a131c6aad2cce0a4198626fff5
+  specs:
+    amazon-ecs (1.1.0)
+      nokogiri
+      ruby-hmac
+
+GIT
   remote: git://github.com/taf2/curb.git
   revision: 74f4e5e9c7d1ac7f8928995fe8e7a1c8210ccb0c
   specs:
@@ -153,6 +161,7 @@ GEM
     rspec-rails (1.3.2)
       rack (>= 1.0.0)
       rspec (>= 1.3.0)
+    ruby-hmac (0.4.0)
     rubyzip (0.9.4)
     rufus-scheduler (2.0.7)
       tzinfo
@@ -189,6 +198,7 @@ DEPENDENCIES
   ZenTest
   aasm
   acl9
+  amazon-ecs!
   awesome_print
   bitly (= 0.5.1)
   builder (= 2.1.2)
