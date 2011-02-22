@@ -12,8 +12,8 @@
       .list_items
         %ul
           - events.each do |event|
-            %li.eventBlock
-              .eventDetailsBlock
+            %li.complexBlock
+              .complexDetailsBlock
                 .thumb
                   - if event.images.present?
                     = image_tag event.images.first.url(:thumb)
@@ -31,7 +31,7 @@
                     %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => timeago(event.created_at))                  
                     %span.btnComment== #{like_link event} #{event.votes_tally}
                     %span.btnComment== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
-              .eventLocationBlock
+              .complexMiniBlock
                 %ul
                   %li 
                     %b== #{event.location}

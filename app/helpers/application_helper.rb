@@ -548,5 +548,5 @@ EMBED
   def render_ad_partial(ad_slot)
     render :partial => 'shared/ads_banner' ,:locals => { :slot_data => ad_slot }
   end
-
+  
 end

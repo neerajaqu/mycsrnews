@@ -108,12 +108,12 @@ $(function() {
 
   	var url = change_url_format($(this).attr('action'));
   	url += "?" + $(this).serialize();
-  	console.log(url);
-  	console.log($(this).serialize());
   	var list = $('ul.classifieds');
     $.get(url, function(data) {
     	$('.classifieds-filter p.status').remove();
-      $(list).quicksand( $(data).find('li'), {adjustHeight: false} );
+      $(list).quicksand( $(data).find('li.complexBlock'), {adjustHeight: false} );
+      $.timeago.settings.strings.suffixAgo = '';
+      $('abbr.timeago', list ).timeago();
       rebuild_facebook_dom();
     }, 'html');
   });

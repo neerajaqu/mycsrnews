@@ -104,7 +104,11 @@ class Classified < ActiveRecord::Base
   def loanable?; listing_type == "loan" end
   def wanted?; listing_type == "wanted" end
   def free?; listing_type == "free" end
-
+  
+  def price
+    4.5
+  end
+  
   def unhide!
     # notify waiting list users
     renewed!

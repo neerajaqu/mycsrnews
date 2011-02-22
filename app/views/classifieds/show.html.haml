@@ -31,7 +31,7 @@
 
         %h1= @classified.title
         %h3
-          = t('posted_by', :fb_name => local_linked_profile_name(@classified.user), :date => timeago(@classified.created_at))
+          = t('posted_by_in_category', :fb_name => local_linked_profile_name(@classified.user), :date => timeago(@classified.created_at), :category => @classified.category_name)
           %span.moderator-links.hidden{:class => "user-#{@classified.user.id}"}
             = pipe_spacer
             = link_to t('classifieds.edit'), edit_classified_path(@classified)
@@ -41,6 +41,10 @@
         %p= sanitize caption(@classified.details, 500)
         -# if @classified.url.present?
           .float_left= link_to t('.read_classified'), @classified.url, :target => "_cts", :class => "btn"
+        .eventMetaBlock
+          .eventMeta
+            %h4== #{classified_listing_type(@classified)}
+            %h3== #{t('classifieds.status', :state => @classified.state)}
       - if @classified.media_item?
         = render_media_items @classified, :size => 'large'
 

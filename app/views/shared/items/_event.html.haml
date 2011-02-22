@@ -1,6 +1,6 @@
 .event.large
-  .eventBlock
-    .eventDetailsBlock
+  .complexBlock
+    .complexDetailsBlock
       .itemBlock
         %h4
           -# %span.tag
@@ -11,7 +11,7 @@
           %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => timeago(event.created_at))                  
           %span.btnComment== #{like_link event} #{event.votes_tally}
           %span.btnComment== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
-    .eventLocationBlock
+    .complexMiniBlock
       %ul
         %li 
           %b== #{event.location}
