@@ -1,0 +1,11 @@
+%h2= t('classifieds.new.amazon_lookup')
+%fieldset
+  - form.inputs do                
+    %p= t('classifieds.new.amazon_info')
+    -# form_tag :url => search_amazon_products_path do    
+    %label{:for => "category"}= t('classifieds.new.category')
+    -#todo - select @category as selected="selected" in options string for select_tag helper   
+    = select_tag "category", options_for_select(categories.map {|c| [c, c]}, categories)
+    %label{:for => "keywords"}= t('classifieds.new.keyword')
+    = text_field_tag "keywords", @keywords
+    = submit_tag "Lookup"

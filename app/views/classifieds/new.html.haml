@@ -45,19 +45,30 @@
         #flowplayer-block
           %ul.arrows
             %li
-              %a{:href => "#"}= t('wizard.classified')
+              %a{:href => "#"}= t('wizard.details')
+            %li
+              %a{:href => "#"}= t('wizard.settings') 
             %li
               %a{:href => "#"}= t('wizard.images') 
             %li
-              %a{:href => "#"}= t('wizard.more') 
+              %a{:href => "#"}= t('wizard.multimedia') 
           - semantic_form_for @classified, :html => { :multipart => true, :class => "post_classified" } do |form|
             .panes
               .panel1
-                %h1.title= t('classifieds.new.your_item')
+                -# %h1.title= t('classifieds.new.your_item')
+                = render :partial => 'amazon_search', :locals => { :form => form, :item => @classified, :categories => @categories }
+                %br
+                %h2= t('classifieds.new.enter_manually')
                 %fieldset
                   - form.inputs do                
                     = form.input :title, :label => t('.title'), :hint => t('.hint_classified_title')
                     = form.input :details, :hint => t('.hint_classified_details'), :required => false 
+                - form.buttons do
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
+              .panel2
+                %h1.title= t('classifieds.new.item_setting')
+                %fieldset
+                  - form.inputs do                
                     = listing_type_select
                     =# form.input :listing_type, :label => t('classifieds.listing_type.title'), :as => :select, :collection => Classified.listing_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false
                     = form.input :allow, :label => t('classifieds.allow_type.title'), :as => :select, :collection => Classified.allow_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false
@@ -74,11 +85,6 @@
                     -# category_form.semantic_fields_for :subcategories do |subcategory_form|
                       - subcategory_form.inputs do
                         = subcategory_form.input :subcategory, :as => :select, :collection => @classified.class.subcategories.map {|c| [c.name, c.id]}
-                - form.buttons do
-                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
-                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
-              .panel2
-                = render :partial => 'shared/forms/images_simple', :locals => { :form => form, :item => @classified }
                 #scrollbox
                   %a.prev.browse.left_scroll
                   .scrollable
@@ -89,6 +95,17 @@
                   = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
                   = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
               .panel3
+                = render :partial => 'shared/forms/images_simple', :locals => { :form => form, :item => @classified }
+                #scrollbox
+                  %a.prev.browse.left_scroll
+                  .scrollable
+                    .items
+                  %a.next.browse.right_scroll
+                - form.buttons do
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
+                  = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
+              .panel4
                 = render :partial => 'shared/forms/media_items_simple', :locals => { :form => form, :item => @classified }
                 - form.buttons do
                   = form.commit_button t('wizard.post_now'), :class => 'float_right', :button_html => { :class => 'form-btn' }
