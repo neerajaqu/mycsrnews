@@ -4,21 +4,7 @@ class AmazonProductsController < ApplicationController
     @keywords = params[:keywords]
     @category = params[:category] || 'Books'
     if request.post?
-    	res = Amazon::Ecs.item_search(@keywords, :search_index => @category)
-    	@items = []
-    	res.items.each do |item|
-    	  istruct = OpenStruct.new
-    	  istruct.title = item.get("itemattributes/title")
-    	  istruct.url = item.get("detailpageurl")
-    	  images = item.get_hash("smallimage")
-    	  if images
-          istruct.thumb_url = item.get_hash("smallimage")[:url]
-        else
-          istruct.thumb_url = nil
-        end
-
-    	  @items.push istruct
-    	end
+    	@items = Newscloud::AmazonSearch.item_search(@keywords, @category)
     end
   end
 

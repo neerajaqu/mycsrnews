@@ -28,10 +28,6 @@ defaults: &defaults
   # allow web log in system
   allow_web_auth: false
 
-  # Amazon AWS credentials for amazon product search
-  amazon_aws_access_key_id: '123456ASDF'
-  amazon_aws_secret_key: '54321ASDF12345'
-
   # Uncomment this line if you wish to enable contact_us email notifications
   # NOTE:: you must setup smtp.yml for outgoing emails to work
   contact_us_recipients: 'admin@email.com,me@email.com,support@email.com'

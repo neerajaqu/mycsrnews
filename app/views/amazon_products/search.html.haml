@@ -24,9 +24,9 @@
               %li
                 .article
                   .thumb{:style => "height: 103px"}
-                    = image_tag(thumb_image_or_default item.thumb_url)
+                    = image_tag(thumb_image_or_default item[:thumb_image_url])
                   .itemBlock
-                    %h2= link_to item.title, item.url, :target => "_amazon"
+                    %h2= link_to item[:title], item[:url], :target => "_amazon"
                     %p item details
                     -#
                       %p= linked_story_caption content
