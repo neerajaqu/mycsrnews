@@ -491,6 +491,7 @@ en:
       enter_manually: "Enter Your Item Manually"
       category: "Category"
       keyword: "Keyword"
+      hint_classified_details: "Describe your listing in more detail e.g. condition, location, etc."
     single_classifieds_title: "Classifieds"
     single_classifieds_intro: "Sell, Share or Give Away Your Stuff"
     single_classifieds_post: "Post Your Stuff"
