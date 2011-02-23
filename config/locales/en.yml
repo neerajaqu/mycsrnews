@@ -420,6 +420,8 @@ en:
       post_likes: "Stories and items you like will be added to your Facebook stream"
       post_items: "Any story or item you post will be added to your Facebook stream"
   galleries:
+    contact_owner: "Contact owner"
+    view_amazon: "Buy New from Amazon"
     add_new_item: "Add a new Item to this Gallery"
     edit: "Edit this Gallery"
     new: "Create a new Gallery"

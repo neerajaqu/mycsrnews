@@ -89,6 +89,7 @@ end
 settings = [
  { :key_sub_type => 'amazon', :key_name => 'aws_access_key_id',  :value => "1234asdf4321" },
  { :key_sub_type => 'amazon', :key_name => 'aws_secret_key',  :value => "123454321asdf5432112345" },
+ { :key_sub_type => 'amazon', :key_name => 'associate_code',  :value => "yourcode-20" },
  { :key_sub_type => 'options', :key_name => 'default_site_preference',  :value => "iframe" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_features',  :value => "300" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_newswires',  :value => "750" },
