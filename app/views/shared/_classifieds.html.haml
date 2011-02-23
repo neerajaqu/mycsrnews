@@ -15,8 +15,8 @@
     .list_items
       %ul.classifieds
         - classifieds.each do |classified|
-          %li{'data-id' => classified.cache_key}
-            .article
+          %li.complexBlock{'data-id' => classified.cache_key}
+            .complexDetailsBlock
               .thumb
                 = link_to image_tag(thumb_image_or_default(classified)), classified
               .itemBlock
@@ -24,9 +24,15 @@
                 %p= linked_item_details classified              
                 .profilePic= local_linked_profile_pic classified.user
                 .itemMeta
-                  %h3= t('posted_by', :fb_name => local_linked_profile_name(classified.user), :date => timeago(classified.created_at))
+                  %h3= t('posted_by_in_category', :fb_name => local_linked_profile_name(classified.user), :date => timeago(classified.created_at), :category => classified.category_name )
                   %span.btnComment== #{like_link classified} #{classified.votes_count}
                   %span.btnComment== #{link_to t('comments'), classified_path(classified, :anchor => "commentListTop")} #{classified.comments_count}
+            .complexMiniBlock
+              %ul
+                %li 
+                  %b== #{classified_listing_type(classified)}
+                %li
+                  == #{t('classifieds.status', :state => classified.state)}
   - if paginate
     .clearfix
       = will_paginate classifieds

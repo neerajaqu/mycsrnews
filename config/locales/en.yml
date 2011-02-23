@@ -93,6 +93,7 @@ en:
   posted_by: "Posted by {{fb_name}} {{date}} ago"
   posted_by_via: "Posted by {{fb_name}} via {{source}}, {{date}} ago"
   posted_by_in_topic: "Posted by {{fb_name}} in {{topic}}"
+  posted_by_in_category: "Posted by {{fb_name}} in {{category}}, {{date}} ago"
   read_more: "read more"
   facebook_share_link: "Facebook"
   facebook_share: "What do you want to write on your wall?"
@@ -461,11 +462,13 @@ en:
       sale: "For Sale"
       free: "Free"
       loan: "To Share"
+      sale_with_price: "For sale : {{price}}"
     menu_title: "Classifieds"
     menu_browse: "Browse Listings"
     menu_new: "Post an item"
     listing_type:
       title: "Select a listing type"
+    status: "Status: {{state}}"
     allow_type:
       title: "Viewable by"
     tags:

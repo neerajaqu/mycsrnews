@@ -20,8 +20,8 @@
             %ol
             - @fb_events.each do |event|
 
-              %li.eventBlock
-                .eventDetailsBlock
+              %li.complexBlock
+                .complexDetailsBlock
                   .itemBlock
                     %h4
                       = check_box_tag "fb_events[]", event.id, false, :style=>"width: 20px;"
@@ -30,7 +30,7 @@
                       = event.name
                     .itemMeta
                       %h3= truncate(event.description, :length => 255)       
-                .eventLocationBlock
+                .complexMiniBlock
                   %ul
                     %li 
                       %b Event Details
