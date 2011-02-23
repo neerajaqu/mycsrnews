@@ -148,7 +148,7 @@ $(function() {
     	$('.classifieds-filter p.status').remove();
       $(list).quicksand( $(data).find('li.complexBlock'), {adjustHeight: false} );
       $.timeago.settings.strings.suffixAgo = '';
-      $('abbr.timeago', list ).timeago();
+      $('abbr.timeago', $('ul.classifieds') ).timeago();
       rebuild_facebook_dom();
     }, 'html');
   });

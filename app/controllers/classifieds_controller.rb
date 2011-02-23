@@ -79,7 +79,7 @@ class ClassifiedsController < ApplicationController
       redirect_to classified_path(@classified)
     else
     	flash[:error] = "Could not update your listing. Please fix the errors and try again."
-    	render :new
+    	render :edit
     end
   end
   

@@ -420,8 +420,6 @@ en:
       post_likes: "Stories and items you like will be added to your Facebook stream"
       post_items: "Any story or item you post will be added to your Facebook stream"
   galleries:
-    contact_owner: "Contact owner"
-    view_amazon: "Buy New from Amazon"
     add_new_item: "Add a new Item to this Gallery"
     edit: "Edit this Gallery"
     new: "Create a new Gallery"
@@ -468,6 +466,7 @@ en:
     menu_title: "Classifieds"
     menu_browse: "Browse Listings"
     menu_new: "Post an item"
+    contact_owner: "Contact {{fb_user}}"
     listing_type:
       title: "Select a listing type"
     status: "Status: {{state}}"
@@ -488,6 +487,7 @@ en:
       title: "Title"
       hint_classified_title: "Please provide a short title for your item"
       hint_classified_detail: "Please provide a brief description of your item."
+      hint_classified_detail: "Please provide a price for your item, leave blank for free or loan items."
       heading: "Post Your Classified Item"
       your_item: "Your Item"
       item_setting: "Item Settings"
@@ -506,10 +506,10 @@ en:
     post_classified_title: "Got extra stuff?"
     post_classified_detail: "Sell, give away or share your stuff with our community."
     post_classified_button: "Post Your Stuff"
+    view_amazon: "Buy New from Amazon"
     edit: "Edit this Classified"
     new_item: "Create a new Classified"
     new_classified_posted: "A new classified item: {{classified}} has been posted."
-    edit: "Edit this item"
     near_expiration:
       subject: "Your classified item {{classified}} is nearing expiration"
       message: "Click the link below if you want to edit or renew the listing."

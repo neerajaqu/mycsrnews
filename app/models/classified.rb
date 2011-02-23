@@ -105,10 +105,6 @@ class Classified < ActiveRecord::Base
   def wanted?; listing_type == "wanted" end
   def free?; listing_type == "free" end
   
-  def price
-    4.5
-  end
-  
   def unhide!
     # notify waiting list users
     renewed!
@@ -247,6 +243,11 @@ class Classified < ActiveRecord::Base
     	sets = sets | $redis.smembers("#{user.cache_id}:friends").map {|f| "user:#{f}:items:classifieds:friends"}
     end
     sets
+  end
+
+  def amazon_item
+    nil unless amazon_asin
+    @amazon_item ||= Newscloud::AmazonSearch::AmazonItem.new amazon_asin
   end
 
   def expire

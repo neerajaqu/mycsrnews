@@ -43,11 +43,11 @@
           .eventMeta
             %h4== #{classified_listing_type(@classified)}
             %h3== #{t('classifieds.status', :state => @classified.state)}
-        - unless @classified.is_owner?(current_user)
-          .float_left.classified_button_margin= link_to t('classifieds.contact_owner'), home_index_path(), :target => "_facebook", :class => "btn"
+        .float_left.classified_button_margin= link_to(t('classifieds.contact_owner', :fb_user => fb_name(@classified.user.fb_user_id, :linked => false)), fb_profile_link(@classified.user), :target => "_facebook", :class => "btn")
+        -#.float_left.classified_button_margin.btn= link_to(fb_name(@classified.user.fb_user_id), :target => "_facebook", :class => "btn")
         -# change to amazon_asin
-        - if @classified.price.present?
-          .float_left.classified_button_margin= link_to t('classifieds.view_amazon'), home_index_path(), :target => "_amazon", :class => "btn"
+        - if @classified.amazon_item.present?
+          .float_left.classified_button_margin= link_to t('classifieds.view_amazon'), @classified.amazon_item.url, :target => "_amazon", :class => "btn"
       - if @classified.media_item?
         = render_media_items @classified, :size => 'large'
 

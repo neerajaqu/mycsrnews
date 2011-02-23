@@ -53,21 +53,19 @@
           - semantic_form_for @classified, :html => { :multipart => true, :class => "post_classified" } do |form|
             .panes
               .panel1
-                %h1.title= t('classifieds.new.your_item')
+                %h1.title= t('classifieds.edit')
                 %fieldset
                   - form.inputs do                
                     = form.input :title, :label => t('.title'), :hint => t('.hint_classified_title')
                     = form.input :details, :hint => t('.hint_classified_details'), :required => false 
-                    -# stupid formtastic and its lacked of :selected
-                    =# form.input :listing_type, :label => t('classifieds.listing_type.title'), :as => :select, :collection => Classified.listing_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false, :selected => 'Free'
+                    = form.input :price, :hint => t('.hint_classified_details')
                     %li
                       %label{:for => "classified_listing_type"}= t('classifieds.listing_type.title')
                       = form.select :listing_type, options_for_select(Classified.listing_types.map {|c| [t("classifieds.listing_type_strings.#{c}"), c] }, @classified.listing_type)
                     %li
                       %label{:for => "classified_allow_type"}= t('classifieds.allow_type.title')
-                      =# form.select :allow_type, options_for_select(Classified.allow_types.map {|c| [c.to_s.humanize, c] }, @classified.allow)
                       = form.select :allow, options_for_select(Classified.allow_types.map {|c| c.to_s }, @classified.allow)
-                - @classified.categorizations.build if @classified.categorizations.empty?
+                -# @classified.categorizations.build if @classified.categorizations.empty?
                 %fieldset
                   - form.semantic_fields_for :categorizations do |category_form|
                     - category_form.inputs do

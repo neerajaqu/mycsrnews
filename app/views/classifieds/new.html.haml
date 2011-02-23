@@ -2,21 +2,21 @@
   :javascript
     $(function() {
       var wizard = $('#wizard');
-    	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
-    		if (index > 0) {
-    			var title = $("#classified_title");
-    			if (title.val() == '') {
-    				title.siblings("label").addClass("wizard-errors")
-    				return false;
+      $("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
+          if (index > 0) {
+              var title = $("#classified_title");
+              if (title.val() == '') {
+                  title.siblings("label").addClass("wizard-errors")
+                  return false;
+              }
+              title.siblings("label").removeClass("wizard-errors");
+              var details = $("#classified_details");
+              if (details.val() == '') {
+                  details.siblings("label").addClass("wizard-errors")
+                  return false;
+              }
+              details.siblings("label").removeClass("wizard-errors");
           }
-          title.siblings("label").removeClass("wizard-errors");
-    			var details = $("#classified_details");
-    			if (details.val() == '') {
-    				details.siblings("label").addClass("wizard-errors")
-    				return false;
-          }
-          details.siblings("label").removeClass("wizard-errors");
-        }
       });
       var api = $("ul.arrows", wizard).data("tabs");
 
@@ -70,6 +70,7 @@
                     = form.input :amazon_asin, :as => :hidden, :required => false
                     = form.input :title, :label => t('.title'), :hint => t('.hint_classified_title')
                     = form.input :details, :hint => t('.hint_classified_details')
+                    = form.input :price, :hint => t('.hint_classified_details')
                 - form.buttons do
                   = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
               .panel2

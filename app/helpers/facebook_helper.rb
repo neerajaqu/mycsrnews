@@ -39,6 +39,10 @@ module FacebookHelper
     text
   end
 
+  def fb_profile_link user
+    "http://www.facebook.com/profile.php?id=#{user.fb_user_id}"
+  end
+
   private
 
   def build_stream_post item
@@ -70,10 +74,6 @@ module FacebookHelper
 	  attachment.add_image(image_path('default/icon-fan-app.gif'), home_index_path(:only_path => false, :canvas => true))
     stream_post.attachment = attachment
     stream_post
-  end
-
-  def fb_profile_link user
-    "http://www.facebook.com/profile.php?id=#{user.fb_user_id}"
   end
 
 end
