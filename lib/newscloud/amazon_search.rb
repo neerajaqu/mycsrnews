@@ -33,5 +33,28 @@ module Newscloud
     	items
     end
 
+    def self.categories
+      @categories ||= ["Apparel", "Baby", "Beauty", "Blended", "Books", "Classical", "DigitalMusic", "DVD", "Electronics", "GourmetFood", "HealthPersonalCare", "Jewelry", "Kitchen", "Magazines", "Merchants", "Miscellaneous", "Music", "MusicalInstruments", "MusicTracks", "OfficeProducts", "OutdoorLiving", "PCHardware", "Photo", "Restaurants", "Software", "SportingGoods", "Tools", "Toys", "VHS", "Video", "VideoGames", "Wireless", "WirelessAccessories"]
+    end
+
+    def self.categories_options
+      self.categories.map {|c| [c,c] }
+    end
+
+    def self.default_category
+      "Books"
+    end
+
+    class AmazonItem
+
+      def initialize asin
+        @asin = asin
+      end
+
+      def url
+        "http://amazon.com/dp/#{@asin}"
+      end
+    end
+
   end
 end

@@ -4,12 +4,18 @@
       var wizard = $('#wizard');
     	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
     		if (index > 0) {
-    			var url = $("#classified_title");
-    			if (url.val() == '') {
-    				url.siblings("label").addClass("wizard-errors")
+    			var title = $("#classified_title");
+    			if (title.val() == '') {
+    				title.siblings("label").addClass("wizard-errors")
     				return false;
           }
-          url.siblings("label").removeClass("wizard-errors");
+          title.siblings("label").removeClass("wizard-errors");
+    			var details = $("#classified_details");
+    			if (details.val() == '') {
+    				details.siblings("label").addClass("wizard-errors")
+    				return false;
+          }
+          details.siblings("label").removeClass("wizard-errors");
         }
       });
       var api = $("ul.arrows", wizard).data("tabs");
@@ -56,26 +62,28 @@
             .panes
               .panel1
                 -# %h1.title= t('classifieds.new.your_item')
-                = render :partial => 'amazon_search', :locals => { :form => form, :item => @classified, :categories => @categories }
+                = render :partial => 'shared/forms/amazon_search'
                 %br
                 %h2= t('classifieds.new.enter_manually')
                 %fieldset
                   - form.inputs do                
+                    = form.input :amazon_asin, :as => :hidden, :required => false
                     = form.input :title, :label => t('.title'), :hint => t('.hint_classified_title')
-                    = form.input :details, :hint => t('.hint_classified_details'), :required => false 
+                    = form.input :details, :hint => t('.hint_classified_details')
                 - form.buttons do
                   = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
               .panel2
                 %h1.title= t('classifieds.new.item_setting')
                 %fieldset
                   - form.inputs do                
-                    = listing_type_select
-                    =# form.input :listing_type, :label => t('classifieds.listing_type.title'), :as => :select, :collection => Classified.listing_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false
-                    = form.input :allow, :label => t('classifieds.allow_type.title'), :as => :select, :collection => Classified.allow_types.map {|c| [c.to_s.humanize, c] }, :include_blank => false
-                    =# form.input :category_list, :label => t('classifieds.tags.categories_title'), :as => :select, :collection => Classified.default_categories.map {|c| [c.name.humanize, c.name] }, :include_blank => false
-                    =# form.input :subcategory_list, :label => t('classifieds.tags.subcategories_title'), :as => :select, :collection => Classified.default_subcategories.map {|c| [c.name.humanize, c.name] }, :include_blank => false
-                    -#= form.input :tags_list, :label => t('tags'), :required => false, :hint => t('tags_hint')
-                    =# form.input :category_name, :as => :select, :collection => @classified.class.categories.map {|c| [c.name, c.id]}
+                    %li
+                      %label{:for => "classified_listing_type"}= t('classifieds.listing_type.title')
+                      -# TODO:: FIXME
+                      -#= form.select :listing_type, options_for_select(Classified.listing_types.map {|c| [t("classifieds.listing_type_strings.#{c.to_s}"), c.to_s] }, t("classifieds.listing_type_strings.#{@classified.listing_type}"))
+                      = form.select :listing_type, options_for_select(Classified.listing_types.map {|c| c.to_s }, @classified.listing_type)
+                    %li
+                      %label{:for => "classified_allow_type"}= t('classifieds.allow_type.title')
+                      = form.select :allow, options_for_select(Classified.allow_types.map {|c| c.to_s }, @classified.allow)
                 - @classified.categorizations.build if @classified.categorizations.empty?
                 %fieldset
                   - form.semantic_fields_for :categorizations do |category_form|

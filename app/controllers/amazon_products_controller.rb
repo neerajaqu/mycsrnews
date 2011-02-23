@@ -5,6 +5,10 @@ class AmazonProductsController < ApplicationController
     @category = params[:category] || 'Books'
     if request.post?
     	@items = Newscloud::AmazonSearch.item_search(@keywords, @category)
+    	respond_to do |format|
+    	  format.html {}
+    	  format.json { render :json => @items.to_json }
+    	end
     end
   end
 

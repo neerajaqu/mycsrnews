@@ -45,10 +45,6 @@ class ClassifiedsController < ApplicationController
     @classified = Classified.new(params[:classified])
     #@classified.tag_list = params[:classified][:tags_string]
     @classified.user = current_user
-    #if params[:classified][:classified_board_id].present?
-    #	@classified_board = ClassifiedBoard.active.find_by_id(params[:classified][:classified_board_id])
-    #	@classified.section_list = @classified_board.section unless @classified_board.nil?
-    #end
 
     if @classified.valid? and current_user.classifieds.push @classified
       if @classified.post_wall?
@@ -60,9 +56,8 @@ class ClassifiedsController < ApplicationController
         end
       end
     	flash[:success] = "Thank you for posting your item!"
-    	redirect_to @classified_board.present? ? [@classified_board, @classified] : @classified
+    	redirect_to @classified
     else
-      @classifieds = Classified.active.newest
     	render :new
     end
   end

@@ -6,9 +6,10 @@ class CreateClassifieds < ActiveRecord::Migration
       t.string :aasm_state
       t.string :listing_type
       t.string :allow
+      t.string :amazon_asin
       t.integer :user_id
       t.datetime :expires_at, :default => nil
-      t.price :float
+      t.float :price
 
       # Default fields
       t.integer :votes_tally, :default => 0

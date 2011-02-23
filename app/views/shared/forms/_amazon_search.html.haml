@@ -1,0 +1,77 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+      $("a.amazon-search-select-item").live("click", function(event) {
+        event.preventDefault();
+
+        var asin = $(this).parent().parent().attr('data-id');
+        var data = $$$(asin).data;
+        var imagePreview = data.thumb_image_url ? '<img src="'+data.thumb_image_url+'" />' : '';
+        var ele = $("li.amazon-search-image-preview");
+        if (ele.length > 0) {
+        	ele.html(imagePreview);
+        } else {
+          $("#classified_title_input").after('<li class="amazon-search-image-preview"><img src="'+data.thumb_image_url+'" /></li>');
+        }
+
+        $("input#classified_title").val(data.title);
+        if (data.full_image_url) {
+          $("input#classified_images_attributes_0_remote_image_url").val(data.full_image_url);
+        }
+        $("input#classified_amazon_asin").val(data.asin);
+      });
+
+    	$("button.amazon-search-submit").click(function(event) {
+    		event.preventDefault();
+        var button = $(this);
+    		var category = $("select#amazon-search-category").val();
+    		var keywords = $("input#amazon-search-keywords").val();
+
+    		if (keywords === '') {
+          alert("keywords must be present");
+        } else {
+        	button.after('<div class="amazon-search-status"><p>Searching...</p></div>');
+          $.post("#{search_amazon_products_path(:format => 'json')}", {category : category, keywords : keywords}, function(data) {
+            var output = [];
+            output.push('<div class="bullet_list">');
+            output.push('<ul class="amazon-search-results">');
+            $.each(data, function() {
+            	var item = this;
+            	$$$(item.asin).data = item;
+            	//$.cache[item.asin] = $.cache[item.asin] || {};
+            	//$.cache[item.asin].data = item;
+            	var li = [];
+            	li.push('<li data-id="'+item.asin+'">');
+            	/*
+            	if (item.thumb_image_url) {
+                li.push('<img src="'+item.thumb_image_url+'" />');
+              } else {
+                li.push('<img src="/images/default/watermark.jpg" />');
+              }
+              */
+              li.push('<p>');
+              li.push('<a target="_external" href="'+item.url+'">'+item.title+'</a>');
+              li.push('<span class="pipe"> | </span>');
+              li.push('<a class="amazon-search-select-item" href="#">Add</a>');
+              li.push('</p>');
+              li.push('</li>');
+            	output.push(li.join(''));
+            });
+            output.push('</ul>');
+            output.push('</div>');
+            $(".amazon-search-status").html(output.join(''));
+          });
+        }
+      });
+    });
+
+%h2= t('classifieds.new.amazon_lookup')
+%fieldset
+  %p= t('classifieds.new.amazon_info')
+  -# form_tag :url => search_amazon_products_path do    
+  %label{:for => "amazon-search-category"}= t('classifieds.new.category')
+  -#todo - select @category as selected="selected" in options string for select_tag helper   
+  = select_tag "amazon-search-category", options_for_select(Newscloud::AmazonSearch.categories_options, Newscloud::AmazonSearch.default_category)
+  %label{:for => "amazon-search-keywords"}= t('classifieds.new.keyword')
+  = text_field_tag "amazon-search-keywords"
+  %button.amazon-search-submit Lookup
