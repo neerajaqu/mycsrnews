@@ -17,7 +17,7 @@ if Forum.count == 0
   Forum.create!({:name => 'Feedback', :description=>"Tell us how we're doing. Share your thoughts about #{APP_CONFIG['site_title']}!"}) unless Forum.find_by_name('Feedback')
 end
 # Initial Classified Categories
-[:home, :general, :electronics].each {|category| Classified.add_category(category) }
+["home", "general", "electronics"].each {|category| Classified.add_category(category) unless Classified.categories.find_by_name(category) }
 #todo - fix (User.admins.last || nil) - creates fb user as nil, bombs out in fb helper for profilepic
 
 # Default Prediction Group 
