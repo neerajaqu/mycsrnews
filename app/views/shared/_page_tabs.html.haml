@@ -110,8 +110,8 @@
                 .dropdown
                   %ul
                     - unless MENU['classifieds']['browse'].nil?
-                      %li= link_to t('classifieds.menu_browse'), classifieds_path, :class => "tab #{tab_selected?(@current_tab, 'classifieds')}"
+                      %li= link_to t('classifieds.menu_browse'), classifieds_path
                     - unless MENU['classifieds']['new'].nil?
-                      %li= link_to t('classifieds.menu_new'), new_classified_path, :class => "tab #{tab_selected?(@current_tab, 'classifieds')}"
+                      %li= link_to t('classifieds.menu_new'), new_classified_path
         - if MENU.key? 'cards'
           %li= link_to t('cards.menu_title'), cards_path, :class => "tab #{tab_selected?(@current_tab, 'cards')}"
