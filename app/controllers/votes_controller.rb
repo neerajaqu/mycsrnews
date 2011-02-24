@@ -8,6 +8,7 @@ class VotesController < ApplicationController
     respond_to do |format|
       error = (current_user and current_user.voted_for?(@voteable)) ? "You already voted" : false
       if !error and current_user and @voteable.present? and (vote = current_user.vote_for(@voteable))
+      	@voteable.expire
       	if vote.voter.post_likes?
           image_url = (vote.voteable.respond_to?(:images) and vote.voteable.images.any?) ? @template.base_url(vote.voteable.images.first.url(:thumb)) : nil
           app_caption = t('app.facebook.vote_caption', :title => get_setting('site_title').try(:value))
@@ -28,6 +29,7 @@ class VotesController < ApplicationController
     @voteable = find_voteable
     respond_to do |format|
       if current_user and @voteable.present? and current_user.vote_against(@voteable)
+      	@voteable.expire
       	success = "Thanks for your vote!"
       	format.html { flash[:success] = success; redirect_to params[:return_to] || @voteable }
       	format.fbml { flash[:success] = success; redirect_to params[:return_to] || @voteable }
