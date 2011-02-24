@@ -10,7 +10,7 @@ class ClassifiedSweeper < ActionController::Caching::Sweeper
   end
 
   def self.expire_classified_all classified, controller = ActionController::Base.new
-    ["#{classified.cache_key}_top", "#{classified.cache_key}_sidebar", "#{classified.cache_key}_voices", "#{classified.cache_key}_who_liked", 'classifieds_list', 'newest_classifieds', 'top_classifieds', 'featured_classified', "top_classified_category_html"].each do |fragment|
+    ["#{classified.cache_key}_top", "#{classified.cache_key}_sidebar", "#{classified.cache_key}_voices", "#{classified.cache_key}_who_liked", 'classifieds_list', 'newest_classifieds', 'top_classifieds', 'featured_classified', "top_classified_category"].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|
