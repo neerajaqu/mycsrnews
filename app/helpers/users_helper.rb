@@ -90,4 +90,8 @@ module UsersHelper
     end
   end
 
+  def user_css_class user
+    "user-#{user.id}"
+  end
+
 end

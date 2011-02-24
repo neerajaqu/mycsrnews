@@ -1,17 +1,16 @@
 class Content < ActiveRecord::Base
 
-  acts_as_voteable
-  acts_as_taggable_on :tags, :sections
   acts_as_featured_item
-  acts_as_moderatable
-  acts_as_relatable
   acts_as_media_item
+  acts_as_moderatable
   acts_as_refineable
-  acts_as_wall_postable
   acts_as_relatable
   acts_as_scorable
+  acts_as_taggable_on :tags, :sections
   acts_as_tweetable
-
+  acts_as_voteable
+  acts_as_wall_postable
+  
   belongs_to :user
   belongs_to :article
   belongs_to :newswire
@@ -20,7 +19,6 @@ class Content < ActiveRecord::Base
   has_many :comments, :as => :commentable  
 
   has_friendly_id :title, :use_slug => true
-
 
   named_scope :published, { :joins => "LEFT JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and (article_id is NULL OR (article_id IS NOT NULL and articles.is_draft = 0))"] }
   named_scope :unpublished, { :joins => "LEFT JOIN articles on contents.article_id = articles.id", :conditions => ["contents.is_blocked =0 and (article_id is NULL OR (article_id IS NOT NULL and articles.is_draft = 1))"] }

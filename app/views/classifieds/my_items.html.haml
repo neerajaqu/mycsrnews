@@ -1,0 +1,17 @@
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+  = render :partial => 'shared/subnav/classifieds_subnav'
+
+#col_left
+  = render_ad(:banner, @ad_layout, @ad_banner)
+  = render :partial => 'shared/classifieds', :locals => { :classifieds => @classifieds, :paginate => @paginate, :page => @page }
+
+#col_right
+  = render :partial => 'shared/sidebar/post_classified'
+  - if @custom_sidebar_widget
+    = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Classified , :locale_var => 'top_classified_tags' }
+  = render :partial => 'shared/sidebar/top_classifieds', :locals => { :top_classifieds => @top_classifieds }
+  = render :partial => 'shared/sidebar/newest_classifieds', :locals => { :newest_classifieds => @newest_classifieds }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

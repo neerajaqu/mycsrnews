@@ -21,6 +21,11 @@ gem "redis-namespace"
 gem "resque"
 gem "resque-scheduler", :require => 'resque_scheduler'
 gem 'sitemap_generator'
+gem "SystemTimer"
+gem "aasm"
+gem "acl9"
+#gem "ruby-aaws"
+gem 'amazon-ecs', :git => 'git://github.com/stipple/amazon-ecs.git'
 
 # Feedzirra related
 gem 'nokogiri'
@@ -55,6 +60,7 @@ group :test, :cucumber do
 	gem "pickle"
 	gem "launchy"
 	gem "ZenTest"
+	gem "rr"
 end
 
 group :production do

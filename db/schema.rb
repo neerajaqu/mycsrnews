@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110122012647) do
+ActiveRecord::Schema.define(:version => 20110209184821) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -86,6 +86,30 @@ ActiveRecord::Schema.define(:version => 20110122012647) do
     t.boolean  "is_blocked",    :default => false
   end
 
+  create_table "categories", :force => true do |t|
+    t.string   "categorizable_type"
+    t.integer  "parent_id"
+    t.string   "name"
+    t.string   "context"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["categorizable_type"], :name => "index_categories_on_categorizable_type"
+  add_index "categories", ["context"], :name => "index_categories_on_context"
+  add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
+
+  create_table "categorizations", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "categorizable_id"
+    t.string   "categorizable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categorizations", ["categorizable_type", "categorizable_id"], :name => "index_categorizations_on_categorizable_type_and_categorizable_id"
+  add_index "categorizations", ["category_id"], :name => "index_categorizations_on_category_id"
+
   create_table "chirps", :force => true do |t|
     t.integer  "user_id"
     t.integer  "recipient_id"
@@ -95,6 +119,32 @@ ActiveRecord::Schema.define(:version => 20110122012647) do
     t.datetime "updated_at"
     t.boolean  "is_blocked",   :default => false
   end
+
+  create_table "classifieds", :force => true do |t|
+    t.string   "title"
+    t.text     "details"
+    t.string   "aasm_state"
+    t.string   "listing_type"
+    t.string   "allow"
+    t.string   "amazon_asin"
+    t.integer  "user_id"
+    t.datetime "expires_at"
+    t.float    "price"
+    t.integer  "votes_tally",    :default => 0
+    t.integer  "comments_count", :default => 0
+    t.boolean  "is_featured",    :default => false
+    t.datetime "featured_at"
+    t.integer  "flags_count",    :default => 0
+    t.boolean  "is_blocked",     :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "classifieds", ["aasm_state"], :name => "index_classifieds_on_aasm_state"
+  add_index "classifieds", ["allow"], :name => "index_classifieds_on_allow"
+  add_index "classifieds", ["expires_at"], :name => "index_classifieds_on_expires_at"
+  add_index "classifieds", ["listing_type"], :name => "index_classifieds_on_listing_type"
+  add_index "classifieds", ["user_id"], :name => "index_classifieds_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "commentid",        :default => 0
@@ -477,7 +527,6 @@ ActiveRecord::Schema.define(:version => 20110122012647) do
     t.boolean  "is_approved",                :default => true
     t.integer  "votes_tally",                :default => 0
     t.integer  "comments_count",             :default => 0
-    t.integer  "questions_count",            :default => 0
     t.boolean  "is_blocked",                 :default => false
     t.boolean  "is_featured",                :default => false
     t.datetime "featured_at"
@@ -510,7 +559,6 @@ ActiveRecord::Schema.define(:version => 20110122012647) do
     t.boolean  "is_approved",              :default => true
     t.integer  "votes_tally",              :default => 0
     t.integer  "comments_count",           :default => 0
-    t.integer  "guesses_count",            :default => 0
     t.boolean  "is_blocked",               :default => false
     t.boolean  "is_featured",              :default => false
     t.datetime "featured_at"
@@ -598,6 +646,21 @@ ActiveRecord::Schema.define(:version => 20110122012647) do
     t.boolean  "is_featured",         :default => false
     t.datetime "featured_at"
     t.boolean  "is_sponsored",        :default => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "authorizable_type"
+    t.integer  "authorizable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "scores", :force => true do |t|
@@ -724,24 +787,24 @@ ActiveRecord::Schema.define(:version => 20110122012647) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer  "user_id",                     :limit => 8,                    :null => false
-    t.integer  "facebook_user_id",            :limit => 8, :default => 0
-    t.boolean  "isAppAuthorized",                          :default => false
-    t.datetime "born_at"
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at"
-    t.text     "bio"
-    t.integer  "referred_by_user_id",         :limit => 8, :default => 0
-    t.boolean  "comment_notifications",                    :default => false
-    t.boolean  "receive_email_notifications",              :default => true
-    t.boolean  "dont_ask_me_for_email",                    :default => false
-    t.datetime "email_last_ask"
-    t.boolean  "dont_ask_me_invite_friends",               :default => false
-    t.datetime "invite_last_ask"
-    t.boolean  "post_comments",                            :default => true
-    t.boolean  "post_likes",                               :default => true
-    t.boolean  "post_items",                               :default => true
-    t.boolean  "is_blocked",                               :default => false
+    t.integer   "user_id",                     :limit => 8,                    :null => false
+    t.integer   "facebook_user_id",            :limit => 8, :default => 0
+    t.boolean   "isAppAuthorized",                          :default => false
+    t.datetime  "born_at"
+    t.timestamp "created_at",                                                  :null => false
+    t.datetime  "updated_at"
+    t.text      "bio"
+    t.integer   "referred_by_user_id",         :limit => 8, :default => 0
+    t.boolean   "comment_notifications",                    :default => false
+    t.boolean   "receive_email_notifications",              :default => true
+    t.boolean   "dont_ask_me_for_email",                    :default => false
+    t.datetime  "email_last_ask"
+    t.boolean   "dont_ask_me_invite_friends",               :default => false
+    t.datetime  "invite_last_ask"
+    t.boolean   "post_comments",                            :default => true
+    t.boolean   "post_likes",                               :default => true
+    t.boolean   "post_items",                               :default => true
+    t.boolean   "is_blocked",                               :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true

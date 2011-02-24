@@ -34,15 +34,11 @@ db/*.sqlite3
 config/initializers/your_site_host.rb
 config/initializers/google_analytics.rb
 coverage.data
-spec/controllers
-spec/views
-spec/helpers
 ._*
 .sass-cache
 config/s3.yml
 *.sql
 !db/development_structure.sql
-spec/fixtures
 *.tmproj
 dump.rdb
 .bundle

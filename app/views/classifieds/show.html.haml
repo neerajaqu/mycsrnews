@@ -1,0 +1,84 @@
+- content_for :title do
+  = @classified.item_title
+- content_for :meta_description do
+  = meta_description @classified
+- if @classified.images.present?
+  - content_for :meta_image do
+    = meta_image @classified.images.first
+
+- content_for :sub_nav do
+  = render_ad(:leaderboard, @ad_layout, @ad_leaderboard)
+  = render :partial => 'shared/subnav/classifieds_subnav'
+
+#col_left
+  - cache "#{@classified.cache_key}_top_html" do
+    #itemDetails.panel_2
+      .topBar
+        %ul
+          %li
+            %a== #{like_link @classified} #{@classified.votes_count}
+          %li
+            %a== #{link_to t('comment'), classified_path(@classified, :anchor => "postCommentBox")} #{@classified.comments_count}
+          %li= fb_share_item_button(@classified)
+          %li
+            = twitter_share_item_link @classified, @classified.title
+          %li.nomargin
+            = render :partial => 'shared/add_this'
+      .itemBlock
+
+        - if @classified.images.present?
+          .thumb= image_tag @classified.images.first.url(:medium)
+
+        %h1= @classified.title
+        %h3
+          = t('posted_by_in_category', :fb_name => local_linked_profile_name(@classified.user), :date => timeago(@classified.created_at), :category => @classified.category_name)
+          %span.moderator-links.hidden{:class => "user-#{@classified.user.id}"}
+            = pipe_spacer
+            = link_to t('classifieds.edit'), edit_classified_path(@classified)
+        - if @tags.present?
+          .tag-wrap
+            == Tags: #{tag_list(@tags, @classified)}
+        %p= sanitize caption(@classified.details, 500)
+        .eventMetaBlock
+          .eventMeta
+            %h4== #{classified_listing_type(@classified)}
+            %h3== #{t('classifieds.status', :state => @classified.state)}
+        .float_left.classified_button_margin= link_to(t('classifieds.contact_owner', :fb_user => fb_name(@classified.user.fb_user_id, :linked => false)), fb_profile_link(@classified.user), :target => "_facebook", :class => "btn")
+        -#.float_left.classified_button_margin.btn= link_to(fb_name(@classified.user.fb_user_id), :target => "_facebook", :class => "btn")
+        -# change to amazon_asin
+        - if @classified.amazon_item.present?
+          .float_left.classified_button_margin= link_to t('classifieds.view_amazon'), @classified.amazon_item.url, :target => "_amazon", :class => "btn"
+      - if @classified.media_item?
+        = render_media_items @classified, :size => 'large'
+
+    %span.moderator-links.hidden{:class => "user-#{@classified.user.id}"}
+      = pipe_spacer
+      = link_to t('classifieds.edit'), edit_classified_path(@classified)
+    - if @classified.moderatable?
+      .mod-panel.panel_2
+        .float_right= render :partial => 'shared/moderate_form', :locals => { :moderatable => @classified }
+        .float_left= render :partial => 'shared/flag_form', :locals => { :flaggable => @classified }
+
+    = render_ad(:banner, @ad_layout, @ad_banner)
+    = render :partial => 'shared/comments', :locals => { :comments => @classified.comments }
+    = render :partial => 'shared/comment_form', :locals => { :commentable => @classified }
+
+  - if @outbrain_item
+    = render :partial => 'shared/external/outbrain_wrapper'
+
+  = render :partial => 'shared/item_footer', :locals => { :item => @classified,:title => @classified.title }
+
+#col_right
+  - if @classified.is_owner?(current_user) or (current_user and current_user.is_moderator?)
+    = render :partial => "actions", :locals => { :classified => @classified }
+  - if @custom_sidebar_widget
+    = render :partial => 'shared/custom_widget', :locals => { :widget => @custom_sidebar_widget }
+  = render_ad(:small_square, @ad_layout, @ad_small_square)
+  = render :partial => 'shared/sidebar/post_classified'
+  - cache "#{@classified.cache_key}_sidebar_html" do
+    = render :partial => 'shared/sidebar/bio', :locals => { :user => @classified.user }
+    = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @classified }
+  = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Classified , :locale_var => 'top_classified_tags' }
+  = render :partial => 'shared/sidebar/newest_classifieds', :locals => { :newest_classifieds => @newest_classifieds }
+  -# = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @classified, :related_items => @classified.related_items }
+  = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)

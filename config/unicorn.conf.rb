@@ -75,4 +75,12 @@ after_fork do |server, worker|
   # and Redis.  TokyoCabinet file handles are safe to reuse
   # between any number of forked children (assuming your kernel
   # correctly implements pread()/pwrite() system calls)
+
+  #
+  # Redis
+  begin
+    $redis = Newscloud::Redcloud.create
+  rescue
+    RAILS_DEFAULT_LOGGER.error("Couldn't connect to Redis with config: #{APP_CONFIG['redis'].inspect}")
+  end
 end

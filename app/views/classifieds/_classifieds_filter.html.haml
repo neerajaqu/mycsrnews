@@ -1,0 +1,32 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+    	$('a.classifieds-refine').click(function(event) {
+    		event.preventDefault();
+    		$('.classifieds-filter').toggle()
+      });
+    });
+
+.classifieds-filter
+  %form{:action => classifieds_path}
+    %ul
+      %li
+        Category:
+        = categories_select Classified
+      -#%li
+        Subcategy:
+        = subcategories_select Classified
+      -#%li
+        Allow:
+        = allow_type_select
+      %li
+        Type:
+        = listing_type_select
+      -#%li
+        Sort:
+        = select_tag 'sort', options_for_select(['newest', 'most_discussed', 'votes_count', 'comments_count'].map {|s| [s.humanize, s]})
+      %li
+        Keyword:
+        = text_field_tag 'keyword'
+      %li
+        = submit_tag "Search", :button_html => { :class => 'btn' }, :class => 'btn'

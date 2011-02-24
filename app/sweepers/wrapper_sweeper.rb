@@ -18,6 +18,8 @@ class WrapperSweeper < ActionController::Caching::Sweeper
         EventSweeper.expire_event_all item
       when "Prediction"
         PredictionSweeper.expire_prediction_all item
+      when "Classified"
+        ClassifiedSweeper.expire_classified_all item
       else
       	nil
     end    

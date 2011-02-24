@@ -44,6 +44,7 @@ class AdminController < ApplicationController
         define_method action do
           case action
           when :index
+            @config = self.admin_scaffold_config
             render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
               :items => @config.model_klass.active.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
               :model => @config.model_klass,
@@ -52,6 +53,7 @@ class AdminController < ApplicationController
               :paginate => @config.paginate
             }
           when :show
+            @config = self.admin_scaffold_config
             render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
               :item => @config.model_klass.find(params[:id]),
               :model => @config.model_klass,
@@ -59,6 +61,7 @@ class AdminController < ApplicationController
               :fields => @config.show_fields || @config.fields.map(&:name),
             }
           when :edit
+            @config = self.admin_scaffold_config
             render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
               :item => @config.model_klass.find(params[:id]),
               :model => @config.model_klass,

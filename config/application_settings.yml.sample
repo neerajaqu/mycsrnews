@@ -22,9 +22,6 @@ defaults: &defaults
   site_topic: 'Default Site Topic'
   site_title: 'Default Site Name'
 
-  # facebook application id 
-  facebook_application_id: '111111111111'
-
   # Uncomment to use TypeKit.com fonts
   # typekit: 'yourcode'
 

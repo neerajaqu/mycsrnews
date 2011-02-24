@@ -257,8 +257,12 @@ module ApplicationHelper
     is_bitly_configured = get_setting('oauth_key').present?
     caption =  Rack::Utils.escape(strip_tags(caption))
     if is_bitly_configured
-      bitly = Bitly.new(APP_CONFIG['bitly_username'], APP_CONFIG['bitly_api_key'])
-      url = bitly.shorten(path_to_self(item)).short_url
+      bitly_username = get_setting('bitly_username').try(:value)
+      bitly_api_key = get_setting('bitly_api_key').try(:value)
+      if bitly_username.present? and bitly_username != 'username'
+        bitly = Bitly.new(bitly_username, bitly_api_key)
+        url = bitly.shorten(path_to_self(item)).short_url
+      end
     else
       url =  Rack::Utils.escape(path_to_self(item))
     end
@@ -544,5 +548,5 @@ EMBED
   def render_ad_partial(ad_slot)
     render :partial => 'shared/ads_banner' ,:locals => { :slot_data => ad_slot }
   end
-
+  
 end

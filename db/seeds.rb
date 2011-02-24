@@ -16,6 +16,8 @@ if Forum.count == 0
   Forum.create!({:name => 'General', :description=>'Talk about whatever you want. This area is for open discussion.'}) unless Forum.find_by_name('General')
   Forum.create!({:name => 'Feedback', :description=>"Tell us how we're doing. Share your thoughts about #{APP_CONFIG['site_title']}!"}) unless Forum.find_by_name('Feedback')
 end
+# Initial Classified Categories
+[:home, :general, :electronics].each {|category| Classified.add_category(category) }
 #todo - fix (User.admins.last || nil) - creates fb user as nil, bombs out in fb helper for profilepic
 
 # Default Prediction Group 
@@ -85,6 +87,9 @@ custom_widgets.each do |custom_widget|
 end
 
 settings = [
+ { :key_sub_type => 'amazon', :key_name => 'aws_access_key_id',  :value => "1234asdf4321" },
+ { :key_sub_type => 'amazon', :key_name => 'aws_secret_key',  :value => "123454321asdf5432112345" },
+ { :key_sub_type => 'amazon', :key_name => 'associate_code',  :value => "yourcode-20" },
  { :key_sub_type => 'options', :key_name => 'default_site_preference',  :value => "iframe" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_features',  :value => "300" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_newswires',  :value => "750" },

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   rescue_from Facebooker::Session::SessionExpired, :with => :facebook_session_expired
   rescue_from Facebooker::Session::MissingOrInvalidParameter, :with => :facebook_session_expired
+  rescue_from Acl9::AccessDenied, :with => :access_denied
 
   def rescue_action(exception)
     if (defined?(exception.message) and defined?(exception.file_name) and defined?(exception.source_extract)) and
@@ -325,7 +326,19 @@ class ApplicationController < ActionController::Base
   def update_last_active
     return false unless current_user.present?
 
+    last_active = current_user.last_active
     current_user.touch(:last_active)
+    if current_facebook_user
+      unless not Rails.env.development? and current_user.last_active < last_active + 1.hour
+        fb_friends = current_facebook_user.friend_ids.join(',')
+        redis_friends = $redis.get "#{current_user.cache_id}:friends_string"
+        unless fb_friends == redis_friends or current_user.last_active < last_active + 4.hours
+          $redis.set "#{current_user.cache_id}:friends_string", fb_friends
+          current_user.redis_update_friends fb_friends
+        end
+      else
+      end
+    end
   end
 
   def check_authorized_param
@@ -464,6 +477,16 @@ class ApplicationController < ActionController::Base
     txt.gsub! %r{#{APP_CONFIG["base_url"]}/?(iframe/)?}, url
     txt.gsub! %r{#{canvas_url}}, url
     txt
+  end
+
+  def access_denied
+    if current_user
+      flash[:notice] = "Access Denied"
+      redirect_to home_path
+    else
+      flash[:notice] = "Access Denied. Try logging in first."
+      redirect_to new_session_path
+    end
   end
 
 end

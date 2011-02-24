@@ -1,0 +1,18 @@
+-# Expects klass, category_type, locale_var
+- category_type ||= 'category'
+- locale_var ||= 'categories.top_title'
+- klass_name = klass.name
+
+- cache "top_#{klass_name}_#{category_type}_html", :expires_in => 1.hour do
+  %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
+    .panelBar
+      %h2= t(locale_var)
+    .top-categories
+      %ul
+        - unless klass.send("#{category_type}_counts").count == 0
+          - klass.send("#{category_type}_counts").each do |categorization|
+            %li
+              %h4== (#{categorization.count})  #{link_to categorization.category.name, url_for(send("categorized_#{klass_name.underscore.pluralize}_path", CGI.escape(categorization.category.name))) }
+        - else
+          %li
+            %h4= t('categories.no_categories')

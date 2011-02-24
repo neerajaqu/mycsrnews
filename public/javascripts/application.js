@@ -1,5 +1,40 @@
 // Place your application-specific jQuery JavaScript functions and classes here
 
+/*
+ * jQuery Extensions
+ */
+(function($) {
+  // Thanks to: http://api.jquery.com/serializeArray/#comment-130159436
+  $.fn.serializeJSON = function() {
+    var json = {};
+    jQuery.map($(this).serializeArray(), function(e, i) {
+      json[e.name] = e.value;
+    });
+    return json;
+  };
+})(jQuery);
+
+// From: http://yehudakatz.com/2009/04/20/evented-programming-with-jquery/
+var $$ = function(param) {
+  var node = $(param)[0];
+  var id = $.data(node);
+  $.cache[id] = $.cache[id] || {};
+  $.cache[id].node = node;
+
+  return $.cache[id];
+};
+
+var $$$ = function(key) {
+	$.cache[key] = $.cache[key] || {};
+
+	return $.cache[key];
+};
+
+
+/*
+ * Application javascript
+ */
+
 function rebuild_facebook_dom() {
   try {
     FB.XFBML.Host.parseDomTree();
@@ -85,6 +120,36 @@ $(function() {
   	$.post(url, $(this).serialize(), function(data) {
   		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
   		rebuild_facebook_dom();
+    }, 'html');
+  });
+
+  $('.classifieds-filter form #categories').change(function(event) {
+		event.preventDefault();
+		var category_select = $(this);
+ 		var select_parent = category_select.parent().parent().parent();
+ 		select_parent.submit();
+  });  
+
+  $('.classifieds-filter form #listing_type').change(function(event) {
+		event.preventDefault();
+		var listing_type_select = $(this);
+ 		var select_parent = listing_type_select.parent().parent().parent();
+ 		select_parent.submit();
+  });  
+
+  $('.classifieds-filter form').submit(function(event) {
+  	event.preventDefault();
+  	$(this).after('<p class="status"><i>...updating...</i></p>');
+
+  	var url = change_url_format($(this).attr('action'));
+  	url += "?" + $(this).serialize();
+  	var list = $('ul.classifieds');
+    $.get(url, function(data) {
+    	$('.classifieds-filter p.status').remove();
+      $(list).quicksand( $(data).find('li.complexBlock'), {adjustHeight: false} );
+      $.timeago.settings.strings.suffixAgo = '';
+      $('abbr.timeago', $('ul.classifieds') ).timeago();
+      rebuild_facebook_dom();
     }, 'html');
   });
 

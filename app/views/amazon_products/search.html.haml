@@ -1,0 +1,38 @@
+#col_left
+  %h1 Search for amazon products
+  -# form_tag :url => search_amazon_products_path do
+  - form_tag do
+    %p
+      %label{:for => "category"} Select Amazon Category
+      = select_tag "category", options_for_select(@categories.map {|c| [c, c]}, @category)
+    %p
+      %label{:for => "keywords"} Keywords
+      = text_field_tag "keywords", @keywords
+    %p
+      = submit_tag "search"
+  %br
+  - if @items
+    .panel_2
+      .panelBar
+        %h2 Items
+      .subtitle
+        %span Items we found
+      .itemListWrap
+        .list_items
+          %ul
+            - @items.each do |item|
+              %li
+                .article
+                  .thumb{:style => "height: 103px"}
+                    = image_tag(thumb_image_or_default item[:thumb_image_url])
+                  .itemBlock
+                    %h2= link_to item[:title], item[:url], :target => "_amazon"
+                    %p item details
+                    -#
+                      %p= linked_story_caption content
+                    
+                      .profilePic= local_linked_profile_pic content.user
+                      .itemMeta
+                        %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
+                        %span.btnComment== #{like_link content} #{content.votes_tally}
+                        %span.btnComment== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}

@@ -1,0 +1,91 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+      var wizard = $('#wizard');
+    	$("ul.arrows", wizard).tabs("div.panes > div", function(event, index) {
+    		if (index > 0) {
+    			var url = $("#classified_title");
+    			if (url.val() == '') {
+    				url.siblings("label").addClass("wizard-errors")
+    				return false;
+          }
+          url.siblings("label").removeClass("wizard-errors");
+        }
+      });
+      var api = $("ul.arrows", wizard).data("tabs");
+
+      // "next tab" button
+      $("input.form-btn.next", wizard).click(function(event) {
+      	event.preventDefault();
+        api.next();
+      });
+
+      // "previous tab" button
+      $("input.form-btn.prev", wizard).click(function() {
+      	event.preventDefault();
+        api.prev();
+      });
+      $('.toggle-embed-video').click(function(event) {
+      	event.preventDefault();
+      	$('textarea.embed-video', $(this).parents('fieldset.inputs')).removeClass('hide').show();
+      	$(this).remove();
+      });
+    });      
+-# content_for :sub_nav do
+  - if @classified_board.present?
+    = render :partial => 'shared/subnav/classified_boards_subnav'
+  - else
+= render :partial => 'shared/subnav/classifieds_subnav'
+#col_full
+  .panel_3
+    .panelBar
+      %h2= t('classifieds.new.heading')
+    .formBox
+      #wizard
+        #flowplayer-block
+          %ul.arrows
+            %li
+              %a{:href => "#"}= t('wizard.classified')
+            %li
+              %a{:href => "#"}= t('wizard.images') 
+            %li
+              %a{:href => "#"}= t('wizard.more') 
+          - semantic_form_for @classified, :html => { :multipart => true, :class => "post_classified" } do |form|
+            .panes
+              .panel1
+                %h1.title= t('classifieds.edit')
+                %fieldset
+                  - form.inputs do                
+                    = form.input :title, :label => t('.title'), :hint => t('.hint_classified_title')
+                    = form.input :details, :hint => t('.hint_classified_details'), :required => false 
+                    = form.input :price, :hint => t('.hint_classified_details')
+                    %li
+                      %label{:for => "classified_listing_type"}= t('classifieds.listing_type.title')
+                      = form.select :listing_type, options_for_select(Classified.listing_types.map {|c| [t("classifieds.listing_type_strings.#{c}"), c] }, @classified.listing_type)
+                    %li
+                      %label{:for => "classified_allow_type"}= t('classifieds.allow_type.title')
+                      = form.select :allow, options_for_select(Classified.allow_types.map {|c| c.to_s }, @classified.allow)
+                -# @classified.categorizations.build if @classified.categorizations.empty?
+                %fieldset
+                  - form.semantic_fields_for :categorizations do |category_form|
+                    - category_form.inputs do
+                      = category_form.input :category, :as => :select, :collection => @classified.class.categories.map {|c| [c.name, c.id]}, :include_blank => false
+                - form.buttons do
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
+                  = form.commit_button t('wizard.save_changes'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+              .panel2
+                = render :partial => 'shared/forms/images_simple', :locals => { :form => form, :item => @classified }
+                #scrollbox
+                  %a.prev.browse.left_scroll
+                  .scrollable
+                    .items
+                  %a.next.browse.right_scroll
+                - form.buttons do
+                  = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
+                  = form.commit_button t('wizard.save_changes'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }
+              .panel3
+                = render :partial => 'shared/forms/media_items_simple', :locals => { :form => form, :item => @classified }
+                - form.buttons do
+                  = form.commit_button t('wizard.save_changes'), :class => 'float_right', :button_html => { :class => 'form-btn' }
+                  = form.commit_button t('wizard.back'), :class => 'float_left', :button_html => { :class => 'form-btn prev' }

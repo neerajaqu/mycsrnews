@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
 
+  acts_as_authorization_subject
+  has_and_belongs_to_many :roles
+
   acts_as_voter
   acts_as_moderatable
 
@@ -46,6 +49,7 @@ class User < ActiveRecord::Base
   has_many :questions, :after_add => :trigger_question
   has_many :answers, :after_add => :trigger_answer
   has_many :ideas, :after_add => :trigger_idea
+  has_many :classifieds, :after_add => :trigger_classified
   has_many :events, :after_add => :trigger_event
   has_many :resources, :after_add => :trigger_resource
   #has_many :topics, :after_add => :trigger_topic
@@ -97,6 +101,7 @@ class User < ActiveRecord::Base
   def trigger_question(question) end
   def trigger_answer(answer) end
   def trigger_idea(idea) end
+  def trigger_classified(classified) end
   def trigger_event(event) end
   def trigger_resource(resource) end
   def trigger_dashboard_message(dashboard_message) end
@@ -108,9 +113,9 @@ class User < ActiveRecord::Base
     self.update_attribute(:last_delivered_feed_item, pfeed_item)
   end
 
-  def pfeed_inbox_unread
-    return pfeed_inbox.find(:all, :limit => 3) unless last_viewed_feed_item
-    pfeed_inbox.newer_than(last_viewed_feed_item).find(:all, :limit => 3)
+  def pfeed_inbox_unread limit = 3
+    return pfeed_inbox.find(:all, :limit => limit) unless last_viewed_feed_item
+    pfeed_inbox.newer_than(last_viewed_feed_item).find(:all, :limit => limit)
   end
 
   def pfeed_inbox_get_new!
@@ -120,6 +125,7 @@ class User < ActiveRecord::Base
   end
 
   def pfeed_set_last_viewed! pfeed_item
+    #return true if last_viewed_feed_item == last_delivered_feed_item and last_delivered_feed_item.id > pfeed_item.id
     return true if last_viewed_feed_item == last_delivered_feed_item
     self.update_attribute(:last_viewed_feed_item, pfeed_item)
   end
@@ -135,6 +141,7 @@ class User < ActiveRecord::Base
   emits_pfeeds :on => [:trigger_question], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_answer], :for => [:participant_recipient_voices, :friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_idea], :for => [:friends], :identified_by => :name
+  emits_pfeeds :on => [:trigger_classified], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_event], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_gallery], :for => [:friends], :identified_by => :name
   emits_pfeeds :on => [:trigger_resource], :for => [:friends], :identified_by => :name
@@ -219,7 +226,16 @@ class User < ActiveRecord::Base
   def friends
     []
   end
-  
+
+  def friends_with? user
+    redis_friend_ids.include? user
+  end
+
+  def friends_of_friends_with? user
+    # TODO:: add this
+    friends_with? user
+  end
+
   def fb_user_id
     return super unless super.nil?
     return nil unless self.user_profile.present?
@@ -344,8 +360,74 @@ class User < ActiveRecord::Base
     prediction_score = self.build_prediction_score
     prediction_score.save ? prediction_score : nil
   end
+
+  def mogli_user
+    return nil unless fb_oauth_active?
+    @mogli_user ||= Mogli::User.find("me", mogli_client)
+  end
   
+  def mogli_friends
+    return [] unless mogli_user
+
+    mogli_user.friends
+  end
+
+  def facebook_friends
+    return [] unless mogli_user
+
+    mogli_friends.map {|f| User.find_by_fb_user_id(f.id) }.compact
+  end
+  
+  def facebook_friend_ids
+    return [] unless mogli_user
+
+    mogli_friends.map {|f| User.find_by_fb_user_id(f.id, :select => "id").try(:id) }.compact
+  end
+  
+  # Overload has_role? from ACL9 to delegate access to given model
+  def has_role?(role_name, object = nil)
+    method = "is_#{role_name.to_s}?".to_sym
+
+    !! if object.nil? and ( self.roles.find_by_name(role_name.to_s) || self.roles.member?(get_role(role_name, nil)) )
+      true
+    elsif method == :is_admin?
+      self.is_admin?
+    elsif object.respond_to?(method)
+    	  object.send(method, self)
+    else
+      role = get_role(role_name, object)
+      role && self.roles.exists?(role.id)
+    end
+  end
+
+  #
+  # REDIS FUNCTIONS
+  #
+  def redis_update_friends friends_string
+    friends = friend_ids friends_string.split(',')
+    $redis.multi do
+      friends.each {|f| $redis.sadd "#{self.cache_id}:friends", f }
+    end
+  end
+
+  def redis_friends friends_array = nil
+    friends_array ||= $redis.smembers "#{self.cache_id}:friends"
+    User.find(:all, :conditions => ["ID IN (?)", friends_array])
+  end
+
+  def redis_friend_ids
+    $redis.smembers "#{self.cache_id}:friends"
+  end
+
+  def friend_ids friends_array = []
+    User.find(:all, :select => "id", :conditions => ["fb_user_id IN (?)", friends_array]).map(&:id)
+  end
+
   private
+
+  def mogli_client
+    @mogli_client ||= Mogli::Client.new fb_oauth_key
+  end
 
   def check_profile
     self.build_profile if self.profile.nil?
