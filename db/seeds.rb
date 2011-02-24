@@ -17,7 +17,7 @@ if Forum.count == 0
   Forum.create!({:name => 'Feedback', :description=>"Tell us how we're doing. Share your thoughts about #{APP_CONFIG['site_title']}!"}) unless Forum.find_by_name('Feedback')
 end
 # Initial Classified Categories
-["Appliances", "Antiques And Collectibles", "Bikes", "Boats", "Books", "Business", "Computer", "Furniture", "General", "Jewelry", "Materials", "Sporting", "Tickets", "Tools", "Arts And Crafts", "Auto Parts", "Baby And Kids", "Beauty And Health", "Cars And Trucks", "Cds, Dvd, Vhs", "Cell Phones", "Clothes", "Electronics", "Garden", "Household", "Motorcycles", "Musical Instruments", "Photo And Video", "Toys", "Video Games", "Gaming"].each do |category|
+["Appliances", "Antiques and Collectibles", "Bikes", "Boats", "Books", "Business", "Computer", "Furniture", "General", "Jewelry", "Materials", "Sporting", "Tickets", "Tools", "Arts and Crafts", "Auto Parts", "Baby and Kids", "Beauty and Health", "Cars and Trucks", "Cds, Dvd, Vhs", "Cell Phones", "Clothes", "Electronics", "Garden", "Household", "Motorcycles", "Musical Instruments", "Photo and Video", "Toys", "Video Games", "Gaming"].each do |category|
   Classified.add_category(category) unless Classified.categories.find_by_name(category)
 end
 

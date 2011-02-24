@@ -34,7 +34,7 @@ module Newscloud
     end
 
     def self.categories
-      @categories ||= ["Apparel", "Baby", "Beauty", "Blended", "Books", "Classical", "DigitalMusic", "DVD", "Electronics", "GourmetFood", "HealthPersonalCare", "Jewelry", "Kitchen", "Magazines", "Merchants", "Miscellaneous", "Music", "MusicalInstruments", "MusicTracks", "OfficeProducts", "OutdoorLiving", "PCHardware", "Photo", "Restaurants", "Software", "SportingGoods", "Tools", "Toys", "VHS", "Video", "VideoGames", "Wireless", "WirelessAccessories"]
+      @categories ||= ["Apparel", "Baby", "Beauty", "Blended", "Books", "Classical", "Digital Music", "DVD", "Electronics", "Gourmet Food", "Health Personal Care", "Jewelry", "Kitchen", "Magazines", "Merchants", "Miscellaneous", "Music", "Musical Instruments", "Music Tracks", "Office Products", "Outdoor Living", "PCHardware", "Photo", "Restaurants", "Software", "Sporting Goods", "Tools", "Toys", "VHS", "Video", "Video Games", "Wireless", "Wireless Accessories"]
     end
 
     def self.categories_options
