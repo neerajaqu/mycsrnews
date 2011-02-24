@@ -1,7 +1,5 @@
-
 /****************************************************
  V2 GLOBALS */
-
 p
   margin-bottom: $PanelGutters * .5
 
@@ -11,7 +9,6 @@ p
 
 .float-right
   float: right
-
 
 /* Shadows */
 .v-shadow
@@ -33,6 +30,20 @@ p
   -moz-border-radius-bottomleft: $SecondaryBorderRadius
   border-bottom-right-radius: $SecondaryBorderRadius
   border-bottom-left-radius: $SecondaryBorderRadius
+
+
+#header
+  .meta-links
+    font-size: $fontsize
+    position: absolute
+    top: 0px
+    right: 0px
+    float: right
+    padding: 5px 10px 5px 60px 
+    background: image_url("default/site/meta-links-bg.png") top left repeat-y
+    .meta-search
+      border: $formInputBorder
+      padding: 3px 9px
 
 
 /****************************************************
@@ -75,8 +86,6 @@ p
 
 /****************************************************
  V2 GRID CLASSES */
-
-
 /* Columns */
 #left-col
 #right-col
@@ -190,12 +199,10 @@ p
       padding-left: $PanelGutters
       padding-right: $PanelGutters
       margin-bottom: $PanelGutters
-  
+
 
 .panel-2
   +grid(8)
-  margin-left: 0
-  margin-right: 0
   .panel-half
     width: $PanelTwoPanelHalf
     .panel-full
@@ -274,7 +281,6 @@ p
 
 /****************************************************
  WIDGET LISTS */
-
 .list-items
   li
     display: inline-block
@@ -282,6 +288,15 @@ p
     margin-bottom: $PanelGutters * .75
     &.last
       margin-bottom: 0
+    .item-with-image
+      display: inline
+      .item-text
+        margin-left: 30%
+        padding-left: $PanelGutters * .5
+      .item-thumb
+        width: 30%
+        margin-right: $PanelGutters * .5
+
 
 .item-with-no-image
   :padding
@@ -308,6 +323,21 @@ p
       width: 30%
       margin-left: $PanelGutters * .5
       margin-right: 0
+  &.nested
+    .item-text
+      margin-left: 0
+      padding-left: 0
+    .item-thumb
+      width: 40%
+      margin-right: $PanelGutters * .5
+      margin-bottom: $PanelGutters * .5
+  &.listed
+    .item-text
+      margin-left: 30%
+      padding-left: $PanelGutters * .5 
+    .item-thumb
+      width: 30%
+      margin-right: $PanelGutters * .5
 
 
 .item-thumb
@@ -351,16 +381,44 @@ p
     width: 100%
     margin-bottom: 20px
 
+.direction-list
+  li
+    display: block
+    margin-bottom: $PanelGutters * .25
+  a
+    background: transparent image_url("default/site/meta-bullet.gif") center right no-repeat
+    display: inline-block
+    :padding
+      top: 4px
+      right: 20px
+      bottom: 4px
+      left: 0px
+
 
 /****************************************************
  BUTTONS */
-
-.button-link, .button-panel-bar
+.button-link, .button-panel-bar, .button, .meta-search, .icon-link
   -webkit-border-radius: 100px
   -moz-border-radius: 100px
   border-radius: 100px
   &:hover
     text-decoration: none
+
+.button
+  border: 1px solid $BtnBorder
+  background: $BtnBG  image_url("default/site/btn-gradient.png") top left repeat-x 
+  color: $BtnTextColor
+  display: inline-block
+  font-size: $fontsize
+  font-weight: bold
+  line-height: 100%
+  margin: 0 5px
+  padding: 2px 12px 4px
+  text-align: center
+  &:hover
+    cursor: pointer
+    border-color: $BtnBGHover
+    background-color: $BtnBGHover
 
 .button-link
   border: 2px solid $BtnBorder
@@ -394,6 +452,98 @@ p
     text-align: center
     width: 100%
     padding: 4px 0
+
+
+/****************************************************
+ V2 FOOTER */
+.panel-3.footer
+  margin-bottom: 0px
+  .footer-wrap
+    background: $footerBG
+    display: inline-block
+    padding-top: $PanelGutters
+    -webkit-border-top-right-radius: $PrimaryBorderRadius
+    -webkit-border-top-left-radius: $PrimaryBorderRadius
+    -moz-border-radius-topright: $PrimaryBorderRadius
+    -moz-border-radius-topleft: $PrimaryBorderRadius
+    border-top-right-radius: $PrimaryBorderRadius
+    border-top-left-radius: $PrimaryBorderRadius
+    -moz-box-shadow: inset 0 0 22px #d1d1d1
+    -webkit-box-shadow: inset 0 0 22px #d1d1d1
+    box-shadow: inset 0 0 22px #d1d1d1
+    width: 100%
+    .button-link
+      display: block
+      margin: 0 auto $PanelGutters 
+      width: auto
+
+/* footer buttons */
+.icon-link
+  background-color: transparent
+  color: $linkColor
+  display: block
+  font-size: 110%
+  font-weight: bold
+  height: 18px
+  line-height: 100%
+  margin: 0 auto $PanelGutters 
+  padding: 10px 0 10px 44px
+  text-align: left
+  &:hover
+    background-color: $bodyBG
+
+  &.facebook
+    background-image: image_url("default/site/icon-facebook.png")
+    background-position: left center 
+    background-repeat: no-repeat
+  &.twitterfeed
+    background-image: image_url("default/site/icon-twitter.png")
+    background-position: left center 
+    background-repeat: no-repeat
+  &.email
+    background-image: image_url("default/site/icon-email.png")
+    background-position: left center 
+    background-repeat: no-repeat
+  &.friends
+    background-image: image_url("default/site/icon-friends.png")
+    background-position: left center 
+    background-repeat: no-repeat
+  &.rssfeed
+    background-image: image_url("default/site/icon-rss.png")
+    background-position: left center 
+    background-repeat: no-repeat
+
+
+.footer-list
+  li
+    display: block
+    margin-bottom: $PanelGutters * .5
+    padding: 4px 0
+    font-size: $fontsize * 1.125
+
+
+/****************************************************
+ V2 AD WRAPPERS */
+.panel-1, .panel-2, .panel-3
+  &.ad-wrap
+    background: image_url("default/site/ad-title-bg.gif") top left repeat-x
+    padding-top: 20px
+    position: relative
+  .ad-title
+    background: $bodyBG
+    color: $subheadColor
+    display: inline-block
+    height: 12px
+    padding: 2px 4px
+    position: absolute
+    top: 0px
+    left: 0px
+  .place-holder-ad
+    padding: 100px 0
+    width: 100%
+    background: #ff00ff
+    text-align: center
+
 
 
 /****************************************************

@@ -9,23 +9,25 @@
   .panel-content
     %ul.list-items
       %li
-        .item-with-no-image
+        .item-with-image
+          .item-thumb
+            %a= image_tag('default/default_thumb.gif')
           .item-text
-            %h3
-              %a
+            %h4
+              %a  
                 Sit volup tatem accus antium dolorem que
-          .meta-data
-            %h6  
-              Posted by
-              %a Jeff Reifman
-              in
-              %a Blogs
-              4 days ago
-            %h6 
-              %span.count 
-                7
-              %a 
-                Comments
+            .meta-data
+              %h6  
+                By
+                %a Jeff Reifman
+                in
+                %a Blogs
+
+              %h6 
+                %span.count 
+                  7
+                %a 
+                  Comments
       %li
         .item-with-no-image
           .item-text
