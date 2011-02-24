@@ -103,14 +103,13 @@
           %li.menu_item
             = link_to t('.predictions'), predictions_path, :class => "tab #{tab_selected?(@current_tab, 'predictions')}"
         - if MENU.key? 'classifieds'
-          %li
-            .menu_item
-              = link_to t('classifieds.menu_title'), classifieds_path, :class => "tab #{tab_selected?(@current_tab, 'classifieds')}"
-              - unless MENU['classifieds'].nil?
-                %ul.dropdown
-                  - unless MENU['classifieds']['browse'].nil?
-                    %li= link_to t('classifieds.menu_browse'), classifieds_path
-                  - unless MENU['classifieds']['new'].nil?
-                    %li= link_to t('classifieds.menu_new'), new_classified_path
+          %li.menu_item
+            = link_to t('classifieds.menu_title'), classifieds_path, :class => "tab #{tab_selected?(@current_tab, 'classifieds')}"
+            - unless MENU['classifieds'].nil?
+              %ul.dropdown
+                - unless MENU['classifieds']['browse'].nil?
+                  %li= link_to t('classifieds.menu_browse'), classifieds_path
+                - unless MENU['classifieds']['new'].nil?
+                  %li= link_to t('classifieds.menu_new'), new_classified_path
         - if MENU.key? 'cards'
           %li= link_to t('cards.menu_title'), cards_path, :class => "tab #{tab_selected?(@current_tab, 'cards')}"
