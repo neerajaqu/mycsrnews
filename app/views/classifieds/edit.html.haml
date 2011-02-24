@@ -65,7 +65,7 @@
                     %li
                       %label{:for => "classified_allow_type"}= t('classifieds.allow_type.title')
                       = form.select :allow, options_for_select(Classified.allow_types.map {|c| c.to_s }, @classified.allow)
-                -# @classified.categorizations.build if @classified.categorizations.empty?
+                - @classified.categorizations.build if @classified.categorizations.empty?
                 %fieldset
                   - form.semantic_fields_for :categorizations do |category_form|
                     - category_form.inputs do
