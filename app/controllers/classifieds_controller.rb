@@ -1,6 +1,8 @@
 class ClassifiedsController < ApplicationController
   rescue_from 'Acl9::AccessDenied', :with => :access_denied
 
+  cache_sweeper :classified_sweeper, :only => [:create, :update]
+
   before_filter :find_classified, :only => [:show, :edit, :update, :set_status]
   before_filter :set_categories, :only => [:new]
   
