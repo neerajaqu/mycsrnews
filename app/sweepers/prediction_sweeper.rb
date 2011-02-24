@@ -65,7 +65,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
       controller.expire_fragment "#{fragment}_html"
     end
     ['', 'page_1_', 'page_2_'].each do |page|
-      expire_fragment "prediction_scores_list_#{page}html"
+      controller.expire_fragment "prediction_scores_list_#{page}html"
     end
     PredictionSweeper.expire_prediction_question_all prediction_result.prediction_question
   end

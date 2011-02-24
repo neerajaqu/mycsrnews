@@ -277,6 +277,10 @@ en:
     read: "Read Story"
     quick_post: "Quick post"
   predictions:
+    final_result: "The correct result for this question is {{accepted_result}}. Closed: {{accepted_time}}"
+    high_scores: "Top Predictors"
+    guess_count: "Predictions: {{guess_count}}"
+    accuracy: "Accuracy: {{accuracy}}"
     submit_guess: "Submit"
     question_closed: ""
     new_question_posted: "A new prediction question: {{question}} has been added to {{group}}."
@@ -454,6 +458,7 @@ en:
     newest_items:
       title: "Newest Items"
       subtitle: "Newest items added by users"
+      post_title: "Post Something"
     top_items:
       title: "Top Items"
       subtitle: "Most popular items"

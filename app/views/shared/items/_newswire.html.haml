@@ -4,7 +4,7 @@
     %p= linked_newswire_caption newswire
     .itemMeta
       %h3= t('newswires.via', :title => newswire.feed.title, :date => timeago((newswire.updated_at || newswire.created_at)))
-      %span.btnComment= link_to t('newswires.publish', :site_title => APP_CONFIG['site_title']), new_story_path(:newswire_id => newswire)
+      %span.btnComment= link_to t('newswires.publish', :site_title => get_setting('site_title').try(:value)), new_story_path(:newswire_id => newswire)
       -# TODO:: add this to a job queue
-      %span.btnComment= link_to t('newswires.quick_post', :site_title => APP_CONFIG['site_title']), quick_post_newswire_path(newswire), :class => 'quick_post'
+      %span.btnComment= link_to t('newswires.quick_post', :site_title => get_setting('site_title').try(:value)), quick_post_newswire_path(newswire), :class => 'quick_post'
       %span.btnComment= link_to t('newswires.read'), newswire.url, :target => "_cts"

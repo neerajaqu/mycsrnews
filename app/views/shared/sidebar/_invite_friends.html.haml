@@ -8,4 +8,4 @@
           .featured
             .item_2.resource
               .itemBlock
-                %p= t('invite_friends.message', :site_title => APP_CONFIG['site_title'], :invite_link => invite_users_path(:format => 'html') )
+                %p= t('invite_friends.message', :site_title => get_setting('site_title').try(:value), :invite_link => invite_users_path(:format => 'html') )

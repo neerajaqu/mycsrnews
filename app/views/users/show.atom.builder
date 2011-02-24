@@ -1,5 +1,5 @@
 atom_feed do |feed|
-  feed.title("#{@user.public_name} | #{APP_CONFIG['site_title']}")
+  feed.title("#{@user.public_name} | #{get_setting('site_title').try(:value)}")
   unless @activities.first.nil?
     feed.updated(@activities.first.created_at)
 

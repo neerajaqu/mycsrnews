@@ -1,240 +1,24 @@
-// NEWSCLOUD SITE SKIN //
-$fontsize: 12px
+//****************************************************************************************************
+// NEWSCLOUD SITE SKIN
+//****************************************************************************************************
+//****************************************************************************************************
+//Globals
+$colorOne:     #3B5998    // Headers, V2 .panel-bar BG
+$colorTwo:     #E6ECF3    // .panel-featured BG
+$colorThree:   #55761B    // Page tab color
+$colorFour:    #333333    // Body font color
+$colorFive:    #888888    // Subtitle color
+$colorSix:     #3B5998    // links 
+$colorSeven:   #55761b    // #pageTab BG, button BG
+$colorEight:   #F1F1F1    // Meta Panel, Subtitle BG,
+$colorNine:    #999999    // general Border color
+$colorTen:     #ffffff    // body BG, #bodyWrapper BG, V1 .panelBar BG, button TXT
+//Globals
+//****************************************************************************************************
+//****************************************************************************************************
 
-
-// body Variables //
-$bodyBG: #FFFFFF
-$bodyWrapperBG: #fff
-$bodyWrapperBorder: none
-$bodyWrapperBorderTop: $bodyWrapperBorder
-$bodyWrapperBorderBot: $bodyWrapperBorder
-$bodyWrapperBorderleft: $bodyWrapperBorder
-$bodyWrapperBorderRight: $bodyWrapperBorder
-
-// Font Variables //
-$copyFont: lucida grande, tahoma, verdana, arial, "san-serif"
-$headerFont: lucida grande, tahoma, verdana, arial, "san-serif"
-// this is for typekit to fix issues with font bolding on fonts that dont have a bold in their families.
-$headerweight: bold
-
-// Text Color Variables //
-$headerColor: #3B5998
-$headerLinkHover: #3B5998
-$subheadColor: #888
-$linkColor: #3B5998
-$bodyColor: #333333
-
-// Button Background //
-$btnBG: #55761b image_url("default/btn-off.gif") left repeat-x
-$btnBGHover: #77983a image_url("default/btn-on.gif") left repeat-x
-$btnBorder:  1px solid #213603
-$btnTextColor: #fff
-
-// Header Variables //
-$headerHeight: 110px
-$headerTitleColor: #3B5998
-$headerTitleDisplay: visible
-$headerTitleLogoImage: none
-$headerTitleLogoHeight: 50px
-$headerTitleLogoWidth: 400px
-$headerTitleLogoPosTop: 30px
-$headerTitleLogoPosLeft: 20px
-$headerBG: #fff image_url("default/hdr_bg.gif") bottom left repeat-x
-
-// DH links //
-$dhlinkspostop: 10px
-$dhlinkscolor: none
-
-// Bottom Border style for all tab links --DO NOT change unless you're planning on changing the entire pages background color-- //
-$TabBotBorder: 1px solid #FFFFFF
-
-// sponsor variables //
-$sponsordisplay: none
-$sponsorheight: 30px
-$sponsorwidth: 140px
-$sponsortop: 20px
-$sponsorleft: 300px
-$sponsorBG: #fff image_url("default/sponsor-logo.png") center left no-repeat
-
-// menu page tab float variable //
-$pagetabFloat: left
-
-// Menu Page Tab BG and Text Color Variables //
-$tabsBG: none
-$tabTopBdr: none
-$tabBotBdr: 1px solid #999999
-
-$pageTabOff: #55761b image_url("default/pagetab-bg-off.gif") top left repeat-x
-$pageTabOffHover: #77983a image_url("default/pagetab-bg-hover.gif") top left repeat-x
-$pageTablinkOff: #FFFFFF
-$pageTabLinkOffHover: $pageTablinkOff
-$pageTabOffPOS: -1px
-$pageTabOn: #FFFFFF image_url("default/pagetab-bg-on.gif") top left repeat-x
-$pageTabOnBotBdr:  1px solid #fff
-$pageTabOnBdr: 1px solid #999999
-$pageTabOnPOS: 0px
-$pageTablinkOn: #3b5998
-$pageTabOnPOS: 0px
-
-$pageTabWidth: 110px
-
-// Page Tab Dropdown Variables //
-$dropdownTabOff: #80a341
-$dropdownTabOn: #5d7e20
-$dropdownTabText: #FFF
-$dropdownTabTopBorder: 1px solid #FFF
-$dropdownListBorder: none
-
-$dropdownWidth: $pageTabWidth * 1.25
-
-// Page Tab Selected Dropdown Variables //
-$dropdownTabSelectOff: #fff
-$dropdownTabSelectOn: #dce6f4
-$dropdownTabTextSelect: #3B5998
-$dropdownTabTopBorderSelect: 1px solid #f0f0f0
-$dropdownTabListBorderSelect: 1px solid #999999
-
-
-// SubNav Variables //
-$subnavTabOn: #FFFFFF image_url("default/pagetab-bg-on.gif") top left repeat-x
-$subnavTabOffHover: #77983a image_url("default/pagetab-bg-hover.gif") left repeat-x
-$subnavTabOff: #55761b image_url("default/pagetab-bg-off.gif") left repeat-x
-$subnavTabLinkOn: #3b5998
-$subnavTabLinkOff: #FFFFFF
-$subnavBorder: 1px solid #999999
-
-// text dropdown styles //
-$AccountArrow: transparent image_url("default/dropdown_arrow.gif") center right no-repeat
-$RefineArrow: transparent image_url("default/dropdown_arrow.gif") center right no-repeat
-
-// Text Dropdown Panel //
-$DropDownBorder: 1px solid #3b5998
-$DropDownBorderBot: 1px solid #FFF
-$DropDownBG: #FFFFFF
-$DropDownLinkHover: #dce6f4
-
-// refine drop down form button variables //
-$refineInputBorder: 1px solid #3b5998
-$refineInputBG: #dce6f4
-$refineInputText: #3b5998
-$refineInputHoverText: #fff
-$refineInputHoverBG: #3b5998
-
-// House Ad Variables //
-$featureH2Text: #3b5998
-$featureBodyText: #3b5998
-$WelcomePanelBG: #fff image_url("default/house-ad-bg.gif") top center repeat-x
-$featureBorder: 2px solid #c0cce0
-$featureBorderTop: $featureBorder
-$featureBorderBot: $featureBorder
-$featureBorderLeft: $featureBorder
-$featureBorderRight: $featureBorder
-$featureBorderRadius: none
-
-// Bookmarklet Variables //
-$demoBG: image_url("default/bookmarklet-demo.png") top center no-repeat
-$bookmarkletBG: #dbe5ee image_url("default/bookmarklet-BG.gif") top left repeat-x
-$bookmarkletHeader: #3b5998
-$bookmarkletHeaderBG: image_url("default/bookmarklet-header-BG.png") top center no-repeat
-$bookmarkletText: #333333
-$bookmarkletBorder: 2px solid #c0cce0
-
-// Ad BG Variable //
-$AdBG: #ccc image_url("default/ad-bg-title.gif") top center no-repeat
-
-// Hot Topic Bar Variables //
-$HTBaseBG: #F0F0F0
-$HTTitleBG: #31500b
-$HTTitleText: #FFF
-
-// Hot Topic Bar List Image Variable //
-$hotTopicBar:  image_url("default/topic_arrow.gif") center left no-repeat
-
-//Top Bar Variables (bar at the top of article detail pages)//
-$TopBarBorder: 1px solid #FFFFFF
-$TopBarBG: #F0F0F0
-
-// Panel Variables //
-$panelListBorder: 1px solid #efefef
-
-// panel Bar //
-$pbh2: 11px
-$fbpbh2: 10px
-$panelBarBG: #FFF
-$panelBarBorder: 1px solid #3b5998
-$panelBarHeader: #999999
-$panelBarHeaderLink: $linkColor
-$panelBarHeaderWeight: normal
-$panelBarTextTransform: uppercase
-
-// subtitle background color //
-$subTitleBG: #F0F0F0
-
-//Panel Featured Story //
-$featureStoryBG: #e6ecf3
-
-// Panel Resources sponsor box //
-$sponsorBoxBorder: 2px solid #77983a
-$sponsorBoxPanelBarBG: #77983a
-$sponsorBoxPanelBarTextColor: #fff
-$sponsorBoxBG: #fff
-
-// Bullet List Image Variables  //
-$bulletList: image_url("default/bullet1.gif")
-
-// Vote Button Variable //
-$btnCommentBG: #F0F0F0
-
-// feature vote button variable //
-$btnCommentFeatureBG: #FFFFFF
-
-// Vote Image Variables  //
-$voteUp: image_url("default/icon_vote_up.gif") left no-repeat
-$voteDown: image_url("default/icon_vote_down.gif") left no-repeat
-
-// Thumb Image Variables  //
-$thumbUp: image_url("default/thumb-up.gif") left no-repeat
-$thumbDown: image_url("default/thumb-down.gif") left no-repeat
-
-// PanelBar Comments Thread BG //
-$panelBarCommentBG: #dce6f4
-$commentBlockBorder: 1px solid #efefef
-
-// Comment Reply Variables //
-$commentReplyText: #336600
-$commentReply: image_url("default/reply_arrow.png") top left no-repeat
-
-
-// Action Legend Variables //
-$actionLegendinputBorder: 1px solid #CCCCCC
-$actionLegendBG: #dce6f4
-
-// Pagination Variables //
-$paginationAlign: center
-$paginationLinkOn: #3b5998
-$paginationLinkOff: #fff
-$paginationLinkDisabled: #999
-$paginationBgOn: #fff
-$paginationBgOff: #3b5998
-$paginationBgDisabled: #fff
-$paginationBdrOn: 1px solid #3b5998
-$paginationBdrOff: 1px solid #3b5998
-$paginationBdrDisabled: 1px solid #999
-
-// Footer //
-$FooterBorder: 1px solid #3b5998
-$FooterBG: #dce6f4
-
-// Various Icon Image Variables //
-$rss: image_url("default/icon_rss.png") left no-repeat
-$twitter: image_url("default/icon_twitter.gif") left no-repeat
-$newsCloud: image_url("default/icon_newscloud.gif") left no-repeat
-
-// BlockQuote Image Variable //
-$blockQuote: #fff
-
-// Story Thumb Image BG Variable //
-$WaterMark: #fff image_url("default/watermark.jpg") center no-repeat
+//****************************************************
+// ALERTS
 
 // Message Flash Variables //
 $flashErrorBorder: 2px solid #640000
@@ -245,3 +29,239 @@ $flashNoticeBorder: 2px solid #0B5B9E
 $flashNoticeBG: #3b91ae
 $flashWarningBorder: 2px solid #b46a06
 $flashWarningBG: #f79410
+
+
+//****************************************************
+// FONTS & TEXT
+
+// Font Families
+$copyFont: lucida grande, tahoma, verdana, arial, "san-serif"
+$headerFont: lucida grande, tahoma, verdana, arial, "san-serif"
+$headerWeight: bold // TypeKit work-around for single family fonts.
+
+// Text Color
+$headerColor: $colorOne
+$headerLinkHover: $colorOne
+$subheadColor: $colorFive
+$linkColor: $colorSix
+$bodyColor: $colorFour
+
+
+//****************************************************
+// HEADER
+
+// Header Container
+$headerBG: image_url("default/hdr_bg.gif") bottom left repeat-x
+$headerHeight: 110px
+
+// Site Title
+$headerTitleColor: $colorOne
+$headerTitleDisplay: visible
+$headerTitleLogoHeight: 50px
+$headerTitleLogoWidth: 400px
+$headerTitleLogoPosTop: 30px
+$headerTitleLogoPosLeft: 20px
+$headerTitleLogoImage: none
+
+// Site Sponsor 
+$sponsorDisplay: none
+$sponsorHeight: 30px
+$sponsorWidth: 140px
+$sponsorTop: 20px
+$sponsorLeft: 300px
+$sponsorLogoImage: image_url("default/sponsor-logo.png") center left no-repeat
+
+// Page Tab Float
+$pagetabFloat: right
+
+// Page Tab Width
+$pageTabWidth: 100px
+
+// Page Tabs
+$tabBG: $colorSeven image_url("default/site/btn-gradient.png") top left repeat-x
+$tabBGHover: $colorSeven - #222 image_url("default/site/btn-gradient.png") top left repeat-x
+$tabBorder: 1px solid $colorSeven
+$tabTextColor: $colorTen
+$tabSelectedBG: $colorTen
+$tabSelectedTextColor: $colorSeven
+// Non-Tab navigation
+$PageTabRoundedCorners: none
+
+// Page Tab Dropdowns
+$PageTabDropDownBG: $colorSeven + #444
+$PageTabDropDownBGHover: $colorSeven - #222
+
+// Page Sub-Navigation Tabs
+$subTabBG: $colorOne 
+$subTabBGHover: $colorOne - #222 
+$subTabBorder: 1px solid $colorNine
+$subTabTextColor: $colorTen
+$subTabSelectedBG: $colorTen
+$subTabSelectedTextColor: $colorOne
+
+
+//****************************************************
+// BODY
+
+// Body Containers
+$bodyBG: $colorTen
+$bodyWrapperBG: $colorTen
+
+
+//****************************************************
+// WIDGETS
+
+//Panel Featured 
+$PanelFeaturedBG: $colorTwo
+$PanelBarFeaturedBG: $colorTwo
+
+//Panel Generic (V2)
+$PanelBarBG: $colorOne
+$PaneBarHeaderColor: $colorTen
+
+$PanelBorderColor: 1px solid $PanelBarFeaturedBG - #222
+
+//Panel Generic (V1)
+$subTitleBG: $colorEight - #010101
+$panelListBorder: 1px solid $colorEight - #010101
+//Panel Bar (V1)
+$pbh2: 11px
+$fbpbh2: 10px
+$panelBarBG: $colorTen
+$panelBarBorder: 1px solid $colorOne
+$panelBarHeader: $colorNine
+$panelBarHeaderLink: $linkColor
+$panelBarHeaderWeight: normal
+$panelBarTextTransform: uppercase
+
+//Panel Meta
+$PanelMetaBackground: $colorEight
+
+// Pagination
+$paginationAlign: right
+$paginationLinkOn: $colorOne
+$paginationLinkOff: $colorTen
+$paginationLinkDisabled: $colorFive
+$paginationBgOn: $colorTen
+$paginationBgOff: $colorOne
+$paginationBgDisabled: $colorTen
+$paginationBdrOn: 1px solid $colorOne
+$paginationBdrOff: 1px solid $colorOne
+$paginationBdrDisabled: 1px solid $colorFive
+
+
+//Buttons (V2)
+//General Button
+$BtnBG: $colorOne
+$BtnBGHover: $colorOne - #222
+$BtnBorder: $colorOne
+$BtnTextColor: $colorTen
+//Panel Bar Button
+$PanelBarBtnBG: $colorTen
+$PanelBarBtnTextColor: $colorOne
+$PanelBarBtnTextColorHover: $colorTen
+
+//Buttons (V1)
+$btnBG: $colorSeven image_url("default/site/btn-gradient.png") top left repeat-x
+$btnBGHover: $colorSeven - #222 image_url("default/site/btn-gradient.png") top left repeat-x
+$btnBorder:  1px solid $colorSeven
+$btnTextColor: $colorTen
+
+//Advertisments (V2)
+$AdvertBG: none
+
+// Advertisments (V1)
+$AdBG: #ccc image_url("default/ad-bg-title.gif") top center no-repeat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ** UNSURE OF WHAT TO DO ** //// ** UNSURE OF WHAT TO DO ** //// ** UNSURE OF WHAT TO DO ** //// ** UNSURE OF WHAT TO DO ** //// ** UNSURE OF WHAT TO DO ** //
+// text dropdown styles //
+$AccountArrow: transparent image_url("default/dropdown_arrow.gif") center right no-repeat
+$RefineArrow: transparent image_url("default/dropdown_arrow.gif") center right no-repeat
+
+// Text Dropdown Panel //
+$DropDownBorder: 1px solid $colorOne
+$DropDownBorderBot: 1px solid $colorTen
+$DropDownBG: $colorTen
+$DropDownLinkHover: $colorTwo
+
+
+// refine drop down form button variables //
+$refineInputBorder: 1px solid $colorOne
+$refineInputBG: $colorTwo
+$refineInputText: $colorOne
+$refineInputHoverText: $colorTen
+$refineInputHoverBG: $colorOne
+// ** UNSURE OF WHAT TO DO ** //// ** UNSURE OF WHAT TO DO ** //// ** UNSURE OF WHAT TO DO ** //// ** UNSURE OF WHAT TO DO ** //// ** UNSURE OF WHAT TO DO ** //
+
+// ** DEPRECIATED ** //// ** DEPRECIATED ** //// ** DEPRECIATED ** //// ** DEPRECIATED ** //// ** DEPRECIATED ** //// ** DEPRECIATED ** //
+// House Ad Variables //
+$featureH2Text: $colorOne
+$featureBodyText: $colorOne
+$WelcomePanelBG: #fff image_url("default/house-ad-bg.gif") top center repeat-x
+$featureBorder: 2px solid $colorTwo
+$featureBorderTop: $featureBorder
+$featureBorderBot: $featureBorder
+$featureBorderLeft: $featureBorder
+$featureBorderRight: $featureBorder
+$featureBorderRadius: none
+// Bookmarklet Variables //
+$demoBG: image_url("default/bookmarklet-demo.png") top center no-repeat
+$bookmarkletBG: #dbe5ee image_url("default/bookmarklet-BG.gif") top left repeat-x
+$bookmarkletHeader: $colorOne
+$bookmarkletHeaderBG: image_url("default/bookmarklet-header-BG.png") top center no-repeat
+$bookmarkletText: $colorFour
+$bookmarkletBorder: 2px solid $colorTwo
+// Footer //
+$FooterBorder: 1px solid $colorOne
+$FooterBG: $colorTwo
+// Action Legend Variables //
+$actionLegendinputBorder: 1px solid $colorFive
+$actionLegendBG: $colorTwo
+
+// BlockQuote Image Variable //
+$blockQuote: $bodyBG
+
+// Hot Topic Bar Variables //
+$HTBaseBG: $colorEight - #010101
+$HTTitleBG: $colorOne
+$HTTitleText: $bodyBG
+
+//Top Bar Variables (bar at the top of article detail pages)//
+$TopBarBorder: 1px solid $bodyBG
+$TopBarBG: $colorEight - #010101
+
+// Vote Button Variable //
+$btnCommentBG: $colorEight - #010101
+
+// feature vote button variable //
+$btnCommentFeatureBG: $bodyBG
+
+// PanelBar Comments Thread BG //
+$panelBarCommentBG: $colorTwo
+$commentBlockBorder: 1px solid $colorEight - #010101
+
+// Comment Reply Variables //
+$commentReplyText: #336600
+// ** DEPRECIATED ** //// ** DEPRECIATED ** //// ** DEPRECIATED ** //// ** DEPRECIATED ** //// ** DEPRECIATED ** //// ** DEPRECIATED ** //

@@ -4,10 +4,10 @@
   %head
     = javascript_include_tag "http://partner.googleadservices.com/gampad/google_service.js"
     %script{:type => "text/javascript"}
-      == GS_googleAddAdSenseService("#{APP_CONFIG['google_adsense_account_id']}");
+      == GS_googleAddAdSenseService("#{get_setting('google_adsense_account_id').try(:value)}");
       GS_googleEnableAllServices();
     %script{:type => "text/javascript"}
-      == GA_googleAddSlot("#{APP_CONFIG['google_adsense_account_id']}", "#{slot_name}");
+      == GA_googleAddSlot("#{get_setting('google_adsense_account_id').try(:value)}", "#{slot_name}");
     %script{:type => "text/javascript"}
       GA_googleFetchAds();
 

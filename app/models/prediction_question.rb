@@ -174,6 +174,8 @@ class PredictionQuestion < ActiveRecord::Base
     correct_guesses.each do |prediction_guess|
       prediction_guess.update_attribute("is_correct",true)
     end
+    self.update_attribute(:status, "closed")
+    # to do - update prediction group question count
     update_scores
     #todo - send notifications
     #Notifier.deliver_prediction_question_message(prediction_result.prediction_question)
@@ -212,4 +214,7 @@ class PredictionQuestion < ActiveRecord::Base
     PredictionSweeper
   end
 
+  def get_accepted_result
+    self.prediction_results.find(:first, :conditions => "is_accepted = 1")
+  end
 end

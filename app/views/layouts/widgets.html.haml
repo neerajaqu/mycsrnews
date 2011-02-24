@@ -1,7 +1,7 @@
 !!!
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://www.facebook.com/2008/fbml"}
   %head
-    - title = (out = yield(:title)) ? "#{out} - #{APP_CONFIG['site_title']}" : APP_CONFIG['site_title']
+    - title = (out = yield(:title)) ? "#{out} - #{get_setting('site_title').try(:value)}" : get_setting('site_title').try(:value)
     %title= title
     %meta{:name => 'title', :content => title}
     %meta{:name => 'description', :content => (out = yield(:meta_description)) ? out : ""}
@@ -11,10 +11,12 @@
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
     = stylesheet_link_merged :base
 
-    - if APP_CONFIG['typekit'].present? and APP_CONFIG['typekit']
-      = javascript_include_tag "http://use.typekit.com/#{APP_CONFIG['typekit']}.js"
-      :javascript
-        try{Typekit.load();}catch(e){}
+    - if get_setting('typekit').present?
+      - typekit = get_setting('typekit').value
+      - if typekit != '000000'
+        = javascript_include_tag "http://use.typekit.com/#{typekit}.js"
+        :javascript
+          try{Typekit.load();}catch(e){}
         
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', "http://platform.twitter.com/anywhere.js?id=#{get_setting('oauth_key').value}&v=1"
     = javascript_include_merged :base

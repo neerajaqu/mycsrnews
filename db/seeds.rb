@@ -90,6 +90,8 @@ settings = [
  { :key_sub_type => 'amazon', :key_name => 'aws_access_key_id',  :value => "1234asdf4321" },
  { :key_sub_type => 'amazon', :key_name => 'aws_secret_key',  :value => "123454321asdf5432112345" },
  { :key_sub_type => 'amazon', :key_name => 'associate_code',  :value => "yourcode-20" },
+ { :key_sub_type => 'options', :key_name => 'default_admin_user',  :value => (APP_CONFIG['default_admin_user'] || "admin") },
+ { :key_sub_type => 'options', :key_name => 'default_admin_password',  :value => (APP_CONFIG['default_admin_password'] || "n2adminpassword") },
  { :key_sub_type => 'options', :key_name => 'default_site_preference',  :value => "iframe" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_features',  :value => "300" },
  { :key_sub_type => 'options', :key_name => 'animation_speed_newswires',  :value => "750" },
@@ -102,6 +104,7 @@ settings = [
  { :key_sub_type => 'options', :key_name => 'outbrain_template_name',  :value => "my_template_name", :hint => "Outbrain template name" },
  { :key_sub_type => 'options', :key_name => 'outbrain_account_id',  :value => "1234567890", :hint => "Outbrain account id" },
  { :key_sub_type => 'options', :key_name => 'outbrain_verification_html',  :value => "false", :hint => "Outbrain verification html, copy paste this from Outbrain." },
+ { :key_sub_type => 'options', :key_name => 'hoptoad_api_key',  :value => (APP_CONFIG['hoptoad_api_key'] || "false" ), :hint => "API Key for tracking bugs via HopToadApp" },
  #{ :key_sub_type => 'options', :key_name => 'site_notification_user',  :value => (User.admins.last || nil) },
  { :key_sub_type => 'options', :key_name => 'enable_activity_popups',  :value => "true" },
  { :key_sub_type => 'options', :key_name => 'allow_web_auth',  :value => (APP_CONFIG['allow_web_auth'] || "false" ) },
@@ -164,21 +167,22 @@ settings = [
  { :key_sub_type => 'ads', :key_name => 'openx_noscript_imgsrc', :value => "http://openx.com/ns_imgsrc_address" },
  { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => ( APP_CONFIG['google_adsense_slot_name'] || "default") },
  { :key_sub_type => 'ads', :key_name => 'google_adsense_account_id', :value => (APP_CONFIG['google_adsense_account_id'] || "ca-pub-9975156792632579" ) },
- { :key_sub_type => 'ads', :key_name => 'google_adsense_slot_name', :value => (APP_CONFIG['google_adsense_slot_name'] || "Needle_Small") },
  { :key_sub_type => 'options', :key_name => 'google_search_engine_id', :value => ("your-google-search-engine-id") },
  { :key_sub_type => 'options', :key_name => 'widget_stories_short_max', :value => "3" },
  { :key_sub_type => 'options', :key_name => 'widget_articles_as_blog_max', :value => "1" },
  { :key_sub_type => 'zvents', :key_name => 'zvents_replacement_url', :value => ("www.zvents.com") },
+ { :key_sub_type => 'zvents', :key_name => 'zvent_api_key', :value => (APP_CONFIG['zvent_api_key'] || "false" ) },
+ { :key_sub_type => 'zvents', :key_name => 'zvent_location', :value => (APP_CONFIG['zvent_location'] || "false" ) },
  { :key_sub_type => 'twitter_standard_favorites', :key_name => 'favorites_account', :value =>"twitter-account", :hint => 'The account name of the Twitter account to show favorites from' }, 
  { :key_sub_type => 'twitter_standard_favorites', :key_name => 'favorites_widget_title', :value =>"Selected tweets from", :hint => 'A title for the favorites widget' }, 
  { :key_sub_type => 'twitter_standard_favorites', :key_name => 'favorites_widget_caption', :value => APP_CONFIG['site_title'], :hint => 'A subject for the favorites widget' }, 
  { :key_sub_type => 'twitter_standard_search', :key_name => 'search', :value =>"search-value", :hint => 'The account name of the Twitter account to show search from' }, 
  { :key_sub_type => 'twitter_standard_search', :key_name => 'search_widget_title', :value =>"Tweets about", :hint => 'A title for the search widget' }, 
- { :key_sub_type => 'twitter_standard_search', :key_name => 'search_widget_caption', :value => APP_CONFIG['site_topic'], :hint => 'A subject for the search widget' }, 
+ { :key_sub_type => 'twitter_standard_search', :key_name => 'search_widget_caption', :value => (APP_CONFIG['site_topic'] || "Default Topic" ), :hint => 'A subject for the search widget' }, 
  { :key_sub_type => 'twitter_standard_list', :key_name => 'list_account', :value =>"twitter-account", :hint => 'The account name which owns the Twitter list' }, 
  { :key_sub_type => 'twitter_standard_list', :key_name => 'list_name', :value =>"default-list", :hint => 'The hyphenated name of the twitter list' }, 
  { :key_sub_type => 'twitter_standard_list', :key_name => 'list_widget_title', :value => APP_CONFIG['site_title'], :hint => 'The title for the widget' }, 
- { :key_sub_type => 'twitter_standard_list', :key_name => 'list_widget_caption', :value =>"Tweets about #{APP_CONFIG['site_topic']}", :hint => 'The caption for the widget' }
+ { :key_sub_type => 'twitter_standard_list', :key_name => 'list_widget_caption', :value =>"Tweets about #{(APP_CONFIG['site_topic'] || "Default Topic" )}", :hint => 'The caption for the widget' }
 ]
 
 settings.each do |setting|

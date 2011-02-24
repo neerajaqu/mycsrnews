@@ -3,7 +3,7 @@
 %html
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'application/xhtml+xml; charset=UTF-8'}/
-    %title== N2 -- #{APP_CONFIG['site_topic']} Admin Interface
+    %title== N2 -- #{get_setting('site_title').try(:value)} Admin Interface
 
     =# javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', 'jquery.ThreeDots.min.js', 'application', 'jquery.masonry.js'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js', 'jquery.jcarousel.pack', 'jquery.quicksand.min', 'jquery.ThreeDots.min.js', 'jquery.masonry.js'
@@ -151,9 +151,9 @@
               %li= link_to 'Facebook Application', "http://apps.facebook.com/#{ENV['FACEBOOKER_RELATIVE_URL_ROOT']}", :target => "_fbapp"
               %li= link_to 'Facebook App Page', "http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
               %li= link_to 'Facebook App Statistics', "http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
-              - if APP_CONFIG['google_analytics_site_id'].present? and APP_CONFIG['google_analytics_site_id']
-                %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1&id=#{APP_CONFIG['google_analytics_site_id']}", :target => "_analytics"
-              - elsif APP_CONFIG['google_analytics_account_id'].present? and APP_CONFIG['google_analytics_account_id']
+              - if get_setting('google_analytics_site_id').try(:value)
+                %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1&id=#{get_setting('google_analytics_site_id').try(:value)}", :target => "_analytics"
+              - elsif get_setting('google_analytics_account_id').try(:value)
                 %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1", :target => "_analytics"
               %li= link_to 'Report a problem', 'http://support.newscloud.com/discussions/problems', :target => "_support"
       .main-content.clearfix

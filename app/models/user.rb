@@ -302,7 +302,7 @@ class User < ActiveRecord::Base
 
 # TODO:: move this to a setting
   def public_name
-    firstnameonly = APP_CONFIG['firstnameonly'] || false
+    firstnameonly = Metadata::Setting.find_setting('firstnameonly').try(:value) || false
     return self.name.split(' ').first if firstnameonly
     self.name
   end

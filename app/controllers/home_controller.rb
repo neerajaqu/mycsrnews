@@ -60,7 +60,7 @@ class HomeController < ApplicationController
   end
 
   def google_ads
-    slot_name = params[:slot_name] || APP_CONFIG['google_adsense_slot_name']
+    slot_name = params[:slot_name] || get_setting('google_adsense_slot_name').try(:value)
     render :partial => 'shared/google_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 
@@ -70,22 +70,22 @@ class HomeController < ApplicationController
   end
 
   def helios_ads
-    slot_name = params[:slot_name] || APP_CONFIG['helios_slot_name']
+    slot_name = params[:slot_name] || get_setting('helios_slot_name').try(:value)
     render :partial => 'shared/ads/helios_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 
   def helios_alt2_ads
-    slot_name = params[:slot_name] || APP_CONFIG['helios_slot_name']
+    slot_name = params[:slot_name] || get_setting('helios_slot_name').try(:value)
     render :partial => 'shared/ads/helios_alt2_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 
   def helios_alt3_ads
-    slot_name = params[:slot_name] || APP_CONFIG['helios_slot_name']
+    slot_name = params[:slot_name] || get_setting('helios_slot_name').try(:value)
     render :partial => 'shared/ads/helios_alt3_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 
   def helios_alt4_ads
-    slot_name = params[:slot_name] || APP_CONFIG['helios_slot_name']
+    slot_name = params[:slot_name] || get_setting('helios_slot_name').try(:value)
     render :partial => 'shared/ads/helios_alt4_ads', :locals => { :slot_name => slot_name },:layout => false
   end
 

@@ -1,5 +1,5 @@
 atom_feed do |feed|
-  feed.title(APP_CONFIG['site_title'])
+  feed.title(get_setting('site_title').try(:value))
   feed.updated(@contents.first.created_at)
 
   @contents.each do |story|

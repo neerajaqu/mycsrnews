@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
       end
       if @comment.user.post_comments?
         image_url = (@comment.commentable.respond_to?(:images) and @comment.commentable.images.any?) ? @template.base_url(@comment.commentable.images.first.url(:thumb)) : nil
-        app_caption = t('app.facebook.comment_caption', :title => APP_CONFIG['site_title'])
+        app_caption = t('app.facebook.comment_caption', :title => get_setting('site_title').try(:value))
         @comment.async_comment_messenger polymorphic_path(@commentable.item_link, :only_path => false, :canvas => iframe_facebook_request?, :format => 'html'), app_caption, image_url
       end
     	# TODO:: change this to work with polymorphic associations, switch to using touch

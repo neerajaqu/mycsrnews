@@ -99,7 +99,7 @@ class AdminController < ApplicationController
 
     if User.admins.empty?
       authenticate_or_request_with_http_basic do |username, password|
-        username == APP_CONFIG['default_admin_user'] and password == APP_CONFIG['default_admin_password']
+        username == get_setting('default_admin_user').try(:value) and password == get_setting('default_admin_password').try(:value)
       end
     else 
       redirect_to home_index_path and return false
