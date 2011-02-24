@@ -69,7 +69,7 @@
                 %fieldset
                   - form.semantic_fields_for :categorizations do |category_form|
                     - category_form.inputs do
-                      = category_form.input :category, :as => :select, :collection => @classified.class.categories.map {|c| [c.name, c.id]}, :include_blank => false
+                      = category_form.input :category, :as => :select, :collection => @classified.class.sorted_categories.map {|c| [c.name, c.id]}, :include_blank => false
                 - form.buttons do
                   = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
                   = form.commit_button t('wizard.save_changes'), :class => 'float_right', :button_html => { :class => 'form-btn' }

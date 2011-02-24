@@ -492,7 +492,7 @@ en:
       title: "Title"
       hint_classified_title: "Please provide a short title for your item"
       hint_classified_detail: "Please provide a brief description of your item."
-      hint_classified_detail: "Please provide a price for your item, leave blank for free or loan items."
+      hint_classified_price: "Please provide a price for your item, leave blank for free or loan items."
       heading: "Post Your Classified Item"
       your_item: "Your Item"
       item_setting: "Item Settings"

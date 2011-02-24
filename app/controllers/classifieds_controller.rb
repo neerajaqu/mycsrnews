@@ -144,9 +144,8 @@ class ClassifiedsController < ApplicationController
       @classified.is_allowed? nil
     end
     
-    #todo - move to amazon helper - per rb
     def set_categories
-      @categories = ["Apparel", "Baby", "Beauty", "Blended", "Books", "Classical", "DigitalMusic", "DVD", "Electronics", "GourmetFood", "HealthPersonalCare", "Jewelry", "Kitchen", "Magazines", "Merchants", "Miscellaneous", "Music", "MusicalInstruments", "MusicTracks", "OfficeProducts", "OutdoorLiving", "PCHardware", "Photo", "Restaurants", "Software", "SportingGoods", "Tools", "Toys", "VHS", "Video", "VideoGames", "Wireless", "WirelessAccessories"]
+      @categories = Newscloud::AmazonSearch.categories
     end
 
 end
