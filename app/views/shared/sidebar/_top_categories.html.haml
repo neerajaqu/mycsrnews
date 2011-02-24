@@ -1,7 +1,7 @@
 -# Expects klass, category_type, locale_var
 - category_type ||= 'category'
 - locale_var ||= 'categories.top_title'
-- klass_name = klass.name
+- klass_name = klass.name.underscore
 
 - cache "top_#{klass_name}_#{category_type}_html", :expires_in => 1.hour do
   %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
