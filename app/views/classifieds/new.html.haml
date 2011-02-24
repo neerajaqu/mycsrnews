@@ -70,7 +70,7 @@
                     = form.input :amazon_asin, :as => :hidden, :required => false
                     = form.input :title, :label => t('.title'), :hint => t('.hint_classified_title')
                     = form.input :details, :hint => t('.hint_classified_details')
-                    = form.input :price, :hint => t('.hint_classified_details')
+                    = form.input :price, :hint => t('.hint_classified_price'), :required => false
                 - form.buttons do
                   = form.commit_button t('wizard.continue'), :class => 'float_right', :button_html => { :class => 'form-btn next' }
               .panel2
@@ -89,7 +89,7 @@
                 %fieldset
                   - form.semantic_fields_for :categorizations do |category_form|
                     - category_form.inputs do
-                      = category_form.input :category, :as => :select, :collection => @classified.class.categories.map {|c| [c.name, c.id]}, :include_blank => false
+                      = category_form.input :category, :as => :select, :collection => @classified.class.sorted_categories.map {|c| [c.name, c.id]}, :include_blank => false
                     -# @classified.subcategories.build if @classified.subcategories.empty?
                     -# category_form.semantic_fields_for :subcategories do |subcategory_form|
                       - subcategory_form.inputs do

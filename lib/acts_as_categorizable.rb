@@ -37,6 +37,10 @@ module Newscloud
           Category.default_categories_on self
         end
 
+        def sorted_categories
+          self.categories.find(:all, :order => "name asc")
+        end
+
         def subcategories
           Category.default_subcategories_on self
         end

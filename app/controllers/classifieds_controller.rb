@@ -1,6 +1,8 @@
 class ClassifiedsController < ApplicationController
   rescue_from 'Acl9::AccessDenied', :with => :access_denied
 
+  cache_sweeper :classified_sweeper, :only => [:create, :update]
+
   before_filter :find_classified, :only => [:show, :edit, :update, :set_status]
   before_filter :set_categories, :only => [:new]
   
@@ -139,9 +141,8 @@ class ClassifiedsController < ApplicationController
       @classified.is_allowed? nil
     end
     
-    #todo - move to amazon helper - per rb
     def set_categories
-      @categories = ["Apparel", "Baby", "Beauty", "Blended", "Books", "Classical", "DigitalMusic", "DVD", "Electronics", "GourmetFood", "HealthPersonalCare", "Jewelry", "Kitchen", "Magazines", "Merchants", "Miscellaneous", "Music", "MusicalInstruments", "MusicTracks", "OfficeProducts", "OutdoorLiving", "PCHardware", "Photo", "Restaurants", "Software", "SportingGoods", "Tools", "Toys", "VHS", "Video", "VideoGames", "Wireless", "WirelessAccessories"]
+      @categories = Newscloud::AmazonSearch.categories
     end
 
 end
