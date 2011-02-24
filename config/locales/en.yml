@@ -463,6 +463,7 @@ en:
       title: "Top Items"
       subtitle: "Most popular items"
   classifieds:
+    top_classified_tags: "Popular Tags"
     listing_type_strings:
       sale: "For Sale"
       free: "Free"
@@ -535,5 +536,5 @@ en:
       published: "Publish item"
     categories_top_title: "Top Classified Categories"
   categories:
-    top_title: "Top Categories"
-    no_items: "No Categories"
+    top_title: "Popular Categories"
+    no_items: "No categories"

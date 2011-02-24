@@ -15,4 +15,4 @@
               %h4== (#{categorization.count})  #{link_to categorization.category.name, url_for(send("categorized_#{klass_name.underscore.pluralize}_path", CGI.escape(categorization.category.name))) }
         - else
           %li
-            %h4= t('categories.no_categories')
+            %h4= t('categories.no_items')

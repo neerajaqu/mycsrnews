@@ -126,8 +126,10 @@ ActiveRecord::Schema.define(:version => 20110209184821) do
     t.string   "aasm_state"
     t.string   "listing_type"
     t.string   "allow"
+    t.string   "amazon_asin"
     t.integer  "user_id"
     t.datetime "expires_at"
+    t.float    "price"
     t.integer  "votes_tally",    :default => 0
     t.integer  "comments_count", :default => 0
     t.boolean  "is_featured",    :default => false
