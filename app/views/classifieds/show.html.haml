@@ -78,7 +78,7 @@
   - cache "#{@classified.cache_key}_sidebar_html" do
     = render :partial => 'shared/sidebar/bio', :locals => { :user => @classified.user }
     = render :partial => 'shared/sidebar/who_liked', :locals => { :item => @classified }
-  = render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Classified , :locale_var => 'top_classified_tags' }
+  =# render :partial => 'shared/sidebar/top_tags', :locals => { :klass => Classified , :locale_var => 'top_classified_tags' }
   = render :partial => 'shared/sidebar/newest_classifieds', :locals => { :newest_classifieds => @newest_classifieds }
   -# = render :partial => 'shared/sidebar/related_items', :locals => { :relatable => @classified, :related_items => @classified.related_items }
   = render_ad(:skyscraper, @ad_layout, @ad_skyscraper)
