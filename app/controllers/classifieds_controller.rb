@@ -86,6 +86,7 @@ class ClassifiedsController < ApplicationController
 
   def my_items
     @current_sub_tab = 'My Items'
+    @classifieds = current_user.classifieds.active
   end
 
   def borrowed_items
