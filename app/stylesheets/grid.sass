@@ -63,12 +63,16 @@ $ProfilePicSize: 50px
 
 /**********************************************************************************************/
 // Site wide Grid Container styles
-body
-  +grid-system(12)
-  padding-bottom: 20px
 
 #header, #footer, #pageBody, #adspace, #subNav, .breadcrumbs
   +grid(12)
+
+#home_container
+  float: left
+  position: relative
+  display: inline
+  width: 960px
+  z-index: 1
 
 #col_full
   position: relative
@@ -140,8 +144,6 @@ body
 /* UNIVERSAL LIST PANEL_1 */
 .panel_1
   +grid(4)
-  +alpha
-  +omega
   /* FEATURED STORY SIDEBAR WIDGET */
   .full-panel
     .thumb
@@ -212,8 +214,6 @@ body
 /* UNIVERSAL LIST PANEL_2 */
 .panel_2
   +grid(8)
-  +alpha
-  +omega
   &.featureWrap
     .thumb.wide
       width: 610px

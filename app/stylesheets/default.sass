@@ -7,10 +7,10 @@
   display: inline-block
 
 // floats //
-.float_left
+.float_left, .float-left
   float: left
 
-.float_right
+.float_right, .float-right
   float: right
 
 /* CLEAR WIDTH */
@@ -140,6 +140,7 @@
 #footer
   border:
     top: $FooterBorder
+  margin-bottom: $PanelGutters
   .dh_links
     color: $bodyColor
     float: left
@@ -172,9 +173,10 @@
 
 // Global styles //
 body
+  +grid-system(12)
   font-family: $copyFont
   color: $bodyColor
-  background: $bodyBG
+  background: $bodyBG $bodyBGImage
   font-size: $fontsize
   min-height: 600px
 
@@ -233,7 +235,7 @@ li
 
 // top level menu page tabs //
 #pageTabs
-  height: 24px
+  height: 28px
   position: absolute
   bottom: 0
   left: 0
@@ -242,7 +244,7 @@ li
     border-bottom: $tabBorder
     height: 24px
     position: absolute
-    bottom: 0
+    bottom: -1px
     left: 0
     right: 0
     .toggle_tabs li
@@ -257,6 +259,7 @@ li
           background: $tabBGHover
           text-decoration: none
       a.tab.selected
+        border: 1px solid
         border:
           top: $tabBorder
           bottom: $bodyBG
@@ -290,6 +293,7 @@ li
           background: $subTabBGHover
           text-decoration: none
       a.tab.selected
+        border: 1px solid
         border:
           top: $subTabBorder
           bottom: $bodyBG
@@ -688,7 +692,7 @@ $ColumnCorners: none
 /* LAYOUT PANELS - PANEL_1 & PANEL_2 CONTAINERS */
 
 .panel_1, .panel_2, .panel_3
-  margin: 0 0 15px 0
+  margin-bottom: $PanelGutters
   .top-tags
     display: inline-block
     padding-top: 4px

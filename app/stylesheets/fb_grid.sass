@@ -65,12 +65,16 @@ $ProfilePicSize: 40px
 
 /**********************************************************************************************/
 // Site wide Grid Container styles
-body
-  +grid-system(12)
-  padding-bottom: 20px
 
 #header, #footer, #pageBody, #adspace, #subNav, .breadcrumbs
   +grid(12)
+
+#home_container
+  float: left
+  position: relative
+  display: inline
+  width: 760px
+  z-index: 1
 
 #col_full
   position: relative
