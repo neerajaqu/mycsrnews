@@ -1,5 +1,5 @@
 -# @expects: local 'newest_classifieds'
 - cache :newest_classifieds_html do
-  - newest_classifieds ||= Classified.active.newest 5
+  - newest_classifieds ||= Classified.active.available.newest 5
   - unless newest_classifieds.empty?
     = render :partial => 'shared/lists/small_generic_list', :locals => { :list_title => t('classifieds.newest_classifieds_title'), :item_list => newest_classifieds }
