@@ -1,0 +1,6 @@
+- cache :d2_top_items_html, :expires_in => 7.minutes do
+  - top_items ||= Vote.top_items(5, nil, 4)
+  - title ||= t('generic.top_items.title')
+  - subtitle ||= t('generic.top_items.subtitle')
+  - button_title ||= t('generic.top_items.post_title')
+  = render :partial => 'shared/lists/d2_item_list', :locals => { :title => title, :subtitle => subtitle, :button_title => button_title, :collection => top_items }

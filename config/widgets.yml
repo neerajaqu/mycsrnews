@@ -4,6 +4,8 @@ widgets:
       partial: '/shared/stories'
     stories_short:
       partial: '/shared/stories_short'
+    d2_articles_as_blog:
+      partial: 'shared/d2_articles_as_blog'    
     articles_as_blog:
       partial: 'shared/articles_as_blog'    
     featured_content:
@@ -204,3 +206,7 @@ widgets:
       partial: '/shared/sidebar/closed_predictions'
     top_prediction_scores:
       partial: '/shared/sidebar/top_prediction_scores'      
+    d2_newest_items:
+      partial: '/shared/sidebar/d2_newest_items'
+    d2_top_items:
+      partial: '/shared/sidebar/d2_top_items'
