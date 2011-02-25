@@ -5,6 +5,9 @@
     %a{:title => "Front Page - #{get_setting('site_title').try(:value)}", :href => "#{home_index_path(:only_path => false)}"}
       %h1= get_setting('site_title').try(:value)
   .meta-links
+    = text_field_tag 'search-bar',  nil, :class =>'meta-search', :placeholder => 'Search Site'
+    = submit_tag "Search", :class => "meta-submit button"
+    = pipe_spacer
     - if logged_in?
       .account-dropdown
         = link_to t('header.account'), account_menu_path, :class => "account-toggle"

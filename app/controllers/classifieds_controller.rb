@@ -52,11 +52,6 @@ class ClassifiedsController < ApplicationController
       if @classified.post_wall?
         session[:post_wall] = @classified
       end      
-      if get_setting('tweet_all_moderator_items').try(:value)
-        if current_user.present? and current_user.is_moderator?
-          @classified.tweet
-        end
-      end
     	flash[:success] = "Thank you for posting your item!"
     	redirect_to @classified
     else
