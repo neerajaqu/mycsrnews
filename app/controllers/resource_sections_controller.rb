@@ -14,12 +14,12 @@ class ResourceSectionsController < ApplicationController
   def show
     @current_sub_tab = 'Browse Section Resources'
     @resource_section = ResourceSection.active.find(params[:id])
-    @top_resources = @resource_section.resources.tally({
+    @top_resources = @resource_section.resources.active.tally({
     	:at_least => 1,
     	:limit    => 5,
     	:order    => "votes.count desc"
     })
-    @newest_resources = @resource_section.resources.newest 5
+    @newest_resources = @resource_section.resources.active.newest 5
     set_sponsor_zone('resources', @resource_section.item_title.underscore)    
   end
 
