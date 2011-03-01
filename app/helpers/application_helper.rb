@@ -256,6 +256,7 @@ module ApplicationHelper
   def twitter_share_item_link(item,caption,button=false)
     is_bitly_configured = get_setting('oauth_key').present?
     caption =  Rack::Utils.escape(strip_tags(caption))
+    url = nil
     if is_bitly_configured
       bitly_username = get_setting('bitly_username').try(:value)
       bitly_api_key = get_setting('bitly_api_key').try(:value)
@@ -263,7 +264,8 @@ module ApplicationHelper
         bitly = Bitly.new(bitly_username, bitly_api_key)
         url = bitly.shorten(path_to_self(item)).short_url
       end
-    else
+    end
+    unless url
       url =  Rack::Utils.escape(path_to_self(item))
     end
     # text = "#{caption}+#{url}"
