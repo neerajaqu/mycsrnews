@@ -13,6 +13,8 @@ module MediaHelper
         url = image.thumb_url
       when Classified.name
         url = image.images.first.try(:thumb_url)
+      when Content.name
+        url = image.images.first.try(:thumb_url)
       else
       	url = nil
     end

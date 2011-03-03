@@ -47,6 +47,10 @@ ActiveRecord::Base.send :include, Newscloud::Acts::AsyncProcessable
 require "#{RAILS_ROOT}/lib/acts_as_categorizable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Categorizable
 
+# Load acts_as_view_object mixin
+require "#{RAILS_ROOT}/lib/acts_as_view_object.rb"
+ActiveRecord::Base.send :include, Newscloud::Acts::ViewObject
+
 # Load acts_as_scorable mixin
 require "#{RAILS_ROOT}/lib/acts_as_scorable.rb"
 ActiveRecord::Base.send :include, Newscloud::Acts::Scorable

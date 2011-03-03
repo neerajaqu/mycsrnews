@@ -1,0 +1,67 @@
+.panel-1.float-right
+  /change the class where "active" is to switch out the icon in the background.
+  .panel-bar.top-secondary-corners.active  
+    .panel-full
+      %h3.float-left
+        Most Active
+      %a.button-panel-bar.float-right
+        Post Something
+  .panel-content
+    %ul.list-items
+      - vo.dataset.each_with_index do |item, index|
+        - if index == 0
+          %li
+            .item-with-image
+              .item-thumb
+                %a= image_tag(thumb_image_or_default(item))
+              .item-text
+                %h4= link_to item.item_title, item
+                .meta-data
+                  %h6  
+                    By
+                    = local_linked_profile_name item.user
+                    in
+                    %a Blogs
+
+                  %h6 
+                    %span.count 
+                      = item.comments_count
+                    %a 
+                      Comments
+        - elsif index == 1
+          %li
+            .item-with-no-image
+              .item-text
+                %h3= link_to item.item_title
+              .meta-data
+                .profile-pic
+                  = local_linked_profile_pic item.user
+                %h6  
+                  Written by
+                  = local_linked_profile_name item.user
+                  in
+                  %a News
+                  = timeago item.created_at
+                %h6 
+                  %span.count 
+                    = item.comments_count
+                  %a 
+                    Comments
+
+        - else
+          %li
+            .item-with-no-image
+              .item-text
+                %h3= link_to item.item_title, item
+              .meta-data
+                %h6  
+                  Posted by
+                  = local_linked_profile_name item.user
+                  in
+                  %a Arts &amp; Crafts Forum
+                  = timeago item.created_at
+                %h6 
+                  %span.count 
+                    = item.comments_count
+                  %a 
+                    Comments

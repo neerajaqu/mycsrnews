@@ -10,6 +10,7 @@ class Content < ActiveRecord::Base
   acts_as_tweetable
   acts_as_voteable
   acts_as_wall_postable
+  acts_as_view_object
   
   belongs_to :user
   belongs_to :article
@@ -137,6 +138,53 @@ class Content < ActiveRecord::Base
 
   def self.sweeper
     StorySweeper
+  end
+
+  def self.view_object_methods
+    {
+      :published => {
+        :args => []
+      },
+      :newest => {
+        :args => [
+          Newscloud::Acts::ViewObject.default_args_count
+        ]
+      },
+      :top => {
+        :args => [
+          Newscloud::Acts::ViewObject.default_args_count
+        ]
+      },
+      :newest_stories => {
+        :args => [
+          Newscloud::Acts::ViewObject.default_args_count
+        ]
+      },
+      :newest_articles => {
+        :args => [
+          Newscloud::Acts::ViewObject.default_args_count
+        ]
+      },
+      :articles => {
+        :args => []
+      },
+      :draft_articles => {
+        :args => []
+      },
+      :top_articles => {
+        :args => [
+          Newscloud::Acts::ViewObject.default_args_count
+        ]
+      },
+      :stories => {
+        :args => []
+      },
+      :featured => {
+        :args => [
+          Newscloud::Acts::ViewObject.default_args_count
+        ]
+      }
+    }
   end
 
 end

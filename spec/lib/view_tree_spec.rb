@@ -24,9 +24,9 @@ describe ViewTree do
 
     context "item is not cached" do
       before(:each) do
-        mock($redis).get(anything) { nil }
-        mock(ViewObject).load(anything)
         @key_name = "stories--index"
+        mock(ViewObject).load(@key_name) { true }
+        mock($redis).get(@key_name) { nil }
       end
 
       it "should fetch" do
