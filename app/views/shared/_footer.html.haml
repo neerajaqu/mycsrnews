@@ -17,7 +17,7 @@
       .panel-third
         = link_to t('footer.contact'), contact_us_path, :class => "icon-link email"
         = link_to t('account_menu.invite_friends'), invite_users_path(:format => 'html'), :class => "icon-link friends"
-        %a.icon_link.rssfeed{:target => "_blank", :title => t('.rss_title'), :href => stories_path(:format => :atom)}= t('.rss')
+        %a.icon-link.rssfeed{:target => "_blank", :title => t('.rss_title'), :href => stories_path(:format => :atom)}= t('.rss')
       .panel-third.last
         %ul.footer-list
           - if current_user.present?
