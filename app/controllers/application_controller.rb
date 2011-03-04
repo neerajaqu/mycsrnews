@@ -329,7 +329,7 @@ class ApplicationController < ActionController::Base
     last_active = current_user.last_active
     current_user.touch(:last_active)
     if current_facebook_user
-      unless not Rails.env.development? and current_user.last_active < last_active + 1.hour
+      unless not Rails.env.development? and last_active and current_user.last_active < last_active + 1.hour
         fb_friends = current_facebook_user.friend_ids.join(',')
         redis_friends = $redis.get "#{current_user.cache_id}:friends_string"
         unless fb_friends == redis_friends or current_user.last_active < last_active + 4.hours
