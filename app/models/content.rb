@@ -187,4 +187,9 @@ class Content < ActiveRecord::Base
     }
   end
 
+  def model_index_name() "Stories" end
+  def model_index_url_name() "stories_url" end
+  def self.model_index_name() "Stories" end
+  def self.model_index_url_name() "stories_url" end
+
 end

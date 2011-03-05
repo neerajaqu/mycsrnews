@@ -10,7 +10,7 @@ class ViewTree
     @view_object = nil
     @children = []
     @controller = controller
-    @cache = true
+    @cache = false
     # Initialize new view tree
     # add children view tree elements for each view object
     # build up render dependency tree
@@ -31,6 +31,11 @@ class ViewTree
       self.load
     end
   end
+
+  def translate locale_key, options = {}
+    I18n.translate(locale_key, options)
+  end
+  alias_method :t, :translate
 
   def load
     @view_object = ViewObject.load(@key_name)

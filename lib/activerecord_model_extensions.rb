@@ -62,6 +62,14 @@ module Newscloud
         nil
       end
 
+      def model_index_name
+        self.name.tableize.titleize
+      end
+
+      def model_index_url_name
+        "#{self.name.tableize.gsub(/\//, '_')}_url"
+      end
+
     end
 
     module InstanceMethods
@@ -97,6 +105,18 @@ module Newscloud
       
       def wall_caption
         return ''
+      end
+
+      def locale_model_name
+        self.class.name.tableize
+      end
+
+      def model_index_name
+        self.class.model_name
+      end
+            
+      def model_index_url_name
+        self.class.model_index_url_name
       end
             
       def item_title

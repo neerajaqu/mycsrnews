@@ -7,6 +7,7 @@ class Metadata::ViewObjectSetting < Metadata
   # HACK:: emulate validate_presence_of
   # these are dynamicly created attributes to they don't exist for the model
   validate :validate_kommands
+  attr_accessible :data
 
   #before_save :build_view_object
 
@@ -64,6 +65,34 @@ class Metadata::ViewObjectSetting < Metadata
     else
     	self.kommands = [kommand]
     end
+  end
+
+  def method_missing(name, *args)
+    return self.send(name, *args) if self.respond_to? name, true
+    init_data
+    name = key_from_assign name
+    if data[name].present?
+      data[name] = args.first if args.present?
+      return data[name]
+    else
+    	data[name] = args.empty? ? nil : args.first
+    end
+  end
+
+  def locale_title() self.data[:locale_title] end
+  def locale_title=(val) self.data[:locale_title] = val end
+  def locale_subtitle() self.data[:locale_subtitle] end
+  def locale_subtitle=(val) self.data[:locale_subtitle] = val end
+
+  def respond_to? method, internal = false
+    #return true if method.to_s == "data"
+    return true if super method
+    return true if not internal and method.to_s =~ /=$/
+    return false if internal
+    
+    #init_data
+    self.data[method].present?
+    #return self.data
   end
 
   private

@@ -2,10 +2,13 @@
   /change the class where "active" is to switch out the icon in the background.
   .panel-bar.top-secondary-corners.active  
     .panel-full
-      %h3.float-left
-        Most Active
-      %a.button-panel-bar.float-right
-        Post Something
+      - if vo.setting and vo.setting.locale_title
+        %h3.float-left= vt.t(vo.setting.locale_title)
+      -#
+        %h3.float-left
+          Most Active
+        %a.button-panel-bar.float-right
+          Post Something
   .panel-content
     %ul.list-items
       - vo.dataset.each_with_index do |item, index|
@@ -15,19 +18,13 @@
               .item-thumb
                 %a= image_tag(thumb_image_or_default(item))
               .item-text
+                - Rails.logger.debug("Generating item link for #{item.inspect}")
                 %h4= link_to item.item_title, item
                 .meta-data
-                  %h6  
-                    By
-                    = local_linked_profile_name item.user
-                    in
-                    %a Blogs
+                  %h6= posted_by_with_topic(item)
+                  - action_links(item).each do |alink|
+                    %h6= alink
 
-                  %h6 
-                    %span.count 
-                      = item.comments_count
-                    %a 
-                      Comments
         - elsif index == 1
           %li
             .item-with-no-image
@@ -36,17 +33,9 @@
               .meta-data
                 .profile-pic
                   = local_linked_profile_pic item.user
-                %h6  
-                  Written by
-                  = local_linked_profile_name item.user
-                  in
-                  %a News
-                  = timeago item.created_at
-                %h6 
-                  %span.count 
-                    = item.comments_count
-                  %a 
-                    Comments
+                %h6= posted_by_with_date_and_topic(item)
+                - action_links(item).each do |alink|
+                  %h6= alink
 
         - else
           %li
@@ -54,14 +43,6 @@
               .item-text
                 %h3= link_to item.item_title, item
               .meta-data
-                %h6  
-                  Posted by
-                  = local_linked_profile_name item.user
-                  in
-                  %a Arts &amp; Crafts Forum
-                  = timeago item.created_at
-                %h6 
-                  %span.count 
-                    = item.comments_count
-                  %a 
-                    Comments
+                %h6= posted_by_with_date_and_topic(item)
+                - action_links(item).each do |alink|
+                  %h6= alink
