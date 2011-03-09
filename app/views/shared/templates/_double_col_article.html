@@ -1,0 +1,16 @@
+.panel-2
+  .panel-content.featured-panel
+    .panel-full
+      .item-with-image.nested
+        .item-thumb
+          %a= image_tag(medium_image_or_default(item))
+        .item-text
+          %h1= link_to item.item_title, item
+          %p
+            = item_text(item)
+          .meta-data
+            .profile-pic
+              = local_linked_profile_pic item.user
+            %h6= posted_by_with_topic(item)
+            - action_links(item).each do |action_link|
+              %h6= action_link

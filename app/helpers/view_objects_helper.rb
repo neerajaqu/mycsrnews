@@ -6,6 +6,14 @@ module ViewObjectsHelper
     	links << comment_link(item)
     end
   end
+  
+  def item_text item
+    if item.is_a? Article
+      item.preamble.present? ? item.preamble : item.item_description
+    else
+      item.item_description
+    end
+  end
 
   def item_model_link item
    link_to item.model_index_name, send(item.model_index_url_name)
