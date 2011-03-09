@@ -2,7 +2,7 @@ class Metadata::ViewObjectSetting < Metadata
 
   named_scope :key_sub_type_name, lambda { |*args| { :conditions => ["key_sub_type = ? AND key_name = ?", args.first, args.second] } }
 
-  validates_format_of :view_object_name, :with => /^[A-Za-z0-9 _]+$/, :message => "View Object Name must be present and may only contain letters and spaces"
+  validates_format_of :view_object_name, :with => /^[A-Za-z0-9 _-]+$/, :message => "View Object Name must be present and may only contain letters, numbers and spaces"
   validates_format_of :klass_name, :with => /^[A-Za-z _]+$/, :message => "Klass Name must be present and may only contain letters and spaces"
   # HACK:: emulate validate_presence_of
   # these are dynamicly created attributes to they don't exist for the model
@@ -48,7 +48,8 @@ class Metadata::ViewObjectSetting < Metadata
   end
 
   def kommand_chain
-    self.kommands.inject(self.klass_name.constantize) {|klass,kommand| klass.send(kommand[:method_name], *([kommand[:args], kommand[:options]].flatten)) }
+    self.kommands.unshift({:method_name => :active}) if self.view_object.respond_to? :active
+    self.kommands.inject(self.klass_name.constantize) {|klass,kommand| klass.send(kommand[:method_name], *([kommand[:args], kommand[:options]].flatten.compact)) }
   end
 
   def add_kommand *args
@@ -81,6 +82,8 @@ class Metadata::ViewObjectSetting < Metadata
 
   def locale_title() self.data[:locale_title] end
   def locale_title=(val) self.data[:locale_title] = val end
+  def use_post_button() self.data[:use_post_button] end
+  def use_post_button=(val) self.data[:use_post_button] = !! val end
   def locale_subtitle() self.data[:locale_subtitle] end
   def locale_subtitle=(val) self.data[:locale_subtitle] = val end
 

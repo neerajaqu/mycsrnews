@@ -299,3 +299,147 @@ sponsor_zones.each do |sponsor_zone|
 		  }
   })
 end
+
+
+#######################################################################
+# View Tree
+#######################################################################
+
+#
+# View Object Templates
+#
+view_object_templates = [
+  {
+  	:name     => "v2_single_col_list",
+  	:template => "shared/templates/single_col_list"
+  },
+  {
+  	:name     => "v2_large_2",
+  	:template => "shared/templates/large_2"
+  }
+]
+view_object_templates.each do |view_object_template|
+  puts "Creating View Object Template: #{view_object_template[:name]} (#{view_object_template[:template]})" if debug and ViewObjectTemplate.find_by_name(view_object_template[:name]).nil?
+  ViewObjectTemplate.find_or_create_by_name(view_object_template)
+end
+
+#
+# View Objects
+#
+view_objects = [
+  {
+  	:name          => "Newest Stories",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.newest_stories.newest_stories_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Stories",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.top_stories.top_stories_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "top_items",
+          :args        => [5, false]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Classifieds",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Classified",
+  		:locale_title    => "classifieds.top_classifieds_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+  		    :method_name => "available"
+  		  },
+  		  {
+          :method_name => "top",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Classifieds",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Classified",
+  		:locale_title    => "classifieds.newest_classifieds_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+  		    :method_name => "available"
+  		  },
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Topics",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Topics",
+  		:locale_title    => "forums.newest_topics_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest"
+        }
+  		]
+  	}
+  },
+]
+view_objects.each do |view_object_hash|
+  next if ViewObject.find_by_name(view_object_hash[:name])
+  puts "Creating View Object: #{view_object_hash[:name]}" if debug
+
+  # Build ViewObject and Metadata::ViewObjectSetting
+  view_object = ViewObject.new(:name => view_object_hash[:name])
+  view_object.build_setting
+
+  # Set template
+  view_object_template = ViewObjectTemplate.find_by_name(view_object_hash[:template_name])
+  raise "Invalid Template Name" unless view_object_template
+  view_object.view_object_template = view_object_template
+
+  # Apply settings
+  view_object.setting.view_object_name = view_object_hash[:name].parameterize.to_s
+  view_object.setting.klass_name       = view_object_hash[:settings][:klass_name]
+  view_object.setting.use_post_button  = view_object_hash[:settings][:use_post_button]
+  view_object.setting.locale_title     = view_object_hash[:settings][:locale_title] if view_object_hash[:settings][:locale_title]
+  view_object.setting.locale_subtitle  = view_object_hash[:settings][:locale_subtitle] if view_object_hash[:settings][:locale_subtitle]
+
+  # Add Kommands
+  view_object_hash[:settings][:kommands].each do |kommand|
+    args = kommand[:args] || []
+    view_object.setting.add_kommand(kommand[:method_name], *args)
+  end
+
+  # Make sure to save both the view object and the metadata setting
+  view_object.save!
+  view_object.setting.save!
+end

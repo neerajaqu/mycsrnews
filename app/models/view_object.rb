@@ -13,10 +13,6 @@ class ViewObject < ActiveRecord::Base
     self.class.find(:all, :conditions => ["parent_id = ?", self.id])
   end
 
-  def view_object_template_name
-    'shared/templates/large_2'
-  end
-
   def self.load key_name
     self.find_by_name(key_name)
   end

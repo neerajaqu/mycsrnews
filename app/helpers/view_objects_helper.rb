@@ -47,4 +47,9 @@ module ViewObjectsHelper
       link_to(I18n.translate("generic.action_links.comments_title"), item)
     ].join(' ')
   end
+
+  def post_something klass_name
+    klass = klass_name.constantize
+    link_to(I18n.translate("generic.post_something"), send(klass.model_new_url_name), :class => "button-panel-bar float-right")
+  end
 end

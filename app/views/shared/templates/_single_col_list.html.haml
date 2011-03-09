@@ -1,14 +1,11 @@
 .panel-1.float-right
   /change the class where "active" is to switch out the icon in the background.
-  .panel-bar.top-secondary-corners.active  
+  .panel-bar.top-secondary-corners.ideas
     .panel-full
       - if vo.setting and vo.setting.locale_title
         %h3.float-left= vt.t(vo.setting.locale_title)
-      -#
-        %h3.float-left
-          Most Active
-        %a.button-panel-bar.float-right
-          Post Something
+        - if vo.setting.use_post_button
+          = post_something vo.setting.klass_name
   .panel-content
     %ul.list-items
       - vo.dataset.each_with_index do |item, index|
@@ -18,24 +15,23 @@
               .item-thumb
                 %a= image_tag(thumb_image_or_default(item))
               .item-text
-                - Rails.logger.debug("Generating item link for #{item.inspect}")
                 %h4= link_to item.item_title, item
                 .meta-data
                   %h6= posted_by_with_topic(item)
-                  - action_links(item).each do |alink|
-                    %h6= alink
+                  - action_links(item).each do |action_link|
+                    %h6= action_link
 
         - elsif index == 1
           %li
             .item-with-no-image
               .item-text
-                %h3= link_to item.item_title
+                %h3= link_to item.item_title, item
               .meta-data
                 .profile-pic
                   = local_linked_profile_pic item.user
                 %h6= posted_by_with_date_and_topic(item)
-                - action_links(item).each do |alink|
-                  %h6= alink
+                - action_links(item).each do |action_link|
+                  %h6= action_link
 
         - else
           %li
@@ -44,5 +40,5 @@
                 %h3= link_to item.item_title, item
               .meta-data
                 %h6= posted_by_with_date_and_topic(item)
-                - action_links(item).each do |alink|
-                  %h6= alink
+                - action_links(item).each do |action_link|
+                  %h6= action_link

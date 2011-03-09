@@ -539,6 +539,7 @@ en:
     top_title: "Popular Categories"
     no_items: "No categories"
   generic:
+    post_something: "Post Something"
     action_links:
       comments_title: "Comments"
       posted_by_in:

@@ -70,6 +70,10 @@ module Newscloud
         "#{self.name.tableize.gsub(/\//, '_')}_url"
       end
 
+      def model_new_url_name
+        "new_#{self.name.underscore.gsub(/\//, '_')}_url"
+      end
+
     end
 
     module InstanceMethods
@@ -119,6 +123,10 @@ module Newscloud
         self.class.model_index_url_name
       end
             
+      def model_new_url_name
+        self.class.model_new_url_name
+      end
+
       def item_title
         [:title, :name, :question].each do |method|
           return self.send(method) if self.respond_to?(method) and self.send(method).present?
