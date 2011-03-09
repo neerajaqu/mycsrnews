@@ -320,7 +320,11 @@ view_object_templates = [
   {
   	:name     => "v2_double_col_feature",
   	:template => "shared/templates/double_col_feature"
-  }
+  },
+  {
+  	:name     => "v2_single_col_user_list",
+  	:template => "shared/templates/single_col_user_list"
+  }  
 ]
 view_object_templates.each do |view_object_template|
   puts "Creating View Object Template: #{view_object_template[:name]} (#{view_object_template[:template]})" if debug and ViewObjectTemplate.find_by_name(view_object_template[:name]).nil?
@@ -333,7 +337,7 @@ end
 view_objects = [
   {
   	:name          => "Recent Users",
-  	:template_name => "single_col_user_list",
+  	:template_name => "v2_single_col_user_list",
   	:settings      => {
   		:klass_name      => "User",
   		:locale_title    => "recent_users_without_count",
