@@ -328,6 +328,10 @@ view_object_templates = [
   {
   	:name     => "v2_single_col_small_list",
   	:template => "shared/templates/single_col_small_list"
+  },
+  {
+  	:name     => "v2_single_col_gallery_strip",
+  	:template => "shared/templates/single_col_gallery_strip"
   }  
 ]
 view_object_templates.each do |view_object_template|
@@ -339,6 +343,24 @@ end
 # View Objects
 #
 view_objects = [
+=begin  
+  {
+  	:name          => "Latest Gallery",
+  	:template_name => "v2_single_col_gallery_strip",
+  	:settings      => {
+  		:klass_name      => "GalleryItem",
+  		:locale_title    => "gallery.title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "active",
+          :args        => [8]
+        }        
+  		]
+  	}
+  },
+=end
   {
   	:name          => "Newswire",
   	:template_name => "v2_single_col_small_list",
