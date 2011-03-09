@@ -2,6 +2,10 @@ module ViewObjectsHelper
 
   def action_links item
     links = []
+    if item.is_a? Newswire
+      links << publish_newswire(item)
+      links << read_newswire(item)
+    end
     if item.respond_to? :comments
     	links << comment_link(item)
     end
@@ -60,5 +64,13 @@ module ViewObjectsHelper
   def post_something klass_name
     klass = klass_name.constantize
     link_to(I18n.translate("generic.post_something"), send(klass.model_new_url_name), :class => "button-panel-bar float-right")
+  end
+
+  def publish_newswire item
+    link_to(I18n.translate('post_newswire', :site_title => get_setting('site_title').try(:value) ), new_story_path(:newswire_id => item, :only_path => false) )
+  end
+  
+  def read_newswire item
+    link_to(I18n.translate('read_newswire'), item.url, :target => "_cts")
   end
 end

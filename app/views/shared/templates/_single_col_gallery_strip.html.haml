@@ -1,0 +1,22 @@
+- gallery ||= Gallery.featured.first || Gallery.top.first
+- if gallery.present?
+  .panel-1
+    .panel-content.meta-panel
+      .panel-full
+        .panelBar
+          %h2= vt.t(vo.setting.locale_title)
+        - unless gallery.gallery_items.empty?
+          .featured.media
+            .scrollable_list_media
+              .items
+                .list_media
+                  %ul 
+                    - count = 0
+                    - gallery.gallery_items.reverse.each do |gallery_item|
+                      - count += 1
+                      - if count > 8
+                        %li.hide-strong= link_to image_tag(gallery_item.thumb_url, :alt => gallery_item.item_title), gallery_item.full_url, :rel => "gallery[small-image-#{gallery.title.parameterize}]", :title => gallery_item.item_description
+                      - else
+                        %li.gallery-item= link_to image_tag(gallery_item.thumb_url, :alt => gallery_item.item_title), gallery_item.full_url, :rel => "gallery[small-image-#{gallery.title.parameterize}]", :title => gallery_item.item_description
+          .itemActions
+            = link_to t('galleries.see_full_gallery'), gallery_path(gallery)
