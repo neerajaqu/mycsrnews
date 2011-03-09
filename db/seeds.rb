@@ -324,6 +324,10 @@ view_object_templates = [
   {
   	:name     => "v2_single_col_user_list",
   	:template => "shared/templates/single_col_user_list"
+  },
+  {
+  	:name     => "v2_single_col_small_list",
+  	:template => "shared/templates/single_col_small_list"
   }  
 ]
 view_object_templates.each do |view_object_template|
@@ -336,6 +340,28 @@ end
 #
 view_objects = [
   {
+  	:name          => "Newswire",
+  	:template_name => "v2_single_col_small_list",
+  	:settings      => {
+  		:klass_name      => "Newswire",
+  		:locale_title    => "newest_newswires_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "active"
+        },
+  		  {
+          :method_name => "unpublished"
+        },
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }        
+  		]
+  	}
+  },
+  {
   	:name          => "Recent Users",
   	:template_name => "v2_single_col_user_list",
   	:settings      => {
@@ -345,9 +371,15 @@ view_objects = [
   		:use_post_button => false,
   		:kommands        => [
   		  {
-          :method_name => "User.active.members.recently_active",
+          :method_name => "active"
+        },
+  		  {
+          :method_name => "members"
+        },
+  		  {
+          :method_name => "recently_active",
           :args        => [21]
-        }
+        }        
   		]
   	}
   },
