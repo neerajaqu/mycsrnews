@@ -130,6 +130,7 @@ en:
   active_users: "{{user_count}} users online now"
   active_users_none: "No users are online right now."
   recent_users: "{{user_count}} recently online"
+  recent_users_without_count: "Recently online"
   recent_users_none: "No recently active users."
   moderator_users: "Our Moderators"
   invite_users_title: "Invite Your Friends"

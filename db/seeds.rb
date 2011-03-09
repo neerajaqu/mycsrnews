@@ -328,6 +328,22 @@ end
 #
 view_objects = [
   {
+  	:name          => "Recent Users",
+  	:template_name => "single_col_user_list",
+  	:settings      => {
+  		:klass_name      => "User",
+  		:locale_title    => "recent_users_without_count",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "User.active.members.recently_active",
+          :args        => [21]
+        }
+  		]
+  	}
+  },
+  {
   	:name          => "Newest Stories",
   	:template_name => "v2_single_col_list",
   	:settings      => {
