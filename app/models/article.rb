@@ -29,6 +29,10 @@ class Article < ActiveRecord::Base
   #todo - was removing formatting from drafts - not sure of purpose
   #before_save :sanitize_body
 
+  def item_list limit
+    Content.articles.active.published.curator_items.find(:all, :order => "created_at desc", :limit => limit)    
+  end
+  
   def item_title
     content.item_title
   end
