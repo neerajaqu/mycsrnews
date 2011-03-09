@@ -5,6 +5,7 @@ module ViewObjectsHelper
     if item.respond_to? :comments
     	links << comment_link(item)
     end
+    links
   end
   
   def item_text item
