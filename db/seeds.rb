@@ -316,6 +316,10 @@ view_object_templates = [
   {
   	:name     => "v2_large_2",
   	:template => "shared/templates/large_2"
+  },
+  {
+  	:name     => "v2_double_col_feature",
+  	:template => "shared/templates/double_col_feature"
   }
 ]
 view_object_templates.each do |view_object_template|
@@ -412,6 +416,25 @@ view_objects = [
   		]
   	}
   },
+  {
+  	:name          => "Newest Articles Feature",
+  	:template_name => "v2_double_col_feature",
+  	:settings      => {
+  		:klass_name      => "Article",
+  		:locale_title    => "articles.newest_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "published"
+        },
+  		  {
+          :method_name => "newest",
+          :args        => [1]
+        }
+  		]
+  	}
+  }
 ]
 view_objects.each do |view_object_hash|
   next if ViewObject.find_by_name(view_object_hash[:name])

@@ -29,7 +29,7 @@ module ViewObjectsHelper
     locale << 'written' if item.is_a? Article or (item.is_a? Content and item.is_article?)
 
     locale << 'by'
-    interpolation_args[:name] = local_linked_profile_name(item.user)
+    interpolation_args[:name] = local_linked_profile_name(item.item_user)
 
     if include_topic
     	locale << 'in_topic'

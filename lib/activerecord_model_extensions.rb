@@ -141,6 +141,13 @@ module Newscloud
         "#{self.class.name.titleize} ##{self.id}"
       end
 
+      def item_user
+        [:user, :author].each do |method|
+          return self.send(method) if self.respond_to?(method) and self.send(method).present?
+        end
+        User.new
+      end
+
       # Breadcrumb parents method
       # Overwrite as [self.story.crumb_items]
       def crumb_parents
