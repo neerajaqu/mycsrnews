@@ -310,6 +310,10 @@ end
 #
 view_object_templates = [
   {
+  	:name     => "v2_welcome_panel",
+  	:template => "shared/templates/single_col_welcome_panel"
+  },
+  {
   	:name     => "v2_single_col_list",
   	:template => "shared/templates/single_col_list"
   },
@@ -357,6 +361,18 @@ view_objects = [
           :method_name => "active",
           :args        => [8]
         }        
+  		]
+  	}
+  },
+  {
+  	:name          => "Welcome Panel",
+  	:template_name => "v2_single_col_welcome_panel",
+  	:settings      => {
+  		:klass_name      => "User",
+  		:locale_title    => "welcome_panel",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
   		]
   	}
   },
