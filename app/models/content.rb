@@ -109,6 +109,7 @@ class Content < ActiveRecord::Base
     else
       self.is_blocked = !self.is_blocked
       self.cascade_block self.is_blocked
+      self.cascade_block_pfeed_items self.is_blocked
       self.save
     end
   end
