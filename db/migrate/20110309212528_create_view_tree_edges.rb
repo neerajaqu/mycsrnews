@@ -3,6 +3,7 @@ class CreateViewTreeEdges < ActiveRecord::Migration
     create_table :view_tree_edges do |t|
       t.integer :parent_id
       t.integer :child_id
+      t.integer :position, :default => 0
 
       t.timestamps
     end

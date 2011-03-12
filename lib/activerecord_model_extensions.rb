@@ -116,7 +116,7 @@ module Newscloud
       end
 
       def model_index_name
-        self.class.model_name
+        self.class.model_name.pluralize
       end
             
       def model_index_url_name
@@ -168,6 +168,14 @@ module Newscloud
 
       def expire
         nil
+      end
+
+      def action_links
+        links = []
+        if self.respond_to? :comments
+        	links << lambda {|klass| comment_link(klass) }
+        end
+        links
       end
 
     end

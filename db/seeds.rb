@@ -336,7 +336,23 @@ view_object_templates = [
   {
   	:name     => "v2_single_col_gallery_strip",
   	:template => "shared/templates/single_col_gallery_strip"
-  }  
+  },
+  {
+  	:name     => "old_featured_gallery",
+  	:template => "shared/media/featured_gallery"
+  },
+  {
+  	:name     => "old_gallery_big_image",
+  	:template => "shared/media/gallery_big_image"
+  },
+  {
+  	:name     => "old_gallery_small_images",
+  	:template => "shared/media/gallery_small_images"
+  },
+  {
+  	:name     => "old_twitter_standard_list",
+  	:template => "shared/sidebar/twitter_standard_list"
+  }
 ]
 view_object_templates.each do |view_object_template|
   puts "Creating View Object Template: #{view_object_template[:name]} (#{view_object_template[:template]})" if debug and ViewObjectTemplate.find_by_name(view_object_template[:name]).nil?
@@ -524,6 +540,62 @@ view_objects = [
         }
   		]
   	}
+  },
+  {
+  	:name          => "Old Featured Gallery",
+  	:template_name => "old_featured_gallery",
+  	:settings      => {
+  		:klass_name      => "Gallery",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:cache_enabled   => false,
+      :old_widget      => true,
+  		:kommands        => [
+  		]
+  	}
+  },
+  {
+  	:name          => "Old Gallery Big Image",
+  	:template_name => "old_gallery_big_image",
+  	:settings      => {
+  		:klass_name      => "Gallery",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:cache_enabled   => false,
+      :old_widget      => true,
+  		:kommands        => [
+  		]
+  	}
+  },
+  {
+  	:name          => "Old Gallery Small Images",
+  	:template_name => "old_gallery_small_images",
+  	:settings      => {
+  		:klass_name      => "Gallery",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:cache_enabled   => false,
+      :old_widget      => true,
+  		:kommands        => [
+  		]
+  	}
+  },
+  {
+  	:name          => "Old Twitter Standard List",
+  	:template_name => "old_twitter_standard_list",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:cache_enabled   => false,
+      :old_widget      => true,
+  		:kommands        => [
+  		]
+  	}
   }
 ]
 view_objects.each do |view_object_hash|
@@ -544,6 +616,8 @@ view_objects.each do |view_object_hash|
   view_object.setting.klass_name       = view_object_hash[:settings][:klass_name]
   view_object.setting.use_post_button  = view_object_hash[:settings][:use_post_button]
   view_object.setting.locale_title     = view_object_hash[:settings][:locale_title] if view_object_hash[:settings][:locale_title]
+  view_object.setting.cache_enabled    = view_object_hash[:settings][:cache_enabled] if view_object_hash[:settings][:cache_enabled]
+  view_object.setting.old_widget       = view_object_hash[:settings][:old_widget] if view_object_hash[:settings][:old_widget]
   view_object.setting.locale_subtitle  = view_object_hash[:settings][:locale_subtitle] if view_object_hash[:settings][:locale_subtitle]
 
   # Add Kommands
@@ -553,6 +627,10 @@ view_objects.each do |view_object_hash|
   end
 
   # Make sure to save both the view object and the metadata setting
-  view_object.save!
-  view_object.setting.save!
+  if view_object.valid? and view_object.setting.valid?
+    view_object.save!
+    view_object.setting.save!
+  else
+  	raise (view_object.errors.full_messages | view_object.setting.errors.full_messages).inspect
+  end
 end

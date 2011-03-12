@@ -12,18 +12,11 @@
           %p= caption item1.item_description
           .meta-data
             .profile-pic
-              = local_linked_profile_pic item1.user
-            %h6  
-              By
-              = local_linked_profile_name item1.user
-              in
-              %a Blogs
+              = local_linked_profile_pic item1.item_user
+            %h6= posted_by_with_topic item1
 
-            %h6 
-              %span.count 
-                7
-              %a 
-                Comments
+            - action_links(item1).each do |action_link|
+              %h6= action_link
 
     .panel-third.alpha
       %ul.list-items
@@ -34,11 +27,8 @@
             .item-text
               %h3= link_to item2.item_title, item2
               .meta-data
-                %h6 
-                  %span.count 
-                    7
-                  %a 
-                    Comments
+                - action_links(item2).each do |action_link|
+                  %h6= action_link
 
         %li.last
           .item-with-image
@@ -47,8 +37,5 @@
             .item-text
               %h3= link_to item3.item_title, item3
               .meta-data
-                %h6
-                  %span.count 
-                    7
-                  %a 
-                    Comments
+                - action_links(item3).each do |action_link|
+                  %h6= action_link

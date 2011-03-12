@@ -39,6 +39,9 @@ class ViewTree
 
   def load
     @view_object = ViewObject.load(@key_name)
+    if not Rails.env.development? and @view_object.setting
+    	@cache = @view_object.setting.cache_enabled
+    end
     @children = @view_object.children.map {|c| ViewTree.new c.name, @controller }
     @output = []
     @output << %{<div class="box">#{@controller.send(:render_to_string, :partial => "#{@view_object.view_object_template.template}.html", :locals => { :vt => self, :vo => @view_object })}</div>}

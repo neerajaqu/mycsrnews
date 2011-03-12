@@ -2,6 +2,10 @@ module ViewObjectsHelper
 
   def action_links item
     links = []
+    item.action_links.each do |link_lambda|
+      links << self.instance_exec(item, &link_lambda)
+    end
+=begin
     if item.is_a? Newswire
       links << publish_newswire(item)
       links << read_newswire(item)
@@ -9,6 +13,7 @@ module ViewObjectsHelper
     if item.respond_to? :comments
     	links << comment_link(item)
     end
+=end
     links
   end
   
@@ -21,7 +26,7 @@ module ViewObjectsHelper
   end
 
   def item_model_link item
-   link_to item.model_index_name, send(item.model_index_url_name)
+    link_to item.model_index_name, send(item.model_index_url_name)
   end
 
   def posted_by item, opts = {}

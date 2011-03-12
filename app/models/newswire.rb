@@ -80,5 +80,11 @@ class Newswire < ActiveRecord::Base
     NewswireSweeper
   end
 
+  def action_links
+    links = []
+    links << lambda {|klass| publish_newswire(klass) }
+    links << lambda {|klass| read_newswire(klass) }
+    links
+  end
 
 end

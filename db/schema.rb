@@ -903,6 +903,7 @@ ActiveRecord::Schema.define(:version => 20110309212528) do
   create_table "view_tree_edges", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "child_id"
+    t.integer  "position",   :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

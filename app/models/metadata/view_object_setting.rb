@@ -48,6 +48,7 @@ class Metadata::ViewObjectSetting < Metadata
   end
 
   def kommand_chain
+    return [] unless self.kommands
     self.kommands.unshift({:method_name => :active}) if self.view_object.respond_to? :active
     self.kommands.inject(self.klass_name.constantize) {|klass,kommand| klass.send(kommand[:method_name], *([kommand[:args], kommand[:options]].flatten.compact)) }
   end
@@ -86,6 +87,10 @@ class Metadata::ViewObjectSetting < Metadata
   def use_post_button=(val) self.data[:use_post_button] = !! val end
   def locale_subtitle() self.data[:locale_subtitle] end
   def locale_subtitle=(val) self.data[:locale_subtitle] = val end
+  def cache_enabled() self.data[:cache_enabled] or true end #default to true
+  def cache_enabled=(val) self.data[:cache_enabled] = val end
+  def old_widget() self.data[:old_widget] or false end #default to false
+  def old_widget=(val) self.data[:old_widget] = val end
 
   def respond_to? method, internal = false
     #return true if method.to_s == "data"
@@ -101,7 +106,10 @@ class Metadata::ViewObjectSetting < Metadata
   private
 
   def validate_kommands
-    return true if self.kommands.any?
+    # TODO:: find better way to do this
+    return true if self.kommands.nil?
+    # TODO:: remove old_widget hack
+    return true if self.kommands.any? or self.old_widget
   end
 
   def on_content_type
