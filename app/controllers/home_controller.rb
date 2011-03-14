@@ -23,6 +23,7 @@ class HomeController < ApplicationController
 
   def index
     @page = "page_1_"
+=begin
     if request.post?
     	respond_to do |format|
     	  format.html
@@ -31,19 +32,18 @@ class HomeController < ApplicationController
     	  format.fbjs { @stories = Content.refine(params) }
       end
     else
-      @no_paginate = true
-      @featured_items = FeaturedItem.find_root_by_item_name('featured_template')
-      controller = self
-      @page = WidgetPage.find_root_by_page_name('home')
-      if @page.present? and @page.children.present?
-        @main = @page.children.first.children
-        @sidebar = @page.children.second.children
-        @main.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
-        @sidebar.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
-      end
     end
-    #expires_in 1.minutes, :private => false, :public => true
+=end
     @no_paginate = true
+    @featured_items = FeaturedItem.find_root_by_item_name('featured_template')
+    controller = self
+    @page = WidgetPage.find_root_by_page_name('home')
+    if @page.present? and @page.children.present?
+      @main = @page.children.first.children
+      @sidebar = @page.children.second.children
+      @main.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
+      @sidebar.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
+    end
   end
 
   def app_tab
