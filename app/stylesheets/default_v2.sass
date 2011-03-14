@@ -267,8 +267,8 @@ p
   background-repeat: no-repeat
 
 .active
-  background-image: image_url("default/site/mark-comments.png")
-.news, .classifieds, .resources
+  background-image: image_url("default/site/mark-active.png")
+.news
   background-image: image_url("default/site/mark-news.png")
 .blogs
   background-image: image_url("default/site/mark-blogs.png")
@@ -276,13 +276,18 @@ p
   background-image: image_url("default/site/mark-comments.png")
 .events
   background-image: image_url("default/site/mark-events.png")
-.ideas, .forums
+.ideas
   background-image: image_url("default/site/mark-ideas.png")
-.questions, .predictions
+.questions
   backgroun-image: image_url("default/site/mark-qa.png")
 .latest
   background-image: image_url("default/site/mark-latest.png")
-
+.classifieds, .resources
+  background-image: image_url("default/site/mark-classifieds.png")
+.predictions
+  background-image: image_url("default/site/mark-predictions.png")
+.forums, .topics
+  background-image: image_url("default/site/mark-forumtopics.png")
 
 /****************************************************
  WIDGET LISTS */
@@ -556,7 +561,8 @@ p
     background: #ff00ff
     text-align: center
 
-
+/****************************************************
+ GALLERY WIDGET */
 
 /****************************************************
  MISC (Stuff I haven't found a place for) */
@@ -571,7 +577,7 @@ p
 
 .wgt-foot
   border-top: 1px solid $subheadColor
-  padding: $PanelGutters * .5
+  padding: 4px
   text-align: right
   
   
