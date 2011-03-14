@@ -39,11 +39,16 @@ p
     top: 0px
     right: 0px
     float: right
-    padding: 5px 10px 5px 60px 
+    padding: 8px 10px 5px 60px 
     background: image_url("default/site/meta-links-bg.png") top left repeat-y
     .meta-search
       border: $formInputBorder
-      padding: 3px 9px
+      padding: 2px 9px
+    .meta-search, .meta-submit
+      font-size: $fontsize - 1px
+      float: left
+      margin-top: -2px
+
 
 
 /****************************************************
@@ -562,7 +567,7 @@ p
   margin-bottom: $PanelGutters
 .meta-panel
   .email-input
-    width: $PanelOnePanelFull - 12px
+    width: $PanelOnePanelFull - $PanelGutters + 2px
 
 .wgt-foot
   border-top: 1px solid $subheadColor
