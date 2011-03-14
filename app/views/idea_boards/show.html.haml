@@ -13,7 +13,7 @@
     .itemListWrap
       #front-stories.list_items
         %ul
-          - @idea_board.ideas.each do |idea|
+          - @idea_board.ideas.active.newest(10).each do |idea|
             %li{'data-id' => idea.cache_key}
               .thumb
                 - if idea.images.present?

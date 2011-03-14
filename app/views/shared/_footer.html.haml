@@ -1,33 +1,40 @@
--# TODO:: fix hardcoded css
 - cache :footer_html, :expires_in => 180.minutes do
-  #footer
-    .dh_links
-      %a.rss_link{:target => "_blank", :title => t('.rss_title'), :href => stories_path(:format => :atom)}= t('.rss')
-      - if get_setting('account').present? && !get_setting('oauth_key').present?
-        = pipe_spacer
-        %a.twitter_link{:target => "_blank", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
-      = pipe_spacer
-      = link_to t('.faq'), faq_path
-      = pipe_spacer
-      = link_to t('.terms'), terms_path
-      = pipe_spacer
-      = link_to t('.about'), about_path
-      = pipe_spacer
-      = link_to t('footer.contact'), contact_us_path
-      %span.admin-links
-        = pipe_spacer
-        = link_to t('.admin'), admin_path
-      = pipe_spacer
-      = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
-      = pipe_spacer
-      %span#follow-twitterapi
-      -if get_setting('account').present? && get_setting('oauth_key').present?
-        :javascript
-          twttr.anywhere(function (T) {
-            T('#follow-twitterapi').followButton("#{get_setting('account').value}");
-          });
-        %a.twitter_link{:style=>"display:none;",:target => "_tweet", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
- 
+  .panel-3.footer
+    .footer-wrap
+      .panel-third.first
+        = link_to t('post_story_button'), new_story_path, :class => "button-link"
+        - if get_setting('app_id').present?
+          %iframe{:src => "http://www.facebook.com/connect/connect.php?id=#{get_setting('app_id').value}&connections=0&stream=0", :frameborder => 0, :scrolling => "no", :style => "border: none; width: 300px; height: 70px;", :allowtransparency => "true"}
+        - if get_setting('account').present? && !get_setting('oauth_key').present?
+          %a.icon-link.twitterfeed{:target => "_blank", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
+        %span#follow-twitterapi
+        -if get_setting('account').present? && get_setting('oauth_key').present?
+          :javascript
+            twttr.anywhere(function (T) {
+              T('#follow-twitterapi').followButton("#{get_setting('account').value}");
+            });
+          %a.twitter_link{:style=>"display:none;",:target => "_tweet", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
+      .panel-third
+        = link_to t('footer.contact'), contact_us_path, :class => "icon-link email"
+        = link_to t('account_menu.invite_friends'), invite_users_path(:format => 'html'), :class => "icon-link friends"
+        %a.icon-link.rssfeed{:target => "_blank", :title => t('.rss_title'), :href => stories_path(:format => :atom)}= t('.rss')
+      .panel-third.last
+        %ul.footer-list
+          - if current_user.present?
+            %li
+              = link_to t('footer.share_email'), edit_user_path(current_user, :format => 'html')
+          %li
+            = link_to t('.faq'), faq_path
+          %li
+            = link_to t('.terms'), terms_path
+          %li
+            = link_to t('.about'), about_path
+          %li
+            = link_to t('.developers'), "http://opensource.newscloud.com", :target => "_cts"
+          - if current_user.present?
+            %li
+              %span.admin-links
+                = link_to t('.admin'), admin_path 
   :javascript
     if(top !== self) {
       $("#twitter-link").attr("href", $("#twitter-link").attr("burl"));
@@ -57,8 +64,7 @@
       	});
       });
     }
-  
-   
+     
   -#    = pipe_spacer
   -#    %span= t('.locale')
   -#    = link_to "EN", root_path(:locale => :en)

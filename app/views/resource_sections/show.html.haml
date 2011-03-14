@@ -11,7 +11,7 @@
     .itemListWrap
       .list_items
         %ul
-          - @resource_section.resources.each do |resource|
+          - @resource_section.resources.active.newest(10).each do |resource|
             %li{'data-id' => resource.cache_key}
               .thumb
                 - if resource.images.present?
