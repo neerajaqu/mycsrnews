@@ -5,24 +5,27 @@
         =link_to image_tag('default/test-profile-pic.jpg'), '#'
       %h2 Welcome Back Username!
       %p Looks like you haven't posted in a while.
-      %a.button-link
-        Post to the Site Name
 
 .panel-1
   .panel-content.meta-panel
     .panel-full
       .profile-pic
         =link_to image_tag('default/test-profile-pic.jpg'), '#'
-      %h2 Welcome Back Username!
-      %p Looks like you haven't posted in a while.
-      %ul.direction-list
-        %li
-          %a Post something to this section
-        %li
-          %a Post something to this section
-        %li
-          %a Post something to this section
-        %li
-          %a Post something to this section
-        %li
-          %a Post something to this section
+      %h4 Hello Username!
+      %h5 Score_1: 12000
+      %h5 Score_2: 1300
+      %span.clearfix
+      %br
+      %a.button-link
+        Post to the Site Name
+
+
+.panel-1
+  .panel-content.meta-panel
+    .panel-full
+      %h4 Give us your email!
+      %p So you can join the flame war personally!
+      %form
+        = text_field_tag 'email',  nil, :class =>'email-input', :placeholder => 'email goes here!'
+      %a.button-link
+        Submit Email

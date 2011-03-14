@@ -263,7 +263,7 @@ p
 
 .active
   background-image: image_url("default/site/mark-comments.png")
-.news
+.news, .classifieds, .resources
   background-image: image_url("default/site/mark-news.png")
 .blogs
   background-image: image_url("default/site/mark-blogs.png")
@@ -271,9 +271,9 @@ p
   background-image: image_url("default/site/mark-comments.png")
 .events
   background-image: image_url("default/site/mark-events.png")
-.ideas
+.ideas, .forums
   background-image: image_url("default/site/mark-ideas.png")
-.questions
+.questions, .predictions
   backgroun-image: image_url("default/site/mark-qa.png")
 .latest
   background-image: image_url("default/site/mark-latest.png")
@@ -555,4 +555,18 @@ p
 
 /****************************************************
  MISC (Stuff I haven't found a place for) */
+.email-input
+  font-size: $fontsize * 1.5
+  padding: $PanelGutters * .25
+  border: 1px solid $subheadColor
+  margin-bottom: $PanelGutters
+.meta-panel
+  .email-input
+    width: $PanelOnePanelFull - 12px
 
+.wgt-foot
+  border-top: 1px solid $subheadColor
+  padding: $PanelGutters * .5
+  text-align: right
+  
+  
