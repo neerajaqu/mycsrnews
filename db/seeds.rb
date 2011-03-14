@@ -310,8 +310,9 @@ end
 #
 view_object_templates = [
   {
-  	:name     => "v2_welcome_panel",
-  	:template => "shared/templates/single_col_welcome_panel"
+  	:name        => "v2_welcome_panel",
+  	:pretty_name => "Version 2 Welcome Panel",
+  	:template    => "shared/templates/single_col_welcome_panel"
   },
   {
   	:name     => "v2_single_col_list",
