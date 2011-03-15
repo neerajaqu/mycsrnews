@@ -39,18 +39,15 @@ p
     top: 0px
     right: 0px
     float: right
-    padding: 5px 5px 5px 60px 
+    padding: 8px 10px 5px 60px 
     background: image_url("default/site/meta-links-bg.png") top left repeat-y
-    #cse
-      width: 200px 
-      float: right
-      margin: -5px 0px 0px 10px
-      padding: 0px
     .meta-search
       border: $formInputBorder
-      padding: 3px 9px 
-      
-
+      padding: 2px 9px
+    .meta-search, .meta-submit
+      font-size: $fontsize - 1px
+      float: left
+      margin-top: -2px
 
 /****************************************************
  V2 HEADERS */
@@ -268,7 +265,7 @@ p
   background-repeat: no-repeat
 
 .active
-  background-image: image_url("default/site/mark-comments.png")
+  background-image: image_url("default/site/mark-active.png")
 .news
   background-image: image_url("default/site/mark-news.png")
 .blogs
@@ -283,7 +280,12 @@ p
   backgroun-image: image_url("default/site/mark-qa.png")
 .latest
   background-image: image_url("default/site/mark-latest.png")
-
+.classifieds, .resources
+  background-image: image_url("default/site/mark-classifieds.png")
+.predictions
+  background-image: image_url("default/site/mark-predictions.png")
+.forums, .topics
+  background-image: image_url("default/site/mark-forumtopics.png")
 
 /****************************************************
  WIDGET LISTS */
@@ -557,8 +559,23 @@ p
     background: #ff00ff
     text-align: center
 
-
+/****************************************************
+ GALLERY WIDGET */
 
 /****************************************************
  MISC (Stuff I haven't found a place for) */
+.email-input
+  font-size: $fontsize * 1.5
+  padding: $PanelGutters * .25
+  border: 1px solid $subheadColor
+  margin-bottom: $PanelGutters
+.meta-panel
+  .email-input
+    width: $PanelOnePanelFull - $PanelGutters + 2px
 
+.wgt-foot
+  border-top: 1px solid $subheadColor
+  padding: 4px
+  text-align: right
+  
+  
