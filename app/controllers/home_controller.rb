@@ -22,24 +22,28 @@ class HomeController < ApplicationController
   end
 
   def index
-    @page = "page_1_"
-    if request.post?
-    	respond_to do |format|
-    	  format.html
-    	  format.fbml
-    	  format.json { @stories = Content.refine(params) }
-    	  format.fbjs { @stories = Content.refine(params) }
-      end
+    if APP_CONFIG["use_view_objects"]
+      render(:text => %{<div id="home_container">#{ViewTree.render(self)}</div>}, :layout => 'application') and return
     else
-      @no_paginate = true
-      @featured_items = FeaturedItem.find_root_by_item_name('featured_template')
-      controller = self
-      @page = WidgetPage.find_root_by_page_name('home')
-      if @page.present? and @page.children.present?
-        @main = @page.children.first.children
-        @sidebar = @page.children.second.children
-        @main.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
-        @sidebar.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
+      @page = "page_1_"
+      if request.post?
+        respond_to do |format|
+          format.html
+          format.fbml
+          format.json { @stories = Content.refine(params) }
+          format.fbjs { @stories = Content.refine(params) }
+        end
+      else
+        @no_paginate = true
+        @featured_items = FeaturedItem.find_root_by_item_name('featured_template')
+        controller = self
+        @page = WidgetPage.find_root_by_page_name('home')
+        if @page.present? and @page.children.present?
+          @main = @page.children.first.children
+          @sidebar = @page.children.second.children
+          @main.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
+          @sidebar.each {|w| controller.send(w.widget.load_functions) if w.widget.load_functions.present? }
+        end
       end
     end
     #expires_in 1.minutes, :private => false, :public => true

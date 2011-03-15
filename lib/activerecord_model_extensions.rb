@@ -62,6 +62,18 @@ module Newscloud
         nil
       end
 
+      def model_index_name
+        self.name.tableize.titleize
+      end
+
+      def model_index_url_name
+        "#{self.name.tableize.gsub(/\//, '_')}_url"
+      end
+
+      def model_new_url_name
+        "new_#{self.name.underscore.gsub(/\//, '_')}_url"
+      end
+
     end
 
     module InstanceMethods
@@ -98,7 +110,23 @@ module Newscloud
       def wall_caption
         return ''
       end
+
+      def locale_model_name
+        self.class.name.tableize
+      end
+
+      def model_index_name
+        self.class.model_name.pluralize
+      end
             
+      def model_index_url_name
+        self.class.model_index_url_name
+      end
+            
+      def model_new_url_name
+        self.class.model_new_url_name
+      end
+
       def item_title
         [:title, :name, :question].each do |method|
           return self.send(method) if self.respond_to?(method) and self.send(method).present?
@@ -111,6 +139,13 @@ module Newscloud
           return self.send(method) if self.respond_to?(method) and self.send(method).present?
         end
         "#{self.class.name.titleize} ##{self.id}"
+      end
+
+      def item_user
+        [:user, :author].each do |method|
+          return self.send(method) if self.respond_to?(method) and self.send(method).present?
+        end
+        User.new
       end
 
       # Breadcrumb parents method
@@ -133,6 +168,14 @@ module Newscloud
 
       def expire
         nil
+      end
+
+      def action_links
+        links = []
+        if self.respond_to? :comments
+        	links << lambda {|klass| comment_link(klass) }
+        end
+        links
       end
 
     end

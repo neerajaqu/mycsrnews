@@ -1,0 +1,41 @@
+- item1 = vo.dataset.first
+- item2 = vo.dataset[1]
+- item3 = vo.dataset.last
+.panel-3
+  .panel-content.featured-panel
+    .panel-twothird
+      .item-with-image
+        .item-thumb
+          %a= image_tag(thumb_image_or_default(item1))
+        .item-text
+          %h1= link_to item1.item_title, item1.item_link
+          %p= caption item1.item_description
+          .meta-data
+            .profile-pic
+              = local_linked_profile_pic item1.item_user
+            %h6= posted_by_with_topic item1
+
+            - action_links(item1).each do |action_link|
+              %h6= action_link
+
+    .panel-third.alpha
+      %ul.list-items
+        %li
+          .item-with-image
+            .item-thumb
+              %a= image_tag(thumb_image_or_default(item2))
+            .item-text
+              %h3= link_to item2.item_title, item2.item_link
+              .meta-data
+                - action_links(item2).each do |action_link|
+                  %h6= action_link
+
+        %li.last
+          .item-with-image
+            .item-thumb
+              %a= image_tag(thumb_image_or_default(item3))
+            .item-text
+              %h3= link_to item3.item_title, item3.item_link
+              .meta-data
+                - action_links(item3).each do |action_link|
+                  %h6= action_link
