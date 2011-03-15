@@ -206,6 +206,8 @@ p
 
 .panel-2
   +grid(8)
+  .panel-full 
+    width: $PanelTwoPanelFull
   .panel-half
     width: $PanelTwoPanelHalf
     .panel-full
@@ -256,11 +258,11 @@ p
 
 /****************************************************
  PANEL BACKGROUND IMAGES */
-.news, .blogs, .comments, .events, .ideas, .questions
+.news, .blogs, .comments, .events, .ideas, .questions, .classifieds, .resources, .forums, .topics
   background-position: 90% 0 
   background-repeat: no-repeat
 
-.latest, .active
+.latest, .active, .media
   background-position: 25% center
   background-repeat: no-repeat
 
@@ -286,6 +288,8 @@ p
   background-image: image_url("default/site/mark-predictions.png")
 .forums, .topics
   background-image: image_url("default/site/mark-forumtopics.png")
+.media
+  background-image: image_url("default/site/mark-media.png")
 
 /****************************************************
  WIDGET LISTS */
@@ -561,6 +565,43 @@ p
 
 /****************************************************
  GALLERY WIDGET */
+
+
+.gallery
+  .panel-content
+    width: auto
+    padding-top: $PanelGutters
+    padding-left: $PanelGutters * .5
+    padding-right: $PanelGutters * .5
+
+.panel-1.featured-panel.gallery
+  .panel-content
+    width: auto
+    padding-top: $PanelGutters
+    padding-left: $PanelGutters * .5
+    padding-right: $PanelGutters * .5
+    margin-bottom: 0
+
+.panel-2
+  .media-item
+    width: $MediaItemWidthColTwo
+
+.panel-1
+  .panel-content
+  .media-item
+    width: $MediaItemWidthColOne
+    &.single
+      width: $MediaItemWidthSingle
+      height: auto
+      float: none
+
+.media-item
+  float: left
+  margin-bottom: $PanelGutters
+  margin-left: $PanelGutters * .5
+  margin-right: $PanelGutters * .5
+  img
+    width: 100%
 
 /****************************************************
  MISC (Stuff I haven't found a place for) */
