@@ -315,44 +315,54 @@ view_object_templates = [
   	:template    => "shared/templates/single_col_welcome_panel"
   },
   {
-  	:name     => "v2_single_col_list",
-  	:template => "shared/templates/single_col_list"
+  	:name        => "v2_single_col_list",
+  	:pretty_name => "Version 2 Single Column List",
+  	:template    => "shared/templates/single_col_list"
   },
   {
-  	:name     => "v2_large_2",
-  	:template => "shared/templates/large_2"
+  	:name        => "v2_large_2",
+  	:pretty_name => "Version 2 Large Feature With 2 Sub Items",
+  	:template    => "shared/templates/large_2"
   },
   {
-  	:name     => "v2_double_col_feature",
-  	:template => "shared/templates/double_col_feature"
+  	:name        => "v2_double_col_feature",
+  	:pretty_name => "Version 2 Double Column Feature",
+  	:template    => "shared/templates/double_col_feature"
   },
   {
-  	:name     => "v2_single_col_user_list",
-  	:template => "shared/templates/single_col_user_list"
+  	:name        => "v2_single_col_user_list",
+  	:pretty_name => "Version 2 Single Column User List",
+  	:template    => "shared/templates/single_col_user_list"
   },
   {
-  	:name     => "v2_single_col_small_list",
-  	:template => "shared/templates/single_col_small_list"
+  	:name        => "v2_single_col_small_list",
+  	:pretty_name => "Version 2 Single Column Small List",
+  	:template    => "shared/templates/single_col_small_list"
   },
   {
-  	:name     => "v2_single_col_gallery_strip",
-  	:template => "shared/templates/single_col_gallery_strip"
+  	:name        => "v2_single_col_gallery_strip",
+  	:pretty_name => "Version 2 Single Column Gallery Strip",
+  	:template    => "shared/templates/single_col_gallery_strip"
   },
   {
-  	:name     => "old_featured_gallery",
-  	:template => "shared/media/featured_gallery"
+  	:name        => "old_featured_gallery",
+  	:pretty_name => "Old Featured Gallery",
+  	:template    => "shared/media/featured_gallery"
   },
   {
-  	:name     => "old_gallery_big_image",
-  	:template => "shared/media/gallery_big_image"
+  	:name        => "old_gallery_big_image",
+  	:pretty_name => "Old Gallery Big Image",
+  	:template    => "shared/media/gallery_big_image"
   },
   {
-  	:name     => "old_gallery_small_images",
-  	:template => "shared/media/gallery_small_images"
+  	:name        => "old_gallery_small_images",
+  	:pretty_name => "Old Gallery Small Images",
+  	:template    => "shared/media/gallery_small_images"
   },
   {
-  	:name     => "old_twitter_standard_list",
-  	:template => "shared/sidebar/twitter_standard_list"
+  	:name        => "old_twitter_standard_list",
+  	:pretty_name => "Old Twitter Standard List",
+  	:template    => "shared/sidebar/twitter_standard_list"
   }
 ]
 view_object_templates.each do |view_object_template|
@@ -485,6 +495,21 @@ view_objects = [
   		  {
           :method_name => "top",
           :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Featured Stories",
+  	:template_name => "v2_large_2",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "featured_stories",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "featured"
         }
   		]
   	}

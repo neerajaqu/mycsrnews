@@ -15,7 +15,7 @@
               .item-thumb
                 %a= image_tag(thumb_image_or_default(item))
               .item-text
-                %h4= link_to item.item_title, item
+                %h4= link_to item.item_title, item.item_link
                 .meta-data
                   %h6= posted_by_with_topic(item)
                   - action_links(item).each do |action_link|
@@ -25,7 +25,7 @@
           %li
             .item-with-no-image
               .item-text
-                %h3= link_to item.item_title, item
+                %h3= link_to item.item_title, item.item_link
               .meta-data
                 .profile-pic
                   = local_linked_profile_pic item.item_user
@@ -37,7 +37,7 @@
           %li
             .item-with-no-image
               .item-text
-                %h3= link_to item.item_title, item
+                %h3= link_to item.item_title, item.item_link
               .meta-data
                 %h6= posted_by_with_date_and_topic(item)
                 - action_links(item).each do |action_link|

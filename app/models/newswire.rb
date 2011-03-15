@@ -87,4 +87,8 @@ class Newswire < ActiveRecord::Base
     links
   end
 
+  def item_link
+    url
+  end
+
 end

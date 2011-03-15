@@ -83,7 +83,8 @@ class Metadata::ViewObjectSetting < Metadata
 
   def locale_title() self.data[:locale_title] end
   def locale_title=(val) self.data[:locale_title] = val end
-  def use_post_button() self.data[:use_post_button] end
+  # TODO:: FIX ME
+  def use_post_button() return false; self.data[:use_post_button] end
   def use_post_button=(val) self.data[:use_post_button] = !! val end
   def locale_subtitle() self.data[:locale_subtitle] end
   def locale_subtitle=(val) self.data[:locale_subtitle] = val end

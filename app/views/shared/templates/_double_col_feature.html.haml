@@ -6,7 +6,7 @@
         .item-thumb
           %a= image_tag(medium_image_or_default(item))
         .item-text
-          %h1= link_to item.item_title, item
+          %h1= link_to item.item_title, item.item_link
           %p
             = item_text(item)
           .meta-data

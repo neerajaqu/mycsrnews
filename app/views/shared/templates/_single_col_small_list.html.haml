@@ -12,7 +12,7 @@
         %li
           .item-with-no-image
             .item-text
-              %h4= link_to item.item_title, item
+              %h4= link_to item.item_title, item.item_link
             .meta-data
               - action_links(item).each do |action_link|
                 %h6= action_link
