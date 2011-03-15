@@ -11,6 +11,7 @@ en:
     contact: "Contact"
   footer:
     contact: "Contact us"
+    share_email: "Update your email address"
   account_menu:
     sign_in: "Sign in"
     sign_out: "Sign out"

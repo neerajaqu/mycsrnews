@@ -104,10 +104,13 @@ class Content < ActiveRecord::Base
       self.article.is_blocked = !self.article.is_blocked
       self.is_blocked = !self.is_blocked
       self.cascade_block self.is_blocked
+      self.article.cascade_block_pfeed_items self.is_blocked
+      self.article.update_attribute(:is_blocked, self.is_blocked)
       self.save
     else
       self.is_blocked = !self.is_blocked
       self.cascade_block self.is_blocked
+      self.cascade_block_pfeed_items self.is_blocked
       self.save
     end
   end

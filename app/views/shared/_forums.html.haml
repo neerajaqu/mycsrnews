@@ -25,8 +25,8 @@
                 -#.profilePic= local_linked_profile_pic forum.user
                 .itemMeta
                   -#%h3= t('forums.last_active', :fb_name => local_linked_profile_name(forum.user), :date => timeago(forum.created_at))
-                  - if forum.recent_topics.any?
-                    %h3== #{t('forums.last_active')} #{link_to forum.recent_topics.first.title, forum.recent_topics.first}
+                  - if forum.recent_topics.active.any?
+                    %h3== #{t('forums.last_active')} #{link_to forum.recent_topics.active.first.title, forum.recent_topics.active.first}
                   %span.btnComment= t('forums.topics_count', :topics_count => forum.topics_count)
                   %span.btnComment= t('forums.posts_count', :posts_count => forum.comments_count)
 

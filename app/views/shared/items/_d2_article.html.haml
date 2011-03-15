@@ -1,8 +1,8 @@
 - content = article.is_a?(Article) ? article.content : article
 - if content.images.present?
-  .item-with-image{'data-id' => content.cache_key}
+  .item-with-image.nested{'data-id' => content.cache_key}
     .item-thumb
-      %a= image_tag content.images.first.url(:thumb)
+      %a= image_tag content.images.first.url(:medium)
     .item-text
       %h1= link_to content.title, story_path(content)
       %p

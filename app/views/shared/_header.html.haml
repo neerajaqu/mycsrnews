@@ -5,12 +5,35 @@
     %a{:title => "Front Page - #{get_setting('site_title').try(:value)}", :href => "#{home_index_path(:only_path => false)}"}
       %h1= get_setting('site_title').try(:value)
   .meta-links
+    - cache :google_search_header_html, :expires_in => 180.minute do
+      - if Metadata::Setting.find_setting('google_search_engine_id').present?
+        - search_engine_id = Metadata::Setting.find_setting('google_search_engine_id').value
+      - if search_engine_id and search_engine_id != "your-google-search-engine-id"
+        #cse
+          = t('loading')
+        %script{:type => "text/javascript", :src => "http://www.google.com/jsapi"}  
+        :javascript
+          var masonryCallback = function() {
+            $('#col_full').masonry({
+              columnWidth: #{iframe_facebook_request? ? 250 : 313},
+              itemSelector: '.box'
+            });
+          };
+          google.load('search', '1', {language : 'en'});
+          google.setOnLoadCallback(function() {
+            var customSearchControl = new google.search.CustomSearchControl('#{search_engine_id}');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            customSearchControl.draw('cse');
+
+            customSearchControl.setSearchCompleteCallback(this, masonryCallback);
+            //var searchForm = new google.search.SearchForm(true, document.getElementById('searchcontrol'));
+            //searchForm.setOnClearCallback(customSearchControl, masonryCallback);
+          }, true);              
+        = stylesheet_link_tag 'http://www.google.com/cse/style/look/default.css'
     - if logged_in?
       .account-dropdown
         = link_to t('header.account'), account_menu_path, :class => "account-toggle"
         .account-links{:style => 'display:none'}
-      = pipe_spacer
-      = link_to t('header.contact'), contact_us_path        
       %span.admin-links
         = pipe_spacer
         - if iframe_facebook_request?
@@ -26,6 +49,5 @@
         = link_to t('.register'), signup_path
     = pipe_spacer
     = fb_share_app_button
-
 
   = render :partial => 'shared/page_tabs'

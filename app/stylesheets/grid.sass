@@ -10,22 +10,23 @@ $ninesixty_gutter_width: 20px
 /**********************************************************************************************/
 // GRID VARIABLES
 
-$HeaderOne: 240%
-$HeaderTwo: 190%
-$HeaderThree: 150%
-$HeaderFour: 130%
-$HeaderFive: 100%
-$HeaderSix: 90%
+$HeaderOne: 28px
+$HeaderTwo: 24px
+$HeaderThree: 20px
+$HeaderFour: 16px
+$HeaderFive: 14px
+$HeaderSix: 11px
 
 $fontsize: 12px
 
 $PrimaryBorderRadius: 16px
-$SecondaryBorderRadius: 8px
+$SecondaryBorderRadius: 10px
 
 $PanelOnePanelFull: 260px
 
 $PanelTwoPanelHalf: 280px
 $PanelTwoPanelThird: 180px
+$PanelTwoPanelFull: 580px
 
 $panelThreePanelHalf: 440px
 $PanelThreePanelThird: 286px
@@ -37,6 +38,11 @@ $ButtonLinkFontSize: 130%
 
 $ProfilePicSize: 50px
 
+$MediaItemWidthColOne: 120px
+
+$MediaItemWidthColTwo: 130px
+
+$MediaItemWidthSingle: $PanelOnePanelFull
 
 /**********************************************************************************************/
 // Reset and grid stylesheets
@@ -62,7 +68,7 @@ $ProfilePicSize: 50px
 @import addthis.sass
 
 /**********************************************************************************************/
-// Site wide Grid Container styles
+/* GRID CONTAINERS */
 
 #header, #footer, #pageBody, #adspace, #subNav, .breadcrumbs
   +grid(12)
@@ -248,6 +254,7 @@ $ProfilePicSize: 50px
       height: 55px
       img
         width: 73px
+
 /**********************************************************************************************/
 /* FEATURED STORY PANEL IMAGE SIZES */
 .half-panel
