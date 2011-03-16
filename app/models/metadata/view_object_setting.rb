@@ -92,6 +92,8 @@ class Metadata::ViewObjectSetting < Metadata
   def cache_enabled=(val) self.data[:cache_enabled] = val end
   def old_widget() self.data[:old_widget] or false end #default to false
   def old_widget=(val) self.data[:old_widget] = val end
+  def css_class() self.data[:css_class] or self.klass_name.tableize end
+  def css_class=(val) self.data[:css_class] = val end
 
   def respond_to? method, internal = false
     #return true if method.to_s == "data"

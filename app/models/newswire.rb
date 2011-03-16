@@ -82,6 +82,7 @@ class Newswire < ActiveRecord::Base
 
   def action_links
     links = []
+    links << lambda {|klass| newswire_via(klass) }
     links << lambda {|klass| publish_newswire(klass) }
     links << lambda {|klass| read_newswire(klass) }
     links

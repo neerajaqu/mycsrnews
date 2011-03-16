@@ -16,9 +16,8 @@
           %p= t('galleries.featured_description', :gallery_description => gallery.description, :gallery_url => gallery_path(gallery))
       = link_to t('galleries.see_full_gallery'), gallery_path(gallery), :class => "button-panel-bar center"
     .panel-content
-      %ul
-        - gallery.gallery_items.reverse.each_with_index do |gallery_item, index|
-          - if index >= 4
-            %li.hide-strong= link_to image_tag(gallery_item.thumb_url, :alt => gallery_item.item_title), gallery_item.full_url, :rel => "gallery[small-image-#{gallery.title.parameterize}]", :title => gallery_item.item_description
-          - else
-            %li.media-item= link_to image_tag(gallery_item.thumb_url, :alt => gallery_item.item_title), gallery_item.full_url, :rel => "gallery[small-image-#{gallery.title.parameterize}]", :title => gallery_item.item_description
+      .media-item.single= link_to image_tag(gallery.thumb_url, :alt => gallery.item_title), gallery.full_url, :rel => "gallery[big-image-#{gallery.title.parameterize}]", :title => gallery.item_description
+      .hidden
+        %ul
+          - gallery.gallery_items.slice(1,10).each do |gallery_item|
+            %li.hide-strong= link_to image_tag(gallery_item.thumb_url, :alt => gallery_item.item_title), gallery_item.full_url, :rel => "gallery[big-image-#{gallery.title.parameterize}]", :title => gallery_item.item_description

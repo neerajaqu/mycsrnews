@@ -78,4 +78,16 @@ module ViewObjectsHelper
   def read_newswire item
     link_to(I18n.translate('read_newswire'), item.url, :target => "_cts")
   end
+
+  def newswire_via item
+    I18n.translate('generic.action_links.via', :name => item.feed.title)
+  end
+
+  def gallery_name view_object
+    if view_object.setting.kommands.any? and view_object.setting.kommands.first[:method_name].present?
+    	"#{view_object.setting.kommands.first[:method_name].titleize} Gallery"
+    else
+    	"Media gallery"
+    end
+  end
 end

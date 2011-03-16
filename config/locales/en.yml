@@ -456,14 +456,6 @@ en:
     twitter_standard_search: "Your twitter search widget settings need to be configured via the Administrative console"
     twitter_standard_favorites: "Your twitter favorites widget settings need to be configured via the Administrative console"  
     twitter_standard_profile: "Your twitter profile widget settings need to be configured via the Administrative console"      
-  generic:
-    newest_items:
-      title: "Newest Items"
-      subtitle: "Newest items added by users"
-      post_title: "Post Something"
-    top_items:
-      title: "Top Items"
-      subtitle: "Most popular items"
   classifieds:
     top_classified_tags: "Popular Tags"
     listing_type_strings:
@@ -541,10 +533,17 @@ en:
     top_title: "Popular Categories"
     no_items: "No categories"
   generic:
+    newest_items:
+      title: "Newest Items"
+      subtitle: "Newest items added by users"
+      post_title: "Post Something"
+    top_items:
+      title: "Top Items"
+      subtitle: "Most popular items"
     post_something: "Post Something"
     action_links:
       comments_title: "Comments"
-      posted_by_in:
+      via: "Via {{name}}"
     posted:
       by: "By {{name}}"
       by_ago: "By {{name}} {{date}} ago"

@@ -345,19 +345,14 @@ view_object_templates = [
   	:template    => "shared/templates/single_col_gallery_strip"
   },
   {
-  	:name        => "old_featured_gallery",
-  	:pretty_name => "Old Featured Gallery",
-  	:template    => "shared/media/featured_gallery"
+  	:name        => "v2_single_col_gallery_big_image",
+  	:pretty_name => "Version 2 Single Column Gallery Big Image",
+  	:template    => "shared/templates/single_col_gallery_big_image"
   },
   {
-  	:name        => "old_gallery_big_image",
-  	:pretty_name => "Old Gallery Big Image",
-  	:template    => "shared/media/gallery_big_image"
-  },
-  {
-  	:name        => "old_gallery_small_images",
-  	:pretty_name => "Old Gallery Small Images",
-  	:template    => "shared/media/gallery_small_images"
+  	:name        => "v2_double_col_gallery_strip",
+  	:pretty_name => "Version 2 Double Column Gallery Strip",
+  	:template    => "shared/templates/double_col_gallery_strip"
   },
   {
   	:name        => "old_twitter_standard_list",
@@ -423,6 +418,51 @@ view_objects = [
           :method_name => "newest",
           :args        => [5]
         }        
+  		]
+  	}
+  },
+  {
+  	:name          => "Featured Gallery Single Column Small Strip",
+  	:template_name => "v2_single_col_gallery_strip",
+  	:settings      => {
+  		:klass_name      => "Gallery",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "featured"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Gallery Single Column Big Image",
+  	:template_name => "v2_single_col_gallery_big_image",
+  	:settings      => {
+  		:klass_name      => "Gallery",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "top"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Gallery Double Column Small Strip",
+  	:template_name => "v2_double_col_gallery_strip",
+  	:settings      => {
+  		:klass_name      => "Gallery",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "newest"
+        }
   		]
   	}
   },
@@ -568,48 +608,6 @@ view_objects = [
   	}
   },
   {
-  	:name          => "Old Featured Gallery",
-  	:template_name => "old_featured_gallery",
-  	:settings      => {
-  		:klass_name      => "Gallery",
-  		:locale_title    => nil,
-  		:locale_subtitle => nil,
-  		:use_post_button => false,
-  		:cache_enabled   => false,
-      :old_widget      => true,
-  		:kommands        => [
-  		]
-  	}
-  },
-  {
-  	:name          => "Old Gallery Big Image",
-  	:template_name => "old_gallery_big_image",
-  	:settings      => {
-  		:klass_name      => "Gallery",
-  		:locale_title    => nil,
-  		:locale_subtitle => nil,
-  		:use_post_button => false,
-  		:cache_enabled   => false,
-      :old_widget      => true,
-  		:kommands        => [
-  		]
-  	}
-  },
-  {
-  	:name          => "Old Gallery Small Images",
-  	:template_name => "old_gallery_small_images",
-  	:settings      => {
-  		:klass_name      => "Gallery",
-  		:locale_title    => nil,
-  		:locale_subtitle => nil,
-  		:use_post_button => false,
-  		:cache_enabled   => false,
-      :old_widget      => true,
-  		:kommands        => [
-  		]
-  	}
-  },
-  {
   	:name          => "Old Twitter Standard List",
   	:template_name => "old_twitter_standard_list",
   	:settings      => {
@@ -644,6 +642,7 @@ view_objects.each do |view_object_hash|
   view_object.setting.locale_title     = view_object_hash[:settings][:locale_title] if view_object_hash[:settings][:locale_title]
   view_object.setting.cache_enabled    = view_object_hash[:settings][:cache_enabled] if view_object_hash[:settings][:cache_enabled]
   view_object.setting.old_widget       = view_object_hash[:settings][:old_widget] if view_object_hash[:settings][:old_widget]
+  view_object.setting.css_class        = view_object_hash[:settings][:css_class] if view_object_hash[:settings][:css_class]
   view_object.setting.locale_subtitle  = view_object_hash[:settings][:locale_subtitle] if view_object_hash[:settings][:locale_subtitle]
 
   # Add Kommands
