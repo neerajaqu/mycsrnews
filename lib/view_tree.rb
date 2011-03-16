@@ -39,6 +39,11 @@ class ViewTree
 
   def load
     @view_object = ViewObject.load(@key_name)
+    unless @view_object
+      @output = ''
+      return true
+    end
+
     if not Rails.env.development? and @view_object.setting
     	#@cache = @view_object.setting.cache_enabled
     end
