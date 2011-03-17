@@ -540,6 +540,40 @@ view_objects = [
   	}
   },
   {
+  	:name          => "Newest Universal Items",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "PfeedItem",
+  		:locale_title    => "pfeeds.latest.title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:css_class       => "active",
+  		:kommands        => [
+  		  {
+  		    :method_name => "newest_items",
+          :args        => [5]
+  		  }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Universal Items",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Vote",
+  		:locale_title    => "generic.top_items.title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:css_class       => "active",
+  		:kommands        => [
+  		  {
+  		    :method_name => "top_items",
+          :args        => [5]
+  		  }
+  		]
+  	}
+  },
+  {
   	:name          => "Featured Stories",
   	:template_name => "v2_large_2",
   	:settings      => {
