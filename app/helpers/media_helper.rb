@@ -35,7 +35,9 @@ module MediaHelper
       when Classified.name
         url = image.images.first.try(:full_url)
       when Content.name
-        url = image.images.first.try(:full_url)
+        url = image.images.first.try(:medium_url)
+      when Article.name
+        url = image.content.images.first.try(:medium_url)
       else
       	url = nil
     end

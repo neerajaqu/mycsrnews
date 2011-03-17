@@ -32,6 +32,10 @@ class Image < ActiveRecord::Base
     url(:thumb)
   end
 
+  def medium_url
+    url(:medium)
+  end
+
   def full_url
     url(:large)
   end
