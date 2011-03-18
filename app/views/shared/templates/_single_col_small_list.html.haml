@@ -11,7 +11,7 @@
       - vo.dataset.each_with_index do |item, index|
         %li
           .item-with-no-image
-            .item-text
-              %h4= link_to item.item_title, item.item_link
+            %p
+              %b= link_to item.item_title, item.item_link
             .meta-data
               %h6= action_links(item).join "&nbsp; | &nbsp;"
