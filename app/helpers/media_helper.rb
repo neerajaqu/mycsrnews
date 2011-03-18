@@ -15,6 +15,8 @@ module MediaHelper
         url = image.images.first.try(:thumb_url)
       when Content.name
         url = image.images.first.try(:thumb_url)
+      when Article.name
+        url = image.content.images.first.try(:medium_url)
       else
       	url = nil
     end
