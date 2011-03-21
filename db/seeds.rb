@@ -358,7 +358,13 @@ view_object_templates = [
   	:name        => "old_twitter_standard_list",
   	:pretty_name => "Old Twitter Standard List",
   	:template    => "shared/sidebar/twitter_standard_list"
+  },
+  {
+  	:name        => "v2_ad_template",
+  	:pretty_name => "Version 2 Ad Template",
+  	:template    => "shared/templates/ad_template"
   }
+  
 ]
 view_object_templates.each do |view_object_template|
   puts "Creating View Object Template: #{view_object_template[:name]} (#{view_object_template[:template]})" if debug and ViewObjectTemplate.find_by_name(view_object_template[:name]).nil?
@@ -652,6 +658,22 @@ view_objects = [
   		:cache_enabled   => false,
       :old_widget      => true,
   		:kommands        => [
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Leaderboard",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["leaderboard", "default"]
+        }
   		]
   	}
   }

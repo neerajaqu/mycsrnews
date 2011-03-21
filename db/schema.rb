@@ -890,9 +890,12 @@ ActiveRecord::Schema.define(:version => 20110309212528) do
   create_table "view_object_templates", :force => true do |t|
     t.string   "template"
     t.string   "name"
+    t.string   "pretty_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "view_object_templates", ["name"], :name => "index_view_object_templates_on_name"
 
   create_table "view_objects", :force => true do |t|
     t.string   "name"
