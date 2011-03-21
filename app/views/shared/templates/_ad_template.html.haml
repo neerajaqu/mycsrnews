@@ -1,4 +1,4 @@
-- slot_data = vo.dataset.try(:first) || Metadata.get_default_ad_slot
+- slot_data = vo.dataset || Metadata.get_default_ad_slot
 - if slot_data.present?
   - case slot_data['data'][:width]
     - when "728px"
