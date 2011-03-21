@@ -662,6 +662,102 @@ view_objects = [
   	}
   },
   {
+  	:name          => "Default Ad Small Square",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["small_square", "default"]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Square",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["square", "default"]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Medium Rectangle",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["medium_rectangle", "default"]
+        }
+  		]
+  	}
+  },  
+  {
+  	:name          => "Default Ad Large Rectangle",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["large_rectangle", "default"]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Skyscraper",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["skyscraper", "default"]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Banner",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["banner", "default"]
+        }
+  		]
+  	}
+  },
+  {
   	:name          => "Default Ad Leaderboard",
   	:template_name => "v2_ad_template",
   	:settings      => {
