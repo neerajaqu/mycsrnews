@@ -9,7 +9,7 @@
       - if Metadata::Setting.find_setting('google_search_engine_id').present?
         - search_engine_id = Metadata::Setting.find_setting('google_search_engine_id').value
       - if search_engine_id and search_engine_id != "your-google-search-engine-id"
-        - form_tag("http://www.google.com/cse", :id => "cse-search-box", :remote => true) do
+        - form_tag("http://www.google.com/cse", :id => "cse-search-box", :remote => true, :method => "get") do
           = hidden_field_tag 'cx', search_engine_id
           = hidden_field_tag 'ie', 'ISO-8859-1'
           = text_field_tag 'q',  nil, :class =>'meta-search'
