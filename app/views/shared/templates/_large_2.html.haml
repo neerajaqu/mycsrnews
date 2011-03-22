@@ -15,8 +15,7 @@
               = local_linked_profile_pic item1.item_user
             %h6= posted_by_with_topic item1
 
-            - action_links(item1).each do |action_link|
-              %h6= action_link
+            %h6= action_links(item1)
 
     .panel-third.alpha
       %ul.list-items
@@ -27,8 +26,7 @@
             .item-text
               %h3= link_to item2.item_title, item2.item_link
               .meta-data
-                - action_links(item2).each do |action_link|
-                  %h6= action_link
+                %h6= action_links(item2)
 
         %li.last
           .item-with-image
@@ -37,5 +35,4 @@
             .item-text
               %h3= link_to item3.item_title, item3.item_link
               .meta-data
-                - action_links(item3).each do |action_link|
-                  %h6= action_link
+                %h6= action_links(item3)

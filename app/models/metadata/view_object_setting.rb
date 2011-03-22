@@ -49,8 +49,10 @@ class Metadata::ViewObjectSetting < Metadata
 
   def kommand_chain
     return [] unless self.kommands
-    self.kommands.unshift({:method_name => :active}) if self.view_object.respond_to? :active
-    self.kommands.inject(self.klass_name.constantize) {|klass,kommand| klass.send(kommand[:method_name], *([kommand[:args], kommand[:options]].flatten.compact)) }
+    model_klass = self.klass_name.constantize
+    kommands = self.kommands.clone
+    kommands.unshift({:method_name => :active}) if model_klass.respond_to? :active
+    kommands.inject(model_klass) {|klass,kommand| klass.send(kommand[:method_name], *([kommand[:args], kommand[:options]].flatten.compact)) }
   end
 
   def add_kommand *args

@@ -172,6 +172,9 @@ module Newscloud
 
       def action_links
         links = []
+        if self.respond_to? :votes_tally
+        	links << lambda {|klass| vote_link(klass) }
+        end
         if self.respond_to? :comments
         	links << lambda {|klass| comment_link(klass) }
         end

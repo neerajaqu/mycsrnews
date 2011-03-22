@@ -18,8 +18,7 @@
                 %h4= link_to item.item_title, item.item_link
                 .meta-data
                   %h6= posted_by_with_topic(item)
-                  - action_links(item).each do |action_link|
-                    %h6= action_link
+                  %h6= action_links(item)
 
         - elsif index == 1
           %li
@@ -30,8 +29,7 @@
                 .profile-pic
                   = local_linked_profile_pic item.item_user
                 %h6= posted_by_with_date_and_topic(item)
-                - action_links(item).each do |action_link|
-                  %h6= action_link
+                %h6= action_links(item)
 
         - else
           %li
@@ -40,5 +38,4 @@
                 %h3= link_to item.item_title, item.item_link
               .meta-data
                 %h6= posted_by_with_date_and_topic(item)
-                - action_links(item).each do |action_link|
-                  %h6= action_link
+                %h6= action_links(item)

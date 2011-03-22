@@ -345,6 +345,21 @@ view_object_templates = [
   	:template    => "shared/templates/single_col_gallery_strip"
   },
   {
+  	:name        => "v2_single_col_item",
+  	:pretty_name => "Version 2 Single Column Item",
+  	:template    => "shared/templates/single_col_item"
+  },
+  {
+  	:name        => "v2_double_col_item",
+  	:pretty_name => "Version 2 Double Column Item",
+  	:template    => "shared/templates/double_col_item"
+  },
+  {
+  	:name        => "v2_double_col_item_list",
+  	:pretty_name => "Version 2 Double Column Item List",
+  	:template    => "shared/templates/double_col_item_list"
+  },
+  {
   	:name        => "v2_single_col_gallery_big_image",
   	:pretty_name => "Version 2 Single Column Gallery Big Image",
   	:template    => "shared/templates/single_col_gallery_big_image"
@@ -505,6 +520,22 @@ view_objects = [
   	}
   },
   {
+  	:name          => "Newest Stories Double Column Item List",
+  	:template_name => "v2_double_col_item_list",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.newest_stories.newest_stories_title",
+  		:locale_subtitle => "shared.stories.stories_subtitle",
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [4]
+        }
+  		]
+  	}
+  },
+  {
   	:name          => "Top Stories",
   	:template_name => "v2_single_col_list",
   	:settings      => {
@@ -516,6 +547,38 @@ view_objects = [
   		  {
           :method_name => "top_items",
           :args        => [5, false]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Story Single Column Item",
+  	:template_name => "v2_single_col_item",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.top_stories.top_stories_title",
+  		:locale_subtitle => "shared.stories.stories_subtitle",
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "top_items",
+          :args        => [5, false]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Story Double Column Item",
+  	:template_name => "v2_double_col_item",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.newest_stories.newest_stories_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [1]
         }
   		]
   	}

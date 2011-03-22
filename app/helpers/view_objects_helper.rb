@@ -14,7 +14,7 @@ module ViewObjectsHelper
     	links << comment_link(item)
     end
 =end
-    links
+    links.join "&nbsp; | &nbsp;"
   end
   
   def item_text item
@@ -66,9 +66,23 @@ module ViewObjectsHelper
     ].join(' ')
   end
 
-  def post_something klass_name
+  def comment_link item
+    [
+      content_tag(:span, item.comments_count, :class => "count"),
+      link_to(I18n.translate("generic.action_links.comments_title"), item)
+    ].join(' ')
+  end
+
+  def vote_link item
+    [
+      link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), :class => "voteUp"),
+      content_tag(:span, item.votes_tally, :class => "count"),
+    ].join(' ')
+  end
+
+  def post_something klass_name, css_class = "float-right"
     klass = klass_name.constantize
-    link_to(I18n.translate("generic.post_something"), send(klass.model_new_url_name), :class => "button-panel-bar float-right")
+    link_to(I18n.translate("generic.post_something"), send(klass.model_new_url_name), :class => "button-panel-bar #{css_class}")
   end
 
   def publish_newswire item
