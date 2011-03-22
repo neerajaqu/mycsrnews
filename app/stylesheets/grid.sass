@@ -10,11 +10,11 @@ $ninesixty_gutter_width: 20px
 /**********************************************************************************************/
 // GRID VARIABLES
 
-$HeaderOne: 28px
-$HeaderTwo: 24px
-$HeaderThree: 20px
+$HeaderOne: 24px
+$HeaderTwo: 20px
+$HeaderThree: 18px
 $HeaderFour: 16px
-$HeaderFive: 14px
+$HeaderFive: 13px
 $HeaderSix: 11px
 
 $fontsize: 12px
@@ -43,6 +43,10 @@ $MediaItemWidthColOne: 120px
 $MediaItemWidthColTwo: 130px
 
 $MediaItemWidthSingle: $PanelOnePanelFull
+
+
+$userPicWidth: 40px
+$userPicHeight: 40px
 
 /**********************************************************************************************/
 // Reset and grid stylesheets
@@ -349,6 +353,6 @@ $MediaItemWidthSingle: $PanelOnePanelFull
 
 /** Twitter Widgets **/
 .twitter_widget_container
-  width: 300px
+  +grid(4)
   height: 390px
-  margin-bottom: 10px
+  margin-bottom: $PanelGutters

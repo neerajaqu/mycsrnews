@@ -44,6 +44,9 @@ $MediaItemWidthColTwo: 111.6675px
 
 $MediaItemWidthSingle: $PanelOnePanelFull
 
+$userPicWidth: 38px
+$userPicHeight: 38px
+
 /**********************************************************************************************/
 // Reset and grid stylesheets
 @import "compass/utilities/general/reset"
@@ -359,6 +362,6 @@ $MediaItemWidthSingle: $PanelOnePanelFull
 
 /** Twitter Widgets **/
 .twitter_widget_container
-  width: 250px
+  +grid(4)
   height: 390px
-  margin-bottom: 10px  
+  margin-bottom: $PanelGutters
