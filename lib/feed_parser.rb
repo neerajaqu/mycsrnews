@@ -56,7 +56,7 @@ module N2
           end
         end
 
-        feed.update_attributes({:updated_at => Time.now, :last_fetched_at => (pub_date || Time.now)})
+        feed.update_attributes({:updated_at => Time.now, :last_fetched_at => Time.now})
       end
 
       expire_newswire_cache if trigger_expire_cache
