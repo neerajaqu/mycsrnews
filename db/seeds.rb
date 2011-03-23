@@ -407,19 +407,19 @@ view_objects = [
   		]
   	}
   },
+=end
   {
   	:name          => "Welcome Panel",
-  	:template_name => "v2_single_col_welcome_panel",
+  	:template_name => "v2_welcome_panel",
   	:settings      => {
   		:klass_name      => "User",
-  		:locale_title    => "welcome_panel",
+  		:locale_title    => nil,
   		:locale_subtitle => nil,
   		:use_post_button => false,
   		:kommands        => [
   		]
   	}
   },
-=end
   {
   	:name          => "Newswire",
   	:template_name => "v2_single_col_small_list",

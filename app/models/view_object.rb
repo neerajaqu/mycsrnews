@@ -22,4 +22,12 @@ class ViewObject < ActiveRecord::Base
     self.find_by_name(key_name)
   end
 
+  def add_parent! parent_view_object, position = 0
+    ViewTreeEdge.create!({:parent => parent_view_object, :child => self, :position => position})
+  end
+
+  def add_child! child_view_object, position = 0
+    ViewTreeEdge.create!({:child => child_view_object, :parent => self, :position => position})
+  end
+
 end

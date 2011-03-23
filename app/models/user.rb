@@ -423,6 +423,13 @@ class User < ActiveRecord::Base
     User.find(:all, :select => "id", :conditions => ["fb_user_id IN (?)", friends_array]).map(&:id)
   end
 
+  def self.get_welcome_host
+    host_id = Metadata::Setting.get_setting('welcome_host').try(:value).try(:to_i)
+    return nil unless host_id and not host_id.zero?
+
+    User.active.find_by_id(host_id) || User.active.find_by_fb_user_id(host_id) || UserProfile.active.find_by_facebook_user_id(host_id).try(:user) || nil
+  end
+
   private
 
   def mogli_client
