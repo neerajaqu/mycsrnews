@@ -262,12 +262,8 @@ p
 
 /****************************************************
  PANEL BACKGROUND IMAGES */
-.news, .articles, .blogs, .contents, .comments, .events, .ideas, .questions, .classifieds, .resources, .forums, .topics, .galleries, .newswires
-  background-position: 90% 0 
-  background-repeat: no-repeat
-
-.latest, .active, .media
-  background-position: 25% center
+.news, .articles, .blogs, .contents, .comments, .events, .ideas, .questions, .classifieds, .resources, .forums, .topics, .galleries, .newswires, .latest, .active, .media
+  background-position: 80% center
   background-repeat: no-repeat
 
 .active
@@ -301,8 +297,8 @@ p
   li
     display: inline-block
     width: 100%
-    margin-bottom: $PanelGutters * .75
-    &.last
+    margin-bottom: $PanelGutters * .5
+    &.last, p
       margin-bottom: 0
     .item-with-image
       display: inline
@@ -316,8 +312,8 @@ p
 
 .item-with-no-image
   :padding
-    left: $PanelGutters * .5
-    right: $PanelGutters * .5
+    left: $PanelGutters * .25
+    right: $PanelGutters * .25
 
 .item-with-image
   display: inline
@@ -327,6 +323,7 @@ p
   .item-thumb
     width: 40%
     margin-right: $PanelGutters * .5
+    margin-bottom: $PanelGutters * .5
   &.flip
     .item-text
       margin-left: 0
@@ -549,19 +546,35 @@ p
 /****************************************************
  V2 AD WRAPPERS */
 .panel-1, .panel-2, .panel-3
-  &.ad-wrap
-    background: image_url("default/site/ad-title-bg.gif") top left repeat-x
-    padding-top: 20px
+  .ad-wrap
+    background: $AdvertBG image_url("default/site/ad-title-bg.gif") top left 
+    -webkit-border-top-right-radius: $SecondaryBorderRadius
+    -webkit-border-top-left-radius: $SecondaryBorderRadius
+    -moz-border-radius-topright: $SecondaryBorderRadius
+    -moz-border-radius-topleft: $SecondaryBorderRadius
+    border-top-right-radius: $SecondaryBorderRadius
+    border-top-left-radius: $SecondaryBorderRadius
+    padding: 26px 6px 6px
     position: relative
   .ad-title
+    -webkit-border-top-right-radius: $SecondaryBorderRadius
+    -webkit-border-top-left-radius: $SecondaryBorderRadius
+    -moz-border-radius-topright: $SecondaryBorderRadius
+    -moz-border-radius-topleft: $SecondaryBorderRadius
+    border-top-right-radius: $SecondaryBorderRadius
+    border-top-left-radius: $SecondaryBorderRadius
     background: $bodyBG
     color: $subheadColor
     display: inline-block
     height: 12px
-    padding: 2px 4px
+    padding: 6px 6px 2px
     position: absolute
-    top: 0px
-    left: 0px
+    top: 6px
+    left: 6px
+    letter-spacing: 1px
+    text-transform: uppercase
+    font-size: 10px
+    font-weight: bold
   .place-holder-ad
     padding: 100px 0
     width: 100%
@@ -570,8 +583,6 @@ p
 
 /****************************************************
  GALLERY WIDGET */
-
-
 .gallery
   .panel-content
     width: auto
@@ -607,6 +618,68 @@ p
   margin-right: $PanelGutters * .5
   img
     width: 100%
+
+/****************************************************
+ USER WIDGET */
+.user-panel
+  background: $AdvertBG image_url("default/site/ad-title-bg.gif") top left 
+  .panel-content
+    padding: 28px 5px 5px
+    position: relative
+    float: none
+    display: block
+  .user-title
+    border-top: 1px solid $subheadColor
+    border-left: 1px solid $subheadColor
+    border-right: 1px solid $subheadColor
+    background: $bodyBG
+    color: $subheadColor
+    display: block
+    height: 12px
+    padding: 6px 6px 2px
+    position: absolute
+    top: 8px
+    left: 5px
+    font-size: 10px
+    font-weight: bold
+  ul.list-users
+    display: block
+    background: $bodyBG
+    border: 1px solid $subheadColor
+    padding-bottom: 5px
+    padding-left: 5px
+    float: left
+    li
+      padding: 0
+      margin-top: 5px
+      margin-right: 5px
+      display: block
+      float: left
+      border:
+        bottom: none
+      .profile-pic
+        width: $userPicWidth
+        height: $userPicHeight
+        margin: 0
+
+
+/****************************************************
+ POPOVER WIDGET */
+.popover-wrapper
+  -webkit-border-radius: $PrimaryBorderRadius
+  -moz-border-radius: $PrimaryBorderRadius
+  border-radius: $PrimaryBorderRadius
+  display: inline
+  float: left
+  background: rgba(0,0,0,.5)
+  .popover-container
+    -webkit-border-radius: $SecondaryBorderRadius
+    -moz-border-radius: $SecondaryBorderRadius
+    border-radius: $SecondaryBorderRadius
+    background: $bodyBG
+    min-height: 300px
+    margin: $PanelGutters * .5
+
 
 /****************************************************
  MISC (Stuff I haven't found a place for) */
