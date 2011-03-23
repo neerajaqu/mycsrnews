@@ -1,13 +1,10 @@
-.panel-1
-  .panel-content.meta-panel
-    .panel-full
-      .panelBar
-        %h2= vt.t(vo.setting.locale_title)
-      .userList
-        - unless vo.dataset.empty?
-          %ul
-            - vo.dataset.each_with_index do |item, index|
-              %li
-                .profilePic= local_linked_profile_pic item, :width => '30', :height => '30'
-        - else
-          %p= vt.t('recent_users_none')
+.panel-1.user-panel.top-secondary-corners
+  .panel-content
+    %span.user-title.top-secondary-corners= vt.t(vo.setting.locale_title)
+    - unless vo.dataset.empty?
+      %ul.list-users
+        - vo.dataset.each_with_index do |item, index|
+          %li
+            .profilePic= local_linked_profile_pic item, :width => '30', :height => '30'
+    - else
+      %p= vt.t('recent_users_none')

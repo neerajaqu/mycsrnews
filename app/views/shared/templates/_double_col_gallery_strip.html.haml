@@ -4,8 +4,7 @@
     %div.panel-bar.panel-full.top-secondary-corners{:class => vo.setting.css_class}
       %h2.float-left= gallery_name vo
       = link_to t('galleries.see_full_gallery'), gallery_path(gallery), :class => "button-panel-bar float-right"
-      %span.clearfix
-      %p.float-left= gallery.title
+      %p.float-left.clearfix= gallery.title
       -#
         - if vo.setting.locale_title
           %h2= vt.t(vo.setting.locale_title)
