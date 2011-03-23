@@ -254,6 +254,7 @@ en:
   pfeeds:
     latest:
       title: "Latest user activity"
+      subtitle: "Most recent content created by users"
   flag_strings:
     choose_flag: "- please choose a reason below -"
     abuse: "abuse"

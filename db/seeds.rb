@@ -542,6 +542,22 @@ view_objects = [
   	}
   },
   {
+  	:name          => "Newest Univeral Items Double Column List",
+  	:template_name => "v2_double_col_item_list",
+  	:settings      => {
+  		:klass_name      => "PfeedItem",
+  		:locale_title    => "pfeeds.latest.title",
+  		:locale_subtitle => "pfeeds.latest.subtitle",
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "newest_items",
+          :args        => [4]
+        }
+  		]
+  	}
+  },
+  {
   	:name          => "Top Stories",
   	:template_name => "v2_single_col_list",
   	:settings      => {
