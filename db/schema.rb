@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110309212528) do
+ActiveRecord::Schema.define(:version => 20110324193416) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -527,7 +527,6 @@ ActiveRecord::Schema.define(:version => 20110309212528) do
     t.boolean  "is_approved",                :default => true
     t.integer  "votes_tally",                :default => 0
     t.integer  "comments_count",             :default => 0
-    t.integer  "questions_count",            :default => 0
     t.boolean  "is_blocked",                 :default => false
     t.boolean  "is_featured",                :default => false
     t.datetime "featured_at"
@@ -560,7 +559,6 @@ ActiveRecord::Schema.define(:version => 20110309212528) do
     t.boolean  "is_approved",              :default => true
     t.integer  "votes_tally",              :default => 0
     t.integer  "comments_count",           :default => 0
-    t.integer  "guesses_count",            :default => 0
     t.boolean  "is_blocked",               :default => false
     t.boolean  "is_featured",              :default => false
     t.datetime "featured_at"
@@ -789,24 +787,24 @@ ActiveRecord::Schema.define(:version => 20110309212528) do
   end
 
   create_table "user_profiles", :force => true do |t|
-    t.integer  "user_id",                     :limit => 8,                    :null => false
-    t.integer  "facebook_user_id",            :limit => 8, :default => 0
-    t.boolean  "isAppAuthorized",                          :default => false
-    t.datetime "born_at"
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at"
-    t.text     "bio"
-    t.integer  "referred_by_user_id",         :limit => 8, :default => 0
-    t.boolean  "comment_notifications",                    :default => false
-    t.boolean  "receive_email_notifications",              :default => true
-    t.boolean  "dont_ask_me_for_email",                    :default => false
-    t.datetime "email_last_ask"
-    t.boolean  "dont_ask_me_invite_friends",               :default => false
-    t.datetime "invite_last_ask"
-    t.boolean  "post_comments",                            :default => true
-    t.boolean  "post_likes",                               :default => true
-    t.boolean  "post_items",                               :default => true
-    t.boolean  "is_blocked",                               :default => false
+    t.integer   "user_id",                     :limit => 8,                    :null => false
+    t.integer   "facebook_user_id",            :limit => 8, :default => 0
+    t.boolean   "isAppAuthorized",                          :default => false
+    t.datetime  "born_at"
+    t.timestamp "created_at",                                                  :null => false
+    t.datetime  "updated_at"
+    t.text      "bio"
+    t.integer   "referred_by_user_id",         :limit => 8, :default => 0
+    t.boolean   "comment_notifications",                    :default => false
+    t.boolean   "receive_email_notifications",              :default => true
+    t.boolean   "dont_ask_me_for_email",                    :default => false
+    t.datetime  "email_last_ask"
+    t.boolean   "dont_ask_me_invite_friends",               :default => false
+    t.datetime  "invite_last_ask"
+    t.boolean   "post_comments",                            :default => true
+    t.boolean   "post_likes",                               :default => true
+    t.boolean   "post_items",                               :default => true
+    t.boolean   "is_blocked",                               :default => false
   end
 
   add_index "user_profiles", ["user_id"], :name => "index_user_infos_on_user_id", :unique => true
@@ -882,6 +880,7 @@ ActiveRecord::Schema.define(:version => 20110309212528) do
     t.integer  "source_id"
     t.string   "thumb_url"
     t.boolean  "video_processing"
+    t.string   "medium_url"
   end
 
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"

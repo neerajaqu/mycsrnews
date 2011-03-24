@@ -370,6 +370,11 @@ view_object_templates = [
   	:template    => "shared/templates/double_col_gallery_strip"
   },
   {
+  	:name        => "v2_double_col_triple_item",
+  	:pretty_name => "Version 2 Double Column Triple Item",
+  	:template    => "shared/templates/double_col_triple_item"
+  },
+  {
   	:name        => "old_twitter_standard_list",
   	:pretty_name => "Old Twitter Standard List",
   	:template    => "shared/sidebar/twitter_standard_list"
@@ -849,6 +854,18 @@ view_objects = [
           :method_name => "get_ad_slot",
           :args => ["leaderboard", "default"]
         }
+  		]
+  	}
+  },
+  {
+  	:name          => "Double Column Triple Featured Items",
+  	:template_name => "v2_double_col_triple_item",
+  	:settings      => {
+  		:klass_name      => "ViewObject",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
   		]
   	}
   }

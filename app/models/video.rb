@@ -222,9 +222,10 @@ class Video < ActiveRecord::Base
     else
     	info = {}
     end
-    self.title = info[:title]
+    self.title       = info[:title]
     self.description = info[:description]
-    self.thumb_url = info[:thumb_url]
+    self.thumb_url   = info[:thumb_url]
+    self.medium_url  = info[:medium_url]
   end
   def set_video_info!() set_video_info and save end
 
@@ -242,9 +243,10 @@ class Video < ActiveRecord::Base
     info = JSON.parse(open(vimeo_json_url).read).first rescue nil
     return {} if info.nil?
     {
-    	:title => info["title"],
+    	:title       => info["title"],
     	:description => info["description"],
-    	:thumb_url => info["thumbnail_medium"]
+    	:thumb_url   => info["thumbnail_medium"],
+    	:medium_url  => info["thumbnail_medium"]
     }
   end
 
@@ -253,13 +255,18 @@ class Video < ActiveRecord::Base
     info = JSON.parse(open(youtube_json_url).read) rescue nil
     return {} if info.nil?
     {
-    	:title => info["entry"]["media$group"]["media$title"]["$t"],
+    	:title       => info["entry"]["media$group"]["media$title"]["$t"],
     	:description => info["entry"]["media$group"]["media$description"]["$t"],
-    	:thumb_url => info["entry"]["media$group"]["media$thumbnail"].first["url"]
+    	:thumb_url   => info["entry"]["media$group"]["media$thumbnail"].first["url"],
+    	:medium_url  => info["entry"]["media$group"]["media$thumbnail"][1]["url"]
     }
   end
 
   def thumb_url
+    super
+  end
+
+  def medium_url
     super
   end
 

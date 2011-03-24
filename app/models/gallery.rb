@@ -33,6 +33,11 @@ class Gallery < ActiveRecord::Base
     gallery_items.first.thumb_url
   end
 
+  def medium_url
+    return nil unless gallery_items.any?
+    gallery_items.first.medium_url
+  end
+
   def full_url
     return nil unless gallery_items.any?
     gallery_items.first.full_url
