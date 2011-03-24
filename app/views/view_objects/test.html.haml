@@ -1,0 +1,24 @@
+- content_for :head_content do
+  :javascript
+    $(function() {
+    	$('ul.view-objects a').click(function(event) {
+    		event.preventDefault();
+
+    		console.log("Loading view object at: "+$(this).attr('href'));
+    		$("#output").load($(this).attr('href'));
+      });
+    });
+
+
+#col_left
+  .panel_2
+    .panelBar
+      %h1 View Objects
+    .itemListWrap
+      .list_items
+        %ul.view-objects
+          - @view_objects.each do |view_object|
+            %li= link_to view_object.name, view_object_path(view_object, :format => 'json')
+
+#home_container
+  #output

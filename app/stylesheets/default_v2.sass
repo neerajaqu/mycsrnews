@@ -44,10 +44,14 @@ p
     .meta-search
       border: $formInputBorder
       padding: 2px 9px
+      width: 68px
     .meta-search, .meta-submit
       font-size: $fontsize - 1px
       float: left
       margin-top: -2px
+    #cse-search-box
+      float: left
+      margin: 0px 10px 0px 0px
 
 /****************************************************
  V2 HEADERS */
@@ -258,15 +262,15 @@ p
 
 /****************************************************
  PANEL BACKGROUND IMAGES */
-.news, .blogs, .comments, .events, .ideas, .questions, .classifieds, .resources, .forums, .topics, .latest, .active, .media
+.news, .articles, .blogs, .contents, .comments, .events, .ideas, .questions, .classifieds, .resources, .forums, .topics, .galleries, .newswires, .latest, .active, .media
   background-position: 80% center
   background-repeat: no-repeat
 
 .active
   background-image: image_url("default/site/mark-active.png")
-.news
+.contents, .news, .newswires
   background-image: image_url("default/site/mark-news.png")
-.blogs
+.articles, .blogs
   background-image: image_url("default/site/mark-blogs.png")
 .comments
   background-image: image_url("default/site/mark-comments.png")
@@ -284,7 +288,7 @@ p
   background-image: image_url("default/site/mark-predictions.png")
 .forums, .topics
   background-image: image_url("default/site/mark-forumtopics.png")
-.media
+.media, .galleries
   background-image: image_url("default/site/mark-media.png")
 
 /****************************************************

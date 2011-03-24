@@ -11,6 +11,7 @@ class Newswire < ActiveRecord::Base
 
   def quick_post user_id = nil, override_image = false
     user_id ||= self.feed.user_id
+    @user = User.find(user_id)
     return false unless user_id and user_id > 0
 
     caption = CGI.unescapeHTML self.caption
@@ -44,7 +45,7 @@ class Newswire < ActiveRecord::Base
     end
 
     begin
-      if @content.save
+      if @user.contents << @content
       	set_published
       	NewswireSweeper.expire_newswires
       	@content.expire
@@ -80,5 +81,16 @@ class Newswire < ActiveRecord::Base
     NewswireSweeper
   end
 
+  def action_links
+    links = []
+    links << lambda {|klass| newswire_via(klass) }
+    links << lambda {|klass| publish_newswire(klass) }
+    links << lambda {|klass| read_newswire(klass) }
+    links
+  end
+
+  def item_link
+    url
+  end
 
 end

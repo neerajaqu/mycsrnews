@@ -40,6 +40,7 @@ module Parse
       images = (doc/"img")
       valid_images = []
       images.each do |image|
+        next unless image.attributes['src'].present?
         image_url = self.concat_url(url, image.attributes['src'].value)
         valid_images << image_url if self.is_valid_image? image_url
       end

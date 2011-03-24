@@ -299,3 +299,594 @@ sponsor_zones.each do |sponsor_zone|
 		  }
   })
 end
+
+
+#######################################################################
+# View Tree
+#######################################################################
+
+#
+# View Object Templates
+#
+view_object_templates = [
+  {
+  	:name        => "v2_welcome_panel",
+  	:pretty_name => "Version 2 Welcome Panel",
+  	:template    => "shared/templates/single_col_welcome_panel"
+  },
+  {
+  	:name        => "v2_single_col_list",
+  	:pretty_name => "Version 2 Single Column List",
+  	:template    => "shared/templates/single_col_list"
+  },
+  {
+  	:name        => "v2_large_2",
+  	:pretty_name => "Version 2 Large Feature With 2 Sub Items",
+  	:template    => "shared/templates/large_2"
+  },
+  {
+  	:name        => "v2_double_col_feature",
+  	:pretty_name => "Version 2 Double Column Feature",
+  	:template    => "shared/templates/double_col_feature"
+  },
+  {
+  	:name        => "v2_single_col_user_list",
+  	:pretty_name => "Version 2 Single Column User List",
+  	:template    => "shared/templates/single_col_user_list"
+  },
+  {
+  	:name        => "v2_single_col_small_list",
+  	:pretty_name => "Version 2 Single Column Small List",
+  	:template    => "shared/templates/single_col_small_list"
+  },
+  {
+  	:name        => "v2_single_col_gallery_strip",
+  	:pretty_name => "Version 2 Single Column Gallery Strip",
+  	:template    => "shared/templates/single_col_gallery_strip"
+  },
+  {
+  	:name        => "v2_single_col_item",
+  	:pretty_name => "Version 2 Single Column Item",
+  	:template    => "shared/templates/single_col_item"
+  },
+  {
+  	:name        => "v2_double_col_item",
+  	:pretty_name => "Version 2 Double Column Item",
+  	:template    => "shared/templates/double_col_item"
+  },
+  {
+  	:name        => "v2_double_col_item_list",
+  	:pretty_name => "Version 2 Double Column Item List",
+  	:template    => "shared/templates/double_col_item_list"
+  },
+  {
+  	:name        => "v2_single_col_gallery_big_image",
+  	:pretty_name => "Version 2 Single Column Gallery Big Image",
+  	:template    => "shared/templates/single_col_gallery_big_image"
+  },
+  {
+  	:name        => "v2_double_col_gallery_strip",
+  	:pretty_name => "Version 2 Double Column Gallery Strip",
+  	:template    => "shared/templates/double_col_gallery_strip"
+  },
+  {
+  	:name        => "old_twitter_standard_list",
+  	:pretty_name => "Old Twitter Standard List",
+  	:template    => "shared/sidebar/twitter_standard_list"
+  },
+  {
+  	:name        => "v2_ad_template",
+  	:pretty_name => "Version 2 Ad Template",
+  	:template    => "shared/templates/ad_template"
+  }
+  
+]
+view_object_templates.each do |view_object_template|
+  puts "Creating View Object Template: #{view_object_template[:name]} (#{view_object_template[:template]})" if debug and ViewObjectTemplate.find_by_name(view_object_template[:name]).nil?
+  ViewObjectTemplate.find_or_create_by_name(view_object_template)
+end
+
+#
+# View Objects
+#
+view_objects = [
+=begin  
+  {
+  	:name          => "Latest Gallery",
+  	:template_name => "v2_single_col_gallery_strip",
+  	:settings      => {
+  		:klass_name      => "GalleryItem",
+  		:locale_title    => "gallery.title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "active",
+          :args        => [8]
+        }        
+  		]
+  	}
+  },
+=end
+  {
+  	:name          => "Welcome Panel",
+  	:template_name => "v2_welcome_panel",
+  	:settings      => {
+  		:klass_name      => "User",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		]
+  	}
+  },
+  {
+  	:name          => "Newswire",
+  	:template_name => "v2_single_col_small_list",
+  	:settings      => {
+  		:klass_name      => "Newswire",
+  		:locale_title    => "newest_newswires_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "active"
+        },
+  		  {
+          :method_name => "unpublished"
+        },
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }        
+  		]
+  	}
+  },
+  {
+  	:name          => "Featured Gallery Single Column Small Strip",
+  	:template_name => "v2_single_col_gallery_strip",
+  	:settings      => {
+  		:klass_name      => "Gallery",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "featured"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Gallery Single Column Big Image",
+  	:template_name => "v2_single_col_gallery_big_image",
+  	:settings      => {
+  		:klass_name      => "Gallery",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "top"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Gallery Double Column Small Strip",
+  	:template_name => "v2_double_col_gallery_strip",
+  	:settings      => {
+  		:klass_name      => "Gallery",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "newest"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Recent Users",
+  	:template_name => "v2_single_col_user_list",
+  	:settings      => {
+  		:klass_name      => "User",
+  		:locale_title    => "recent_users_without_count",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "active"
+        },
+  		  {
+          :method_name => "members"
+        },
+  		  {
+          :method_name => "recently_active",
+          :args        => [21]
+        }        
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Stories",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.newest_stories.newest_stories_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Stories Double Column Item List",
+  	:template_name => "v2_double_col_item_list",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.newest_stories.newest_stories_title",
+  		:locale_subtitle => "shared.stories.stories_subtitle",
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [4]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Univeral Items Double Column List",
+  	:template_name => "v2_double_col_item_list",
+  	:settings      => {
+  		:klass_name      => "PfeedItem",
+  		:locale_title    => "pfeeds.latest.title",
+  		:locale_subtitle => "pfeeds.latest.subtitle",
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "newest_items",
+          :args        => [4]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Stories",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.top_stories.top_stories_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "top_items",
+          :args        => [5, false]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Story Single Column Item",
+  	:template_name => "v2_single_col_item",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.top_stories.top_stories_title",
+  		:locale_subtitle => "shared.stories.stories_subtitle",
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "top_items",
+          :args        => [5, false]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Story Double Column Item",
+  	:template_name => "v2_double_col_item",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "shared.sidebar.newest_stories.newest_stories_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [1]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Classifieds",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Classified",
+  		:locale_title    => "classifieds.top_classifieds_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+  		    :method_name => "available"
+  		  },
+  		  {
+          :method_name => "top",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Universal Items",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "PfeedItem",
+  		:locale_title    => "pfeeds.latest.title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:css_class       => "active",
+  		:kommands        => [
+  		  {
+  		    :method_name => "newest_items",
+          :args        => [5]
+  		  }
+  		]
+  	}
+  },
+  {
+  	:name          => "Top Universal Items",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Vote",
+  		:locale_title    => "generic.top_items.title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:css_class       => "active",
+  		:kommands        => [
+  		  {
+  		    :method_name => "top_items",
+          :args        => [5]
+  		  }
+  		]
+  	}
+  },
+  {
+  	:name          => "Featured Stories",
+  	:template_name => "v2_large_2",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => "featured_stories",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "featured"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Classifieds",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Classified",
+  		:locale_title    => "classifieds.newest_classifieds_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+  		    :method_name => "available"
+  		  },
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Topics",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Topic",
+  		:locale_title    => "forums.newest_topics_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Articles Feature",
+  	:template_name => "v2_double_col_feature",
+  	:settings      => {
+  		:klass_name      => "Article",
+  		:locale_title    => "articles.newest_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "published"
+        },
+  		  {
+          :method_name => "newest",
+          :args        => [1]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Old Twitter Standard List",
+  	:template_name => "old_twitter_standard_list",
+  	:settings      => {
+  		:klass_name      => "Content",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:cache_enabled   => false,
+      :old_widget      => true,
+  		:kommands        => [
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Small Square",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["small_square", "default"]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Square",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["square", "default"]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Medium Rectangle",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["medium_rectangle", "default"]
+        }
+  		]
+  	}
+  },  
+  {
+  	:name          => "Default Ad Large Rectangle",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["large_rectangle", "default"]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Skyscraper",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["skyscraper", "default"]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Banner",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["banner", "default"]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Default Ad Leaderboard",
+  	:template_name => "v2_ad_template",
+  	:settings      => {
+  		:klass_name      => "Metadata",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "get_ad_slot",
+          :args => ["leaderboard", "default"]
+        }
+  		]
+  	}
+  }
+]
+view_objects.each do |view_object_hash|
+  next if ViewObject.find_by_name(view_object_hash[:name])
+  puts "Creating View Object: #{view_object_hash[:name]}" if debug
+
+  # Build ViewObject and Metadata::ViewObjectSetting
+  view_object = ViewObject.new(:name => view_object_hash[:name])
+  view_object.build_setting
+
+  # Set template
+  view_object_template = ViewObjectTemplate.find_by_name(view_object_hash[:template_name])
+  raise "Invalid Template Name" unless view_object_template
+  view_object.view_object_template = view_object_template
+
+  # Apply settings
+  view_object.setting.view_object_name = view_object_hash[:name].parameterize.to_s
+  view_object.setting.klass_name       = view_object_hash[:settings][:klass_name]
+  view_object.setting.use_post_button  = view_object_hash[:settings][:use_post_button]
+  view_object.setting.locale_title     = view_object_hash[:settings][:locale_title] if view_object_hash[:settings][:locale_title]
+  view_object.setting.cache_enabled    = view_object_hash[:settings][:cache_enabled] if view_object_hash[:settings][:cache_enabled]
+  view_object.setting.old_widget       = view_object_hash[:settings][:old_widget] if view_object_hash[:settings][:old_widget]
+  view_object.setting.css_class        = view_object_hash[:settings][:css_class] if view_object_hash[:settings][:css_class]
+  view_object.setting.locale_subtitle  = view_object_hash[:settings][:locale_subtitle] if view_object_hash[:settings][:locale_subtitle]
+
+  # Add Kommands
+  view_object_hash[:settings][:kommands].each do |kommand|
+    args = kommand[:args] || []
+    view_object.setting.add_kommand(kommand[:method_name], *args)
+  end
+
+  # Make sure to save both the view object and the metadata setting
+  if view_object.valid? and view_object.setting.valid?
+    view_object.save!
+    view_object.setting.save!
+  else
+  	raise (view_object.errors.full_messages | view_object.setting.errors.full_messages).inspect
+  end
+end

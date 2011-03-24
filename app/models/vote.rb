@@ -32,11 +32,11 @@ class Vote < ActiveRecord::Base
 
   def self.top_items limit = 5, range = nil, min_items = nil
     range ||= 1.week.ago
-    items = self.active.find(:all, :select => 'count(*), votes.*', :group => 'voteable_type, voteable_id', :conditions => ["voteable_type IN ('#{self.item_klasses.join "', '"}') AND created_at > ?", range], :limit => limit, :order => "created_at desc").map(&:voteable)
+    items = self.active.find(:all, :select => 'count(*) as count, votes.*', :group => 'voteable_type, voteable_id', :conditions => ["voteable_type IN ('#{self.item_klasses.join "', '"}') AND created_at > ?", range], :limit => limit, :order => "count desc, created_at desc").map(&:voteable)
     if items.any? and (not min_items or items.count > min_items)
     	items
     else
-      items = self.active.find(:all, :select => 'count(*) count, votes.*', :group => 'voteable_type, voteable_id', :conditions => ["voteable_type IN ('#{self.item_klasses.join "', '"}')"], :limit => limit, :order => "count desc, created_at desc").map(&:voteable)
+      items = self.active.find(:all, :select => 'count(*) as count, votes.*', :group => 'voteable_type, voteable_id', :conditions => ["voteable_type IN ('#{self.item_klasses.join "', '"}')"], :limit => limit, :order => "count desc, created_at desc").map(&:voteable)
     end
   end
 

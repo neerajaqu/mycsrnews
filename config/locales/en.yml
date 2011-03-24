@@ -131,6 +131,7 @@ en:
   active_users: "{{user_count}} users online now"
   active_users_none: "No users are online right now."
   recent_users: "{{user_count}} recently online"
+  recent_users_without_count: "Recently online"
   recent_users_none: "No recently active users."
   moderator_users: "Our Moderators"
   invite_users_title: "Invite Your Friends"
@@ -253,6 +254,7 @@ en:
   pfeeds:
     latest:
       title: "Latest user activity"
+      subtitle: "Most recent content created by users"
   flag_strings:
     choose_flag: "- please choose a reason below -"
     abuse: "abuse"
@@ -455,14 +457,6 @@ en:
     twitter_standard_search: "Your twitter search widget settings need to be configured via the Administrative console"
     twitter_standard_favorites: "Your twitter favorites widget settings need to be configured via the Administrative console"  
     twitter_standard_profile: "Your twitter profile widget settings need to be configured via the Administrative console"      
-  generic:
-    newest_items:
-      title: "Newest Items"
-      subtitle: "Newest items added by users"
-      post_title: "Post Something"
-    top_items:
-      title: "Top Items"
-      subtitle: "Most popular items"
   classifieds:
     top_classified_tags: "Popular Tags"
     listing_type_strings:
@@ -539,3 +533,26 @@ en:
   categories:
     top_title: "Popular Categories"
     no_items: "No categories"
+  generic:
+    newest_items:
+      title: "Newest Items"
+      subtitle: "Newest items added by users"
+      post_title: "Post Something"
+    top_items:
+      title: "Top Items"
+      subtitle: "Most popular items"
+    post_something: "Post Something"
+    action_links:
+      comments_title: "Comments"
+      via: "Via {{name}}"
+    posted:
+      by: "By {{name}}"
+      by_ago: "By {{name}} {{date}} ago"
+      by_via: "Posted by {{name}} via {{source}}, {{date}} ago"
+      by_in_topic: "By {{name}} in {{topic}}"
+      by_in_topic_ago: "Posted by {{name}} in {{topic}} {{date}} ago"
+      written_by: "Written By {{name}}"
+      written_by_ago: "Written By {{name}} {{date}} ago"
+      written_by_via: "Written by {{name}} via {{source}}, {{date}} ago"
+      written_by_in_topic: "Written By {{name}} in {{topic}}"
+      written_by_in_topic_ago: "Written by {{name}} in {{topic}} {{date}} ago"

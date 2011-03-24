@@ -1,0 +1,33 @@
+- items = vo.dataset
+- item1 = items.shift
+.panel-2
+  .panel-border.top-secondary-corners.bottom-secondary-corners
+    .panel-half.featured-panel.position-left.top-secondary-corners.bottom-secondary-corners.shadow 
+      %div.panel-bar.panel-full.top-secondary-corners{:class => vo.setting.css_class}
+        - if vo.setting and vo.setting.locale_title
+          %h2= vt.t(vo.setting.locale_title)
+          - if vo.setting.locale_subtitle
+            %p= vt.t(vo.setting.locale_subtitle)
+          - if vo.setting.use_post_button
+            = post_something vo.setting.klass_name, "center"
+      .panel-content
+        %h1= link_to item1.item_title, item1.item_link
+
+        .meta-data
+          .profile-pic
+            = local_linked_profile_pic item1.item_user
+          %h6= posted_by_with_topic(item1)
+          %h6= action_links(item1)
+
+
+    .panel-half.pad-left
+      .panel-content
+        %ul.list-items
+          - items.each do |item|
+            %li
+              .item-with-no-image
+                .item-text
+                  %h3= link_to item.item_title, item.item_link
+                .meta-data
+                  %h6= posted_by_with_topic(item1)
+                  %h6= action_links(item1)

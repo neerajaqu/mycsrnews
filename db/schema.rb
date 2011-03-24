@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209184821) do
+ActiveRecord::Schema.define(:version => 20110309212528) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -886,6 +886,35 @@ ActiveRecord::Schema.define(:version => 20110209184821) do
 
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"
   add_index "videos", ["videoable_type", "videoable_id"], :name => "index_videos_on_videoable_type_and_videoable_id"
+
+  create_table "view_object_templates", :force => true do |t|
+    t.string   "template"
+    t.string   "name"
+    t.string   "pretty_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "view_object_templates", ["name"], :name => "index_view_object_templates_on_name"
+
+  create_table "view_objects", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "view_object_template_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "view_tree_edges", :force => true do |t|
+    t.integer  "parent_id"
+    t.integer  "child_id"
+    t.integer  "position",   :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "view_tree_edges", ["child_id"], :name => "index_view_tree_edges_on_child_id"
+  add_index "view_tree_edges", ["parent_id"], :name => "index_view_tree_edges_on_parent_id"
 
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false

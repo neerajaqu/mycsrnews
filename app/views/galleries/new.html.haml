@@ -16,8 +16,8 @@
           - @gallery.gallery_items.build if @gallery.gallery_items.empty?
           - form.semantic_fields_for :gallery_items do |item_form|
             -# TODO:: get style working for <legend> in <fieldset>
-            -# item_form.inputs :id => "gallery-items-fieldset", :title => "Gallery Items" do
-            - item_form.inputs :id => "gallery-items-fieldset" do
+            -# item_form.inputs :id => "gallery-items-fieldset" do
+            - item_form.inputs :id => "gallery-items-fieldset", :title => "Gallery Items" do
               = item_form.input :item_url, :hint => t('galleries.item_url_hint')
               = add_gallery_item_simple(form)
           - form.buttons do

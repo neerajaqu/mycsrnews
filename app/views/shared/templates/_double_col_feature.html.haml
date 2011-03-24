@@ -1,0 +1,16 @@
+- item = vo.dataset.first
+.panel-2
+  .panel-content.featured-panel
+    .panel-full
+      .item-with-image.nested
+        .item-thumb
+          %a= image_tag(medium_image_or_default(item))
+        .item-text
+          %h1= link_to item.item_title, item.item_link
+          %p
+            = item_text(item)
+          .meta-data
+            .profile-pic
+              = local_linked_profile_pic item.item_user
+            %h6= posted_by_with_topic(item)
+            %h6= action_links(item)
