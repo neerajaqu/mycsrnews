@@ -51,7 +51,7 @@ p
 
 /****************************************************
  V2 HEADERS */
-.panel-1, .panel-2, .panel-3
+.panel-1, .panel-2, .panel-3, .popover-container
   h1, h2, h3, h4, h5, h6
     color: $headerColor
     margin: 0 0 $PanelGutters * .5
@@ -275,7 +275,7 @@ p
 .ideas
   background-image: image_url("default/site/mark-ideas.png")
 .questions
-  backgroun-image: image_url("default/site/mark-qa.png")
+  background-image: image_url("default/site/mark-qa.png")
 .latest
   background-image: image_url("default/site/mark-latest.png")
 .classifieds, .resources
@@ -414,7 +414,7 @@ p
 
 /****************************************************
  BUTTONS */
-.button-link, .button-panel-bar, .button, .meta-search, .icon-link
+.button-link, .button-panel-bar, .button, .meta-search, .icon-link, .popover-button
   -webkit-border-radius: 100px
   -moz-border-radius: 100px
   border-radius: 100px
@@ -454,7 +454,7 @@ p
     border-color: $BtnBGHover
     background-color: $BtnBGHover
 
-.button-panel-bar
+.button-panel-bar, .popover-button
   background: $PanelBarBtnBG
   color: $PanelBarBtnTextColor
   display: inline-block
@@ -470,6 +470,10 @@ p
     width: 100%
     padding: 4px 0
 
+.popover-button
+  font-size: $HeaderFour
+  padding: 5px 20px
+  margin: 0 $PanelGutters
 
 /****************************************************
  V2 FOOTER */
@@ -661,21 +665,80 @@ p
 
 /****************************************************
  POPOVER WIDGET */
+
+.fake-shadow
+  background: rgba(0,0,0, .5)
+  padding: 100px 0
+  display: inline-block
+  width: 100%
 .popover-wrapper
+  margin: 0 auto
   -webkit-border-radius: $PrimaryBorderRadius
   -moz-border-radius: $PrimaryBorderRadius
   border-radius: $PrimaryBorderRadius
-  display: inline
-  float: left
-  background: rgba(0,0,0,.5)
+  display: block
+  background: rgba(255,255,255,.4)
+  width: $postPopOverWidth + $PanelGutters
   .popover-container
+    padding-top: $PanelGutters 
+    padding-bottom: $PanelGutters 
+    width: $postPopOverWidth
+    display: inline-block
     -webkit-border-radius: $SecondaryBorderRadius
     -moz-border-radius: $SecondaryBorderRadius
     border-radius: $SecondaryBorderRadius
-    background: $bodyBG
-    min-height: 300px
+    background: $popOverBG
     margin: $PanelGutters * .5
-
+    h1.title, p
+      color: $bodyBG
+      margin: 0 $PanelGutters $PanelGutters * .5
+    .news, .blogs, .comments, .events, .ideas, .questions, .classifieds, .resources, .forums, .topics, .latest, .active, .media
+      background-position: center
+      background-repeat: no-repeat
+.popover-tabs
+  li, a
+    -webkit-border-top-right-radius: $SecondaryBorderRadius
+    -webkit-border-top-left-radius: $SecondaryBorderRadius
+    -moz-border-radius-topright: $SecondaryBorderRadius
+    -moz-border-radius-topleft: $SecondaryBorderRadius
+    border-top-right-radius: $SecondaryBorderRadius
+    border-top-left-radius: $SecondaryBorderRadius
+  ul
+    display: block
+    float: left
+    padding-left: 2px
+  li.tab
+    display: block
+    float: left
+    margin-right: 1px
+    width: $popOverTabWidth
+    a
+      text-align: center
+      padding: 40px 0 10px
+      color: $bodyBG
+      display: block
+      width: 100%
+      float: left
+      background: none
+      font-weight: bold
+      &:hover
+        background: image_url("default/site/btn-highlight.png") top left repeat 
+        text-decoration: none
+      &.selected
+        background: $popOverTabBG
+        color: $headerColor
+.popover-wizard-area, .popover-form-area, .popover-button-area
+  float: left
+  width: 100%
+.popover-wizard-area
+  background: $popOverTabBG
+  padding: 20px 0
+.popover-form-area
+  padding: 20px 0
+  background: $bodyBG
+.popover-button-area
+  text-align: right
+  padding: 20px 0 0
 
 /****************************************************
  MISC (Stuff I haven't found a place for) */
