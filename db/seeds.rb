@@ -659,6 +659,12 @@ view_objects = [
   		:use_post_button => true,
   		:kommands        => [
   		  {
+          :method_name => "approved"
+        },
+  		  {
+          :method_name => "open"
+        },
+        {
           :method_name => "view_object_random_item"
         }
   		]
@@ -673,6 +679,12 @@ view_objects = [
   		:locale_subtitle => nil,
   		:use_post_button => true,
   		:kommands        => [
+  		  {
+          :method_name => "approved"
+        },
+  		  {
+          :method_name => "open"
+        },
   		  {
           :method_name => "newest",
           :args        => [5]
