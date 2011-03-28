@@ -3,7 +3,7 @@
   %div.panel-bar.top-secondary-corners{:class => vo.setting.css_class}
     .panel-full
       - if vo.setting and vo.setting.locale_title
-        %h3.float-left= vt.t(vo.setting.locale_title)
+        %h2.float-left= vt.t(vo.setting.locale_title)
         - if vo.setting.use_post_button
           = post_something vo.setting.klass_name, "center"
   .panel-content
