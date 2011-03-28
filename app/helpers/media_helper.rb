@@ -29,13 +29,13 @@ module MediaHelper
       when String.name
         url = image
       when Gallery.name
-        url = image.full_url
+        url = image.medium_url
       when Image.name
-        url = image.full_url
+        url = image.medium_url
       when Video.name
-        url = image.full_url
+        url = image.medium_url
       when Classified.name
-        url = image.images.first.try(:full_url)
+        url = image.images.first.try(:medium_url)
       when Content.name
         url = image.images.first.try(:medium_url)
       when Article.name
@@ -43,7 +43,7 @@ module MediaHelper
       else
       	url = nil
     end
-    url || 'default/watermark.jpg'
+    url || 'default/medium_watermark.jpg'
   end
   
 end

@@ -1,0 +1,16 @@
+- items = [Content.featured.first, Gallery.last, Classified.last]
+
+.panel-2
+  .panel-content.featured-panel
+    - items.each_with_index do |item, index|
+      %div.panel-third{:class => (index == 0 ? "first" : index == 2 ? "last" : "")}
+        .panel-bar.top-secondary-corners.bottom-secondary-corners
+          %h5= item.model_index_name
+          .item-thumb.bottom-secondary-corners
+            = link_to image_tag(medium_image_or_default(item)), item.item_link, :style => "display: block;"
+            -#%a= image_tag('default/default_thumb.gif')
+        .item-text
+          %h3= link_to item.item_title, item.item_link
+        .meta-data
+          %h6= posted_by_with_date(item)
+          %h6= action_links(item)
