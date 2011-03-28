@@ -662,7 +662,7 @@ view_objects = [
           :method_name => "approved"
         },
   		  {
-          :method_name => "open"
+          :method_name => "currently_open"
         },
         {
           :method_name => "view_object_random_item"
@@ -683,7 +683,7 @@ view_objects = [
           :method_name => "approved"
         },
   		  {
-          :method_name => "open"
+          :method_name => "currently_open"
         },
   		  {
           :method_name => "newest",
