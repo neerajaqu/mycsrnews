@@ -1,7 +1,21 @@
 - items = vo.dataset
+- item1 = items.shift
 
 .panel-2
   .panel-content.featured-panel
+    .panel-full
+      .item-with-image
+        .item-thumb
+          = link_to image_tag(medium_image_or_default(item1)), item1.item_link
+        .item-text
+          %h1= link_to item1.item_title, item1.item_link
+          %p= item1.item_description
+          .meta-data
+            .profile-pic
+              = local_linked_profile_pic(item1.user)
+            %h6= posted_by_with_date(item1)
+            %h6= action_links(item1)
+
     - items.each_with_index do |item, index|
       %div.panel-third{:class => (index == 0 ? "first" : index == 2 ? "last" : "")}
         .panel-bar.top-secondary-corners.bottom-secondary-corners
