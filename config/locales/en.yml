@@ -238,6 +238,7 @@ en:
       new: "Create a new topic"
       new_header: "Create a New Topic"
       replies: "Replies"
+      newest_topics_title: "Latest Topics"
   blog_roll_title: "Blog Roll"
   feed_roll_title: "News Sources"
   read_latest_newswires: "Read the latest newswires"    
@@ -280,6 +281,8 @@ en:
     read: "Read Story"
     quick_post: "Quick post"
   predictions:
+    newest_predictions_title: "Latest Predictions"
+    random_predictions_title: "Featured Prediction"
     final_result: "The correct result for this question is {{accepted_result}}. Closed: {{accepted_time}}"
     high_scores: "Top Predictors"
     guess_count: "Predictions: {{guess_count}}"

@@ -625,6 +625,37 @@ view_objects = [
   	}
   },
   {
+  	:name          => "Random Prediction Question",
+  	:template_name => "v2_single_col_item",
+  	:settings      => {
+  		:klass_name      => "PredictionQuestion",
+  		:locale_title    => "predictions.random_predictions_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "rand"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Prediction Questions",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "PredictionQuestion",
+  		:locale_title    => "predictions.newest_predictions_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
   	:name          => "Newest Universal Items",
   	:template_name => "v2_single_col_list",
   	:settings      => {
