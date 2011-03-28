@@ -639,7 +639,7 @@ view_objects = [
   		:use_post_button => true,
   		:kommands        => [
   		  {
-          :method_name => "rand"
+          :method_name => "view_object_random_item"
         }
   		]
   	}
