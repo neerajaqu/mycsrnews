@@ -160,6 +160,8 @@ en:
     new: "Ask a Question"
     my_questions: "Your Questions"
     logged_in_error: "You must be logged in to ask questions."
+    random_questions_title: "Recently Asked"
+    newest_questions_title: "Latest Questions"
   answers:
     top_title: "Top Answers"
     newest_title: "Newest Answers"

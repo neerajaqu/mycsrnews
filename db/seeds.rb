@@ -635,6 +635,21 @@ view_objects = [
   	}
   },
   {
+  	:name          => "Random Question",
+  	:template_name => "v2_single_col_item",
+  	:settings      => {
+  		:klass_name      => "Question",
+  		:locale_title    => "questions.random_questions_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "view_object_random_item"
+        }
+  		]
+  	}
+  },
+  {
   	:name          => "Random Prediction Question",
   	:template_name => "v2_single_col_item",
   	:settings      => {
@@ -655,6 +670,22 @@ view_objects = [
   	:settings      => {
   		:klass_name      => "PredictionQuestion",
   		:locale_title    => "predictions.newest_predictions_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Questions",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Question",
+  		:locale_title    => "questions.newest_questions_title",
   		:locale_subtitle => nil,
   		:use_post_button => true,
   		:kommands        => [
