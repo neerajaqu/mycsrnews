@@ -5,7 +5,7 @@
       - if vo.setting and vo.setting.locale_title
         %h3.float-left= vt.t(vo.setting.locale_title)
         - if vo.setting.use_post_button
-          = post_something vo.setting.klass_name
+          = post_something vo.setting.klass_name, "center"
   .panel-content
     %ul.list-items
       - vo.dataset.each_with_index do |item, index|
