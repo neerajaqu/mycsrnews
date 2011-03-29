@@ -1,0 +1,142 @@
+- content_for :head do
+      
+  :javascript
+    $(function() {
+    	var widget_data = {
+    		section1: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        }, section2: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        }, section3: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        }, section4: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        }, section5: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        }, section6: {
+    			primary: null,
+    			secondary1: null,
+    			secondary2: null
+        },
+        template       : null,
+        items          : [],
+        view_object_id : null
+      };
+
+      $('.view-object h3 a').click(function(event) {
+        event.preventDefault();
+      	widget_data.view_object_id = $(this).attr("data-id");
+      	var url = $(this).attr('href');
+      	$('#content').load(url, {}, function(responseText, textStatus, XMLHttpRequest) {
+      		$('#section-1-primary, #section-1-secondary1, #section-1-secondary2, #section-2-primary, #section-2-secondary1, #section-2-secondary2,#section-3-primary, #section-3-secondary1, #section-3-secondary2,#section-4-primary, #section-4-secondary1, #section-4-secondary2,#section-5-primary, #section-5-secondary1, #section-5-secondary2,#section-6-primary, #section-6-secondary1, #section-6-secondary2,').droppable({
+      			accept: 'li.ui-widget-content',
+      			activeClass: 'ui-state-hover',
+      			hoverClass: 'ui-state-active',
+      			drop: function(event, ui) {
+              var section = false;
+              var box = false;
+      				if ((match = $(this).attr('id').match(/^(section-[0-9]+)-(.*)$/)) !== null) {
+      					if (match[1] == 'section-1') {
+      						section = 'section1';
+                } else if (match[1] == 'section-2') {
+                	section = 'section2';
+                } else if (match[1] == 'section-3') {
+                	section = 'section3';
+                } else if (match[1] == 'section-4') {
+                	section = 'section4';
+                } else if (match[1] == 'section-5') {
+                	section = 'section5';
+                } else if (match[1] == 'section-6') {
+                	section = 'section6';
+                } else {
+                	return false;
+                }
+                if (match[2] == 'primary') {
+                	box = match[2];
+                } else if (match[2] == 'secondary1') {
+                	box = match[2];
+                } else if (match[2] == 'secondary2') {
+                	box = match[2];
+                } else {
+                	return false;
+                }
+              } else {
+              	return false;
+              }
+              $(this).addClass('dropped').removeClass('drop-error');
+              widget_data[section][box] = ui.draggable.attr('id');
+              widget_data.template = $(this).parent().parent().attr('id');
+              $(this).attr('data-id', ui.draggable.attr('id'));
+      				$('#'+section+'-'+box+'-title').html("<h1>"+$('h5', ui.draggable).text()+"</p>");
+      				if (box == 'primary') {
+      				  $(this).html('<img src="'+$('img', ui.draggable).attr('src')+'" />');
+              }
+      				//$('#section-1-primary').append('<img src="'+$('img', ui.draggable.parent()).attr('src')+'" />');
+            }
+          });
+      		$('#items').html("<p>Loading items...</p>");
+      		$.get('/admin/featured_items/contents/load_items', null, null, 'script');
+      	});
+      });
+
+      $('#featured-items-select').live('change', function() {
+      	var type = $('option:selected', this).val();
+      	$.get('/admin/featured_items/'+type+'/load_items', null, null, 'script');
+      });
+
+      $('#items ul a').live("click", function() { return false; });
+      $('#items .pagination a').live("click", function(event) {
+      	event.preventDefault();
+      	var url = this.href.replace(/^(.+load_items\/)([0-9]+).*$/, "$1page/$2");
+      	$(this).parent().html("Loading items...");
+      	$.get(url, null, null, 'script');
+      });
+
+    	$('#save-button')
+    	  .live('mousedown', function() {
+        	$(this).addClass('ui-state-active');
+        }).live('mouseup', function() {
+    	  	$(this).removeClass('ui-state-active');
+        }).live('click', function() {
+        	var error_count = 0;
+          widget_data.items = [];
+        	$.each($('.ui-droppable'), function(index, value) {
+        		var item = $(value);
+        		if ( ! item.hasClass('dropped') ) {
+        			error_count += 1;
+        			item.addClass('drop-error');
+            } else {
+              widget_data.items.push(item.attr('data-id'));
+            }
+          });
+          if (error_count > 0) {
+          	alert('You are missing '+error_count+' items in this featured template. Please drag items for all boxes in this template');
+          } else {
+            $.post("/admin/featured_items/save_featured_widgets.json", {featured_items: JSON.stringify(widget_data)}, function(data) {
+              if (typeof(data.success) !== 'undefined') {
+                alert(data.success);
+              } else {
+                alert('There was a problem saving your page');
+              }
+            }, "json");
+          }
+        }
+      );
+    });
+
+#content.main-content
+  %h2 Select the template you would like to use:
+  - @view_objects.each do |view_object|
+    .view-object.clearfix
+      %h3== #{view_object.name} -- #{link_to "Update", load_new_template_admin_featured_item_path(:id => view_object.id), "data-id" => view_object.id}
+      .view-object.output{"data-id" => view_object.id}= ViewTree.render(view_object.name, @controller)

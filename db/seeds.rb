@@ -320,9 +320,9 @@ view_object_templates = [
   	:template    => "shared/templates/single_col_list"
   },
   {
-  	:name        => "v2_large_2",
-  	:pretty_name => "Version 2 Large Feature With 2 Sub Items",
-  	:template    => "shared/templates/large_2"
+  	:name        => "v2_triple_col_large_2",
+  	:pretty_name => "Version 2 Triple Column Large Feature With 2 Sub Items",
+  	:template    => "shared/templates/triple_col_large_2"
   },
   {
   	:name        => "v2_double_col_feature",

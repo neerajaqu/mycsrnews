@@ -1,9 +1,23 @@
 class Admin::FeaturedItemsController < AdminController
   layout proc {|c| c.request.xhr? ? false : "new_admin" }
   before_filter :set_featured_types, :only => :load_template
+  before_filter :set_new_featured_types, :only => [:load_new_template, :save_featured_widgets]
   cache_sweeper :story_sweeper, :only => [:save]
 
   def index
+  end
+
+  def new_featured_widgets
+    @view_objects = ["v2_double_col_feature_triple_item", "v2_double_col_triple_item", "v2_triple_col_large_2"].map {|name| ViewObjectTemplate.find_by_name(name) }.map(&:view_objects).flatten
+  end
+
+  def save_featured_widgets
+    data = ActiveSupport::JSON.decode(params['featured_items'])
+    view_object = ViewObject.find_by_id(data["view_object_id"])
+    render :json => {:error => "Invalid Type"}.to_json and return unless data["items"].select {|i| not @featurables.map {|f| f[1].classify }.include?(i.sub(/_[0-9]+$/,'').classify) }.empty?
+    view_object.setting.dataset = data["items"].map {|i| i.split(/_/) }.map{|i| [i[0].classify, i[1]] }
+    view_object.setting.save
+    render :json => {:success => "Success!"}.to_json and return
   end
 
   def load_template
@@ -12,18 +26,33 @@ class Admin::FeaturedItemsController < AdminController
     @template_id = params[:id]
   end
 
+  def load_new_template
+    @view_object          = ViewObject.find(params[:id])
+    @view_object_template = @view_object.view_object_template
+  end
+
   def load_items
     case params[:id]
       when Content.name.tableize
-        @items = Content.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+        @items = Content.active.paginate  :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Idea.name.tableize
-        @items = Idea.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+        @items = Idea.active.paginate     :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Event.name.tableize
-        @items = Event.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+        @items = Event.active.paginate    :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Resource.name.tableize
         @items = Resource.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Question.name.tableize
         @items = Question.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when Gallery.name.tableize
+        @items = Gallery.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when Forum.name.tableize
+        @items = Forum.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when Topic.name.tableize
+        @items = Topic.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when PredictionGroup.name.tableize
+        @items = PredictionGroup.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when PredictionQuestion.name.tableize
+        @items = PredictionQuestion.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       else
       	return false
     end
@@ -78,6 +107,10 @@ class Admin::FeaturedItemsController < AdminController
 
   def set_featured_types
     @featurables ||= [['Stories', 'contents'], ['Ideas', 'ideas'], ['Questions', 'questions'], ['Resources', 'resources'], ['Events', 'events']]
+  end
+
+  def set_new_featured_types
+    @featurables ||= [['Stories', 'contents'], ['Ideas', 'ideas'], ['Questions', 'questions'], ['Resources', 'resources'], ['Events', 'events'], ['Galleries', 'galleries'], ['Forums', 'forums'], ['Topics', 'topics'], ['Prediction Groups', 'prediction_groups'], ['Prediction Questions', 'prediction_questions']]
   end
 
   def set_current_tab

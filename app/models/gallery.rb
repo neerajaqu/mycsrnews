@@ -32,6 +32,7 @@ class Gallery < ActiveRecord::Base
     return nil unless gallery_items.any?
     gallery_items.first.thumb_url
   end
+  alias_method :featured_image_url, :thumb_url
 
   def medium_url
     return nil unless gallery_items.any?
