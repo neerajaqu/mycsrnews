@@ -5,6 +5,7 @@ class Resource < ActiveRecord::Base
   acts_as_moderatable
   acts_as_media_item
   acts_as_refineable
+  acts_as_tweetable
   acts_as_wall_postable
   acts_as_relatable
     
