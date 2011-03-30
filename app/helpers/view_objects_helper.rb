@@ -66,11 +66,16 @@ module ViewObjectsHelper
     ].join(' ')
   end
 
-  def comment_link item
-    [
-      content_tag(:span, item.comments_count, :class => "count"),
-      link_to(I18n.translate("generic.action_links.comments_title"), item)
-    ].join(' ')
+  def answer_link item
+    if item.answers_count > 0
+      answer_string = item.answers_count == 1 ? "answer" : "answers"
+      [
+        content_tag(:span, item.answers_count, :class => "count"),
+        link_to(I18n.translate('answers_count', :answer_string => answer_string), item)
+      ].join(' ')
+    else 
+      link_to(I18n.translate('answer_question'), item)
+    end
   end
 
   def vote_link item
