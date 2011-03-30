@@ -91,6 +91,7 @@
 
       $('#featured-items-select').live('change', function() {
       	var type = $('option:selected', this).val();
+        $('#items').html("<p>Loading items...</p>");
       	$.get('/admin/featured_items/'+type+'/load_items', null, null, 'script');
       });
 

@@ -76,7 +76,7 @@ class Gallery < ActiveRecord::Base
       gallery = Gallery.new
       gallery.user = user || User.admins.first
       gallery.title = data["feed"]["title"]["$t"]
-      gallery.description = data["feed"]["subtitle"]["$t"]
+      gallery.description = data["feed"]["subtitle"]["$t"].present? ? data["feed"]["subtitle"]["$t"] : data["feed"]["title"]["$t"]
       data["feed"]["entry"].each do |entry|
         url = entry["media$group"]["media$content"].first["url"]
         gallery.gallery_items.build(:item_url => url, :gallery => gallery)
@@ -84,6 +84,7 @@ class Gallery < ActiveRecord::Base
       if gallery.save
       	gallery
       else
+        raise gallery.errors.full_messages.inspect
       	nil
       end
     else

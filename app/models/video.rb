@@ -278,6 +278,13 @@ class Video < ActiveRecord::Base
     end
   end
 
+  alias_method :featured_title, :item_title
+  alias_method :featured_image_url, :thumb_url
+
+  def item_link
+    self.videoable or self.galleries.first
+  end
+
   def self.youtube_url? url
     url =~ %r{^https?://(?:www\.)?youtube.com\/(watch\?v=|v\/)([^"&]+)}
   end

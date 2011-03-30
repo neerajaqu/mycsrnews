@@ -45,6 +45,8 @@ class Admin::FeaturedItemsController < AdminController
         @items = Question.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Gallery.name.tableize
         @items = Gallery.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when Video.name.tableize
+        @items = Video.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Forum.name.tableize
         @items = Forum.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Topic.name.tableize
@@ -110,7 +112,7 @@ class Admin::FeaturedItemsController < AdminController
   end
 
   def set_new_featured_types
-    @featurables ||= [['Stories', 'contents'], ['Ideas', 'ideas'], ['Questions', 'questions'], ['Resources', 'resources'], ['Events', 'events'], ['Galleries', 'galleries'], ['Forums', 'forums'], ['Topics', 'topics'], ['Prediction Groups', 'prediction_groups'], ['Prediction Questions', 'prediction_questions']]
+    @featurables ||= [['Stories', 'contents'], ['Ideas', 'ideas'], ['Questions', 'questions'], ['Resources', 'resources'], ['Events', 'events'], ['Galleries', 'galleries'], ['Forums', 'forums'], ['Topics', 'topics'], ['Prediction Groups', 'prediction_groups'], ['Prediction Questions', 'prediction_questions'], ['Videos', 'videos']]
   end
 
   def set_current_tab

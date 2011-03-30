@@ -744,7 +744,7 @@ view_objects = [
   },
   {
   	:name          => "Featured Stories",
-  	:template_name => "v2_large_2",
+  	:template_name => "v2_triple_col_large_2",
   	:settings      => {
   		:klass_name      => "Content",
   		:locale_title    => "featured_stories",
