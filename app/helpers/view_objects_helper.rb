@@ -79,10 +79,12 @@ module ViewObjectsHelper
   end
 
   def vote_link item
-    [
-      link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), :class => "voteUp"),
-      content_tag(:span, item.votes_tally, :class => "count"),
-    ].join(' ')
+    # Add wrapper span tag for vote link ajax purposes
+    content_tag(:span,
+      [
+        link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), :class => "voteUp"),
+        content_tag(:span, item.votes_tally, :class => "count"),
+      ].join(' '))
   end
 
   def post_something klass_name, css_class = "float-right"
