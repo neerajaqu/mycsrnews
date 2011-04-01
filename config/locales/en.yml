@@ -547,6 +547,18 @@ en:
       title: "Top Items"
       subtitle: "Most popular items"
     post_something: "Post Something"
+    post:
+      content: "Post a Story"
+      event: "Add an Event"
+      question: "Ask a Question"
+      forum: "Add a Topic"
+      topic: "Add a Topic"
+      article: "Add a Blog Post"
+      classified: "Post a Classified"
+      gallery: "Add a Gallery"
+      resource: "Add a Resource"
+      ideas: "Add an Idea"
+      prediction_question: "Create a Prediction Question"
     action_links:
       comments_title: "Comments"
       via: "Via {{name}}"
