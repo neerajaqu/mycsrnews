@@ -32,6 +32,12 @@ class Gallery < ActiveRecord::Base
     return nil unless gallery_items.any?
     gallery_items.first.thumb_url
   end
+  alias_method :featured_image_url, :thumb_url
+
+  def medium_url
+    return nil unless gallery_items.any?
+    gallery_items.first.medium_url
+  end
 
   def full_url
     return nil unless gallery_items.any?
@@ -70,7 +76,7 @@ class Gallery < ActiveRecord::Base
       gallery = Gallery.new
       gallery.user = user || User.admins.first
       gallery.title = data["feed"]["title"]["$t"]
-      gallery.description = data["feed"]["subtitle"]["$t"]
+      gallery.description = data["feed"]["subtitle"]["$t"].present? ? data["feed"]["subtitle"]["$t"] : data["feed"]["title"]["$t"]
       data["feed"]["entry"].each do |entry|
         url = entry["media$group"]["media$content"].first["url"]
         gallery.gallery_items.build(:item_url => url, :gallery => gallery)
@@ -78,6 +84,7 @@ class Gallery < ActiveRecord::Base
       if gallery.save
       	gallery
       else
+        raise gallery.errors.full_messages.inspect
       	nil
       end
     else

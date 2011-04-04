@@ -1,4 +1,4 @@
 -# @expects: local 'prediction_questions'
 - cache :newest_prediction_questions_html do
-  - prediction_questions ||= PredictionQuestion.approved.active.open.newest 5
+  - prediction_questions ||= PredictionQuestion.approved.active.currently_open.newest 5
   = render :partial => 'shared/lists/micro_generic_list', :locals => { :list_title => t('predictions.newest_questions'), :item_list => prediction_questions, :item_type => 'prediction' }

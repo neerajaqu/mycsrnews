@@ -74,6 +74,14 @@ module Newscloud
         "new_#{self.name.underscore.gsub(/\//, '_')}_url"
       end
 
+      def view_object_random_item
+        if (c = count) != 0
+          find(:all, :offset => rand(c), :limit => 1)
+        else
+          return []
+        end
+      end
+
     end
 
     module InstanceMethods

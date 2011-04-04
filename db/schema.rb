@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110309212528) do
+ActiveRecord::Schema.define(:version => 20110324193416) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -527,7 +527,6 @@ ActiveRecord::Schema.define(:version => 20110309212528) do
     t.boolean  "is_approved",                :default => true
     t.integer  "votes_tally",                :default => 0
     t.integer  "comments_count",             :default => 0
-    t.integer  "questions_count",            :default => 0
     t.boolean  "is_blocked",                 :default => false
     t.boolean  "is_featured",                :default => false
     t.datetime "featured_at"
@@ -560,7 +559,6 @@ ActiveRecord::Schema.define(:version => 20110309212528) do
     t.boolean  "is_approved",              :default => true
     t.integer  "votes_tally",              :default => 0
     t.integer  "comments_count",           :default => 0
-    t.integer  "guesses_count",            :default => 0
     t.boolean  "is_blocked",               :default => false
     t.boolean  "is_featured",              :default => false
     t.datetime "featured_at"
@@ -882,6 +880,7 @@ ActiveRecord::Schema.define(:version => 20110309212528) do
     t.integer  "source_id"
     t.string   "thumb_url"
     t.boolean  "video_processing"
+    t.string   "medium_url"
   end
 
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"

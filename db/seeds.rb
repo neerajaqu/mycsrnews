@@ -320,9 +320,9 @@ view_object_templates = [
   	:template    => "shared/templates/single_col_list"
   },
   {
-  	:name        => "v2_large_2",
-  	:pretty_name => "Version 2 Large Feature With 2 Sub Items",
-  	:template    => "shared/templates/large_2"
+  	:name        => "v2_triple_col_large_2",
+  	:pretty_name => "Version 2 Triple Column Large Feature With 2 Sub Items",
+  	:template    => "shared/templates/triple_col_large_2"
   },
   {
   	:name        => "v2_double_col_feature",
@@ -368,6 +368,16 @@ view_object_templates = [
   	:name        => "v2_double_col_gallery_strip",
   	:pretty_name => "Version 2 Double Column Gallery Strip",
   	:template    => "shared/templates/double_col_gallery_strip"
+  },
+  {
+  	:name        => "v2_double_col_triple_item",
+  	:pretty_name => "Version 2 Double Column Triple Item",
+  	:template    => "shared/templates/double_col_triple_item"
+  },
+  {
+  	:name        => "v2_double_col_feature_triple_item",
+  	:pretty_name => "Version 2 Double Column Feature With Triple Item",
+  	:template    => "shared/templates/double_col_feature_triple_item"
   },
   {
   	:name        => "old_twitter_standard_list",
@@ -625,6 +635,80 @@ view_objects = [
   	}
   },
   {
+  	:name          => "Random Question",
+  	:template_name => "v2_single_col_item",
+  	:settings      => {
+  		:klass_name      => "Question",
+  		:locale_title    => "questions.random_questions_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "view_object_random_item"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Random Prediction Question",
+  	:template_name => "v2_single_col_item",
+  	:settings      => {
+  		:klass_name      => "PredictionQuestion",
+  		:locale_title    => "predictions.random_predictions_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "approved"
+        },
+  		  {
+          :method_name => "currently_open"
+        },
+        {
+          :method_name => "view_object_random_item"
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Prediction Questions",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "PredictionQuestion",
+  		:locale_title    => "predictions.newest_predictions_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "approved"
+        },
+  		  {
+          :method_name => "currently_open"
+        },
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
+  	:name          => "Newest Questions",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Question",
+  		:locale_title    => "questions.newest_questions_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
   	:name          => "Newest Universal Items",
   	:template_name => "v2_single_col_list",
   	:settings      => {
@@ -660,7 +744,7 @@ view_objects = [
   },
   {
   	:name          => "Featured Stories",
-  	:template_name => "v2_large_2",
+  	:template_name => "v2_triple_col_large_2",
   	:settings      => {
   		:klass_name      => "Content",
   		:locale_title    => "featured_stories",
@@ -851,6 +935,30 @@ view_objects = [
         }
   		]
   	}
+  },
+  {
+  	:name          => "Double Column Triple Featured Items",
+  	:template_name => "v2_double_col_triple_item",
+  	:settings      => {
+  		:klass_name      => "ViewObject",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		]
+  	}
+  },
+  {
+  	:name          => "Double Column Featured With Triple Items",
+  	:template_name => "v2_double_col_feature_triple_item",
+  	:settings      => {
+  		:klass_name      => "ViewObject",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		]
+  	}
   }
 ]
 view_objects.each do |view_object_hash|
@@ -875,6 +983,7 @@ view_objects.each do |view_object_hash|
   view_object.setting.old_widget       = view_object_hash[:settings][:old_widget] if view_object_hash[:settings][:old_widget]
   view_object.setting.css_class        = view_object_hash[:settings][:css_class] if view_object_hash[:settings][:css_class]
   view_object.setting.locale_subtitle  = view_object_hash[:settings][:locale_subtitle] if view_object_hash[:settings][:locale_subtitle]
+  view_object.setting.dataset          = view_object_hash[:settings][:dataset] if view_object_hash[:settings][:dataset]
 
   # Add Kommands
   view_object_hash[:settings][:kommands].each do |kommand|

@@ -38,10 +38,14 @@ class Newswire < ActiveRecord::Base
     	@content.images.build({ :remote_image_url => self.imageUrl})
     	@content.images.first.override_image = true if override_image
     else
-    	page = Parse::Page.parse_page self.url
-    	unless page[:images_sized].empty?
-    	  @content.images.build({ :remote_image_url => page[:images_sized].first[:url] })
-    	end
+    	begin
+        page = Parse::Page.parse_page self.url
+        unless page[:images_sized].empty?
+          @content.images.build({ :remote_image_url => page[:images_sized].first[:url] })
+        end
+      rescue
+        Rails.logger.info("PARSE PAGE ERROR: failed to parse page: #{self.url}")
+      end
     end
 
     begin

@@ -1,0 +1,219 @@
+- content_for :head do
+  %style
+    #sortable1, #sortable2 { list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; }
+    #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+    :sass
+      .float-toggle
+        position: absolute
+        top: 2px
+        right: 2px
+      #content-box
+        width: 960px
+      #left
+        width: 700px
+        display: inline
+        position: relative
+        clear: both
+        float: left
+        .left
+          width: 300px
+          //position: relative
+          //left: 0
+          //margin-left: 0px
+          float: left
+          clear: left
+        .right
+          //position: absolute
+          //right: 0
+          width: 300px
+          float: right
+          clear: right
+          //margin-right: 0px
+      #right
+        width: 200px
+      #main-widgets-list
+        width: 440px
+      #sidebar-widgets-list
+        width: 440px
+      .box
+        margin-left: 25px
+        min-height: 500px
+        float: left
+        border: 1px solid black
+      .title
+        margin-left: 10px
+      .clear
+        clear: both
+      .draggable-main, .draggable-sidebar
+        position: relative
+        width: 100px
+        //height: 100px
+        padding: 5px
+        margin: 10px 10px 10px 0
+        float: left
+        background-color: #AEAEAE
+        overflow: hidden
+
+  :javascript
+    $(function() {
+      var $tabs = $('#widget-tabs').tabs();
+      $('ul.sortable, ul.destination').sortable({placeholder:'ui-state-highlight'}).disableSelection();
+
+      $('li.widget').each(function(i, ele) {
+      	//$$(ele).birth_parent = $(ele).parent().parent().attr('id');
+      	$(ele).data('birth_parent', $(ele).parent().parent());
+      });
+
+      var getWidgetID = function(widget_str) {
+        if ((match = widget_str.match(/^view-object-([0-9]+)$/)) != null) {
+          return match[1];
+        } else {
+          return false;
+        }
+      }
+
+      $('#widget-tabs-destination').droppable({
+        accept: 'ul.source li',
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        helper: 'clone',
+        drop: function(event, ui) {
+        	if (!ui.draggable.parent().hasClass('destination')) {
+            var widget = ui.draggable;
+            widget.fadeOut(function() {
+              widget.appendTo($('ul.destination')).fadeIn();
+            });
+          }
+        }
+      });
+      $('#widget-tabs').droppable({
+        accept: 'ul.destination li',
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        helper: 'clone',
+        drop: function(event, ui) {
+        	if (ui.draggable.parent().hasClass('destination')) {
+            var widget = ui.draggable;
+            widget.fadeOut(function() {
+              widget.appendTo($('ul', $(widget).data('birth_parent'))).fadeIn();
+            });
+          }
+        }
+      });
+      $('#preview-button').click(function() {
+        var widget_ids = [];
+        $('ul.destination li').each(function(index, element) {
+          var wids = $(element).attr('id').split(/-/);
+          if (wids.length && wids[1]) {
+            widget_ids.push(wids[1]);
+          }
+        });
+        $(this).attr('href', $(this).attr('href').replace(/\?.*$/, '') + '?widget_ids=' + widget_ids.join(','));
+        return true;
+      });
+
+      $('#clear-button').click(function(event) {
+        event.preventDefault();
+        $('ul.destination li').each(function(index, element) {
+          $(element).fadeOut(function() {
+            $(element).appendTo($('ul', $(element).data('birth_parent'))).fadeIn();
+          });
+        });
+      });
+
+      $('#save-button').click(function(event) {
+        event.preventDefault();
+        var widgets = {
+          main: [],
+          sidebar: []
+        };
+        $('ul.destination li.widget').each(function(i) {
+          widgets.main.push(getWidgetID(this.id));
+        });
+        $.post("/admin/widgets/save_newer_widgets.json", {main: widgets.main.join(','), sidebar: widgets.sidebar.join(',')}, function(data) {
+          if (typeof(data.success) !== 'undefined') {
+            alert(data.success);
+          } else {
+            alert('There was a problem saving your page');
+          }
+        }, "json");
+      });
+
+      $('#save-button, #preview-button, #clear-button')
+        .hover(
+          function() { $(this).addClass('ui-state-hover'); },
+          function() { $(this).removeClass('ui-state-hover'); }
+        ).mousedown(function() {
+          $(this).addClass('ui-state-active');
+        }).mouseup(function() {
+          $(this).removeClass('ui-state-active');
+        });
+
+      var current_widgets = #{@main_widgets.map {|vo| vo.id}.to_json};
+      $(current_widgets).each(function(index, widget_id) {
+      	var element = $('#view-object-'+widget_id);
+        $(element).appendTo($('ul.destination')).fadeIn();
+      });
+
+    });
+
+.main-content
+  #admin-actions
+    %a#save-button.admin-btn.float_right{:type => "button"} Save your layout
+    %a#clear-button.admin-btn{:type => "button"} Clear Widgets
+    -#%a#preview-button.admin-btn{:href => "/home/preview_widgets", :target => "_preview", :type => "button"} Preview Widgets
+
+  -##widget-tabs.ui-widget.ui-widget-content.ui-corner-all
+    %h2 Available Widgets
+    %ul.source.sortable.ui-helper-reset
+      - @view_objects.each do |view_object|
+        %li.widget.ui-state-default{:id => "view-object-#{view_object.id}"}= view_object.name
+  #widget-tabs
+    %ul
+      - @filters.each_with_index do |filter, i|
+        %li
+          %a{:href => "#tabs-#{i+1}"}= filter[:name].titleize
+    - @filters.each_with_index do |filter, i|
+      - vo_list = []
+      - @view_objects.delete_if {|vo| vo.name =~ filter[:regex] and vo_list.push vo }
+      %div{:id => "tabs-#{i+1}"}
+        %ul.source.sortable.ui-helper-reset
+          - vo_list.each do |view_object|
+            %li.widget.ui-state-default{:id => "view-object-#{view_object.id}"}= view_object.name
+
+  #widget-tabs-destination.ui-widget.ui-widget-content.ui-corner-all.ui-droppable
+    %h2 Drop and Rearrange Widgets Here
+    %ul.destination
+-#
+  %h1.title Select Widgets for Your Page Layout
+  %button#save-button.admin-btn.float_right{:type => "button"} Save your layout
+  %button#clear-button.admin-btn{:type => "button"} Clear Widgets
+  .clear
+  %br
+  #left.box.droppable-main.ui-widget-content.ui-state-default
+    %h1 Main Column
+    %ul#sortable-main
+  #right.box.droppable-sidebar.ui-widget-content.ui-state-default
+    %h1 Sidebar Column
+    %ul#sortable-sidebar
+  .clear
+  %br
+  -# TODO this second button is not working
+  -# %button#save-button.admin-btn{:type => "button"} Save your layout
+%br
+.clear
+%br
+-#sidebar-widgets
+  %p.title Drag widgets below to their appropriate box and desired position above
+  #main-widgets-list.box
+    %h1 Wide Widgets
+    %ul
+      - @main.each do |widget|
+        %li.draggable-main.ui-widget-content{:id => "widget_#{widget.id}", :name => widget.name}
+          %p== #{widget.name}
+  #sidebar-widgets-list.box
+    %h1 Narrow Widgets
+    %ul
+      - @sidebar.each do |widget|
+        %li.draggable-sidebar.ui-widget-content{:id => "widget_#{widget.id}", :name => widget.name}
+          %p== #{widget.name}

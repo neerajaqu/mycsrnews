@@ -66,23 +66,30 @@ module ViewObjectsHelper
     ].join(' ')
   end
 
-  def comment_link item
-    [
-      content_tag(:span, item.comments_count, :class => "count"),
-      link_to(I18n.translate("generic.action_links.comments_title"), item)
-    ].join(' ')
+  def answer_link item
+    if item.answers_count > 0
+      answer_string = item.answers_count == 1 ? "answer" : "answers"
+      [
+        content_tag(:span, item.answers_count, :class => "count"),
+        link_to(I18n.translate('answers_count', :answer_string => answer_string), item)
+      ].join(' ')
+    else 
+      link_to(I18n.translate('answer_question'), item)
+    end
   end
 
   def vote_link item
-    [
-      link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), :class => "voteUp"),
-      content_tag(:span, item.votes_tally, :class => "count"),
-    ].join(' ')
+    # Add wrapper span tag for vote link ajax purposes
+    content_tag(:span,
+      [
+        link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), :class => "voteUp"),
+        content_tag(:span, item.votes_tally, :class => "count"),
+      ].join(' '))
   end
 
   def post_something klass_name, css_class = "float-right"
     klass = klass_name.constantize
-    link_to(I18n.translate("generic.post_something"), send(klass.model_new_url_name), :class => "button-panel-bar #{css_class}")
+    link_to(I18n.translate("generic.post.#{klass_name.underscore}".to_sym, :default => "generic.post_something".to_sym), send(klass.model_new_url_name), :class => "button-panel-bar #{css_class}")
   end
 
   def publish_newswire item

@@ -53,11 +53,17 @@
           %li
             %a{:href => "#home-page"} Front Page
             %ul
-              %li= link_to 'Feature Stories', admin_featured_items_path
+              - if APP_CONFIG['use_view_objects']
+                %li= link_to 'Feature Stories', new_featured_widgets_admin_featured_items_path
+              - else
+                %li= link_to 'Feature Stories', admin_featured_items_path
               %li
                 %a{:href => "#widgets"} Build Layout
                 %ul
-                  %li= link_to 'Choose Widgets', new_widgets_admin_widgets_path
+                  - if APP_CONFIG['use_view_objects']
+                    %li= link_to 'Choose Widgets', newer_widgets_admin_widgets_path
+                  - else
+                    %li= link_to 'Choose Widgets', new_widgets_admin_widgets_path
                   %li= link_to 'Custom Widgets', admin_metadata_custom_widgets_path
               %li= link_to 'Announcements', admin_announcements_path
           %li

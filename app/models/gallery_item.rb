@@ -14,6 +14,7 @@ class GalleryItem < ActiveRecord::Base
   before_save :set_item_info
 
   delegate :thumb_url, :to => :galleryable
+  delegate :medium_url, :to => :galleryable
   delegate :full_url, :to => :galleryable
 
   def item_title

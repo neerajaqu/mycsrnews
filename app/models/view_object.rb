@@ -10,6 +10,7 @@ class ViewObject < ActiveRecord::Base
   has_many :edge_parents, :through => :indirect_view_tree_edges, :source => :parent, :order => "position desc"
 
   def dataset
+    return setting.load_dataset if setting and setting.dataset
     return setting.kommand_chain if setting
     @dataset ||= Content.active.top
   end

@@ -85,8 +85,7 @@ class Metadata::ViewObjectSetting < Metadata
 
   def locale_title() self.data[:locale_title] end
   def locale_title=(val) self.data[:locale_title] = val end
-  # TODO:: FIX ME
-  def use_post_button() return false; self.data[:use_post_button] end
+  def use_post_button() self.data[:use_post_button] end
   def use_post_button=(val) self.data[:use_post_button] = !! val end
   def locale_subtitle() self.data[:locale_subtitle] end
   def locale_subtitle=(val) self.data[:locale_subtitle] = val end
@@ -96,6 +95,15 @@ class Metadata::ViewObjectSetting < Metadata
   def old_widget=(val) self.data[:old_widget] = val end
   def css_class() self.data[:css_class] or self.klass_name.tableize end
   def css_class=(val) self.data[:css_class] = val end
+  def dataset() self.data[:dataset] end
+  def dataset=(val) self.data[:dataset] = val end
+
+  def load_dataset
+    return [] unless self.dataset
+    self.dataset.map do |item|
+      item[0].constantize.send(:find, item[1])
+    end
+  end
 
   def respond_to? method, internal = false
     #return true if method.to_s == "data"

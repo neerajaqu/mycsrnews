@@ -36,6 +36,39 @@ class Admin::WidgetsController < AdminController
     end
   end
 
+  def newer_widgets
+    @filters = [
+      { :name => 'stories', :regex => /(stor(y|ies))|article|featured_content/i },
+      { :name => 'content', :regex => /idea|question|answer|event|resource|forum|topic|newswire|classified/i },
+      { :name => 'media', :regex => /image|video|galler(y|ies)/i },
+      { :name => 'users', :regex => /user|welcome panel?/i },
+      { :name => 'ads', :regex => /\bad[s_\. ]/i },
+      { :name => 'misc', :regex => /.+/i }
+    ]
+    @page = ViewObject.find_by_name("home--index")
+    @view_objects = ViewObject.find(:all, :conditions => ["view_object_template_id is not null"])
+    @main = Widget.main
+    @sidebar = Widget.sidebar
+    if @page.present? and @page.edge_children.present?
+      @main_widgets = @page.edge_children
+    else
+    	@main_widgets = []
+    end
+  end
+
+  def save_newer_widgets
+    @page = ViewObject.find_by_name("home--index")
+    children = []
+    params[:main].split(/,/).reverse.each_with_index do |view_object_id, position|
+      view_object = nil
+      raise ArgumentError.new "Invalid id: #{view_object_id}" unless view_object_id =~ /^[0-9]+$/ and view_object = ViewObject.find(view_object_id)
+      children.push ViewTreeEdge.new({ :parent => @page, :child => view_object, :position => position + 1 })
+    end
+    @page.direct_view_tree_edges.destroy_all
+    children.map(&:save)
+    render :json => {:success => "Success!"}.to_json and return
+  end
+
   def save
     # TODO:: Switch to updating instead of deleting
     WidgetPage.destroy_all

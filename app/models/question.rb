@@ -65,4 +65,11 @@ class Question < ActiveRecord::Base
     QandaSweeper
   end
 
+  def action_links
+    links = []
+    links << lambda {|klass| vote_link(klass) }
+    links << lambda {|klass| answer_link(klass) }
+    links
+  end
+
 end

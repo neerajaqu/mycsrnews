@@ -1,0 +1,59 @@
+#content
+  #admin-actions
+    = link_to 'Return to template selector', new_featured_widgets_admin_featured_items_path, :class=>"admin-btn"
+    %button#save-button.admin-btn.float_right{:type => "button"} Save Featured Stories
+
+- case @view_object_template.name
+  - when "v2_double_col_triple_item", "v2_triple_col_large_2"
+    %h2== Template Builder #{@view_object_template.pretty_name}
+    .template-builder-column
+
+      #template_5.template-builder
+        .drop-zone
+          #section-1-primary.primary-drop
+            %p Drop First Item
+          #section1-primary-title
+          .clear
+          #section-2-primary.primary-drop
+            %p Drop Second Item
+          #section2-primary-title
+          .clear
+          #section-3-primary.primary-drop
+            %p Drop Third Item
+          #section3-primary-title
+          .clear
+
+  - when "v2_double_col_feature_triple_item"
+    %h2== Template Builder #{@view_object_template.pretty_name}
+    .template-builder-column
+
+      #template_7.template-builder
+        .drop-zone
+          #section-1-primary.primary-drop
+            %p Drop First Item
+          #section1-primary-title
+          .clear
+          #section-2-primary.primary-drop
+            %p Drop Second Item
+          #section2-primary-title
+          .clear
+          #section-3-primary.primary-drop
+            %p Drop Third Item
+          #section3-primary-title
+          .clear
+          #section-4-primary.primary-drop
+            %p Drop Fourth Item
+          #section4-primary-title
+          .clear
+
+  
+.template-item-selector-column
+  %h2 Items
+  = select_tag 'featured-items-select', options_for_select(@featurables)
+  #items
+
+
+.clearfix
+%h2 Existing Layout
+= ViewTree.render(@view_object.name, @controller)
+

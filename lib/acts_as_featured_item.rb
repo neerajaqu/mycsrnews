@@ -37,7 +37,7 @@ module Newscloud
           if self.respond_to?('images')
             return self.images.first.url(:medium) if self.images.present?
           else
-            [:image_url, :get_image_url].each do |method|
+            [:image_url, :get_image_url, :thumb_url].each do |method|
               return self.send(method) if self.respond_to?(method) and self.send(method).present?
             end
           end
