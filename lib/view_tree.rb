@@ -6,11 +6,11 @@ class ViewTree
 
   def initialize key_name, controller
     @key_name = key_name
-    @output = self.get
     @view_object = nil
     @children = []
     @controller = controller
     @cache = false
+    @output = self.get
     # Initialize new view tree
     # add children view tree elements for each view object
     # build up render dependency tree

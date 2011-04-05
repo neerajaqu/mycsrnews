@@ -1,0 +1,12 @@
+%h1 Setting Groups
+
+%table
+  %thead
+    %tr
+      %th Setting Group
+      %th Actions
+  %tbody
+    - @setting_groups.each do |name, setting_group|
+      %tr
+        %td= setting_group[:title]
+        %td= link_to 'Wizard Config', edit_admin_setting_group_path(:id => name)

@@ -187,6 +187,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :resource_sections
     admin.resources :resources
     admin.resources :settings
+    admin.resources :setting_groups
     admin.resources :skip_images
     admin.resources :sources
     admin.resources :sponsor_zones
