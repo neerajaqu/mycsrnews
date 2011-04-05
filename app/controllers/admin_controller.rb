@@ -6,7 +6,6 @@ class AdminController < ApplicationController
   before_filter :check_iframe
 
   self.class_eval do
-    def self.foo() raise @config.inspect end
     # TODO::
     #   - finish methods
     #   - add associations to edit/new forms
@@ -20,15 +19,19 @@ class AdminController < ApplicationController
     #   - switch to allowing model_id or hash options
     def self.admin_scaffold_build_config model_id = nil
       # switch to calling methods in context of admin_scaffold_config object
-      @config = OpenStruct.new
-      @config.model_id = model_id
-      @config.klass_name = self.to_s.split('::').last.sub(/Controller$/, '')
-      @config.model_klass = @config.model_id.to_s.classify.constantize
-      @config.actions = [:index, :show, :new, :create, :edit, :update, :destroy]
-      @config.fields = @config.model_klass.columns
-      @config.paginate = true
+      @config              = OpenStruct.new
+      @config.model_id     = model_id
+      @config.klass_name   = self.to_s.split('::').last.sub(/Controller$/, '')
+      @config.model_klass  = @config.model_id.to_s.classify.constantize
+      @config.actions      = [:index, :show, :new, :create, :edit, :update, :destroy]
+      @config.fields       = @config.model_klass.columns
+      @config.form_name    = @config.model_klass.name.underscore
+      @config.model_title  = @config.model_klass.name.titleize
+      @config.paginate     = true
+      @config.media_form   = false
       @config.associations = {}
-      @config.edit_fields = @config.fields.select {|f| not (f.name =~ /_at$/ or f.name == 'id' or f.name =~ /tally|count$/) }
+      @config.edit_fields  = @config.fields.select {|f| not (f.name =~ /_at$/ or f.name == 'id' or f.name =~ /tally|count$/) }.map(&:name)
+      @config.new_fields   = @config.fields.select {|f| not (f.name =~ /_at$/ or f.name == 'id' or f.name =~ /tally|count$/) }.map(&:name)
       @config
     end
 
@@ -46,28 +49,70 @@ class AdminController < ApplicationController
           when :index
             @config = self.admin_scaffold_config
             render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
-              :items => @config.model_klass.active.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
-              :model => @config.model_klass,
-              :fields => @config.index_fields || @config.fields.map(&:name),
+              :items        => @config.model_klass.active.paginate(:page           => params[:page], :per_page => 20, :order => "created_at desc"),
+              :model        => @config.model_klass,
+              :fields       => @config.index_fields || @config.fields.map(&:name),
               :associations => @config.associations,
-              :paginate => @config.paginate
+              :paginate     => @config.paginate
             }
           when :show
             @config = self.admin_scaffold_config
             render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
-              :item => @config.model_klass.find(params[:id]),
-              :model => @config.model_klass,
+              :item         => @config.model_klass.find(params[:id]),
+              :model        => @config.model_klass,
               :associations => @config.associations,
-              :fields => @config.show_fields || @config.fields.map(&:name),
+              :fields       => @config.show_fields || @config.fields.map(&:name)
             }
           when :edit
             @config = self.admin_scaffold_config
             render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-              :item => @config.model_klass.find(params[:id]),
-              :model => @config.model_klass,
-              :associations => @config.associations,
-              :fields => @config.edit_fields.map(&:name),
+              :item               => @config.model_klass.find(params[:id]),
+              :model              => @config.model_klass,
+              :include_media_form => @config.media_form,
+              :associations       => @config.associations,
+              :fields             => @config.edit_fields || @config.edit_fields.map(&:name)
             }
+          when :new
+            @config = self.admin_scaffold_config
+            render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
+              :item               => @config.model_klass.new,
+              :include_media_form => @config.media_form,
+              :model              => @config.model_klass,
+              :associations       => @config.associations,
+              :fields             => @config.new_fields || @config.new_fields.map(&:name)
+            }
+          when :create
+            @config = self.admin_scaffold_config
+            @item = @config.model_klass.new(params[@config.form_name])
+            if @item.save
+              flash[:success] = "Successfully created your new #{@config.model_title}"
+              redirect_to [:admin, @item]
+            else
+              flash[:error] = "Please clear any errors and try again"
+              render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
+                :item               => @item,
+                :include_media_form => @config.media_form,
+                :model              => @config.model_klass,
+                :associations       => @config.associations,
+                :fields             => @config.new_fields || @config.new_fields.map(&:name)
+              }
+            end
+          when :update
+            @config = self.admin_scaffold_config
+            @item = @config.model_klass.find(params[:id])
+            if @item.update_attributes(params[@config.form_name])
+              flash[:success] = "Successfully updated your #{@config.model_title}"
+              redirect_to [:admin, @item]
+            else
+              flash[:error] = "Please clear any errors and try again"
+              render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
+                :item               => @item,
+                :include_media_form => @config.media_form,
+                :model              => @config.model_klass,
+                :associations       => @config.associations,
+                :fields             => @config.edit_fields || @config.edit_fields.map(&:name)
+              }
+            end
           else
           	render :text => "Implement: #{action}", :layout => 'new_admin'
           end

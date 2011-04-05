@@ -7,6 +7,7 @@ public/cache/*
 tmp
 .DS_Store
 public/system
+public/images/cards
 public/javascripts/cache
 public/stylesheets/cache
 public/stylesheets/compiled/*.css

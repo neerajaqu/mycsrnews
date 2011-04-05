@@ -161,6 +161,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :ads
     admin.resources :announcements
     admin.resources :answers    
+    admin.resources :cards
     admin.resources :classifieds
     admin.resources :comments
     admin.resources :content_images

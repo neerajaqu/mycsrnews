@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110324193416) do
+ActiveRecord::Schema.define(:version => 20110405193504) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -76,14 +76,18 @@ ActiveRecord::Schema.define(:version => 20110324193416) do
     t.string   "name"
     t.string   "short_caption"
     t.text     "long_caption"
-    t.integer  "points",        :default => 0
+    t.integer  "points",             :default => 0
     t.string   "slug_name"
-    t.boolean  "not_sendable",  :default => false
-    t.boolean  "is_featured",   :default => false
+    t.boolean  "not_sendable",       :default => false
+    t.boolean  "is_featured",        :default => false
     t.datetime "updated_at"
-    t.integer  "sent_count",    :default => 0
+    t.integer  "sent_count",         :default => 0
     t.datetime "created_at"
-    t.boolean  "is_blocked",    :default => false
+    t.boolean  "is_blocked",         :default => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "categories", :force => true do |t|

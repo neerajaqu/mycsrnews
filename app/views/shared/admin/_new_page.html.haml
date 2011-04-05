@@ -1,5 +1,4 @@
-%h2== Create a new #{model.name.titleize}
-- item ||= model.new
+%h2== New #{item.class.name.titleize}
 - associations ||= {}
 - include_media_form ||= false
 - semantic_form_for [:admin, item], :html => { :multipart => (!! include_media_form) } do |form|
@@ -11,7 +10,7 @@
         = form.input association
       - else
         = form.input field
-    - if include_media_form
+    - if include_media_form and item.media_item?
       = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => item }
   - form.buttons do
     = form.commit_button
