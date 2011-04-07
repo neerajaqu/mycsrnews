@@ -3,10 +3,15 @@
 %table
   %thead
     %tr
-      %th Setting Group
+      %th Setting Group Title
+      %th Setting Group Description
       %th Actions
   %tbody
     - @setting_groups.each do |name, setting_group|
       %tr
         %td= setting_group[:title]
-        %td= link_to 'Wizard Config', edit_admin_setting_group_path(:id => name)
+        %td= setting_group[:description]
+        %td
+          = link_to 'Wizard Config', edit_admin_setting_group_path(:id => name)
+          = pipe_spacer
+          = link_to 'Show Config', admin_setting_group_path(:id => name)
