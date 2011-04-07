@@ -41,9 +41,10 @@
                   = text_field_tag "setting_group[#{setting.key_id}]", setting.value, :class => "text"
                   %br
                   %em= item[:hint]
-            - if page_index + 1 < @setting_group[:pages].size
-              %li.clearfix
+            %li.clearfix
+              - unless page_index.zero?
+                %button.prev{:type => "button", :style => "float: left;"} &laquo; Back
+              - if page_index + 1 < @setting_group[:pages].size
                 %button.next.right{:type => "button"} Proceed &raquo;
-            - else
-              %li.clearfix
+              - else
                 %button.next.right{:type => "submit"} Submit
