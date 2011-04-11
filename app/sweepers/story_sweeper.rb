@@ -4,6 +4,7 @@ class StorySweeper < ActionController::Caching::Sweeper
   def after_save(record)
     if record.is_a?(Content)
     	story = record
+    	self.expire_story_all story
     elsif record.is_a?(Article)
     	clear_article_cache(record)
     	story = record.content
