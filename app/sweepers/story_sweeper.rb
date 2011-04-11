@@ -4,8 +4,9 @@ class StorySweeper < ActionController::Caching::Sweeper
   def after_save(record)
     if record.is_a?(Content)
     	story = record
-    	self.expire_story_all story
+    	StorySweeper.expire_story_all story
     elsif record.is_a?(Article)
+    	StorySweeper.expire_article_all record
     	clear_article_cache(record)
     	story = record.content
     elsif record.is_a?(Comment) and record.commentable.is_a?(Content)
