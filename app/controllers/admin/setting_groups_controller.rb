@@ -27,7 +27,8 @@ class Admin::SettingGroupsController < AdminController
         translation.update_attribute(:value, value) unless translation.value == value
       end
     end
-    redirect_to admin_setting_groups_path
+    flash[:success] = "Successfully configured your settings"
+    redirect_to admin_path
   end
 
   private

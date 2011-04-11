@@ -129,8 +129,7 @@ class AdminController < ApplicationController
 
   def index
     # Loads dashboard
-    # TODO:: make the dashboard actually a dashboard
-    #redirect_to admin_contents_path
+    @setting_groups = Newscloud::SettingGroups.groups
   end
 
   private

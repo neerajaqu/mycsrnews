@@ -41,6 +41,18 @@
 
         $('#status li').removeClass("active").eq(i).addClass("active");
       });
+      // if tab is pressed on the next button seek to next page
+      root.find("button.next").keydown(function(e) {
+        if (e.keyCode == 9) {
+
+          // seeks to next tab by executing our validation routine
+          api.next();
+          e.preventDefault();
+        } else if (
+          e.preventDefault();
+          return false;
+          //form.submit();
+      });
     });
 
 %h1= @setting_group[:title]
