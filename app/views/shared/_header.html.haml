@@ -5,7 +5,7 @@
     %a{:title => "Front Page - #{get_setting('site_title').try(:value)}", :href => "#{home_index_path(:only_path => false)}"}
       %h1= get_setting('site_title').try(:value)
   .meta-links
-    -# cache :google_search_header_html, :expires_in => 180.minute do
+    - cache :google_search_header_html, :expires_in => 180.minute do
       - if Metadata::Setting.find_setting('google_search_engine_id').present?
         - search_engine_id = Metadata::Setting.find_setting('google_search_engine_id').value
       - if search_engine_id and search_engine_id != "your-google-search-engine-id"
