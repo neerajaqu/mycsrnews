@@ -49,7 +49,9 @@ class AdminController < ApplicationController
           when :index
             @config = self.admin_scaffold_config
             render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
-              :items        => @config.model_klass.active.paginate(:page           => params[:page], :per_page => 20, :order => "created_at desc"),
+              # TODO:: handle active
+              #:items        => @config.model_klass.active.paginate(:page           => params[:page], :per_page => 20, :order => "created_at desc"),
+              :items        => @config.model_klass.paginate(:page           => params[:page], :per_page => 20, :order => "created_at desc"),
               :model        => @config.model_klass,
               :fields       => @config.index_fields || @config.fields.map(&:name),
               :associations => @config.associations,

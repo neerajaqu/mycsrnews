@@ -1,0 +1,105 @@
+- content_for :head do
+  :javascript
+    $(function() {
+      $('.view-object a').click(function(e) { e.preventDefault(); });
+
+      $('#items').html("<p>Loading items...</p>");
+      $.get('/admin/featured_items/contents/load_items', null, null, 'script');
+
+      $('#featured-items-select').live('change', function() {
+      	var type = $('option:selected', this).val();
+        $('#items').html("<p>Loading items...</p>");
+      	$.get('/admin/featured_items/'+type+'/load_items', null, null, 'script');
+      });
+
+      $('#items ul a').live("click", function() { return false; });
+      $('#items .pagination a').live("click", function(event) {
+      	event.preventDefault();
+      	var url = this.href.replace(/^(.+load_items\/)([0-9]+).*$/, "$1page/$2");
+      	$('#items').html("<p>Loading items...</p>");
+      	$.get(url, null, null, 'script');
+      });
+
+      $('.primary-drop').droppable({
+        accept: 'li.ui-widget-content',
+        activeClass: 'ui-state-hover',
+        hoverClass: 'ui-state-active',
+        drop: function(event, ui) {
+          var dropContainer = $(this).parent(),
+              dropBox       = $('.primary-drop', dropContainer),
+              dropTitle     = $('.drop-item-title', dropContainer);
+
+          $(this).addClass('dropped').removeClass('drop-error');
+
+          $(this).attr('data-id', ui.draggable.attr('id'));
+          dropTitle.html("<h1>"+$('h5', ui.draggable).text()+"</p>");
+          dropBox.html('<img src="'+$('img', ui.draggable).attr('src')+'" />');
+        }
+      });
+    	$('#save-button')
+    	  .live('mousedown', function() {
+        	$(this).addClass('ui-state-active');
+        }).live('mouseup', function() {
+    	  	$(this).removeClass('ui-state-active');
+        }).live('click', function() {
+          var dropItems = $.map($('.primary-drop'), function(e, i) {
+            return $(e).attr('data-id');
+          });
+
+        	var error_count = 0;
+        	$.each($('.primary-drop'), function(index, value) {
+        		var item = $(value);
+        		if ( ! item.hasClass('dropped') ) {
+        			error_count += 1;
+        			item.addClass('drop-error');
+            }
+          });
+          if (error_count > 0) {
+          	alert('You are missing '+error_count+' items in this template. Please drag items for all boxes in this template');
+          } else {
+            $.post("#{admin_view_object_path(@view_object, :format => 'json')}", {featured_items: dropItems, _method: "put"}, function(data) {
+              if (typeof(data.success) !== 'undefined') {
+                alert(data.success);
+              } else {
+                alert('There was a problem saving your page');
+              }
+            });
+          }
+        });
+    });
+
+#content
+  #admin-actions
+    =# link_to 'Return to View Objects index', admin_view_objects_path, :class=>"admin-btn"
+    %button#save-button.admin-btn.float_right{:type => "button"} Update Template Settings
+
+  - item_count = 0
+  - case @view_object_template.name
+    - when "v2_double_col_triple_item", "v2_triple_col_large_2"
+      - item_count = 3
+    - when "v2_double_col_feature_triple_item"
+      - item_count = 4
+    - else
+      - item_count = 3
+
+  %h2== Template Builder #{@view_object_template.pretty_name}
+  .template-builder-column
+
+    .template-builder
+      .drop-zone
+        - item_count.times do |index|
+          - index += 1
+          .drop-item
+            .primary-drop{:id => "item-#{index}"}
+              %p== Drop #{index.ordinalize} Item
+            .drop-item-title{:id => "item-#{index}-title"}
+          .clear
+    
+  .template-item-selector-column
+    %h2 Items
+    = select_tag 'featured-items-select', options_for_select(@featurables)
+    #items
+
+.clearfix
+  %h2 Existing Layout
+  .view-object= ViewTree.render(@view_object.name, @controller)

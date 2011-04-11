@@ -197,6 +197,8 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :twitter_settings, :collection => { :update_keys => :post, :update_auth => :post, :reset_keys => :get }
     admin.resources :user_profiles,      :active_scaffold => true
     admin.resources :users,           :active_scaffold => true
+    admin.resources :view_objects
+    admin.resources :view_object_templates
     admin.resources :votes,           :active_scaffold => true
     admin.resources :widgets, :collection => { :save => :post, :new_widgets => :get, :newer_widgets => :get, :save_newer_widgets => :post }
 
