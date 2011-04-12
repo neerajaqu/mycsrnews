@@ -7,26 +7,33 @@
       });
     });
 
-.classifieds-filter
+.panel-2.classifieds-filter.top-secondary-corners.bottom-secondary-corners
   %form{:action => classifieds_path}
     %ul
       %li
-        Category:
+        %label 
+          Category:
         = categories_select Classified
       -#%li
-        Subcategy:
+        %label 
+          Subcategy:
         = subcategories_select Classified
       -#%li
-        Allow:
+        %label 
+          Allow:
         = allow_type_select
       %li
-        Type:
+        %label 
+          Type:
         = listing_type_select
       -#%li
-        Sort:
+        %label 
+          Sort:
         = select_tag 'sort', options_for_select(['newest', 'most_discussed', 'votes_count', 'comments_count'].map {|s| [s.humanize, s]})
       %li
-        Keyword:
+        %label 
+          Keyword:
         = text_field_tag 'keyword'
       %li
         = submit_tag "Search", :button_html => { :class => 'btn' }, :class => 'btn'
+      .clearfix
