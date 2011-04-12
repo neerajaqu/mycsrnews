@@ -743,17 +743,14 @@ view_objects = [
   	}
   },
   {
-  	:name          => "Featured Stories",
+  	:name          => "Triple Item Featured Widget",
   	:template_name => "v2_triple_col_large_2",
   	:settings      => {
   		:klass_name      => "Content",
-  		:locale_title    => "featured_stories",
+  		:locale_title    => nil,
   		:locale_subtitle => nil,
   		:use_post_button => true,
   		:kommands        => [
-  		  {
-          :method_name => "featured"
-        }
   		]
   	}
   },

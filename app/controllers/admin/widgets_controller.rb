@@ -47,7 +47,7 @@ class Admin::WidgetsController < AdminController
     ]
     @page = ViewObject.find_by_name("home--index")
     @view_objects = ViewObject.find(:all, :conditions => ["view_object_template_id is not null"])
-    @editable_view_objects = ["v2_double_col_feature_triple_item", "v2_double_col_triple_item", "v2_triple_col_large_2"].map {|name| ViewObjectTemplate.find_by_name(name) }.map(&:view_objects).flatten
+    @editable_view_objects = ["v2_double_col_feature_triple_item", "v2_double_col_triple_item", "v2_triple_col_large_2"].map {|name| ViewObjectTemplate.find_by_name(name) }.map(&:view_objects).flatten.select {|vo| vo.setting.kommands.empty? }
     @main = Widget.main
     @sidebar = Widget.sidebar
     if @page.present? and @page.edge_children.present?

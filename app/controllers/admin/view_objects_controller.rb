@@ -9,7 +9,7 @@ class Admin::ViewObjectsController < AdminController
   end
 
   def edit
-    @view_objects = ["v2_double_col_feature_triple_item", "v2_double_col_triple_item", "v2_triple_col_large_2"].map {|name| ViewObjectTemplate.find_by_name(name) }.map(&:view_objects).flatten
+    @view_objects = ["v2_double_col_feature_triple_item", "v2_double_col_triple_item", "v2_triple_col_large_2"].map {|name| ViewObjectTemplate.find_by_name(name) }.map(&:view_objects).flatten.select {|vo| vo.setting.kommands.empty? }
     @view_object = ViewObject.find(params[:id])
     @view_object_template = @view_object.view_object_template
 
