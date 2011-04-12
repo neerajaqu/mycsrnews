@@ -551,7 +551,7 @@ p
  V2 AD WRAPPERS */
 .panel-1, .panel-2, .panel-3
   .ad-wrap
-    background: $AdvertBG image_url("default/site/ad-title-bg.gif") top left 
+    background: #ddd
     -webkit-border-top-right-radius: $SecondaryBorderRadius
     -webkit-border-top-left-radius: $SecondaryBorderRadius
     -moz-border-radius-topright: $SecondaryBorderRadius
@@ -561,14 +561,7 @@ p
     padding: 26px 6px 6px
     position: relative
   .ad-title
-    -webkit-border-top-right-radius: $SecondaryBorderRadius - 4px
-    -webkit-border-top-left-radius: $SecondaryBorderRadius - 4px
-    -moz-border-radius-topright: $SecondaryBorderRadius - 4px
-    -moz-border-radius-topleft: $SecondaryBorderRadius - 4px
-    border-top-right-radius: $SecondaryBorderRadius - 4px
-    border-top-left-radius: $SecondaryBorderRadius - 4px
-    background: $bodyBG
-    color: $subheadColor
+    color: #666
     display: inline-block
     height: 12px
     padding: 6px 6px 2px
@@ -679,7 +672,7 @@ p
   -moz-border-radius: $PrimaryBorderRadius
   border-radius: $PrimaryBorderRadius
   display: block
-  background: rgba(255,255,255,.4)
+  background: image_url("default/site/btn-highlight.png") top left repeat 
   width: $postPopOverWidth + $PanelGutters
   .popover-container
     padding-top: $PanelGutters 
@@ -694,9 +687,6 @@ p
     h1.title, p
       color: $bodyBG
       margin: 0 $PanelGutters $PanelGutters * .5
-    .news, .blogs, .comments, .events, .ideas, .questions, .classifieds, .resources, .forums, .topics, .latest, .active, .media
-      background-position: center
-      background-repeat: no-repeat
 .popover-tabs
   li, a
     -webkit-border-top-right-radius: $SecondaryBorderRadius
@@ -716,18 +706,19 @@ p
     width: $popOverTabWidth
     a
       text-align: center
-      padding: 40px 0 10px
+      padding: 60px 0 10px
       color: $bodyBG
       display: block
       width: 100%
       float: left
-      background: none
       font-weight: bold
-      &:hover
-        background: image_url("default/site/btn-highlight.png") top left repeat 
+    &:hover
+      background:  image_url("default/site/btn-highlight.png") top left repeat 
+      a
         text-decoration: none
-      &.selected
-        background: $popOverTabBG
+    &.selected
+      background: $popOverTabBG
+      a
         color: $headerColor
 .popover-wizard-area, .popover-form-area, .popover-button-area
   float: left
@@ -741,6 +732,36 @@ p
 .popover-button-area
   text-align: right
   padding: 20px 0 0
+
+.popover-container
+  .news, .blogs, .comments, .events, .ideas, .questions, .classifieds, .resources, .forums, .topics, .latest, .active, .media
+    background-position: center 5px 
+    background-repeat: no-repeat
+  .active
+    background-image: image_url("default/site/mark-active-sml-d.png")
+  .contents, .news, .newswires
+    background-image: image_url("default/site/mark-news-sml-d.png")
+  .articles, .blogs
+    background-image: image_url("default/site/mark-blogs-sml-d.png")
+  .comments
+    background-image: image_url("default/site/mark-comments-sml-d.png")
+  .events
+    background-image: image_url("default/site/mark-events-sml-d.png")
+  .ideas
+    background-image: image_url("default/site/mark-ideas-sml-d.png")
+  .questions
+    background-image: image_url("default/site/mark-qa-sml-d.png")
+  .latest
+    background-image: image_url("default/site/mark-latest-sml-d.png")
+  .classifieds, .resources
+    background-image: image_url("default/site/mark-classifieds-sml-d.png")
+  .predictions
+    background-image: image_url("default/site/mark-predictions-sml-d.png")
+  .forums, .topics
+    background-image: image_url("default/site/mark-forumtopics-sml-d.png")
+  .media, .galleries
+    background-image: image_url("default/site/mark-media-sml-d.png")
+
 
 /****************************************************
  MISC (Stuff I haven't found a place for) */
@@ -758,4 +779,11 @@ p
   padding: 4px
   text-align: right
   
-  
+.fb-fanapp
+  height: 70px
+  width: 230px
+  margin: 0 $fbappMargin 10px
+
+#follow-twitterapi
+  display: block
+  text-align: center

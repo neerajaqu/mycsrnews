@@ -160,7 +160,9 @@
 .twitter_link
   background: image_url("default/icon_twitter.gif") left no-repeat
   padding: 3px 0 3px 18px
-
+.twt_ft_wrap
+  display: block
+  text-align: center
 .newscloud_link
   background: image_url("default/icon_newscloud.gif") left no-repeat
   padding: 3px 0 3px 20px
@@ -1803,22 +1805,36 @@ body div.jGrowl div.jGrowl-closer
     border: 1px solid black
     max-width: 133px
     max-height: 100px
-
+/****************************************************
+ Classifieds filter styles  */
 .classifieds-filter
+  background: $subTitleBG
   border: none
   display: block
   margin: 0px 0px 25px 0px
   ul
+    padding: $PanelGutters * .5
     list-style: none
     li
       float: left
+      display: inline-block
+      text-align: center
+      width: 25%
       select
-        margin: 0px 5px 0px 5px
+        margin: 0 0 10px
         max-width: 120px
+      label
+        text-align: left
+        max-width: 120px
+        font-weight: bold
+        display: block
+        margin: 0 auto 5px
       input
-        margin: 0px 10px 0px 5px
-        .btn
-          width: 40px
+        margin: 0 0 10px
+        &.btn
+          font-size: $fontsize * 1.15
+          margin-top: 14px
+          width: 80px
 
 .classified_button_margin
   margin: 10px 10px 0px 0px

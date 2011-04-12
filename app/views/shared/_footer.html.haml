@@ -4,7 +4,7 @@
       .panel-third.first
         = link_to t('post_story_button'), new_story_path, :class => "button-link"
         - if get_setting('app_id').present?
-          %iframe{:src => "http://www.facebook.com/connect/connect.php?id=#{get_setting('app_id').value}&connections=0&stream=0", :frameborder => 0, :scrolling => "no", :style => "border: none; width: 300px; height: 70px;", :allowtransparency => "true"}
+          %iframe{:src => "http://www.facebook.com/connect/connect.php?id=#{get_setting('app_id').value}&connections=0&stream=0", :frameborder => 0, :scrolling => "no", :class => "fb-fanapp", :allowtransparency => "true"}
         - if get_setting('account').present? && !get_setting('oauth_key').present?
           %a.icon-link.twitterfeed{:target => "_blank", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
         %span#follow-twitterapi
@@ -13,7 +13,8 @@
             twttr.anywhere(function (T) {
               T('#follow-twitterapi').followButton("#{get_setting('account').value}");
             });
-          %a.twitter_link{:style=>"display:none;",:target => "_tweet", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
+          %span.twt_ft_wrap
+            %a.twitter_link{:style=>"display:none;",:target => "_tweet", :title => t('.twitter_title'), :href => twitter_url(get_setting('account').value) }= t('.twitter')
       .panel-third
         = link_to t('footer.contact'), contact_us_path, :class => "icon-link email"
         = link_to t('account_menu.invite_friends'), invite_users_path(:format => 'html'), :class => "icon-link friends"
