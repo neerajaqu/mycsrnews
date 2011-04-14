@@ -8,6 +8,7 @@
   = render :partial => 'shared/galleries', :locals => { :galleries => @galleries, :paginate => @paginate, :page => @page }
 #col_right
   = render :partial => 'shared/sidebar/galleries_whatisthis'
+  = render :partial => 'shared/media/gallery_big_image'
   = render :partial => 'shared/sidebar/top_galleries'
   - if @sponsor_zone_code
     = render :partial => 'shared/ads/sponsor_zone_wrapper'

@@ -6,7 +6,7 @@
         %h2= t('galleries.featured_title', :gallery_title => gallery.title)
       .featured.media
         .thumb#image_wrap
-          = link_to image_tag(gallery.thumb_url, :alt => gallery.item_title), gallery.full_url, :rel => "gallery[big-image-#{gallery.title.parameterize}]", :title => gallery.item_description
+          = link_to image_tag(gallery.medium_url, :alt => gallery.item_title), gallery.full_url, :rel => "gallery[big-image-#{gallery.title.parameterize}]", :title => gallery.item_description
           .hidden
             %ul
               - gallery.gallery_items.slice(1,10).each do |gallery_item|
