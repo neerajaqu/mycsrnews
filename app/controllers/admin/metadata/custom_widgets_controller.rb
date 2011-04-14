@@ -67,7 +67,7 @@ class Admin::Metadata::CustomWidgetsController < Admin::MetadataController
     	:fields => [
     	  :title,
     	  lambda {|f| f.input :custom_data, :as => :text, :input_html => { :rows => 30, :cols => 80} },
-    	  lambda {|f| f.input :content_type, :as => :select, :collection => [['Main Content', 'main_content'], ['Sidebar Content', 'sidebar_content']]}
+    	  lambda {|f| f.input :content_type, :as => :select, :collection => [['Single Column', 'panel-1'], ['Double Column', 'panel-2'], ['Triple Column', 'panel-3']] }
       ]
     }
   end
@@ -79,7 +79,7 @@ class Admin::Metadata::CustomWidgetsController < Admin::MetadataController
     	:fields => [
     	  :title,
     	  lambda {|f| f.input :custom_data, :as => :text, :input_html => { :rows => 30, :cols => 80} },
-    	  lambda {|f| f.input :content_type, :as => :select, :collection => [['Main Content', 'main_content'], ['Sidebar Content', 'sidebar_content']]}
+    	  lambda {|f| f.input :content_type, :as => :select, :collection => [['Single Column', 'panel-1'], ['Double Column', 'panel-2'], ['Triple Column', 'panel-3']] }
       ]
     }
   end

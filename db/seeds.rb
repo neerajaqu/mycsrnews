@@ -388,8 +388,22 @@ view_object_templates = [
   	:name        => "v2_ad_template",
   	:pretty_name => "Version 2 Ad Template",
   	:template    => "shared/templates/ad_template"
+  },
+  {
+  	:name        => "v2_single_col_custom_widget",
+  	:pretty_name => "Version 2 Single Column Custom Widget",
+  	:template    => "shared/templates/single_col_custom_widget"
+  },
+  {
+  	:name        => "v2_double_col_custom_widget",
+  	:pretty_name => "Version 2 Double Column Custom Widget",
+  	:template    => "shared/templates/double_col_custom_widget"
+  },
+  {
+  	:name        => "v2_triple_col_custom_widget",
+  	:pretty_name => "Version 2 Triple Column Custom Widget",
+  	:template    => "shared/templates/triple_col_custom_widget"
   }
-  
 ]
 view_object_templates.each do |view_object_template|
   puts "Creating View Object Template: #{view_object_template[:name]} (#{view_object_template[:template]})" if debug and ViewObjectTemplate.find_by_name(view_object_template[:name]).nil?
@@ -964,7 +978,8 @@ view_objects.each do |view_object_hash|
 
   # Build ViewObject and Metadata::ViewObjectSetting
   view_object = ViewObject.new(:name => view_object_hash[:name])
-  view_object.build_setting
+  #view_object.build_setting
+  view_object.setting = Metadata::ViewObjectSetting.new
 
   # Set template
   view_object_template = ViewObjectTemplate.find_by_name(view_object_hash[:template_name])
