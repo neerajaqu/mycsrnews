@@ -10,7 +10,8 @@
             = link_to image_tag(medium_image_or_default(item)), item.item_link
             -#%a= image_tag('default/default_thumb.gif')
         .item-text
-          %h3= link_to item.item_title, item.item_link
+          %h3
+            %span.ellipsis_title_3= link_to item.item_title, item.item_link, :class => 'ellipsis_text'
         .meta-data
           %h6= posted_by_with_date(item)
           %h6= action_links(item)

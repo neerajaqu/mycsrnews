@@ -9,7 +9,8 @@
       - if vo.setting.use_post_button
         = post_something vo.setting.klass_name, "center"
   .panel-content
-    %h1= link_to item.item_title, item.item_link
+    %h1
+      %span.ellipsis_title_3= link_to item.item_title, item.item_link, :class => 'ellipsis_text'
 
     .meta-data
       .profile-pic
