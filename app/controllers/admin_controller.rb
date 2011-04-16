@@ -144,9 +144,12 @@ class AdminController < ApplicationController
     return true if current_user and current_user.is_admin?
 
     if User.admins.empty?
+      flash[:error] = "WARNING:: NO ACTIVE ADMINS. Please set an admin"
+=begin
       authenticate_or_request_with_http_basic do |username, password|
         username == get_setting('default_admin_user').try(:value) and password == get_setting('default_admin_password').try(:value)
       end
+=end
     else 
       redirect_to home_index_path and return false
     end
