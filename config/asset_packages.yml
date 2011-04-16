@@ -8,7 +8,7 @@ javascripts:
   - scrollable.autoscroll.min
   - audio-player
   - scrollable.min
-  - jquery.ThreeDots.min
+  - jquery.ThreeDots
   - jquery.quicksand.min
   - jquery.jcarousel.pack
   - jquery.masonry.min

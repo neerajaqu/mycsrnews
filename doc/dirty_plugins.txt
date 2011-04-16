@@ -13,3 +13,4 @@ Javascript:
 -----------
 
 * Pretty Photo minified version, updated with: var regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif)(?:\\?[0-9]+)?$");
+* jquery.ThreeDots.js
