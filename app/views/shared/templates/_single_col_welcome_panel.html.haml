@@ -11,7 +11,8 @@
           %h5= vt.t('newbie_headline')
         %span.clearfix
         %br
-        = link_to "Post to #{get_setting('site_title').try(:value)}", new_story_path, :class => "button-link"
+        - if vo.setting.use_post_button
+          = link_to "Post to #{get_setting('site_title').try(:value)}", new_story_path, :class => "button-link"
       - else
         .profile-pic
           - case get_setting('welcome_layout').try(:value)
