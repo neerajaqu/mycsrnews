@@ -21,7 +21,6 @@ script/pids
 config/*.yml
 config/application.god
 config/compass.config
-config/compass.rb
 !config/widgets.yml
 !config/resque_schedule.yml
 !config/cucumber.yml
