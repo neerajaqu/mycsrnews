@@ -46,8 +46,6 @@ The primary(required) config files are:
   * application_settings.yml -- misc config options
   * database.yml
   * facebooker.yml -- remember to set callback_url to your base site, ie http://my.site.com
-  * compass.rb -- need to set http_images_path to your absolute web address
-  * locales.yml -- select the languagues you will be using
   * menu.yml -- configure what menu items you want to appear in your application
   * resque.yml -- where to find your redis server
 
@@ -57,6 +55,7 @@ The optional config files for advanced settings are:
   * smtp.yml for outgoing mail
   * application.god for use with the [God monitoring system](http://god.rubyforge.org/)
   * unicorn.conf.rb
+  * locales.yml -- select the languagues you will be using
   * There are a number of other advanced files in the config directory
 
 We provide .sample files for the majority of these config files to facilitate easy setup.
