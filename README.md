@@ -96,8 +96,11 @@ We have a wide array of documentation and articles located at http://support.new
 
 Some useful starting points are:
   * [Community Guide to the NewsCloud Open Source Facebook Platform](http://blog.newscloud.com/community-guide-to-the-newscloud-open-source-facebook-platform.html)
+  
   * [Configuring Your Application](http://support.newscloud.com/faqs/configuring-your-application)
+  
   * [Managing Your Application](http://support.newscloud.com/faqs/managing-your-application)
+  
   * [Using your Facebook Application](http://support.newscloud.com/faqs/using-your-facebook-application)
 
 Developers
