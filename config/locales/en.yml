@@ -29,6 +29,7 @@ en:
     suggest_idea: "Suggest an Idea"
     your_idea: "What's your idea?"
   resources:
+    newest_resources_title: "Newest Links"
     newest_resource_sections: "Newest {{name}} Links"
     top_resource_sections: "Top {{name}} Links"
     top_resources: "Top Links"

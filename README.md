@@ -1,8 +1,9 @@
 Welcome to the Newscloud framework
 ==================================
 
-NewsCloud is an open-source Facebook application that brings the power of community to news organizations. It is powered in part by technology funded by the John S. and James L. Knight Foundation.
+NewsCloud is an open-source Facebook Connect Website and Facebook Application that brings the power of community to news  organizations. It is powered in part by technology funded by the John S. and James L. Knight Foundation.Funding for our open source development will continue through April 30, 2012.
 
+For a complete feature list of the platform, visit [http://newscloud.net/idLbRa](http://newscloud.net/idLbRa). Follow [@newscloud on Twitter](http://twitter.com/newscloud) for updates.
 
 Getting Started
 ---------------
@@ -17,7 +18,7 @@ Alternatively, download release 2 directly [http://github.com/newscloud/n2/archi
 Register a facebook application
 -------------------------------
 
-  * Visit [http://www.facebook.com/developers/](http://www.facebook.com/developers/) and register your application
+  * Add the Facebook developer application [http://www.facebook.com/developers/](http://www.facebook.com/developers/) and [create a new application](http://www.facebook.com/developers/createapp.php)
   * You **must** set your canvas url to end in /iframe/, ie http://my.site.com/iframe/
   * However, when you set your config files you only want to use http://my.site.com
   * This is used internally to allow the use of a facebook canvas app and an external web pages
@@ -83,13 +84,7 @@ You can now run your application in the typical rails fashion by doing:
 
 or by whatever means you normally use.
 
-As long as there are no existing admin users, you can use a default login to get into the admin interface. Register as a user and make sure to set yourself as an admin immediately.
-Default login for http://my.site.com/admin :
-
-       login: admin
-	   password: n2adminpassword
-
-Once there, goto the Members -> Users tab and edit your user account to make you an admin.
+You must set up an administrator. First, visit your Facebook application or website and register as a user. Then, visit the administration site e.g. http://my.site.com/admin and make yourself an administrator e.g. goto the Members -> Users tab and edit your user account to make you an admin.
 
 Next Steps
 ----------
@@ -101,11 +96,15 @@ We have a wide array of documentation and articles located at http://support.new
 
 Some useful starting points are:
 
+  * [Community Guide to the NewsCloud Open Source Facebook Platform](http://blog.newscloud.com/community-guide-to-the-newscloud-open-source-facebook-platform.html)
+  
   * [Configuring Your Application](http://support.newscloud.com/faqs/configuring-your-application)
+  
   * [Managing Your Application](http://support.newscloud.com/faqs/managing-your-application)
+  
   * [Using your Facebook Application](http://support.newscloud.com/faqs/using-your-facebook-application)
 
 Developers
 ----------
 
-There is always more to do in the software world, and we need your help. Grab a fork and hack away! If you're interested in discussiong the application further, please get in touch with us.
+There is always more to do in the software world, and we need your help. Grab a fork and hack away! If you're interested in discussing the application further, please get in touch with us.
