@@ -1,8 +1,17 @@
 .left-dashboard{:style => "width: 48%; float: left; border-right: 1px solid black; padding-right: 10px;"}
   %h1 Site Configuration
+
+  - unless FACEBOOKER["api_key"] and FACEBOOKER["secret_key"]
+    %h4 Facebook application configuration
+    %p
+      == Please provide your application name, callback url, api key and secret key in the file config/facebooker.yml, and then restart your newscloud application. If you do not have a facebook application,#{link_to "create one now", "http://www.facebook.com/developers/createapp.php", :target => "_blank"}.
+
   - @setting_groups.each do |name, setting_group|
     %h4= link_to setting_group[:title], edit_admin_setting_group_path(:id => name)
     %p= setting_group[:description]
+
+  %h4= link_to "Twitter Configuration", admin_twitter_settings_path
+  %p== Integrate a twitter account with your newscloud application. If you do not yet have a twitter dev application, #{link_to "create one now", "https://dev.twitter.com/apps/new", :target => "_blank"}.
 
 .right-dashboard{:style => "width: 45%; float: right;"}
   %h1 Administer #{get_setting('site_title').try(:value)}
