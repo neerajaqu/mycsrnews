@@ -30,18 +30,18 @@ class Gallery < ActiveRecord::Base
 
   def thumb_url
     return nil unless gallery_items.any?
-    gallery_items.first.thumb_url
+    gallery_items.last.thumb_url
   end
   alias_method :featured_image_url, :thumb_url
 
   def medium_url
     return nil unless gallery_items.any?
-    gallery_items.first.medium_url
+    gallery_items.last.medium_url
   end
 
   def full_url
     return nil unless gallery_items.any?
-    gallery_items.first.full_url
+    gallery_items.last.full_url
   end
 
   def expire
