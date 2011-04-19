@@ -2,8 +2,9 @@
 - if gallery.present?
   .panel-1.featured-panel.top-secondary-corners.bottom-secondary-corners.gallery
     %div.panel-bar.panel-full.top-secondary-corners{:class => vo.setting.css_class}
-      %h2= gallery_name vo
-      %p= gallery.title
+      -#%h2= gallery_name vo
+      -#%p= gallery.title
+      %h2= gallery.title
       -#
         - if vo.setting.locale_title
           %h2= vt.t(vo.setting.locale_title)
