@@ -95,6 +95,7 @@ For more information about configuring you home page, read our [Widget Builder G
 We have a wide array of documentation and articles located at http://support.newscloud.com/
 
 Some useful starting points are:
+
   * [Community Guide to the NewsCloud Open Source Facebook Platform](http://blog.newscloud.com/community-guide-to-the-newscloud-open-source-facebook-platform.html)
   
   * [Configuring Your Application](http://support.newscloud.com/faqs/configuring-your-application)
