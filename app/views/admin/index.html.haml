@@ -1,6 +1,9 @@
 .left-dashboard{:style => "width: 48%; float: left; border-right: 1px solid black; padding-right: 10px;"}
   %h1 Site Configuration
 
+  - unless false and User.admins.any?
+    %h4 You need to add an admin user.
+    %p== First register #{link_to 'here', signup_path} if you have not done so already. Next add set an admin user here #{link_to 'here', admin_users_path}.
   - unless FACEBOOKER["api_key"] and FACEBOOKER["secret_key"]
     %h4 Facebook application configuration
     %p
