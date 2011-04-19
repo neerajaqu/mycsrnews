@@ -11,6 +11,10 @@ class Metadata::ViewObjectSetting < Metadata
 
   #before_save :build_view_object
 
+  def after_initialize
+    init_data
+  end
+
   def self.get_slot key_sub_type, key_name
     self.find_slot(key_sub_type, key_name)
   end
@@ -96,7 +100,7 @@ class Metadata::ViewObjectSetting < Metadata
   def css_class() self.data[:css_class] or self.klass_name.tableize end
   def css_class=(val) self.data[:css_class] = val end
   def dataset() self.data[:dataset] end
-  def kommands() self.data[:kommands] || [] end
+  def kommands() self.data[:kommands] ||= [] end
   def dataset=(val) self.data[:dataset] = val end
 
   def load_dataset
