@@ -723,6 +723,22 @@ view_objects = [
   	}
   },
   {
+  	:name          => "Newest Resources",
+  	:template_name => "v2_single_col_list",
+  	:settings      => {
+  		:klass_name      => "Resource",
+  		:locale_title    => "resources.newest_resources_title",
+  		:locale_subtitle => nil,
+  		:use_post_button => true,
+  		:kommands        => [
+  		  {
+          :method_name => "newest",
+          :args        => [5]
+        }
+  		]
+  	}
+  },
+  {
   	:name          => "Newest Universal Items",
   	:template_name => "v2_single_col_list",
   	:settings      => {
