@@ -115,7 +115,7 @@ settings = [
  { :key_sub_type => 'options', :key_name => 'site_topic', :value => (APP_CONFIG['site_topic'] || "Default Topic" ) },
  { :key_sub_type => 'options', :key_name => 'contact_us',  :value => (APP_CONFIG['contact_us_recipient'] || "admin@email.com,me@email.com,support@email.com" ) },
  { :key_sub_type => 'options', :key_name => 'firstnameonly', :value => (APP_CONFIG['firstnameonly'] || "false" ) },
- { :key_sub_type => 'options', :key_name => 'site_video_url', :value => APP_CONFIG['base_url'].gsub("http://","").gsub("www",""), :hint => "used by some sites with custom video URLs e.g. boston.com"},
+ { :key_sub_type => 'options', :key_name => 'site_video_url', :value => APP_CONFIG['base_site_url'].gsub("http://","").gsub("www",""), :hint => "used by some sites with custom video URLs e.g. boston.com"},
  { :key_sub_type => 'options', :key_name => 'predictions_max_daily_guesses', :value => 25, :hint => "maximum number of guesses allowed per day"},
  { :key_sub_type => 'options', :key_name => 'predictions_allow_suggestions',  :value => true },
  { :key_sub_type => 'design', :key_name => 'typekit', :value => (APP_CONFIG['typekit'] || "000000" ) },
@@ -141,7 +141,7 @@ settings = [
  { :key_sub_type => 'bitly', :key_name => 'bitly_api_key', :value =>(APP_CONFIG['bitly_api_key'] || "api_key" ) },
  { :key_sub_type => 'facebook', :key_name => 'app_id', :value => (APP_CONFIG['facebook_application_id'] || "111111111111" ) },
  { :key_sub_type => 'welcome_panel', :key_name => 'welcome_layout', :value => "default", :hint => 'e.g. default, thumb, host, banner' },
- { :key_sub_type => 'welcome_panel', :key_name => 'welcome_image_url', :value => APP_CONFIG['base_url']+"/images/default/icon-fan-app.gif", :hint => "Full (absolute) URL to image, e.g. #{APP_CONFIG['base_url']}/images/default/icon-fan-app.gif, recommended sizes: thumb 50 x 50 or banner = 300 x 90"},
+ { :key_sub_type => 'welcome_panel', :key_name => 'welcome_image_url', :value => APP_CONFIG['base_site_url']+"/images/default/icon-fan-app.gif", :hint => "Full (absolute) URL to image, e.g. #{APP_CONFIG['base_site_url']}/images/default/icon-fan-app.gif, recommended sizes: thumb 50 x 50 or banner = 300 x 90"},
  { :key_sub_type => 'welcome_panel', :key_name => 'welcome_host', :value => "0", :hint => 'userid of host profile image to use'},
  { :key_sub_type => 'options', :key_name => 'limit_daily_member_posts',  :value => "25" },
  { :key_sub_type => 'stats', :key_name => 'google_analytics_account_id', :value => (APP_CONFIG['google_analytics_account_id'] || "UF-123456890-7" ) },
@@ -1025,5 +1025,13 @@ view_objects.each do |view_object_hash|
     view_object.setting.save!
   else
   	raise (view_object.errors.full_messages | view_object.setting.errors.full_messages).inspect
+  end
+end
+
+home_view_object = ViewObject.find_or_create_by_name("home--index")
+unless home_view_object.edge_children.any?
+  ["Newest Univeral Items Double Column List", "Welcome Panel", "Recent Users", "Newest Story Double Column Item", "Newest Gallery Double Column Small Strip", "Newswire"].each do |name|
+    puts "Adding #{name}" if debug
+    home_view_object.add_child! ViewObject.find_by_name(name)
   end
 end

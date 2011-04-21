@@ -35,7 +35,7 @@ module Newscloud
     @@groups = {
       :basic_site_config => {
         :title       => "Initial Site Configuration Settings",
-        :description => "This contains basic site settings like Site Title and Site Description and primary contact info.",
+        :description => "This contains basic site settings like Site Title and Site Description, primary contact info, and your facebook application id.",
         :pages       => [
           {
             :tab_title        => "Site Description",
@@ -76,6 +76,18 @@ module Newscloud
                 :description => "This is the user account that will be used to send dashboard messages, reminder emails, and other contact information.",
                 :setting     => ["site_notification_user", nil],
                 :hint        => "Please insert a user id."
+              }
+            ]
+          },
+          {
+            :tab_title        => "Facebook Application ID",
+            :page_title       => "Set your facebook application ID here",
+            :items            => [
+              {
+                :title       => "Facebook application ID",
+                :required    => true,
+                :description => 'You can find your facebook application id at <a href="http://www.facebook.com/developers/apps.php" target="_ext">http://www.facebook.com/developers/apps.php</a>',
+                :setting     => ["app_id", "facebook"],
               }
             ]
           }
