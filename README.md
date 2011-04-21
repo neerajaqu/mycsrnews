@@ -43,7 +43,6 @@ Setup your config files
 
 The primary(required) config files are:
 
-  * application_settings.yml -- misc config options
   * database.yml
   * facebooker.yml -- remember to set callback_url to your base site, ie http://my.site.com
   * menu.yml -- configure what menu items you want to appear in your application
@@ -51,6 +50,7 @@ The primary(required) config files are:
 
 The optional config files for advanced settings are:
 
+  * application_settings.yml -- misc config options
   * newrelic.yml for use with the [New Relic](http://newrelic.com/) monitoring (Note: we are not affiliated, we just like their application)
   * smtp.yml for outgoing mail
   * application.god for use with the [God monitoring system](http://god.rubyforge.org/)

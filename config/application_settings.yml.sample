@@ -8,30 +8,15 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  fb_rss_url: "http://my.site.com/stories.atom"
-  fb_ajax_url: "http://my.site.com"
-  base_url: "http://my.site.com"
 
 test:
   <<: *defaults
-  fb_rss_url: "http://my.site.com/stories.atom"
-  fb_ajax_url: "http://my.site.com"
-  base_url: "http://my.site.com"
 
 cucumber:
   <<: *defaults
-  fb_rss_url: "http://my.site.com/stories.atom"
-  fb_ajax_url: "http://my.site.com"
-  base_url: "http://my.site.com"
 
 staging:
   <<: *defaults
-  fb_rss_url: "http://my.site.com/stories.atom"
-  fb_ajax_url: "http://my.site.com"
-  base_url: "http://my.site.com"
 
 production:
   <<: *defaults
-  fb_rss_url: "http://my.site.com/stories.atom"
-  fb_ajax_url: "http://my.site.com"
-  base_url: "http://my.site.com"

@@ -12,7 +12,7 @@ module Newscloud
   class Tweeter
 
     def initialize
-      default_url_options[:host] = APP_CONFIG['base_url'].sub(%r{^https?://}, '')
+      default_url_options[:host] = APP_CONFIG['base_site_url'].sub(%r{^https?://}, '')
       @base_oauth_key = "U6qjcn193333331AuA"
       @base_oauth_secret= "Heu0GGaRuzn762323gg0qFGWCp923viG8Haw"
 

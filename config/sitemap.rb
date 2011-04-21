@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = APP_CONFIG['base_url']
+SitemapGenerator::Sitemap.default_host = APP_CONFIG['base_site_url']
 
 if Metadata::Setting.find_setting('yahoo_app_id').present?
   SitemapGenerator::Sitemap.yahoo_app_id = Metadata::Setting.find_setting('yahoo_app_id').value

@@ -286,9 +286,9 @@ module ApplicationHelper
   end
       
   def base_url(path = '')
-    path = "/#{path}" if path.present? and not path =~ %r{^/} and not APP_CONFIG['base_url'] =~ %r{/$}
-    if APP_CONFIG['base_url'].present?
-    	"#{APP_CONFIG['base_url']}#{path}"
+    path = "/#{path}" if path.present? and not path =~ %r{^/} and not base_site_url =~ %r{/$}
+    if base_site_url.present?
+    	"#{base_site_url}#{path}"
     end
   end
 
@@ -347,7 +347,11 @@ module ApplicationHelper
   end
 
   def default_image
-    APP_CONFIG['default_image']
+    'default/watermark.jpg'
+  end
+
+  def default_medium_image
+    'default/medium_watermark.jpg'
   end
 
   def display_facebook_messages

@@ -1,5 +1,5 @@
 -# email reminder sent by admin to get people to sign up for email
 -# expects locals user
 = I18n.translate('reminders.emailsignup.message')
-%a{:href => "#{APP_CONFIG['base_url']}/users/#{user.cached_slug}/edit"}= I18n.translate('reminders.emailsignup.action')
-%a{:href => "#{APP_CONFIG['base_url']}/users/dont_ask_me_for_email"}= I18n.translate('reminders.emailsignup.stop')
+%a{:href => "#{FACEBOOKER['base_url']}/users/#{user.cached_slug}/edit"}= I18n.translate('reminders.emailsignup.action')
+%a{:href => "#{FACEBOOKER['base_url']}/users/dont_ask_me_for_email"}= I18n.translate('reminders.emailsignup.stop')

@@ -50,6 +50,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
 
+  helper_method :base_site_url
   helper_method :facebook_session
   helper_method :current_facebook_user
   helper_method :get_setting
@@ -462,19 +463,23 @@ class ApplicationController < ActionController::Base
     "http://#{Facebooker.canvas_server_base}/#{FACEBOOKER["canvas_page_name"]}/"
   end
 
+  def base_site_url
+    APP_CONFIG['base_site_url']
+  end
+
   def replace_url_with_canvas_url url
-    url.sub %r{^#{APP_CONFIG["base_url"]}/?(iframe/)?}, canvas_url
+    url.sub %r{^#{base_site_url}/?(iframe/)?}, canvas_url
   end
 
   def replace_text_with_canvas_urls text
-    text.gsub %r{#{APP_CONFIG["base_url"]}/?(iframe/)?}, canvas_url
+    text.gsub %r{#{base_site_url}/?(iframe/)?}, canvas_url
   end
 
   def replace_text_with_urls text, url
     txt = text.clone
-    url ||= get_canvas_preference ? canvas_url : APP_CONFIG['base_url']
+    url ||= get_canvas_preference ? canvas_url : base_site_url
     url += '/' unless url =~ %r{/$}
-    txt.gsub! %r{#{APP_CONFIG["base_url"]}/?(iframe/)?}, url
+    txt.gsub! %r{#{base_site_url}/?(iframe/)?}, url
     txt.gsub! %r{#{canvas_url}}, url
     txt
   end

@@ -22,7 +22,7 @@ module MediaHelper
       else
       	url = nil
     end
-    url || 'default/watermark.jpg'
+    url || default_image
   end
 
   def medium_image_or_default image
@@ -47,7 +47,7 @@ module MediaHelper
       else
       	url = nil
     end
-    url || 'default/medium_watermark.jpg'
+    url || default_medium_image
   end
   
 end
