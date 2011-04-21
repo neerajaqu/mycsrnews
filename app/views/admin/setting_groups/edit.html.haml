@@ -34,6 +34,7 @@
               form.submit();
             } else {
               submit = false;
+              $('#status li').removeClass("active").eq(i).addClass("active");
             }
             return true;
           }
