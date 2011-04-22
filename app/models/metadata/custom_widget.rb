@@ -24,6 +24,10 @@ class Metadata::CustomWidget < Metadata
     ['panel-1', 'panel-2', 'panel-3']
   end
 
+  def self.old_content_types
+    ['main_content', 'sidebar_content']
+  end
+
   def valid_data?
     custom_data != '**default**'
   end
@@ -58,7 +62,7 @@ class Metadata::CustomWidget < Metadata
   private
 
   def on_content_type
-    errors.add(:content_type, "You must select a valid content type") unless Metadata::CustomWidget.content_types.include?(self.content_type)
+    errors.add(:content_type, "You must select a valid content type") unless Metadata::CustomWidget.content_types.include?(self.content_type) or Metadata::CustomWidget.old_content_types.include?(self.content_type)
   end
 
   def set_meta_keys

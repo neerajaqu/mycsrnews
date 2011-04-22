@@ -11,14 +11,15 @@
           - if vo.setting.use_post_button
             = post_something vo.setting.klass_name, "center"
       .panel-content
-        %h1
-          %span.ellipsis_title_3= link_to item1.item_title, item1.item_link, :class => 'ellipsis_text'
+        - if item1
+          %h1
+            %span.ellipsis_title_3= link_to item1.item_title, item1.item_link, :class => 'ellipsis_text'
 
-        .meta-data
-          .profile-pic
-            = local_linked_profile_pic item1.item_user
-          %h6= posted_by_with_topic(item1)
-          %h6= action_links(item1)
+          .meta-data
+            .profile-pic
+              = local_linked_profile_pic item1.item_user
+            %h6= posted_by_with_topic(item1)
+            %h6= action_links(item1)
 
 
     .panel-half.pad-left

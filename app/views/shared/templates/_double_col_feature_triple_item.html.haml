@@ -5,18 +5,19 @@
   .panel-content.featured-panel
     .panel-full
       .item-with-image
-        .item-thumb
-          = link_to image_tag(medium_image_or_default(item1)), item1.item_link
-        .item-text
-          %h1
-            %span.ellipsis_title_3= link_to item1.item_title, item1.item_link, :class => 'ellipsis_text'
-          %p.ellipsis_caption_5
-            %span.ellipsis_text= item1.item_description
-          .meta-data
-            .profile-pic
-              = local_linked_profile_pic(item1.user)
-            %h6= posted_by_with_date(item1)
-            %h6= action_links(item1)
+        - if item1
+          .item-thumb
+            = link_to image_tag(medium_image_or_default(item1)), item1.item_link
+          .item-text
+            %h1
+              %span.ellipsis_title_3= link_to item1.item_title, item1.item_link, :class => 'ellipsis_text'
+            %p.ellipsis_caption_5
+              %span.ellipsis_text= item1.item_description
+            .meta-data
+              .profile-pic
+                = local_linked_profile_pic(item1.user)
+              %h6= posted_by_with_date(item1)
+              %h6= action_links(item1)
 
     - items.each_with_index do |item, index|
       %div.panel-third{:class => (index == 0 ? "first" : index == 2 ? "last" : "")}
