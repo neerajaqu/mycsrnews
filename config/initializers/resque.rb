@@ -9,7 +9,9 @@ unless defined?(APP_CONFIG)
   APP_CONFIG = {}
 end
 
-resque_config = YAML.load_file(rails_root + '/config/resque.yml')
+resque_base_file = rails_root + '/config/resque.yml'
+resque_file = File.exists?(resque_base_file) ? resque_base_file : (resque_base_file + '.sample')
+resque_config = YAML.load_file(resque_file)
 Resque.redis = resque_config[rails_env]
 APP_CONFIG['redis'] = resque_config[rails_env]
 

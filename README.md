@@ -45,14 +45,14 @@ The primary(required) config files are:
 
   * database.yml
   * facebooker.yml -- remember to set callback_url to your base site, ie http://my.site.com
-  * menu.yml -- configure what menu items you want to appear in your application
-  * resque.yml -- where to find your redis server
 
 The optional config files for advanced settings are:
 
   * application_settings.yml -- misc config options
+  * resque.yml -- where to find your redis server, defaults to localhost:6379
   * newrelic.yml for use with the [New Relic](http://newrelic.com/) monitoring (Note: we are not affiliated, we just like their application)
   * smtp.yml for outgoing mail
+  * menu.yml -- configure what menu items you want to appear in your application
   * application.god for use with the [God monitoring system](http://god.rubyforge.org/)
   * unicorn.conf.rb
   * locales.yml -- select the languagues you will be using

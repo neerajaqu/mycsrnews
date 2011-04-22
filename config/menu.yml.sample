@@ -24,17 +24,16 @@ menu:
     questions_list: 'enabled'
     new_question: 'enabled'
     my_questions: 'enabled'
-  events:
-    events_list: 'enabled'
-    new_event: 'enabled'
-    import_facebook: 'enabled'  
-  admin:
+  #events:
+    #events_list: 'enabled'
+    #new_event: 'enabled'
+    #import_facebook: 'enabled'  
   galleries:
     galleries_list: 'enabled'
     new_gallery: 'enabled'
     sub_galleries: 'enabled'
-  classifieds:
-    browse: 'enabled'
-    new: 'enabled'
-  predictions:
-    predictions_play: 'enabled'
+  #classifieds:
+    #browse: 'enabled'
+    #new: 'enabled'
+  #predictions:
+    #predictions_play: 'enabled'
