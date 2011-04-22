@@ -1,6 +1,12 @@
 .left-dashboard{:style => "width: 48%; float: left; border-right: 1px solid black; padding-right: 10px;"}
   %h1 Site Configuration
 
+  -# HACK:: TODO:: rebuild setting groups into an orderable customizable dsl
+  - display_setting_group = Proc.new do |name|
+    - setting_group = Newscloud::SettingGroups.group name
+    %h4= link_to setting_group[:title], edit_admin_setting_group_path(:id => name)
+    %p= setting_group[:description]
+
   - unless false and User.admins.any?
     %h4 You need to add an admin user.
     %p== First register #{link_to 'here', signup_path} if you have not done so already. Next add set an admin user here #{link_to 'here', admin_users_path}.
@@ -9,12 +15,25 @@
     %p
       == Please provide your application name, callback url, api key and secret key in the file config/facebooker.yml, and then restart your newscloud application. If you do not have a facebook application,#{link_to "create one now", "http://www.facebook.com/developers/createapp.php", :target => "_blank"}.
 
-  - @setting_groups.each do |name, setting_group|
+  - display_setting_group.call :basic_site_config
+  - display_setting_group.call :welcome_panel_config
+
+  - display_setting_group.call :bitly_config
+  -# Twitter config
+  %h4= link_to "Twitter Configuration", admin_twitter_settings_path
+  %p== Integrate a twitter account with your newscloud application. If you do not yet have a twitter dev application, #{link_to "create one now", "https://dev.twitter.com/apps/new", :target => "_blank"}.
+
+  - display_setting_group.call :analytics_config
+  - display_setting_group.call :sitemap_seo_config
+  - display_setting_group.call :google_custom_search_engine_config
+
+  -# @setting_groups.each do |name, setting_group|
     %h4= link_to setting_group[:title], edit_admin_setting_group_path(:id => name)
     %p= setting_group[:description]
 
-  %h4= link_to "Twitter Configuration", admin_twitter_settings_path
-  %p== Integrate a twitter account with your newscloud application. If you do not yet have a twitter dev application, #{link_to "create one now", "https://dev.twitter.com/apps/new", :target => "_blank"}.
+  -#
+    %h4= link_to "Twitter Configuration", admin_twitter_settings_path
+    %p== Integrate a twitter account with your newscloud application. If you do not yet have a twitter dev application, #{link_to "create one now", "https://dev.twitter.com/apps/new", :target => "_blank"}.
 
 .right-dashboard{:style => "width: 45%; float: right;"}
   %h1 Administer #{get_setting('site_title').try(:value)}
