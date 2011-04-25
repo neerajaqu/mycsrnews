@@ -18,6 +18,10 @@ Get ruby up and running
 
 	sudo apt-get install ruby build-essential libopenssl-ruby ruby1.8-dev irb rubygems
 
+Add rubygems executables to your path
+
+	export PATH=/var/lib/gems/1.8/bin:$PATH
+
 Update rubygems
 
 	sudo gem install rubygems-update
@@ -34,8 +38,6 @@ Install MySQL
 Install mysql
 
 	sudo apt-get install mysql-server mysql-client libmysql-ruby libmysqlclient-dev
-
-	sudo gem install mysql
 
 Create a newscloud database and user
 
@@ -89,7 +91,9 @@ You will need to have a facebook developer application, either:
 
   * Create a [new application](http://www.facebook.com/developers/createapp.php)
   * Use an [existing application](http://www.facebook.com/developers/)
+
 NOTE::
+
   * You **must** set your canvas url to end in /iframe/, ie http://my.site.com/iframe/
   * However, when you set your config files you only want to use http://my.site.com
   * This is used internally to allow the use of a facebook canvas app and an external web pages
