@@ -80,6 +80,7 @@ Make Sure to checkout release 3.
 
 
 Configure your database with the settings you created earlier in mysql.
+
 	cp config/database.yml.sample config/database.yml
 	vim config/database.yml
 
