@@ -5,11 +5,16 @@ NewsCloud is an open-source Facebook Connect Website and Facebook Application th
 
 For a complete feature list of the platform, visit [http://newscloud.net/idLbRa](http://newscloud.net/idLbRa). Follow [@newscloud on Twitter](http://twitter.com/newscloud) for updates.
 
-Getting Started
----------------
+View the Ubuntu Server 10.04 lts install guide
+----------------------------------------------
 
 We now have a full guide for bootstrapping and install newscloud on a minimal Ubuntu Server 10.04 LTS system.
+
 See the guide at [INSTALL-ubuntu.md](https://github.com/newscloud/n2/blob/master/INSTALL-ubuntu.md)
+
+
+Getting Started
+---------------
 
 Clone this application to your machine and checkout release 3
 
