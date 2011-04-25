@@ -84,7 +84,7 @@ class GalleriesController < ApplicationController
 
   def check_valid_user
     @gallery = Gallery.find(params[:id])
-    unless current_user and (@gallery.user == current_user or not current_user.is_moderator?)
+    unless current_user and (@gallery.user == current_user or current_user.is_moderator?)
       flash[:error] = "You are not authorized for that gallery."
       redirect_to @gallery and return false
     end

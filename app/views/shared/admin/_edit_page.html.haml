@@ -10,7 +10,7 @@
         = form.input association
       - else
         = form.input field
-    - if include_media_form
+    - if include_media_form and item.media_item?
       = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => item }
   - form.buttons do
     = form.commit_button

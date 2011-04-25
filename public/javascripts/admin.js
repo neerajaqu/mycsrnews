@@ -16,6 +16,12 @@ var $$ = function(param) {
   return $.cache[id];
 };
 
+var $$$ = function(key) {
+	$.cache[key] = $.cache[key] || {};
+
+	return $.cache[key];
+};
+
 $(function() {
   setTimeout(function() {
 		$('.flash').effect('fade', {}, 1000);

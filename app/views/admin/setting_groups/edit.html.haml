@@ -1,0 +1,111 @@
+- content_for :head do
+  = javascript_include_tag 'http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js'
+  = stylesheet_link_tag 'http://static.flowplayer.org/tools/css/scrollable-wizard.css'
+  :javascript
+    $(function() {
+      var root = $("#wizard").scrollable();
+      var api = root.scrollable(), drawer = $('#drawer'), form = $('#wizard-form');
+      var submit = false;
+      form.submit(function(event) { if (!submit) { event.preventDefault(); } });
+      api.onBeforeSeek(function(event, i) {
+        if (api.getIndex() < i) {
+          var page = root.find(".page").eq(api.getIndex()),
+              inputs = page.find('.required :input').removeClass("error"),
+              empty = inputs.filter(function() {
+                return $(this).val().replace(/\s*/g, '') == '';
+              });
+          if (empty.length) {
+            drawer.slideDown(function() {
+              drawer.css("backgroundColor", "#229");
+              setTimeout(function() { drawer.css("backgroundColor", "#fff"); }, 1000);
+            });
+
+            empty.addClass("error");
+
+            submit = false;
+            event.preventDefault();
+            return false;
+          } else {
+            drawer.slideUp();
+            // HACK:: terrible hack...
+            // why the hell can't I submit a form in flowplayer wizards??
+            if (root.find(".page").length == i) {
+              submit = true;
+              form.submit();
+            } else {
+              submit = false;
+            }
+            return true;
+          }
+        }
+
+        $('#status li').removeClass("active").eq(i).addClass("active");
+      });
+      // if tab is pressed on the next button seek to next page
+      root.find("button.next").keydown(function(e) {
+        if (e.keyCode == 9) {
+
+          // seeks to next tab by executing our validation routine
+          api.next();
+          e.preventDefault();
+        } else if (
+          e.preventDefault();
+          return false;
+          //form.submit();
+      });
+    });
+
+%h1= @setting_group[:title]
+#drawer There is an error!
+-#%form{:action => admin_setting_group_path(:id => @setting_group_name), :style => "width: 900px; height: 800px"}
+- form_tag admin_setting_group_url(:id => @setting_group_name), :method => :put, :style => "width: 900px; height: 800px", :id => "wizard-form" do
+  #wizard{:style => "width: 100%; height:1000px"}
+    %ul#status
+      - @setting_group[:pages].each_with_index do |page, index|
+        %li{:class => index.zero? ? "active" : ""}
+          %strong== #{index + 1}.
+          = page[:tab_title]
+
+    .items
+      - @setting_group[:pages].each_with_index do |page, page_index|
+        .page{:style => "width: 850px; height: 800px;"}
+          %h2
+            %strong== Step #{page_index + 1}:
+            = page[:page_title]
+            %em= page[:page_description]
+
+          %ul
+            - page[:items].each_with_index do |item, item_index|
+              - setting, translation = nil
+              - if item[:setting]
+                - setting = Metadata::Setting.get_setting(item[:setting][0], item[:setting][1])
+              - elsif item[:translation]
+                - translation = @locale.translations.find_by_raw_key(item[:translation])
+              -# else
+                -# TODO:: handle edge case
+
+              %li{:class => item[:required] ? "required" : ""}
+                %label
+                  %strong== #{item_index + 1}.
+                  = item[:title]
+                  - if item[:required]
+                    %span *
+                  - if item[:description]
+                    %p= item[:description]
+                  - else
+                    %br
+                  - if setting
+                    = text_field_tag "setting_group[#{setting.key_id}]", setting.value, :class => "text"
+                  - elsif translation
+                    = text_field_tag "translation_group[#{translation.raw_key}]", translation.value, :class => "text"
+                  -# else
+                    -# TODO:: handle edge case
+                  %br
+                  %em= item[:hint]
+            %li.clearfix
+              - unless page_index.zero?
+                %button.prev{:type => "button", :style => "float: left;"} &laquo; Back
+              - if page_index + 1 < @setting_group[:pages].size
+                %button.next.right{:type => "button"} Proceed &raquo;
+              - else
+                %button.next.right{:type => "submit"} Submit

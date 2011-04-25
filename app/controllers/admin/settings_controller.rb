@@ -31,6 +31,9 @@ class Admin::SettingsController < AdminController
   def create
   end
 
+  def wizard
+  end
+
   def destroy
     @metadata = Metadata.find(params[:id])
     @metadata.destroy

@@ -1,40 +1,47 @@
-%h1 Administer #{get_setting('site_title').try(:value)}
-%p
-  %i
-    %b Note: 
-    Preferred browsers for the administration area are 
-    %b
-      %a= link_to 'Google Chrome', 'http://www.google.com/chrome', :target=>'_blank'
-    ,
-    %b
-      %a= link_to 'Safari', 'http://www.apple.com/safari/download/', :target=>'_blank'
-    and
-    %b
-      %a= link_to 'Firefox', 'http://www.mozilla.com/en-US/firefox/firefox.html', :target=>'_blank'
-    \. Internet Explorer 7.x does not work at this time.
+.left-dashboard{:style => "width: 48%; float: left; border-right: 1px solid black; padding-right: 10px;"}
+  %h1 Site Configuration
+  - @setting_groups.each do |name, setting_group|
+    %h4= link_to setting_group[:title], edit_admin_setting_group_path(:id => name)
+    %p= setting_group[:description]
 
-%p Please use the menus above to manage your Facebook application but here are some links that may be helpful to get you started:
-%ul
-  %li
-    %a= link_to 'Read our Frequently Asked Questions','http://support.newscloud.com/faqs/managing-your-application',:target=>'_blank'
-  %li
-    %a= link_to 'Submit a problem to NewsCloud technical support','http://support.newscloud.com/discussions/problems',:target=>'_blank'
-  %li
-    %a= link_to 'Configure the layout of widgets on your front page',admin_featured_items_path
-  %li
-    %a= link_to 'Feature a story on your front page',admin_widgets_path
-  %li
-    %a= link_to 'Set up the text in your application',admin_locale_translations_path(:locale_id => 'en')
-  %li
-    %a= link_to 'Set up HTML for default pages such as About, FAQ and Terms of Services', admin_locale_translations_path(:locale_id => 'en',:type => 'static_pages')
-  - if get_setting('app_id').present?
-    - app_id = get_setting('app_id').value
+.right-dashboard{:style => "width: 45%; float: right;"}
+  %h1 Administer #{get_setting('site_title').try(:value)}
+  %p
+    %i
+      %b Note: 
+      Preferred browsers for the administration area are 
+      %b
+        %a= link_to 'Google Chrome', 'http://www.google.com/chrome', :target=>'_blank'
+      ,
+      %b
+        %a= link_to 'Safari', 'http://www.apple.com/safari/download/', :target=>'_blank'
+      and
+      %b
+        %a= link_to 'Firefox', 'http://www.mozilla.com/en-US/firefox/firefox.html', :target=>'_blank'
+      \. Internet Explorer 7.x does not work at this time.
+
+  %p Please use the menus above to manage your Facebook application but here are some links that may be helpful to get you started:
+  %ul
     %li
-      %a= link_to 'Author the Application\'s page in Facebook for its directory listing',"http://www.facebook.com/apps/application.php?id=#{app_id}",:target=>'_blank'
+      %a= link_to 'Read our Frequently Asked Questions','http://support.newscloud.com/faqs/managing-your-application',:target=>'_blank'
     %li
-      %a= link_to 'Visit your Facebook application statistics',"http://www.facebook.com/business/insights/app.php?id=#{app_id}",:target=>'_blank'
-%p
-  Please be sure to 
-  %a= link_to 'follow @NewsCloud on Twitter', 'http://twitter.com/newscloud',:target=>'_blank'
-  for regular updates or visit our
-  %a= link_to 'blog','http://opensource.newscloud.com',:target=>'_blank'
+      %a= link_to 'Submit a problem to NewsCloud technical support','http://support.newscloud.com/discussions/problems',:target=>'_blank'
+    %li
+      %a= link_to 'Configure the layout of widgets on your front page',admin_featured_items_path
+    %li
+      %a= link_to 'Feature a story on your front page',admin_widgets_path
+    %li
+      %a= link_to 'Set up the text in your application',admin_locale_translations_path(:locale_id => 'en')
+    %li
+      %a= link_to 'Set up HTML for default pages such as About, FAQ and Terms of Services', admin_locale_translations_path(:locale_id => 'en',:type => 'static_pages')
+    - if get_setting('app_id').present?
+      - app_id = get_setting('app_id').value
+      %li
+        %a= link_to 'Author the Application\'s page in Facebook for its directory listing',"http://www.facebook.com/apps/application.php?id=#{app_id}",:target=>'_blank'
+      %li
+        %a= link_to 'Visit your Facebook application statistics',"http://www.facebook.com/business/insights/app.php?id=#{app_id}",:target=>'_blank'
+  %p
+    Please be sure to 
+    %a= link_to 'follow @NewsCloud on Twitter', 'http://twitter.com/newscloud',:target=>'_blank'
+    for regular updates or visit our
+    %a= link_to 'blog','http://opensource.newscloud.com',:target=>'_blank'

@@ -22,6 +22,7 @@ class Metadata::Setting < Metadata
   end
 
   def key() self.setting_name end
+  def key_id() "#{self.key_name}--#{self.key_sub_type}" end
 
   def value
     if self.setting_value == "true"
@@ -40,6 +41,11 @@ class Metadata::Setting < Metadata
   def update_value val
     self.value = val
     save
+  end
+
+  def update_value! val
+    self.value = val
+    save!
   end
 
   def enabled?

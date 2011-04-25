@@ -53,9 +53,7 @@
           %li
             %a{:href => "#home-page"} Front Page
             %ul
-              - if APP_CONFIG['use_view_objects']
-                %li= link_to 'Feature Stories', new_featured_widgets_admin_featured_items_path
-              - else
+              - if not APP_CONFIG['use_view_objects']
                 %li= link_to 'Feature Stories', admin_featured_items_path
               %li
                 %a{:href => "#widgets"} Build Layout
@@ -77,6 +75,7 @@
               %li= link_to 'RSS Feeds', admin_feeds_path
               %li= link_to 'News Sources', admin_sources_path
               %li= link_to 'Related Items', admin_related_items_path
+              %li= link_to 'Cards', admin_cards_path
           %li
             %a{:href => "#modules"} Modules
             %ul

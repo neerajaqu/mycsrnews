@@ -1,0 +1,19 @@
+%h1= @setting_group[:title]
+%h4= @setting_group[:description]
+
+- @setting_group[:pages].each_with_index do |page, index|
+  %hr
+  %h2= page[:tab_title]
+  %ul
+    - page[:items].each do |item|
+      - if item[:setting]
+        - value = Metadata::Setting.get_setting(item[:setting][0], item[:setting][1]).value
+      - elsif item[:translation]
+        - value = @locale.translations.find_by_raw_key(item[:translation]).value
+      - else
+        - value = ''
+      %li== #{item[:title]}: #{value}
+
+%hr
+%br
+= link_to 'Back', admin_path
