@@ -787,3 +787,78 @@ p
 #follow-twitterapi
   display: block
   text-align: center
+
+/****************************************************
+ PREDICTIONS */
+
+.prediction-details 
+  .item-details
+    margin-bottom: $PanelGutters * .5
+  .vote-options
+    border: 1px solid #ccc
+    padding: 10px 10px 0
+    margin-bottom: 10px
+    ul
+      display: inline-block
+      width: 100%
+      margin: 0 
+      padding: 0
+    li
+      background-color: $PanelBarFeaturedBG
+      float: left
+      width: 100%
+      padding: 5px 0
+      margin-bottom: 10px
+    .vote-opt-list
+      ul
+        margin-bottom: 10px
+      li.option-item
+        &:hover
+          background-color: $PanelBarFeaturedBG - #111
+        label
+          display: block
+          padding:  $PanelGutters * .5 $PanelGutters * .5 $PanelGutters * .5 $PanelGutters * 1.15
+          font-weight: bold
+        input
+          float: left
+          margin: $PanelGutters * .5 0 $PanelGutters * .5 $PanelGutters * .25
+    .results-list
+      li.results-item
+        background-color: $PanelBarFeaturedBG
+        &.user-choice
+          background-color: $PanelBarFeaturedBG - #111
+        .numbers
+          float: left
+          width: 30%
+          span
+            text-align: center
+            display: block
+            padding: 5px
+            font-weight: bold
+        .voter-profiles
+          margin-left: -1px
+          border-left: 1px solid #fff
+          float: left
+          width: 70%
+          .profile-pic
+            margin: 0 0 0 10px
+              
+
+
+  .pred-nav-bar
+    padding: 5px 0
+    background-color: $subTitleBG
+    display: inline-block
+    width: 100%
+    margin-bottom: 10px
+    
+    a
+      color: $linkColor
+      display: inline-block
+      font-weight: bold
+      padding: 0 5px
+      
+      &.previous
+        float: left
+      &.next
+        float: right
