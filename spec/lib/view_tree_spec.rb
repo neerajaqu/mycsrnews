@@ -3,6 +3,7 @@ require "spec_helper"
 describe ViewTree do
 
   it "should render" do
+    pending("Update viewtree spec")
     mock(ViewTree).fetch("stories--index")
     controller = StoriesController.new
     controller.action_name = 'index'
@@ -18,6 +19,7 @@ describe ViewTree do
       end
 
       it "should fetch" do
+        pending("Update viewtree spec")
         ViewTree.fetch(@key_name)
       end
     end
@@ -30,6 +32,7 @@ describe ViewTree do
       end
 
       it "should fetch" do
+        pending("Update viewtree spec")
         ViewTree.fetch(@key_name)
       end
     end
