@@ -112,6 +112,7 @@ Install required rubygems
 -------------------------
 
 First install the bundler gem
+
 	sudo gem install bundler
 
 Use bundler to install the required gems
