@@ -86,6 +86,7 @@ Register a facebook application
 
 Configure facebooker with the keys from your facebook application
 You will need to have a facebook developer application, either:
+
   * Create a [new application](http://www.facebook.com/developers/createapp.php)
   * Use an [existing application](http://www.facebook.com/developers/)
 NOTE::
