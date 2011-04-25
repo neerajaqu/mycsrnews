@@ -8,12 +8,15 @@ For a complete feature list of the platform, visit [http://newscloud.net/idLbRa]
 Getting Started
 ---------------
 
-Clone this application to your machine and checkout release 2
+We now have a full guide for bootstrapping and install newscloud on a minimal Ubuntu Server 10.04 LTS system.
+See the guide at [INSTALL-ubuntu.md](https://github.com/newscloud/n2/blob/master/INSTALL-ubuntu.md)
+
+Clone this application to your machine and checkout release 3
 
         git clone git://github.com/newscloud/n2.git
-        git checkout --track -b release2 origin/release2
+        git checkout --track -b release3 origin/release3
 
-Alternatively, download release 2 directly [http://github.com/newscloud/n2/archives/v2.0_stable](https://github.com/newscloud/n2/tree/release2)
+Alternatively, download release 3 directly [http://github.com/newscloud/n2/archives/v3.0_stable](https://github.com/newscloud/n2/tree/release3)
 
 Register a facebook application
 -------------------------------
