@@ -44,7 +44,7 @@ Create a newscloud database and user
 	mysql -u root -p
 
 	create database n2_development;
-	grant ALL on n2_develpment.* to n2db@localhost identified by 'SOME SECURE PASSWORD';
+	grant ALL on n2_development.* to n2db@localhost identified by 'SOME SECURE PASSWORD';
 
 
 Install Memcached and Redis
