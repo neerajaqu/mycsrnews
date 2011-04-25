@@ -25,7 +25,7 @@ Add rubygems executables to your path
 Update rubygems
 
 	sudo gem install rubygems-update
-	sudo update_rubygems
+	sudo `which update_rubygems`
 
 Set your rails environment variable if need be
 	
