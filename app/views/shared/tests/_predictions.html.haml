@@ -1,0 +1,156 @@
+.clearfix
+
+.panel-2.prediction-details
+  .item-details
+    %h1
+      Predictions: Politics
+    %p
+      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+    .meta-data
+      %h6 
+        Posted by 
+        %a Jeff Reifman 
+        3 months ago
+      %h6 
+        Tags:  
+        %a seattle
+        , 
+        %a politics
+
+  .pred-nav-bar
+    %a.previous
+      &laquo; Previous
+    %a.next
+      Next &raquo;
+    .clearfix
+
+  .vote-options
+    %h4 Will Mike McGinn be reelected?
+    %p Select an option below to vote 
+    .vote-opt-list
+      %ul
+        %li.option-item
+          .option
+            = radio_button_tag 'option', '1', :class => 'radio'
+            = label_tag 'option 1'
+        %li.option-item
+          .option
+            = radio_button_tag 'option', '2'
+            = label_tag 'option 2'
+        %li.option-item
+          .option
+            = radio_button_tag 'option', '3'
+            = label_tag 'option 3'
+        %li.option-item
+          .option
+            = radio_button_tag 'option', '4'
+            = label_tag 'option 4'
+        %li.option-item
+          .option
+            = radio_button_tag 'option', '5'
+            = label_tag 'option 5'
+
+
+
+    %p.vote-meta
+      %a Is this question out of date?
+  .vote-options
+    %h4 Will Mike McGinn be reelected?
+    %p You voted for Option 1
+    %p template notes:  Only show top five latest users who voted. along with the paragraph saying who the user voted for the user's voted option will be highlited.
+    .results-list
+      %ul
+        %li.results-item.user-choice
+          .numbers
+            %span Option 1
+            %span 20% | 12,000 Votes
+          .voter-profiles
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+
+        %li.results-item
+          .numbers
+            %span Option 1
+            %span 20% | 12,000 Votes
+          .voter-profiles
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+
+        %li.results-item
+          .numbers
+            %span Option 1
+            %span 20% | 12,000 Votes
+          .voter-profiles
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+
+        %li.results-item
+          .numbers
+            %span Option 1
+            %span 20% | 12,000 Votes
+          .voter-profiles
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+
+        %li.results-item
+          .numbers
+            %span Option 1
+            %span 20% | 12,000 Votes
+          .voter-profiles
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+            .profile-pic.float-left
+              =link_to image_tag('default/test-profile-pic.jpg'), '#'
+
+
+    %p.vote-meta
+      %a Is this question out of date?
+
+
+
+
+  .pred-nav-bar
+    %a.previous
+      &laquo; Previous
+    %a.next
+      Next &raquo;
+    .clearfix
