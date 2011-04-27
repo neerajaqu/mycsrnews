@@ -17,7 +17,7 @@ module I18n
       end
 
       def locale=(code)
-        @locale = Locale.find_by_code(code)
+        @locale = ::Locale.find_by_code(code)
       end
 
       def cache_store=(store)
@@ -126,7 +126,7 @@ module I18n
       end
 
       def available_locales
-        Locale.available_locales
+        ::Locale.available_locales
       end
 
       def reload!
@@ -139,8 +139,8 @@ module I18n
         # routine, and also accept an arbitrary locale for one time locale lookups
         def locale_in_context(locale)
           return @locale if @locale && @locale.code == locale.to_s
-          #Locale.find_by_code(locale.to_s) rescue nil && (raise InvalidLocale.new(locale))
-          locale = Locale.find_by_code(locale.to_s)
+          #::Locale.find_by_code(locale.to_s) rescue nil && (raise InvalidLocale.new(locale))
+          locale = ::Locale.find_by_code(locale.to_s)
           raise InvalidLocale.new(locale) unless locale
           locale
         end
@@ -171,7 +171,7 @@ module I18n
 
         # looks up translations for the default locale, and if they exist untranslated records are created for the locale and the default locale values are returned 
         def use_and_copy_default_locale_translations_if_they_exist(locale, key)
-          default_locale_entry = lookup(Locale.default_locale, key)
+          default_locale_entry = lookup(::Locale.default_locale, key)
           return unless default_locale_entry
 
           if default_locale_entry.is_a?(Array)
