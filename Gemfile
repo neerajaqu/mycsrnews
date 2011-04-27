@@ -1,13 +1,15 @@
 source :gemcutter
-gem "rails", "2.3.4"
+
+gem "rails", "2.3.11"
+gem "rack", '1.1.0'
 
 
+gem "haml", "3.0.25"
 gem 'compass', '~> 0.10.0'
 gem 'compass-960-plugin'
 gem 'json', '1.4.6'
 gem 'mogli'
 
-gem "rack", '1.0.1'
 gem "formtastic", "1.1.0"
 gem "friendly_id", '2.2.7'
 gem 'will_paginate', '~> 2.3.11'
@@ -52,7 +54,7 @@ group :test, :cucumber do
 	gem "capybara", :git => "git://github.com/jnicklas/capybara.git"
 	#gem "capybara-envjs"
 	gem "cucumber"
-	gem "cucumber-rails"
+	gem "cucumber-rails", "0.3.2"
 	gem "factory_girl"
 	#gem "email_spec"
 	gem "rcov"

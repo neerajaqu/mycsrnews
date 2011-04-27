@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/bmabey/database_cleaner.git
-  revision: 0d334c37f5d9f51831809b02a0e80de83bfb25b6
+  revision: e8607e504eca348520260ccbfc2bdff85832e911
   specs:
-    database_cleaner (0.6.1)
+    database_cleaner (0.6.7)
 
 GIT
   remote: git://github.com/chewbranca/feedzirra.git
@@ -18,28 +18,26 @@ GIT
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 78c5812b6eed0a78cd39933d7b78c260245830ea
+  revision: 65ba487d229fda3be85aa88377ab3f435075b2f2
   specs:
-    capybara (0.4.0)
-      celerity (>= 0.7.9)
-      culerity (>= 0.2.4)
+    capybara (1.0.0.beta1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       selenium-webdriver (>= 0.0.27)
-      xpath (~> 0.1.2)
+      xpath (~> 0.1.4)
 
 GIT
   remote: git://github.com/pauldix/sax-machine.git
-  revision: a25dff90d5d59ee76b2ef976dbe40825bc8d5477
+  revision: 1e39f35c1bb727dcf1e3aeee356dcb9f719d39d8
   specs:
-    sax-machine (0.0.15)
+    sax-machine (0.0.16)
       nokogiri (> 0.0.0)
 
 GIT
   remote: git://github.com/stipple/amazon-ecs.git
-  revision: eb7b3d02db9252a131c6aad2cce0a4198626fff5
+  revision: 5a0403b9a31dcea8f67f9f8b73ed1ef599695169
   specs:
     amazon-ecs (1.1.0)
       nokogiri
@@ -47,55 +45,61 @@ GIT
 
 GIT
   remote: git://github.com/taf2/curb.git
-  revision: 74f4e5e9c7d1ac7f8928995fe8e7a1c8210ccb0c
+  revision: a47439ae72397f5cf14a028c82cbb8878e21f1db
   specs:
-    curb (0.7.8.1)
+    curb (0.7.15)
 
 GEM
   remote: http://rubygems.org/
   remote: http://gems.github.com/
   specs:
-    SystemTimer (1.2.2)
-    ZenTest (4.4.2)
+    SystemTimer (1.2.3)
+    ZenTest (4.5.0)
     aasm (2.2.0)
     acl9 (0.12.0)
-    actionmailer (2.3.4)
-      actionpack (= 2.3.4)
-    actionpack (2.3.4)
-      activesupport (= 2.3.4)
-      rack (~> 1.0.0)
-    activerecord (2.3.4)
-      activesupport (= 2.3.4)
-    activeresource (2.3.4)
-      activesupport (= 2.3.4)
-    activesupport (2.3.4)
-    awesome_print (0.3.1)
+    actionmailer (2.3.11)
+      actionpack (= 2.3.11)
+    actionpack (2.3.11)
+      activesupport (= 2.3.11)
+      rack (~> 1.1.0)
+    activerecord (2.3.11)
+      activesupport (= 2.3.11)
+    activeresource (2.3.11)
+      activesupport (= 2.3.11)
+    activesupport (2.3.11)
+    addressable (2.2.5)
+    awesome_print (0.3.2)
     bitly (0.5.1)
       crack (>= 0.1.4)
       httparty (>= 0.5.2)
     builder (2.1.2)
-    celerity (0.8.6)
-    childprocess (0.1.4)
-      ffi (~> 0.6.3)
+    childprocess (0.1.8)
+      ffi (~> 1.0.6)
     compass (0.10.6)
       haml (>= 3.0.4)
-    compass-960-plugin (0.10.0)
+    compass-960-plugin (0.10.2)
       compass (>= 0.10.0)
-    configuration (1.1.0)
+    configuration (1.2.0)
     crack (0.1.8)
-    cucumber (0.10.0)
+    cucumber (0.10.2)
       builder (>= 2.1.2)
-      diff-lcs (~> 1.1.2)
-      gherkin (~> 2.3.2)
-      json (~> 1.4.6)
-      term-ansicolor (~> 1.0.5)
+      diff-lcs (>= 1.1.2)
+      gherkin (>= 2.3.5)
+      json (>= 1.4.6)
+      term-ansicolor (>= 1.0.5)
     cucumber-rails (0.3.2)
       cucumber (>= 0.8.0)
-    culerity (0.2.12)
     diff-lcs (1.1.2)
-    factory_girl (1.3.2)
-    faker (0.3.1)
-    ffi (0.6.3)
+    factory_girl (1.3.3)
+    faker (0.9.5)
+      i18n (~> 0.4)
+    faraday (0.6.1)
+      addressable (~> 2.2.4)
+      multipart-post (~> 1.1.0)
+      rack (>= 1.1.0, < 2)
+    faraday_middleware (0.6.3)
+      faraday (~> 0.6.0)
+    ffi (1.0.7)
       rake (>= 0.8.7)
     formtastic (1.1.0)
       actionpack (>= 2.3.0)
@@ -104,55 +108,55 @@ GEM
     friendly_id (2.2.7)
       activerecord (>= 2.2.3)
       activesupport (>= 2.2.3)
-    gherkin (2.3.2)
-      json (~> 1.4.6)
-      term-ansicolor (~> 1.0.5)
-    haml (3.0.24)
-    hashie (0.4.0)
-    httparty (0.6.1)
+    gherkin (2.3.6)
+      json (>= 1.4.6)
+    haml (3.0.25)
+    hashie (1.0.0)
+    httparty (0.7.7)
       crack (= 0.1.8)
     i18n (0.5.0)
     json (1.4.6)
-    json_pure (1.4.6)
-    launchy (0.3.7)
+    json_pure (1.5.1)
+    launchy (0.4.0)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
     loofah (0.4.7)
       nokogiri (>= 1.3.3)
     mime-types (1.16)
-    mogli (0.0.16)
-      hashie (>= 0.2.0)
+    mogli (0.0.28)
       httparty (>= 0.4.3)
     multi_json (0.0.5)
+    multi_xml (0.2.2)
+    multipart-post (1.1.0)
     mysql (2.8.1)
     nokogiri (1.4.4)
     oauth (0.4.4)
-    pickle (0.4.4)
+    pickle (0.4.7)
       cucumber (>= 0.8)
       rake
-      rspec (>= 1.3)
-      yard
-    rack (1.0.1)
-    rack-test (0.5.6)
+    rack (1.1.0)
+    rack-test (0.5.7)
       rack (>= 1.0)
-    rails (2.3.4)
-      actionmailer (= 2.3.4)
-      actionpack (= 2.3.4)
-      activerecord (= 2.3.4)
-      activeresource (= 2.3.4)
-      activesupport (= 2.3.4)
+    rails (2.3.11)
+      actionmailer (= 2.3.11)
+      actionpack (= 2.3.11)
+      activerecord (= 2.3.11)
+      activeresource (= 2.3.11)
+      activesupport (= 2.3.11)
       rake (>= 0.8.3)
     rake (0.8.7)
+    rash (0.3.0)
+      hashie (~> 1.0.0)
     rcov (0.9.9)
-    redis (2.1.1)
+    redis (2.2.0)
     redis-namespace (0.10.0)
       redis (< 3.0.0)
-    resque (1.8.2)
-      redis
-      redis-namespace
+    resque (1.15.0)
+      json (~> 1.4.6)
+      redis-namespace (>= 0.10.0)
       sinatra (>= 0.9.2)
-      vegas (>= 0.1.2)
-    resque-scheduler (1.9.7)
+      vegas (~> 0.1.2)
+    resque-scheduler (1.9.9)
       redis (>= 2.0.1)
       resque (>= 1.8.0)
       rufus-scheduler
@@ -163,22 +167,28 @@ GEM
       rspec (>= 1.3.0)
     ruby-hmac (0.4.0)
     rubyzip (0.9.4)
-    rufus-scheduler (2.0.7)
-      tzinfo
-    selenium-webdriver (0.1.1)
-      childprocess (= 0.1.4)
-      ffi (~> 0.6.3)
+    rufus-scheduler (2.0.9)
+      tzinfo (>= 0.3.23)
+    selenium-webdriver (0.2.0)
+      childprocess (>= 0.1.7)
+      ffi (>= 1.0.7)
       json_pure
       rubyzip
-    sinatra (1.0)
-      rack (>= 1.0)
-    sitemap_generator (1.3.5)
+    simple_oauth (0.1.4)
+    sinatra (1.2.3)
+      rack (~> 1.1)
+      tilt (>= 1.2.2, < 2.0)
+    sitemap_generator (1.5.2)
     term-ansicolor (1.0.5)
-    twitter (0.9.12)
-      hashie (~> 0.4.0)
-      httparty (~> 0.6.1)
-      multi_json (~> 0.0.4)
-      oauth (~> 0.4.3)
+    tilt (1.3)
+    twitter (1.4.0)
+      faraday (~> 0.6.1)
+      faraday_middleware (~> 0.6.3)
+      hashie (~> 1.0.0)
+      multi_json (~> 0.0.5)
+      multi_xml (~> 0.2.0)
+      rash (~> 0.3.0)
+      simple_oauth (~> 0.1.4)
     tzinfo (0.3.23)
     unicorn (0.95.2)
       rack
@@ -186,9 +196,8 @@ GEM
       rack (>= 1.0.0)
     will_paginate (2.3.15)
     wirble (0.1.3)
-    xpath (0.1.2)
+    xpath (0.1.4)
       nokogiri (~> 1.3)
-    yard (0.6.4)
 
 PLATFORMS
   ruby
@@ -206,7 +215,7 @@ DEPENDENCIES
   compass (~> 0.10.0)
   compass-960-plugin
   cucumber
-  cucumber-rails
+  cucumber-rails (= 0.3.2)
   curb!
   database_cleaner!
   factory_girl
@@ -214,6 +223,7 @@ DEPENDENCIES
   feedzirra!
   formtastic (= 1.1.0)
   friendly_id (= 2.2.7)
+  haml (= 3.0.25)
   json (= 1.4.6)
   launchy
   loofah (= 0.4.7)
@@ -222,8 +232,8 @@ DEPENDENCIES
   nokogiri
   oauth
   pickle
-  rack (= 1.0.1)
-  rails (= 2.3.4)
+  rack (= 1.1.0)
+  rails (= 2.3.11)
   rcov
   redis
   redis-namespace
