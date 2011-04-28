@@ -30,6 +30,8 @@ gem "paperclip"
 #gem "ruby-aaws"
 gem 'amazon-ecs', :git => 'git://github.com/stipple/amazon-ecs.git'
 
+gem "hoptoad_notifier"
+
 # Feedzirra related
 gem 'nokogiri'
 gem 'loofah', '0.4.7'
