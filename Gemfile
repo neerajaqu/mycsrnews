@@ -30,8 +30,10 @@ gem "paperclip"
 #gem "ruby-aaws"
 gem 'amazon-ecs', :git => 'git://github.com/stipple/amazon-ecs.git'
 
+# switched from vendor/plugins
 gem "hoptoad_notifier"
 gem "newrelic_rpm"
+gem "acts-as-taggable-on"
 
 # Feedzirra related
 gem 'nokogiri'
