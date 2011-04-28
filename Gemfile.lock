@@ -131,6 +131,9 @@ GEM
     mysql (2.8.1)
     nokogiri (1.4.4)
     oauth (0.4.4)
+    paperclip (2.3.5)
+      activerecord
+      activesupport
     pickle (0.4.7)
       cucumber (>= 0.8)
       rake
@@ -231,6 +234,7 @@ DEPENDENCIES
   mysql
   nokogiri
   oauth
+  paperclip
   pickle
   rack (= 1.1.0)
   rails (= 2.3.11)
