@@ -26,6 +26,7 @@ gem 'sitemap_generator'
 gem "SystemTimer"
 gem "aasm"
 gem "acl9"
+gem "paperclip"
 #gem "ruby-aaws"
 gem 'amazon-ecs', :git => 'git://github.com/stipple/amazon-ecs.git'
 
@@ -44,6 +45,7 @@ gem 'feedzirra', :git => 'git://github.com/chewbranca/feedzirra.git'
 group :development do
   gem "wirble"
   gem "awesome_print"
+	gem "faker"
 end
 
 group :test, :cucumber do
