@@ -31,6 +31,7 @@ gem "paperclip"
 gem 'amazon-ecs', :git => 'git://github.com/stipple/amazon-ecs.git'
 
 gem "hoptoad_notifier"
+gem "newrelic_rpm"
 
 # Feedzirra related
 gem 'nokogiri'
