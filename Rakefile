@@ -18,3 +18,6 @@ begin
  rescue Exception => e
    puts "Warning, couldn't load gem tasks: #{e.message}! Skipping..."
 end
+
+# Load paperclip tasks
+import File.expand_path(File.join(Gem.datadir('paperclip'), '..', '..', 'lib', 'tasks', 'paperclip.rake'))
