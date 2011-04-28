@@ -10,3 +10,8 @@ APP_CONFIG['use_view_objects'] = true unless APP_CONFIG.keys.include? "use_view_
 ActionMailer::Base.default_url_options[:host] = APP_CONFIG['base_site_url'].sub(/^https?:\/\//,'')
 
 Time.zone = APP_CONFIG['time_zone'] || 'Pacific Time (US & Canada)'
+
+# Use Bit.ly version 3 API
+if defined?(Bitly)
+  Bitly.use_api_version_3
+end

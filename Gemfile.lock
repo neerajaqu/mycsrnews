@@ -69,9 +69,10 @@ GEM
     activesupport (2.3.11)
     addressable (2.2.5)
     awesome_print (0.3.2)
-    bitly (0.5.1)
+    bitly (0.6.1)
       crack (>= 0.1.4)
       httparty (>= 0.5.2)
+      oauth2 (>= 0.1.1)
     builder (2.1.2)
     childprocess (0.1.8)
       ffi (~> 1.0.6)
@@ -134,6 +135,9 @@ GEM
     mysql (2.8.1)
     nokogiri (1.4.4)
     oauth (0.4.4)
+    oauth2 (0.4.1)
+      faraday (~> 0.6.1)
+      multi_json (>= 0.0.5)
     paperclip (2.3.5)
       activerecord
       activesupport
@@ -215,7 +219,7 @@ DEPENDENCIES
   acl9
   amazon-ecs!
   awesome_print
-  bitly (= 0.5.1)
+  bitly
   builder (= 2.1.2)
   capybara!
   compass (~> 0.10.0)

@@ -17,7 +17,7 @@ gem "tzinfo", '0.3.23'
 gem "oauth"
 gem "twitter"
 gem "mysql"
-gem "bitly", "0.5.1"
+gem "bitly"
 gem "redis"
 gem "redis-namespace"
 gem "resque"
