@@ -31,6 +31,14 @@ class Vote < ActiveRecord::Base
   end
 
   def self.top_items limit = 5, range = nil, min_items = nil
+    # HACK:: TODO:: FIXME
+    # When this gets run through Metadata::ViewObjectSetting.kommand_chain
+    # something like [3,nil,3] will get flattened to [3,3] which is obviously not right
+    if range.is_a?(Integer) and min_items.nil?
+      min_items = range
+      range = nil
+    end
+
     range ||= 1.week.ago
     items = self.active.find(:all, :select => 'count(*) as count, votes.*', :group => 'voteable_type, voteable_id', :conditions => ["voteable_type IN ('#{self.item_klasses.join "', '"}') AND created_at > ?", range], :limit => limit, :order => "count desc, created_at desc").map(&:voteable)
     if items.any? and (not min_items or items.count >= min_items)
