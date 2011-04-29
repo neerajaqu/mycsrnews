@@ -3,6 +3,12 @@ Installing on Ubuntu 10.04 LTS Server
 
 This guide will bootstrap newscloud from a minimal ubuntu server install.
 
+Update Your System
+------------------
+If necessary, update your system:
+
+	sudo apt-get update
+
 Base Utilities
 --------------
 
