@@ -976,6 +976,22 @@ view_objects = [
   	}
   },
   {
+  	:name          => "Double Column Triple Popular Items",
+  	:template_name => "v2_double_col_triple_item",
+  	:settings      => {
+  		:klass_name      => "Vote",
+  		:locale_title    => nil,
+  		:locale_subtitle => nil,
+  		:use_post_button => false,
+  		:kommands        => [
+  		  {
+          :method_name => "top_items",
+          :args => [3, nil, 3]
+        }
+  		]
+  	}
+  },
+  {
   	:name          => "Double Column Featured With Triple Items",
   	:template_name => "v2_double_col_feature_triple_item",
   	:settings      => {
