@@ -58,7 +58,7 @@ class GalleriesController < ApplicationController
   def add_gallery_item
     @gallery = Gallery.find(params[:id])
 
-    unless @gallery.user == current_user or @gallery.is_public?
+    unless @gallery.user == current_user or @gallery.is_public? or current_user.is_moderator?
       flash[:error] = "You are not authorized to modify this gallery."
       redirect_to @gallery and return
     end
