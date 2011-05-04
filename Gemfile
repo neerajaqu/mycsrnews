@@ -38,6 +38,9 @@ gem "acts-as-taggable-on"
 #gem 'redis-store', '= 1.0.0.beta2', :git => 'https://github.com/jodosha/redis-store.git', :ref => '20d5a4d3741095b3509d'
 gem 'redis-store', '= 1.0.0.beta5'
 
+# Rails_xss plugin requirements
+gem 'erubis'
+
 # Feedzirra related
 gem 'nokogiri'
 gem 'loofah', '0.4.7'
