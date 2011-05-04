@@ -38,13 +38,20 @@ Install required software
 -------------------------
 
   * MySQL
-  * Memcached
   * Redis 2.x
 
-We currently require the use of Memcached and Redis for caching and background job processing respectively.  We are in the process of fully converting over to Redis, but for the time being both are required.
+We have switched over to using Redis completely, so memcached is no longer required.
 
-Memcached is only required in production and can be disabled in config/environments/production.rb
-Redis/Resque are required in both development and production environments as Rails does not have a generic job queue hook.
+Redis is used in production for caching, the development environment does not do any caching.
+
+However, Redis/Resque are required to be installed for development mode as there isn't
+a pluggable job system in rails like the caching system.
+
+You do not need to run a resque worker in development, but things will error out if
+you do not have an open redis connection.
+
+We currently require MySQL. We are working on removing the dependency on MySQL, but for now
+its required. Additional database targets are PostgreSQL and SQLite.
 
 Setup your config files
 -----------------------

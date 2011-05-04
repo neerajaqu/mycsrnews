@@ -163,6 +163,9 @@ GEM
     redis (2.2.0)
     redis-namespace (0.10.0)
       redis (< 3.0.0)
+    redis-store (1.0.0.beta5)
+      redis (~> 2.2.0)
+      redis (>= 2.0.0)
     resque (1.15.0)
       json (~> 1.4.6)
       redis-namespace (>= 0.10.0)
@@ -253,6 +256,7 @@ DEPENDENCIES
   rcov
   redis
   redis-namespace
+  redis-store (= 1.0.0.beta5)
   resque
   resque-scheduler
   rr
