@@ -18,7 +18,7 @@
     - else
       = stylesheet_link_tag 'compiled/grid.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/text.css', :media => 'print'
-    = stylesheet_link_merged :base
+    = raw stylesheet_link_merged :base
 
     - if get_setting('typekit').present?
       - typekit = get_setting('typekit').value
@@ -28,7 +28,7 @@
           try{Typekit.load();}catch(e){}
           
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://cdn.jquerytools.org/1.2.2/all/jquery.tools.min.js', "http://platform.twitter.com/anywhere.js?id=#{get_setting('oauth_key').value}&v=1"
-    = javascript_include_merged :base
+    = raw javascript_include_merged :base
 
     = javascript_include_tag 'application'
     - if iframe_facebook_request?
@@ -93,7 +93,7 @@
 
   %body
     #bodyWrapper
-      = fb_connect_javascript_tag
+      = raw fb_connect_javascript_tag
       - if @share_item
         - init_fb_connect "XFBML", :js => :jquery do
           = fb_connect_stream_publish(build_stream_post(@share_item), t('facebook_share'))

@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def pipe_spacer
-    '<span class="pipe">|</span>'
+    '<span class="pipe">|</span>'.html_safe
   end
 
   def tab_selected?(current_tab, tab_name)
