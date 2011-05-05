@@ -604,6 +604,7 @@ $(function() {
   }  
   
   // Add Threedots support
+  /*
   $('.ellipsis_title_1').ThreeDots({max_rows : 1});
   $('.ellipsis_title_2').ThreeDots({max_rows : 2});
   $('.ellipsis_title_3').ThreeDots({max_rows : 3});
@@ -612,7 +613,9 @@ $(function() {
   $('.ellipsis_caption_5').ThreeDots({max_rows : 5});
   $('.ellipsis_caption_6').ThreeDots({max_rows : 6});
   $('.ellipsis_caption_7').ThreeDots({max_rows : 7});
+  */
 
+  $('.ellipsis_text').ellipsis();
 });
 
 /** IMAGE VIEWER **/
