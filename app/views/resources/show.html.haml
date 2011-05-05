@@ -22,7 +22,7 @@
             = image_tag @resource.images.first.url(:medium)
         %h1= @resource.title
         %h3
-          = t('posted_by', :fb_name => local_linked_profile_name(@resource.user), :date => timeago(@resource.created_at))
+          = generic_posted_by @resource
           - if @resource.resource_section.present?
             = t('in')
             = link_to(@resource.resource_section.name, @resource.resource_section)

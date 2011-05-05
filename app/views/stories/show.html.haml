@@ -30,13 +30,10 @@
 
         %h1= @story.title
         - unless @story.is_article?
-          - unless @story.source.present?
-            %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => story_source_link(@story), :date => timeago(@story.created_at))
-          - else
-            %h3= t('posted_by_via', :fb_name => local_linked_profile_name(@story.user), :source => source_link(@story), :date => timeago(@story.created_at))
+          %h3= stories_posted_by_via @story
         - else
           %h3 
-            = t('posted_by', :fb_name => local_linked_profile_name(@story.user), :date => timeago(@story.created_at))
+            = stories_posted_by story
             = pipe_spacer
             %span.moderator-links.hidden{:class => user_css_class(@story.user)}
               = link_to t('articles.edit_draft'), edit_article_path(@story.article)

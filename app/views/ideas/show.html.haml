@@ -25,7 +25,7 @@
             = image_tag @idea.images.first.url(:medium)
         %h1= @idea.title
         %h3
-          = t('posted_by', :fb_name => local_linked_profile_name(@idea.user), :date => timeago(@idea.created_at))
+          = generic_posted_by @idea
           - if @idea.idea_board.present?
             in
             = link_to(@idea.idea_board.name, @idea.idea_board)

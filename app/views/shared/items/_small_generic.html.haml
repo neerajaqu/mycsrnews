@@ -3,6 +3,6 @@
     %h4= link_to item.item_title, path_to_self(item.item_link)
     .profilePic= local_linked_profile_pic item.user
     .itemMeta
-      %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => timeago(item.created_at))
+      %h3= generic_posted_by item
       %span.btnComment== #{like_link item} #{item.votes_tally}
       %span.btnComment== #{link_to t('comments'), path_to_self_with_anchor(item, "commentListTop")} #{item.comments_count}

@@ -24,7 +24,7 @@
                 %p= linked_item_details classified              
                 .profilePic= local_linked_profile_pic classified.user
                 .itemMeta
-                  %h3= t('posted_by_in_category', :fb_name => local_linked_profile_name(classified.user), :date => timeago(classified.created_at), :category => classified.category_name )
+                  %h3= classifieds_posted_by classified
                   %span.btnComment== #{like_link classified} #{classified.votes_count}
                   %span.btnComment== #{link_to t('comments'), classified_path(classified, :anchor => "commentListTop")} #{classified.comments_count}
             .complexMiniBlock

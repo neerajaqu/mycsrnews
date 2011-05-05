@@ -2,7 +2,7 @@
 
 .panel_1
   .panelBar
-    %h2= t('.posted_by', :fb_name => local_linked_profile_name(user))
+    %h2= t('.posted_by', :fb_name => local_linked_profile_name(user)).html_safe
   .thumb.user-bio
     = local_linked_profile_pic user
   .itemBlock
