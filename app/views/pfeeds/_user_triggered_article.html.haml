@@ -3,5 +3,5 @@
 .user-wrapper
   .profilePic= local_linked_profile_pic user, :width => '30px', :height => '30px', :only_path => false, :format => 'html'
   %h3
-    = t('user_posted_item', :fb_name => local_linked_profile_name(user, :only_path => false, :format => 'html'), :title => link_to(item.item_title, polymorphic_url(item.item_link,:only_path => false) ), :date => timeago(item.created_at))
+    = user_posted_item item, user
 -# %p= pfeed_caption item.item_description

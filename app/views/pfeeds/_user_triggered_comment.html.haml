@@ -5,7 +5,7 @@
 .user-wrapper
   .profilePic= local_linked_profile_pic user, :width => '30px', :height => '30px', :only_path => false, :format => 'html'
   %h3
-    = t('posted_by', :fb_name => local_linked_profile_name(user, :only_path => false, :format => 'html'), :date => timeago(comment.created_at))
+    = generic_posted_by comment, user
   %h3
     Re: 
     = link_to caption(comment.commentable.item_title,120), polymorphic_path(comment.commentable, :only_path => false, :format => 'html')
