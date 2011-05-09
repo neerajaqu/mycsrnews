@@ -19,7 +19,7 @@ module ViewObjectsHelper
   
   def item_text item
     if item.is_a? Article
-      item.preamble.present? ? item.preamble : item.item_description
+      raw item.preamble.present? ? item.preamble : item.item_description
     else
       item.item_description
     end

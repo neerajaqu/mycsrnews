@@ -13,7 +13,7 @@
       .panel-content
         - if item1
           %h1
-            %span.ellipsis_title_3= link_to item1.item_title, item1.item_link, :class => 'ellipsis_text'
+            %span.ellipsis_title_3= link_to sanitize_title(item1.item_title), item1.item_link, :class => 'ellipsis_text'
 
           .meta-data
             .profile-pic
@@ -30,7 +30,7 @@
               .item-with-no-image
                 .item-text
                   %h3
-                    %span.ellipsis_title_2= link_to item.item_title, item.item_link, :class => 'ellipsis_text'
+                    %span.ellipsis_title_2= link_to sanitize_title(item.item_title), item.item_link, :class => 'ellipsis_text'
                 .meta-data
                   %h6= posted_by_with_topic(item)
                   %h6= action_links(item)

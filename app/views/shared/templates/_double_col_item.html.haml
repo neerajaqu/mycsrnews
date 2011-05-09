@@ -18,7 +18,7 @@
             %a= image_tag(thumb_image_or_default(item))
           .item-text
             %h4
-              %span.ellipsis_title_3= link_to item.item_title, item.item_link, :class => 'ellipsis_text'
+              %span.ellipsis_title_3= link_to sanitize_title(item.item_title), item.item_link, :class => 'ellipsis_text'
           .meta-data
             %h6= posted_by_with_topic(item)
             %h6= action_links(item)

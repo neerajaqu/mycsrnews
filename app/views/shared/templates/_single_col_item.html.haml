@@ -11,7 +11,7 @@
   .panel-content
     - if item
       %h1
-        %span.ellipsis_title_3= link_to item.item_title, item.item_link, :class => 'ellipsis_text'
+        %span.ellipsis_title_3= link_to sanitize_title(item.item_title), item.item_link, :class => 'ellipsis_text'
 
       .meta-data
         .profile-pic
