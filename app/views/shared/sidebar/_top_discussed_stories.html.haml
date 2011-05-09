@@ -12,7 +12,7 @@
           - most_discussed_stories.each do |story|
             %li
               .itemBlock
-                %h4= link_to story.title, story_path(story)
+                %h4= link_to sanitize_title(story.title), story_path(story)
                 .profilePic= local_linked_profile_pic story.user
                 .itemMeta
                   %h3= stories_posted_by story

@@ -27,7 +27,7 @@
                     -else
                       = image_tag ('default/watermark.jpg')
                   .itemBlock
-                    %h2= link_to content.title, story_path(content)
+                    %h2= link_to sanitize_title(content.title), story_path(content)
                     %p= linked_story_caption content
                   
                     .profilePic= local_linked_profile_pic content.user

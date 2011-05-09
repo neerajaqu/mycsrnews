@@ -1,7 +1,9 @@
 - content_for :title do
-  = @story.item_title
+  = sanitize_title @story.item_title
+
 - content_for :meta_description do
   = meta_description @story
+
 - if @story.images.present?
   - content_for :meta_image do
     = meta_image @story.images.first
@@ -28,7 +30,7 @@
         - if @story.images.present?
           .thumb= image_tag @story.images.first.url(:medium)
 
-        %h1= @story.title
+        %h1= sanitize_title @story.title
         - unless @story.is_article?
           %h3= stories_posted_by_via @story
         - else
@@ -43,7 +45,7 @@
         - if @story.is_article?
           %p= sanitize nl2br(@story.caption)
         - elsif @story.full_html?
-          %p= nl2br(@story.caption)
+          %p= sanitize nl2br(@story.caption)
         - else
           %p= sanitize caption(@story.caption, 500)
         - if @story.url.present?

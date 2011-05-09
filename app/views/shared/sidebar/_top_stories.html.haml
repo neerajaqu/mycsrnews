@@ -24,7 +24,7 @@
                     .itemBlock  
                       %h4
                         %span.ellipsis_title_2
-                          = link_to story.title, story_path(story), { :class => 'ellipsis_text'}
+                          = link_to sanitize_title(story.title), story_path(story), { :class => 'ellipsis_text'}
                       .itemMeta
                         %span.btnComment== #{like_link story} #{story.votes_tally}
                         %span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

@@ -6,4 +6,4 @@
   .thumb.user-bio
     = local_linked_profile_pic user
   .itemBlock
-    %p= (user.bio.present?) ? user.bio : default_bio(user)
+    %p= raw((user.bio.present?) ? user.bio : default_bio(user)).fb_sanitize
