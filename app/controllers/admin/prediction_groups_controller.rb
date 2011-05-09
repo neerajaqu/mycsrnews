@@ -81,7 +81,7 @@ class Admin::PredictionGroupsController < AdminController
     prediction_group ||= PredictionGroup.new
 
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
-    	:item => @prediction_group,
+    	:item => prediction_group,
     	:model => PredictionGroup,
     	:fields => [:title, lambda {|f| f.input :description, :required => false }, :status, :is_approved, :is_blocked, :user_id],
     	:associations => { :belongs_to => { :user => :user_id } }

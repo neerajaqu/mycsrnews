@@ -25,7 +25,7 @@
     .cards_pagerBar
       %b PAGE:
       %span.card_pagination_links
-        = (@cards.size / 6.0).ceil.times.entries.map {|k| link_to k+1, '#'}.join ' | '
+        = (@cards.size / 6.0).ceil.times.entries.map {|k| link_to k+1, '#'}.join(' | ').html_safe
   #selCardStage
     .cards_insideSelStage
       &nbsp;

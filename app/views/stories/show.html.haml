@@ -33,7 +33,7 @@
           %h3= stories_posted_by_via @story
         - else
           %h3 
-            = stories_posted_by story
+            = stories_posted_by @story
             = pipe_spacer
             %span.moderator-links.hidden{:class => user_css_class(@story.user)}
               = link_to t('articles.edit_draft'), edit_article_path(@story.article)

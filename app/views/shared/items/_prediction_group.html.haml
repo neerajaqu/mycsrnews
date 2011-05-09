@@ -9,6 +9,6 @@
     -#%p= linked_item_details prediction_group
     .profilePic= local_linked_profile_pic prediction_group.user
     .itemMeta
-      %h3= t('posted_by', :fb_name => local_linked_profile_name(prediction_group.user), :date => timeago(prediction_group.created_at))
+      %h3= generic_posted_by prediction_group
       %span.btnComment== #{like_link prediction_group} #{prediction_group.votes_tally}
       %span.btnComment== #{link_to t('comments'), prediction_group_path(prediction_group, :anchor => "commentListTop")} #{prediction_group.comments_count}

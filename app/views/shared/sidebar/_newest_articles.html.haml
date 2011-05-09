@@ -13,6 +13,6 @@
               .itemBlock
                 %h4= link_to article.content.title, content_path(article.content)
                 .profilePic= local_linked_profile_pic article.author
-                %h3= t('posted_by', :fb_name => local_linked_profile_name(article.author), :date => timeago(article.created_at))
+                %h3= generic_posted_by article, article.author
                 %span.btnComment== #{like_link article.content} #{article.content.votes_tally}
                 %span.btnComment== #{link_to t('comments'), content_path(article.content, :anchor => "commentListTop")} #{article.content.comments_count}  

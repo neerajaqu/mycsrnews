@@ -24,7 +24,7 @@
           .float_right.clearfix= render :partial => 'shared/moderate_form', :locals => { :moderatable => @prediction_group }
           .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @prediction_group }
       %h1= @prediction_group.title
-      %h3= t('posted_by', :fb_name => local_linked_profile_name(@prediction_group.user), :date => timeago(@prediction_group.created_at))
+      %h3= generic_posted_by @prediction_group
       - if @tags.present?
         %h3== Tags #{tag_list(@tags, @prediction_group)}
       - if @prediction_group.media_item?

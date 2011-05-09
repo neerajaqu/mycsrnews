@@ -6,7 +6,7 @@
   = render_ad(:banner, @ad_layout, @ad_banner)
   = render :partial => 'shared/newswires', :locals => { :newswires => @newswires, :paginate => @paginate, :page => @page }
 
-#col_right.clearfix
+#col_right
   = render :partial => 'shared/sidebar/post_story'
   = render_ad(:small_square, @ad_layout, @ad_small_square)
   = render :partial => 'shared/sidebar/top_stories', :locals => { :top_stories => @top_stories }
