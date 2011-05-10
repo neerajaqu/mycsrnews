@@ -15,7 +15,7 @@ gem "friendly_id", '2.2.7'
 gem 'will_paginate', '~> 2.3.11'
 gem "tzinfo", '0.3.23'
 gem "oauth"
-gem "twitter"
+gem "twitter", "0.9.12"
 gem "mysql"
 gem "bitly"
 gem "redis"
@@ -33,7 +33,7 @@ gem 'amazon-ecs', :git => 'git://github.com/stipple/amazon-ecs.git'
 # switched from vendor/plugins
 gem "hoptoad_notifier"
 gem "newrelic_rpm"
-gem "acts-as-taggable-on"
+gem "acts-as-taggable-on", '2.0.0.rc1'
 
 #gem 'redis-store', '= 1.0.0.beta2', :git => 'https://github.com/jodosha/redis-store.git', :ref => '20d5a4d3741095b3509d'
 gem 'redis-store', '= 1.0.0.beta5'
