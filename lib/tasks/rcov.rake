@@ -1,8 +1,9 @@
 begin
   require 'cucumber/rake/task' #I have to add this
   require 'spec/rake/spectask'
-rescue
+rescue Exception => e
   # If this fails we are most likely in production mode where cucumber tasks don't exist
+  # puts "Warning, couldn't load gem tasks: #{e.message}! Skipping..."
 end
  
 namespace :rcov do
