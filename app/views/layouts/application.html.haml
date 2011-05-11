@@ -10,6 +10,9 @@
       %meta{:name => 'y_key', :content => "#{get_setting('yahoo-site-verification').value}"}
     %meta{:name => 'description', :content => (out = yield(:meta_description)) ? out : ""}
     %meta{:name => 'medium', :content => 'news'}
+
+    = csrf_meta_tag
+
     %link{:rel  => "image_src", :content => (out = yield(:meta_image)) ? out : base_url('/images/default/icon-fan-app.gif')}
     %link{:rel  => "icon", :href => base_url('/images/default/icon-fan-app.gif')}
     
