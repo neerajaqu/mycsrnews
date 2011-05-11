@@ -79,5 +79,5 @@ group :test, :cucumber do
 end
 
 group :production do
-  gem "unicorn", "0.95.2"
+  gem "unicorn"
 end
