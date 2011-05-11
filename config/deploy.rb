@@ -6,6 +6,7 @@ require 'eycap/recipes'
 set :bundle_without, [:development, :test, :cucumber]
 
 require 'bundler/capistrano'
+require 'new_relic/recipes'
 
 default_run_options[:pty] = true
 
