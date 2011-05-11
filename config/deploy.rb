@@ -3,6 +3,10 @@ set (:stages) { Dir.glob(File.join(File.dirname(__FILE__), "deploy", "*.rb")).ma
 require 'capistrano/ext/multistage'
 require 'eycap/recipes'
 
+set :bundle_without, [:development, :test, :cucumber]
+
+require 'bundler/capistrano'
+
 default_run_options[:pty] = true
 
 set :repository,  "git://github.com/newscloud/n2.git"
@@ -13,6 +17,7 @@ set (:deploy_to) { "/data/sites/#{application}" }
 
 set :user, 'deploy'
 set :use_sudo, false
+
 
 after("deploy:update_code") do
   # setup shared files
@@ -26,7 +31,7 @@ after("deploy:update_code") do
   deploy.load_skin
   deploy.restore_previous_sitemap
   deploy.cleanup
-  bundler.bundle_new_release
+  #bundler.bundle_new_release
 end
 
 before("deploy") do

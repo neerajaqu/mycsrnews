@@ -1,5 +1,9 @@
-require 'cucumber/rake/task' #I have to add this
-require 'spec/rake/spectask'
+begin
+  require 'cucumber/rake/task' #I have to add this
+  require 'spec/rake/spectask'
+rescue
+  # If this fails we are most likely in production mode where cucumber tasks don't exist
+end
  
 namespace :rcov do
   Cucumber::Rake::Task.new(:cucumber) do |t|    
