@@ -69,6 +69,10 @@ Install curl dependencies
 
 	sudo apt-get install curl libcurl3 libcurl3-gnutls libcurl4-openssl-dev
 
+Install imagemagick
+
+	sudo apt-get install imagemagick
+
 
 Install Newscloud
 -----------------
