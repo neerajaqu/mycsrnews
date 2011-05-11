@@ -13,20 +13,21 @@
         %ul
           - @resource_section.resources.active.newest(10).each do |resource|
             %li{'data-id' => resource.cache_key}
-              .thumb
-                - if resource.images.present?
-                  = image_tag resource.images.first.url(:thumb)
-                - else
-                  = image_tag ('default/watermark.jpg')
-              .itemBlock
-                %h2= link_to resource.title, [@resource_section, resource]
-                %p= linked_item_details resource
-                .profilePic= local_linked_profile_pic resource.user
-                .itemMeta
-                  %h3= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => timeago(resource.created_at))
-                  %span.btnComment== #{like_link resource} #{resource.votes_tally}
-                  %span.btnComment== #{link_to t('comments'), [@resource_section, resource]} #{resource.comments_count}
-                  %span.btnComment= fb_share_item_button(resource)
+              .item_1
+                .thumb
+                  - if resource.images.present?
+                    = image_tag resource.images.first.url(:thumb)
+                  - else
+                    = image_tag ('default/watermark.jpg')
+                .itemBlock
+                  %h2= link_to resource.title, [@resource_section, resource]
+                  %p= linked_item_details resource
+                  .profilePic= local_linked_profile_pic resource.user
+                  .itemMeta
+                    %h3= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => timeago(resource.created_at))
+                    %span.btnComment== #{like_link resource} #{resource.votes_tally}
+                    %span.btnComment== #{link_to t('comments'), [@resource_section, resource]} #{resource.comments_count}
+                    %span.btnComment= fb_share_item_button(resource)
 
   = render :partial => 'shared/index_footer', :locals => { :index_path => resource_section_path(:only_path => false, :canvas => iframe_facebook_request?), :title => @resource_section.name }
                   
