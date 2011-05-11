@@ -4,7 +4,7 @@
       - if current_user.present? and current_user.is_established?
         .profile-pic= local_linked_profile_pic current_user
         %h4= vt.t('welcome_name', :name => current_user.first_name)
-        %h5= vt.t('welcome_panel_stack_up', :score_link => users_path, :user_score => current_user.combined_score)
+        %h5= vt.t('welcome_panel_stack_up', :score_link => users_path, :user_score => current_user.combined_score).html_safe
         -#
           - unless current_user.combined_score < 20
             %h5= vt.t('karma_score', :score => current_user.karma_score)
