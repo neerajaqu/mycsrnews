@@ -23,7 +23,7 @@ class HomeController < ApplicationController
 
   def index
     if APP_CONFIG["use_view_objects"]
-      render(:text => %{<div id="home_container">#{ViewTree.render(self)}</div>}, :layout => 'application') and return
+      render(:text => %{<div id="home_container">#{ViewTree.render(self)}</div>}.html_safe, :layout => 'application')
     else
 =begin
       @page = "page_1_"

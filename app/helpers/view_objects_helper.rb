@@ -14,12 +14,12 @@ module ViewObjectsHelper
     	links << comment_link(item)
     end
 =end
-    links.join "&nbsp; | &nbsp;"
+    links.join("&nbsp; | &nbsp;").html_safe
   end
   
   def item_text item
     if item.is_a? Article
-      item.preamble.present? ? item.preamble : item.item_description
+      raw item.preamble.present? ? item.preamble : item.item_description
     else
       item.item_description
     end
@@ -53,7 +53,7 @@ module ViewObjectsHelper
 
     # TODO:: add this in?
     # opts[:vt] ? opts[:vt].t(...) : I18n.translate(...)
-    I18n.translate("generic.posted.#{locale.join('_')}", interpolation_args)
+    I18n.translate("generic.posted.#{locale.join('_')}", interpolation_args).html_safe
   end
   def posted_by_with_date(item) posted_by(item, :date => true) end
   def posted_by_with_topic(item) posted_by(item, :topic => true) end
@@ -63,7 +63,7 @@ module ViewObjectsHelper
     [
       content_tag(:span, item.comments_count, :class => "count"),
       link_to(I18n.translate("generic.action_links.comments_title"), item)
-    ].join(' ')
+    ].join(' ').html_safe
   end
 
   def answer_link item
@@ -72,7 +72,7 @@ module ViewObjectsHelper
       [
         content_tag(:span, item.answers_count, :class => "count"),
         link_to(I18n.translate('answers_count', :answer_string => answer_string), item)
-      ].join(' ')
+      ].join(' ').html_safe
     else 
       link_to(I18n.translate('answer_question'), item)
     end
@@ -83,8 +83,8 @@ module ViewObjectsHelper
     content_tag(:span,
       [
         link_to('Like', like_item_path(item.class.name.foreign_key.to_sym => item), :class => "voteUp"),
-        content_tag(:span, item.votes_tally, :class => "count"),
-      ].join(' '))
+        content_tag(:span, item.votes_tally, :class => "count")
+      ].join(' ').html_safe)
   end
 
   def post_something klass_name, css_class = "float-right"

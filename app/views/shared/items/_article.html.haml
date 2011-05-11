@@ -2,7 +2,7 @@
 .blog
   .itemBlock
     %h2= link_to content.title, story_path(content)
-    %h3= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
+    %h3= generic_posted_by content
     .itemContent
       - if content.images.present?
         .thumb
@@ -12,9 +12,9 @@
           = image_tag ('default/watermark.jpg')
       %p
         - unless content.article.preamble.nil? or content.article.preamble.empty?
-          = content.article.preamble
+          = raw content.article.preamble
         - else
-          = content.caption
+          = raw content.caption
     .itemMeta
       %span.btnComment== #{like_link content} #{content.votes_tally}
       %span.btnComment== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}

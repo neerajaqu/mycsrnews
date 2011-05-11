@@ -13,6 +13,6 @@
           .item-with-no-image
             %p
               %b
-                %span.ellipsis_title_2= link_to item.item_title, item.item_link, :class => 'ellipsis_text'
+                %span.ellipsis_title_2= link_to sanitize_title(item.item_title), item.item_link, :class => 'ellipsis_text'
             .meta-data
               %h6= action_links(item)

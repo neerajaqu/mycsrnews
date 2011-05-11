@@ -7,7 +7,7 @@
     %h4= link_to setting_group[:title], edit_admin_setting_group_path(:id => name)
     %p= setting_group[:description]
 
-  - unless false and User.admins.any?
+  - unless User.admins.any?
     %h4 You need to add an admin user.
     %p== First register #{link_to 'here', signup_path} if you have not done so already. Next add set an admin user here #{link_to 'here', admin_users_path}.
   - unless FACEBOOKER["api_key"] and FACEBOOKER["secret_key"]

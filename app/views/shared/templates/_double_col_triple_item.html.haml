@@ -11,7 +11,7 @@
             -#%a= image_tag('default/default_thumb.gif')
         .item-text
           %h3
-            %span.ellipsis_title_3= link_to item.item_title, item.item_link, :class => 'ellipsis_text'
+            %span.ellipsis_title_3= link_to sanitize_title(item.item_title), item.item_link, :class => 'ellipsis_text'
         .meta-data
           %h6= posted_by_with_date(item)
           %h6= action_links(item)

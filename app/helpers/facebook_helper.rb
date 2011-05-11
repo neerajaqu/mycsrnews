@@ -55,7 +55,7 @@ module FacebookHelper
     	  attachment.add_image(image_path(image.url(:thumb)), polymorphic_url(item.item_link, :only_path => false, :canvas => true))
     	end
     end
-    attachment.name = item.item_title
+    attachment.name = strip_tags(item.item_title)
     attachment.description = caption(strip_tags(item.item_description),999) # 999 is fb limit
     attachment.href = polymorphic_url(item.item_link, :only_path => false, :canvas => true)
     stream_post.attachment = attachment

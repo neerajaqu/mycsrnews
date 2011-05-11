@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
   before_filter :set_iframe_status
-  #protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  protect_from_forgery :secret => 'a64cfbca0d60835e7c0ef3f0c814087d14f417155b354ff1b85fc6188e70a7be4d75e93b6699de6fe3ce80a270ff3e7001104932' # See ActionController::RequestForgeryProtection for details
   before_filter :set_p3p_header
   before_filter :set_facebook_session_wrapper
   before_filter :set_current_tab
@@ -69,6 +69,11 @@ class ApplicationController < ActionController::Base
   end
   alias_method :rails_redirect_to, :redirect_to
   alias_method :redirect_to, :newscloud_redirect_to
+
+
+  # TODO:: get this working
+  #def handle_unverifiedrequest
+  #end
 
   def logged_in_to_facebook_and_app_authorized
     if ensure_application_is_installed_by_facebook_user  

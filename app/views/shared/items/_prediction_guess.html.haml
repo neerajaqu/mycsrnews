@@ -6,6 +6,6 @@
     - status = t('predictions.open')
   - else
     - status = t('predictions.see_results', :results_link => prediction_question_path(prediction_question))
-  %h3= t('predictions.posted_by_in_topic_with_status', :fb_name => local_linked_profile_name(prediction_question.user), :topic => prediction_question.prediction_group.title, :link_topic => prediction_group_path(prediction_question.prediction_group), :status => status)
+  %h3= t('predictions.posted_by_in_topic_with_status', :fb_name => local_linked_profile_name(prediction_question.user), :topic => prediction_question.prediction_group.title, :link_topic => prediction_group_path(prediction_question.prediction_group), :status => status).html_safe
 .float_right
   %h3= prediction_guess.guess

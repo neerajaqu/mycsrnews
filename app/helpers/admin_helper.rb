@@ -11,7 +11,7 @@ module AdminHelper
     html << "<h2>#{gen_new_link model}</h2>"
 
     html << gen_table(collection, model, fields, options)
-    html.join
+    html.join.html_safe
   end
 
   def gen_show_page(item, fields, options = {})
@@ -27,7 +27,7 @@ module AdminHelper
     html << "<p>Actions: #{admin_links item}</p>"
     html << "<br />"
 
-    html.join
+    html.join.html_safe
   end
 
   def gen_new_link model
@@ -70,7 +70,7 @@ module AdminHelper
       html << will_paginate(collection) if options[:paginate]
     end
 
-    html.join
+    html.join.html_safe
   end
 
   def admin_links item

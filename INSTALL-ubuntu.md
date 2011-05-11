@@ -53,10 +53,8 @@ Create a newscloud database and user
 	grant ALL on n2_development.* to n2db@localhost identified by 'SOME SECURE PASSWORD';
 
 
-Install Memcached and Redis
+Install Redis
 ---------------------------
-
-	sudo apt-get install memcached libmemcache-client-ruby libmemcached-dev
 
 	sudo apt-get install redis-server
 

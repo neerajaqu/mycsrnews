@@ -21,7 +21,7 @@
           .thumb= image_tag @question.images.first.url(:medium)
         %h1.askQuestionHead= @question.question
 
-        %h3= t('asked_by', :fb_name => local_linked_profile_name(@question.user), :date => timeago(@question.created_at))
+        %h3= asked_by @question
         - if @tags.present?
           .tag-wrap
             %h3== Tags: #{tag_list(@tags, @question)}

@@ -7,6 +7,7 @@ Plugins that have been modified:
 * pfeed is from github.com/chewbranca/pfeed
 * feedzirra is from github.com/chewbranca/feedzirra
 * i18n_backend_database?
+	- switched Locale.foo to ::Locale.foo in vendor/plugins/i18n_backend_database/lib/i18n_backend_database/database.rb
 * paperclip: https://github.com/thoughtbot/paperclip/issues/259
 
 Javascript:

@@ -19,4 +19,8 @@ module ClassifiedsHelper
     end
   end
 
+  def classifieds_posted_by classified
+    I18n.translate('posted_by_in_category', :fb_name => local_linked_profile_name(classified.user), :date => timeago(classified.created_at), :category => classified.category_name).html_safe
+  end
+
 end

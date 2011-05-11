@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def pipe_spacer
-    '<span class="pipe">|</span>'
+    '<span class="pipe">|</span>'.html_safe
   end
 
   def tab_selected?(current_tab, tab_name)
@@ -78,24 +78,24 @@ module ApplicationHelper
 
   def linked_story_caption(story, length = 150, url = false, options = {})
     caption = caption(story.caption.sanitize_standard, length)
-    "#{caption} #{link_to 'More', (url ? url : story_path(story, options))}"
+    "#{caption} #{link_to 'More', (url ? url : story_path(story, options))}".html_safe
   end
 
   #remove this method when self.title methods created
   def linked_item_details(item, length = 150, url = false)    
     return "" if item.details.nil? || item.details.empty?
     caption = caption(item.details.sanitize_standard, length)
-    "#{caption} #{link_to 'More', (url ? url : item)}"
+    "#{caption} #{link_to 'More', (url ? url : item)}".html_safe
   end
 
   def linked_newswire_caption(newswire, length = 150)
     caption = strip_tags(caption(newswire.caption, length))
-    "#{caption} #{link_to 'More', newswire.url, :target => "_cts"}"
+    "#{caption} #{link_to 'More', newswire.url, :target => "_cts"}".html_safe
   end
 
   def linked_comment_caption(comment, length = 150)
     caption = caption(comment.comments, length)
-    "#{caption} #{link_to 'More', comment.commentable, :anchor => 'commentsListTop'}"
+    "#{caption} #{link_to 'More', comment.commentable, :anchor => 'commentsListTop'}".html_safe
   end
 
   # Adopted from http://daniel.collectiveidea.com/blog/2007/7/10/a-prettier-truncate-helper
@@ -311,7 +311,7 @@ module ApplicationHelper
       flash[type] = nil
     end
     
-    (messages.size > 0) ? messages.join : ''
+    (messages.size > 0) ? messages.join.html_safe : ''
   end
 
   def ar_xid(record)
@@ -324,7 +324,7 @@ module ApplicationHelper
       tag_list << link_to(tag.name, tag_link(tag, item), :class => css_class)
     end
 
-    tag_list.size > 0 ? tag_list.join(', ') : ''
+    tag_list.size > 0 ? tag_list.join(', ').html_safe : ''
   end
 
   def tag_link(tag, item)
@@ -463,6 +463,7 @@ EMBED
     count_str = "#{count > 0 ? '+' : ''}#{count}"
     output = "<span class='likes-tally'>#{count_str}</span>&nbsp;#{like_link item}"
     output += "&nbsp;#{dislike_link item}" if item.downvoteable?
+    raw output
   end
 
   def answer_translate count = 0

@@ -2,6 +2,6 @@
   - allow_suggestions = get_setting('predictions_allow_suggestions').try(:value) || false
   - if allow_suggestions
     %div{:class => "panel_1 #{defined?(widget_page) ? widget_page.css_class : ''}"}
-      = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => false, :title => t('predictions.suggest_predictions_title')}
+      = render :partial => 'widgets/titlebar', :locals => {:hide_titlebar => false, :title => t('predictions.suggest_predictions_title').html_safe}
       %p
-        =t('predictions.suggest_predictions_info', :link_topic => new_prediction_group_path(), :link_question => new_prediction_question_path())
+        = t('predictions.suggest_predictions_info', :link_topic => new_prediction_group_path(), :link_question => new_prediction_question_path()).html_safe

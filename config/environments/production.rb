@@ -15,9 +15,15 @@ config.action_view.cache_template_loading            = true
 # Use a different logger for distributed setups
 # config.logger = SyslogLogger.new
 
+# Load up redis config info
+resque_base_file = RAILS_ROOT + '/config/resque.yml'
+resque_file = File.exists?(resque_base_file) ? resque_base_file : (resque_base_file + '.sample')
+resque_config = YAML.load_file(resque_file)['production']
+redis_host, redis_port = resque_config.split(/:/)
+
 # Use a different cache store in production
-app_name = RAILS_ROOT =~ %r(/([^/]+)/(current|release)) ? $1 : 'default'
-config.cache_store = :mem_cache_store, { :namespace => app_name }
+app_name = RAILS_ROOT =~ %r(/([^/]+)/(current|release)) ? $1 : 'newscloud'
+config.cache_store = :redis_store, { :host => redis_host, :port => redis_port, :namespace => app_name }
 
 # Set the i18n cache store
 #I18n.backend.cache_store = :mem_cache_store

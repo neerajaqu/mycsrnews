@@ -31,7 +31,7 @@
 
         %h1= @gallery.title
         %h3 
-          = t('posted_by', :fb_name => local_linked_profile_name(@gallery.user), :date => timeago(@gallery.created_at))
+          = generic_posted_by @gallery
           %span.moderator-links.hidden{:class => "user-#{@gallery.user.id}"}
             = pipe_spacer
             = link_to t('galleries.edit'), edit_gallery_path(@gallery)

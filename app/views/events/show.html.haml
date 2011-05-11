@@ -24,7 +24,7 @@
             = image_tag @event.pic
         %h1= @event.name
         %h3
-          = t('posted_by', :fb_name => local_linked_profile_name(@event.user), :date => timeago(@event.created_at))
+          = generic_posted_by @event
         - if @tags.present?
           .tag-wrap
             %h3== Tags: #{tag_list(@tags,@event)}

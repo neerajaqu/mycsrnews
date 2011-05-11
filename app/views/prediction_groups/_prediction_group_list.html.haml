@@ -7,10 +7,11 @@
       %h2= t 'predictions.browse_groups'
     .itemListWrap
       #prediction_groups.list_items
-        %ul
-          - prediction_groups.each do |prediction_group|
-            %li{'data-id' => prediction_group.cache_key}
-              = render :partial => 'shared/items/prediction_group', :locals => { :prediction_group => prediction_group }
+        .item_1
+          %ul
+            - prediction_groups.each do |prediction_group|
+              %li{'data-id' => prediction_group.cache_key}
+                = render :partial => 'shared/items/prediction_group', :locals => { :prediction_group => prediction_group }
     - if paginate
       .clearfix
         = will_paginate prediction_groups

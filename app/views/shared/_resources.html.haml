@@ -25,7 +25,7 @@
 
                 .itemMeta
                   .profilePic= local_linked_profile_pic resource.user
-                  %h3= t('posted_by', :fb_name => local_linked_profile_name(resource.user), :date => timeago(resource.created_at))
+                  %h3= generic_posted_by resource
                   %span.btnComment== #{like_link resource} #{resource.votes_tally}
                   %span.btnComment== #{link_to t('.resources_comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}
                   %span.btnComment= fb_share_item_button(resource)

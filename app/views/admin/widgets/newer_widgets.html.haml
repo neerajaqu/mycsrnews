@@ -182,7 +182,7 @@
             - if @editable_view_objects.include? view_object
               %li.widget.ui-state-default{:id => "view-object-#{view_object.id}"}
                 = view_object.name
-                %span{:style => "float:right"}= link_to 'Edit &nbsp;', edit_admin_view_object_path(view_object), :target => "_view_object"
+                %span{:style => "float:right"}= link_to 'Edit ', edit_admin_view_object_path(view_object), :target => "_view_object"
             - else
               %li.widget.ui-state-default{:id => "view-object-#{view_object.id}"}= view_object.name
 

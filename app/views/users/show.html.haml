@@ -4,7 +4,7 @@
 #col_left
   #myProfile.panel_2.featureWrap
     .panelBar
-      %h2= t('.title', :name => profile_fb_name(@user,false))
+      %h2= t('.title', :name => profile_fb_name(@user,false)).html_safe
     .half-panel
       .thumb.user-details
         = local_linked_profile_pic @user, :destination => fb_profile_link(@user), :width => '180', :size => 'normal', :target => '_top'

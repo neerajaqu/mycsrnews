@@ -9,11 +9,4 @@
     - else
       %h4= link_to item.title, path_to_self(item, canvas_preference), :target => "_top"
     .itemMeta
-      - if item_type == 'topic'
-        %h3= t('posted_by_in_topic', :fb_name => local_linked_profile_name(item.user), :topic => item.forum.item_title)
-      - elsif item_type == 'prediction'
-        %h3= t('posted_by_in_topic', :fb_name => local_linked_profile_name(item.user), :topic => item.prediction_group.item_title)
-      - else
-        %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => timeago(item.created_at))
-      
-      
+      %h3= forum_posted_by_with_topic item

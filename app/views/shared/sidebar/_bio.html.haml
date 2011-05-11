@@ -2,8 +2,8 @@
 
 .panel_1
   .panelBar
-    %h2= t('.posted_by', :fb_name => local_linked_profile_name(user))
+    %h2= t('.posted_by', :fb_name => local_linked_profile_name(user)).html_safe
   .thumb.user-bio
     = local_linked_profile_pic user
   .itemBlock
-    %p= (user.bio.present?) ? user.bio : default_bio(user)
+    %p= raw((user.bio.present?) ? user.bio : default_bio(user)).fb_sanitize

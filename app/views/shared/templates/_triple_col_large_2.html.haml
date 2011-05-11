@@ -10,7 +10,7 @@
             %a= image_tag(medium_image_or_default(item1))
           .item-text
             %h1
-              %span.ellipsis_title_2= link_to item1.item_title, item1.item_link, :class => 'ellipsis_text'
+              %span.ellipsis_title_2= link_to sanitize_title(item1.item_title), item1.item_link, :class => 'ellipsis_text'
             %p.ellipsis_caption_5
               %span.ellipsis_text= item1.item_description
             .meta-data
@@ -29,7 +29,7 @@
                 %a= image_tag(thumb_image_or_default(item2))
               .item-text
                 %h3
-                  %span.ellipsis_title_2= link_to item2.item_title, item2.item_link, :class => 'ellipsis_text'
+                  %span.ellipsis_title_2= link_to sanitize_title(item2.item_title), item2.item_link, :class => 'ellipsis_text'
                 .meta-data
                   %h6= action_links(item2)
 
@@ -40,6 +40,6 @@
                 %a= image_tag(thumb_image_or_default(item3))
               .item-text
                 %h3
-                  %span.ellipsis_title_2= link_to item3.item_title, item3.item_link, :class => 'ellipsis_text'
+                  %span.ellipsis_title_2= link_to sanitize_title(item3.item_title), item3.item_link, :class => 'ellipsis_text'
                 .meta-data
                   %h6= action_links(item3)
