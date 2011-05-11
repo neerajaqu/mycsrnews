@@ -1,11 +1,8 @@
-#subNav.tabs.clearfix
-  .left_tabs
-    %ul#toggle_tabs_unused.toggle_tabs.clearfix
-      -#%li.first= link_to t('top_users.daily'), top_users_path(:top => 'daily'), :class => sub_tab_selected?(@current_sub_tab, 'daily')
-      %li.first= link_to t('top_users.weekly'), top_users_path(:top => 'weekly'), :class => sub_tab_selected?(@current_sub_tab, 'weekly')
-      -#%li.first= link_to t('top_users.monthly'), top_users_path(:top => 'monthly'), :class => sub_tab_selected?(@current_sub_tab, 'monthly')
-      -#%li.first= link_to t('top_users.yearly'), top_users_path(:top => 'yearly'), :class => sub_tab_selected?(@current_sub_tab, 'yearly')
-      %li.first= link_to t('top_users.alltime'), top_users_path(:top => 'alltime'), :class => sub_tab_selected?(@current_sub_tab, 'alltime')
-%br
-%br
-
+#subNav
+  .tabs
+    %ul#toggle_tabs_unused.toggle_tabs
+      -#%li= link_to t('top_users.daily'), top_users_path(:top => 'daily'), :class => "tab #{sub_tab_selected?(@current_sub_tab, 'daily')}"
+      %li= link_to t('top_users.weekly'), top_users_path(:top => 'weekly'), :class => "tab #{sub_tab_selected?(@current_sub_tab, 'weekly')}"
+      -#%li= link_to t('top_users.monthly'), top_users_path(:top => 'monthly'), :class => "tab #{sub_tab_selected?(@current_sub_tab, 'monthly')}"
+      -#%li= link_to t('top_users.yearly'), top_users_path(:top => 'yearly'), :class => "tab #{sub_tab_selected?(@current_sub_tab, 'yearly')}"
+      %li= link_to t('top_users.alltime'), top_users_path(:top => 'alltime'), :class => "tab #{sub_tab_selected?(@current_sub_tab, 'alltime')}"

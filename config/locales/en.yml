@@ -66,6 +66,7 @@ en:
     yearly: "Yearly"
     alltime: "All Time"
   welcome_name: "Welcome {{name}}!"
+  welcome_panel_stack_up: "See how your {{user_score}} points stacks up against <a href=\"{{score_link}}\">other readers</a>."
   newbie_headline: "Still wondering how to get started?"
   newbie_tip_like: "Like or Share any story or headline"
   newbie_tip_story: "<a href=\"{{href}}\">Post a link</a> to a story from the Web"
