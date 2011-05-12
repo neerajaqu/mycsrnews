@@ -19,9 +19,9 @@ Getting Started
 Clone this application to your machine and checkout release 3
 
         git clone git://github.com/newscloud/n2.git
-        git checkout --track -b release3 origin/release3
+        git checkout --track -b release3_1 origin/release3_1
 
-Alternatively, download release 3 directly [http://github.com/newscloud/n2/archives/v3.0_stable](https://github.com/newscloud/n2/tree/release3)
+Alternatively, download release 3 directly [http://github.com/newscloud/n2/archives/v3.1_stable](http://github.com/newscloud/n2/archives/v3.1_stable)
 
 Register a facebook application
 -------------------------------
