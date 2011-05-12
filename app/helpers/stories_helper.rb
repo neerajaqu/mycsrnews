@@ -13,7 +13,7 @@ module StoriesHelper
   def stories_posted_by_via story
     I18n.translate('posted_by_via',
                    :fb_name => local_linked_profile_name(story.user),
-                   :source => (story.source.present? ? story_source_link(story) : source_link(story)),
+                   :source => (story.source.present? ? source_link(story) : story_source_link(story)),
                    :date => timeago(story.created_at)
                   ).html_safe
   end
