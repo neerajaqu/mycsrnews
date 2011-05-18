@@ -35,6 +35,7 @@ set :template_dir, "config/deploy/templates"
 # TODO:: remove this from main deploy
 set :branch, 'master'
 
+set :skin_dir, "/data/config/n2_sites"
 
 after("deploy:update_code") do
   # setup shared files
@@ -145,11 +146,13 @@ namespace :deploy do
 
   desc "Start application"
   task :start, :roles => :app do
-    run "cd #{current_path} && /usr/bin/unicorn_rails -c #{current_path}/config/unicorn.conf.rb -E #{rails_env} -D"
+    run "cd #{current_path} && bundle exec unicorn_rails -c #{current_path}/config/unicorn.conf.rb -E #{rails_env} -D"
+    deploy.god.start
   end
 
   desc "Stop application"
   task :stop, :roles => :app do
+    deploy.god.stop
     run "cat #{current_path}/tmp/pids/unicorn.pid | xargs kill -QUIT"
   end
 
@@ -214,11 +217,11 @@ end
 #########################################################################
 
 def skin_dir_exists?
-  dir_exists? "/data/config/n2_sites/#{application}"
+  dir_exists? "#{skin_dir}/#{application}"
 end
 
 def skin_file_exists?
-  file_exists? "/data/config/n2_sites/#{application}/app/stylesheets/skin.sass"
+  file_exists? "#{skin_dir}/#{application}/app/stylesheets/skin.sass"
 end
 
 def dir_exists? path
