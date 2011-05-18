@@ -1,0 +1,20 @@
+base: &base
+  adapter: sqlite3
+  timeout: 5000
+development:
+  database: <%= shared_path %>/db/development.sqlite3
+  <<: *base
+test:
+  database: <%= shared_path %>/db/test.sqlite3
+  <<: *base
+
+production:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: <%= application %>_production
+  host:     localhost
+  pool: 5
+  username: <%= db_user %>
+  password: <%= db_password || Capistrano::CLI.password_prompt("Enter MySQL database password: ") %>
+  socket: /var/run/mysqld/mysqld.sock

@@ -1,8 +1,19 @@
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'deploy', 'tasks')
+
 set :default_stage, "n2_staging"
 set (:stages) { Dir.glob(File.join(File.dirname(__FILE__), "deploy", "*.rb")).map {|s| File.basename(s, ".rb") }.select {|s| not s =~ /sample/} }
+
 require 'capistrano/ext/multistage'
 require 'eycap/recipes'
 
+# Custom newscloud template generators
+require "capistrano_database_yml"
+require "capistrano_facebooker_yml"
+require "capistrano_application_god"
+require "capistrano_unicorn_conf"
+require "config_wizard"
+
+# :bundle_without must be above require 'bundler/capistrano'
 set :bundle_without, [:development, :test, :cucumber]
 
 require 'bundler/capistrano'
@@ -18,6 +29,11 @@ set (:deploy_to) { "/data/sites/#{application}" }
 
 set :user, 'deploy'
 set :use_sudo, false
+
+set :template_dir, "config/deploy/templates"
+
+# TODO:: remove this from main deploy
+set :branch, 'master'
 
 
 after("deploy:update_code") do
@@ -47,6 +63,7 @@ before("deploy:migrations") do
   deploy.god.stop
 end
 
+=begin
 after("deploy") do
   run "cd #{current_path} && rake n2:queue:restart_workers"
   run "cd #{current_path} && rake n2:queue:restart_scheduler APP_NAME=#{application}"
@@ -60,7 +77,15 @@ after("deploy:migrations") do
   deploy.god.start
   newrelic.notice_deployment
 end
+=end
 
+after("deploy:update_code") do
+  deploy.server_post_deploy
+  set :rake_post_path, current_path
+  deploy.rake_post_deploy
+end
+
+=begin
 before "deploy:start" do
   set :rake_post_path, release_path
   deploy.rake_post_deploy
@@ -70,6 +95,7 @@ before "deploy:restart" do
   set :rake_post_path, current_path
   deploy.rake_post_deploy
 end
+=end
 
 before("deploy:web:disable") do
   deploy.god.stop
@@ -142,7 +168,15 @@ namespace :deploy do
   desc "Run rake after deploy tasks"
   task :rake_post_deploy do
     path = rake_post_path || release_path
-    run "cd #{path} && /usr/bin/rake n2:deploy:after RAILS_ENV=#{rails_env}"
+    run "cd #{path} && bundle exec rake n2:deploy:after RAILS_ENV=#{rails_env}"
+  end
+
+  desc "Run server post deploy tasks to restart workers and reload god"
+  task :server_post_deploy do
+    run "cd #{current_path} && bundle exec rake n2:queue:restart_workers"
+    run "cd #{current_path} && bundle exec rake n2:queue:restart_scheduler APP_NAME=#{application}"
+    deploy.god.start
+    newrelic.notice_deployment
   end
 
   desc "Load the app skin if it exists"

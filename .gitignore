@@ -26,6 +26,8 @@ config/compass.config
 !config/cucumber.yml
 !config/asset_packages.yml
 config/deploy/*.rb
+config/deploy/*.yml
+config/deploy/*.yaml
 !config/deploy/sample.rb
 *.pid
 ical
