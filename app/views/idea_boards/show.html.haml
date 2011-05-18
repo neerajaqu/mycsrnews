@@ -15,19 +15,20 @@
         %ul
           - @idea_board.ideas.active.newest(10).each do |idea|
             %li{'data-id' => idea.cache_key}
-              .thumb
-                - if idea.images.present?
-                  = image_tag idea.images.first.url(:thumb)
-                - else
-                  = image_tag ('default/watermark.jpg')
-              .itemBlock
-                %h2= link_to idea.title, idea_path(idea)
-                %p= linked_item_details idea
-                .profilePic= local_linked_profile_pic idea.user
-                .itemMeta
-                  %h3= generic_posted_by idea
-                  %span.btnComment== #{like_link idea} #{idea.votes_tally}
-                  %span.btnComment== #{link_to t('comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
+              .item_1
+                .thumb
+                  - if idea.images.present?
+                    = image_tag idea.images.first.url(:thumb)
+                  - else
+                    = image_tag ('default/watermark.jpg')
+                .itemBlock
+                  %h2= link_to idea.title, idea_path(idea)
+                  %p= linked_item_details idea
+                  .profilePic= local_linked_profile_pic idea.user
+                  .itemMeta
+                    %h3= generic_posted_by idea
+                    %span.btnComment== #{like_link idea} #{idea.votes_tally}
+                    %span.btnComment== #{link_to t('comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
     - if paginate
       .clearfix
         = will_paginate ideas
