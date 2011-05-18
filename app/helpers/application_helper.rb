@@ -363,7 +363,7 @@ module ApplicationHelper
   def embed_video video, *args
     options = args.extract_options!
     options.merge!(:size => 'normal') unless options[:size].present?
-    embed_html_video(video, options)
+    embed_html_video(video, options).html_safe
   end
 
   def embed_html_video video, options = {}
@@ -386,7 +386,7 @@ EMBED
 
   def embed_audio audio, options = {}
     #request_comes_from_facebook? ? embed_fb_audio(audio, options) : embed_html_audio(audio, options)
-    embed_html_audio(audio, options)
+    embed_html_audio(audio, options).html_safe
   end
 
   def embed_fb_audio audio, options = {}
