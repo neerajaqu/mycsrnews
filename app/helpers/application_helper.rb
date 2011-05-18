@@ -416,7 +416,7 @@ EMBED
       next unless item.send("#{media}_item?")
       output << render(:partial => "shared/media/#{media.pluralize}", :locals => { media.pluralize.to_sym => item.send(media.pluralize.to_sym), :size => size })
     end
-    output.join
+    output.join().html_safe
   end
 
   def sanitize_user_content content
