@@ -45,7 +45,12 @@
         %tr{:class => "images #{cycle('odd', 'even')}"}
           %td= link_to image_tag(image.url(:medium), :size => "75x75"), [:admin, image]
           %td= image.remote_image_url || image.image_file_name
-          %td= link_to image.imageable.item_title, [:admin, image.imageable.item_link]
+          - if image.imageable
+            %td= link_to image.imageable.item_title, [:admin, image.imageable.item_link]
+          - elsif image.galleries.any?
+            %td= link_to image.galleries.first.item_title, [:admin, image.galleries.first.item_link]
+          - else
+            %td Unknown
           %td
             %ul
               -#%li= link_to 'View', '#'
