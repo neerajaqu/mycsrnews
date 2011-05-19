@@ -1,12 +1,15 @@
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'deploy', 'tasks')
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'deploy', 'recipes')
 
 set :default_stage, "n2_staging"
 set (:stages) { Dir.glob(File.join(File.dirname(__FILE__), "deploy", "*.rb")).map {|s| File.basename(s, ".rb") }.select {|s| not s =~ /sample/} }
 
 require 'capistrano/ext/multistage'
-require 'eycap/recipes'
+#require 'eycap/recipes'
 
 # Custom newscloud template generators
+#
+# switch to this once nginx config is working and eycap db
+#Dir.glob(File.join(File.dirname(__FILE__), "deploy", "recipes", "*.rb")).map {|s| File.basename(s, ".rb") }.each {|f| require f }
 require "capistrano_database_yml"
 require "capistrano_facebooker_yml"
 require "capistrano_application_god"
