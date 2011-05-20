@@ -4,7 +4,7 @@
 #col_left
   -# cache_if page.present?, "idea_boards_#{idea_board.id}_#{page}html" do
     -# ideas ||= @idea_board.ideas.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
-  - paginate ||= false
+  - @paginate ||= false
   .panel_2
     .panelBar.clearfix
       %h2= @idea_board.name
@@ -13,7 +13,7 @@
     .itemListWrap
       #front-stories.list_items
         %ul
-          - @idea_board.ideas.active.newest(10).each do |idea|
+          - @ideas.each do |idea|
             %li{'data-id' => idea.cache_key}
               .item_1
                 .thumb
@@ -29,9 +29,9 @@
                     %h3= generic_posted_by idea
                     %span.btnComment== #{like_link idea} #{idea.votes_tally}
                     %span.btnComment== #{link_to t('comments'), idea_path(idea, :anchor => "commentListTop")} #{idea.comments_count}
-    - if paginate
+    - if @paginate
       .clearfix
-        = will_paginate ideas
+        = will_paginate @ideas
         %br
         
 #col_right

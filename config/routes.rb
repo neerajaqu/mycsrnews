@@ -47,6 +47,8 @@ ActionController::Routing::Routes.draw do |map|
   map.paged_galleries '/galleries/page/:page.:format', :controller => 'galleries', :action => 'index'
   map.paged_galleries_with_format '/galleries/page/:page.:format', :controller => 'galleries', :action => 'index'
   map.paged_ideas '/ideas/page/:page.:format', :controller => 'ideas', :action => 'index'
+  map.paged_idea_boards '/idea_boards/:id/page/:page.:format', :controller => 'idea_boards', :action => 'show'
+  map.paged_idea_boards_with_format '/idea_boards/:id/page/:page.:format', :controller => 'idea_boards', :action => 'show'
   map.paged_my_events '/events/:id/my_events/page/:page.:format', :controller => 'events', :action => 'my_events'
   map.paged_my_questions '/questions/:id/my_questions/page/:page.:format', :controller => 'questions', :action => 'my_questions'
   map.paged_my_resources '/resources/:id/my_resources/page/:page.:format', :controller => 'resources', :action => 'my_resources'

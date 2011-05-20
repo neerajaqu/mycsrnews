@@ -12,13 +12,9 @@ class IdeaBoardsController < ApplicationController
 
   def show
     @current_sub_tab = 'Browse Board Ideas'
+    @paginate = true
     @idea_board = IdeaBoard.active.find(params[:id])
-    @top_ideas = @idea_board.ideas.active.tally({
-    	:at_least => 1,
-    	:limit    => 5,
-    	:order    => "votes.count desc"
-    })
-    @newest_ideas = @idea_board.ideas.active.newest 5
+    @ideas = @idea_board.ideas.active.paginate :page => params[:page], :per_page => 10, :order => "created_at desc"
     set_sponsor_zone('ideas', @idea_board.item_title.underscore)
   end
 
