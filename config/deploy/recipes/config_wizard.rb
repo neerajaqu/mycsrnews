@@ -26,8 +26,9 @@ Capistrano::Configuration.instance.load do
       @settings[:app_name] = @app_name
 
       run_wizard
-      @ui.say("Responses for #{@app_name}")
-      @ui.say("#{@settings.inspect}")
+      #@ui.say("Responses for #{@app_name}")
+      #@ui.say("#{@settings.inspect}")
+      @ui.say("Successfully configured #{@app_name}")
     end
   end
 end
@@ -71,7 +72,7 @@ def get_facebook_config
     q.responses[:not_valid] = "Facebook Callback URL should look like a url and cannot end in 'iframe'."
   end
 
-  @settings[:base_url] ||= @settings[:facebooker][:callback_url]
+  @settings[:base_url] ||= @settings[:facebooker][:callback_url].sub(%r{^https?://}, '')
 end
 
 def get_database_config
@@ -82,7 +83,7 @@ def get_database_config
     q.default = "#{@app_name}_production"
     q.validate = /^.+$/
   end
-  @settings[:database][:user] = non_blank_request("Database User Name", :default => "#{@app_name}_db_user")
+  @settings[:database][:user] = non_blank_request("Database User Name (Max 16 chars)", :default => "#{@app_name}_db_user"[0,16])
   @settings[:database][:password] = @ui.ask("Please enter the database password (Leave blank to be prompted for your password on deploy)", lambda {|str| str.empty? ? nil : str }) do |q|
     q.echo = "*"
     #q.validate = /^.+$/

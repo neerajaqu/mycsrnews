@@ -27,22 +27,36 @@
 Capistrano::Configuration.instance.load do
     
   # Where your nginx lives. Usually /opt/nginx or /usr/local/nginx for source compiled.
-  set :nginx_path_prefix, "/opt/nginx" unless exists?(:nginx_path_prefix)
+  #set :nginx_path_prefix, "/etc/nginx" unless exists?(:nginx_path_prefix)
+  set(:nginx_path_prefix) { shared_path }
 
   # Path to the nginx erb template to be parsed before uploading to remote
-  set(:nginx_local_config) { "#{templates_path}/nginx.conf.erb" } unless exists?(:nginx_local_config)
+  set(:nginx_local_config) { "#{template_dir}/nginx.conf.erb" } unless exists?(:nginx_local_config)
 
   # Path to where your remote config will reside (I use a directory sites inside conf)
   set(:nginx_remote_config) do
-    "#{nginx_path_prefix}/conf/sites/#{application}.conf"
+    #"#{nginx_path_prefix}/sites-available/#{application}.conf"
+    "#{nginx_path_prefix}/#{application}.conf"
   end unless exists?(:nginx_remote_config)
+
+  # Path to nginx error log
+  set(:nginx_error_log_path) do
+    "/var/log/nginx/nginx.#{application}.error.log"
+  end unless exists?(:nginx_error_log_path)
+
+  # Path to nginx access log
+  set(:nginx_access_log_path) do
+    "/var/log/nginx/nginx.#{application}.access.log"
+  end unless exists?(:nginx_access_log_path)
 
   # Nginx tasks are not *nix agnostic, they assume you're using Debian/Ubuntu.
   # Override them as needed.
   namespace :nginx do
     desc "|DarkRecipes| Parses and uploads nginx configuration for this app."
     task :setup, :roles => :app , :except => { :no_release => true } do
-      generate_config(nginx_local_config, nginx_remote_config)
+      #generate_config(nginx_local_config, nginx_remote_config)
+      put(parse_config(nginx_local_config), nginx_remote_config)
+      #sudo "ln -nfs #{nginx_remote_config} #{nginx_path_prefix}/sites-enabled/#{application.conf}"
     end
     
     desc "|DarkRecipes| Parses config file and outputs it to STDOUT (internal task)"

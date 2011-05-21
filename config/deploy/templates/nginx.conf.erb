@@ -36,7 +36,7 @@
         passenger_enabled on;
         <% end %>
         client_max_body_size 500M;
-        server_name <%= application %>;
+        server_name <%= base_url %>;
 
         # ~2 seconds is often enough for most folks to parse HTML/CSS and
         # retrieve needed images/icons/frames, connections are cheap in
@@ -45,8 +45,10 @@
 
         # path for static files
         root <%= deploy_to %>/current/public;
-        access_log <%= deploy_to %>/current/log/nginx.access.log main;
-        error_log  <%= deploy_to %>/current/log/nginx.error.log info;
+        #access_log <%= deploy_to %>/current/log/nginx.access.log main;
+        #error_log  <%= deploy_to %>/current/log/nginx.error.log info;
+        access_log <%= nginx_access_log_path %>;
+        error_log <%= nginx_error_log_path %>;
 
         # this rewrites all the requests to the maintenance.html
         # page if it exists in the doc root. This is for capistrano's
@@ -110,27 +112,6 @@
         	 break;
         }
         
-        # Now this supposedly should work as it gets the filenames with querystrings that Rails provides.
-        # BUT there's a chance it could break the ajax calls.
-        location ~* \.(ico|css|gif|jpe?g|png)(\?[0-9]+)?$ {
-        	 expires max;
-        	 break;
-        }
-        
-        location ~ ^/javascripts/.*\.js(\?[0-9]+)?$ {
-        	 expires max;
-        	 break;
-        }
-        
-        # if the request is for a static resource, nginx should serve it directly
-        # and add a far future expires header to it, making the browser
-        # cache the resource and navigate faster over the website
-        location ~ ^/(images|javascripts|stylesheets|system)/ {
-          root /home/deployer/shop/current/public;
-          expires max;
-          break;
-        }
-        
         # Rails error pages
         error_page 500 502 503 504 /500.html;
         location = /500.html {
@@ -162,8 +143,10 @@
       client_max_body_size    50M;
       
       root <%= deploy_to %>/current/public;
-      access_log <%= deploy_to %>/current/log/nginx.access.log main;
-      error_log  <%= deploy_to %>/current/log/nginx.error.log info;
+      #access_log <%= deploy_to %>/current/log/nginx.access.log main;
+      #error_log  <%= deploy_to %>/current/log/nginx.error.log info;
+      access_log <%= nginx_access_log_path %>;
+      error_log <%= nginx_error_log_path %>;
 
       # this rewrites all the requests to the maintenance.html
       # page if it exists in the doc root. This is for capistrano's

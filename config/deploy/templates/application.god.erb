@@ -35,11 +35,12 @@ rails_root = ENV['RAILS_ROOT'] || "<%= deploy_to %>/current"
 #end
 
 God.watch do |w|
-  w.name = "unicorn"
+  w.name = "unicorn-#{application}"
+  w.group = "#{application}_workers"
   w.interval = 30.seconds # default
  
   # unicorn needs to be run from the rails root
-  w.start = "cd #{rails_root} && /usr/bin/unicorn_rails -c #{rails_root}/config/unicorn.conf.rb -E #{rails_env} -D"
+  w.start = "cd #{rails_root} && bundle exec unicorn_rails -c #{rails_root}/config/unicorn.conf.rb -E #{rails_env} -D"
  
   # QUIT gracefully shuts down workers
   w.stop = "kill -QUIT `cat #{rails_root}/tmp/pids/unicorn.pid`"
@@ -132,10 +133,11 @@ num_workers = <%= num_resque_workers %>
 num_workers.times do |num|
   God.watch do |w|
     w.name     = "resque-#{application}-#{num}"
-    w.group    = 'resque'
+    #w.group    = 'resque'
+    w.group = "#{application}_workers"
     w.interval = 30.seconds
     w.env      = {"QUEUE"=>"*", "RAILS_ENV"=>rails_env}
-    w.start    = "/usr/bin/rake -f #{rails_root}/Rakefile environment resque:work"
+    w.start    = "bundle exec rake -f #{rails_root}/Rakefile environment resque:work"
 
     #w.uid = 'deploy'
     #w.gid = 'deploy'
@@ -181,7 +183,8 @@ end
 
   God.watch do |w|
     w.name     = "resque-scheduler-#{application}"
-    w.group    = 'resque-scheduler'
+    #w.group    = 'resque-scheduler'
+    w.group = "#{application}_workers"
     w.interval = 30.seconds
     w.env      = {"INITIALIZER_PATH"=>"#{rails_root}/config/initializers/resque.rb", "RAILS_ENV"=>rails_env}
     w.start    = "/usr/bin/rake -f #{rails_root}/Rakefile resque:scheduler"
