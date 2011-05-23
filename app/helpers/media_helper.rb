@@ -22,6 +22,11 @@ module MediaHelper
       else
       	url = nil
     end
+    if url.nil?
+      if image.respond_to?(:images) and image.images.any?
+        url = image.images.first.try(:thumb_url)
+      end
+    end
     url || default_image
   end
 
@@ -46,6 +51,11 @@ module MediaHelper
         url = image.images.first.try(:medium_url)
       else
       	url = nil
+    end
+    if url.nil?
+      if image.respond_to?(:images) and image.images.any?
+        url = image.images.first.try(:medium_url)
+      end
     end
     url || default_medium_image
   end
