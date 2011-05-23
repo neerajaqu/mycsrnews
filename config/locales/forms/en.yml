@@ -41,7 +41,7 @@ en:
         body: "Write something inspiring here."
     actions:
       question:
-        create: "Ask my Question"
+        create: "Submit question"
       create: "Create my {{model}}"
       update: "Save changes"
       dummie: "Launch!"
