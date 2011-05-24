@@ -58,7 +58,7 @@
           - form.inputs do
             = form.input :answer, :label => false
           - form.buttons do
-            = form.commit_button :button_html => { :class => "btn_1" }
+            = form.commit_button :class => 'float_right', :button_html => { :class => "btn" }
   - if @outbrain_item
     = render :partial => 'shared/external/outbrain_wrapper'
   - if @question.moderatable?

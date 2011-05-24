@@ -13,7 +13,7 @@ module CommentsHelper
     s.gsub!( @starts_with_www_regexp, '\1<a target="_extlink" href="http://\2">\2</a>' )
     s.gsub!( @starts_with_ftp_regexp, '\1<a target="_extlink" href="ftp://\2">\2</a>' )
     s.gsub!( @email_regexp, '\1<a target="_extlink" href="mailto:\2@\3">\2@\3</a>' )
-    s
+    s.html_safe
   end
 
 end

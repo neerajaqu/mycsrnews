@@ -5,8 +5,7 @@
     .profilePic= local_linked_profile_pic answer.user
     .itemMeta
       %h3= answered_by answer
-      %span.btnComment.btn_left== #{link_to answer_translate(answer.question.answers.count), question_path(answer.question)}
-      %span.btnComment.btn_mid= link_to answer_comments_translate(answer.comments.size), '#', :class => 'answer_comments_link'
+      %span.btnComment.btn_left= link_to answer_comments_translate(answer.comments.size), '#', :class => 'answer_comments_link'
   - if show_comments.present?
     %br
     .clearfix
