@@ -8,8 +8,9 @@
           - if app_id_setting.value != '111111111111'
             %iframe{:src => "http://www.facebook.com/connect/connect.php?id=#{get_setting('app_id').value}&connections=0&stream=0", :frameborder => 0, :scrolling => "no", :class => "fb-fanapp", :allowtransparency => "true"}
           - else
-            %p
-              = link_to t('footer.setup_app_id', :setup_app_id_path => edit_admin_metadata_setting_path(app_id_setting), :learn_more_path => "http://support.newscloud.com/kb/configuring-your-application/how-to-setup-your-facebook-application-id" ).html_safe
+            .admin-links
+              %p
+                = link_to t('footer.setup_app_id', :setup_app_id_path => edit_admin_metadata_setting_path(app_id_setting), :learn_more_path => "http://support.newscloud.com/kb/configuring-your-application/how-to-setup-your-facebook-application-id" ).html_safe
         - account_setting = get_setting('account')
         - oauth_key_setting = get_setting('oauth_key')
         - if account_setting.present? && !oauth_key_setting.present?
@@ -24,8 +25,9 @@
             %span.twt_ft_wrap
               %a.twitter_link{:style=>"display:none;",:target => "_tweet", :title => t('.twitter_title'), :href => twitter_url(account_setting.value) }= t('.twitter')
           - else
-            %p
-              = link_to t('footer.setup_twitter', :setup_twitter_path => admin_twitter_settings_path, :learn_more_path => "http://support.newscloud.com/kb/configuring-your-application/how-to-configure-twitter-anywhere" ).html_safe            
+            .admin-links
+              %p
+                = link_to t('footer.setup_twitter', :setup_twitter_path => admin_twitter_settings_path, :learn_more_path => "http://support.newscloud.com/kb/configuring-your-application/how-to-configure-twitter-anywhere" ).html_safe            
       .panel-third
         = link_to t('footer.contact'), contact_us_path, :class => "icon-link email"
         = link_to t('account_menu.invite_friends'), invite_users_path(:format => 'html'), :class => "icon-link friends"
