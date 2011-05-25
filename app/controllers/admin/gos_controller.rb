@@ -43,7 +43,7 @@ class Admin::GosController < AdminController
   private
 
     def set_goable_types
-      @goable_types ||= [['Stories', 'contents'], ['Ideas', 'ideas'], ['Questions', 'questions'], ['Resources', 'resources'], ['Events', 'events'], ['Galleries', 'galleries'], ['Forums', 'forums'], ['Topics', 'topics'], ['Prediction Groups', 'prediction_groups'], ['Prediction Questions', 'prediction_questions'], ['Videos', 'videos']]
+      @goable_types ||= [['Stories', 'contents'], ['Ideas', 'ideas'], ['Idea Boards', 'idea_boards'], ['Questions', 'questions'], ['Resources', 'resources'], ['Resource Sections', 'resource_sections'], ['Events', 'events'], ['Galleries', 'galleries'], ['Forums', 'forums'], ['Topics', 'topics'], ['Prediction Groups', 'prediction_groups'], ['Prediction Questions', 'prediction_questions'], ['Videos', 'videos']]
     end
 
     def find_goable

@@ -37,10 +37,14 @@ class Admin::FeaturedItemsController < AdminController
         @items = Content.active.paginate  :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Idea.name.tableize
         @items = Idea.active.paginate     :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when IdeaBoard.name.tableize
+        @items = IdeaBoard.active.paginate     :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Event.name.tableize
         @items = Event.active.paginate    :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Resource.name.tableize
         @items = Resource.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
+      when ResourceSection.name.tableize
+        @items = ResourceSection.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Question.name.tableize
         @items = Question.active.paginate :page => params[:page], :per_page => 12, :order => "created_at desc"
       when Gallery.name.tableize
