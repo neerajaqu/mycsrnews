@@ -4,41 +4,18 @@ set :default_stage, "n2_staging"
 set (:stages) { Dir.glob(File.join(File.dirname(__FILE__), "deploy", "*.rb")).map {|s| File.basename(s, ".rb") }.select {|s| not s =~ /sample/} }
 
 require 'capistrano/ext/multistage'
-#require 'eycap/recipes'
 
-# Custom newscloud template generators
-#
-# switch to this once nginx config is working and eycap db
 Dir.glob(File.join(File.dirname(__FILE__), "deploy", "recipes", "*.rb")).sort.map {|s| File.basename(s, ".rb") }.each {|f| require f }
-
-#require "capistrano_database_yml"
-#require "capistrano_facebooker_yml"
-#require "capistrano_application_god"
-#require "capistrano_unicorn_conf"
-#require "config_wizard"
 
 # :bundle_without must be above require 'bundler/capistrano'
 set :bundle_without, [:development, :test, :cucumber]
-
 require 'bundler/capistrano'
+
 require 'new_relic/recipes'
 
-#default_run_options[:pty] = true
-
-#set :repository,  "git://github.com/newscloud/n2.git"
-#set :scm, :git
-#set :deploy_via, :remote_cache
-
+# Other default settings in config/deploy/recipes/application.rb
 set (:deploy_to) { "/data/sites/#{application}" }
-
-#set :user, 'deploy'
-#set :use_sudo, false
-
 set :template_dir, "config/deploy/templates"
-
-# TODO:: remove this from main deploy
-#set :branch, 'master'
-
 set :skin_dir, "/data/config/n2_sites"
 
 after("deploy:symlink") do
@@ -53,7 +30,6 @@ after("deploy:symlink") do
   deploy.load_skin
   deploy.restore_previous_sitemap
   deploy.cleanup
-  #bundler.bundle_new_release
 end
 
 before("deploy") do
@@ -68,22 +44,6 @@ before("deploy:migrations") do
   deploy.god.stop
 end
 
-=begin
-after("deploy") do
-  run "cd #{current_path} && rake n2:queue:restart_workers"
-  run "cd #{current_path} && rake n2:queue:restart_scheduler APP_NAME=#{application}"
-  deploy.god.start
-  newrelic.notice_deployment
-end
-
-after("deploy:migrations") do
-  run "cd #{current_path} && rake n2:queue:restart_workers"
-  run "cd #{current_path} && rake n2:queue:restart_scheduler APP_NAME=#{application}"
-  deploy.god.start
-  newrelic.notice_deployment
-end
-=end
-
 after("deploy:update_code") do
   unless exists?(:skip_post_deploy) and skip_post_deploy
     deploy.server_post_deploy
@@ -91,18 +51,6 @@ after("deploy:update_code") do
     deploy.rake_post_deploy
   end
 end
-
-=begin
-before "deploy:start" do
-  set :rake_post_path, release_path
-  deploy.rake_post_deploy
-end
-
-before "deploy:restart" do
-  set :rake_post_path, current_path
-  deploy.rake_post_deploy
-end
-=end
 
 before("deploy:web:disable") do
   deploy.god.stop

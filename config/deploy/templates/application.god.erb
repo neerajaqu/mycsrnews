@@ -136,8 +136,8 @@ num_workers.times do |num|
     #w.group    = 'resque'
     w.group = "#{application}_workers"
     w.interval = 30.seconds
-    w.env      = {"QUEUE"=>"*", "RAILS_ENV"=>rails_env}
-    w.start    = "bundle exec rake -f #{rails_root}/Rakefile environment resque:work"
+    #w.env      = {"QUEUE"=>"*", "RAILS_ENV"=>rails_env}
+    w.start    = "cd #{rails_root} && RAILS_ENV=#{rails_env} QUEUE=* bundle exec rake resque:work"
 
     #w.uid = 'deploy'
     #w.gid = 'deploy'
@@ -183,14 +183,10 @@ end
 
   God.watch do |w|
     w.name     = "resque-scheduler-#{application}"
-    #w.group    = 'resque-scheduler'
     w.group = "#{application}_workers"
     w.interval = 30.seconds
-    w.env      = {"INITIALIZER_PATH"=>"#{rails_root}/config/initializers/resque.rb", "RAILS_ENV"=>rails_env}
-    w.start    = "/usr/bin/rake -f #{rails_root}/Rakefile resque:scheduler"
-    #w.start    = "/usr/bin/rake -f #{rails_root}/Rakefile environment resque:work& &> log/resque_worker_#{num}.log && echo $! > tmp/pids/resque_worker_#{num}.pid && echo 0"
-    #w.start    = "/usr/bin/rake -f #{rails_root}/Rakefile environment resque:work &> log/resque_worker_#{num}.log && echo !$ > tmp/pids/resque_worker_#{num}.pid"
-    #w.start    = "cd #{rails_root} && RAILS_ENV=#{rails_env} INTERVAL=1 QUEUES=* rake resque:work &> log/resque_worker_#{num}.log & echo $! > tmp/pids/resque_worker_#{num}.pid"
+    #w.env      = {"INITIALIZER_PATH"=>"#{rails_root}/config/initializers/resque.rb", "RAILS_ENV"=>rails_env}
+    w.start    = "cd #{rails_root} && RAILS_ENV=#{rails_env} INITIALIZER_PATH=#{rails_root}/config/initializers/resque.rb bundle exec rake resque:scheduler"
     #w.pid_file = "#{rails_root}/tmp/pids/resque_worker_#{num}.pid"
 
     #w.behavior(:clean_pid_file)
