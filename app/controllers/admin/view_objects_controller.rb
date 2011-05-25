@@ -23,9 +23,9 @@ class Admin::ViewObjectsController < AdminController
     data = params['featured_items']
     view_object = ViewObject.find(params[:id])
 
-    render :json => {:error => "Invalid Type"}.to_json and return unless data.select {|i| not @featurables.map {|f| f[1].classify }.include?(i.sub(/_[0-9]+$/,'').classify) }.empty?
+    render :json => {:error => "Invalid Type"}.to_json and return unless data.select {|i| not @featurables.map {|f| f[1].classify }.include?(i.sub(/-[0-9]+$/,'').classify) }.empty?
 
-    view_object.setting.dataset = data.map {|i| i.split(/_/) }.map{|i| [i[0].classify, i[1]] }
+    view_object.setting.dataset = data.map {|i| i.split(/-/) }.map{|i| [i[0].classify, i[1]] }
     view_object.setting.save
 
     render :json => {:success => "Success!"}.to_json and return

@@ -2,7 +2,7 @@
   = will_paginate items
   %ul.items-list
     - items.each do |item|
-      %li.ui-widget-content.ui-corner-rt{:id => "#{item.class.name.downcase}_#{item.id}"}
+      %li.ui-widget-content.ui-corner-rt{:id => "#{item.class.name.underscore}-#{item.id}"}
         %h5.ui-widget-header= item.featured_title
         = image_tag (item.featured_image_url || default_image)
         = link_to 'View Larger', (item.featured_image_url || default_image), :class => 'ui-icon ui-icon-zoomin'

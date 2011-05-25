@@ -103,6 +103,6 @@
 .clearfix
   %h2 Existing Layout
   - if @view_object.setting.dataset
-    .view-object= ViewTree.render(@view_object.name, @controller)
+    .view-object= ViewTree.render(@view_object.name, @controller).html_safe
   - else
     %h4 You have not yet configured this View Object
