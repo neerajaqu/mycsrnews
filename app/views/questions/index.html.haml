@@ -15,10 +15,10 @@
             = form.input :question, :required => false, :label => false
           .fullQuestionForm.hide
             - form.inputs do
-              = form.input :details, :required => false, :label => t('please_elaborate'), :input_html => { :class => 'asdf' }
+              = form.input :details, :required => false, :label => t('please_elaborate')
               = form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
             - form.buttons do
-              = form.commit_button :button_html => { :class => "btn_1" }
+              = form.commit_button :button_html => { :class => "btn" }
 
   = render_ad(:banner, @ad_layout, @ad_banner)
   - cache "questions_list_#{@page}html" do

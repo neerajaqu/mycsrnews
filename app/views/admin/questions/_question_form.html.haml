@@ -1,6 +1,6 @@
 - form.inputs do
   = form.input :question
-  = form.input :details, :input_html => { :rows => 5 }
+  = form.input :details
   = render :partial => 'shared/forms/media_items', :locals => { :form => form, :item => @question }
   = form.input :tags_string, :required => false
 %br

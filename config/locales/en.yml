@@ -12,6 +12,8 @@ en:
   footer:
     contact: "Contact us"
     share_email: "Update your email address"
+    setup_app_id: "<a href=\"{{setup_app_id_path}}\">Setup your Facebook app id</a> (<a target=\"_blank\" href=\"{{learn_more_path}}\">Learn more</a>)"
+    setup_twitter: "<a href=\"{{setup_twitter_path}}\">Setup Twitter integration</a> (<a target=\"_blank\" href=\"{{learn_more_path}}\">Learn more</a>)"
   account_menu:
     sign_in: "Sign in"
     sign_out: "Sign out"

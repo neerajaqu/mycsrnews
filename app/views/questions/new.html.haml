@@ -12,7 +12,7 @@
         - semantic_form_for Question.new do |form|
           - form.inputs do
             = form.input :question, :required => false, :label => t('What is your Question?')
-            = form.input :details, :required => false, :label => t('please_elaborate'), :input_html => { :class => 'asdf' }
+            = form.input :details, :required => false, :label => t('please_elaborate')
             = form.input :tags_string, :label => t('tags'), :required => false, :hint => t('tags_hint')
             = render :partial => 'shared/forms/wall_postable', :locals => { :form => form }
           - form.buttons do
