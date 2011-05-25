@@ -1,0 +1,58 @@
+- content_for :head do
+  :javascript
+    $(function() {
+      $('#items li').live("click", function(e) {
+        e.preventDefault();
+        var form = $('form.go')[0];
+        console.log(this);
+        console.log($(this).attr('id'));
+        var name = $('h5', this).text();
+        var itemId = $(this).attr('id').split(/_/);
+        console.log(name);
+        if (!$('input#go_name').val()) {
+          $('input#go_name').val(name);
+        }
+        $('input#go_goable_type').val(itemId[0]);
+        $('input#go_goable_id').val(itemId[1]);
+        $('p.selected_text').text('Selected item: ' + name);
+      });
+
+      $('#items').html("<p>Loading items...</p>");
+      $.get('/admin/featured_items/contents/load_items', null, null, 'script');
+
+      $('#featured-items-select').live('change', function() {
+      	var type = $('option:selected', this).val();
+        $('#items').html("<p>Loading items...</p>");
+      	$.get('/admin/featured_items/'+type+'/load_items', null, null, 'script');
+      });
+
+      $('#items ul a').live("click", function(e) { e.preventDefault(); });
+      $('#items .pagination a').live("click", function(event) {
+      	event.preventDefault();
+      	var url = this.href.replace(/^(.+load_items\/)([0-9]+).*$/, "$1page/$2");
+      	$('#items').html("<p>Loading items...</p>");
+      	$.get(url, null, null, 'script');
+      });
+
+    });
+
+#content
+  #admin-actions
+
+  %h2 New Go to item quick link
+  %h3 Click the item in the right column you would like to go to
+  .template-builder-column
+
+    - semantic_form_for [:admin, @go] do |form|
+      - form.inputs do
+        = form.input :name
+        = form.input :goable_type, :as => :hidden
+        = form.input :goable_id, :as => :hidden
+        %p.selected_text== Selected item: #{@goable.try(:item_title)}
+      - form.buttons do
+        = form.commit_button
+    
+  .template-item-selector-column
+    %h2 Items
+    = select_tag 'featured-items-select', options_for_select(@goable_types)
+    #items

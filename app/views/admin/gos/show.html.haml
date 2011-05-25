@@ -1,0 +1,12 @@
+%h1 Go Link Details
+%hr
+
+%p== Name: #{@go.name}
+%p== Views Count: #{@go.views_count}
+%p
+  Go Link:
+  %a{:href => base_url("/go/#{@go.name}")}= base_url("/go/#{@go.name}")
+
+%br
+%p== Actions: #{admin_links(@go).html_safe}
+%br

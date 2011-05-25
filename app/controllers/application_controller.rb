@@ -308,10 +308,13 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    opts = {
-    	:locale => I18n.locale,
-      :format => format
-    } 
+    opts = {}
+    unless true or options.key?(:locale) and options[:locale] == "false"
+    	#opts[:locale] = I18n.locale
+    end
+    unless options.key?(:format) and options[:format] == "false"
+      opts[:format] = format
+    end
     # Disabled this and moved to IframeRewriter middleware due to fragment caching
     #opts[:iframe] = @iframe_status if @iframe_status and not options[:canvas] == true
     # TODO:: FIX:: Reenabled as a hack to update ajax json urls that aren't cached

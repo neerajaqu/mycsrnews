@@ -126,6 +126,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :events, :member => { :like => [:get, :post],:my_events => [:get, :post] }, :collection => { :index => [:get, :post], :import_facebook => [:get, :post] },:has_many => [:comments, :flags, :related_items]
   map.resources :forums, :has_many => [:topics]
   map.resources :galleries, :has_many => [:comments, :flags, :related_items], :member => { :add_gallery_item => [:get, :post] }
+  map.resources :go, :only => :show
   map.resources :home, :collection => { :preview_widgets => :get, :index => [:get, :post], :app_tab => [:get, :post], :google_ads => [:get],:openx_ads => [:get],:helios_ads => [:get],:helios_alt2_ads => [:get],:helios_alt3_ads => [:get],:helios_alt4_ads => [:get], :about => :get, :faq => :get, :terms => :get, :contact_us => [:get, :post] }, :member => { :render_widget => [:get, :post] }
   map.resources :idea_boards, :has_many => :ideas
   map.resources :ideas, :member => { :like => [:get, :post],:my_ideas => [:get, :post] },:collection => { :index => [:get, :post] }, :has_many => [:comments, :flags, :related_items ]
@@ -175,6 +176,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :flags
     admin.resources :forums, :collection => { :reorder => [:get, :post] }
     admin.resources :galleries
+    admin.resources :gos
     admin.resources :idea_boards
     admin.resources :ideas
     admin.resources :images
