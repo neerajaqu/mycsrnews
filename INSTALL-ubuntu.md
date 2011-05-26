@@ -13,8 +13,7 @@ You may want to review our installation support page which lists a configuration
 Create Rackspace Cloud Server with 1024 megs
 ----------------------------------------------------------------------
 
-Visit [https://signup.rackspacecloud.com/signup](https://signup.rackspacecloud.com/signup)
-and sign up for a 1024 mb cloud server.
+Visit [Rackspace](http://www.rackspacecloud.com/2352.html) and sign up for a 1024 mb cloud server.
 
 Domain Name Configuration
 -------------------------
