@@ -1,9 +1,9 @@
 Installing on Ubuntu 10.04 LTS
 ======================================================
 
-This guide will bootstrap a production newscloud install on Ubuntu 10.04. We have tested this configuration specifically for a 1 GB Rackspace cloud-based server, which costs about $45/mo. 
+This guide will bootstrap a production newscloud install on Ubuntu 10.04. We have tested this configuration specifically for a 1 GB Rackspace cloud-based server, which costs about $45 per month. 
 
-We're not affiliated with rackspace in any way, we just see it as a good, affordable hosting platform.
+We're not affiliated with rackspace in any way, we just see it as a good, affordable hosting choice for organizations interested in NewsCloud.
 
 Part One: Prerequisites
 =======================
@@ -19,24 +19,26 @@ and sign up for a 1024 mb cloud server.
 Domain Name Configuration
 -------------------------
 
-Use your DNS provider to point your domain name at the rackspace server. Need help? Visit [How to register a domain for your NewsCloud site](http://support.newscloud.com/kb/installing-newscloud/how-to-register-a-domain-for-your-newscloud-site) and [How to map your domain's DNS for Facebook Connect](http://support.newscloud.com/kb/installing-newscloud/how-to-map-your-domains-dns-for-facebook-connect)
+Use your DNS provider to point your domain name at the IP address of the rackspace server. Need more information? Visit [How to register a domain for your NewsCloud site](http://support.newscloud.com/kb/installing-newscloud/how-to-register-a-domain-for-your-newscloud-site) and [How to map your domain's DNS for Facebook Connect](http://support.newscloud.com/kb/installing-newscloud/how-to-map-your-domains-dns-for-facebook-connect)
 
-Register a facebook application
--------------------------------
+Register your facebook application
+----------------------------------
 
 You will need to have a facebook developer application, either:
 
   * Create a [new application](http://www.facebook.com/developers/createapp.php)
   * Use an [existing application](http://www.facebook.com/developers/)
 
-NOTE::
+NOTE:
+
+You can see a bit more detail and screenshots of example Facebook configurations on our support page. [How to register your application with Facebook](http://support.newscloud.com/kb/installing-newscloud/how-to-register-your-application-with-facebook)
 
   * You **must** set your canvas url to end in /iframe/, ie http://mysite.com/iframe/
   * However, when you set your config files you only want to use http://mysite.com
   * This is used internally to allow the use of a facebook canvas app and an external web pages
   * Other settings of note are:
     * Canvas Type = Iframe
-	* Iframe Size = Auto-resize
+    * Iframe Size = Auto-resize
 
 Part Two: Bootstrap Your New Server
 ===================================
@@ -188,7 +190,7 @@ Part Three:: Deploying newscloud from your dev machine
 
 Now that we have the base server up and running, we can use capistrano to do the heavy lifting.
 
-**NOTE**:: These commands will now be run from your local dev machine.
+**NOTE**: These commands will now be run from your local dev machine.
 
 You will need to have capistrano and the capistrano multistage extension installed.
 
