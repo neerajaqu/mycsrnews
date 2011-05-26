@@ -5,8 +5,8 @@ This guide will bootstrap a production newscloud install on a rackspace server.
 
 A few side notes:
 
-	* First, we're not affiliated with rackspace in any way, we just see it as a good, affordable hosting platform.
-	* Second, this guide will work fine on any ubuntu 10.04 server system with at least a gigabyte of ram, not just a rackspace server.
+  * First, we're not affiliated with rackspace in any way, we just see it as a good, affordable hosting platform.
+  * Second, this guide will work fine on any ubuntu 10.04 server system with at least a gigabyte of ram, not just a rackspace server.
 
 Part One: Prerequisites
 =======================
