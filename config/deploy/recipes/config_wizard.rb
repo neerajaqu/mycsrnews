@@ -35,7 +35,6 @@ end
 
 def run_wizard
   say_headline('Welcome to the newscloud configuration wizard')
-  @ui.say("Default/Current stage #{default_stage}/#{defined?(stage) ? stage : "undefined"}")
   get_app unless @app_name
   get_facebook_config
   get_database_config

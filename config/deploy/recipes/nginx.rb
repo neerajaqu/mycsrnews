@@ -27,17 +27,26 @@
 Capistrano::Configuration.instance.load do
     
   # Where your nginx lives. Usually /opt/nginx or /usr/local/nginx for source compiled.
-  #set :nginx_path_prefix, "/etc/nginx" unless exists?(:nginx_path_prefix)
-  set(:nginx_path_prefix) { shared_path }
+  set :nginx_path_prefix, "/etc/nginx" unless exists?(:nginx_path_prefix)
 
   # Path to the nginx erb template to be parsed before uploading to remote
   set(:nginx_local_config) { "#{template_dir}/nginx.conf.erb" } unless exists?(:nginx_local_config)
 
   # Path to where your remote config will reside (I use a directory sites inside conf)
-  set(:nginx_remote_config) do
+  set(:nginx_remote_available_path) do
     #"#{nginx_path_prefix}/sites-available/#{application}.conf"
-    "#{nginx_path_prefix}/#{application}.conf"
-  end unless exists?(:nginx_remote_config)
+    "#{nginx_path_prefix}/sites-available/#{application}.conf"
+  end unless exists?(:nginx_remote_available_path)
+
+  set(:nginx_remote_enabled_path) do
+    #"#{nginx_path_prefix}/sites-available/#{application}.conf"
+    "#{nginx_path_prefix}/sites-enabled/#{application}.conf"
+  end unless exists?(:nginx_remote_enabled_path)
+
+  set(:nginx_remote_shared_path) do
+    #"#{nginx_path_prefix}/sites-available/#{application}.conf"
+    "#{shared_path}/#{application}.conf"
+  end unless exists?(:nginx_remote_shared_path)
 
   # Path to nginx error log
   set(:nginx_error_log_path) do
@@ -54,9 +63,10 @@ Capistrano::Configuration.instance.load do
   namespace :nginx do
     desc "|DarkRecipes| Parses and uploads nginx configuration for this app."
     task :setup, :roles => :app , :except => { :no_release => true } do
-      #generate_config(nginx_local_config, nginx_remote_config)
-      put(parse_config(nginx_local_config), nginx_remote_config)
-      #sudo "ln -nfs #{nginx_remote_config} #{nginx_path_prefix}/sites-enabled/#{application.conf}"
+      put(parse_config(nginx_local_config), nginx_remote_shared_path)
+      sudo "cp #{nginx_remote_shared_path} #{nginx_remote_available_path}"
+      sudo "ln -nfs #{nginx_remote_available_path} #{nginx_remote_enabled_path}"
+      nginx.restart
     end
     
     desc "|DarkRecipes| Parses config file and outputs it to STDOUT (internal task)"
@@ -86,7 +96,7 @@ Capistrano::Configuration.instance.load do
   end
   
   after 'deploy:setup' do
-    nginx.setup if Capistrano::CLI.ui.agree("Create nginx configuration file? [Yn]")
+    nginx.setup if Capistrano::CLI.ui.agree("Create nginx configuration file?") {|q| q.default = "yes" }
   end if is_using_nginx 
 end
 
