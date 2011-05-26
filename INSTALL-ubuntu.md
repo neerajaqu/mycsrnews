@@ -1,101 +1,27 @@
-Installing on Ubuntu 10.04 LTS Server
-=====================================
+Installing on Ubuntu 10.04 LTS
+======================================================
 
-This guide will bootstrap newscloud from a minimal ubuntu server install.
+This guide will bootstrap a production newscloud install on Ubuntu 10.04. We have tested this configuration specifically for a 1 GB Rackspace cloud-based server, which costs about $45/mo. 
 
-Update Your System
-------------------
-If necessary, update your system:
+We're not affiliated with rackspace in any way, we just see it as a good, affordable hosting platform.
 
-	sudo apt-get update
+Part One: Prerequisites
+=======================
 
-Base Utilities
---------------
+Create Rackspace Cloud Server with 1024 megs
+----------------------------------------------------------------------
 
-Replace vim-nox with your editor of choice.
+Visit [https://signup.rackspacecloud.com/signup](https://signup.rackspacecloud.com/signup)
+and sign up for a 1024 mb cloud server.
 
-	sudo apt-get install ssh git-core vim-nox
+Domain Name Configuration
+-------------------------
 
-
-Base Ruby Dependencies
-----------------------
-
-Get ruby up and running
-
-	sudo apt-get install ruby build-essential libopenssl-ruby ruby1.8-dev irb rubygems
-
-Add rubygems executables to your path
-
-	export PATH=/var/lib/gems/1.8/bin:$PATH
-
-Update rubygems
-
-	sudo gem install rubygems-update
-	sudo `which update_rubygems`
-
-Set your rails environment variable if need be
-	
-	export RAILS_ENV=development
-
-
-Install MySQL
--------------
-
-Install mysql
-
-	sudo apt-get install mysql-server mysql-client libmysql-ruby libmysqlclient-dev
-
-Create a newscloud database and user
-
-	mysql -u root -p
-
-	create database n2_development;
-	grant ALL on n2_development.* to n2db@localhost identified by 'SOME SECURE PASSWORD';
-
-
-Install Redis
----------------------------
-
-	sudo apt-get install redis-server
-
-Install Miscellaneous Dependencies
-----------------------------------
-
-Install nokogiri dependencies
-
-	sudo apt-get install libxml2 libxml2-dev libxslt1-dev
-
-Install curl dependencies
-
-	sudo apt-get install curl libcurl3 libcurl3-gnutls libcurl4-openssl-dev
-
-Install imagemagick
-
-	sudo apt-get install imagemagick
-
-
-Install Newscloud
------------------
-
-Create a directory for where newscloud and pull from github.
-Make Sure to checkout release 3.
-
-	mkdir src
-	cd src/
-	git clone git://github.com/newscloud/n2.git
-	cd n2
-	git checkout --track -b release3 origin/release3
-
-
-Configure your database with the settings you created earlier in mysql.
-
-	cp config/database.yml.sample config/database.yml
-	vim config/database.yml
+Use your DNS provider to point your domain name at the rackspace server.
 
 Register a facebook application
 -------------------------------
 
-Configure facebooker with the keys from your facebook application
 You will need to have a facebook developer application, either:
 
   * Create a [new application](http://www.facebook.com/developers/createapp.php)
@@ -103,42 +29,208 @@ You will need to have a facebook developer application, either:
 
 NOTE::
 
-  * You **must** set your canvas url to end in /iframe/, ie http://my.site.com/iframe/
-  * However, when you set your config files you only want to use http://my.site.com
+  * You **must** set your canvas url to end in /iframe/, ie http://mysite.com/iframe/
+  * However, when you set your config files you only want to use http://mysite.com
   * This is used internally to allow the use of a facebook canvas app and an external web pages
   * Other settings of note are:
     * Canvas Type = Iframe
 	* Iframe Size = Auto-resize
 
-Add your facebook settings to facebooker.yml
+Part Two: Bootstrap Your New Server
+===================================
 
-	cp config/facebooker.yml.sample config/facebooker.yml
-	vim config/facebooker.yml
+Setup a deploy user
+-------------------
+
+By default rackspace provides a root account on the ubuntu server, so we will add a deploy
+user and give that user sudo access by adding deploy to the sudo group.
+
+	$ ssh root@mysite.com
+
+	# adduser deploy
+	# adduser deploy sudo
 
 
-Install required rubygems
--------------------------
+Create the /data directory for deploying your app to /data/sites/mysite
+-----------------------------------------------------------------------
+	
+	# mkdir -p /data/sites
+	# chown -R deploy:deploy /data
+	# chmod -R 755 /data
 
-First install the bundler gem
+	
+Now switch to the deploy user and setup your ssh key
+----------------------------------------------------
+	
+	# su deploy
+	$ cd $HOME
+	$ mkdir .ssh
+	$ touch .ssh/authorized_keys
+	$ vi .ssh/authorized_keys
 
-	sudo gem install bundler
+Paste your public ssh key from your development box in .ssh/authorized_keys.
 
-Use bundler to install the required gems
+Update Your System
+------------------
+If necessary, update your system:
 
-	bundle install
+	$ sudo apt-get update
 
-Bootstrap the Newscloud System
-------------------------------
-	bundle exec rake n2:setup
+Base Utilities
+--------------
 
-Launch Newscloud
+Replace vim-nox with your editor of choice.
+
+	$ sudo apt-get install git-core vim-nox
+
+
+Base Ruby Dependencies
+----------------------
+
+Get ruby up and running
+
+	$ sudo apt-get install ruby build-essential libopenssl-ruby ruby1.8-dev irb rubygems
+
+Add rubygems executables to your path
+
+	$ export PATH=/var/lib/gems/1.8/bin:$PATH
+
+Update rubygems
+
+	$ sudo gem install rubygems-update
+	$ sudo `which update_rubygems`
+
+
+Install MySQL
+-------------
+
+Install mysql
+
+	$ sudo apt-get install mysql-server mysql-client libmysql-ruby libmysqlclient-dev
+
+Create a newscloud database and user
+
+	$ mysql -u root -p
+
+	create database mysite_production;
+	grant ALL on mysite_production.* to mysite_db_user@localhost identified by 'SOME SECURE PASSWORD';
+
+
+Install Redis 2
+---------------
+
+First grab Redis and build it
+
+	$ cd /tmp
+	$ wget http://redis.googlecode.com/files/redis-2.2.8.tar.gz
+	$ tar zxvf redis-2.2.8.tar.gz
+	$ cd redis-2.2.8
+	$ make
+	$ sudo make install
+
+Add a Redis user
+
+	$ sudo useradd redis
+
+Grab our prebuilt config files and move them in place
+
+	$ wget --no-check-certificate https://github.com/newscloud/n2/raw/release3_2/doc/redis-server
+	$ wget --no-check-certificate https://github.com/newscloud/n2/raw/release3_2/doc/redis.conf
+	$ sudo mv redis-server /etc/init.d/redis-server
+	$ sudo mv redis.conf /etc/redis.confg
+	$ sudo chmod +x /etc/init.d/redis-server
+
+Create the requisite directories for Redis
+
+	$ sudo mkdir -p /var/lib/redis
+	$ sudo mkdir -p /var/log/redis
+	$ sudo chown redis:redis /var/lib/redis
+	$ sudo chown redis:redis /var/log/redis
+
+Update the init script with default settings and start Redis
+
+	$ sudo update-rc.d redis-server defaults
+	$ sudo /etc/init.d/redis-server start
+
+Verify Redis is up and running
+
+	$ redis-cli info
+
+Install Miscellaneous Dependencies
+----------------------------------
+
+Install nokogiri dependencies
+
+	$ sudo apt-get install libxml2 libxml2-dev libxslt1-dev
+
+Install curl dependencies
+
+	$ sudo apt-get install curl libcurl3 libcurl3-gnutls libcurl4-openssl-dev
+
+Install imagemagick
+
+	$ sudo apt-get install imagemagick
+
+Install nginx
+
+	$ sudo apt-get install nginx
+
+Required rubygems
+	
+	$ sudo gem install bundler
+	$ sudo gem install god
+
+
+Part Three:: Deploying newscloud from your dev machine
+======================================================
+
+Now that we have the base server up and running, we can use capistrano to do the heavy lifting.
+
+**NOTE**:: These commands will now be run from your local dev machine.
+
+First grab newscloud (on your local machine)
+--------------------------------------------
+
+	$ git clone git://github.com/newscloud/n2.git
+	$ cd n2
+	$ git checkout --track -b release3 origin/release3
+
+Capistrano Steps
 ----------------
 
-Start the server
+Run the capistrano configuration wizard. This will ask you for your domain name
+as well your as facebook and database settings, so have those at hand.
 
-	bundle exec ruby script/server
+	$ cap config:wizard
 
-Start the resque worker and resque scheduler for background and scheduled tasks.
+Lets check and make sure everything is setup properly.
+Assuming your application name is 'mysite', run the command:
 
-	QUEUE=* bundle exec rake resque:work
-	bundle exec rake resque:scheduler INITIALIZER_PATH=config/initializers/resque.rb
+	$ cap mysite deploy:check
+
+If there aren't any errors in deploy:check, you're ready to run the setup task.
+
+	$ cap mysite deploy:setup
+
+If you're getting any errors, make sure you're running cap with your site name, ie:
+
+	$ cap mysite deploy:setup
+
+and not
+
+	$ cap deploy:setup
+
+And finally we're ready to get everything up and running. This will bootstrap
+the full newscloud application, installing all the appropriate gems, create the
+database and populate it with the initial data, so grab a cup of coffee or a
+snack as this will take some time to run.
+
+	$ cap deploy:cold
+
+
+
+Once this has finished you should be up and running. Visit http://mysite.com
+to see your newscloud application
+
+Make sure and head to http://mysite.com/admin to add yourself as an admin user
+and configure the application. Enjoy!
