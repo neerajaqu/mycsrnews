@@ -39,12 +39,6 @@ NOTE::
     * Canvas Type = Iframe
 	* Iframe Size = Auto-resize
 
-
-	* A rackspace server with 1024 megs of ram. This is the minimum recommended server size.
-	* You will also need a domain pointed at your rackspace server.
-	* And a registered facebook dev application.
-
-
 Part Two: Bootstrap Your New Server
 ===================================
 
