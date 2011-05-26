@@ -188,12 +188,16 @@ Now that we have the base server up and running, we can use capistrano to do the
 
 **NOTE**:: These commands will now be run from your local dev machine.
 
+You will need to have capistrano and the capistrano multistage extension installed.
+
+	$ gem install capistrano capistrano-ext
+
 First grab newscloud (on your local machine)
 --------------------------------------------
 
 	$ git clone git://github.com/newscloud/n2.git
 	$ cd n2
-	$ git checkout --track -b release3 origin/release3
+	$ git checkout --track -b release3_2 origin/release3_2
 
 Capistrano Steps
 ----------------
