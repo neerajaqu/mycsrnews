@@ -8,6 +8,8 @@ We're not affiliated with rackspace in any way, we just see it as a good, afford
 Part One: Prerequisites
 =======================
 
+You may want to review our installation support page which lists a configuration checklist and detailed explanations of what's required to run a NewsCloud community. See [Installing NewsCloud](http://support.newscloud.com/kb/installing-newscloud)
+
 Create Rackspace Cloud Server with 1024 megs
 ----------------------------------------------------------------------
 
@@ -17,7 +19,7 @@ and sign up for a 1024 mb cloud server.
 Domain Name Configuration
 -------------------------
 
-Use your DNS provider to point your domain name at the rackspace server. See [How to register a domain for your NewsCloud site](http://support.newscloud.com/kb/installing-newscloud/how-to-register-a-domain-for-your-newscloud-site) and [How to map your domain's DNS for Facebook Connect?](http://support.newscloud.com/kb/installing-newscloud/how-to-map-your-domains-dns-for-facebook-connect)
+Use your DNS provider to point your domain name at the rackspace server. Need help? Visit [How to register a domain for your NewsCloud site](http://support.newscloud.com/kb/installing-newscloud/how-to-register-a-domain-for-your-newscloud-site) and [How to map your domain's DNS for Facebook Connect](http://support.newscloud.com/kb/installing-newscloud/how-to-map-your-domains-dns-for-facebook-connect)
 
 Register a facebook application
 -------------------------------
