@@ -84,7 +84,7 @@ Base Utilities
 
 Replace vim-nox with your editor of choice.
 
-	$ sudo apt-get install ssh git-core vim-nox
+	$ sudo apt-get install git-core vim-nox
 
 
 Base Ruby Dependencies
@@ -122,7 +122,42 @@ Create a newscloud database and user
 Install Redis 2
 ---------------
 
-Visit [http://redis.io/download](http://redis.io/download) for instructions
+First grab Redis and build it
+
+	$ cd /tmp
+	$ wget http://redis.googlecode.com/files/redis-2.2.8.tar.gz
+	$ tar zxvf redis-2.2.8.tar.gz
+	$ cd redis-2.2.8
+	$ make
+	$ sudo make install
+
+Add a Redis user
+
+	$ sudo useradd redis
+
+Grab our prebuilt config files and move them in place
+
+	$ wget --no-check-certificate https://github.com/newscloud/n2/raw/deploy_updates/doc/redis-server
+	$ wget --no-check-certificate https://github.com/newscloud/n2/raw/deploy_updates/doc/redis.conf
+	$ sudo mv redis-server /etc/init.d/redis-server
+	$ sudo mv redis.conf /etc/redis.confg
+	$ sudo chmod +x /etc/init.d/redis-server
+
+Create the requisite directories for Redis
+
+	$ sudo mkdir -p /var/lib/redis
+	$ sudo mkdir -p /var/log/redis
+	$ sudo chown redis:redis /var/lib/redis
+	$ sudo chown redis:redis /var/log/redis
+
+Update the init script with default settings and start Redis
+
+	$ sudo update-rc.d redis-server defaults
+	$ sudo /etc/init.d/redis-server start
+
+Verify Redis is up and running
+
+	$ redis-cli info
 
 Install Miscellaneous Dependencies
 ----------------------------------
