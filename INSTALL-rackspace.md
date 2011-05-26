@@ -5,10 +5,8 @@ This guide will bootstrap a production newscloud install on a rackspace server.
 
 A few side notes:
 
-	* First, we're not affiliated with rackspace in any way, we just see it as a
-	  good, affordable hosting platform.
-	* Second, this guide will work fine on any ubuntu 10.04 server system with at
-	  least a gigabyte of ram, not just a rackspace server.
+	* First, we're not affiliated with rackspace in any way, we just see it as a good, affordable hosting platform.
+	* Second, this guide will work fine on any ubuntu 10.04 server system with at least a gigabyte of ram, not just a rackspace server.
 
 Part One: Prerequisites
 =======================
@@ -111,10 +109,6 @@ Update rubygems
 	$ sudo gem install rubygems-update
 	$ sudo `which update_rubygems`
 
-Set your rails environment variable if need be
-	
-	$ export RAILS_ENV=development
-
 
 Install MySQL
 -------------
@@ -131,8 +125,8 @@ Create a newscloud database and user
 	grant ALL on mysite_production.* to mysite_db_user@localhost identified by 'SOME SECURE PASSWORD';
 
 
-Install Redis
----------------------------
+Install Redis 2
+---------------
 
 Visit [http://redis.io/download](http://redis.io/download) for instructions
 
@@ -152,6 +146,7 @@ Install imagemagick
 	$ sudo apt-get install imagemagick
 
 Install nginx
+
 	$ sudo apt-get install nginx
 
 Required rubygems
@@ -165,7 +160,7 @@ Part Three:: Deploying newscloud from your dev machine
 
 Now that we have the base server up and running, we can use capistrano to do the heavy lifting.
 
-NOTE:: These commands will now be run from your local dev machine.
+**NOTE**:: These commands will now be run from your local dev machine.
 
 First grab newscloud (on your local machine)
 --------------------------------------------
@@ -199,11 +194,13 @@ and not
 
 	$ cap deploy:setup
 
-And finally we're ready to get everything up and running.
+And finally we're ready to get everything up and running. This will bootstrap
+the full newscloud application, installing all the appropriate gems, create the
+database and populate it with the initial data, so grab a cup of coffee or a
+snack as this will take some time to run.
 
 	$ cap deploy:cold
 
-Grab a cup of coffee or a snack as this will take some time to run.
 
 
 Once this has finished you should be up and running. Visit http://mysite.com
