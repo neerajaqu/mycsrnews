@@ -1,17 +1,14 @@
-Installing on a Rackspace Server with Ubuntu 10.04 LTS
+Installing on Ubuntu 10.04 LTS
 ======================================================
 
-This guide will bootstrap a production newscloud install on a rackspace server.
+This guide will bootstrap a production newscloud install on Ubuntu 10.04. We have tested this configuration specifically for a 1 GB Rackspace cloud-based server, which costs about $45/mo. 
 
-A few side notes:
-
-  * First, we're not affiliated with rackspace in any way, we just see it as a good, affordable hosting platform.
-  * Second, this guide will work fine on any ubuntu 10.04 server system with at least a gigabyte of ram, not just a rackspace server.
+We're not affiliated with rackspace in any way, we just see it as a good, affordable hosting platform.
 
 Part One: Prerequisites
 =======================
 
-Create Rackspace Cloud Server with 1024 megs (approximately $45/month)
+Create Rackspace Cloud Server with 1024 megs
 ----------------------------------------------------------------------
 
 Visit (https://signup.rackspacecloud.com/signup)[https://signup.rackspacecloud.com/signup]
