@@ -11,7 +11,7 @@ Part One: Prerequisites
 Create Rackspace Cloud Server with 1024 megs
 ----------------------------------------------------------------------
 
-Visit (https://signup.rackspacecloud.com/signup)[https://signup.rackspacecloud.com/signup]
+Visit [https://signup.rackspacecloud.com/signup](https://signup.rackspacecloud.com/signup)
 and sign up for a 1024 mb cloud server.
 
 Domain Name Configuration
