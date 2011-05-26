@@ -12,6 +12,8 @@ We now have a full guide for bootstrapping and install newscloud on a minimal Ub
 
 See the guide at [INSTALL-ubuntu.md](https://github.com/newscloud/n2/blob/master/INSTALL-ubuntu.md)
 
+This guide will bootstrap a production newscloud install on Ubuntu 10.04. We have tested this configuration specifically for a 1 GB Rackspace cloud-based server, which costs about $45/mo. 
+
 
 Getting Started
 ---------------
@@ -19,9 +21,9 @@ Getting Started
 Clone this application to your machine and checkout release 3
 
         git clone git://github.com/newscloud/n2.git
-        git checkout --track -b release3_1 origin/release3_1
+        git checkout --track -b release3_2 origin/release3_2
 
-Alternatively, download release 3 directly [http://github.com/newscloud/n2/archives/v3.1_stable](http://github.com/newscloud/n2/archives/v3.1_stable)
+Alternatively, download release 3 directly [http://github.com/newscloud/n2/archives/v3.2_stable](http://github.com/newscloud/n2/archives/v3.2_stable)
 
 Register a facebook application
 -------------------------------
