@@ -4,6 +4,7 @@ role :db,   "<%= @settings[:base_url] %>", :primary => true
 set :rails_env, "production"
 set :application, "<%= @settings[:app_name] %>"
 set :base_url, "<%= @settings[:base_url] %>"
+set :branch, "release3_2"
 
 # database.yml settings
 set :db_user, "<%= @settings[:database][:user] %>"
