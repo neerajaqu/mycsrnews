@@ -171,28 +171,6 @@ namespace :bundler do
     run "cd #{release_path} && bundle install --deployment --without test --without development --without cucumber"
   end
 end
- 
-
-#########################################################################
-# Helper Methods
-#########################################################################
-
-def skin_dir_exists?
-  dir_exists? "#{skin_dir}/#{application}"
-end
-
-def skin_file_exists?
-  file_exists? "#{skin_dir}/#{application}/app/stylesheets/skin.sass"
-end
-
-def dir_exists? path
-  'yes' == capture("if [ -d #{path} ]; then echo 'yes'; fi").strip
-end
-
-def file_exists? path
-  'yes' == capture("if [ -e #{path} ]; then echo 'yes'; fi").strip
-end
-
 
 Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
   $: << File.join(vendored_notifier, 'lib')

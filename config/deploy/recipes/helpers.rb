@@ -107,3 +107,32 @@ end
 def run_rake(task)
   run "cd #{current_path} && bundle exec rake #{task} RAILS_ENV=#{environment}"
 end
+
+
+#########################################################################
+# Newscloud Helper Methods
+#########################################################################
+
+def skin_dir_exists?
+  dir_exists? "#{skin_dir}/#{application}"
+end
+
+def skin_file_exists?
+  file_exists? "#{skin_dir}/#{application}/app/stylesheets/skin.sass"
+end
+
+def dir_exists? path
+  'yes' == capture("if [ -d #{path} ]; then echo 'yes'; fi").strip
+end
+
+def file_exists? path
+  'yes' == capture("if [ -e #{path} ]; then echo 'yes'; fi").strip
+end
+
+def read_remote_file file
+  out = ''
+  run "cat #{file}" do |ch, st, data|
+    out += data
+  end
+  out
+end
