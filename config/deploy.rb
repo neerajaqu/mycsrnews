@@ -27,7 +27,6 @@ after("deploy:symlink") do
       run "ln -nfs #{shared_path}#{file} #{release_path}#{file}"
   end
 
-  deploy.load_skin
   deploy.restore_previous_sitemap
   deploy.cleanup
 end
@@ -46,6 +45,7 @@ end
 
 after("deploy:update_code") do
   unless exists?(:skip_post_deploy) and skip_post_deploy
+    deploy.load_skin
     deploy.server_post_deploy
     set :rake_post_path, release_path
     deploy.rake_post_deploy

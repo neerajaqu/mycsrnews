@@ -25,7 +25,7 @@ Capistrano::Configuration.instance.load do
       settings[:app_name] = stage.to_s
       settings[:branch] = 'master'
 
-      save_settings settings, 'stest_'
+      save_settings settings
     end
   end
 end
@@ -154,7 +154,7 @@ end
 
 def extract_settings config
   {
-    :base_url   => config["facebooker"]["callback_url"],
+    :base_url   => config["facebooker"]["callback_url"].sub(%r{^https?://}, ''),
     :app_name   => stage.to_s,
     :facebooker => {
       :canvas_page_name => config["facebooker"]["canvas_page_name"],

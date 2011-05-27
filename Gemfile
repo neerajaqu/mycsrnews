@@ -57,6 +57,8 @@ group :development do
   gem "wirble"
   gem "awesome_print"
 	gem "faker"
+	gem "capistrano"
+	gem "capistrano-ext"
 end
 
 group :test, :cucumber do
