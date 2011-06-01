@@ -34,13 +34,15 @@ module Newscloud
     #}
     @@groups = {
       :basic_site_config => {
-        :title       => "Initial Site Configuration Settings",
+        # Complete when site_title, site_topic, contact_us, site_notification_user, app_id are configured
+        :title       => "Initial Site Settings",
         :description => "This contains basic site settings like Site Title and Site Description, primary contact info, and your facebook application id.",
         :pages       => [
           {
             :tab_title        => "Site Description",
             :page_title       => "Site Title and Topic Configuration",
             :page_description => "Your site title and topic are used throughout the site to let users know who you are what your site is about.",
+            :faq_url => nil,
             :items            => [
               {
                 :title       => "Site Title",
@@ -59,9 +61,10 @@ module Newscloud
             ]
           },
           {
-            :tab_title        => "Admin Contact Info",
+            :tab_title        => "Site Contact Information",
             :page_title       => "Primary Contact Settings",
             :page_description => "Settings for the primary Admin contact, and email addresses for where to forward user questions.",
+            :faq_url => nil,
             :items            => [
               {
                 :title       => "Contact Us Email addresses",
@@ -81,7 +84,8 @@ module Newscloud
           },
           {
             :tab_title        => "Facebook Application ID",
-            :page_title       => "Set your facebook application ID here",
+            :page_title       => "Set your facebook application ID. This will configure the application Like badge in the footer.",
+            :faq_url => "http://support.newscloud.com/kb/installing-newscloud/how-to-register-your-application-with-facebook",
             :items            => [
               {
                 :title       => "Facebook application ID",
@@ -94,8 +98,10 @@ module Newscloud
         ]
       },
       :bitly_config => {
+        # hide when bitly_username, bitly_api_key no longer defaulted as username and api_key
         :title => "Bit.ly URL Shortening Settings",
         :description => "Configuration settings for use with bit.ly in your application.",
+        :faq_url => "http://support.newscloud.com/kb/configuring-your-application/how-to-configure-bitly-url-shortening",
         :pages => [
           {
             :tab_title        => "Bit.ly Config",
@@ -121,8 +127,10 @@ module Newscloud
         ]
       },
       :analytics_config => {
+        # hide when google_analytics_account_id is configured
         :title       => "Google Analytics Config",
-        :description => "Config options for tracking user statistics with Google Analytics",
+        :description => "Configuration options for tracking user statistics with Google Analytics",
+        :faq_url => "http://support.newscloud.com/kb/configuring-your-application/how-to-set-up-google-analytics-to-track-activity-on-your-site",
         :pages       => [
           {
             :tab_title        => "Google Analytics",
@@ -148,12 +156,15 @@ module Newscloud
         ]
       },
       :sitemap_seo_config => {
-        :title       => "Google and Yahoo Sitemap SEO Config",
-        :description => "Config options for SEO optimization with Google Sitemaps and Yahoo Sitemaps",
+        # hide when google-site-verification is configured
+        # yahoo settings are optional
+        :title       => "Search Engine Sitemap Configuration",
+        :description => "Configuration options for SEO optimization with Google Sitemaps and Yahoo Sitemaps",
+        :faq_url => "http://support.newscloud.com/kb/configuring-your-application/how-to-tell-search-engines-such-as-google-to-index-your-site",
         :pages       => [
           {
-            :tab_title        => "Google Sitemap Config",
-            :page_title       => "Config Settings for Google Sitemap",
+            :tab_title        => "Google Sitemap Configuration",
+            :page_title       => "Configuration Settings for Google Sitemap",
             :page_description => %{Set your Google Sitemap Account Info. If you do not have a google sitemap account yet, you can register by following the link: <a href="https://www.google.com/webmasters/tools/home?hl=en" target="_ext">https://www.google.com/webmasters/tools/home?hl=en</a>.},
             :items            => [
               {
@@ -166,8 +177,8 @@ module Newscloud
             ]
           },
           {
-            :tab_title        => "Yahoo Sitemap Config",
-            :page_title       => "Config Settings for Yahoo Sitemap",
+            :tab_title        => "Yahoo Sitemap Configuration",
+            :page_title       => "Configuration Settings for Yahoo Sitemap",
             :page_description => %{Set your Yahoo Sitemap Account Info. If you do not have a yahoo sitemap account yet, you can register by following the link: <a href="http://siteexplorer.search.yahoo.com/" target="_ext">http://siteexplorer.search.yahoo.com/http://siteexplorer.search.yahoo.com/</a>.},
             :items            => [
               {
@@ -189,12 +200,14 @@ module Newscloud
         ]
       },
       :google_custom_search_engine_config => {
+        # Hide when google_search_engine_id is configured
         :title       => "Google Custom Search Engine Config",
         :description => "Use this to setup a custom search engine with your app to allow users to more easily find content",
+        :faq_url => "http://support.newscloud.com/kb/configuring-your-application/how-to-configure-google-search-in-your-navigation-bar",
         :pages       => [
           {
             :tab_title        => "Google CSE Config",
-            :page_title       => "Config Settings for Google Custom Search Engine",
+            :page_title       => "Configuration settings for Google Custom Search Engine",
             :page_description => %{Set your Google Custom Search Engine ID here to enable custom search powered by google on your application. If you do not have a google custom search engine account yet, you can register by following the link: <a href="http://www.google.com/cse/" target="_ext">http://www.google.com/cse/</a>.},
             :items            => [
               {
@@ -209,12 +222,15 @@ module Newscloud
         ]
       },
       :welcome_panel_config => {
+        # Hide when shared.sidebar.welcome_panel.welcome_panel_headline changed from "Welcome to our site"
+        # and when shared.sidebar.welcome_panel.welcome_panel_message_fbml changed from "This is such a wonderful community to keep up on local events. We hope you enjoy yourself here."
         :title       => "Welcome Panel Text Configuration",
         :description => "Customize the headline and blurb that new users see in the welcome panel.",
+        :faq_url => nil,
         :pages       => [
           {
             :tab_title        => "Welcome Panel Config",
-            :page_title       => "Config the text strings for the Welcome Panel",
+            :page_title       => "Customize the text strings for the Welcome Panel",
             :page_description => %{Set the headline and blurb you want users to see in the welcome panel when they come to the site.},
             :items            => [
               {

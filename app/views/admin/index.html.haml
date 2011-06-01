@@ -20,8 +20,11 @@
 
   - display_setting_group.call :bitly_config
   -# Twitter config
-  %h4= link_to "Twitter Configuration", admin_twitter_settings_path
-  %p== Integrate a twitter account with your newscloud application. If you do not yet have a twitter dev application, #{link_to "create one now", "https://dev.twitter.com/apps/new", :target => "_blank"}.
+  -# to do - hide when twitter is configured
+    -# if account_setting.present? && oauth_key_setting.present?
+      -# if oauth_key_setting.value != 'U6qjcn193333331AuA'          
+  %h4= link_to "Twitter Integration", admin_twitter_settings_path
+  %p== Integrate a twitter account with your newscloud application. If you do not yet have a twitter dev application, #{link_to "create one now", "https://dev.twitter.com/apps/new", :target => "_blank"} | #{link_to "learn more", "http://support.newscloud.com/kb/configuring-your-application/how-to-configure-twitter-anywhere", :target => "_blank"}.
 
   - display_setting_group.call :analytics_config
   - display_setting_group.call :sitemap_seo_config
@@ -32,7 +35,7 @@
     %p= setting_group[:description]
 
   -#
-    %h4= link_to "Twitter Configuration", admin_twitter_settings_path
+    %h4= link_to "Twitter Integration", admin_twitter_settings_path
     %p== Integrate a twitter account with your newscloud application. If you do not yet have a twitter dev application, #{link_to "create one now", "https://dev.twitter.com/apps/new", :target => "_blank"}.
 
 .right-dashboard{:style => "width: 45%; float: right;"}
