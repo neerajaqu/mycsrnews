@@ -49,62 +49,51 @@
     #admin-content.clearfix
       .admin-menu-content
         %ul#admin-menu.sf-menu.sf-js-enabled.sf-shadow
-          %li= link_to 'Dashboard', admin_path
-          %li
-            %a{:href => "#home-page"} Front Page
-            %ul
-              - if not APP_CONFIG['use_view_objects']
-                %li= link_to 'Feature Stories', admin_featured_items_path
-              %li
-                %a{:href => "#widgets"} Build Layout
-                %ul
-                  - if APP_CONFIG['use_view_objects']
-                    %li= link_to 'Choose Widgets', newer_widgets_admin_widgets_path
-                  - else
-                    %li= link_to 'Choose Widgets', new_widgets_admin_widgets_path
-                  %li= link_to 'Custom Widgets', admin_metadata_custom_widgets_path
-              %li= link_to 'Announcements', admin_announcements_path
+          %li= link_to 'Home', admin_path
           %li
             %a{:href => "#contents"} Content
             %ul
+              %li
+                %a{:href => "#home-page"} Front Page
+                %ul
+                  - if not APP_CONFIG['use_view_objects']
+                    %li= link_to 'Feature Stories', admin_featured_items_path
+                  - if APP_CONFIG['use_view_objects']
+                    %li= link_to 'Build Layout', newer_widgets_admin_widgets_path
+                  - else
+                    %li= link_to 'Build Layout', new_widgets_admin_widgets_path
+                  %li= link_to 'Custom Widgets', admin_metadata_custom_widgets_path
               %li= link_to 'Flagged Items', admin_flags_path
               %li= link_to 'Stories', admin_contents_path
-              %li= link_to 'Images', admin_images_path
-              %li= link_to 'Newswires', admin_newswires_path
               %li= link_to 'Comments', admin_comments_path
-              %li= link_to 'RSS Feeds', admin_feeds_path
-              %li= link_to 'News Sources', admin_sources_path
+              %li= link_to 'Images', admin_images_path
+              %li= link_to 'News Feeds', admin_feeds_path
+              %li= link_to 'Feed items', admin_newswires_path
               %li= link_to 'Related Items', admin_related_items_path
-              %li= link_to 'Cards', admin_cards_path
           %li
-            %a{:href => "#modules"} Modules
+            %a{:href => "#modules"} Features
             %ul
-              %li
-                %a{:href => "#modules-ideas"} Ideas
-                %ul
-                  %li= link_to 'Ideas', admin_ideas_path
-                  %li= link_to 'Topics', admin_idea_boards_path
-              %li
-                %a{:href => "#modules-resources"} Directory
-                %ul
-                  %li= link_to 'Links', admin_resources_path
-                  %li= link_to 'Categories', admin_resource_sections_path
               %li
                 = link_to 'Calendar', admin_events_path
                 %ul
                   %li= link_to "Manage Events", admin_events_path
                   %li= link_to "Import from Zvents", import_zvents_admin_events_path
               %li
-                %a{:href => "#modules-questions"} Q & A
+                %a{:href => "#modules-resources"} Directory
                 %ul
-                  %li= link_to 'Questions', admin_questions_path
-                  %li= link_to 'Answers', admin_answers_path
+                  %li= link_to 'Links', admin_resources_path
+                  %li= link_to 'Categories', admin_resource_sections_path
               %li
                 %a{:href => "#forums-questions"} Forums
                 %ul
                   %li= link_to 'Forums', admin_forums_path
                   %li= link_to 'Topics', admin_topics_path
                   %li= link_to 'Reorder Forums', reorder_admin_forums_path
+              %li
+                %a{:href => "#modules-ideas"} Ideas
+                %ul
+                  %li= link_to 'Ideas', admin_ideas_path
+                  %li= link_to 'Topics', admin_idea_boards_path
               %li
                 %a{:href => "#predictions"} Predictions
                 %ul
@@ -113,29 +102,45 @@
                   %li= link_to 'Guesses', admin_prediction_guesses_path
                   %li= link_to 'Results', admin_prediction_results_path
                   %li= link_to 'Refresh All Scores', refresh_all_admin_prediction_scores_path
-              %li= link_to 'Go Links', admin_gos_path
+              %li
+                %a{:href => "#modules-questions"} Q & A
+                %ul
+                  %li= link_to 'Questions', admin_questions_path
+                  %li= link_to 'Answers', admin_answers_path
+              %li= link_to 'Shortcuts', admin_gos_path
+              %li= link_to 'Cards', admin_cards_path
           %li
-            %a{:href => "#members"} Members
+            %a{:href => "#community"} Community
             %ul
-              %li= link_to 'Users', admin_users_path
-          %li
-            %a{:href => "#module-settings"} Communicate
-            %ul
-              %li= link_to 'Dashboard', admin_dashboard_messages_path
-              %li= link_to 'Clear Dashboard', clear_global_admin_dashboard_messages_path
-              %li= link_to 'Dashboard FAQ', 'http://support.newscloud.com/faqs/managing-your-application/where-do-dashboard-messages-that-i-send-appear-to-the-reader'
+              %li= link_to 'Members', admin_users_path
+              %li= link_to 'Announcements', admin_announcements_path
+              %li
+                %a{:href => "#community-notifications"} Notifications
+                %ul
+                  %li= link_to 'Notifications', admin_dashboard_messages_path
+                  %li= link_to 'Reset dashboard', clear_global_admin_dashboard_messages_path
+                  %li= link_to 'FAQ', 'http://support.newscloud.com/faqs/managing-your-application/where-do-dashboard-messages-that-i-send-appear-to-the-reader'
           %li
             %a{:href => "#module-settings"} Settings
             %ul
               %li
-                %a{:href => "#modules-metadata"} Configuration
+                %a{:href => "#module-settings-wizards"} Wizards
                 %ul
-                  %li= link_to 'App settings', admin_metadata_settings_path
+                  %li= link_to 'Bit.ly Shortcuts', edit_admin_setting_group_path(:id => :bitly_config)                 
+                  %li= link_to 'Google Analytics', edit_admin_setting_group_path(:id => :analytics_config)
+                  %li= link_to 'Google Search', edit_admin_setting_group_path(:id => :google_custom_search_engine_config)                
+                  %li= link_to 'Site Description', edit_admin_setting_group_path(:id => :basic_site_config)                
+                  %li= link_to 'Site Maps (SEO)', edit_admin_setting_group_path(:id => :sitemap_seo_config)
+                  %li= link_to 'Twitter Integration', admin_twitter_settings_path
+                  %li= link_to 'Welcome Panel', edit_admin_setting_group_path(:id => :welcome_panel_config)                
+              %li
+                %a{:href => "#modules-metadata"} General
+                %ul
+                  %li= link_to 'Basic settings', admin_metadata_settings_path
                   %li= link_to 'Headline filters', admin_metadata_title_filters_path
-                  %li= link_to 'Skip images', admin_metadata_skip_images_path
+                  %li= link_to 'Image filters', admin_metadata_skip_images_path
                   %li= link_to 'Activity scores', admin_metadata_activity_scores_path
-                  %li= link_to 'Custom widgets', admin_metadata_custom_widgets_path
-                  %li= link_to 'Twitter Settings', admin_twitter_settings_path
+                  %li= link_to 'Sources', admin_sources_path
               %li
                 %a{:href => "#modules-metadata-advertising"} Advertising
                 %ul
@@ -143,7 +148,7 @@
                   %li= link_to 'Ad banners', admin_metadata_ads_path
                   %li= link_to 'Sponsor zones', admin_metadata_sponsor_zones_path
               %li
-                %a{:href => "#modules-settings-locales"} Languages
+                %a{:href => "#modules-settings-locales"} Text
                 %ul
                   %li= link_to 'Default text', admin_locale_translations_path(:locale_id => 'en')
                   %li= link_to 'Default pages', admin_locale_translations_path(:locale_id => 'en',:type => 'static_pages')
@@ -151,17 +156,23 @@
                   %li= link_to 'Translations', admin_translations_path
                   %li= link_to 'Refresh changes', refresh_admin_locales_path
           %li
-            %a{:href => "#home-page"} Links
+            %a{:href => "#links"} Your Site
             %ul
-              %li= link_to 'Web site', home_index_path, :target => "_fbc"
+              %li= link_to 'Facebook Connect', home_index_path, :target => "_fbc"
               %li= link_to 'Facebook Application', "http://apps.facebook.com/#{ENV['FACEBOOKER_RELATIVE_URL_ROOT']}", :target => "_fbapp"
-              %li= link_to 'Facebook App Page', "http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
-              %li= link_to 'Facebook App Statistics', "http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
+              %li= link_to 'Facebook Directory Page', "http://www.facebook.com/apps/application.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
+              %li= link_to 'Facebook Statistics', "http://www.facebook.com/business/insights/app.php?id=#{APP_CONFIG['facebook_application_id']}", :target => "_facebook"
               - if get_setting('google_analytics_site_id').try(:value)
                 %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1&id=#{get_setting('google_analytics_site_id').try(:value)}", :target => "_analytics"
               - elsif get_setting('google_analytics_account_id').try(:value)
                 %li= link_to 'Google Analytics', "https://www.google.com/analytics/reporting/?reset=1", :target => "_analytics"
+          %li
+            %a{:href => "#help"} Help
+            %ul
+              %li= link_to 'FAQ', 'http://support.newscloud.com/faq', :target => "_support"
               %li= link_to 'Report a problem', 'http://support.newscloud.com/discussions/problems', :target => "_support"
+              %li= link_to 'Developers', "http://opensource.newscloud.com"
+              %li= link_to 'NewsCloud', "http://blog.newscloud.com"
       .main-content.clearfix
         = flash_messages
         = yield
