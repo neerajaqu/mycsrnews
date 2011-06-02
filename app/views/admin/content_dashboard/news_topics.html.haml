@@ -22,10 +22,10 @@
 - form_tag news_topics_admin_content_dashboard_path, :method => :post do
   %p
     = check_box_tag "topic_form[use_default_selections]", true, true
-    = label_tag 'topic_form[use_default_selections]', 'Use Default Selections' 
+    = label_tag 'topic_form[use_default_selections]', 'Use our default selections' 
   %p
     = check_box_tag 'topic_form[auto_post_items]', true, true
-    = label_tag 'topic_form[auto_post_items]', 'Auto Post Items' 
+    = label_tag 'topic_form[auto_post_items]', 'Automatically post all feed items' 
 
   - @feed_topics.each do |name, feeds|
     .feed-topic
@@ -51,4 +51,4 @@
               %td= check_box_tag "topic_form[feeds][#{feed.id}][autopost]", true, false, :class => 'feed-autopost'
               %td *status field*
 
-  = submit_tag "Update News Topics"
+  = submit_tag "Save Changes"
