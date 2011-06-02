@@ -3,17 +3,18 @@ class Admin::ContentDashboardController < AdminController
   end
 
   def news_topics
-    if request.put?
-      items = params["topic_form"]["feeds"].map do |feed_id, settings|
+    if request.put? or request.post?
+      params["topic_form"]["feeds"].each do |feed_id, settings|
         feed = Feed.find(feed_id)
         feed.update_attribute("enabled", true) if settings["enabled"]
         feed.update_attribute("load_all", settings["autopost"])
-        [settings, Feed.find(feed_id)]
+        feed.update_attribute(:user, current_user)
       end
 
-      raise items.inspect
+      flash[:success] = "Successfully Updated your feeds."
+      redirect_to admin_feeds_path
+    else
+      @feed_topics = Feed.default_feed_topics
     end
-
-    @feed_topics = Feed.default_feed_topics
   end
 end
