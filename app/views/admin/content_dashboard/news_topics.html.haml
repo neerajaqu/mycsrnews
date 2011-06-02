@@ -1,0 +1,54 @@
+- content_for :head do
+  :javascript
+    $(function() {
+      $('table#feed_topics').toggle( !$('#topic_form_use_default_selections')[0].checked);
+      $('#topic_form_use_default_selections').click(function() {
+        $('table#feed_topics').toggle();
+        $('.feed-enabled').each(function() {
+          $(this).attr('checked', $('.topic-toggle', $(this).parents('.feed-topic')).attr('checked'));
+        });
+      });
+      $('.feed-autopost').attr('checked', $('#topic_form_auto_post_items')[0].checked);
+      $('#topic_form_auto_post_items').click(function() {
+        $('.feed-autopost').attr('checked', $(this)[0].checked);
+      });
+
+      $('.topic-toggle').click(function() {
+        $('.feed-enabled', $(this).parent().parent()).attr('checked', $(this)[0].checked);
+      });
+    });
+
+%h1 Populate Newswires With News Topics
+- form_tag news_topics_admin_content_dashboard_path, :method => :post do
+  %p
+    = check_box_tag "topic_form[use_default_selections]", true, true
+    = label_tag 'topic_form[use_default_selections]', 'Use Default Selections' 
+  %p
+    = check_box_tag 'topic_form[auto_post_items]', true, true
+    = label_tag 'topic_form[auto_post_items]', 'Auto Post Items' 
+
+  - @feed_topics.each do |name, feeds|
+    .feed-topic
+      %h2
+        = check_box_tag "topic_form[topic_#{name}]", false, false, :class => "topic-toggle"
+        = label_tag "topic_form[topic_#{name}]", name.titleize
+
+      %table#feed_topics
+        %thead
+          %tr
+            %th Enabled
+            %th Name
+            %th Feed URL
+            %th Auto Post
+            %th Status
+        %tbody
+          - feeds.each do |feed|
+            %tr
+              -#%td= form.input :enabled
+              %td= check_box_tag "topic_form[feeds][#{feed.id}][enabled]", true, false, :class => 'feed-enabled'
+              %td= feed.title
+              %td= feed.rss
+              %td= check_box_tag "topic_form[feeds][#{feed.id}][autopost]", true, false, :class => 'feed-autopost'
+              %td *status field*
+
+  = submit_tag "Update News Topics"

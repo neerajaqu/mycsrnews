@@ -167,6 +167,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :cards
     admin.resources :classifieds
     admin.resources :comments
+    admin.resources :content_dashboard, :collection => { :news_topics => [:get, :post, :put] }
     admin.resources :content_images
     admin.resources :contents
     admin.resources :dashboard_messages, :member => { :send_global => [:get, :post], :clear_global => [:get, :post] }, :collection => { :clear_global => [:get, :post] }

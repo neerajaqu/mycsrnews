@@ -2,7 +2,7 @@ class Admin::FeedsController < AdminController
 
   def index
     render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
-    	:items => Feed.active.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
+    	:items => Feed.enabled.active.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
     	:model => Feed,
     	:fields => [:title, :url, :rss, :created_at, :user_id],
     	:associations => { :belongs_to => { :user => :user_id } },
