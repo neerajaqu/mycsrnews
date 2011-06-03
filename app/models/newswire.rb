@@ -2,7 +2,7 @@ class Newswire < ActiveRecord::Base
   acts_as_moderatable
 
 
-  belongs_to :feed
+  belongs_to :feed, :counter_cache => true, :touch => true
   belongs_to :user
   has_one :content
 

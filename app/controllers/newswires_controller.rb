@@ -14,7 +14,7 @@ class NewswiresController < ApplicationController
   end
 
   def feed_index
-    @feed = Feed.active.find(params[:feed_id])    
+    @feed = Feed.enabled.active.find(params[:feed_id])    
     @current_sub_tab = 'Browse Wires'
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
     @newswires = @feed.newswires.unpublished.paginate :page => params[:page], :per_page => 20, :order => "created_at desc"

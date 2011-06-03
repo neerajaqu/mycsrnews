@@ -48,14 +48,20 @@ class AdminController < ApplicationController
           case action
           when :index
             @config = self.admin_scaffold_config
+            if @config.extra_scopes and @config.extra_scopes.any?
+              @items = @config.model_klass.send(@config.extra_scopes.first).paginate(:page => params[:page], :per_page => 20, :order => "created_at desc")
+            else
+              @items = @config.model_klass.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc")
+            end
             render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
               # TODO:: handle active
               #:items        => @config.model_klass.active.paginate(:page           => params[:page], :per_page => 20, :order => "created_at desc"),
-              :items        => @config.model_klass.paginate(:page           => params[:page], :per_page => 20, :order => "created_at desc"),
+              :items        => @items,
               :model        => @config.model_klass,
               :fields       => @config.index_fields || @config.fields.map(&:name),
               :associations => @config.associations,
-              :paginate     => @config.paginate
+              :paginate     => @config.paginate,
+              :config       => @config
             }
           when :show
             @config = self.admin_scaffold_config
@@ -63,7 +69,8 @@ class AdminController < ApplicationController
               :item         => @config.model_klass.find(params[:id]),
               :model        => @config.model_klass,
               :associations => @config.associations,
-              :fields       => @config.show_fields || @config.fields.map(&:name)
+              :fields       => @config.show_fields || @config.fields.map(&:name),
+              :config       => @config
             }
           when :edit
             @config = self.admin_scaffold_config
@@ -72,7 +79,8 @@ class AdminController < ApplicationController
               :model              => @config.model_klass,
               :include_media_form => @config.media_form,
               :associations       => @config.associations,
-              :fields             => @config.edit_fields || @config.edit_fields.map(&:name)
+              :fields             => @config.edit_fields || @config.edit_fields.map(&:name),
+              :config             => @config
             }
           when :new
             @config = self.admin_scaffold_config
@@ -81,7 +89,8 @@ class AdminController < ApplicationController
               :include_media_form => @config.media_form,
               :model              => @config.model_klass,
               :associations       => @config.associations,
-              :fields             => @config.new_fields || @config.new_fields.map(&:name)
+              :fields             => @config.new_fields || @config.new_fields.map(&:name),
+              :config             => @config
             }
           when :create
             @config = self.admin_scaffold_config
@@ -96,7 +105,8 @@ class AdminController < ApplicationController
                 :include_media_form => @config.media_form,
                 :model              => @config.model_klass,
                 :associations       => @config.associations,
-                :fields             => @config.new_fields || @config.new_fields.map(&:name)
+                :fields             => @config.new_fields || @config.new_fields.map(&:name),
+                :config             => @config
               }
             end
           when :update
@@ -112,7 +122,8 @@ class AdminController < ApplicationController
                 :include_media_form => @config.media_form,
                 :model              => @config.model_klass,
                 :associations       => @config.associations,
-                :fields             => @config.edit_fields || @config.edit_fields.map(&:name)
+                :fields             => @config.edit_fields || @config.edit_fields.map(&:name),
+                :config             => @config
               }
             end
           else

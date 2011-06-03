@@ -34,7 +34,49 @@ Source.create!({:name => 'Los Angeles Times', :url =>'latimes.com'}) unless Sour
 Source.create!({:name => 'Chicago Tribune', :url =>'chicagotribune.com'}) unless Source.find_by_url('chicagotribune.com')
 Source.create!({:name => 'National Public Radio', :url =>'npr.org'}) unless Source.find_by_url('npr.org')
 
-# Create Metadata Settings
+#######################################################################
+# Default Topic Feeds
+#######################################################################
+[
+	{
+		:topic   => "Global News",
+		:title   => "New York Times Top Stories Global",
+		:rss_url => "http://www.nytimes.com/services/xml/rss/nyt/GlobalHome.xml"
+	},
+	{
+		:topic   => "Global News",
+		:title   => "Yahoo Top Stories",
+		:rss_url => "http://rss.news.yahoo.com/rss/topstories"
+	},
+	{
+		:topic   => "US News",
+		:title   => "New York Times Top Stories U.S.",
+		:rss_url => "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+	},
+	{
+		:topic   => "Technology",
+		:title   => "New York Times Technology",
+		:rss_url => "http://feeds.nytimes.com/nyt/rss/Technology"
+	},
+	{
+		:topic   => "Business",
+		:title   => "New York Times Business",
+		:rss_url => "http://feeds.nytimes.com/nyt/rss/Business"
+	},
+	{
+		:topic   => "Sports",
+		:title   => "New York Times Sports",
+		:rss_url => "http://www.nytimes.com/services/xml/rss/nyt/Sports.xml"
+	}
+].each do |f|
+  next if Feed.find_by_rss(f[:rss_url])
+  puts "Creating Default (Topic) Feed: (#{f[:topic]}) #{f[:title]}"
+  Feed.add_default_feed! f[:rss_url], :topic => f[:topic], :title => f[:title]
+end
+
+#######################################################################
+# Metadata Settings
+#######################################################################
 ads = [
   { :key_name => 'default', :key_sub_type => 'banner', :width => "468px", :height => "60px", :background => "default/ads_468_60.gif" },
   { :key_name => 'default', :key_sub_type => 'leaderboard', :width => "728px", :height => "90px", :background => "default/ads_728_90.gif" },

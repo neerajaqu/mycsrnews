@@ -1,87 +1,31 @@
 class Admin::FeedsController < AdminController
 
-  def index
-    render :partial => 'shared/admin/index_page', :layout => 'new_admin', :locals => {
-    	:items => Feed.active.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc"),
-    	:model => Feed,
-    	:fields => [:title, :url, :rss, :created_at, :user_id],
-    	:associations => { :belongs_to => { :user => :user_id } },
-    	:paginate => true
-    }
+  admin_scaffold :feed do |config|
+    config.index_fields = [:title, :url, :rss, :last_fetched_at, :newswires_count, :user_id]
+    config.extra_scopes = [:enabled]
+    config.show_fields = [:title, :url, :rss, :last_fetched_at, :newswires_count, :user_id, :load_all, :is_blocked]
+    config.new_fields = [:title, :url, :rss, :user_id, :load_all]
+    config.edit_fields = [:title, :url, :rss, :user_id, :enabled, :load_all]
+    config.actions = [:index, :new, :create, :update, :show, :edit]
+    config.associations = { :belongs_to => { :user => :user_id } }
+    config.index_links = [lambda { link_to 'Add Default Feeds', news_topics_admin_content_dashboard_path }]
   end
 
-  def new
-    render_new
-  end
-
-  def edit
-    @feed = Feed.find(params[:id])
-
-    render_edit @feed
-  end
-
-  def update
-    @feed = Feed.find(params[:id])
-    if @feed.update_attributes(params[:feed])
-      flash[:success] = "Successfully updated your Feed."
-      redirect_to [:admin, @feed]
+  def fetch_new
+    @feed = Feed.enabled.active.find(params[:id])
+    if @feed.async_update_feed
+      flash[:success] = "Queued your feed for processing. Please wait a few minutes."
+      redirect_to admin_feeds_path
     else
-      flash[:error] = "Could not update your Feed as requested. Please try again."
-      render_edit @feed
+      flash[:error] = "Could not process your feed."
+      redirect_to admin_feeds_path
     end
-  end
-
-  def show
-    render :partial => 'shared/admin/show_page', :layout => 'new_admin', :locals => {
-    	:item => Feed.find(params[:id]),
-    	:model => Feed,
-    	:fields => [:title, :url, :rss, :created_at],
-    }
-  end
-
-  def create
-    @feed = Feed.new(params[:feed])
-    if @feed.save
-      flash[:success] = "Successfully created your new Feed!"
-      redirect_to [:admin, @feed]
-    else
-      flash[:error] = "Could not create your Feed, please try again"
-      render_new @feed
-    end
-  end
-
-  def destroy
-    @feed = Feed.find(params[:id])
-    @feed.update_attribute(:deleted_at, Time.now)
-
-    redirect_to admin_feeds_path
   end
 
   private
 
-  def render_new feed = nil
-    feed ||= Feed.new
-
-    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
-    	:item => feed,
-    	:model => Feed,
-    	:fields => [:title, :url, :rss, :user_id],
-    	:associations => { :belongs_to => { :user => :user_id } }
-    }
-  end
-
-  def render_edit feed
-    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
-    	:item => feed,
-    	:model => Feed,
-    	:fields => [:title, :url, :rss, :user_id],
-    	:associations => { :belongs_to => { :user => :user_id } }
-    }
-  end
-
-
-  def set_current_tab
-    @current_tab = 'feeds';
-  end
+    def set_current_tab
+      @current_tab = 'feeds';
+    end
 
 end

@@ -167,12 +167,13 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :cards
     admin.resources :classifieds
     admin.resources :comments
+    admin.resources :content_dashboard, :collection => { :news_topics => [:get, :post, :put] }
     admin.resources :content_images
     admin.resources :contents
     admin.resources :dashboard_messages, :member => { :send_global => [:get, :post], :clear_global => [:get, :post] }, :collection => { :clear_global => [:get, :post] }
     admin.resources :events, :collection => { :import_zvents => [:get, :post]}
     admin.resources :featured_items, :member => { :load_template => [:get, :post], :load_new_template => [:get, :post], :load_items => [:get, :post] }, :collection => { :save => :post, :new_featured_widgets => :get, :save_featured_widgets => :post }
-    admin.resources :feeds
+    admin.resources :feeds, :member => { :fetch_new => :get }
     admin.resources :flags
     admin.resources :forums, :collection => { :reorder => [:get, :post] }
     admin.resources :galleries
