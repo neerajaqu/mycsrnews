@@ -45,6 +45,21 @@ Source.create!({:name => 'National Public Radio', :url =>'npr.org'}) unless Sour
 	},
 	{
 		:topic   => "Global News",
+		:title   => "Euraeka Top news",
+		:rss_url => "http://euraeka.com/news.rss"
+	},
+	{
+		:topic   => "Global News",
+		:title   => "New York Times Magazine",
+		:rss_url => "http://feeds.nytimes.com/nyt/rss/Magazine"
+	},
+	{
+		:topic   => "Global News",
+		:title   => "New York Times Week in Review",
+		:rss_url => "http://feeds.nytimes.com/nyt/rss/WeekinReview"
+	},
+	{
+		:topic   => "Global News",
 		:title   => "Yahoo Top Stories",
 		:rss_url => "http://rss.news.yahoo.com/rss/topstories"
 	},
@@ -54,20 +69,131 @@ Source.create!({:name => 'National Public Radio', :url =>'npr.org'}) unless Sour
 		:rss_url => "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
 	},
 	{
+		:topic   => "Entertainment",
+		:title   => "Euraeka Entertainment News",
+		:rss_url => "http://euraeka.com/entertainment.rss"
+	},	
+	{
+		:topic   => "Entertainment",
+		:title   => "Yahoo Entertainment",
+		:rss_url => "http://rss.news.yahoo.com/rss/entertainment"
+	},
+	{
+		:topic   => "Lifestyle",
+		:title   => "Euraeka Lifestyle News",
+		:rss_url => "http://euraeka.com/lifestyle.rss"
+	},	
+	{
+		:topic   => "Offbeat",
+		:title   => "Yahoo Oddly Enough",
+		:rss_url => "http://rss.news.yahoo.com/rss/oddlyenough"
+	},	
+	{
+		:topic   => "Offbeat",
+		:title   => "Euraeka Offbeat News",
+		:rss_url => "http://euraeka.com/offbeat.rss"
+	},	
+	{
+		:topic   => "Opinion",
+		:title   => "New York Times Opinion",
+		:rss_url => "http://feeds.nytimes.com/nyt/rss/Opinion"
+	},
+	{
+		:topic   => "Opinion",
+		:title   => "New York Times Op Ed Columnists",
+		:rss_url => "http://topics.nytimes.com/top/opinion/editorialsandoped/oped/columnists/index.html?rss=1"
+	},
+	{
+		:topic   => "Opinion",
+		:title   => "Yahoo Opinion",
+		:rss_url => "http://rss.news.yahoo.com/rss/oped"
+	},
+	{
+		:topic   => "Politics",
+		:title   => "Yahoo Politics",
+		:rss_url => "http://rss.news.yahoo.com/rss/politics"
+	},
+	{
+		:topic   => "Technology",
+		:title   => "Yahoo Technology",
+		:rss_url => "http://rss.news.yahoo.com/rss/tech"
+	},
+	{
 		:topic   => "Technology",
 		:title   => "New York Times Technology",
 		:rss_url => "http://feeds.nytimes.com/nyt/rss/Technology"
 	},
+	{
+		:topic   => "Technology",
+		:title   => "Euraeka Technology News",
+		:rss_url => "http://euraeka.com/technology.rss"
+	},		
 	{
 		:topic   => "Business",
 		:title   => "New York Times Business",
 		:rss_url => "http://feeds.nytimes.com/nyt/rss/Business"
 	},
 	{
+		:topic   => "Business",
+		:title   => "Euraeka Business",
+		:rss_url => "http://euraeka.com/news/business_society.rss"
+	},	
+	{
+		:topic   => "Business",
+		:title   => "Yahoo Business",
+		:rss_url => "http://rss.news.yahoo.com/rss/business"
+	},
+	{
 		:topic   => "Sports",
 		:title   => "New York Times Sports",
 		:rss_url => "http://www.nytimes.com/services/xml/rss/nyt/Sports.xml"
-	}
+	},
+	{
+		:topic   => "Sports",
+		:title   => "Yahoo Sports",
+		:rss_url => "http://rss.news.yahoo.com/rss/sports"
+	},
+	{
+		:topic   => "Health",
+		:title   => "Yahoo Health",
+		:rss_url => "http://rss.news.yahoo.com/rss/health"
+	},	
+	{
+		:topic   => "Health",
+		:title   => "New York Times Health",
+		:rss_url => "http://feeds.nytimes.com/nyt/rss/Health"
+	},
+	{
+		:topic   => "Arts",
+		:title   => "New York Times Arts",
+		:rss_url => "http://feeds.nytimes.com/nyt/rss/Arts"
+	},
+	{
+		:topic   => "Travel",
+		:title   => "New York Times Travel",
+		:rss_url => "http://feeds.nytimes.com/nyt/rss/Travel"
+	},
+	{
+		:topic   => "Science",
+		:title   => "Euraeka Science News",
+		:rss_url => "http://euraeka.com/science.rss"
+	},		
+	{
+		:topic   => "Science",
+		:title   => "Yahoo Science",
+		:rss_url => "http://rss.news.yahoo.com/rss/science"
+	},
+	{
+		:topic   => "Science",
+		:title   => "New York Times Science",
+		:rss_url => "http://feeds.nytimes.com/nyt/rss/Science"
+	},
+	{
+		:topic   => "Humor",
+		:title   => "The Onion",
+		:rss_url => "http://feeds.theonion.com/onionnewsnetwork"
+	}	
+	
 ].each do |f|
   next if Feed.find_by_rss(f[:rss_url])
   puts "Creating Default (Topic) Feed: (#{f[:topic]}) #{f[:title]}"
