@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110531181259) do
+ActiveRecord::Schema.define(:version => 20110603181934) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -324,6 +324,7 @@ ActiveRecord::Schema.define(:version => 20110531181259) do
     t.datetime "deleted_at"
     t.boolean  "is_blocked",                   :default => false
     t.boolean  "enabled",                      :default => true
+    t.integer  "newswires_count",              :default => 0
   end
 
   add_index "feeds", ["deleted_at"], :name => "index_feeds_on_deleted_at"

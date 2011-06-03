@@ -1,4 +1,5 @@
 - associations ||= {}
 - paginate ||= false
+- config ||= OpenStruct.new
 
-= gen_index_page items, model, fields, :associations => associations, :paginate => paginate
+= gen_index_page items, model, fields, :associations => associations, :paginate => paginate, :config => config

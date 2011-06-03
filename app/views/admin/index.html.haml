@@ -27,6 +27,9 @@
   - display_setting_group.call :sitemap_seo_config
   - display_setting_group.call :google_custom_search_engine_config
 
+  %h4= link_to 'Automated News Feeds', news_topics_admin_content_dashboard_path
+  %p Add feeds from various news sources to automatically populate your application.
+
   -# @setting_groups.each do |name, setting_group|
     %h4= link_to setting_group[:title], edit_admin_setting_group_path(:id => name)
     %p= setting_group[:description]

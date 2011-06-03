@@ -2,6 +2,8 @@
 module AdminHelper
 
   def gen_index_page(collection, model, fields, options = {})
+    config = options[:config] || OpenStruct.new
+
     set_model_vars model
 
     html = []
@@ -9,6 +11,11 @@ module AdminHelper
     html << "<br />"
 
     html << "<h2>#{gen_new_link model}</h2>"
+    if config.index_links and config.index_links.any?
+      config.index_links.each do |lambda_link|
+        html << "<h2>" + self.instance_exec(&lambda_link) + "</h2>"
+      end
+    end
 
     html << gen_table(collection, model, fields, options)
     html.join.html_safe
@@ -109,6 +116,7 @@ module AdminHelper
     
     if item.class.name == 'Feed'
       links << link_to('Destroy', [:admin, item], :confirm => 'Are you sure?', :method => :delete)
+      links << link_to('Fetch New items', fetch_new_admin_feed_path(item))
     end
     links.join ' | '
   end

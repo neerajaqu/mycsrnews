@@ -10,7 +10,7 @@ class Feed < ActiveRecord::Base
   validates_format_of :rss, :with => /\Ahttp(s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i, :message => "should look like a URL", :allow_blank => false
 
   named_scope :roll, lambda { |*args| { :conditions => ["feedType != ? AND feedType != ?", 'images', 'bookmarks' ], :order => ["last_fetched_at desc"], :limit => (args.first || 7)} }
-  named_scope :active, lambda { |*args| { :conditions => ["deleted_at is null" ] } }
+  named_scope :active, lambda { |*args| { :conditions => ["deleted_at is null and is_blocked is false and enabled is true" ] } }
   named_scope :enabled, :conditions => { :enabled => true }
   named_scope :disabled, :conditions => { :enabled => false }
 
@@ -34,9 +34,19 @@ class Feed < ActiveRecord::Base
 
   def self.default_feed_topics
     Feed.tag_counts.inject({}) do |list, tag|
-      list[tag[:name]] = Feed.disabled.tagged_with(tag[:name])
+      feeds = Feed.disabled.tagged_with(tag[:name])
+      list[tag[:name]] = feeds if feeds.any?
+
       list
     end
+  end
+
+  def async_update_feed
+    Resque.enqueue(FeedsWorker, self.id)
+  end
+
+  def self.async_update_feeds
+    Resque.enqueue(FeedsWorker)
   end
 
 end
