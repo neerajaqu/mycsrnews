@@ -1,6 +1,15 @@
+- if enable_file_uploads
+  - gallery_form.object.galleryable ||= Image.new
+
 - if full_form
-  = gallery_form.input :item_url, :hint => false, :input_html => {:class=>"gallery_item-url-input"}
+  = gallery_form.input :item_url, :hint => false, :input_html => {:class=>"gallery_item-url-input"}, :required => (not enable_file_uploads)
+  - if enable_file_uploads
+    - gallery_form.semantic_fields_for :galleryable do |image_form|
+      = image_form.input :image, :required => false, :as => :file, :label => false, :class => "browse-media-item"
   = gallery_form.input :title, :required => false
   = gallery_form.input :caption, :required => false, :input_html => { :rows => 5 }
 - else
-  = gallery_form.input :item_url, :label => false, :required => false, :hint => false, :input_html => {:class=>"gallery_item-url-input"}
+  = gallery_form.input :item_url, :label => false, :hint => false, :input_html => {:class=>"gallery_item-url-input"}, :required => (not enable_file_uploads)
+  - if enable_file_uploads
+    - gallery_form.semantic_fields_for :galleryable do |image_form|
+      = image_form.input :image, :required => false, :as => :file, :label => false, :class => "browse-media-item"

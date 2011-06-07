@@ -6,7 +6,7 @@
       - unless current_user.present?
         %p== #{t 'galleries.logged_in_error'} #{link_to 'Login now', login_path}
       - else
-        - semantic_form_for @gallery do |form|
+        - semantic_form_for @gallery, :html => { :multipart => true } do |form|
           - form.inputs do
             = form.input :title
             = form.input :description, :input_html => { :rows => 5 }
@@ -15,10 +15,13 @@
             = render :partial => 'shared/forms/wall_postable', :locals => { :form => form }
           - @gallery.gallery_items.build if @gallery.gallery_items.empty?
           - form.semantic_fields_for :gallery_items do |item_form|
-            -# TODO:: get style working for <legend> in <fieldset>
-            -# item_form.inputs :id => "gallery-items-fieldset" do
+            - if @enable_file_uploads
+              - item_form.object.galleryable ||= Image.new
             - item_form.inputs :id => "gallery-items-fieldset", :title => "Gallery Items" do
               = item_form.input :item_url, :hint => t('galleries.item_url_hint')
+              - if @enable_file_uploads
+                - item_form.semantic_fields_for :galleryable do |image_form|
+                  = image_form.input :image, :required => false, :as => :file, :label => false, :class => "browse-media-item"
               = add_gallery_item_simple(form)
           - form.buttons do
             = form.commit_button  :class => 'float_right', :button_html => { :class => "btn" }

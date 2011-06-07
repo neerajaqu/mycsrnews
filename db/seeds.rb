@@ -270,6 +270,7 @@ settings = [
  { :key_sub_type => 'options', :key_name => 'animation_interval_general',  :value => "1000" },
  { :key_sub_type => 'options', :key_name => 'animation_interval_newswires',  :value => "1000" },
  { :key_sub_type => 'options', :key_name => 'exclude_articles_from_news',  :value => "false" },
+ { :key_sub_type => 'options', :key_name => 'enable_gallery_file_uploads',  :value => "false" },
  { :key_sub_type => 'options', :key_name => 'auto_feature_only_moderator_items',  :value => "false", :hint => "Filter auto feature widgets to only use items posted by moderators" },
  { :key_sub_type => 'options', :key_name => 'outbrain_enabled',  :value => "false", :hint => "Enable Outbrain(http://outbrain.com) support" },
  { :key_sub_type => 'options', :key_name => 'outbrain_template_name',  :value => "my_template_name", :hint => "Outbrain template name" },

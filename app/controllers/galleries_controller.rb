@@ -2,6 +2,7 @@ class GalleriesController < ApplicationController
   cache_sweeper :gallery_sweeper, :only => [:create, :update, :destroy, :add_gallery_item]
   before_filter :login_required, :only => [:new, :create, :edit, :update, :add_gallery_item]
   before_filter :check_valid_user, :only => [:edit, :update]
+  before_filter :set_enable_file_uploads
 
   def index
     @page = params[:page].present? ? (params[:page].to_i < 3 ? "page_#{params[:page]}_" : "") : "page_1_"
@@ -19,7 +20,24 @@ class GalleriesController < ApplicationController
   end
 
   def create
-    @gallery = Gallery.new(params[:gallery])
+    #if params["gallery"]["gallery_items_attributes"].select {|i,gi| gi["galleryable_attributes"]["image"].present? }.any?
+    if params["gallery"]["gallery_items_attributes"].select {|i,gi| gi["galleryable_attributes"].present? }.any?
+      gallery_params = params["gallery"].dup
+      gallery_items_params = gallery_params.delete "gallery_items_attributes"
+      @gallery = Gallery.new(gallery_params)
+      gallery_items_params.each do |index, gi_params|
+        if gi_params["galleryable_attributes"] and gi_params["galleryable_attributes"]["image"].present?
+          gallery_item = GalleryItem.new 
+          gallery_item.galleryable = Image.new gi_params["galleryable_attributes"]
+          @gallery.gallery_items << gallery_item
+        elsif gi_params["item_url"].present?
+          @gallery.gallery_items << GalleryItem.new(gi_params)
+        end
+      end
+    else
+      @gallery = Gallery.new(params[:gallery])
+    end
+
     @gallery.set_user current_user
     if @gallery.valid? and current_user.galleries.push @gallery
       if @gallery.post_wall?
@@ -39,12 +57,35 @@ class GalleriesController < ApplicationController
 
   def update
     @gallery ||= Gallery.find(params[:id])
-    if @gallery.update_attributes(params[:gallery])
-    	flash[:success] = "Successfully updated your Gallery."
-    	redirect_to @gallery
+    if params["gallery"]["gallery_items_attributes"].select {|i,gi| gi["galleryable_attributes"].present? }.any?
+      gallery_params = params["gallery"].dup
+      gallery_items_params = gallery_params.delete "gallery_items_attributes"
+      gallery_items_params.each do |index, gi_params|
+        if gi_params["galleryable_attributes"] and gi_params["galleryable_attributes"]["image"].present?
+          gallery_item = GalleryItem.new 
+          gallery_item.galleryable = Image.new gi_params["galleryable_attributes"]
+          @gallery.gallery_items << gallery_item
+        elsif gi_params["id"].present?
+          @gallery.gallery_items.find(gi_params["id"]).update_attributes(gi_params)
+        else
+          @gallery.gallery_items << GalleryItem.new(gi_params)
+        end
+      end
+      if @gallery.save
+        flash[:success] = "Successfully updated your Gallery."
+        redirect_to @gallery
+      else
+        flash[:error] = "Could not update your Gallery. Please fix the errors and try again"
+        render :edit
+      end
     else
-    	flash[:error] = "Could not update your Gallery. Please fix the errors and try again"
-    	render :edit
+      if @gallery.update_attributes(params[:gallery])
+        flash[:success] = "Successfully updated your Gallery."
+        redirect_to @gallery
+      else
+        flash[:error] = "Could not update your Gallery. Please fix the errors and try again"
+        render :edit
+      end
     end
   end
 
@@ -64,7 +105,14 @@ class GalleriesController < ApplicationController
     end
 
     if request.post?
-      @gallery_item = GalleryItem.new(params[:gallery_item])
+      if params["gallery_item"]["galleryable_attributes"].present?
+        gallery_item_params = params["gallery_item"].dup
+        galleryable_params = gallery_item_params.delete "galleryable_attributes"
+        @gallery_item = GalleryItem.new gallery_item_params
+        @gallery_item.galleryable = Image.new galleryable_params
+      else
+        @gallery_item = GalleryItem.new(params[:gallery_item])
+      end
       @gallery_item.gallery = @gallery
       @gallery_item.user = current_user
 
@@ -92,6 +140,11 @@ class GalleriesController < ApplicationController
 
   def set_current_tab
     @current_tab = 'galleries'
+  end
+
+  def set_enable_file_uploads
+    @enable_file_uploads = Metadata::Setting.get_setting("enable_gallery_file_uploads").try(:value)
+    #@enable_file_uploads = true
   end
 
 end

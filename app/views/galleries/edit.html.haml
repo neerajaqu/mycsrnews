@@ -3,7 +3,7 @@
     .panelBar
       %h2= t('galleries.edit', :gallery => @gallery.title)
     .formBox
-      - semantic_form_for @gallery do |form|
+      - semantic_form_for @gallery, :html => { :multipart => true } do |form|
         - form.inputs do
           = form.input :title
           = form.input :description, :input_html => { :rows => 5 }
@@ -14,7 +14,8 @@
           -# item_form.inputs :id => "gallery-items-fieldset", :title => "Gallery Items" do
           - item_form.inputs do
             = image_tag item_form.object.thumb_url if item_form.object.galleryable
-            = item_form.input :item_url
+            - unless @enable_file_uploads and not item_form.object.item_url.present?
+              = item_form.input :item_url
             = item_form.input :title, :required => false
             = item_form.input :caption, :required => false, :input_html => { :rows => 5 }
         - form.inputs do

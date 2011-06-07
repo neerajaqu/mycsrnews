@@ -4,11 +4,13 @@ class GalleryItem < ActiveRecord::Base
   belongs_to :user
   belongs_to :galleryable, :polymorphic => true, :touch => true
 
+  accepts_nested_attributes_for :galleryable
+
   default_scope :order => "position desc, created_at asc"
 
   named_scope :positioned, :order => "position desc, created_at asc"
   #validates_presence_of :user, :gallery, :title
-  validates_presence_of :item_url
+  #validates_presence_of :item_url
   before_validation :gallery_user
   validate :build_item
   before_save :set_item_info
@@ -50,8 +52,10 @@ class GalleryItem < ActiveRecord::Base
   end
 
   def build_item
-    return false unless self.new_record? or item_url_changed?
+    return true if self.galleryable.present?
+    return true unless self.new_record? or item_url_changed?
     errors.add(:item_url, "item url must be present") if self.new_record? and item_url.nil?
+
     if Image.image_url? item_url
     	self.galleryable = Image.new(:remote_image_url => item_url, :user => user)
     elsif Video.youtube_url? item_url
@@ -61,6 +65,8 @@ class GalleryItem < ActiveRecord::Base
     else
       errors.add(:item_url, "item url must point to an image, or a youtube or vimeo url")
     end
+    # HACK:: Video.process_video stopped getting triggered, so trigger it
+    self.galleryable and self.galleryable.valid?
   end
 
   def set_item_info

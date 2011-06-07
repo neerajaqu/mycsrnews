@@ -519,9 +519,10 @@ EMBED
   end
 
   def add_gallery_item_simple(form_builder, full_form = false)
+    @enable_file_uploads = Metadata::Setting.get_setting("enable_gallery_file_uploads").try(:value)
     link_to_function I18n.translate('galleries.add_additional_items'), :id => "add_gallery_item" do |page|
         form_builder.fields_for :gallery_items, GalleryItem.new, :child_index => 'NEW_RECORD' do |gallery_item_form|
-          html = render(:partial => 'shared/forms/gallery_item_simple', :locals => {:gallery_form => gallery_item_form, :full_form => full_form })
+          html = render(:partial => 'shared/forms/gallery_item_simple', :locals => {:gallery_form => gallery_item_form, :full_form => full_form, :enable_file_uploads => @enable_file_uploads })
           page << "$('#{escape_javascript(html)}'.replace(/NEW_RECORD/g, new Date().getTime())).insertBefore($('#add_gallery_item'));" 
         end
       end
