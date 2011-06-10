@@ -28,11 +28,3 @@
                   .itemBlock
                     %h2= link_to item[:title], item[:url], :target => "_amazon"
                     %p item details
-                    -#
-                      %p= linked_story_caption content
-                    
-                      .profilePic= local_linked_profile_pic content.user
-                      .itemMeta
-                        %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
-                        %span.btnComment== #{like_link content} #{content.votes_tally}
-                        %span.btnComment== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}

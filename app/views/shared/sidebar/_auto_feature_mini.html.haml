@@ -31,7 +31,7 @@
                         = caption(sanitize(strip_tags(item.featured_blurb)),limit_caption)
                     .itemMeta
                       .profilePic= local_linked_profile_pic item.user
-                      %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => timeago(item.created_at))
+                      %h3= generic_posted_by item
                       %span.btnComment== #{like_link item.item_link} #{item.votes_tally}
                       %span.btnComment== #{link_to t('comments'), polymorphic_url(item.item_link, :anchor => "commentListTop")} #{item.comments_count}
       :javascript

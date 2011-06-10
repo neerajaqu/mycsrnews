@@ -9,10 +9,6 @@
           - top_prediction_scores.each do |prediction_score|
             %li
               .itemBlock
-                -#%h4= link_to story.title, story_path(story)
                 .profilePic= local_linked_profile_pic prediction_score.user
                 .itemMeta
-                  -#%h3= t('posted_by', :fb_name => local_linked_profile_name(story.user), :date => timeago(story.created_at))
                   %h3== Accuracy: #{number_to_percentage(prediction_score.accuracy * 100)}
-                  -#%span.btnComment== #{like_link story} #{story.votes_tally}
-                  -#%span.btnComment== #{link_to t('comments'), story_path(story, :anchor => "commentListTop")} #{story.comments_count}

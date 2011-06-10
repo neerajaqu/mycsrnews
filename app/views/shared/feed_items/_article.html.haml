@@ -9,8 +9,8 @@
   .itemBlock
     %h2= link_to article.title, article_path(article)
     %p= linked_story_caption article
-    .profilePic= local_linked_profile_pic article.user
+    .profilePic= local_linked_profile_pic article.author
     .itemMeta
-      %h3= t('.stories_posted_by', :fb_name => local_linked_profile_name(article.user), :date => timeago(article.created_at))
+      %h3= generic_posted_by article, article.author
       %span.btnComment== #{like_link article} #{article.votes_tally}
       %span.btnComment== #{link_to t('comments'), story_path(article, :anchor => "commentListTop")} #{article.comments_count}
