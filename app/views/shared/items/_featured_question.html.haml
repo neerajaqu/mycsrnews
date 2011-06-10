@@ -9,7 +9,7 @@
           %span.ellipsis_title_2
             = link_to item.item_title, path_to_self(item.item_link), {:class => 'ellipsis_text'}
         .itemMeta
-          %h3= t('asked_by', :fb_name => local_linked_profile_name(item.user), :date => timeago(item.created_at))
+          %h3= generic_posted_by item
           %span.btnComment== #{like_link item} #{item.votes_tally}
           %span.btnComment== #{link_to answer_translate(item.answers.count), question_path(item, :anchor => "commentListTop")}
 - else

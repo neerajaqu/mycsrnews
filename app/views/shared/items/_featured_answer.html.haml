@@ -11,7 +11,7 @@
             = item.item_description
         .itemMeta
           .profilePic= local_linked_profile_pic item.user
-          %h3= t('asked_by', :fb_name => local_linked_profile_name(item.user), :date => timeago(item.created_at))
+          %h3= generic_posted_by item
           %h3
             = link_to item.item_title, path_to_self(item.item_link)
 - else

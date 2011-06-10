@@ -2,7 +2,7 @@
 .blog
   .itemBlock
     %h2= link_to content.title, story_path(content)
-    %h3= generic_posted_by content
+    %h3= generic_posted_by content, (article.try(:author) || article.user)
     .itemContent
       - if content.images.present?
         .thumb

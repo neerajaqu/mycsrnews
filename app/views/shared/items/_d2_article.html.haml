@@ -12,7 +12,7 @@
           = content.caption
     .meta-data
       .profilePic= local_linked_profile_pic content.user
-      %h6= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
+      %h6= generic_posted_by content
       %h6 
         %span.count== #{like_link content} #{content.votes_tally}
         %span.count== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}
@@ -31,7 +31,7 @@
           = content.caption
     .meta-data
       .profilePic= local_linked_profile_pic content.user
-      %h6= t('posted_by', :fb_name => local_linked_profile_name(content.user), :date => timeago(content.created_at))
+      %h6= generic_posted_by content
       %h6 
         %span.count== #{like_link content} #{content.votes_tally}
         %span.count== #{link_to t('comments'), story_path(content, :anchor => "commentListTop")} #{content.comments_count}

@@ -3,6 +3,6 @@
   .itemBlock
     %h4= link_to caption(newswire.title,80), newswire.url, :target => "_newswire", :only_path => false
     .itemMeta
-      %h3= t('via', :title => newswire.feed.title, :date => timeago((newswire.updated_at || newswire.created_at)))
-      %span.btnComment= link_to t('post_newswire', :site_title => get_setting('site_title').try(:value)), new_story_path(:newswire_id => newswire, :only_path => false)
+      %h3= t('via', :title => newswire.feed.title, :date => timeago((newswire.updated_at || newswire.created_at))).html_safe
+      %span.btnComment= link_to t('post_newswire', :site_title => get_setting('site_title').try(:value)).html_safe, new_story_path(:newswire_id => newswire, :only_path => false)
       %span.btnComment= link_to t('read_newswire'), newswire.url, :target => "_cts" 

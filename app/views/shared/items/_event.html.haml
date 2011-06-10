@@ -8,7 +8,7 @@
           = link_to event.name, event_path(event)
         .profilePic= local_linked_profile_pic event.user, :size => :square
         .itemMeta
-          %h3= t('posted_by', :fb_name => local_linked_profile_name(event.user), :date => timeago(event.created_at))                  
+          %h3= generic_posted_by event
           %span.btnComment== #{like_link event} #{event.votes_tally}
           %span.btnComment== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
     .complexMiniBlock

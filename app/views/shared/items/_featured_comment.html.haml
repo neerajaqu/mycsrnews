@@ -6,7 +6,7 @@
         %span.ellipsis_text= item.comments
       .itemMeta
         .profilePic= local_linked_profile_pic item.user
-        %h3= t('posted_by', :fb_name => local_linked_profile_name(item.user), :date => timeago(item.created_at))
+        %h3= generic_posted_by item
         %h3
           Re:
           %a.ellipsis_title_1

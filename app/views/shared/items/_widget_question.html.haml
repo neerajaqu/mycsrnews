@@ -3,5 +3,5 @@
   %h4= link_to caption(question.question,80), question_path(question, :only_path => false, :canvas => canvas_preference), :target => "_top"
   .profilePic= local_linked_profile_pic(question.user, :only_path => false, :target => "_top", :canvas => canvas_preference)
   .itemMeta
-    %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user, :only_path => false, :target => "_top", :canvas => canvas_preference), :date => timeago(question.created_at))
+    %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user, :only_path => false, :target => "_top", :canvas => canvas_preference), :date => timeago(question.created_at)).html_safe
     %span.btnComment== #{link_to answer_translate(question.answers.count), question_path(question, :only_path => false, :anchor => "commentListTop", :canvas => canvas_preference), :target => "_top"}

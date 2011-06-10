@@ -4,7 +4,7 @@
     = local_linked_profile_pic user, :size => "small"
   .itemBlock
     .float_left{ :style => 'width: 60%' }
-      %h2== #{local_linked_profile_name(user)}
+      %h2= local_linked_profile_name(user)
       %p= user.bio
     .float_right{ :style => 'width: 35%' }
       %h4.userPoints= t('total_score', :score => score.total_score)

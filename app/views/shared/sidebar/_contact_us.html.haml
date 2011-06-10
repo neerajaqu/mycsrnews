@@ -9,6 +9,6 @@
             .item_2.idea
               .itemBlock
                 - if ( forum = Forum.find_by_name('Feedback') )
-                  %p= t('contact_us.feedback_message', :contact_link => contact_us_path, :forum_link => forum_path(forum))
+                  %p= t('contact_us.feedback_message', :contact_link => contact_us_path, :forum_link => forum_path(forum)).html_safe
                 - else
-                  %p= t('contact_us.message', :contact_link => contact_us_path)
+                  %p= t('contact_us.message', :contact_link => contact_us_path).html_safe

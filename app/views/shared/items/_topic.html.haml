@@ -4,6 +4,6 @@
     %p= caption topic.item_description
     .profilePic= local_linked_profile_pic topic.user
     .itemMeta
-      %h3= t('.posted_by', :fb_name => local_linked_profile_name(topic.user), :date => timeago(topic.created_at))
+      %h3= generic_posted_by topic
       -#%span.btnComment== #{like_link topic} #{topic.votes_tally}
       %span.btnComment== #{link_to t('comments'), topic.item_link} #{topic.comments_count}
