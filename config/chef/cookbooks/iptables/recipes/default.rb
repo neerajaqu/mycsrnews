@@ -48,3 +48,5 @@ end
 
 iptables_rule "all_established"
 iptables_rule "all_icmp"
+iptables_rule "all_ssh"
+iptables_rule "all_http_s"

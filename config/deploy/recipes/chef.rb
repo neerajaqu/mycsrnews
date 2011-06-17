@@ -45,11 +45,18 @@ end
 
 Capistrano::Configuration.instance.load do
 
+  set :remote_chef_dir, "/etc/chef" unless exists?(:remote_chef_dir)
+  set(:remote_cookbook_dir) { "#{remote_chef_dir}/cookbooks" } unless exists?(:remote_cookbook_dir)
+  set :remote_file_cache_path, "/tmp/chef-solo" unless exists?(:remote_file_cache_path)
+  set :local_chef_dir, "config/chef" unless exists?(:local_chef_dir)
+  set(:local_cookbook_dir) { "#{local_chef_dir}/cookbooks" } unless exists?(:local_cookbook_dir)
+
+  set :rsync_port, "22" unless exists?(:rsync_port)
+
   namespace :chef do
+
     desc "Initialize a fresh Ubuntu install; create users, groups, upload pubkey, etc."
     task :init_server do
-      set :user, "root"
-
       location = fetch(:template_dir, "config/deploy/templates") + '/sudoers.erb'
       config = ERB.new(File.read(location))
       put config.result(binding), "/tmp/sudoers"
@@ -59,10 +66,11 @@ Capistrano::Configuration.instance.load do
       sudo "mv /tmp/sudoers /etc/sudoers"
 
       sudo 'groupadd developers; exit 0'
+      # TODO:: only do this for initial root login
       #create_user `whoami`, 'l0WlW3pH6hxj.', 'developers', 'sudo', `cat ~/.ssh/id_rsa.pub`
       create_user 'deploy', '4126c014250095a3a07e3ec76cbf2301a1836d2cf5b', 'developers', 'sudo', `cat ~/.ssh/id_rsa.pub`
       sudo 'rm /etc/motd; exit 0'
-      abort 'Prep successful!'
+      #abort 'Prep successful!'
     end
 
     desc "Bootstrap an Ubuntu 10.04 server and kick-start Chef-Solo"
@@ -71,9 +79,9 @@ Capistrano::Configuration.instance.load do
       #install_ree
       install_mri_ruby
       install_chef
-      #install_cookbook_repo
-      #install_dna
-      #solo
+      install_cookbook_repo
+      install_dna
+      solo
     end
 
     desc "Install Ruby Enterprise Edition"
@@ -158,42 +166,54 @@ Capistrano::Configuration.instance.load do
     task :install_chef do
       sudo_env 'gem source -a http://gems.opscode.com/'
       sudo_env 'gem install ohai chef'
+      # Create chef remote_file_cache_path directory
+      # This is the temporary location for chef files to be dumped
+      # NOTE:: chef-solo does not automatically create this for you
+      sudo "mkdir -m 0775 -p #{remote_file_cache_path}"
     end
 
     desc "Install Cookbook Repository from cwd"
     task :install_cookbook_repo do
       sudo 'aptitude install -y rsync'
-      sudo "mkdir -m 0775 -p #{cookbook_dir}"
-      sudo "chown `whoami` #{cookbook_dir}"
+      sudo "mkdir -m 0775 -p #{remote_cookbook_dir}"
+      sudo "chown -R deploy #{remote_chef_dir}"
       reinstall_cookbook_repo
     end
 
     desc "Re-install Cookbook Repository from cwd"
     task :reinstall_cookbook_repo do
-      rsync cwd + '/', cookbook_dir
+      #rsync cwd + '/', cookbook_dir
+      rsync local_cookbook_dir, remote_chef_dir
     end
 
     desc "Install ./dna/*.json for specified node"
     task :install_dna do
       sudo 'aptitude install -y rsync'
+=begin
       sudo "mkdir -m 0775 -p #{dna_dir}"
       sudo "chown `whoami` #{dna_dir}"
       put %Q(file_cache_path "#{cookbook_dir}"
   cookbook_path ["#{cookbook_dir}/cookbooks", "#{cookbook_dir}/site-cookbooks"]
   role_path "#{cookbook_dir}/roles"), "#{dna_dir}/solo.rb", :via => :scp, :mode => "0644"
+=end
       reinstall_dna
     end
 
     desc "Re-install ./dna/*.json for specified node"
     task :reinstall_dna do
-      rsync "#{cwd}/dna/#{node}.json", "#{dna_dir}/dna.json"
+      #rsync "#{cwd}/dna/#{node}.json", "#{dna_dir}/dna.json"
+      #rsync "#{local_chef_dir}/dna.json", "#{remote_chef_dir}/dna.json"
+      #put File.read("#{local_chef_dir}/dna.json"), "#{remote_chef_dir}/dna.json"
+      put File.read("config/deploy/#{stage.to_s}_dna.json"), "#{remote_chef_dir}/#{stage.to_s}_dna.json"
+      put File.read("#{local_chef_dir}/solo.rb"), "#{remote_chef_dir}/solo.rb"
     end
 
     desc "Execute Chef-Solo"
     task :solo do
-      sudo_env "chef-solo -c #{dna_dir}/solo.rb -j #{dna_dir}/dna.json -l debug"
+      #sudo_env "chef-solo -c #{dna_dir}/solo.rb -j #{dna_dir}/dna.json -l debug"
+      sudo_env "chef-solo -c #{remote_chef_dir}/solo.rb -j #{remote_chef_dir}/#{stage.to_s}_dna.json -l debug"
 
-      exit # subsequent args are not tasks to be run
+      #exit # subsequent args are not tasks to be run
     end
 
     desc "Reinstall and Execute Chef-Solo"
@@ -263,7 +283,7 @@ end
 
 def rsync(from, to)
   find_servers_for_task(current_task).each do |server|
-    puts `rsync -avz -e "ssh -p#{port}" "#{from}" "#{ENV['USER']}@#{server}:#{to}" \
+    puts `rsync -avz -e "ssh -p#{rsync_port}" "#{from}" "#{user}@#{base_url}:#{to}" \
       --exclude ".svn" --exclude ".git"`
   end
 end

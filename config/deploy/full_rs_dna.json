@@ -1,0 +1,31 @@
+{
+	"mysql": {
+  "server_root_password": "root",
+		"bind_address": "127.0.0.1"
+	},
+	"redis": {
+		"bind_address": "127.0.0.1"
+	},
+  "recipes": [
+    "iptables",
+    "imagemagick",
+    "nginx",
+    "gems",
+    "mysql::server",
+    "libxml",
+    "newscloud_deps",
+    "newscloud_database",
+    "redis"
+  ],
+  "gems": [
+  	"bundler",
+  	"god"
+	],
+	"newscloud": {
+	  "db": {
+	    "user": "full_rs_db_user",
+      "password": "VTR7oR5OnE",
+	    "database": "full_rs_production"
+    }
+  }
+}

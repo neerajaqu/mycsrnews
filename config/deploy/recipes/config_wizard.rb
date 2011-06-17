@@ -8,7 +8,6 @@ Capistrano::Configuration.instance.load do
 
   namespace :config do
 
-
     desc <<-DESC
       Newscloud Config Wizard
     DESC
@@ -28,17 +27,77 @@ Capistrano::Configuration.instance.load do
       save_settings settings
     end
   end
+
+  namespace :newscloud do
+
+    desc <<-DESC
+      Run the full newscloud bootstrap script.
+    DESC
+    task :run do
+      run_color_scheme
+      say_headline('Welcome to the Newscloud bootstrap script. This will take care of provisioning your ubuntu server and bootstrapping the Newscloud framework.')
+      settings = {}
+      settings[:app_name] = get_app
+      settings[:default_user] = ui.ask("Please enter the ssh username for your server:") do |q|
+        q.default = "root"
+        q.validate = /^[A-Za-z_-]+$/
+        q.responses[:not_valid] = "Please use only letters, underscores and dashes"
+      end
+      settings[:default_mysql_root_password] = ui.ask("Please enter the mysql root password you would like to use:") do |q|
+        q.default = "root"
+        q.validate = /^.+$/
+      end
+
+      settings = run_wizard settings
+
+      save_settings settings
+      cap_set_stage settings[:app_name]
+
+      say_headline("\nRunning full system bootstrap. This will take a while and does not require any user intervention, so grab a cup of coffee.\n")
+      say_headline("\nInitializing server..\n")
+      # Set user to the provided user account on the server for ssh access
+      set :user, settings[:default_user]
+      chef.init_server
+      # Now that we've initialized the user, we have a deploy user to work with
+      close_sessions
+      set :user, 'deploy'
+      say_headline("\nBootstrapping server with chef..\n")
+      chef.bootstrap
+      say_headline("\nSetting up rails directory structure..\n")
+      deploy.setup
+      say_headline("\nBootstrapping newscloud rails framework..\n")
+      deploy.cold
+      say_headline("\nCongragulations, your server #{settings[:app_name]}(#{settings[:base_url]}) is up and running!!\n")
+    end
+
+  end
+
+  def cap_set_stage stage_name
+    unless stages.map(&:to_s).include? stage_name
+      puts "Defining task: #{stage_name}"
+      desc "Set the target stage to `#{stage_name}'."
+      task(stage_name) do
+        set :stage, stage_name.to_sym
+        load "config/deploy/#{stage_name}.rb"
+      end 
+    end
+    roles.clear
+    stages.push stage_name
+    full_stage_name = search_task(stage_name).fully_qualified_name
+    find_and_execute_task full_stage_name
+  end
+
 end
 
 def ui
   @ui ||= Capistrano::CLI.ui
 end
 
-def run_wizard
+def run_wizard settings = {}
   run_color_scheme
-  say_headline('Welcome to the newscloud configuration wizard')
-  settings = Hash.new
-  settings[:app_name] = stage.to_s == default_stage.to_s ? get_app : stage
+  say_headline('Welcome to the Newscloud configuration wizard')
+  settings ||= {}
+  settings[:app_name] ||= stage.to_s == default_stage.to_s ? get_app : stage
   settings[:facebooker] = get_facebook_config
   settings[:database] = get_database_config settings[:app_name]
   settings[:base_url] ||= settings[:facebooker][:callback_url].sub(%r{^https?://}, '')
@@ -99,9 +158,22 @@ def get_database_config app_name
     q.validate = /^.+$/
   end
   settings[:user] = non_blank_request("Database User Name (Max 16 chars)", :default => "#{app_name}_db_user"[0,16])
+
+=begin
+  # NOTE:: Can't do this anymore, _must_ have db password to generate database with chef
+  #
+  # old deploy.rb.erb password line
+  # set :db_password, <%= @settings[:database][:password] ? "\"#{@settings[:database][:password]}\"" : 'nil' %>
+  #
   settings[:password] = ui.ask("Please enter the database password (Leave blank to be prompted for your password on deploy)", lambda {|str| str.empty? ? nil : str }) do |q|
     q.echo = "*"
     #q.validate = /^.+$/
+  end
+=end
+  settings[:password] = ui.ask("Please enter the database password") do |q|
+    q.echo = "*"
+    q.default = newpass
+    q.validate = /^.+$/
   end
 
   return settings
@@ -133,6 +205,7 @@ end
 def save_settings settings, prefix = nil
   save_yaml_file settings, prefix
   save_deploy_file settings, prefix
+  save_dna_json_file settings, prefix
 end
 
 def save_yaml_file settings, prefix = nil
@@ -150,6 +223,16 @@ def save_deploy_file settings, prefix = nil
   #settings ||= settings
   @settings = settings
   File.open("config/deploy/#{filename}", "w") {|f| f.write deploy_template.result(binding) }
+end
+
+def save_dna_json_file settings, prefix = nil
+  filename = "#{prefix}#{settings[:app_name]}_dna.json"
+
+  location = fetch(:template_dir, "config/deploy/templates") + "/dna.json.erb"
+  template = File.file?(location) ? File.read(location) : raise("File Not Found: #{location}")
+  dna_json_template = ERB.new(template)
+  @settings = settings
+  File.open("config/deploy/#{filename}", "w") {|f| f.write dna_json_template.result(binding) }
 end
 
 def extract_settings config
@@ -180,4 +263,28 @@ def extract_settings config
       :password             => config["smtp"]["password"]
     }
   }
+end
+
+def set_stage stage_name
+  unless stages.map(&:to_s).include? stage_name
+    puts "Defining task: #{stage_name}"
+    desc "Set the target stage to `#{stage_name}'."
+    task(stage_name) do
+      set :stage, stage_name.to_sym
+      load "config/deploy/#{stage_name}.rb"
+    end 
+  end
+  roles.clear
+  stages.push stage_name
+  full_stage_name = search_task(stage_name).fully_qualified_name
+  find_and_execute_task full_stage_name
+end
+
+# Random password generator
+# Thanks to: http://snippets.dzone.com/posts/show/491
+def newpass(len=10 )
+    chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+    newpass = ""
+    1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
+    return newpass
 end
