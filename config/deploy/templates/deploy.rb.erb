@@ -9,7 +9,7 @@ set :branch, "<%= @settings[:branch] || "release3_2" %>"
 # database.yml settings
 set :db_user, "<%= @settings[:database][:user] %>"
 set :db_name, "<%= @settings[:database][:name] %>"
-set :db_password, <%= @settings[:database][:password] ? "\"#{@settings[:database][:password]}\"" : 'nil' %>
+set :db_password, "<%= @settings[:database][:password] %>"
 
 # facebooker.yml settings
 set :facebook_api_key, "<%= @settings[:facebooker][:api_key] %>"

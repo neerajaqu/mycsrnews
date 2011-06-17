@@ -1,0 +1,12 @@
+= DESCRIPTION:
+
+Redis 2.2 cookbook.
+
+Thanks to http://reiddraper.com/first-chef-recipe/
+
+= REQUIREMENTS:
+
+= ATTRIBUTES: 
+
+= USAGE:
+
