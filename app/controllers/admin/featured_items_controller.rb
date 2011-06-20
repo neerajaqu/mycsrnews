@@ -94,7 +94,7 @@ class Admin::FeaturedItemsController < AdminController
   private
 
   def get_item item
-    return false unless item and item =~ /^([^_]+)_([0-9]+)$/
+    return false unless item and item =~ /^([^_]+)(?:_|-)([0-9]+)$/
     case $1
       when 'content'
         return Content.find_by_id($2)
