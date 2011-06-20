@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'deploy', 'recipes')
 
-set :default_stage, "n2_staging"
+set :default_stage, "default_stage"
 set (:stages) { Dir.glob(File.join(File.dirname(__FILE__), "deploy", "*.rb")).map {|s| File.basename(s, ".rb") }.select {|s| not s =~ /sample/} }
 
 require 'capistrano/ext/multistage'

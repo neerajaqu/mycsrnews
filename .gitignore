@@ -29,6 +29,7 @@ config/deploy/*.rb
 config/deploy/*.yml
 config/deploy/*.yaml
 !config/deploy/sample.rb
+!config/deploy/default_stage.rb
 *.pid
 ical
 db/*.db
