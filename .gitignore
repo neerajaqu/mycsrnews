@@ -28,6 +28,7 @@ config/compass.config
 config/deploy/*.rb
 config/deploy/*.yml
 config/deploy/*.yaml
+config/deploy/*.json
 !config/deploy/sample.rb
 !config/deploy/example_site.rb
 *.pid
