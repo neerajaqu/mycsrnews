@@ -11,7 +11,11 @@ Dir.glob(File.join(File.dirname(__FILE__), "deploy", "recipes", "*.rb")).sort.ma
 set :bundle_without, [:development, :test, :cucumber]
 require 'bundler/capistrano'
 
-require 'new_relic/recipes'
+begin
+  require 'new_relic/recipes'
+rescue Exception => e
+  # puts "Error could not load new_relic notifier: #{e}"
+end
 
 # Other default settings in config/deploy/recipes/application.rb
 set (:deploy_to) { "/data/sites/#{application}" }
@@ -172,8 +176,12 @@ namespace :bundler do
   end
 end
 
-Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
-  $: << File.join(vendored_notifier, 'lib')
-end
+begin
+  Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
+    $: << File.join(vendored_notifier, 'lib')
+  end
 
-require 'hoptoad_notifier/capistrano'
+  require 'hoptoad_notifier/capistrano'
+rescue Exception => e
+  # puts "Error could not load hoptoad notifier: #{e}"
+end
