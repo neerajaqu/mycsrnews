@@ -5,8 +5,28 @@ NewsCloud is an open-source Facebook Connect Website and Facebook Application th
 
 For a complete feature list of the platform, visit [http://newscloud.net/idLbRa](http://newscloud.net/idLbRa). Follow [@newscloud on Twitter](http://twitter.com/newscloud) for updates.
 
+Quick Start Newscloud Production Server With Chef
+=================================================
+
+We now have a full deploy with system provisioning thanks to chef and capistrano on a minimal ubuntu server with only ssh installed.
+
+In addition to the standard requirements of a registered facebook application, you will need:
+
+  * A minimal ubuntu server with at least 1024 megs of ram and ssh installed
+  * A registered domain name point to your ubuntu server
+  * A local ssh key in ~/ssh/id_rsa(.pub) (this will be used for passwordless execution of tasks on the remote server)
+  * GEMS: gem install capistrano capistrano-ext bundler
+
+Once these requirements have been fetch, simply run:
+
+        git clone git://github.com/newscloud/n2.git
+        cd n2
+		cap newscloud:run
+
+This will run through a setup wizard to grab your config settings, bootstrap your server with minimal requirements to run chef-solo, bootstrap the system requirements with chef, and then do a full capistrano deployment.
+
 View the Ubuntu Server 10.04 lts install guide
-----------------------------------------------
+==============================================
 
 We now have a full guide for bootstrapping and install newscloud on a minimal Ubuntu Server 10.04 LTS system.
 
@@ -16,14 +36,14 @@ This guide will bootstrap a production newscloud install on Ubuntu 10.04. We hav
 
 
 Getting Started
----------------
+===============
 
 Clone this application to your machine and checkout release 3
 
         git clone git://github.com/newscloud/n2.git
-        git checkout --track -b release3_2 origin/release3_2
+        git checkout --track -b release3_3 origin/release3_3
 
-Alternatively, download release 3 directly [http://github.com/newscloud/n2/archives/v3.2_stable](http://github.com/newscloud/n2/archives/v3.2_stable)
+Alternatively, download release 3 directly [http://github.com/newscloud/n2/archives/v3.3_stable](http://github.com/newscloud/n2/archives/v3.3_stable)
 
 Register a facebook application
 -------------------------------
