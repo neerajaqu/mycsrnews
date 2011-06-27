@@ -36,6 +36,11 @@
       	$('textarea.embed-video', $(this).parents('fieldset.inputs')).removeClass('hide').show();
       	$(this).remove();
       });
+      $('.toggle-embed-audio').click(function(event) {
+      	event.preventDefault();
+      	$('textarea.embed-audio', $(this).parents('fieldset.inputs')).removeClass('hide').show();
+      	$(this).remove();
+      });
     });      
 -# content_for :sub_nav do
   - if @classified_board.present?
