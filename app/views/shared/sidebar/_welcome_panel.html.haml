@@ -15,14 +15,14 @@
     - if current_user.combined_score < 20 
       .list_items.bullet_list
         %ul
-          %li= t('newbie_tip_like')
-          %li= t('newbie_tip_story', :href => new_story_path )
+          %li= t('newbie_tip_like').html_safe
+          %li= t('newbie_tip_story', :href => new_story_path ).html_safe
           - if MENU.key? 'forums'
-            %li= t('newbie_tip_forum', :href => forums_path )
+            %li= t('newbie_tip_forum', :href => forums_path ).html_safe
           - unless MENU['stories']['new_article'].nil? and MENU['articles']['new_article'].nil?
-            %li= t('newbie_tip_article', :href => new_article_path )
+            %li= t('newbie_tip_article', :href => new_article_path ).html_safe
           - if MENU.key? 'questions'
-            %li= t('newbie_tip_question', :href => new_question_path )
+            %li= t('newbie_tip_question', :href => new_question_path ).html_safe
 - else
   - cache :welcome_panel_html do
     - if get_setting('welcome_layout').present?

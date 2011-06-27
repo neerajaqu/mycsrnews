@@ -1,4 +1,4 @@
 - custom_widget = widget.metadata
 - wclass = custom_widget.main_content? ? 'panel_2' : custom_widget.sidebar_content? ? 'panel_1' : ''
 %div{:class => "#{wclass} #{defined?(widget_page) ? widget_page.css_class : ''}"}
-  = custom_widget.custom_data
+  = raw custom_widget.custom_data
