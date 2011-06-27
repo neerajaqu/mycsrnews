@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110603181934) do
+ActiveRecord::Schema.define(:version => 20110627220941) do
 
   create_table "announcements", :force => true do |t|
     t.string   "prefix"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20110603181934) do
     t.integer  "votes_tally",    :default => 0
     t.integer  "source_id"
     t.boolean  "is_blocked",     :default => false
+    t.text     "embed_code"
   end
 
   add_index "audios", ["audioable_type", "audioable_id"], :name => "index_audios_on_audioable_type_and_audioable_id"

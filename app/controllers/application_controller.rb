@@ -54,6 +54,7 @@ class ApplicationController < ActionController::Base
   helper_method :facebook_session
   helper_method :current_facebook_user
   helper_method :get_setting
+  helper_method :get_setting_value
   helper_method :get_ad_layout
   helper_method :iframe_facebook_request?
   helper_method :get_canvas_preference
@@ -397,6 +398,10 @@ class ApplicationController < ActionController::Base
 
   def get_setting name, sub_type = nil
     Metadata::Setting.get name, sub_type
+  end
+
+  def get_setting_value name, sub_type = nil
+    get_setting(name, sub_type).try(:value)
   end
 
   def get_ad_layout name, sub_type = nil

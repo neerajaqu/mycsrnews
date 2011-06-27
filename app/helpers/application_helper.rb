@@ -386,7 +386,11 @@ EMBED
 
   def embed_audio audio, options = {}
     #request_comes_from_facebook? ? embed_fb_audio(audio, options) : embed_html_audio(audio, options)
-    embed_html_audio(audio, options).html_safe
+    if audio.url?
+      embed_html_audio(audio, options).html_safe
+    elsif audio.embed_code? and get_setting_value('enable_audio_embed')
+      raw audio.embed_code
+    end
   end
 
   def embed_fb_audio audio, options = {}

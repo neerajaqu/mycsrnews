@@ -26,6 +26,9 @@
   - item.audios.build if item.audios.empty?
   - form.semantic_fields_for :audios do |audio_form|
     = audio_form.input :url, :required => false, :label => false
+    - if get_setting_value('enable_audio_embed') and current_user.is_moderator?
+      = audio_form.input :embed_code, :required => false, :input_html => {:class => 'hide embed-audio'}
+      %a.toggle-embed-audio{:href=> "#"}= t('add_by_embed_code')
     -#%a{:href=> "#"}= t('edit_caption')
     -#
       = audio_form.input :title, :required => false
