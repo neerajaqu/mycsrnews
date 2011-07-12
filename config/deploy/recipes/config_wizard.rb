@@ -12,6 +12,7 @@ Capistrano::Configuration.instance.load do
       Newscloud Config Wizard
     DESC
     task :wizard do
+      @display_welcome = true
       settings = run_wizard
       ui.say("Successfully configured #{settings[:app_name]}")
     end
@@ -36,16 +37,29 @@ Capistrano::Configuration.instance.load do
     task :run do
       run_color_scheme
       say_headline('Welcome to the Newscloud bootstrap script. This will take care of provisioning your ubuntu server and bootstrapping the Newscloud framework.')
+      say_headline("\nBase config settings")
+      @enable_advanced_config = Capistrano::CLI.ui.agree("Advanced config mode?") {|q| q.default = "no" }
+      @using_aws = Capistrano::CLI.ui.agree("Deploying to Amazon AWS?") {|q| q.default = "no" }
       settings = {}
       settings[:app_name] = get_app
       settings[:default_user] = ui.ask("Please enter the ssh username for your server:") do |q|
-        q.default = "root"
+        q.default = @using_aws ? "ubuntu" : "root"
         q.validate = /^[A-Za-z_-]+$/
         q.responses[:not_valid] = "Please use only letters, underscores and dashes"
       end
-      settings[:default_mysql_root_password] = ui.ask("Please enter the mysql root password you would like to use:") do |q|
-        q.default = "root"
-        q.validate = /^.+$/
+      if @using_aws
+        settings[:aws_key_location] = ui.ask("Please enter the path to your AWS private key so that you can deploy to your server:") do |q|
+          q.validate = /^.+$/
+        end
+      end
+
+      if @enable_advanced_config
+        settings[:default_mysql_root_password] = ui.ask("Please enter the mysql root password you would like to use:") do |q|
+          q.default = "root"
+          q.validate = /^.+$/
+        end
+      else
+        settings[:default_mysql_root_password] = "root"
       end
 
       settings = run_wizard settings
@@ -53,7 +67,7 @@ Capistrano::Configuration.instance.load do
       save_settings settings
       cap_set_stage settings[:app_name]
 
-      say_headline("\nRunning full system bootstrap. This will take a while and does not require any user intervention, so grab a cup of coffee.\n")
+      say_headline("\nRunning full system bootstrap. This will take a while and does not require any user intervention after logging into your server, so grab a cup of coffee.\n")
       say_headline("\nInitializing server..\n")
       # Set user to the provided user account on the server for ssh access
       set :user, settings[:default_user]
@@ -72,6 +86,7 @@ Capistrano::Configuration.instance.load do
 
   end
 
+  # TODO:: switch this back to set_stage at bottom
   def cap_set_stage stage_name
     unless stages.map(&:to_s).include? stage_name
       puts "Defining task: #{stage_name}"
@@ -95,10 +110,13 @@ end
 
 def run_wizard settings = {}
   run_color_scheme
-  say_headline('Welcome to the Newscloud configuration wizard')
+  say_headline('Welcome to the Newscloud configuration wizard') if @display_welcome
   settings ||= {}
   settings[:app_name] ||= stage.to_s == default_stage.to_s ? get_app : stage
   settings[:facebooker] = get_facebook_config
+  if @enable_advanced_config and Capistrano::CLI.ui.agree("Use separate worker server") {|q| q.default = "no" }
+    settings[:worker_server] = get_worker_server if @enable_advanced_config
+  end
   settings[:database] = get_database_config settings[:app_name]
   settings[:base_url] ||= settings[:facebooker][:callback_url].sub(%r{^https?://}, '')
   save_settings settings
@@ -122,6 +140,17 @@ def get_app
   end
 end
 
+def get_worker_server
+  ui.ask("Please enter your worker server address") do |q|
+    q.case = :down
+    q.validate = lambda do |url|
+      # TODO:: add validation for aws urls
+      #url =~ /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(\/.*)?$/ or url =~ /^(http|https):\/\/([0-9]{1,3}){4}$/
+      true
+    end
+  end
+end
+
 def get_facebook_config
   say_headline("Facebook Configuration")
   settings = Hash.new
@@ -138,7 +167,8 @@ def get_facebook_config
   settings[:callback_url] = ui.ask("Please enter your Facebook Callback URL:", lambda {|str| str.sub(%r{/$}, '')} ) do |q|
     q.case = :down
     q.validate = lambda do |url|
-      return false unless url =~ /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(\/.*)?$/
+      # TODO:: add back in
+      #return false unless url =~ /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(\/.*)?$/
       return false if url =~ /iframe\/?$/
       true
     end
@@ -150,6 +180,14 @@ def get_facebook_config
 end
 
 def get_database_config app_name
+  unless @enable_advanced_config
+    return {
+      :name => "#{app_name}_production",
+      :user => "#{app_name}_db_user"[0,16],
+      :password => newpass
+    }
+  end
+
   say_headline("Database Configuration")
   settings = Hash.new
 
@@ -219,20 +257,26 @@ def save_deploy_file settings, prefix = nil
   location = fetch(:template_dir, "config/deploy/templates") + "/deploy.rb.erb"
   template = File.file?(location) ? File.read(location) : raise("File Not Found: #{location}")
   deploy_template = ERB.new(template)
-  # TODO:: remove _test
-  #settings ||= settings
   @settings = settings
   File.open("config/deploy/#{filename}", "w") {|f| f.write deploy_template.result(binding) }
 end
 
 def save_dna_json_file settings, prefix = nil
+  # TODO:: update this to actually perform a check on multiserver
+  settings[:mysql_bind_address] = false ? "127.0.0.1" : "0.0.0.0"
+  settings[:redis_bind_address] = false ? "127.0.0.1" : "0.0.0.0"
   filename = "#{prefix}#{settings[:app_name]}_dna.json"
+  worker_filename = "#{prefix}#{settings[:app_name]}_worker_dna.json"
 
   location = fetch(:template_dir, "config/deploy/templates") + "/dna.json.erb"
+  worker_location = fetch(:template_dir, "config/deploy/templates") + "/dna_worker.json.erb"
   template = File.file?(location) ? File.read(location) : raise("File Not Found: #{location}")
+  worker_template = File.file?(worker_location) ? File.read(worker_location) : raise("File Not Found: #{worker_location}")
   dna_json_template = ERB.new(template)
+  worker_dna_json_template = ERB.new(worker_template)
   @settings = settings
   File.open("config/deploy/#{filename}", "w") {|f| f.write dna_json_template.result(binding) }
+  File.open("config/deploy/#{worker_filename}", "w") {|f| f.write worker_dna_json_template.result(binding) }
 end
 
 def extract_settings config
