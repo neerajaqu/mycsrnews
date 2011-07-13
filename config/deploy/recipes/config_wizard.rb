@@ -41,6 +41,7 @@ Capistrano::Configuration.instance.load do
       @enable_advanced_config = Capistrano::CLI.ui.agree("Advanced config mode?") {|q| q.default = "no" }
       @using_aws = Capistrano::CLI.ui.agree("Deploying to Amazon AWS?") {|q| q.default = "no" }
       settings = {}
+      settings[:using_aws] = @using_aws
       settings[:app_name] = get_app
       settings[:default_user] = ui.ask("Please enter the ssh username for your server:") do |q|
         q.default = @using_aws ? "ubuntu" : "root"

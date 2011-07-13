@@ -7,7 +7,9 @@
     "bind_address": "<%= @settings[:redis_bind_address] %>"
 	},
   "recipes": [
-    /*"iptables",*/
+    <% unless @settings[:using_aws] %>
+      "iptables",
+    <% end %>
     "imagemagick",
     "nginx",
     "gems",

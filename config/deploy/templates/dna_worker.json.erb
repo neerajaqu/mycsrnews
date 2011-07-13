@@ -1,6 +1,8 @@
 {
   "recipes": [
-    /*"iptables",*/
+    <% unless @settings[:using_aws] %>
+      "iptables",
+    <% end %>
     "imagemagick",
     "gems",
     "mysql::client",
