@@ -1,0 +1,19 @@
+development:
+  bucket: newscloud_development
+  access_key_id: 9bb749d84f27ac8d5f01d710c9003697
+  secret_access_key: 9bb749d84f27ac8d5f01d710c9003794
+
+test:
+  bucket: newscloud_test
+  access_key_id: 9bb749d84f27ac8d5f01d710c9003697
+  secret_access_key: 9bb749d84f27ac8d5f01d710c9003794
+
+production:
+  bucket: newscloud_production
+  access_key_id: 9bb749d84f27ac8d5f01d710c9003697
+  secret_access_key: 9bb749d84f27ac8d5f01d710c9003794
+
+cucumber:
+  bucket: newscloud_cucumber
+  access_key_id: 9bb749d84f27ac8d5f01d710c9003697
+  secret_access_key: 9bb749d84f27ac8d5f01d710c9003794
