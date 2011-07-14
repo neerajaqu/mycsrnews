@@ -23,7 +23,8 @@ namespace :attachments do
     # Process each attachment
     Image.all.each_with_index do |attachment, n|
       styles.each do |style|
-        path = attachment.image.path(style).sub(/^.*system/,'')
+        #path = attachment.image.path(style).sub(/^.*system/,'')
+        path = attachment.image.send(:interpolate, "/:attachment/:id/:style.:extension")
         file = attachment.image.to_file(style)
         
         begin
