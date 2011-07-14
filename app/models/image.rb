@@ -14,13 +14,26 @@ class Image < ActiveRecord::Base
   named_scope :newest, lambda { |*args| { :order => ["created_at desc"], :limit => (args.first || 8)} }
   named_scope :featured, lambda { |*args| { :conditions => ["is_featured=1"],:order => ["created_at desc"], :limit => (args.first || 3)} }
 
-  has_attached_file :image, :styles => {
-  	:media_item => ["75x56#", :jpg],
-  	:thumb => ["100x75#", :jpg],
-  	:medium => ["320x240#", :jpg],
-  	:large => ["610x458#", :jpg]
-  }
+  has_attached_file :image,
+    :styles => {
+      :media_item => ["75x56#", :jpg],
+      :thumb => ["100x75#", :jpg],
+      :medium => ["320x240#", :jpg],
+      :large => ["610x458#", :jpg]
+    }
 
+=begin
+  has_attached_file :image,
+    :styles => {
+      :media_item => ["75x56#", :jpg],
+      :thumb => ["100x75#", :jpg],
+      :medium => ["320x240#", :jpg],
+      :large => ["610x458#", :jpg]
+    },
+    :storage => :s3,
+    :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
+    :path => "/:attachment/:id/:style.:extension"
+=end
   validate :download_image, :if => :remote_image_url?
   validates_presence_of :image, :image_file_name, :image_content_type, :image_file_size
 
