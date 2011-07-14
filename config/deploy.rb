@@ -26,7 +26,7 @@ after("deploy:symlink") do
   # setup shared files
   %w{/config/unicorn.conf.rb /tmp/sockets /config/database.yml
     /config/facebooker.yml /config/application_settings.yml
-    /config/application.god /config/newrelic.yml
+    /config/application.god /config/newrelic.yml /config/s3.yml
     /config/smtp.yml /config/menu.yml /config/resque.yml}.each do |file|
       run "ln -nfs #{shared_path}#{file} #{release_path}#{file}"
   end
