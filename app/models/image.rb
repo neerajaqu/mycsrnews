@@ -32,7 +32,7 @@ class Image < ActiveRecord::Base
     },
     :storage => :s3,
     :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
-    :path => "/:attachment/:id/:style.:extension"
+    :path => "/:attachment/:id/:style.jpg"
 =end
   validate :download_image, :if => :remote_image_url?
   validates_presence_of :image, :image_file_name, :image_content_type, :image_file_size
