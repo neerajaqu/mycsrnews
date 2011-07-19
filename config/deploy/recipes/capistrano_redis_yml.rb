@@ -46,7 +46,7 @@ Capistrano::Configuration.instance.load do
         location = fetch(:template_dir, "config/deploy/templates") + '/resque.yml.erb'
         template = File.read(location)
 
-        set :redis_host, base_url
+        set :redis_host, fetch(:primary_redis_host, base_url)
         config = ERB.new(template)
 
         run "mkdir -p #{shared_path}/config" 

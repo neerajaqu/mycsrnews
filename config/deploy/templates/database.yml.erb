@@ -12,7 +12,7 @@ production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: <%= application %>_production
+  database: <%= db_name || "#{application}_production" %>
   host:     <%= db_host || "localhost" %>
   pool: 5
   username: <%= db_user[0,16] %>

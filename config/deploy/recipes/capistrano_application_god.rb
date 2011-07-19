@@ -43,7 +43,7 @@ Capistrano::Configuration.instance.load do
       task :setup_application_god_primary, :roles => :app, :except => { :no_release => true } do
 
         set :enable_god_for_app, true
-        set(:enable_god_for_workers) { not roles[:workers].include?(find_servers_for_task(current_task).first) }
+        set(:enable_god_for_workers) { roles[:workers].empty? or roles[:workers].include?(find_servers_for_task(current_task).first) }
         location = fetch(:template_dir, "config/deploy/templates") + '/application.god.erb'
         template = File.file?(location) ? File.read(location) : raise("File Not Found: #{location}")
 

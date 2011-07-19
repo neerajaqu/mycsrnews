@@ -65,12 +65,14 @@ after("deploy:web:enable") do
 end
 
 after("deploy:setup") do
+=begin
   if stage.to_s[0,3] == "n2_"
   	puts "Setting up default config files"
     run "mkdir -p #{shared_path}/config"
     #run "mkdir -p #{shared_path}/tmp/sockets"
     run "cp /data/defaults/config/* #{shared_path}/config/"
   end
+=end
   run "mkdir -p #{shared_path}/tmp/sockets"
 end
 
@@ -159,6 +161,15 @@ namespace :deploy do
     deploy.god.init
     start
   end
+
+  desc "Fresh deploy and start (like cold but skip setup_db)"
+  task :fresh do
+    set :skip_post_deploy, true
+    update
+    deploy.god.init
+    start
+  end
+
 
   desc "Setup app server"
   task :setup_app_server, :roles => :app do
