@@ -115,7 +115,12 @@ Capistrano::Configuration.instance.load do
         when running deploy:setup for all stages one by one.
       DESC
       task :setup, :except => { :no_release => true } do
+        deploy.db.setup_primary_config
+        deploy.db.setup_worker_config
+      end
 
+      task :setup_primary_config, :roles => :app, :except => { :no_release => true } do
+        set :db_host, nil
         default_template = <<-EOF
         base: &base
           adapter: sqlite3
@@ -134,6 +139,19 @@ Capistrano::Configuration.instance.load do
         location = fetch(:template_dir, "config/deploy/templates") + '/database.yml.erb'
         template = File.file?(location) ? File.read(location) : default_template
 
+        config = ERB.new(template)
+
+        run "mkdir -p #{shared_path}/db" 
+        run "mkdir -p #{shared_path}/config" 
+        put config.result(binding), "#{shared_path}/config/database.yml"
+      end
+
+      task :setup_worker_config, :roles => :workers, :except => { :no_release => true } do
+        next if find_servers_for_task(current_task).empty?
+        location = fetch(:template_dir, "config/deploy/templates") + '/database.yml.erb'
+        template = File.read(location)
+
+        set :db_host, fetch(:primary_db_host, base_url)
         config = ERB.new(template)
 
         run "mkdir -p #{shared_path}/db" 

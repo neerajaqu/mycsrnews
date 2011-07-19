@@ -27,7 +27,7 @@ after("deploy:symlink") do
   %w{/config/unicorn.conf.rb /tmp/sockets /config/database.yml
     /config/facebooker.yml /config/application_settings.yml
     /config/application.god /config/newrelic.yml /config/s3.yml
-    /config/smtp.yml /config/menu.yml /config/resque.yml}.each do |file|
+    /config/smtp.yml /config/menu.yml}.each do |file|
       run "ln -nfs #{shared_path}#{file} #{release_path}#{file}"
   end
 
@@ -65,12 +65,14 @@ after("deploy:web:enable") do
 end
 
 after("deploy:setup") do
+=begin
   if stage.to_s[0,3] == "n2_"
   	puts "Setting up default config files"
     run "mkdir -p #{shared_path}/config"
     #run "mkdir -p #{shared_path}/tmp/sockets"
     run "cp /data/defaults/config/* #{shared_path}/config/"
   end
+=end
   run "mkdir -p #{shared_path}/tmp/sockets"
 end
 
@@ -78,25 +80,56 @@ namespace :deploy do
   
   namespace :god do
     desc "Stop god monitoring"
-    task :stop, :roles => :app, :on_error => :continue do
+    task :stop, :roles => [:app, :workers], :on_error => :continue do
+      next if find_servers_for_task(current_task).empty?
       #run "god unmonitor #{application}"
       run "god unmonitor #{application}_workers"
     end
 
     desc "Start god monitoring"
-    task :start, :roles => :app do
+    task :start, :roles => [:app, :workers] do
+      next if find_servers_for_task(current_task).empty?
       run "god load #{current_path}/config/application.god"
       run "god monitor #{application}_workers"
     end
 
     desc "Status of god monitoring"
-    task :status, :roles => :app do
+    task :status, :roles => [:app, :workers] do
+      next if find_servers_for_task(current_task).empty?
       run "god status"
     end
 
     desc "Initialize god monitoring"
-    task :init, :roles => :app do
+    task :init, :roles => [:app, :workers] do
+      next if find_servers_for_task(current_task).empty?
       run "god"
+    end
+  end
+
+  namespace :resque do
+    desc "Restart Resque workers"
+    task :restart_workers, :roles => :workers do
+      run "cd #{current_path} && bundle exec rake n2:queue:stop_workers RAILS_ENV=#{rails_env}"
+      run "cd #{current_path} && bundle exec rake n2:queue:stop_scheduler APP_NAME=#{application} RAILS_ENV=#{rails_env}"
+    end
+
+    desc "Stop Resque workers"
+    task :stop_workers, :roles => :workers do
+      # TODO:: switch this to god.stop_workers
+      deploy.god.stop
+      run "cd #{current_path} && bundle exec rake n2:queue:stop_workers RAILS_ENV=#{rails_env}"
+      run "cd #{current_path} && bundle exec rake n2:queue:stop_scheduler APP_NAME=#{application} RAILS_ENV=#{rails_env}"
+    end
+
+    desc "Start Resque workers"
+    task :start_workers, :roles => :workers do
+      # TODO:: switch this to god.start_workers
+      deploy.god.start
+    end
+
+    desc "Run the resque-web script for a given stage"
+    task :resque_web, :roles => :app do
+      run "cd #{current_path} && bundle exec resque-web -F -e #{rails_env} #{current_path}/config/initializers/resque.rb"
     end
   end
 
@@ -123,14 +156,29 @@ namespace :deploy do
   task :cold do
     set :skip_post_deploy, true
     update
-    setup_db
+    setup_app_server
+    setup_worker_server
     deploy.god.init
     start
   end
 
-  desc "Setup db"
-  task :setup_db do
+  desc "Fresh deploy and start (like cold but skip setup_db)"
+  task :fresh do
+    set :skip_post_deploy, true
+    update
+    deploy.god.init
+    start
+  end
+
+
+  desc "Setup app server"
+  task :setup_app_server, :roles => :app do
     run_rake "n2:setup"
+  end
+
+  desc "Setup worker server"
+  task :setup_worker_server, :roles => :worker do
+    #run_rake "n2:setup"
   end
 
   desc "Run rake after deploy tasks"

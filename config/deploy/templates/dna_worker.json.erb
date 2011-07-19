@@ -1,0 +1,18 @@
+{
+  "recipes": [
+    <% unless @settings[:using_aws] %>
+      "iptables",
+    <% end %>
+    "imagemagick",
+    "gems",
+    "mysql::client",
+    "libxml",
+    "newscloud_deps"
+  ],
+  "gems": [
+  	"bundler",
+  	"god"
+	],
+	"newscloud": {
+  }
+}

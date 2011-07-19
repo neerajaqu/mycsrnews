@@ -1,13 +1,15 @@
 {
 	"mysql": {
-  "server_root_password": "<%= @settings[:default_mysql_root_password] %>",
-		"bind_address": "127.0.0.1"
+    "server_root_password": "<%= @settings[:default_mysql_root_password] %>",
+    "bind_address": "<%= @settings[:mysql_bind_address] %>"
 	},
 	"redis": {
-		"bind_address": "127.0.0.1"
+    "bind_address": "<%= @settings[:redis_bind_address] %>"
 	},
   "recipes": [
-    "iptables",
+    <% unless @settings[:using_aws] %>
+      "iptables",
+    <% end %>
     "imagemagick",
     "nginx",
     "gems",

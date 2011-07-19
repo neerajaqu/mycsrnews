@@ -199,13 +199,29 @@ Capistrano::Configuration.instance.load do
       reinstall_dna
     end
 
+    desc "Re-install worker server dna.json"
+    task :reinstall_worker_dna, :roles => :workers do
+      next if find_servers_for_task(current_task).empty?
+      put File.read("config/deploy/#{stage.to_s}_worker_dna.json"), "#{remote_chef_dir}/#{stage.to_s}_dna.json"
+      put File.read("#{local_chef_dir}/solo.rb"), "#{remote_chef_dir}/solo.rb"
+    end
+
+    desc "Re-install server server dna.json"
+    task :reinstall_server_dna, :roles => :app do
+      put File.read("config/deploy/#{stage.to_s}_dna.json"), "#{remote_chef_dir}/#{stage.to_s}_dna.json"
+      put File.read("#{local_chef_dir}/solo.rb"), "#{remote_chef_dir}/solo.rb"
+    end
+
     desc "Re-install ./dna/*.json for specified node"
     task :reinstall_dna do
       #rsync "#{cwd}/dna/#{node}.json", "#{dna_dir}/dna.json"
       #rsync "#{local_chef_dir}/dna.json", "#{remote_chef_dir}/dna.json"
       #put File.read("#{local_chef_dir}/dna.json"), "#{remote_chef_dir}/dna.json"
-      put File.read("config/deploy/#{stage.to_s}_dna.json"), "#{remote_chef_dir}/#{stage.to_s}_dna.json"
-      put File.read("#{local_chef_dir}/solo.rb"), "#{remote_chef_dir}/solo.rb"
+      #
+      #put File.read("config/deploy/#{stage.to_s}_dna.json"), "#{remote_chef_dir}/#{stage.to_s}_dna.json"
+      #put File.read("#{local_chef_dir}/solo.rb"), "#{remote_chef_dir}/solo.rb"
+      chef.reinstall_server_dna
+      chef.reinstall_worker_dna
     end
 
     desc "Execute Chef-Solo"
@@ -283,7 +299,8 @@ end
 
 def rsync(from, to)
   find_servers_for_task(current_task).each do |server|
-    puts `rsync -avz -e "ssh -p#{rsync_port}" "#{from}" "#{user}@#{base_url}:#{to}" \
+    #puts `rsync -avz -e "ssh -p#{rsync_port}" "#{from}" "#{user}@#{base_url}:#{to}" \
+    puts `rsync -avz -e "ssh -p#{rsync_port}" "#{from}" "#{user}@#{server.host}:#{to}" \
       --exclude ".svn" --exclude ".git"`
   end
 end

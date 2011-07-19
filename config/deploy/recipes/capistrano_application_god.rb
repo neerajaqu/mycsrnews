@@ -36,6 +36,27 @@ Capistrano::Configuration.instance.load do
         when running deploy:setup for all stages one by one.
       DESC
       task :setup_application_god, :except => { :no_release => true } do
+        deploy.config.setup_application_god_primary
+        deploy.config.setup_application_god_workers
+      end
+
+      task :setup_application_god_primary, :roles => :app, :except => { :no_release => true } do
+
+        set :enable_god_for_app, true
+        set(:enable_god_for_workers) { roles[:workers].empty? or roles[:workers].include?(find_servers_for_task(current_task).first) }
+        location = fetch(:template_dir, "config/deploy/templates") + '/application.god.erb'
+        template = File.file?(location) ? File.read(location) : raise("File Not Found: #{location}")
+
+        config = ERB.new(template)
+
+        run "mkdir -p #{shared_path}/config" 
+        put config.result(binding), "#{shared_path}/config/application.god"
+      end
+
+      task :setup_application_god_workers, :roles => :workers, :except => { :no_release => true } do
+        next if find_servers_for_task(current_task).empty?
+        set :enable_god_for_app, false
+        set :enable_god_for_workers, true
 
         location = fetch(:template_dir, "config/deploy/templates") + '/application.god.erb'
         template = File.file?(location) ? File.read(location) : raise("File Not Found: #{location}")
