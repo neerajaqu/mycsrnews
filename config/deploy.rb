@@ -182,21 +182,22 @@ namespace :deploy do
   end
 
   desc "Run rake after deploy tasks"
-  task :rake_post_deploy do
+  task :rake_post_deploy, :roles => :app do
     path = rake_post_path || release_path
     run "cd #{path} && bundle exec rake n2:deploy:after RAILS_ENV=#{rails_env}"
   end
 
   desc "Run server post deploy tasks to restart workers and reload god"
-  task :server_post_deploy do
-    run "cd #{current_path} && bundle exec rake n2:queue:restart_workers RAILS_ENV=#{rails_env}"
-    run "cd #{current_path} && bundle exec rake n2:queue:restart_scheduler APP_NAME=#{application} RAILS_ENV=#{rails_env}"
+  task :server_post_deploy, :roles => :app do
+    #run "cd #{current_path} && bundle exec rake n2:queue:restart_workers RAILS_ENV=#{rails_env}"
+    #run "cd #{current_path} && bundle exec rake n2:queue:restart_scheduler APP_NAME=#{application} RAILS_ENV=#{rails_env}"
+    resque.restart_workers
     deploy.god.start
     newrelic.notice_deployment
   end
 
   desc "Load the app skin if it exists"
-  task :load_skin do
+  task :load_skin, :roles => :app do
     if skin_dir_exists? and skin_file_exists?
     	run "ln -nfs /data/config/n2_sites/#{application}/app/stylesheets/skin.sass #{release_path}/app/stylesheets/skin.sass"
     	run "rm -r #{release_path}/public/images"
