@@ -189,9 +189,12 @@ namespace :deploy do
 
   desc "Run server post deploy tasks to restart workers and reload god"
   task :server_post_deploy, :roles => :app do
-    #run "cd #{current_path} && bundle exec rake n2:queue:restart_workers RAILS_ENV=#{rails_env}"
-    #run "cd #{current_path} && bundle exec rake n2:queue:restart_scheduler APP_NAME=#{application} RAILS_ENV=#{rails_env}"
-    resque.restart_workers
+    if roles[:workers].any?
+      resque.restart_workers
+    else
+      run "cd #{current_path} && bundle exec rake n2:queue:restart_workers RAILS_ENV=#{rails_env}"
+      run "cd #{current_path} && bundle exec rake n2:queue:restart_scheduler APP_NAME=#{application} RAILS_ENV=#{rails_env}"
+    end
     deploy.god.start
     newrelic.notice_deployment
   end
