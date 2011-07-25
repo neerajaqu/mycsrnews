@@ -44,6 +44,10 @@ class Answer < ActiveRecord::Base
     answer
   end
 
+  def item_link
+    question.item_link
+  end
+
   def expire
     self.class.sweeper.expire_answer_all self
   end

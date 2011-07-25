@@ -34,15 +34,15 @@
           .float_left.clearfix= render :partial => 'shared/flag_form', :locals => { :flaggable => @question }
 
       = render_ad(:banner, @ad_layout, @ad_banner)
-  - if @question.answers.present?
+  - if @question.answers.active.present?
     - cache "#{@question.cache_key}_bottom_html" do
       #answersList.panel_2
         .panelBar
-          %h2== Showing #{pluralize @question.answers.size, 'Answer'}
+          %h2== Showing #{pluralize @question.answers.active.size, 'Answer'}
         .itemListWrap
           .list_items
             %ul
-              - @question.answers.each do |answer|
+              - @question.answers.active.each do |answer|
                 = render :partial => 'shared/answer', :locals => { :answer => answer }
   #answerForm.panel_2
     .panelBar

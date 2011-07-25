@@ -10,11 +10,11 @@ class FlagsController < ApplicationController
     respond_to do |format|
       if @flaggable.flag_item params[:flag_type], current_user
        	success = "Thanks. We'll review shortly."
-      	format.html { flash[:success] = success; redirect_to @flaggable }
+      	format.html { flash[:success] = success; redirect_to @flaggable.item_link }
       	format.json { render :json => { :msg => success }.to_json }
       else
       	error = "Failed to record flag"
-      	format.html { flash[:error] = error; redirect_to @flaggable }
+      	format.html { flash[:error] = error; redirect_to @flaggable.item_link }
       	format.json { render :json => { :msg => error }.to_json }
       end
     end
@@ -28,10 +28,10 @@ class FlagsController < ApplicationController
     	@item.expire
       # todo - if block user, then use fb:ban api call too! or unban
     	flash[:success] = "Successfully #{@item.blocked? ? "Blocked" : "UnBlocked"} your item."
-    	redirect_to @item
+    	redirect_to @item.item_link
     else
     	flash[:error] = "Could not block this item."
-    	redirect_to @item
+    	redirect_to @item.item_link
     end
   end
 
@@ -42,7 +42,7 @@ class FlagsController < ApplicationController
     	redirect_to @item
     else
     	flash[:error] = "Could not feature this item."
-    	redirect_to @item
+    	redirect_to @item.item_link
     end
   end
 
