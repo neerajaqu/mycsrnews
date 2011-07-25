@@ -1,7 +1,9 @@
 .newswire.large
   .itemBlock
     %h2= link_to newswire.title, newswire.url, :target => "_newswire"
-    %p= linked_newswire_caption newswire
+    %p
+      = linked_newswire_caption newswire
+      = link_to 'More', newswire.url, :target => "_cts"
     .itemMeta
       %h3= newswire_via_with_date newswire
       %span.btnComment= link_to t('newswires.publish', :site_title => get_setting('site_title').try(:value)), new_story_path(:newswire_id => newswire)
