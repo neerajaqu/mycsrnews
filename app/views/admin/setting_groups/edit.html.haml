@@ -95,7 +95,7 @@
                   - if item[:required]
                     %span *
                   - if item[:description]
-                    %p= item[:description]
+                    %p= raw item[:description]
                   - else
                     %br
                   - if setting

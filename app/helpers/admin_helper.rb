@@ -115,7 +115,7 @@ module AdminHelper
     end
     
     if item.class.name == 'Feed'
-      links << link_to('Destroy', [:admin, item], :confirm => 'Are you sure?', :method => :delete)
+      #links << link_to('Destroy', [:admin, item], :confirm => 'Are you sure?', :method => :delete)
       links << link_to('Fetch New items', fetch_new_admin_feed_path(item))
     end
     links.join ' | '
