@@ -78,7 +78,7 @@ class Admin::ForumsController < AdminController
     forum ||= Forum.new
 
     render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
-    	:item => @forum,
+    	:item => forum,
     	:model => Forum,
     	:fields => [:name, :description],
     	:include_media_form => true
