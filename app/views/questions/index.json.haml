@@ -1,17 +1,18 @@
 %ul
   - @questions.each do |question|
     %li.askQuestionWrap{'data-id' => question.cache_key}
-      .thumb
-        - if question.images.present?
-          = image_tag question.images.first.url(:thumb)
-        - else
-          = image_tag ('default/watermark.jpg')
-      .itemBlock
-        %h2= link_to question.question, question
-        %p= linked_item_details question
-        .profilePic= local_linked_profile_pic question.user
-        .itemMeta
-          %h3= t('asked_by', :fb_name => local_linked_profile_name(question.user), :date => timeago(question.created_at))
-          %span.btnComment== #{like_link question} #{question.votes.size}
-          %span.btnComment== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
-          %span.btnComment= fb_share_item_button question
+      .item_1
+        .thumb
+          - if question.images.present?
+            = image_tag question.images.first.url(:thumb)
+          - else
+            = image_tag ('default/watermark.jpg')
+        .itemBlock
+          %h2= link_to question.question, question
+          %p= linked_item_details question
+          .profilePic= local_linked_profile_pic question.user
+          .itemMeta
+            %h3= asked_by question
+            %span.btnComment== #{like_link question} #{question.votes.size}
+            %span.btnComment== #{link_to answer_translate(question.answers.count), question_path(question, :anchor => "commentListTop")}
+            -#%span.btnComment= fb_share_item_button question

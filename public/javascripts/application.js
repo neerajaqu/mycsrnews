@@ -121,10 +121,17 @@ $(function() {
 
   	var url = change_url_format($(this).attr('action'));
   	var list = $('.list_items ul', $(this).parents().filter('.panel_2'));
-  	$.post(url, $(this).serialize(), function(data) {
+  	$.ajax({
+      'url': url,
+      'data': $(this).serializeJSON(),
+      'dataType': 'html',
+      'success': function(data) {
   		$(list).quicksand( $(data).find('li'), {adjustHeight: false} );
+        $.timeago.settings.strings.suffixAgo = '';
+        $('abbr.timeago', $('.itemListWrap') ).timeago();
   		rebuild_facebook_dom();
-    }, 'html');
+      }
+    });
   });
 
   $('.classifieds-filter form #categories').change(function(event) {
@@ -234,6 +241,7 @@ $(function() {
       url = url.substring(0, url.length - 5) + ".json";
     } else if (url.match(/like.html/)) {
       url = url.replace(/like.html/, 'like.json');
+    } else if (url.match(/like.json/)) {
     } else {
       url = url + ".json";
     }

@@ -4,10 +4,8 @@
     %li.askQuestionWrap
       .itemBlock
         %p.askQuestionHead= link_to event.name, event_path(event)
-        .profilePic= local_linked_profile_pic event.user, :size => :square
         .itemMeta
-          %p= t('.events_asked_by', :fb_name => local_linked_profile_name(event.user), :date => timeago(event.created_at))
-          %p
-            %span.btn_left== #{like_link event} #{event.votes_tally}
-            %span.btn_mid== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}
-            %span.btn_right= fb_share_item_button(event)
+          .profilePic= local_linked_profile_pic event.user, :size => :square
+          %h3= generic_posted_by event
+          %span.btnComment== #{like_link event} #{event.votes_tally}
+          %span.btnComment== #{link_to t('.events_comments'), event_path(event, :anchor => "commentListTop")} #{event.comments_count}

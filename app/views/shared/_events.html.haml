@@ -5,7 +5,7 @@
   .panel_2
     .panelBar
       %h2= t('.events_title')
-      - if events.present? and events.first.refineable?
+      -# if events.present? and events.first.refineable?
         .refine_link
           = render :partial => 'shared/forms/refine_dropdown'
     .itemListWrap

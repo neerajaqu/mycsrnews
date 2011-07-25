@@ -10,9 +10,9 @@
       .itemBlock
         %h2= link_to resource.title, resource_path(resource)
         %p= linked_item_details resource
-        .profilePic= local_linked_profile_pic resource.user
         .itemMeta
+          .profilePic= local_linked_profile_pic resource.user
           %h3= generic_posted_by resource
           %span.btnComment== #{like_link resource} #{resource.votes_tally}
           %span.btnComment== #{link_to t('comments'), resource_path(resource, :anchor => "commentListTop")} #{resource.comments_count}
-          %span.btnComment= fb_share_item_button(resource)
+          -#%span.btnComment= fb_share_item_button(resource)
