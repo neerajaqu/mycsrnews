@@ -698,7 +698,7 @@ view_objects = [
         },
   		  {
           :method_name => "recently_active",
-          :args        => [21]
+          :args        => [20]
         }        
   		]
   	}
