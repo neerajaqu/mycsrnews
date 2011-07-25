@@ -113,7 +113,8 @@
             %a{:href => "#community"} Community
             %ul
               %li= link_to 'Members', admin_users_path
-              %li= link_to 'Announcements', admin_announcements_path
+              - if not APP_CONFIG['use_view_objects']
+                %li= link_to 'Announcements', admin_announcements_path
               %li
                 %a{:href => "#community-notifications"} Notifications
                 %ul
