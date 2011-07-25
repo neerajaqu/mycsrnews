@@ -11,11 +11,13 @@ class Admin::NewswiresController < AdminController
   end
 
   def new
-    @newswire = Newswire.new
+    render_new
   end
 
   def edit
     @newswire = Newswire.find(params[:id])
+
+    render_edit @newswire
   end
 
   def update
@@ -26,7 +28,7 @@ class Admin::NewswiresController < AdminController
       redirect_to [:admin, @newswire]
     else
       flash[:error] = "Could not update your Newswire as requested. Please try again."
-      render :edit
+      render_edit @newswire
     end
   end
 
@@ -47,7 +49,7 @@ class Admin::NewswiresController < AdminController
       redirect_to [:admin, @newswire]
     else
       flash[:error] = "Could not create your Newswire, please try again"
-      render :new
+      render_new @newswire
     end
   end
 
@@ -59,6 +61,29 @@ class Admin::NewswiresController < AdminController
   end
 
   private
+
+  def render_new newswire = nil
+    newswire ||= Newswire.new
+
+    render :partial => 'shared/admin/new_page', :layout => 'new_admin', :locals => {
+    	:item => newswire,
+    	:model => Newswire,
+    	:fields => [:title, :caption, :feed],
+    	:include_media_form => true,
+    	:associations => { :belongs_to => { :feed => :feed_id } }
+    }
+  end
+
+  def render_edit newswire
+    render :partial => 'shared/admin/edit_page', :layout => 'new_admin', :locals => {
+    	:item => newswire,
+    	:model => Newswire,
+    	:fields => [:title, :caption],
+    	:include_media_form => true,
+    	:associations => { :belongs_to => { :feed => :feed_id } }
+    }
+  end
+
 
   def set_current_tab
     @current_tab = 'newswires';
