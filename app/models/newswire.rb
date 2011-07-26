@@ -23,6 +23,7 @@ class Newswire < ActiveRecord::Base
       rescue
       end
     end
+    caption = self.title unless caption.present?
     story_type = self.feed.full_html? ? 'full_html' : 'story'
     @content = Content.new({
     	:title      => self.title,
