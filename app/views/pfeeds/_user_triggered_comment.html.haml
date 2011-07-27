@@ -8,4 +8,4 @@
     = generic_posted_by comment, user
   %h3
     Re: 
-    = link_to caption(comment.commentable.item_title,120), polymorphic_path(comment.commentable, :only_path => false, :format => 'html')
+    = link_to(caption(comment.commentable.item_title,120), polymorphic_path(comment.commentable, :only_path => false, :format => 'html')).html_safe
