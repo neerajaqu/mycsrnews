@@ -13,4 +13,4 @@
           -#TODO:: get register link working
 - else
   #col_left
-    %h2= "Successfully invited your #{pluralize @fb_user_ids.size, 'friend'} #{fb_list_of_names @fb_user_ids}."
+    %h2= "Successfully invited your #{pluralize @fb_user_ids.size, 'friend'} #{fb_list_of_names @fb_user_ids}.".html_safe
