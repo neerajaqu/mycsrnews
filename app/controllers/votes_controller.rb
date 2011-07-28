@@ -1,11 +1,15 @@
 class VotesController < ApplicationController
   cache_sweeper :vote_sweeper, :only => [:like, :dislike]
 
-  before_filter :login_required, :only => [:like, :dislike]
+  #before_filter :login_required, :only => [:like, :dislike]
 
   def like
     @voteable = find_voteable
     respond_to do |format|
+      unless current_user
+      	format.html { flash[:error] = "You must login to vote"; redirect_to params[:return_to] || @voteable }
+      	format.json { render :json => { :msg => "You must login" }.to_json }
+      end
       error = (current_user and current_user.voted_for?(@voteable)) ? "You already voted" : false
       if !error and current_user and @voteable.present? and (vote = current_user.vote_for(@voteable))
       	@voteable.expire
