@@ -11,7 +11,7 @@ class ViewTree
     @children = []
     @controller = controller
     #@cache = true
-    @cache = Rails.env.production? and @view_object.edge_parents.any? and @view_object.name != 'Welcome Panel'
+    @cache = Rails.env.production? and not key_name =~ /--/ and key_name != 'Welcome Panel'
     # Initialize new view tree
     # add children view tree elements for each view object
     # build up render dependency tree
