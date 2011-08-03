@@ -78,7 +78,7 @@ class StorySweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       controller.expire_fragment "articles_list_#{page}html"
     end
-    NewscloudSweeper.expire_instance(story)
+    NewscloudSweeper.expire_instance(article)
   end
 
 end
