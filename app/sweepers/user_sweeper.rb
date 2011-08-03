@@ -14,6 +14,7 @@ class UserSweeper < ActionController::Caching::Sweeper
     ['newest_users', 'recent_users', 'active_users', 'moderator_users', 'sidebar_top_users_weekly'].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
+    NewscloudSweeper.expire_instance(user)
   end
 
 end

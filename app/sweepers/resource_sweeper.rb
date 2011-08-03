@@ -16,6 +16,7 @@ class ResourceSweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       expire_fragment "resources_list_#{page}html"
     end
+    NewscloudSweeper.expire_instance(resource)
   end
 
   def self.expire_resource_all resource
@@ -26,6 +27,7 @@ class ResourceSweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       controller.expire_fragment "resources_list_#{page}html"
     end
+    NewscloudSweeper.expire_instance(resource)
   end
 
 end

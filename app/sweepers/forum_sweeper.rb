@@ -22,6 +22,7 @@ class ForumSweeper < ActionController::Caching::Sweeper
     ['forums_list', "#{forum.cache_key}_topics_list", 'forum_roll'].each do |fragment|
       controller.expire_fragment fragment
     end
+    NewscloudSweeper.expire_instance(forum)
   end
 
   def self.expire_topic_all topic
@@ -31,6 +32,7 @@ class ForumSweeper < ActionController::Caching::Sweeper
     end
 
     ForumSweeper.expire_forum_all topic.forum
+    NewscloudSweeper.expire_instance(topic)
   end
 
 end

@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
-  #caches_page :index, :google_ads, :helios_ads
   layout proc { |controller| controller.action_name == 'app_tab' ? 'app_tab' : 'application' }
-  cache_sweeper :story_sweeper, :only => [:create, :update, :destroy, :like]
 
   before_filter :set_current_tab
   before_filter :load_newest_images, :only => [:index, :app_tab]

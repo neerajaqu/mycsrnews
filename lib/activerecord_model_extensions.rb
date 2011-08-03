@@ -111,6 +111,10 @@ module Newscloud
         "#{self.class.name.underscore}:#{self.id}"
       end
 
+      def model_deps_key
+        "#{self.cache_id}:view_object_deps"
+      end
+
       def item_link
         self
       end

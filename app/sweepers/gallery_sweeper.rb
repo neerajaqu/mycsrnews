@@ -25,6 +25,7 @@ class GallerySweeper < ActionController::Caching::Sweeper
       controller.expire_fragment "galleries_list_#{page}html"
     end
 
+    NewscloudSweeper.expire_instance(gallery)
   end
 
   def self.expire_gallery_item_all gallery_item, controller = ActionController::Base.new
@@ -33,6 +34,7 @@ class GallerySweeper < ActionController::Caching::Sweeper
     end
 
     GallerySweeper.expire_gallery_all gallery_item.gallery, controller
+    NewscloudSweeper.expire_instance(gallery)
   end
 
 end

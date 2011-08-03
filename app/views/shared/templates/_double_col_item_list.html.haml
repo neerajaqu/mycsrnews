@@ -1,5 +1,7 @@
 - items = vo.dataset
-- item1 = items.shift
+- item1 = items.first
+- remaining_items = items.slice(1,items.size)
+
 .panel-2
   .panel-border.top-secondary-corners.bottom-secondary-corners
     .panel-half.featured-panel.position-left.top-secondary-corners.bottom-secondary-corners.shadow 
@@ -25,7 +27,7 @@
     .panel-half.pad-left
       .panel-content
         %ul.list-items
-          - items.each do |item|
+          - remaining_items.each do |item|
             %li
               .item-with-no-image
                 .item-text

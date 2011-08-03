@@ -28,6 +28,7 @@ class QandaSweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       expire_fragment "questions_list_#{page}html"
     end
+    NewscloudSweeper.expire_instance(question)
   end
 
   def clear_answer_cache(answer)
@@ -35,6 +36,7 @@ class QandaSweeper < ActionController::Caching::Sweeper
       expire_fragment "#{fragment}_html"
     end
     clear_question_cache answer.question
+    NewscloudSweeper.expire_instance(answer)
   end
 
   def self.expire_question_all question
@@ -45,6 +47,7 @@ class QandaSweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       controller.expire_fragment "questions_list_#{page}html"
     end
+    NewscloudSweeper.expire_instance(question)
   end
 
   def self.expire_answer_all answer
@@ -53,6 +56,7 @@ class QandaSweeper < ActionController::Caching::Sweeper
       controller.expire_fragment "#{fragment}_html"
     end
     QandaSweeper.expire_question_all answer.question
+    NewscloudSweeper.expire_instance(answer)
   end
 
 end

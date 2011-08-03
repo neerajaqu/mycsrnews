@@ -48,6 +48,7 @@ class StorySweeper < ActionController::Caching::Sweeper
       expire_fragment "stories_list_#{page}html"
     end
     #expire_page root_path
+    NewscloudSweeper.expire_instance(story)
   end
 
   def clear_article_cache article
@@ -66,6 +67,7 @@ class StorySweeper < ActionController::Caching::Sweeper
     end
 
     StorySweeper.expire_article_all story.article if story.is_article?
+    NewscloudSweeper.expire_instance(story)
   end
 
   def self.expire_article_all article
@@ -76,6 +78,7 @@ class StorySweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       controller.expire_fragment "articles_list_#{page}html"
     end
+    NewscloudSweeper.expire_instance(story)
   end
 
 end

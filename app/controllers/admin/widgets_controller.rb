@@ -67,6 +67,7 @@ class Admin::WidgetsController < AdminController
     end
     @page.direct_view_tree_edges.destroy_all
     children.map(&:save)
+    @page.expire
     render :json => {:success => "Success!"}.to_json and return
   end
 

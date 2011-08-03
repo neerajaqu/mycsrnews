@@ -17,5 +17,6 @@ class ClassifiedSweeper < ActionController::Caching::Sweeper
       controller.expire_fragment "classifieds_list_#{page}html"
     end
 
+    NewscloudSweeper.expire_instance(classified)
   end
 end

@@ -16,6 +16,7 @@ class EventSweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       expire_fragment "events_list_#{page}html"
     end
+    NewscloudSweeper.expire_instance(event)
   end
 
   def self.expire_event_all event
@@ -28,6 +29,7 @@ class EventSweeper < ActionController::Caching::Sweeper
       controller.expire_fragment "events_list_#{page}html"
       controller.expire_fragment "events_list_#{page}fbml"
     end
+    NewscloudSweeper.expire_instance(event)
   end
 
 end

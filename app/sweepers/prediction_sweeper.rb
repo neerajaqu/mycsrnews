@@ -39,6 +39,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
     ['suggest_prediction','newest_prediction_groups', 'top_prediction_groups', "#{prediction_group.cache_key}_group_list", "#{prediction_group.cache_key}_top"].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
+    NewscloudSweeper.expire_instance(prediction_group)
   end
 
   def self.expire_prediction_question_all prediction_question
@@ -48,6 +49,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
     end
 
     PredictionSweeper.expire_prediction_group_all prediction_question.prediction_group
+    NewscloudSweeper.expire_instance(prediction_question)
   end
 
   def self.expire_prediction_guess_all prediction_guess
@@ -57,6 +59,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
     #end
 
     PredictionSweeper.expire_prediction_question_all prediction_guess.prediction_question
+    NewscloudSweeper.expire_instance(prediction_guess)
   end
 
   def self.expire_prediction_result_all prediction_result
@@ -68,6 +71,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
       controller.expire_fragment "prediction_scores_list_#{page}html"
     end
     PredictionSweeper.expire_prediction_question_all prediction_result.prediction_question
+    NewscloudSweeper.expire_instance(prediction_result)
   end
 
   def self.expire_prediction_score_all prediction_score
@@ -75,6 +79,7 @@ class PredictionSweeper < ActionController::Caching::Sweeper
     ["#{prediction_score.cache_key}_voices"].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
+    NewscloudSweeper.expire_instance(prediction_score)
   end
 
 end

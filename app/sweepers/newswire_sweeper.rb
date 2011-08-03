@@ -9,6 +9,7 @@ class NewswireSweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       controller.expire_fragment "newswires_list_#{page}html"
     end
+    NewscloudSweeper.expire_class(Newswire)
   end
 
 end

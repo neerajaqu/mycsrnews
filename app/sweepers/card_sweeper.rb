@@ -13,6 +13,7 @@ class CardSweeper < ActionController::Caching::Sweeper
     ['top_sent_cards', 'newest_sent_cards', 'cards_list', card.cache_key].each do |fragment|
       expire_fragment "#{fragment}_html"
     end
+    NewscloudSweeper.expire_instance(card)
   end
 
   def self.expire_card_all card
@@ -20,6 +21,7 @@ class CardSweeper < ActionController::Caching::Sweeper
     ['top_sent_cards', 'newest_sent_cards', 'cards_list', card.cache_key].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
+    NewscloudSweeper.expire_instance(card)
   end
 
 end

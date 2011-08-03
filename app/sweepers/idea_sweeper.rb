@@ -16,6 +16,7 @@ class IdeaSweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       expire_fragment "ideas_list_#{page}html"
     end
+    NewscloudSweeper.expire_instance(idea)
   end
 
   def self.expire_idea_all idea
@@ -26,6 +27,7 @@ class IdeaSweeper < ActionController::Caching::Sweeper
     ['', 'page_1_', 'page_2_'].each do |page|
       controller.expire_fragment "ideas_list_#{page}html"
     end
+    NewscloudSweeper.expire_instance(idea)
   end
 
 end

@@ -5,6 +5,7 @@ class PfeedSweeper < ActionController::Caching::Sweeper
     ['latest_pfeeds'].each do |fragment|
       controller.expire_fragment "#{fragment}_html"
     end
+    NewscloudSweeper.expire_instance(pfeed)
   end
 
 end
